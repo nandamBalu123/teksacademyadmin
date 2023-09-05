@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   
-var apiUrl = 'https://demo.teksacademy.com:3000';
-// var apiUrl = 'http://localhost:3003/';
+// var apiUrl = 'https://demo.teksacademy.com:3000';
+// var apiUrl = 'http://localhost:3030/';
 
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -25,7 +25,7 @@ var apiUrl = 'https://demo.teksacademy.com:3000';
       event.preventDefault();
       setErrors(validation(values));
       if(errors.name === "" & errors.email === "" && errors.password === ""){
-        axios.post(`https://demo.teksacademy.com:3000/signup`, values)
+        axios.post(`http://localhost:3030/signup`, values)
         .then(res => {
           navigate('/');
         })
