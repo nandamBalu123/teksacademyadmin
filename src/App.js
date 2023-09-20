@@ -16,6 +16,22 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 
+// import Dashboard from "./components/dashboard/Dashboard";
+import "./App.css";
+import Login from "./components/logins/adminlogins/Login";
+import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Signup from "./components/logins/adminlogins/Signup";
+import Register from "./components/inventory/Register";
+import Edit from "./components/inventory/Edit";
+import Details from "./components/inventory/Details";
+
+import Assignassets from "./components/inventory/Assignassets";
+import Addassets from "./components/inventory/Addassets";
+import Addassetsform from "./components/inventory/Addassetsform";
+import Inventoryhome from "./components/inventory/Inventoryhome";
+import ReturnAssetsForm from "./components/inventory/ReturnAssetsForm";
+import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -40,6 +56,23 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/signup" element={<Signup />}></Route>
+              <Route path="/assignassets" element={<Assignassets />} />
+              <Route exact path="/register" element={<Register />} />{" "}
+              <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}
+              <Route
+                exact
+                path="/assignassets/view/:id"
+                element={<Details />}
+              />
+              <Route path="/addassets" element={<Addassets />}></Route>
+              <Route path="/addassetsform" element={<Addassetsform />}></Route>
+              <Route path="/inventory" element={<Inventoryhome />}></Route>
+              <Route
+                path="/assignassets/returnassets/:id"
+                element={<ReturnAssetsForm />}
+              ></Route>
             </Routes>
           </main>
         </div>
