@@ -9,8 +9,8 @@ import { FaArrowUp } from 'react-icons/fa';
 import Inventoryhome from './Inventoryhome';
 // import axios from 'axios'
 import SideBar from '../Sidebar/SideBar';
-import Navbaar from './Navbaar'
 
+import Navbaar from '../Navbar/Navbaar';
 const Assignassets = () => {
 
 

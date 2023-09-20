@@ -5,9 +5,8 @@ import { adddata } from './context/ContextProvider';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import SideBar from '../Sidebar/SideBar';
-import Navbaar from './Navbaar'
 
-
+import Navbaar from '../Navbar/Navbaar';
 export default function Addassetsform() {
     
 // var apiUrl = 'https://demo.teksacademy.com:3000';

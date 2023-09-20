@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom'
 import  Addassets from './Addassets';
 import Assignassets from './Assignassets';
 import SideBar from '../Sidebar/SideBar';
-import Navbaar from './Navbaar'
 
+import Navbaar from '../Navbar/Navbaar';
 export default function Inventoryhome() {
 
   

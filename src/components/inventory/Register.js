@@ -4,9 +4,9 @@ import { adddata } from './context/ContextProvider';
 // import Navbaar from './Navbaar';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Navbaar from './Navbaar';
 import SideBar from '../Sidebar/SideBar';
 
+import Navbaar from '../Navbar/Navbaar';
 const Register = () => {
 
     var apiUrl = 'https://demo.teksacademy.com:3000';

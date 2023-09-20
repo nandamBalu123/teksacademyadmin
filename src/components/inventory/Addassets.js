@@ -8,8 +8,8 @@ import { updatedata } from './context/ContextProvider';
 
 // import axios from 'axios'
 import SideBar from '../Sidebar/SideBar';
-import Navbaar from './Navbaar'
 
+import Navbaar from '../Navbar/Navbaar';
 
 const Addassets = () => {
 
