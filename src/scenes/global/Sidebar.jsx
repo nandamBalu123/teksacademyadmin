@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { useState, useEffect } from "react";
+import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
+import Hidden from "@mui/material/Hidden";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
@@ -16,7 +17,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-
+import zaheer from "../../images/zaheer.jpg";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -40,6 +42,35 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  // const [screenSize, setScreenSize] = useState(getCurrentDimension());
+
+  // function getCurrentDimension() {
+  //   return {
+  //     width: window.innerWidth,
+  //     height: window.innerHeight,
+  //   };
+  // }
+  let screenSize = window.innerWidth;
+  console.log(screenSize);
+  useEffect(() => {
+    if (screenSize < 720) {
+      setIsCollapsed(true);
+    }
+    if (screenSize > 721) {
+      setIsCollapsed(false);
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   const updateDimension = () => {
+  //     setScreenSize(getCurrentDimension());
+  //   };
+  //   window.addEventListener("resize", updateDimension);
+
+  //   return () => {
+  //     window.removeEventListener("resize", updateDimension);
+  //   };
+  // }, [screenSize]);
 
   return (
     <Box
@@ -51,7 +82,7 @@ const Sidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .pro-inner-item": {
-          padding: "5px 35px 5px 0px !important",
+          padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
           color: "#868dfb !important",
@@ -61,6 +92,7 @@ const Sidebar = () => {
         },
       }}
     >
+      {screenSize.width}
       <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
@@ -80,7 +112,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                  Teks Academy
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -96,7 +128,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
+                  src={zaheer}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -107,10 +139,10 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Ed Roh
+                  Zaheer
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
+                  Admin
                 </Typography>
               </Box>
             </Box>
@@ -125,28 +157,82 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography
+            <SubMenu
+              style={{
+                color: colors.grey[100],
+              }}
+              icon={<PeopleOutlinedIcon />}
+              label={"Student Details"}
+              title={"Student Details"}
+            >
+              <Item
+                title="Registration Form"
+                to="/registrationform"
+                icon={<EditNoteIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Student Details"
+                to="/studentdetails"
+                icon={<EditNoteIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Fee Details"
+                to="/feedetails"
+                icon={<EditNoteIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Certificate"
+                to="/certificate"
+                icon={<EditNoteIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </SubMenu>
+            <SubMenu
+              style={{
+                color: colors.grey[100],
+              }}
+              icon={<PeopleOutlinedIcon />}
+              label={"Student Details"}
+              title={"User Management"}
+            >
+              <Item
+                title="Create User"
+                to="/createuser"
+                icon={<PeopleOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </SubMenu>
+
+            {/* <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Data
-            </Typography>
-            <Item
+            </Typography> */}
+            {/* <Item
               title="Manage Team"
               to="/team"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Item
+            /> */}
+            {/* <Item
               title="Contacts Information"
               to="/contacts"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Item
+            /> */}
+            {/* <Item
               title="Invoices Balances"
               to="/invoices"
               icon={<ReceiptOutlinedIcon />}
@@ -160,8 +246,8 @@ const Sidebar = () => {
               sx={{ m: "15px 0 5px 20px" }}
             >
               Pages
-            </Typography>
-            <Item
+            </Typography> */}
+            {/* <Item
               title="Profile Form"
               to="/form"
               icon={<PersonOutlinedIcon />}
@@ -174,16 +260,16 @@ const Sidebar = () => {
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Item
+            /> */}
+            {/* <Item
               title="FAQ Page"
               to="/faq"
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
-            <Typography
+            {/* <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
@@ -217,7 +303,7 @@ const Sidebar = () => {
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
           </Box>
         </Menu>
       </ProSidebar>

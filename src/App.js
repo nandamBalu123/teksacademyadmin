@@ -19,7 +19,7 @@ import Calendar from "./scenes/calendar/calendar";
 // import Dashboard from "./components/dashboard/Dashboard";
 import "./App.css";
 import Login from "./components/logins/adminlogins/Login";
-import { BrowserRouter } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Signup from "./components/logins/adminlogins/Signup";
 import Register from "./components/inventory/Register";
@@ -31,7 +31,10 @@ import Addassets from "./components/inventory/Addassets";
 import Addassetsform from "./components/inventory/Addassetsform";
 import Inventoryhome from "./components/inventory/Inventoryhome";
 import ReturnAssetsForm from "./components/inventory/ReturnAssetsForm";
-import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
+import RegistrationForm from "./scenes/registrationform";
+import CreateUserForm from "./scenes/user/createUserForm/CreateUserForm";
+import StudentDetails from "./scenes/studentDetails";
+
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -46,6 +49,10 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/registrationform" element={<RegistrationForm />} />
+              <Route path="/createuser" element={<CreateUserForm />} />
+              studentdetails
+              <Route path="/studentdetails" element={<StudentDetails />} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
@@ -57,7 +64,6 @@ function App() {
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
               <Route path="/login" element={<Login />}></Route>
-              <Route path="/signup" element={<Signup />}></Route>
               <Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
               <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}
