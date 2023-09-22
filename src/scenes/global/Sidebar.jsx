@@ -209,6 +209,13 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
+              <Item
+                title="User Details"
+                to="/userdata"
+                icon={<PeopleOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
             </SubMenu>
 
             {/* <Typography

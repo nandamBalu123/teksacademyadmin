@@ -34,6 +34,7 @@ import ReturnAssetsForm from "./components/inventory/ReturnAssetsForm";
 import RegistrationForm from "./scenes/registrationform";
 import CreateUserForm from "./scenes/user/createUserForm/CreateUserForm";
 import StudentDetails from "./scenes/studentDetails";
+import UserData from "./scenes/user/userData";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -51,7 +52,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/registrationform" element={<RegistrationForm />} />
               <Route path="/createuser" element={<CreateUserForm />} />
-              studentdetails
+              <Route path="/userdata" element={<UserData />} />
               <Route path="/studentdetails" element={<StudentDetails />} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
