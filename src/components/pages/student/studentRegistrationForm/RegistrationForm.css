@@ -1,0 +1,73 @@
+.main-container {
+  /* background-color: brown; */
+  width: 100%;
+  padding-top: 2em;
+}
+.main-sub-container {
+  width: 100%;
+  margin-left: 2em;
+  /* background-color: aqua; */
+}
+@media (max-width: 1320px) {
+  .main-sub-container {
+    margin-left: 3em;
+  }
+}
+@media (max-width: 1140px) {
+  .main-sub-container {
+    margin-left: 3em;
+  }
+}
+@media (max-width: 960px) {
+  .main-sub-container {
+    margin-left: 3em;
+  }
+}
+@media (max-width: 720px) {
+  .main-sub-container {
+    margin-left: 3em;
+  }
+}
+@media (max-width: 540px) {
+  .main-sub-container {
+    margin-left: 3em;
+  }
+}
+@media (max-width: 400px) {
+  .main-sub-container {
+    margin-left: 1em;
+  }
+}
+label {
+  margin-bottom: 7px;
+  font-size: large;
+}
+input {
+  margin-left: 13px;
+}
+input:hover {
+  border: 1.5px solid black;
+  border-radius: 5px;
+}
+.row {
+  margin-top: 20px;
+}
+StepLabel {
+  font-size: xx-large;
+}
+.image-input {
+  width: 300px; /* Adjust the width as needed */
+  height: 70px; /* Adjust the height as needed */
+  border: none; /* Remove the default border */
+  background-color: transparent; /* Make the background transparent */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* Add styles for hover and active states (optional) */
+.image-input:hover {
+  opacity: 0.8; /* Reduce opacity on hover */
+}
+
+.image-input:active {
+  transform: scale(0.95); /* Shrink the image when clicked */
+}
