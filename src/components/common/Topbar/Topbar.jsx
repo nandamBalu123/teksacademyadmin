@@ -13,7 +13,14 @@ const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-
+  const handleLogout = () => {
+    axios
+      .get("http://localhost:3030/logout")
+      .then((res) => {
+        navigate("/login");
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       {/* SEARCH BAR */}
@@ -46,6 +53,7 @@ const Topbar = () => {
         <IconButton>
           <PersonOutlinedIcon></PersonOutlinedIcon>
         </IconButton>
+        <button onClick={handleLogout}>logout</button>
       </Box>
     </Box>
   );
