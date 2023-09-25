@@ -139,7 +139,7 @@ const handleSubmit = async (e) => {
               id="fullname"
               required
             />
-            <div class="valid-feedback">Looks good!</div>
+
             <label className="mar col-md-2" for="email">
               Email ID<span className="star"> *</span>:
             </label>
@@ -157,7 +157,7 @@ const handleSubmit = async (e) => {
               Phone Number <span className="star"> *</span>:
             </label>
             <input
-              className=" mar col-md-3"
+              className=" mar col-md-3 inputt"
               type="number"
               onChange={(e) => setphonenum(e.target.value)}
               value={phonenum}
@@ -181,7 +181,7 @@ const handleSubmit = async (e) => {
               Department<span className="star"> *</span>:
             </label>
             <input
-              className=" mar col-md-3"
+              className=" mar col-md-3 inputt"
               type="text"
               onChange={(e) => setdepartment(e.target.value)}
               value={department}
