@@ -6,35 +6,35 @@ import axios from 'axios';
 
 function Login(){
 
-    // var apiUrl = 'https://demo.teksacademy.com:3000';
-    var apiUrl = 'http://localhost:3003';
-
     const navigate = useNavigate();
     const [values, setValues] = useState({
         email: '',
         password: ''
-    })
-    
-    const [errors, setErrors] = useState({})
-    const handleInput = (event) =>{
-        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
-    }
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleInput = (event) => {
+        setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(validation(values));
-        if(errors.email === "" && errors.password === ""){
-            axios.post(`${apiUrl}/signin`, values)
-            .then(res => {
-                if(res.data === "success"){
-                    navigate('/dashboardhome')
-                }else{
-                    alert("No records existed")
-                }
-            })
-            .catch(err => console.log(err));
-          }
-    }
+        if (errors.email === '' && errors.password === '') {
+            axios
+                .post('http://localhost:3030/adminlogin', values)
+                .then((res) => {
+                    if (res.data.Status === 'Success') {
+                        localStorage.setItem('token', res.data.token); // Store the token in localStorage
+                        navigate('/'); // Redirect to the admin dashboard route
+                    } else {
+                        alert('No records existed');
+                    }
+                })
+                .catch((err) => console.log(err));
+        }
+    };
     return(
         
         <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>

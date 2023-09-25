@@ -1,7 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LoginPage.css";
 import image from "../../../images/thumbnail_Login.jpg";
+import {useNavigate} from "react-router-dom";
+import axios from 'axios';
+
+
 const LoginPage = () => {
+  function validation(values){
+    let error = {}
+    const email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if(values.email === ""){
+        error.email = "Name should not be empty";
+    }
+    else if(!email_pattern.test(values.email)){
+        error.email = "Email didn't match";
+    }else{
+        error.email = ""
+    }
+
+    if(values.password === ""){
+        error.password = "Password should not be empty"
+    }
+    else if(!password_pattern.test(values.password)){
+        error.password = "Password didn't match"
+    }else{
+        error.password = ""
+    }
+    return error;
+}
+ 
+
+const navigate = useNavigate();
+const [values, setValues] = useState({
+    email: '',
+    password: ''
+});
+
+const [errors, setErrors] = useState({});
+
+const handleInput = (event) => {
+    setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+};
+
+const handleSubmit = (event) => {
+    event.preventDefault();
+    setErrors(validation(values));
+    if (errors.email === '' && errors.password === '') {
+        axios
+            .post('http://localhost:3030/adminlogin', values)
+            .then((res) => {
+                if (res.data.Status === 'Success') {
+                    localStorage.setItem('token', res.data.token); // Store the token in localStorage
+                    navigate('/'); // Redirect to the admin dashboard route
+                } else {
+                    alert('No records existed');
+                }
+            })
+            .catch((err) => console.log(err));
+    }
+};
+  
+
   let quotes = [
     "Your commitment to excellence is an inspiration to us all. Keep up the great work!",
     "Teamwork makes the dream work. Together, we can achieve greatness.",
@@ -30,10 +91,19 @@ const LoginPage = () => {
       <div className="subdiv col-md-6 credentials">
         <p className="quotes">{quotes[random]}</p>
         <p></p>
+        <form action="" onSubmit={handleSubmit}></form>
         {/* <h3 className="loginlogo">Login to your Account</h3> */}
-        <input className="inputcon" placeholder="  Email ID" />
-        <input className="inputcon" placeholder="  Password" />
-        <button className="btnn">Login</button>
+        <label htmlFor='email'><strong>Email</strong></label>
+        <input type="email" name='email' placeholder='Enter Email' className='form-control rounded-0'
+        onChange={handleInput}/>
+        {errors.email && <span className='text-danger'>{errors.email}</span>}
+        <label htmlFor='password'><strong>Password</strong></label>
+        <input type="password" name='password' placeholder='Enter Password' className='form-control rounded-0'
+        onChange={handleInput}/>
+        {errors.password && <span className='text-danger'>{errors.password}</span>}
+        {/* <input className="inputcon" placeholder="  Email ID" />
+        <input className="inputcon" placeholder="  Password" /> */}
+        <button type="submit" className="btnn">Login</button>
       </div>
     </div>
   );

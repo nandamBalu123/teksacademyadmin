@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
+import Login from "./components/pages/logins/adminlogins/Login";
 
 import "./App.css";
 // import Login from "./components/logins/adminlogins/Login";
@@ -30,15 +31,17 @@ import LoginPage from "./components/pages/loginpage/LoginPage";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  // const { user } = useAuthContext();
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {/* <Routes>
+
+          <Routes>
             <Route path="/login" element={<LoginPage />} />
-          </Routes> */}
+          </Routes>
 
           <Sidebar isSidebar={isSidebar} />
           <main className="content" style={{ overflow: "auto" }}>
@@ -50,8 +53,8 @@ function App() {
               <Route path="/createuser" element={<CreateUserForm />} />
               <Route path="/userdata" element={<UserData />} />
 
-              {/* <Route path="/login" element={<Login />}></Route>
-              <Route path="/assignassets" element={<Assignassets />} />
+               <Route path="/in" element={<Login />}></Route>
+              {/*<Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
               <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}
               <Route
