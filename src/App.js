@@ -55,7 +55,7 @@ function App() {
                 <Route path="/createuser" element={<CreateUserForm />} />
                 <Route path="/userdata" element={<UserData />} />
 
-                <Route path="/in" element={<Login />}></Route>
+                <Route path="/inn" element={<Login />}></Route>
                 {/*<Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
               <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}

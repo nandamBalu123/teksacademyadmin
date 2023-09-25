@@ -18,6 +18,19 @@
 .selectt {
   margin-left: 13px;
 }
+/* .inputt {
+  width: 30%;
+  margin: 5px 25px 5px 25px;
+  height: 40px;
+  border: none;
+  border-left: 5px solid #335eea;
+  background-color: rgb(229, 234, 238);
+}
+.inputt:hover {
+  border: none;
+  border-left: 5px solid #335eea;
+  border-radius: 0;
+} */
 
 @media (max-width: 720px) {
   .roww {
@@ -26,7 +39,7 @@
   .mar {
     margin-bottom: 10px;
   }
-  inputt {
+  .inputt {
     margin-right: 30px;
   }
 }

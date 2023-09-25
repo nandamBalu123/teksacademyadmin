@@ -137,6 +137,29 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+            <SubMenu
+              style={{
+                color: colors.grey[100],
+              }}
+              icon={<PeopleOutlinedIcon />}
+              label={"User Details"}
+              title={"User Management"}
+            >
+              <Item
+                title="Create User"
+                to="/createuser"
+                icon={<PeopleOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="User Details"
+                to="/userdata"
+                icon={<PeopleOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </SubMenu>
 
             <SubMenu
               style={{
@@ -171,29 +194,6 @@ const Sidebar = () => {
                 title="Certificate"
                 to="/certificate"
                 icon={<EditNoteIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-            </SubMenu>
-            <SubMenu
-              style={{
-                color: colors.grey[100],
-              }}
-              icon={<PeopleOutlinedIcon />}
-              label={"Student Details"}
-              title={"User Management"}
-            >
-              <Item
-                title="Create User"
-                to="/createuser"
-                icon={<PeopleOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="User Details"
-                to="/userdata"
-                icon={<PeopleOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
