@@ -2,7 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
+
 import "./CreateUserForm.css";
+// import ValidationTextFields from "./casdfas";
 const CreateUserForm = () => {
 
 
@@ -124,110 +126,108 @@ const handleSubmit = async (e) => {
     <div className="main-user-container">
       <h3>User Creation Form</h3>
       <div className="sub-user-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="needs-validation" novalidate>
           <div className="row roww mb-4">
-            <label className="mar col-md-2">Full Name:</label>
+            <label className="mar col-md-2 " for="fullname">
+              Full Name<span className="star"> *</span>:
+            </label>
             <input
-              className={
-                emptyFields.includes("fullname")
-                  ? "error mar col-md-3 inputt"
-                  : "mar col-md-3 inputt"
-              }
+              className="mar col-md-3 inputt "
               type="text"
               onChange={(e) => setfullname(e.target.value)}
               value={fullname}
+              id="fullname"
+              required
             />
-            <label className="mar col-md-2">Email ID:</label>
+            <div class="valid-feedback">Looks good!</div>
+            <label className="mar col-md-2" for="email">
+              Email ID<span className="star"> *</span>:
+            </label>
             <input
-              className={
-                emptyFields.includes("email")
-                  ? "error mar col-md-4 inputt"
-                  : "mar col-md-4 inputt"
-              }
+              className=" mar col-md-4 inputt"
               type="email"
               onChange={(e) => setemail(e.target.value)}
               value={email}
+              id="email"
+              required
             />
           </div>
           <div className="row roww mb-4">
-            <label className="mar col-md-2">Phone Number :</label>
+            <label className="mar col-md-2" for="phonenumber">
+              Phone Number <span className="star"> *</span>:
+            </label>
             <input
-              className={
-                emptyFields.includes("phonenum")
-                  ? "error mar col-md-3"
-                  : "mar col-md-3"
-              }
+              className=" mar col-md-3"
               type="number"
               onChange={(e) => setphonenum(e.target.value)}
               value={phonenum}
+              id="phonenumber"
+              required
             />
-            <label className="mar col-md-2">Designation :</label>
+            <label className="mar col-md-2" for="designation">
+              Designation<span className="star"> *</span> :
+            </label>
             <input
-              className={
-                emptyFields.includes("designation")
-                  ? "error mar col-md-4 inputt"
-                  : "mar col-md-4 inputt"
-              }
+              className=" mar col-md-4 inputt"
               type="text"
               onChange={(e) => setdesignation(e.target.value)}
               value={designation}
+              id="designation"
+              required
             />
           </div>
           <div className="row roww mb-4">
-            <label className="mar col-md-2">Department:</label>
+            <label className="mar col-md-2" for="department">
+              Department<span className="star"> *</span>:
+            </label>
             <input
-              className={
-                emptyFields.includes("department")
-                  ? "error mar col-md-3"
-                  : "mar col-md-3"
-              }
+              className=" mar col-md-3"
               type="text"
               onChange={(e) => setdepartment(e.target.value)}
               value={department}
+              id="department"
+              required
             />
-            <label className="mar col-md-2">Report to :</label>
+            <label className="mar col-md-2" for="reportto">
+              Report to <span className="star"> *</span> :
+            </label>
             <input
-              className={
-                emptyFields.includes("reportto")
-                  ? "error mar col-md-4 inputt"
-                  : "mar col-md-4 inputt"
-              }
+              className=" mar col-md-4 inputt"
               type="text"
               onChange={(e) => setreportto(e.target.value)}
               value={reportto}
+              id="reportto"
+              required
             />
           </div>
           <div className="row roww mb-4">
-            <label className="mar col-md-2">Profile :</label>
+            <label className="mar col-md-2" for="profile">
+              Profile <span className="star"> *</span>:
+            </label>
 
             <select
-              className={
-                emptyFields.includes("profile")
-                  ? "error mar col-md-3 selectt"
-                  : "mar col-md-3 selectt"
-              }
+              className=" mar col-md-3 selectt"
               id="profile"
               onChange={(e) => setprofile(e.target.value)}
               value={profile}
+              required
             >
               <option value="">--select--</option>
               <option value="Counseller">Counseller </option>
               <option value="manager">Manager</option>
-              <option value="projectmanager">Project Manager</option>
+              <option value="regionalmanager">Regional Manager</option>
               <option value="managingdirector">Managing Director</option>
-              <option value="interns">Interns</option>
             </select>
-            <label className="mar col-md-2">Branch :</label>
+            <label className="mar col-md-2" for="branch">
+              Branch <span className="star"> *</span>:
+            </label>
             <select
-              className={
-                emptyFields.includes("branch")
-                  ? "error mar col-md-4 selectt"
-                  : "mar col-md-4 selectt"
-              }
+              className=" mar col-md-4 selectt"
               id="branch"
               name="branch"
               onChange={(e) => setbranch(e.target.value)}
               value={branch}
+              required
             >
               <option value="">--select--</option>
               <option value="hitechcity">Hitech City</option>
@@ -238,10 +238,9 @@ const handleSubmit = async (e) => {
             </select>
           </div>
           <div className="create-button">
-            <button type="button" class="btn btn-primary mt-5">
+            <button type="submit" class="btn btn-primary mr-20 mt-5  ">
               Create User
             </button>
-            {error && <div className="error">{error}</div>}
           </div>
         </form>
       </div>

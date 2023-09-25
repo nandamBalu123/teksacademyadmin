@@ -2,36 +2,37 @@ import React, { useEffect, useState } from "react";
 
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
-const UserData = () => {
-  // const [users, setUsers] = useState([]);
-  const { users, dispatch } = useUsersContext();
-  const { user } = useAuthContext();
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch("/api/users", {
-        headers: { Authorization: `Bearer ${user.token}` },
-      });
-      const json = await response.json();
 
-      if (response.ok) {
-        dispatch({ type: "SET_USERS", payload: json });
+const UserData = () => {
+  const [userData, setUserData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3030/userdata');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setUserData(data.Result);
+      } catch (err) {
+        setError(err);
       }
     };
 
-    if (user) {
-      fetchUsers();
-    }
-  }, [dispatch, user]);
-  // axios
-  //   .get("/api/users")
-  //   .then((users) => setUsers(users.data))
-  //   .catch((err) => console.log(err));
+    fetchData();
+  }, []);
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div style={{ margin: "30px 0px 0px 20px" }}>
       <h2>Users List</h2>
-      <table class="table">
-        <thead class="table-dark">
+      <table className="table">
+        <thead className="table-dark">
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
@@ -44,24 +45,23 @@ const UserData = () => {
           </tr>
         </thead>
         <tbody>
-          {users &&
-            users.map((user) => (
-              <tr>
-                <th scope="row"></th>
-                <td>{user.fullname}</td>
-                <td>{users.email}</td>
-                <td>{users.phonenum}</td>
-                <td>{users.designation}</td>
-                <td>{users.department}</td>
-                <td>{users.reportto}</td>
-                <td>{users.profile}</td>
-                <td>{users.branch}</td>
-              </tr>
-            ))}
+          {userData.map((user, index) => (
+            <tr key={index}>
+              <td>{user.fullname}</td>
+              <td>{user.email}</td>
+              <td>{user.phonenumber}</td>
+              <td>{user.designation}</td>
+              <td>{user.department}</td>
+              <td>{user.reportto}</td>
+              <td>{user.profile}</td>
+              <td>{user.branch}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
   );
 };
+
 
 export default UserData;

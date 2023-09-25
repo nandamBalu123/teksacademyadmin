@@ -7,10 +7,13 @@
   margin-left: 30px;
   margin-right: 30px;
 }
+.star {
+  color: red;
+}
 .create-button {
   display: flex;
   justify-content: end;
-  margin-right: 70px;
+  margin-right: 30px;
 }
 .selectt {
   margin-left: 13px;

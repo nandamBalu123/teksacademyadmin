@@ -69,7 +69,9 @@ const Topbar = () => {
         <IconButton>
           <PersonOutlinedIcon></PersonOutlinedIcon>
         </IconButton>
-        <button onClick={handleLogout}>logout</button>
+        <button onClick={handleLogout} type="submit" class="btn btn-primary">
+          logout
+        </button>
       </Box>
     </div>
   );
