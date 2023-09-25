@@ -26,11 +26,11 @@ import StudentData from "./components/pages/student/studentData/StudentData";
 import CreateUserForm from "./components/pages/user/createUserForm/CreateUserForm";
 import UserData from "./components/pages/user/userData/UserData";
 import LoginPage from "./components/pages/loginpage/LoginPage";
-
+import { Box } from "@mui/material";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-
+  const toggle = true;
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -40,17 +40,21 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
           </Routes> */}
 
-          <Sidebar isSidebar={isSidebar} />
-          <main className="content" style={{ overflow: "auto" }}>
-            <Topbar setIsSidebar={setIsSidebar} />
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/registrationform" element={<RegistrationForm />} />
-              <Route path="/studentdata" element={<StudentData />} />
-              <Route path="/createuser" element={<CreateUserForm />} />
-              <Route path="/userdata" element={<UserData />} />
+          {toggle ? <Sidebar isSidebar={isSidebar} /> : <LoginPage />}
+          {toggle ? (
+            <main className="content" style={{ overflow: "auto" }}>
+              <Topbar setIsSidebar={setIsSidebar} />
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route
+                  path="/registrationform"
+                  element={<RegistrationForm />}
+                />
+                <Route path="/studentdata" element={<StudentData />} />
+                <Route path="/createuser" element={<CreateUserForm />} />
+                <Route path="/userdata" element={<UserData />} />
 
-              {/* <Route path="/login" element={<Login />}></Route>
+                {/* <Route path="/login" element={<Login />}></Route>
               <Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
               <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}
@@ -66,8 +70,9 @@ function App() {
                 path="/assignassets/returnassets/:id"
                 element={<ReturnAssetsForm />}
               ></Route> */}
-            </Routes>
-          </main>
+              </Routes>
+            </main>
+          ) : undefined}
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>

@@ -8,7 +8,7 @@ const UserData = () => {
   const { user } = useAuthContext();
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch("/api/users", {
+      const response = await fetch("/userdata/users", {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       const json = await response.json();
