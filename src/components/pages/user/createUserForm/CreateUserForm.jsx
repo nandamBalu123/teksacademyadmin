@@ -23,26 +23,17 @@ const CreateUserForm = () => {
       profile,
       branch,
     };
-    console.log('User Data:', user); 
-    const response = await fetch("http://localhost:3030/createUser", {
+
+    const response = await fetch("/api/users", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log('Response:', response);
     const json = await response.json();
 
-    // if (!response.ok) {
-    //   setError(json.error);
-    //   setEmptyFields(json.emptyFields);
-    // }
-    console.log('JSON Response:', json);
     if (response.ok) {
-      console.log('User created successfully.');
-      // setEmptyFields([]);
-      // setError(null);
       setfullname("");
       setemail("");
       setphonenum("");

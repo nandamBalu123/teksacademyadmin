@@ -1,5 +1,6 @@
 import { Box, IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ColorModeContext, tokens } from "../../../theme";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -8,8 +9,10 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
-
+import axios from "axios";
+import zIndex from "@mui/material/styles/zIndex";
 const Topbar = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
@@ -22,12 +25,19 @@ const Topbar = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <Box display="flex" justifyContent="space-between" p={2}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "20px",
+      }}
+    >
       {/* SEARCH BAR */}
       <Box
         display="flex"
         backgroundColor={colors.primary[400]}
         borderRadius="3px"
+        sx={{ position: "fixed" }}
       >
         <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
         <IconButton type="button" sx={{ p: 1 }}>
@@ -36,7 +46,13 @@ const Topbar = () => {
       </Box>
 
       {/* ICONS */}
-      <Box display="flex">
+      <Box
+        display="flex"
+        sx={{
+          position: "fixed",
+          right: "0",
+        }}
+      >
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
@@ -55,7 +71,7 @@ const Topbar = () => {
         </IconButton>
         <button onClick={handleLogout}>logout</button>
       </Box>
-    </Box>
+    </div>
   );
 };
 

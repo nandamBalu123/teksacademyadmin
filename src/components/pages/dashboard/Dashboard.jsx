@@ -2,26 +2,28 @@ import { Box, usef } from "@mui/material";
 // import { tokens } from "../../../theme";
 import navigate from "react";
 import Header from "../../common/Header/Header";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 const Dashboard = () => {
   // const theme = useTheme();
   // const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
-  axios.defaults.withCredentials = true;
-  useEffect(() => {
-    axios.get("http://localhost:8081/dashboard").then((res) => {
-      if (res.data.Status === "Success") {
-        if (res.data.role === "admin") {
-          navigate("/");
-        } else {
-          const id = res.data.id;
-          navigate("/employeedetail/" + id);
-        }
-      } else {
-        navigate("/start");
-      }
-    });
-  }, []);
+  // axios.defaults.withCredentials = true;
+  // useEffect(() => {
+  //   axios.get("http://localhost:8081/dashboard").then((res) => {
+  //     if (res.data.Status === "Success") {
+  //       if (res.data.role === "admin") {
+  //         navigate("/");
+  //       } else {
+  //         const id = res.data.id;
+  //         navigate("/employeedetail/" + id);
+  //       }
+  //     } else {
+  //       navigate("/start");
+  //     }
+  //   });
+  // }, []);
   return (
     <Box m="20px">
       {/* HEADER */}

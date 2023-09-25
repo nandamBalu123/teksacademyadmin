@@ -41,7 +41,7 @@ function App() {
           </Routes> */}
 
           <Sidebar isSidebar={isSidebar} />
-          <main className="content">
+          <main className="content" style={{ overflow: "auto" }}>
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Dashboard />} />
