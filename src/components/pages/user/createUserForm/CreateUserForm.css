@@ -12,20 +12,29 @@
   justify-content: end;
   margin-right: 70px;
 }
-select {
+.selectt {
   margin-left: 13px;
 }
-.row {
-  margin-bottom: 30px;
-}
+
 @media (max-width: 720px) {
-  .row {
+  .roww {
     margin-bottom: 0px;
   }
   .mar {
     margin-bottom: 10px;
   }
-  input {
+  inputt {
     margin-right: 30px;
   }
+}
+.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+.error {
+  border: 1px solid var(--error);
 }
