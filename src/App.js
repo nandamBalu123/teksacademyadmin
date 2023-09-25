@@ -6,7 +6,7 @@ import { ColorModeContext, useMode } from "./theme";
 import Login from "./components/pages/logins/adminlogins/Login";
 
 import "./App.css";
-// import Login from "./components/logins/adminlogins/Login";
+
 
 // import Signup from "./components/logins/adminlogins/Signup";
 // import Register from "./components/inventory/Register";

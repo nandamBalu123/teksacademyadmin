@@ -4,62 +4,122 @@ import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import "./CreateUserForm.css";
 const CreateUserForm = () => {
-  const { dispatch } = useUsersContext();
-  const { user } = useAuthContext();
-  const [fullname, setfullname] = useState("");
-  const [email, setemail] = useState("");
-  const [phonenum, setphonenum] = useState("");
-  const [designation, setdesignation] = useState("");
-  const [department, setdepartment] = useState("");
-  const [reportto, setreportto] = useState("");
-  const [profile, setprofile] = useState("");
-  const [branch, setbranch] = useState("");
-  const [error, setError] = useState(null);
-  const [emptyFields, setEmptyFields] = useState([]);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // if (!user) {
-    //   setError('You must be logged in')
-    //   return
-    // }
-    const user = {
-      fullname,
-      email,
-      phonenum,
-      designation,
-      department,
-      reportto,
-      profile,
-      branch,
-    };
 
-    const response = await fetch("/api/users", {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-        // 'Authorization': `Bearer ${user.token}`
-      },
-    });
-    const json = await response.json();
-    if (!response.ok) {
-      setError(json.error);
-      setEmptyFields(json.emptyFields);
-    }
-    if (response.ok) {
-      setfullname("");
-      setemail("");
-      setphonenum("");
-      setdesignation("");
-      setdepartment("");
-      setreportto("");
-      setprofile("");
-      setbranch("");
-      setError(null);
-      setEmptyFields([]);
-      // dispatch({type: 'CREATE_USER', payload: json})
-    }
+
+  const [fullname, setfullname] = useState("");
+const [email, setemail] = useState("");
+const [phonenum, setphonenum] = useState("");
+const [designation, setdesignation] = useState("");
+const [department, setdepartment] = useState("");
+const [reportto, setreportto] = useState("");
+const [profile, setprofile] = useState("");
+const [branch, setbranch] = useState("");
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const user = {
+    fullname,
+    email,
+    phonenum,
+    designation,
+    department,
+    reportto,
+    profile,
+    branch,
   };
+
+  console.log('User Data:', user); // Log the user data being sent
+
+  const response = await fetch("http://localhost:3030/createUser", {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  console.log('Response:', response); // Log the response from the server
+
+  const json = await response.json();
+
+  console.log('JSON Response:', json); // Log the parsed JSON response
+
+  if (response.ok) {
+    console.log('User created successfully.');
+    
+    // Reset the form fields
+    setfullname("");
+    setemail("");
+    setphonenum("");
+    setdesignation("");
+    setdepartment("");
+    setreportto("");
+    setprofile("");
+    setbranch("");
+  }
+};
+
+
+  // const { dispatch } = useUsersContext();
+  // const { user } = useAuthContext();
+  // const [fullname, setfullname] = useState("");
+  // const [email, setemail] = useState("");
+  // const [phonenum, setphonenum] = useState("");
+  // const [designation, setdesignation] = useState("");
+  // const [department, setdepartment] = useState("");
+  // const [reportto, setreportto] = useState("");
+  // const [profile, setprofile] = useState("");
+  // const [branch, setbranch] = useState("");
+  // const [error, setError] = useState(null);
+  // const [emptyFields, setEmptyFields] = useState([]);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   // if (!user) {
+  //   //   setError('You must be logged in')
+  //   //   return
+  //   // }
+  //   const user = {
+  //     fullname,
+  //     email,
+  //     phonenum,
+  //     designation,
+  //     department,
+  //     reportto,
+  //     profile,
+  //     branch,
+  //   };
+
+  //   const response = await fetch("http://localhost:3030/createuser", {
+  //     method: "POST",
+  //     body: JSON.stringify(user),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       // 'Authorization': `Bearer ${user.token}`
+  //     },
+  //   });
+  //   const json = await response.json();
+  //   if (!response.ok) {
+  //     setError(json.error);
+  //     setEmptyFields(json.emptyFields);
+  //   }
+  //   console.log('Response:', response);
+  //   console.log('JSON Response:', json); 
+  //   if (response.ok) {
+  //     console.log('User created successfully.');
+  //     setfullname("");
+  //     setemail("");
+  //     setphonenum("");
+  //     setdesignation("");
+  //     setdepartment("");
+  //     setreportto("");
+  //     setprofile("");
+  //     setbranch("");
+  //     setError(null);
+  //     setEmptyFields([]);
+  //     // dispatch({type: 'CREATE_USER', payload: json})
+  //   }
+  // };
   return (
     <div className="main-user-container">
       <h3>User Creation Form</h3>
