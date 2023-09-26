@@ -24,32 +24,43 @@ const UsersData = () => {
       dispatch({ type: "DELETE_USER", payload: json });
     }
   };
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch("/userdata/users", {
-        headers: { Authorization: `Bearer ${user.token}` },
-      });
-      const json = await response.json();
+  //   useEffect(() => {
+  //     const fetchUsers = async () => {
+  //       const response = await fetch("/userdata/users", {
+  //         headers: { Authorization: `Bearer ${user.token}` },
+  //       });
+  //       const json = await response.json();
 
-      if (response.ok) {
-        dispatch({ type: "SET_USERS", payload: json });
+  // const UserData = () => {
+  //   const [userData, setUserData] = useState([]);
+  //   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3030/userdata");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setUserData(data.Result);
+      } catch (err) {
+        setError(err);
       }
     };
 
-    if (user) {
-      fetchUsers();
-    }
-  }, [dispatch, user]);
-  // axios
-  //   .get("/api/users")
-  //   .then((users) => setUsers(users.data))
-  //   .catch((err) => console.log(err));
+    fetchData();
+  }, []);
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div style={{ margin: "30px 0px 0px 20px" }}>
       <h2>Users List</h2>
-      <table class="table">
-        <thead class="table-dark">
+      <table className="table">
+        <thead className="table-dark">
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
