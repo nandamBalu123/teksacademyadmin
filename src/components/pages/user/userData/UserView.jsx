@@ -1,11 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 const UserView = () => {
   const [singleUser, setUser] = useState();
-ś
-  const { user } = useAuthContext();
 
+  const { user } = useAuthContext();
+  const { id } = useParams("");
   useEffect(() => {
     const fetchUser = async () => {
       const response = await fetch(`userview/${id}`, {
@@ -34,7 +35,7 @@ const UserView = () => {
       <p>irshad2</p>
       <p>3321332</p>
       <p>rewfasdf</p>
-      <p>gfdsfdasf</pś>
+      <p>gfdsfdasf</p>
       <p>fsdafs</p>
       <p>fsdfsdf</p>
       <p>fsdfa</p>

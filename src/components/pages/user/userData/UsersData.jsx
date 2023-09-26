@@ -31,9 +31,8 @@ const UsersData = () => {
   //       });
   //       const json = await response.json();
 
-  // const UserData = () => {
-  //   const [userData, setUserData] = useState([]);
-  //   const [error, setError] = useState(null);
+  const [userData, setUserData] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,7 +85,7 @@ const UsersData = () => {
 
             <td>
               <button onClick={navigate("/userview")}>View</button>
-              <button onClick={navigate("/")}>Edit</button>
+              <button onClick={navigate("/edit")}>Edit</button>
 
               <button onClick={handleDelete}>Delete</button>
             </td>

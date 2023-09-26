@@ -7,7 +7,6 @@ import Login from "./components/pages/logins/adminlogins/Login";
 
 import "./App.css";
 
-
 // import Signup from "./components/logins/adminlogins/Signup";
 // import Register from "./components/inventory/Register";
 // import Edit from "./components/inventory/Edit";
@@ -31,6 +30,7 @@ import { Box } from "@mui/material";
 import CreateRole from "./components/pages/roles/CreateRole";
 import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
+import Edit from "./components/pages/user/userData/EditUser";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -60,7 +60,7 @@ function App() {
                 <Route path="/userview" element={<UserView />} />
                 <Route path="/roles" element={<Roles />} />
                 <Route path="/createrole" element={<CreateRole />} />
-
+                <Route path="/edit" element={<Edit />} />
                 <Route path="/inn" element={<Login />}></Route>
                 {/*<Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
