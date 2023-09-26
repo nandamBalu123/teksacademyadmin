@@ -154,8 +154,24 @@ const Sidebar = () => {
               />
               <Item
                 title="User Details"
-                to="/userdata"
+                to="/usersdata"
                 icon={<PeopleOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </SubMenu>
+            <SubMenu
+              style={{
+                color: colors.grey[100],
+              }}
+              icon={<PeopleOutlinedIcon />}
+              label={"Roles Management"}
+              title={"Roles Management"}
+            >
+              <Item
+                title="Roles"
+                to="/roles"
+                icon={<EditNoteIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
@@ -166,16 +182,9 @@ const Sidebar = () => {
                 color: colors.grey[100],
               }}
               icon={<PeopleOutlinedIcon />}
-              label={"Student Details"}
-              title={"Student Details"}
+              label={"Student Management"}
+              title={"Student Management"}
             >
-              <Item
-                title="Registration Form"
-                to="/registrationform"
-                icon={<EditNoteIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
               <Item
                 title="Student Details"
                 to="/studentdetails"
@@ -183,6 +192,14 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
+              <Item
+                title="Registration Form"
+                to="/registrationform"
+                icon={<EditNoteIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+
               <Item
                 title="Fee Details"
                 to="/feedetails"
