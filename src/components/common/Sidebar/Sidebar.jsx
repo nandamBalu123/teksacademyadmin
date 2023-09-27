@@ -11,9 +11,12 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
+// let role = localStorage.getItem(role);
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}
@@ -28,15 +31,18 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     </MenuItem>
   );
 };
-
+let username = "sdfdsfs";
+let role = "admin";
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-
+  let role = "admin";
+  // let role = localStorage.getItem(role);
   let screenSize = window.innerWidth;
   console.log(screenSize);
+
   useEffect(() => {
     if (screenSize < 720) {
       setIsCollapsed(true);
@@ -120,10 +126,11 @@ const Sidebar = () => {
                   sx={{ m: "10px 0 0 0" }}
                   letterSpacing="1px"
                 >
-                  Zaheer
+                  {/* Zaheer */}
+                  {username}
                 </Typography>
                 <Typography variant="h5" color={colors.grey[100]}>
-                  Admin
+                  {role}
                 </Typography>
               </Box>
             </Box>
@@ -137,45 +144,49 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <SubMenu
-              style={{
-                color: colors.grey[100],
-              }}
-              icon={<PeopleOutlinedIcon />}
-              label={"User Details"}
-              title={"User Management"}
-            >
-              <Item
-                title="Create User"
-                to="/createuser"
+            {role == "admin" ? (
+              <SubMenu
+                style={{
+                  color: colors.grey[100],
+                }}
                 icon={<PeopleOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="User Details"
-                to="/usersdata"
+                label={"User Details"}
+                title={"User Management"}
+              >
+                <Item
+                  title="Create User"
+                  to="/createuser"
+                  icon={<PeopleOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="User Details"
+                  to="/usersdata"
+                  icon={<PeopleOutlinedIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </SubMenu>
+            ) : undefined}
+            {role == "admin" ? (
+              <SubMenu
+                style={{
+                  color: colors.grey[100],
+                }}
                 icon={<PeopleOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-            </SubMenu>
-            <SubMenu
-              style={{
-                color: colors.grey[100],
-              }}
-              icon={<PeopleOutlinedIcon />}
-              label={"Roles Management"}
-              title={"Roles Management"}
-            >
-              <Item
-                title="Roles"
-                to="/roles"
-                icon={<EditNoteIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-            </SubMenu>
+                label={"Roles Management"}
+                title={"Roles Management"}
+              >
+                <Item
+                  title="Roles"
+                  to="/roles"
+                  icon={<EditNoteIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </SubMenu>
+            ) : undefined}
 
             <SubMenu
               style={{

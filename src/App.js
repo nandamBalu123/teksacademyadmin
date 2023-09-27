@@ -31,38 +31,65 @@ import CreateRole from "./components/pages/roles/CreateRole";
 import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
-// import Form from "./components/pages/user/createUserForm/CreateUserForm";
+
+let role = "addmin";
+let token = "ghvhgvn";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const toggle = true;
   // let role = localStorage.getItem(role); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
+  // let role = localStorage.getItem(role);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-          </Routes>
-          <Sidebar isSidebar={isSidebar} />
-          <main className="content" style={{ overflow: "auto" }}>
-            <Topbar setIsSidebar={setIsSidebar} />
-            <div style={{ marginBottom: "50px" }}></div>
+          {!token ? (
             <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/registrationform" element={<RegistrationForm />} />
-              <Route path="/studentdata" element={<StudentData />} />
-              <Route path="/createuser" element={<CreateUserForm />} />
-              <Route path="/usersdata" element={<UsersData />} />
-              <Route path="/userview" element={<UserView />} />
-              <Route path="/roles" element={<Roles />} />
-              <Route path="/createrole" element={<CreateRole />} />
-              <Route path="/edit" element={<Edit />} />
-              <Route path="/inn" element={<Login />}></Route>
+              <Route path="/inn" element={<LoginPage />} />
+            </Routes>
+          ) : undefined}
+          {token ? <Sidebar isSidebar={isSidebar} /> : undefined}
+          {token ? (
+            <main className="content" style={{ overflow: "auto" }}>
+              <Topbar setIsSidebar={setIsSidebar} />
+              <div style={{ marginBottom: "50px" }}></div>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route
+                  path="/registrationform"
+                  element={<RegistrationForm />}
+                />
+                <Route path="/studentdata" element={<StudentData />} />
+                <Route
+                  path="/createuser"
+                  element={role == "admin" ? <CreateUserForm /> : <Dashboard />}
+                />
+                <Route
+                  path="/usersdata"
+                  element={role == "admin" ? <UsersData /> : <Dashboard />}
+                />
+                <Route
+                  path="/userview"
+                  element={role == "admin" ? <UserView /> : <Dashboard />}
+                />
+                <Route
+                  path="/roles"
+                  element={role == "admin" ? <Roles /> : <Dashboard />}
+                />
+                <Route
+                  path="/createrole"
+                  element={role == "admin" ? <CreateRole /> : <Dashboard />}
+                />
+                <Route
+                  path="/edit"
+                  element={role == "admin" ? <Edit /> : <Dashboard />}
+                />
+                <Route path="/inn" element={<Login />}></Route>
 
-              {/*<Route path="/assignassets" element={<Assignassets />} />
+                {/*<Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
               <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}
               <Route
@@ -77,8 +104,11 @@ function App() {
                 path="/assignassets/returnassets/:id"
                 element={<ReturnAssetsForm />}
               ></Route> */}
-            </Routes>
-          </main>
+              </Routes>
+            </main>
+          ) : (
+            <LoginPage />
+          )}
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
