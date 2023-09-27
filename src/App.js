@@ -32,7 +32,7 @@ import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
 
-let role = "addmin";
+let role = "admin";
 let token = "ghvhgvn";
 function App() {
   const [theme, colorMode] = useMode();
