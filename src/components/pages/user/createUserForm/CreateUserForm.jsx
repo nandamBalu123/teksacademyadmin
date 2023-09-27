@@ -1,251 +1,240 @@
 import React from "react";
-import { useState } from "react";
-import { useUsersContext } from "../../../../hooks/useUsersContext";
-import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { useFormik } from "formik";
 
-import "./CreateUserForm.css";
-// import ValidationTextFields from "./casdfas";
-const CreateUserForm = () => {
+const validate = (values) => {
+  const errors = {};
 
-
-  const [fullname, setfullname] = useState("");
-const [email, setemail] = useState("");
-const [phonenum, setphonenum] = useState("");
-const [designation, setdesignation] = useState("");
-const [department, setdepartment] = useState("");
-const [reportto, setreportto] = useState("");
-const [profile, setprofile] = useState("");
-const [branch, setbranch] = useState("");
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  const user = {
-    fullname,
-    email,
-    phonenum,
-    designation,
-    department,
-    reportto,
-    profile,
-    branch,
-  };
-
-  console.log('User Data:', user); // Log the user data being sent
-
-  const response = await fetch("http://localhost:3030/createUser", {
-    method: "POST",
-    body: JSON.stringify(user),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  console.log('Response:', response); // Log the response from the server
-
-  const json = await response.json();
-
-  console.log('JSON Response:', json); // Log the parsed JSON response
-
-  if (response.ok) {
-    console.log('User created successfully.');
-    
-    // Reset the form fields
-    setfullname("");
-    setemail("");
-    setphonenum("");
-    setdesignation("");
-    setdepartment("");
-    setreportto("");
-    setprofile("");
-    setbranch("");
+  if (!values.fullname) {
+    errors.fullname = "Required";
+  } else if (values.fullname.length > 20) {
+    errors.fullname = "Must be 20 characters or less";
   }
+
+  if (!values.email) {
+    errors.email = "Required";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Invalid email address";
+  }
+
+  if (!values.phonenum) {
+    errors.phonenum = "Required";
+  } else if (values.phonenum.length > 9) {
+    errors.phonenum = "Must be 10 characters";
+  }
+  if (!values.designation) {
+    errors.designation = "Required";
+  } else if (values.designation.length > 20) {
+    errors.designation = "Must be 20 characters or less";
+  }
+  if (!values.department) {
+    errors.department = "Required";
+  } else if (values.department.length > 20) {
+    errors.department = "Must be 20 characters or less";
+  }
+  if (!values.reportto) {
+    errors.reportto = "Required";
+  } else if (values.reportto.length > 20) {
+    errors.reportto = "Must be 20 characters or less";
+  }
+  if (!values.profile) {
+    errors.profile = "Required";
+  } else if (values.profile.length > 20) {
+    errors.profile = "Must be 20 characters or less";
+  }
+  if (!values.branch) {
+    errors.branch = "Required";
+  } else if (values.branch.length > 20) {
+    errors.branch = "Must be 20 characters or less";
+  }
+  return errors;
 };
 
+const CreateUserForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      fullname: "",
+      email: "",
+      phonenum: "",
+      designation: "",
+      department: "",
+      reportto: "",
+      profile: "",
+      branch: "",
+    },
+    validate,
+    onSubmit: async (values) => {
+      alert(JSON.stringify(values, null, 2));
+      console.log("User Data:", values);
+      const response = await fetch("http://localhost:3030/createUser", {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("Response:", response); // Log the response from the server
 
-  // const { dispatch } = useUsersContext();
-  // const { user } = useAuthContext();
-  // const [fullname, setfullname] = useState("");
-  // const [email, setemail] = useState("");
-  // const [phonenum, setphonenum] = useState("");
-  // const [designation, setdesignation] = useState("");
-  // const [department, setdepartment] = useState("");
-  // const [reportto, setreportto] = useState("");
-  // const [profile, setprofile] = useState("");
-  // const [branch, setbranch] = useState("");
-  // const [error, setError] = useState(null);
-  // const [emptyFields, setEmptyFields] = useState([]);
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   // if (!user) {
-  //   //   setError('You must be logged in')
-  //   //   return
-  //   // }
-  //   const user = {
-  //     fullname,
-  //     email,
-  //     phonenum,
-  //     designation,
-  //     department,
-  //     reportto,
-  //     profile,
-  //     branch,
-  //   };
+      const json = await response.json();
 
-  //   const response = await fetch("http://localhost:3030/createuser", {
-  //     method: "POST",
-  //     body: JSON.stringify(user),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       // 'Authorization': `Bearer ${user.token}`
-  //     },
-  //   });
-  //   const json = await response.json();
-  //   if (!response.ok) {
-  //     setError(json.error);
-  //     setEmptyFields(json.emptyFields);
-  //   }
-  //   console.log('Response:', response);
-  //   console.log('JSON Response:', json); 
-  //   if (response.ok) {
-  //     console.log('User created successfully.');
-  //     setfullname("");
-  //     setemail("");
-  //     setphonenum("");
-  //     setdesignation("");
-  //     setdepartment("");
-  //     setreportto("");
-  //     setprofile("");
-  //     setbranch("");
-  //     setError(null);
-  //     setEmptyFields([]);
-  //     // dispatch({type: 'CREATE_USER', payload: json})
-  //   }
-  // };
+      console.log("JSON Response:", json); // Log the parsed JSON response
+
+      if (response.ok) {
+        console.log("User created successfully.");
+      }
+    },
+  });
   return (
-    <div className="main-user-container">
-      <h3>User Creation Form</h3>
-      <div className="sub-user-container">
-        <form onSubmit={handleSubmit} className="needs-validation" novalidate>
-          <div className="row roww mb-4">
-            <label className="mar col-md-2 " for="fullname">
-              Full Name<span className="star"> *</span>:
-            </label>
+    <div>
+      <h3>Create User Form</h3>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="row">
+          <label htmlFor="fullname" className="col ">
+            Full Name
+          </label>
+          <div className="col">
             <input
-              className="mar col-md-3 inputt "
-              type="text"
-              onChange={(e) => setfullname(e.target.value)}
-              value={fullname}
               id="fullname"
-              required
+              name="fullname"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.fullname}
             />
+            {formik.touched.fullname && formik.errors.fullname ? (
+              <div>{formik.errors.fullname}</div>
+            ) : null}
+          </div>
 
-            <label className="mar col-md-2" for="email">
-              Email ID<span className="star"> *</span>:
-            </label>
+          <label htmlFor="email" className="col">
+            email{" "}
+          </label>
+          <div className="col">
             <input
-              className=" mar col-md-4 inputt"
-              type="email"
-              onChange={(e) => setemail(e.target.value)}
-              value={email}
               id="email"
-              required
+              name="email"
+              type="email"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
             />
+            {formik.touched.email && formik.errors.email ? (
+              <div>{formik.errors.email}</div>
+            ) : null}
           </div>
-          <div className="row roww mb-4">
-            <label className="mar col-md-2" for="phonenumber">
-              Phone Number <span className="star"> *</span>:
-            </label>
+        </div>
+        <div className="row">
+          <label htmlFor="phonenum" className="col">
+            phonenum{" "}
+          </label>
+          <div className="col">
             <input
-              className=" mar col-md-3 inputt"
+              id="phonenum"
+              name="phonenum"
               type="number"
-              onChange={(e) => setphonenum(e.target.value)}
-              value={phonenum}
-              id="phonenumber"
-              required
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.phonenum}
             />
-            <label className="mar col-md-2" for="designation">
-              Designation<span className="star"> *</span> :
-            </label>
-            <input
-              className=" mar col-md-4 inputt"
-              type="text"
-              onChange={(e) => setdesignation(e.target.value)}
-              value={designation}
-              id="designation"
-              required
-            />
+            {formik.touched.phonenum && formik.errors.phonenum ? (
+              <div>{formik.errors.phonenum}</div>
+            ) : null}
           </div>
-          <div className="row roww mb-4">
-            <label className="mar col-md-2" for="department">
-              Department<span className="star"> *</span>:
-            </label>
-            <input
-              className=" mar col-md-3 inputt"
-              type="text"
-              onChange={(e) => setdepartment(e.target.value)}
-              value={department}
-              id="department"
-              required
-            />
-            <label className="mar col-md-2" for="reportto">
-              Report to <span className="star"> *</span> :
-            </label>
-            <input
-              className=" mar col-md-4 inputt"
-              type="text"
-              onChange={(e) => setreportto(e.target.value)}
-              value={reportto}
-              id="reportto"
-              required
-            />
-          </div>
-          <div className="row roww mb-4">
-            <label className="mar col-md-2" for="profile">
-              Profile <span className="star"> *</span>:
-            </label>
 
-            <select
-              className=" mar col-md-3 selectt"
+          <label htmlFor="designation" className="col">
+            designation{" "}
+          </label>
+          <div className="col">
+            <input
+              id="designation"
+              name="designation"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.designation}
+            />
+            {formik.touched.designation && formik.errors.designation ? (
+              <div>{formik.errors.designation}</div>
+            ) : null}
+          </div>
+        </div>
+        <div className="row">
+          <label htmlFor="department" className="col">
+            department{" "}
+          </label>
+          <div className="col">
+            <input
+              id="department"
+              name="department"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.department}
+              className="col"
+            />
+            {formik.touched.department && formik.errors.department ? (
+              <div>{formik.errors.department}</div>
+            ) : null}
+          </div>
+
+          <label htmlFor="reportto" className="col">
+            reportto{" "}
+          </label>
+          <div className="col">
+            <input
+              id="reportto"
+              name="reportto"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.reportto}
+              className="col"
+            />
+            {formik.touched.reportto && formik.errors.reportto ? (
+              <div>{formik.errors.reportto}</div>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="row">
+          <label htmlFor="profile" className="col">
+            profile{" "}
+          </label>
+          <div className="col">
+            <input
               id="profile"
-              onChange={(e) => setprofile(e.target.value)}
-              value={profile}
-              required
-            >
-              <option value="">--select--</option>
-              <option value="Counseller">Counseller </option>
-              <option value="manager">Manager</option>
-              <option value="regionalmanager">Regional Manager</option>
-              <option value="managingdirector">Managing Director</option>
-            </select>
-            <label className="mar col-md-2" for="branch">
-              Branch <span className="star"> *</span>:
-            </label>
-            <select
-              className=" mar col-md-4 selectt"
+              name="profile"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.profile}
+              className="col"
+            />
+            {formik.touched.profile && formik.errors.profile ? (
+              <div>{formik.errors.profile}</div>
+            ) : null}
+          </div>
+
+          <label htmlFor="branch" className="col">
+            branch{" "}
+          </label>
+          <div className="col">
+            <input
               id="branch"
               name="branch"
-              onChange={(e) => setbranch(e.target.value)}
-              value={branch}
-              required
-            >
-              <option value="">--select--</option>
-              <option value="hitechcity">Hitech City</option>
-              <option value="ameerpet">Ameerpet</option>
-              <option value="kukatpally">Kukatpally</option>
-              <option value="secundrabad">Secundrabad</option>
-              <option value="dilshuknagar">Dilshuknagar</option>
-            </select>
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.branch}
+              className="col"
+            />
+            {formik.touched.branch && formik.errors.branch ? (
+              <div>{formik.errors.branch}</div>
+            ) : null}
           </div>
-          <div className="create-button">
-            <button type="submit" class="btn btn-primary mr-20 mt-5  ">
-              Create User
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 };
-
 export default CreateUserForm;

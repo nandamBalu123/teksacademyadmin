@@ -7,7 +7,6 @@ import Login from "./components/pages/logins/adminlogins/Login";
 
 import "./App.css";
 
-
 // import Signup from "./components/logins/adminlogins/Signup";
 // import Register from "./components/inventory/Register";
 // import Edit from "./components/inventory/Edit";
@@ -25,9 +24,14 @@ import Topbar from "./components/common/Topbar/Topbar";
 import RegistrationForm from "./components/pages/student/studentRegistrationForm/RegistrationForm";
 import StudentData from "./components/pages/student/studentData/StudentData";
 import CreateUserForm from "./components/pages/user/createUserForm/CreateUserForm";
-import UserData from "./components/pages/user/userData/UserData";
+import UsersData from "./components/pages/user/userData/UsersData";
 import LoginPage from "./components/pages/loginpage/LoginPage";
 import { Box } from "@mui/material";
+import CreateRole from "./components/pages/roles/CreateRole";
+import Roles from "./components/pages/roles/Roles";
+import UserView from "./components/pages/user/userData/UserView";
+import Edit from "./components/pages/user/userData/EditUser";
+// import Form from "./components/pages/user/createUserForm/CreateUserForm";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -45,6 +49,7 @@ function App() {
           {toggle ? (
             <main className="content" style={{ overflow: "auto" }}>
               <Topbar setIsSidebar={setIsSidebar} />
+              <div style={{ marginBottom: "50px" }}></div>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route
@@ -53,9 +58,13 @@ function App() {
                 />
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route path="/createuser" element={<CreateUserForm />} />
-                <Route path="/userdata" element={<UserData />} />
-
+                <Route path="/usersdata" element={<UsersData />} />
+                <Route path="/userview" element={<UserView />} />
+                <Route path="/roles" element={<Roles />} />
+                <Route path="/createrole" element={<CreateRole />} />
+                <Route path="/edit" element={<Edit />} />
                 <Route path="/inn" element={<Login />}></Route>
+
                 {/*<Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
               <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}

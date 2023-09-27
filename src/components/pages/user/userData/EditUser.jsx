@@ -1,37 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
-import { updatedata } from "./context/ContextProvider";
 
 const Edit = () => {
   var apiUrl = "https://demo.teksacademy.com:3000";
-  // var apiUrl = 'http://localhost:3003/';
-
-  // const [getuserdata, setUserdata] = useState([]);
-  // console.log(getuserdata);
-
-  const [getassigndata, setUserdata] = useState([]);
-  console.log(getassigndata);
-
-  const { updata, setUPdata } = useContext(updatedata);
 
   const navigate = useNavigate("");
 
-  const [inpval, setINP] = useState({
-    name: "",
-    vendername: "",
+  const [user, setuser] = useState({
+    fullname: "",
+    email: "",
+    phonenum: "",
     designation: "",
+    department: "",
+    reportto: "",
+    profile: "",
     branch: "",
-    assettype: "",
-    issueddate: "",
-    assetcode: "",
-    anonymity: "",
-    remarks: "",
   });
 
   const setdata = (e) => {
     console.log(e.target.value);
     const { name, value } = e.target;
-    setINP((preval) => {
+    setuser((preval) => {
       return {
         ...preval,
         [name]: value,
@@ -56,29 +45,28 @@ const Edit = () => {
     if (res.status === 422 || !data) {
       console.log("error ");
     } else {
-      setINP(data[0]);
+      setuser(data[0]);
       console.log("get data");
     }
   };
 
-  useEffect(() => {
-    getdata();
-  }, []);
+  // useEffect(() => {
+  //   getdata();
+  // }, []);
 
   const updateuser = async (e) => {
     e.preventDefault();
 
     const {
-      name,
-      vendername,
+      fullname,
+      email,
+      phonenum,
       designation,
+      department,
+      reportto,
+      profile,
       branch,
-      assettype,
-      issueddate,
-      assetcode,
-      anonymity,
-      remarks,
-    } = inpval;
+    } = user;
 
     const res2 = await fetch(`${apiUrl}/updatassignassets/${id}`, {
       method: "PATCH",
@@ -86,15 +74,14 @@ const Edit = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,
-        vendername,
+        fullname,
+        email,
+        phonenum,
         designation,
+        department,
+        reportto,
+        profile,
         branch,
-        assettype,
-        issueddate,
-        assetcode,
-        anonymity,
-        remarks,
       }),
     });
 
@@ -111,16 +98,16 @@ const Edit = () => {
 
   return (
     <div className="container">
-      <NavLink to="/assignassets">Back</NavLink>
+      <NavLink to="/usersdata">Back</NavLink>
       <form className="mt-4">
         <div className="row">
           <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputEmail1" class="form-label">
-              Name
+              fullname
             </label>
             <input
               type="text"
-              value={inpval.name}
+              value={user.fullname}
               onChange={setdata}
               name="name"
               class="form-control"
@@ -130,11 +117,11 @@ const Edit = () => {
           </div>
           <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputEmail1" class="form-label">
-              Vender Name
+              email
             </label>
             <input
               type="text"
-              value={inpval.vendername}
+              value={user.email}
               onChange={setdata}
               name="name"
               class="form-control"
@@ -148,9 +135,62 @@ const Edit = () => {
             </label>
             <input
               type="email"
-              value={inpval.designation}
+              value={user.designation}
               onChange={setdata}
               name="designation"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+          <div class="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputPassword1" class="form-label">
+              Phone number
+            </label>
+            <input
+              type="text"
+              value={user.phonenum}
+              onChange={setdata}
+              name="branch"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+
+          <div class="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputPassword1" class="form-label">
+              Department
+            </label>
+            <input
+              type="text"
+              value={user.department}
+              onChange={setdata}
+              name="assettype"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+          <div class="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputPassword1" class="form-label">
+              reportto
+            </label>
+            <input
+              type="text"
+              value={user.reportto}
+              onChange={setdata}
+              name="issueddate"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+          <div class="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputPassword1" class="form-label">
+              profile
+            </label>
+            <input
+              type="text"
+              value={user.profile}
+              onChange={setdata}
+              name="assetcode"
               class="form-control"
               id="exampleInputPassword1"
             />
@@ -161,92 +201,9 @@ const Edit = () => {
             </label>
             <input
               type="text"
-              value={inpval.branch}
-              onChange={setdata}
-              name="branch"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          {/* <div className="mb-3 col-lg-6 col-md-6 col-12">
-                            <label htmlFor="exampleInputPassword1" className="form-label">Asset Type</label>
-                            <select
-                                selected={inpval.assettype}
-                                onChange={setdata}
-                                name="assettype"
-                                className="form-select"
-                                id="exampleInputPassword1"
-                            >
-                                <option value="">Select Mobile</option>
-                                <option value="shirt">Shirt</option>
-                                <option value="t-shirt">T-Shirt</option>
-                                <option value="laptop">Laptop</option>
-                                <option value="charger">Charger</option>
-                                <option value="mouse">Mouse</option>
-                                <option value="student bags">Student Bags</option>
-                            </select>
-                        </div> */}
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
-              Asset Type
-            </label>
-            <input
-              type="text"
-              value={inpval.assettype}
-              onChange={setdata}
-              name="assettype"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
-              Issued Date
-            </label>
-            <input
-              type="text"
-              value={inpval.issueddate}
-              onChange={setdata}
-              name="issueddate"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
-              Asset Code
-            </label>
-            <input
-              type="text"
-              value={inpval.assetcode}
-              onChange={setdata}
-              name="assetcode"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
-              Anonymity
-            </label>
-            <input
-              type="text"
-              value={inpval.anonymity}
+              value={user.branch}
               onChange={setdata}
               name="anonymity"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
-              Remarks
-            </label>
-            <input
-              type="text"
-              value={inpval.remarks}
-              onChange={setdata}
-              name="remarks"
               class="form-control"
               id="exampleInputPassword1"
             />
