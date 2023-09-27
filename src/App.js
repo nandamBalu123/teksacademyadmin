@@ -36,6 +36,8 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const toggle = true;
+  // let role = localStorage.getItem(role); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -44,28 +46,23 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
           </Routes>
+          <Sidebar isSidebar={isSidebar} />
+          <main className="content" style={{ overflow: "auto" }}>
+            <Topbar setIsSidebar={setIsSidebar} />
+            <div style={{ marginBottom: "50px" }}></div>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/registrationform" element={<RegistrationForm />} />
+              <Route path="/studentdata" element={<StudentData />} />
+              <Route path="/createuser" element={<CreateUserForm />} />
+              <Route path="/usersdata" element={<UsersData />} />
+              <Route path="/userview" element={<UserView />} />
+              <Route path="/roles" element={<Roles />} />
+              <Route path="/createrole" element={<CreateRole />} />
+              <Route path="/edit" element={<Edit />} />
+              <Route path="/inn" element={<Login />}></Route>
 
-          {toggle ? <Sidebar isSidebar={isSidebar} /> : <LoginPage />}
-          {toggle ? (
-            <main className="content" style={{ overflow: "auto" }}>
-              <Topbar setIsSidebar={setIsSidebar} />
-              <div style={{ marginBottom: "50px" }}></div>
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route
-                  path="/registrationform"
-                  element={<RegistrationForm />}
-                />
-                <Route path="/studentdata" element={<StudentData />} />
-                <Route path="/createuser" element={<CreateUserForm />} />
-                <Route path="/usersdata" element={<UsersData />} />
-                <Route path="/userview" element={<UserView />} />
-                <Route path="/roles" element={<Roles />} />
-                <Route path="/createrole" element={<CreateRole />} />
-                <Route path="/edit" element={<Edit />} />
-                <Route path="/inn" element={<Login />}></Route>
-
-                {/*<Route path="/assignassets" element={<Assignassets />} />
+              {/*<Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
               <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}
               <Route
@@ -80,9 +77,8 @@ function App() {
                 path="/assignassets/returnassets/:id"
                 element={<ReturnAssetsForm />}
               ></Route> */}
-              </Routes>
-            </main>
-          ) : undefined}
+            </Routes>
+          </main>
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>

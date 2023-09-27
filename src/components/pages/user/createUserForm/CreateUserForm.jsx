@@ -88,10 +88,10 @@ const CreateUserForm = () => {
       <h3>Create User Form</h3>
       <form onSubmit={formik.handleSubmit}>
         <div className="row">
-          <label htmlFor="fullname" className="col ">
+          <label htmlFor="fullname" className="col-6 col-md-3">
             Full Name
           </label>
-          <div className="col">
+          <div className="col-6 col-md-3">
             <input
               id="fullname"
               name="fullname"
@@ -105,10 +105,10 @@ const CreateUserForm = () => {
             ) : null}
           </div>
 
-          <label htmlFor="email" className="col">
+          <label htmlFor="email" className="col-6 col-md-3">
             email{" "}
           </label>
-          <div className="col">
+          <div className="col-6 col-md-3">
             <input
               id="email"
               name="email"
@@ -123,10 +123,10 @@ const CreateUserForm = () => {
           </div>
         </div>
         <div className="row">
-          <label htmlFor="phonenum" className="col">
+          <label htmlFor="phonenum" className="col-6 col-md-3">
             phonenum{" "}
           </label>
-          <div className="col">
+          <div className="col-6 col-md-3">
             <input
               id="phonenum"
               name="phonenum"
@@ -140,10 +140,10 @@ const CreateUserForm = () => {
             ) : null}
           </div>
 
-          <label htmlFor="designation" className="col">
+          <label htmlFor="designation" className="col-6 col-md-3">
             designation{" "}
           </label>
-          <div className="col">
+          <div className="col-6 col-md-3">
             <input
               id="designation"
               name="designation"
@@ -158,10 +158,10 @@ const CreateUserForm = () => {
           </div>
         </div>
         <div className="row">
-          <label htmlFor="department" className="col">
+          <label htmlFor="department" className="col-6 col-md-3">
             department{" "}
           </label>
-          <div className="col">
+          <div className="col-6 col-md-3">
             <input
               id="department"
               name="department"
@@ -176,10 +176,10 @@ const CreateUserForm = () => {
             ) : null}
           </div>
 
-          <label htmlFor="reportto" className="col">
+          <label htmlFor="reportto" className="col-6 col-md-3">
             reportto{" "}
           </label>
-          <div className="col">
+          <div className="col-6 col-md-3">
             <input
               id="reportto"
               name="reportto"
@@ -196,10 +196,10 @@ const CreateUserForm = () => {
         </div>
 
         <div className="row">
-          <label htmlFor="profile" className="col">
+          <label htmlFor="profile" className="col-6 col-md-3">
             profile{" "}
           </label>
-          <div className="col">
+          <div className="col-6 col-md-3">
             <input
               id="profile"
               name="profile"
@@ -214,10 +214,10 @@ const CreateUserForm = () => {
             ) : null}
           </div>
 
-          <label htmlFor="branch" className="col">
+          <label htmlFor="branch" className="col-6 col-md-3">
             branch{" "}
           </label>
-          <div className="col">
+          <div className="col-6 col-md-3">
             <input
               id="branch"
               name="branch"
