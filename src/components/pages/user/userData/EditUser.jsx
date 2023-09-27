@@ -50,9 +50,9 @@ const Edit = () => {
     }
   };
 
-  useEffect(() => {
-    getdata();
-  }, []);
+  // useEffect(() => {
+  //   getdata();
+  // }, []);
 
   const updateuser = async (e) => {
     e.preventDefault();
@@ -98,7 +98,7 @@ const Edit = () => {
 
   return (
     <div className="container">
-      <NavLink to="/assignassets">Back</NavLink>
+      <NavLink to="/usersdata">Back</NavLink>
       <form className="mt-4">
         <div className="row">
           <div class="mb-3 col-lg-6 col-md-6 col-12">

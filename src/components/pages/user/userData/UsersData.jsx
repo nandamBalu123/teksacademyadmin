@@ -34,27 +34,32 @@ const UsersData = () => {
   const [userData, setUserData] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3030/userdata");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setUserData(data.Result);
-      } catch (err) {
-        setError(err);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:3030/userdata");
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       const data = await response.json();
+  //       setUserData(data.Result);
+  //     } catch (err) {
+  //       setError(err);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
+  const handleedit = () => {
+    navigate("/edit");
+  };
+  const handleview = () => {
+    navigate("/userview");
+  };
   return (
     <div style={{ margin: "30px 0px 0px 20px" }}>
       <h2>Users List</h2>
@@ -84,8 +89,8 @@ const UsersData = () => {
             <td>profile</td>
 
             <td>
-              <button onClick={navigate("/userview")}>View</button>
-              <button onClick={navigate("/edit")}>Edit</button>
+              <button onClick={handleview}>View</button>
+              <button onClick={handleedit}>Edit</button>
 
               <button onClick={handleDelete}>Delete</button>
             </td>

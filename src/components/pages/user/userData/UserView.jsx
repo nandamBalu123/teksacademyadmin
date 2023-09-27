@@ -22,7 +22,7 @@ const UserView = () => {
   }, [user]);
 
   return (
-    <div style={{ marginTop: "30px" }}>
+    <div>
       {/* <p>{singleUser.fullname}</p>
       <p>{singleUser.email}</p>
       <p>{singleUser.phonenumber}</p>
