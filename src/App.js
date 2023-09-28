@@ -42,8 +42,11 @@ function App() {
   const toggle = true;
   // let role = localStorage.getItem(role); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
   // let role = localStorage.getItem(role);
-  let role = localStorage.getItem("role");
-  let token = localStorage.getItem("token");
+
+  // let role = localStorage.getItem("role");
+  // let token = localStorage.getItem("token");
+  let role = 'admin';
+  let token = 'sdf';  
   console.log('hello: ', localStorage.getItem("token"))
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -54,7 +57,7 @@ function App() {
             <Routes>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
-          ) : <Navigate to = "/" />}
+          ) : undefined}
           {token ? <Sidebar isSidebar={isSidebar} /> : undefined}
           {token ? (
             <main className="content" style={{ overflow: "auto" }}>
