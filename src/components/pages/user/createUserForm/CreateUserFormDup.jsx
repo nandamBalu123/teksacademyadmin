@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "./CreateUserForm.css";
 const CreateUserForm = () => {
@@ -11,7 +11,7 @@ const CreateUserForm = () => {
   const [profile, setprofile] = useState("");
   const [branch, setbranch] = useState("");
   const [errors, setErrors] = useState({ fullname: "" });
-
+  const [Profiles, SetProfiles] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!fullname.trim()) {
@@ -84,6 +84,7 @@ const CreateUserForm = () => {
       setprofile("");
       setbranch("");
     }
+    useEffect(() => {}, []);
   };
 
   return (
@@ -179,11 +180,15 @@ const CreateUserForm = () => {
               value={profile}
               required
             >
-              <option value="">--select--</option>
-              <option value="Counseller">Counseller </option>
+              {Profiles.map((profile, index) => {
+                <option value="{profile}">{profile} </option>;
+              })}
+
+              {/* <option value="">--select--</option>
+
               <option value="manager">Manager</option>
               <option value="regionalmanager">Regional Manager</option>
-              <option value="managingdirector">Managing Director</option>
+              <option value="managingdirector">Managing Director</option> */}
             </select>
             <label className="mar col-md-2" for="branch">
               Branch <span className="star"> *</span>:
