@@ -32,13 +32,13 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 let username = "zaheer";
-let role = localStorage.getItem('role');
+let role = localStorage.getItem("role");
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  
+
   // let role = localStorage.getItem(role);
   let screenSize = window.innerWidth;
   console.log(screenSize);
@@ -167,24 +167,22 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-              </SubMenu>
-            ) : undefined}
-            {role == "admin" ? (
-              <SubMenu
-                style={{
-                  color: colors.grey[100],
-                }}
-                icon={<PeopleOutlinedIcon />}
-                label={"Roles Management"}
-                title={"Roles Management"}
-              >
-                <Item
-                  title="Roles"
-                  to="/roles"
-                  icon={<EditNoteIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
+                <SubMenu
+                  style={{
+                    color: colors.grey[100],
+                  }}
+                  icon={<PeopleOutlinedIcon />}
+                  label={"Roles Management"}
+                  title={"Settings"}
+                >
+                  <Item
+                    title="Roles"
+                    to="/roles"
+                    icon={<EditNoteIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </SubMenu>
               </SubMenu>
             ) : undefined}
 

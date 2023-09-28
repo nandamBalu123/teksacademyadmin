@@ -23,7 +23,7 @@ import Topbar from "./components/common/Topbar/Topbar";
 
 import RegistrationForm from "./components/pages/student/studentRegistrationForm/RegistrationForm";
 import StudentData from "./components/pages/student/studentData/StudentData";
-import CreateUserForm from "./components/pages/user/createUserForm/CreateUserForm";
+import CreateUserForm from "./components/pages/user/createUserForm/CreateUserFormDup";
 import UsersData from "./components/pages/user/userData/UsersData";
 import LoginPage from "./components/pages/loginpage/LoginPage";
 import { Box } from "@mui/material";
@@ -31,10 +31,7 @@ import CreateRole from "./components/pages/roles/CreateRole";
 import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
-
-
-
-
+import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -42,9 +39,11 @@ function App() {
   const toggle = true;
   // let role = localStorage.getItem(role); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
   // let role = localStorage.getItem(role);
-  let role = localStorage.getItem("role");
-  let token = localStorage.getItem("token");
-  console.log('hello: ', localStorage.getItem("token"))
+  // let role = localStorage.getItem("role");
+  // let token = localStorage.getItem("token");
+  let token = "dsfdsfsdfdsfds";
+  let role = "admin";
+  // console.log("hello: ", localStorage.getItem("token"));
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -54,7 +53,7 @@ function App() {
             <Routes>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
-          ) : <Navigate to = "/" />}
+          ) : undefined}
           {token ? <Sidebar isSidebar={isSidebar} /> : undefined}
           {token ? (
             <main className="content" style={{ overflow: "auto" }}>
@@ -94,7 +93,7 @@ function App() {
                   element={role == "admin" ? <Edit /> : <Dashboard />}
                 />
                 <Route path="/inn" element={<Login />}></Route>
-
+                <Route path="/formm" element={<Formm />}></Route>
                 {/*<Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
               <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}
