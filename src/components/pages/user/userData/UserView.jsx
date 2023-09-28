@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
+import "./UserView.css";
 const UserView = () => {
   const [singleUser, setUser] = useState();
 
@@ -31,7 +32,7 @@ const UserView = () => {
       <p>{singleUser.reportto}</p>
       <p>{singleUser.profile}</p>
       <p>{singleUser.branch}</p> */}
-      <p>irshad</p>
+      <h2>irshad</h2>
       <p>irshad2</p>
       <p>3321332</p>
       <p>rewfasdf</p>

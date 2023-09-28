@@ -39,7 +39,6 @@ function App() {
   const [isSidebar, setIsSidebar] = useState(true);
   const toggle = true;
   // let role = localStorage.getItem(role); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
-  // let role = localStorage.getItem(role);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -55,7 +54,9 @@ function App() {
           {token ? (
             <main className="content" style={{ overflow: "auto" }}>
               <Topbar setIsSidebar={setIsSidebar} />
-              <div style={{ marginBottom: "50px" }}></div>
+              <div
+                style={{ marginBottom: "50px", backgroundColor: "black" }}
+              ></div>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route
