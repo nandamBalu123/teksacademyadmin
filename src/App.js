@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
@@ -32,15 +32,19 @@ import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
 
-let role = "admin";
-let token = "ghvhgvn";
+
+
+
+
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const toggle = true;
   // let role = localStorage.getItem(role); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
   // let role = localStorage.getItem(role);
-
+  let role = localStorage.getItem("role");
+  let token = localStorage.getItem("token");
+  console.log('hello: ', localStorage.getItem("token"))
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -48,9 +52,9 @@ function App() {
         <div className="app">
           {!token ? (
             <Routes>
-              <Route path="/inn" element={<LoginPage />} />
+              <Route path="/login" element={<LoginPage />} />
             </Routes>
-          ) : undefined}
+          ) : <Navigate to = "/" />}
           {token ? <Sidebar isSidebar={isSidebar} /> : undefined}
           {token ? (
             <main className="content" style={{ overflow: "auto" }}>

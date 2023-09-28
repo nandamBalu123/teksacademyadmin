@@ -32,13 +32,13 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 let username = "zaheer";
-let role = "admin";
+let role = localStorage.getItem('role');
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  let role = "admin";
+  
   // let role = localStorage.getItem(role);
   let screenSize = window.innerWidth;
   console.log(screenSize);

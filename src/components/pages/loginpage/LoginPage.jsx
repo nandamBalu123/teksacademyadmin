@@ -3,35 +3,14 @@ import "./LoginPage.css";
 import image from "../../../images/thumbnail_Login.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import validation from "../logins/adminlogins/Loginvalidation";
 
 const LoginPage = () => {
-  function validation(values) {
-    let error = {};
-    const email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const password_pattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-    if (values.email === "") {
-      error.email = "Name should not be empty";
-    } else if (!email_pattern.test(values.email)) {
-      error.email = "Email didn't match";
-    } else {
-      error.email = "";
-    }
-
-    if (values.password === "") {
-      error.password = "Password should not be empty";
-    } else if (!password_pattern.test(values.password)) {
-      error.password = "Password didn't match";
-    } else {
-      error.password = "";
-    }
-    return error;
-  }
-
   const navigate = useNavigate();
+
   const [values, setValues] = useState({
     email: "",
+
     password: "",
   });
 
@@ -43,21 +22,104 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // Move the error check after setting errors in state to ensure they are updated
+
     setErrors(validation(values));
-    if (errors.email === "" && errors.password === "") {
+
+    // Check if there are errors after setting them
+
+    if (!errors.email && !errors.password) {
       axios
+
         .post("http://localhost:3030/adminlogin", values)
+
         .then((res) => {
+          console.log("API Response:", res.data);
+
           if (res.data.Status === "Success") {
-            localStorage.setItem("token", res.data.token); // Store the token in localStorage
-            navigate("/"); // Redirect to the admin dashboard route
+            const id = res.data.adminData.id;
+
+            const token = res.data.token;
+
+            const role = res.data.adminData.profile;
+
+            console.log("Received Token:", token);
+
+            console.log("role: ", role);
+
+            localStorage.setItem("role", role);
+
+            localStorage.setItem("token", token);
+
+            navigate("/"+role +"/" + id);
+
+            console.log(id);
           } else {
-            alert("No records existed");
+            alert("Wrong Email or Password");
           }
         })
-        .catch((err) => console.log(err));
+
+        .catch((err) => {
+          console.error("API Error:", err);
+
+          alert("An error occurred. Please try again later.");
+        });
     }
   };
+  // function validation(values) {
+  //   let error = {};
+  //   const email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  //   const password_pattern =
+  //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+  //   if (values.email === "") {
+  //     error.email = "Name should not be empty";
+  //   } else if (!email_pattern.test(values.email)) {
+  //     error.email = "Email didn't match";
+  //   } else {
+  //     error.email = "";
+  //   }
+
+  //   if (values.password === "") {
+  //     error.password = "Password should not be empty";
+  //   } else if (!password_pattern.test(values.password)) {
+  //     error.password = "Password didn't match";
+  //   } else {
+  //     error.password = "";
+  //   }
+  //   return error;
+  // }
+
+  // const navigate = useNavigate();
+  // const [values, setValues] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+
+  // const [errors, setErrors] = useState({});
+
+  // const handleInput = (event) => {
+  //   setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setErrors(validation(values));
+  //   if (errors.email === "" && errors.password === "") {
+  //     axios
+  //       .post("http://localhost:3030/adminlogin", values)
+  //       .then((res) => {
+  //         if (res.data.Status === "Success") {
+  //           localStorage.setItem("token", res.data.token); // Store the token in localStorage
+  //           navigate("/"); // Redirect to the admin dashboard route
+  //         } else {
+  //           alert("No records existed");
+  //         }
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // };
 
   let quotes = [
     "Your commitment to excellence is an inspiration to us all. Keep up the great work!",
@@ -87,31 +149,32 @@ const LoginPage = () => {
       <div className="subdiv col-md-6 credentials">
         <p className="quotes">{quotes[random]}</p>
         <p></p>
-        <form action="" onSubmit={handleSubmit}></form>
+        <form action="" onSubmit={handleSubmit}>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          className="inputcon form-control rounded-0"
-          onChange={handleInput}
-        />
-        {errors.email && <span className="text-danger">{errors.email}</span>}
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            className="inputcon form-control rounded-0"
+            onChange={handleInput}
+          />
+          {errors.email && <span className="text-danger">{errors.email}</span>}
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          className="inputcon form-control rounded-0"
-          onChange={handleInput}
-        />
-        {errors.password && (
-          <span className="text-danger">{errors.password}</span>
-        )}
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            className="inputcon form-control rounded-0"
+            onChange={handleInput}
+          />
+          {errors.password && (
+            <span className="text-danger">{errors.password}</span>
+          )}
 
-        <button type="submit" className="btnn">
-          Login
-        </button>
+          <button type="submit" className="btnn">
+            Login
+          </button>
+        </form>
       </div>
     </div>
   );
