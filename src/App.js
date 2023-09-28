@@ -59,7 +59,9 @@ function App() {
           {token ? (
             <main className="content" style={{ overflow: "auto" }}>
               <Topbar setIsSidebar={setIsSidebar} />
-              <div style={{ marginBottom: "50px" }}></div>
+              <div
+                style={{ marginBottom: "50px", backgroundColor: "black" }}
+              ></div>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route

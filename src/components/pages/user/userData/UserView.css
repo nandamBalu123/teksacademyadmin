@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,700;1,800&display=swap");
+p {
+  color: #1e2022;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: "Nunito", sans-serif;
+  letter-spacing: 0.5px;
+}
+/* font-family: "Inter", sans-serif;
+font-family: "Mooli", sans-serif;
+font-family: "Nunito", sans-serif;
+font-family: "Nunito Sans", sans-serif;
+font-family: "Roboto Mono", monospace;
+font-family: "Source Sans 3", sans-serif; */
