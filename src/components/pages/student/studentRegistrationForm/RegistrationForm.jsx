@@ -39,41 +39,44 @@ export default function RegistrationForm() {
             <StepContent>
               <form>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Name:</label>
+                  <label className="col-12 col-md-2">Name  <span className="text-danger">*</span>&nbsp; :</label>
                   <input
                     type="text"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Email:</label>
+                  <label className="col-12 col-md-2">Email <span className="text-danger"> *</span>&nbsp; :</label>
                   <input
                     type="text"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Mobile Number:</label>
+                  <label className="col-12 col-md-2">Mobile Number<span className="text-danger"> *</span>&nbsp;:</label>
                   <input
                     type="text"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
+                </div><br/>
               </form>
 
               <Box sx={{ mb: 2, mt: 2 }}>
@@ -98,67 +101,83 @@ export default function RegistrationForm() {
             <StepContent>
               <form>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Parent's Name:</label>
+                  <label className="col-12 col-md-2">Parent's Name <span className="text-danger"> *</span>&nbsp;:</label>
                   <input
                     type="text"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Birth Date:</label>
+                  <label className="col-12 col-md-2">Birth Date <span className="text-danger"> *</span>&nbsp;:</label>
                   <input
-                    type="text"
+                    type="date"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Gender:</label>
-                  <input
-                    type="text"
+                  <label className="col-12 col-md-2">Gender <span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
                     className="col-9 col-md-5"
+                    id=""
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                  />
-                </div>
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Female </option>
+                    <option value="degree">Male</option>
+                    <option value="mca"> Others</option>
+                  </select>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Marital Status:</label>
-                  <input
-                    type="text"
+                  <label className="col-12 col-md-2">Marital Status <span className="text-danger"> *</span>&nbsp; :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
                     className="col-9 col-md-5"
+                    id=""
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                  />
-                </div>
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Single</option>
+                    <option value="degree">Marriage</option>
+                  </select>
+                </div><br/>
                 <div className="row ">
                   <label className="col-12 col-md-2">
-                    College / School / Company* :
+                    College / School / Company <span className="text-danger"> *</span>&nbsp; :
                   </label>
                   <input
                     type="text"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
+                </div><br/>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -190,78 +209,101 @@ export default function RegistrationForm() {
             </StepLabel>
             <StepContent>
               <form>
+              <div className="row ">
+                  <label className="col-12 col-md-2">Country <span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">India </option>
+                    
+                  </select>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Country:</label>
+                  <label className="col-12 col-md-2">State<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Andhra </option>
+                    
+                  </select>
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Area<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Madhapur</option>
+                    
+                  </select>
+                </div><br/>
+              
+                
+                <div className="row ">
+                  <label className="col-12 col-md-2">Native Place  <span className="text-danger"> *</span>&nbsp;:</label>
                   <input
                     type="text"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">State:</label>
+                  <label className="col-12 col-md-2">Zip Code <span className="text-danger"> *</span>&nbsp; :</label>
                   <input
                     type="text"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Area:</label>
+                  <label className="col-12 col-md-2"> WhatsApp Number <span className="text-danger"> *</span>&nbsp;:</label>
                   <input
                     type="text"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
-                <div className="row ">
-                  <label className="col-12 col-md-2">Native Place :</label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  />
-                </div>
-                <div className="row ">
-                  <label className="col-12 col-md-2">Zip Code* :</label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  />
-                </div>
-                <div className="row ">
-                  <label className="col-12 col-md-2"> WhatsApp Number*:</label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  />
-                </div>
+                </div><br/>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -294,11 +336,12 @@ export default function RegistrationForm() {
             <StepContent>
               <form>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Education Type:</label>
+                  <label className="col-12 col-md-2">Education Type <span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
 
                   <select
                     className="col-9 col-md-5"
                     id="educationtype"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
@@ -312,31 +355,39 @@ export default function RegistrationForm() {
                     <option value="ssc"> SSC</option>
                     <option value="other">others</option>
                   </select>
-                </div>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Marks:</label>
+                  <label className="col-12 col-md-2">Marks<span className="text-danger"> *</span>&nbsp;:</label>
                   <input
                     type="text"
                     className="col-9 col-md-5"
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                   />
-                </div>
+                </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">Academic Year:</label>
-                  <input
-                    type="text"
+                  <label className="col-12 col-md-2">Academic Year<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
                     className="col-9 col-md-5"
+                    id=""
+                    
+                    required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                  />
-                </div>
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">2023</option>
+                    
+                  </select>
+                </div><br/>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -360,8 +411,11 @@ export default function RegistrationForm() {
               </Box>
             </StepContent>
           </Step>
+          {/* Step 5 */}
           <Step>
-            <StepLabel>Photo</StepLabel>
+            <StepLabel>
+            <Typography fontSize={25}>Photo</Typography>
+            </StepLabel>
 
             <StepContent>
               <form>
@@ -416,20 +470,510 @@ export default function RegistrationForm() {
               </Box>
             </StepContent>
           </Step>
+            {/* -----step 6--- */}
           <Step>
-            <StepLabel>Basic Details</StepLabel>
 
-            <StepContent></StepContent>
+            <StepLabel><Typography fontSize={25}>Enquiry Details:</Typography></StepLabel>
+           <StepContent>
+            <form> 
+            <div className="row ">
+                  <label className="col-12 col-md-2">Enquiry Date<span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="date"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">
+                    Enquiry  Taken   By<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Bhavitha</option>
+                    
+                  </select>
+                </div><br/>
+              
+                
+                <div className="row ">
+                  <label className="col-12 col-md-2"> 
+                  Course   Package<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Business Analytics</option>
+                    
+                  </select>
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Courses<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Full Stack</option>
+                    
+                  </select>
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Lead Source<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Walkin</option>
+                    
+                  </select>
+                </div><br/>
+              
+                
+                
+              </form> 
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                    >
+                {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                Continue
+                </Button>
+                <Button
+                  variant="contained"
+                  // disabled={index === 0}
+                  onClick={handleBack}
+                  sx={{ mt: 1, mr: 1 }}
+                >
+                  Back
+                </Button>
+              </div>
+            </Box>
+                  </StepContent>
+            
           </Step>
+  {/* -----step 7--- */}
           <Step>
-            <StepLabel>Basic Details</StepLabel>
+            <StepLabel> <Typography fontSize={25}>Admission Details</Typography></StepLabel>
 
-            <StepContent></StepContent>
+            <StepContent> 
+            <form> 
+            <div className="row ">
+                  <label className="col-12 col-md-2">Branch<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Hitech-city</option>
+                    
+                  </select>
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Mode of Traning<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Online</option>
+                    
+                  </select>
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Admission Status<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Active</option>
+                    
+                  </select>
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Registration No <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Admission Date <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="date"
+                    className="col-9 col-md-5"
+                    required
+
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Validity Start Date <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="date"
+                    className="col-9 col-md-5"
+                    required
+              
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Validity End Date <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="date"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                
+              </form> 
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                    >
+                {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                Continue
+                </Button>
+                <Button
+                  variant="contained"
+                  // disabled={index === 0}
+                  onClick={handleBack}
+                  sx={{ mt: 1, mr: 1 }}
+                >
+                  Back
+                </Button>
+              </div>
+            </Box>
+            </StepContent>
           </Step>
+            {/* -----step 8--- */}
           <Step>
-            <StepLabel>Basic Details</StepLabel>
+            <StepLabel> <Typography fontSize={25}>Fee Details</Typography> </StepLabel>
 
-            <StepContent></StepContent>
+            <StepContent> 
+           <form>
+           <div className="row ">
+                  <label className="col-12 col-md-2">Fee Type <span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Course fee </option>
+                    <option value="degree">Admission Fee</option>
+                    <option value="mca"> QR CODE</option>
+                    
+                  </select>
+                </div><br/>
+           
+                <div className="row ">
+                  <label className="col-12 col-md-2">Amount <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+            
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Discount <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Tax <span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Exclusive Tax </option>
+                    <option value="degree">Inclusive Tax</option>
+                   
+                    
+                  </select>
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Tax(in$) <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Total <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/></form>
+                <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                    >
+                {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                Continue
+                </Button>
+                <Button
+                  variant="contained"
+                  // disabled={index === 0}
+                  onClick={handleBack}
+                  sx={{ mt: 1, mr: 1 }}
+                >
+                  Back
+                </Button>
+              </div>
+            </Box>
+            </StepContent>
+          </Step>
+           {/* -----step 9--- */}
+           <Step>
+            <StepLabel> <Typography fontSize={25}>Billing</Typography> </StepLabel>
+
+            <StepContent> 
+            <form>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Gross Total <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">
+                   Discount     Before Tax <span className="text-danger"> *</span>&nbsp; :
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Net Total <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Tax(+) <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2">Grand Total<span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2"> Admission Remarks <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2"> Assetss <span className="text-danger"> *</span>&nbsp;:</label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div><br/>
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                    variant="contained"
+                    onClick={""}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Submit
+                  </Button>
+                  <Button
+                    variant="contained"
+                    // disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            
+            </StepContent>
           </Step>
         </Stepper>
         {/* {activeStep === steps.length && (
