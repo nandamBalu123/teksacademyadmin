@@ -55,6 +55,7 @@ const LoginPage = () => {
             navigate("/"+role +"/" + id);
 
             console.log(id);
+            window.location.reload()
           } else {
             alert("Wrong Email or Password");
           }
