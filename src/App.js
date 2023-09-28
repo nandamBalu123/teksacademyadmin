@@ -23,7 +23,9 @@ import Topbar from "./components/common/Topbar/Topbar";
 
 import RegistrationForm from "./components/pages/student/studentRegistrationForm/RegistrationForm";
 import StudentData from "./components/pages/student/studentData/StudentData";
-import CreateUserForm from "./components/pages/user/createUserForm/CreateUserForm";
+// import CreateUserForm from "./components/pages/user/createUserForm/CreateUserForm";
+import CreateUserForm from "./components/pages/user/createUserForm/CreateUserFormDup";
+
 import UsersData from "./components/pages/user/userData/UsersData";
 import LoginPage from "./components/pages/loginpage/LoginPage";
 import { Box } from "@mui/material";
@@ -54,7 +56,7 @@ function App() {
             <Routes>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
-          ) : <Navigate to = "/" />}
+          ) : undefined}
           {token ? <Sidebar isSidebar={isSidebar} /> : undefined}
           {token ? (
             <main className="content" style={{ overflow: "auto" }}>

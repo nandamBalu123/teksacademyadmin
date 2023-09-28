@@ -92,11 +92,11 @@ const CreateUserForm = () => {
       <div className="sub-user-container">
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="row roww mb-4">
-            <label className="mar col-md-1 " for="fullname">
+            <label className="mar col-md-2 " for="fullname">
               Full Name<span className="star"> *</span>:
             </label>
             <input
-              className="mar col-md-1 inputt "
+              className="mar col-md-3 inputt "
               type="text"
               onChange={(e) => setfullname(e.target.value)}
               value={fullname}
