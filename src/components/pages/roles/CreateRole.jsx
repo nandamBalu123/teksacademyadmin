@@ -5,30 +5,64 @@ import { useState } from "react";
 import { Update } from "@mui/icons-material";
 const CreateRole = () => {
   const navigate = useNavigate();
-  const [RoleName, setRoleName] = useState("");
-  const [Description, setDescription] = useState("");
+  const [role, setRoleName] = useState("");
+  const [description, setDescription] = useState("");
   const [BasicAccess, setBasicAccess] = useState({
     Read: false,
     Update: false,
     Delete: false,
     Create: false,
   });
-  const handleCheckboxChange = async (event) => {
-    const name = event.target.name;
+  // const handleCheckboxChange = async (event) => {
+  //   const name = event.target.name;
 
-    // Step 4: Update the state with the new checkbox value
-    setBasicAccess({
-      ...BasicAccess,
-      [name]: !BasicAccess.name,
-    });
-    console.log(BasicAccess);
-  };
+  //   // Step 4: Update the state with the new checkbox value
+  //   setBasicAccess({
+  //     ...BasicAccess,
+  //     [name]: !BasicAccess.name,
+  //   });
+  //   console.log(BasicAccess);
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleCheckboxChange();
-    console.log(RoleName, Description);
+    const user = {
+      role,
+      description
+      
+    };
+
+    console.log("User Data:", user); // Log the user data being sent
+
+    const response = await fetch("http://localhost:3030/userroles", {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("Response:", response); // Log the response from the server
+
+    const json = await response.json();
+
+    console.log("JSON Response:", json); // Log the parsed JSON response
+
+    if (response.ok) {
+      console.log("User created successfully.");
+
+      // Reset the form fields
+      setRoleName("");
+      setDescription("");
+      
+    }
+  
+  
+   
+    // handleCheckboxChange();
+    console.log(role, description);
     navigate("/roles");
   };
+
+  
 
   return (
     <div style={{ marginTop: "30px" }}>
@@ -39,7 +73,7 @@ const CreateRole = () => {
           <input
             type="text"
             onChange={(e) => setRoleName(e.target.value)}
-            value={RoleName}
+            value={role}
           />
         </div>
         <div>
@@ -47,7 +81,7 @@ const CreateRole = () => {
           <input
             type="text"
             onChange={(e) => setDescription(e.target.value)}
-            value={Description}
+            value={description}
           />
         </div>
 
@@ -91,7 +125,7 @@ const CreateRole = () => {
                           name="Read"
                           value={BasicAccess.Read}
                           checked={BasicAccess.Read}
-                          onChange={(event) => handleCheckboxChange}
+                          // onChange={(event) => handleCheckboxChange}
                         />
                       </div>
                       <div class="form-check form-switch">
@@ -103,7 +137,7 @@ const CreateRole = () => {
                           name="Update"
                           value={BasicAccess.Update}
                           checked={BasicAccess.Update}
-                          onChange={(event) => handleCheckboxChange}
+                          // onChange={(event) => handleCheckboxChange}
                         />
                       </div>
                       <div class="form-check form-switch">
@@ -115,7 +149,7 @@ const CreateRole = () => {
                           name="Delete"
                           value={BasicAccess.Delete}
                           checked={BasicAccess.Delete}
-                          onChange={(event) => handleCheckboxChange}
+                          // onChange={(event) => handleCheckboxChange}
                         />
                       </div>
                       <div class="form-check form-switch">
@@ -127,7 +161,7 @@ const CreateRole = () => {
                           name="Create"
                           value={BasicAccess.Create}
                           checked={BasicAccess.Create}
-                          onChange={(event) => handleCheckboxChange(event)}
+                          // onChange={(event) => handleCheckboxChange(event)}
                         />
                       </div>
                     </div>
