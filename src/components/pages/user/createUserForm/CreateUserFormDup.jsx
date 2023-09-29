@@ -2,15 +2,15 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import "./CreateUserForm.css";
 const CreateUserForm = () => {
-  const [fullname, setfullname] = useState("");
-  const [email, setemail] = useState("");
-  const [phonenum, setphonenum] = useState("");
-  const [designation, setdesignation] = useState("");
-  const [department, setdepartment] = useState("");
-  const [reportto, setreportto] = useState("");
-  const [profile, setprofile] = useState("");
-  const [branch, setbranch] = useState("");
-  const [errors, setErrors] = useState({ fullname: "" });
+const [fullname, setfullname] = useState("");
+const [email, setemail] = useState("");
+const [phonenum, setphonenum] = useState("");
+const [designation, setdesignation] = useState("");
+const [department, setdepartment] = useState("");
+const [reportto, setreportto] = useState("");
+const [profile, setprofile] = useState("");
+const [branch, setbranch] = useState("");
+const [errors, setErrors] = useState({ fullname: "" });
   // const [Profiles, setProfiles] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,9 +87,9 @@ const CreateUserForm = () => {
     
   };
 
-  // const [profiles, setProfiles] = useState([1,2]);
-  const profiles=[1,2,3]
-
+  const [profiles, setProfiles] = useState(["balu"]);
+  
+// const profiles = []
   const fetchData = async () => {
     try {
       const response = await fetch("http://localhost:3030/getuserroles");
@@ -103,9 +103,16 @@ const CreateUserForm = () => {
   
       const data = await response.json();
       console.log("Fetched data:", data.Result); // Log the fetched data
-      
+      const profile = data.Result
       // setProfiles(data.Result);
-      console.log("ppppppp",profiles)
+      
+      console.log("ppppppp",profile[0].role)
+      for(let i = 0;i<profile.length;i++){
+        console.log("role",profile[i].role)
+        profiles.push(profile[i].role)
+        console.log("profiles",profiles)
+        // setProfiles([...profiles,profile[i].role])
+      }
     } catch (error) {
       console.error("Error:", error);
     }
@@ -231,8 +238,8 @@ const CreateUserForm = () => {
               value={profile}
               required
             >
-              {profiles.map((profile, index) => {
-                <option value="{profile}">{profile} </option>;
+              {profiles.map((profile) => {
+                return  <option value="{profile}">{profile} </option>;
               })}
 
               {/* <option value="">--select--</option>
