@@ -47,9 +47,9 @@ function App() {
 
   // let role = localStorage.getItem("role");
   // let token = localStorage.getItem("token");
-  let role = 'admin';
-  let token = 'sdf';  
-  console.log('hello: ', localStorage.getItem("token"))
+  let role = "admin";
+  let token = "sdf";
+  console.log("hello: ", localStorage.getItem("token"));
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -89,7 +89,7 @@ function App() {
                   path="/userview"
                   element={role == "admin" ? <UserView /> : <Dashboard />}
                 />
-               
+
                 <Route
                   path="/roles"
                   element={role == "admin" ? <Roles /> : <Dashboard />}
