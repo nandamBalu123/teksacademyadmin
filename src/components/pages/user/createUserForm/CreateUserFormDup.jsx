@@ -11,7 +11,7 @@ const CreateUserForm = () => {
   const [profile, setprofile] = useState("");
   const [branch, setbranch] = useState("");
   const [errors, setErrors] = useState({ fullname: "" });
-  const [Profiles, SetProfiles] = useState({});
+  // const [Profiles, setProfiles] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!fullname.trim()) {
@@ -84,8 +84,59 @@ const CreateUserForm = () => {
       setprofile("");
       setbranch("");
     }
-    useEffect(() => {}, []);
+    
   };
+
+  // const [profiles, setProfiles] = useState([1,2]);
+  const profiles=[1,2,3]
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:3030/getuserroles");
+      
+      console.log("Response status:", response.status); // Log response status
+  
+      if (!response.ok) {
+        console.error("Network response error:", response.status, response.statusText);
+        throw new Error("Network response was not ok");
+      }
+  
+      const data = await response.json();
+      console.log("Fetched data:", data.Result); // Log the fetched data
+      
+      // setProfiles(data.Result);
+      console.log("ppppppp",profiles)
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  
+
+  useEffect(() => {
+    fetchData(); // Call fetchData when the component mounts
+  }, []); // Empty dependency array means it runs once after the initial render
+  
+
+
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:3030/getuserroles");
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok");
+
+    
+  //     }
+  //     const data = await response.json();
+  //     SetProfiles(data.result);
+      
+  //     console.log(data.result)
+  //   } catch (err) {
+  //     console.log("error")
+  //   }
+  // };
+
+  fetchData();
 
   return (
     <div className="main-user-container">
@@ -180,7 +231,7 @@ const CreateUserForm = () => {
               value={profile}
               required
             >
-              {Profiles.map((profile, index) => {
+              {profiles.map((profile, index) => {
                 <option value="{profile}">{profile} </option>;
               })}
 
