@@ -69,4 +69,4 @@ StepLabel {
 
 .image-input:active {
   transform: scale(0.95); /* Shrink the image when clicked */
-}
+} 
