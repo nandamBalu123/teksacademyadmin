@@ -33,7 +33,7 @@ import CreateRole from "./components/pages/roles/CreateRole";
 import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
-import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
+// import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -47,7 +47,7 @@ function App() {
 
   // let role = localStorage.getItem("role");
   // let token = localStorage.getItem("token");
-  let role = "admin";
+  let role = 'admin';
   let token = "sdf";
   console.log("hello: ", localStorage.getItem("token"));
   return (
@@ -73,9 +73,7 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
-                <Route
-                path="/feedetails"
-                element={<Feedetails/>}/>
+                
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
                   path="/createuser"
