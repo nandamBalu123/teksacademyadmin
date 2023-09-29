@@ -33,6 +33,8 @@ import CreateRole from "./components/pages/roles/CreateRole";
 import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
+import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
+
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 
@@ -71,6 +73,9 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
+                <Route
+                path="/feedetails"
+                element={<Feedetails/>}/>
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
                   path="/createuser"
@@ -98,7 +103,9 @@ function App() {
                   element={role == "admin" ? <Edit /> : <Dashboard />}
                 />
                 <Route path="/inn" element={<Login />}></Route>
-              
+                {/* <Route
+                path="/feedetails"
+                element={role=='admin'? <Feedetails/> :<Dashboard/>}/> */}
                 {/* <Route path="/formm" element={<Formm />}></Route> */}
                 {/*<Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}

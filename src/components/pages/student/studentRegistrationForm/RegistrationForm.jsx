@@ -30,15 +30,15 @@ export default function RegistrationForm() {
       <div className="main-sub-container">
         <Typography fontSize={35}>Registration form</Typography>
 
-        <Stepper activeStep={activeStep} orientation="vertical">
+        <Stepper activeStep={activeStep} orientation="vertical" > 
           {/* -----step 1--- */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Basic Details</Typography>
+              <Typography fontSize={25} >Basic Details</Typography>
             </StepLabel>
             <StepContent>
               <form>
-                <div className="row ">
+                <div className="row  inputbox">
                   <label className="col-12 col-md-2">Name  <span className="text-danger">*</span>&nbsp; :</label>
                   <input
                     type="text"
@@ -46,7 +46,7 @@ export default function RegistrationForm() {
                     required
                     style={{
                       height: "35px",
-                      border: "1.5px solid black",
+                      border: "1.5px solid Black",
                       borderRadius: "5px",
                     }}
                   />
@@ -140,9 +140,9 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Female </option>
-                    <option value="degree">Male</option>
-                    <option value="mca"> Others</option>
+                    <option value="female">Female </option>
+                    <option value="male">Male</option>
+                    <option value="others"> Others</option>
                   </select>
                 </div><br/>
                 <div className="row ">
@@ -159,8 +159,8 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Single</option>
-                    <option value="degree">Marriage</option>
+                    <option value="single">Single</option>
+                    <option value="marriage">Marriage</option>
                   </select>
                 </div><br/>
                 <div className="row ">
@@ -223,7 +223,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">India </option>
+                    <option value="india">India </option>
                     
                   </select>
                 </div><br/>
@@ -241,7 +241,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Andhra </option>
+                    <option value="andhra">Andhra </option>
                     
                   </select>
                 </div><br/>
@@ -259,7 +259,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Madhapur</option>
+                    <option value="madhapur">Madhapur</option>
                     
                   </select>
                 </div><br/>
@@ -384,7 +384,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">2023</option>
+                    <option value="2023">2023</option>
                     
                   </select>
                 </div><br/>
@@ -505,7 +505,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Bhavitha</option>
+                    <option value="bhavitha">Bhavitha</option>
                     
                   </select>
                 </div><br/>
@@ -526,7 +526,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Business Analytics</option>
+                    <option value="business analytics">Business Analytics</option>
                     
                   </select>
                 </div><br/>
@@ -544,7 +544,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Full Stack</option>
+                    <option value="fullstack">Full Stack</option>
                     
                   </select>
                 </div><br/>
@@ -562,7 +562,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Walkin</option>
+                    <option value="walkin">Walkin</option>
                     
                   </select>
                 </div><br/>
@@ -631,7 +631,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Online</option>
+                    <option value="online">Online</option>
                     
                   </select>
                 </div><br/>
@@ -649,7 +649,7 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Active</option>
+                    <option value="active">Active</option>
                     
                   </select>
                 </div><br/>
@@ -750,9 +750,9 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Course fee </option>
-                    <option value="degree">Admission Fee</option>
-                    <option value="mca"> QR CODE</option>
+                    <option value="coursefee">Course fee </option>
+                    <option value="admission fee">Admission Fee</option>
+                    <option value="QR code"> QR CODE</option>
                     
                   </select>
                 </div><br/>
@@ -798,8 +798,8 @@ export default function RegistrationForm() {
                     }}
                   >
                     <option value="">--select--</option>
-                    <option value="btech">Exclusive Tax </option>
-                    <option value="degree">Inclusive Tax</option>
+                    <option value="exclusivetax">Exclusive Tax </option>
+                    <option value="inclusive">Inclusive Tax</option>
                    
                     
                   </select>
@@ -939,17 +939,26 @@ export default function RegistrationForm() {
                   />
                 </div><br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2"> Assetss <span className="text-danger"> *</span>&nbsp;:</label>
-                  <input
-                    type="text"
+                  <label className="col-12 col-md-2">Assets<span className="text-danger"> *</span>&nbsp;:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <select
                     className="col-9 col-md-5"
+                    id=""
                     required
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                  />
+                  >
+                    <option value="">--select--</option>
+                    <option value="Laptap"> Laptap</option>
+                    <option value="LMS"> LMS</option>
+                    <option value="books"> Books</option>
+                    <option value="bag"> Bag</option>
+
+                    
+                  </select>
                 </div><br/>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
@@ -973,7 +982,7 @@ export default function RegistrationForm() {
                 </div>
               </Box>
             
-            </StepContent>
+            </StepContent> 
           </Step>
         </Stepper>
         {/* {activeStep === steps.length && (
