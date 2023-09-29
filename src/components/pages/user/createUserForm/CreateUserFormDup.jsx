@@ -143,7 +143,7 @@ const [errors, setErrors] = useState({ fullname: "" });
   //   }
   // };
 
-  fetchData();
+ 
 
   return (
     <div className="main-user-container">
