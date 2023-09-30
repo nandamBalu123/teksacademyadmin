@@ -2,16 +2,18 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import "./CreateUserForm.css";
 const CreateUserForm = () => {
-const [fullname, setfullname] = useState("");
-const [email, setemail] = useState("");
-const [phonenum, setphonenum] = useState("");
-const [designation, setdesignation] = useState("");
-const [department, setdepartment] = useState("");
-const [reportto, setreportto] = useState("");
-const [profile, setprofile] = useState("");
-const [branch, setbranch] = useState("");
-const [errors, setErrors] = useState({ fullname: "" });
-  // const [Profiles, setProfiles] = useState({});
+  const [fullname, setfullname] = useState("");
+  const [email, setemail] = useState("");
+  const [phonenum, setphonenum] = useState("");
+  const [designation, setdesignation] = useState("");
+  const [department, setdepartment] = useState("");
+  const [reportto, setreportto] = useState("");
+  const [profile, setprofile] = useState("");
+  const [branch, setbranch] = useState("");
+  const [errors, setErrors] = useState({ fullname: "" });
+  const [profiles, setProfiles] = useState(["balu"]);
+  const profilee = [];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!fullname.trim()) {
@@ -84,7 +86,6 @@ const [errors, setErrors] = useState({ fullname: "" });
       setprofile("");
       setbranch("");
     }
-    
   };
 
   const [profiles, setProfiles] = useState([]);
@@ -142,32 +143,10 @@ const fetchData = async () => {
 //     }
 //   };
 
-  
-
   useEffect(() => {
     fetchData(); // Call fetchData when the component mounts
+    setProfiles(profilee);
   }, []); // Empty dependency array means it runs once after the initial render
-  
-
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:3030/getuserroles");
-  //     if (!response.ok) {
-  //       throw new Error("Network response was not ok");
-
-    
-  //     }
-  //     const data = await response.json();
-  //     SetProfiles(data.result);
-      
-  //     console.log(data.result)
-  //   } catch (err) {
-  //     console.log("error")
-  //   }
-  // };
-
- 
 
   return (
     <div className="main-user-container">
@@ -277,7 +256,7 @@ const fetchData = async () => {
               required
             >
               {profiles.map((profile) => {
-                return  <option value="{profile}">{profile} </option>;
+                return <option value="{profile}">{profile} </option>;
               })}
 
               
@@ -311,5 +290,4 @@ const fetchData = async () => {
     </div>
   );
 };
-
 export default CreateUserForm;
