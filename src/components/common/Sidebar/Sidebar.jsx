@@ -66,13 +66,13 @@ const Sidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .pro-inner-item": {
-          padding: "5px 14px 5px 0px !important",
+          padding: "5px 14px 5px 0px !important"
         },
         "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+          color: "#335eea !important",
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          color: "#335eea !important",
         },
         letterSpacing: "0.6px",
       }}
