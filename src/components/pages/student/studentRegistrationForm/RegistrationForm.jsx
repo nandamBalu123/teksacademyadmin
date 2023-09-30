@@ -58,7 +58,8 @@ export default function RegistrationForm() {
 
   useEffect(() => {
     setTotalamount(amount - discount);
-    setTaxamount(totalamount * 0.18);
+    let actualfee = (totalamount * 100) / 118;
+    setTaxamount(totalamount - actualfee);
   });
   // useEffect(() => {}, [totalamount]);
 
@@ -141,11 +142,11 @@ export default function RegistrationForm() {
       <div className="main-sub-container">
         <Typography fontSize={35}>Registration form</Typography>
 
-        <Stepper activeStep={activeStep} orientation="vertical" > 
+        <Stepper activeStep={activeStep} orientation="vertical">
           {/* -----step 1--- */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25} >Basic Details</Typography>
+              <Typography fontSize={25}>Basic Details</Typography>
             </StepLabel>
             <StepContent>
               <form>
@@ -1286,9 +1287,9 @@ export default function RegistrationForm() {
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2">
-                    Assetss <span className="text-danger"> *</span>&nbsp;:
+                    Assets <span className="text-danger"> *</span>&nbsp;:
                   </label>
-                  <input
+                  {/* <input
                     type="text"
                     className="col-9 col-md-5"
                     required
@@ -1297,7 +1298,23 @@ export default function RegistrationForm() {
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                  />
+                  /> */}
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="laptop">Laptop </option>
+                    <option value="bag"> Bag</option>
+                    <option value="lms"> LMS</option>
+                    <option value="coursematerial"> Course Materials</option>
+                  </select>
                 </div>
                 <br />
               </form>
