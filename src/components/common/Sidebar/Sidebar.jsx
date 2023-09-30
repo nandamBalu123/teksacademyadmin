@@ -64,13 +64,13 @@ const Sidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .pro-inner-item": {
-          padding: "5px 14px 5px 0px !important",
+          padding: "5px 14px 5px 0px !important"
         },
         "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+          color: "#335eea !important",
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          color: "#335eea !important",
         },
         letterSpacing: "0.6px",
       }}
@@ -83,6 +83,7 @@ const Sidebar = () => {
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
+              
               color: colors.grey[100],
             }}
           >
@@ -138,7 +139,8 @@ const Sidebar = () => {
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={isCollapsed ? undefined : "10%"}
+          >
             <Item
               title="Dashboard"
               to="/"
