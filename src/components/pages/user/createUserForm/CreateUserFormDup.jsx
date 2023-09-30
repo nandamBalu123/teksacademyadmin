@@ -87,36 +87,60 @@ const [errors, setErrors] = useState({ fullname: "" });
     
   };
 
-  const [profiles, setProfiles] = useState(["balu"]);
-  
-// const profiles = []
-  const fetchData = async () => {
-    try {
-      const response = await fetch("http://localhost:3030/getuserroles");
-      
-      console.log("Response status:", response.status); // Log response status
-  
-      if (!response.ok) {
-        console.error("Network response error:", response.status, response.statusText);
-        throw new Error("Network response was not ok");
-      }
-  
-      const data = await response.json();
-      console.log("Fetched data:", data.Result); // Log the fetched data
-      const profile = data.Result
-      // setProfiles(data.Result);
-      
-      console.log("ppppppp",profile[0].role)
-      for(let i = 0;i<profile.length;i++){
-        console.log("role",profile[i].role)
-        profiles.push(profile[i].role)
-        console.log("profiles",profiles)
-        // setProfiles([...profiles,profile[i].role])
-      }
-    } catch (error) {
-      console.error("Error:", error);
+  const [profiles, setProfiles] = useState([]);
+
+const fetchData = async () => {
+  try {
+    const response = await fetch("http://localhost:3030/getuserroles");
+    
+    console.log("Response status:", response.status); // Log response status
+
+    if (!response.ok) {
+      console.error("Network response error:", response.status, response.statusText);
+      throw new Error("Network response was not ok");
     }
-  };
+
+    const data = await response.json();
+    console.log("Fetched data:", data.Result); // Log the fetched data
+    const profileData = data.Result.map((item) => item.role);
+    
+    setProfiles(profileData); // Update the state with the extracted role data
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+
+//   const [profiles, setProfiles] = useState([]);
+  
+// // const profiles = []
+//   const fetchData = async () => {
+//     try {
+//       const response = await fetch("http://localhost:3030/getuserroles");
+      
+//       console.log("Response status:", response.status); // Log response status
+  
+//       if (!response.ok) {
+//         console.error("Network response error:", response.status, response.statusText);
+//         throw new Error("Network response was not ok");
+//       }
+  
+//       const data = await response.json();
+//       console.log("Fetched data:", data.Result); // Log the fetched data
+//       const profile = data.Result
+//       // setProfiles(data.Result);
+      
+//       console.log("ppppppp",profile[0].role)
+//       for(let i = 0;i<profile.length;i++){
+//         console.log("role",profile[i].role)
+//         profiles.push(profile[i].role)
+//         console.log("profiles",profiles)
+//         // setProfiles([...profiles,profile[i].role])
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//     }
+//   };
 
   
 
@@ -151,7 +175,7 @@ const [errors, setErrors] = useState({ fullname: "" });
       <div className="sub-user-container">
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="row roww mb-4">
-            <label className="mar col-md-2 " for="fullname">
+            <label className="mar col-md-2 " htmlFor="fullname">
               Full Name<span className="star"> *</span>:
             </label>
             <input
@@ -163,7 +187,7 @@ const [errors, setErrors] = useState({ fullname: "" });
               required
             />
 
-            <label className="mar col-md-2" for="email">
+            <label className="mar col-md-2" htmlFor="email">
               Email ID<span className="star"> *</span>:
             </label>
             <input
@@ -179,7 +203,7 @@ const [errors, setErrors] = useState({ fullname: "" });
             )}
           </div>
           <div className="row roww mb-4">
-            <label className="mar col-md-2" for="phonenumber">
+            <label className="mar col-md-2" htmlFor="phonenumber">
               Phone Number <span className="star"> *</span>:
             </label>
             <input
@@ -190,7 +214,7 @@ const [errors, setErrors] = useState({ fullname: "" });
               id="phonenumber"
               required
             />
-            <label className="mar col-md-2" for="designation">
+            <label className="mar col-md-2" htmlFor="designation">
               Designation<span className="star"> *</span> :
             </label>
             <input
@@ -203,7 +227,7 @@ const [errors, setErrors] = useState({ fullname: "" });
             />
           </div>
           <div className="row roww mb-4">
-            <label className="mar col-md-2" for="department">
+            <label className="mar col-md-2" htmlFor="department">
               Department<span className="star"> *</span>:
             </label>
             <input
@@ -214,7 +238,7 @@ const [errors, setErrors] = useState({ fullname: "" });
               id="department"
               required
             />
-            <label className="mar col-md-2" for="reportto">
+            <label className="mar col-md-2" htmlFor="reportto">
               Report to <span className="star"> *</span> :
             </label>
             <input
@@ -227,11 +251,25 @@ const [errors, setErrors] = useState({ fullname: "" });
             />
           </div>
           <div className="row roww mb-4">
-            <label className="mar col-md-2" for="profile">
+            <label className="mar col-md-2" htmlFor="profile">
               Profile <span className="star"> *</span>:
             </label>
 
             <select
+              className="mar col-md-3 selectt"
+              id="profile"
+              onChange={(e) => setprofile(e.target.value)}
+              value={profile}
+              required
+              >
+              {profiles.map((profile) => (
+                <option key={profile} value={profile}>
+                  {profile}
+                </option>
+              ))}
+            </select>
+
+            {/* <select
               className=" mar col-md-3 selectt"
               id="profile"
               onChange={(e) => setprofile(e.target.value)}
@@ -242,13 +280,9 @@ const [errors, setErrors] = useState({ fullname: "" });
                 return  <option value="{profile}">{profile} </option>;
               })}
 
-              {/* <option value="">--select--</option>
-
-              <option value="manager">Manager</option>
-              <option value="regionalmanager">Regional Manager</option>
-              <option value="managingdirector">Managing Director</option> */}
-            </select>
-            <label className="mar col-md-2" for="branch">
+              
+            </select> */}
+            <label className="mar col-md-2" htmlFor="branch">
               Branch <span className="star"> *</span>:
             </label>
             <select

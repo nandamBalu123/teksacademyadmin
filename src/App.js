@@ -55,7 +55,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {!token ? (
+          {!token && !role? (
             <Routes>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
