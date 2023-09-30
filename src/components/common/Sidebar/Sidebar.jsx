@@ -32,7 +32,9 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 let username = "zaheer";
-let role = localStorage.getItem("role");
+// let role = localStorage.getItem("role");
+let role = "admin";
+
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -62,7 +64,7 @@ const Sidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .pro-inner-item": {
-          padding: "5px 14px 5px 20px !important",
+          padding: "5px 14px 5px 0px !important",
         },
         "& .pro-inner-item:hover": {
           color: "#868dfb !important",
@@ -196,7 +198,7 @@ const Sidebar = () => {
             >
               <Item
                 title="Student Details"
-                to="/studentdetails"
+                to="/studentdata"
                 icon={<EditNoteIcon />}
                 selected={selected}
                 setSelected={setSelected}

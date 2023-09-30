@@ -141,11 +141,11 @@ export default function RegistrationForm() {
       <div className="main-sub-container">
         <Typography fontSize={35}>Registration form</Typography>
 
-        <Stepper activeStep={activeStep} orientation="vertical">
+        <Stepper activeStep={activeStep} orientation="vertical" > 
           {/* -----step 1--- */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Basic Details</Typography>
+              <Typography fontSize={25} >Basic Details</Typography>
             </StepLabel>
             <StepContent>
               <form>
@@ -159,7 +159,7 @@ export default function RegistrationForm() {
                     required
                     style={{
                       height: "35px",
-                      border: "1.5px solid black",
+                      border: "1.5px solid Black",
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setName(e.target.value)}
