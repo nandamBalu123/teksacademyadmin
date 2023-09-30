@@ -33,6 +33,7 @@ import CreateRole from "./components/pages/roles/CreateRole";
 import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
+import RoleAccess from "./components/pages/roles/RoleAccess";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
 
@@ -95,6 +96,10 @@ function App() {
                 <Route
                   path="/createrole"
                   element={role == "admin" ? <CreateRole /> : <Dashboard />}
+                />
+                <Route
+                  path="/roleaccess"
+                  element={role == "admin" ? <RoleAccess /> : <Dashboard />}
                 />
                 <Route
                   path="/edit"

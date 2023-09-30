@@ -100,7 +100,7 @@ const CreateRole = () => {
         {/* <div>
           <h2>Module & Object Permissions</h2>
         </div> */}
-        <div>
+        {/* <div>
           <table class="table" border="1">
             <thead border="1">
               <tr>
@@ -177,7 +177,7 @@ const CreateRole = () => {
                   </tr>
                 </td>
               </tr>
-              {/* <tr>
+              <tr>
                 <td>employee</td>
                 <td>
                   <tr>
@@ -221,10 +221,10 @@ const CreateRole = () => {
                     </div>
                   </tr>
                 </td>
-              </tr> */}
+              </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -1,8 +1,21 @@
 import React, { useEffect, useState } from "react";
-
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import './UsersData.css';
+
+import { Button,Dialog, DialogTitle, DialogContent , DialogContentText, DialogActions  } from "@mui/material";
 const UsersData = () => {
   const navigate = useNavigate();
   const { users, dispatch } = useUsersContext();
@@ -53,24 +66,25 @@ const UsersData = () => {
 
   const [userData, setUserData] = useState([]);
   const [error, setError] = useState(null);
+  const [open, setOpen]= useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3030/userdata");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-      console.log(userData)
-        }
-        const data = await response.json();
-        setUserData(data.Result);
-      } catch (err) {
-        setError(err);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:3030/userdata");
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //     console.log(userData)
+  //       }
+  //       const data = await response.json();
+  //       setUserData(data.Result);
+  //     } catch (err) {
+  //       setError(err);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -81,23 +95,183 @@ const UsersData = () => {
   const handleview = () => {
     navigate("/userview");
   };
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+
   return (
-    <div style={{ margin: "30px 0px 0px 20px" }}>
-      <h2>Users List</h2>
-      <table className="table">
-        <thead className="table-dark">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Designation</th>
-            <th scope="col">Department</th>
-            <th scope="col">Report To</th>
-            <th scope="col">Profile</th>
-            <th scope="col">Branch</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
+    // style={{ margin: "30px 0px 0px 20px" }}
+    <div className="container-fluid">
+      <h2 className="ms-3">Users List</h2>
+      <div className="mb-2"> 
+      <input
+            type="text"
+            placeholder='Search Here......'
+            style={{
+              height: "55px",
+              width: "90%",
+              padding: "10px",
+              margin:"3px",
+              border: "1.5px solid black",
+              borderRadius: "5px",
+            }}
+            
+          />  
+          <Button  className="filter" onClick={()=> setOpen(true)}> Fillter</Button>
+          <Dialog  
+         
+          open={open}
+          onClose={()=>setOpen(false)}
+          aria-labelledby="dialog-title"
+           aria-describedby="dialogue-description" > 
+            <DialogTitle> Filter Users</DialogTitle>
+            <DialogContent> 
+              <DialogContentText id='dialog description'>
+                 
+              
+              <label htmlFor="">Enter Date</label>
+              <input type='date' className='col-12 felids ' 
+              id=""
+              required
+            style={{
+              height: "45px",
+              padding: "15px",
+              border: "1.5px solid black",
+              borderRadius: "5px",
+            }}
+          />
+          <label htmlFor="">Filter Branch</label>
+           <select
+            className="col-12  felids"
+            id=""
+          
+            required
+            style={{
+              height: "45px",
+               border: "1.5px solid black",
+              borderRadius: "5px",
+            }}
+          >
+            <option value="">--select--</option>
+            <option value="Hitech"> Hitech</option>
+          </select>
+          <label htmlFor="">Lead Source</label>
+          <select
+            className="col-12 felids "
+            id=""
+            placeholder='Lead Source'
+            required
+            style={{
+              height: "45px",
+             
+              border: "1.5px solid black",
+              borderRadius: "5px",
+            }}
+          >
+            <option value="">--select--</option>
+            <option value="Walkin"> Walkin</option>
+          </select>
+          <label htmlFor="">Mode of Traning</label>
+          <select
+            className="col-12 felids"
+            id=""
+            placeholder='Mode of Traning'
+            required
+            style={{
+              height: "45px",
+              
+              border: "1.5px solid black",
+              borderRadius: "5px",
+            }}
+          >
+            <option value="">--select--</option>
+            <option value="online"> Online</option>
+            <option value="offline"> Offline</option>
+          </select>
+            
+              
+               </DialogContentText>
+            </DialogContent>
+            <DialogActions> 
+              <Button onClick={()=>setOpen(false)}>Cancel</Button>
+              <Button autoFocus onClick={()=> setOpen}>Submit</Button>
+            </DialogActions>
+          </Dialog>
+          
+      </div>
+      <div> 
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 1000 }} aria-label="customized table" >
+          <TableHead  >
+            <TableRow >
+           <StyledTableCell className=' bg-primary fs-6'>Name</StyledTableCell>
+              <StyledTableCell className=' bg-primary fs-6'  align="center">Email</StyledTableCell>
+              <StyledTableCell className='  bg-primary fs-6' align="center">Phone No</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6 '  align="center">Designation</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6 '  align="center">Department</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6' align="center">Report To</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6 ' align="center">Profile</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6 ' align="center">Branch</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6' align="center">Action</StyledTableCell>
+            </TableRow>
+          </TableHead>
+      <TableBody>
+          
+            
+              {/* <StyledTableRow> 
+              <StyledTableCell align="center">Bhavitha</StyledTableCell>
+              <StyledTableCell align="center">bhavitha@gmail.com</StyledTableCell>
+              <StyledTableCell align="center"> 0123412344</StyledTableCell>
+              <StyledTableCell align="center">Developer</StyledTableCell>
+              <StyledTableCell align="center">IT</StyledTableCell>
+              <StyledTableCell align="center">Krishna</StyledTableCell>
+              <StyledTableCell align="center">profile</StyledTableCell>
+              <StyledTableCell align="center"> Hi-tech city</StyledTableCell>
+              <StyledTableCell align="center">
+                 <RemoveRedEyeIcon/>
+                <ModeEditIcon/>
+                <DeleteIcon/>
+                 </StyledTableCell>
+              </StyledTableRow>  */}
+               {userData && userData.map((user)=>(  
+                <StyledTableRow> 
+                <StyledTableCell align="center">{user.fullname}</StyledTableCell>
+                <StyledTableCell align="center">{user.email}</StyledTableCell>
+                <StyledTableCell align="center"> {user.phonenumber}</StyledTableCell>
+                <StyledTableCell align="center">{user.designation}</StyledTableCell>
+                <StyledTableCell align="center">{user.department}</StyledTableCell>
+                <StyledTableCell align="center">{user.reportto}</StyledTableCell>
+                <StyledTableCell align="center">{user.profile}</StyledTableCell>
+                <StyledTableCell align="center"> {user.branch}</StyledTableCell>
+                <StyledTableCell align="center"> 
+                <RemoveRedEyeIcon onClick={handleview}/>
+                <ModeEditIcon onClick={handleedit}/>
+                <DeleteIcon onClick={() => deleteuser(user.id)}/> </StyledTableCell>
+                </StyledTableRow>
+            ))}
+                   </TableBody>
+        </Table>
+      </TableContainer>
+      </div>
+          
+      {/* <table className="table">
+       
         <tbody>
     
           {userData &&
@@ -121,7 +295,27 @@ const UsersData = () => {
               </tr>
             ))}
         </tbody>
-      </table>
+      </table> */}
+      {/* {userData &&
+      userData.map((user) => (
+        <tr>
+        <td>{user.fullname}</td>
+          <td>{user.email}</td>
+          <td>{user.phonenumber}</td>
+          <td>{user.designation}</td>
+          <td>{user.department}</td>
+          <td>{user.reportto}</td>
+          <td>{user.profile}</td>
+          <td>{user.branch}</td>
+          <td>
+          <button onClick={handleview}>View</button>
+        <button onClick={handleedit}>Edit</button>
+
+        <button onClick={() => deleteuser(user.id)}>Delete</button>
+        </td>
+        </tr>
+      ))} */}
+ 
     </div>
   );
 };

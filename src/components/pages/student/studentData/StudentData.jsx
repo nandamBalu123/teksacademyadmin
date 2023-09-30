@@ -132,56 +132,29 @@ const StudentData = () => {
           <TableHead  >
             <TableRow >
               <StyledTableCell className=' bg-primary fs-6'>SNo</StyledTableCell>
-              <StyledTableCell className=' bg-primary fs-6'  align="right">Photo</StyledTableCell>
-              <StyledTableCell className='  bg-primary fs-6' align="right">Registration No</StyledTableCell>
-              <StyledTableCell className='bg-primary fs-6 '  align="right">Student Name & Student ID</StyledTableCell>
-              <StyledTableCell className='bg-primary fs-6 '  align="right">Contact Number & Email</StyledTableCell>
-              <StyledTableCell className='bg-primary fs-6' align="right">Course Counseller Source</StyledTableCell>
-              <StyledTableCell className='bg-primary fs-6 ' align="right">Joining Date & Traning Mode</StyledTableCell>
-              <StyledTableCell className='bg-primary fs-6' align="right">Action</StyledTableCell>
+              <StyledTableCell className=' bg-primary fs-6'  align="center">Photo</StyledTableCell>
+              <StyledTableCell className='  bg-primary fs-6' align="center">Registration No</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6 '  align="center">Student Name & Student ID</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6 '  align="center">Contact Number & Email</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6' align="center">Course Counseller Source</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6 ' align="center">Joining Date & Traning Mode</StyledTableCell>
+              <StyledTableCell className='bg-primary fs-6' align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
           <StyledTableRow> 
-          <StyledTableCell align="right">1</StyledTableCell>
-          <StyledTableCell align="right">Photo</StyledTableCell>
-          <StyledTableCell align="right"> 23745859757</StyledTableCell>
-          <StyledTableCell align="right">Bhavitha</StyledTableCell>
-          <StyledTableCell align="right">12345</StyledTableCell>
-          <StyledTableCell align="right">Full Stack</StyledTableCell>
-          <StyledTableCell align="right">23-09-01</StyledTableCell>
-          <StyledTableCell align="right"></StyledTableCell>
+          <StyledTableCell align="center">1</StyledTableCell>
+          <StyledTableCell align="center">Photo</StyledTableCell>
+          <StyledTableCell align="center"> 23745859757</StyledTableCell>
+          <StyledTableCell align="center">Bhavitha</StyledTableCell>
+          <StyledTableCell align="center">12345</StyledTableCell>
+          <StyledTableCell align="center">Full Stack</StyledTableCell>
+          <StyledTableCell align="center">23-09-01</StyledTableCell>
+          <StyledTableCell align="center"></StyledTableCell>
           </StyledTableRow>
-          <StyledTableRow> 
-          <StyledTableCell align="right">1</StyledTableCell>
-          <StyledTableCell align="right">Photo</StyledTableCell>
-          <StyledTableCell align="right"> 23745859757</StyledTableCell>
-          <StyledTableCell align="right">Bhavitha</StyledTableCell>
-          <StyledTableCell align="right">12345</StyledTableCell>
-          <StyledTableCell align="right">Full Stack</StyledTableCell>
-          <StyledTableCell align="right">23-09-01</StyledTableCell>
-          <StyledTableCell align="right"></StyledTableCell>
-          </StyledTableRow>
-          <StyledTableRow> 
-          <StyledTableCell align="right">1</StyledTableCell>
-          <StyledTableCell align="right">Photo</StyledTableCell>
-          <StyledTableCell align="right"> 23745859757</StyledTableCell>
-          <StyledTableCell align="right">Bhavitha</StyledTableCell>
-          <StyledTableCell align="right">12345</StyledTableCell>
-          <StyledTableCell align="right">Full Stack</StyledTableCell>
-          <StyledTableCell align="right">23-09-01</StyledTableCell>
-          <StyledTableCell align="right"></StyledTableCell>
-          </StyledTableRow>
-          <StyledTableRow> 
-          <StyledTableCell align="right">1</StyledTableCell>
-          <StyledTableCell align="right">Photo</StyledTableCell>
-          <StyledTableCell align="right"> 23745859757</StyledTableCell>
-          <StyledTableCell align="right">Bhavitha</StyledTableCell>
-          <StyledTableCell align="right">12345</StyledTableCell>
-          <StyledTableCell align="right">Full Stack</StyledTableCell>
-          <StyledTableCell align="right">23-09-01</StyledTableCell>
-          <StyledTableCell align="right"></StyledTableCell>
-          </StyledTableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
             {/* {rows.map((row) => (
               <StyledTableRow key={row.SNo}>
                 <StyledTableCell component="th" scope="row">
@@ -198,9 +171,7 @@ const StudentData = () => {
 
               </StyledTableRow>
             ))} */}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          
 
 
     </div>

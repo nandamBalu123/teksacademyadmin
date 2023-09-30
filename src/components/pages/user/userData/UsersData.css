@@ -1,0 +1,15 @@
+.filter{ 
+   background-color: #0070fc;
+   padding: 10px 22px 10px 20px;
+   color: white;
+   margin-left: 10px;
+}
+.filter:hover{ 
+    background-color:#0070fc ;
+    color: white;
+}
+.flex{ 
+    display: flex;
+    justify-content: space-between;
+   
+}
