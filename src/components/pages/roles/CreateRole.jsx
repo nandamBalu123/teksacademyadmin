@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./CreateRole.css";
 import { useState } from "react";
 import { Update } from "@mui/icons-material";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 const CreateRole = () => {
   const navigate = useNavigate();
   const [role, setRoleName] = useState("");
@@ -54,43 +56,50 @@ const CreateRole = () => {
       setDescription("");
       
     }
-  
-  
-   
     // handleCheckboxChange();
     console.log(role, description);
     navigate("/roles");
   };
-
-  
-
-  return (
+   return (
     <div style={{ marginTop: "30px" }}>
-      <p>CreateRole</p>
+      <p className="fs-5 ms-5">CreateRole</p>
       <form>
-        <div>
-          <label>Role Name:</label>
-          <input
-            type="text"
-            onChange={(e) => setRoleName(e.target.value)}
-            value={role}
-          />
+      <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div className="container">
+        <div className="row">
+        <div className="col-12 col-md-6 col-lg-4 "> <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /></div>
+        <div className="col-12 col-md-6 col-lg-4 "><TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> </div>
         </div>
-        <div>
-          <label>Role Description :</label>
+        <div className="container "><button type="submit" class="btn btn-primary mr-20 ms-2 mb-2" onClick={handleSubmit}>
+              Submit
+            </button></div>
+        
+    
+        
+      </div>
+     
+     </Box>
+          {/* <label>Role Description :</label>
           <input
             type="text"
             onChange={(e) => setDescription(e.target.value)}
             value={description}
+            className="col-12 col-md-6 col-lg-6"
           />
-        </div>
+         */}
 
-        <button onClick={handleSubmit}>Submit</button>
       </form>
       <div>
-        <div>
+        {/* <div>
           <h2>Module & Object Permissions</h2>
-        </div>
+        </div> */}
         <div>
           <table class="table" border="1">
             <thead border="1">

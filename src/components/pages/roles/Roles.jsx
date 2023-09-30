@@ -9,8 +9,11 @@ const Roles = () => {
   };
   return (
     <div>
-      <p>Roles</p>
-      <button onClick={handleSubmit}>Add Role</button>
+      <p className="fs-5 ms-3">Roles</p>
+      <div className="container "><button type="submit" class="btn btn-primary mr-20 " onClick={handleSubmit}>
+             Add Role
+            </button></div>
+      
     </div>
   );
 };
