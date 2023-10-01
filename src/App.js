@@ -36,7 +36,6 @@ import Edit from "./components/pages/user/userData/EditUser";
 import RoleAccess from "./components/pages/roles/RoleAccess";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
-
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -46,10 +45,10 @@ function App() {
   // let role = localStorage.getItem(role); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
   // let role = localStorage.getItem(role);
 
-  let role = localStorage.getItem("role");
-  let token = localStorage.getItem("token");
-  // let role = 'admin';
-  // let token = "sdf";
+  // let role = localStorage.getItem("role");
+  // let token = localStorage.getItem("token");
+  let role = "admin";
+  let token = "sdf";
   console.log("hello: ", localStorage.getItem("token"));
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -74,7 +73,7 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
-                
+
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
                   path="/createuser"
