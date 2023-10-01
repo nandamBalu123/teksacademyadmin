@@ -133,7 +133,8 @@ const UsersData = () => {
             }}
             
           />  
-          <Button  className="filter" onClick={()=> setOpen(true)}> Fillter</Button>
+          {/* <button className="Filter" onAuxClick={()=>setOpen(true)}> </button> */}
+          <button  className="Filter"  onClick={()=> setOpen(true)}> Fillter</button>
           <Dialog  
          
           open={open}
@@ -151,19 +152,21 @@ const UsersData = () => {
               required
             style={{
               height: "45px",
+              
               padding: "15px",
               border: "1.5px solid black",
               borderRadius: "5px",
             }}
           />
-          <label htmlFor="">Filter Branch</label>
-           <select
+          <label htmlFor="" >Filter Branch</label>
+          <select
             className="col-12  felids"
             id=""
           
             required
             style={{
               height: "45px",
+              
                border: "1.5px solid black",
               borderRadius: "5px",
             }}

@@ -38,9 +38,10 @@ const Roles = () => {
     <div className="contianer" >
       <div className="flex">  
       <p className="fs-5 ms-3">All Profile Permissions</p>
-      <button type="submit" class="btn btn-primary mr-20 ms-2 mb-2" onClick={handleSubmit}>
+      <button type="submit" className="btn btn-primary mr-20 ms-2 mb-2" onClick={handleSubmit}>  Add Role </button>
+      {/* <button type="submit" className="btn btn-primary mr-20 ms-2 mb-2" onClick={handleSubmit}>
               Add Role
-            </button>
+            </button> */}
             </div>
            
   

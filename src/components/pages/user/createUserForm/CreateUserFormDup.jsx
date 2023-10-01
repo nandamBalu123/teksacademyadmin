@@ -133,9 +133,10 @@ const CreateUserForm = () => {
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="row roww mb-4">
             <label className="mar col-md-2 " for="fullname">
-              Full Name<span className="star"> *</span>:
+              Full Name : <span className="star"> *</span>
             </label>
             <input
+            
               className="mar col-md-3 inputt "
               type="text"
               onChange={(e) => setfullname(e.target.value)}
@@ -145,7 +146,7 @@ const CreateUserForm = () => {
             />
 
             <label className="mar col-md-2" for="email">
-              Email ID<span className="star"> *</span>:
+              Email ID : <span className="star"> *</span> 
             </label>
             <input
               className=" mar col-md-4 inputt"
@@ -161,7 +162,7 @@ const CreateUserForm = () => {
           </div>
           <div className="row roww mb-4">
             <label className="mar col-md-2" for="phonenumber">
-              Phone Number <span className="star"> *</span>:
+              Phone No.  : <span className="star"> *</span>
             </label>
             <input
               className=" mar col-md-3 inputt"
@@ -172,7 +173,7 @@ const CreateUserForm = () => {
               required
             />
             <label className="mar col-md-2" for="designation">
-              Designation<span className="star"> *</span> :
+              Designation : <span className="star"> *</span>
             </label>
             <input
               className=" mar col-md-4 inputt"
@@ -185,7 +186,7 @@ const CreateUserForm = () => {
           </div>
           <div className="row roww mb-4">
             <label className="mar col-md-2" for="department">
-              Department<span className="star"> *</span>:
+              Department  : <span className="star"> *</span> 
             </label>
             <input
               className=" mar col-md-3 inputt"
@@ -196,7 +197,7 @@ const CreateUserForm = () => {
               required
             />
             <label className="mar col-md-2" for="reportto">
-              Report to <span className="star"> *</span> :
+              Report to  : <span className="star"> *</span>
             </label>
             <input
               className=" mar col-md-4 inputt"
@@ -208,8 +209,8 @@ const CreateUserForm = () => {
             />
           </div>
           <div className="row roww mb-4">
-            <label className="mar col-md-2" for="profile">
-              Profile <span className="star"> *</span>:
+            <label className="mar col-md-2" htmlFor="profile">
+              Profile  : <span className="star"> *</span>
             </label>
 
             <select
@@ -220,7 +221,7 @@ const CreateUserForm = () => {
               required
             >
               {profiles.map((profile) => {
-                return <option value="{profile}">{profile} </option>;
+                return <option value="{profile}">{profile} </option> 
               })}
 
               {/* <option value="">--select--</option>
@@ -229,8 +230,8 @@ const CreateUserForm = () => {
               <option value="regionalmanager">Regional Manager</option>
               <option value="managingdirector">Managing Director</option> */}
             </select>
-            <label className="mar col-md-2" for="branch">
-              Branch <span className="star"> *</span>:
+            <label className="mar col-md-2" htmlFor="branch">
+              Branch : <span className="star"> *</span> 
             </label>
             <select
               className=" mar col-md-4 selectt"
@@ -249,7 +250,7 @@ const CreateUserForm = () => {
             </select>
           </div>
           <div className="create-button">
-            <button type="submit" class="btn btn-primary mr-20 mt-5  ">
+            <button type="submit" className="btn btn-primary mr-20 mt-5  ">
               Create User
             </button>
           </div>

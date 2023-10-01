@@ -1,5 +1,6 @@
 import React from 'react';
 import './RoleAccess.css';
+
 import Switch from '@mui/material/Switch';
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -67,8 +68,7 @@ const RoleAccess = () => {
                             <td>  <tr> <Switch  {...label} color="info" /></tr></td>
                             <td>  <tr> <Switch  {...label} color="info" /></tr></td>
                         </tr>
-                        <tr >
-                             </tr>
+                        <tr ></tr>
 
                     </tbody>
                 </table>

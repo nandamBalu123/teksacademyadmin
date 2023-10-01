@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
-import image from "../../../images/thumbnail_Login.jpg";
+// import image from "../../../images/thumbnail_Login.jpg";
+import loginimg1 from '../../../images/loginimg1.jpg';
+// import loginimg from '../../../images/loginimg.jpg'
+// import education from '../../../images/education.jpg';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import validation from "../logins/adminlogins/Loginvalidation";
@@ -52,7 +55,7 @@ const LoginPage = () => {
 
             localStorage.setItem("token", token);
 
-            navigate("/"+role +"/" + id);
+            navigate("/" + role + "/" + id);
 
             console.log(id);
             window.location.reload()
@@ -143,41 +146,80 @@ const LoginPage = () => {
   let random = Math.round(Math.random() * 15);
   console.log(random);
   return (
-    <div className="maindiv row">
-      <div className="subdiv col-6 imagediv">
-        <img className="imgg" src={image} alt="img" />
-      </div>
-      <div className="subdiv col-md-6 credentials">
-        <p className="quotes">{quotes[random]}</p>
-        <p></p>
-        <form action="" onSubmit={handleSubmit}>
+    <div className="login">
+      <div className="containers ">
+        <form className="login-section  " onSubmit={handleSubmit}>
+          <div className="form-box ">
+            <h2> Welcome Back</h2>
+            <div className="input-box">
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter Email"
-            className="inputcon form-control rounded-0"
-            onChange={handleInput}
-          />
-          {errors.email && <span className="text-danger">{errors.email}</span>}
+              <input
+                type="email"
+                name="email"
+                required
+                onChange={handleInput}
+              />
+               {errors.email && <span className="text-danger">{errors.email}</span>}
+              <label htmlFor=""> Enter Email</label>
+            </div>
+            <div className="input-box col-12 col-md-6 col-md-6">
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter Password"
-            className="inputcon form-control rounded-0"
-            onChange={handleInput}
-          />
-          {errors.password && (
+              <input
+                type="password"
+                name="password"
+                required
+                onChange={handleInput}
+              />
+              
+               {errors.password && (
             <span className="text-danger">{errors.password}</span>
           )}
+              <label htmlFor=""> Enter Password</label>
+            </div>
+            <div className="input-box">
+              <button className="btn"> Login</button> </div></div> </form>
+        <div className="img">
+          <img className="img w-100" src={loginimg1} alt="img" />
+        </div>
 
-          <button type="submit" className="btnn">
-            Login
-          </button>
-        </form>
       </div>
+
     </div>
+    // <div className="login row ">
+    //   <div className="subdiv col-12  col-md-6  col-lg-6 imagediv">
+    //     <img className="img w-100" src={loginimg1} alt="img" />
+    //   </div>
+    //   <div className="subdiv col-12  col-md-6  col-lg-6 credentials">
+    //     <p className="quotes">{quotes[random]}</p>
+    //     <p></p>
+    //     <form action="" onSubmit={handleSubmit}>
+
+    //       <input
+    //         type="email"
+    //         name="email"
+    //         placeholder="Enter Email"
+    //         className="inputcon form-control rounded-0"
+    //         onChange={handleInput}
+    //       />
+    //       {errors.email && <span className="text-danger">{errors.email}</span>}
+
+    //       <input
+    //         type="password"
+    //         name="password"
+    //         placeholder="Enter Password"
+    //         className="inputcon form-control rounded-0"
+    //         onChange={handleInput}
+    //       />
+    //       {errors.password && (
+    //         <span className="text-danger">{errors.password}</span>
+    //       )}
+
+    //       <button type="submit" className="btnn">
+    //         Login
+    //       </button>
+    //     </form>
+    //   </div>
+    // </div>
   );
 };
 
