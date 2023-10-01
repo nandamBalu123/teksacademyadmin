@@ -14,7 +14,7 @@ import "./StudentData.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import { initialDataa } from "./data";
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
