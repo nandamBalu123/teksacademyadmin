@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 // import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import "./RegistrationForm.css";
+import axios from 'axios';
+
 // import { blue } from "@mui/material/colors";
 export default function RegistrationForm() {
   const [name, setName] = useState("");
@@ -101,7 +103,7 @@ export default function RegistrationForm() {
 
     console.log(feedetails);
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const studentRegistrationdata = {
       name,
       email,
@@ -136,6 +138,25 @@ export default function RegistrationForm() {
       feedetails,
     };
     console.log("studentRegistration", studentRegistrationdata);
+    try {
+      // Make the POST request
+      const response = await axios.post('http://localhost:3030/student_form', studentRegistrationdata);
+    
+      // Handle a successful response here
+      console.log('Response:', response.data);
+    } catch (error) {
+      // Handle the error here
+      if (error.response) {
+        // The request was made and the server responded with a non-2xx status code
+        console.log('Server returned an error:', error.response.status, error.response.data);
+      } else if (error.request) {
+        // The request was made, but no response was received
+        console.log('No response received:', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error('Request error:', error.message);
+      }
+    }
   };
   return (
     <div className="main-container">
@@ -1322,7 +1343,7 @@ export default function RegistrationForm() {
                 <div>
                   <Button
                     variant="contained"
-                    onClick={""}
+                    onClick={handleSubmit}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}

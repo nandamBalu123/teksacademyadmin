@@ -1,4 +1,5 @@
 import * as React from 'react';
+import  {useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import DownloadIcon from '@mui/icons-material/Download';
+import axios from 'axios';
 import './StudentData.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -44,7 +46,27 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const StudentData = () => {
+const StudentData = ()  => {
+  
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Make a GET request to fetch the list of students
+    axios.get('http://localhost:3030/getstudent_data')
+      .then((response) => {
+        setRows(response.data); // Assuming the response is an array of student objects
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching student list:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
 <div className='studetdetails container'>
       <div className='row mb-3'>
@@ -142,7 +164,7 @@ const StudentData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-          <StyledTableRow> 
+          {/* <StyledTableRow> 
           <StyledTableCell align="right">1</StyledTableCell>
           <StyledTableCell align="right">Photo</StyledTableCell>
           <StyledTableCell align="right"> 23745859757</StyledTableCell>
@@ -181,8 +203,8 @@ const StudentData = () => {
           <StyledTableCell align="right">Full Stack</StyledTableCell>
           <StyledTableCell align="right">23-09-01</StyledTableCell>
           <StyledTableCell align="right"></StyledTableCell>
-          </StyledTableRow>
-            {/* {rows.map((row) => (
+          </StyledTableRow> */}
+            {rows.map((row) => (
               <StyledTableRow key={row.SNo}>
                 <StyledTableCell component="th" scope="row">
                   {row.SNo}
@@ -197,7 +219,7 @@ const StudentData = () => {
                 <StyledTableCell align="right">{row.Action}</StyledTableCell>
 
               </StyledTableRow>
-            ))} */}
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
