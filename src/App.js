@@ -34,6 +34,7 @@ import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
 import RoleAccess from "./components/pages/roles/RoleAccess";
+import StudentDataView from "./components/pages/student/studentData/StudentDataView";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -73,16 +74,22 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
+                
 
                 <Route path="/studentdata" element={<StudentData />} />
+                <Route path ="/studentdataview"
+                element={role == "admin" ? <StudentDataView/> : <Dashboard/>}
+                />
                 <Route
                   path="/createuser"
                   element={role == "admin" ? <CreateUserForm /> : <Dashboard />}
                 />
+                
                 <Route
                   path="/usersdata"
                   element={role == "admin" ? <UsersData /> : <Dashboard />}
                 />
+
                 <Route
                   path="/userview"
                   element={role == "admin" ? <UserView /> : <Dashboard />}

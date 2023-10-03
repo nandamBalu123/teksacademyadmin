@@ -46,35 +46,35 @@ const Roles = () => {
            
   
             <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table" >
+        <Table sx={{ minWidth: 1000 }} aria-label="customized table " >
           <TableHead  >
-            <TableRow >
-           <StyledTableCell className=' bg-primary fs-6 ' align="center">Name</StyledTableCell>
-              <StyledTableCell className=' bg-primary fs-6'  align="center">Description</StyledTableCell>
-              <StyledTableCell className='  bg-primary fs-6' align="center">Type</StyledTableCell>
+            <TableRow  >
+           <StyledTableCell className=' bg-primary fs-6  border border 1' align="center">Name</StyledTableCell>
+              <StyledTableCell className=' bg-primary fs-6 border border 1'  align="center">Description</StyledTableCell>
+              <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell>
               
             </TableRow>
           </TableHead>
-      <TableBody>
+      <TableBody className="border border 1">
              <StyledTableRow> 
-              <StyledTableCell align="center">Branch Manager</StyledTableCell>
-              <StyledTableCell align="center">Deal with Branch things,Student Counsellor</StyledTableCell>
-              <StyledTableCell align="center"> Custom</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center">Branch Manager</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center">Deal with Branch things,Student Counsellor</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell>
               </StyledTableRow> 
               <StyledTableRow> 
-              <StyledTableCell align="center">Counsellor</StyledTableCell>
-              <StyledTableCell align="center">Team handling student calls and counselling</StyledTableCell>
-              <StyledTableCell align="center"> Custom</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center">Counsellor</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center">Team handling student calls and counselling</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell>
               </StyledTableRow> 
               <StyledTableRow> 
-              <StyledTableCell align="center">Admin</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center">Admin</StyledTableCell>
               <StyledTableCell align="center">Admin</StyledTableCell>
               <StyledTableCell align="center"> System</StyledTableCell>
               </StyledTableRow> 
               <StyledTableRow> 
-              <StyledTableCell align="center">Restricted User</StyledTableCell>
-              <StyledTableCell align="center">Restricted User</StyledTableCell>
-              <StyledTableCell align="center"> System</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center">Restricted User</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center">Restricted User</StyledTableCell>
+              <StyledTableCell className=" border border 1 text-center"> System</StyledTableCell>
               </StyledTableRow>
             </TableBody>
         </Table>
