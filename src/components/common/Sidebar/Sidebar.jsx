@@ -13,7 +13,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
-import favicon from '../../../images/favicon.jpeg';
+import favicon from "../../../images/favicon.jpeg";
 // let role = localStorage.getItem(role);
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -61,13 +61,13 @@ const Sidebar = () => {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          background: `rgb(232, 232, 241); !important`,
+          background: `white; !important`,
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
         },
         "& .pro-inner-item": {
-          padding: "5px 14px 5px 0px !important",
+          padding: "5px 14px 5px 10px !important",
         },
         "& .pro-inner-item:hover": {
           color: "#335eea !important",

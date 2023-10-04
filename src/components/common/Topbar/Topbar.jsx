@@ -42,9 +42,9 @@ const Topbar = () => {
 
   return (
     <>
-      <div className="row topbar">
+      <div className="row topbar mt-0">
         <div className="col-8 ">
-          <Box
+          {/* <Box
             backgroundColor={colors.primary[400]}
             borderRadius="3px"
             width={"35%"}
@@ -53,18 +53,19 @@ const Topbar = () => {
             <IconButton type="button" sx={{ p: 1 }}>
               <SearchIcon />
             </IconButton>
-          </Box>
-        </div>{" "}
+          </Box> */}
+        </div>
         <div className="col-1"> 
-        <Box>
-        <IconButton onClick={colorMode.toggleColorMode}>
-          {theme.palette.mode === "dark" ? (
-            <DarkModeOutlinedIcon />
-          ) : (
-            <LightModeOutlinedIcon />
-          )}
-        </IconButton> 
-       </Box></div>
+          {/* <Box>
+          <IconButton onClick={colorMode.toggleColorMode}>
+            {theme.palette.mode === "dark" ? (
+              <DarkModeOutlinedIcon />
+            ) : (
+              <LightModeOutlinedIcon />
+            )}
+          </IconButton> 
+        </Box> */}
+       </div>
        <div className="col-1">
        <IconButton>
           <NotificationsOutlinedIcon />
