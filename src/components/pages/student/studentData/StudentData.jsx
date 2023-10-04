@@ -21,9 +21,9 @@ import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 
 import DownloadIcon from "@mui/icons-material/Download";
-import SearchIcon from '@mui/icons-material/Search';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import SearchIcon from "@mui/icons-material/Search";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 import "./StudentData.css";
 
@@ -44,66 +44,37 @@ import { LastPage } from "@mui/icons-material";
 import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-
   [`&.${tableCellClasses.head}`]: {
-
     backgroundColor: theme.palette.common.black,
 
     color: theme.palette.common.white,
-
   },
 
   [`&.${tableCellClasses.body}`]: {
-
     fontSize: 14,
-
   },
-
 }));
-
- 
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-
   "&:nth-of-type(odd)": {
-
     backgroundColor: theme.palette.action.hover,
-
   },
-
- 
 
   "&:last-child td, &:last-child th": {
-
     border: 0,
-
   },
-
 }));
 
- 
-
-const initialData = initialDataa;
-
- 
-
-let initialDataCount = initialData.length;
-
- 
-
 const StudentData = () => {
+  // const [initialData, setData] = useState([{name: ''}]);
+  const initialData = initialDataa;
+  let initialDataCount = initialData.length;
 
-  const [initialData, setData] = useState([{name: ''}]);
   const [filteredData, setFilteredData] = useState(initialData);
-
- 
 
   let recordCount = filteredData.length;
 
- 
-
   const [filterCriteria, setFilterCriteria] = useState({
-
     date: "",
 
     branch: "",
@@ -115,92 +86,61 @@ const StudentData = () => {
     counsellar: "",
 
     search: "",
-
   });
 
- 
-
   const handleInputChange = (e) => {
-
     const { name, value } = e.target;
 
     setFilterCriteria({ ...filterCriteria, [name]: value });
-
   };
 
-  
-
-
-useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios.get('http://localhost:3030/getstudent_data')
-      .then((response) => {
-        // Handle the successful response here
-        setData(response.data); // Update the data state with the fetched data
-        console.log(response.data);
-
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error('Error fetching data:', error);
-        
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Make a GET request to your backend API endpoint
+  //   axios
+  //     .get("http://localhost:3030/getstudent_data")
+  //     .then((response) => {
+  //       // Handle the successful response here
+  //       setData(response.data); // Update the data state with the fetched data
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the request
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   useEffect(() => {
-
     const filteredResults = initialData.filter((item) => {
-
       const dateCondition = filterCriteria.date
-
         ? item.joiningdata === filterCriteria.date
-
         : true;
 
       const branchCondition = filterCriteria.branch
-
         ? item.branch === filterCriteria.branch
-
         : true;
 
       const sourceCondition = filterCriteria.source
-
         ? item.source === filterCriteria.source
-
         : true;
 
       const modeCondition = filterCriteria.mode
-
         ? item.trainingmode === filterCriteria.mode
-
         : true;
 
       const counsellarCondition = filterCriteria.counsellar
-
         ? item.counsellar === filterCriteria.counsellar
-
         : true;
 
       return (
-
         dateCondition &&
-
         branchCondition &&
-
         sourceCondition &&
-
         modeCondition &&
-
         counsellarCondition
-
       );
-
     });
 
     setFilteredData(filteredResults);
-
   }, [filterCriteria, initialData]);
-
- 
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -226,12 +166,11 @@ useEffect(() => {
   };
 
   return (
-<>
- <h3 className="ms-5"> Student Data </h3>
- 
- <div className="studetdetails container">
+    <>
+      <h3 className="ms-5"> Student Data </h3>
 
-{/* <div className="row mb-3">
+      <div className="studetdetails container">
+        {/* <div className="row mb-3">
 
   <div className="col-9 col-md-9 ">
 
@@ -267,676 +206,318 @@ useEffect(() => {
 
 </div> */}
 
-<div className="row mb-3 px-4 pt-3">
-  <div className="col-9 col-md-9 ">
-    <p className="search"><SearchIcon/> Search Here.....</p> <hr className="w-50"/>
-    
-  </div>
-  <div className="col-1">
-    <h6> {recordCount}/{initialDataCount}</h6>
-  </div>
-  <div className="col-1 "><h6> Export</h6> </div>
-  <div className="col-1 "> <h6 onClick={handleClick} > Filter</h6> 
-  
-  
-<Menu
-  id="basic-menu"
-  anchorEl={anchorEl}
-  open={open}
-  onClose={handleClose}
-  MenuListProps={{
-    'aria-labelledby': 'basic-button',
-  }}
-  style={{width:"600px",
-          borderRadius:"25px",
-          marginTop:"20px",
-          cursor:"pointer"
-          }}
->
-    <MenuItem  > Filter</MenuItem><hr/>
-  <MenuItem className="pt-3" > 
- <label> Enter Date : </label><br/>
-  <input
-    type="date"
-    className="form-control"
-    
-    style={{
-      height: "45px",
-      border: "1.5px solid black",
-      borderRadius: "5px"
-    }}
-    
-   
-   name="date"
-   value={filterCriteria.data}
-   onChange={handleInputChange}
-  />
-
-  </MenuItem>
-<div className="d-flex w-100 mt-3"> 
-<MenuItem  >
-
-  <select
-    
-    id=""
-    placeholder="Filter Branch"
-    required
-    style={{
-      height: "45px",
-      paddingLeft:"10px",
-      paddingRight:"50px",
-      border: "1.5px solid black",
-      borderRadius: "5px",
-    }}
- 
-    name="branch"
-    value={filterCriteria.branch}
-    onChange={handleInputChange}
-   
-  >
-    <option value="">Branch</option>
-    <option value="hitechcity"> Hitech city</option>
-    <option value="ameerpet"> Ameerpet</option>
-    <option value="dilsukhnagar"> Dilsukhnagar</option>
-    <option value="gachibowli"> Gachibowli</option>
-  </select></MenuItem>
-  <MenuItem > <select
- 
-    id=""
-    placeholder="Lead Source"
-    required
-    style={{
-      height: "45px",
-      paddingRight:"65px",
-     
-      border: "1.5px solid black",
-      borderRadius: "5px",
-    }}
-    
-   
-    name="source"
-
-    value={filterCriteria.source}
-
-    onChange={handleInputChange}
-  >
-    <option value="">LeadSource</option>
-    <option value="walkin"> Walkin</option>
-    <option value="justdail"> JustDail</option>
-    <option value="referral"> Referral</option>
-  </select></MenuItem> </div>
-  <div className="d-flex w-100 mt-3 mb-2"> 
-<MenuItem  >
-<select
- 
-    id=""
-    placeholder="Mode of Traning"
-    required
-    style={{
-      height: "45px",
-      paddingRight:"37px",
-      border: "1.5px solid black",
-      borderRadius: "5px"
-    }}
-    //
-    name="mode"
-
-    value={filterCriteria.mode}
-
-    onChange={handleInputChange}
-  >
-    <option value="">Mode Of Training</option>
-    <option value="online"> Online</option>
-    <option value="offline"> Offline</option>
-  </select>
-  </MenuItem>
-  <MenuItem > <select
- 
-    id=""
-    placeholder="Councellors"
-    required
-    style={{
-      height: "45px",
-      paddingRight:"65px",
-      border: "1.5px solid black",
-      borderRadius: "5px",
-    }}
-    
-    
-    name="counsellar"
-
-    value={filterCriteria.counsellar}
-
-    onChange={handleInputChange}
-  >
-    <option value="">Councellors</option>
-    <option value="walkin"> </option>
-    
-  </select></MenuItem> </div>
-  
-</Menu></div>
-
-
-  
-</div>
-
-
-
-
-
-{/* <div className="row mb-3 ">
-
-  <input
-
-    type="date"
-
-    className="col-12 col-md-5 col-lg-3 me-2 felids"
-
-    placeholder="Enter Date"
-
-    style={{
-
-      height: "45px",
-
-
-
-      padding: "15px",
-
-      border: "1.5px solid black",
-
-      borderRadius: "5px",
-
-    }}
-
-    name="date"
-
-    value={filterCriteria.date}
-
-    onChange={handleInputChange}
-
-  />
-
-  <select
-
-    className="col-12 col-md-5 col-lg-2 me-2 felids"
-
-    id=""
-
-    placeholder="Filter Branch"
-
-    required
-
-    style={{
-
-      height: "45px",
-
-
-
-      border: "1.5px solid black",
-
-      borderRadius: "5px",
-
-    }}
-
-    name="branch"
-
-    value={filterCriteria.branch}
-
-    onChange={handleInputChange}
-
-  >
-
-    <option value="">Branch</option>
-
-    <option value="hitechcity"> Hitech city</option>
-
-    <option value="ameerpet"> Ameerpet</option>
-
-    <option value="dilsukhnagar"> Dilsukhnagar</option>
-
-    <option value="gachibowli"> Gachibowli</option>
-
-  </select>
-
-  <select
-
-    className="col-12 col-md-5 col-lg-2 me-2 felids"
-
-    id=""
-
-    placeholder="Lead Source"
-
-    required
-
-    style={{
-
-      height: "45px",
-
-
-
-      border: "1.5px solid black",
-
-      borderRadius: "5px",
-
-    }}
-
-    name="source"
-
-    value={filterCriteria.source}
-
-    onChange={handleInputChange}
-
-  >
-
-    <option value="">LeadSource</option>
-
-    <option value="walkin"> Walkin</option>
-
-    <option value="justdail"> JustDail</option>
-
-    <option value="referral"> Referral</option>
-
-  </select>
-
-  <select
-
-    className="col-12 col-md-5 col-lg-2 me-2 felids"
-
-    id=""
-
-    placeholder="Mode of Traning"
-
-    required
-
-    style={{
-
-      height: "45px",
-
-
-
-      border: "1.5px solid black",
-
-      borderRadius: "5px",
-
-    }}
-
-    name="mode"
-
-    value={filterCriteria.mode}
-
-    onChange={handleInputChange}
-
-  >
-
-    <option value="">Mode Of Training</option>
-
-    <option value="online"> Online</option>
-
-    <option value="offline"> Offline</option>
-
-  </select>
-
-  <select
-
-    className="col-12 col-md-5 col-lg-2 me-2 felids"
-
-    id=""
-
-    placeholder="Counsellar"
-
-    required
-
-    style={{
-
-      height: "45px",
-
-
-
-      border: "1.5px solid black",
-
-      borderRadius: "5px",
-
-    }}
-
-    name="counsellar"
-
-    value={filterCriteria.counsellar}
-
-    onChange={handleInputChange}
-
-  >
-
-    <option value="">Counsellar</option>
-
-    <option value="kavya"> kavya</option>
-
-    <option value="keerthana"> keerthana</option>
-
-    <option value="david"> David</option>
-
-  </select>
-
-  <RotateLeftIcon
-
-    sx={{ fontSize: 48 }}
-
-    className="col-sm-12 col-md-4 col-lg-2  me-lg-3 "
-
-  />
-
-  <ShowChartIcon
-
-    sx={{ fontSize: 48 }}
-
-    className="col-sm-12 col-md-4 col-lg-2 me-lg-4 "
-
-  />
-
-  <DownloadIcon
-
-    sx={{ fontSize: 48 }}
-
-    className="col-sm-12 col-md-4 col-lg-2   "
-
-  />
-
-</div> */}
-
-
-
-<TableContainer component={Paper}>
-
-  <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-
-    <TableHead>
-
-      <TableRow>
-
-        <StyledTableCell className="bg-secondary fs-6 border border 1 text-center ">
-
-          SNo
-
-        </StyledTableCell>
-
-        <StyledTableCell
-
-          className="bg-secondary fs-6  border border 1 text-center"
-
-          align="left"
-
-        >
-
-          Photo
-
-        </StyledTableCell>
-
-        <StyledTableCell
-
-          className="  bg-secondary fs-6 border border 1 text-centerborder border 1 text-center"
-
-          align="left"
-
-        >
-
-          Student Name & Registration No
-
-        </StyledTableCell>
-
-        <StyledTableCell
-
-          className="bg-secondary fs-6 border border 1 text-center"
-
-          align="left"
-
-        >
-
-          Branch
-
-        </StyledTableCell>
-
-
-
-        <StyledTableCell
-
-          className="bg-secondary fs-6 border border 1 text-center"
-
-          align="left"
-
-        >
-
-          Course Counseller Source
-
-        </StyledTableCell>
-
-        <StyledTableCell
-
-          className="bg-secondary fs-6 border border 1 text-center "
-
-          align="left"
-
-        >
-
-          Contact Number & Email
-
-        </StyledTableCell>
-
-
-
-        <StyledTableCell
-
-          className="bg-secondary fs-6 border border 1 text-center "
-
-          align="left"
-
-        >
-
-          Joining Date & Traning Mode
-
-        </StyledTableCell>
-
-        <StyledTableCell
-
-          className="bg-secondary fs-6 border border 1 text-center"
-
-          align="left"
-        >
-
-          Action
-
-        </StyledTableCell>
-
-      </TableRow>
-
-    </TableHead>
-
-    <TableBody>
-
-      {records.map((item) => (
-
-        // <li key={item.id}>{item.name}</li>
-
-        <StyledTableRow key={item.id}>
-
-          <StyledTableCell className=" border border 2 text-center">{item.id}</StyledTableCell>
-
-          <StyledTableCell className=" border border 2 text-center">{item.photo}</StyledTableCell>
-
-          <StyledTableCell className=" border border 1 text-center">
-
-           <p>  {item.name}</p>
-
-          
-
-            {item.registrationnumber}
-
-          </StyledTableCell>
-
-          <StyledTableCell align="left">{item.branch}</StyledTableCell>
-
-          <StyledTableCell className=" border border 1 text-center">
-
-            <p> {item.course} </p>
-
-            {item.counsellar} 
-
-            {item.source}
-
-          </StyledTableCell>
-
-          <StyledTableCell className=" border border 1 text-center">
-
-         <p>    {item.contactnumber}</p> 
-
-            {item.email}
-
-          </StyledTableCell>
-
-
-
-          <StyledTableCell className=" border border 1 text-center">
-
-           <p>  {item.joiningdata} </p>
-
-            {item.trainingmode}
-
-          </StyledTableCell>
-
-          <StyledTableCell className=" border border 1 text-center d-flex ">
-
-            <Link to={`/studentdataview/${item.id}`}>
-
-              <EditIcon />
-
-            </Link>
-
-            <Link to={`/registrationform/${item.id}`}>
-
-              <VisibilityIcon />
-
-            </Link>
-
-          </StyledTableCell>
-
-        </StyledTableRow>
-
-      ))}
-
-    </TableBody>
-
-  </Table>
-
-</TableContainer>
-
-<div>
-
-  <nav>
-
-    <ul className="pagination">
-
-      <li className="page-item">
-
-        <a
-
-          href="#"
-
-          className="prev"
-
-          onClick={prevPage}
-
-        >
-
-          {" "}
-
-          Prev{" "}
-
-        </a>
-
-      </li>
-
-      {numbers.map((n, i) => (
-
-        <li
-
-          className={`page-item ${currentPage == n ? "active" : ""}`}
-
-          key={i}
-
-        >
-
-          <a href="#" className="mx-2 num " onClick={changePage(n)}>
-
-            {n}{" "}
-
-          </a>
-
-        </li>
-
-      ))}
-
-      <li className="page-item">
-
-        <a
-
-          href="#"
-
-          className="next"
-
-          onClick={nextPage}
-
-        >
-
-          {" "}
-
-          Next
-
-        </a>
-
-      </li>
-
-    </ul>
-
-  </nav>
-
-</div>
-
-</div>
- </>
-
+        <div className="row mb-3 px-4 pt-3">
+          <div className="col-9 col-md-9 ">
+            <p className="search">
+              <SearchIcon /> Search Here.....
+            </p>{" "}
+            <hr className="w-50" />
+          </div>
+          <div className="col-1">
+            <h6>
+              {" "}
+              {recordCount}/{initialDataCount}
+            </h6>
+          </div>
+          <div className="col-1 ">
+            <h6> Export</h6>{" "}
+          </div>
+          <div className="col-1 ">
+            {" "}
+            <h6 onClick={handleClick}> Filter</h6>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+              style={{
+                width: "600px",
+                borderRadius: "25px",
+                marginTop: "20px",
+                cursor: "pointer",
+              }}
+            >
+              <MenuItem> Filter</MenuItem>
+              <hr />
+              <MenuItem className="pt-3">
+                <label> Enter Date : </label>
+                <br />
+                <input
+                  type="date"
+                  className="form-control"
+                  style={{
+                    height: "45px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="date"
+                  value={filterCriteria.date}
+                  onChange={handleInputChange}
+                />
+              </MenuItem>
+              <div className="d-flex w-100 mt-3">
+                <MenuItem>
+                  <select
+                    id=""
+                    placeholder="Filter Branch"
+                    required
+                    style={{
+                      height: "45px",
+                      paddingLeft: "10px",
+                      paddingRight: "50px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="branch"
+                    value={filterCriteria.branch}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Branch</option>
+                    <option value="hitechcity"> Hitech city</option>
+                    <option value="ameerpet"> Ameerpet</option>
+                    <option value="dilsukhnagar"> Dilsukhnagar</option>
+                    <option value="gachibowli"> Gachibowli</option>
+                  </select>
+                </MenuItem>
+                <MenuItem>
+                  {" "}
+                  <select
+                    id=""
+                    placeholder="Lead Source"
+                    required
+                    style={{
+                      height: "45px",
+                      paddingRight: "65px",
+
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="source"
+                    value={filterCriteria.source}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">LeadSource</option>
+                    <option value="walkin"> Walkin</option>
+                    <option value="justdail"> JustDail</option>
+                    <option value="referral"> Referral</option>
+                  </select>
+                </MenuItem>{" "}
+              </div>
+              <div className="d-flex w-100 mt-3 mb-2">
+                <MenuItem>
+                  <select
+                    id=""
+                    placeholder="Mode of Traning"
+                    required
+                    style={{
+                      height: "45px",
+                      paddingRight: "37px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    //
+                    name="mode"
+                    value={filterCriteria.mode}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Mode Of Training</option>
+                    <option value="online"> Online</option>
+                    <option value="offline"> Offline</option>
+                  </select>
+                </MenuItem>
+                <MenuItem>
+                  {" "}
+                  <select
+                    id=""
+                    placeholder="Councellors"
+                    required
+                    style={{
+                      height: "45px",
+                      paddingRight: "65px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="counsellar"
+                    value={filterCriteria.counsellar}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Councellors</option>
+                    <option value="kavya"> kavya</option>
+                  </select>
+                </MenuItem>{" "}
+              </div>
+            </Menu>
+          </div>
+        </div>
+
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell className="bg-secondary fs-6 border border 1 text-center ">
+                  SNo
+                </StyledTableCell>
+
+                <StyledTableCell
+                  className="bg-secondary fs-6  border border 1 text-center"
+                  align="left"
+                >
+                  Photo
+                </StyledTableCell>
+
+                <StyledTableCell
+                  className="  bg-secondary fs-6 border border 1 text-centerborder border 1 text-center"
+                  align="left"
+                >
+                  Student Name & Registration No
+                </StyledTableCell>
+
+                <StyledTableCell
+                  className="bg-secondary fs-6 border border 1 text-center"
+                  align="left"
+                >
+                  Branch
+                </StyledTableCell>
+
+                <StyledTableCell
+                  className="bg-secondary fs-6 border border 1 text-center"
+                  align="left"
+                >
+                  Course Counseller Source
+                </StyledTableCell>
+
+                <StyledTableCell
+                  className="bg-secondary fs-6 border border 1 text-center "
+                  align="left"
+                >
+                  Contact Number & Email
+                </StyledTableCell>
+
+                <StyledTableCell
+                  className="bg-secondary fs-6 border border 1 text-center "
+                  align="left"
+                >
+                  Joining Date & Traning Mode
+                </StyledTableCell>
+
+                <StyledTableCell
+                  className="bg-secondary fs-6 border border 1 text-center"
+                  align="left"
+                >
+                  Action
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {records.map((item) => (
+                // <li key={item.id}>{item.name}</li>
+
+                <StyledTableRow key={item.id}>
+                  <StyledTableCell className=" border border 2 text-center">
+                    {item.id}
+                  </StyledTableCell>
+
+                  <StyledTableCell className=" border border 2 text-center">
+                    {item.photo}
+                  </StyledTableCell>
+
+                  <StyledTableCell className=" border border 1 text-center">
+                    <p> {item.name}</p>
+
+                    {item.registrationnumber}
+                  </StyledTableCell>
+
+                  <StyledTableCell align="left">{item.branch}</StyledTableCell>
+
+                  <StyledTableCell className=" border border 1 text-center">
+                    <p> {item.course} </p>
+
+                    {item.counsellar}
+
+                    {item.source}
+                  </StyledTableCell>
+
+                  <StyledTableCell className=" border border 1 text-center">
+                    <p> {item.contactnumber}</p>
+
+                    {item.email}
+                  </StyledTableCell>
+
+                  <StyledTableCell className=" border border 1 text-center">
+                    <p> {item.joiningdata} </p>
+
+                    {item.trainingmode}
+                  </StyledTableCell>
+
+                  <StyledTableCell className=" border border 1 text-center d-flex ">
+                    <Link to={`/studentdataview/${item.id}`}>
+                      <EditIcon />
+                    </Link>
+
+                    <Link to={`/registrationform/${item.id}`}>
+                      <VisibilityIcon />
+                    </Link>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <div>
+          <nav>
+            <ul className="pagination">
+              <li className="page-item">
+                <a href="#" className="prev" onClick={prevPage}>
+                  {" "}
+                  Prev{" "}
+                </a>
+              </li>
+
+              {numbers.map((n, i) => (
+                <li
+                  className={`page-item ${currentPage == n ? "active" : ""}`}
+                  key={i}
+                >
+                  <a href="#" className="mx-2 num " onClick={changePage(n)}>
+                    {n}{" "}
+                  </a>
+                </li>
+              ))}
+
+              <li className="page-item">
+                <a href="#" className="next" onClick={nextPage}>
+                  {" "}
+                  Next
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </>
   );
 
   function prevPage() {
-
     if (currentPage !== firstIndex) {
-
       setCurrentPage(currentPage - 1);
-
     }
-
   }
 
   function changePage(id) {}
 
   function nextPage() {
-
     if (currentPage !== lastIndex) {
-
       setCurrentPage(currentPage + 1);
-
     }
-
   }
-
 };
 
- 
-
 export default StudentData;
-
-
-
-
-
-
 
 // import * as React from "react";
 
@@ -1003,8 +584,6 @@ export default StudentData;
 
 // }));
 
- 
-
 // const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 //   "&:nth-of-type(odd)": {
@@ -1012,8 +591,6 @@ export default StudentData;
 //     backgroundColor: theme.palette.action.hover,
 
 //   },
-
- 
 
 //   "&:last-child td, &:last-child th": {
 
@@ -1023,18 +600,11 @@ export default StudentData;
 
 // }));
 
- 
-
 // const initialData = initialDataa;
-
- 
 
 // let initialDataCount = initialData.length;
 
- 
-
 // const StudentData = () => {
-
 
 //   const [filteredData, setFilteredData] = useState(initialData);
 //   let recordCount = filteredData.length;
@@ -1054,8 +624,6 @@ export default StudentData;
 
 //   });
 
- 
-
 //   const handleInputChange = (e) => {
 
 //     const { name, value } = e.target;
@@ -1063,9 +631,6 @@ export default StudentData;
 //     setFilterCriteria({ ...filterCriteria, [name]: value });
 
 //   };
-
-  
-
 
 //   useEffect(() => {
 //     const filteredResults = initialData.filter((item) => {
@@ -1120,8 +685,6 @@ export default StudentData;
 
 //   }, [filterCriteria, initialData]);
 
- 
-
 //   const [currentPage, setCurrentPage] = useState(1);
 
 //   const recordsPerPage = 10;
@@ -1136,8 +699,6 @@ export default StudentData;
 
 //   const numbers = [...Array(npage + 1).keys()].slice(1);
 
- 
-
 // //  for fillter dropdown
 // const [anchorEl, setAnchorEl] = React.useState(null);
 // const open = Boolean(anchorEl);
@@ -1148,9 +709,8 @@ export default StudentData;
 //   setAnchorEl(null);
 // };
 
-
 //   return (
-//     <> 
+//     <>
 //     <h3 className="ms-5"> Student Data</h3>
 //     <div className="  studetdetails ">
 //       <div className="row mb-3 px-4 pt-3">
@@ -1202,8 +762,8 @@ export default StudentData;
 //           <h6> {recordCount}/{initialDataCount}</h6>
 //         </div>
 //         <div className="col-1 "><h6> Export</h6> </div>
-//         <div className="col-1 "> <h6 onClick={handleClick} > Filter</h6> 
-        
+//         <div className="col-1 "> <h6 onClick={handleClick} > Filter</h6>
+
 //          {/* <Button
 //         id="basic-button"
 //         aria-controls={open ? 'basic-menu' : undefined}
@@ -1227,12 +787,12 @@ export default StudentData;
 //                 }}
 //       >
 //           <MenuItem  > Filter</MenuItem><hr/>
-//         <MenuItem className="pt-3" > 
+//         <MenuItem className="pt-3" >
 //        <label> Enter Date : </label><br/>
 //         <input
 //           type="date"
 //           className="form-control"
-          
+
 //           style={{
 //             height: "45px",
 //             border: "1.5px solid black",
@@ -1246,11 +806,11 @@ export default StudentData;
 //         />
 
 //         </MenuItem>
-//   <div className="d-flex w-100 mt-3"> 
+//   <div className="d-flex w-100 mt-3">
 //   <MenuItem  >
- 
+
 //         <select
-          
+
 //           id=""
 //           placeholder="Filter Branch"
 //           required
@@ -1273,14 +833,14 @@ export default StudentData;
 //           <option value="gachibowli"> Gachibowli</option>
 //         </select></MenuItem>
 //         <MenuItem > <select
-       
+
 //           id=""
 //           placeholder="Lead Source"
 //           required
 //           style={{
 //             height: "45px",
 //             paddingRight:"65px",
-           
+
 //             border: "1.5px solid black",
 //             borderRadius: "5px",
 //           }}
@@ -1294,10 +854,10 @@ export default StudentData;
 //           <option value="justdail"> JustDail</option>
 //           <option value="referral"> Referral</option>
 //         </select></MenuItem> </div>
-//         <div className="d-flex w-100 mt-3 mb-2"> 
+//         <div className="d-flex w-100 mt-3 mb-2">
 //   <MenuItem  >
 //   <select
-       
+
 //           id=""
 //           placeholder="Mode of Traning"
 //           required
@@ -1318,7 +878,7 @@ export default StudentData;
 //         </select>
 //         </MenuItem>
 //         <MenuItem > <select
-       
+
 //           id=""
 //           placeholder="Councellors"
 //           required
@@ -1335,13 +895,11 @@ export default StudentData;
 //         >
 //           <option value="">Councellors</option>
 //           <option value="walkin"> </option>
-          
+
 //         </select></MenuItem> </div>
-        
+
 //       </Menu></div>
-      
-   
-        
+
 //       </div>
 //       {/* <div className="row mb-3 ">
 //         <input
@@ -1355,8 +913,6 @@ export default StudentData;
 //           style={{
 
 //             height: "45px",
-
- 
 
 //             padding: "15px",
 
@@ -1387,8 +943,6 @@ export default StudentData;
 //           style={{
 
 //             height: "45px",
-
- 
 
 //             border: "1.5px solid black",
 
@@ -1430,8 +984,6 @@ export default StudentData;
 
 //             height: "45px",
 
- 
-
 //             border: "1.5px solid black",
 
 //             borderRadius: "5px",
@@ -1470,8 +1022,6 @@ export default StudentData;
 
 //             height: "45px",
 
- 
-
 //             border: "1.5px solid black",
 
 //             borderRadius: "5px",
@@ -1507,8 +1057,6 @@ export default StudentData;
 //           style={{
 
 //             height: "45px",
-
- 
 
 //             border: "1.5px solid black",
 
@@ -1560,14 +1108,11 @@ export default StudentData;
 
 //       </div>
 
- 
-
 //       <TableContainer component={Paper}>
 
 //         <Table sx={{ minWidth: 1000 }} aria-label="customized table">
 
 //       </div> */}
-      
 
 //       <TableContainer component={Paper}>
 //         <Table sx={{ minWidth: 1000 }} aria-label="customized table ">
@@ -1649,8 +1194,6 @@ export default StudentData;
 //                   {item.email}
 
 //                 </StyledTableCell>
-
- 
 
 //                 <StyledTableCell className=" border border 1 text-center">
 

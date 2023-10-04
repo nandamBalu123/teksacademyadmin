@@ -3,12 +3,12 @@
 .tekslogo {
   /* font-family: "Mooli", sans-serif;
   font-family: "Roboto Mono", monospace; */
-  font-family: "Source Sans 3", sans-serif;
   /* font-weight: 1900; */
+  font-family: "Nunito", sans-serif;
+
   letter-spacing: 1px;
 }
 
-*{
+* {
   font-size: large;
 }
- 
