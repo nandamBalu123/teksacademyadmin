@@ -149,10 +149,10 @@ export default function RegistrationForm() {
             <StepLabel >
               <Typography fontSize={25} >Basic Details</Typography>
             </StepLabel>
-            <StepContent>
-              <form>
-                <div className="row ">
-                  <label className="col-12 col-md-2">
+            <StepContent  >
+              <form className="form">
+                <div className="row input ">
+                  <label className="col-12 col-md-2 w-25">
                     Name <span className="text-danger">*</span>&nbsp; :
                   </label>
                   <input
@@ -168,9 +168,9 @@ export default function RegistrationForm() {
                     value={name}
                   />
                 </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
+           <br/>
+                <div className="row input ">
+                  <label className="col-12 col-md-2 w-25">
                     Email <span className="text-danger"> *</span>&nbsp; :
                   </label>
                   <input
@@ -186,9 +186,9 @@ export default function RegistrationForm() {
                     value={email}
                   />
                 </div>
-                <br />
+           <br/>
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Mobile Number<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   <input
@@ -205,8 +205,7 @@ export default function RegistrationForm() {
                   />
                 </div>
                 <br />
-              </form>
-
+                
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
                   <Button
@@ -220,6 +219,8 @@ export default function RegistrationForm() {
                   </Button>
                 </div>
               </Box>
+              </form>
+
             </StepContent>
           </Step>
           {/* -----step 2--- */}
@@ -227,12 +228,12 @@ export default function RegistrationForm() {
             <StepLabel>
               <Typography fontSize={25}>Student Details</Typography>
             </StepLabel>
-            <StepContent>
-              <form>
+            <StepContent className="">
+              <form className="form">
                 <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Parent's Name <span className="text-danger"> *</span>&nbsp;:
-                  </label>
+                  <label className="col-12 col-md-2 w-25">
+                    Parent's  Name <span className="text-danger"> *</span>&nbsp;:
+                  </label>&nbsp;&nbsp;
                   <input
                     type="text"
                     className="col-9 col-md-5"
@@ -248,9 +249,9 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Birth Date <span className="text-danger"> *</span>&nbsp;:
-                  </label>
+                  </label>&nbsp;&nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5"
@@ -266,7 +267,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Gender <span className="text-danger"> *</span>&nbsp;:
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -290,7 +291,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Marital Status <span className="text-danger"> *</span>&nbsp;
                     :
                   </label>
@@ -313,15 +314,15 @@ export default function RegistrationForm() {
                   </select>
                 </div>
                 <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
+                <div className="row  ">
+                  <label className="col-12 col-md-2 w-25">
                     College / School / Company{" "}
                     <span className="text-danger"> *</span>&nbsp; :
-                  </label>
+                  </label>&nbsp;
                   <input
                     type="text"
-                    className="col-9 col-md-5"
-                    required
+                    className="col-9 col-md-5 mt-3 "
+                    require
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
@@ -364,9 +365,9 @@ export default function RegistrationForm() {
               <Typography fontSize={25}>Student Contact Details</Typography>
             </StepLabel>
             <StepContent>
-              <form>
+              <form className="form">
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Country <span className="text-danger"> *</span>&nbsp;:
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -392,7 +393,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     State<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -453,7 +454,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Area<span className="text-danger"> *</span>&nbsp;:
                   </label>
 
@@ -473,7 +474,7 @@ export default function RegistrationForm() {
                 <br />
 
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Native Place <span className="text-danger"> *</span>&nbsp;:
                   </label>
                   <input
@@ -491,7 +492,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Zip Code <span className="text-danger"> *</span>&nbsp; :
                   </label>
                   <input
@@ -509,13 +510,13 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     WhatsApp Number <span className="text-danger"> *</span>
                     &nbsp;:
                   </label>
                   <input
                     type="text"
-                    className="col-9 col-md-5"
+                    className="col-9 col-md-5 mt-3"
                     required
                     style={{
                       height: "35px",
@@ -559,9 +560,9 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
-              <form>
+              <form className="form">
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Education Type <span className="text-danger"> *</span>
                     &nbsp;:
                   </label>
@@ -588,7 +589,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Marks<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   <input
@@ -606,7 +607,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Academic Year<span className="text-danger"> *</span>&nbsp;:
                   </label>
 
@@ -656,7 +657,7 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
-              <form>
+              <form className="form">
                 <div className="row ">
                   {/* <label className="col-12 col-md-2">Image:</label> */}
                   {/* <input
@@ -716,9 +717,9 @@ export default function RegistrationForm() {
               <Typography fontSize={25}>Enquiry Details:</Typography>
             </StepLabel>
             <StepContent>
-              <form>
+              <form className="form">
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Enquiry Date<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   <input
@@ -736,7 +737,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Enquiry Taken By<span className="text-danger"> *</span>
                     &nbsp;:
                   </label>
@@ -760,7 +761,7 @@ export default function RegistrationForm() {
                 <br />
 
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Course Package<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -787,7 +788,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Courses<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -815,7 +816,7 @@ export default function RegistrationForm() {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2">
+                  <label className="col-12 col-md-2 w-25">
                     Lead Source<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -882,7 +883,7 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
-              <form>
+              <form className="form">
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Branch<span className="text-danger"> *</span>&nbsp;:
@@ -907,7 +908,7 @@ export default function RegistrationForm() {
                     <option value="gachibowli">Gachibowli</option>
                   </select>
                 </div>
-                <br />
+                
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Mode of Traning<span className="text-danger"> *</span>
@@ -915,7 +916,7 @@ export default function RegistrationForm() {
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <select
-                    className="col-9 col-md-5"
+                    className="col-9 col-md-5 mt-3"
                     id=""
                     required
                     style={{
@@ -931,7 +932,7 @@ export default function RegistrationForm() {
                     <option value="offline">Offline</option>
                   </select>
                 </div>
-                <br />
+                
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Admission Status<span className="text-danger"> *</span>
@@ -939,7 +940,7 @@ export default function RegistrationForm() {
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <select
-                    className="col-9 col-md-5"
+                    className="col-9 col-md-5  mt-3"
                     id=""
                     required
                     style={{
@@ -955,7 +956,7 @@ export default function RegistrationForm() {
                     <option value="inactive">Inactive</option>
                   </select>
                 </div>
-                <br />
+           
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Registration No <span className="text-danger"> *</span>
@@ -963,7 +964,7 @@ export default function RegistrationForm() {
                   </label>
                   <input
                     type="text"
-                    className="col-9 col-md-5"
+                    className="col-9 col-md-5 mt-3"
                     style={{
                       height: "35px",
                       border: "1.5px solid black",
@@ -973,7 +974,7 @@ export default function RegistrationForm() {
                     value={registrationNumber}
                   />
                 </div>
-                <br />
+              
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Admission Date <span className="text-danger"> *</span>
@@ -981,7 +982,7 @@ export default function RegistrationForm() {
                   </label>
                   <input
                     type="date"
-                    className="col-9 col-md-5"
+                    className="col-9 col-md-5 mt-3"
                     required
                     style={{
                       height: "35px",
@@ -1064,7 +1065,7 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
-              <form onSubmit={handleFeeDetails}>
+              <form onSubmit={handleFeeDetails} className="form">
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Fee Type <span className="text-danger"> *</span>&nbsp;:
@@ -1197,7 +1198,7 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
-              <form>
+              <form className="form">
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Gross Total <span className="text-danger"> *</span>&nbsp;:

@@ -13,6 +13,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
+import favicon from '../../../images/favicon.jpeg';
 // let role = localStorage.getItem(role);
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -84,7 +85,7 @@ const Sidebar = () => {
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              margin: "10px 0px 10px 0px",
+              margin: "10px 8px 10px 5px",
               color: colors.grey[100],
             }}
           >
@@ -102,7 +103,7 @@ const Sidebar = () => {
                   className="tekslogo"
                   fontWeight="900"
                 >
-                  Teks Academy
+                 <img className="w-25 rounded-5" src={favicon}/>  Teks Academy
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <CloseIcon />

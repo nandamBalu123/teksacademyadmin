@@ -15,9 +15,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import './StudentData.css';
+import SearchIcon from '@mui/icons-material/Search';
+
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { initialDataa } from "./data";
 
 import { LastPage } from "@mui/icons-material";
+import { Pagination } from "@mui/material";
 // import ReactPaginate from 'react-paginate';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -1099,6 +1106,7 @@ const initialData = [
   },
   
   
+  
 ];
 // Add more data objects as needed  
 let initialDataCount = initialData.length;
@@ -1122,7 +1130,9 @@ const StudentData = () => {
         item.source.includes(source) &&
         item.trainingmode.includes(mode)
       )
-        return (
+        return ( 
+
+          
           item.joiningdata.includes(date) &&
           item.branch.includes(branch) &&
           item.source.includes(source) &&
@@ -1197,12 +1207,25 @@ const StudentData = () => {
   const npage = Math.ceil(initialData.length/recordsPerPage)
  const numbers = [...Array(npage +1).keys()].slice(1)
 
+//  for fillter dropdown
+const [anchorEl, setAnchorEl] = React.useState(null);
+const open = Boolean(anchorEl);
+const handleClick = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+const handleClose = () => {
+  setAnchorEl(null);
+};
+
 
   return (
-    <div className="studetdetails container">
-      <div className="row mb-3">
+    <> 
+    <h3 className="ms-5"> Student Data</h3>
+    <div className="  studetdetails ">
+      <div className="row mb-3 px-4 pt-3">
         <div className="col-9 col-md-9 ">
-          <input
+          <p className="search"><SearchIcon/> Search Here.....</p> <hr className="w-50"/>
+          {/* <input
             type="text"
             placeholder="Search Here......"
             style={{
@@ -1213,19 +1236,160 @@ const StudentData = () => {
               borderRadius: "5px",
             }}
             value={searchTerm}
-            // value={search}
+            value={search}
             onChange={handleSearchChange}
-            // onChange={(e) => {
-            //   handleFilter();
-            //   setSearch(e.target.value);
-            // }}
-          />
+            onChange={(e) => {
+              handleFilter();
+              setSearch(e.target.value);
+            }}
+          /> */}
         </div>
-        <div className="col-3 col-md-3 text-end pt-lg-3">
-          {recordCount}/{initialDataCount}
+        <div className="col-1">
+          <h6> {recordCount}/{initialDataCount}</h6>
         </div>
+        <div className="col-1 "><h6> Export</h6> </div>
+        <div className="col-1 "> <h6 onClick={handleClick} > Filter</h6> 
+        
+         {/* <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+       <h6> Fillter</h6>
+      </Button> */}
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+        style={{width:"600px",
+                borderRadius:"25px",
+                marginTop:"20px",
+                }}
+      >
+          <MenuItem  > Filter</MenuItem><hr/>
+        <MenuItem className="pt-3" > 
+       <label> Enter Date : </label><br/>
+        <input
+          type="date"
+          className="form-control"
+          
+          style={{
+            height: "45px",
+            border: "1.5px solid black",
+            borderRadius: "5px",
+          }}
+          // onChange={(e) => handleDateFilter(e.target.value)}
+          onChange={(e) => {
+            handleFilter();
+            setdate(e.target.value);
+          }}
+        />
+
+        </MenuItem>
+  <div className="d-flex w-100 mt-3"> 
+  <MenuItem  >
+ 
+        <select
+          
+          id=""
+          placeholder="Filter Branch"
+          required
+          style={{
+            height: "45px",
+            paddingLeft:"10px",
+            paddingRight:"50px",
+            border: "1.5px solid black",
+            borderRadius: "5px",
+          }}
+          // onChange={(e) => handleBranchFilter(e.target.value)}
+          onChange={(e) => {
+            setbranch(e.target.value);
+          }}
+        >
+          <option value="">Branch</option>
+          <option value="hitechcity"> Hitech city</option>
+          <option value="ameerpet"> Ameerpet</option>
+          <option value="dilsukhnagar"> Dilsukhnagar</option>
+          <option value="gachibowli"> Gachibowli</option>
+        </select></MenuItem>
+        <MenuItem > <select
+       
+          id=""
+          placeholder="Lead Source"
+          required
+          style={{
+            height: "45px",
+            paddingRight:"65px",
+           
+            border: "1.5px solid black",
+            borderRadius: "5px",
+          }}
+          // onChange={(e) => handleLeadFilter(e.target.value)}
+          onChange={(e) => {
+            setsource(e.target.value);
+          }}
+        >
+          <option value="">LeadSource</option>
+          <option value="walkin"> Walkin</option>
+          <option value="justdail"> JustDail</option>
+          <option value="referral"> Referral</option>
+        </select></MenuItem> </div>
+        <div className="d-flex w-100 mt-3 mb-2"> 
+  <MenuItem  >
+  <select
+       
+          id=""
+          placeholder="Mode of Traning"
+          required
+          style={{
+            height: "45px",
+            paddingRight:"37px",
+            border: "1.5px solid black",
+            borderRadius: "5px"
+          }}
+          // onChange={(e) => handleModeOfTrainingFilter(e.target.value)}
+          onChange={(e) => {
+            setmode(e.target.value);
+          }}
+        >
+          <option value="">Mode Of Training</option>
+          <option value="online"> Online</option>
+          <option value="offline"> Offline</option>
+        </select>
+        </MenuItem>
+        <MenuItem > <select
+       
+          id=""
+          placeholder="Councellors"
+          required
+          style={{
+            height: "45px",
+            paddingRight:"65px",
+            border: "1.5px solid black",
+            borderRadius: "5px",
+          }}
+          // onChange={(e) => handleLeadFilter(e.target.value)}
+          onChange={(e) => {
+            setsource(e.target.value);
+          }}
+        >
+          <option value="">Councellors</option>
+          <option value="walkin"> </option>
+          
+        </select></MenuItem> </div>
+        
+      </Menu></div>
+      
+   
+        
       </div>
-      <div className="row mb-3 ">
+      {/* <div className="row mb-3 ">
         <input
           type="date"
           className="col-12 col-md-5 col-lg-3 me-2 felids"
@@ -1318,35 +1482,35 @@ const StudentData = () => {
           sx={{ fontSize: 48 }}
           className="col-sm-12 col-md-4 col-lg-2   "
         />
-      </div>
+      </div> */}
       
 
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+        <Table sx={{ minWidth: 1000 }} aria-label="customized table ">
           <TableHead>
             <TableRow>
-              <StyledTableCell className=" bg-primary fs-6 border border 1 text-center ">
+              <StyledTableCell className=" bg-secondary fs-9 border border 1 text-center ">
                 SNo
               </StyledTableCell>
-              <StyledTableCell className=" bg-primary fs-6 border border 1 text-center" align="left">
+              <StyledTableCell className=" bg-secondary fs-9 border border 1 text-center" align="left">
                 Photo
               </StyledTableCell>
-              <StyledTableCell className="  bg-primary fs-6 border border 1 text-centerborder border 1 text-center" align="left">
+              <StyledTableCell className="  bg-secondary fs-9 border border 1 text-centerborder border 1 text-center" align="left">
                 Registration No
               </StyledTableCell>
-              <StyledTableCell className="bg-primary fs-6 border border 1 text-center" align="left">
+              <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
                 Student Name & Student ID
               </StyledTableCell>
-              <StyledTableCell className="bg-primary fs-6 border border 1 text-center " align="left">
+              <StyledTableCell className="bg-secondary fs-10 border border 1 text-center " align="left">
                 Contact Number & Email
               </StyledTableCell>
-              <StyledTableCell className="bg-primary fs-6 border border 1 text-center" align="left">
+              <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
                 Course Counseller Source
               </StyledTableCell>
-              <StyledTableCell className="bg-primary fs-6 border border 1 text-center " align="left">
+              <StyledTableCell className="bg-secondary fs-10 border border 1 text-center " align="left">
                 Joining Date & Traning Mode
               </StyledTableCell>
-              <StyledTableCell className="bg-primary fs-6 border border 1 text-center" align="left">
+              <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
                 Action
               </StyledTableCell>
             </TableRow>
@@ -1387,20 +1551,20 @@ const StudentData = () => {
                   <p> {item.registrationnumber}</p>  {item.branch}
                 </StyledTableCell>
                 <StyledTableCell className=" border border 1 text-center">
-                  {item.name} 
+                <p>   {item.name} </p>
                   {item.studentid}
                 </StyledTableCell>
                 <StyledTableCell className=" border border 1 text-center">
-                  {item.contactnumber} <hr />
+              <p>     {item.contactnumber}</p> 
                   {item.email}
                 </StyledTableCell>
                 <StyledTableCell className=" border border 1 text-center">
-                  {item.course} <hr />
-                  {item.counsellar} <hr />
+                 <p>  {item.course} </p>
+                  {item.counsellar} 
                   {item.source}
                 </StyledTableCell>
                 <StyledTableCell className=" border border 1 text-center">
-                  {item.joiningdata} <hr />
+                  <p> {item.joiningdata}</p>
                   {item.trainingmode}
                 </StyledTableCell>
                 <StyledTableCell className=" border border 1 text-center">
@@ -1417,19 +1581,19 @@ const StudentData = () => {
     </Stack> */}
         </Table>
       </TableContainer>
-      <nav> 
+      <nav className="mt-3 "> 
         <ul className="pagination"> 
         <li className="page-item"> 
-        <a href="#" className="bg-primary text-light px-3 py-2" onClick={prevPage}> Prev </a></li> 
+        <a href="#" className="prev" onClick={prevPage}> Prev </a></li> 
         { 
         numbers.map((n, i) =>( 
           <li className={`page-item ${currentPage == n ? 'active': "" }`} key={i}> 
-          <a href="#" className="mx-1 " onClick={changePage(n)}>{n} </a></li>
+          <a href="#" className="mx-2 num  " onClick={changePage(n)}>{n} </a></li>
         ) )
          
         }
         <li className="page-item"> 
-        <a href="#" className="bg-primary text-light px-3 py-2" onClick={nextPage} > Next</a></li>
+        <a href="#" className="next" onClick={nextPage} > Next</a></li>
         </ul>
       </nav>
       {/* {rows.map((row) => (
@@ -1449,7 +1613,11 @@ const StudentData = () => {
               </StyledTableRow>
             ))} */}
     </div>
-  );
+
+    {/* <Pagination  
+    count={100}/> */}
+
+    </>  );
    function prevPage(){ 
     if(currentPage !== firstIndex){ 
       setCurrentPage(currentPage - 1)
@@ -1457,9 +1625,7 @@ const StudentData = () => {
 
    }
     function changePage(id){ 
-      
-
-    }
+      }
   function nextPage(){ 
     if(currentPage !==  lastIndex){ 
       setCurrentPage( currentPage + 1)
