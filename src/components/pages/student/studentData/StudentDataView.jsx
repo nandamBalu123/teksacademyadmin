@@ -7,8 +7,29 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./StudentDataView.css";
+import { useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
 const StudentDataView = () => {
+  const { id } = useParams();
+  console.log("id", id);
   const [studentdata, setstudentdata] = useState("");
+
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get(`http://localhost:3030/viewstudentdata/:${id}`)
+      .then((response) => {
+        // Handle the successful response here
+        setstudentdata(response.data); // Update the data state with the fetched data
+        console.log("studentdata", response.data);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   return (
     <>
       <h2 className="text-center"> Student Details From</h2>
