@@ -101,7 +101,7 @@ const StudentData = () => {
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
-        console.log(response.data);
+        console.log("data", response.data);
       })
       .catch((error) => {
         // Handle any errors that occur during the request
@@ -170,42 +170,6 @@ const StudentData = () => {
       <h3 className="ms-5"> Student Data </h3>
 
       <div className="studetdetails container">
-        {/* <div className="row mb-3">
-
-  <div className="col-9 col-md-9 ">
-
-    <input
-
-      type="text"
-
-      placeholder="Search Here......"
-
-      style={{
-
-        height: "55px",
-
-        width: "100%",
-
-        padding: "10px",
-
-        border: "1.5px solid black",
-
-        borderRadius: "5px",
-
-      }}
-
-    />
-
-  </div>
-
-  <div className="col-3 col-md-3 text-end pt-lg-3">
-
-    {recordCount}/{initialDataCount}
-
-  </div>
-
-</div> */}
-
         <div className="row mb-3 px-4 pt-3">
           <div className="col-9 col-md-9 ">
             <p className="search">
@@ -422,7 +386,7 @@ const StudentData = () => {
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 2 text-center">
-                    {item.photo}
+                    {item.profilepic}
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
@@ -434,32 +398,32 @@ const StudentData = () => {
                   <StyledTableCell align="left">{item.branch}</StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.course} </p>
+                    <p> {item.courses} </p>
 
-                    {item.counsellar}
+                    {item.enquirytakenby}
 
-                    {item.source}
+                    {item.leadsource}
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.contactnumber}</p>
+                    <p> {item.mobilenumber}</p>
 
                     {item.email}
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.joiningdata} </p>
+                    <p> {item.admissiondate} </p>
 
-                    {item.trainingmode}
+                    {item.modeoftraining}
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center d-flex ">
                     <Link to={`/studentdataview/${item.id}`}>
-                      <EditIcon />
+                      <VisibilityIcon />
                     </Link>
 
                     <Link to={`/registrationform/${item.id}`}>
-                      <VisibilityIcon />
+                      <EditIcon />
                     </Link>
                   </StyledTableCell>
                 </StyledTableRow>

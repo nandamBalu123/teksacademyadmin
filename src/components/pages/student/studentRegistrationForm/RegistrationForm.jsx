@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 // import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import "./RegistrationForm.css";
-import axios from 'axios';
+import axios from "axios";
 
 import { blue } from "@mui/material/colors";
 // import { blue } from "@mui/material/colors";
@@ -141,21 +141,28 @@ export default function RegistrationForm() {
     console.log("studentRegistration", studentRegistrationdata);
     try {
       // Make the POST request
-      const response = await axios.post('http://localhost:3030/student_form', studentRegistrationdata);
-    
+      const response = await axios.post(
+        "http://localhost:3030/student_form",
+        studentRegistrationdata
+      );
+
       // Handle a successful response here
-      console.log('Response:', response.data);
+      console.log("Response:", response.data);
     } catch (error) {
       // Handle the error here
       if (error.response) {
         // The request was made and the server responded with a non-2xx status code
-        console.log('Server returned an error:', error.response.status, error.response.data);
+        console.log(
+          "Server returned an error:",
+          error.response.status,
+          error.response.data
+        );
       } else if (error.request) {
         // The request was made, but no response was received
-        console.log('No response received:', error.request);
+        console.log("No response received:", error.request);
       } else {
         // Something happened in setting up the request that triggered an error
-        console.error('Request error:', error.message);
+        console.error("Request error:", error.message);
       }
     }
   };
@@ -164,13 +171,13 @@ export default function RegistrationForm() {
       <div className="main-sub-container ">
         <Typography fontSize={35}>Registration form</Typography>
 
-        <Stepper activeStep={activeStep} orientation="vertical" >
+        <Stepper activeStep={activeStep} orientation="vertical">
           {/* -----step 1--- */}
-          <Step >
-            <StepLabel >
-              <Typography fontSize={25} >Basic Details</Typography>
+          <Step>
+            <StepLabel>
+              <Typography fontSize={25}>Basic Details</Typography>
             </StepLabel>
-            <StepContent  >
+            <StepContent>
               <form className="form">
                 <div className="row input ">
                   <label className="col-12 col-md-2 w-25">
@@ -189,7 +196,7 @@ export default function RegistrationForm() {
                     value={name}
                   />
                 </div>
-           <br/>
+                <br />
                 <div className="row input ">
                   <label className="col-12 col-md-2 w-25">
                     Email <span className="text-danger"> *</span>&nbsp; :
@@ -207,7 +214,7 @@ export default function RegistrationForm() {
                     value={email}
                   />
                 </div>
-           <br/>
+                <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 w-25">
                     Mobile Number<span className="text-danger"> *</span>&nbsp;:
@@ -226,22 +233,21 @@ export default function RegistrationForm() {
                   />
                 </div>
                 <br />
-                
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1,  }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                </div>
-              </Box>
-              </form>
 
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Continue
+                    </Button>
+                  </div>
+                </Box>
+              </form>
             </StepContent>
           </Step>
           {/* -----step 2--- */}
@@ -253,8 +259,9 @@ export default function RegistrationForm() {
               <form className="form">
                 <div className="row ">
                   <label className="col-12 col-md-2 w-25">
-                    Parent's  Name <span className="text-danger"> *</span>&nbsp;:
-                  </label>&nbsp;&nbsp;
+                    Parent's Name <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;
                   <input
                     type="text"
                     className="col-9 col-md-5"
@@ -272,7 +279,8 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <label className="col-12 col-md-2 w-25">
                     Birth Date <span className="text-danger"> *</span>&nbsp;:
-                  </label>&nbsp;&nbsp;
+                  </label>
+                  &nbsp;&nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5"
@@ -339,7 +347,8 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 w-25">
                     College / School / Company{" "}
                     <span className="text-danger"> *</span>&nbsp; :
-                  </label>&nbsp;
+                  </label>
+                  &nbsp;
                   <input
                     type="text"
                     className="col-9 col-md-5 mt-3 "
@@ -358,7 +367,7 @@ export default function RegistrationForm() {
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
@@ -367,7 +376,7 @@ export default function RegistrationForm() {
                     Continue
                   </Button>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
@@ -553,6 +562,513 @@ export default function RegistrationForm() {
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
                   <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    // disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            </StepContent>
+          </Step>
+          {/* -----step 4--- */}
+          <Step>
+            <StepLabel>
+              <Typography fontSize={25}>Education Details</Typography>
+            </StepLabel>
+
+            <StepContent>
+              <form className="form">
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Education Type <span className="text-danger"> *</span>
+                   :
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id="educationtype"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setEducationType(e.target.value)}
+                    value={educationType}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">B.Tech </option>
+                    <option value="degree">Degree</option>
+                    <option value="mca"> MCA</option>
+                    <option value="ssc"> SSC</option>
+                    <option value="other">others</option>
+                  </select>
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Marks<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setMarks(e.target.value)}
+                    value={marks}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Academic Year<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setAcademicyear(e.target.value)}
+                    value={academicyear}
+                  />
+                </div>
+                <br />
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    // disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            </StepContent>
+          </Step>
+          {/* Step 5 */}
+          <Step>
+            <StepLabel>
+              <Typography fontSize={25}>Photo</Typography>
+            </StepLabel>
+
+            <StepContent>
+              <form className="form">
+                <div className="row ">
+                  {/* <label className="col-12 col-md-2">Image:</label> */}
+                  {/* <input
+                    type="image"
+                    // className="col-9 col-md-5"
+                    // style={{
+                    //   height: "35px",
+                    //   border: "1.5px solid black",
+                    //   borderRadius: "5px",
+                    // }}
+                  /> */}
+
+                  <input
+                    accept=".jpg, .jpeg, .png"
+                    type="file"
+                    src="your-image-url.jpg"
+                    alt="Submit"
+                    class="image-input"
+                  />
+                  {/* <input type="file" accept=".jpg, .jpeg, .png" /> */}
+
+                  <input
+                    type="file"
+                    id="imageInput"
+                    accept=".jpg, .jpeg, .png"
+                    style={{ display: "none" }}
+                  />
+                </div>
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    // disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            </StepContent>
+          </Step>
+          {/* -----step 6--- */}
+          <Step>
+            <StepLabel>
+              <Typography fontSize={25}>Enquiry Details:</Typography>
+            </StepLabel>
+            <StepContent>
+              <form className="form">
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Enquiry Date<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  <input
+                    type="date"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setEnquiryDate(e.target.value)}
+                    value={enquiryDate}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Enquiry Taken By<span className="text-danger"> *</span>
+                  :
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => enquiryTakenBy(e.target.value)}
+                    value={enquiryTakenBy}
+                  >
+                    <option value="">--select--</option>
+                    <option value="Bhavitha">Bhavitha</option>
+                    <option value="keerty">keerty</option>
+                    <option value="harsha">harsha</option>
+                    <option value="Bhavitha">Bhavitha</option>
+                  </select>
+                </div>
+                <br />
+
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Course Package<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setCoursepakage(e.target.value)}
+                    value={coursePackage}
+                  >
+                    <option value="">--select--</option>
+                    <option value="businessanalytics">
+                      Business Analytics
+                    </option>
+                    <option value="postgraduationprogram">
+                      Business Analytics
+                    </option>
+                  </select>
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Courses<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setCourses(e.target.value)}
+                    value={courses}
+                  >
+                    <option value="">--select--</option>
+                    <option value="fullstack">Full Stack Java</option>
+                    <option value="reactjs">React JS </option>
+                    <option value="nodejs">Node JS</option>
+                    <option value="angular">Angular</option>
+                    <option value="revit">Revit</option>
+                    <option value="salesforce">Sales Force</option>
+                    <option value="devops">Devops</option>
+                  </select>
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Lead Source<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setLeadSource(e.target.value)}
+                    value={leadSource}
+                  >
+                    <option value="">--select--</option>
+                    <option value="justdail">Just Dail</option>
+                    <option value="walkin">Walkin</option>
+                    <option value="ivr">IVR</option>
+                    <option value="test">Test</option>
+                    <option value="studentrefferal">Student Refferal</option>
+                    <option value="employeeRefferal">Employee Refferal</option>
+                    <option value="crm">CRM</option>
+                    <option value="buddy">Buddy</option>
+                    <option value="sulekha">sulekha</option>
+                    <option value="personalReference">
+                      personal Reference
+                    </option>
+                    <option value="website">website</option>
+                    <option value="primelead">Prime Lead</option>
+                  </select>
+                </div>
+                <br />
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    // disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            </StepContent>
+          </Step>
+          {/* -----step 7--- */}
+          <Step>
+            <StepLabel>
+              {" "}
+              <Typography fontSize={25}>Admission Details</Typography>
+            </StepLabel>
+
+            <StepContent>
+              <form className="form">
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Branch<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setBranch(e.target.value)}
+                    value={branch}
+                  >
+                    <option value="">--select--</option>
+                    <option value="hitechcity">Hitech-city</option>
+                    <option value="ameerpet">Ameerpet</option>
+                    <option value="dilsukhnagar">Dilsukhnagar</option>
+                    <option value="gachibowli">Gachibowli</option>
+                  </select>
+                </div>
+                
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Mode of Traning<span className="text-danger"> *</span>
+                    &nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5 mt-3"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setModeOfTraining(e.target.value)}
+                    value={modeOfTraining}
+                  >
+                    <option value="">--select--</option>
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                  </select>
+                </div>
+                
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Admission Status<span className="text-danger"> *</span>
+                    &nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5  mt-3"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setAdmissionStatus(e.target.value)}
+                    value={admissionStatus}
+                  >
+                    <option value="">--select--</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+           
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Registration No <span className="text-danger"> *</span>
+                    &nbsp;:
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5 mt-3"
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setRegistrationNumber(e.target.value)}
+                    value={registrationNumber}
+                  />
+                </div>
+              
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Admission Date <span className="text-danger"> *</span>
+                    &nbsp;:
+                  </label>
+                  <input
+                    type="date"
+                    className="col-9 col-md-5 mt-3"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setAdmissionDate(e.target.value)}
+                    value={admissionDate}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Validity Start Date <span className="text-danger"> *</span>
+                    &nbsp;:
+                  </label>
+                  <input
+                    type="date"
+                    className="col-9 col-md-5 mt-3"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setValidityStartDate(e.target.value)}
+                    value={validityStartDate}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Validity End Date <span className="text-danger"> *</span>
+                    &nbsp;:
+                  </label>
+                  <input
+                    type="date"
+                    className="col-9 col-md-5 mt-3"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setValidityEndDate(e.target.value)}
+                    value={validityEndDate}
+                  />
+                </div>
+                <br />
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
                   className="bg-primary"
                     variant="contained"
                     onClick={handleNext}
@@ -574,7 +1090,732 @@ export default function RegistrationForm() {
               </Box>
             </StepContent>
           </Step>
-          {/* -----step 4--- */}
+          {/* -----step 8--- */}
+          <Step>
+            <StepLabel>
+              {" "}
+              <Typography fontSize={25}>Fee Details</Typography>{" "}
+            </StepLabel>
+
+            <StepContent>
+              <form onSubmit={handleFeeDetails} className="form">
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Fee Type <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setfeetype(e.target.value)}
+                    value={feetype}
+                  >
+                    <option value="">--select--</option>
+                    <option value="coursefee">Course fee </option>
+                    <option value="admissionfee">Admission Fee </option>
+                  </select>
+                </div>
+                <br />
+
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Amount <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  <input
+                    type="number"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setAmount(e.target.value)}
+                    value={amount}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Discount <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  <input
+                    type="number"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setDiscount(e.target.value)}
+                    value={discount}
+                  />
+                </div>
+                <br />
+                {/* <div className="row ">
+                  <label className="col-12 col-md-2">
+                    Tax <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Exclusive Tax </option>
+                    <option value="degree">Inclusive Tax</option>
+                  </select>
+                </div> */}
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Tax Amount <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+
+                  {taxamount}
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Total Amount (Inclusive of GST){" "}
+                    <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+
+                  {totalamount}
+                </div>
+                <button onClick={handleFeeDetails} className="bg-primary text-light px-4 py-1  border border-none rounded-2 ">save</button>
+                <br />
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button 
+                  className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
+                  </Button>
+                  <Button
+                  className="bg-primary"
+                    variant="contained"
+                    // disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            </StepContent>
+          </Step>
+          {/* -----step 9--- */}
+          <Step>
+            <StepLabel>
+              {" "}
+              <Typography fontSize={25}>Billing</Typography>{" "}
+            </StepLabel>
+
+            <StepContent>
+              <form className="form">
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Gross Total <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  {/* <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  /> */}
+                  {grosstotal}
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Discount <span className="text-danger"> *</span>
+                    &nbsp; :
+                  </label>
+                  {/* <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  /> */}
+                  {totaldiscount}
+                </div>
+                <br />
+                {/* <div className="row ">
+                  <label className="col-12 col-md-2">
+                    Net Total <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div> */}
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Total Tax <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  {/* <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  /> */}
+                  {totaltax}
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Grand Total<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  {/* <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  /> */}
+                  {grandtotal}
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    {" "}
+                    Admission Remarks <span className="text-danger "> *</span>
+                    &nbsp;:
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5 mt-4"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Assets <span className="text-danger"> *</span>&nbsp;:
+                  </label>&nbsp;&nbsp;&nbsp;
+                  {/* <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  /> */}
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    <option value="">--select--</option>
+                    <option value="laptop">Laptop </option>
+                    <option value="bag"> Bag</option>
+                    <option value="lms"> LMS</option>
+                    <option value="coursematerial"> Course Materials</option>
+                  </select>
+                </div>
+                <br />
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                  className="bg-primary"
+                    variant="contained"
+                    onClick={""}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Submit
+                  </Button>
+                  <Button
+                  className="bg-primary"
+                    variant="contained"
+                    // disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            </StepContent>
+          </Step>
+        </Stepper>
+        {/* {activeStep === steps.length && (
+          <Paper square elevation={0} sx={{ p: 3 }}>
+            <Typography>All steps completed - you&apos;re finished</Typography>
+            <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+              Reset
+            </Button>
+          </Paper>
+        )} */}
+      </div>
+      {/* <div className="main-sub-container ">
+        <Typography fontSize={35}>Registration form</Typography>
+
+        <Stepper activeStep={activeStep} orientation="vertical" >
+         
+          <Step >
+            <StepLabel >
+              <Typography fontSize={25} >Basic Details</Typography>
+            </StepLabel>
+            <StepContent  >
+              <form className="form">
+                <div className="row input ">
+                  <label className="col-12 col-md-2 w-25">
+                    Name <span className="text-danger">*</span>&nbsp; :
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid Black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                  />
+                </div>
+           <br/>
+                <div className="row input ">
+                  <label className="col-12 col-md-2 w-25">
+                    Email <span className="text-danger"> *</span>&nbsp; :
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                  />
+                </div>
+           <br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Mobile Number<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setMobileNumber(e.target.value)}
+                    value={mobileNumber}
+                  />
+                </div>
+                <br />
+                
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                  className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1,  }}
+                  >
+
+                    Continue
+                  </Button>
+                </div>
+              </Box>
+              </form>
+
+            </StepContent>
+          </Step>
+   
+          <Step>
+            <StepLabel>
+              <Typography fontSize={25}>Student Details</Typography>
+            </StepLabel>
+            <StepContent className="">
+              <form className="form">
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Parent's  Name <span className="text-danger"> *</span>&nbsp;:
+                  </label>&nbsp;&nbsp;
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setParentsName(e.target.value)}
+                    value={parentsname}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Birth Date <span className="text-danger"> *</span>&nbsp;:
+                  </label>&nbsp;&nbsp;
+                  <input
+                    type="date"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setBirthDate(e.target.value)}
+                    value={birthdate}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Gender <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setGender(e.target.value)}
+                    value={gender}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Female </option>
+                    <option value="degree">Male</option>
+                    <option value="mca"> Others</option>
+                  </select>
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Marital Status <span className="text-danger"> *</span>&nbsp;
+                    :
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setMaritalStatus(e.target.value)}
+                    value={maritalStatus}
+                  >
+                    <option value="">--select--</option>
+                    <option value="btech">Single</option>
+                    <option value="degree">Marriage</option>
+                  </select>
+                </div>
+                <br />
+                <div className="row  ">
+                  <label className="col-12 col-md-2 w-25">
+                    College / School / Company{" "}
+                    <span className="text-danger"> *</span>&nbsp; :
+                  </label>&nbsp;
+                  <input
+                    type="text"
+                    className="col-9 col-md-5 mt-3 "
+                    require
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setCollege(e.target.value)}
+                    value={college}
+                  />
+                </div>
+                <br />
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                  className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                 
+                    Continue
+                  </Button>
+                  <Button
+                  className="bg-primary"
+                    variant="contained"
+                 
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            </StepContent>
+          </Step>
+
+
+          <Step>
+            <StepLabel>
+              <Typography fontSize={25}>Student Contact Details</Typography>
+            </StepLabel>
+            <StepContent>
+              <form className="form">
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Country <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setCountry(e.target.value)}
+                    value={country}
+                  >
+                    <option value="">--select--</option>
+                    <option value="india">India </option>
+                    <option value="usa">USA </option>
+                    <option value="australia">Australia </option>
+                    <option value="china">China </option>
+                    <option value="others">Others </option>
+                  </select>
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    State<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="col-9 col-md-5"
+                    id=""
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setState(e.target.value)}
+                    value={state}
+                  >
+                    <option value="">--select--</option>
+                    <option value="Telangana">Telangana </option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Andaman and Nicobar Islands">
+                      Andaman and Nicobar Islands
+                    </option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Dadra and Nagar Haveli and Daman and Diu">
+                      Dadra and Nagar Haveli and Daman and Diu
+                    </option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Puducherry">Puducherry</option>
+                    <option value="others">Others</option>
+                  </select>
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Area<span className="text-danger"> *</span>&nbsp;:
+                  </label>
+
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setArea(e.target.value)}
+                    value={area}
+                  />
+                </div>
+                <br />
+
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Native Place <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setNative(e.target.value)}
+                    value={native}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    Zip Code <span className="text-danger"> *</span>&nbsp; :
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setZipcode(e.target.value)}
+                    value={zipcode}
+                  />
+                </div>
+                <br />
+                <div className="row ">
+                  <label className="col-12 col-md-2 w-25">
+                    WhatsApp Number <span className="text-danger"> *</span>
+                    &nbsp;:
+                  </label>
+                  <input
+                    type="text"
+                    className="col-9 col-md-5 mt-3"
+                    required
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setWhatsAppNo(e.target.value)}
+                    value={whatsAppNo}
+                  />
+                </div>
+                <br />
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                  <Button
+                  className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+
+                    Continue
+                  </Button>
+                  <Button
+                  className="bg-primary"
+                    variant="contained"
+               
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            </StepContent>
+          </Step>
+
           <Step>
             <StepLabel>
               <Typography fontSize={25}>Education Details</Typography>
@@ -655,13 +1896,13 @@ export default function RegistrationForm() {
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    
                     Continue
                   </Button>
                   <Button
                   className="bg-primary"
                     variant="contained"
-                    // disabled={index === 0}
+                 
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
@@ -671,7 +1912,7 @@ export default function RegistrationForm() {
               </Box>
             </StepContent>
           </Step>
-          {/* Step 5 */}
+      
           <Step>
             <StepLabel>
               <Typography fontSize={25}>Photo</Typography>
@@ -680,16 +1921,7 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  {/* <label className="col-12 col-md-2">Image:</label> */}
-                  {/* <input
-                    type="image"
-                    // className="col-9 col-md-5"
-                    // style={{
-                    //   height: "35px",
-                    //   border: "1.5px solid black",
-                    //   borderRadius: "5px",
-                    // }}
-                  /> */}
+                 
 
                   <input
                     accept=".jpg, .jpeg, .png"
@@ -698,7 +1930,7 @@ export default function RegistrationForm() {
                     alt="Submit"
                     class="image-input"
                   />
-                  {/* <input type="file" accept=".jpg, .jpeg, .png" /> */}
+                 
 
                   <input
                     type="file"
@@ -716,13 +1948,13 @@ export default function RegistrationForm() {
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                
                     Continue
                   </Button>
                   <Button
                   className="bg-primary"
                     variant="contained"
-                    // disabled={index === 0}
+                 
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
@@ -732,7 +1964,7 @@ export default function RegistrationForm() {
               </Box>
             </StepContent>
           </Step>
-          {/* -----step 6--- */}
+      
           <Step>
             <StepLabel>
               <Typography fontSize={25}>Enquiry Details:</Typography>
@@ -880,13 +2112,13 @@ export default function RegistrationForm() {
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+
                     Continue
                   </Button>
                   <Button
                   className="bg-primary"
                     variant="contained"
-                    // disabled={index === 0}
+                  
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
@@ -896,7 +2128,7 @@ export default function RegistrationForm() {
               </Box>
             </StepContent>
           </Step>
-          {/* -----step 7--- */}
+      
           <Step>
             <StepLabel>
               {" "}
@@ -929,7 +2161,7 @@ export default function RegistrationForm() {
                     <option value="gachibowli">Gachibowli</option>
                   </select>
                 </div>
-                
+
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Mode of Traning<span className="text-danger"> *</span>
@@ -953,7 +2185,7 @@ export default function RegistrationForm() {
                     <option value="offline">Offline</option>
                   </select>
                 </div>
-                
+
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Admission Status<span className="text-danger"> *</span>
@@ -977,7 +2209,7 @@ export default function RegistrationForm() {
                     <option value="inactive">Inactive</option>
                   </select>
                 </div>
-           
+
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Registration No <span className="text-danger"> *</span>
@@ -995,7 +2227,7 @@ export default function RegistrationForm() {
                     value={registrationNumber}
                   />
                 </div>
-              
+
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Admission Date <span className="text-danger"> *</span>
@@ -1057,18 +2289,18 @@ export default function RegistrationForm() {
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+   
                     Continue
                   </Button>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
-                    // disabled={index === 0}
+                
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
@@ -1078,7 +2310,7 @@ export default function RegistrationForm() {
               </Box>
             </StepContent>
           </Step>
-          {/* -----step 8--- */}
+   
           <Step>
             <StepLabel>
               {" "}
@@ -1147,26 +2379,7 @@ export default function RegistrationForm() {
                   />
                 </div>
                 <br />
-                {/* <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Tax <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  >
-                    <option value="">--select--</option>
-                    <option value="btech">Exclusive Tax </option>
-                    <option value="degree">Inclusive Tax</option>
-                  </select>
-                </div> */}
+               
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2">
@@ -1184,24 +2397,29 @@ export default function RegistrationForm() {
 
                   {totalamount}
                 </div>
-                <button onClick={handleFeeDetails} className="bg-primary text-light px-4 py-1  border border-none rounded-2 ">save</button>
+                <button
+                  onClick={handleFeeDetails}
+                  className="bg-primary text-light px-4 py-1  border border-none rounded-2 "
+                >
+                  save
+                </button>
                 <br />
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
-                  <Button 
-                  className="bg-primary"
+                  <Button
+                    className="bg-primary"
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                 
                     Continue
                   </Button>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
-                    // disabled={index === 0}
+                
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
@@ -1211,7 +2429,7 @@ export default function RegistrationForm() {
               </Box>
             </StepContent>
           </Step>
-          {/* -----step 9--- */}
+
           <Step>
             <StepLabel>
               {" "}
@@ -1224,16 +2442,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2">
                     Gross Total <span className="text-danger"> *</span>&nbsp;:
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                  
                   {grosstotal}
                 </div>
                 <br />
@@ -1242,49 +2451,17 @@ export default function RegistrationForm() {
                     Discount <span className="text-danger"> *</span>
                     &nbsp; :
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                  
                   {totaldiscount}
                 </div>
                 <br />
-                {/* <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Net Total <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  />
-                </div> */}
+               
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2">
                     Total Tax <span className="text-danger"> *</span>&nbsp;:
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                 
                   {totaltax}
                 </div>
                 <br />
@@ -1292,16 +2469,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2">
                     Grand Total<span className="text-danger"> *</span>&nbsp;:
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                 
                   {grandtotal}
                 </div>
                 <br />
@@ -1327,16 +2495,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2">
                     Assets <span className="text-danger"> *</span>&nbsp;:
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                 
                   <select
                     className="col-9 col-md-5"
                     id=""
@@ -1359,18 +2518,18 @@ export default function RegistrationForm() {
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
                     onClick={handleSubmit}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    
                     Submit
                   </Button>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
-                    // disabled={index === 0}
+                  
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
@@ -1381,15 +2540,8 @@ export default function RegistrationForm() {
             </StepContent>
           </Step>
         </Stepper>
-        {/* {activeStep === steps.length && (
-          <Paper square elevation={0} sx={{ p: 3 }}>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-              Reset
-            </Button>
-          </Paper>
-        )} */}
-      </div>
+       
+      </div> */}
     </div>
   );
 }
