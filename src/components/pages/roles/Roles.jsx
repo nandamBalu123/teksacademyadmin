@@ -1,4 +1,6 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -8,13 +10,34 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from "react-router-dom";
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import axios from 'axios';
 
 const Roles = () => {
+  
+  const [initialData, setData] = useState([{name: ''}]);
+
+useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios.get('http://localhost:3030/getuserroles')
+      .then((response) => {
+        // Handle the successful response here
+        setData(response.data); // Update the data state with the fetched data
+        console.log(response.data);
+
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error('Error fetching data:', error);
+        
+      });
+  }, []);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     navigate("/createrole");
   };
+
+  
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -45,38 +68,23 @@ const Roles = () => {
             </div>
            
   
-            <TableContainer component={Paper}>
+      <TableContainer component={Paper}>
         <Table sx={{ minWidth: 1000 }} aria-label="customized table " >
           <TableHead  >
             <TableRow  >
-           <StyledTableCell className=' bg-primary fs-6  border border 1' align="center">Name</StyledTableCell>
-              <StyledTableCell className=' bg-primary fs-6 border border 1'  align="center">Description</StyledTableCell>
-              <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell>
-              
+              <StyledTableCell className=' bg-primary fs-6  border border 1' align="center">Name</StyledTableCell>
+              <StyledTableCell className=' bg-primary fs-6 border border 1' align="center">Description</StyledTableCell>
+              {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
+
             </TableRow>
           </TableHead>
-      <TableBody className="border border 1">
-             <StyledTableRow> 
+          <TableBody className="border border 1">
+            <StyledTableRow>
               <StyledTableCell className=" border border 1 text-center">Branch Manager</StyledTableCell>
               <StyledTableCell className=" border border 1 text-center">Deal with Branch things,Student Counsellor</StyledTableCell>
-              <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell>
-              </StyledTableRow> 
-              <StyledTableRow> 
-              <StyledTableCell className=" border border 1 text-center">Counsellor</StyledTableCell>
-              <StyledTableCell className=" border border 1 text-center">Team handling student calls and counselling</StyledTableCell>
-              <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell>
-              </StyledTableRow> 
-              <StyledTableRow> 
-              <StyledTableCell className=" border border 1 text-center">Admin</StyledTableCell>
-              <StyledTableCell align="center">Admin</StyledTableCell>
-              <StyledTableCell align="center"> System</StyledTableCell>
-              </StyledTableRow> 
-              <StyledTableRow> 
-              <StyledTableCell className=" border border 1 text-center">Restricted User</StyledTableCell>
-              <StyledTableCell className=" border border 1 text-center">Restricted User</StyledTableCell>
-              <StyledTableCell className=" border border 1 text-center"> System</StyledTableCell>
-              </StyledTableRow>
-            </TableBody>
+              {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
+            </StyledTableRow>
+          </TableBody>
         </Table>
       </TableContainer>
                 
