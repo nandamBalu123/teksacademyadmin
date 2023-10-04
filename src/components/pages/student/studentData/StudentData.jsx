@@ -21,6 +21,9 @@ import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 
 import DownloadIcon from "@mui/icons-material/Download";
+import SearchIcon from '@mui/icons-material/Search';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 import "./StudentData.css";
 
@@ -213,525 +216,691 @@ useEffect(() => {
 
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
- 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-
-    <div className="studetdetails container">
-
-      <div className="row mb-3">
-
-        <div className="col-9 col-md-9 ">
-
-          <input
-
-            type="text"
-
-            placeholder="Search Here......"
-
-            style={{
-
-              height: "55px",
-
-              width: "100%",
-
-              padding: "10px",
-
-              border: "1.5px solid black",
-
-              borderRadius: "5px",
-
-            }}
-
-          />
-
-        </div>
-
-        <div className="col-3 col-md-3 text-end pt-lg-3">
-
-          {recordCount}/{initialDataCount}
-
-        </div>
-
-      </div>
-
-      <div className="row mb-3 ">
-
-        <input
-
-          type="date"
-
-          className="col-12 col-md-5 col-lg-3 me-2 felids"
-
-          placeholder="Enter Date"
-
-          style={{
-
-            height: "45px",
-
+<>
+ <h3 className="ms-5"> Student Data </h3>
  
+ <div className="studetdetails container">
 
-            padding: "15px",
+{/* <div className="row mb-3">
 
-            border: "1.5px solid black",
+  <div className="col-9 col-md-9 ">
 
-            borderRadius: "5px",
+    <input
 
+      type="text"
+
+      placeholder="Search Here......"
+
+      style={{
+
+        height: "55px",
+
+        width: "100%",
+
+        padding: "10px",
+
+        border: "1.5px solid black",
+
+        borderRadius: "5px",
+
+      }}
+
+    />
+
+  </div>
+
+  <div className="col-3 col-md-3 text-end pt-lg-3">
+
+    {recordCount}/{initialDataCount}
+
+  </div>
+
+</div> */}
+
+<div className="row mb-3 px-4 pt-3">
+  <div className="col-9 col-md-9 ">
+    <p className="search"><SearchIcon/> Search Here.....</p> <hr className="w-50"/>
+    
+  </div>
+  <div className="col-1">
+    <h6> {recordCount}/{initialDataCount}</h6>
+  </div>
+  <div className="col-1 "><h6> Export</h6> </div>
+  <div className="col-1 "> <h6 onClick={handleClick} > Filter</h6> 
+  
+  
+<Menu
+  id="basic-menu"
+  anchorEl={anchorEl}
+  open={open}
+  onClose={handleClose}
+  MenuListProps={{
+    'aria-labelledby': 'basic-button',
+  }}
+  style={{width:"600px",
+          borderRadius:"25px",
+          marginTop:"20px",
+          cursor:"pointer"
           }}
+>
+    <MenuItem  > Filter</MenuItem><hr/>
+  <MenuItem className="pt-3" > 
+ <label> Enter Date : </label><br/>
+  <input
+    type="date"
+    className="form-control"
+    
+    style={{
+      height: "45px",
+      border: "1.5px solid black",
+      borderRadius: "5px"
+    }}
+    
+   
+   name="date"
+   value={filterCriteria.data}
+   onChange={handleInputChange}
+  />
 
-          name="date"
+  </MenuItem>
+<div className="d-flex w-100 mt-3"> 
+<MenuItem  >
 
-          value={filterCriteria.date}
-
-          onChange={handleInputChange}
-
-        />
-
-        <select
-
-          className="col-12 col-md-5 col-lg-2 me-2 felids"
-
-          id=""
-
-          placeholder="Filter Branch"
-
-          required
-
-          style={{
-
-            height: "45px",
-
+  <select
+    
+    id=""
+    placeholder="Filter Branch"
+    required
+    style={{
+      height: "45px",
+      paddingLeft:"10px",
+      paddingRight:"50px",
+      border: "1.5px solid black",
+      borderRadius: "5px",
+    }}
  
+    name="branch"
+    value={filterCriteria.branch}
+    onChange={handleInputChange}
+   
+  >
+    <option value="">Branch</option>
+    <option value="hitechcity"> Hitech city</option>
+    <option value="ameerpet"> Ameerpet</option>
+    <option value="dilsukhnagar"> Dilsukhnagar</option>
+    <option value="gachibowli"> Gachibowli</option>
+  </select></MenuItem>
+  <MenuItem > <select
+ 
+    id=""
+    placeholder="Lead Source"
+    required
+    style={{
+      height: "45px",
+      paddingRight:"65px",
+     
+      border: "1.5px solid black",
+      borderRadius: "5px",
+    }}
+    
+   
+    name="source"
 
-            border: "1.5px solid black",
+    value={filterCriteria.source}
 
-            borderRadius: "5px",
+    onChange={handleInputChange}
+  >
+    <option value="">LeadSource</option>
+    <option value="walkin"> Walkin</option>
+    <option value="justdail"> JustDail</option>
+    <option value="referral"> Referral</option>
+  </select></MenuItem> </div>
+  <div className="d-flex w-100 mt-3 mb-2"> 
+<MenuItem  >
+<select
+ 
+    id=""
+    placeholder="Mode of Traning"
+    required
+    style={{
+      height: "45px",
+      paddingRight:"37px",
+      border: "1.5px solid black",
+      borderRadius: "5px"
+    }}
+    //
+    name="mode"
 
-          }}
+    value={filterCriteria.mode}
 
-          name="branch"
+    onChange={handleInputChange}
+  >
+    <option value="">Mode Of Training</option>
+    <option value="online"> Online</option>
+    <option value="offline"> Offline</option>
+  </select>
+  </MenuItem>
+  <MenuItem > <select
+ 
+    id=""
+    placeholder="Councellors"
+    required
+    style={{
+      height: "45px",
+      paddingRight:"65px",
+      border: "1.5px solid black",
+      borderRadius: "5px",
+    }}
+    
+    
+    name="counsellar"
 
-          value={filterCriteria.branch}
+    value={filterCriteria.counsellar}
 
-          onChange={handleInputChange}
+    onChange={handleInputChange}
+  >
+    <option value="">Councellors</option>
+    <option value="walkin"> </option>
+    
+  </select></MenuItem> </div>
+  
+</Menu></div>
+
+
+  
+</div>
+
+
+
+
+
+{/* <div className="row mb-3 ">
+
+  <input
+
+    type="date"
+
+    className="col-12 col-md-5 col-lg-3 me-2 felids"
+
+    placeholder="Enter Date"
+
+    style={{
+
+      height: "45px",
+
+
+
+      padding: "15px",
+
+      border: "1.5px solid black",
+
+      borderRadius: "5px",
+
+    }}
+
+    name="date"
+
+    value={filterCriteria.date}
+
+    onChange={handleInputChange}
+
+  />
+
+  <select
+
+    className="col-12 col-md-5 col-lg-2 me-2 felids"
+
+    id=""
+
+    placeholder="Filter Branch"
+
+    required
+
+    style={{
+
+      height: "45px",
+
+
+
+      border: "1.5px solid black",
+
+      borderRadius: "5px",
+
+    }}
+
+    name="branch"
+
+    value={filterCriteria.branch}
+
+    onChange={handleInputChange}
+
+  >
+
+    <option value="">Branch</option>
+
+    <option value="hitechcity"> Hitech city</option>
+
+    <option value="ameerpet"> Ameerpet</option>
+
+    <option value="dilsukhnagar"> Dilsukhnagar</option>
+
+    <option value="gachibowli"> Gachibowli</option>
+
+  </select>
+
+  <select
+
+    className="col-12 col-md-5 col-lg-2 me-2 felids"
+
+    id=""
+
+    placeholder="Lead Source"
+
+    required
+
+    style={{
+
+      height: "45px",
+
+
+
+      border: "1.5px solid black",
+
+      borderRadius: "5px",
+
+    }}
+
+    name="source"
+
+    value={filterCriteria.source}
+
+    onChange={handleInputChange}
+
+  >
+
+    <option value="">LeadSource</option>
+
+    <option value="walkin"> Walkin</option>
+
+    <option value="justdail"> JustDail</option>
+
+    <option value="referral"> Referral</option>
+
+  </select>
+
+  <select
+
+    className="col-12 col-md-5 col-lg-2 me-2 felids"
+
+    id=""
+
+    placeholder="Mode of Traning"
+
+    required
+
+    style={{
+
+      height: "45px",
+
+
+
+      border: "1.5px solid black",
+
+      borderRadius: "5px",
+
+    }}
+
+    name="mode"
+
+    value={filterCriteria.mode}
+
+    onChange={handleInputChange}
+
+  >
+
+    <option value="">Mode Of Training</option>
+
+    <option value="online"> Online</option>
+
+    <option value="offline"> Offline</option>
+
+  </select>
+
+  <select
+
+    className="col-12 col-md-5 col-lg-2 me-2 felids"
+
+    id=""
+
+    placeholder="Counsellar"
+
+    required
+
+    style={{
+
+      height: "45px",
+
+
+
+      border: "1.5px solid black",
+
+      borderRadius: "5px",
+
+    }}
+
+    name="counsellar"
+
+    value={filterCriteria.counsellar}
+
+    onChange={handleInputChange}
+
+  >
+
+    <option value="">Counsellar</option>
+
+    <option value="kavya"> kavya</option>
+
+    <option value="keerthana"> keerthana</option>
+
+    <option value="david"> David</option>
+
+  </select>
+
+  <RotateLeftIcon
+
+    sx={{ fontSize: 48 }}
+
+    className="col-sm-12 col-md-4 col-lg-2  me-lg-3 "
+
+  />
+
+  <ShowChartIcon
+
+    sx={{ fontSize: 48 }}
+
+    className="col-sm-12 col-md-4 col-lg-2 me-lg-4 "
+
+  />
+
+  <DownloadIcon
+
+    sx={{ fontSize: 48 }}
+
+    className="col-sm-12 col-md-4 col-lg-2   "
+
+  />
+
+</div> */}
+
+
+
+<TableContainer component={Paper}>
+
+  <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+
+    <TableHead>
+
+      <TableRow>
+
+        <StyledTableCell className="bg-secondary fs-6 border border 1 text-center ">
+
+          SNo
+
+        </StyledTableCell>
+
+        <StyledTableCell
+
+          className="bg-secondary fs-6  border border 1 text-center"
+
+          align="left"
 
         >
 
-          <option value="">Branch</option>
+          Photo
 
-          <option value="hitechcity"> Hitech city</option>
+        </StyledTableCell>
 
-          <option value="ameerpet"> Ameerpet</option>
+        <StyledTableCell
 
-          <option value="dilsukhnagar"> Dilsukhnagar</option>
+          className="  bg-secondary fs-6 border border 1 text-centerborder border 1 text-center"
 
-          <option value="gachibowli"> Gachibowli</option>
-
-        </select>
-
-        <select
-
-          className="col-12 col-md-5 col-lg-2 me-2 felids"
-
-          id=""
-
-          placeholder="Lead Source"
-
-          required
-
-          style={{
-
-            height: "45px",
-
- 
-
-            border: "1.5px solid black",
-
-            borderRadius: "5px",
-
-          }}
-
-          name="source"
-
-          value={filterCriteria.source}
-
-          onChange={handleInputChange}
+          align="left"
 
         >
 
-          <option value="">LeadSource</option>
+          Student Name & Registration No
 
-          <option value="walkin"> Walkin</option>
+        </StyledTableCell>
 
-          <option value="justdail"> JustDail</option>
+        <StyledTableCell
 
-          <option value="referral"> Referral</option>
+          className="bg-secondary fs-6 border border 1 text-center"
 
-        </select>
-
-        <select
-
-          className="col-12 col-md-5 col-lg-2 me-2 felids"
-
-          id=""
-
-          placeholder="Mode of Traning"
-
-          required
-
-          style={{
-
-            height: "45px",
-
- 
-
-            border: "1.5px solid black",
-
-            borderRadius: "5px",
-
-          }}
-
-          name="mode"
-
-          value={filterCriteria.mode}
-
-          onChange={handleInputChange}
+          align="left"
 
         >
 
-          <option value="">Mode Of Training</option>
+          Branch
 
-          <option value="online"> Online</option>
+        </StyledTableCell>
 
-          <option value="offline"> Offline</option>
 
-        </select>
 
-        <select
+        <StyledTableCell
 
-          className="col-12 col-md-5 col-lg-2 me-2 felids"
+          className="bg-secondary fs-6 border border 1 text-center"
 
-          id=""
-
-          placeholder="Counsellar"
-
-          required
-
-          style={{
-
-            height: "45px",
-
- 
-
-            border: "1.5px solid black",
-
-            borderRadius: "5px",
-
-          }}
-
-          name="counsellar"
-
-          value={filterCriteria.counsellar}
-
-          onChange={handleInputChange}
+          align="left"
 
         >
 
-          <option value="">Counsellar</option>
+          Course Counseller Source
 
-          <option value="kavya"> kavya</option>
+        </StyledTableCell>
 
-          <option value="keerthana"> keerthana</option>
+        <StyledTableCell
 
-          <option value="david"> David</option>
+          className="bg-secondary fs-6 border border 1 text-center "
 
-        </select>
+          align="left"
 
-        <RotateLeftIcon
+        >
 
-          sx={{ fontSize: 48 }}
+          Contact Number & Email
 
-          className="col-sm-12 col-md-4 col-lg-2  me-lg-3 "
+        </StyledTableCell>
 
-        />
 
-        <ShowChartIcon
 
-          sx={{ fontSize: 48 }}
+        <StyledTableCell
 
-          className="col-sm-12 col-md-4 col-lg-2 me-lg-4 "
+          className="bg-secondary fs-6 border border 1 text-center "
 
-        />
+          align="left"
 
-        <DownloadIcon
+        >
 
-          sx={{ fontSize: 48 }}
+          Joining Date & Traning Mode
 
-          className="col-sm-12 col-md-4 col-lg-2   "
+        </StyledTableCell>
 
-        />
+        <StyledTableCell
 
-      </div>
+          className="bg-secondary fs-6 border border 1 text-center"
 
- 
+          align="left"
+        >
 
-      <TableContainer component={Paper}>
+          Action
 
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+        </StyledTableCell>
 
-          <TableHead>
+      </TableRow>
 
-            <TableRow>
+    </TableHead>
 
-              <StyledTableCell className=" bg-primary fs-6 border border 1 text-center ">
+    <TableBody>
 
-                SNo
+      {records.map((item) => (
 
-              </StyledTableCell>
+        // <li key={item.id}>{item.name}</li>
 
-              <StyledTableCell
+        <StyledTableRow key={item.id}>
 
-                className=" bg-primary fs-6 border border 1 text-center"
+          <StyledTableCell className=" border border 2 text-center">{item.id}</StyledTableCell>
 
-                align="left"
+          <StyledTableCell className=" border border 2 text-center">{item.photo}</StyledTableCell>
 
-              >
+          <StyledTableCell className=" border border 1 text-center">
 
-                Photo
+           <p>  {item.name}</p>
 
-              </StyledTableCell>
+          
 
-              <StyledTableCell
+            {item.registrationnumber}
 
-                className="  bg-primary fs-6 border border 1 text-centerborder border 1 text-center"
+          </StyledTableCell>
 
-                align="left"
+          <StyledTableCell align="left">{item.branch}</StyledTableCell>
 
-              >
+          <StyledTableCell className=" border border 1 text-center">
 
-                Student Name & Registration No
+            <p> {item.course} </p>
 
-              </StyledTableCell>
+            {item.counsellar} 
 
-              <StyledTableCell
+            {item.source}
 
-                className="bg-primary fs-6 border border 1 text-center"
+          </StyledTableCell>
 
-                align="left"
+          <StyledTableCell className=" border border 1 text-center">
 
-              >
+         <p>    {item.contactnumber}</p> 
 
-                Branch
+            {item.email}
 
-              </StyledTableCell>
+          </StyledTableCell>
 
- 
 
-              <StyledTableCell
 
-                className="bg-primary fs-6 border border 1 text-center"
+          <StyledTableCell className=" border border 1 text-center">
 
-                align="left"
+           <p>  {item.joiningdata} </p>
 
-              >
+            {item.trainingmode}
 
-                Course Counseller Source
+          </StyledTableCell>
 
-              </StyledTableCell>
+          <StyledTableCell className=" border border 1 text-center d-flex ">
 
-              <StyledTableCell
+            <Link to={`/studentdataview/${item.id}`}>
 
-                className="bg-primary fs-6 border border 1 text-center "
+              <EditIcon />
 
-                align="left"
+            </Link>
 
-              >
+            <Link to={`/registrationform/${item.id}`}>
 
-                Contact Number & Email
+              <VisibilityIcon />
 
-              </StyledTableCell>
+            </Link>
 
- 
+          </StyledTableCell>
 
-              <StyledTableCell
+        </StyledTableRow>
 
-                className="bg-primary fs-6 border border 1 text-center "
+      ))}
 
-                align="left"
+    </TableBody>
 
-              >
+  </Table>
 
-                Joining Date & Traning Mode
+</TableContainer>
 
-              </StyledTableCell>
+<div>
 
-              <StyledTableCell
+  <nav>
 
-                className="bg-primary fs-6 border border 1 text-center"
+    <ul className="pagination">
 
-                align="left"
+      <li className="page-item">
 
-              >
+        <a
 
-                Action
+          href="#"
 
-              </StyledTableCell>
+          className="prev"
 
-            </TableRow>
+          onClick={prevPage}
 
-          </TableHead>
+        >
 
-          <TableBody>
+          {" "}
 
-            {records.map((item) => (
+          Prev{" "}
 
-              // <li key={item.id}>{item.name}</li>
+        </a>
 
-              <StyledTableRow key={item.id}>
+      </li>
 
-                <StyledTableCell align="left">{item.id}</StyledTableCell>
+      {numbers.map((n, i) => (
 
-                <StyledTableCell align="left">{item.photo}</StyledTableCell>
+        <li
 
-                <StyledTableCell className=" border border 1 text-center">
+          className={`page-item ${currentPage == n ? "active" : ""}`}
 
-                  {item.name}
+          key={i}
 
-                  <hr />
+        >
 
-                  {item.registrationnumber}
+          <a href="#" className="mx-2 num " onClick={changePage(n)}>
 
-                </StyledTableCell>
+            {n}{" "}
 
-                <StyledTableCell align="left">{item.branch}</StyledTableCell>
+          </a>
 
-                <StyledTableCell className=" border border 1 text-center">
+        </li>
 
-                  {item.course} <hr />
+      ))}
 
-                  {item.counsellar} <hr />
+      <li className="page-item">
 
-                  {item.source}
+        <a
 
-                </StyledTableCell>
+          href="#"
 
-                <StyledTableCell className=" border border 1 text-center">
+          className="next"
 
-                  {item.contactnumber} <hr />
+          onClick={nextPage}
 
-                  {item.email}
+        >
 
-                </StyledTableCell>
+          {" "}
 
- 
+          Next
 
-                <StyledTableCell className=" border border 1 text-center">
+        </a>
 
-                  {item.joiningdata} <hr />
+      </li>
 
-                  {item.trainingmode}
+    </ul>
 
-                </StyledTableCell>
+  </nav>
 
-                <StyledTableCell className=" border border 1 text-center d-flex ">
+</div>
 
-                  <Link to={`/studentdataview/${item.id}`}>
-
-                    <EditIcon />
-
-                  </Link>
-
-                  <Link to={`/registrationform/${item.id}`}>
-
-                    <VisibilityIcon />
-
-                  </Link>
-
-                </StyledTableCell>
-
-              </StyledTableRow>
-
-            ))}
-
-          </TableBody>
-
-        </Table>
-
-      </TableContainer>
-
-      <div>
-
-        <nav>
-
-          <ul className="pagination">
-
-            <li className="page-item">
-
-              <a
-
-                href="#"
-
-                className="bg-primary text-light px-3 py-2"
-
-                onClick={prevPage}
-
-              >
-
-                {" "}
-
-                Prev{" "}
-
-              </a>
-
-            </li>
-
-            {numbers.map((n, i) => (
-
-              <li
-
-                className={`page-item ${currentPage == n ? "active" : ""}`}
-
-                key={i}
-
-              >
-
-                <a href="#" className="mx-1 " onClick={changePage(n)}>
-
-                  {n}{" "}
-
-                </a>
-
-              </li>
-
-            ))}
-
-            <li className="page-item">
-
-              <a
-
-                href="#"
-
-                className="bg-primary text-light px-3 py-2"
-
-                onClick={nextPage}
-
-              >
-
-                {" "}
-
-                Next
-
-              </a>
-
-            </li>
-
-          </ul>
-
-        </nav>
-
-      </div>
-
-    </div>
+</div>
+ </>
 
   );
 
