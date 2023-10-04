@@ -1,69 +1,68 @@
 @import url("https://fonts.googleapis.com/css2?family=Mooli&family=Source+Sans+3:wght@400;600;700&display=swap");
 
-*{ 
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
+  font-family: "Nunito", sans-serif;
 }
-.login{ 
+.login {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background:linear-gradient(#7a86ac,rgb(229, 234, 238) ) ;
+  background: linear-gradient(#7a86ac, rgb(229, 234, 238));
 }
-.containers{ 
+.containers {
   width: 75%;
   height: 550px;
   margin-top: 20px;
   background-color: #e2e1e9;
   position: absolute;
-  box-shadow: 0 0 20px (0,0,0,.4);
-  border-radius: 20px ;
+  box-shadow: 0 0 20px (0, 0, 0, 0.4);
+  border-radius: 20px;
 }
-.img{ 
+.img {
   position: absolute;
   width: 50%;
   height: 100%;
-  background-color: rgb(229, 234, 238) ;
+  background-color: rgb(229, 234, 238);
   left: 0;
   top: 0;
   border-bottom-left-radius: 20px;
   border-top-left-radius: 20px;
 }
-.login-section{ 
+.login-section {
   position: absolute;
   top: 0;
   right: 0;
   width: calc(100% - 56%);
 }
-.form-box{ 
- 
+.form-box {
   position: absolute;
- padding-top: 40%;
- padding-right:20% ;
+  padding-top: 40%;
+  padding-right: 20%;
   display: flex;
-  justify-content:center ;
-  align-items:center ;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   flex-direction: column;
-
 }
-.form-box h2{ 
+.form-box h2 {
   font-size: 35px;
   text-align: center;
   font-weight: bold;
 }
-.input-box{ 
+.input-box {
   height: 30px;
   width: 75%;
   border-bottom: 2px solid #888;
   position: relative;
   margin: 20px 0;
 }
-.input-box input{ 
+.input-box input {
   width: 100%;
   height: 100%;
   background: transparent;
@@ -72,30 +71,29 @@
   font-size: 16px;
   padding-right: 20px;
 }
-.input-box  label{ 
+.input-box label {
   position: absolute;
   top: -60%;
   left: 15px;
   color: #888;
   pointer-events: none;
-  transition: ease .5s ;
+  transition: ease 0.5s;
 }
 /* .input-box input:focus ~ label,
 .input-box input:valid ~ label{ 
   top: -6px;
 } */
-.input-box .btn{ 
+.input-box .btn {
   background-color: #7a86ac;
   width: 100%;
   height: 45px;
-  outline:none ;
+  outline: none;
   border: none;
   pointer-events: none;
   cursor: pointer;
   font-size: 16px;
   border-radius: 4px;
   box-shadow: none;
-  
 }
 
 /* @media (max-width: 600px) {

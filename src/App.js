@@ -56,7 +56,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {!token && !role? (
+          {!token && !role ? (
             <Routes>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
@@ -74,17 +74,19 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
-                
 
                 <Route path="/studentdata" element={<StudentData />} />
-                <Route path ="/studentdataview"
-                element={role == "admin" ? <StudentDataView/> : <Dashboard/>}
+                <Route
+                  path="/studentdataview/:id"
+                  element={
+                    role == "admin" ? <StudentDataView /> : <Dashboard />
+                  }
                 />
                 <Route
                   path="/createuser"
                   element={role == "admin" ? <CreateUserForm /> : <Dashboard />}
                 />
-                
+
                 <Route
                   path="/usersdata"
                   element={role == "admin" ? <UsersData /> : <Dashboard />}
@@ -104,7 +106,7 @@ function App() {
                   element={role == "admin" ? <CreateRole /> : <Dashboard />}
                 />
                 <Route
-                  path="/rolccess"
+                  path="/roleaccess/:id"
                   element={role == "admin" ? <RoleAccess /> : <Dashboard />}
                 />
                 <Route
