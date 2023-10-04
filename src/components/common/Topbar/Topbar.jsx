@@ -9,7 +9,13 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
+import profilepic from "../../../images/profilepic.jpg";
+import "./Topbar.css";
 import zIndex from "@mui/material/styles/zIndex";
 const Topbar = () => {
   const navigate = useNavigate();
@@ -24,56 +30,178 @@ const Topbar = () => {
       })
       .catch((err) => console.log(err));
   };
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "20px",
-      }}
-    >
-      {/* SEARCH BAR */}
-      <Box
-        display="flex"
-        backgroundColor={colors.primary[400]}
-        borderRadius="3px"
-        sx={{ position: "fixed" }}
-      >
-        <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-        <IconButton type="button" sx={{ p: 1 }}>
-          <SearchIcon />
-        </IconButton>
-      </Box>
 
-      {/* ICONS */}
-      <Box
-        display="flex"
-        sx={{
-          position: "fixed",
-          right: "0",
-        }}
-      >
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <div className="row topbar">
+        <div className="col-8 ">
+          <Box
+            backgroundColor={colors.primary[400]}
+            borderRadius="3px"
+            width={"35%"}
+          >
+            <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
+            <IconButton type="button" sx={{ p: 1 }}>
+              <SearchIcon />
+            </IconButton>
+          </Box>
+        </div>{" "}
+        <div className="col-1"> 
+        <Box>
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
           ) : (
             <LightModeOutlinedIcon />
           )}
-        </IconButton>
-        <IconButton>
+        </IconButton> 
+       </Box></div>
+       <div className="col-1">
+       <IconButton>
           <NotificationsOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <SettingsOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <PersonOutlinedIcon></PersonOutlinedIcon>
-        </IconButton>
-        <button onClick={handleLogout} type="submit" class="btn btn-primary">
-          logout
-        </button>
-      </Box>
-    </div>
+      </IconButton> </div>
+      <div className="col-1"> 
+      <IconButton>
+         <SettingsOutlinedIcon />
+       </IconButton></div>
+       <div className="col-1">  
+      
+          <div>
+          <Button
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <PersonOutlinedIcon className="personicon"> </PersonOutlinedIcon>
+            </Button>
+             <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <div className="d-flex">
+                <img className="w-25" src={profilepic} alt="phpto" />
+
+                <div className=" ms-3 mt-3">
+                  {" "}
+                  <h5 onClick={handleClose}>Bhavitha</h5>
+                  <p onClick={handleClose}>Bhavitha@gmail.com</p>
+                </div>
+              </div>
+
+              <MenuItem onClick={handleClose}>Profile & Acoount</MenuItem>
+              <MenuItem onClick={handleClose}>Setting </MenuItem>
+              <hr />
+              <MenuItem onClick={handleClose}>Sing Out </MenuItem>
+            </Menu>
+          </div>
+         
+        </div>
+      </div>
+    </>
+    // <div
+    // className="topbar"
+    //   style={{
+    //     display: "flex",
+    //     justifyContent: "space-between",
+    //     padding: "20px"
+
+    //   }}
+    // >
+    //   <div >
+    //     {/* SEARCH BAR */}
+    //   <Box
+    //     display="flex"
+    //     backgroundColor={colors.primary[400]}
+    //     borderRadius="3px"
+    //     sx={{ position: "fixed" }}
+    //   >
+    //     <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
+    //     <IconButton type="button" sx={{ p: 1 }}>
+    //       <SearchIcon />
+    //     </IconButton>
+    //   </Box>
+
+    //   {/* ICONS */}
+    //   <Box
+    //     display="flex"
+    //     sx={{
+    //       position: "fixed",
+    //       right: "0",
+    //     }}
+    //   >
+    //     <IconButton onClick={colorMode.toggleColorMode}>
+    //       {theme.palette.mode === "dark" ? (
+    //         <DarkModeOutlinedIcon />
+    //       ) : (
+    //         <LightModeOutlinedIcon />
+    //       )}
+    //     </IconButton>
+    //     <IconButton>
+    //       <NotificationsOutlinedIcon />
+    //     </IconButton>
+    //     <IconButton>
+    //       <SettingsOutlinedIcon />
+    //     </IconButton>
+    //     <IconButton>
+    //       <div>
+    //         <Button
+    //           id="basic-button"
+    //           aria-controls={open ? "basic-menu" : undefined}
+    //           aria-haspopup="true"
+    //           aria-expanded={open ? "true" : undefined}
+    //           onClick={handleClick}
+    //         >
+    //           <PersonOutlinedIcon> </PersonOutlinedIcon>
+    //         </Button>
+    //         <Menu
+    //           id="basic-menu"
+    //           anchorEl={anchorEl}
+    //           open={open}
+    //           onClose={handleClose}
+    //           MenuListProps={{
+    //             "aria-labelledby": "basic-button",
+    //           }}
+    //         >
+    //           <div className="d-flex">
+    //             <img className="w-25" src={profilepic} alt="phpto" />
+
+    //             <div className=" ms-3 mt-3">
+    //               {" "}
+    //               <h5 onClick={handleClose}>Bhavitha</h5>
+    //               <p onClick={handleClose}>Bhavitha@gmail.com</p>
+    //             </div>
+    //           </div>
+
+    //           <MenuItem onClick={handleClose}>Profile & Acoount</MenuItem>
+    //           <MenuItem onClick={handleClose}>Setting </MenuItem>
+    //           <hr />
+    //           <MenuItem onClick={handleClose}>Sing Out </MenuItem>
+    //         </Menu>
+    //       </div>
+    //       {/* <PersonOutlinedIcon> </PersonOutlinedIcon> */}
+    //     </IconButton>
+    //     <button onClick={handleLogout} type="submit" class="btn btn-primary">
+    //       logout
+    //     </button>
+    //   </Box>
+
+    //     </div>    </div>
   );
 };
 

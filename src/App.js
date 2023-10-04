@@ -66,7 +66,7 @@ function App() {
             <main className="content" style={{ overflow: "auto" }}>
               <Topbar setIsSidebar={setIsSidebar} />
               <div
-                style={{ marginBottom: "50px", backgroundColor: "black" }}
+                style={{ marginBottom: "50px", backgroundColor: "white" }}
               ></div>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
