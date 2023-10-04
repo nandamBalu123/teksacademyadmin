@@ -1,0 +1,17 @@
+.Filter{ 
+   background-color: #0070fc;
+   padding: 10px 12px 5px 10px;
+   color: white;
+   margin-left: 20px;
+   border: none;
+   border-radius: 5px;
+}
+.Filter:hover{ 
+    background-color:#0070fc ;
+    color: white;
+}
+.flex{ 
+    display: flex;
+    justify-content: space-between;
+   
+}

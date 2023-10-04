@@ -33,8 +33,9 @@ import CreateRole from "./components/pages/roles/CreateRole";
 import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
+import RoleAccess from "./components/pages/roles/RoleAccess";
+import StudentDataView from "./components/pages/student/studentData/StudentDataView";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
-
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 
@@ -45,10 +46,10 @@ function App() {
   // let role = localStorage.getItem(role); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
   // let role = localStorage.getItem(role);
 
-  let role = localStorage.getItem("role");
-  let token = localStorage.getItem("token");
-  // let role = 'admin';
-  // let token = "sdf";
+  // let role = localStorage.getItem("role");
+  // let token = localStorage.getItem("token");
+  let role = "admin";
+  let token = "sdf";
   console.log("hello: ", localStorage.getItem("token"));
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -74,15 +75,21 @@ function App() {
                   element={<RegistrationForm />}
                 />
                 
+
                 <Route path="/studentdata" element={<StudentData />} />
+                <Route path ="/studentdataview"
+                element={role == "admin" ? <StudentDataView/> : <Dashboard/>}
+                />
                 <Route
                   path="/createuser"
                   element={role == "admin" ? <CreateUserForm /> : <Dashboard />}
                 />
+                
                 <Route
                   path="/usersdata"
                   element={role == "admin" ? <UsersData /> : <Dashboard />}
                 />
+
                 <Route
                   path="/userview"
                   element={role == "admin" ? <UserView /> : <Dashboard />}
@@ -95,6 +102,10 @@ function App() {
                 <Route
                   path="/createrole"
                   element={role == "admin" ? <CreateRole /> : <Dashboard />}
+                />
+                <Route
+                  path="/rolccess"
+                  element={role == "admin" ? <RoleAccess /> : <Dashboard />}
                 />
                 <Route
                   path="/edit"

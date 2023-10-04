@@ -1,0 +1,39 @@
+*{ 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+ 
+    
+ .container .bg{ 
+    background-image: url('https://4.bp.blogspot.com/-csAekMs5mjk/TjqRjjPYv4I/AAAAAAAAA9s/G4fBWXh_AdY/s1600/cool-wallpaper-12.jpg');
+    background-position: cover;
+    width: 100%;
+    height: 9.5rem;
+    object-fit: cover;
+    vertical-align: top;
+    border-radius: 0.7rem;
+    position: relative;
+    
+}
+.photo{ 
+    background-color: white;
+    width: 20%;
+    border-radius: 50%;
+    position: sticky;
+    margin-left: 39%;
+    margin-top: 7%;
+}
+.end{ 
+  margin-left: 50%;
+}
+.center{ 
+    margin-left: 24%;
+}
+.hr{ 
+    margin-left: 11%;
+}
+h2{ 
+    font-family: italic;
+} 

@@ -158,6 +158,7 @@ const fetchData = async () => {
               Full Name<span className="star"> *</span>:
             </label>
             <input
+            
               className="mar col-md-3 inputt "
               type="text"
               onChange={(e) => setfullname(e.target.value)}
@@ -256,7 +257,7 @@ const fetchData = async () => {
               required
             >
               {profiles.map((profile) => {
-                return <option value="{profile}">{profile} </option>;
+                return <option value="{profile}">{profile} </option> 
               })}
 
               
@@ -281,7 +282,7 @@ const fetchData = async () => {
             </select>
           </div>
           <div className="create-button">
-            <button type="submit" class="btn btn-primary mr-20 mt-5  ">
+            <button type="submit" className="btn btn-primary mr-20 mt-5  ">
               Create User
             </button>
           </div>

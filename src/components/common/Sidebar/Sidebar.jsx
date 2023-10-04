@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import SettingsIcon from '@mui/icons-material/Settings';
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import SettingsIcon from "@mui/icons-material/Settings";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
@@ -66,7 +66,7 @@ const Sidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .pro-inner-item": {
-          padding: "5px 14px 5px 0px !important"
+          padding: "5px 14px 5px 0px !important",
         },
         "& .pro-inner-item:hover": {
           color: "#335eea !important",
@@ -140,16 +140,14 @@ const Sidebar = () => {
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "1%"}  >
+          <Box paddingLeft={isCollapsed ? undefined : "1%"}>
             <SubMenu
-            
               title="Dashboard"
               to="/"
-              
-               icon={<HomeOutlinedIcon />}
+              icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              style={{color: 'black'}}
+              style={{ color: "black" }}
             />
             {role == "admin" ? (
               <SubMenu
@@ -159,12 +157,11 @@ const Sidebar = () => {
                 icon={<PeopleOutlinedIcon />}
                 label={"User Details"}
                 title={"User Management"}
-               
               >
                 <Item
                   title="Create User"
                   to="/createuser"
-                  icon={<PersonAddIcon/>}
+                  icon={<PersonAddIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
@@ -174,12 +171,11 @@ const Sidebar = () => {
                   icon={<PeopleOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
-             
                 />
                 <SubMenu
                   style={{
                     // color: colors.grey[100],
-                    color: 'black'
+                    color: "black",
                   }}
                   icon={<SettingsIcon />}
                   label={"Roles Management"}
