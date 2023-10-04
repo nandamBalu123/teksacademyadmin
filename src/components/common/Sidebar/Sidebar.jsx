@@ -103,7 +103,8 @@ const Sidebar = () => {
                   className="tekslogo"
                   fontWeight="900"
                 >
-                 <img className="w-25 rounded-5" src={favicon}/>  Teks Academy
+                  Teks Academy
+                 {/* <img className="w-25 rounded-5" src={favicon}/>  Teks Academy */}
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <CloseIcon />
