@@ -11,7 +11,7 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 
 const Roles = () => {
-  const [getuserroles, setData] = useState([]);
+  const [getuserroless, setData] = useState([]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -19,6 +19,7 @@ const Roles = () => {
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
+        console.log(response.data)
       })
       .catch((error) => {
         // Handle any errors that occur during the request
@@ -30,6 +31,8 @@ const Roles = () => {
     e.preventDefault();
     navigate("/createrole");
   };
+
+console.log(getuserroless);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -80,8 +83,8 @@ const Roles = () => {
           </TableHead>
 
           <TableBody className="border border 1">
-          {Array.isArray(getuserroles) ? (
-            getuserroles.map((item) => (
+          {Array.isArray(getuserroless) ? (
+            getuserroless.map((item) => (
               <StyledTableRow key={item.id}>
                 <StyledTableCell className="border border 1 text-center">{item.id}</StyledTableCell>
                 <StyledTableCell className="border border 1 text-center">{item.role}</StyledTableCell>
@@ -93,7 +96,7 @@ const Roles = () => {
             <TableRow>
               <TableCell colSpan={3}>No data available</TableCell>
             </TableRow>
-          )}
+          )}  
           </TableBody>
         </Table>
       </TableContainer>
