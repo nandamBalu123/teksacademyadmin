@@ -178,7 +178,7 @@ export default function RegistrationForm() {
               <Typography fontSize={25}>Basic Details</Typography>
             </StepLabel>
             <StepContent>
-              <form className="form">
+              <form className="form" >
                 <div className="row input ">
                   <label className="col-12 col-md-2 w-25">
                     Name <span className="text-danger">*</span>&nbsp; :
@@ -781,7 +781,7 @@ export default function RegistrationForm() {
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                    onChange={(e) => enquiryTakenBy(e.target.value)}
+                    onChange={(e) => setEnquiryTakenBy(e.target.value)}
                     value={enquiryTakenBy}
                   >
                     <option value="">--select--</option>
@@ -1373,7 +1373,7 @@ export default function RegistrationForm() {
                   <Button
                   className="bg-primary"
                     variant="contained"
-                    onClick={""}
+                    onClick={handleSubmit}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}

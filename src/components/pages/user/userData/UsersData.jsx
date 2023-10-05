@@ -21,31 +21,73 @@ const UsersData = () => {
   const { users, dispatch } = useUsersContext();
   const { user } = useAuthContext();
   
-
   const deleteuser = async (id) => {
-    const res2 = await fetch(`http://localhost:3030/deleteasset/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const deletedata = await res2.json();
-    console.log(deletedata);
-
-    if (res2.status === 422 || !deletedata) {
-      console.log("error");
-    } else {
-      console.log("user deleted");
-      // setDLTdata(deletedata)
-      // getdata();
+    try {
+      const res2 = await fetch(`http://localhost:3030/deleteuser/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (res2.status === 404) {
+        console.log("User not found");
+      } else if (res2.status === 422) {
+        console.log("Unprocessable Entity");
+      } else if (res2.status === 200) {
+        const deletedata = await res2.json();
+        console.log("User deleted successfully", deletedata);
+      } else {
+        console.log("Unexpected error");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
-  // const handleDelete = async () => {
+
+  // const deleteuser = async (id) => {
+  //   try{
+  //     const response = await fetch(`http://localhost:3030/deleteuser/${id}`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },        
+  //     });
+  //     if(response.status === 200){
+  //       console.log("User delete successfully");
+  //     }else{
+  //       console.log("Failed to delete user: ", response.statusText);
+  //     }
+
+  //   }catch (error){
+  //     console.log("An error occurred:", error)
+  //   }
+  // }
+
+  // const deleteuser = async (id) => {
+  //   const res2 = await fetch(`http://localhost:3030/deleteuser/${id}`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+
+  //   const deletedata = await res2.json();
+  //   console.log(deletedata);
+
+  //   if (res2.status === 422 || !deletedata) {
+  //     console.log("error");
+  //   } else {
+  //     console.log("user deleted");
+  //     // setDLTdata(deletedata)
+  //     // getdata();
+  //   }
+  // };
+  // const deleteuser = async () => {
   //   if (!user) {
   //     return;
   //   }
-  //   const response = await fetch("http://localhost:3030/userdata/delete" + user._id, {
+  //   const response = await fetch("http://localhost:3030/deleteuser/delete", {
   //     method: "DELETE",
   //     headers: {
   //       Authorization: `Bearer ${user.token}`,
@@ -57,12 +99,12 @@ const UsersData = () => {
   //     dispatch({ type: "DELETE_USER", payload: json });
   //   }
   // };
-  //   useEffect(() => {
-  //     const fetchUsers = async () => {
-  //       const response = await fetch("/userdata/users", {
-  //         headers: { Authorization: `Bearer ${user.token}` },
-  //       });
-  //       const json = await response.json();
+    // useEffect(() => {
+    //   const fetchUsers = async () => {
+    //     const response = await fetch("/userdata/users", {
+    //       headers: { Authorization: `Bearer ${user.token}` },
+    //     });
+    //     const json = await response.json();
 
   const [userData, setUserData] = useState([]);
   const [error, setError] = useState(null);
