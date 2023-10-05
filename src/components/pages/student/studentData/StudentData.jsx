@@ -70,8 +70,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
-  const [initialData, setData] = useState([{name: ''}]);
-  // const initialData = initialDataa;
+  // const [initialData, setData] = useState([{name: ''}]);
+  const initialData = initialDataa;
   let initialDataCount = initialData.length;
 
   const [filteredData, setFilteredData] = useState(initialData);
@@ -98,20 +98,20 @@ const StudentData = () => {
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
 
-  useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios
-      .get("http://localhost:3030/getstudent_data")
-      .then((response) => {
-        // Handle the successful response here
-        setData(response.data); // Update the data state with the fetched data
-        console.log("data", response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Make a GET request to your backend API endpoint
+  //   axios
+  //     .get("http://localhost:3030/getstudent_data")
+  //     .then((response) => {
+  //       // Handle the successful response here
+  //       setData(response.data); // Update the data state with the fetched data
+  //       console.log("data", response.data);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the request
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
       const dateCondition = filterCriteria.date

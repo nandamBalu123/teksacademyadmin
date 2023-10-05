@@ -56,6 +56,8 @@ export default function RegistrationForm() {
   const [totaldiscount, setTotalDiscount] = useState(0);
   const [totaltax, settotaltax] = useState(0);
   const [grandtotal, setGrandtotal] = useState(0);
+  const [admissionremarks, setadmissionremarks] = useState("");
+  const [assets, setassets] = useState("");
 
   const [feedetails, setFeeDetails] = useState([]);
 
@@ -137,6 +139,12 @@ export default function RegistrationForm() {
       validityStartDate,
       validityEndDate,
       feedetails,
+      grosstotal,
+      totaldiscount,
+      totaltax,
+      grandtotal,
+      admissionremarks,
+      assets,
     };
     console.log("studentRegistration", studentRegistrationdata);
     try {
@@ -339,7 +347,7 @@ export default function RegistrationForm() {
                   >
                     <option value="">--select--</option>
                     <option value="btech">Single</option>
-                    <option value="degree">Marriage</option>
+                    <option value="degree">Married</option>
                   </select>
                 </div>
                 <br />
@@ -781,7 +789,7 @@ export default function RegistrationForm() {
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                    onChange={(e) => enquiryTakenBy(e.target.value)}
+                    onChange={(e) => setEnquiryTakenBy(e.target.value)}
                     value={enquiryTakenBy}
                   >
                     <option value="">--select--</option>
@@ -1069,7 +1077,7 @@ export default function RegistrationForm() {
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
@@ -1078,7 +1086,7 @@ export default function RegistrationForm() {
                     Continue
                   </Button>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
@@ -1196,13 +1204,18 @@ export default function RegistrationForm() {
 
                   {totalamount}
                 </div>
-                <button onClick={handleFeeDetails} className="bg-primary text-light px-4 py-1  border border-none rounded-2 ">save</button>
+                <button
+                  onClick={handleFeeDetails}
+                  className="bg-primary text-light px-4 py-1  border border-none rounded-2 "
+                >
+                  save
+                </button>
                 <br />
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
-                  <Button 
-                  className="bg-primary"
+                  <Button
+                    className="bg-primary"
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
@@ -1211,7 +1224,7 @@ export default function RegistrationForm() {
                     Continue
                   </Button>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
@@ -1332,13 +1345,16 @@ export default function RegistrationForm() {
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
+                    onChange={(e) => setadmissionremarks(e.target.value)}
+                    value={admissionremarks}
                   />
                 </div>
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Assets <span className="text-danger"> *</span>&nbsp;:
-                  </label>&nbsp;&nbsp;&nbsp;
+                  </label>
+                  &nbsp;&nbsp;&nbsp;
                   {/* <input
                     type="text"
                     className="col-9 col-md-5"
@@ -1358,6 +1374,8 @@ export default function RegistrationForm() {
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
+                    onChange={(e) => setassets(e.target.value)}
+                    value={assets}
                   >
                     <option value="">--select--</option>
                     <option value="laptop">Laptop </option>
@@ -1371,16 +1389,16 @@ export default function RegistrationForm() {
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
-                    onClick={""}
+                    onClick={handleSubmit}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
                     Submit
                   </Button>
                   <Button
-                  className="bg-primary"
+                    className="bg-primary"
                     variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
