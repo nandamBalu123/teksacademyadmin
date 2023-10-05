@@ -20,7 +20,7 @@ export const initialDataa = [
 
     enquirytakenby: "kavya",
 
-    leadleadsource: "walkin",
+    leadsource: "walkin",
 
     admissiondate: "2023-10-03",
 
@@ -46,13 +46,13 @@ export const initialDataa = [
 
     courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -74,13 +74,13 @@ export const initialDataa = [
 
     courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -102,13 +102,13 @@ export const initialDataa = [
 
     courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -130,13 +130,13 @@ export const initialDataa = [
 
     courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -158,13 +158,13 @@ export const initialDataa = [
 
     courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -186,13 +186,13 @@ export const initialDataa = [
 
     courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -214,13 +214,13 @@ export const initialDataa = [
 
     courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -242,13 +242,13 @@ export const initialDataa = [
 
     courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -270,13 +270,13 @@ export const initialDataa = [
 
     courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -298,13 +298,13 @@ export const initialDataa = [
 
     courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -326,13 +326,13 @@ export const initialDataa = [
 
     courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -354,13 +354,13 @@ export const initialDataa = [
 
     courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -382,13 +382,13 @@ export const initialDataa = [
 
     courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -410,13 +410,13 @@ export const initialDataa = [
 
     courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -438,13 +438,13 @@ export const initialDataa = [
 
     courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -466,13 +466,13 @@ export const initialDataa = [
 
     courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -494,13 +494,13 @@ export const initialDataa = [
 
     courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -522,13 +522,13 @@ export const initialDataa = [
 
     courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -550,13 +550,13 @@ export const initialDataa = [
 
     courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -578,13 +578,13 @@ export const initialDataa = [
 
     courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -606,13 +606,13 @@ export const initialDataa = [
 
     courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -634,13 +634,13 @@ export const initialDataa = [
 
     courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -662,13 +662,13 @@ export const initialDataa = [
 
     courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -690,13 +690,13 @@ export const initialDataa = [
 
     courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -718,13 +718,13 @@ export const initialDataa = [
 
     courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -746,13 +746,13 @@ export const initialDataa = [
 
     courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -774,13 +774,13 @@ export const initialDataa = [
 
     courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -802,13 +802,13 @@ export const initialDataa = [
 
     courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -830,13 +830,13 @@ export const initialDataa = [
 
     courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -858,13 +858,13 @@ export const initialDataa = [
 
     courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -886,13 +886,13 @@ export const initialDataa = [
 
     courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -914,13 +914,13 @@ export const initialDataa = [
 
     courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -942,13 +942,13 @@ export const initialDataa = [
 
     courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -970,13 +970,13 @@ export const initialDataa = [
 
     courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -998,13 +998,13 @@ export const initialDataa = [
 
     courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1026,13 +1026,13 @@ export const initialDataa = [
 
     courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1054,13 +1054,13 @@ export const initialDataa = [
 
     courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1082,13 +1082,13 @@ export const initialDataa = [
 
     courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1110,13 +1110,13 @@ export const initialDataa = [
 
     courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1138,13 +1138,13 @@ export const initialDataa = [
 
     courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1166,13 +1166,13 @@ export const initialDataa = [
 
     courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1194,13 +1194,13 @@ export const initialDataa = [
 
     courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1222,13 +1222,13 @@ export const initialDataa = [
 
     courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1250,13 +1250,13 @@ export const initialDataa = [
 
     courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1278,13 +1278,13 @@ export const initialDataa = [
 
     courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1306,13 +1306,13 @@ export const initialDataa = [
 
     courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1334,13 +1334,13 @@ export const initialDataa = [
 
     courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1362,13 +1362,13 @@ export const initialDataa = [
 
     courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1390,13 +1390,13 @@ export const initialDataa = [
 
     courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1418,13 +1418,13 @@ export const initialDataa = [
 
     courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1446,13 +1446,13 @@ export const initialDataa = [
 
     courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1474,13 +1474,13 @@ export const initialDataa = [
 
     courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1502,13 +1502,13 @@ export const initialDataa = [
 
     courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1530,13 +1530,13 @@ export const initialDataa = [
 
     courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1558,13 +1558,13 @@ export const initialDataa = [
 
     courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1586,13 +1586,13 @@ export const initialDataa = [
 
     courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1614,13 +1614,13 @@ export const initialDataa = [
 
     courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1642,13 +1642,13 @@ export const initialDataa = [
 
     courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1670,13 +1670,13 @@ export const initialDataa = [
 
     courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1698,13 +1698,13 @@ export const initialDataa = [
 
     courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1726,13 +1726,13 @@ export const initialDataa = [
 
     courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1754,13 +1754,13 @@ export const initialDataa = [
 
     courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1782,13 +1782,13 @@ export const initialDataa = [
 
     courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1810,13 +1810,13 @@ export const initialDataa = [
 
     courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1838,13 +1838,13 @@ export const initialDataa = [
 
     courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 
   {
@@ -1866,13 +1866,13 @@ export const initialDataa = [
 
     courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
     leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1894,13 +1894,13 @@ export const initialDataa = [
 
     courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
+    modeoftraining: "online",
   },
 
   {
@@ -1922,12 +1922,12 @@ export const initialDataa = [
 
     courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
     leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
+    modeoftraining: "offline",
   },
 ];

@@ -15,7 +15,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import Paper from "@mui/material/Paper";
-
+import PrintIcon from "@mui/icons-material/Print";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 
 import ShowChartIcon from "@mui/icons-material/ShowChart";
@@ -39,7 +41,7 @@ import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 
 import DownloadIcon from '@mui/icons-material/Download';
 
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+// import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { CSVLink } from "react-csv";
 
 
@@ -50,6 +52,11 @@ import { Link } from "react-router-dom";
 import { LastPage } from "@mui/icons-material";
 
 import axios from "axios";
+// import { CSVLink } from "react-csv";
+// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+// import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+// import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -74,7 +81,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
-  // const [initialData, setData] = useState([{name: ''}]);
+  // const [initialData, setData] = useState([{ name: "" }]);
   const initialData = initialDataa;
   let initialDataCount = initialData.length;
 
@@ -83,15 +90,17 @@ const StudentData = () => {
   let recordCount = filteredData.length;
 
   const [filterCriteria, setFilterCriteria] = useState({
-    date: "",
+    fromdate: "",
+
+    todate: "",
 
     branch: "",
 
-    source: "",
+    leadsource: "",
 
-    mode: "",
+    modeoftraining: "",
 
-    counsellar: "",
+    enquirytakenby: "",
 
     search: "",
   });
@@ -118,27 +127,46 @@ const StudentData = () => {
   // }, []);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
-      const dateCondition = filterCriteria.date
-        ? item.joiningdata === filterCriteria.date
+      const searchCondition = filterCriteria.search
+        ? item.name
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.branch
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.registrationnumber.includes(filterCriteria.search) ||
+          item.courses
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.enquirytakenby
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase())
         : true;
+
+      const dateCondition =
+        filterCriteria.fromdate && filterCriteria.todate
+          ? item.admissiondate >= filterCriteria.fromdate &&
+            item.admissiondate <= filterCriteria.todate
+          : true;
 
       const branchCondition = filterCriteria.branch
         ? item.branch === filterCriteria.branch
         : true;
 
-      const sourceCondition = filterCriteria.source
-        ? item.source === filterCriteria.source
+      const sourceCondition = filterCriteria.leadsource
+        ? item.leadsource === filterCriteria.leadsource
         : true;
 
-      const modeCondition = filterCriteria.mode
-        ? item.trainingmode === filterCriteria.mode
+      const modeCondition = filterCriteria.modeoftraining
+        ? item.modeoftraining === filterCriteria.modeoftraining
         : true;
 
-      const counsellarCondition = filterCriteria.counsellar
-        ? item.counsellar === filterCriteria.counsellar
+      const counsellarCondition = filterCriteria.enquirytakenby
+        ? item.enquirytakenby === filterCriteria.enquirytakenby
         : true;
 
       return (
+        searchCondition &&
         dateCondition &&
         branchCondition &&
         sourceCondition &&
@@ -172,9 +200,7 @@ const StudentData = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-// for date
-  
-
+  // for date
 
   return (
     <>
@@ -183,10 +209,20 @@ const StudentData = () => {
       <div className="studetdetails container">
         <div className="row mb-3 px-4 pt-3">
           <div className="col-9 col-md-9 ">
-            <p className="search">
-              <SearchIcon /> Search Here.....
+            <p className="">
+              <input
+                type="text"
+                className="form-control"
+                style={{
+                  height: "45px",
+                  border: "1.5px solid black",
+                  borderRadius: "5px",
+                }}
+                name="search"
+                value={filterCriteria.search}
+                onChange={handleInputChange}
+              />
             </p>{" "}
-            <hr className="w-50" />
           </div>
           <div className="col-1">
             <h6>
@@ -194,7 +230,18 @@ const StudentData = () => {
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-         
+          {/* <div className="col-1 ">
+            <h6> Export</h6>{" "}
+            <CSVLink
+              data={filteredData}
+              filename={"studentsdata.csv"}
+              className="btn btn-primary"
+              target="_blank"
+            >
+              export
+            </CSVLink>
+          </div> */}
+
           <div className="col-1 ">
             {" "}
             <h6 onClick={handleClick}> Filter</h6>
@@ -215,46 +262,54 @@ const StudentData = () => {
             >
               <MenuItem> Filter</MenuItem>
               <hr />
-              <div className="d-flex"> 
-              <MenuItem className="pt-3 ">
-                <div><label > From: </label></div>
-               
-                <input
-                  type="date"
-                  className="form-control"
-                  style={{
-                    height: "45px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="date"
-                  value={filterCriteria.date}
-                  onChange={handleInputChange}
-                />
-              </MenuItem>
-              <MenuItem className="pt-3 ">
-                <label > To: </label>
-                <br/>
-                <input
-                  type="date"
-                  className="form-control"
-                  style={{
-                    height: "45px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="date"
-                  value={filterCriteria.date}
-                  onChange={handleInputChange}
-                />
-              </MenuItem>
+              <div className="d-flex">
+                <MenuItem className="pt-3 ">
+                  <div>
+                    <label> From: </label>
+                  </div>
+
+                  <input
+                    type="date"
+                    className="form-control"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </MenuItem>
+                <MenuItem className="pt-3 ">
+                  <label> To: </label>
+                  <br />
+                  <input
+                    type="date"
+                    className="form-control"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                  />
+                </MenuItem>
+                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DateRangePicker"]}>
+                    <DateRangePicker
+                      localeText={{ start: "Check-in", end: "Check-out" }}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider> */}
               </div>
               <div className="d-flex w-100 mt-3">
                 <MenuItem>
                   <select
                     id=""
                     placeholder="Filter Branch"
-                    required
                     style={{
                       height: "45px",
                       paddingLeft: "10px",
@@ -274,7 +329,6 @@ const StudentData = () => {
                   </select>
                 </MenuItem>
                 <MenuItem>
-                  {" "}
                   <select
                     id=""
                     placeholder="Lead Source"
@@ -286,8 +340,8 @@ const StudentData = () => {
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                    name="source"
-                    value={filterCriteria.source}
+                    name="leadsource"
+                    value={filterCriteria.leadsource}
                     onChange={handleInputChange}
                   >
                     <option value="">LeadSource</option>
@@ -310,8 +364,8 @@ const StudentData = () => {
                       borderRadius: "5px",
                     }}
                     //
-                    name="mode"
-                    value={filterCriteria.mode}
+                    name="modeoftraining"
+                    value={filterCriteria.modeoftraining}
                     onChange={handleInputChange}
                   >
                     <option value="">Mode Of Training</option>
@@ -320,10 +374,9 @@ const StudentData = () => {
                   </select>
                 </MenuItem>
                 <MenuItem>
-                  {" "}
                   <select
                     id=""
-                    placeholder="Councellors"
+                    placeholder="Counsellors"
                     required
                     style={{
                       height: "45px",
@@ -331,11 +384,14 @@ const StudentData = () => {
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                    name="counsellar"
-                    value={filterCriteria.counsellar}
+                    name="enquirytakenby"
+                    value={filterCriteria.enquirytakenby}
                     onChange={handleInputChange}
                   >
-                    <option value="">Councellors</option>
+                    <option value="">Counsellors</option>
+                    <option value="kavya"> kavya</option>
+                    <option value="mark"> Mark</option>
+                    <option value="david"> David</option>
                     <option value="kavya"> kavya</option>
                   </select>
                 </MenuItem>{" "}
@@ -346,25 +402,22 @@ const StudentData = () => {
           <CSVLink
             data={filteredData}
             filename={"studentsdata.csv"}
-            className=" link "
+        
             target="_blank"
           >
-           <DownloadIcon/>
+           <DownloadIcon className="text-dark" ></DownloadIcon>
           </CSVLink>{" "}
           </div>
-
-
-          
-        </div>
+          </div>
 
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="bg-secondary fs-6 border border 1 text-center ">
+                <StyledTableCell className="bg-primary fs-6 border border 1 text-center ">
                   SNo
                 </StyledTableCell>
-{/* 
+                  {/* 
                 <StyledTableCell
                   className="bg-secondary fs-6  border border 1 text-center"
                   align="left"
@@ -373,45 +426,48 @@ const StudentData = () => {
                 </StyledTableCell> */}
 
                 <StyledTableCell
-                  className="  bg-secondary fs-6 border border 1 text-centerborder border 1 text-center"
+                  className="  bg-primary fs-6 border border 1 text-centerborder border 1 text-center"
                   align="left"
                 >
-                  Student Name & Registration No
+                  Student Name <br /> Registration No
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
                   Branch
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
-                  Course Counseller Source
+                  Course <br /> Counseller
+                  <br /> Source
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center "
+                  className="bg-primary fs-6 border border 1 text-center "
                   align="left"
                 >
-                  Contact Number & Email
+                  Contact Number <br />
+                  Email
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center "
+                  className="bg-primary fs-6 border border 1 text-center "
                   align="left"
                 >
-                  Joining Date & Traning Mode
+                  Joining Date <br />
+                  Traning Mode
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
-                  Action
+                  Actions
                 </StyledTableCell>
               </TableRow>
             </TableHead>
@@ -438,9 +494,10 @@ const StudentData = () => {
                   <StyledTableCell align="left">{item.branch}</StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.courses} </p>
-
+                    {item.courses}
+                    <br />
                     {item.enquirytakenby}
+                    <br />
 
                     {item.leadsource}
                   </StyledTableCell>
@@ -457,16 +514,33 @@ const StudentData = () => {
                     {item.modeoftraining}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center d-flex  pb-5 ">
-                    <Link className="me-2 " to={`/studentdataview/${item.id}`}>
-                      <VisibilityIcon />
+                  <StyledTableCell className=" border border 1 text-center d-flex pb-5 ">
+                    <Link
+                      to={`/studentdataview/${item.id}`}
+                      style={{ width: "40px" }}
+                    >
+                      <VisibilityIcon className="iconn" />
                     </Link>
 
-                    <Link to={`/registrationform/${item.id}`}>
-                      <EditIcon className="me-2 " />
+                    <Link
+                      to={`/registrationform/${item.id}`}
+                      style={{ width: "40px" }}
+                    >
+                      <EditIcon className="iconn" />
                     </Link>
-                    <Link className="me-2 " ><LocalPrintshopIcon/>  </Link>
-                    <Link className="me-2 "> <CurrencyRupeeIcon/></Link>
+                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <CurrencyRupeeIcon className="iconn" />
+                    </Link>
+                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <PrintIcon className="iconn" />
+                    </Link>
+                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <DeleteOutlineIcon
+                        style={{ color: "red" }}
+                        className="iconn"
+                      />
+                    </Link>
+                    
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -1125,32 +1199,32 @@ export default StudentData;
 //           <TableHead>
 
 //             <TableRow>
-//               <StyledTableCell className=" bg-secondary fs-9 border border 1 text-center ">
+//               <StyledTableCell className=" bg-primary fs-9 border border 1 text-center ">
 //                 SNo
 
 //               </StyledTableCell>
-//               <StyledTableCell className=" bg-secondary fs-9 border border 1 text-center" align="left">
+//               <StyledTableCell className=" bg-primary fs-9 border border 1 text-center" align="left">
 //                 Photo
 
 //               </StyledTableCell>
-//               <StyledTableCell className="  bg-secondary fs-9 border border 1 text-centerborder border 1 text-center" align="left">
+//               <StyledTableCell className="  bg-primary fs-9 border border 1 text-centerborder border 1 text-center" align="left">
 //                 Registration No
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center" align="left">
 //                 Student Name & Student ID
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center " align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center " align="left">
 //                 Contact Number & Email
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center" align="left">
 //                 Course Counseller Source
 
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center " align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center " align="left">
 //                 Joining Date & Traning Mode
 
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center" align="left">
 //                 Action
 
 //               </StyledTableCell>

@@ -22,7 +22,6 @@ const StudentDataView = () => {
       .get(`http://localhost:3030/viewstudentdata/${id}`)
       .then((response) => {
         // Handle the successful response here
-
         setstudentdata(response.data[0]); // Update the data state with the fetched data
         console.log("studentdata", response.data);
       })
