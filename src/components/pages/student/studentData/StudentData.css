@@ -77,4 +77,12 @@ hr {
 }
 .iconn:hover {
   font-size: 35px;
+  transition: 0.1s;
+}
+.StyledTableCell {
+  white-space: nowrap; /* Prevent text from wrapping to the next line */
+  overflow: hidden; /* Hide any content that overflows the container */
+  text-overflow: ellipsis; /* Display an ellipsis (...) for overflowed content */
+  width: 200px; /* Set a fixed width for the container */
+  border: 1px solid #ccc; /* Optional: Add a border for better visualization */
 }

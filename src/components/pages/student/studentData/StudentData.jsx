@@ -73,8 +73,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
-  // const [initialData, setData] = useState([{ name: "" }]);
-  const initialData = initialDataa;
+  const [initialData, setData] = useState([{ name: "" }]);
+  // const initialData = initialDataa;
   let initialDataCount = initialData.length;
 
   const [filteredData, setFilteredData] = useState(initialData);
@@ -103,20 +103,21 @@ const StudentData = () => {
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
 
-  // useEffect(() => {
-  //   // Make a GET request to your backend API endpoint
-  //   axios
-  //     .get("http://localhost:3030/getstudent_data")
-  //     .then((response) => {
-  //       // Handle the successful response here
-  //       setData(response.data); // Update the data state with the fetched data
-  //       console.log("data", response.data);
-  //     })
-  //     .catch((error) => {
-  //       // Handle any errors that occur during the request
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get("http://localhost:3030/getstudent_data")
+      .then((response) => {
+        // Handle the successful response here
+        setData(response.data); // Update the data state with the fetched data
+
+        console.log("data", response.data);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
       const searchCondition = filterCriteria.search
@@ -289,13 +290,6 @@ const StudentData = () => {
                     onChange={handleInputChange}
                   />
                 </MenuItem>
-                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DemoContainer components={["DateRangePicker"]}>
-                    <DateRangePicker
-                      localeText={{ start: "Check-in", end: "Check-out" }}
-                    />
-                  </DemoContainer>
-                </LocalizationProvider> */}
               </div>
               <div className="d-flex w-100 mt-3">
                 <MenuItem>
@@ -418,14 +412,14 @@ const StudentData = () => {
                   className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
-                  Branch
+                  Branch <br /> Course
                 </StyledTableCell>
 
                 <StyledTableCell
                   className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
-                  Course <br /> Counseller
+                  Counseller
                   <br /> Source
                 </StyledTableCell>
 
@@ -468,31 +462,37 @@ const StudentData = () => {
                   </StyledTableCell> */}
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.name}</p>
+                    {item.name}
+                    <br />
 
                     {item.registrationnumber}
                   </StyledTableCell>
 
-                  <StyledTableCell align="left">{item.branch}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {item.branch}
+                    <br />
+                    {item.courses}
+                  </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
-                    {item.courses}
-                    <br />
                     {item.enquirytakenby}
                     <br />
 
                     {item.leadsource}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.mobilenumber}</p>
+                  <StyledTableCell className=" border border 1 text-center ">
+                    {item.mobilenumber}
+                    <br />
 
                     {item.email}
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.admissiondate} </p>
-
+                    {item.admissiondate
+                      ? item.admissiondate.substring(0, 10)
+                      : "No Date"}{" "}
+                    <br />
                     {item.modeoftraining}
                   </StyledTableCell>
 

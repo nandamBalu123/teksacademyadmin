@@ -22,7 +22,8 @@ const UserViewCopy = () => {
                            <h5> Report To : Krishna</h5> <br/>
                            <h5> Profile : Profile</h5> <br/>
                            <h5> Branch: Hi-Tech City</h5> </div>
-        </div> </div></>
+        </div> </div>
+        </>
     )
 }
 export default UserViewCopy;
