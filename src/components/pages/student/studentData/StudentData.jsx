@@ -449,7 +449,7 @@ const StudentData = () => {
                   className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
-                  Action
+                  Actions
                 </StyledTableCell>
               </TableRow>
             </TableHead>
@@ -497,21 +497,27 @@ const StudentData = () => {
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center d-flex ">
-                    <Link to={`/studentdataview/${item.id}`}>
-                      <VisibilityIcon />
+                    <Link
+                      to={`/studentdataview/${item.id}`}
+                      style={{ margin: "0 4px " }}
+                    >
+                      <VisibilityIcon className="iconn" />
                     </Link>
 
-                    <Link to={`/registrationform/${item.id}`}>
-                      <EditIcon />
+                    <Link
+                      to={`/registrationform/${item.id}`}
+                      style={{ margin: "0 4px " }}
+                    >
+                      <EditIcon className="iconn" />
                     </Link>
-                    <Link to={`/registrationform/${item.id}`}>
-                      <CurrencyRupeeIcon />
+                    <Link to={`//${item.id}`} style={{ margin: "0 4px " }}>
+                      <CurrencyRupeeIcon className="iconn" />
                     </Link>
-                    <Link to={`/registrationform/${item.id}`}>
-                      <PrintIcon />
+                    <Link to={`//${item.id}`} style={{ margin: "0 4px " }}>
+                      <PrintIcon  className="iconn"/>
                     </Link>
-                    <Link to={`/registrationform/${item.id}`}>
-                      <DeleteOutlineIcon />
+                    <Link to={`//${item.id}`} style={{ margin: "0 4px " }}>
+                      <DeleteOutlineIcon style={{ color: "red" }} className="iconn"/>
                     </Link>
                   </StyledTableCell>
                 </StyledTableRow>
