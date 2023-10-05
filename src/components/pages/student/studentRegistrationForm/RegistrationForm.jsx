@@ -186,7 +186,7 @@ export default function RegistrationForm() {
               <Typography fontSize={25}>Basic Details</Typography>
             </StepLabel>
             <StepContent>
-              <form className="form">
+              <form className="form" >
                 <div className="row input ">
                   <label className="col-12 col-md-2 label">
                     Name <span className="text-danger">*</span>&nbsp; :

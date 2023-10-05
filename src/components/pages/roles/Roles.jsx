@@ -18,8 +18,10 @@ const Roles = () => {
       .get("http://localhost:3030/getuserroles")
       .then((response) => {
         // Handle the successful response here
-        setData(response.data); // Update the data state with the fetched data
-        console.log(response.data)
+        if(response.data.Status === "Success"){
+        setData(response.data.Result); // Update the data state with the fetched data
+        // console.log(response.data)
+      }
       })
       .catch((error) => {
         // Handle any errors that occur during the request
@@ -83,20 +85,20 @@ console.log(getuserroless);
           </TableHead>
 
           <TableBody className="border border 1">
-          {Array.isArray(getuserroless) ? (
-            getuserroless.map((item) => (
-              <StyledTableRow key={item.id}>
-                <StyledTableCell className="border border 1 text-center">{item.id}</StyledTableCell>
-                <StyledTableCell className="border border 1 text-center">{item.role}</StyledTableCell>
-                <StyledTableCell className="border border 1 text-center">{item.description}</StyledTableCell>
-                {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
-              </StyledTableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={3}>No data available</TableCell>
-            </TableRow>
-          )}  
+          {Array.isArray(getuserroless) && getuserroless.length > 0 ? (
+              getuserroless.map((item) => (
+                <StyledTableRow key={item.id}>
+                  <StyledTableCell className="border border 1 text-center">{item.id}</StyledTableCell>
+                  <StyledTableCell className="border border 1 text-center">{item.role}</StyledTableCell>
+                  <StyledTableCell className="border border 1 text-center">{item.description}</StyledTableCell>
+                  {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
+                </StyledTableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={3}>No data available</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
