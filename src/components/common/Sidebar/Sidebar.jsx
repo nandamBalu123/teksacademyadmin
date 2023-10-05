@@ -67,7 +67,7 @@ const Sidebar = () => {
           backgroundColor: "transparent !important",
         },
         "& .pro-inner-item": {
-          padding: "5px 14px 5px 10px !important",
+          padding: "5px 14px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
           color: "#335eea !important",
@@ -104,7 +104,7 @@ const Sidebar = () => {
                   fontWeight="900"
                 >
                   Teks Academy
-                 {/* <img className="w-25 rounded-5" src={favicon}/>  Teks Academy */}
+                  {/* <img className="w-25 rounded-5" src={favicon}/>  Teks Academy */}
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <CloseIcon />

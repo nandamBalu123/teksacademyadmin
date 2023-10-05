@@ -35,10 +35,6 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-
-
-
-
 import { initialDataa } from "./data";
 
 import { Link } from "react-router-dom";
@@ -46,6 +42,11 @@ import { Link } from "react-router-dom";
 import { LastPage } from "@mui/icons-material";
 
 import axios from "axios";
+import { CSVLink } from "react-csv";
+// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+// import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+// import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -115,18 +116,22 @@ const StudentData = () => {
   //     });
   // }, []);
   useEffect(() => {
-    // const admissionDate = new Date(item.admissiondate);
     const filteredResults = initialData.filter((item) => {
       const searchCondition = filterCriteria.search
-        ? item.name.toLowerCase().includes(filterCriteria.search.toLowerCase())
-        : // &&
-          // item.enquirytakenby
-          //   .toLowerCase()
-          //   .includes(filterCriteria.search.toLowerCase())
-          true;
-      // const dateCondition = filterCriteria.date
-      //   ? item.admissiondate === filterCriteria.date
-      //   : true;
+        ? item.name
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.branch
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.registrationnumber.includes(filterCriteria.search) ||
+          item.courses
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.enquirytakenby
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase())
+        : true;
 
       const dateCondition =
         filterCriteria.fromdate && filterCriteria.todate
@@ -185,9 +190,7 @@ const StudentData = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-// for date
-  
-
+  // for date
 
   return (
     <>
@@ -220,8 +223,17 @@ const StudentData = () => {
             </h6>
           </div>
           <div className="col-1 ">
-            <h6> Export</h6>{" "}
+            {/* <h6> Export</h6>{" "} */}
+            <CSVLink
+              data={filteredData}
+              filename={"studentsdata.csv"}
+              className="btn btn-primary"
+              target="_blank"
+            >
+              export
+            </CSVLink>
           </div>
+
           <div className="col-1 ">
             {" "}
             <h6 onClick={handleClick}> Filter</h6>
@@ -242,51 +254,48 @@ const StudentData = () => {
             >
               <MenuItem> Filter</MenuItem>
               <hr />
-              <div className="d-flex"> 
-              <MenuItem className="pt-3 ">
-                <div><label > From: </label></div>
-               
-                <input
-                  type="date"
-                  className="form-control"
-                  style={{
-                    height: "45px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="fromdate"
-                  value={filterCriteria.fromdate}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="date"
-                  className="form-control"
-                  style={{
-                    height: "45px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="todate"
-                  value={filterCriteria.todate}
-                  onChange={handleInputChange}
-                />
-              </MenuItem>
-              <MenuItem className="pt-3 ">
-                <label > To: </label>
-                <br/>
-                <input
-                  type="date"
-                  className="form-control"
-                  style={{
-                    height: "45px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="date"
-                  value={filterCriteria.date}
-                  onChange={handleInputChange}
-                />
-              </MenuItem>
+              <div className="d-flex">
+                <MenuItem className="pt-3 ">
+                  <div>
+                    <label> From: </label>
+                  </div>
+
+                  <input
+                    type="date"
+                    className="form-control"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </MenuItem>
+                <MenuItem className="pt-3 ">
+                  <label> To: </label>
+                  <br />
+                  <input
+                    type="date"
+                    className="form-control"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                  />
+                </MenuItem>
+                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DateRangePicker"]}>
+                    <DateRangePicker
+                      localeText={{ start: "Check-in", end: "Check-out" }}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider> */}
               </div>
               <div className="d-flex w-100 mt-3">
                 <MenuItem>
@@ -391,12 +400,12 @@ const StudentData = () => {
                   SNo
                 </StyledTableCell>
 
-                <StyledTableCell
+                {/* <StyledTableCell
                   className="bg-secondary fs-6  border border 1 text-center"
                   align="left"
                 >
                   Photo
-                </StyledTableCell>
+                </StyledTableCell> */}
 
                 <StyledTableCell
                   className="  bg-secondary fs-6 border border 1 text-centerborder border 1 text-center"
@@ -451,9 +460,9 @@ const StudentData = () => {
                     {item.id}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 2 text-center">
+                  {/* <StyledTableCell className=" border border 2 text-center">
                     {item.profilepic}
-                  </StyledTableCell>
+                  </StyledTableCell> */}
 
                   <StyledTableCell className=" border border 1 text-center">
                     <p> {item.name}</p>
@@ -491,6 +500,12 @@ const StudentData = () => {
                     <Link to={`/registrationform/${item.id}`}>
                       <EditIcon />
                     </Link>
+                    {/* <Link to={`/registrationform/${item.id}`}>
+                      <EditIcon />
+                    </Link>
+                    <Link to={`/registrationform/${item.id}`}>
+                      <EditIcon />
+                    </Link> */}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
