@@ -200,7 +200,6 @@ const StudentData = () => {
         <div className="row mb-3 px-4 pt-3">
           <div className="col-9 col-md-9 ">
             <p className="search">
-              <SearchIcon /> Search Here.....
               <input
                 type="text"
                 className="form-control"
