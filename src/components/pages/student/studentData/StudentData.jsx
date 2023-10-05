@@ -22,7 +22,7 @@ import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 
-import DownloadIcon from "@mui/icons-material/Download";
+
 import SearchIcon from "@mui/icons-material/Search";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -37,6 +37,14 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
+
+import DownloadIcon from '@mui/icons-material/Download';
+
+// import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import { CSVLink } from "react-csv";
+
+
 import { initialDataa } from "./data";
 
 import { Link } from "react-router-dom";
@@ -44,7 +52,7 @@ import { Link } from "react-router-dom";
 import { LastPage } from "@mui/icons-material";
 
 import axios from "axios";
-import { CSVLink } from "react-csv";
+// import { CSVLink } from "react-csv";
 // import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 // import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
@@ -223,8 +231,8 @@ const StudentData = () => {
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-1 ">
-            {/* <h6> Export</h6>{" "} */}
+          {/* <div className="col-1 ">
+            <h6> Export</h6>{" "}
             <CSVLink
               data={filteredData}
               filename={"studentsdata.csv"}
@@ -233,7 +241,7 @@ const StudentData = () => {
             >
               export
             </CSVLink>
-          </div>
+          </div> */}
 
           <div className="col-1 ">
             {" "}
@@ -384,7 +392,17 @@ const StudentData = () => {
               </div>
             </Menu>
           </div>
-        </div>
+          <div className="col-1 ">
+          <CSVLink
+            data={filteredData}
+            filename={"studentsdata.csv"}
+        
+            target="_blank"
+          >
+           <DownloadIcon className="text-dark" ></DownloadIcon>
+          </CSVLink>{" "}
+          </div>
+          </div>
 
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
@@ -393,9 +411,9 @@ const StudentData = () => {
                 <StyledTableCell className="bg-primary fs-6 border border 1 text-center ">
                   SNo
                 </StyledTableCell>
-
-                {/* <StyledTableCell
-                  className="bg-primary fs-6  border border 1 text-center"
+                  {/* 
+                <StyledTableCell
+                  className="bg-secondary fs-6  border border 1 text-center"
                   align="left"
                 >
                   Photo
@@ -456,8 +474,8 @@ const StudentData = () => {
                   <StyledTableCell className=" border border 2 text-center">
                     {item.id}
                   </StyledTableCell>
-
-                  {/* <StyledTableCell className=" border border 2 text-center">
+{/* 
+                  <StyledTableCell className=" border border 2 text-center">
                     {item.profilepic}
                   </StyledTableCell> */}
 
@@ -496,7 +514,7 @@ const StudentData = () => {
                     {item.modeoftraining}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center d-flex ">
+                  <StyledTableCell className=" border border 1 text-center d-flex pb-5 ">
                     <Link
                       to={`/studentdataview/${item.id}`}
                       style={{ width: "40px" }}
@@ -522,6 +540,7 @@ const StudentData = () => {
                         className="iconn"
                       />
                     </Link>
+                    
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
