@@ -17,7 +17,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import PrintIcon from "@mui/icons-material/Print";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 
 import ShowChartIcon from "@mui/icons-material/ShowChart";
@@ -396,54 +396,57 @@ const StudentData = () => {
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="bg-secondary fs-6 border border 1 text-center ">
+                <StyledTableCell className="bg-primary fs-6 border border 1 text-center ">
                   SNo
                 </StyledTableCell>
 
                 {/* <StyledTableCell
-                  className="bg-secondary fs-6  border border 1 text-center"
+                  className="bg-primary fs-6  border border 1 text-center"
                   align="left"
                 >
                   Photo
                 </StyledTableCell> */}
 
                 <StyledTableCell
-                  className="  bg-secondary fs-6 border border 1 text-centerborder border 1 text-center"
+                  className="  bg-primary fs-6 border border 1 text-centerborder border 1 text-center"
                   align="left"
                 >
-                  Student Name & Registration No
+                  Student Name <br /> Registration No
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
                   Branch
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
-                  Course Counseller Source
+                  Course <br /> Counseller
+                  <br /> Source
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center "
+                  className="bg-primary fs-6 border border 1 text-center "
                   align="left"
                 >
-                  Contact Number & Email
+                  Contact Number <br />
+                  Email
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center "
+                  className="bg-primary fs-6 border border 1 text-center "
                   align="left"
                 >
-                  Joining Date & Traning Mode
+                  Joining Date <br />
+                  Traning Mode
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
                   Action
@@ -473,9 +476,10 @@ const StudentData = () => {
                   <StyledTableCell align="left">{item.branch}</StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.courses} </p>
-
+                    {item.courses}
+                    <br />
                     {item.enquirytakenby}
+                    <br />
 
                     {item.leadsource}
                   </StyledTableCell>
@@ -507,7 +511,7 @@ const StudentData = () => {
                       <PrintIcon />
                     </Link>
                     <Link to={`/registrationform/${item.id}`}>
-                      < DeleteOutlineIcon/>
+                      <DeleteOutlineIcon />
                     </Link>
                   </StyledTableCell>
                 </StyledTableRow>
@@ -1167,32 +1171,32 @@ export default StudentData;
 //           <TableHead>
 
 //             <TableRow>
-//               <StyledTableCell className=" bg-secondary fs-9 border border 1 text-center ">
+//               <StyledTableCell className=" bg-primary fs-9 border border 1 text-center ">
 //                 SNo
 
 //               </StyledTableCell>
-//               <StyledTableCell className=" bg-secondary fs-9 border border 1 text-center" align="left">
+//               <StyledTableCell className=" bg-primary fs-9 border border 1 text-center" align="left">
 //                 Photo
 
 //               </StyledTableCell>
-//               <StyledTableCell className="  bg-secondary fs-9 border border 1 text-centerborder border 1 text-center" align="left">
+//               <StyledTableCell className="  bg-primary fs-9 border border 1 text-centerborder border 1 text-center" align="left">
 //                 Registration No
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center" align="left">
 //                 Student Name & Student ID
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center " align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center " align="left">
 //                 Contact Number & Email
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center" align="left">
 //                 Course Counseller Source
 
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center " align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center " align="left">
 //                 Joining Date & Traning Mode
 
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center" align="left">
 //                 Action
 
 //               </StyledTableCell>
