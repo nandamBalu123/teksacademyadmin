@@ -33,7 +33,7 @@ import CreateRole from "./components/pages/roles/CreateRole";
 import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 
-import UserViewCopy from "./components/pages/user/userData/UserViewCopy";
+// import UserViewCopy from "./components/pages/user/userData/UserViewCopy";
 import Edit from "./components/pages/user/userData/EditUser";
 import RoleAccess from "./components/pages/roles/RoleAccess";
 import StudentDataView from "./components/pages/student/studentData/StudentDataView";
@@ -97,10 +97,6 @@ function App() {
                 <Route
                   path="/userview/:id"
                   element={role == "admin" ? <UserView /> : <Dashboard />}
-                />
-                <Route
-                  path="/userviewcopy"
-                  element={role == "admin" ? <UserViewCopy /> : <Dashboard />}
                 />
 
                 <Route
