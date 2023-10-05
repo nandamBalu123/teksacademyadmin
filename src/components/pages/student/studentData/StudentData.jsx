@@ -35,6 +35,10 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+
+
+
+
 import { initialDataa } from "./data";
 
 import { Link } from "react-router-dom";
@@ -66,8 +70,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
-  const [initialData, setData] = useState([{name: ''}]);
-  // const initialData = initialDataa;
+  // const [initialData, setData] = useState([{name: ''}]);
+  const initialData = initialDataa;
   let initialDataCount = initialData.length;
 
   const [filteredData, setFilteredData] = useState(initialData);
@@ -75,15 +79,17 @@ const StudentData = () => {
   let recordCount = filteredData.length;
 
   const [filterCriteria, setFilterCriteria] = useState({
-    date: "",
+    fromdate: "",
+
+    todate: "",
 
     branch: "",
 
-    source: "",
+    leadsource: "",
 
-    mode: "",
+    modeoftraining: "",
 
-    counsellar: "",
+    enquirytakenby: "",
 
     search: "",
   });
@@ -94,43 +100,58 @@ const StudentData = () => {
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
 
+  // useEffect(() => {
+  //   // Make a GET request to your backend API endpoint
+  //   axios
+  //     .get("http://localhost:3030/getstudent_data")
+  //     .then((response) => {
+  //       // Handle the successful response here
+  //       setData(response.data); // Update the data state with the fetched data
+  //       console.log("data", response.data);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the request
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios
-      .get("http://localhost:3030/getstudent_data")
-      .then((response) => {
-        // Handle the successful response here
-        setData(response.data); // Update the data state with the fetched data
-        console.log("data", response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-  useEffect(() => {
+    // const admissionDate = new Date(item.admissiondate);
     const filteredResults = initialData.filter((item) => {
-      const dateCondition = filterCriteria.date
-        ? item.joiningdata === filterCriteria.date
-        : true;
+      const searchCondition = filterCriteria.search
+        ? item.name.toLowerCase().includes(filterCriteria.search.toLowerCase())
+        : // &&
+          // item.enquirytakenby
+          //   .toLowerCase()
+          //   .includes(filterCriteria.search.toLowerCase())
+          true;
+      // const dateCondition = filterCriteria.date
+      //   ? item.admissiondate === filterCriteria.date
+      //   : true;
+
+      const dateCondition =
+        filterCriteria.fromdate && filterCriteria.todate
+          ? item.admissiondate >= filterCriteria.fromdate &&
+            item.admissiondate <= filterCriteria.todate
+          : true;
 
       const branchCondition = filterCriteria.branch
         ? item.branch === filterCriteria.branch
         : true;
 
-      const sourceCondition = filterCriteria.source
-        ? item.source === filterCriteria.source
+      const sourceCondition = filterCriteria.leadsource
+        ? item.leadsource === filterCriteria.leadsource
         : true;
 
-      const modeCondition = filterCriteria.mode
-        ? item.trainingmode === filterCriteria.mode
+      const modeCondition = filterCriteria.modeoftraining
+        ? item.modeoftraining === filterCriteria.modeoftraining
         : true;
 
-      const counsellarCondition = filterCriteria.counsellar
-        ? item.counsellar === filterCriteria.counsellar
+      const counsellarCondition = filterCriteria.enquirytakenby
+        ? item.enquirytakenby === filterCriteria.enquirytakenby
         : true;
 
       return (
+        searchCondition &&
         dateCondition &&
         branchCondition &&
         sourceCondition &&
@@ -164,6 +185,9 @@ const StudentData = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+// for date
+  
+
 
   return (
     <>
@@ -174,6 +198,18 @@ const StudentData = () => {
           <div className="col-9 col-md-9 ">
             <p className="search">
               <SearchIcon /> Search Here.....
+              <input
+                type="text"
+                className="form-control"
+                style={{
+                  height: "45px",
+                  border: "1.5px solid black",
+                  borderRadius: "5px",
+                }}
+                name="search"
+                value={filterCriteria.search}
+                onChange={handleInputChange}
+              />
             </p>{" "}
             <hr className="w-50" />
           </div>
@@ -206,9 +242,38 @@ const StudentData = () => {
             >
               <MenuItem> Filter</MenuItem>
               <hr />
-              <MenuItem className="pt-3">
-                <label> Enter Date : </label>
-                <br />
+              <div className="d-flex"> 
+              <MenuItem className="pt-3 ">
+                <div><label > From: </label></div>
+               
+                <input
+                  type="date"
+                  className="form-control"
+                  style={{
+                    height: "45px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="fromdate"
+                  value={filterCriteria.fromdate}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="date"
+                  className="form-control"
+                  style={{
+                    height: "45px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="todate"
+                  value={filterCriteria.todate}
+                  onChange={handleInputChange}
+                />
+              </MenuItem>
+              <MenuItem className="pt-3 ">
+                <label > To: </label>
+                <br/>
                 <input
                   type="date"
                   className="form-control"
@@ -222,16 +287,16 @@ const StudentData = () => {
                   onChange={handleInputChange}
                 />
               </MenuItem>
+              </div>
               <div className="d-flex w-100 mt-3">
                 <MenuItem>
                   <select
                     id=""
                     placeholder="Filter Branch"
-                    required
                     style={{
                       height: "45px",
                       paddingLeft: "10px",
-                      paddingRight: "50px",
+                      paddingRight: "115px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -247,20 +312,19 @@ const StudentData = () => {
                   </select>
                 </MenuItem>
                 <MenuItem>
-                  {" "}
                   <select
                     id=""
                     placeholder="Lead Source"
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "65px",
+                      paddingRight: "115px",
 
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                    name="source"
-                    value={filterCriteria.source}
+                    name="leadsource"
+                    value={filterCriteria.leadsource}
                     onChange={handleInputChange}
                   >
                     <option value="">LeadSource</option>
@@ -278,13 +342,13 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "37px",
+                      paddingRight: "102px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                     //
-                    name="mode"
-                    value={filterCriteria.mode}
+                    name="modeoftraining"
+                    value={filterCriteria.modeoftraining}
                     onChange={handleInputChange}
                   >
                     <option value="">Mode Of Training</option>
@@ -293,22 +357,24 @@ const StudentData = () => {
                   </select>
                 </MenuItem>
                 <MenuItem>
-                  {" "}
                   <select
                     id=""
-                    placeholder="Councellors"
+                    placeholder="Counsellors"
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "65px",
+                      paddingRight: "110px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                    name="counsellar"
-                    value={filterCriteria.counsellar}
+                    name="enquirytakenby"
+                    value={filterCriteria.enquirytakenby}
                     onChange={handleInputChange}
                   >
-                    <option value="">Councellors</option>
+                    <option value="">Counsellors</option>
+                    <option value="kavya"> kavya</option>
+                    <option value="mark"> Mark</option>
+                    <option value="david"> David</option>
                     <option value="kavya"> kavya</option>
                   </select>
                 </MenuItem>{" "}

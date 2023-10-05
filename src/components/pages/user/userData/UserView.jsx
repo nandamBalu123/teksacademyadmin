@@ -32,14 +32,14 @@ const UserView = () => {
       <p>{singleUser.reportto}</p>
       <p>{singleUser.profile}</p>
       <p>{singleUser.branch}</p> */}
-      <h2>irshad</h2>
+      {/* <h2>irshad</h2>
       <p>irshad2</p>
       <p>3321332</p>
       <p>rewfasdf</p>
       <p>gfdsfdasf</p>
       <p>fsdafs</p>
       <p>fsdfsdf</p>
-      <p>fsdfa</p>
+      <p>fsdfa</p> */}
     </div>
   );
 };

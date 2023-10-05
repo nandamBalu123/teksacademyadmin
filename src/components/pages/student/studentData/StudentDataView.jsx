@@ -30,6 +30,7 @@ const StudentDataView = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+  console.log("student", studentdata.email);
   return (
     <>
       <h2 className="text-center"> Student Details From</h2>

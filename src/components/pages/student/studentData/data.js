@@ -1,7 +1,5 @@
 export const initialDataa = [
-
   {
-
     id: 1,
 
     photo: "photo",
@@ -14,24 +12,22 @@ export const initialDataa = [
 
     studentid: 231,
 
-    contactnumber: 23212,
+    mobilenumber: 23212,
 
     email: "john@gmail.com",
 
-    course: "java",
+    courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 2,
 
     photo: "photo",
@@ -44,24 +40,22 @@ export const initialDataa = [
 
     studentid: 232,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "jane@gmail.com",
 
-    course: "python",
+    courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "justdail",
+    leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 3,
 
     photo: "photo",
@@ -74,24 +68,22 @@ export const initialDataa = [
 
     studentid: 233,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "bob@gmail.com",
 
-    course: "react",
+    courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 4,
 
     photo: "photo",
@@ -104,24 +96,22 @@ export const initialDataa = [
 
     studentid: 234,
 
-    contactnumber: 12345,
+    mobilenumber: 12345,
 
     email: "alice@gmail.com",
 
-    course: "node.js",
+    courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 5,
 
     photo: "photo",
@@ -134,24 +124,22 @@ export const initialDataa = [
 
     studentid: 235,
 
-    contactnumber: 67890,
+    mobilenumber: 67890,
 
     email: "eve@gmail.com",
 
-    course: "angular",
+    courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 6,
 
     photo: "photo",
@@ -164,24 +152,22 @@ export const initialDataa = [
 
     studentid: 236,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "michael@gmail.com",
 
-    course: "html/css",
+    courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 7,
 
     photo: "photo",
@@ -194,24 +180,22 @@ export const initialDataa = [
 
     studentid: 237,
 
-    contactnumber: 13579,
+    mobilenumber: 13579,
 
     email: "sarah@gmail.com",
 
-    course: "javascript",
+    courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 8,
 
     photo: "photo",
@@ -224,24 +208,22 @@ export const initialDataa = [
 
     studentid: 238,
 
-    contactnumber: 24680,
+    mobilenumber: 24680,
 
     email: "peter@gmail.com",
 
-    course: "ruby",
+    courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 9,
 
     photo: "photo",
@@ -254,24 +236,22 @@ export const initialDataa = [
 
     studentid: 239,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "mary@gmail.com",
 
-    course: "php",
+    courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 10,
 
     photo: "photo",
@@ -284,24 +264,22 @@ export const initialDataa = [
 
     studentid: 240,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "david@gmail.com",
 
-    course: "c#",
+    courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 11,
 
     photo: "photo",
@@ -314,24 +292,22 @@ export const initialDataa = [
 
     studentid: 232,
 
-    contactnumber: 23212,
+    mobilenumber: 23212,
 
     email: "john@gmail.com",
 
-    course: "java",
+    courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 12,
 
     photo: "photo",
@@ -344,24 +320,22 @@ export const initialDataa = [
 
     studentid: 232,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "jane@gmail.com",
 
-    course: "python",
+    courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "justdail",
+    leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 13,
 
     photo: "photo",
@@ -374,24 +348,22 @@ export const initialDataa = [
 
     studentid: 233,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "bob@gmail.com",
 
-    course: "react",
+    courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 14,
 
     photo: "photo",
@@ -404,24 +376,22 @@ export const initialDataa = [
 
     studentid: 234,
 
-    contactnumber: 12345,
+    mobilenumber: 12345,
 
     email: "alice@gmail.com",
 
-    course: "node.js",
+    courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 15,
 
     photo: "photo",
@@ -434,24 +404,22 @@ export const initialDataa = [
 
     studentid: 235,
 
-    contactnumber: 67890,
+    mobilenumber: 67890,
 
     email: "eve@gmail.com",
 
-    course: "angular",
+    courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 16,
 
     photo: "photo",
@@ -464,24 +432,22 @@ export const initialDataa = [
 
     studentid: 236,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "michael@gmail.com",
 
-    course: "html/css",
+    courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 17,
 
     photo: "photo",
@@ -494,24 +460,22 @@ export const initialDataa = [
 
     studentid: 237,
 
-    contactnumber: 13579,
+    mobilenumber: 13579,
 
     email: "sarah@gmail.com",
 
-    course: "javascript",
+    courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 18,
 
     photo: "photo",
@@ -524,24 +488,22 @@ export const initialDataa = [
 
     studentid: 238,
 
-    contactnumber: 24680,
+    mobilenumber: 24680,
 
     email: "peter@gmail.com",
 
-    course: "ruby",
+    courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 19,
 
     photo: "photo",
@@ -554,24 +516,22 @@ export const initialDataa = [
 
     studentid: 239,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "mary@gmail.com",
 
-    course: "php",
+    courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 20,
 
     photo: "photo",
@@ -584,24 +544,22 @@ export const initialDataa = [
 
     studentid: 240,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "david@gmail.com",
 
-    course: "c#",
+    courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 21,
 
     photo: "photo",
@@ -614,24 +572,22 @@ export const initialDataa = [
 
     studentid: 231,
 
-    contactnumber: 23212,
+    mobilenumber: 23212,
 
     email: "john@gmail.com",
 
-    course: "java",
+    courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 22,
 
     photo: "photo",
@@ -644,24 +600,22 @@ export const initialDataa = [
 
     studentid: 232,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "jane@gmail.com",
 
-    course: "python",
+    courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "justdail",
+    leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 23,
 
     photo: "photo",
@@ -674,24 +628,22 @@ export const initialDataa = [
 
     studentid: 233,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "bob@gmail.com",
 
-    course: "react",
+    courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 24,
 
     photo: "photo",
@@ -704,24 +656,22 @@ export const initialDataa = [
 
     studentid: 234,
 
-    contactnumber: 12345,
+    mobilenumber: 12345,
 
     email: "alice@gmail.com",
 
-    course: "node.js",
+    courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 25,
 
     photo: "photo",
@@ -734,24 +684,22 @@ export const initialDataa = [
 
     studentid: 235,
 
-    contactnumber: 67890,
+    mobilenumber: 67890,
 
     email: "eve@gmail.com",
 
-    course: "angular",
+    courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 26,
 
     photo: "photo",
@@ -764,24 +712,22 @@ export const initialDataa = [
 
     studentid: 236,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "michael@gmail.com",
 
-    course: "html/css",
+    courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 27,
 
     photo: "photo",
@@ -794,24 +740,22 @@ export const initialDataa = [
 
     studentid: 237,
 
-    contactnumber: 13579,
+    mobilenumber: 13579,
 
     email: "sarah@gmail.com",
 
-    course: "javascript",
+    courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 28,
 
     photo: "photo",
@@ -824,24 +768,22 @@ export const initialDataa = [
 
     studentid: 238,
 
-    contactnumber: 24680,
+    mobilenumber: 24680,
 
     email: "peter@gmail.com",
 
-    course: "ruby",
+    courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 29,
 
     photo: "photo",
@@ -854,24 +796,22 @@ export const initialDataa = [
 
     studentid: 239,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "mary@gmail.com",
 
-    course: "php",
+    courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 30,
 
     photo: "photo",
@@ -884,26 +824,22 @@ export const initialDataa = [
 
     studentid: 240,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "david@gmail.com",
 
-    course: "c#",
+    courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
- 
-
   {
-
     id: 31,
 
     photo: "photo",
@@ -916,24 +852,22 @@ export const initialDataa = [
 
     studentid: 231,
 
-    contactnumber: 23212,
+    mobilenumber: 23212,
 
     email: "john@gmail.com",
 
-    course: "java",
+    courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 32,
 
     photo: "photo",
@@ -946,24 +880,22 @@ export const initialDataa = [
 
     studentid: 232,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "jane@gmail.com",
 
-    course: "python",
+    courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "justdail",
+    leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 33,
 
     photo: "photo",
@@ -976,24 +908,22 @@ export const initialDataa = [
 
     studentid: 233,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "bob@gmail.com",
 
-    course: "react",
+    courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 34,
 
     photo: "photo",
@@ -1006,24 +936,22 @@ export const initialDataa = [
 
     studentid: 234,
 
-    contactnumber: 12345,
+    mobilenumber: 12345,
 
     email: "alice@gmail.com",
 
-    course: "node.js",
+    courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 35,
 
     photo: "photo",
@@ -1036,24 +964,22 @@ export const initialDataa = [
 
     studentid: 235,
 
-    contactnumber: 67890,
+    mobilenumber: 67890,
 
     email: "eve@gmail.com",
 
-    course: "angular",
+    courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 36,
 
     photo: "photo",
@@ -1066,24 +992,22 @@ export const initialDataa = [
 
     studentid: 236,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "michael@gmail.com",
 
-    course: "html/css",
+    courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 37,
 
     photo: "photo",
@@ -1096,24 +1020,22 @@ export const initialDataa = [
 
     studentid: 237,
 
-    contactnumber: 13579,
+    mobilenumber: 13579,
 
     email: "sarah@gmail.com",
 
-    course: "javascript",
+    courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 38,
 
     photo: "photo",
@@ -1126,24 +1048,22 @@ export const initialDataa = [
 
     studentid: 238,
 
-    contactnumber: 24680,
+    mobilenumber: 24680,
 
     email: "peter@gmail.com",
 
-    course: "ruby",
+    courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 39,
 
     photo: "photo",
@@ -1156,24 +1076,22 @@ export const initialDataa = [
 
     studentid: 239,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "mary@gmail.com",
 
-    course: "php",
+    courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 40,
 
     photo: "photo",
@@ -1186,26 +1104,22 @@ export const initialDataa = [
 
     studentid: 240,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "david@gmail.com",
 
-    course: "c#",
+    courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
- 
-
   {
-
     id: 41,
 
     photo: "photo",
@@ -1218,24 +1132,22 @@ export const initialDataa = [
 
     studentid: 231,
 
-    contactnumber: 23212,
+    mobilenumber: 23212,
 
     email: "john@gmail.com",
 
-    course: "java",
+    courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 42,
 
     photo: "photo",
@@ -1248,24 +1160,22 @@ export const initialDataa = [
 
     studentid: 232,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "jane@gmail.com",
 
-    course: "python",
+    courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "justdail",
+    leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 43,
 
     photo: "photo",
@@ -1278,24 +1188,22 @@ export const initialDataa = [
 
     studentid: 233,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "bob@gmail.com",
 
-    course: "react",
+    courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 44,
 
     photo: "photo",
@@ -1308,24 +1216,22 @@ export const initialDataa = [
 
     studentid: 234,
 
-    contactnumber: 12345,
+    mobilenumber: 12345,
 
     email: "alice@gmail.com",
 
-    course: "node.js",
+    courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 45,
 
     photo: "photo",
@@ -1338,24 +1244,22 @@ export const initialDataa = [
 
     studentid: 235,
 
-    contactnumber: 67890,
+    mobilenumber: 67890,
 
     email: "eve@gmail.com",
 
-    course: "angular",
+    courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 46,
 
     photo: "photo",
@@ -1368,24 +1272,22 @@ export const initialDataa = [
 
     studentid: 236,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "michael@gmail.com",
 
-    course: "html/css",
+    courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 47,
 
     photo: "photo",
@@ -1398,24 +1300,22 @@ export const initialDataa = [
 
     studentid: 237,
 
-    contactnumber: 13579,
+    mobilenumber: 13579,
 
     email: "sarah@gmail.com",
 
-    course: "javascript",
+    courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 48,
 
     photo: "photo",
@@ -1428,24 +1328,22 @@ export const initialDataa = [
 
     studentid: 238,
 
-    contactnumber: 24680,
+    mobilenumber: 24680,
 
     email: "peter@gmail.com",
 
-    course: "ruby",
+    courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 49,
 
     photo: "photo",
@@ -1458,24 +1356,22 @@ export const initialDataa = [
 
     studentid: 239,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "mary@gmail.com",
 
-    course: "php",
+    courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 50,
 
     photo: "photo",
@@ -1488,26 +1384,22 @@ export const initialDataa = [
 
     studentid: 240,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "david@gmail.com",
 
-    course: "c#",
+    courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
- 
-
   {
-
     id: 51,
 
     photo: "photo",
@@ -1520,24 +1412,22 @@ export const initialDataa = [
 
     studentid: 231,
 
-    contactnumber: 23212,
+    mobilenumber: 23212,
 
     email: "john@gmail.com",
 
-    course: "java",
+    courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 52,
 
     photo: "photo",
@@ -1550,24 +1440,22 @@ export const initialDataa = [
 
     studentid: 232,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "jane@gmail.com",
 
-    course: "python",
+    courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "justdail",
+    leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 53,
 
     photo: "photo",
@@ -1580,24 +1468,22 @@ export const initialDataa = [
 
     studentid: 233,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "bob@gmail.com",
 
-    course: "react",
+    courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 54,
 
     photo: "photo",
@@ -1610,24 +1496,22 @@ export const initialDataa = [
 
     studentid: 234,
 
-    contactnumber: 12345,
+    mobilenumber: 12345,
 
     email: "alice@gmail.com",
 
-    course: "node.js",
+    courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 55,
 
     photo: "photo",
@@ -1640,24 +1524,22 @@ export const initialDataa = [
 
     studentid: 235,
 
-    contactnumber: 67890,
+    mobilenumber: 67890,
 
     email: "eve@gmail.com",
 
-    course: "angular",
+    courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 56,
 
     photo: "photo",
@@ -1670,24 +1552,22 @@ export const initialDataa = [
 
     studentid: 236,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "michael@gmail.com",
 
-    course: "html/css",
+    courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 57,
 
     photo: "photo",
@@ -1700,24 +1580,22 @@ export const initialDataa = [
 
     studentid: 237,
 
-    contactnumber: 13579,
+    mobilenumber: 13579,
 
     email: "sarah@gmail.com",
 
-    course: "javascript",
+    courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 58,
 
     photo: "photo",
@@ -1730,24 +1608,22 @@ export const initialDataa = [
 
     studentid: 238,
 
-    contactnumber: 24680,
+    mobilenumber: 24680,
 
     email: "peter@gmail.com",
 
-    course: "ruby",
+    courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 59,
 
     photo: "photo",
@@ -1760,24 +1636,22 @@ export const initialDataa = [
 
     studentid: 239,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "mary@gmail.com",
 
-    course: "php",
+    courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 60,
 
     photo: "photo",
@@ -1790,26 +1664,22 @@ export const initialDataa = [
 
     studentid: 240,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "david@gmail.com",
 
-    course: "c#",
+    courses: "c#",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
- 
-
   {
-
     id: 61,
 
     photo: "photo",
@@ -1822,24 +1692,22 @@ export const initialDataa = [
 
     studentid: 231,
 
-    contactnumber: 23212,
+    mobilenumber: 23212,
 
     email: "john@gmail.com",
 
-    course: "java",
+    courses: "java",
 
-    counsellar: "kavya",
+    enquirytakenby: "kavya",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 62,
 
     photo: "photo",
@@ -1852,24 +1720,22 @@ export const initialDataa = [
 
     studentid: 232,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "jane@gmail.com",
 
-    course: "python",
+    courses: "python",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "justdail",
+    leadsource: "justdail",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 63,
 
     photo: "photo",
@@ -1882,24 +1748,22 @@ export const initialDataa = [
 
     studentid: 233,
 
-    contactnumber: 54321,
+    mobilenumber: 54321,
 
     email: "bob@gmail.com",
 
-    course: "react",
+    courses: "react",
 
-    counsellar: "alice",
+    enquirytakenby: "alice",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 64,
 
     photo: "photo",
@@ -1912,24 +1776,22 @@ export const initialDataa = [
 
     studentid: 234,
 
-    contactnumber: 12345,
+    mobilenumber: 12345,
 
     email: "alice@gmail.com",
 
-    course: "node.js",
+    courses: "node.js",
 
-    counsellar: "john",
+    enquirytakenby: "john",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 65,
 
     photo: "photo",
@@ -1942,24 +1804,22 @@ export const initialDataa = [
 
     studentid: 235,
 
-    contactnumber: 67890,
+    mobilenumber: 67890,
 
     email: "eve@gmail.com",
 
-    course: "angular",
+    courses: "angular",
 
-    counsellar: "susan",
+    enquirytakenby: "susan",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 66,
 
     photo: "photo",
@@ -1972,24 +1832,22 @@ export const initialDataa = [
 
     studentid: 236,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "michael@gmail.com",
 
-    course: "html/css",
+    courses: "html/css",
 
-    counsellar: "lisa",
+    enquirytakenby: "lisa",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-05",
+    admissiondate: "2023-10-05",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
 
   {
-
     id: 67,
 
     photo: "photo",
@@ -2002,24 +1860,22 @@ export const initialDataa = [
 
     studentid: 237,
 
-    contactnumber: 13579,
+    mobilenumber: 13579,
 
     email: "sarah@gmail.com",
 
-    course: "javascript",
+    courses: "javascript",
 
-    counsellar: "david",
+    enquirytakenby: "david",
 
-    source: "walkin",
+    leadsource: "walkin",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 68,
 
     photo: "photo",
@@ -2032,24 +1888,22 @@ export const initialDataa = [
 
     studentid: 238,
 
-    contactnumber: 24680,
+    mobilenumber: 24680,
 
     email: "peter@gmail.com",
 
-    course: "ruby",
+    courses: "ruby",
 
-    counsellar: "sophia",
+    enquirytakenby: "sophia",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-04",
+    admissiondate: "2023-10-04",
 
-    trainingmode: "online",
-
+    modeoftraining: "online",
   },
 
   {
-
     id: 69,
 
     photo: "photo",
@@ -2062,22 +1916,18 @@ export const initialDataa = [
 
     studentid: 239,
 
-    contactnumber: 98765,
+    mobilenumber: 98765,
 
     email: "mary@gmail.com",
 
-    course: "php",
+    courses: "php",
 
-    counsellar: "mark",
+    enquirytakenby: "mark",
 
-    source: "referral",
+    leadsource: "referral",
 
-    joiningdata: "2023-10-03",
+    admissiondate: "2023-10-03",
 
-    trainingmode: "offline",
-
+    modeoftraining: "offline",
   },
-
 ];
-
- 
