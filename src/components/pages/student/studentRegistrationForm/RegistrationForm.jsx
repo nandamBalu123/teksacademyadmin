@@ -628,7 +628,7 @@ export default function RegistrationForm() {
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
-                    Marks<span className="text-danger"> *</span>&nbsp;:
+                    Percentage<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   <input
                     type="text"

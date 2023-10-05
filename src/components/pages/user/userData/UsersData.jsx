@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
@@ -13,10 +14,14 @@ import { styled } from '@mui/material/styles';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
 import './UsersData.css';
 
 import { Button,Dialog, DialogTitle, DialogContent , DialogContentText, DialogActions  } from "@mui/material";
 const UsersData = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const { users, dispatch } = useUsersContext();
   const { user } = useAuthContext();
@@ -66,25 +71,25 @@ const UsersData = () => {
 
   const [userData, setUserData] = useState([]);
   const [error, setError] = useState(null);
-  const [open, setOpen]= useState(false);
+  // const [open, setOpen]= useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3030/userdata");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-      console.log(userData)
-        }
-        const data = await response.json();
-        setUserData(data.Result);
-      } catch (err) {
-        setError(err);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:3030/userdata");
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //     console.log(userData)
+  //       }
+  //       const data = await response.json();
+  //       setUserData(data.Result);
+  //     } catch (err) {
+  //       setError(err);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -114,7 +119,14 @@ const UsersData = () => {
       border: 0,
     },
   }));
-
+  
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container-fluid">
@@ -133,8 +145,84 @@ const UsersData = () => {
             }}
             
           />  
+          
+          
+             {/* For Filter */}
+             <Button
+        id="demo-positioned-button"
+        aria-controls={open ? 'demo-positioned-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        
+      >
+        <h6 className="filters" style={{textTransform: "capitalize"}}> Filter </h6>
+   
+      </Button>
+
+      <Menu
+      className="mt-5"
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+      >
+        <MenuItem> <h6 > Filter</h6></MenuItem><hr/>
+        <MenuItem > 
+        <label className="mt-3 me-3">Profile:</label>
+        <select
+        className="mt-3"
+                    id=""
+                    
+                    required
+                    style={{
+                      height: "45px",
+                      
+                      paddingRight: "145px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                   
+                  >
+                    <option value="">Manager</option>
+                   
+                  </select>
+        
+        </MenuItem>
+        <MenuItem > 
+        <label className="mt-3 me-3"> Branch: </label> 
+        <select
+        className="mt-3"
+                    id=""
+                  
+                    required
+                    style={{
+                      height: "45px",
+                      paddingLeft: "10px",
+                      paddingRight: "115px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                   
+                  >
+                    <option value="">Hi-tech City</option>
+                   
+                  </select>
+        </MenuItem>
+    
+      </Menu>
+
           {/* <button className="Filter" onAuxClick={()=>setOpen(true)}> </button> */}
-          <button  className="Filter"  onClick={()=> setOpen(true)}> Fillter</button>
+          {/* <button  className="Filter"  onClick={()=> setOpen(true)}> Fillter</button>
           <Dialog  
          
           open={open}
@@ -215,7 +303,7 @@ const UsersData = () => {
               <Button onClick={()=>setOpen(false)}>Cancel</Button>
               <Button autoFocus onClick={()=> setOpen}>Submit</Button>
             </DialogActions>
-          </Dialog>
+          </Dialog> */}
           
       </div>
       <div> 

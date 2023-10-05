@@ -75,3 +75,8 @@ hr {
   padding: 5px;
   color: white;
 }
+.link{ 
+  text-decoration: none;
+  list-style: none;
+  color: black;
+}

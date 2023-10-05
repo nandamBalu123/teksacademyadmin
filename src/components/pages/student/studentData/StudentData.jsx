@@ -20,7 +20,7 @@ import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 
-import DownloadIcon from "@mui/icons-material/Download";
+
 import SearchIcon from "@mui/icons-material/Search";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -35,8 +35,12 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 
+import DownloadIcon from '@mui/icons-material/Download';
 
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import { CSVLink } from "react-csv";
 
 
 import { initialDataa } from "./data";
@@ -190,9 +194,7 @@ const StudentData = () => {
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-1 ">
-            <h6> Export</h6>{" "}
-          </div>
+         
           <div className="col-1 ">
             {" "}
             <h6 onClick={handleClick}> Filter</h6>
@@ -340,6 +342,19 @@ const StudentData = () => {
               </div>
             </Menu>
           </div>
+          <div className="col-1 ">
+          <CSVLink
+            data={filteredData}
+            filename={"studentsdata.csv"}
+            className=" link "
+            target="_blank"
+          >
+           <DownloadIcon/>
+          </CSVLink>{" "}
+          </div>
+
+
+          
         </div>
 
         <TableContainer component={Paper}>
@@ -349,13 +364,13 @@ const StudentData = () => {
                 <StyledTableCell className="bg-secondary fs-6 border border 1 text-center ">
                   SNo
                 </StyledTableCell>
-
+{/* 
                 <StyledTableCell
                   className="bg-secondary fs-6  border border 1 text-center"
                   align="left"
                 >
                   Photo
-                </StyledTableCell>
+                </StyledTableCell> */}
 
                 <StyledTableCell
                   className="  bg-secondary fs-6 border border 1 text-centerborder border 1 text-center"
@@ -409,10 +424,10 @@ const StudentData = () => {
                   <StyledTableCell className=" border border 2 text-center">
                     {item.id}
                   </StyledTableCell>
-
+{/* 
                   <StyledTableCell className=" border border 2 text-center">
                     {item.profilepic}
-                  </StyledTableCell>
+                  </StyledTableCell> */}
 
                   <StyledTableCell className=" border border 1 text-center">
                     <p> {item.name}</p>
@@ -442,14 +457,16 @@ const StudentData = () => {
                     {item.modeoftraining}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center d-flex ">
-                    <Link to={`/studentdataview/${item.id}`}>
+                  <StyledTableCell className=" border border 1 text-center d-flex  pb-5 ">
+                    <Link className="me-2 " to={`/studentdataview/${item.id}`}>
                       <VisibilityIcon />
                     </Link>
 
                     <Link to={`/registrationform/${item.id}`}>
-                      <EditIcon />
+                      <EditIcon className="me-2 " />
                     </Link>
+                    <Link className="me-2 " ><LocalPrintshopIcon/>  </Link>
+                    <Link className="me-2 "> <CurrencyRupeeIcon/></Link>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
