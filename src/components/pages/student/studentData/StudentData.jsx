@@ -15,7 +15,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import Paper from "@mui/material/Paper";
-
+import PrintIcon from "@mui/icons-material/Print";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 
 import ShowChartIcon from "@mui/icons-material/ShowChart";
@@ -71,8 +73,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
-  const [initialData, setData] = useState([{ name: "" }]);
-  // const initialData = initialDataa;
+  // const [initialData, setData] = useState([{ name: "" }]);
+  const initialData = initialDataa;
   let initialDataCount = initialData.length;
 
   const [filteredData, setFilteredData] = useState(initialData);
@@ -101,20 +103,20 @@ const StudentData = () => {
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
 
-  useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios
-      .get("http://localhost:3030/getstudent_data")
-      .then((response) => {
-        // Handle the successful response here
-        setData(response.data); // Update the data state with the fetched data
-        console.log("data", response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // Make a GET request to your backend API endpoint
+  //   axios
+  //     .get("http://localhost:3030/getstudent_data")
+  //     .then((response) => {
+  //       // Handle the successful response here
+  //       setData(response.data); // Update the data state with the fetched data
+  //       console.log("data", response.data);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the request
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
       const searchCondition = filterCriteria.search
@@ -199,7 +201,7 @@ const StudentData = () => {
       <div className="studetdetails container">
         <div className="row mb-3 px-4 pt-3">
           <div className="col-9 col-md-9 ">
-            <p className="search">
+            <p className="">
               <input
                 type="text"
                 className="form-control"
@@ -213,7 +215,6 @@ const StudentData = () => {
                 onChange={handleInputChange}
               />
             </p>{" "}
-            <hr className="w-50" />
           </div>
           <div className="col-1">
             <h6>
@@ -499,12 +500,15 @@ const StudentData = () => {
                     <Link to={`/registrationform/${item.id}`}>
                       <EditIcon />
                     </Link>
-                    {/* <Link to={`/registrationform/${item.id}`}>
-                      <EditIcon />
+                    <Link to={`/registrationform/${item.id}`}>
+                      <CurrencyRupeeIcon />
                     </Link>
                     <Link to={`/registrationform/${item.id}`}>
-                      <EditIcon />
-                    </Link> */}
+                      <PrintIcon />
+                    </Link>
+                    <Link to={`/registrationform/${item.id}`}>
+                      < DeleteOutlineIcon/>
+                    </Link>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
