@@ -11,8 +11,7 @@ const UserViewCopy = () => {
     return(
         <>  
         <div className="container"> 
-        <div className="data "  
-        >  
+        <div className="data">  
    
         <h3 className="text-center pt-3 title fs-3"> User Details</h3><hr className="w-50 m-auto"/>
       <div className="details pt-3">    <h5> Name : Bhavitha </h5> <br/>

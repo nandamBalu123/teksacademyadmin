@@ -35,6 +35,10 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+
+
+
+
 import { initialDataa } from "./data";
 
 import { Link } from "react-router-dom";
@@ -164,6 +168,9 @@ const StudentData = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+// for date
+  
+
 
   return (
     <>
@@ -206,9 +213,10 @@ const StudentData = () => {
             >
               <MenuItem> Filter</MenuItem>
               <hr />
-              <MenuItem className="pt-3">
-                <label> Enter Date : </label>
-                <br />
+              <div className="d-flex"> 
+              <MenuItem className="pt-3 ">
+                <div><label > From: </label></div>
+               
                 <input
                   type="date"
                   className="form-control"
@@ -222,6 +230,23 @@ const StudentData = () => {
                   onChange={handleInputChange}
                 />
               </MenuItem>
+              <MenuItem className="pt-3 ">
+                <label > To: </label>
+                <br/>
+                <input
+                  type="date"
+                  className="form-control"
+                  style={{
+                    height: "45px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="date"
+                  value={filterCriteria.date}
+                  onChange={handleInputChange}
+                />
+              </MenuItem>
+              </div>
               <div className="d-flex w-100 mt-3">
                 <MenuItem>
                   <select
@@ -231,7 +256,7 @@ const StudentData = () => {
                     style={{
                       height: "45px",
                       paddingLeft: "10px",
-                      paddingRight: "50px",
+                      paddingRight: "115px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -254,7 +279,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "65px",
+                      paddingRight: "115px",
 
                       border: "1.5px solid black",
                       borderRadius: "5px",
@@ -278,7 +303,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "37px",
+                      paddingRight: "102px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -300,7 +325,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "65px",
+                      paddingRight: "110px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
