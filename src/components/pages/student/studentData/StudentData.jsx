@@ -499,25 +499,28 @@ const StudentData = () => {
                   <StyledTableCell className=" border border 1 text-center d-flex ">
                     <Link
                       to={`/studentdataview/${item.id}`}
-                      style={{ margin: "0 4px " }}
+                      style={{ width: "40px" }}
                     >
                       <VisibilityIcon className="iconn" />
                     </Link>
 
                     <Link
                       to={`/registrationform/${item.id}`}
-                      style={{ margin: "0 4px " }}
+                      style={{ width: "40px" }}
                     >
                       <EditIcon className="iconn" />
                     </Link>
-                    <Link to={`//${item.id}`} style={{ margin: "0 4px " }}>
+                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
                       <CurrencyRupeeIcon className="iconn" />
                     </Link>
-                    <Link to={`//${item.id}`} style={{ margin: "0 4px " }}>
-                      <PrintIcon  className="iconn"/>
+                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <PrintIcon className="iconn" />
                     </Link>
-                    <Link to={`//${item.id}`} style={{ margin: "0 4px " }}>
-                      <DeleteOutlineIcon style={{ color: "red" }} className="iconn"/>
+                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <DeleteOutlineIcon
+                        style={{ color: "red" }}
+                        className="iconn"
+                      />
                     </Link>
                   </StyledTableCell>
                 </StyledTableRow>
