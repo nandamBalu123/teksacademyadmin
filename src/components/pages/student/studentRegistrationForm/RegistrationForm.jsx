@@ -67,6 +67,47 @@ export default function RegistrationForm() {
     setTaxamount(totalamount - actualfee);
   });
   // useEffect(() => {}, [totalamount]);
+  useEffect(() => {
+    let date = toString(admissionDate);
+    let month = admissionDate[5] + admissionDate[6];
+    let year = admissionDate[2] + admissionDate[3];
+    let firstbranch;
+    if (branch) {
+      firstbranch = branch[0].toUpperCase();
+    }
+    let serialno;
+    if (branch == "hitechcity") {
+      serialno = hitechcitycount + 1;
+    }
+    if (branch == "ameerpet") {
+      serialno = ameerpetcount + 1;
+    }
+    if (branch == "dilsukhnagar") {
+      serialno = dilsukhnagarcount + 1;
+    }
+    if (branch == "gachibowli") {
+      serialno = gachibowlicount + 1;
+    }
+    if (serialno) {
+      serialno = serialno.toString();
+      if (serialno.length === 3) {
+        serialno = "0" + serialno;
+      }
+      if (serialno.length === 2) {
+        serialno = "00" + serialno;
+      }
+      if (serialno.length === 1) {
+        serialno = "000" + serialno;
+      }
+    }
+
+    if (!admissionDate) {
+      setRegistrationNumber("");
+    }
+    if (admissionDate) {
+      setRegistrationNumber("TA" + firstbranch + month + year + serialno);
+    }
+  }, [admissionDate, branch]);
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -174,6 +215,65 @@ export default function RegistrationForm() {
       }
     }
   };
+  const [getusers, setgetusers] = useState([]);
+  const [filteredcounsellor, setfilteredcounsellor] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3030/userdata");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setgetusers(data.Result);
+      } catch (err) {
+        // setError(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+  useEffect(() => {
+    const filteruser = getusers.filter((user) => {
+      const filtercounsellar = user.profile === "counsellor";
+      return filtercounsellar;
+    });
+    setfilteredcounsellor(filteruser);
+  }, [getusers]);
+  const [studentData, setStudentData] = useState([{ name }, { name }]);
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get("http://localhost:3030/getstudent_data")
+      .then((response) => {
+        // Handle the successful response here
+        setStudentData(response.data); // Update the data state with the fetched data
+
+        console.log("data", response.data);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  const ameerpetbranch = studentData.filter(
+    (item) => item.branch === "ameerpet"
+  );
+  const ameerpetcount = ameerpetbranch.length;
+  const hitechcitybranch = studentData.filter(
+    (item) => item.branch === "hitechcity"
+  );
+  const hitechcitycount = hitechcitybranch.length;
+  const dilsukhnagarbranch = studentData.filter(
+    (item) => item.branch === "dilsukhnagar"
+  );
+  const dilsukhnagarcount = dilsukhnagarbranch.length;
+  const gachibowlibranch = studentData.filter(
+    (item) => item.branch === "gachibowli"
+  );
+  const gachibowlicount = gachibowlibranch.length;
+
   return (
     <div className="main-container">
       <div className="main-sub-container ">
@@ -186,7 +286,7 @@ export default function RegistrationForm() {
               <Typography fontSize={25}>Basic Details</Typography>
             </StepLabel>
             <StepContent>
-              <form className="form" >
+              <form className="form">
                 <div className="row input ">
                   <label className="col-12 col-md-2 label">
                     Name <span className="text-danger">*</span>&nbsp; :
@@ -601,8 +701,7 @@ export default function RegistrationForm() {
               <form className="form">
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
-                    Education Type <span className="text-danger"> *</span>
-                   :
+                    Education Type <span className="text-danger"> *</span>:
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <select
@@ -776,8 +875,7 @@ export default function RegistrationForm() {
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
-                    Enquiry Taken By<span className="text-danger"> *</span>
-                  :
+                    Enquiry Taken By<span className="text-danger"> *</span>:
                   </label>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <select
@@ -792,11 +890,15 @@ export default function RegistrationForm() {
                     onChange={(e) => setEnquiryTakenBy(e.target.value)}
                     value={enquiryTakenBy}
                   >
-                    <option value="">--select--</option>
+                    {filteredcounsellor &&
+                      filteredcounsellor.map((user, index) => (
+                        <option value={user.fullname}> {user.fullname}</option>
+                      ))}
+                    {/* <option value="">--select--</option>
                     <option value="Bhavitha">Bhavitha</option>
                     <option value="keerty">keerty</option>
                     <option value="harsha">harsha</option>
-                    <option value="Bhavitha">Bhavitha</option>
+                    <option value="Bhavitha">Bhavitha</option> */}
                   </select>
                 </div>
                 <br />
@@ -949,7 +1051,7 @@ export default function RegistrationForm() {
                     <option value="gachibowli">Gachibowli</option>
                   </select>
                 </div>
-                <br/>
+                <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Mode of Traning<span className="text-danger"> *</span>
@@ -973,7 +1075,7 @@ export default function RegistrationForm() {
                     <option value="offline">Offline</option>
                   </select>
                 </div>
-                <br/>
+                <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Admission Status<span className="text-danger"> *</span>
@@ -997,25 +1099,7 @@ export default function RegistrationForm() {
                     <option value="inactive">Inactive</option>
                   </select>
                 </div>
-                 <br/>
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Registration No <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5 "
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setRegistrationNumber(e.target.value)}
-                    value={registrationNumber}
-                  />
-                </div>
-                  <br/>
+                <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Admission Date <span className="text-danger"> *</span>
@@ -1034,7 +1118,27 @@ export default function RegistrationForm() {
                     value={admissionDate}
                   />
                 </div>
-                <br/>
+                <div className="row ">
+                  <label className="col-12 col-md-2 label">
+                    Registration No <span className="text-danger"> *</span>
+                    &nbsp;:
+                  </label>
+                  {/* <input
+                    type="text"
+                    className="col-9 col-md-5 "
+                    style={{
+                      height: "35px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    onChange={(e) => setRegistrationNumber(e.target.value)}
+                    value={registrationNumber}
+                  /> */}
+                  {registrationNumber}
+                </div>
+                <br />
+
+                <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Validity Start Date <span className="text-danger"> *</span>
@@ -1053,7 +1157,7 @@ export default function RegistrationForm() {
                     value={validityStartDate}
                   />
                 </div>
-                 <br/>
+                <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Validity End Date <span className="text-danger"> *</span>
@@ -1166,7 +1270,7 @@ export default function RegistrationForm() {
                     value={discount}
                   />
                 </div>
-             
+
                 {/* <div className="row ">
                   <label className="col-12 col-md-2">
                     Tax <span className="text-danger"> *</span>&nbsp;:
@@ -1202,7 +1306,7 @@ export default function RegistrationForm() {
                     <span className="text-danger"> *</span>&nbsp;:
                   </label>
 
-               {totalamount}     
+                  {totalamount}
                 </div>
                 <button
                   onClick={handleFeeDetails}
@@ -1295,7 +1399,7 @@ export default function RegistrationForm() {
                     }}
                   />
                 </div> */}
-             
+
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Total Tax <span className="text-danger"> *</span>&nbsp;:

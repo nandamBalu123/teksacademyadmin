@@ -38,7 +38,11 @@ import Edit from "./components/pages/user/userData/EditUser";
 import RoleAccess from "./components/pages/roles/RoleAccess";
 import StudentDataView from "./components/pages/student/studentData/StudentDataView";
 import Print from "./components/print/print";
+import PdfGenerator from "./components/print/print";
+import StudentApplicationPrint from "./components/pages/student/studentData/StudentApplicationPrint";
 import FeeDetails from "./components/pages/student/fee/FeeDetails";
+import Feefollowup from "./components/pages/student/fee/Feefollowup";
+import FeeView from "./components/pages/student/fee/FeeView";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -78,8 +82,18 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
+                <Route
+                  path="/feedetails/:id"
+                  element={role == "admin" ? <FeeDetails /> : <Dashboard />}
+                />
                 <Route  path="/feedetails"
                 element={role == "admin" ? <FeeDetails/> : <Dashboard/>}/>
+                
+                <Route path="/feefollowup"
+                element={role == "admin" ? <Feefollowup/>:<Dashboard/>}/>
+
+                <Route path="/feeview"
+                element ={role == "admin" ? <FeeView/> : <Dashboard/>}/>
 
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
@@ -108,8 +122,14 @@ function App() {
                   element={role == "admin" ? <Roles /> : <Dashboard />}
                 />
                 <Route
-                  path="/print"
-                  element={role == "admin" ? <Print /> : <Dashboard />}
+                  path="/studentApplicationprint"
+                  element={
+                    role == "admin" ? (
+                      <StudentApplicationPrint />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
                 />
                 <Route
                   path="/createrole"
