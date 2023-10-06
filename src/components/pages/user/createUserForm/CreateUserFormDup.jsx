@@ -10,42 +10,91 @@ const CreateUserForm = () => {
   const [reportto, setreportto] = useState("");
   const [profile, setprofile] = useState("");
   const [branch, setbranch] = useState("");
-  const [errors, setErrors] = useState({ fullname: "" });
+  const [errors, setErrors] = useState({});
   // const [profiles, setProfiles] = useState([]);
   const profilee = [];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // if (!fullname.trim()) {
+    //   errors.fullname = "UserName is required";
+    // }
+    // if (fullname.trim()) {
+    //   errors.fullname = "";
+    // }
+    // // Validate email
+    // if (!/\S+@\S+\.\S+/.test(email)) {
+    //   errors.email = "Invalid email address";
+    // }
+
+    // if (phonenum != 10) {
+    //   errors.phonenum = "please enter correct phone number";
+    // }
+    // if (!designation) {
+    //   errors.designation = "Designation is required";
+    // }
+    // if (!department) {
+    //   errors.department = "Department is required";
+    // }
+    // if (!reportto) {
+    //   errors.reportto = "Report To is required";
+    // }
+    // if (!profile) {
+    //   errors.profile = "Profile is required";
+    // }
+    // if (!branch) {
+    //   errors.branch = "Branch is required";
+    // }
+    // console.log("errors" + errors);
+    setErrors({});
+
+    // Validate Full Name
     if (!fullname.trim()) {
-      errors.fullname = "UserName is required";
-    }
-    if (fullname.trim()) {
-      errors.fullname = "";
-    }
-    // Validate email
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Invalid email address";
+      setErrors({ ...errors, fullname: "Full Name is required" });
+      return; // Prevent further validation
     }
 
-    if (phonenum != 10) {
-      errors.phonenum = "please enter correct phone number";
+    // Validate Email
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setErrors({ ...errors, email: "Invalid email address" });
+      return;
     }
-    if (!designation) {
-      errors.designation = "Designation is required";
+
+    // Validate Phone Number
+    if (phonenum.length !== 10) {
+      setErrors({ ...errors, phonenum: "Phone number must be 10 digits" });
+      return;
     }
-    if (!department) {
-      errors.department = "Department is required";
+
+    // Validate Designation
+    if (!designation.trim()) {
+      setErrors({ ...errors, designation: "Designation is required" });
+      return;
     }
-    if (!reportto) {
-      errors.reportto = "Report To is required";
+
+    // Validate Department
+    if (!department.trim()) {
+      setErrors({ ...errors, department: "Department is required" });
+      return;
     }
+
+    // Validate Report To
+    if (!reportto.trim()) {
+      setErrors({ ...errors, reportto: "Report To is required" });
+      return;
+    }
+
+    // Validate Profile
     if (!profile) {
-      errors.profile = "Profile is required";
+      setErrors({ ...errors, profile: "Profile is required" });
+      return;
     }
+
+    // Validate Branch
     if (!branch) {
-      errors.branch = "Branch is required";
+      setErrors({ ...errors, branch: "Branch is required" });
+      return;
     }
-    console.log("errors" + errors);
     const user = {
       fullname,
       email,
@@ -90,58 +139,61 @@ const CreateUserForm = () => {
 
   const [profiles, setProfiles] = useState([]);
 
-const fetchData = async () => {
-  try {
-    const response = await fetch("http://localhost:3030/getuserroles");
-    
-    console.log("Response status:", response.status); // Log response status
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:3030/getuserroles");
 
-    if (!response.ok) {
-      console.error("Network response error:", response.status, response.statusText);
-      throw new Error("Network response was not ok");
+      console.log("Response status:", response.status); // Log response status
+
+      if (!response.ok) {
+        console.error(
+          "Network response error:",
+          response.status,
+          response.statusText
+        );
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log("Fetched data:", data.Result); // Log the fetched data
+      const profileData = data.Result.map((item) => item.role);
+
+      setProfiles(profileData); // Update the state with the extracted role data
+    } catch (error) {
+      console.error("Error:", error);
     }
+  };
 
-    const data = await response.json();
-    console.log("Fetched data:", data.Result); // Log the fetched data
-    const profileData = data.Result.map((item) => item.role);
-    
-    setProfiles(profileData); // Update the state with the extracted role data
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+  //   const [profiles, setProfiles] = useState([]);
 
+  // // const profiles = []
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:3030/getuserroles");
 
-//   const [profiles, setProfiles] = useState([]);
-  
-// // const profiles = []
-//   const fetchData = async () => {
-//     try {
-//       const response = await fetch("http://localhost:3030/getuserroles");
-      
-//       console.log("Response status:", response.status); // Log response status
-  
-//       if (!response.ok) {
-//         console.error("Network response error:", response.status, response.statusText);
-//         throw new Error("Network response was not ok");
-//       }
-  
-//       const data = await response.json();
-//       console.log("Fetched data:", data.Result); // Log the fetched data
-//       const profile = data.Result
-//       // setProfiles(data.Result);
-      
-//       console.log("ppppppp",profile[0].role)
-//       for(let i = 0;i<profile.length;i++){
-//         console.log("role",profile[i].role)
-//         profiles.push(profile[i].role)
-//         console.log("profiles",profiles)
-//         // setProfiles([...profiles,profile[i].role])
-//       }
-//     } catch (error) {
-//       console.error("Error:", error);
-//     }
-//   };
+  //       console.log("Response status:", response.status); // Log response status
+
+  //       if (!response.ok) {
+  //         console.error("Network response error:", response.status, response.statusText);
+  //         throw new Error("Network response was not ok");
+  //       }
+
+  //       const data = await response.json();
+  //       console.log("Fetched data:", data.Result); // Log the fetched data
+  //       const profile = data.Result
+  //       // setProfiles(data.Result);
+
+  //       console.log("ppppppp",profile[0].role)
+  //       for(let i = 0;i<profile.length;i++){
+  //         console.log("role",profile[i].role)
+  //         profiles.push(profile[i].role)
+  //         console.log("profiles",profiles)
+  //         // setProfiles([...profiles,profile[i].role])
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   };
 
   useEffect(() => {
     fetchData(); // Call fetchData when the component mounts
@@ -158,7 +210,6 @@ const fetchData = async () => {
               Full Name<span className="star"> *</span>:
             </label>
             <input
-            
               className="mar col-md-3 inputt "
               type="text"
               onChange={(e) => setfullname(e.target.value)}
@@ -166,7 +217,9 @@ const fetchData = async () => {
               id="fullname"
               required
             />
-
+            {errors.fullname && (
+              <span className="error">{errors.fullname}</span>
+            )}
             <label className="mar col-md-2" htmlFor="email">
               Email ID<span className="star"> *</span>:
             </label>
@@ -178,9 +231,7 @@ const fetchData = async () => {
               id="email"
               required
             />
-            {errors.fullname && (
-              <span className="error">{errors.fullname}</span>
-            )}
+            {errors.email && <span className="error">{errors.email}</span>}
           </div>
           <div className="row roww mb-4">
             <label className="mar col-md-2" htmlFor="phonenumber">
@@ -194,6 +245,10 @@ const fetchData = async () => {
               id="phonenumber"
               required
             />
+            {errors.phonenum && (
+              <span className="error">{errors.phonenum}</span>
+            )}
+
             <label className="mar col-md-2" htmlFor="designation">
               Designation<span className="star"> *</span> :
             </label>
@@ -205,6 +260,9 @@ const fetchData = async () => {
               id="designation"
               required
             />
+            {errors.designation && (
+              <span className="error">{errors.designation}</span>
+            )}
           </div>
           <div className="row roww mb-4">
             <label className="mar col-md-2" htmlFor="department">
@@ -218,6 +276,10 @@ const fetchData = async () => {
               id="department"
               required
             />
+            {errors.department && (
+              <span className="error">{errors.department}</span>
+            )}
+
             <label className="mar col-md-2" htmlFor="reportto">
               Report to <span className="star"> *</span> :
             </label>
@@ -229,6 +291,9 @@ const fetchData = async () => {
               id="reportto"
               required
             />
+            {errors.reportto && (
+              <span className="error">{errors.reportto}</span>
+            )}
           </div>
           <div className="row roww mb-4">
             <label className="mar col-md-2" htmlFor="profile">
@@ -241,13 +306,14 @@ const fetchData = async () => {
               onChange={(e) => setprofile(e.target.value)}
               value={profile}
               required
-              >
+            >
               {profiles.map((profile) => (
                 <option key={profile} value={profile}>
                   {profile}
                 </option>
               ))}
             </select>
+            {errors.profile && <span className="error">{errors.profile}</span>}
 
             {/* <select
               className=" mar col-md-3 selectt"
@@ -280,6 +346,7 @@ const fetchData = async () => {
               <option value="secundrabad">Secundrabad</option>
               <option value="dilshuknagar">Dilshuknagar</option>
             </select>
+            {errors.branch && <span className="error">{errors.branch}</span>}
           </div>
           <div className="create-button">
             <button type="submit" className="btn btn-primary mr-20 mt-5  ">

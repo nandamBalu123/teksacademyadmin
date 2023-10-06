@@ -74,10 +74,30 @@ const CreateRole = () => {
     >
       <div className="container">
         <div className="row">
-        <div className="col-12 col-md-6 col-lg-4 "> <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /></div>
-        <div className="col-12 col-md-6 col-lg-4 "><TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> </div>
+        <div className="col-12 col-md-6 col-lg-4 ">
+       <input 
+       className="form-control"
+       placeholder="Role Name"
+       type="text"
+       value={role}
+       onChange={(e)=>setRoleName(e.target.value)}
+       style={{padding:"15px"}}
+       />
+           {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
+           </div>
+        <div className="col-12 col-md-6 col-lg-4 "> 
+        <input 
+        className="form-control"
+       placeholder="Role Description"
+       type="text"
+       value={description}
+       onChange={(e)=>setDescription(e.target.value)}
+       style={{padding:"15px"}}
+       />
+        {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
         </div>
-        <div className="container "><button type="submit" class="btn btn-primary mr-20 ms-2 mb-2" onClick={handleSubmit}>
+        </div>
+        <div className="container "><button type="submit" class="btn btn-primary my-4" onClick={handleSubmit}>
               Submit
             </button></div>
         

@@ -33,10 +33,12 @@ import CreateRole from "./components/pages/roles/CreateRole";
 import Roles from "./components/pages/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 
-import UserViewCopy from './components/pages/user/userData/UserViewCopy';
+// import UserViewCopy from "./components/pages/user/userData/UserViewCopy";
 import Edit from "./components/pages/user/userData/EditUser";
 import RoleAccess from "./components/pages/roles/RoleAccess";
 import StudentDataView from "./components/pages/student/studentData/StudentDataView";
+import Print from "./components/print/print";
+import FeeDetails from "./components/pages/student/fee/FeeDetails";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -76,6 +78,8 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
+                <Route  path="/feedetails"
+                element={role == "admin" ? <FeeDetails/> : <Dashboard/>}/>
 
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
@@ -95,17 +99,17 @@ function App() {
                 />
 
                 <Route
-                  path="/userview"
+                  path="/userview/:id"
                   element={role == "admin" ? <UserView /> : <Dashboard />}
                 />
-                 <Route
-                 path="/userviewcopy"
-                 element ={role == "admin" ? <UserViewCopy/>:<Dashboard/>} 
-                 />
 
                 <Route
                   path="/roles"
                   element={role == "admin" ? <Roles /> : <Dashboard />}
+                />
+                <Route
+                  path="/print"
+                  element={role == "admin" ? <Print /> : <Dashboard />}
                 />
                 <Route
                   path="/createrole"

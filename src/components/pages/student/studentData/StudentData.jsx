@@ -15,12 +15,14 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import Paper from "@mui/material/Paper";
-
+import PrintIcon from "@mui/icons-material/Print";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 
-import DownloadIcon from "@mui/icons-material/Download";
+
 import SearchIcon from "@mui/icons-material/Search";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -35,6 +37,16 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
+import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
+
+import DownloadIcon from '@mui/icons-material/Download';
+
+import RefreshIcon from '@mui/icons-material/Refresh';
+
+// import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import { CSVLink } from "react-csv";
+
+
 import { initialDataa } from "./data";
 
 import { Link } from "react-router-dom";
@@ -42,7 +54,7 @@ import { Link } from "react-router-dom";
 import { LastPage } from "@mui/icons-material";
 
 import axios from "axios";
-import { CSVLink } from "react-csv";
+// import { CSVLink } from "react-csv";
 // import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 // import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
@@ -108,6 +120,7 @@ const StudentData = () => {
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
+
         console.log("data", response.data);
       })
       .catch((error) => {
@@ -198,11 +211,13 @@ const StudentData = () => {
 
       <div className="studetdetails container">
         <div className="row mb-3 px-4 pt-3">
-          <div className="col-9 col-md-9 ">
-            <p className="search">
+          <div className="col-8 col-md-8  input-field">
+           
               <input
                 type="text"
-                className="form-control"
+                className="input-field"
+                placeholder="Search Here..."
+                autoComplete="off"
                 style={{
                   height: "45px",
                   border: "1.5px solid black",
@@ -212,17 +227,19 @@ const StudentData = () => {
                 value={filterCriteria.search}
                 onChange={handleInputChange}
               />
-            </p>{" "}
+            
            
+            
           </div>
-          <div className="col-1">
+          <div className="col-1 pt-2"> <RefreshIcon/> </div>
+          <div className="col-1 pt-2">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-1 ">
-            {/* <h6> Export</h6>{" "} */}
+          {/* <div className="col-1 ">
+            <h6> Export</h6>{" "}
             <CSVLink
               data={filteredData}
               filename={"studentsdata.csv"}
@@ -231,9 +248,9 @@ const StudentData = () => {
             >
               export
             </CSVLink>
-          </div>
+          </div> */}
 
-          <div className="col-1 ">
+          <div className="col-1 pt-2">
             {" "}
             <h6 onClick={handleClick}> Filter</h6>
             <Menu
@@ -288,13 +305,6 @@ const StudentData = () => {
                     onChange={handleInputChange}
                   />
                 </MenuItem>
-                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DemoContainer components={["DateRangePicker"]}>
-                    <DateRangePicker
-                      localeText={{ start: "Check-in", end: "Check-out" }}
-                    />
-                  </DemoContainer>
-                </LocalizationProvider> */}
               </div>
               <div className="d-flex w-100 mt-3">
                 <MenuItem>
@@ -389,17 +399,27 @@ const StudentData = () => {
               </div>
             </Menu>
           </div>
-        </div>
+          <div className="col-1 pt-2 ">
+          <CSVLink
+            data={filteredData}
+            filename={"studentsdata.csv"}
+        
+            target="_blank"
+          >
+           <DownloadIcon className="text-dark" ></DownloadIcon>
+          </CSVLink>{" "}
+          </div>
+          </div>
 
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="bg-secondary fs-6 border border 1 text-center ">
+                <StyledTableCell className="bg-primary fs-6 border border 1 text-center ">
                   SNo
                 </StyledTableCell>
-
-                {/* <StyledTableCell
+                  {/* 
+                <StyledTableCell
                   className="bg-secondary fs-6  border border 1 text-center"
                   align="left"
                 >
@@ -407,45 +427,48 @@ const StudentData = () => {
                 </StyledTableCell> */}
 
                 <StyledTableCell
-                  className="  bg-secondary fs-6 border border 1 text-centerborder border 1 text-center"
+                  className="  bg-primary fs-6 border border 1 text-centerborder border 1 text-center"
                   align="left"
                 >
-                  Student Name & Registration No
+                  Student Name <br /> Registration No
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
-                  Branch
+                  Branch <br /> Course
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
-                  Course Counseller Source
+                  Counseller
+                  <br /> Source
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center "
+                  className="bg-primary fs-6 border border 1 text-center "
                   align="left"
                 >
-                  Contact Number & Email
+                  Contact Number <br />
+                  Email
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center "
+                  className="bg-primary fs-6 border border 1 text-center "
                   align="left"
                 >
-                  Joining Date & Traning Mode
+                  Joining Date <br />
+                  Traning Mode
                 </StyledTableCell>
 
                 <StyledTableCell
-                  className="bg-secondary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center"
                   align="left"
                 >
-                  Action
+                  Actions
                 </StyledTableCell>
               </TableRow>
             </TableHead>
@@ -458,53 +481,73 @@ const StudentData = () => {
                   <StyledTableCell className=" border border 2 text-center">
                     {item.id}
                   </StyledTableCell>
-
-                  {/* <StyledTableCell className=" border border 2 text-center">
+{/* 
+                  <StyledTableCell className=" border border 2 text-center">
                     {item.profilepic}
                   </StyledTableCell> */}
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.name}</p>
+                    {item.name}
+                    <br />
 
                     {item.registrationnumber}
                   </StyledTableCell>
 
-                  <StyledTableCell align="left">{item.branch}</StyledTableCell>
+                  <StyledTableCell align="left">
+                    {item.branch}
+                    <br />
+                    {item.courses}
+                  </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.courses} </p>
-
                     {item.enquirytakenby}
+                    <br />
 
                     {item.leadsource}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.mobilenumber}</p>
+                  <StyledTableCell className=" border border 1 text-center ">
+                    {item.mobilenumber}
+                    <br />
 
                     {item.email}
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
-                    <p> {item.admissiondate} </p>
-
+                    {item.admissiondate
+                      ? item.admissiondate.substring(0, 10)
+                      : "No Date"}{" "}
+                    <br />
                     {item.modeoftraining}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center d-flex ">
-                    <Link to={`/studentdataview/${item.id}`}>
-                      <VisibilityIcon />
+                  <StyledTableCell className=" border border 1 text-center d-flex pb-5 ">
+                    <Link
+                      to={`/studentdataview/${item.id}`}
+                      style={{ width: "40px" }}
+                    >
+                      <VisibilityIcon className="iconn" />
                     </Link>
 
-                    <Link to={`/registrationform/${item.id}`}>
-                      <EditIcon />
+                    <Link
+                      to={`/registrationform/${item.id}`}
+                      style={{ width: "40px" }}
+                    >
+                      <EditIcon className="iconn" />
                     </Link>
-                    {/* <Link to={`/registrationform/${item.id}`}>
-                      <EditIcon />
+                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <CurrencyRupeeIcon className="iconn" />
                     </Link>
-                    <Link to={`/registrationform/${item.id}`}>
-                      <EditIcon />
-                    </Link> */}
+                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <PrintIcon className="iconn" />
+                    </Link>
+                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <DeleteOutlineIcon
+                        style={{ color: "red" }}
+                        className="iconn"
+                      />
+                    </Link>
+                    
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -1163,32 +1206,32 @@ export default StudentData;
 //           <TableHead>
 
 //             <TableRow>
-//               <StyledTableCell className=" bg-secondary fs-9 border border 1 text-center ">
+//               <StyledTableCell className=" bg-primary fs-9 border border 1 text-center ">
 //                 SNo
 
 //               </StyledTableCell>
-//               <StyledTableCell className=" bg-secondary fs-9 border border 1 text-center" align="left">
+//               <StyledTableCell className=" bg-primary fs-9 border border 1 text-center" align="left">
 //                 Photo
 
 //               </StyledTableCell>
-//               <StyledTableCell className="  bg-secondary fs-9 border border 1 text-centerborder border 1 text-center" align="left">
+//               <StyledTableCell className="  bg-primary fs-9 border border 1 text-centerborder border 1 text-center" align="left">
 //                 Registration No
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center" align="left">
 //                 Student Name & Student ID
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center " align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center " align="left">
 //                 Contact Number & Email
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center" align="left">
 //                 Course Counseller Source
 
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center " align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center " align="left">
 //                 Joining Date & Traning Mode
 
 //               </StyledTableCell>
-//               <StyledTableCell className="bg-secondary fs-10 border border 1 text-center" align="left">
+//               <StyledTableCell className="bg-primary fs-10 border border 1 text-center" align="left">
 //                 Action
 
 //               </StyledTableCell>

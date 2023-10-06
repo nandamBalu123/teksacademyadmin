@@ -3,43 +3,50 @@ import { useState, useEffect } from "react";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import "./UserView.css";
+import axios from "axios";
 const UserView = () => {
-  const [singleUser, setUser] = useState();
+  const [singleUser, setUser] = useState("");
 
   const { user } = useAuthContext();
   const { id } = useParams("");
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch(`userview/${id}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
+    // Make a GET request to your backend API endpoint
+    axios
+      .get(`http://localhost:3030/viewuser/${id}`)
+      .then((response) => {
+        // Handle the successful response here
+        setUser(response.data[0]); // Update the data state with the fetched data
+        console.log("studentdata---", response.data[0]);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
       });
-      const json = await response.json();
-      setUser(json);
-    };
+  }, []);
 
-    if (user) {
-      fetchUser();
-    }
-  }, [user]);
+  const backgroundImageUrl = "url(../../../../images/userviewlogo.jpg)";
+  const divStyle = {
+    backgroundImage: backgroundImageUrl,
+    backgroundSize: "cover", // Adjust as needed
+    backgroundRepeat: "no-repeat", // Adjust as needed
+  };
 
   return (
-    <div>
-      {/* <p>{singleUser.fullname}</p>
-      <p>{singleUser.email}</p>
-      <p>{singleUser.phonenumber}</p>
-      <p>{singleUser.designation}</p>
-      <p>{singleUser.department}</p>
-      <p>{singleUser.reportto}</p>
-      <p>{singleUser.profile}</p>
-      <p>{singleUser.branch}</p> */}
-      {/* <h2>irshad</h2>
-      <p>irshad2</p>
-      <p>3321332</p>
-      <p>rewfasdf</p>
-      <p>gfdsfdasf</p>
-      <p>fsdafs</p>
-      <p>fsdfsdf</p>
-      <p>fsdfa</p> */}
+    <div className="container">
+      <div className="data">
+        <h3 className="text-center pt-3 title fs-3"> User Details</h3>
+        <hr className="w-50 m-auto" />
+        <div className="details pt-3">
+          <h5> Name : {singleUser.fullname} </h5> <br />
+          <h5> Email : {singleUser.email}</h5> <br />
+          <h5> Phone No :{singleUser.phonenumber}</h5> <br />
+          <h5> Designation: {singleUser.designation}</h5> <br />
+          <h5> Department : {singleUser.department}</h5> <br />
+          <h5> Report To : {singleUser.reportto}</h5> <br />
+          <h5> Profile : {singleUser.profile}</h5> <br />
+          <h5> Branch: {singleUser.branch}</h5>{" "}
+        </div>
+      </div>
     </div>
   );
 };
