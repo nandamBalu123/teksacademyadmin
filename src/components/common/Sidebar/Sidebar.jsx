@@ -13,6 +13,10 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+import InfoIcon from '@mui/icons-material/Info';
+import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import favicon from "../../../images/favicon.jpeg";
 // let role = localStorage.getItem(role);
 
@@ -205,14 +209,14 @@ const Sidebar = () => {
               <Item
                 title="Student Details"
                 to="/studentdata"
-                icon={<EditNoteIcon />}
+                icon={<InfoIcon/>}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
                 title="Registration Form"
                 to="/registrationform"
-                icon={<EditNoteIcon />}
+                icon={<Diversity3Icon/>}
                 selected={selected}
                 setSelected={setSelected}
               />
@@ -220,14 +224,14 @@ const Sidebar = () => {
               <Item
                 title="Fee Details"
                 to="/feedetails"
-                icon={<EditNoteIcon />}
+                icon={<AttachMoneyIcon/>}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
                 title="Certificate"
                 to="/certificate"
-                icon={<EditNoteIcon />}
+                icon={<CardMembershipIcon/>}
                 selected={selected}
                 setSelected={setSelected}
               />

@@ -75,7 +75,11 @@ hr {
   padding: 5px;
   color: white;
 }
+
 .iconn:hover {
-  font-size: 35px;
+  color:gray;
   transition: 0.1s;
+}
+.input-field:hover{ 
+  border: hidden;
 }
