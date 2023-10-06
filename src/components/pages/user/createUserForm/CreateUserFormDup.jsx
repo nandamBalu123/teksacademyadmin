@@ -307,6 +307,7 @@ const CreateUserForm = () => {
               value={profile}
               required
             >
+              <option value="">--select</option>
               {profiles.map((profile) => (
                 <option key={profile} value={profile}>
                   {profile}

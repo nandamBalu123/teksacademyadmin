@@ -80,8 +80,10 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
-                <Route  path="/feedetails"
-                element={role == "admin" ? <FeeDetails/> : <Dashboard/>}/>
+                <Route
+                  path="/feedetails/:id"
+                  element={role == "admin" ? <FeeDetails /> : <Dashboard />}
+                />
 
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route

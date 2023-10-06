@@ -4,7 +4,31 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import logo from "../../../../images/Teks-Logo-with-Trade.png";
 import "./FeeDetails.css";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 const FeeDetails = () => {
+  const { id } = useParams();
+
+  const [studentdata, setstudentdata] = useState("");
+
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get(`http://localhost:3030/viewstudentdata/${id}`)
+      .then((response) => {
+        // Handle the successful response here
+        setstudentdata(response.data[0]); // Update the data state with the fetched data
+        console.log("studentdata", response.data);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+  // const jsonString = studentdata.feedetails;
+
+  // const jsonObject = JSON.parse(jsonString);
   return (
     <>
       <div className="page">
@@ -57,7 +81,7 @@ const FeeDetails = () => {
                 {" "}
                 <h5 className="text-start">
                   {" "}
-                  <strong> Branch:</strong> Dilsukhnagar{" "}
+                  <strong> Branch:</strong> {studentdata.branch}
                 </h5>
               </h4>
             </div>
@@ -85,27 +109,36 @@ const FeeDetails = () => {
                           {" "}
                           Student/Trainee Name
                         </th>{" "}
-                        <td colspan="4"></td>{" "}
+                        <td colspan="4">{studentdata.name}</td>{" "}
                       </tr>
                       <tr>
                         {" "}
-                        <th>Parent Name </th> <td colspan="4"></td>{" "}
+                        <th>Parent Name </th>{" "}
+                        <td colspan="4">{studentdata.parentsname}</td>{" "}
                       </tr>
                       <tr>
                         {" "}
-                        <th> Date of Birth</th> <td colspan="4"></td>{" "}
+                        <th> Date of Birth</th>{" "}
+                        <td colspan="4">
+                          {studentdata.birthdate
+                            ? studentdata.birthdate.substring(0, 10)
+                            : "No Date"}
+                        </td>{" "}
                       </tr>
                       <tr>
                         {" "}
-                        <th>Gender </th> <td colspan="4"></td>{" "}
+                        <th>Gender </th>{" "}
+                        <td colspan="4">{studentdata.gender}</td>{" "}
                       </tr>
                       <tr>
                         {" "}
-                        <th>Marital Status </th> <td colspan="4"></td>{" "}
+                        <th>Marital Status </th>{" "}
+                        <td colspan="4">{studentdata.maritalstatus}</td>{" "}
                       </tr>
                       <tr>
                         {" "}
-                        <th> College/Company</th> <td colspan="4"></td>{" "}
+                        <th> College/Company</th>{" "}
+                        <td colspan="4">{studentdata.college}</td>{" "}
                       </tr>
                     </tbody>
                   </table>
@@ -130,28 +163,41 @@ const FeeDetails = () => {
                   <br />
                   <tr>
                     {" "}
-                    <th>Country</th> <td className="w-25"> </td>{" "}
-                    <th> Native Place</th> <td className="w-25"></td>{" "}
+                    <th>Country</th>{" "}
+                    <td className="w-25">{studentdata.country} </td>{" "}
+                    <th> Native Place</th>{" "}
+                    <td className="w-25">{studentdata.native}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
-                    <th>State</th> <td className="w-25"> </td> <th> Area</th>{" "}
-                    <td className="w-25"></td>{" "}
+                    <th>State</th>{" "}
+                    <td className="w-25"> {studentdata.state} </td>
+                    <th> Area</th> <td className="w-25">{studentdata.area}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
-                    <th>Present Address</th> <td className="w-25"> </td>{" "}
-                    <th> ZipCode</th> <td className="w-25"></td>{" "}
+                    <th>Present Address</th>{" "}
+                    <td className="w-25">
+                      {studentdata.area}
+                      {studentdata.state}
+                      {studentdata.zipcode}{" "}
+                    </td>{" "}
+                    <th> ZipCode</th>{" "}
+                    <td className="w-25">{studentdata.zipcode}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
-                    <th> Mobile Number </th> <td className="w-25"> </td>{" "}
-                    <th> WhatsApp Number</th> <td className="w-25"></td>{" "}
+                    <th> Mobile Number </th>{" "}
+                    <td className="w-25"> {studentdata.mobilenumber}</td>{" "}
+                    <th> WhatsApp Number</th>{" "}
+                    <td className="w-25">{studentdata.whatsappno}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
-                    <th> Email Id </th> <td className="w-25"> </td>{" "}
-                    <th> Parent Number</th> <td className="w-25"></td>{" "}
+                    <th> Email Id </th>{" "}
+                    <td className="w-25">{studentdata.email} </td>{" "}
+                    <th> Parent Number</th>{" "}
+                    <td className="w-25">{studentdata.whatsappno}</td>{" "}
                   </tr>
                 </tbody>
               </table>
@@ -176,8 +222,10 @@ const FeeDetails = () => {
                     </tr>
                     <tr>
                       {" "}
-                      <td class="w-25"> </td> <td class="w-25"></td>{" "}
-                      <td class="w-25"></td> <td class="w-25"></td>{" "}
+                      <td class="w-25">{studentdata.id}</td>{" "}
+                      <td class="w-25">{studentdata.educationtype}</td>{" "}
+                      <td class="w-25">{studentdata.marks}</td>{" "}
+                      <td class="w-25">{studentdata.academicyear}</td>{" "}
                     </tr>
                   </tbody>
                 </table>
@@ -198,34 +246,61 @@ const FeeDetails = () => {
                   <br />
                   <tr>
                     {" "}
-                    <th>Enquiry Date</th> <td className="w-25"> </td>{" "}
-                    <th> Branch</th> <td className="w-25"></td>{" "}
+                    <th>Enquiry Date</th>{" "}
+                    <td className="w-25">
+                      {" "}
+                      {studentdata.enquirydate
+                        ? studentdata.enquirydate.substring(0, 10)
+                        : "No Date"}
+                    </td>{" "}
+                    <th> Branch</th>{" "}
+                    <td className="w-25">{studentdata.branch}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
-                    <th> Enquiry Taken By </th> <td className="w-25"> </td>{" "}
-                    <th> Lead Source </th> <td className="w-25"></td>{" "}
+                    <th> Enquiry Taken By </th>{" "}
+                    <td className="w-25">{studentdata.enquirytakenby} </td>{" "}
+                    <th> Lead Source </th>{" "}
+                    <td className="w-25">{studentdata.leadsource}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
-                    <th> Course Package </th> <td className="w-25"> </td>{" "}
-                    <th> Course</th> <td className="w-25"></td>{" "}
+                    <th> Course Package </th>{" "}
+                    <td className="w-25">{studentdata.coursepackage} </td>{" "}
+                    <th> Course</th>{" "}
+                    <td className="w-25">{studentdata.courses}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
-                    <th> Admission Status </th> <td className="w-25"> </td>{" "}
-                    <th> Mode of Training</th> <td className="w-25"></td>{" "}
+                    <th> Admission Status </th>{" "}
+                    <td className="w-25">{studentdata.admissionstatus} </td>{" "}
+                    <th> Mode of Training</th>{" "}
+                    <td className="w-25">{studentdata.modeoftraining}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
                     <th> Admission Date </th>
-                    <td> </td> <th> Course Start Date</th>{" "}
-                    <td colspan="1"> </td>{" "}
+                    <td>
+                      {studentdata.admissiondate
+                        ? studentdata.admissiondate.substring(0, 10)
+                        : "No Date"}{" "}
+                    </td>{" "}
+                    <th> Course Start Date</th>{" "}
+                    <td colspan="1">
+                      {" "}
+                      {studentdata.validitystartdate
+                        ? studentdata.validitystartdate.substring(0, 10)
+                        : "No Date"}{" "}
+                    </td>{" "}
                   </tr>
                   <tr>
                     {" "}
                     <th> Expected End Date </th>
-                    <td colspan="4"></td>{" "}
+                    <td colspan="4">
+                      {studentdata.validityenddate
+                        ? studentdata.validityenddate.substring(0, 10)
+                        : "No Date"}{" "}
+                    </td>{" "}
                   </tr>
                 </tbody>
               </table>
@@ -251,8 +326,28 @@ const FeeDetails = () => {
                     <th> Discount Type</th>
                     <th className="col-sm-4"> Total Fee </th>
                   </tr>
+                  {studentdata.feedetails}
+                  {/* {studentdata.feedetails &&
+                    studentdata.feedetails.map((item, index) => (
+                      <tr key={index}>
+                        <td>{item.feetype}</td>
+                        <td>{item.amount}</td>
+                        <td>{item.discount}</td>
+                        <td>{item.taxamount}</td>
+                        <td>{item.totalamount}</td>
+                      </tr>
+                    ))} */}
+                  {Array.isArray(studentdata.feedetails) &&
+                    studentdata.feedetails.map((item, index) => (
+                      <tr key={index}>
+                        <td>{item.feetype}</td>
+                        <td>{item.amount}</td>
+                        <td>{item.discount}</td>
+                        <td>{item.taxamount}</td>
+                        <td>{item.totalamount}</td>
+                      </tr>
+                    ))}
                   <tr>
-                    {" "}
                     <td> </td> <td></td> <td></td> <td></td> <td></td>{" "}
                   </tr>
                 </tbody>
@@ -265,7 +360,7 @@ const FeeDetails = () => {
               style={{ fontSize: "25px", fontWeight: "600" }}
             >
               {" "}
-              Asserts{" "}
+              Assets{" "}
             </div>
             <div className="table-responsive">
               <table className="table table-bordered">
