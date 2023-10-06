@@ -108,7 +108,7 @@ const Topbar = () => {
               <MenuItem onClick={handleClose}>Profile & Acoount</MenuItem>
               <MenuItem onClick={handleClose}>Setting </MenuItem>
               <hr />
-              <MenuItem onClick={handleClose}>Sing Out </MenuItem>
+              <MenuItem onClick={handleLogout}>Sing Out </MenuItem>
             </Menu>
           </div>
          

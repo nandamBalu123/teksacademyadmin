@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -306,7 +306,9 @@ const UsersData = () => {
                 <StyledTableCell align="center"> {user.branch}</StyledTableCell>
                 <StyledTableCell align="center"> 
                 <RemoveRedEyeIcon onClick={handleview}/>
-                <ModeEditIcon onClick={handleedit}/>
+                <NavLink to={`edit/${user.id}`}>
+                <ModeEditIcon />
+                </NavLink>
                 <DeleteIcon onClick={() => deleteuser(user.id)}/> </StyledTableCell>
                 </StyledTableRow>
             ))}

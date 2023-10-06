@@ -213,7 +213,7 @@ const StudentData = () => {
                 onChange={handleInputChange}
               />
             </p>{" "}
-            <hr className="w-50" />
+           
           </div>
           <div className="col-1">
             <h6>
