@@ -75,4 +75,7 @@ hr {
   padding: 5px;
   color: white;
 }
-
+.iconn:hover {
+  font-size: 35px;
+  transition: 0.1s;
+}
