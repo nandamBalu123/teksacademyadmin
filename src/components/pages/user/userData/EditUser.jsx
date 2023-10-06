@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {NavLink, useParams, useNavigate} from "react-router-dom"
 import { updatedata } from './context/ContextProvider';
-
+import axios from 'axios';
 const EditUser = () => {
 
   // var apiUrl = "http://localhost:3030";
@@ -56,51 +56,65 @@ console.log("update" + updata);
     getdata();
   }, []);
 
-  const updateuser = async (e) => {
+  // const updateuser = async (e) => {
+  //   e.preventDefault();
+  
+  //   const {
+  //     fullname,
+  //     email,
+  //     phonenumber,
+  //     designation,
+  //     department,
+  //     reportto,
+  //     profile,
+  //     branch,
+  //   } = user;
+  
+  //   console.log("user : ", user);
+  
+  //   const res2 = await fetch(`http://localhost:3030/updateuser/${id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       fullname,
+  //       email,
+  //       phonenumber,
+  //       designation,
+  //       department,
+  //       reportto,
+  //       profile,
+  //       branch,
+  //     }),
+  //   });
+  
+  //   console.log('res2: ', res2)
+  //   const data2 = await res2.json();
+  //   console.log('data2' + data2)
+  
+  //   if (res2.status === 422 || !data2) {
+  //     alert("Please fill in the data.");
+  //   } else {
+  //     navigate("/usersdata");
+  //     setUPdata(data2); // You can uncomment this if needed.
+  //   }
+  // };
+  
+
+  const handlesubmit = (e) => {
     e.preventDefault();
-  
-    const {
-      fullname,
-      email,
-      phonenumber,
-      designation,
-      department,
-      reportto,
-      profile,
-      branch,
-    } = user;
-  
-    console.log("user : ", user);
-  
-    const res2 = await fetch(`http://localhost:3030/updateuser/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fullname,
-        email,
-        phonenumber,
-        designation,
-        department,
-        reportto,
-        profile,
-        branch,
-      }),
-    });
-  
-    console.log('res2: ', res2)
-    const data2 = await res2.json();
-    console.log('data2' + data2)
-  
-    if (res2.status === 422 || !data2) {
-      alert("Please fill in the data.");
-    } else {
-      navigate("/usersdata");
-      setUPdata(data2); // You can uncomment this if needed.
-    }
-  };
-  
+    axios.put(`http://localhost:3030/updateuser/${id}`, user)
+    .then(res => {
+      if(res.data.updated){
+        alert('User Updated')
+        navigate('/usersdata')
+        
+      }else{
+        alert("not updated")
+      }
+    })
+  }
 
   return (
     <div className="container">
@@ -215,7 +229,7 @@ console.log("update" + updata);
             />
           </div>
 
-          <button type="submit" onClick={updateuser} className="btn btn-primary">
+          <button type="submit" onClick={handlesubmit} className="btn btn-primary">
             Submit
           </button>
         </div>

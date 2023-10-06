@@ -215,12 +215,17 @@ const StudentData = () => {
            
               <input
                 type="text"
-                className="input-field"
+                className="input-field ps-2"
                 placeholder="Search Here..."
                 autoComplete="off"
                 style={{
                   height: "45px",
-                  border: "1.5px solid black",
+                 width:"50%",
+                  border: "none",
+                  outline: "none",
+                  borderTop: 'none',
+                  borderBottom: "1.5px solid black",
+                  background:"none",
                   borderRadius: "5px",
                 }}
                 name="search"
@@ -231,7 +236,7 @@ const StudentData = () => {
            
             
           </div>
-          <div className="col-1 pt-2"> <RefreshIcon/> </div>
+          <div className="col-1 pt-2" style={{cursor: 'pointer'}}> <RefreshIcon/> </div>
           <div className="col-1 pt-2">
             <h6>
               {" "}
@@ -252,7 +257,7 @@ const StudentData = () => {
 
           <div className="col-1 pt-2">
             {" "}
-            <h6 onClick={handleClick}> Filter</h6>
+            <h6 onClick={handleClick} style={{cursor: 'pointer'}}> Filter</h6>
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}
@@ -521,7 +526,7 @@ const StudentData = () => {
                     {item.modeoftraining}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center d-flex pb-5 ">
+                  <StyledTableCell className=" border border 1 text-center d-flex   ">
                     <Link
                       to={`/studentdataview/${item.id}`}
                       style={{ width: "40px" }}

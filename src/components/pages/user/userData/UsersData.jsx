@@ -28,88 +28,68 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
+// import { transcode } from "buffer";
 const UsersData = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const { users, dispatch } = useUsersContext();
   const { user } = useAuthContext();
 
-  const deleteuser = async (id) => {
-    try {
-      const res2 = await fetch(`http://localhost:3030/deleteuser/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  // const [deleted, setDeleted] = useState(false);
 
-      if (res2.status === 404) {
-        console.log("User not found");
-      } else if (res2.status === 422) {
-        console.log("Unprocessable Entity");
-      } else if (res2.status === 200) {
-        const deletedata = await res2.json();
-        console.log("User deleted successfully", deletedata);
-      } else {
-        console.log("Unexpected error");
+  const [deleted, setDeleted] = useState(false);
+
+  useEffect(() => {
+    // Define a function to delete the user
+    const deleteuser = async () => {
+      try {
+        const response = await fetch(`/deleteuser/${user.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.status === 200) {
+          // User deleted successfully
+          setDeleted(true);
+        } else if (response.status === 404) {
+          // User not found
+          console.error('User not found.');
+        } else {
+          // Handle other errors here
+          console.error('Error deleting user.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+    };
+
+    // Call the delete function
+    deleteuser();
+  }, [user]);
 
   // const deleteuser = async (id) => {
-  //   try{
-  //     const response = await fetch(`http://localhost:3030/deleteuser/${id}`, {
+  //   try {
+  //     const res2 = await fetch(`http://localhost:3030/deleteuser/${id}`, {
   //       method: "DELETE",
   //       headers: {
   //         "Content-Type": "application/json",
   //       },
   //     });
-  //     if(response.status === 200){
-  //       console.log("User delete successfully");
-  //     }else{
-  //       console.log("Failed to delete user: ", response.statusText);
+
+  //     if (res2.status === 404) {
+  //       console.log("User not found");
+  //     } else if (res2.status === 422) {
+  //       console.log("Unprocessable Entity");
+  //     } else if (res2.status === 200) {
+  //       const deletedata = await res2.json();
+  //       console.log("User deleted successfully", deletedata);
+  //     } else {
+  //       console.log("Unexpected error");
   //     }
-
-  //   }catch (error){
-  //     console.log("An error occurred:", error)
-  //   }
-  // }
-
-  // const deleteuser = async (id) => {
-  //   const res2 = await fetch(`http://localhost:3030/deleteuser/${id}`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-
-  //   const deletedata = await res2.json();
-  //   console.log(deletedata);
-
-  //   if (res2.status === 422 || !deletedata) {
-  //     console.log("error");
-  //   } else {
-  //     console.log("user deleted");
-  //     // setDLTdata(deletedata)
-  //     // getdata();
-  //   }
-  // };
-  // const deleteuser = async () => {
-  //   if (!user) {
-  //     return;
-  //   }
-  //   const response = await fetch("http://localhost:3030/deleteuser/delete", {
-  //     method: "DELETE",
-  //     headers: {
-  //       Authorization: `Bearer ${user.token}`,
-  //     },
-  //   });
-  //   const json = await response.json();
-
-  //   if (response.ok) {
-  //     dispatch({ type: "DELETE_USER", payload: json });
+  //   } catch (error) {
+  //     console.error("Error:", error);
   //   }
   // };
 
@@ -168,12 +148,7 @@ const UsersData = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  const handleedit = () => {
-    navigate("/edit");
-  };
-  const handleview = () => {
-    navigate("/userview");
-  };
+  
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -215,7 +190,12 @@ const UsersData = () => {
               
               padding: "10px",
               margin:"3px",
-              border: "1.5px solid black",
+              // border: "1.5px solid black",
+              border: "none",
+              outline: "none",
+              borderTop: 'none',
+              borderBottom: "1.5px solid black",
+              background:"none",
               borderRadius: "5px",
             }}
             
@@ -469,8 +449,11 @@ const UsersData = () => {
                       >
                         <VisibilityIcon className="iconn" />
                       </Link>
-                      <ModeEditIcon onClick={handleedit} />
-                      <DeleteIcon onClick={() => deleteuser(user.id)} />{" "}
+                      <Link to={`/edituser/${user.id}`}>
+                        <ModeEditIcon />
+                      </Link>
+                      <DeleteIcon />
+                      {/* onClick={() => deleteuser(user.id)}  */}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
