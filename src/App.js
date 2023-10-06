@@ -37,6 +37,7 @@ import UserViewCopy from './components/pages/user/userData/UserViewCopy';
 import Edit from "./components/pages/user/userData/EditUser";
 import RoleAccess from "./components/pages/roles/RoleAccess";
 import StudentDataView from "./components/pages/student/studentData/StudentDataView";
+import FeeDetails from "./components/pages/student/fee/FeeDetails";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -76,6 +77,8 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
+                <Route  path="/feedetails"
+                element={role == "admin" ? <FeeDetails/> : <Dashboard/>}/>
 
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route

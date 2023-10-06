@@ -174,12 +174,13 @@ const UsersData = () => {
     <div className="container-fluid">
       <h2 className="ms-3">Users List</h2>
       <div className="mb-2"> 
+      <div className="user-data"> 
       <input
             type="text"
             placeholder='Search Here......'
             style={{
               height: "55px",
-              width: "90%",
+              
               padding: "10px",
               margin:"3px",
               border: "1.5px solid black",
@@ -187,20 +188,20 @@ const UsersData = () => {
             }}
             
           />  
-          
-          
-             {/* For Filter */}
-             <Button
+      {/* For Filter */}
+        <Button
+       
         id="demo-positioned-button"
         aria-controls={open ? 'demo-positioned-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        
+      
       >
-        <h6 className="filters" style={{textTransform: "capitalize"}}> Filter </h6>
+     <button  className="btn btn-primary mr-20 ms-2 mb-2"   style={{textTransform: "capitalize"}}> Filter </button>
    
       </Button>
+      </div>
 
       <Menu
       className="mt-5"

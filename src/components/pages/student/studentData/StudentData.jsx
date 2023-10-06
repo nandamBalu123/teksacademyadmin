@@ -41,6 +41,8 @@ import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 
 import DownloadIcon from '@mui/icons-material/Download';
 
+import RefreshIcon from '@mui/icons-material/Refresh';
+
 // import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { CSVLink } from "react-csv";
 
@@ -208,11 +210,13 @@ const StudentData = () => {
 
       <div className="studetdetails container">
         <div className="row mb-3 px-4 pt-3">
-          <div className="col-9 col-md-9 ">
-            <p className="">
+          <div className="col-8 col-md-8  input-field">
+           
               <input
                 type="text"
-                className="form-control"
+                className="input-field"
+                placeholder="Search Here..."
+                autoComplete="off"
                 style={{
                   height: "45px",
                   border: "1.5px solid black",
@@ -222,9 +226,12 @@ const StudentData = () => {
                 value={filterCriteria.search}
                 onChange={handleInputChange}
               />
-            </p>{" "}
+            
+           
+            
           </div>
-          <div className="col-1">
+          <div className="col-1 pt-2"> <RefreshIcon/> </div>
+          <div className="col-1 pt-2">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
@@ -242,7 +249,7 @@ const StudentData = () => {
             </CSVLink>
           </div> */}
 
-          <div className="col-1 ">
+          <div className="col-1 pt-2">
             {" "}
             <h6 onClick={handleClick}> Filter</h6>
             <Menu
@@ -398,7 +405,7 @@ const StudentData = () => {
               </div>
             </Menu>
           </div>
-          <div className="col-1 ">
+          <div className="col-1 pt-2 ">
           <CSVLink
             data={filteredData}
             filename={"studentsdata.csv"}
