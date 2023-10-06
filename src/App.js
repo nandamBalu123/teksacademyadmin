@@ -145,7 +145,7 @@ function App() {
                   element={role == "admin" ? <RoleAccess /> : <Dashboard />}
                 />
                 <Route
-                  path="/edit"
+                  path="/edituser/:id"
                   element={role == "admin" ? <Edit /> : <Dashboard />}
                 />
                 <Route path="/inn" element={<Login />}></Route>

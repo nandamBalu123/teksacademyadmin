@@ -235,23 +235,33 @@ const StudentData = () => {
       <div className="studetdetails ">
         <div className="row mb-3 px-4 pt-3">
           <div className="col-8 col-md-8  input-field">
-            <input
-              type="text"
-              className="input-field"
-              placeholder="Search Here..."
-              autoComplete="off"
-              style={{
-                height: "45px",
-                border: "hidden",
-                borderRadius: "5px",
-                background: "none",
-              }}
-              name="search"
-              value={filterCriteria.search}
-              onChange={handleInputChange}
-            />
-            <hr />
+           
+              <input
+                type="text"
+                className="input-field ps-2"
+                placeholder="Search Here..."
+                autoComplete="off"
+                style={{
+                  height: "45px",
+                 width:"50%",
+                  
+                  outline: "none",
+                  borderTop: 'none',
+                  borderBottom: "1.5px solid black",
+                  background:"none",
+                  border: "hidden",
+                  borderRadius: "5px",
+                  background:"none"
+                }}
+                name="search"
+                value={filterCriteria.search}
+                onChange={handleInputChange}
+              /><hr/>
+            
+           
+            
           </div>
+          <div className="col-1 pt-2" style={{cursor: 'pointer'}}> <RefreshIcon/> </div>
           <div className="col-1 pt-2">
             <h6>
               {" "}
@@ -272,7 +282,7 @@ const StudentData = () => {
 
           <div className="col-1 pt-2">
             {" "}
-            <h6 onClick={handleClick}> Filter</h6>
+            <h6 onClick={handleClick} style={{cursor: 'pointer'}}> Filter</h6>
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}
