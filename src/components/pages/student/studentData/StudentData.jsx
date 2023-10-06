@@ -205,11 +205,11 @@ const StudentData = () => {
   };
   // for date
 
-  return (
+  return ( 
     <>
       <h3 className="ms-5"> Student Data </h3>
 
-      <div className="studetdetails container">
+      <div className="studetdetails ">
         <div className="row mb-3 px-4 pt-3">
           <div className="col-8 col-md-8  input-field">
            
@@ -220,13 +220,14 @@ const StudentData = () => {
                 autoComplete="off"
                 style={{
                   height: "45px",
-                  border: "1.5px solid black",
+                  border: "hidden",
                   borderRadius: "5px",
+                  background:"none"
                 }}
                 name="search"
                 value={filterCriteria.search}
                 onChange={handleInputChange}
-              />
+              /><hr/>
             
            
             
@@ -506,11 +507,16 @@ const StudentData = () => {
                     {item.leadsource}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center ">
+                  <StyledTableCell className=" border border 1 text-center  ">
                     {item.mobilenumber}
                     <br />
 
-                    {item.email}
+                    <p style={{
+                       width:"200px",
+                       whiteSpace:"nowrap",
+                       overflow:"hidden",
+                       textOverflow:"ellipsis"
+                  }}>janfjanjgnasjdnjsnagjagrjgferhtuweteruhtuewrhgejrijgenjdnbjdnfjd</p>
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
@@ -521,10 +527,10 @@ const StudentData = () => {
                     {item.modeoftraining}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center d-flex pb-5 ">
+                  <StyledTableCell className=" border border 1 text-center d-flex">
                     <Link
                       to={`/studentdataview/${item.id}`}
-                      style={{ width: "40px" }}
+                      style={{ width: "40px", marginBottom:"10px" }}
                     >
                       <VisibilityIcon className="iconn" />
                     </Link>
