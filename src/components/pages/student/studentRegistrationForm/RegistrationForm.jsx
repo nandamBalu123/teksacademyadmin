@@ -359,7 +359,7 @@ export default function RegistrationForm() {
                   &nbsp;
                   <input
                     type="text"
-                    className="col-9 col-md-5  "
+                    className="col-9 col-md-5  mt-3 "
                     require
                     style={{
                       height: "35px",
@@ -1202,7 +1202,7 @@ export default function RegistrationForm() {
                     <span className="text-danger"> *</span>&nbsp;:
                   </label>
 
-                  {totalamount}
+               {totalamount}     
                 </div>
                 <button
                   onClick={handleFeeDetails}

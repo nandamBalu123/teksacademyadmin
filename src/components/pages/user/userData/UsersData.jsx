@@ -205,19 +205,35 @@ const UsersData = () => {
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container-fluid">
       <h2 className="ms-3">Users List</h2>
-      <div className="mb-2">
-        <input
-          type="text"
-          placeholder="Search Here......"
-          style={{
-            height: "55px",
-            width: "90%",
-            padding: "10px",
-            margin: "3px",
-            border: "1.5px solid black",
-            borderRadius: "5px",
-          }}
-        />
+      <div className="mb-2"> 
+      <div className="user-data"> 
+      <input
+            type="text"
+            placeholder='Search Here......'
+            style={{
+              height: "55px",
+              
+              padding: "10px",
+              margin:"3px",
+              border: "1.5px solid black",
+              borderRadius: "5px",
+            }}
+            
+          />  
+      {/* For Filter */}
+        <Button
+       
+        id="demo-positioned-button"
+        aria-controls={open ? 'demo-positioned-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      
+      >
+     <button  className="btn btn-primary mr-20 ms-2 mb-2"   style={{textTransform: "capitalize"}}> Filter </button>
+   
+      </Button>
+      </div>
 
         {/* For Filter */}
         <Button
