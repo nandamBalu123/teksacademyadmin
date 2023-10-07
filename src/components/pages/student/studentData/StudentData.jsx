@@ -149,17 +149,15 @@ const StudentData = () => {
             .includes(filterCriteria.search.toLowerCase()) ||
           item.branch
             .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.registrationnumber.includes(filterCriteria.search) ||
+          item.courses
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.enquirytakenby
+            .toLowerCase()
             .includes(filterCriteria.search.toLowerCase())
-        : //   ||
-          // item.registrationnumber.includes(filterCriteria.search)
-
-          // item.courses
-          //   .toLowerCase()
-          //   .includes(filterCriteria.search.toLowerCase()) ||
-          // item.enquirytakenby
-          //   .toLowerCase()
-          //   .includes(filterCriteria.search.toLowerCase())
-          true;
+        : true;
 
       const dateCondition =
         filterCriteria.fromdate && filterCriteria.todate
@@ -227,7 +225,24 @@ const StudentData = () => {
     setAnchorEl(null);
   };
   // for date
+  //// reset filters
+  const filterreset = () => {
+    setFilterCriteria({
+      fromdate: "",
 
+      todate: "",
+
+      branch: "",
+
+      leadsource: "",
+
+      modeoftraining: "",
+
+      enquirytakenby: "",
+
+      search: "",
+    });
+  };
   return (
     <>
       <h3 className="ms-5"> Student Data </h3>
@@ -235,54 +250,46 @@ const StudentData = () => {
       <div className="studetdetails ">
         <div className="row mb-3 px-4 pt-3">
           <div className="col-8 col-md-8  input-field">
-           
-              <input
-                type="text"
-                className="input-field ps-2"
-                placeholder="Search Here..."
-                autoComplete="off"
-                style={{
-                  height: "45px",
-                 width:"50%",
-                  
-                  outline: "none",
-                  borderTop: 'none',
-                  borderBottom: "1.5px solid black",
-                  background:"none",
-                  border: "hidden",
-                  borderRadius: "5px",
-                  background:"none"
-                }}
-                name="search"
-                value={filterCriteria.search}
-                onChange={handleInputChange}
-              /><hr/>
-            
-           
-            
+            <input
+              type="text"
+              className="input-field ps-2"
+              placeholder="Search Here..."
+              autoComplete="off"
+              style={{
+                height: "45px",
+                width: "50%",
+
+                outline: "none",
+                borderTop: "none",
+                borderBottom: "1.5px solid black",
+                background: "none",
+                border: "hidden",
+                borderRadius: "5px",
+                background: "none",
+              }}
+              name="search"
+              value={filterCriteria.search}
+              onChange={handleInputChange}
+            />
+            <hr />
           </div>
-          <div className="col-1 pt-2" style={{cursor: 'pointer'}}> <RefreshIcon/> </div>
+          <div className="col-1 pt-2" style={{ cursor: "pointer" }}>
+            {" "}
+            <RefreshIcon onClick={filterreset} />{" "}
+          </div>
           <div className="col-1 pt-2">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          {/* <div className="col-1 ">
-            <h6> Export</h6>{" "}
-            <CSVLink
-              data={filteredData}
-              filename={"studentsdata.csv"}
-              className="btn btn-primary"
-              target="_blank"
-            >
-              export
-            </CSVLink>
-          </div> */}
 
           <div className="col-1 pt-2">
             {" "}
-            <h6 onClick={handleClick} style={{cursor: 'pointer'}}> Filter</h6>
+            <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
+              {" "}
+              Filter
+            </h6>
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}
@@ -506,94 +513,100 @@ const StudentData = () => {
             </TableHead>
 
             <TableBody>
-              {records.map((item) => (
-                // <li key={item.id}>{item.name}</li>
+              {Array.isArray(records) && records.length > 0 ? (
+                records.map((item) => (
+                  // <li key={item.id}>{item.name}</li>
 
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell className=" border border 2 text-center">
-                    {item.id}
-                  </StyledTableCell>
-                  {/* 
+                  <StyledTableRow key={item.id}>
+                    <StyledTableCell className=" border border 2 text-center">
+                      {item.id}
+                    </StyledTableCell>
+                    {/* 
                   <StyledTableCell className=" border border 2 text-center">
                     {item.profilepic}
                   </StyledTableCell> */}
 
-                  <StyledTableCell className=" border border 1 text-center">
-                    {item.name}
-                    <br />
+                    <StyledTableCell className=" border border 1 text-center">
+                      {item.name}
+                      <br />
 
-                    {item.registrationnumber}
-                  </StyledTableCell>
+                      {item.registrationnumber}
+                    </StyledTableCell>
 
-                  <StyledTableCell align="left">
-                    {item.branch}
-                    <br />
-                    {item.courses}
-                  </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {item.branch}
+                      <br />
+                      {item.courses}
+                    </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center">
-                    {item.enquirytakenby}
-                    <br />
+                    <StyledTableCell className=" border border 1 text-center">
+                      {item.enquirytakenby}
+                      <br />
 
-                    {item.leadsource}
-                  </StyledTableCell>
+                      {item.leadsource}
+                    </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center  ">
-                    {item.mobilenumber}
-                    <br />
+                    <StyledTableCell className=" border border 1 text-center  ">
+                      {item.mobilenumber}
+                      <br />
 
-                    <p
-                      style={{
-                        width: "200px",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      janfjanjgnasjdnjsnagjagrjgferhtuweteruhtuewrhgejrijgenjdnbjdnfjd
-                    </p>
-                  </StyledTableCell>
+                      <p
+                        style={{
+                          width: "200px",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        janfjanjgnasjdnjsnagjagrjgferhtuweteruhtuewrhgejrijgenjdnbjdnfjd
+                      </p>
+                    </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center">
-                    {item.admissiondate
-                      ? item.admissiondate.substring(0, 10)
-                      : "No Date"}{" "}
-                    <br />
-                    {item.modeoftraining}
-                  </StyledTableCell>
+                    <StyledTableCell className=" border border 1 text-center">
+                      {item.admissiondate
+                        ? item.admissiondate.substring(0, 10)
+                        : "No Date"}{" "}
+                      <br />
+                      {item.modeoftraining}
+                    </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center d-flex">
-                    <Link
-                      to={`/studentdataview/${item.id}`}
-                      style={{ width: "40px", marginBottom: "10px" }}
-                    >
-                      <VisibilityIcon className="iconn" />
-                    </Link>
+                    <StyledTableCell className=" border border 1 text-center d-flex">
+                      <Link
+                        to={`/studentdataview/${item.id}`}
+                        style={{ width: "40px", marginBottom: "10px" }}
+                      >
+                        <VisibilityIcon className="iconn" />
+                      </Link>
 
-                    <Link
-                      to={`/editstudent/${item.id}`}
-                      style={{ width: "40px" }}
-                    >
-                      <EditIcon className="iconn" />
-                    </Link>
-                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
-                      <CurrencyRupeeIcon className="iconn" />
-                    </Link>
-                    <Link
-                      to={`/studentApplicationprint/${item.id}`}
-                      style={{ width: "40px" }}
-                    >
-                      <PrintIcon className="iconn" />
-                    </Link>
-                    <Link to={`//${item.id}`} style={{ width: "40px" }}>
-                      <DeleteOutlineIcon
-                        style={{ color: "red" }}
-                        className="iconn"
-                      />
-                    </Link>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
+                      <Link
+                        to={`/editstudent/${item.id}`}
+                        style={{ width: "40px" }}
+                      >
+                        <EditIcon className="iconn" />
+                      </Link>
+                      <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                        <CurrencyRupeeIcon className="iconn" />
+                      </Link>
+                      <Link
+                        to={`/studentApplicationprint/${item.id}`}
+                        style={{ width: "40px" }}
+                      >
+                        <PrintIcon className="iconn" />
+                      </Link>
+                      <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                        <DeleteOutlineIcon
+                          style={{ color: "red" }}
+                          className="iconn"
+                        />
+                      </Link>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={3}>No data available</TableCell>
+                </TableRow>
+              )}{" "}
             </TableBody>
           </Table>
         </TableContainer>

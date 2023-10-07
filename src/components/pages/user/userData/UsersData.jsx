@@ -73,35 +73,35 @@ const UsersData = () => {
 
   const [deleted, setDeleted] = useState(false);
 
-  useEffect(() => {
-    // Define a function to delete the user
-    const deleteuser = async () => {
-      try {
-        const response = await fetch(`/deleteuser/${user.id}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+  // useEffect(() => {
+  //   // Define a function to delete the user
+  //   const deleteuser = async () => {
+  //     try {
+  //       const response = await fetch(`/deleteuser/${user.id}`, {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
 
-        if (response.status === 200) {
-          // User deleted successfully
-          setDeleted(true);
-        } else if (response.status === 404) {
-          // User not found
-          console.error('User not found.');
-        } else {
-          // Handle other errors here
-          console.error('Error deleting user.');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
+  //       if (response.status === 200) {
+  //         // User deleted successfully
+  //         setDeleted(true);
+  //       } else if (response.status === 404) {
+  //         // User not found
+  //         console.error("User not found.");
+  //       } else {
+  //         // Handle other errors here
+  //         console.error("Error deleting user.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   };
 
-    // Call the delete function
-    deleteuser();
-  }, [user]);
+  //   // Call the delete function
+  //   deleteuser();
+  // }, [user]);
 
   // const deleteuser = async (id) => {
   //   try {
@@ -165,6 +165,27 @@ const UsersData = () => {
   // console.log(userData);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
+      const searchCondition = filterCriteria.search
+        ? item.fullname
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.branch
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.designation
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.department
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.reportto
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.profile
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase())
+        : true;
+
       const branchCondition = filterCriteria.branch
         ? item.branch === filterCriteria.branch
         : true;
@@ -173,7 +194,7 @@ const UsersData = () => {
         ? item.profile === filterCriteria.profile
         : true;
 
-      return profileCondition && branchCondition;
+      return profileCondition && branchCondition && searchCondition;
     });
 
     setFilteredData(filteredResults);
@@ -182,7 +203,7 @@ const UsersData = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -224,15 +245,15 @@ const UsersData = () => {
               height: "55px",
 
               padding: "10px",
-              margin:"3px",
+              margin: "3px",
               // border: "1.5px solid black",
               border: "none",
               outline: "none",
-              borderTop: 'none',
+              borderTop: "none",
               borderBottom: "1.5px solid black",
-              background:"none",
+              background: "none",
               margin: "3px",
-              
+
               borderRadius: "5px",
             }}
             name="search"

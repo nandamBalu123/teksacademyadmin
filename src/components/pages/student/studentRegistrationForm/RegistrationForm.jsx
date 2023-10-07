@@ -13,8 +13,10 @@ import "./RegistrationForm.css";
 import axios from "axios";
 
 import { blue } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 // import { blue } from "@mui/material/colors";
 export default function RegistrationForm() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
@@ -194,6 +196,8 @@ export default function RegistrationForm() {
         "http://localhost:3030/student_form",
         studentRegistrationdata
       );
+
+      navigate("/studentdata");
 
       // Handle a successful response here
       console.log("Response:", response.data);
