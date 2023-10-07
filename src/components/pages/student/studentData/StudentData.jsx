@@ -571,7 +571,7 @@ const StudentData = () => {
                     </Link>
 
                     <Link
-                      to={`/registrationform/${item.id}`}
+                      to={`/editstudent/${item.id}`}
                       style={{ width: "40px" }}
                     >
                       <EditIcon className="iconn" />

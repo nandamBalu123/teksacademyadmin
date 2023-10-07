@@ -42,6 +42,7 @@ import StudentApplicationPrint from "./components/pages/student/studentData/Stud
 import FeeDetails from "./components/pages/student/fee/FeeDetails";
 import Feefollowup from "./components/pages/student/fee/Feefollowup";
 import FeeView from "./components/pages/student/fee/FeeView";
+import EditStudentForm from "./components/pages/student/studentData/EditStudentForm";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -147,6 +148,10 @@ function App() {
                 <Route
                   path="/edituser/:id"
                   element={role == "admin" ? <Edit /> : <Dashboard />}
+                />
+                <Route
+                  path="/editstudent/:id"
+                  element={role == "admin" ? <EditStudentForm /> : <Dashboard />}
                 />
                 <Route path="/inn" element={<Login />}></Route>
                 {/* <Route
