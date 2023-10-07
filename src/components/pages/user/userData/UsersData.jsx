@@ -211,12 +211,13 @@ const UsersData = () => {
             type="text"
             placeholder='Search Here......'
             style={{
-              height: "55px",
-              
+              height: "45px",
+                  border: "hidden",
+                  borderRadius: "5px",
+                  background:"none",
               padding: "10px",
               margin:"3px",
-              border: "1.5px solid black",
-              borderRadius: "5px",
+              
             }}
             
           />  

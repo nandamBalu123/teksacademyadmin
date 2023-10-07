@@ -147,7 +147,7 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "1%"}>
-            <SubMenu
+            <Item
               title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}

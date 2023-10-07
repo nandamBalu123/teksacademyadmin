@@ -516,7 +516,7 @@ const StudentData = () => {
                        whiteSpace:"nowrap",
                        overflow:"hidden",
                        textOverflow:"ellipsis"
-                  }}>janfjanjgnasjdnjsnagjagrjgferhtuweteruhtuewrhgejrijgenjdnbjdnfjd</p>
+                  }}>{item.email}</p>
                   </StyledTableCell>
 
                   <StyledTableCell className=" border border 1 text-center">
@@ -527,7 +527,7 @@ const StudentData = () => {
                     {item.modeoftraining}
                   </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center d-flex">
+                  <StyledTableCell className=" border border 1 text-center d-flex pb-3  ">
                     <Link
                       to={`/studentdataview/${item.id}`}
                       style={{ width: "40px", marginBottom:"10px" }}
