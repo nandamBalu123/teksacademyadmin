@@ -13,7 +13,7 @@ import axios from "axios";
 const PrintableComponent = React.forwardRef((props, ref) => {
   const { id } = useParams();
 
-  const [studentdata, setstudentdata] = useState("");
+  const [studentdata, setstudentdata] = useState([]);
 
   useEffect(() => {
     // Make a GET request to your backend API endpoint
@@ -21,8 +21,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       .get(`http://localhost:3030/viewstudentdata/${id}`)
       .then((response) => {
         // Handle the successful response here
+        // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
         setstudentdata(response.data[0]); // Update the data state with the fetched data
-        console.log("studentdata", response.data);
+        // setstudentdata()
+        // console.log("studentdata", response.data[0].feedetails);
       })
       .catch((error) => {
         // Handle any errors that occur during the request
@@ -31,9 +33,25 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   }, []);
   // const jsonString = studentdata.feedetails;
 
-  // const jsonObject = JSON.parse(jsonString);
+  // // const jsonObject = JSON.parse(jsonString);
+  // useEffect(() => {
+  //   setstudentdata((item)=>(...item,feedetails: JSON.parse(feedetails)))
+  //   // setstudentdata((data) => {
+  //   //   // return data.map((item) => {
+  //   //   return { ...data, data.feedetails: JSON.parse(data.feedetails) };
+  //   //   // });
+  //   // });
+  // }, [studentdata]);
+
+  // let jsonObject;
+  // useEffect(() => {
+  //   if (studentdata.feedetails) {
+  //     jsonObject = JSON.parse(studentdata.feedetails);
+  //     console.log("jsonobj", jsonObject);
+  //   }
+  // });
   return (
-    <>
+    <div ref={ref}>
       <div className="page">
         <div className="application">
           <div className="row">
@@ -329,19 +347,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     <th> Discount Type</th>
                     <th className="col-sm-4"> Total Fee </th>
                   </tr>
-                  {studentdata.feedetails}
-                  {/* {studentdata.feedetails &&
-                    studentdata.feedetails.map((item, index) => (
-                      <tr key={index}>
-                        <td>{item.feetype}</td>
-                        <td>{item.amount}</td>
-                        <td>{item.discount}</td>
-                        <td>{item.taxamount}</td>
-                        <td>{item.totalamount}</td>
-                      </tr>
-                    ))} */}
-                  {Array.isArray(studentdata.feedetails) &&
-                    studentdata.feedetails.map((item, index) => (
+
+                  {studentdata.feedetails &&
+                    JSON.parse(studentdata.feedetails).map((item, index) => (
                       <tr key={index}>
                         <td>{item.feetype}</td>
                         <td>{item.amount}</td>
@@ -372,15 +380,17 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
                   <tr>
                     {" "}
-                    <th> Provided </th> <td className="w-25"> </td>{" "}
-                    <th> Issue Date </th> <td className="w-25"></td>{" "}
+                    <th> Provided </th>{" "}
+                    <td className="w-25">{studentdata.assets} </td>{" "}
+                    <th> Issue Date </th>{" "}
+                    <td className="w-25">{studentdata.admissiondate}</td>{" "}
                   </tr>
 
                   <tr>
                     {" "}
                     <th> Comments </th>{" "}
                     <td className="w-25" colspan="4">
-                      {" "}
+                      {studentdata.admissionremarks}
                     </td>{" "}
                   </tr>
                   <tr>
@@ -935,7 +945,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </div>{" "}
         </div>
       </div>
-    </>
+    </div>
   );
 });
 

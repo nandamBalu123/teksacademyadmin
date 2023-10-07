@@ -19,7 +19,7 @@ export default function RegistrationForm() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [mobileNumber, setMobileNumber] = useState(null);
   const [parentsname, setParentsName] = useState("");
   const [birthdate, setBirthDate] = useState("");
   const [gender, setGender] = useState("");
@@ -29,8 +29,8 @@ export default function RegistrationForm() {
   const [state, setState] = useState("");
   const [area, setArea] = useState("");
   const [native, setNative] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [whatsAppNo, setWhatsAppNo] = useState("");
+  const [zipcode, setZipcode] = useState(null);
+  const [whatsAppNo, setWhatsAppNo] = useState(null);
   const [educationType, setEducationType] = useState("");
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
@@ -49,8 +49,8 @@ export default function RegistrationForm() {
   const [validityEndDate, setValidityEndDate] = useState("");
 
   const [feetype, setfeetype] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [discount, setDiscount] = useState(0);
+  const [amount, setAmount] = useState(null);
+  const [discount, setDiscount] = useState(null);
   const [taxamount, setTaxamount] = useState(0);
   const [totalamount, setTotalamount] = useState(0);
 
@@ -314,7 +314,7 @@ export default function RegistrationForm() {
                     Email <span className="text-danger"> *</span>&nbsp; :
                   </label>
                   <input
-                    type="text"
+                    type="email"
                     className="col-9 col-md-5"
                     required
                     style={{
@@ -332,7 +332,7 @@ export default function RegistrationForm() {
                     Mobile Number<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     className="col-9 col-md-5"
                     required
                     style={{
@@ -638,7 +638,7 @@ export default function RegistrationForm() {
                     Zip Code <span className="text-danger"> *</span>&nbsp; :
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     className="col-9 col-md-5"
                     required
                     style={{
@@ -657,7 +657,7 @@ export default function RegistrationForm() {
                     &nbsp;:
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     className="col-9 col-md-5 "
                     required
                     style={{
@@ -734,7 +734,7 @@ export default function RegistrationForm() {
                     Percentage<span className="text-danger"> *</span>&nbsp;:
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     className="col-9 col-md-5"
                     required
                     style={{
@@ -753,7 +753,7 @@ export default function RegistrationForm() {
                   </label>
 
                   <input
-                    type="text"
+                    type="number"
                     className="col-9 col-md-5"
                     required
                     style={{
@@ -1127,17 +1127,7 @@ export default function RegistrationForm() {
                     Registration No <span className="text-danger"> *</span>
                     &nbsp;:
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5 "
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setRegistrationNumber(e.target.value)}
-                    value={registrationNumber}
-                  /> */}
+
                   {registrationNumber}
                 </div>
                 <br />
