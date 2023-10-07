@@ -149,7 +149,9 @@ function App() {
                 />
                 <Route
                   path="/editstudent/:id"
-                  element={role == "admin" ? <EditStudentForm /> : <Dashboard />}
+                  element={
+                    role == "admin" ? <EditStudentForm /> : <Dashboard />
+                  }
                 />
                 <Route path="/inn" element={<Login />}></Route>
                 {/* <Route
