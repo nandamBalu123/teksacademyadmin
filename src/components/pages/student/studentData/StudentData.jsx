@@ -584,7 +584,7 @@ const StudentData = () => {
                       >
                         <EditIcon className="iconn" />
                       </Link>
-                      <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <Link to={`/feeview/${item.id}`} style={{ width: "40px" }}>
                         <CurrencyRupeeIcon className="iconn" />
                       </Link>
                       <Link
