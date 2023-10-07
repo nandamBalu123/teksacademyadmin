@@ -28,88 +28,102 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
+// import { transcode } from "buffer";
 const UsersData = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate();
-  const { users, dispatch } = useUsersContext();
-  const { user } = useAuthContext();
+  // profile filter
 
-  const deleteuser = async (id) => {
+  const [profiles, setProfiles] = useState([]);
+
+  const fetchData = async () => {
     try {
-      const res2 = await fetch(`http://localhost:3030/deleteuser/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch("http://localhost:3030/getuserroles");
 
-      if (res2.status === 404) {
-        console.log("User not found");
-      } else if (res2.status === 422) {
-        console.log("Unprocessable Entity");
-      } else if (res2.status === 200) {
-        const deletedata = await res2.json();
-        console.log("User deleted successfully", deletedata);
-      } else {
-        console.log("Unexpected error");
+      console.log("Response status:", response.status); // Log response status
+
+      if (!response.ok) {
+        console.error(
+          "Network response error:",
+          response.status,
+          response.statusText
+        );
+        throw new Error("Network response was not ok");
       }
+
+      const data = await response.json();
+      console.log("Fetched data:", data.Result); // Log the fetched data
+      const profileData = data.Result.map((item) => item.role);
+
+      setProfiles(profileData); // Update the state with the extracted role data
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
+  useEffect(() => {
+    fetchData(); // Call fetchData when the component mounts
+    setProfiles(profiles);
+  }, []); // Empty dependency array means it runs once after the initial render
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
+  const { users, dispatch } = useUsersContext();
+  const { user } = useAuthContext();
+
+  // const [deleted, setDeleted] = useState(false);
+
+  const [deleted, setDeleted] = useState(false);
+
+  // useEffect(() => {
+  //   // Define a function to delete the user
+  //   const deleteuser = async () => {
+  //     try {
+  //       const response = await fetch(`/deleteuser/${user.id}`, {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+
+  //       if (response.status === 200) {
+  //         // User deleted successfully
+  //         setDeleted(true);
+  //       } else if (response.status === 404) {
+  //         // User not found
+  //         console.error("User not found.");
+  //       } else {
+  //         // Handle other errors here
+  //         console.error("Error deleting user.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   };
+
+  //   // Call the delete function
+  //   deleteuser();
+  // }, [user]);
+
   // const deleteuser = async (id) => {
-  //   try{
-  //     const response = await fetch(`http://localhost:3030/deleteuser/${id}`, {
+  //   try {
+  //     const res2 = await fetch(`http://localhost:3030/deleteuser/${id}`, {
   //       method: "DELETE",
   //       headers: {
   //         "Content-Type": "application/json",
   //       },
   //     });
-  //     if(response.status === 200){
-  //       console.log("User delete successfully");
-  //     }else{
-  //       console.log("Failed to delete user: ", response.statusText);
+
+  //     if (res2.status === 404) {
+  //       console.log("User not found");
+  //     } else if (res2.status === 422) {
+  //       console.log("Unprocessable Entity");
+  //     } else if (res2.status === 200) {
+  //       const deletedata = await res2.json();
+  //       console.log("User deleted successfully", deletedata);
+  //     } else {
+  //       console.log("Unexpected error");
   //     }
-
-  //   }catch (error){
-  //     console.log("An error occurred:", error)
-  //   }
-  // }
-
-  // const deleteuser = async (id) => {
-  //   const res2 = await fetch(`http://localhost:3030/deleteuser/${id}`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-
-  //   const deletedata = await res2.json();
-  //   console.log(deletedata);
-
-  //   if (res2.status === 422 || !deletedata) {
-  //     console.log("error");
-  //   } else {
-  //     console.log("user deleted");
-  //     // setDLTdata(deletedata)
-  //     // getdata();
-  //   }
-  // };
-  // const deleteuser = async () => {
-  //   if (!user) {
-  //     return;
-  //   }
-  //   const response = await fetch("http://localhost:3030/deleteuser/delete", {
-  //     method: "DELETE",
-  //     headers: {
-  //       Authorization: `Bearer ${user.token}`,
-  //     },
-  //   });
-  //   const json = await response.json();
-
-  //   if (response.ok) {
-  //     dispatch({ type: "DELETE_USER", payload: json });
+  //   } catch (error) {
+  //     console.error("Error:", error);
   //   }
   // };
 
@@ -151,6 +165,27 @@ const UsersData = () => {
   // console.log(userData);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
+      const searchCondition = filterCriteria.search
+        ? item.fullname
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.branch
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.designation
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.department
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.reportto
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.profile
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase())
+        : true;
+
       const branchCondition = filterCriteria.branch
         ? item.branch === filterCriteria.branch
         : true;
@@ -159,7 +194,7 @@ const UsersData = () => {
         ? item.profile === filterCriteria.profile
         : true;
 
-      return profileCondition && branchCondition;
+      return profileCondition && branchCondition && searchCondition;
     });
 
     setFilteredData(filteredResults);
@@ -168,12 +203,7 @@ const UsersData = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  const handleedit = () => {
-    navigate("/edit");
-  };
-  const handleview = () => {
-    navigate("/userview");
-  };
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -201,43 +231,55 @@ const UsersData = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container-fluid">
       <h2 className="ms-3">Users List</h2>
-      <div className="mb-2"> 
-      <div className="user-data"> 
-      <input
+      <div className="mb-2">
+        <div className="user-data">
+          <input
             type="text"
-            placeholder='Search Here......'
+            placeholder="Search Here......"
             style={{
-              height: "45px",
-                  border: "hidden",
-                  borderRadius: "5px",
-                  background:"none",
+              height: "55px",
+
               padding: "10px",
-              margin:"3px",
-              
+              margin: "3px",
+              // border: "1.5px solid black",
+              border: "none",
+              outline: "none",
+              borderTop: "none",
+              borderBottom: "1.5px solid black",
+              background: "none",
+              margin: "3px",
+
+              borderRadius: "5px",
             }}
-            
-          />  
-      {/* For Filter */}
-        <Button
-       
-        id="demo-positioned-button"
-        aria-controls={open ? 'demo-positioned-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      
-      >
-     <button  className="btn btn-primary mr-20 ms-2 mb-2"   style={{textTransform: "capitalize"}}> Filter </button>
-   
-      </Button>
-      </div>
+            name="search"
+            value={filterCriteria.search}
+            onChange={handleInputChange}
+          />
+          {/* For Filter */}
+          <Button
+            id="demo-positioned-button"
+            aria-controls={open ? "demo-positioned-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          >
+            <button
+              className="btn btn-primary mr-20 ms-2 mb-2"
+              style={{ textTransform: "capitalize" }}
+            >
+              {" "}
+              Filter{" "}
+            </button>
+          </Button>
+        </div>
 
         {/* For Filter */}
-        <Button
+        {/* <Button
           id="demo-positioned-button"
           aria-controls={open ? "demo-positioned-menu" : undefined}
           aria-haspopup="true"
@@ -248,7 +290,7 @@ const UsersData = () => {
             {" "}
             Filter{" "}
           </h6>
-        </Button>
+        </Button> */}
 
         <Menu
           className="mt-5"
@@ -288,8 +330,12 @@ const UsersData = () => {
               value={filterCriteria.profile}
               onChange={handleInputChange}
             >
-              <option value="">Manager</option>
-              <option value="RM">RM</option>
+              <option value="">--select--</option>
+              {profiles.map((profile) => (
+                <option key={profile} value={profile}>
+                  {profile}
+                </option>
+              ))}
             </select>
           </MenuItem>
           <MenuItem>
@@ -309,8 +355,12 @@ const UsersData = () => {
               value={filterCriteria.branch}
               onChange={handleInputChange}
             >
+              <option value="">--select--</option>
+
               <option value="hitechcity">Hi-tech City</option>
               <option value="dilsukhnagar">dilshukanagar</option>
+              <option value="ameerpet">ameerpet</option>
+              <option value="gachibowli">gachibowli</option>
             </select>
           </MenuItem>
         </Menu>
@@ -470,8 +520,11 @@ const UsersData = () => {
                       >
                         <VisibilityIcon className="iconn" />
                       </Link>
-                      <ModeEditIcon onClick={handleedit} />
-                      <DeleteIcon onClick={() => deleteuser(user.id)} />{" "}
+                      <Link to={`/edituser/${user.id}`}>
+                        <ModeEditIcon />
+                      </Link>
+                      <DeleteIcon />
+                      {/* onClick={() => deleteuser(user.id)}  */}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

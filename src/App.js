@@ -37,13 +37,13 @@ import UserView from "./components/pages/user/userData/UserView";
 import Edit from "./components/pages/user/userData/EditUser";
 import RoleAccess from "./components/pages/roles/RoleAccess";
 import StudentDataView from "./components/pages/student/studentData/StudentDataView";
-import Print from "./components/print/print";
-import PdfGenerator from "./components/print/print";
+
 import StudentApplicationPrint from "./components/pages/student/studentData/StudentApplicationPrint";
 import FeeDetails from "./components/pages/student/fee/FeeDetails";
 import Feefollowup from "./components/pages/student/fee/Feefollowup";
 import FeeView from "./components/pages/student/fee/FeeView";
 import Addtofee from "./components/pages/student/fee/Addtofee";
+import EditStudentForm from "./components/pages/student/studentData/EditStudentForm";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -52,14 +52,12 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const toggle = true;
-  // let role = localStorage.getItem(role); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
-  // let role = localStorage.getItem(role);
-
-  // let role = localStorage.getItem("role");
+  // let role = localStorage.getItem('role'); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
   // let token = localStorage.getItem("token");
   let role = "admin";
   let token = "sdf";
   console.log("hello: ", localStorage.getItem("token"));
+  console.log("hello: ", localStorage.getItem("role"));
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -83,14 +81,24 @@ function App() {
                   path="/registrationform"
                   element={<RegistrationForm />}
                 />
-                <Route  path="/feedetails"
-                element={role == "admin" ? <FeeDetails/> : <Dashboard/>}/>
-                
-                <Route path="/feefollowup"
-                element={role == "admin" ? <Feefollowup/>:<Dashboard/>}/>
+                <Route
+                  path="/feedetails/:id"
+                  element={role == "admin" ? <FeeDetails /> : <Dashboard />}
+                />
+                <Route
+                  path="/feedetails"
+                  element={role == "admin" ? <FeeDetails /> : <Dashboard />}
+                />
 
-                <Route path="/feeview"
-                element ={role == "admin" ? <FeeView/> : <Dashboard/>}/>
+                <Route
+                  path="/feefollowup"
+                  element={role == "admin" ? <Feefollowup /> : <Dashboard />}
+                />
+
+                <Route
+                  path="/feeview"
+                  element={role == "admin" ? <FeeView /> : <Dashboard />}
+                />
 
                 <Route path="/addtofee"
                 element={role == "admin"  ?  <Addtofee/> : <Dashboard/>}/>
@@ -121,7 +129,7 @@ function App() {
                   element={role == "admin" ? <Roles /> : <Dashboard />}
                 />
                 <Route
-                  path="/studentApplicationprint"
+                  path="/studentApplicationprint/:id"
                   element={
                     role == "admin" ? (
                       <StudentApplicationPrint />
@@ -139,8 +147,14 @@ function App() {
                   element={role == "admin" ? <RoleAccess /> : <Dashboard />}
                 />
                 <Route
-                  path="/edit"
+                  path="/edituser/:id"
                   element={role == "admin" ? <Edit /> : <Dashboard />}
+                />
+                <Route
+                  path="/editstudent/:id"
+                  element={
+                    role == "admin" ? <EditStudentForm /> : <Dashboard />
+                  }
                 />
                 <Route path="/inn" element={<Login />}></Route>
                 {/* <Route

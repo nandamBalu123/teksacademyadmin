@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import "./CreateUserForm.css";
+import { useNavigate } from "react-router-dom";
 const CreateUserForm = () => {
+  const navigate = useNavigate();
   const [fullname, setfullname] = useState("");
   const [email, setemail] = useState("");
   const [phonenum, setphonenum] = useState("");
@@ -16,36 +18,7 @@ const CreateUserForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (!fullname.trim()) {
-    //   errors.fullname = "UserName is required";
-    // }
-    // if (fullname.trim()) {
-    //   errors.fullname = "";
-    // }
-    // // Validate email
-    // if (!/\S+@\S+\.\S+/.test(email)) {
-    //   errors.email = "Invalid email address";
-    // }
 
-    // if (phonenum != 10) {
-    //   errors.phonenum = "please enter correct phone number";
-    // }
-    // if (!designation) {
-    //   errors.designation = "Designation is required";
-    // }
-    // if (!department) {
-    //   errors.department = "Department is required";
-    // }
-    // if (!reportto) {
-    //   errors.reportto = "Report To is required";
-    // }
-    // if (!profile) {
-    //   errors.profile = "Profile is required";
-    // }
-    // if (!branch) {
-    //   errors.branch = "Branch is required";
-    // }
-    // console.log("errors" + errors);
     setErrors({});
 
     // Validate Full Name
@@ -134,6 +107,7 @@ const CreateUserForm = () => {
       setreportto("");
       setprofile("");
       setbranch("");
+      navigate("/usersdata");
     }
   };
 
@@ -307,6 +281,7 @@ const CreateUserForm = () => {
               value={profile}
               required
             >
+              <option value="">--select</option>
               {profiles.map((profile) => (
                 <option key={profile} value={profile}>
                   {profile}

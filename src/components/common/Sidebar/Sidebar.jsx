@@ -18,11 +18,14 @@ import Diversity3Icon from '@mui/icons-material/Diversity3';
 import InfoIcon from '@mui/icons-material/Info';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import favicon from "../../../images/favicon.jpeg";
+import axios from "axios";
 // let role = localStorage.getItem(role);
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+
 
   return (
     <MenuItem
@@ -39,8 +42,8 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 let username = "zaheer";
-// let role = localStorage.getItem("role");
-let role = "admin";
+let role = localStorage.getItem("role");
+// let role = "admin";
 
 const Sidebar = () => {
   const theme = useTheme();
