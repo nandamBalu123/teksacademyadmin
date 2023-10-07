@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./CreateRole.css";
 import { useState } from "react";
 import { Update } from "@mui/icons-material";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 const CreateRole = () => {
   const navigate = useNavigate();
   const [role, setRoleName] = useState("");
@@ -29,8 +29,7 @@ const CreateRole = () => {
     e.preventDefault();
     const user = {
       role,
-      description
-      
+      description,
     };
 
     console.log("User Data:", user); // Log the user data being sent
@@ -54,59 +53,61 @@ const CreateRole = () => {
       // Reset the form fields
       setRoleName("");
       setDescription("");
-      
+      navigate("/roles");
     }
     // handleCheckboxChange();
     console.log(role, description);
     navigate("/roles");
   };
-   return (
+  return (
     <div style={{ marginTop: "30px" }}>
       <p className="fs-5 ms-5">CreateRole</p>
       <form>
-      <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div className="container">
-        <div className="row">
-        <div className="col-12 col-md-6 col-lg-4 ">
-       <input 
-       className="form-control"
-       placeholder="Role Name"
-       type="text"
-       value={role}
-       onChange={(e)=>setRoleName(e.target.value)}
-       style={{padding:"15px"}}
-       />
-           {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
-           </div>
-        <div className="col-12 col-md-6 col-lg-4 "> 
-        <input 
-        className="form-control"
-       placeholder="Role Description"
-       type="text"
-       value={description}
-       onChange={(e)=>setDescription(e.target.value)}
-       style={{padding:"15px"}}
-       />
-        {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
-        </div>
-        </div>
-        <div className="container "><button type="submit" class="btn btn-primary my-4" onClick={handleSubmit}>
-              Submit
-            </button></div>
-        
-    
-        
-      </div>
-     
-     </Box>
-          {/* <label>Role Description :</label>
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <div className="container">
+            <div className="row">
+              <div className="col-12 col-md-6 col-lg-4 ">
+                <input
+                  className="form-control"
+                  placeholder="Role Name"
+                  type="text"
+                  value={role}
+                  onChange={(e) => setRoleName(e.target.value)}
+                  style={{ padding: "15px" }}
+                />
+                {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
+              </div>
+              <div className="col-12 col-md-6 col-lg-4 ">
+                <input
+                  className="form-control"
+                  placeholder="Role Description"
+                  type="text"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  style={{ padding: "15px" }}
+                />
+                {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
+              </div>
+            </div>
+            <div className="container ">
+              <button
+                type="submit"
+                class="btn btn-primary my-4"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </Box>
+        {/* <label>Role Description :</label>
           <input
             type="text"
             onChange={(e) => setDescription(e.target.value)}
@@ -114,7 +115,6 @@ const CreateRole = () => {
             className="col-12 col-md-6 col-lg-6"
           />
          */}
-
       </form>
       <div>
         {/* <div>
