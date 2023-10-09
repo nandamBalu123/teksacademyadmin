@@ -51,13 +51,16 @@ export default function RegistrationForm() {
   const [feetype, setfeetype] = useState("");
   const [amount, setAmount] = useState(null);
   const [discount, setDiscount] = useState(null);
-  const [taxamount, setTaxamount] = useState(0);
-  const [totalamount, setTotalamount] = useState(0);
+  const [taxamount, setTaxamount] = useState(null);
+  const [totalamount, setTotalamount] = useState(null);
+  const [materialfee, setmaterialfee] = useState(null);
+  const [coursefee, setCoursefee] = useState(null);
+  const [admissionfee, setAdmissionfee] = useState(null);
 
-  const [grosstotal, setGrosstotal] = useState(0);
-  const [totaldiscount, setTotalDiscount] = useState(0);
-  const [totaltax, settotaltax] = useState(0);
-  const [grandtotal, setGrandtotal] = useState(0);
+  const [grosstotal, setGrosstotal] = useState(null);
+  const [totaldiscount, setTotalDiscount] = useState(null);
+  const [totaltax, settotaltax] = useState(null);
+  const [grandtotal, setGrandtotal] = useState(null);
   const [admissionremarks, setadmissionremarks] = useState("");
   const [assets, setassets] = useState("");
 
@@ -66,7 +69,8 @@ export default function RegistrationForm() {
   useEffect(() => {
     setTotalamount(amount - discount);
     let actualfee = (totalamount * 100) / 118;
-    setTaxamount(totalamount - actualfee);
+
+    setTaxamount(parseFloat((totalamount - actualfee).toFixed(2)));
   });
   // useEffect(() => {}, [totalamount]);
   useEffect(() => {
@@ -131,6 +135,7 @@ export default function RegistrationForm() {
     setFeeDetails([
       ...feedetails,
       {
+        id: Date.now(),
         feetype: feetype,
         amount: amount,
         discount: discount,
@@ -142,13 +147,42 @@ export default function RegistrationForm() {
     setAmount(0);
     setDiscount(0);
     setTotalamount(0);
-    setGrosstotal((grosstotal) => grosstotal + parseInt(amount));
-    setTotalDiscount((totaldiscount) => totaldiscount + parseInt(discount));
-    settotaltax((totaltax) => totaltax + parseInt(taxamount));
-    setGrandtotal((grandtotal) => grandtotal + parseInt(totalamount));
-
-    console.log(feedetails);
   };
+
+  const handleFeecalculations = () => {
+    let ggrosstotal = 0;
+    let ttotaldiscount = 0;
+    let ttotaltax = 0;
+    let ttotalamount = 0;
+    let materialfee = 0;
+    let coursefee = 0;
+    let admissionfee = 0;
+    for (let i = 0; i < feedetails.length; i++) {
+      ggrosstotal = parseInt(ggrosstotal) + parseInt(feedetails[i].amount);
+      ttotaldiscount =
+        parseInt(ttotaldiscount) + parseInt(feedetails[i].discount);
+      ttotaltax = parseFloat(ttotaltax) + parseFloat(feedetails[i].taxamount);
+      ttotalamount =
+        parseInt(ttotalamount) + parseInt(feedetails[i].totalamount);
+      if (feedetails[i].feetype === "fee") {
+        materialfee = materialfee + feedetails[i].totalamount * 0.35;
+
+        coursefee = coursefee + feedetails[i].totalamount * 0.65;
+      }
+      if (feedetails[i].feetype === "admissionfee") {
+        admissionfee = admissionfee + feedetails[i].totalamount;
+      }
+    }
+    setmaterialfee(materialfee);
+    setCoursefee(coursefee);
+    setGrosstotal(ggrosstotal);
+    setTotalDiscount(ttotaldiscount);
+    settotaltax(parseFloat(ttotaltax.toFixed(2)));
+    setGrandtotal(ttotalamount);
+    setAdmissionfee(admissionfee);
+    handleNext();
+  };
+
   const handleSubmit = async () => {
     const studentRegistrationdata = {
       name,
@@ -188,6 +222,7 @@ export default function RegistrationForm() {
       grandtotal,
       admissionremarks,
       assets,
+      materialfee,admissionfee,coursefee
     };
     console.log("studentRegistration", studentRegistrationdata);
     try {
@@ -278,6 +313,10 @@ export default function RegistrationForm() {
   );
   const gachibowlicount = gachibowlibranch.length;
 
+  const handleFeeDelete = (id) => {
+    const updatedTasks = feedetails.filter((task) => task.id !== id);
+    setFeeDetails(updatedTasks);
+  };
   return (
     <div className="main-container">
       <div className="main-sub-container ">
@@ -1223,8 +1262,8 @@ export default function RegistrationForm() {
                     value={feetype}
                   >
                     <option value="">--select--</option>
-                    <option value="coursefee">Course fee </option>
-                    <option value="admissionfee">Admission Fee </option>
+                    <option value="fee">Fee </option>
+                    <option value="admissionfee">Admission Fee</option>
                   </select>
                 </div>
                 <br />
@@ -1265,26 +1304,6 @@ export default function RegistrationForm() {
                   />
                 </div>
 
-                {/* <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Tax <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  >
-                    <option value="">--select--</option>
-                    <option value="btech">Exclusive Tax </option>
-                    <option value="degree">Inclusive Tax</option>
-                  </select>
-                </div> */}
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
@@ -1309,13 +1328,42 @@ export default function RegistrationForm() {
                   save
                 </button>
                 <br />
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Fee Type</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Discount</th>
+                      <th scope="col">Tax Amount</th>
+                      <th scope="col">Total Amount</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {feedetails &&
+                      feedetails.map((item) => (
+                        <tr key={item.id}>
+                          <th scope="row">{item.feetype}</th>
+                          <td>{item.amount}</td>
+                          <td>{item.discount}</td>
+                          <td>{item.taxamount}</td>
+                          <td>{item.totalamount}</td>
+                          <td>
+                            <button onClick={() => handleFeeDelete(item.id)}>
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handleFeecalculations}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1347,16 +1395,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Gross Total <span className="text-danger"> *</span>&nbsp;:
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+
                   {grosstotal}
                 </div>
                 <br />
@@ -1396,7 +1435,8 @@ export default function RegistrationForm() {
 
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
-                    Total Tax <span className="text-danger"> *</span>&nbsp;:
+                    Total Tax (GST) <span className="text-danger"> *</span>
+                    &nbsp;:
                   </label>
                   {/* <input
                     type="text"
@@ -1413,7 +1453,8 @@ export default function RegistrationForm() {
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
-                    Grand Total<span className="text-danger"> *</span>&nbsp;:
+                    Grand Total(inclusive of GST)
+                    <span className="text-danger"> *</span>&nbsp;:
                   </label>
                   {/* <input
                     type="text"
@@ -1426,6 +1467,13 @@ export default function RegistrationForm() {
                     }}
                   /> */}
                   {grandtotal}
+
+                  <h4> fee split</h4>
+                  <p> admission fee {admissionfee}</p>
+                  <p>coursefee {coursefee}</p>
+                  <p>Materialfee {materialfee}</p>
+
+                  <p>total--{grandtotal}</p>
                 </div>
                 <br />
                 <div className="row ">
@@ -2661,48 +2709,3 @@ export default function RegistrationForm() {
     </div>
   );
 }
-
-// import { Label } from "@mui/icons-material";
-// import React from "react";
-
-// const RegistrationForm = () => {
-//   return (
-//     <div>
-//       <form action="#">
-//         <div>
-//           <h2>Student Details</h2>
-//           <label>Name : </label>
-//           <input />
-//           <label>Email Id : </label>
-//           <input />
-//           <label>Mobile Number</label>
-//           <input />
-//           <label>Parents Name</label>
-//           <input />
-//           <label>Birth Date</label>
-//           <input type="date" />
-//           <label>Gender</label>
-//           <select id="gender" name="gender">
-//             <option value="">--select--</option>
-
-//             <option value="male">Male</option>
-//             <option value="female">Female</option>
-//             <option value="others">Others</option>
-//           </select>
-//           <label>Marital status</label>
-//           <select id="maritalStatus" name="maritalStatus">
-//             <option value="">--select--</option>
-//             <option value="single">Single</option>
-//             <option value="married">Married</option>
-//             <option value="divorced">Divorced</option>
-//           </select>
-//           <label>College / Company</label>
-//           <input />
-//         </div>
-
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default RegistrationForm;

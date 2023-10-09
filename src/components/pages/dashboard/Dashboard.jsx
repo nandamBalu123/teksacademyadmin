@@ -1,290 +1,138 @@
 import { Box, usef } from "@mui/material";
 // import { tokens } from "../../../theme";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import navigate from "react";
 import Header from "../../common/Header/Header";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import './Dashboard.css';
 const Dashboard = () => {
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
-  const navigate = useNavigate();
-  // axios.defaults.withCredentials = true;
-  // useEffect(() => {
-  //   axios.get("http://localhost:8081/dashboard").then((res) => {
-  //     if (res.data.Status === "Success") {
-  //       if (res.data.role === "admin") {
-  //         navigate("/");
-  //       } else {
-  //         const id = res.data.id;
-  //         navigate("/employeedetail/" + id);
-  //       }
-  //     } else {
-  //       navigate("/start");
-  //     }
-  //   });
-  // }, []);
+  <Box
+  component="span"
+  sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+>
+  
+</Box>
+// this is for progress bar
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 10,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 100 : 800],
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
+  },
+}));
+  
   return (
-    <Box m="20px">
-      {/* HEADER */}
+    <> 
+      {/* Header */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
-
-        {/* <Box>
-          <Button
-            sx={{
-              backgroundColor: colors.blueAccent[700],
-              color: colors.grey[100],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-          >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box> */}
       </Box>
+      <div className="d-flex w-100 justify-content-around">
+      <Card className="card1">
+      <CardContent>Total Enrollments</CardContent></Card>  
+    <Card className="card2">
+      <CardContent> Total Fee</CardContent> </Card>
+      <Card className="card3">
+      <CardContent> Total Users</CardContent> </Card> 
+     </div> 
 
-      {/* GRID & CHARTS */}
-      {/* <Box
-        display="grid"
-        gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="140px"
-        gap="20px"
-      > */}
-      {/* ROW 1 */}
-      {/* <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="12,361"
-            subtitle="Emails Sent"
-            progress="0.75"
-            increase="+14%"
-            icon={
-              <EmailIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="431,225"
-            subtitle="Sales Obtained"
-            progress="0.50"
-            increase="+21%"
-            icon={
-              <PointOfSaleIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="32,441"
-            subtitle="New Clients"
-            progress="0.30"
-            increase="+5%"
-            icon={
-              <PersonAddIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="1,325,134"
-            subtitle="Traffic Received"
-            progress="0.80"
-            increase="+43%"
-            icon={
-              <TrafficIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box> */}
+     {/* This is for progress bar */}
+     <div className="progreebar rounded rounded-5  pb-4"> 
+     <h4 className="pt-3 mt-3 enrollment"> Total Entrollment</h4>
+     <div className="d-flex  justify-content-around pt-4">  
+     <Box className="w-25"> 
+     <h6> Hi-tech City</h6>
+    <BorderLinearProgress variant="determinate" value={75}  /> 75%
+   </Box>
+   <Box className="w-25"> 
+   <h6> Ameerpet</h6>
+    <BorderLinearProgress variant="determinate" value={25}  /> 25%
+   </Box>
+   <Box className="w-25"> 
+   <h6>Dilsukhnagar </h6>
+    <BorderLinearProgress variant="determinate" value={45}  /> 45%
+   </Box>
+     </div>
+      </div>
+      <div className="progreebar rounded rounded-5 mt-5 pb-4"> 
+     <h4 className="pt-3 mt-3 enrollment"> Total Fee</h4>
+     <div className="d-flex  justify-content-around pt-4">  
+     <Box className="w-25"> 
+     <h6> Hi-tech City</h6>
+    <BorderLinearProgress variant="determinate" value={55}  /> 55%
+   </Box>
+   <Box className="w-25"> 
+   <h6> Ameerpet</h6>
+    <BorderLinearProgress variant="determinate" value={87}  /> 87%
+   </Box>
+   <Box className="w-25"> 
+   <h6>Dilsukhnagar </h6>
+    <BorderLinearProgress variant="determinate" value={93}  /> 93%
+   </Box>
+     </div>
+      </div>
+      <div className="progreebar rounded rounded-5 mt-5 pb-4"> 
+     <h4 className="pt-3 mt-3 enrollment"> Total Users</h4>
+     <div className="d-flex  justify-content-around pt-4">  
+     <Box className="w-25"> 
+     <h6> Hi-tech City</h6>
+    <BorderLinearProgress variant="determinate" value={99}  /> 99%
+   </Box>
+   <Box className="w-25"> 
+   <h6> Ameerpet</h6>
+    <BorderLinearProgress variant="determinate" value={84}  /> 84%
+   </Box>
+   <Box className="w-25"> 
+   <h6>Dilsukhnagar </h6>
+    <BorderLinearProgress variant="determinate" value={76}  /> 76%
+   </Box>
+     </div>
+      </div>
 
-      {/* ROW 2 */}
-      {/* <Box
-          gridColumn="span 8"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex "
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Revenue Generated
-              </Typography>
-              <Typography
-                variant="h3"
-                fontWeight="bold"
-                color={colors.greenAccent[500]}
-              >
-                $59,342.32
-              </Typography>
-            </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box>
-          </Box>
-          <Box height="250px" m="-20px 0 0 0">
-            <LineChart isDashboard={true} />
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          overflow="auto"
-        >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
-            colors={colors.grey[100]}
-            p="15px"
-          >
-            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
-            </Typography>
-          </Box>
-          {mockTransactions.map((transaction, i) => (
-            <Box
-              key={`${transaction.txId}-${i}`}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              p="15px"
-            >
-              <Box>
-                <Typography
-                  color={colors.greenAccent[500]}
-                  variant="h5"
-                  fontWeight="600"
-                >
-                  {transaction.txId}
-                </Typography>
-                <Typography color={colors.grey[100]}>
-                  {transaction.user}
-                </Typography>
-              </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
-              <Box
-                backgroundColor={colors.greenAccent[500]}
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                ${transaction.cost}
-              </Box>
-            </Box>
-          ))}
-        </Box> */}
+    
+    {/* <div > 
+      
+     
+      This is for progress bar
+     <div className="progress mt-3"> 
+     <div className="enrollment">  
+     <h4 className="pt-3"> Total Entrollment</h4>
+     <div className="d-flex  justify-content-around">  
+     <Box className="w-25"> 
+     <h6> Hi-tech City</h6>
+    <BorderLinearProgress variant="determinate" value={75}  /> 75%
+   </Box>
+   <Box className="w-25"> 
+   <h6> Ameerpet</h6>
+    <BorderLinearProgress variant="determinate" value={25}  /> 25%
+   </Box>
+   <Box className="w-25"> 
+   <h6>Dilsukhnagar </h6>
+    <BorderLinearProgress variant="determinate" value={45}  /> 45%
+   </Box>
+     </div>
+    
+     </div>  </div>
+      */}
+     
+     </>
 
-      {/* ROW 3 */}
-      {/* <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Sales Quantity
-          </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Geography Based Traffic
-          </Typography>
-          <Box height="200px">
-            <GeographyChart isDashboard={true} />
-          </Box>
-        </Box>
-      </Box>*/}
-    </Box>
+    
+      
+  
   );
 };
 

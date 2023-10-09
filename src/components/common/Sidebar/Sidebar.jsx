@@ -13,10 +13,10 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import Diversity3Icon from '@mui/icons-material/Diversity3';
-import InfoIcon from '@mui/icons-material/Info';
-import CardMembershipIcon from '@mui/icons-material/CardMembership';
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
+import InfoIcon from "@mui/icons-material/Info";
+import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import favicon from "../../../images/favicon.jpeg";
 import axios from "axios";
 // let role = localStorage.getItem(role);
@@ -24,8 +24,6 @@ import axios from "axios";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
-
 
   return (
     <MenuItem
@@ -42,8 +40,8 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 let username = "zaheer";
-let role = localStorage.getItem("role");
-// let role = "admin";
+// let role = localStorage.getItem("role");
+let role = "admin";
 
 const Sidebar = () => {
   const theme = useTheme();
@@ -150,7 +148,7 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "1%"}>
-            <SubMenu
+            <Item
               title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
@@ -212,14 +210,14 @@ const Sidebar = () => {
               <Item
                 title="Student Details"
                 to="/studentdata"
-                icon={<InfoIcon/>}
+                icon={<InfoIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
                 title="Registration Form"
                 to="/registrationform"
-                icon={<Diversity3Icon/>}
+                icon={<Diversity3Icon />}
                 selected={selected}
                 setSelected={setSelected}
               />
@@ -227,14 +225,14 @@ const Sidebar = () => {
               <Item
                 title="Fee Details"
                 to="/feedetails"
-                icon={<AttachMoneyIcon/>}
+                icon={<AttachMoneyIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
                 title="Certificate"
                 to="/certificate"
-                icon={<CardMembershipIcon/>}
+                icon={<CardMembershipIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />

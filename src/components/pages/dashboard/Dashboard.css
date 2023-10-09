@@ -1,0 +1,27 @@
+.card1{ 
+    width: 25%;
+    background-color:#d9e9e9;
+    color: dark;
+    text-align: center;
+}
+.card2{ 
+    width: 25%;
+    background-color: #b7e9da;
+    text-align: center;
+}
+.card3{  
+    width: 25%;
+    background-color:#e6acb4 ;
+    text-align: center; 
+}
+.progreebar{ 
+    width: 95%;
+    margin: auto;
+    background-color: white;
+    
+}
+.enrollment{ 
+    width: 92%;
+    margin: auto;
+    
+}

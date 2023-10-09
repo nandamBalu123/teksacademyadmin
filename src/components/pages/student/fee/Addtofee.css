@@ -1,0 +1,16 @@
+
+.addfee{ 
+    width: 95%;
+    margin: auto;
+    background-color: #fff;
+    border: 2px solid #f5f5f5;
+    border-radius: 10px;
+}
+.adding{ 
+    width: 92%;
+    margin: auto;
+    padding-top: 15px;
+}
+.textfield{ 
+    width: 22%;
+}
