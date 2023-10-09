@@ -222,7 +222,9 @@ export default function RegistrationForm() {
       grandtotal,
       admissionremarks,
       assets,
-      materialfee,admissionfee,coursefee
+      materialfee,
+      admissionfee,
+      coursefee
     };
     console.log("studentRegistration", studentRegistrationdata);
     try {
