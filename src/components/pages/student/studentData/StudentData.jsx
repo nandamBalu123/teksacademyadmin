@@ -41,7 +41,7 @@ import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import DownloadIcon from "@mui/icons-material/Download";
 
 import RefreshIcon from "@mui/icons-material/Refresh";
-
+import { initialDataa } from "./data";
 // import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { CSVLink } from "react-csv";
 
@@ -79,8 +79,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
-  const [initialData, setData] = useState([{ name: "" }]);
-  // const [initialData, setData] = useState(initialDataa);
+  // const [initialData, setData] = useState([{ name: "" }]);
+  const [initialData, setData] = useState(initialDataa);
 
   let initialDataCount = initialData.length;
 
@@ -118,7 +118,7 @@ const StudentData = () => {
       .get("http://localhost:3030/getstudent_data")
       .then((response) => {
         // Handle the successful response here
-        setData(response.data); // Update the data state with the fetched data
+        // setData(response.data); // Update the data state with the fetched data
 
         console.log("data", response.data);
       })
@@ -203,9 +203,11 @@ const StudentData = () => {
   }, [getusers]);
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage, setrecordsPerPage] = useState(10);
 
-  const recordsPerPage = 10;
-
+  const handlerecorddata = (e) => {
+    setrecordsPerPage(e.target.value);
+  };
   const lastIndex = currentPage * recordsPerPage;
 
   const firstIndex = lastIndex - recordsPerPage;
@@ -550,13 +552,17 @@ const StudentData = () => {
                       {item.mobilenumber}
                       <br />
 
-                    <p style={{
-                       width:"200px",
-                       whiteSpace:"nowrap",
-                       overflow:"hidden",
-                       textOverflow:"ellipsis"
-                  }}>{item.email}</p>
-                  </StyledTableCell>
+                      <p
+                        style={{
+                          width: "200px",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {item.email}
+                      </p>
+                    </StyledTableCell>
 
                     <StyledTableCell className=" border border 1 text-center">
                       {item.admissiondate
@@ -566,13 +572,13 @@ const StudentData = () => {
                       {item.modeoftraining}
                     </StyledTableCell>
 
-                  <StyledTableCell className=" border border 1 text-center d-flex pb-3  ">
-                    <Link
-                      to={`/studentdataview/${item.id}`}
-                      style={{ width: "40px", marginBottom:"10px" }}
-                    >
-                      <VisibilityIcon className="iconn" />
-                    </Link>
+                    <StyledTableCell className=" border border 1 text-center d-flex pb-3  ">
+                      <Link
+                        to={`/studentdataview/${item.id}`}
+                        style={{ width: "40px", marginBottom: "10px" }}
+                      >
+                        <VisibilityIcon className="iconn" />
+                      </Link>
 
                       <Link
                         to={`/editstudent/${item.id}`}
@@ -580,7 +586,10 @@ const StudentData = () => {
                       >
                         <EditIcon className="iconn" />
                       </Link>
-                      <Link to={`/feeview/${item.id}`} style={{ width: "40px" }}>
+                      <Link
+                        to={`/feeview/${item.id}`}
+                        style={{ width: "40px" }}
+                      >
                         <CurrencyRupeeIcon className="iconn" />
                       </Link>
                       <Link
@@ -636,6 +645,13 @@ const StudentData = () => {
               </li>
             </ul>
           </nav>
+
+          <select name="cars" id="cars" onChange={handlerecorddata}>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="75">75</option>
+          </select>
         </div>
       </div>
     </>

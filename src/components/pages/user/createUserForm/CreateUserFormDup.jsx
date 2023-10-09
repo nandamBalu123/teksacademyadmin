@@ -271,7 +271,7 @@ const CreateUserForm = () => {
           </div>
           <div className="row roww mb-4">
             <label className="mar col-md-2" htmlFor="profile">
-              Profile <span className="star"> *</span>:
+              Role <span className="star"> *</span>:
             </label>
 
             <select
