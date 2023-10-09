@@ -36,28 +36,28 @@ th {
 }
 .main-tc{ 
     width: 100%;
-   
+    padding-top: 20px;
 }
 .tc{ 
-  
-
-    border: 2px solid #000;
+  border: 2px solid #000;
 
 }
 .tclogo{ 
     background-color: #0070fc;
-    color: #000;
+    text-align: center;
+    color: white;
     border: 2px solid #000;
 }
  .tc .info{ 
-    
+    padding-left: 25px;
     padding-top: 40px;
     margin: auto;
+   padding-right: 10px;
 }
 
-.info ul li { 
+/* .info ul li { 
     padding-top: 25px;
-}
+} */
 .sign{ 
     display: flex;
     justify-content: space-between;

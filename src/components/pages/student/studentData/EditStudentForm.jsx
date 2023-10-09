@@ -389,7 +389,7 @@ useEffect(() => {
 
 const handlesubmit = (e) => {
   e.preventDefault();
-  axios.put(`http://localhost:3030/updateuser/${id}`, user)
+  axios.put(`http://localhost:3030/updatestudentdata/${id}`, user)
   .then(res => {
     if(res.data.updated){
       alert('User Updated')

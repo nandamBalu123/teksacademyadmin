@@ -550,17 +550,13 @@ const StudentData = () => {
                       {item.mobilenumber}
                       <br />
 
-                      <p
-                        style={{
-                          width: "200px",
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
-                      >
-                        janfjanjgnasjdnjsnagjagrjgferhtuweteruhtuewrhgejrijgenjdnbjdnfjd
-                      </p>
-                    </StyledTableCell>
+                    <p style={{
+                       width:"200px",
+                       whiteSpace:"nowrap",
+                       overflow:"hidden",
+                       textOverflow:"ellipsis"
+                  }}>{item.email}</p>
+                  </StyledTableCell>
 
                     <StyledTableCell className=" border border 1 text-center">
                       {item.admissiondate
@@ -570,13 +566,13 @@ const StudentData = () => {
                       {item.modeoftraining}
                     </StyledTableCell>
 
-                    <StyledTableCell className=" border border 1 text-center d-flex">
-                      <Link
-                        to={`/studentdataview/${item.id}`}
-                        style={{ width: "40px", marginBottom: "10px" }}
-                      >
-                        <VisibilityIcon className="iconn" />
-                      </Link>
+                  <StyledTableCell className=" border border 1 text-center d-flex pb-3  ">
+                    <Link
+                      to={`/studentdataview/${item.id}`}
+                      style={{ width: "40px", marginBottom:"10px" }}
+                    >
+                      <VisibilityIcon className="iconn" />
+                    </Link>
 
                       <Link
                         to={`/editstudent/${item.id}`}
@@ -584,7 +580,7 @@ const StudentData = () => {
                       >
                         <EditIcon className="iconn" />
                       </Link>
-                      <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                      <Link to={`/feeview/${item.id}`} style={{ width: "40px" }}>
                         <CurrencyRupeeIcon className="iconn" />
                       </Link>
                       <Link

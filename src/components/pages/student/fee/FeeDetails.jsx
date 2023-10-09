@@ -20,6 +20,7 @@ const FeeDetails = () => {
     setAnchorEl(null);
   };
   
+  
   return (
     <>
     <div className="fee"> 
@@ -133,7 +134,7 @@ const FeeDetails = () => {
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                    name="branch"
+                    name="amount"
                 
                   >
                     <option> Select Type</option>

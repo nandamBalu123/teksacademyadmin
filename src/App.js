@@ -42,6 +42,7 @@ import StudentApplicationPrint from "./components/pages/student/studentData/Stud
 import FeeDetails from "./components/pages/student/fee/FeeDetails";
 import Feefollowup from "./components/pages/student/fee/Feefollowup";
 import FeeView from "./components/pages/student/fee/FeeView";
+import Addtofee from "./components/pages/student/fee/Addtofee";
 import EditStudentForm from "./components/pages/student/studentData/EditStudentForm";
 // import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
@@ -99,6 +100,9 @@ function App() {
                   element={role == "admin" ? <FeeView /> : <Dashboard />}
                 />
 
+                <Route path="/addtofee"
+                element={role == "admin"  ?  <Addtofee/> : <Dashboard/>}/>
+
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
                   path="/studentdataview/:id"
@@ -110,7 +114,6 @@ function App() {
                   path="/createuser"
                   element={role == "admin" ? <CreateUserForm /> : <Dashboard />}
                 />
-
                 <Route
                   path="/usersdata"
                   element={role == "admin" ? <UsersData /> : <Dashboard />}
