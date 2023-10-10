@@ -17,8 +17,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link } from "react-router-dom";
-
 import "./UsersData.css";
+import axios from 'axios';
 
 import {
   Button,
@@ -30,8 +30,7 @@ import {
 } from "@mui/material";
 // import { transcode } from "buffer";
 const UsersData = () => {
-  // profile filter
-
+  const [deleted, setDeleted] = useState(false);
   const [profiles, setProfiles] = useState([]);
 
   const fetchData = async () => {
@@ -66,42 +65,17 @@ const UsersData = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
-  const { users, dispatch } = useUsersContext();
-  const { user } = useAuthContext();
+  useEffect(() => {
+    fetchData();
+  }, [deleted]);
 
-  // const [deleted, setDeleted] = useState(false);
-
-  const [deleted, setDeleted] = useState(false);
-
-  // useEffect(() => {
-  //   // Define a function to delete the user
-  //   const deleteuser = async () => {
-  //     try {
-  //       const response = await fetch(`/deleteuser/${user.id}`, {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       });
-
-  //       if (response.status === 200) {
-  //         // User deleted successfully
-  //         setDeleted(true);
-  //       } else if (response.status === 404) {
-  //         // User not found
-  //         console.error("User not found.");
-  //       } else {
-  //         // Handle other errors here
-  //         console.error("Error deleting user.");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error:", error);
-  //     }
-  //   };
-
-  //   // Call the delete function
-  //   deleteuser();
-  // }, [user]);
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:3030/deleteuser/${id}`)
+    .then(() => setDeleted(!deleted))
+    .catch((error) => {
+      console.log("Error: ", error)
+    })
+  }
 
   // const deleteuser = async (id) => {
   //   try {
@@ -365,88 +339,7 @@ const UsersData = () => {
           </MenuItem>
         </Menu>
 
-        {/* <button className="Filter" onAuxClick={()=>setOpen(true)}> </button> */}
-        {/* <button  className="Filter"  onClick={()=> setOpen(true)}> Fillter</button>
-          <Dialog  
-         
-          open={open}
-          onClose={() => setOpen(false)}
-          aria-labelledby="dialog-title"
-          aria-describedby="dialogue-description"
-        >
-          <DialogTitle> Filter Users</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="dialog description">
-              <label htmlFor="">Enter Date</label>
-              <input type='date' className='col-12 felids ' 
-              id=""
-              required
-            style={{
-              height: "45px",
-              
-              padding: "15px",
-              border: "1.5px solid black",
-              borderRadius: "5px",
-            }}
-          />
-          <label htmlFor="" >Filter Branch</label>
-          <select
-            className="col-12  felids"
-            id=""
-          
-            required
-            style={{
-              height: "45px",
-              
-               border: "1.5px solid black",
-              borderRadius: "5px",
-            }}
-          >
-            <option value="">--select--</option>
-            <option value="Hitech"> Hitech</option>
-          </select>
-          <label htmlFor="">Lead Source</label>
-          <select
-            className="col-12 felids "
-            id=""
-            placeholder='Lead Source'
-            required
-            style={{
-              height: "45px",
-             
-              border: "1.5px solid black",
-              borderRadius: "5px",
-            }}
-          >
-            <option value="">--select--</option>
-            <option value="Walkin"> Walkin</option>
-          </select>
-          <label htmlFor="">Mode of Traning</label>
-          <select
-            className="col-12 felids"
-            id=""
-            placeholder='Mode of Traning'
-            required
-            style={{
-              height: "45px",
-              
-              border: "1.5px solid black",
-              borderRadius: "5px",
-            }}
-          >
-            <option value="">--select--</option>
-            <option value="online"> Online</option>
-            <option value="offline"> Offline</option>
-          </select>
-            
-              
-               </DialogContentText>
-            </DialogContent>
-            <DialogActions> 
-              <Button onClick={()=>setOpen(false)}>Cancel</Button>
-              <Button autoFocus onClick={()=> setOpen}>Submit</Button>
-            </DialogActions>
-          </Dialog> */}
+        
       </div>
       <div>
         <TableContainer component={Paper}>
@@ -523,8 +416,8 @@ const UsersData = () => {
                       <Link to={`/edituser/${user.id}`}>
                         <ModeEditIcon />
                       </Link>
-                      <DeleteIcon />
-                      {/* onClick={() => deleteuser(user.id)}  */}
+                      <DeleteIcon  onClick={() => handleDelete(user.id)}/>
+                      
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
