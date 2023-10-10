@@ -13,6 +13,7 @@ import "./RegistrationForm.css";
 import axios from "axios";
 
 import { blue } from "@mui/material/colors";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
 // import { blue } from "@mui/material/colors";
 export default function RegistrationForm() {
@@ -1169,9 +1170,9 @@ export default function RegistrationForm() {
 
                   {registrationNumber}
                 </div>
-                <br />
+                
 
-                <br />
+              
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Validity Start Date <span className="text-danger"> *</span>
@@ -1327,8 +1328,10 @@ export default function RegistrationForm() {
                 >
                   save
                 </button>
+                <br/>
+                <br/>
                 <br />
-                <table class="table">
+                <table className="table   ">
                   <thead>
                     <tr>
                       <th scope="col">Fee Type</th>
@@ -1348,10 +1351,9 @@ export default function RegistrationForm() {
                           <td>{item.discount}</td>
                           <td>{item.taxamount}</td>
                           <td>{item.totalamount}</td>
-                          <td>
-                            <button onClick={() => handleFeeDelete(item.id)}>
-                              Delete
-                            </button>
+                          <td onClick={() => handleFeeDelete(item.id)} className="text-danger">
+                           
+                              <DeleteIcon/>
                           </td>
                         </tr>
                       ))}
@@ -1468,12 +1470,38 @@ export default function RegistrationForm() {
                   /> */}
                   {grandtotal}
 
-                  <h4> fee split</h4>
-                  <p> admission fee {admissionfee}</p>
+               
+                  <table className="table  w-75 " >
+  <tr>
+    <th colspan="2" className="text-center"> Fee Split</th>
+    
+  </tr>
+  <tr>
+    <td>Admission</td>
+    <td className="text-end">{admissionfee}</td>
+    
+   
+    
+  </tr>
+  <tr>
+  <td>CourseFee</td>
+    <td className="text-end">{ coursefee}</td>
+  </tr>
+  <tr> 
+  <td> Material Fee</td>
+  <td className="text-end"> {materialfee}</td>
+  </tr>
+  <tr> 
+  <td> Total</td>
+  <td className="text-end"> {grandtotal}</td>
+  </tr>
+</table>
+                  
+                  {/* <p> admission fee {admissionfee}</p>
                   <p>coursefee {coursefee}</p>
-                  <p>Materialfee {materialfee}</p>
+                  <p>Materialfee {materialfee}</p> */}
 
-                  <p>total--{grandtotal}</p>
+                  {/* <p>total--{grandtotal}</p> */}
                 </div>
                 <br />
                 <div className="row ">

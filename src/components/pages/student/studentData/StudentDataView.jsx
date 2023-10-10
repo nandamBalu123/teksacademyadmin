@@ -69,9 +69,9 @@ const StudentDataView = () => {
             <p> Marital Status: {studentdata.maritalstatus}</p>
             <p> College: {studentdata.college}</p>
           </div>
-          <div className="col-4  text-center ">
+          <div className="col-4  text-start ">
             <h6> Student Contact Details</h6>
-            <hr className="w-50  center " />
+            <hr className="w-50  start " />
             <p> Whatsapp Number: {studentdata.whatsappno}</p>
             <p> State: {studentdata.state} </p>
             <p>Area: {studentdata.area} </p>
@@ -94,7 +94,7 @@ const StudentDataView = () => {
             <p> Branch : {studentdata.branch}</p>
             <p> Mode of Traning: {studentdata.modeoftraining}</p>
           </div>
-          <div className="col-4 text-center">
+          <div className="col-4 text-start">
             <p>
               {" "}
               Validity :{studentdata.validitystartdate} to{" "}

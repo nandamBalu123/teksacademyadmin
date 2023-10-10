@@ -41,21 +41,26 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
       </Box>
       <div className="d-flex w-100 justify-content-around">
-      <Card className="card1">
-      <CardContent>Total Enrollments</CardContent></Card>  
-    <Card className="card2">
-      <CardContent> Total Fee</CardContent> </Card>
-      <Card className="card3">
-      <CardContent> Total Users</CardContent> </Card> 
+      <Card className="color1">
+      <p className="pt-3" >Total Enrollments</p> 
+      <p> 200</p></Card>  
+    <Card className="color2">
+    <p className="pt-3">Total Fee</p> 
+      <p> 20,00,000</p>
+       </Card>
+      <Card className="color3">
+      <p className="pt-3">Total Users</p> 
+      <p> 500</p>
+       </Card> 
      </div> 
 
      {/* This is for progress bar */}
      <div className="progreebar rounded rounded-5  pb-4"> 
-     <h4 className="pt-3 mt-3 enrollment"> Total Entrollment</h4>
+     <h4 className="pt-3 mt-3 enrollment ps-4"> Total Entrollment</h4>
      <div className="d-flex  justify-content-around pt-4">  
      <Box className="w-25"> 
      <h6> Hi-tech City</h6>
-    <BorderLinearProgress variant="determinate" value={75}  /> 75%
+    <BorderLinearProgress variant="determinate" value={50}  /> 50%
    </Box>
    <Box className="w-25"> 
    <h6> Ameerpet</h6>
@@ -63,41 +68,41 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
    </Box>
    <Box className="w-25"> 
    <h6>Dilsukhnagar </h6>
-    <BorderLinearProgress variant="determinate" value={45}  /> 45%
+    <BorderLinearProgress variant="determinate" value={25}  /> 25%
    </Box>
      </div>
       </div>
       <div className="progreebar rounded rounded-5 mt-5 pb-4"> 
-     <h4 className="pt-3 mt-3 enrollment"> Total Fee</h4>
+     <h4 className="pt-3 mt-3 enrollment ps-4"> Total Fee</h4>
      <div className="d-flex  justify-content-around pt-4">  
      <Box className="w-25"> 
      <h6> Hi-tech City</h6>
-    <BorderLinearProgress variant="determinate" value={55}  /> 55%
+    <BorderLinearProgress variant="determinate" value={40}  /> 40%
    </Box>
    <Box className="w-25"> 
    <h6> Ameerpet</h6>
-    <BorderLinearProgress variant="determinate" value={87}  /> 87%
+    <BorderLinearProgress variant="determinate" value={20}  /> 20%
    </Box>
    <Box className="w-25"> 
    <h6>Dilsukhnagar </h6>
-    <BorderLinearProgress variant="determinate" value={93}  /> 93%
+    <BorderLinearProgress variant="determinate" value={40}  /> 40%
    </Box>
      </div>
       </div>
       <div className="progreebar rounded rounded-5 mt-5 pb-4"> 
-     <h4 className="pt-3 mt-3 enrollment"> Total Users</h4>
+     <h4 className="pt-3 mt-3 enrollment ps-4"> Total Users</h4>
      <div className="d-flex  justify-content-around pt-4">  
      <Box className="w-25"> 
      <h6> Hi-tech City</h6>
-    <BorderLinearProgress variant="determinate" value={99}  /> 99%
+    <BorderLinearProgress variant="determinate" value={38}  /> 38%
    </Box>
    <Box className="w-25"> 
    <h6> Ameerpet</h6>
-    <BorderLinearProgress variant="determinate" value={84}  /> 84%
+    <BorderLinearProgress variant="determinate" value={12}  /> 12%
    </Box>
    <Box className="w-25"> 
    <h6>Dilsukhnagar </h6>
-    <BorderLinearProgress variant="determinate" value={76}  /> 76%
+    <BorderLinearProgress variant="determinate" value={50}  /> 50%
    </Box>
      </div>
       </div>

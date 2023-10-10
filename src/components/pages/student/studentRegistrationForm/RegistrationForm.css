@@ -83,3 +83,10 @@ StepLabel {
 .label {
   width: 210px;
 }
+table,th,td{ 
+  border: 1px solid black;
+ 
+}
+.table{ 
+  border-radius: 5px;
+}

@@ -48,22 +48,18 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
   // let jsonObject;
   // useEffect(() => {
-  //   if (studentdata.feedetails) {
-  //     jsonObject = JSON.parse(studentdata.feedetails);
-  //     console.log("jsonobj", jsonObject);
-  //   }
+    
   // });
   return (
     <div ref={ref}>
       <div className="page">
         <div className="application">
+        <h3 className="text-center"> Application Form </h3><hr/>
           <div className="row">
             <div className="col-lg-6">
-              <br />
-              <br />
-              <br />
+              
 
-              <h4 style={{ marginLeft: "15px", marginBottom: "20px" }}>
+              <h4 style={{ marginLeft: "15px" }}>
                 {" "}
                 <strong className="ps-5">
                   {" "}
@@ -97,10 +93,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <br />
               <br />
               <br />
-              <img src={logo} style={{ width: "65%", marginLeft: "24%" }} />
+              <img src={logo} style={{ width: "95%",  }} />
               <h4
                 className="text-center"
-                style={{ marginTop: "23px", marginLeft: "50%" }}
+                style={{ marginTop: "23px"}}
               >
                 {" "}
                 <h5 className="text-start">
@@ -111,11 +107,11 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </div>
           </div>
           <div className="apptext">
-            <h4 className="text-center"> Application Form </h4>{" "}
+           
           </div>
           <div className="admform-sd">
             <div
-              className=" text-center bg-primary text-light"
+              className=" text-center caption "
               style={{ fontSize: "25px", fontWeight: "600" }}
             >
               {" "}
@@ -175,7 +171,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </div>
           <div className="admform-scd">
             <div
-              className="text-center bg-primary text-light"
+              className="text-center caption"
               style={{ fontSize: "25px", fontWeight: "600" }}
             >
               {" "}
@@ -229,7 +225,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
             <div className="admform-scd">
               <div
-                className="text-center bg-primary text-light"
+                className="text-center caption"
                 style={{ fontSize: "25px", fontWeight: "600" }}
               >
                 {" "}
@@ -257,7 +253,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </div>
             <div className="admform-scd">
               <div
-                className="text-center bg-primary text-light "
+                className="text-center caption"
                 style={{ fontSize: "25px", fontWeight: "600" }}
               >
                 {" "}
@@ -333,7 +329,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
           <div className="admform-scd">
             <div
-              className="text-center bg-primary text-light"
+              className="text-center caption"
               style={{ fontSize: "25px", fontWeight: "600" }}
             >
               {" "}
@@ -370,7 +366,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </div>
           <div className="admform-scd">
             <div
-              className="text-center bg-primary text-light"
+              className="text-center caption"
               style={{ fontSize: "25px", fontWeight: "600" }}
             >
               {" "}
