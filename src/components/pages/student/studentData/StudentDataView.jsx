@@ -115,6 +115,10 @@ const StudentDataView = () => {
               <TableRow>
                 <TableCell className="fs-6 text-center border border-2">
                   {" "}
+                  Fee Type{" "}
+                </TableCell>
+                <TableCell className="fs-6 text-center border border-2">
+                  {" "}
                   Amount{" "}
                 </TableCell>
                 <TableCell className="fs-6 text-center border border-2">
@@ -123,32 +127,48 @@ const StudentDataView = () => {
                 </TableCell>
                 <TableCell className="fs-6 text-center border border-2">
                   {" "}
-                  Tax Amount
+                  Tax Amount (Inclusive of GST)
                 </TableCell>
                 <TableCell className="fs-6 text-center border border-2">
                   {" "}
-                  Tax Amount (Inclusive of GST)
+                  Total Amount
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell className="text-center border border-2">
-                  {" "}
-                  20,000
-                </TableCell>
-                <TableCell className="text-center border border-2">
-                  2000
-                </TableCell>
-                <TableCell className="text-center border border-2">
-                  500
-                </TableCell>
-                <TableCell className="text-center border border-2">
-                  18,000
-                </TableCell>
-              </TableRow>
+              {studentdata.feedetails &&
+                JSON.parse(studentdata.feedetails).map((item, index) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    key={index}
+                  >
+                    <TableCell className="text-center border border-2">
+                      {" "}
+                      {item.feetype}
+                    </TableCell>
+                    <TableCell className="text-center border border-2">
+                      {" "}
+                      {item.amount}
+                    </TableCell>
+                    <TableCell className="text-center border border-2">
+                      {item.discount}
+                    </TableCell>
+                    <TableCell className="text-center border border-2">
+                      {item.taxamount}
+                    </TableCell>
+                    <TableCell className="text-center border border-2">
+                      {item.totalamount}
+                      {item.feetype === "fee" ? (
+                        <span>
+                          Materialfee:{item.materialfee} CourseFee:
+                          {item.coursefee}
+                        </span>
+                      ) : (
+                        <span></span>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

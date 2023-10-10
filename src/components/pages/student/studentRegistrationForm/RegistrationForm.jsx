@@ -53,26 +53,146 @@ export default function RegistrationForm() {
   const [discount, setDiscount] = useState(null);
   const [taxamount, setTaxamount] = useState(null);
   const [totalamount, setTotalamount] = useState(null);
+  const [feedetails, setFeeDetails] = useState([]);
+  const [feedetailsbilling, setfeedetailsbilling] = useState([]);
   const [materialfee, setmaterialfee] = useState(null);
-  const [coursefee, setCoursefee] = useState(null);
-  const [admissionfee, setAdmissionfee] = useState(null);
-
-  const [grosstotal, setGrosstotal] = useState(null);
-  const [totaldiscount, setTotalDiscount] = useState(null);
-  const [totaltax, settotaltax] = useState(null);
-  const [grandtotal, setGrandtotal] = useState(null);
+  const [finaltotal, setfinaltotal] = useState(null);
   const [admissionremarks, setadmissionremarks] = useState("");
   const [assets, setassets] = useState("");
 
-  const [feedetails, setFeeDetails] = useState([]);
+  const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
+  const [totaltax, settotaltax] = useState(null);
+  const [grandtotal, setGrandtotal] = useState(null);
 
+  const [grosstotal, setGrosstotal] = useState(null);
+  const [totaldiscount, setTotalDiscount] = useState(null);
+
+  const handleFeecalculations = () => {
+    let grosstotall = 0;
+    let totaldiscountt = 0;
+    let totalfeewithouttaxx = 0;
+    let totaltaxx = 0;
+    let grandtotall = 0;
+    let materialfeee = 0;
+    const array = [];
+    for (let i = 0; i < feedetails.length; i++) {
+      if (feedetails[i].feetype === "admissionfee") {
+        let admissionobject = {
+          id: "",
+          feetype: "",
+          feewithtax: 0,
+          feewithouttax: 0,
+          feetax: 0,
+        };
+        admissionobject.id = feedetails[i].id;
+        admissionobject.feetype = "Admission Fee";
+        admissionobject.feewithtax = feedetails[i].totalamount;
+        admissionobject.feewithouttax = admissionobject.feewithtax / 1.18;
+        admissionobject.feetax =
+          admissionobject.feewithtax - admissionobject.feewithouttax;
+        grosstotall = grosstotall + parseInt(feedetails[i].amount);
+        totaldiscountt = totaldiscountt + feedetails[i].discount;
+        totalfeewithouttaxx =
+          totalfeewithouttaxx + admissionobject.feewithouttax;
+        totaltaxx = totaltaxx + admissionobject.feetax;
+        grandtotall = grandtotall + admissionobject.feewithtax;
+
+        array.push(admissionobject);
+      }
+      if (feedetails[i].feetype === "fee") {
+        let coursefeeobject = {
+          id: "",
+          feetype: "",
+          feewithtax: 0,
+          feewithouttax: 0,
+          feetax: 0,
+        };
+        coursefeeobject.id = feedetails[i].id;
+        coursefeeobject.feetype = "Course Fee";
+        coursefeeobject.feewithtax = feedetails[i].totalamount * 0.65;
+        coursefeeobject.feewithouttax = coursefeeobject.feewithtax / 1.18;
+        coursefeeobject.feetax =
+          coursefeeobject.feewithtax - coursefeeobject.feewithouttax;
+        // settotalfeewithouttax((value) => value + coursefeeobject.feewithouttax);
+        // settotaltax((value) => value + coursefeeobject.feetax);
+        // setGrandtotal((value) => value + coursefeeobject.feewithtax);
+        grosstotall = grosstotall + parseInt(feedetails[i].amount * 0.65);
+        totaldiscountt = totaldiscountt + feedetails[i].discount * 0.65;
+
+        totalfeewithouttaxx =
+          totalfeewithouttaxx + coursefeeobject.feewithouttax;
+        totaltaxx = totaltaxx + coursefeeobject.feetax;
+        grandtotall = grandtotall + coursefeeobject.feewithtax;
+        array.push(coursefeeobject);
+        let materialfeeobject = {
+          id: "",
+          feetype: "",
+          feewithtax: 0,
+          feewithouttax: 0,
+          feetax: 0,
+        };
+        materialfeeobject.id = feedetails[i].id;
+        materialfeeobject.feetype = "Material Fee";
+        materialfeeobject.feewithtax = feedetails[i].totalamount * 0.35;
+        materialfeeobject.feewithouttax = materialfeeobject.feewithtax;
+        materialfeeobject.feetax = 0;
+
+        // settotalfeewithouttax(
+        //   (value) => value + materialfeeobject.feewithouttax
+        // );
+        // settotaltax((value) => value + materialfeeobject.feetax);
+        // setGrandtotal((value) => value + materialfeeobject.feewithtax);
+        grosstotall = grosstotall + parseInt(feedetails[i].amount * 0.35);
+        totaldiscountt = totaldiscountt + feedetails[i].discount * 0.35;
+        materialfeee =
+          materialfeee + parseInt(feedetails[i].totalamount * 0.35);
+        // totalfeewithouttaxx =
+        //   totalfeewithouttaxx + materialfeeobject.feewithouttax;
+        totaltaxx = totaltaxx + materialfeeobject.feetax;
+        // grandtotall = grandtotall + materialfeeobject.feewithtax;
+        array.push(materialfeeobject);
+      }
+    }
+    setTotalDiscount(totaldiscountt);
+    setGrosstotal(grosstotall);
+    settotalfeewithouttax(totalfeewithouttaxx);
+    settotaltax(totaltaxx);
+    setGrandtotal(grandtotall);
+    setfeedetailsbilling(array);
+    setmaterialfee(materialfeee);
+
+    handleNext();
+  };
+  useEffect(() => {
+    setfinaltotal(grandtotal + materialfee);
+  }, [grandtotal, materialfee]);
   useEffect(() => {
     setTotalamount(amount - discount);
     let actualfee = (totalamount * 100) / 118;
 
-    setTaxamount(parseFloat((totalamount - actualfee).toFixed(2)));
+    setTaxamount(totalamount - actualfee);
   });
-  // useEffect(() => {}, [totalamount]);
+  const handleFeeDetails = (e) => {
+    e.preventDefault();
+
+    setFeeDetails([
+      ...feedetails,
+      {
+        id: Date.now(),
+        feetype: feetype,
+        amount: amount,
+        discount: discount,
+        taxamount: taxamount,
+        totalamount: totalamount,
+      },
+    ]);
+    setAmount(0);
+    setDiscount(0);
+    setTaxamount(0);
+
+    setTotalamount(0);
+  };
+
   useEffect(() => {
     let date = toString(admissionDate);
     let month = admissionDate[5] + admissionDate[6];
@@ -129,60 +249,6 @@ export default function RegistrationForm() {
     setActiveStep(0);
   };
 
-  const handleFeeDetails = (e) => {
-    e.preventDefault();
-
-    setFeeDetails([
-      ...feedetails,
-      {
-        id: Date.now(),
-        feetype: feetype,
-        amount: amount,
-        discount: discount,
-        taxamount: taxamount,
-        totalamount: totalamount,
-      },
-    ]);
-    setTaxamount(0);
-    setAmount(0);
-    setDiscount(0);
-    setTotalamount(0);
-  };
-
-  const handleFeecalculations = () => {
-    let ggrosstotal = 0;
-    let ttotaldiscount = 0;
-    let ttotaltax = 0;
-    let ttotalamount = 0;
-    let materialfee = 0;
-    let coursefee = 0;
-    let admissionfee = 0;
-    for (let i = 0; i < feedetails.length; i++) {
-      ggrosstotal = parseInt(ggrosstotal) + parseInt(feedetails[i].amount);
-      ttotaldiscount =
-        parseInt(ttotaldiscount) + parseInt(feedetails[i].discount);
-      ttotaltax = parseFloat(ttotaltax) + parseFloat(feedetails[i].taxamount);
-      ttotalamount =
-        parseInt(ttotalamount) + parseInt(feedetails[i].totalamount);
-      if (feedetails[i].feetype === "fee") {
-        materialfee = materialfee + feedetails[i].totalamount * 0.35;
-
-        coursefee = coursefee + feedetails[i].totalamount * 0.65;
-      }
-      if (feedetails[i].feetype === "admissionfee") {
-        admissionfee = admissionfee + feedetails[i].totalamount;
-      }
-    }
-    setmaterialfee(materialfee);
-    setCoursefee(coursefee);
-    setGrosstotal(ggrosstotal);
-    setTotalDiscount(ttotaldiscount);
-    settotaltax(parseFloat(ttotaltax.toFixed(2)));
-    setGrandtotal(ttotalamount);
-    setAdmissionfee(admissionfee);
-    handleNext();
-  };
-
   const handleSubmit = async () => {
     const studentRegistrationdata = {
       name,
@@ -215,14 +281,16 @@ export default function RegistrationForm() {
       admissionDate,
       validityStartDate,
       validityEndDate,
+
       feedetails,
+      feedetailsbilling,
+      totalfeewithouttax,
       grosstotal,
       totaldiscount,
       totaltax,
       grandtotal,
       admissionremarks,
       assets,
-      materialfee,admissionfee,coursefee
     };
     console.log("studentRegistration", studentRegistrationdata);
     try {
@@ -1305,22 +1373,22 @@ export default function RegistrationForm() {
                 </div>
 
                 <br />
-                <div className="row ">
+                {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Tax Amount <span className="text-danger"> *</span>&nbsp;:
                   </label>
 
                   {taxamount}
-                </div>
+                </div> */}
                 <br />
-                <div className="row ">
+                {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Total Amount (Inclusive of GST){" "}
                     <span className="text-danger"> *</span>&nbsp;:
                   </label>
 
                   {totalamount}
-                </div>
+                </div> */}
                 <button
                   onClick={handleFeeDetails}
                   className="bg-primary text-light px-4 py-1  border border-none rounded-2 "
@@ -1328,35 +1396,37 @@ export default function RegistrationForm() {
                   save
                 </button>
                 <br />
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Fee Type</th>
-                      <th scope="col">Amount</th>
-                      <th scope="col">Discount</th>
-                      <th scope="col">Tax Amount</th>
-                      <th scope="col">Total Amount</th>
-                      <th scope="col">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {feedetails &&
-                      feedetails.map((item) => (
-                        <tr key={item.id}>
-                          <th scope="row">{item.feetype}</th>
-                          <td>{item.amount}</td>
-                          <td>{item.discount}</td>
-                          <td>{item.taxamount}</td>
-                          <td>{item.totalamount}</td>
-                          <td>
-                            <button onClick={() => handleFeeDelete(item.id)}>
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
+                {feedetails.length > 0 && (
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Fee Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Tax Amount</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {feedetails &&
+                        feedetails.map((item) => (
+                          <tr key={item.id}>
+                            <th scope="row">{item.feetype}</th>
+                            <td>{item.amount}</td>
+                            <td>{item.discount}</td>
+                            <td>{item.taxamount}</td>
+                            <td>{item.totalamount}</td>
+                            <td>
+                              <button onClick={() => handleFeeDelete(item.id)}>
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                )}
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1390,32 +1460,94 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Gross Total</th>
+                    <th scope="col">Total Discount</th>
+                    <th scope="col">Total Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{grosstotal}</td>
+                    <td>{totaldiscount}</td>
+                    <td>{finaltotal}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p></p>
               <form className="form">
-                <div className="row ">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Fee Type</th>
+                      <th scope="col">Fee (exclusive Of GST) </th>
+                      <th scope="col">tax</th>
+                      <th scope="col">Fee (inclusive Of GST)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {feedetailsbilling.length > 0 &&
+                      feedetailsbilling.map((item) => {
+                        if (item.feetype != "Material Fee") {
+                          return (
+                            <tr key={item.id}>
+                              <th scope="row">{item.feetype}</th>
+                              <td>
+                                {parseFloat(item.feewithouttax.toFixed(2))}
+                              </td>
+                              <td>{parseFloat(item.feetax.toFixed(2))}</td>
+                              <td>{parseFloat(item.feewithtax.toFixed(2))}</td>
+                            </tr>
+                          );
+                        }
+                      })}
+                    {feedetailsbilling.length > 0 && (
+                      <tr>
+                        <td></td>
+                        <th>
+                          Total Fee (exclusive of GST)
+                          {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
+                        </th>
+                        <th>Total Tax:{parseFloat(totaltax.toFixed(2))}</th>
+                        <th>
+                          Total Fee (inclusive of GST)
+                          {parseFloat(grandtotal.toFixed(2))}
+                        </th>
+                      </tr>
+                    )}
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th>MaterialFee:{materialfee}</th>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th>Grand Total:{finaltotal}</th>
+                    </tr>
+                  </tbody>
+                </table>
+
+                {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Gross Total <span className="text-danger"> *</span>&nbsp;:
                   </label>
 
                   {grosstotal}
-                </div>
+                </div> */}
                 <br />
-                <div className="row ">
+                {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Discount <span className="text-danger"> *</span>
                     &nbsp; :
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                  
                   {totaldiscount}
-                </div>
+                </div> */}
                 <br />
                 {/* <div className="row ">
                   <label className="col-12 col-md-2">
@@ -1433,12 +1565,12 @@ export default function RegistrationForm() {
                   />
                 </div> */}
 
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
+                {/* <div className="row "> */}
+                {/* <label className="col-12 col-md-2 label">
                     Total Tax (GST) <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>
-                  {/* <input
+                  </label> */}
+                {/* <input
                     type="text"
                     className="col-9 col-md-5"
                     required
@@ -1448,15 +1580,15 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {totaltax}
-                </div>
+                {/* {totaltax} */}
+                {/* </div>
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Grand Total(inclusive of GST)
                     <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  {/* <input
+                  </label> */}
+                {/* <input
                     type="text"
                     className="col-9 col-md-5"
                     required
@@ -1466,7 +1598,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {grandtotal}
+                {/* {grandtotal}
 
                   <h4> fee split</h4>
                   <p> admission fee {admissionfee}</p>
@@ -1474,7 +1606,7 @@ export default function RegistrationForm() {
                   <p>Materialfee {materialfee}</p>
 
                   <p>total--{grandtotal}</p>
-                </div>
+                </div> */}
                 <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">

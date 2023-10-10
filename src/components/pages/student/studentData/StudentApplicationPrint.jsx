@@ -358,7 +358,17 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                         <td>{item.amount}</td>
                         <td>{item.discount}</td>
                         <td>{item.taxamount}</td>
-                        <td>{item.totalamount}</td>
+                        <td>
+                          {item.totalamount}{" "}
+                          {item.feetype === "fee" ? (
+                            <span>
+                              Materialfee:{item.materialfee} CourseFee:
+                              {item.coursefee}
+                            </span>
+                          ) : (
+                            <span></span>
+                          )}
+                        </td>
                       </tr>
                     ))}
                   <tr>

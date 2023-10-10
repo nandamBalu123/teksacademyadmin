@@ -41,13 +41,14 @@ import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import DownloadIcon from "@mui/icons-material/Download";
 
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { initialDataa } from "./data";
+// import { initialDataa } from "./data";
 // import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { CSVLink } from "react-csv";
 
 import { Link } from "react-router-dom";
 
 import { LastPage } from "@mui/icons-material";
+import AddIcon from "@mui/icons-material/Add";
 
 import axios from "axios";
 // import { CSVLink } from "react-csv";
@@ -79,8 +80,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
-  // const [initialData, setData] = useState([{ name: "" }]);
-  const [initialData, setData] = useState(initialDataa);
+  const [initialData, setData] = useState([{ name: "" }]);
+  // const [initialData, setData] = useState(initialDataa);
 
   let initialDataCount = initialData.length;
 
@@ -118,7 +119,7 @@ const StudentData = () => {
       .get("http://localhost:3030/getstudent_data")
       .then((response) => {
         // Handle the successful response here
-        // setData(response.data); // Update the data state with the fetched data
+        setData(response.data); // Update the data state with the fetched data
 
         console.log("data", response.data);
       })
@@ -207,6 +208,7 @@ const StudentData = () => {
 
   const handlerecorddata = (e) => {
     setrecordsPerPage(e.target.value);
+    setCurrentPage(1);
   };
   const lastIndex = currentPage * recordsPerPage;
 
@@ -591,6 +593,12 @@ const StudentData = () => {
                         style={{ width: "40px" }}
                       >
                         <CurrencyRupeeIcon className="iconn" />
+                      </Link>
+                      <Link
+                        to={`/addtofee/${item.id}`}
+                        style={{ width: "40px" }}
+                      >
+                        <AddIcon className="iconn" />
                       </Link>
                       <Link
                         to={`/studentApplicationprint/${item.id}`}

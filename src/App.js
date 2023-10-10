@@ -100,8 +100,10 @@ function App() {
                   element={role == "admin" ? <FeeView /> : <Dashboard />}
                 />
 
-                <Route path="/addtofee"
-                element={role == "admin"  ?  <Addtofee/> : <Dashboard/>}/>
+                <Route
+                  path="/addtofee/:id"
+                  element={role == "admin" ? <Addtofee /> : <Dashboard />}
+                />
 
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
