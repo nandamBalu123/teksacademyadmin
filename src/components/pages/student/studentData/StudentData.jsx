@@ -253,7 +253,7 @@ const StudentData = () => {
 
       <div className="studetdetails ">
         <div className="row mb-3 px-4 pt-3">
-          <div className="col-8 col-md-8  input-field">
+          <div className="col-7 col-md-7  input-field">
             <input
               type="text"
               className="input-field ps-2"
@@ -443,6 +443,12 @@ const StudentData = () => {
               </div>
             </Menu>
           </div>
+          <div className="col-1"> <select name="cars" id="cars" onChange={handlerecorddata}>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="75">75</option>
+          </select></div>
           <div className="col-1 pt-2 ">
             <CSVLink
               data={filteredData}
@@ -453,12 +459,43 @@ const StudentData = () => {
             </CSVLink>{" "}
           </div>
         </div>
+{/* 
+        <table className="table table-striped">
+        <thead>
+    <tr>
+
+      <th  className="  bg-primary fs-6 border border 1 text-center text-light"
+                  align="left">  S.No</th>
+      <th  className="  bg-primary fs-6 border border 1 text-center text-light"
+                  align="left">  Student Name <br /> Registration No</th>
+      <th  className="bg-primary fs-6 border border 1 text-center text-light"
+                  align="left"> Branch <br /> Course</th>
+      <th  className="bg-primary fs-6 border border 1 text-center text-light"
+                  align="left">Counseller
+                  <br /> Source</th>
+      <th  className="bg-primary fs-6 border border 1 text-center text-light"
+                  align="left">Contact Number
+                  <br /> Email ID</th>  
+                  <th  className="bg-primary fs-6 border border 1 text-center text-light"
+                  align="left"> Joining Date <br />
+                  Traning Mode
+                  </th>  
+                  <th  className="bg-primary fs-6 border border 1 text-center text-light"
+                  align="left"> Actions
+                </th>                    
+    </tr>
+  </thead>
+  <tbody>
+   
+    
+  </tbody>
+</table> */}
 
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell className="bg-primary fs-6 border border 1 text-center ">
+            <TableHead >
+              <TableRow  className="tablerow">
+                <StyledTableCell className="bg-primary fs-6 border border 1 text-center   ">
                   SNo
                 </StyledTableCell>
                 {/* 
@@ -654,12 +691,7 @@ const StudentData = () => {
             </ul>
           </nav>
 
-          <select name="cars" id="cars" onChange={handlerecorddata}>
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="75">75</option>
-          </select>
+          
         </div>
       </div>
     </>

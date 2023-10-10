@@ -1,15 +1,15 @@
-.card1{ 
+.color1{ 
     width: 25%;
     background-color:#d9e9e9;
     color: dark;
     text-align: center;
 }
-.card2{ 
+.color2{ 
     width: 25%;
     background-color: #b7e9da;
     text-align: center;
 }
-.card3{  
+.color3{  
     width: 25%;
     background-color:#e6acb4 ;
     text-align: center; 
@@ -22,6 +22,6 @@
 }
 .enrollment{ 
     width: 92%;
-    margin: auto;
+   
     
 }

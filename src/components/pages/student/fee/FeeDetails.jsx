@@ -183,7 +183,7 @@ const FeeDetails = () => {
       </Table>
     </TableContainer>
 
-    <TableContainer component={Paper} className="pt-4" id="">
+    {/* <TableContainer component={Paper} className="pt-4" id="">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -216,7 +216,7 @@ const FeeDetails = () => {
       
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer> */}
 
        
        </div>

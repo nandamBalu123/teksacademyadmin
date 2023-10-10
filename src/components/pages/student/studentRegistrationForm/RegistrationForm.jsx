@@ -13,6 +13,7 @@ import "./RegistrationForm.css";
 import axios from "axios";
 
 import { blue } from "@mui/material/colors";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 // import { blue } from "@mui/material/colors";
 export default function RegistrationForm() {
@@ -1237,9 +1238,7 @@ export default function RegistrationForm() {
 
                   {registrationNumber}
                 </div>
-                <br />
 
-                <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Validity Start Date <span className="text-danger"> *</span>
@@ -1396,37 +1395,37 @@ export default function RegistrationForm() {
                   save
                 </button>
                 <br />
-                {feedetails.length > 0 && (
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Fee Type</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Discount</th>
-                        <th scope="col">Tax Amount</th>
-                        <th scope="col">Total Amount</th>
-                        <th scope="col">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {feedetails &&
-                        feedetails.map((item) => (
-                          <tr key={item.id}>
-                            <th scope="row">{item.feetype}</th>
-                            <td>{item.amount}</td>
-                            <td>{item.discount}</td>
-                            <td>{item.taxamount}</td>
-                            <td>{item.totalamount}</td>
-                            <td>
-                              <button onClick={() => handleFeeDelete(item.id)}>
-                                Delete
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                )}
+                <br />
+                <br />
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Fee Type</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Discount</th>
+                      <th scope="col">Tax Amount</th>
+                      <th scope="col">Total Amount</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {feedetails &&
+                      feedetails.map((item) => (
+                        <tr key={item.id}>
+                          <th scope="row">{item.feetype}</th>
+                          <td>{item.amount}</td>
+                          <td>{item.discount}</td>
+                          <td>{item.taxamount}</td>
+                          <td>{item.totalamount}</td>
+                          <td>
+                            <button onClick={() => handleFeeDelete(item.id)}>
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1532,82 +1531,6 @@ export default function RegistrationForm() {
                   </tbody>
                 </table>
 
-                {/* <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Gross Total <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-
-                  {grosstotal}
-                </div> */}
-                <br />
-                {/* <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Discount <span className="text-danger"> *</span>
-                    &nbsp; :
-                  </label>
-                  
-                  {totaldiscount}
-                </div> */}
-                <br />
-                {/* <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Net Total <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  />
-                </div> */}
-
-                {/* <div className="row "> */}
-                {/* <label className="col-12 col-md-2 label">
-                    Total Tax (GST) <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label> */}
-                {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
-                {/* {totaltax} */}
-                {/* </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Grand Total(inclusive of GST)
-                    <span className="text-danger"> *</span>&nbsp;:
-                  </label> */}
-                {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
-                {/* {grandtotal}
-
-                  <h4> fee split</h4>
-                  <p> admission fee {admissionfee}</p>
-                  <p>coursefee {coursefee}</p>
-                  <p>Materialfee {materialfee}</p>
-
-                  <p>total--{grandtotal}</p>
-                </div> */}
-                <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     {" "}
