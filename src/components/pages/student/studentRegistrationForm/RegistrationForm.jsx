@@ -67,7 +67,7 @@ export default function RegistrationForm() {
   const [dueamount, setdueamount] = useState(null);
   const [totalinstallments, settotalinstallments] = useState(0);
   const [duedatetype, setduedatetype] = useState("");
-  const [addfee, setaddfee] = useState(0);
+  const [addfee, setaddfee] = useState(false);
   const [installments, setinstallments] = useState([]);
 
   const [feedetailsbilling, setfeedetailsbilling] = useState([]);

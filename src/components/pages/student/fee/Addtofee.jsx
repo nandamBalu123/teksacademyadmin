@@ -15,11 +15,13 @@ const Addtofee = () => {
   const { id } = useParams();
   const [studentdata, setstudentdata] = useState("");
   useEffect(() => {
-    settotalinstallments([{
-      totalinstallments: totalinstallment,
-      totalinstallmentspaid: 0,
-      totalinstallmentsleft: totalinstallment,
-    }]);
+    settotalinstallments([
+      {
+        totalinstallments: totalinstallment,
+        totalinstallmentspaid: 0,
+        totalinstallmentsleft: totalinstallment,
+      },
+    ]);
   }, [totalinstallment]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
@@ -35,10 +37,8 @@ const Addtofee = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  
-  useEffect(() => {
-    setdueamount(studentdata.dueamount);
-  }, [studentdata]);
+  console.log("studentdata", studentdata);
+
   const [selectedOption, setSelectedOption] = useState("option1");
 
   useEffect(() => {
@@ -53,10 +53,11 @@ const Addtofee = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const addfee = true;
+
     const updatedData = { dueamount, initialamount, totalinstallments, addfee };
-    console.log("dueamount: ", dueamount)
+    console.log("dueeqam", dueamount);
+
     axios
       .put(`http://localhost:3030/addfee/${id}`, updatedData)
 
@@ -70,7 +71,7 @@ const Addtofee = () => {
         }
       });
   };
- 
+
   return (
     <>
       <div className="addfee">
