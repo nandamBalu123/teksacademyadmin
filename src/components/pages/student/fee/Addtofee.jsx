@@ -9,10 +9,18 @@ const Addtofee = () => {
   const navigator = useNavigate();
   const [dueamount, setdueamount] = useState();
   const [initialamount, setinitialamount] = useState();
+  const [totalinstallment, settotalinstallment] = useState();
   const [totalinstallments, settotalinstallments] = useState();
+
   const { id } = useParams();
   const [studentdata, setstudentdata] = useState("");
-
+  useEffect(() => {
+    settotalinstallments([{
+      totalinstallments: totalinstallment,
+      totalinstallmentspaid: 0,
+      totalinstallmentsleft: totalinstallment,
+    }]);
+  }, [totalinstallment]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -33,7 +41,6 @@ const Addtofee = () => {
   }, [studentdata]);
   const [selectedOption, setSelectedOption] = useState("option1");
 
-  
   useEffect(() => {
     setdueamount(studentdata.dueamount - initialamount);
   }, [initialamount]);
@@ -43,24 +50,27 @@ const Addtofee = () => {
 
 
 
-  
 
   const handleSubmit = (e) => {
-    // dueamount,initialamount,totalinstallments5
     e.preventDefault();
-    axios.put(`http://localhost:3030/addfee/${id}`, dueamount, initialamount, totalinstallments)
-    .then(res => {
-      if(res.data.updated){
-        alert('Fee Added')
-        navigator('/studentdata')
-      }else{
-        alert("Try Again");
-      }
-    })
 
+    const addfee = true;
+    const updatedData = { dueamount, initialamount, totalinstallments, addfee };
+    console.log("dueamount: ", dueamount)
+    axios
+      .put(`http://localhost:3030/addfee/${id}`, updatedData)
 
+      .then((res) => {
+        if (res.data.updated) {
+          alert("Fee Added");
 
+          navigator("/studentdata");
+        } else {
+          alert("Try Again");
+        }
+      });
   };
+ 
   return (
     <>
       <div className="addfee">
@@ -182,8 +192,8 @@ const Addtofee = () => {
               label="No. of Installments"
               variant="outlined"
               className="textfield"
-              value={totalinstallments}
-              onChange={(e) => settotalinstallments(e.target.value)}
+              value={totalinstallment}
+              onChange={(e) => settotalinstallment(e.target.value)}
             />
             <p>Due Date Type</p>
             <label>
