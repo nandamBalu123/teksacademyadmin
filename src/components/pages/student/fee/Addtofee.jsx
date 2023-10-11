@@ -2,10 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import "./Addtofee.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import InputAdornment from "@mui/material/InputAdornment";
 const Addtofee = () => {
+  const navigator = useNavigate();
   const [dueamount, setdueamount] = useState();
   const [initialamount, setinitialamount] = useState();
   const [totalinstallments, settotalinstallments] = useState();
@@ -26,7 +27,7 @@ const Addtofee = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  console.log("studentdata", studentdata);
+  
   useEffect(() => {
     setdueamount(studentdata.dueamount);
   }, [studentdata]);
@@ -37,8 +38,26 @@ const Addtofee = () => {
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
-  const handleSubmit = () => {
+
+
+
+  
+
+  const handleSubmit = (e) => {
     // dueamount,initialamount,totalinstallments5
+    e.preventDefault();
+    axios.put(`http://localhost:3030/addfee/${id}`, dueamount, initialamount, totalinstallments)
+    .then(res => {
+      if(res.data.updated){
+        alert('Fee Added')
+        navigator('/studentdata')
+      }else{
+        alert("Try Again");
+      }
+    })
+
+
+
   };
   return (
     <>
