@@ -54,19 +54,26 @@ export default function RegistrationForm() {
   const [discount, setDiscount] = useState(null);
   const [taxamount, setTaxamount] = useState(null);
   const [totalamount, setTotalamount] = useState(null);
+
   const [feedetails, setFeeDetails] = useState([]);
-  const [feedetailsbilling, setfeedetailsbilling] = useState([]);
-  const [materialfee, setmaterialfee] = useState(null);
+  const [grosstotal, setGrosstotal] = useState(null);
+  const [totaldiscount, setTotalDiscount] = useState(0);
+  const [totaltax, settotaltax] = useState(null);
+  const [grandtotal, setGrandtotal] = useState(null);
   const [finaltotal, setfinaltotal] = useState(null);
   const [admissionremarks, setadmissionremarks] = useState("");
   const [assets, setassets] = useState("");
+  const [initailamount, setinitailamount] = useState(0);
+  const [dueamount, setdueamount] = useState(finaltotal);
+  const [totalinstallments, settotalinstallments] = useState(0);
+  const [duedatetype, setduedatetype] = useState("");
+  const [addfee, setaddfee] = useState(0);
+  const [installments, setinstallments] = useState([]);
+
+  const [feedetailsbilling, setfeedetailsbilling] = useState([]);
+  const [materialfee, setmaterialfee] = useState(null);
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
-  const [totaltax, settotaltax] = useState(null);
-  const [grandtotal, setGrandtotal] = useState(null);
-
-  const [grosstotal, setGrosstotal] = useState(null);
-  const [totaldiscount, setTotalDiscount] = useState(0);
 
   const handleFeecalculations = () => {
     let grosstotall = 0;
@@ -197,9 +204,9 @@ export default function RegistrationForm() {
   };
 
   useEffect(() => {
-    let date = toString(admissionDate);
-    let month = admissionDate[5] + admissionDate[6];
-    let year = admissionDate[2] + admissionDate[3];
+    let date = toString(admissiondate);
+    let month = admissiondate[5] + admissiondate[6];
+    let year = admissiondate[2] + admissiondate[3];
     let firstbranch;
     if (branch) {
       firstbranch = branch[0].toUpperCase();
@@ -230,13 +237,13 @@ export default function RegistrationForm() {
       }
     }
 
-    if (!admissionDate) {
+    if (!admissiondate) {
       setRegistrationNumber("");
     }
-    if (admissionDate) {
+    if (admissiondate) {
       setRegistrationNumber("TA" + firstbranch + month + year + serialno);
     }
-  }, [admissionDate, branch]);
+  }, [admissiondate, branch]);
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -286,16 +293,24 @@ export default function RegistrationForm() {
       validityenddate,
 
       feedetails,
-      feedetailsbilling,
-      totalfeewithouttax,
       grosstotal,
       totaldiscount,
       totaltax,
       grandtotal,
+      finaltotal,
       admissionremarks,
       assets,
+      totalinstallments,
+      dueamount,
+      addfee,
+
+      initailamount,
+      duedatetype,
+      installments,
       materialfee,
-      finaltotal,
+
+      feedetailsbilling,
+      totalfeewithouttax,
     };
     console.log("studentRegistration", studentRegistrationdata);
     try {
@@ -1240,7 +1255,7 @@ export default function RegistrationForm() {
                     &nbsp;:
                   </label>
 
-                  {registrationNumber}
+                  {registrationnumber}
                 </div>
 
                 <div className="row ">
