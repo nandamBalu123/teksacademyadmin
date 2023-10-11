@@ -6,6 +6,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import InputAdornment from "@mui/material/InputAdornment";
 const Addtofee = () => {
+  const [dueamount, setdueamount] = useState();
+  const [initialamount, setinitialamount] = useState();
+  const [totalinstallments, settotalinstallments] = useState();
   const { id } = useParams();
   const [studentdata, setstudentdata] = useState("");
 
@@ -24,12 +27,19 @@ const Addtofee = () => {
       });
   }, []);
   console.log("studentdata", studentdata);
+  useEffect(() => {
+    setdueamount(studentdata.dueamount);
+  }, [studentdata]);
   const [selectedOption, setSelectedOption] = useState("option1");
-
+  useEffect(() => {
+    setdueamount(studentdata.dueamount - initialamount);
+  }, [initialamount]);
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
-
+  const handleSubmit = () => {
+    // dueamount,initialamount,totalinstallments5
+  };
   return (
     <>
       <div className="addfee">
@@ -87,12 +97,14 @@ const Addtofee = () => {
             />
           </div>
           <div className="d-flex justify-content-around pt-5">
+            {/* <input type="text" value={studentdata.admissiondate} /> */}
             <TextField
               id="outlined-basic"
               label="Date Of Joining"
               variant="outlined"
               className="textfield"
               type="date"
+              value={studentdata.admissiondate}
               InputLabelProps={{
                 shrink: true, // This will make the label float when there is a value
               }}
@@ -115,7 +127,7 @@ const Addtofee = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    {studentdata.grandtotal}
+                    {studentdata.finaltotal}
                   </InputAdornment>
                 ),
               }}
@@ -126,11 +138,11 @@ const Addtofee = () => {
               sx={{ m: 1, width: "25ch" }}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                  
-                  </InputAdornment>
+                  <InputAdornment position="start"></InputAdornment>
                 ),
               }}
+              value={initialamount}
+              onChange={(e) => setinitialamount(e.target.value)}
             />
             <TextField
               label="Due Amount"
@@ -138,9 +150,7 @@ const Addtofee = () => {
               sx={{ m: 1, width: "25ch" }}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                
-                  </InputAdornment>
+                  <InputAdornment position="start">{dueamount}</InputAdornment>
                 ),
               }}
             />
@@ -151,6 +161,8 @@ const Addtofee = () => {
               label="No. of Installments"
               variant="outlined"
               className="textfield"
+              value={totalinstallments}
+              onChange={(e) => settotalinstallments(e.target.value)}
             />
             <p>Due Date Type</p>
             <label>
@@ -175,6 +187,7 @@ const Addtofee = () => {
               Customized
             </label>
           </div>
+          <button onClick={handleSubmit}>Add to Fee</button>
         </div>{" "}
       </div>
     </>

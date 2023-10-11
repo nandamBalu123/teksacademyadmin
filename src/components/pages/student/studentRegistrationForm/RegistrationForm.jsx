@@ -63,8 +63,8 @@ export default function RegistrationForm() {
   const [finaltotal, setfinaltotal] = useState(null);
   const [admissionremarks, setadmissionremarks] = useState("");
   const [assets, setassets] = useState("");
-  const [initailamount, setinitailamount] = useState(0);
-  const [dueamount, setdueamount] = useState(finaltotal);
+  const [initialamount, setinitialamount] = useState(0);
+  const [dueamount, setdueamount] = useState(null);
   const [totalinstallments, settotalinstallments] = useState(0);
   const [duedatetype, setduedatetype] = useState("");
   const [addfee, setaddfee] = useState(0);
@@ -99,7 +99,8 @@ export default function RegistrationForm() {
         admissionobject.feetax =
           admissionobject.feewithtax - admissionobject.feewithouttax;
         grosstotall = grosstotall + parseInt(feedetails[i].amount);
-        totaldiscountt = totaldiscountt + parseInt(feedetails[i].discount);
+        // totaldiscountt = totaldiscountt + parseInt(feedetails[i].discount);
+        totaldiscountt = 0;
         totalfeewithouttaxx =
           totalfeewithouttaxx + admissionobject.feewithouttax;
         totaltaxx = totaltaxx + admissionobject.feetax;
@@ -176,6 +177,9 @@ export default function RegistrationForm() {
   useEffect(() => {
     setfinaltotal(grandtotal + materialfee);
   }, [grandtotal, materialfee]);
+  useEffect(() => {
+    setdueamount(finaltotal);
+  }, [finaltotal]);
   useEffect(() => {
     setTotalamount(amount - discount);
     let actualfee = (totalamount * 100) / 118;
@@ -304,7 +308,7 @@ export default function RegistrationForm() {
       dueamount,
       addfee,
 
-      initailamount,
+      initialamount,
       duedatetype,
       installments,
       materialfee,
@@ -1021,6 +1025,7 @@ export default function RegistrationForm() {
                     onChange={(e) => setEnquiryTakenBy(e.target.value)}
                     value={enquirytakenby}
                   >
+                    <option>---select--</option>
                     {filteredcounsellor &&
                       filteredcounsellor.map((user, index) => (
                         <option value={user.fullname}> {user.fullname}</option>
