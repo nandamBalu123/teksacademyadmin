@@ -9,11 +9,18 @@ import Paper from "@mui/material/Paper";
 import "./FeeView.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios"
+import axios from "axios";
 const FeeView = () => {
   const { id } = useParams();
   const [studentdata, setstudentdata] = useState("");
+  const [installments, setinstallments] = useState([]);
+  const [duedate,setduedate]=useState()
+  const [paidamount,setpaidamount]=useState()
+  const [paiddate,setpaiddate]=useState()
+  const [modeofpayment,setmodeofpayment]=useState()
+  const [transactionid,settransactionid]=useState()
 
+ 
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -29,6 +36,19 @@ const FeeView = () => {
       });
   }, []);
   console.log("studentdata", studentdata);
+  const handleinstallments=()=>{
+    setinstallments([
+      ...installments,
+      {
+        id: Date.now(),
+        duedate:duedate,
+        paidamount:paidamount,
+        paiddate:paiddate,
+        modeofpayment:modeofpayment,
+        transactionid:transactionid
+      },
+    ]);
+  }
   return (
     <div className="fee">
       <div className="feeview">
@@ -82,18 +102,33 @@ const FeeView = () => {
               <TableRow
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell
-                  component="th"
-                  className="border border 1"
-                ></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
+                <TableCell component="th" className="border border 1">
+                  {studentdata.name}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.email}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.mobilenumber}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.courses}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.admissiondate}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.finaltotal}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.initialamount}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.finaltotal - studentdata.dueamount}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.dueamount}
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -144,6 +179,7 @@ const FeeView = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        {}
         <div className="instalment">
           <p className="ms-4"> Instalment 1 :10,000</p>
           <div className="d-flex  payment">
@@ -167,7 +203,7 @@ const FeeView = () => {
           </div>
           <div className="updatebtn">
             {" "}
-            <button className="update "> Update</button>
+            <button className="update " onClick={handleinstallments}> Update</button>
           </div>
         </div>
       </div>

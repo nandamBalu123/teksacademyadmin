@@ -31,6 +31,8 @@ const Addtofee = () => {
     setdueamount(studentdata.dueamount);
   }, [studentdata]);
   const [selectedOption, setSelectedOption] = useState("option1");
+
+  
   useEffect(() => {
     setdueamount(studentdata.dueamount - initialamount);
   }, [initialamount]);
