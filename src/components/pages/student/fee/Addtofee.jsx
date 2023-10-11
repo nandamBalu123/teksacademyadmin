@@ -2,10 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import "./Addtofee.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import InputAdornment from "@mui/material/InputAdornment";
 const Addtofee = () => {
+  const navigator = useNavigate();
   const [dueamount, setdueamount] = useState();
   const [initialamount, setinitialamount] = useState();
   const [totalinstallment, settotalinstallment] = useState();
@@ -14,11 +15,13 @@ const Addtofee = () => {
   const { id } = useParams();
   const [studentdata, setstudentdata] = useState("");
   useEffect(() => {
-    settotalinstallments({
-      totalinstallments: totalinstallment,
-      totalinstallmentspaid: 0,
-      totalinstallmentsleft: totalinstallment,
-    });
+    settotalinstallments([
+      {
+        totalinstallments: totalinstallment,
+        totalinstallmentspaid: 0,
+        totalinstallmentsleft: totalinstallment,
+      },
+    ]);
   }, [totalinstallment]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
@@ -35,9 +38,9 @@ const Addtofee = () => {
       });
   }, []);
   console.log("studentdata", studentdata);
-  useEffect(() => {
-    setdueamount(studentdata.dueamount);
-  }, [studentdata]);
+  // useEffect(() => {
+  //   setdueamount(studentdata.dueamount);
+  // }, [studentdata]);
   const [selectedOption, setSelectedOption] = useState("option1");
 
   useEffect(() => {
@@ -51,8 +54,10 @@ const Addtofee = () => {
     // dueamount,initialamount,totalinstallments
 
     e.preventDefault();
+    const addfee = true;
 
-    const updatedData = { dueamount, initialamount, totalinstallments };
+    const updatedData = { dueamount, initialamount, totalinstallments, addfee };
+    console.log("dueeqam", dueamount);
 
     axios
       .put(`http://localhost:3030/addfee/${id}`, updatedData)
@@ -67,7 +72,7 @@ const Addtofee = () => {
         }
       });
   };
- 
+
   return (
     <>
       <div className="addfee">

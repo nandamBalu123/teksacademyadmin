@@ -443,12 +443,15 @@ const StudentData = () => {
               </div>
             </Menu>
           </div>
-          <div className="col-1"> <select name="cars" id="cars" onChange={handlerecorddata}>
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="75">75</option>
-          </select></div>
+          <div className="col-1">
+            {" "}
+            <select name="cars" id="cars" onChange={handlerecorddata}>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+            </select>
+          </div>
           <div className="col-1 pt-2 ">
             <CSVLink
               data={filteredData}
@@ -459,7 +462,7 @@ const StudentData = () => {
             </CSVLink>{" "}
           </div>
         </div>
-{/* 
+        {/* 
         <table className="table table-striped">
         <thead>
     <tr>
@@ -493,8 +496,8 @@ const StudentData = () => {
 
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-            <TableHead >
-              <TableRow  className="tablerow">
+            <TableHead>
+              <TableRow className="tablerow">
                 <StyledTableCell className="bg-primary fs-6 border border 1 text-center   ">
                   SNo
                 </StyledTableCell>
@@ -625,18 +628,23 @@ const StudentData = () => {
                       >
                         <EditIcon className="iconn" />
                       </Link>
-                      <Link
-                        to={`/feeview/${item.id}`}
-                        style={{ width: "40px" }}
-                      >
-                        <CurrencyRupeeIcon className="iconn" />
-                      </Link>
-                      <Link
-                        to={`/addtofee/${item.id}`}
-                        style={{ width: "40px" }}
-                      >
-                        <AddIcon className="iconn" />
-                      </Link>
+                      {item.addfee == 1 && (
+                        <Link
+                          to={`/feeview/${item.id}`}
+                          style={{ width: "40px" }}
+                        >
+                          <CurrencyRupeeIcon className="iconn" />
+                        </Link>
+                      )}
+                      {item.addfee == 0 && (
+                        <Link
+                          to={`/addtofee/${item.id}`}
+                          style={{ width: "40px" }}
+                        >
+                          <AddIcon className="iconn" />
+                        </Link>
+                      )}
+
                       <Link
                         to={`/studentApplicationprint/${item.id}`}
                         style={{ width: "40px" }}
@@ -690,8 +698,6 @@ const StudentData = () => {
               </li>
             </ul>
           </nav>
-
-          
         </div>
       </div>
     </>
