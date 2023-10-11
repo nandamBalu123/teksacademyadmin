@@ -96,7 +96,7 @@ function App() {
                 />
 
                 <Route
-                  path="/feeview"
+                  path="/feeview/:id"
                   element={role == "admin" ? <FeeView /> : <Dashboard />}
                 />
 

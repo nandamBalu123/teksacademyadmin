@@ -7,7 +7,28 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./FeeView.css";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios"
 const FeeView = () => {
+  const { id } = useParams();
+  const [studentdata, setstudentdata] = useState("");
+
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get(`http://localhost:3030/viewstudentdata/${id}`)
+      .then((response) => {
+        // Handle the successful response here
+        setstudentdata(response.data[0]); // Update the data state with the fetched data
+        console.log("studentdata", response.data);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+  console.log("studentdata", studentdata);
   return (
     <div className="fee">
       <div className="feeview">
@@ -83,7 +104,7 @@ const FeeView = () => {
             <TableHead>
               <TableRow>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                    Due Date
+                  Due Date
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   Paid Amount
@@ -144,7 +165,10 @@ const FeeView = () => {
               name="transationid"
             />
           </div>
-        <div className="updatebtn">    <button  className="update " > Update</button></div>
+          <div className="updatebtn">
+            {" "}
+            <button className="update "> Update</button>
+          </div>
         </div>
       </div>
     </div>

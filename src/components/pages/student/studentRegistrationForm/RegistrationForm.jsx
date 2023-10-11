@@ -20,34 +20,34 @@ export default function RegistrationForm() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [mobileNumber, setMobileNumber] = useState(null);
+  const [mobilenumber, setMobileNumber] = useState(null);
   const [parentsname, setParentsName] = useState("");
   const [birthdate, setBirthDate] = useState("");
   const [gender, setGender] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
+  const [maritalstatus, setMaritalStatus] = useState("");
   const [college, setCollege] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [area, setArea] = useState("");
   const [native, setNative] = useState("");
   const [zipcode, setZipcode] = useState(null);
-  const [whatsAppNo, setWhatsAppNo] = useState(null);
-  const [educationType, setEducationType] = useState("");
+  const [whatsappno, setWhatsAppNo] = useState(null);
+  const [educationtype, setEducationType] = useState("");
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
   const [profilepic, setProfilePpic] = useState("");
-  const [enquiryDate, setEnquiryDate] = useState("");
-  const [enquiryTakenBy, setEnquiryTakenBy] = useState("");
-  const [coursePackage, setCoursepakage] = useState("");
+  const [enquirydate, setEnquiryDate] = useState("");
+  const [enquirytakenby, setEnquiryTakenBy] = useState("");
+  const [coursepackage, setCoursepakage] = useState("");
   const [courses, setCourses] = useState("");
-  const [leadSource, setLeadSource] = useState("");
+  const [leadsource, setLeadSource] = useState("");
   const [branch, setBranch] = useState("");
-  const [modeOfTraining, setModeOfTraining] = useState("");
-  const [admissionStatus, setAdmissionStatus] = useState("");
-  const [registrationNumber, setRegistrationNumber] = useState("");
-  const [admissionDate, setAdmissionDate] = useState("");
-  const [validityStartDate, setValidityStartDate] = useState("");
-  const [validityEndDate, setValidityEndDate] = useState("");
+  const [modeoftraining, setModeOfTraining] = useState("");
+  const [admissionstatus, setAdmissionStatus] = useState("");
+  const [registrationnumber, setRegistrationNumber] = useState("");
+  const [admissiondate, setAdmissionDate] = useState("");
+  const [validitystartdate, setValidityStartDate] = useState("");
+  const [validityenddate, setValidityEndDate] = useState("");
 
   const [feetype, setfeetype] = useState("");
   const [amount, setAmount] = useState(null);
@@ -256,34 +256,34 @@ export default function RegistrationForm() {
     const studentRegistrationdata = {
       name,
       email,
-      mobileNumber,
+      mobilenumber,
       parentsname,
       birthdate,
       gender,
-      maritalStatus,
+      maritalstatus,
       college,
       country,
       state,
       area,
       native,
       zipcode,
-      whatsAppNo,
-      educationType,
+      whatsappno,
+      educationtype,
       marks,
       academicyear,
       profilepic,
-      enquiryDate,
-      enquiryTakenBy,
-      coursePackage,
+      enquirydate,
+      enquirytakenby,
+      coursepackage,
       courses,
-      leadSource,
+      leadsource,
       branch,
-      modeOfTraining,
-      admissionStatus,
-      registrationNumber,
-      admissionDate,
-      validityStartDate,
-      validityEndDate,
+      modeoftraining,
+      admissionstatus,
+      registrationnumber,
+      admissiondate,
+      validitystartdate,
+      validityenddate,
 
       feedetails,
       feedetailsbilling,
@@ -453,7 +453,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setMobileNumber(e.target.value)}
-                    value={mobileNumber}
+                    value={mobilenumber}
                   />
                 </div>
                 <br />
@@ -559,7 +559,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setMaritalStatus(e.target.value)}
-                    value={maritalStatus}
+                    value={maritalstatus}
                   >
                     <option value="">--select--</option>
                     <option value="btech">Single</option>
@@ -778,7 +778,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setWhatsAppNo(e.target.value)}
-                    value={whatsAppNo}
+                    value={whatsappno}
                   />
                 </div>
                 <br />
@@ -830,7 +830,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setEducationType(e.target.value)}
-                    value={educationType}
+                    value={educationtype}
                   >
                     <option value="">--select--</option>
                     <option value="btech">B.Tech </option>
@@ -985,7 +985,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setEnquiryDate(e.target.value)}
-                    value={enquiryDate}
+                    value={enquirydate}
                   />
                 </div>
                 <br />
@@ -1004,7 +1004,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setEnquiryTakenBy(e.target.value)}
-                    value={enquiryTakenBy}
+                    value={enquirytakenby}
                   >
                     {filteredcounsellor &&
                       filteredcounsellor.map((user, index) => (
@@ -1034,7 +1034,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setCoursepakage(e.target.value)}
-                    value={coursePackage}
+                    value={coursepackage}
                   >
                     <option value="">--select--</option>
                     <option value="businessanalytics">
@@ -1089,7 +1089,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setLeadSource(e.target.value)}
-                    value={leadSource}
+                    value={leadsource}
                   >
                     <option value="">--select--</option>
                     <option value="justdail">Just Dail</option>
@@ -1184,7 +1184,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setModeOfTraining(e.target.value)}
-                    value={modeOfTraining}
+                    value={modeoftraining}
                   >
                     <option value="">--select--</option>
                     <option value="online">Online</option>
@@ -1208,7 +1208,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setAdmissionStatus(e.target.value)}
-                    value={admissionStatus}
+                    value={admissionstatus}
                   >
                     <option value="">--select--</option>
                     <option value="active">Active</option>
@@ -1231,7 +1231,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setAdmissionDate(e.target.value)}
-                    value={admissionDate}
+                    value={admissiondate}
                   />
                 </div>
                 <div className="row ">
@@ -1258,7 +1258,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setValidityStartDate(e.target.value)}
-                    value={validityStartDate}
+                    value={validitystartdate}
                   />
                 </div>
                 <br />
@@ -1277,7 +1277,7 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                     onChange={(e) => setValidityEndDate(e.target.value)}
-                    value={validityEndDate}
+                    value={validityenddate}
                   />
                 </div>
                 <br />
@@ -1433,35 +1433,6 @@ export default function RegistrationForm() {
                     </tbody>
                   </table>
                 )}
-                {/* <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Fee Type</th>
-                      <th scope="col">Amount</th>
-                      <th scope="col">Discount</th>
-                      <th scope="col">Tax Amount</th>
-                      <th scope="col">Total Amount</th>
-                      <th scope="col">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {feedetails &&
-                      feedetails.map((item) => (
-                        <tr key={item.id}>
-                          <th scope="row">{item.feetype}</th>
-                          <td>{item.amount}</td>
-                          <td>{item.discount}</td>
-                          <td>{item.taxamount}</td>
-                          <td>{item.totalamount}</td>
-                          <td>
-                            <button onClick={() => handleFeeDelete(item.id)}>
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table> */}
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1542,7 +1513,7 @@ export default function RegistrationForm() {
                       <tr>
                         <td></td>
                         <th>
-                          Grand Total  (exclusive of GST)
+                          Grand Total (exclusive of GST)
                           {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
                         </th>
                         <th>Total Tax:{parseFloat(totaltax.toFixed(2))}</th>
@@ -1657,1146 +1628,6 @@ export default function RegistrationForm() {
           </Paper>
         )} */}
       </div>
-      {/* <div className="main-sub-container ">
-        <Typography fontSize={35}>Registration form</Typography>
-
-        <Stepper activeStep={activeStep} orientation="vertical" >
-         
-          <Step >
-            <StepLabel >
-              <Typography fontSize={25} >Basic Details</Typography>
-            </StepLabel>
-            <StepContent  >
-              <form className="form">
-                <div className="row input ">
-                  <label className="col-12 col-md-2 label">
-                    Name <span className="text-danger">*</span>&nbsp; :
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid Black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                  />
-                </div>
-           <br/>
-                <div className="row input ">
-                  <label className="col-12 col-md-2 label">
-                    Email <span className="text-danger"> *</span>&nbsp; :
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                  />
-                </div>
-           <br/>
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Mobile Number<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setMobileNumber(e.target.value)}
-                    value={mobileNumber}
-                  />
-                </div>
-                <br />
-                
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1,  }}
-                  >
-
-                    Continue
-                  </Button>
-                </div>
-              </Box>
-              </form>
-
-            </StepContent>
-          </Step>
-   
-          <Step>
-            <StepLabel>
-              <Typography fontSize={25}>Student Details</Typography>
-            </StepLabel>
-            <StepContent className="">
-              <form className="form">
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Parent's  Name <span className="text-danger"> *</span>&nbsp;:
-                  </label>&nbsp;&nbsp;
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setParentsName(e.target.value)}
-                    value={parentsname}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Birth Date <span className="text-danger"> *</span>&nbsp;:
-                  </label>&nbsp;&nbsp;
-                  <input
-                    type="date"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setBirthDate(e.target.value)}
-                    value={birthdate}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Gender <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setGender(e.target.value)}
-                    value={gender}
-                  >
-                    <option value="">--select--</option>
-                    <option value="btech">Female </option>
-                    <option value="degree">Male</option>
-                    <option value="mca"> Others</option>
-                  </select>
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Marital Status <span className="text-danger"> *</span>&nbsp;
-                    :
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setMaritalStatus(e.target.value)}
-                    value={maritalStatus}
-                  >
-                    <option value="">--select--</option>
-                    <option value="btech">Single</option>
-                    <option value="degree">Marriage</option>
-                  </select>
-                </div>
-                <br />
-                <div className="row  ">
-                  <label className="col-12 col-md-2 label">
-                    College / School / Company{" "}
-                    <span className="text-danger"> *</span>&nbsp; :
-                  </label>&nbsp;
-                  <input
-                    type="text"
-                    className="col-9 col-md-5 mt-3 "
-                    require
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setCollege(e.target.value)}
-                    value={college}
-                  />
-                </div>
-                <br />
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                 
-                    Continue
-                  </Button>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                 
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-
-
-          <Step>
-            <StepLabel>
-              <Typography fontSize={25}>Student Contact Details</Typography>
-            </StepLabel>
-            <StepContent>
-              <form className="form">
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Country <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setCountry(e.target.value)}
-                    value={country}
-                  >
-                    <option value="">--select--</option>
-                    <option value="india">India </option>
-                    <option value="usa">USA </option>
-                    <option value="australia">Australia </option>
-                    <option value="china">China </option>
-                    <option value="others">Others </option>
-                  </select>
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    State<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setState(e.target.value)}
-                    value={state}
-                  >
-                    <option value="">--select--</option>
-                    <option value="Telangana">Telangana </option>
-                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                    <option value="Assam">Assam</option>
-                    <option value="Bihar">Bihar</option>
-                    <option value="Chhattisgarh">Chhattisgarh</option>
-                    <option value="Goa">Goa</option>
-                    <option value="Gujarat">Gujarat</option>
-                    <option value="Haryana">Haryana</option>
-                    <option value="Himachal Pradesh">Himachal Pradesh</option>
-                    <option value="Jharkhand">Jharkhand</option>
-                    <option value="Karnataka">Karnataka</option>
-                    <option value="Kerala">Kerala</option>
-                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                    <option value="Maharashtra">Maharashtra</option>
-                    <option value="Manipur">Manipur</option>
-                    <option value="Meghalaya">Meghalaya</option>
-                    <option value="Mizoram">Mizoram</option>
-                    <option value="Nagaland">Nagaland</option>
-                    <option value="Odisha">Odisha</option>
-                    <option value="Punjab">Punjab</option>
-                    <option value="Rajasthan">Rajasthan</option>
-                    <option value="Sikkim">Sikkim</option>
-                    <option value="Tamil Nadu">Tamil Nadu</option>
-
-                    <option value="Tripura">Tripura</option>
-                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                    <option value="Uttarakhand">Uttarakhand</option>
-                    <option value="West Bengal">West Bengal</option>
-                    <option value="Andaman and Nicobar Islands">
-                      Andaman and Nicobar Islands
-                    </option>
-                    <option value="Chandigarh">Chandigarh</option>
-                    <option value="Dadra and Nagar Haveli and Daman and Diu">
-                      Dadra and Nagar Haveli and Daman and Diu
-                    </option>
-                    <option value="Lakshadweep">Lakshadweep</option>
-                    <option value="Delhi">Delhi</option>
-                    <option value="Puducherry">Puducherry</option>
-                    <option value="others">Others</option>
-                  </select>
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Area<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setArea(e.target.value)}
-                    value={area}
-                  />
-                </div>
-                <br />
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Native Place <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setNative(e.target.value)}
-                    value={native}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Zip Code <span className="text-danger"> *</span>&nbsp; :
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setZipcode(e.target.value)}
-                    value={zipcode}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    WhatsApp Number <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5 mt-3"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setWhatsAppNo(e.target.value)}
-                    value={whatsAppNo}
-                  />
-                </div>
-                <br />
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-
-                    Continue
-                  </Button>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-               
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-
-          <Step>
-            <StepLabel>
-              <Typography fontSize={25}>Education Details</Typography>
-            </StepLabel>
-
-            <StepContent>
-              <form className="form">
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Education Type <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id="educationtype"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setEducationType(e.target.value)}
-                    value={educationType}
-                  >
-                    <option value="">--select--</option>
-                    <option value="btech">B.Tech </option>
-                    <option value="degree">Degree</option>
-                    <option value="mca"> MCA</option>
-                    <option value="ssc"> SSC</option>
-                    <option value="other">others</option>
-                  </select>
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Marks<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setMarks(e.target.value)}
-                    value={marks}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Academic Year<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setAcademicyear(e.target.value)}
-                    value={academicyear}
-                  />
-                </div>
-                <br />
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    
-                    Continue
-                  </Button>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                 
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-      
-          <Step>
-            <StepLabel>
-              <Typography fontSize={25}>Photo</Typography>
-            </StepLabel>
-
-            <StepContent>
-              <form className="form">
-                <div className="row ">
-                 
-
-                  <input
-                    accept=".jpg, .jpeg, .png"
-                    type="file"
-                    src="your-image-url.jpg"
-                    alt="Submit"
-                    class="image-input"
-                  />
-                 
-
-                  <input
-                    type="file"
-                    id="imageInput"
-                    accept=".jpg, .jpeg, .png"
-                    style={{ display: "none" }}
-                  />
-                </div>
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                
-                    Continue
-                  </Button>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                 
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-      
-          <Step>
-            <StepLabel>
-              <Typography fontSize={25}>Enquiry Details:</Typography>
-            </StepLabel>
-            <StepContent>
-              <form className="form">
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Enquiry Date<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="date"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setEnquiryDate(e.target.value)}
-                    value={enquiryDate}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Enquiry Taken By<span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setEnquiryTakenBy(e.target.value)}
-                    value={enquiryTakenBy}
-                  >
-                    <option value="">--select--</option>
-                    <option value="btech">Bhavitha</option>
-                  </select>
-                </div>
-                <br />
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Course Package<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setCoursepakage(e.target.value)}
-                    value={coursePackage}
-                  >
-                    <option value="">--select--</option>
-                    <option value="businessanalytics">
-                      Business Analytics
-                    </option>
-                    <option value="postgraduationprogram">
-                      Business Analytics
-                    </option>
-                  </select>
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Courses<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setCourses(e.target.value)}
-                    value={courses}
-                  >
-                    <option value="">--select--</option>
-                    <option value="fullstack">Full Stack Java</option>
-                    <option value="reactjs">React JS </option>
-                    <option value="nodejs">Node JS</option>
-                    <option value="angular">Angular</option>
-                    <option value="revit">Revit</option>
-                    <option value="salesforce">Sales Force</option>
-                    <option value="devops">Devops</option>
-                  </select>
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Lead Source<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setLeadSource(e.target.value)}
-                    value={leadSource}
-                  >
-                    <option value="">--select--</option>
-                    <option value="justdail">Just Dail</option>
-                    <option value="walkin">Walkin</option>
-                    <option value="ivr">IVR</option>
-                    <option value="test">Test</option>
-                    <option value="studentrefferal">Student Refferal</option>
-                    <option value="employeeRefferal">Employee Refferal</option>
-                    <option value="crm">CRM</option>
-                    <option value="buddy">Buddy</option>
-                    <option value="sulekha">sulekha</option>
-                    <option value="personalReference">
-                      personal Reference
-                    </option>
-                    <option value="website">website</option>
-                    <option value="primelead">Prime Lead</option>
-                  </select>
-                </div>
-                <br />
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-
-                    Continue
-                  </Button>
-                  <Button
-                  className="bg-primary"
-                    variant="contained"
-                  
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-      
-          <Step>
-            <StepLabel>
-              {" "}
-              <Typography fontSize={25}>Admission Details</Typography>
-            </StepLabel>
-
-            <StepContent>
-              <form className="form">
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Branch<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setBranch(e.target.value)}
-                    value={branch}
-                  >
-                    <option value="">--select--</option>
-                    <option value="hitechcity">Hitech-city</option>
-                    <option value="ameerpet">Ameerpet</option>
-                    <option value="dilsukhnagar">Dilsukhnagar</option>
-                    <option value="gachibowli">Gachibowli</option>
-                  </select>
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Mode of Traning<span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5 mt-3"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setModeOfTraining(e.target.value)}
-                    value={modeOfTraining}
-                  >
-                    <option value="">--select--</option>
-                    <option value="online">Online</option>
-                    <option value="offline">Offline</option>
-                  </select>
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Admission Status<span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5  mt-3"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setAdmissionStatus(e.target.value)}
-                    value={admissionStatus}
-                  >
-                    <option value="">--select--</option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                  </select>
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Registration No <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5 mt-3"
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setRegistrationNumber(e.target.value)}
-                    value={registrationNumber}
-                  />
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Admission Date <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  <input
-                    type="date"
-                    className="col-9 col-md-5 mt-3"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setAdmissionDate(e.target.value)}
-                    value={admissionDate}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Validity Start Date <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  <input
-                    type="date"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setValidityStartDate(e.target.value)}
-                    value={validityStartDate}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Validity End Date <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  <input
-                    type="date"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setValidityEndDate(e.target.value)}
-                    value={validityEndDate}
-                  />
-                </div>
-                <br />
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-   
-                    Continue
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-   
-          <Step>
-            <StepLabel>
-              {" "}
-              <Typography fontSize={25}>Fee Details</Typography>{" "}
-            </StepLabel>
-
-            <StepContent>
-              <form onSubmit={handleFeeDetails} className="form">
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Fee Type <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setfeetype(e.target.value)}
-                    value={feetype}
-                  >
-                    <option value="">--select--</option>
-                    <option value="coursefee">Course fee </option>
-                    <option value="admissionfee">Admission Fee </option>
-                  </select>
-                </div>
-                <br />
-
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Amount <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="number"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setAmount(e.target.value)}
-                    value={amount}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Discount <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="number"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setDiscount(e.target.value)}
-                    value={discount}
-                  />
-                </div>
-                <br />
-               
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Tax Amount <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-
-                  {taxamount}
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Total Amount (Inclusive of GST){" "}
-                    <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-
-                  {totalamount}
-                </div>
-                <button
-                  onClick={handleFeeDetails}
-                  className="bg-primary text-light px-4 py-1  border border-none rounded-2 "
-                >
-                  save
-                </button>
-                <br />
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                 
-                    Continue
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-
-          <Step>
-            <StepLabel>
-              {" "}
-              <Typography fontSize={25}>Billing</Typography>{" "}
-            </StepLabel>
-
-            <StepContent>
-              <form className="form">
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Gross Total <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  
-                  {grosstotal}
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Discount <span className="text-danger"> *</span>
-                    &nbsp; :
-                  </label>
-                  
-                  {totaldiscount}
-                </div>
-                <br />
-               
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Total Tax <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                 
-                  {totaltax}
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Grand Total<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                 
-                  {grandtotal}
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    {" "}
-                    Admission Remarks <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  />
-                </div>
-                <br />
-                <div className="row ">
-                  <label className="col-12 col-md-2">
-                    Assets <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                 
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  >
-                    <option value="">--select--</option>
-                    <option value="laptop">Laptop </option>
-                    <option value="bag"> Bag</option>
-                    <option value="lms"> LMS</option>
-                    <option value="coursematerial"> Course Materials</option>
-                  </select>
-                </div>
-                <br />
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleSubmit}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    
-                    Submit
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                  
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-        </Stepper>
-       
-      </div> */}
     </div>
   );
 }
