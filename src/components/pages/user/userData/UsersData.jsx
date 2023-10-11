@@ -18,7 +18,7 @@ import MenuItem from "@mui/material/MenuItem";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link } from "react-router-dom";
 import "./UsersData.css";
-import axios from 'axios';
+import axios from "axios";
 
 import {
   Button,
@@ -70,12 +70,13 @@ const UsersData = () => {
   }, [deleted]);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3030/deleteuser/${id}`)
-    .then(() => setDeleted(!deleted))
-    .catch((error) => {
-      console.log("Error: ", error)
-    })
-  }
+    axios
+      .delete(`http://localhost:3030/deleteuser/${id}`)
+      .then(() => setDeleted(!deleted))
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+  };
 
   // const deleteuser = async (id) => {
   //   try {
@@ -338,15 +339,13 @@ const UsersData = () => {
             </select>
           </MenuItem>
         </Menu>
-
-        
       </div>
       <div>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className=" bg-primary fs-6">
+                <StyledTableCell className=" bg-primary fs-6 border border-1">
                   Name
                 </StyledTableCell>
                 <StyledTableCell className=" bg-primary fs-6" align="center">
@@ -416,8 +415,7 @@ const UsersData = () => {
                       <Link to={`/edituser/${user.id}`}>
                         <ModeEditIcon />
                       </Link>
-                      <DeleteIcon  onClick={() => handleDelete(user.id)}/>
-                      
+                      <DeleteIcon onClick={() => handleDelete(user.id)} />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

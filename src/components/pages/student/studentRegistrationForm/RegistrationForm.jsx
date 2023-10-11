@@ -66,7 +66,7 @@ export default function RegistrationForm() {
   const [grandtotal, setGrandtotal] = useState(null);
 
   const [grosstotal, setGrosstotal] = useState(null);
-  const [totaldiscount, setTotalDiscount] = useState(null);
+  const [totaldiscount, setTotalDiscount] = useState(0);
 
   const handleFeecalculations = () => {
     let grosstotall = 0;
@@ -92,7 +92,7 @@ export default function RegistrationForm() {
         admissionobject.feetax =
           admissionobject.feewithtax - admissionobject.feewithouttax;
         grosstotall = grosstotall + parseInt(feedetails[i].amount);
-        totaldiscountt = totaldiscountt + feedetails[i].discount;
+        totaldiscountt = totaldiscountt + parseInt(feedetails[i].discount);
         totalfeewithouttaxx =
           totalfeewithouttaxx + admissionobject.feewithouttax;
         totaltaxx = totaltaxx + admissionobject.feetax;
@@ -118,7 +118,8 @@ export default function RegistrationForm() {
         // settotaltax((value) => value + coursefeeobject.feetax);
         // setGrandtotal((value) => value + coursefeeobject.feewithtax);
         grosstotall = grosstotall + parseInt(feedetails[i].amount * 0.65);
-        totaldiscountt = totaldiscountt + feedetails[i].discount * 0.65;
+        totaldiscountt =
+          totaldiscountt + parseInt(feedetails[i].discount * 0.65);
 
         totalfeewithouttaxx =
           totalfeewithouttaxx + coursefeeobject.feewithouttax;
@@ -144,7 +145,8 @@ export default function RegistrationForm() {
         // settotaltax((value) => value + materialfeeobject.feetax);
         // setGrandtotal((value) => value + materialfeeobject.feewithtax);
         grosstotall = grosstotall + parseInt(feedetails[i].amount * 0.35);
-        totaldiscountt = totaldiscountt + feedetails[i].discount * 0.35;
+        totaldiscountt =
+          totaldiscountt + parseInt(feedetails[i].discount * 0.35);
         materialfeee =
           materialfeee + parseInt(feedetails[i].totalamount * 0.35);
         // totalfeewithouttaxx =
@@ -292,6 +294,8 @@ export default function RegistrationForm() {
       grandtotal,
       admissionremarks,
       assets,
+      materialfee,
+      finaltotal,
     };
     console.log("studentRegistration", studentRegistrationdata);
     try {
@@ -1329,8 +1333,9 @@ export default function RegistrationForm() {
                     value={feetype}
                   >
                     <option value="">--select--</option>
-                    <option value="fee">Fee </option>
                     <option value="admissionfee">Admission Fee</option>
+
+                    <option value="fee">Fee </option>
                   </select>
                 </div>
                 <br />
@@ -1397,7 +1402,38 @@ export default function RegistrationForm() {
                 <br />
                 <br />
                 <br />
-                <table class="table">
+                {feedetails.length > 0 && (
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Fee Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Tax Amount</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {feedetails &&
+                        feedetails.map((item) => (
+                          <tr key={item.id}>
+                            <th scope="row">{item.feetype}</th>
+                            <td>{item.amount}</td>
+                            <td>{item.discount}</td>
+                            <td> {parseFloat(item.taxamount.toFixed(2))}</td>
+                            <td>{item.totalamount}</td>
+                            <td>
+                              <button onClick={() => handleFeeDelete(item.id)}>
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                )}
+                {/* <table class="table">
                   <thead>
                     <tr>
                       <th scope="col">Fee Type</th>
@@ -1425,7 +1461,7 @@ export default function RegistrationForm() {
                         </tr>
                       ))}
                   </tbody>
-                </table>
+                </table> */}
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>

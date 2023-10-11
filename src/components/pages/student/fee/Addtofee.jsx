@@ -23,7 +23,7 @@ const Addtofee = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  console.log("fff", studentdata);
+  console.log("studentdata", studentdata);
   const [selectedOption, setSelectedOption] = useState("option1");
 
   const handleOptionChange = (event) => {
@@ -127,7 +127,7 @@ const Addtofee = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    {studentdata.grandtotal}
+                  
                   </InputAdornment>
                 ),
               }}
@@ -139,7 +139,7 @@ const Addtofee = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    {studentdata.grandtotal}
+                
                   </InputAdornment>
                 ),
               }}
