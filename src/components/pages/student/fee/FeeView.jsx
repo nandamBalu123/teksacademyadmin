@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 const FeeView = () => {
   const { id } = useParams();
-  const navigator = useNavigate();
+  // const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
   const [dueamount, setdueamount] = useState("");
   const [totalinstallments, settotalinstallments] = useState([]);

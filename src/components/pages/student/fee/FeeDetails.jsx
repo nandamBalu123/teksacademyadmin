@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Table from '@mui/material/Table';
@@ -9,8 +9,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import "./FeeDetails.css";
+import axios from 'axios';
 
 const FeeDetails = () => {
+  const [getstudentData, setData] = useState()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -20,6 +22,22 @@ const FeeDetails = () => {
     setAnchorEl(null);
   };
   
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get("http://localhost:3030/getstudent_data")
+      .then((response) => {
+        // Handle the successful response here
+        setData(response.data); // Update the data state with the fetched data
+
+        console.log("data", response.data);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+    // fetchData();
+  }, []);
   
   return (
     <>
@@ -154,69 +172,42 @@ const FeeDetails = () => {
         <TableHead>
           <TableRow>
             <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> S.NO</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">Name Branch/ Counsellor</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Contact/Email</TableCell>
+            <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">Name Branch Counsellor</TableCell>
+            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Contact<br />Email</TableCell>
             <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Course Date of Joining</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Total Fee/ Paid Fee /Due Date</TableCell>
+            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Total Fee<br /> Paid Fee Due Date</TableCell>
             <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> Created Date Next Due Date</TableCell>
             <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Paid Status </TableCell>
             <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> View</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-      
+        {Array.isArray(getstudentData) && getstudentData.length > 0 ? (
+                getstudentData.map((item) => (
             <TableRow
               
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={item.id}
             >
-              <TableCell component="th" className="border border 1" > 1</TableCell>
-              <TableCell className="border border 1"> Hi-tech City <br/>Bhavitha</TableCell>
-              <TableCell className="border border 1"> 1234567891<br/> bhavitha@gmail.com</TableCell>
-              <TableCell className="border border 1"> 09/02/21</TableCell>
+              <TableCell component="th" className="border border 1" > {item.id}</TableCell>
+              <TableCell className="border border 1"> {item.branchname} <br/>{item.name}</TableCell>
+              <TableCell className="border border 1"> {item.mobilenumber}<br/> {item.email}</TableCell>
+              <TableCell className="border border 1"> {item.admissiondate}</TableCell>
               <TableCell className="border border 1"> 12000<br/> 10000<br/>21/08/23</TableCell>
               <TableCell className="border border 1"> Oct 6, 2023<br/>Nov 6, 2023</TableCell>
               <TableCell className="border border 1"> 2/3</TableCell>
               <TableCell className="border border 1"> view</TableCell>
             </TableRow>
-      
+            ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={3}>No data available</TableCell>
+              </TableRow>
+            )}{" "}
         </TableBody>
       </Table>
     </TableContainer>
 
-    {/* <TableContainer component={Paper} className="pt-4" id="">
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> S.NO</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">Name Branch/ Counsellor</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Contact</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Email</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Course</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> Due Date</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Due Amount </TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> Paid Status</TableCell>
-        
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> View</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-      
-            <TableRow
-              
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-               
-              </TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-            </TableRow>
-      
-        </TableBody>
-      </Table>
-    </TableContainer> */}
+    
 
        
        </div>
