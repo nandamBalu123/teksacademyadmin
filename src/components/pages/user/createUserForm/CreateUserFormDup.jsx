@@ -142,6 +142,10 @@ const CreateUserForm = () => {
 
     console.log("JSON Response:", json); // Log the parsed JSON response
 
+    if(json.Status == "exists"){
+      alert('Email already exists.');
+      return false;
+    }
     if (response.ok) {
       console.log("User created successfully.");
 
