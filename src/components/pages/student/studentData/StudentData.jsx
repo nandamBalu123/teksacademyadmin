@@ -49,6 +49,7 @@ import { Link } from "react-router-dom";
 
 import { LastPage } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from '@mui/icons-material/Close';
 
 import axios from "axios";
 // import { CSVLink } from "react-csv";
@@ -309,7 +310,10 @@ const StudentData = () => {
                 cursor: "pointer",
               }}
             >
-              <MenuItem> Filter</MenuItem>
+             <div className="d-flex justify-content-between"> 
+             <MenuItem> Filter</MenuItem>
+              <MenuItem> <CloseIcon/> </MenuItem>
+             </div>
               <hr />
               <div className="d-flex">
                 <MenuItem className="pt-3 ">
@@ -422,7 +426,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "110px",
+                      paddingRight: "185px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -441,6 +445,10 @@ const StudentData = () => {
                   </select>
                 </MenuItem>{" "}
               </div>
+              <MenuItem className="d-flex justify-content-between"> 
+              <button className="save"> Save</button>
+              <button className="clear"> Clear</button>
+              </MenuItem>
             </Menu>
           </div>
           <div className="col-1">

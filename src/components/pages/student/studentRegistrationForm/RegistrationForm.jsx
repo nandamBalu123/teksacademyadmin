@@ -1486,7 +1486,10 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
-              <table className="table w-50 ms-5">
+              
+             
+              <form className="form">
+              <table className="table w-75 ms-5">
                 <thead>
                   <tr>
                     <th className="border border-1">Gross Total</th>
@@ -1502,13 +1505,11 @@ export default function RegistrationForm() {
                   </tr>
                 </tbody>
               </table>
-              <p></p>
-              <form className="form">
-                <table class="table">
+                <table class="table billing ">
                   <thead>
                     <tr>
                       <th className="border border-1">Fee Type</th>
-                      <th className="border border-1">Fee (exclusive Of GST) </th>
+                      <th className="border border-1 ">Fee (exclusive Of GST) </th>
                       <th className="border border-1">tax</th>
                       <th className="border border-1">Fee (inclusive Of GST)</th>
                     </tr>
@@ -1520,7 +1521,7 @@ export default function RegistrationForm() {
                           return (
                             <tr key={item.id}>
                               <td className="border border-1">{item.feetype}</td>
-                              <td className="border border-1">
+                              <td className="border border-1" >
                                 {parseFloat(item.feewithouttax.toFixed(2))}
                               </td>
                               <td className="border border-1">{parseFloat(item.feetax.toFixed(2))}</td>
@@ -1531,35 +1532,58 @@ export default function RegistrationForm() {
                       })}
                     {feedetailsbilling.length > 0 && (
                       <tr>
-                        <td></td>
-                        <th>
-                          Grand Total (exclusive of GST)
+                        <td className="empty"></td>
+                        <td className="border border-1 " >
+                          Grand Total (excl of GST) :
                           {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
-                        </th>
-                        <th>Total Tax:{parseFloat(totaltax.toFixed(2))}</th>
-                        <th>
-                          Grand Total (inclusive of GST)
-                          {parseFloat(grandtotal.toFixed(2))}
-                        </th>
+                        </td>
+                        <td className="border border-1 ">TotalTax: <br/>{parseFloat(totaltax.toFixed(2))}</td>
+                        <td className="border border-1 ">
+                          Grand Total (incl of GST) :{parseFloat(grandtotal.toFixed(2))}
+                        </td>
                       </tr>
                     )}
-                    <tr>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>MaterialFee:{materialfee}</th>
-                    </tr>
-                    <tr>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th>Final Total:{finaltotal}</th>
-                    </tr>
                   </tbody>
                 </table>
+                <p className="materialfee" >MaterialFee:{materialfee}</p>
+                <p className="finaltotal">Final Total:{finaltotal}</p>
 
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
+                
+                <br />
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleFeecalculations}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
+                  </Button>
+                  
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    // disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+              </Box>
+            </StepContent>
+          </Step>
+          <Step>
+            <StepLabel>
+              <Typography fontSize={25}>Others</Typography>
+            </StepLabel>
+            <StepContent>
+              <form className="form">
+                <div className="row input ">
+                <label className="col-12 col-md-2 label">
                     {" "}
                     Admission Remarks <span className="text-danger "> *</span>
                     &nbsp;:
@@ -1576,8 +1600,11 @@ export default function RegistrationForm() {
                     onChange={(e) => setadmissionremarks(e.target.value)}
                     value={admissionremarks}
                   />
+                 
                 </div>
                 <br />
+              
+            
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Assets <span className="text-danger"> *</span>&nbsp;:
@@ -1612,11 +1639,10 @@ export default function RegistrationForm() {
                     <option value="coursematerial"> Course Materials</option>
                   </select>
                 </div>
-                <br />
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
+                </form>
+
+                <Box sx={{ mb: 2, mt: 2 }}>
+                <Button
                     className="bg-primary"
                     variant="contained"
                     onClick={handleSubmit}
@@ -1634,10 +1660,15 @@ export default function RegistrationForm() {
                   >
                     Back
                   </Button>
-                </div>
-              </Box>
+                </Box>
+              
             </StepContent>
-          </Step>
+          </Step> 
+
+
+            
+
+          
         </Stepper>
         {/* {activeStep === steps.length && (
           <Paper square elevation={0} sx={{ p: 3 }}>

@@ -235,60 +235,88 @@ const FeeView = () => {
         </TableContainer>
         {studentdata.totalinstallments &&
           studentdata.totalinstallments.length > 0 &&
-          Array(totalInstallmentsLeft)
+      Array(totalInstallmentsLeft)
             .fill()
             .map((_, index) => (
               <div className="instalment">
                 <p className="ms-4"> Instalment 1 :10,000</p>
-                <div className="d-flex  payment">
+                <div className="row" >
+                  <div className="col-md-4">
+                  <div  className="me-5 ms-3 "> <label > Due Date :</label></div>
                   <input
+                  className=" w-75 ps-3"
                     type="date"
                     name="duedate"
                     onChange={(e) => setduedate(e.target.value)}
                     value={duedate}
                   />
+                     </div> 
+                <div className="col-md-4"> 
+                <div className=" ms-3">  <label> Paid Amount :</label></div> 
                   <input
                     type="text"
-                    placeholder="paidamount"
+                    className="w-75"
                     name="paidamount"
                     onChange={(e) => setpaidamount(e.target.value)}
                     value={paidamount}
                   />
-
+                  </div> 
+                  <div className="col-md-4"> 
+                  <div className=" ms-3 "><label > Paid Date :</label> </div> 
                   <input
+                  className=" w-75 ps-3"
                     type="date"
                     name="paiddate"
                     onChange={(e) => setpaiddate(e.target.value)}
                     value={paiddate}
                   />
-
-                  <select
-                    className="ms-3"
+                    </div> 
+                  </div>
+                 <div className="row"> 
+                 <div className="col-md-4"> 
+               <div className="ms-3">   <label > Mode Of Payment :</label></div> 
+                 <select
+                    className="w-75 ms-3"
                     placeholder="Mode of Payment"
                     onChange={(e) => setmodeofpayment(e.target.value)}
                     value={modeofpayment}
                   >
-                    <option value="">Mode of Payment</option>
+                    <option value="">Select</option>
                     <option value="upi">UPI</option>
                     <option value="cash">Cash</option>
                     <option value="backtransfor"> Bank Transfor</option>
                     <option value="cheque"> CHEQUE</option>
                   </select>
+                 </div>
+                 <div className="col-md-4"> 
+                 <div className="ms-3">  <label> Transition ID :</label></div>
                   <input
                     type="text"
-                    placeholder="Transation Id"
+                    className="w-75"
                     name="transationid"
                     onChange={(e) => settransactionid(e.target.value)}
                     value={transactionid}
                   />
-                </div>
-                <div className="updatebtn">
+                 </div>
+                <div className="col-md-4">
+                <div className="updatebtn ">
                   {" "}
                   <button className="update " onClick={handleinstallments}>
                     {" "}
                     Update
                   </button>
                 </div>
+                  </div> 
+
+                 </div>
+                    
+                   
+                  
+                 
+                  
+                  
+                
+                
               </div>
             ))}
       </div>

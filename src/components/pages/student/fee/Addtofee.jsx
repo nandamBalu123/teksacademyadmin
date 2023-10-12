@@ -199,7 +199,7 @@ const Addtofee = () => {
                 type="radio"
                 name="fixed"
                 value="fixed"
-                checked={selectedOption === "option1"}
+                checked={selectedOption === "fixed"}
                 onChange={handleOptionChange}
               />
               Fixed
@@ -210,13 +210,13 @@ const Addtofee = () => {
                 type="radio"
                 name="customized"
                 value="customized"
-                checked={selectedOption === "option2"}
+                checked={selectedOption === "customized"}
                 onChange={handleOptionChange}
               />
               Customized
             </label>
           </div>
-          <button onClick={handleSubmit}>Add to Fee</button>
+          <button className="addtofee" onClick={handleSubmit}>Add to Fee</button>
         </div>{" "}
       </div>
     </>

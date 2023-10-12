@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-.container .bg {
+.bg {
   background-image: url("https://4.bp.blogspot.com/-csAekMs5mjk/TjqRjjPYv4I/AAAAAAAAA9s/G4fBWXh_AdY/s1600/cool-wallpaper-12.jpg");
   background-position: cover;
   width: 100%;
@@ -34,4 +34,15 @@
 h2 {
   /* font-family: italic; */
   font-family: "Nunito", sans-serif;
+}
+.save , .clear{ 
+  background-color: #0070fc;
+  color: #fff;
+  padding: 5px 19px 5px 19px;
+  border: none;
+  border-radius: 5px;
+}
+.studentdataview{ 
+  width: 93%;
+  margin: auto;
 }

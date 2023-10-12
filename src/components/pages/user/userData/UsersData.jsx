@@ -17,6 +17,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link } from "react-router-dom";
+import CloseIcon from '@mui/icons-material/Close';
 import "./UsersData.css";
 import axios from "axios";
 
@@ -283,10 +284,10 @@ const UsersData = () => {
             horizontal: "left",
           }}
         >
-          <MenuItem>
-            {" "}
-            <h6> Filter</h6>
-          </MenuItem>
+          <div className="d-flex justify-content-between"> 
+             <MenuItem> Filter</MenuItem>
+              <MenuItem> <CloseIcon/> </MenuItem>
+             </div>
           <hr />
           <MenuItem>
             <label className="mt-3 me-3">Profile:</label>
@@ -294,9 +295,8 @@ const UsersData = () => {
               className="mt-3"
               id=""
               required
-              style={{
+              style={{ 
                 height: "45px",
-
                 paddingRight: "145px",
                 border: "1.5px solid black",
                 borderRadius: "5px",
@@ -338,6 +338,10 @@ const UsersData = () => {
               <option value="gachibowli">gachibowli</option>
             </select>
           </MenuItem>
+          <MenuItem className="d-flex justify-content-between"> 
+              <button className="save"> Save</button>
+              <button className="clear"> Clear</button>
+              </MenuItem>
         </Menu>
       </div>
       <div>

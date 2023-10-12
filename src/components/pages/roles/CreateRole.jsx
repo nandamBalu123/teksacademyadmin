@@ -60,9 +60,9 @@ const CreateRole = () => {
     navigate("/roles");
   };
   return (
-    <div style={{ marginTop: "30px" }}>
+    <div style={{ marginTop: "30px" }} >
       <p className="fs-5 ms-5">CreateRole</p>
-      <form>
+      <form >
         <Box
           component="form"
           sx={{
@@ -71,7 +71,7 @@ const CreateRole = () => {
           noValidate
           autoComplete="off"
         >
-          <div className="container">
+          <div className="container createrole">
             <div className="row">
               <div className="col-12 col-md-6 col-lg-4 ">
                 <input

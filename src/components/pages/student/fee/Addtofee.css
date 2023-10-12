@@ -14,3 +14,12 @@
 .textfield{ 
     width: 22%;
 }
+.addtofee{ 
+    background-color:#0060e9 ;
+    color: #fff;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    margin: 15px 2px 15px 808px;
+    border-radius: 5px;
+   
+}
