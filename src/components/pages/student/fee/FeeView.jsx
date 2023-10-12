@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 const FeeView = () => {
   const { id } = useParams();
-  // const navigator = useNavigate();
+  const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
   const [dueamount, setdueamount] = useState("");
   const [totalinstallments, settotalinstallments] = useState([]);
@@ -38,36 +38,19 @@ const FeeView = () => {
       });
   }, []);
 
+  let installments;
+
+  if (studentdata.installments && studentdata.installments.length > 0) {
+    installments = JSON.parse(studentdata.installments);
+  }
+
   useEffect(() => {
     setdueamount(studentdata.dueamount);
     settotalinstallments(studentdata.totalinstallments);
-
   }, [studentdata]);
-  let installments;
-  if (studentdata.installments && studentdata.installments.length > 0) {
-    installments = JSON.parse(studentdata.installments);
-    console.log("inst", installments);
-  }
- 
-  let totalInstallmentsLeft;
-  let totalInstallmentss;
-  let totalinstallmentspaid;
-  if (totalinstallments && totalinstallments.length > 0) {
-    let data = JSON.parse(totalinstallments);
-
-    totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
-    totalinstallmentspaid = parseInt(data[0].totalinstallmentspaid);
-
-    totalInstallmentss = parseInt(data[0].totalinstallments);
-  } else {
-    console.log("JSON data is empty or undefined.");
-  }
-  
-
   useEffect(() => {
-    console.log("install", installments);
-  }, [installments]);
-  // console.log("studentdata", studentdata);
+    console.log("totalinstallmentssss", totalinstallments);
+  });
   const updateinstallments = (e) => {
     let newinstallment = {
       id: Date.now(),
@@ -94,7 +77,7 @@ const FeeView = () => {
         if (res.data.updated) {
           alert("Fee Added");
 
-          // navigator("/studentdata");
+          navigator(`/feeview/${id}`);
         } else {
           alert("Try Again");
         }
@@ -181,9 +164,7 @@ const FeeView = () => {
                 <TableCell className="border border 1">
                   {studentdata.dueamount}
                 </TableCell>
-                <TableCell className="border border 1">
-                  {totalinstallmentspaid}/{totalInstallmentss}
-                </TableCell>
+                <TableCell className="border border 1"></TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -247,9 +228,9 @@ const FeeView = () => {
               ))}
           </Table>
         </TableContainer>
-        {totalinstallments &&
-          totalinstallments.length > 0 &&
-          Array(totalInstallmentsLeft)
+        {studentdata.totalinstallments &&
+          studentdata.totalinstallments.length > 0 &&
+          Array(4)
             .fill()
             .map((_, index) => (
               <div className="instalment" key={index}>
