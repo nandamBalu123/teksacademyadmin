@@ -7,22 +7,26 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./FeeView.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const FeeView = () => {
   const { id } = useParams();
   const [studentdata, setstudentdata] = useState("");
   const [dueamount, setdueamount] = useState("");
-  const [totalinstallments, settotalinstallments] = useState("");
+  const [totalinstallments, settotalinstallments] = useState();
 
+  // const [installments, setinstallments] = useState([]);
   const [installments, setinstallments] = useState([]);
 
+  console.log("installments: ", installments)
+  
   const [duedate, setduedate] = useState();
   const [paidamount, setpaidamount] = useState();
   const [paiddate, setpaiddate] = useState();
   const [modeofpayment, setmodeofpayment] = useState();
   const [transactionid, settransactionid] = useState();
+  const navigator = useNavigate();
 
   useEffect(() => {
     // Make a GET request to your backend API endpoint
