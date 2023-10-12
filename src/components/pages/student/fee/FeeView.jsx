@@ -16,26 +16,12 @@ const FeeView = () => {
   const [studentdata, setstudentdata] = useState("");
   const [dueamount, setdueamount] = useState("");
   const [totalinstallments, settotalinstallments] = useState([]);
-
-  const [installments, setinstallments] = useState([
-    // {
-    //   // id: Date.now(),
-    //   duedate: "vfdvdf",
-    //   paidamount: "2434",
-    //   paiddate: "erwre",
-    //   modeofpayment: "vfdvf",
-    //   transactionid: "vdfvfd",
-    // },
-  ]);
-
-  console.log("installments: ", installments)
-  
   const [duedate, setduedate] = useState();
   const [paidamount, setpaidamount] = useState();
   const [paiddate, setpaiddate] = useState();
   const [modeofpayment, setmodeofpayment] = useState();
+
   const [transactionid, settransactionid] = useState();
-  const navigator = useNavigate();
 
   useEffect(() => {
     // Make a GET request to your backend API endpoint
@@ -55,16 +41,14 @@ const FeeView = () => {
   useEffect(() => {
     setdueamount(studentdata.dueamount);
     settotalinstallments(studentdata.totalinstallments);
-    setinstallments(studentdata.installments);
+
   }, [studentdata]);
-  useEffect(() => {
-    console.log(
-      "due amount",
-      dueamount,
-      "totalinstallments",
-      totalinstallments
-    );
-  });
+  let installments;
+  if (studentdata.installments && studentdata.installments.length > 0) {
+    installments = JSON.parse(studentdata.installments);
+    console.log("inst", installments);
+  }
+ 
   let totalInstallmentsLeft;
   let totalInstallmentss;
   let totalinstallmentspaid;
@@ -78,29 +62,29 @@ const FeeView = () => {
   } else {
     console.log("JSON data is empty or undefined.");
   }
+  
 
-  const saveInstallments = () => {
-    setinstallments([
-      ...installments,
-      {
-        id: Date.now(),
-        duedate: duedate,
-        paidamount: paidamount,
-        paiddate: paiddate,
-        modeofpayment: modeofpayment,
-        transactionid: transactionid,
-      },
-    ]);
+  useEffect(() => {
+    console.log("install", installments);
+  }, [installments]);
+  // console.log("studentdata", studentdata);
+  const updateinstallments = (e) => {
+    let newinstallment = {
+      id: Date.now(),
+      duedate: duedate,
+      paidamount: paidamount,
+      paiddate: paiddate,
+      modeofpayment: modeofpayment,
+      transactionid: transactionid,
+    };
+    installments.push(newinstallment);
+    console.log("uoqwieuqwio", installments);
+    e.preventDefault();
     setduedate("");
     setpaidamount(0);
     setpaiddate("");
     setmodeofpayment("");
     settransactionid("");
-  };
-  // console.log("studentdata", studentdata);
-  const updateinstallments = (e) => {
-    e.preventDefault();
-
     const updatedData = { installments, totalinstallments, dueamount };
     console.log("installmets", installments);
     axios
@@ -116,7 +100,7 @@ const FeeView = () => {
         }
       });
   };
-  const handlepostdata = () => {};
+
   return (
     <div className="fee">
       <div className="feeview">
@@ -314,9 +298,9 @@ const FeeView = () => {
                 </div>
                 <div className="updatebtn">
                   {" "}
-                  <button className="update " onClick={saveInstallments}>
+                  {/* <button className="update " onClick={saveInstallments}>
                     save
-                  </button>
+                  </button> */}
                   <button className="update " onClick={updateinstallments}>
                     {" "}
                     Update
