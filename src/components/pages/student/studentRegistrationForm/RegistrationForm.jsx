@@ -1403,30 +1403,30 @@ export default function RegistrationForm() {
                 <br />
                 <br />
                 {feedetails.length > 0 && (
-                  <table class="table">
+                  <table class="table w-75 m-auto border border-1 ">
                     <thead>
                       <tr>
-                        <th scope="col">Fee Type</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Discount</th>
-                        <th scope="col">Tax Amount</th>
-                        <th scope="col">Total Amount</th>
-                        <th scope="col">Actions</th>
+                        <th className="border border-1">Fee Type</th>
+                        <th className="border border-1">Amount</th>
+                        <th className="border border-1">Discount</th>
+                        <th className="border border-1">Tax Amount</th>
+                        <th className="border border-1">Total Amount</th>
+                        <th className="border border-1">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {feedetails &&
                         feedetails.map((item) => (
                           <tr key={item.id}>
-                            <th scope="row">{item.feetype}</th>
-                            <td>{item.amount}</td>
-                            <td>{item.discount}</td>
-                            <td> {parseFloat(item.taxamount.toFixed(2))}</td>
-                            <td>{item.totalamount}</td>
-                            <td>
-                              <button onClick={() => handleFeeDelete(item.id)}>
-                                Delete
-                              </button>
+                            <td scope="row" className="border border-1">{item.feetype}</td>
+                            <td className="border border-1">{item.amount}</td>
+                            <td className="border border-1" >{item.discount}</td>
+                            <td className="border border-1"> {parseFloat(item.taxamount.toFixed(2))}</td>
+                            <td className="border border-1">{item.totalamount}</td>
+                            <td onClick={() => handleFeeDelete(item.id)}>
+                             
+                                <DeleteIcon/>
+                           
                             </td>
                           </tr>
                         ))}
@@ -1495,19 +1495,19 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
-              <table>
+              <table className="table w-50 ms-5">
                 <thead>
                   <tr>
-                    <th scope="col">Gross Total</th>
-                    <th scope="col">Total Discount</th>
-                    <th scope="col">Total Amount</th>
+                    <th className="border border-1">Gross Total</th>
+                    <th className="border border-1">Total Discount</th>
+                    <th className="border border-1">Total Amount</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{grosstotal}</td>
-                    <td>{totaldiscount}</td>
-                    <td>{finaltotal}</td>
+                    <td className="border border-1">{grosstotal}</td>
+                    <td className="border border-1">{totaldiscount}</td>
+                    <td className="border border-1">{finaltotal}</td>
                   </tr>
                 </tbody>
               </table>
@@ -1516,10 +1516,10 @@ export default function RegistrationForm() {
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col">Fee Type</th>
-                      <th scope="col">Fee (exclusive Of GST) </th>
-                      <th scope="col">tax</th>
-                      <th scope="col">Fee (inclusive Of GST)</th>
+                      <th className="border border-1">Fee Type</th>
+                      <th className="border border-1">Fee (exclusive Of GST) </th>
+                      <th className="border border-1">tax</th>
+                      <th className="border border-1">Fee (inclusive Of GST)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1528,12 +1528,12 @@ export default function RegistrationForm() {
                         if (item.feetype != "Material Fee") {
                           return (
                             <tr key={item.id}>
-                              <th scope="row">{item.feetype}</th>
-                              <td>
+                              <td className="border border-1">{item.feetype}</td>
+                              <td className="border border-1">
                                 {parseFloat(item.feewithouttax.toFixed(2))}
                               </td>
-                              <td>{parseFloat(item.feetax.toFixed(2))}</td>
-                              <td>{parseFloat(item.feewithtax.toFixed(2))}</td>
+                              <td className="border border-1">{parseFloat(item.feetax.toFixed(2))}</td>
+                              <td className="border border-1">{parseFloat(item.feewithtax.toFixed(2))}</td>
                             </tr>
                           );
                         }
