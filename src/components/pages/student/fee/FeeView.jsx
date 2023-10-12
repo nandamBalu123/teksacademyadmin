@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 const FeeView = () => {
   const { id } = useParams();
-  const navigator = useNavigate();
+  // const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
   const [dueamount, setdueamount] = useState("");
   const [totalinstallments, settotalinstallments] = useState([]);
@@ -35,7 +35,7 @@ const FeeView = () => {
   const [paiddate, setpaiddate] = useState();
   const [modeofpayment, setmodeofpayment] = useState();
   const [transactionid, settransactionid] = useState();
-  const navigator = useNavigate();
+  // const navigator = useNavigate();
 
   useEffect(() => {
     // Make a GET request to your backend API endpoint
