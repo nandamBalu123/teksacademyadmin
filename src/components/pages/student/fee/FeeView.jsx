@@ -28,11 +28,14 @@ const FeeView = () => {
     // },
   ]);
 
+  console.log("installments: ", installments)
+  
   const [duedate, setduedate] = useState();
   const [paidamount, setpaidamount] = useState();
   const [paiddate, setpaiddate] = useState();
   const [modeofpayment, setmodeofpayment] = useState();
   const [transactionid, settransactionid] = useState();
+  const navigator = useNavigate();
 
   useEffect(() => {
     // Make a GET request to your backend API endpoint
