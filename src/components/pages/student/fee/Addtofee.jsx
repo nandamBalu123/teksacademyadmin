@@ -48,16 +48,13 @@ const Addtofee = () => {
     setSelectedOption(event.target.value);
   };
 
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const addfee = true;
 
     const updatedData = { dueamount, initialamount, totalinstallments, addfee };
     console.log("dueeqam", dueamount);
-
+    console.log("fdf", dueamount, initialamount, totalinstallments, addfee);
     axios
       .put(`http://localhost:3030/addfee/${id}`, updatedData)
 
