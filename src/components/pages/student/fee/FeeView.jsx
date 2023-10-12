@@ -19,7 +19,6 @@ const FeeView = () => {
   const [paiddate,setpaiddate]=useState()
   const [modeofpayment,setmodeofpayment]=useState()
   const [transactionid,settransactionid]=useState()
-
  
   useEffect(() => {
     // Make a GET request to your backend API endpoint
@@ -49,6 +48,9 @@ const FeeView = () => {
       },
     ]);
   }
+
+  console.log("studet installment: ", studentdata.installments);
+
   return (
     <div className="fee">
       <div className="feeview">
@@ -162,20 +164,29 @@ const FeeView = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
+            
             <TableBody>
+              {studentdata.installments &&
+              JSON.parse(studentdata.installments).map((item, index) => {
+
+              
               <TableRow
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                key={index}
               >
+                
                 <TableCell
                   component="th"
                   className="border border 1"
                 ></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
+                <TableCell className="border border 1">{item.dueamount}</TableCell>
+                <TableCell className="border border 1">{item.paidamount}</TableCell>
+                <TableCell className="border border 1">{item.paiddate}</TableCell>
+                <TableCell className="border border 1">{item.modeofpayment}</TableCell>
+                <TableCell className="border border 1">{item.transactionid}</TableCell>
+                <TableCell className="border border 1">{item.transactionid}</TableCell>
               </TableRow>
+                })}
             </TableBody>
           </Table>
         </TableContainer>
