@@ -13,13 +13,17 @@ import axios from "axios";
 const FeeView = () => {
   const { id } = useParams();
   const [studentdata, setstudentdata] = useState("");
+  const [dueamount, setdueamount] = useState("");
+  const [totalinstallments, settotalinstallments] = useState("");
+
   const [installments, setinstallments] = useState([]);
-  const [duedate,setduedate]=useState()
-  const [paidamount,setpaidamount]=useState()
-  const [paiddate,setpaiddate]=useState()
-  const [modeofpayment,setmodeofpayment]=useState()
-  const [transactionid,settransactionid]=useState()
- 
+
+  const [duedate, setduedate] = useState();
+  const [paidamount, setpaidamount] = useState();
+  const [paiddate, setpaiddate] = useState();
+  const [modeofpayment, setmodeofpayment] = useState();
+  const [transactionid, settransactionid] = useState();
+
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -34,22 +38,57 @@ const FeeView = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+  useEffect(() => {
+    setdueamount(studentdata.dueamount);
+    settotalinstallments(studentdata.totalinstallments);
+  }, [studentdata]);
+
+  let totalInstallmentsLeft;
+  if (totalinstallments && totalinstallments.length > 0) {
+    let data = JSON.parse(totalinstallments);
+
+    totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
+    // totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
+
+    // totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
+  } else {
+    console.log("JSON data is empty or undefined.");
+  }
+
   console.log("studentdata", studentdata);
-  const handleinstallments=()=>{
+  const handleinstallments = (e) => {
+    e.preventDefault();
     setinstallments([
       ...installments,
       {
         id: Date.now(),
-        duedate:duedate,
-        paidamount:paidamount,
-        paiddate:paiddate,
-        modeofpayment:modeofpayment,
-        transactionid:transactionid
+        duedate: duedate,
+        paidamount: paidamount,
+        paiddate: paiddate,
+        modeofpayment: modeofpayment,
+        transactionid: transactionid,
       },
     ]);
-  }
+    setduedate("");
+    setpaidamount(0);
+    setpaiddate("");
+    setmodeofpayment("");
+    settransactionid("");
+    const updatedData = { installments, totalinstallments, dueamount };
 
-  console.log("studet installment: ", studentdata.installments);
+    axios
+      .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
+
+      .then((res) => {
+        if (res.data.updated) {
+          alert("Fee Added");
+
+          navigator("/studentdata");
+        } else {
+          alert("Try Again");
+        }
+      });
+  };
 
   return (
     <div className="fee">
@@ -190,33 +229,64 @@ const FeeView = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        {}
-        <div className="instalment">
-          <p className="ms-4"> Instalment 1 :10,000</p>
-          <div className="d-flex  payment">
-            <input type="date" name="duedate" />
-            <input type="text" placeholder="paidamount" name="paidamount" />
+        {studentdata.totalinstallments &&
+          studentdata.totalinstallments.length > 0 &&
+          Array(totalInstallmentsLeft)
+            .fill()
+            .map((_, index) => (
+              <div className="instalment">
+                <p className="ms-4"> Instalment 1 :10,000</p>
+                <div className="d-flex  payment">
+                  <input
+                    type="date"
+                    name="duedate"
+                    onChange={(e) => setduedate(e.target.value)}
+                    value={duedate}
+                  />
+                  <input
+                    type="text"
+                    placeholder="paidamount"
+                    name="paidamount"
+                    onChange={(e) => setpaidamount(e.target.value)}
+                    value={paidamount}
+                  />
 
-            <input type="date" name="paiddate" />
+                  <input
+                    type="date"
+                    name="paiddate"
+                    onChange={(e) => setpaiddate(e.target.value)}
+                    value={paiddate}
+                  />
 
-            <select className="ms-3" placeholder="Mode of Payment">
-              <option value="">Mode of Payment</option>
-              <option value="upi">UPI</option>
-              <option value="cash">Cash</option>
-              <option value="backtransfor"> Bank Transfor</option>
-              <option value="cheque"> CHEQUE</option>
-            </select>
-            <input
-              type="text"
-              placeholder="Transation Id"
-              name="transationid"
-            />
-          </div>
-          <div className="updatebtn">
-            {" "}
-            <button className="update " onClick={handleinstallments}> Update</button>
-          </div>
-        </div>
+                  <select
+                    className="ms-3"
+                    placeholder="Mode of Payment"
+                    onChange={(e) => setmodeofpayment(e.target.value)}
+                    value={modeofpayment}
+                  >
+                    <option value="">Mode of Payment</option>
+                    <option value="upi">UPI</option>
+                    <option value="cash">Cash</option>
+                    <option value="backtransfor"> Bank Transfor</option>
+                    <option value="cheque"> CHEQUE</option>
+                  </select>
+                  <input
+                    type="text"
+                    placeholder="Transation Id"
+                    name="transationid"
+                    onChange={(e) => settransactionid(e.target.value)}
+                    value={transactionid}
+                  />
+                </div>
+                <div className="updatebtn">
+                  {" "}
+                  <button className="update " onClick={handleinstallments}>
+                    {" "}
+                    Update
+                  </button>
+                </div>
+              </div>
+            ))}
       </div>
     </div>
   );
