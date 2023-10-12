@@ -7,7 +7,93 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./FeeView.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const FeeView = () => {
+  const { id } = useParams();
+  const [studentdata, setstudentdata] = useState("");
+  const [dueamount, setdueamount] = useState("");
+  const [totalinstallments, settotalinstallments] = useState();
+
+  // const [installments, setinstallments] = useState([]);
+  const [installments, setinstallments] = useState([]);
+
+  console.log("installments: ", installments)
+  
+  const [duedate, setduedate] = useState();
+  const [paidamount, setpaidamount] = useState();
+  const [paiddate, setpaiddate] = useState();
+  const [modeofpayment, setmodeofpayment] = useState();
+  const [transactionid, settransactionid] = useState();
+  const navigator = useNavigate();
+
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get(`http://localhost:3030/viewstudentdata/${id}`)
+      .then((response) => {
+        // Handle the successful response here
+        setstudentdata(response.data[0]); // Update the data state with the fetched data
+        console.log("studentdata", response.data);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+  useEffect(() => {
+    setdueamount(studentdata.dueamount);
+    settotalinstallments(studentdata.totalinstallments);
+  }, [studentdata]);
+
+  let totalInstallmentsLeft;
+  if (totalinstallments && totalinstallments.length > 0) {
+    let data = JSON.parse(totalinstallments);
+
+    totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
+    // totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
+
+    // totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
+  } else {
+    console.log("JSON data is empty or undefined.");
+  }
+
+  console.log("studentdata", studentdata);
+  const handleinstallments = (e) => {
+    e.preventDefault();
+    setinstallments([
+      ...installments,
+      {
+        id: Date.now(),
+        duedate: duedate,
+        paidamount: paidamount,
+        paiddate: paiddate,
+        modeofpayment: modeofpayment,
+        transactionid: transactionid,
+      },
+    ]);
+    setduedate("");
+    setpaidamount(0);
+    setpaiddate("");
+    setmodeofpayment("");
+    settransactionid("");
+    const updatedData = { installments, totalinstallments, dueamount };
+
+    axios
+      .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
+
+      .then((res) => {
+        if (res.data.updated) {
+          alert("Fee Added");
+
+          navigator("/studentdata");
+        } else {
+          alert("Try Again");
+        }
+      });
+  };
+
   return (
     <div className="fee">
       <div className="feeview">
@@ -61,18 +147,33 @@ const FeeView = () => {
               <TableRow
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell
-                  component="th"
-                  className="border border 1"
-                ></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
+                <TableCell component="th" className="border border 1">
+                  {studentdata.name}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.email}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.mobilenumber}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.courses}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.admissiondate}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.finaltotal}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.initialamount}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.finaltotal - studentdata.dueamount}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.dueamount}
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -83,7 +184,7 @@ const FeeView = () => {
             <TableHead>
               <TableRow>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                    Due Date
+                  Due Date
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   Paid Amount
@@ -106,46 +207,90 @@ const FeeView = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
+            
             <TableBody>
+              {studentdata.installments &&
+              JSON.parse(studentdata.installments).map((item, index) => {
+
+              
               <TableRow
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                key={index}
               >
+                
                 <TableCell
                   component="th"
                   className="border border 1"
                 ></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
+                <TableCell className="border border 1">{item.dueamount}</TableCell>
+                <TableCell className="border border 1">{item.paidamount}</TableCell>
+                <TableCell className="border border 1">{item.paiddate}</TableCell>
+                <TableCell className="border border 1">{item.modeofpayment}</TableCell>
+                <TableCell className="border border 1">{item.transactionid}</TableCell>
+                <TableCell className="border border 1">{item.transactionid}</TableCell>
               </TableRow>
+                })}
             </TableBody>
           </Table>
         </TableContainer>
-        <div className="instalment">
-          <p className="ms-4"> Instalment 1 :10,000</p>
-          <div className="d-flex  payment">
-            <input type="date" name="duedate" />
-            <input type="text" placeholder="paidamount" name="paidamount" />
+        {studentdata.totalinstallments &&
+          studentdata.totalinstallments.length > 0 &&
+          Array(totalInstallmentsLeft)
+            .fill()
+            .map((_, index) => (
+              <div className="instalment">
+                <p className="ms-4"> Instalment 1 :10,000</p>
+                <div className="d-flex  payment">
+                  <input
+                    type="date"
+                    name="duedate"
+                    onChange={(e) => setduedate(e.target.value)}
+                    value={duedate}
+                  />
+                  <input
+                    type="text"
+                    placeholder="paidamount"
+                    name="paidamount"
+                    onChange={(e) => setpaidamount(e.target.value)}
+                    value={paidamount}
+                  />
 
-            <input type="date" name="paiddate" />
+                  <input
+                    type="date"
+                    name="paiddate"
+                    onChange={(e) => setpaiddate(e.target.value)}
+                    value={paiddate}
+                  />
 
-            <select className="ms-3" placeholder="Mode of Payment">
-              <option value="">Mode of Payment</option>
-              <option value="upi">UPI</option>
-              <option value="cash">Cash</option>
-              <option value="backtransfor"> Bank Transfor</option>
-              <option value="cheque"> CHEQUE</option>
-            </select>
-            <input
-              type="text"
-              placeholder="Transation Id"
-              name="transationid"
-            />
-          </div>
-        <div className="updatebtn">    <button  className="update " > Update</button></div>
-        </div>
+                  <select
+                    className="ms-3"
+                    placeholder="Mode of Payment"
+                    onChange={(e) => setmodeofpayment(e.target.value)}
+                    value={modeofpayment}
+                  >
+                    <option value="">Mode of Payment</option>
+                    <option value="upi">UPI</option>
+                    <option value="cash">Cash</option>
+                    <option value="backtransfor"> Bank Transfor</option>
+                    <option value="cheque"> CHEQUE</option>
+                  </select>
+                  <input
+                    type="text"
+                    placeholder="Transation Id"
+                    name="transationid"
+                    onChange={(e) => settransactionid(e.target.value)}
+                    value={transactionid}
+                  />
+                </div>
+                <div className="updatebtn">
+                  {" "}
+                  <button className="update " onClick={handleinstallments}>
+                    {" "}
+                    Update
+                  </button>
+                </div>
+              </div>
+            ))}
       </div>
     </div>
   );

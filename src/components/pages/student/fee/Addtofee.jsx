@@ -2,13 +2,27 @@ import React from "react";
 import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import "./Addtofee.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import InputAdornment from "@mui/material/InputAdornment";
 const Addtofee = () => {
+  const navigator = useNavigate();
+  const [dueamount, setdueamount] = useState();
+  const [initialamount, setinitialamount] = useState();
+  const [totalinstallment, settotalinstallment] = useState();
+  const [totalinstallments, settotalinstallments] = useState();
+
   const { id } = useParams();
   const [studentdata, setstudentdata] = useState("");
-
+  useEffect(() => {
+    settotalinstallments([
+      {
+        totalinstallments: totalinstallment,
+        totalinstallmentspaid: 0,
+        totalinstallmentsleft: totalinstallment,
+      },
+    ]);
+  }, [totalinstallment]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -24,10 +38,35 @@ const Addtofee = () => {
       });
   }, []);
   console.log("studentdata", studentdata);
+
   const [selectedOption, setSelectedOption] = useState("option1");
 
+  useEffect(() => {
+    setdueamount(studentdata.dueamount - initialamount);
+  }, [initialamount]);
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const addfee = true;
+
+    const updatedData = { dueamount, initialamount, totalinstallments, addfee };
+    console.log("dueeqam", dueamount);
+    console.log("fdf", dueamount, initialamount, totalinstallments, addfee);
+    axios
+      .put(`http://localhost:3030/addfee/${id}`, updatedData)
+
+      .then((res) => {
+        if (res.data.updated) {
+          alert("Fee Added");
+
+          navigator("/studentdata");
+        } else {
+          alert("Try Again");
+        }
+      });
   };
 
   return (
@@ -87,12 +126,14 @@ const Addtofee = () => {
             />
           </div>
           <div className="d-flex justify-content-around pt-5">
+            {/* <input type="text" value={studentdata.admissiondate} /> */}
             <TextField
               id="outlined-basic"
               label="Date Of Joining"
               variant="outlined"
               className="textfield"
               type="date"
+              value={studentdata.admissiondate}
               InputLabelProps={{
                 shrink: true, // This will make the label float when there is a value
               }}
@@ -115,7 +156,7 @@ const Addtofee = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    {studentdata.grandtotal}
+                    {studentdata.finaltotal}
                   </InputAdornment>
                 ),
               }}
@@ -126,11 +167,11 @@ const Addtofee = () => {
               sx={{ m: 1, width: "25ch" }}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                  
-                  </InputAdornment>
+                  <InputAdornment position="start"></InputAdornment>
                 ),
               }}
+              value={initialamount}
+              onChange={(e) => setinitialamount(e.target.value)}
             />
             <TextField
               label="Due Amount"
@@ -138,9 +179,7 @@ const Addtofee = () => {
               sx={{ m: 1, width: "25ch" }}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                
-                  </InputAdornment>
+                  <InputAdornment position="start">{dueamount}</InputAdornment>
                 ),
               }}
             />
@@ -151,6 +190,8 @@ const Addtofee = () => {
               label="No. of Installments"
               variant="outlined"
               className="textfield"
+              value={totalinstallment}
+              onChange={(e) => settotalinstallment(e.target.value)}
             />
             <p>Due Date Type</p>
             <label>
@@ -175,6 +216,7 @@ const Addtofee = () => {
               Customized
             </label>
           </div>
+          <button onClick={handleSubmit}>Add to Fee</button>
         </div>{" "}
       </div>
     </>
