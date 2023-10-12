@@ -12,12 +12,21 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 const FeeView = () => {
   const { id } = useParams();
+  const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
   const [dueamount, setdueamount] = useState("");
-  const [totalinstallments, settotalinstallments] = useState();
+  const [totalinstallments, settotalinstallments] = useState([]);
 
-  // const [installments, setinstallments] = useState([]);
-  const [installments, setinstallments] = useState([]);
+  const [installments, setinstallments] = useState([
+    // {
+    //   // id: Date.now(),
+    //   duedate: "vfdvdf",
+    //   paidamount: "2434",
+    //   paiddate: "erwre",
+    //   modeofpayment: "vfdvf",
+    //   transactionid: "vdfvfd",
+    // },
+  ]);
 
   console.log("installments: ", installments)
   
@@ -42,26 +51,35 @@ const FeeView = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+
   useEffect(() => {
     setdueamount(studentdata.dueamount);
     settotalinstallments(studentdata.totalinstallments);
+    setinstallments(studentdata.installments);
   }, [studentdata]);
-
+  useEffect(() => {
+    console.log(
+      "due amount",
+      dueamount,
+      "totalinstallments",
+      totalinstallments
+    );
+  });
   let totalInstallmentsLeft;
+  let totalInstallmentss;
+  let totalinstallmentspaid;
   if (totalinstallments && totalinstallments.length > 0) {
     let data = JSON.parse(totalinstallments);
 
     totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
-    // totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
+    totalinstallmentspaid = parseInt(data[0].totalinstallmentspaid);
 
-    // totalInstallmentsLeft = parseInt(data[0].totalinstallmentsleft);
+    totalInstallmentss = parseInt(data[0].totalinstallments);
   } else {
     console.log("JSON data is empty or undefined.");
   }
 
-  console.log("studentdata", studentdata);
-  const handleinstallments = (e) => {
-    e.preventDefault();
+  const saveInstallments = () => {
     setinstallments([
       ...installments,
       {
@@ -78,8 +96,13 @@ const FeeView = () => {
     setpaiddate("");
     setmodeofpayment("");
     settransactionid("");
-    const updatedData = { installments, totalinstallments, dueamount };
+  };
+  // console.log("studentdata", studentdata);
+  const updateinstallments = (e) => {
+    e.preventDefault();
 
+    const updatedData = { installments, totalinstallments, dueamount };
+    console.log("installmets", installments);
     axios
       .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
 
@@ -87,13 +110,13 @@ const FeeView = () => {
         if (res.data.updated) {
           alert("Fee Added");
 
-          navigator("/studentdata");
+          // navigator("/studentdata");
         } else {
           alert("Try Again");
         }
       });
   };
-
+  const handlepostdata = () => {};
   return (
     <div className="fee">
       <div className="feeview">
@@ -174,6 +197,9 @@ const FeeView = () => {
                 <TableCell className="border border 1">
                   {studentdata.dueamount}
                 </TableCell>
+                <TableCell className="border border 1">
+                  {totalinstallmentspaid}/{totalInstallmentss}
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -207,39 +233,43 @@ const FeeView = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            
-            <TableBody>
-              {studentdata.installments &&
-              JSON.parse(studentdata.installments).map((item, index) => {
-
-              
-              <TableRow
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                key={index}
-              >
-                
-                <TableCell
-                  component="th"
-                  className="border border 1"
-                ></TableCell>
-                <TableCell className="border border 1">{item.dueamount}</TableCell>
-                <TableCell className="border border 1">{item.paidamount}</TableCell>
-                <TableCell className="border border 1">{item.paiddate}</TableCell>
-                <TableCell className="border border 1">{item.modeofpayment}</TableCell>
-                <TableCell className="border border 1">{item.transactionid}</TableCell>
-                <TableCell className="border border 1">{item.transactionid}</TableCell>
-              </TableRow>
-                })}
-            </TableBody>
+            {studentdata.installments &&
+              studentdata.installments.length > 0 &&
+              JSON.parse(studentdata.installments).map((item, index) => (
+                <TableBody>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" className="border border 1">
+                      {item.duedate}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.paidamount}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.paiddate}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.modeofpayment}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.transactionid}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {/* {item.invoice} */}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              ))}
           </Table>
         </TableContainer>
-        {studentdata.totalinstallments &&
-          studentdata.totalinstallments.length > 0 &&
+        {totalinstallments &&
+          totalinstallments.length > 0 &&
           Array(totalInstallmentsLeft)
             .fill()
             .map((_, index) => (
-              <div className="instalment">
-                <p className="ms-4"> Instalment 1 :10,000</p>
+              <div className="instalment" key={index}>
+                <p className="ms-4"> Instalment {index + 1} :10,000</p>
                 <div className="d-flex  payment">
                   <input
                     type="date"
@@ -284,7 +314,10 @@ const FeeView = () => {
                 </div>
                 <div className="updatebtn">
                   {" "}
-                  <button className="update " onClick={handleinstallments}>
+                  <button className="update " onClick={saveInstallments}>
+                    save
+                  </button>
+                  <button className="update " onClick={updateinstallments}>
                     {" "}
                     Update
                   </button>
