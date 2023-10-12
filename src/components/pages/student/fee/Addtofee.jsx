@@ -191,7 +191,7 @@ const Addtofee = () => {
               variant="outlined"
               className="textfield"
               value={totalinstallment}
-              onChange={(e) => settotalinstallment(e.target.value)}
+              onChange={(e) => settotalinstallment(parseInt(e.target.value))}
             />
             <p>Due Date Type</p>
             <label>
