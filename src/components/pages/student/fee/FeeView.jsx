@@ -41,21 +41,23 @@ const FeeView = () => {
 
   useEffect(() => {
     // totalinstallments = studentdata.totalinstallments;
+    // setInstallments(studentdata.installments);
+    console.log(studentdata.installments);
     // dueamount = studentdata.dueamount;
   }, [studentdata]);
 
-  let initialInstallments = Array(totalinstallments[0].totalinstallments)
-    .fill()
-    .map((_, index) => ({
-      id: Date.now(),
-      duedate: "",
-      paidamount: "",
-      paiddate: "",
-      modeofpayment: "",
-      transactionid: "",
-      paymentdone: false,
-    }));
-  const [installments, setInstallments] = useState(initialInstallments);
+  // let initialInstallments = Array(totalinstallments[0].totalinstallments)
+  //   .fill()
+  //   .map((_, index) => ({
+  //     id: Date.now(),
+  //     duedate: "",
+  //     paidamount: "",
+  //     paiddate: "",
+  //     modeofpayment: "",
+  //     transactionid: "",
+  //     paymentdone: false,
+  //   }));
+  const [installments, setInstallments] = useState();
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
     updatedInstallments[index] = updatedInstallment;
@@ -84,7 +86,7 @@ const FeeView = () => {
       });
   };
 
-  const updateinstallments = (e) => {};
+  // const updateinstallments = (e) => {};
 
   return (
     <div className="fee">
@@ -204,7 +206,7 @@ const FeeView = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {studentdata.installments &&
+            {/* {studentdata.installments &&
               studentdata.installments.length > 0 &&
               JSON.parse(studentdata.installments).map((item, index) => (
                 <TableBody>
@@ -227,14 +229,14 @@ const FeeView = () => {
                       {item.transactionid}
                     </TableCell>
                     <TableCell className="border border 1">
-                      {/* {item.invoice} */}
+              
                     </TableCell>
                   </TableRow>
                 </TableBody>
-              ))}
+              ))} */}
           </Table>
         </TableContainer>
-        {totalinstallments[0].totalinstallmentsleft > 0 &&
+        {/* {totalinstallments[0].totalinstallmentsleft > 0 &&
           installments.map((installment, index) => (
             <div className="installment" key={index}>
               <p className="ms-4"> Instalment {index + 1}: 10,000</p>
@@ -318,7 +320,7 @@ const FeeView = () => {
                 </button>
               </div>
             </div>
-          ))}
+          ))} */}
       </div>
     </div>
   );

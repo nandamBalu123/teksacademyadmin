@@ -69,7 +69,7 @@ const Addtofee = () => {
       addfee,
       installments,
     };
-
+    console.log("installments", installments);
     console.log("updatedData", updatedData);
     axios
       .put(`http://localhost:3030/addfee/${id}`, updatedData)
@@ -232,7 +232,9 @@ const Addtofee = () => {
               Customized
             </label>
           </div>
-          <button className="addtofee" onClick={handleSubmit}>Add to Fee</button>
+          <button className="addtofee" onClick={handleSubmit}>
+            Add to Fee
+          </button>
         </div>{" "}
       </div>
     </>
