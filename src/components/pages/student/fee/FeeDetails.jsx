@@ -10,8 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import "./FeeDetails.css";
 import axios from 'axios';
+import { useNavigate, Link } from "react-router-dom";
 
 const FeeDetails = () => {
+  const navigator = useNavigate();
   const [getstudentData, setData] = useState()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -38,14 +40,14 @@ const FeeDetails = () => {
       });
     // fetchData();
   }, []);
-  
+  const sn = 0;
   return (
     <>
     <div className="fee"> 
        <div className="feedetails">  <h4> Fee Management(Registered Students)</h4> 
    <div className="d-flex justify-content-between pt-3">  
-      <button className="feebtn"> Student Fee Records</button>
- <button className="feebtn"> Fee FollowUps</button></div> 
+      <button className="feebtn" onClick={() => navigator('/feedetails')}>Student Fee Records</button>
+ <button className="feebtn" onClick={() => navigator('/feefollowup')}> Fee FollowUps</button></div> 
    <div className="d-flex justify-content-between pt-3 pb-3">
            
    <input
@@ -172,11 +174,11 @@ const FeeDetails = () => {
         <TableHead>
           <TableRow>
             <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> S.NO</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">Name Branch Counsellor</TableCell>
+            <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">Name<br /> Branch <br />Counsellor</TableCell>
             <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Contact<br />Email</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Course Date of Joining</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Total Fee<br /> Paid Fee Due Date</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> Created Date Next Due Date</TableCell>
+            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Course <br /> Date of Joining</TableCell>
+            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Total Fee<br /> Paid Fee<br /> Due Date</TableCell>
+            <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> Created Date <br /> Next Due Date</TableCell>
             <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Paid Status </TableCell>
             <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> View</TableCell>
           </TableRow>
@@ -188,14 +190,15 @@ const FeeDetails = () => {
               
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={item.id}
             >
-              <TableCell component="th" className="border border 1" > {item.id}</TableCell>
+              
+              <TableCell component="th" className="border border 1" > {sn+1}</TableCell>
               <TableCell className="border border 1"> {item.branchname} <br/>{item.name}</TableCell>
               <TableCell className="border border 1"> {item.mobilenumber}<br/> {item.email}</TableCell>
-              <TableCell className="border border 1"> {item.admissiondate}</TableCell>
-              <TableCell className="border border 1"> 12000<br/> 10000<br/>21/08/23</TableCell>
-              <TableCell className="border border 1"> Oct 6, 2023<br/>Nov 6, 2023</TableCell>
+              <TableCell className="border border 1"> {item.courses}<br />{item.admissiondate}</TableCell>
+              <TableCell className="border border 1"> {item.finaltotal}<br/> {item.finaltotal - item.dueamount}<br/>na</TableCell>
+              <TableCell className="border border 1"> {item.admissiondate}<br/>na</TableCell>
               <TableCell className="border border 1"> 2/3</TableCell>
-              <TableCell className="border border 1"> view</TableCell>
+              <TableCell className="border border 1" ><Link to={`/feeview/${item.id}`}>view</Link> </TableCell>
             </TableRow>
             ))
             ) : (
