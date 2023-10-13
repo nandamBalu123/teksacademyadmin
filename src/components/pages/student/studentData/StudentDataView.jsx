@@ -34,7 +34,7 @@ const StudentDataView = () => {
   return (
     <>
       <h2 className="text-center"> Student Details From</h2>
-      <div className="container">
+      <div className="studentdataview">
         <div className="bg">
           <img
             className="photo"

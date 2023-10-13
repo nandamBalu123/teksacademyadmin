@@ -68,3 +68,8 @@ th {
     background-color: #00619d;
     color: #fff;
 }
+.print{ 
+    border: none;
+   background: none;
+   margin: 0px  2px 5px 999px;
+}

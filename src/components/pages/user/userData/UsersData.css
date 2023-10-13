@@ -25,3 +25,10 @@
     display: flex;
     justify-content: space-between;
 }
+.save , .clear{ 
+    background-color: #0070fc;
+    color: #fff;
+    padding: 5px 19px 5px 19px;
+    border: none;
+    border-radius: 5px;
+  }

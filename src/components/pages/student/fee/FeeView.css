@@ -8,7 +8,7 @@
      margin: auto;
 }
 .instalment{ 
-    width: 91%;
+    width: 97%;
     margin: auto;
     background-color: #fff;
    
@@ -24,7 +24,7 @@
  border-radius: 10px;
 }
 .updatebtn{ 
-    text-align: end;
+    text-align: start;
 }
 .update{ 
     padding: 10px 10px 5px 10px;
@@ -34,4 +34,7 @@
     border-radius: 10px;
     border: none;
    
+}
+.feeviewlabel{ 
+    width: 10%;
 }

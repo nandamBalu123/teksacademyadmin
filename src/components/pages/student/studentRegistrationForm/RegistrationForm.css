@@ -90,3 +90,12 @@ StepLabel {
 .table{ 
   border-radius: 5px;
 }
+.materialfee, .finaltotal{ 
+  margin-left: 460px;
+}
+.billing{ 
+  width: 95%;
+}
+.empty{ 
+  border: none;
+}
