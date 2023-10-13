@@ -51,10 +51,26 @@ const Addtofee = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const addfee = true;
+    let installments = Array(totalinstallment)
+      .fill()
+      .map((_, index) => ({
+        id: Date.now(),
+        duedate: "",
+        paidamount: "",
+        paiddate: "",
+        modeofpayment: "",
+        transactionid: "",
+        paymentdone: false,
+      }));
+    const updatedData = {
+      dueamount,
+      initialamount,
+      totalinstallments,
+      addfee,
+      installments,
+    };
 
-    const updatedData = { dueamount, initialamount, totalinstallments, addfee };
-    console.log("dueeqam", dueamount);
-    console.log("fdf", dueamount, initialamount, totalinstallments, addfee);
+    console.log("updatedData", updatedData);
     axios
       .put(`http://localhost:3030/addfee/${id}`, updatedData)
 
