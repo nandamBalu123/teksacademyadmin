@@ -10,22 +10,15 @@ import "./FeeView.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 const FeeView = () => {
   const { id } = useParams();
   const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
+  const [totalinstallments, settotalinstallments] = useState();
+  const [dueamount, setdueamount] = useState();
 
-  let dueamount;
-
-  let totalinstallments = [
-    {
-      totalinstallments: 4,
-      totalinstallmentspaid: 0,
-      totalinstallmentsleft: 4,
-    },
-  ];
   useEffect(() => {
-    // Make a GET request to your backend API endpoint
     axios
       .get(`http://localhost:3030/viewstudentdata/${id}`)
       .then((response) => {
@@ -38,38 +31,29 @@ const FeeView = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-
+  // let totalinstallments;
   useEffect(() => {
     // totalinstallments = studentdata.totalinstallments;
-    // setInstallments(studentdata.installments);
-    console.log(studentdata.installments);
-    // dueamount = studentdata.dueamount;
+    settotalinstallments(studentdata.totalinstallments);
+    setInstallments(studentdata.installments);
   }, [studentdata]);
 
-  // let initialInstallments = Array(totalinstallments[0].totalinstallments)
-  //   .fill()
-  //   .map((_, index) => ({
-  //     id: Date.now(),
-  //     duedate: "",
-  //     paidamount: "",
-  //     paiddate: "",
-  //     modeofpayment: "",
-  //     transactionid: "",
-  //     paymentdone: false,
-  //   }));
   const [installments, setInstallments] = useState();
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
     updatedInstallments[index] = updatedInstallment;
     setInstallments(updatedInstallments);
-    console.log("updatedinstallments", installments);
   };
+
   const updatedata = (e) => {
     e.preventDefault();
-    totalinstallments[0].totalinstallmentspaid =
-      totalinstallments[0].totalinstallmentspaid + 1;
-    totalinstallments[0].totalinstallmentsleft =
-      totalinstallments[0].totalinstallmentsleft - 1;
+
+    // const updatedDataa = [...totalinstallments];
+    // updatedDataa[0].totalinstallmentsleft =
+    //   updatedDataa[0].totalinstallmentsleft - 1;
+    // updatedDataa[0].totalinstallmentspaid =
+    //   updatedDataa[0].totalinstallmentspaid + 1;
+    // settotalinstallments(updatedDataa);
     const updatedData = { installments, totalinstallments, dueamount };
     console.log("updatedData", updatedData);
     axios
@@ -85,9 +69,6 @@ const FeeView = () => {
         }
       });
   };
-
-  // const updateinstallments = (e) => {};
-
   return (
     <div className="fee">
       <div className="feeview">
@@ -167,11 +148,18 @@ const FeeView = () => {
                 </TableCell>
                 <TableCell className="border border 1">
                   {/* {studentdata.dueamount} */}
-                  {dueamount}
+                  {/* {dueamount} */}
                 </TableCell>
+
                 <TableCell className="border border 1">
-                  {totalinstallments[0].totalinstallmentspaid}/
-                  {totalinstallments[0].totalinstallments}
+                  {/* {studentdata.totalinstallments} */}
+                  {studentdata.totalinstallments &&
+                    studentdata.totalinstallments.length > 0 &&
+                    studentdata.totalinstallments.map((item, index) => (
+                      <span>
+                        {item.totalinstallmentspaid}/{item.totalinstallments}
+                      </span>
+                    ))}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -206,9 +194,9 @@ const FeeView = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {/* {studentdata.installments &&
-              studentdata.installments.length > 0 &&
-              JSON.parse(studentdata.installments).map((item, index) => (
+            {installments &&
+              installments.length > 0 &&
+              installments.map((item, index) => (
                 <TableBody>
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -228,18 +216,16 @@ const FeeView = () => {
                     <TableCell className="border border 1">
                       {item.transactionid}
                     </TableCell>
-                    <TableCell className="border border 1">
-              
-                    </TableCell>
+                    <TableCell className="border border 1"></TableCell>
                   </TableRow>
                 </TableBody>
-              ))} */}
+              ))}{" "}
           </Table>
         </TableContainer>
-        {/* {totalinstallments[0].totalinstallmentsleft > 0 &&
+        {installments &&
           installments.map((installment, index) => (
             <div className="installment" key={index}>
-              <p className="ms-4"> Instalment {index + 1}: 10,000</p>
+              <p className="ms-4"> Instalment {index + 1}</p>
               <div className="d-flex payment">
                 <input
                   type="date"
@@ -299,15 +285,15 @@ const FeeView = () => {
                 </select>
                 <input
                   type="text"
-                  name="transationid"
+                  name="transactionid"
                   onChange={(e) => {
                     const updatedInstallment = {
                       ...installment,
-                      transationid: e.target.value,
+                      transactionid: e.target.value,
                     };
                     handleInstallmentUpdate(index, updatedInstallment);
                   }}
-                  value={installment.transationid}
+                  value={installment.transactionid}
                 />
               </div>
               <div className="updatebtn">
@@ -320,7 +306,7 @@ const FeeView = () => {
                 </button>
               </div>
             </div>
-          ))} */}
+          ))}
       </div>
     </div>
   );

@@ -15,23 +15,16 @@ const FeeView = () => {
   const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
 
-  // const [dueamount, setdueamount] = useState("");
-  // const [totalinstallments, settotalinstallments] = useState([]);
+  let dueamount;
 
-  const [duedate, setduedate] = useState();
-  const [paidamount, setpaidamount] = useState();
-  const [paiddate, setpaiddate] = useState();
-  const [modeofpayment, setmodeofpayment] = useState();
-  const [transactionid, settransactionid] = useState();
-  let installments;
-  let dueamount = 10000;
-  let totalinstallments = [{
-    totalinstallments: 2,
-    totalinstallmentspaid: 0,
-    totalinstallmentsleft: 2,
-  }];
+  let totalinstallments = [
+    {
+      totalinstallments: 4,
+      totalinstallmentspaid: 0,
+      totalinstallmentsleft: 4,
+    },
+  ];
   useEffect(() => {
-    // Make a GET request to your backend API endpoint
     axios
       .get(`http://localhost:3030/viewstudentdata/${id}`)
       .then((response) => {
@@ -45,52 +38,54 @@ const FeeView = () => {
       });
   }, []);
 
-  if (studentdata.installments && studentdata.installments.length > 0) {
-    installments = JSON.parse(studentdata.installments);
-  }
-
   useEffect(() => {
-    // setdueamount(studentdata.dueamount);
-    // settotalinstallments(studentdata.totalinstallments);
+    // totalinstallments = studentdata.totalinstallments;
+    // setInstallments(studentdata.installments);
+    console.log(studentdata.installments);
+    // dueamount = studentdata.dueamount;
   }, [studentdata]);
-  console.log("tyuu", totalinstallments);
-  const updateinstallments = (e) => {
+
+  // let initialInstallments = Array(totalinstallments[0].totalinstallments)
+  //   .fill()
+  //   .map((_, index) => ({
+  //     id: Date.now(),
+  //     duedate: "",
+  //     paidamount: "",
+  //     paiddate: "",
+  //     modeofpayment: "",
+  //     transactionid: "",
+  //     paymentdone: false,
+  //   }));
+  const [installments, setInstallments] = useState();
+  const handleInstallmentUpdate = (index, updatedInstallment) => {
+    const updatedInstallments = [...installments];
+    updatedInstallments[index] = updatedInstallment;
+    setInstallments(updatedInstallments);
+    console.log("updatedinstallments", installments);
+  };
+  const updatedata = (e) => {
+    e.preventDefault();
     totalinstallments[0].totalinstallmentspaid =
       totalinstallments[0].totalinstallmentspaid + 1;
     totalinstallments[0].totalinstallmentsleft =
       totalinstallments[0].totalinstallmentsleft - 1;
-    dueamount = dueamount - paidamount;
-    let newinstallment = {
-      id: Date.now(),
-      duedate: duedate,
-      paidamount: paidamount,
-      paiddate: paiddate,
-      modeofpayment: modeofpayment,
-      transactionid: transactionid,
-    };
-    installments.push(newinstallment);
-    console.log("uoqwieuqwio", installments);
-    e.preventDefault();
-    setduedate("");
-    setpaidamount(0);
-    setpaiddate("");
-    setmodeofpayment("");
-    settransactionid("");
     const updatedData = { installments, totalinstallments, dueamount };
     console.log("updatedData", updatedData);
-    // axios
-    //   .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
+    axios
+      .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
 
-    //   .then((res) => {
-    //     if (res.data.updated) {
-    //       alert("Fee Added");
+      .then((res) => {
+        if (res.data.updated) {
+          alert("Fee Added");
 
-    //       navigator(`/feeview/${id}`);
-    //     } else {
-    //       alert("Try Again");
-    //     }
-    //   });
+          navigator(`/feeview/${id}`);
+        } else {
+          alert("Try Again");
+        }
+      });
   };
+
+  // const updateinstallments = (e) => {};
 
   return (
     <div className="fee">
@@ -170,7 +165,8 @@ const FeeView = () => {
                   {studentdata.finaltotal - studentdata.dueamount}
                 </TableCell>
                 <TableCell className="border border 1">
-                  {/* {studentdata.dueamount} */}{dueamount}
+                  {/* {studentdata.dueamount} */}
+                  {dueamount}
                 </TableCell>
                 <TableCell className="border border 1">
                   {totalinstallments[0].totalinstallmentspaid}/
@@ -209,7 +205,7 @@ const FeeView = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {studentdata.installments &&
+            {/* {studentdata.installments &&
               studentdata.installments.length > 0 &&
               JSON.parse(studentdata.installments).map((item, index) => (
                 <TableBody>
@@ -232,140 +228,100 @@ const FeeView = () => {
                       {item.transactionid}
                     </TableCell>
                     <TableCell className="border border 1">
-                      {/* {item.invoice} */}
+              
                     </TableCell>
                   </TableRow>
                 </TableBody>
-              ))}
+              ))} */}
           </Table>
         </TableContainer>
-        {totalinstallments[0].totalinstallmentsleft &&
-          totalinstallments[0].totalinstallmentsleft > 0 &&
-          Array(totalinstallments[0].totalinstallmentsleft)
-            .fill()
-            .map((_, index) => (
-              <div className="instalment" key={index}>
-                <p className="ms-4"> Instalment {index + 1} :10,000</p>
-                <div className="d-flex  payment">
-                  <input
-                    type="date"
-                    name="duedate"
-                    onChange={(e) => setduedate(e.target.value)}
-                    value={duedate}
-                  />
-                  <input
-                    type="text"
-                    placeholder="paidamount"
-                    name="paidamount"
-                    onChange={(e) => setpaidamount(e.target.value)}
-                    value={paidamount}
-                  />
+        {/* {totalinstallments[0].totalinstallmentsleft > 0 &&
+          installments.map((installment, index) => (
+            <div className="installment" key={index}>
+              <p className="ms-4"> Instalment {index + 1}: 10,000</p>
+              <div className="d-flex payment">
+                <input
+                  type="date"
+                  name="duedate"
+                  onChange={(e) => {
+                    const updatedInstallment = {
+                      ...installment,
+                      duedate: e.target.value,
+                    };
+                    handleInstallmentUpdate(index, updatedInstallment);
+                  }}
+                  value={installment.duedate}
+                />
+                <input
+                  type="text"
+                  name="paidamount"
+                  onChange={(e) => {
+                    const updatedInstallment = {
+                      ...installment,
+                      paidamount: e.target.value,
+                    };
+                    handleInstallmentUpdate(index, updatedInstallment);
+                  }}
+                  value={installment.paidamount}
+                />
+                <input
+                  type="date"
+                  name="paiddate"
+                  onChange={(e) => {
+                    const updatedInstallment = {
+                      ...installment,
+                      paiddate: e.target.value,
+                    };
+                    handleInstallmentUpdate(index, updatedInstallment);
+                  }}
+                  value={installment.paiddate}
+                />
 
-                  <input
-                    type="date"
-                    name="paiddate"
-                    onChange={(e) => setpaiddate(e.target.value)}
-                    value={paiddate}
-                  />
-
-                  <select
-                    className="ms-3"
-                    placeholder="Mode of Payment"
-                    onChange={(e) => setmodeofpayment(e.target.value)}
-                    value={modeofpayment}
-                  >
-                    <option value="">Mode of Payment</option>
-                    <option value="upi">UPI</option>
-                    <option value="cash">Cash</option>
-                    <option value="backtransfor"> Bank Transfor</option>
-                    <option value="cheque"> CHEQUE</option>
-                  </select>
-                  <input
-                    type="text"
-                    placeholder="Transation Id"
-                    name="transationid"
-                    onChange={(e) => settransactionid(e.target.value)}
-                    value={transactionid}
-                  />
-                </div>
-                <div className="updatebtn">
-                  {" "}
-                  {/* <button className="update " onClick={saveInstallments}>
-                    save
-                  </button> */}
-                  <button className="update " onClick={updateinstallments}>
-                    {" "}
-                    Update
-                  </button>
-                </div>
+                <select
+                  className="ms-3"
+                  name="modeofpayment"
+                  placeholder="Mode of Payment"
+                  onChange={(e) => {
+                    const updatedInstallment = {
+                      ...installment,
+                      modeofpayment: e.target.value,
+                    };
+                    handleInstallmentUpdate(index, updatedInstallment);
+                  }}
+                  value={installment.modeofpayment}
+                >
+                  <option value="">Mode of Payment</option>
+                  <option value="upi">UPI</option>
+                  <option value="cash">Cash</option>
+                  <option value="backtransfor"> Bank Transfor</option>
+                  <option value="cheque"> CHEQUE</option>
+                </select>
+                <input
+                  type="text"
+                  name="transationid"
+                  onChange={(e) => {
+                    const updatedInstallment = {
+                      ...installment,
+                      transationid: e.target.value,
+                    };
+                    handleInstallmentUpdate(index, updatedInstallment);
+                  }}
+                  value={installment.transationid}
+                />
               </div>
-            ))}
+              <div className="updatebtn">
+                <button
+                  className="update"
+                  // onClick={() => handleInstallmentUpdate(index, installment)}
+                  onClick={updatedata}
+                >
+                  Update
+                </button>
+              </div>
+            </div>
+          ))} */}
       </div>
     </div>
   );
 };
 export default FeeView;
-
-
-
-
-// import React from "react";
-// import { useState } from "react";
-// const Feevieww = () => {
-//   let totalInstallmentsLeft = 5;
-//   const initialInstallments = Array(totalInstallmentsLeft)
-//     .fill()
-//     .map((_, index) => ({
-//       duedate: "",
-//       paidamount: "",
-//       paiddate: "",
-//       modeofpayment: "",
-//       transactionid: "",
-//     }));
-
-//   const [installments, setInstallments] = useState(initialInstallments);
-
-//   const handleInstallmentUpdate = (index, updatedInstallment) => {
-//     // Create a copy of the installments array and update the specific installment
-//     const updatedInstallments = [...installments];
-//     updatedInstallments[index] = updatedInstallment;
-//     setInstallments(updatedInstallments);
-//   };
-//   console.log("installments", installments);
-//   return (
-//     <div>
-//       {" "}
-//       {totalInstallmentsLeft > 0 &&
-//         installments.map((installment, index) => (
-//           <div className="installment" key={index}>
-//             <p className="ms-4"> Instalment {index + 1}: 10,000</p>
-//             <div className="d-flex payment">
-//               <input
-//                 type="date"
-//                 name="duedate"
-//                 onChange={(e) => {
-//                   const updatedInstallment = {
-//                     ...installment,
-//                     duedate: e.target.value,
-//                   };
-//                   handleInstallmentUpdate(index, updatedInstallment);
-//                 }}
-//                 value={installment.duedate}
-//               />
-//               {/* Add similar input fields for paidamount, paiddate, modeofpayment, and transactionid */}
-//             </div>
-//             <div className="updatebtn">
-//               <button
-//                 className="update"
-//                 onClick={() => handleInstallmentUpdate(index, installment)}
-//               >
-//                 Update
-//               </button>
-//             </div>
-//           </div>
-//         ))}
-//     </div>
-//   );
-// };
-
-// export default Feevieww;
