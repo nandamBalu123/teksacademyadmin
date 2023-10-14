@@ -19,6 +19,10 @@ const FeeView = () => {
   const [dueamountt, setdueamount] = useState();
   const [totalpaidamountt, settotalpaidamount] = useState();
   const [newpaidamount, setnewpaidamount] = useState();
+  const [installmentamount, setinstallmentamount] = useState();
+  // const [totoalleft, settotalleft] = useState();
+  let totalleft;
+
   useEffect(() => {
     axios
       .get(`http://localhost:3030/viewstudentdata/${id}`)
@@ -43,9 +47,10 @@ const FeeView = () => {
     setreadinstallments(studentdata.installments);
     settotalpaidamount(studentdata.totalpaidamount);
     setdueamount(studentdata.dueamount);
+    setinstallmentamount(parseInt(studentdata.dueamount) / totalleft);
   }, [studentdata]);
   useEffect(() => {
-    // console.log("totalpaidamounttt", totalpaidamount);
+    console.log("totoalleft", totalleft);
   });
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
@@ -58,15 +63,15 @@ const FeeView = () => {
 
   const updatedata = (e) => {
     e.preventDefault();
+    if (newpaidamount) {
+      const updatedDataa = [...totalinstallments];
+      updatedDataa[0].totalinstallmentsleft =
+        updatedDataa[0].totalinstallmentsleft - 1;
+      updatedDataa[0].totalinstallmentspaid =
+        updatedDataa[0].totalinstallmentspaid + 1;
+      settotalinstallments(updatedDataa);
+    }
 
-    // const updatedDataa = [...totalinstallments];
-    // updatedDataa[0].totalinstallmentsleft =
-    //   updatedDataa[0].totalinstallmentsleft - 1;
-    // updatedDataa[0].totalinstallmentspaid =
-    //   updatedDataa[0].totalinstallmentspaid + 1;
-    // settotalinstallments(updatedDataa);
-    // console.log("newpaidamount", newpaidamount);
-    // settotalpaidamount((value) => parseInt(value) + parseInt(newpaidamount));
     let totalpaidamount = parseInt(totalpaidamountt) + parseInt(newpaidamount);
     let dueamount = parseInt(dueamountt) - parseInt(newpaidamount);
     console.log("totalpaidamount", totalpaidamount);
@@ -179,11 +184,18 @@ const FeeView = () => {
                   {/* {studentdata.totalinstallments} */}
                   {studentdata.totalinstallments &&
                     studentdata.totalinstallments.length > 0 &&
-                    studentdata.totalinstallments.map((item, index) => (
-                      <span>
-                        {item.totalinstallmentspaid}/{item.totalinstallments}
-                      </span>
-                    ))}
+                    studentdata.totalinstallments.map((item, index) => {
+                      if (true) {
+                        // settotalleft(item.totalinstallmentsleft);
+                        totalleft = item.totalinstallmentsleft;
+                        return (
+                          <span>
+                            {item.totalinstallmentspaid}/
+                            {item.totalinstallments}
+                          </span>
+                        );
+                      }
+                    })}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -285,7 +297,11 @@ const FeeView = () => {
 
             return (
               <div className="installment" key={index}>
-                <p className="ms-4"> Instalment {index + 1}</p>
+                <p className="ms-4">
+                  {" "}
+                  Instalment {index + 1} :{" "}
+                  {parseFloat(installmentamount).toFixed(2)}
+                </p>
                 <div className="d-flex payment">
                   <input
                     type="date"
