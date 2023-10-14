@@ -862,16 +862,20 @@ function StudentApplicationPrint() {
   });
 
   return (
-    <div>
+    <div >
       {/* <h1>Your React App</h1> */}
+      <div className="w-50 ">
       <button
         onClick={handlePrint}
         // style={{ margin: "30px" }}
-        className="print "
+        className="btn btn-primary mb-3 m-auto"
+      
       >
         {" "}
-        <LocalPrintshopIcon />{" "}
+        {/* <LocalPrintshopIcon />{" "} */}
+        Print
       </button>
+      </div>
       <PrintableComponent ref={componentRef} />
     </div>
   );
