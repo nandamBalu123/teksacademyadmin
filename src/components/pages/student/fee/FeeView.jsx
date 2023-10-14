@@ -16,8 +16,12 @@ const FeeView = () => {
   const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
   const [totalinstallments, settotalinstallments] = useState();
-  const [dueamount, setdueamount] = useState();
-  const [totalpaidamount, settotalpaidamount] = useState();
+  const [dueamountt, setdueamount] = useState();
+  const [totalpaidamountt, settotalpaidamount] = useState();
+  const [newpaidamount, setnewpaidamount] = useState();
+  const [installmentamount, setinstallmentamount] = useState();
+  // const [totoalleft, settotalleft] = useState();
+  let totalleft;
 
   useEffect(() => {
     axios
@@ -41,25 +45,43 @@ const FeeView = () => {
     settotalinstallments(studentdata.totalinstallments);
     setInstallments(studentdata.installments);
     setreadinstallments(studentdata.installments);
+    settotalpaidamount(studentdata.totalpaidamount);
+    setdueamount(studentdata.dueamount);
+    setinstallmentamount(parseInt(studentdata.dueamount) / totalleft);
   }, [studentdata]);
-
+  useEffect(() => {
+    console.log("totoalleft", totalleft);
+  });
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
     updatedInstallments[index] = updatedInstallment;
+    console.log("updatedInstallment", updatedInstallment.paidamount);
+    setnewpaidamount(updatedInstallment.paidamount);
     setInstallments(updatedInstallments);
-    console.log("read", readinstallments);
   };
+  useEffect(() => {}, []);
 
   const updatedata = (e) => {
     e.preventDefault();
+    if (newpaidamount) {
+      const updatedDataa = [...totalinstallments];
+      updatedDataa[0].totalinstallmentsleft =
+        updatedDataa[0].totalinstallmentsleft - 1;
+      updatedDataa[0].totalinstallmentspaid =
+        updatedDataa[0].totalinstallmentspaid + 1;
+      settotalinstallments(updatedDataa);
+    }
 
-    // const updatedDataa = [...totalinstallments];
-    // updatedDataa[0].totalinstallmentsleft =
-    //   updatedDataa[0].totalinstallmentsleft - 1;
-    // updatedDataa[0].totalinstallmentspaid =
-    //   updatedDataa[0].totalinstallmentspaid + 1;
-    // settotalinstallments(updatedDataa);
-    const updatedData = { installments, totalinstallments, dueamount };
+    let totalpaidamount = parseInt(totalpaidamountt) + parseInt(newpaidamount);
+    let dueamount = parseInt(dueamountt) - parseInt(newpaidamount);
+    console.log("totalpaidamount", totalpaidamount);
+    setdueamount((value) => value - newpaidamount);
+    const updatedData = {
+      installments,
+      totalinstallments,
+      dueamount,
+      totalpaidamount,
+    };
     console.log("updatedData", updatedData);
     axios
       .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
@@ -162,11 +184,18 @@ const FeeView = () => {
                   {/* {studentdata.totalinstallments} */}
                   {studentdata.totalinstallments &&
                     studentdata.totalinstallments.length > 0 &&
-                    studentdata.totalinstallments.map((item, index) => (
-                      <span>
-                        {item.totalinstallmentspaid}/{item.totalinstallments}
-                      </span>
-                    ))}
+                    studentdata.totalinstallments.map((item, index) => {
+                      if (true) {
+                        // settotalleft(item.totalinstallmentsleft);
+                        totalleft = item.totalinstallmentsleft;
+                        return (
+                          <span>
+                            {item.totalinstallmentspaid}/
+                            {item.totalinstallments}
+                          </span>
+                        );
+                      }
+                    })}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -268,7 +297,11 @@ const FeeView = () => {
 
             return (
               <div className="installment" key={index}>
-                <p className="ms-4"> Instalment {index + 1}</p>
+                <p className="ms-4">
+                  {" "}
+                  Instalment {index + 1} :{" "}
+                  {parseFloat(installmentamount).toFixed(2)}
+                </p>
                 <div className="d-flex payment">
                   <input
                     type="date"
