@@ -148,7 +148,7 @@ const CreateUserForm = () => {
     }
     if (response.ok) {
       console.log("User created successfully.");
-
+      alert("User created successfully.")
       // Reset the form fields
       setfullname("");
       setemail("");

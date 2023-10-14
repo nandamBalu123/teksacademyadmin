@@ -8,13 +8,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./FeeDetails.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 const FeeDetails = () => {
   const navigator = useNavigate();
-  const [getstudentData, setData] = useState();
+  const [getstudentData, setData] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -40,7 +41,19 @@ const FeeDetails = () => {
       });
     // fetchData();
   }, []);
-  const sn = 0;
+  
+// serial number increasing
+var sn = 1;
+// style for paid status
+const dynamicStyle = {
+  color: getstudentData.dueamount < 1 ? "green" : "red",
+  fontSize: getstudentData.dueamount < 1 ? "20px" : "16px",
+  fontWeight: getstudentData.dueamount < 1 ? "900" : "900",
+};
+const IconStyle = {
+  display: getstudentData.dueamount < 1 ? true : "none",
+  marginLeft: "10px",
+};
   return (
     <>
       <div className="fee">
@@ -251,7 +264,17 @@ const FeeDetails = () => {
                         <br />
                         na
                       </TableCell>
-                      <TableCell className="border border 1"> 2/3</TableCell>
+                      <TableCell className="border border 1"> 
+                      <div style={{ display: "flex" }}>
+                        <span style={dynamicStyle}>
+                          {item.totalinstallments.totalinstallmentspaid}/
+                          {item.totalinstallments.totalinstallments}
+                        </span>
+                        <span style={dynamicStyle}>
+                          <CheckCircleIcon style={IconStyle} />
+                        </span>
+                      </div>
+                      </TableCell>
                       <TableCell className="border border 1">
                         <Link to={`/feeview/${item.id}`}>view</Link>{" "}
                       </TableCell>
