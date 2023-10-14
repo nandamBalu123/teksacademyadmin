@@ -106,6 +106,11 @@ const FeeView = () => {
     display: studentdata.dueamount < 1 ? true : "none",
     marginLeft: "10px",
   };
+  const addInstallmentstyles = {
+    display: studentdata.dueamount < 1 ? "none" : true,
+    height: "40px",
+    margin: "20px",
+  };
 
   //////add installment
   const addInstallment = () => {
@@ -258,7 +263,8 @@ const FeeView = () => {
             type="button"
             class="btn btn-warning"
             onClick={addInstallment}
-            style={{ height: "40px", margin: "20px" }}
+            // style={{ height: "40px", margin: "20px" }}
+            style={addInstallmentstyles}
           >
             Add Installment
           </button>

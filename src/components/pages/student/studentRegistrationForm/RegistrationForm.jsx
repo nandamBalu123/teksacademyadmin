@@ -201,8 +201,9 @@ export default function RegistrationForm() {
         totalamount: totalamount,
       },
     ]);
-    setAmount(0);
-    setDiscount(0);
+    setfeetype("");
+    setAmount("");
+    setDiscount("");
     setTaxamount(0);
 
     setTotalamount(0);
@@ -316,7 +317,7 @@ export default function RegistrationForm() {
 
       feedetailsbilling,
       totalfeewithouttax,
-      totalpaidamount
+      totalpaidamount,
     };
     console.log("studentRegistration", studentRegistrationdata);
     try {
@@ -1440,15 +1441,20 @@ export default function RegistrationForm() {
                       {feedetails &&
                         feedetails.map((item) => (
                           <tr key={item.id}>
-                            <td scope="row" className="border border-1">{item.feetype}</td>
+                            <td scope="row" className="border border-1">
+                              {item.feetype}
+                            </td>
                             <td className="border border-1">{item.amount}</td>
-                            <td className="border border-1" >{item.discount}</td>
-                            <td className="border border-1"> {parseFloat(item.taxamount.toFixed(2))}</td>
-                            <td className="border border-1">{item.totalamount}</td>
+                            <td className="border border-1">{item.discount}</td>
+                            <td className="border border-1">
+                              {" "}
+                              {parseFloat(item.taxamount.toFixed(2))}
+                            </td>
+                            <td className="border border-1">
+                              {item.totalamount}
+                            </td>
                             <td onClick={() => handleFeeDelete(item.id)}>
-                             
-                                <DeleteIcon/>
-                           
+                              <DeleteIcon />
                             </td>
                           </tr>
                         ))}
@@ -1488,32 +1494,34 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
-              
-             
               <form className="form">
-              <table className="table w-75 ms-5">
-                <thead>
-                  <tr>
-                    <th className="border border-1">Gross Total</th>
-                    <th className="border border-1">Total Discount</th>
-                    <th className="border border-1">Total Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-1">{grosstotal}</td>
-                    <td className="border border-1">{totaldiscount}</td>
-                    <td className="border border-1">{finaltotal}</td>
-                  </tr>
-                </tbody>
-              </table>
+                <table className="table w-75 ms-5">
+                  <thead>
+                    <tr>
+                      <th className="border border-1">Gross Total</th>
+                      <th className="border border-1">Total Discount</th>
+                      <th className="border border-1">Total Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border border-1">{grosstotal}</td>
+                      <td className="border border-1">{totaldiscount}</td>
+                      <td className="border border-1">{finaltotal}</td>
+                    </tr>
+                  </tbody>
+                </table>
                 <table class="table billing ">
                   <thead>
                     <tr>
                       <th className="border border-1">Fee Type</th>
-                      <th className="border border-1 ">Fee (exclusive Of GST) </th>
+                      <th className="border border-1 ">
+                        Fee (exclusive Of GST){" "}
+                      </th>
                       <th className="border border-1">tax</th>
-                      <th className="border border-1">Fee (inclusive Of GST)</th>
+                      <th className="border border-1">
+                        Fee (inclusive Of GST)
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1522,12 +1530,18 @@ export default function RegistrationForm() {
                         if (item.feetype != "Material Fee") {
                           return (
                             <tr key={item.id}>
-                              <td className="border border-1">{item.feetype}</td>
-                              <td className="border border-1" >
+                              <td className="border border-1">
+                                {item.feetype}
+                              </td>
+                              <td className="border border-1">
                                 {parseFloat(item.feewithouttax.toFixed(2))}
                               </td>
-                              <td className="border border-1">{parseFloat(item.feetax.toFixed(2))}</td>
-                              <td className="border border-1">{parseFloat(item.feewithtax.toFixed(2))}</td>
+                              <td className="border border-1">
+                                {parseFloat(item.feetax.toFixed(2))}
+                              </td>
+                              <td className="border border-1">
+                                {parseFloat(item.feewithtax.toFixed(2))}
+                              </td>
                             </tr>
                           );
                         }
@@ -1535,27 +1549,30 @@ export default function RegistrationForm() {
                     {feedetailsbilling.length > 0 && (
                       <tr>
                         <td className="empty"></td>
-                        <td className="border border-1 " >
+                        <td className="border border-1 ">
                           Grand Total (excl of GST) :
                           {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
                         </td>
-                        <td className="border border-1 ">TotalTax: <br/>{parseFloat(totaltax.toFixed(2))}</td>
                         <td className="border border-1 ">
-                          Grand Total (incl of GST) :{parseFloat(grandtotal.toFixed(2))}
+                          TotalTax: <br />
+                          {parseFloat(totaltax.toFixed(2))}
+                        </td>
+                        <td className="border border-1 ">
+                          Grand Total (incl of GST) :
+                          {parseFloat(grandtotal.toFixed(2))}
                         </td>
                       </tr>
                     )}
                   </tbody>
                 </table>
-                <p className="materialfee" >MaterialFee:{materialfee}</p>
+                <p className="materialfee">MaterialFee:{materialfee}</p>
                 <p className="finaltotal">Final Total:{finaltotal}</p>
 
-                
                 <br />
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
-                <Button
+                  <Button
                     className="bg-primary"
                     variant="contained"
                     onClick={handleFeecalculations}
@@ -1564,7 +1581,7 @@ export default function RegistrationForm() {
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
                     Continue
                   </Button>
-                  
+
                   <Button
                     className="bg-primary"
                     variant="contained"
@@ -1585,7 +1602,7 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row input ">
-                <label className="col-12 col-md-2 label">
+                  <label className="col-12 col-md-2 label">
                     {" "}
                     Admission Remarks <span className="text-danger "> *</span>
                     &nbsp;:
@@ -1602,11 +1619,9 @@ export default function RegistrationForm() {
                     onChange={(e) => setadmissionremarks(e.target.value)}
                     value={admissionremarks}
                   />
-                 
                 </div>
                 <br />
-              
-            
+
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Assets <span className="text-danger"> *</span>&nbsp;:
@@ -1641,36 +1656,30 @@ export default function RegistrationForm() {
                     <option value="coursematerial"> Course Materials</option>
                   </select>
                 </div>
-                </form>
+              </form>
 
-                <Box sx={{ mb: 2, mt: 2 }}>
+              <Box sx={{ mb: 2, mt: 2 }}>
                 <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleSubmit}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Submit
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </Box>
-              
+                  className="bg-primary"
+                  variant="contained"
+                  onClick={handleSubmit}
+                  sx={{ mt: 1, mr: 1 }}
+                >
+                  {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                  Submit
+                </Button>
+                <Button
+                  className="bg-primary"
+                  variant="contained"
+                  // disabled={index === 0}
+                  onClick={handleBack}
+                  sx={{ mt: 1, mr: 1 }}
+                >
+                  Back
+                </Button>
+              </Box>
             </StepContent>
-          </Step> 
-
-
-            
-
-          
+          </Step>
         </Stepper>
         {/* {activeStep === steps.length && (
           <Paper square elevation={0} sx={{ p: 3 }}>
