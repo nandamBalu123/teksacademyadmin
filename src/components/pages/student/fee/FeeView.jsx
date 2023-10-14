@@ -46,7 +46,6 @@ const FeeView = () => {
     const updatedInstallments = [...installments];
     updatedInstallments[index] = updatedInstallment;
     setInstallments(updatedInstallments);
-    console.log("read", readinstallments);
   };
 
   const updatedata = (e) => {
@@ -149,13 +148,8 @@ const FeeView = () => {
                 <TableCell className="border border 1">
                   {studentdata.initialamount}
                 </TableCell>
-                <TableCell className="border border 1">
-                  {studentdata.finaltotal - studentdata.dueamount}
-                </TableCell>
-                <TableCell className="border border 1">
-                  {/* {studentdata.dueamount} */}
-                  {/* {dueamount} */}
-                </TableCell>
+                <TableCell className="border border 1"></TableCell>
+                <TableCell className="border border 1"></TableCell>
 
                 <TableCell className="border border 1">
                   {/* {studentdata.totalinstallments} */}
