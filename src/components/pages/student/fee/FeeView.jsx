@@ -189,7 +189,7 @@ const FeeView = () => {
                         // settotalleft(item.totalinstallmentsleft);
                         totalleft = item.totalinstallmentsleft;
                         return (
-                          <span>
+                          <span >
                             {item.totalinstallmentspaid}/
                             {item.totalinstallments}
                           </span>
@@ -290,6 +290,7 @@ const FeeView = () => {
           </Table>
         </TableContainer>
         {installments &&
+          studentdata.dueamount > 0 &&
           installments.map((installment, index) => {
             if (readinstallments[index].paidamount > 0) {
               return null; // Do not render anything
@@ -385,6 +386,7 @@ const FeeView = () => {
             );
           })}
       </div>
+      <button>Add Installment</button>
     </div>
   );
 };

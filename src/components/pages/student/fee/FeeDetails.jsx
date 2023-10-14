@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import "./FeeDetails.css";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 const FeeDetails = () => {
   const navigator = useNavigate();
-  const [getstudentData, setData] = useState()
+  const [getstudentData, setData] = useState();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -23,7 +23,7 @@ const FeeDetails = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -43,32 +43,39 @@ const FeeDetails = () => {
   const sn = 0;
   return (
     <>
-    <div className="fee"> 
-       <div className="feedetails">  <h4> Fee Management(Registered Students)</h4> 
-   <div className="d-flex justify-content-between pt-3">  
-      <button className="feebtn" onClick={() => navigator('/feedetails')}>Student Fee Records</button>
- <button className="feebtn" onClick={() => navigator('/feefollowup')}> Fee FollowUps</button></div> 
-   <div className="d-flex justify-content-between pt-3 pb-3">
-           
-   <input
-                type="text"
-                className="input-field ps-2 "
-                placeholder="Search Here..."
-                autoComplete="off"
-                style={{
-                  height: "45px",
-                 width:"50%",
-                  border: "none",
-                  outline: "none",
-                  borderTop: 'none',
-                  borderBottom: "1.5px solid black",
-                  background:"none",
-                  borderRadius: "5px",
-                  
-                }}/>
-            
-                
-            {" "}
+      <div className="fee">
+        <div className="feedetails">
+          {" "}
+          <h4> Fee Management(Registered Students)</h4>
+          <div className="d-flex justify-content-between pt-3">
+            <button className="feebtn" onClick={() => navigator("/feedetails")}>
+              Student Fee Records
+            </button>
+            <button
+              className="feebtn"
+              onClick={() => navigator("/feefollowup")}
+            >
+              {" "}
+              Fee FollowUps
+            </button>
+          </div>
+          <div className="d-flex justify-content-between pt-3 pb-3">
+            <input
+              type="text"
+              className="input-field ps-2 "
+              placeholder="Search Here..."
+              autoComplete="off"
+              style={{
+                height: "45px",
+                width: "50%",
+                border: "none",
+                outline: "none",
+                borderTop: "none",
+                borderBottom: "1.5px solid black",
+                background: "none",
+                borderRadius: "5px",
+              }}
+            />{" "}
             <h6 onClick={handleClick}> Filter</h6>
             <Menu
               id="basic-menu"
@@ -102,7 +109,6 @@ const FeeDetails = () => {
                       borderRadius: "5px",
                     }}
                     name="fromdate"
-                   
                   />
                 </MenuItem>
                 <MenuItem className="pt-3 ">
@@ -117,7 +123,6 @@ const FeeDetails = () => {
                       borderRadius: "5px",
                     }}
                     name="todate"
-                    
                   />
                 </MenuItem>
               </div>
@@ -134,7 +139,6 @@ const FeeDetails = () => {
                       borderRadius: "5px",
                     }}
                     name="branch"
-                
                   >
                     <option value="">Branch</option>
                     <option value="hitechcity"> Hitech city</option>
@@ -143,79 +147,126 @@ const FeeDetails = () => {
                     <option value="gachibowli"> Gachibowli</option>
                   </select>
                 </MenuItem>
-                <MenuItem> 
-                <select
+                <MenuItem>
+                  <select
                     id=""
                     placeholder="select Type"
                     style={{
                       height: "45px",
-                    
+
                       paddingRight: "105px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
                     name="amount"
-                
                   >
                     <option> Select Type</option>
                     <option value="paidamount"> Paid Amount</option>
                     <option value="dueamount"> Due Amount</option>
-                   
                   </select>
                 </MenuItem>
-                              </div>
-             
+              </div>
             </Menu>
-         
+          </div>
+          <TableContainer component={Paper} className="pt-4">
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    {" "}
+                    S.NO
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    Name
+                    <br /> Branch <br />
+                    Counsellor
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    {" "}
+                    Contact
+                    <br />
+                    Email
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    {" "}
+                    Course <br /> Date of Joining
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    {" "}
+                    Total Fee
+                    <br /> Paid Fee
+                    <br /> Due Date
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    {" "}
+                    Created Date <br /> Next Due Date
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    {" "}
+                    Paid Status{" "}
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    {" "}
+                    View
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Array.isArray(getstudentData) && getstudentData.length > 0 ? (
+                  getstudentData.map((item) => (
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                      key={item.id}
+                    >
+                      <TableCell component="th" className="border border 1">
+                        {" "}
+                        {sn + 1}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {" "}
+                        {item.branchname} <br />
+                        {item.name}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {" "}
+                        {item.mobilenumber}
+                        <br /> {item.email}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {" "}
+                        {item.courses}
+                        <br />
+                        {item.admissiondate}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {" "}
+                        {item.finaltotal}
+                        <br /> {item.totalpaidamount} <br />
+                        {item.dueamount}
+                        <br />
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {" "}
+                        {item.admissiondate}
+                        <br />
+                        na
+                      </TableCell>
+                      <TableCell className="border border 1"> 2/3</TableCell>
+                      <TableCell className="border border 1">
+                        <Link to={`/feeview/${item.id}`}>view</Link>{" "}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={3}>No data available</TableCell>
+                  </TableRow>
+                )}{" "}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </div>
-
-      <TableContainer component={Paper} className="pt-4">
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> S.NO</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">Name<br /> Branch <br />Counsellor</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Contact<br />Email</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Course <br /> Date of Joining</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Total Fee<br /> Paid Fee<br /> Due Date</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> Created Date <br /> Next Due Date</TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Paid Status </TableCell>
-            <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> View</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {Array.isArray(getstudentData) && getstudentData.length > 0 ? (
-                getstudentData.map((item) => (
-            <TableRow
-              
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }} key={item.id}
-            >
-              
-              <TableCell component="th" className="border border 1" > {sn+1}</TableCell>
-              <TableCell className="border border 1"> {item.branchname} <br/>{item.name}</TableCell>
-              <TableCell className="border border 1"> {item.mobilenumber}<br/> {item.email}</TableCell>
-              <TableCell className="border border 1"> {item.courses}<br />{item.admissiondate}</TableCell>
-              <TableCell className="border border 1"> {item.finaltotal}<br/> {item.finaltotal - item.dueamount}<br/>na</TableCell>
-              <TableCell className="border border 1"> {item.admissiondate}<br/>na</TableCell>
-              <TableCell className="border border 1"> 2/3</TableCell>
-              <TableCell className="border border 1" ><Link to={`/feeview/${item.id}`}>view</Link> </TableCell>
-            </TableRow>
-            ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={3}>No data available</TableCell>
-              </TableRow>
-            )}{" "}
-        </TableBody>
-      </Table>
-    </TableContainer>
-
-    
-
-       
-       </div>
-    </div>
-     
     </>
   );
 };
