@@ -10,7 +10,7 @@ import "./FeeView.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 const FeeView = () => {
   const { id } = useParams();
   const navigator = useNavigate();
@@ -97,7 +97,53 @@ const FeeView = () => {
         }
       });
   };
+  const dynamicStyle = {
+    color: studentdata.dueamount < 1 ? "green" : "red",
+    fontSize: studentdata.dueamount < 1 ? "20px" : "16px",
+    fontWeight: studentdata.dueamount < 1 ? "900" : "900",
+  };
+  const IconStyle = {
+    display: studentdata.dueamount < 1 ? true : "none",
+    marginLeft: "10px",
+  };
 
+  //////add installment
+  const addInstallment = () => {
+    const updatedDataa = [...totalinstallments];
+    updatedDataa[0].totalinstallmentsleft =
+      updatedDataa[0].totalinstallmentsleft + 1;
+    updatedDataa[0].totalinstallments = updatedDataa[0].totalinstallments + 1;
+    settotalinstallments(updatedDataa);
+    let iinstallment = installments;
+    let newInstallment = {
+      id: Date.now(),
+      duedate: "",
+      paidamount: "",
+      paiddate: "",
+      modeofpayment: "",
+      transactionid: "",
+      paymentdone: false,
+    };
+    iinstallment.push(newInstallment);
+    setInstallments(iinstallment);
+    const updatedData = {
+      installments,
+      totalinstallments,
+    };
+    axios
+      .put(`http://localhost:3030/addnewinstallments/${id}`, updatedData)
+
+      .then((res) => {
+        if (res.data.updated) {
+          alert("Installment  Added");
+
+          navigator(`/feeview/${id}`);
+          window.location.reload();
+        } else {
+          alert("Try Again");
+        }
+      });
+  };
   return (
     <div className="fee">
       <div className="feeview">
@@ -189,10 +235,15 @@ const FeeView = () => {
                         // settotalleft(item.totalinstallmentsleft);
                         totalleft = item.totalinstallmentsleft;
                         return (
-                          <span >
-                            {item.totalinstallmentspaid}/
-                            {item.totalinstallments}
-                          </span>
+                          <div style={{ display: "flex" }}>
+                            <span style={dynamicStyle}>
+                              {item.totalinstallmentspaid}/
+                              {item.totalinstallments}
+                            </span>
+                            <span style={dynamicStyle}>
+                              <CheckCircleIcon style={IconStyle} />
+                            </span>
+                          </div>
                         );
                       }
                     })}
@@ -201,7 +252,17 @@ const FeeView = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <p className="fs-3 pt-3"> Paid Installments</p>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span className="fs-3 pt-3"> Paid Installments</span>
+          <button
+            type="button"
+            class="btn btn-warning"
+            onClick={addInstallment}
+            style={{ height: "40px", margin: "20px" }}
+          >
+            Add Installment
+          </button>
+        </div>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -261,32 +322,6 @@ const FeeView = () => {
                   </TableBody>
                 );
               })}
-            {/* {readinstallments &&
-              readinstallments.length > 0 &&
-              readinstallments.map((item, index) => (
-                <TableBody>
-                  <TableRow
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" className="border border 1">
-                      {item.duedate}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.paidamount}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.paiddate}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.modeofpayment}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.transactionid}
-                    </TableCell>
-                    <TableCell className="border border 1"></TableCell>
-                  </TableRow>
-                </TableBody>
-              ))} */}
           </Table>
         </TableContainer>
         {installments &&
@@ -386,7 +421,6 @@ const FeeView = () => {
             );
           })}
       </div>
-      <button>Add Installment</button>
     </div>
   );
 };
