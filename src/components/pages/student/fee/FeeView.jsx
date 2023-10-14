@@ -32,17 +32,21 @@ const FeeView = () => {
       });
   }, []);
   // let totalinstallments;
+  const [installments, setInstallments] = useState();
+  const [readinstallments, setreadinstallments] = useState();
+
   useEffect(() => {
     // totalinstallments = studentdata.totalinstallments;
     settotalinstallments(studentdata.totalinstallments);
     setInstallments(studentdata.installments);
+    setreadinstallments(studentdata.installments);
   }, [studentdata]);
 
-  const [installments, setInstallments] = useState();
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
     updatedInstallments[index] = updatedInstallment;
     setInstallments(updatedInstallments);
+    console.log("read", readinstallments);
   };
 
   const updatedata = (e) => {
@@ -64,11 +68,13 @@ const FeeView = () => {
           alert("Fee Added");
 
           navigator(`/feeview/${id}`);
+          window.location.reload();
         } else {
           alert("Try Again");
         }
       });
   };
+
   return (
     <div className="fee">
       <div className="feeview">
@@ -194,9 +200,40 @@ const FeeView = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {installments &&
-              installments.length > 0 &&
-              installments.map((item, index) => (
+            {readinstallments &&
+              readinstallments.map((item, index) => {
+                if (item.paidamount < 1) {
+                  return null; // Do not render anything
+                }
+
+                return (
+                  <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" className="border border 1">
+                        {item.duedate}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.paidamount}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.paiddate}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.modeofpayment}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.transactionid}
+                      </TableCell>
+                      <TableCell className="border border 1"></TableCell>
+                    </TableRow>
+                  </TableBody>
+                );
+              })}
+            {/* {readinstallments &&
+              readinstallments.length > 0 &&
+              readinstallments.map((item, index) => (
                 <TableBody>
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -219,94 +256,100 @@ const FeeView = () => {
                     <TableCell className="border border 1"></TableCell>
                   </TableRow>
                 </TableBody>
-              ))}{" "}
+              ))} */}
           </Table>
         </TableContainer>
         {installments &&
-          installments.map((installment, index) => (
-            <div className="installment" key={index}>
-              <p className="ms-4"> Instalment {index + 1}</p>
-              <div className="d-flex payment">
-                <input
-                  type="date"
-                  name="duedate"
-                  onChange={(e) => {
-                    const updatedInstallment = {
-                      ...installment,
-                      duedate: e.target.value,
-                    };
-                    handleInstallmentUpdate(index, updatedInstallment);
-                  }}
-                  value={installment.duedate}
-                />
-                <input
-                  type="text"
-                  name="paidamount"
-                  onChange={(e) => {
-                    const updatedInstallment = {
-                      ...installment,
-                      paidamount: e.target.value,
-                    };
-                    handleInstallmentUpdate(index, updatedInstallment);
-                  }}
-                  value={installment.paidamount}
-                />
-                <input
-                  type="date"
-                  name="paiddate"
-                  onChange={(e) => {
-                    const updatedInstallment = {
-                      ...installment,
-                      paiddate: e.target.value,
-                    };
-                    handleInstallmentUpdate(index, updatedInstallment);
-                  }}
-                  value={installment.paiddate}
-                />
+          installments.map((installment, index) => {
+            if (readinstallments[index].paidamount > 0) {
+              return null; // Do not render anything
+            }
 
-                <select
-                  className="ms-3"
-                  name="modeofpayment"
-                  placeholder="Mode of Payment"
-                  onChange={(e) => {
-                    const updatedInstallment = {
-                      ...installment,
-                      modeofpayment: e.target.value,
-                    };
-                    handleInstallmentUpdate(index, updatedInstallment);
-                  }}
-                  value={installment.modeofpayment}
-                >
-                  <option value="">Mode of Payment</option>
-                  <option value="upi">UPI</option>
-                  <option value="cash">Cash</option>
-                  <option value="backtransfor"> Bank Transfor</option>
-                  <option value="cheque"> CHEQUE</option>
-                </select>
-                <input
-                  type="text"
-                  name="transactionid"
-                  onChange={(e) => {
-                    const updatedInstallment = {
-                      ...installment,
-                      transactionid: e.target.value,
-                    };
-                    handleInstallmentUpdate(index, updatedInstallment);
-                  }}
-                  value={installment.transactionid}
-                />
+            return (
+              <div className="installment" key={index}>
+                <p className="ms-4"> Instalment {index + 1}</p>
+                <div className="d-flex payment">
+                  <input
+                    type="date"
+                    name="duedate"
+                    onChange={(e) => {
+                      const updatedInstallment = {
+                        ...installment,
+                        duedate: e.target.value,
+                      };
+                      handleInstallmentUpdate(index, updatedInstallment);
+                    }}
+                    value={installment.duedate}
+                  />
+                  <input
+                    type="text"
+                    name="paidamount"
+                    onChange={(e) => {
+                      const updatedInstallment = {
+                        ...installment,
+                        paidamount: e.target.value,
+                      };
+                      handleInstallmentUpdate(index, updatedInstallment);
+                    }}
+                    value={installment.paidamount}
+                  />
+                  <input
+                    type="date"
+                    name="paiddate"
+                    onChange={(e) => {
+                      const updatedInstallment = {
+                        ...installment,
+                        paiddate: e.target.value,
+                      };
+                      handleInstallmentUpdate(index, updatedInstallment);
+                    }}
+                    value={installment.paiddate}
+                  />
+
+                  <select
+                    className="ms-3"
+                    name="modeofpayment"
+                    placeholder="Mode of Payment"
+                    onChange={(e) => {
+                      const updatedInstallment = {
+                        ...installment,
+                        modeofpayment: e.target.value,
+                      };
+                      handleInstallmentUpdate(index, updatedInstallment);
+                    }}
+                    value={installment.modeofpayment}
+                  >
+                    <option value="">Mode of Payment</option>
+                    <option value="upi">UPI</option>
+                    <option value="cash">Cash</option>
+                    <option value="backtransfor"> Bank Transfor</option>
+                    <option value="cheque"> CHEQUE</option>
+                  </select>
+                  <input
+                    type="text"
+                    name="transactionid"
+                    onChange={(e) => {
+                      const updatedInstallment = {
+                        ...installment,
+                        transactionid: e.target.value,
+                      };
+                      handleInstallmentUpdate(index, updatedInstallment);
+                    }}
+                    value={installment.transactionid}
+                  />
+                </div>
+                <div className="updatebtn">
+                  <button
+                    className="update"
+                    // onClick={() => handleInstallmentUpdate(index, installment)}
+                    onClick={updatedata}
+                  >
+                    Update
+                  </button>
+                </div>
               </div>
-              <div className="updatebtn">
-                <button
-                  className="update"
-                  // onClick={() => handleInstallmentUpdate(index, installment)}
-                  onClick={updatedata}
-                >
-                  Update
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
       </div>
     </div>
   );
