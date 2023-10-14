@@ -1515,13 +1515,9 @@ export default function RegistrationForm() {
                   <thead>
                     <tr>
                       <th className="border border-1">Fee Type</th>
-                      <th className="border border-1 ">
-                        Fee (exclusive Of GST){" "}
-                      </th>
+                      <th className="border border-1 ">Fee (excl Of GST) </th>
                       <th className="border border-1">tax</th>
-                      <th className="border border-1">
-                        Fee (inclusive Of GST)
-                      </th>
+                      <th className="border border-1">Fee (incl Of GST)</th>
                     </tr>
                   </thead>
                   <tbody>
