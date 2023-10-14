@@ -15,7 +15,7 @@ const FeeView = () => {
   const { id } = useParams();
   const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
-  const [totalinstallments, settotalinstallments] = useState();
+  const [totalinstallments, settotalinstallments] = useState("");
   const [dueamountt, setdueamount] = useState();
   const [totalpaidamountt, settotalpaidamount] = useState();
   const [newpaidamount, setnewpaidamount] = useState();
