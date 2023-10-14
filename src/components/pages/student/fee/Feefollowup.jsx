@@ -172,7 +172,7 @@ const Feefollowup = () => {
           <h3>Today</h3>
             <TableRow>
               <TableCell className="bg-primary fs-6 border border 1 text-center text-light "> S.NO</TableCell>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">Name Branch/ Counsellor</TableCell>
+              <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">Name<br /> Branch <br /> Counsellor</TableCell>
               <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Contact</TableCell>
               <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Email</TableCell>
               <TableCell className="bg-primary fs-6 border border 1 text-center text-light"> Course</TableCell>
