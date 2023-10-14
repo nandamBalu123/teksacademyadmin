@@ -11,6 +11,7 @@ const Addtofee = () => {
   const [initialamount, setinitialamount] = useState();
   const [totalinstallment, settotalinstallment] = useState();
   const [totalinstallments, settotalinstallments] = useState();
+  const [totalpaidamount, settotalpaidamount] = useState();
 
   const { id } = useParams();
   const [studentdata, setstudentdata] = useState("");
@@ -62,12 +63,14 @@ const Addtofee = () => {
         transactionid: "",
         paymentdone: false,
       }));
+    const totalpaidamount = initialamount;
     const updatedData = {
       dueamount,
       initialamount,
       totalinstallments,
       addfee,
       installments,
+      totalpaidamount
     };
     console.log("installments", installments);
     console.log("updatedData", updatedData);

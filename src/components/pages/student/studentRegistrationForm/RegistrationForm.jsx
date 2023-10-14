@@ -74,6 +74,7 @@ export default function RegistrationForm() {
   const [materialfee, setmaterialfee] = useState(null);
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
+  const [totalpaidamount, settotalpaidamount] = useState(0);
 
   const handleFeecalculations = () => {
     let grosstotall = 0;
@@ -315,6 +316,7 @@ export default function RegistrationForm() {
 
       feedetailsbilling,
       totalfeewithouttax,
+      totalpaidamount
     };
     console.log("studentRegistration", studentRegistrationdata);
     try {
