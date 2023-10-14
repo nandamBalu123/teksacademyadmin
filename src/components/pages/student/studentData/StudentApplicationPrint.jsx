@@ -7,7 +7,7 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import logo from "../../../../images/Teks-Logo-with-Trade.png";
 // import { useReactToPrint } from "react-to-print";
 import "./StudentApplication.css";
-import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
+import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 
 // import "../fee/FeeDetails.CSS";
 // import "..fee/FeeDetails.CSS";
@@ -49,40 +49,35 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
   // let jsonObject;
   // useEffect(() => {
-    
+
   // });
   return (
     <div ref={ref}>
       <div className="page">
         <div className="application">
-        <h3 className="text-center"> Application Form </h3>
+          <h3 className="text-center"> Application Form </h3>
           <div className="row">
             <div className="col-lg-6">
-              
-
               <h4 style={{ marginLeft: "15px" }}>
                 {" "}
-                <strong >
-                  {" "}
-                  Kapil Knowledge Hub Private Limited
-                </strong>
+                <strong> Kapil Knowledge Hub Private Limited</strong>
               </h4>
-              <p >&nbsp;&nbsp; CIN: U80100TG2018PTC123853 </p>
-              <p >
+              <p>&nbsp;&nbsp; CIN: U80100TG2018PTC123853 </p>
+              <p>
                 &nbsp;&nbsp;{" "}
                 <strong>
                   <EmailIcon />
                 </strong>
                 info@teksacademy.com{" "}
               </p>
-              <p >
+              <p>
                 &nbsp;&nbsp;{" "}
                 <strong>
                   <LocalPhoneIcon />
                 </strong>{" "}
                 1800-120-4748
               </p>
-              <p >
+              <p>
                 &nbsp;&nbsp;
                 <strong>
                   <AlternateEmailIcon />{" "}
@@ -91,12 +86,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </p>
             </div>
             <div className="col-lg-6 text-right">
-             <br/>
-              <img src={logo} className="tekslogo" style={{ width: "100%",  }} />
-              <h4
-                className="text-center"
-                style={{ marginTop: "23px"}}
-              >
+              <br />
+              <img src={logo} className="tekslogo" style={{ width: "100%" }} />
+              <h4 className="text-center" style={{ marginTop: "23px" }}>
                 {" "}
                 <h5 className="text-start">
                   {" "}
@@ -105,9 +97,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </h4>
             </div>
           </div>
-          <div className="apptext">
-           
-          </div>
+          <div className="apptext"></div>
           <div className="admform-sd">
             <div
               className=" text-center caption "
@@ -874,7 +864,14 @@ function StudentApplicationPrint() {
   return (
     <div>
       {/* <h1>Your React App</h1> */}
-      <button onClick={handlePrint} className="print "> <LocalPrintshopIcon/> </button>
+      <button
+        onClick={handlePrint}
+        // style={{ margin: "30px" }}
+        className="print "
+      >
+        {" "}
+        <LocalPrintshopIcon />{" "}
+      </button>
       <PrintableComponent ref={componentRef} />
     </div>
   );
