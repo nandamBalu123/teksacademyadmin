@@ -17,6 +17,7 @@ const FeeView = () => {
   const [studentdata, setstudentdata] = useState("");
   const [totalinstallments, settotalinstallments] = useState();
   const [dueamount, setdueamount] = useState();
+  const [totalpaidamount, settotalpaidamount] = useState();
 
   useEffect(() => {
     axios
@@ -148,8 +149,13 @@ const FeeView = () => {
                 <TableCell className="border border 1">
                   {studentdata.initialamount}
                 </TableCell>
-                <TableCell className="border border 1"></TableCell>
-                <TableCell className="border border 1"></TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.totalpaidamount}
+                </TableCell>
+                <TableCell className="border border 1">
+                  {studentdata.dueamount}
+                  {/* {dueamount} */}
+                </TableCell>
 
                 <TableCell className="border border 1">
                   {/* {studentdata.totalinstallments} */}
