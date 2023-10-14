@@ -18,9 +18,9 @@ const Addtofee = () => {
   useEffect(() => {
     settotalinstallments([
       {
-        totalinstallments: totalinstallment,
+        totalinstallments: parseInt(totalinstallment),
         totalinstallmentspaid: 0,
-        totalinstallmentsleft: totalinstallment,
+        totalinstallmentsleft: parseInt(totalinstallment),
       },
     ]);
   }, [totalinstallment]);
@@ -52,7 +52,7 @@ const Addtofee = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const addfee = true;
-    let installments = Array(totalinstallment)
+    let installments = Array(parseInt(totalinstallment))
       .fill()
       .map((_, index) => ({
         id: Date.now(),
@@ -63,7 +63,7 @@ const Addtofee = () => {
         transactionid: "",
         paymentdone: false,
       }));
-    const totalpaidamount = initialamount;
+    const totalpaidamount = parseInt(initialamount);
     const updatedData = {
       dueamount,
       initialamount,
@@ -202,7 +202,7 @@ const Addtofee = () => {
                 ),
               }}
               value={initialamount}
-              onChange={(e) => setinitialamount(parseInt(e.target.value, 10))}
+              onChange={(e) => setinitialamount(e.target.value)}
             />
             <TextField
               label="Due Amount"
@@ -222,7 +222,7 @@ const Addtofee = () => {
               variant="outlined"
               className="textfield"
               value={totalinstallment}
-              onChange={(e) => settotalinstallment(parseInt(e.target.value))}
+              onChange={(e) => settotalinstallment(e.target.value)}
             />
           </div>
           <button className="addtofee" onClick={handleSubmit}>

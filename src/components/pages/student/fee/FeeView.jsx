@@ -71,11 +71,18 @@ const FeeView = () => {
         updatedDataa[0].totalinstallmentspaid + 1;
       settotalinstallments(updatedDataa);
     }
+    let totalpaidamount;
+    let dueamount;
+    if (newpaidamount) {
+      totalpaidamount = parseInt(totalpaidamountt) + parseInt(newpaidamount);
+      dueamount = parseInt(dueamountt) - parseInt(newpaidamount);
+    } else {
+      totalpaidamount = parseInt(totalpaidamountt);
+      dueamount = parseInt(dueamountt);
+    }
 
-    let totalpaidamount = parseInt(totalpaidamountt) + parseInt(newpaidamount);
-    let dueamount = parseInt(dueamountt) - parseInt(newpaidamount);
-    console.log("totalpaidamount", totalpaidamount);
-    setdueamount((value) => value - newpaidamount);
+    console.log("totalpaidamount", totalpaidamount, "rr", dueamount);
+    // setdueamount((value) => value - newpaidamount);
     const updatedData = {
       installments,
       totalinstallments,
