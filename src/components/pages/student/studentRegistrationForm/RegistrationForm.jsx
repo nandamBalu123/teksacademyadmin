@@ -1550,7 +1550,7 @@ export default function RegistrationForm() {
                       <tr>
                         <td className="empty"></td>
                         <td className="border border-1 ">
-                          Grand Total (excl of GST) :
+                          Grand Total :
                           {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
                         </td>
                         <td className="border border-1 ">
@@ -1558,8 +1558,7 @@ export default function RegistrationForm() {
                           {parseFloat(totaltax.toFixed(2))}
                         </td>
                         <td className="border border-1 ">
-                          Grand Total (incl of GST) :
-                          {parseFloat(grandtotal.toFixed(2))}
+                          Grand Total :{parseFloat(grandtotal.toFixed(2))}
                         </td>
                       </tr>
                     )}
