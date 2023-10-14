@@ -210,7 +210,7 @@ const UsersData = () => {
 
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
-    <div className="container-fluid">
+    <div className="container-fluid" >
       <h2 className="ms-3">Users List</h2>
       <div className="mb-2">
         <div className="user-data">
