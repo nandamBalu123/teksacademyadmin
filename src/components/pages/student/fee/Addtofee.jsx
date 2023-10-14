@@ -70,7 +70,7 @@ const Addtofee = () => {
       totalinstallments,
       addfee,
       installments,
-      totalpaidamount
+      totalpaidamount,
     };
     console.log("installments", installments);
     console.log("updatedData", updatedData);
@@ -180,7 +180,7 @@ const Addtofee = () => {
                 ),
               }}
             />
-            <TextField
+            {/* <TextField
               label="Initial Pay Amount"
               id="outlined-start-adornment"
               sx={{ m: 1, width: "25ch" }}
@@ -191,6 +191,18 @@ const Addtofee = () => {
               }}
               value={initialamount}
               onChange={(e) => setinitialamount(e.target.value)}
+            /> */}
+            <TextField
+              label="Initial Pay Amount"
+              id="outlined-start-adornment"
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start"></InputAdornment>
+                ),
+              }}
+              value={initialamount}
+              onChange={(e) => setinitialamount(parseInt(e.target.value, 10))}
             />
             <TextField
               label="Due Amount"
@@ -212,28 +224,6 @@ const Addtofee = () => {
               value={totalinstallment}
               onChange={(e) => settotalinstallment(parseInt(e.target.value))}
             />
-            <p>Due Date Type</p>
-            <label>
-              <input
-                type="radio"
-                name="fixed"
-                value="fixed"
-                checked={selectedOption === "fixed"}
-                onChange={handleOptionChange}
-              />
-              Fixed
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="customized"
-                value="customized"
-                checked={selectedOption === "customized"}
-                onChange={handleOptionChange}
-              />
-              Customized
-            </label>
           </div>
           <button className="addtofee" onClick={handleSubmit}>
             Add to Fee

@@ -16,9 +16,9 @@ const FeeView = () => {
   const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
   const [totalinstallments, settotalinstallments] = useState();
-  const [dueamount, setdueamount] = useState();
-  const [totalpaidamount, settotalpaidamount] = useState();
-
+  const [dueamountt, setdueamount] = useState();
+  const [totalpaidamountt, settotalpaidamount] = useState();
+  const [newpaidamount, setnewpaidamount] = useState();
   useEffect(() => {
     axios
       .get(`http://localhost:3030/viewstudentdata/${id}`)
@@ -41,13 +41,20 @@ const FeeView = () => {
     settotalinstallments(studentdata.totalinstallments);
     setInstallments(studentdata.installments);
     setreadinstallments(studentdata.installments);
+    settotalpaidamount(studentdata.totalpaidamount);
+    setdueamount(studentdata.dueamount);
   }, [studentdata]);
-
+  useEffect(() => {
+    // console.log("totalpaidamounttt", totalpaidamount);
+  });
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
     updatedInstallments[index] = updatedInstallment;
+    console.log("updatedInstallment", updatedInstallment.paidamount);
+    setnewpaidamount(updatedInstallment.paidamount);
     setInstallments(updatedInstallments);
   };
+  useEffect(() => {}, []);
 
   const updatedata = (e) => {
     e.preventDefault();
@@ -58,7 +65,18 @@ const FeeView = () => {
     // updatedDataa[0].totalinstallmentspaid =
     //   updatedDataa[0].totalinstallmentspaid + 1;
     // settotalinstallments(updatedDataa);
-    const updatedData = { installments, totalinstallments, dueamount };
+    // console.log("newpaidamount", newpaidamount);
+    // settotalpaidamount((value) => parseInt(value) + parseInt(newpaidamount));
+    let totalpaidamount = parseInt(totalpaidamountt) + parseInt(newpaidamount);
+    let dueamount = parseInt(dueamountt) - parseInt(newpaidamount);
+    console.log("totalpaidamount", totalpaidamount);
+    setdueamount((value) => value - newpaidamount);
+    const updatedData = {
+      installments,
+      totalinstallments,
+      dueamount,
+      totalpaidamount,
+    };
     console.log("updatedData", updatedData);
     axios
       .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
