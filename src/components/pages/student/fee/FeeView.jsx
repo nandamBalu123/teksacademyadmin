@@ -61,53 +61,56 @@ const FeeView = () => {
 
   const updatedata = (e) => {
     e.preventDefault();
-    if (newpaidamount) {
-      const updatedDataa = [...totalinstallments];
-      updatedDataa[0].totalinstallmentsleft =
-        updatedDataa[0].totalinstallmentsleft - 1;
-      updatedDataa[0].totalinstallmentspaid =
-        updatedDataa[0].totalinstallmentspaid + 1;
-      settotalinstallments(updatedDataa);
-    }
-    let totalpaidamount;
-    let dueamount;
-    if (newpaidamount) {
-      totalpaidamount = parseInt(totalpaidamountt) + parseInt(newpaidamount);
-      dueamount = parseInt(dueamountt) - parseInt(newpaidamount);
-    } else {
-      totalpaidamount = parseInt(totalpaidamountt);
-      dueamount = parseInt(dueamountt);
-    }
 
-    let nextduedate;
-    for (let i = 0; i < installments.length; i++) {
-      if (installments[i].paidamount < 1) {
-        nextduedate = installments[i].duedate;
-        break;
+    if (newpaidamount <= dueamountt) {
+      if (newpaidamount) {
+        const updatedDataa = [...totalinstallments];
+        updatedDataa[0].totalinstallmentsleft =
+          updatedDataa[0].totalinstallmentsleft - 1;
+        updatedDataa[0].totalinstallmentspaid =
+          updatedDataa[0].totalinstallmentspaid + 1;
+        settotalinstallments(updatedDataa);
       }
-    }
-    console.log("nextduedate", nextduedate);
-    const updatedData = {
-      installments,
-      totalinstallments,
-      dueamount,
-      totalpaidamount,
-      nextduedate,
-    };
-    console.log("updatedData", updatedData);
-    axios
-      .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
+      let totalpaidamount;
+      let dueamount;
+      if (newpaidamount) {
+        totalpaidamount = parseInt(totalpaidamountt) + parseInt(newpaidamount);
+        dueamount = parseInt(dueamountt) - parseInt(newpaidamount);
+      } else {
+        totalpaidamount = parseInt(totalpaidamountt);
+        dueamount = parseInt(dueamountt);
+      }
 
-      .then((res) => {
-        if (res.data.updated) {
-          alert("Fee Added");
-
-          navigator(`/feeview/${id}`);
-          // window.location.reload();
-        } else {
-          alert("Try Again");
+      let nextduedate;
+      for (let i = 0; i < installments.length; i++) {
+        if (installments[i].paidamount < 1) {
+          nextduedate = installments[i].duedate;
+          break;
         }
-      });
+      }
+      console.log("nextduedate", nextduedate);
+      const updatedData = {
+        installments,
+        totalinstallments,
+        dueamount,
+        totalpaidamount,
+        nextduedate,
+      };
+      console.log("updatedData", updatedData);
+      axios
+        .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
+
+        .then((res) => {
+          if (res.data.updated) {
+            alert("Fee Added");
+
+            navigator(`/feeview/${id}`);
+            // window.location.reload();
+          } else {
+            alert("Try Again");
+          }
+        });
+    } else alert("amount is greater than due amount");
   };
   const dynamicStyle = {
     color: studentdata.dueamount < 1 ? "green" : "red",

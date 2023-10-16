@@ -30,9 +30,10 @@ const StudentDataView = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  console.log("student", studentdata.email);
+  
   return (
     <>
+    
       <h2 className="text-center"> Student Details From</h2>
       <div className="studentdataview">
         <div className="bg">
@@ -173,6 +174,7 @@ const StudentDataView = () => {
           </Table>
         </TableContainer>
       </div>
+      
     </>
   );
 };
