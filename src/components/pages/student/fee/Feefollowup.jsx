@@ -87,7 +87,7 @@ const Feefollowup = () => {
   return (
     <div className="fee">
       <div className="feedetails">
-        <button
+        <button className="feefollowupbtn"
           // className={`feebtn me-5 mb-2 ${displayTodayTable ? "active" : ""}`}
           // onClick={() => setDisplayTodayTable(true)}
 
@@ -103,7 +103,7 @@ const Feefollowup = () => {
           Today
         </button>
 
-        <button
+        <button className="feefollowupbtn"
           // className={`feebtn me-5 mb-2 ${displayTodayTable ? "active" : ""}`}
           // onClick={() => setDisplayTodayTable(true)}
 
@@ -119,7 +119,7 @@ const Feefollowup = () => {
           {" "}
           Upcoming{" "}
         </button>
-        <button
+        <button className="feefollowupbtn"
           onClick={() => {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
