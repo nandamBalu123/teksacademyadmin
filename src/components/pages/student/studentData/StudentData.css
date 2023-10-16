@@ -83,3 +83,6 @@ hr {
 .input-field:hover{ 
   border: hidden;
 }
+.studetdetails { 
+overflow-x:hidden ;
+}
