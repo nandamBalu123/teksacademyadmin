@@ -105,7 +105,7 @@ const FeeView = () => {
             alert("Fee Added");
 
             navigator(`/feeview/${id}`);
-            // window.location.reload();
+            window.location.reload();
           } else {
             alert("Try Again");
           }
