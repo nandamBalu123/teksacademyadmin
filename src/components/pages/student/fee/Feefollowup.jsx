@@ -73,18 +73,17 @@ const Feefollowup = () => {
     setfiltereddata(filteredResults);
   }, [getstudentData, filterCriteria]);
 
-  // serial number increasing
+ 
 
-  // style for paid status
-  // const dynamicStyle = {
-  //   color: getstudentData.dueamount < 1 ? "green" : "red",
-  //   fontSize: getstudentData.dueamount < 1 ? "20px" : "16px",
-  //   fontWeight: getstudentData.dueamount < 1 ? "900" : "900",
-  // };
-  // const IconStyle = {
-  //   display: getstudentData.dueamount < 1 ? true : "none",
-  //   marginLeft: "10px",
-  // };
+  const dynamicStyle = {
+    color: getstudentData.dueamount < 1 ? "green" : "red",
+    fontSize: getstudentData.dueamount < 1 ? "20px" : "16px",
+    fontWeight: getstudentData.dueamount < 1 ? "900" : "900",
+  };
+  const IconStyle = {
+    display: getstudentData.dueamount < 1 ? true : "none",
+    marginLeft: "10px",
+  };
   return (
     <div className="fee">
       <div className="feedetails">
@@ -326,16 +325,24 @@ const Feefollowup = () => {
                     {item.dueamount}
                   </TableCell>
                   <TableCell className="border border 1">
-                    {/* <div style={{ display: "flex" }}>
-                      <span style={dynamicStyle}>
-                        {item.totalinstallments.totalinstallmentspaid}/
-                        {item.totalinstallments.totalinstallments}
-                      </span>
-
-                      <span style={dynamicStyle}>
-                        <CheckCircleIcon style={IconStyle} />
-                      </span>
-                    </div> */}
+                    {item.totalinstallments && item.totalinstallments.length > 0 &&
+                    item.totalinstallments.map((items, index) => {
+                      if(true){
+                        return(
+                          <div style={{display: "flex"}}>
+                            <span style={dynamicStyle}>
+                              {items.totalinstallmentspaid} /
+                              {items.totalinstallments}
+                            </span>
+                            <span style={dynamicStyle}>
+                              <CheckCircleIcon style={IconStyle}/>
+                            </span>
+                          </div>
+                        )
+                      }
+                    })
+                      
+                  }
                   </TableCell>
                   <TableCell className="border border 1">
                     <Link to={`/feeview/${item.id}`}>view</Link>
