@@ -73,7 +73,7 @@ const FeeDetails = () => {
             <button className="feebtn" onClick={studentFeeRecords}>
               Student Fee Records
             </button>
-            <button onClick={noDueRecords}>No Due Records</button>
+            <button className="feebtn " onClick={noDueRecords}>No Due Records</button>
             <button
               className="feebtn"
               onClick={() => navigator("/feefollowup")}
@@ -99,7 +99,7 @@ const FeeDetails = () => {
                 borderRadius: "5px",
               }}
             />{" "}
-            <h6 onClick={handleClick}> Filter</h6>
+            {/* <h6 onClick={handleClick}> Filter</h6> */}
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}

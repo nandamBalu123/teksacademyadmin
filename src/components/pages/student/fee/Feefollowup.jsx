@@ -104,39 +104,7 @@ const Feefollowup = () => {
   return (
     <div className="fee">
       <div className="feedetails">
-        <button className="feefollowupbtn"
-          // className={`feebtn me-5 mb-2 ${displayTodayTable ? "active" : ""}`}
-          // onClick={() => setDisplayTodayTable(true)}
-
-          onClick={() => {
-            setFilterCriteria((e) => ({
-              dueamount: true,
-              todaydate: true,
-              upcomingdate: false,
-              pendingdate: false,
-            }));
-          }}
-        >
-          Today
-        </button>
-
-        <button className="feefollowupbtn"
-          // className={`feebtn me-5 mb-2 ${displayTodayTable ? "active" : ""}`}
-          // onClick={() => setDisplayTodayTable(true)}
-
-          onClick={() => {
-            setFilterCriteria((e) => ({
-              dueamount: true,
-              todaydate: false,
-              upcomingdate: true,
-              pendingdate: false,
-            }));
-          }}
-        >
-          {" "}
-          Upcoming{" "}
-        </button>
-        <button className="feefollowupbtn"
+      <button className="feefollowupbtn bg-danger"
           onClick={() => {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
@@ -152,6 +120,39 @@ const Feefollowup = () => {
           {" "}
           Pending
         </button>
+        <button className="feefollowupbtn bg-warning"
+          // className={`feebtn me-5 mb-2 ${displayTodayTable ? "active" : ""}`}
+          // onClick={() => setDisplayTodayTable(true)}
+
+          onClick={() => {
+            setFilterCriteria((e) => ({
+              dueamount: true,
+              todaydate: true,
+              upcomingdate: false,
+              pendingdate: false,
+            }));
+          }}
+        >
+          Today
+        </button>
+
+        <button className="feefollowupbtn bg-secondary"
+          // className={`feebtn me-5 mb-2 ${displayTodayTable ? "active" : ""}`}
+          // onClick={() => setDisplayTodayTable(true)}
+
+          onClick={() => {
+            setFilterCriteria((e) => ({
+              dueamount: true,
+              todaydate: false,
+              upcomingdate: true,
+              pendingdate: false,
+            }));
+          }}
+        >
+          {" "}
+          Upcoming{" "}
+        </button>
+        
       </div>
       <div className="d-flex justify-content-between">
         <input
