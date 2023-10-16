@@ -16,6 +16,7 @@ import { useNavigate, Link } from "react-router-dom";
 const FeeDetails = () => {
   const navigator = useNavigate();
   const [getstudentData, setData] = useState("");
+  const [studentFeeRecordss, setFeerecords] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -32,7 +33,7 @@ const FeeDetails = () => {
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
-
+        setFeerecords(response.data);
         console.log("data", response.data);
       })
       .catch((error) => {
@@ -41,19 +42,27 @@ const FeeDetails = () => {
       });
     // fetchData();
   }, []);
-  
-// serial number increasing
-var sn = 1;
-// style for paid status
-const dynamicStyle = {
-  color: getstudentData.dueamount < 1 ? "green" : "red",
-  fontSize: getstudentData.dueamount < 1 ? "20px" : "16px",
-  fontWeight: getstudentData.dueamount < 1 ? "900" : "900",
-};
-const IconStyle = {
-  display: getstudentData.dueamount < 1 ? true : "none",
-  marginLeft: "10px",
-};
+  const noDueRecords = () => {
+    const filteredResults = getstudentData.filter((item) => {
+      const dueamount = item.dueamount === 0;
+
+      return dueamount;
+    });
+    setData(filteredResults);
+  };
+  const studentFeeRecords = () => {
+    setData(studentFeeRecordss);
+  };
+  // style for paid status
+  const dynamicStyle = {
+    color: getstudentData.dueamount < 1 ? "green" : "red",
+    fontSize: getstudentData.dueamount < 1 ? "20px" : "16px",
+    fontWeight: getstudentData.dueamount < 1 ? "900" : "900",
+  };
+  const IconStyle = {
+    display: getstudentData.dueamount < 1 ? true : "none",
+    marginLeft: "10px",
+  };
   return (
     <>
       <div className="fee">
@@ -61,9 +70,10 @@ const IconStyle = {
           {" "}
           <h4> Fee Management(Registered Students)</h4>
           <div className="d-flex justify-content-between pt-3">
-            <button className="feebtn" onClick={() => navigator("/feedetails")}>
+            <button className="feebtn" onClick={studentFeeRecords}>
               Student Fee Records
             </button>
+            <button onClick={noDueRecords}>No Due Records</button>
             <button
               className="feebtn"
               onClick={() => navigator("/feefollowup")}
@@ -208,7 +218,7 @@ const IconStyle = {
                     {" "}
                     Total Fee
                     <br /> Paid Fee
-                    <br /> Due Date
+                    <br /> Due Amount
                   </TableCell>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                     {" "}
@@ -226,14 +236,14 @@ const IconStyle = {
               </TableHead>
               <TableBody>
                 {Array.isArray(getstudentData) && getstudentData.length > 0 ? (
-                  getstudentData.map((item) => (
+                  getstudentData.map((item, index) => (
                     <TableRow
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                       key={item.id}
                     >
                       <TableCell component="th" className="border border 1">
                         {" "}
-                        {sn + 1}
+                        {index + 1}
                       </TableCell>
                       <TableCell className="border border 1">
                         {" "}
@@ -262,29 +272,29 @@ const IconStyle = {
                         {" "}
                         {item.admissiondate}
                         <br />
-                        na
+                        {item.nextduedate}
+                        
                       </TableCell>
-                      <TableCell className="border border 1"> 
-                      
-                      {item.totalinstallments &&
-                        item.totalinstallments.length > 0 &&
-                        item.totalinstallments.map((items, index) => {
-                          if (true) {
-                            // settotalleft(item.totalinstallmentsleft);
-                            // totalleft = item.totalinstallmentsleft;
-                            return (
-                              <div style={{ display: "flex" }}>
-                                <span style={dynamicStyle}>
-                                  {items.totalinstallmentspaid}/
-                                  {items.totalinstallments}
-                                </span>
-                                <span style={dynamicStyle}>
-                                  <CheckCircleIcon style={IconStyle} />
-                                </span>
-                              </div>
-                            );
-                          }
-                        })}
+                      <TableCell className="border border 1">
+                        {item.totalinstallments &&
+                          item.totalinstallments.length > 0 &&
+                          item.totalinstallments.map((items, index) => {
+                            if (true) {
+                              // settotalleft(item.totalinstallmentsleft);
+                              // totalleft = item.totalinstallmentsleft;
+                              return (
+                                <div style={{ display: "flex" }}>
+                                  <span style={dynamicStyle}>
+                                    {items.totalinstallmentspaid}/
+                                    {items.totalinstallments}
+                                  </span>
+                                  <span style={dynamicStyle}>
+                                    <CheckCircleIcon style={IconStyle} />
+                                  </span>
+                                </div>
+                              );
+                            }
+                          })}
                       </TableCell>
                       <TableCell className="border border 1">
                         <Link to={`/feeview/${item.id}`}>view</Link>{" "}
