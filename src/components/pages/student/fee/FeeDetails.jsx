@@ -265,15 +265,26 @@ const IconStyle = {
                         na
                       </TableCell>
                       <TableCell className="border border 1"> 
-                      <div style={{ display: "flex" }}>
-                        <span style={dynamicStyle}>
-                          {item.totalinstallments.totalinstallmentspaid}/
-                          {item.totalinstallments.totalinstallments}
-                        </span>
-                        <span style={dynamicStyle}>
-                          <CheckCircleIcon style={IconStyle} />
-                        </span>
-                      </div>
+                      
+                      {item.totalinstallments &&
+                        item.totalinstallments.length > 0 &&
+                        item.totalinstallments.map((items, index) => {
+                          if (true) {
+                            // settotalleft(item.totalinstallmentsleft);
+                            // totalleft = item.totalinstallmentsleft;
+                            return (
+                              <div style={{ display: "flex" }}>
+                                <span style={dynamicStyle}>
+                                  {items.totalinstallmentspaid}/
+                                  {items.totalinstallments}
+                                </span>
+                                <span style={dynamicStyle}>
+                                  <CheckCircleIcon style={IconStyle} />
+                                </span>
+                              </div>
+                            );
+                          }
+                        })}
                       </TableCell>
                       <TableCell className="border border 1">
                         <Link to={`/feeview/${item.id}`}>view</Link>{" "}
