@@ -233,7 +233,7 @@ const CreateUserForm = () => {
       <div className="sub-user-container">
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="row ">
-            <div className="col-md-6"> 
+            <div className=" col-12 col-md-6 col-lg-6 col-xl-6"> 
             <label className="mar userlabel " htmlFor="fullname">
               Full Name<span className="star"> *</span>:
             </label>
@@ -250,7 +250,7 @@ const CreateUserForm = () => {
               <span className="error">{errors.fullname}</span>
             )}</div>
             </div>
-           <div className="col-md-6">  <label className="mar userlabel" htmlFor="email">
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6">  <label className="mar userlabel" htmlFor="email">
               Email ID<span className="star"> *</span>:
             </label>
             <input
@@ -266,7 +266,7 @@ const CreateUserForm = () => {
             </div>
           </div>
           <div className="row ">
-          <div className="col-md-6"> 
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
           <label className="mar userlabel" htmlFor="phonenumber">
               Phone No. <span className="star"> *</span>:
             </label>
@@ -283,7 +283,7 @@ const CreateUserForm = () => {
               <span className="error">{errors.phonenum}</span>
             )}</div>
           </div>
-           <div className="col-md-6"> 
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
             
            <label className="mar userlabel" htmlFor="designation">
               Designation<span className="star"> *</span> :
@@ -303,7 +303,7 @@ const CreateUserForm = () => {
            </div>
           </div>
           <div className="row ">
-            <div className="col-md-6"> 
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
             <label className="mar userlabel" htmlFor="department">
               Department<span className="star"> *</span>:
             </label>
@@ -321,7 +321,7 @@ const CreateUserForm = () => {
             )}</div>
 
             </div>
-            <div className="col-md-6"> 
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
             <label className="mar userlabel" htmlFor="reportto">
               Report to <span className="star"> *</span> :
             </label>
@@ -342,7 +342,7 @@ const CreateUserForm = () => {
             </div>
           </div>
           <div className="row ">
-           <div className="col-md-6"> 
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
            <label className="mar userlabel" htmlFor="profile">
               Role <span className="star"> *</span>:
             </label>
@@ -377,7 +377,7 @@ const CreateUserForm = () => {
 
               
             </select> */}
-      <div className="col-md-6"> 
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
       <label className="mar userlabel" htmlFor="branch">
               Branch <span className="star"> *</span>:
             </label>

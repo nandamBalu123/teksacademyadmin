@@ -16,4 +16,15 @@
     border: none;
     border-radius: 5px;
 }
+.feefollowupbtn{ 
+    background-color:#0070fc ;
+    color: #fff;
+    padding: 5px 14px 5px 14px;
+    border: none;
+    border-radius: 5px;
+    margin: 2px 15px 2px 5px;
+}
+.feefollowupbtn:hover{ 
+    background-color: #4c698d;
+}
 
