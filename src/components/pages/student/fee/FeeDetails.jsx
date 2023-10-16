@@ -273,12 +273,20 @@ const FeeDetails = () => {
                         {item.admissiondate}
                         <br />
                         {item.nextduedate}
-                        
                       </TableCell>
                       <TableCell className="border border 1">
                         {item.totalinstallments &&
                           item.totalinstallments.length > 0 &&
                           item.totalinstallments.map((items, index) => {
+                            const dynamicStyle = {
+                              color: item.dueamount < 1 ? "green" : "red",
+                              fontSize: item.dueamount < 1 ? "20px" : "16px",
+                              fontWeight: item.dueamount < 1 ? "900" : "900",
+                            };
+                            const IconStyle = {
+                              display: item.dueamount < 1 ? true : "none",
+                              marginLeft: "10px",
+                            };
                             if (true) {
                               // settotalleft(item.totalinstallmentsleft);
                               // totalleft = item.totalinstallmentsleft;
