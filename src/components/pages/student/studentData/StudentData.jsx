@@ -252,7 +252,7 @@ const StudentData = () => {
     <>
       <h3 className="ms-5"> Student Data </h3>
 
-      <div className="studetdetails ">
+      <div className="studetdetails container ">
         <div className="row mb-3 px-4 pt-3">
           <div className="col-7 col-md-7  input-field">
             <input
