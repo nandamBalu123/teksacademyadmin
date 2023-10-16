@@ -69,8 +69,25 @@ const Feefollowup = () => {
         dueamount
       );
     });
+    if (filterCriteria.pendingdate) {
+      const sortData = () => {
+        const sortedData = [...filteredResults].sort((a, b) =>
+          b.nextduedate.localeCompare(a.nextduedate)
+        );
+        setfiltereddata(sortedData);
+      };
+      sortData();
+    } else {
+      const sortData = () => {
+        const sortedData = [...filteredResults].sort((a, b) =>
+          a.nextduedate.localeCompare(b.nextduedate)
+        );
+        setfiltereddata(sortedData);
+      };
+      sortData();
+    }
 
-    setfiltereddata(filteredResults);
+    // setfiltereddata(filteredResults);
   }, [getstudentData, filterCriteria]);
 
  
