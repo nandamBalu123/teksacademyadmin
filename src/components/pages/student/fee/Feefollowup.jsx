@@ -16,7 +16,7 @@ import axios from "axios";
 const Feefollowup = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  // const [displayTodayTable, setDisplayTodayTable] = useState(true);
+
   const [getstudentData, setData] = useState([]);
   const [filtereddata, setfiltereddata] = useState();
 
@@ -41,29 +41,33 @@ const Feefollowup = () => {
       });
   }, []);
   const [filterCriteria, setFilterCriteria] = useState({
-    todaydate: "",
-    tomorrowdate: "",
+    dueamount: true,
+    todaydate: "true",
+    upcomingdate: "",
+    pendingdate: "",
   });
-  useEffect(() => {
-    const today = new Date();
-    const todayFormatted = today.toISOString().split("T")[0];
-
-    setFilterCriteria((prevFilterCriteria) => ({
-      ...prevFilterCriteria,
-      todaydate: todayFormatted,
-    }));
-  }, []);
+  const today = new Date();
+  const todayFormatted = today.toISOString().split("T")[0];
 
   useEffect(() => {
     const filteredResults = getstudentData.filter((item) => {
+      const dueamount = filterCriteria.dueamount ? item.dueamount != 0 : true;
       const todaydateCondition = filterCriteria.todaydate
-        ? item.nextduedate === filterCriteria.todaydate
+        ? item.nextduedate === todayFormatted
         : true;
-      const upcomingdateCondition = filterCriteria.tomorrowdate
-        ? item.nextduedate >= filterCriteria.tomorrowdate
+      const upcomingdateCondition = filterCriteria.upcomingdate
+        ? item.nextduedate > todayFormatted
+        : true;
+      const pendingdateCondition = filterCriteria.pendingdate
+        ? item.nextduedate < todayFormatted
         : true;
 
-      return todaydateCondition && upcomingdateCondition;
+      return (
+        todaydateCondition &&
+        upcomingdateCondition &&
+        pendingdateCondition &&
+        dueamount
+      );
     });
 
     setfiltereddata(filteredResults);
@@ -89,32 +93,48 @@ const Feefollowup = () => {
           // onClick={() => setDisplayTodayTable(true)}
 
           onClick={() => {
-            const today = new Date();
-            const todayFormatted = today.toISOString().split("T")[0];
             setFilterCriteria((e) => ({
-              todaydate: todayFormatted,
-              tomorrowdate: "",
+              dueamount: true,
+              todaydate: true,
+              upcomingdate: false,
+              pendingdate: false,
+            }));
+          }}
+        >
+          Today
+        </button>
+
+        <button
+          // className={`feebtn me-5 mb-2 ${displayTodayTable ? "active" : ""}`}
+          // onClick={() => setDisplayTodayTable(true)}
+
+          onClick={() => {
+            setFilterCriteria((e) => ({
+              dueamount: true,
+              todaydate: false,
+              upcomingdate: true,
+              pendingdate: false,
             }));
           }}
         >
           {" "}
-          Today{" "}
+          Upcoming{" "}
         </button>
         <button
-          // className={`feebtn ${!displayTodayTable ? "active" : ""}`}
-          // onClick={() => setDisplayTodayTable(false)}
           onClick={() => {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             const tomorrowFormatted = tomorrow.toISOString().split("T")[0];
             setFilterCriteria((e) => ({
-              tomorrowdate: tomorrowFormatted,
-              todaydate: "",
+              dueamount: true,
+              todaydate: false,
+              upcomingdate: false,
+              pendingdate: true,
             }));
           }}
         >
           {" "}
-          Upcoming
+          Pending
         </button>
       </div>
       <div className="d-flex justify-content-between">
@@ -299,7 +319,9 @@ const Feefollowup = () => {
                   <TableCell className="border border 1">
                     {item.courses}
                   </TableCell>
-                  <TableCell className="border border 1"></TableCell>
+                  <TableCell className="border border 1">
+                    {item.nextduedate}
+                  </TableCell>
                   <TableCell className="border border 1">
                     {item.dueamount}
                   </TableCell>
@@ -325,22 +347,6 @@ const Feefollowup = () => {
                 <TableCell colSpan={3}>No data available</TableCell>
               </TableRow>
             )}
-            {/* <TableRow
-
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" className="border border 1">
-
-              </TableCell>
-              <TableCell className="border border 1"></TableCell>
-              <TableCell className="border border 1"></TableCell>
-              <TableCell className="border border 1"></TableCell>
-              <TableCell className="border border 1"></TableCell>
-              <TableCell className="border border 1"></TableCell>
-              <TableCell className="border border 1"></TableCell>
-              <TableCell className="border border 1"></TableCell>
-              <TableCell className="border border 1"></TableCell>
-            </TableRow> */}
           </TableBody>
         </Table>
       </TableContainer>
