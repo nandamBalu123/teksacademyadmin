@@ -1,4 +1,4 @@
-.color1{ 
+/* .color1{ 
     width: 25%;
     background-color:#d9e9e9;
     color: dark;
@@ -13,7 +13,7 @@
     width: 25%;
     background-color:#e6acb4 ;
     text-align: center; 
-}
+} */
 .progreebar{ 
     width: 95%;
     margin: auto;
@@ -22,6 +22,31 @@
 }
 .enrollment{ 
     width: 92%;
-   
-    
+   }
+.Dashboard{ 
+    overflow-x: hidden;
+    margin: auto;
+    width: 96%;
 }
+.progreebar-show{ 
+    width: 93%;
+    margin: auto;
+}
+
+/* @media (min-width: 576px) { 
+ .dashboardcard{ 
+    margin-bottom: 20px;
+ }
+ }
+
+
+@media (min-width: 768px) {  }
+
+
+@media (min-width: 992px) {  }
+
+
+@media (min-width: 1200px) {  }
+
+
+@media (min-width: 1400px) {  } */

@@ -43,7 +43,7 @@ const Topbar = () => {
   return (
     <>
       <div className="row topbar mt-0">
-        <div className="col-8 ">
+        <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8 ">
           {/* <Box
             backgroundColor={colors.primary[400]}
             borderRadius="3px"
@@ -55,7 +55,7 @@ const Topbar = () => {
             </IconButton>
           </Box> */}
         </div>
-        <div className="col-1"> 
+        
           {/* <Box>
           <IconButton onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "dark" ? (
@@ -65,16 +65,16 @@ const Topbar = () => {
             )}
           </IconButton> 
         </Box> */}
-       </div>
-       <div className="col-1">
+    
+       <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">
        <IconButton>
           <NotificationsOutlinedIcon />
       </IconButton> </div>
-      <div className="col-1"> 
+      <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1"> 
       <IconButton>
          <SettingsOutlinedIcon />
        </IconButton></div>
-       <div className="col-1">  
+       <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">  
       
           <div>
           <Button
