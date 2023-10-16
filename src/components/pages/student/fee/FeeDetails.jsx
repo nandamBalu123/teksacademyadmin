@@ -12,7 +12,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./FeeDetails.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
 const FeeDetails = () => {
   const navigator = useNavigate();
   const [getstudentData, setData] = useState("");
@@ -73,7 +73,9 @@ const FeeDetails = () => {
             <button className="feebtn" onClick={studentFeeRecords}>
               Student Fee Records
             </button>
-            <button className="feebtn " onClick={noDueRecords}>No Due Records</button>
+            <button className="feebtn " onClick={noDueRecords}>
+              No Due Records
+            </button>
             <button
               className="feebtn"
               onClick={() => navigator("/feefollowup")}
@@ -305,7 +307,9 @@ const FeeDetails = () => {
                           })}
                       </TableCell>
                       <TableCell className="border border 1">
-                        <Link to={`/feeview/${item.id}`}>view</Link>{" "}
+                        <Link to={`/feeview/${item.id}`}>
+                          <VisibilityIcon />
+                        </Link>{" "}
                       </TableCell>
                     </TableRow>
                   ))

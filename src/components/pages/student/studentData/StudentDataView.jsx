@@ -30,10 +30,9 @@ const StudentDataView = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  
+
   return (
     <>
-    
       <h2 className="text-center"> Student Details From</h2>
       <div className="studentdataview">
         <div className="bg">
@@ -155,15 +154,17 @@ const StudentDataView = () => {
                       {item.discount}
                     </TableCell>
                     <TableCell className="text-center border border-2">
-                      {item.taxamount}
+                      {parseFloat(item.taxamount).toFixed(2)}
                     </TableCell>
                     <TableCell className="text-center border border-2">
                       {item.totalamount}
+                      <br />
                       {item.feetype === "fee" ? (
-                        <span>
-                          Materialfee:{item.materialfee} CourseFee:
-                          {item.coursefee}
-                        </span>
+                        <>
+                          Materialfee:{studentdata.materialfee}
+                          <br /> CourseFee:
+                          {item.totalamount - studentdata.materialfee}
+                        </>
                       ) : (
                         <span></span>
                       )}
@@ -174,7 +175,6 @@ const StudentDataView = () => {
           </Table>
         </TableContainer>
       </div>
-      
     </>
   );
 };
