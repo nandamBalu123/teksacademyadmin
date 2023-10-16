@@ -254,7 +254,7 @@ const StudentData = () => {
 
       <div className="studetdetails container ">
         <div className="row mb-3 px-4 pt-3">
-          <div className="col-7 col-md-7  input-field">
+          <div className="col-10 col-md-7 col-lg-7 col-xl-7  input-field">
             <input
               type="text"
               className="input-field ps-2"
@@ -278,18 +278,21 @@ const StudentData = () => {
             />
             <hr />
           </div>
-          <div className="col-1 pt-2" style={{ cursor: "pointer" }}>
+          <div
+            className=" col-2 col-md-1 col-lg-1 col-xl-1 pt-2"
+            style={{ cursor: "pointer" }}
+          >
             {" "}
             <RefreshIcon onClick={filterreset} />{" "}
           </div>
-          <div className="col-1 pt-2">
+          <div className="col-2 col-md-1 col-lg-1 col-xl-1 pt-2">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
             </h6>
           </div>
 
-          <div className="col-1 pt-2">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
             {" "}
             <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               {" "}
@@ -454,7 +457,7 @@ const StudentData = () => {
               </MenuItem>
             </Menu>
           </div>
-          <div className="col-1">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2 ">
             {" "}
             <select name="cars" id="cars" onChange={handlerecorddata}>
               <option value="10">10</option>
@@ -463,7 +466,7 @@ const StudentData = () => {
               <option value="75">75</option>
             </select>
           </div>
-          <div className="col-1 pt-2 ">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2 ">
             <CSVLink
               data={filteredData}
               filename={"studentsdata.csv"}
