@@ -153,10 +153,10 @@ const Feefollowup = () => {
             borderRadius: "5px",
           }}
         />
-        <h6 onClick={handleClick} className="pe-4">
+        {/* <h6 onClick={handleClick} className="pe-4">
           {" "}
           Filter
-        </h6>
+        </h6> */}
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}
@@ -248,11 +248,21 @@ const Feefollowup = () => {
           </div>
         </Menu>
       </div>
-
-      <TableContainer component={Paper} className="pt-4" id="">
+      {filterCriteria.todaydate && 
+            <h3 className="ms-3 mt-2">Today</h3>
+          }
+            {filterCriteria.upcomingdate && 
+            <h3 className="ms-3 mt-2">Upcoming</h3>
+          }
+          
+          {filterCriteria.pendingdate && 
+            <h3 className="ms-3 mt-2">Pending</h3>
+          }
+      <TableContainer component={Paper} className="pt-0" id="">
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          
           <TableHead>
-            <h3>Today</h3>
+            
             <TableRow>
               <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                 {" "}
