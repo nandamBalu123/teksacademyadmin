@@ -49,9 +49,7 @@ const FeeView = () => {
     setdueamount(studentdata.dueamount);
     setinstallmentamount(parseInt(studentdata.dueamount) / totalleft);
   }, [studentdata]);
-  useEffect(() => {
-    console.log("totoalleft", totalleft);
-  });
+
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
     updatedInstallments[index] = updatedInstallment;
@@ -81,13 +79,20 @@ const FeeView = () => {
       dueamount = parseInt(dueamountt);
     }
 
-    console.log("totalpaidamount", totalpaidamount, "rr", dueamount);
-    // setdueamount((value) => value - newpaidamount);
+    let nextduedate;
+    for (let i = 0; i < installments.length; i++) {
+      if (installments[i].paidamount < 1) {
+        nextduedate = installments[i].duedate;
+        break;
+      }
+    }
+    console.log("nextduedate", nextduedate);
     const updatedData = {
       installments,
       totalinstallments,
       dueamount,
       totalpaidamount,
+      nextduedate,
     };
     console.log("updatedData", updatedData);
     axios
@@ -98,7 +103,7 @@ const FeeView = () => {
           alert("Fee Added");
 
           navigator(`/feeview/${id}`);
-          window.location.reload();
+          // window.location.reload();
         } else {
           alert("Try Again");
         }
@@ -365,7 +370,7 @@ const FeeView = () => {
                     value={installment.duedate}
                   />
                   <input
-                    type="text"
+                    type="number"
                     name="paidamount"
                     onChange={(e) => {
                       const updatedInstallment = {

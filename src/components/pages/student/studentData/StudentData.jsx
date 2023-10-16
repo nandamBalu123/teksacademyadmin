@@ -49,7 +49,7 @@ import { Link } from "react-router-dom";
 
 import { LastPage } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
 import axios from "axios";
 // import { CSVLink } from "react-csv";
@@ -310,10 +310,13 @@ const StudentData = () => {
                 cursor: "pointer",
               }}
             >
-             <div className="d-flex justify-content-between"> 
-             <MenuItem> Filter</MenuItem>
-              <MenuItem> <CloseIcon/> </MenuItem>
-             </div>
+              <div className="d-flex justify-content-between">
+                <MenuItem> Filter</MenuItem>
+                <MenuItem>
+                  {" "}
+                  <CloseIcon />{" "}
+                </MenuItem>
+              </div>
               <hr />
               <div className="d-flex">
                 <MenuItem className="pt-3 ">
@@ -445,9 +448,9 @@ const StudentData = () => {
                   </select>
                 </MenuItem>{" "}
               </div>
-              <MenuItem className="d-flex justify-content-between"> 
-              <button className="save"> Save</button>
-              <button className="clear"> Clear</button>
+              <MenuItem className="d-flex justify-content-between">
+                <button className="save"> Save</button>
+                <button className="clear"> Clear</button>
               </MenuItem>
             </Menu>
           </div>
@@ -566,12 +569,12 @@ const StudentData = () => {
 
             <TableBody>
               {Array.isArray(records) && records.length > 0 ? (
-                records.map((item) => (
+                records.map((item, index) => (
                   // <li key={item.id}>{item.name}</li>
 
                   <StyledTableRow key={item.id}>
                     <StyledTableCell className=" border border 2 text-center">
-                      {item.id}
+                      {index + 1}
                     </StyledTableCell>
                     {/* 
                   <StyledTableCell className=" border border 2 text-center">

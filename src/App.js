@@ -44,8 +44,6 @@ import Feefollowup from "./components/pages/student/fee/Feefollowup";
 import FeeView from "./components/pages/student/fee/FeeView";
 import Addtofee from "./components/pages/student/fee/Addtofee";
 import EditStudentForm from "./components/pages/student/studentData/EditStudentForm";
-import Feevieww from "./components/pages/student/fee/Feevieww";
-// import Feedetails from "./components/pages/student/studentData/feedetails/Feedetails";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 
@@ -160,7 +158,6 @@ function App() {
                   }
                 />
                 <Route path="/inn" element={<Login />}></Route>
-                <Route path="/feevieww" element={<Feevieww />}></Route>
 
                 {/* <Route
                 path="/feedetails"

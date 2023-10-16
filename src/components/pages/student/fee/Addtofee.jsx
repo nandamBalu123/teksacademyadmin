@@ -8,7 +8,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 const Addtofee = () => {
   const navigator = useNavigate();
   const [dueamount, setdueamount] = useState();
-  const [initialamount, setinitialamount] = useState();
+  const [initialamount, setinitialamount] = useState(0);
   const [totalinstallment, settotalinstallment] = useState();
   const [totalinstallments, settotalinstallments] = useState();
   const [totalpaidamount, settotalpaidamount] = useState();
@@ -41,7 +41,9 @@ const Addtofee = () => {
   console.log("studentdata", studentdata);
 
   const [selectedOption, setSelectedOption] = useState("option1");
-
+  useEffect(() => {
+    setdueamount(studentdata.dueamount);
+  }, [studentdata]);
   useEffect(() => {
     setdueamount(studentdata.dueamount - initialamount);
   }, [initialamount]);
@@ -168,6 +170,7 @@ const Addtofee = () => {
               }}
             />
             {/* <TextField id="outlined-basic"  label=" Course date" variant="outlined"  className="textfield" type="date"/> */}
+
             <TextField
               label="Total Amount"
               id="outlined-start-adornment"
@@ -180,30 +183,23 @@ const Addtofee = () => {
                 ),
               }}
             />
-            {/* <TextField
-              label="Initial Pay Amount"
-              id="outlined-start-adornment"
-              sx={{ m: 1, width: "25ch" }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start"></InputAdornment>
-                ),
-              }}
-              value={initialamount}
-              onChange={(e) => setinitialamount(e.target.value)}
-            /> */}
-            <TextField
-              label="Initial Pay Amount"
-              id="outlined-start-adornment"
-              sx={{ m: 1, width: "25ch" }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start"></InputAdornment>
-                ),
-              }}
+            <input
+              type="number"
               value={initialamount}
               onChange={(e) => setinitialamount(e.target.value)}
             />
+            {/*  <TextField
+              label="Initial Pay Amount"
+              id="outlined-start-adornment"
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start"></InputAdornment>
+                ),
+              }}
+              value={initialamount}
+              onChange={(e) => setinitialamount(e.target.value)}
+            />*/}
             <TextField
               label="Due Amount"
               id="outlined-start-adornment"
@@ -216,14 +212,19 @@ const Addtofee = () => {
             />
           </div>
           <div className="d-flex justify-content-around pt-5">
-            <TextField
+            <input
+              type="number"
+              value={totalinstallment}
+              onChange={(e) => settotalinstallment(e.target.value)}
+            />
+            {/* <TextField
               id="outlined-basic"
               label="No. of Installments"
               variant="outlined"
               className="textfield"
               value={totalinstallment}
               onChange={(e) => settotalinstallment(e.target.value)}
-            />
+            /> */}
           </div>
           <button className="addtofee" onClick={handleSubmit}>
             Add to Fee
