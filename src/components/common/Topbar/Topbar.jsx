@@ -40,7 +40,7 @@ const Topbar = () => {
     //   .then((res) => {
     //     navigate("/login");
     //   })
-    //   .catch((err) => console.log(err));
+    //   .catch((err) => cFuseronsole.log(err));
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -54,8 +54,14 @@ const Topbar = () => {
   const handleProfile = () => {
     navigate("");
     navigate("/userview/" + user.id);
+    setAnchorEl(null);
   };
-
+  let fullname;
+  let email;
+  if (user) {
+    fullname = user.fullname;
+    email = user.email;
+  }
   return (
     <>
       <div className="row topbar mt-0">
@@ -117,8 +123,8 @@ const Topbar = () => {
 
                 <div className=" ms-3 mt-3">
                   {" "}
-                  <h5 onClick={handleClose}>{user.fullname}</h5>
-                  <p onClick={handleClose}>{user.email}</p>
+                  <h5 onClick={handleClose}>{fullname}</h5>
+                  <p onClick={handleClose}>{email}</p>
                 </div>
               </div>
 

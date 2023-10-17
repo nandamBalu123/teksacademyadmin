@@ -68,13 +68,15 @@ function App() {
         <CssBaseline />
         <BrowserRouter>
           <div className="app">
-            {user ? <Sidebar /> : undefined}
+            {/* {user ? <Sidebar /> : undefined} */}
+            <Sidebar />
+
             <div
               style={{ marginBottom: "50px", backgroundColor: "white" }}
             ></div>
             <main className="content" style={{ overflow: "auto" }}>
-              {user ? <Topbar /> : undefined}
-
+              {/* {user ? <Topbar /> : undefined} */}
+              <Topbar />
               <Routes>
                 <Route
                   path="/"

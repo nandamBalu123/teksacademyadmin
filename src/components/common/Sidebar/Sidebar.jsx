@@ -43,6 +43,13 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 
 const Sidebar = () => {
   const { user } = useAuthContext();
+  let fullname;
+  let profile;
+  if (user) {
+    fullname = user.fullname;
+    profile = user.profile;
+    console.log("fulname", fullname, profile);
+  }
   // let role;
   // let user;
   // let username;
@@ -154,10 +161,10 @@ const Sidebar = () => {
                   letterSpacing="1px"
                 >
                   {/* Zaheer */}
-                  {user.fullname}
+                  {fullname}
                 </Typography>
                 <Typography variant="h5" color={colors.grey[100]}>
-                  {user.profile}
+                  {profile}
                 </Typography>
               </Box>
             </Box>
@@ -172,7 +179,7 @@ const Sidebar = () => {
               setSelected={setSelected}
               style={{ color: "black" }}
             />
-            {user.profile == "admin" ? (
+            {profile == "admin" ? (
               <SubMenu
                 style={{
                   color: colors.grey[100],
@@ -236,7 +243,7 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
             </SubMenu>
-            {user.profile == "admin" ? (
+            {profile == "admin" ? (
               <SubMenu
                 style={{
                   // color: colors.grey[100],
