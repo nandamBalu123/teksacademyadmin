@@ -236,23 +236,25 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
             </SubMenu>
-            <SubMenu
-              style={{
-                // color: colors.grey[100],
-                color: "black",
-              }}
-              icon={<SettingsIcon />}
-              label={"Roles Management"}
-              title={"Settings"}
-            >
-              <Item
-                title="Roles"
-                to="/roles"
-                icon={<EditNoteIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-            </SubMenu>
+            {user.profile == "admin" ? (
+              <SubMenu
+                style={{
+                  // color: colors.grey[100],
+                  color: "black",
+                }}
+                icon={<SettingsIcon />}
+                label={"Roles Management"}
+                title={"Settings"}
+              >
+                <Item
+                  title="Roles"
+                  to="/roles"
+                  icon={<EditNoteIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </SubMenu>
+            ) : undefined}
           </Box>
         </Menu>
       </ProSidebar>
