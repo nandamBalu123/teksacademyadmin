@@ -92,13 +92,15 @@ const Addtofee = () => {
 
   return (
     <>
-      <div className="addfee">
+      <div className="addfee container">
         <div className="adding">
           {" "}
           <h4> Add Fee Details</h4> <hr />
-          <div className="d-flex justify-content-around pt-5">
+       
+          {/* <div className="row pt-5">
             <TextField
               label="Name"
+              className="col-12 col-md-4 col-lg-4 col-xl-4"
               id="outlined-start-adornment"
               sx={{ m: 1, width: "25ch" }}
               InputProps={{
@@ -111,6 +113,7 @@ const Addtofee = () => {
             />
             <TextField
               label="Email"
+              className="col-12 col-md-4 col-lg-4 col-xl-4"
               id="outlined-start-adornment"
               sx={{ m: 1, width: "25ch" }}
               InputProps={{
@@ -123,6 +126,7 @@ const Addtofee = () => {
             />
             <TextField
               label="Mobile Number"
+              className="col-12 col-md-4 col-lg-4 col-xl-4"
               id="outlined-start-adornment"
               sx={{ m: 1, width: "25ch" }}
               InputProps={{
@@ -133,90 +137,92 @@ const Addtofee = () => {
                 ),
               }}
             />
-            <TextField
-              label="Course"
-              id="outlined-start-adornment"
-              sx={{ m: 1, width: "25ch" }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    {studentdata.courses}
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </div>
-          <div className="d-flex justify-content-around pt-5">
-            {/* <input type="text" value={studentdata.admissiondate} /> */}
-            <TextField
-              id="outlined-basic"
-              label="Date Of Joining"
-              variant="outlined"
-              className="textfield"
-              type="date"
-              value={studentdata.admissiondate}
-              InputLabelProps={{
-                shrink: true, // This will make the label float when there is a value
-              }}
-              InputProps={{
-                style: {
-                  // Hide the placeholder text
-                  textOverflow: "clip",
-                  padding: "0", // Adjust padding as needed
-                  "&::-webkit-calendar-picker-indicator": {
-                    display: "none", // Hide the calendar icon in Chrome
-                  },
-                },
-              }}
-            />
-            {/* <TextField id="outlined-basic"  label=" Course date" variant="outlined"  className="textfield" type="date"/> */}
+           
+          </div> */}
+          <div className="row">  
+          <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup"> 
+          <input type="text" 
+          name="name"
+          value={studentdata.name} 
+          required/>
+          <label> Full Name</label>
+         
+           </div>
+           <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup"> 
+          <input type="text" 
+         name="email"
+         value={studentdata.email}
+            required />
+          <label> Email</label>
+         
+           </div>
+           <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup"> 
+          <input type="text"
+          name="phonenumber" 
+          value={studentdata.mobilenumber}
+           required/>
+          <label> Phone Number</label>
+         
+           </div>
+           <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup"> 
+          <input type="text"
+          name="courses"
+          value={studentdata.courses}
+           required/>
+          <label> Courses</label>
+         
+           </div>
+           </div>
+          <div className="row ">
 
-            <TextField
-              label="Total Amount"
-              id="outlined-start-adornment"
-              sx={{ m: 1, width: "25ch" }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    {studentdata.finaltotal}
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <input
+          <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup"> 
+          <input type="text"
+          name="date"
+          value={studentdata.admissiondate}
+           required/>
+          <label> Date of Joining</label></div>
+          <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup"> 
+          <input type="text"
+          name="text"
+          value={studentdata.finaltotal}
+           required/>
+          <label> Total Amount</label>
+         
+           </div>
+           <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup"> 
+           <input type="text"
+           name="dueamount"
+           value={dueamount} 
+           required/>
+           <label> Due Amount</label>
+           </div>
+           <div className="col-12 col-md-3 col-lg-3 col-xl-3 inputgroup"> 
+           <input
               type="number"
               value={initialamount}
               onChange={(e) => setinitialamount(e.target.value)}
             />
-            {/*  <TextField
-              label="Initial Pay Amount"
-              id="outlined-start-adornment"
-              sx={{ m: 1, width: "25ch" }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start"></InputAdornment>
-                ),
-              }}
-              value={initialamount}
-              onChange={(e) => setinitialamount(e.target.value)}
-            />*/}
-            <TextField
-              label="Due Amount"
-              id="outlined-start-adornment"
-              sx={{ m: 1, width: "25ch" }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">{dueamount}</InputAdornment>
-                ),
-              }}
-            />
-          </div>
-          <div className="d-flex justify-content-around pt-5">
+            <label> Initial Amount </label>
+           </div>
+            {/* <input type="text" value={studentdata.admissiondate} /> */}
+            
+            {/* <TextField id="outlined-basic"  label=" Course date" variant="outlined"  className="textfield" type="date"/> */}
+
+            </div>
+          <div className="row ">
+            <div className=" col-12 col-md-6 col-xl-6 col-lg-6 inputgroup"> 
             <input
               type="number"
               value={totalinstallment}
               onChange={(e) => settotalinstallment(e.target.value)}
             />
+            <label>No.Of Installments </label>
+            </div>
+            <div className="col-12 col-md-6 col-xl-6 col-lg-6"> 
+            <button className=" btn btn-primary my-3 end " onClick={handleSubmit}>
+            Add to Fee
+          </button>
+            </div>
             {/* <TextField
               id="outlined-basic"
               label="No. of Installments"
@@ -226,9 +232,9 @@ const Addtofee = () => {
               onChange={(e) => settotalinstallment(e.target.value)}
             /> */}
           </div>
-          <button className="addtofee" onClick={handleSubmit}>
-            Add to Fee
-          </button>
+          
+
+          
         </div>{" "}
       </div>
     </>

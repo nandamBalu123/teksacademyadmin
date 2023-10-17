@@ -18,8 +18,38 @@
     background-color:#0060e9 ;
     color: #fff;
     border: none;
-    padding: 5px 10px 5px 10px;
-    margin: 15px 2px 15px 808px;
-    border-radius: 5px;
    
+    border-radius: 5px;
+    margin-top: 20px;
 }
+.inputgroup{ 
+    position: relative;
+    margin: 20px 0;
+}
+.inputgroup label{ 
+    position: absolute;
+    top: 50%;
+    left: 12%;
+   transform: translateY(-50%);
+    font-size: 16px;
+    color: black;
+    transition:-5s ;
+    padding: 4px ;
+    }
+    .inputgroup input{ 
+        width: 200px;
+        height: 45px;
+        font-size: 16px;
+        padding: 0 10px;
+        background: transparent;
+        border: 1.2px solid gray;
+        outline: none;
+        border-radius: 5px;
+    }
+    .inputgroup input:focus~label,
+    .inputgroup input:valid~label{ 
+        top: 0;
+        font-size: 14px;
+        color:#0060e9;
+        background-color: #fff;
+    }

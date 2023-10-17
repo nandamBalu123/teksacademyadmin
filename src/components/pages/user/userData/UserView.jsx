@@ -50,14 +50,34 @@ const UserView = () => {
            <h5> Profile : {singleUser.profile}</h5> <br />
           <h5> Branch: {singleUser.branch}</h5> */}
          </div> 
-         <h5> Name :  Bhavitha</h5>
+
+         <div className="row">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+          
+            <p> Name :  {singleUser.fullname}</p>
+            <p> EMail: {singleUser.email}</p>
+            <p> Mobile Number: {singleUser.phonenumber}</p>
+            <p > Designation : {singleUser.designation} </p>
+            <p></p>
+          </div>
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+          <p> Department :  {singleUser.department}</p>
+         <p> Report To :  {singleUser.reportto}</p>
+         <p> Profile: {singleUser.profile}</p>
+         <p> Branch : {singleUser.branch}</p>
+           
+           
+          </div>
+        </div>
+        
+         {/* <h5> Name :  Bhavitha</h5>
          <p> Email : bhavitha@gmail.com </p>
          <p> phone No : 123456789 </p>
          <p> Designation : vgcffffgvgvb </p>
          <p> Department : hgcdsfhhvgvgvg</p>
          <p> Report To : nhvgvgvghh</p>
          <p> Profile: gvgvgvgvgh</p>
-         <p> Branch : hvgfcfcff</p>
+         <p> Branch : hvgfcfcff</p> */}
          </div>
       
 
