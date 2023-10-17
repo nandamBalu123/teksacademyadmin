@@ -19,6 +19,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import favicon from "../../../images/favicon.jpeg";
 import axios from "axios";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 // let role = localStorage.getItem(role);
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -39,17 +40,32 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     </MenuItem>
   );
 };
-let username = "zaheer";
-// let role = localStorage.getItem("role");
-let role = "admin";
 
 const Sidebar = () => {
+  const { user } = useAuthContext();
+  // let role;
+  // let user;
+  // let username;
+  // if (localStorage.getItem("user")) {
+  //   user = localStorage.getItem("user");
+  //   user = JSON.parse(user);
+  //   role = user.profile;
+  //   username = user.fullname;
+  // }
+  // let user = localStorage.getItem("user"); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
+  let token = localStorage.getItem("token");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-
+  // let logggeduser = JSON.parse(user);
+  // console.log("usser", logggeduser);
+  // let username = JSON.parse(user.fullname);
+  // let role = localStorage.getItem("role");
+  // let role = JSON.parse(user.profile);
   // let role = localStorage.getItem(role);
+  // let username = "zHERER";
+  // let role = "admin";
   let screenSize = window.innerWidth;
   console.log(screenSize);
 
@@ -121,13 +137,13 @@ const Sidebar = () => {
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
-                <img
+                {/* <img
                   alt="profile-user"
                   width="100px"
                   height="100px"
                   src={zaheer}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
+                /> */}
               </Box>
               <Box textAlign="center">
                 <Typography
@@ -138,10 +154,10 @@ const Sidebar = () => {
                   letterSpacing="1px"
                 >
                   {/* Zaheer */}
-                  {username}
+                  {user.fullname}
                 </Typography>
                 <Typography variant="h5" color={colors.grey[100]}>
-                  {role}
+                  {user.profile}
                 </Typography>
               </Box>
             </Box>
@@ -156,7 +172,7 @@ const Sidebar = () => {
               setSelected={setSelected}
               style={{ color: "black" }}
             />
-            {role == "admin" ? (
+            {user.profile == "admin" ? (
               <SubMenu
                 style={{
                   color: colors.grey[100],
@@ -179,26 +195,8 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-                
               </SubMenu>
             ) : undefined}
-            <SubMenu
-                  style={{
-                    // color: colors.grey[100],
-                    color: "black",
-                  }}
-                  icon={<SettingsIcon />}
-                  label={"Roles Management"}
-                  title={"Settings"}
-                >
-                  <Item
-                    title="Roles"
-                    to="/roles"
-                    icon={<EditNoteIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                </SubMenu>
 
             <SubMenu
               style={{
@@ -238,6 +236,25 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
             </SubMenu>
+            {user.profile == "admin" ? (
+              <SubMenu
+                style={{
+                  // color: colors.grey[100],
+                  color: "black",
+                }}
+                icon={<SettingsIcon />}
+                label={"Roles Management"}
+                title={"Settings"}
+              >
+                <Item
+                  title="Roles"
+                  to="/roles"
+                  icon={<EditNoteIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </SubMenu>
+            ) : undefined}
           </Box>
         </Menu>
       </ProSidebar>
