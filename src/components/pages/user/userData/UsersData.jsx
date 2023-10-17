@@ -107,6 +107,7 @@ const UsersData = () => {
   const [initialData, setData] = useState([{ name: "" }]);
   const [filteredData, setFilteredData] = useState(initialData);
 
+  console.log("initialData: ", initialData)
   // const [filteredData, setFilteredData] = useState(userData);
   const [error, setError] = useState(null);
   // const [open, setOpen] = useState(false);
@@ -130,7 +131,7 @@ const UsersData = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setData(data.Result);
+        setData(data);
       } catch (err) {
         setError(err);
       }
