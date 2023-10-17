@@ -56,11 +56,14 @@
   font-weight: bold;
 }
 .input-box {
-  height: 30px;
+  /* height: 30px; */
   width: 75%;
   border-bottom: 2px solid #888;
   position: relative;
   margin: 20px 0;
+}
+.btnbrder {
+  border: none;
 }
 .input-box input {
   width: 100%;

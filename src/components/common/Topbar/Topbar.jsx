@@ -17,18 +17,30 @@ import axios from "axios";
 import profilepic from "../../../images/profilepic.jpg";
 import "./Topbar.css";
 import zIndex from "@mui/material/styles/zIndex";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+
 const Topbar = () => {
+  const { user } = useAuthContext();
+  const { dispatch } = useAuthContext();
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+
   const handleLogout = () => {
-    axios
-      .get("http://localhost:3030/logout")
-      .then((res) => {
-        navigate("/login");
-      })
-      .catch((err) => console.log(err));
+    localStorage.removeItem("user");
+    localStorage.removeItem("role");
+    localStorage.removeItem("token");
+
+    // dispatch logout action
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+    // axios
+    //   .get("http://localhost:3030/logout")
+    //   .then((res) => {
+    //     navigate("/login");
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -38,6 +50,10 @@ const Topbar = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleProfile = () => {
+    navigate("");
+    navigate("/userview/" + user.id);
   };
 
   return (
@@ -55,8 +71,8 @@ const Topbar = () => {
             </IconButton>
           </Box> */}
         </div>
-        
-          {/* <Box>
+
+        {/* <Box>
           <IconButton onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "dark" ? (
               <DarkModeOutlinedIcon />
@@ -65,19 +81,20 @@ const Topbar = () => {
             )}
           </IconButton> 
         </Box> */}
-    
-       <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">
-       <IconButton>
-          <NotificationsOutlinedIcon />
-      </IconButton> </div>
-      <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1"> 
-      <IconButton>
-         <SettingsOutlinedIcon />
-       </IconButton></div>
-       <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">  
-      
+
+        <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+          <IconButton>
+            <NotificationsOutlinedIcon />
+          </IconButton>{" "}
+        </div>
+        <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+          <IconButton>
+            <SettingsOutlinedIcon />
+          </IconButton>
+        </div>
+        <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">
           <div>
-          <Button
+            <Button
               id="basic-button"
               aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
@@ -86,7 +103,7 @@ const Topbar = () => {
             >
               <PersonOutlinedIcon className="personicon"> </PersonOutlinedIcon>
             </Button>
-             <Menu
+            <Menu
               id="basic-menu"
               anchorEl={anchorEl}
               open={open}
@@ -100,18 +117,17 @@ const Topbar = () => {
 
                 <div className=" ms-3 mt-3">
                   {" "}
-                  <h5 onClick={handleClose}>Bhavitha</h5>
-                  <p onClick={handleClose}>Bhavitha@gmail.com</p>
+                  <h5 onClick={handleClose}>{user.fullname}</h5>
+                  <p onClick={handleClose}>{user.email}</p>
                 </div>
               </div>
 
-              <MenuItem onClick={handleClose}>Profile & Acoount</MenuItem>
+              <MenuItem onClick={handleProfile}>Profile</MenuItem>
               <MenuItem onClick={handleClose}>Setting </MenuItem>
               <hr />
-              <MenuItem onClick={handleLogout}>Sing Out </MenuItem>
+              <MenuItem onClick={handleLogout}>Logout </MenuItem>
             </Menu>
           </div>
-         
         </div>
       </div>
     </>
