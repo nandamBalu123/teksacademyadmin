@@ -67,16 +67,17 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
+        
           <div className="app">
-            {/* {user ? <Sidebar /> : undefined} */}
-            <Sidebar />
+            {user ? <Sidebar /> : undefined}
+            {/* <Sidebar /> */}
 
             <div
               style={{ marginBottom: "50px", backgroundColor: "white" }}
             ></div>
             <main className="content" style={{ overflow: "auto" }}>
-              {/* {user ? <Topbar /> : undefined} */}
-              <Topbar />
+              {user ? <Topbar /> : undefined}
+              {/* <Topbar /> */}
               <Routes>
                 <Route
                   path="/"
