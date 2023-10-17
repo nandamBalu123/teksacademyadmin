@@ -288,15 +288,21 @@ const CreateUserForm = () => {
            <label className="mar userlabel" htmlFor="designation">
               Designation<span className="star"> *</span> :
             </label>
-            <input
-              className=" mar w-50"
+            
+
+            <select
+              className=" mar w-50 ms-2"
               name="designation"
               type="text"
               onChange={(e) => setdesignation(e.target.value)}
               value={designation}
               id="designation"
               required
-            />
+            >
+              <option> ---select--- </option>
+            <option> Sr. Counsellor </option>
+            <option> Branch Manager </option>
+            </select>
             <div className=" w-100  ms-5 error"> {errors.designation && (
               <span className="error">{errors.designation}</span>
             )}</div>

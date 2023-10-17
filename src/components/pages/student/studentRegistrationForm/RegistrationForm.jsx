@@ -413,7 +413,7 @@ export default function RegistrationForm() {
     setFeeDetails(updatedTasks);
   };
   return (
-    <div className="main-container">
+    <div className="main-container container">
       <div className="main-sub-container ">
         <Typography fontSize={35}>Registration form</Typography>
 
@@ -424,14 +424,14 @@ export default function RegistrationForm() {
               <Typography fontSize={25}>Basic Details</Typography>
             </StepLabel>
             <StepContent>
-              <form className="form">
+              <form className="form ">
                 <div className="row input ">
-                  <label className="col-12 col-md-2 label">
+                  <label className="col-12 col-md-5 label">
                     Name <span className="text-danger">*</span>&nbsp; :
                   </label>
                   <input
                     type="text"
-                    className="col-9 col-md-5"
+                    className="col-12 col-md-5"
                     required
                     style={{
                       height: "35px",
@@ -1429,12 +1429,12 @@ export default function RegistrationForm() {
                   <table class="table w-75 m-auto border border-1 ">
                     <thead>
                       <tr>
-                        <th className="border border-1">Fee Type</th>
+                        <th className="border border-1 ">Fee Type</th>
                         <th className="border border-1">Amount</th>
                         <th className="border border-1">Discount</th>
                         <th className="border border-1">Tax Amount</th>
                         <th className="border border-1">Total Amount</th>
-                        <th className="border border-1">Actions</th>
+                        <th className="border border-1 ">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1498,7 +1498,7 @@ export default function RegistrationForm() {
                 <table className="table w-75 ms-5">
                   <thead>
                     <tr>
-                      <th className="border border-1">Gross Total</th>
+                      <th className="border border-1 ">Gross Total</th>
                       <th className="border border-1">Total Discount</th>
                       <th className="border border-1">Total Amount</th>
                     </tr>
@@ -1508,6 +1508,7 @@ export default function RegistrationForm() {
                       <td className="border border-1">{grosstotal}</td>
                       <td className="border border-1">{totaldiscount}</td>
                       <td className="border border-1">{finaltotal}</td>
+                      
                     </tr>
                   </tbody>
                 </table>
@@ -1543,21 +1544,35 @@ export default function RegistrationForm() {
                         }
                       })}
                     {feedetailsbilling.length > 0 && (
-                      <tr>
-                        <td className="empty"></td>
+                      <tr >
+                        <td className="border border-1" > <strong> Sub Total</strong></td>
                         <td className="border border-1 ">
-                          Grand Total :
-                          {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
+                        
+                         <strong> {parseFloat(totalfeewithouttax.toFixed(2))}{" "} </strong> 
                         </td>
                         <td className="border border-1 ">
-                          TotalTax: <br />
-                          {parseFloat(totaltax.toFixed(2))}
+                    
+                          <strong> {parseFloat(totaltax.toFixed(2))}</strong>
                         </td>
                         <td className="border border-1 ">
-                          Grand Total :{parseFloat(grandtotal.toFixed(2))}
+                        <strong> {parseFloat(grandtotal.toFixed(2))}</strong>
                         </td>
                       </tr>
                     )}
+                    <tr > 
+                      <td colspan="2" className="empty"> 
+                       
+                      </td>
+                      <td className="empty">  Material Fee  </td>
+                      <td > {materialfee} </td>
+                    </tr>
+                    <tr > 
+                      <td colspan="2" className="empty"> 
+                        
+                      </td>
+                      <td className="empty"> Grand Total</td>
+                      <td> {finaltotal} </td>
+                    </tr>
                   </tbody>
                 </table>
                 <div className="d-flex justify-content-around">

@@ -99,7 +99,7 @@ const CreateRole = () => {
             <div className="container ">
               <button
                 type="submit"
-                class="btn btn-primary my-4"
+                class="btn btn-primary my-4 "
                 onClick={handleSubmit}
               >
                 Submit

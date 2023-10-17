@@ -69,20 +69,24 @@ const FeeDetails = () => {
         <div className="feedetails">
           {" "}
           <h4> Fee Management(Registered Students)</h4>
-          <div className="d-flex justify-content-between pt-3">
-            <button className="feebtn" onClick={studentFeeRecords}>
+          <div className="row pt-3">
+           <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3"> 
+           <button className="feebtn" onClick={studentFeeRecords}>
               Student Fee Records
             </button>
-            <button className="feebtn " onClick={noDueRecords}>
-              No Due Records
-            </button>
+           </div>
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3"> 
+            <button className="btn bg-success text-light" onClick={noDueRecords}>No Due Records</button>
+            </div>
+            <div  className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3" > 
             <button
-              className="feebtn"
+              className="feebtn "
               onClick={() => navigator("/feefollowup")}
             >
               {" "}
               Fee FollowUps
             </button>
+            </div>
           </div>
           <div className="d-flex justify-content-between pt-3 pb-3">
             <input

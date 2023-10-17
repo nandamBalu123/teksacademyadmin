@@ -73,16 +73,14 @@ StepLabel {
 .form {
   background-color: white;
   border: 1px solid whitesmoke;
-  width: 70%;
+ 
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 5%;
   margin: 0;
   border-radius: 30px;
 }
-.label {
-  width: 210px;
-}
+
 /* table,th,td{ 
   border: 1px solid black;
  
@@ -91,6 +89,7 @@ StepLabel {
   border-radius: 5px;
 }
 /* .materialfee, .finaltotal{ 
+  margin-left: 67%;
   margin-left: 400px;
 } */
 .billing{ 
@@ -99,3 +98,4 @@ StepLabel {
 .empty{ 
   border: none;
 }
+

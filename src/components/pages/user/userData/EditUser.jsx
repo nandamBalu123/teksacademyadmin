@@ -76,7 +76,7 @@ const EditUser = () => {
          <div className="row">
            <div className="mb-3 col-lg-6 col-md-6 col-12">
              <label htmlFor="exampleInputEmail1" className="form-label">
-               fullname
+               Full Name
              </label>
              <input
               type="text"
@@ -90,7 +90,7 @@ const EditUser = () => {
           </div>
           <div className="mb-3 col-lg-6 col-md-6 col-12">
             <label htmlFor="exampleInputEmail1" className="form-label">
-              email
+              Email
             </label>
             <input
               type="email"
@@ -117,7 +117,7 @@ const EditUser = () => {
           </div>
           <div className="mb-3 col-lg-6 col-md-6 col-12">
             <label htmlFor="exampleInputPassword1" className="form-label">
-              Phone number
+              Phone Number
             </label>
             <input
               type="text"
@@ -144,7 +144,7 @@ const EditUser = () => {
           </div>
           <div className="mb-3 col-lg-6 col-md-6 col-12">
             <label htmlFor="exampleInputPassword1" className="form-label">
-              reportto
+              Report To
             </label>
             <input
               type="text"
@@ -157,7 +157,7 @@ const EditUser = () => {
           </div>
           <div className="mb-3 col-lg-6 col-md-6 col-12">
             <label htmlFor="exampleInputPassword1" className="form-label">
-              profile
+              Profile
             </label>
             <input
               type="text"

@@ -100,9 +100,11 @@ useEffect(() => {
   return (
     <>
       {/* Header */}
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+     <div > 
+     <Box className="text-center">
+        <Header title="TEKS ACADEMY" subtitle="Welcome to your dashboard" />
       </Box>
+     </div>
 
       
       <div className="contianer Dashboard">
@@ -150,15 +152,15 @@ useEffect(() => {
           
           <Box className=" col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
             <h6> Hi-tech City</h6>
-            <BorderLinearProgress variant="determinate" value={40} /> 40%
+            <BorderLinearProgress variant="determinate" value={40} />90,000( 40%) 
           </Box>
           <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
             <h6> Ameerpet</h6>
-            <BorderLinearProgress variant="determinate" value={20} /> 20%
+            <BorderLinearProgress variant="determinate" value={20} />  20,000(20%)
           </Box>
           <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
             <h6>Dilsukhnagar </h6>
-            <BorderLinearProgress variant="determinate" value={40} /> 40%
+            <BorderLinearProgress variant="determinate" value={40} /> 90,000(40%)
           </Box>
         </div>
       </div>
@@ -177,11 +179,11 @@ useEffect(() => {
             })}
           {/* <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
             <h6> Hi-tech City</h6>
-            <BorderLinearProgress variant="determinate" value={38} /> 38%
+            <BorderLinearProgress variant="determinate" value={38} />180(38%) 
           </Box>
           <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
             <h6> Ameerpet</h6>
-            <BorderLinearProgress variant="determinate" value={12} /> 12%
+            <BorderLinearProgress variant="determinate" value={12} />70 (12%)
           </Box>
           <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
             <h6>Dilsukhnagar </h6>
