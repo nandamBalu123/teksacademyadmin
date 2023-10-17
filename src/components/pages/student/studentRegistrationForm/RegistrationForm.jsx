@@ -1575,7 +1575,11 @@ export default function RegistrationForm() {
                     </tr>
                   </tbody>
                 </table>
-                       <br />
+                <div className="d-flex justify-content-around">
+                  <p >MaterialFee: {materialfee}</p>
+                  <p>Final Total: {finaltotal}</p>
+                </div>
+                <br />
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>

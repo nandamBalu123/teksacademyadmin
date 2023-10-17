@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
@@ -44,120 +44,188 @@ import Feefollowup from "./components/pages/student/fee/Feefollowup";
 import FeeView from "./components/pages/student/fee/FeeView";
 import Addtofee from "./components/pages/student/fee/Addtofee";
 import EditStudentForm from "./components/pages/student/studentData/EditStudentForm";
-
+import { useAuthContext } from "./hooks/useAuthContext";
+import { useEffect } from "react";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
+  const { user } = useAuthContext();
+
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const toggle = true;
-  // let role = localStorage.getItem('role'); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
+  let role;
+  useEffect(() => {
+    role = localStorage.getItem("role");
+    console.log("role", role);
+  }, [user]);
+
+  // let user = localStorage.getItem("user"); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
   // let token = localStorage.getItem("token");
-  let role = "admin";
-  let token = "sdf";
-  console.log("hello: ", localStorage.getItem("token"));
-  console.log("hello: ", localStorage.getItem("role"));
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
-          {!token && !role ? (
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
-          ) : undefined}
-          {token ? <Sidebar isSidebar={isSidebar} /> : undefined}
-          {token ? (
+        <BrowserRouter>
+        
+          <div className="app">
+            {user ? <Sidebar /> : undefined}
+            {/* <Sidebar /> */}
+
+            <div
+              style={{ marginBottom: "50px", backgroundColor: "white" }}
+            ></div>
             <main className="content" style={{ overflow: "auto" }}>
-              <Topbar setIsSidebar={setIsSidebar} />
-              <div
-                style={{ marginBottom: "50px", backgroundColor: "white" }}
-              ></div>
+              {user ? <Topbar /> : undefined}
+              {/* <Topbar /> */}
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route
+                  path="/"
+                  element={user ? <Dashboard /> : <Navigate to="/login" />}
+                />
+                <Route
+                  path="/login"
+                  element={!user ? <LoginPage /> : <Navigate to="/" />}
+                />
+
                 <Route
                   path="/registrationform"
-                  element={<RegistrationForm />}
-                />
-                <Route
-                  path="/feedetails/:id"
-                  element={role == "admin" ? <FeeDetails /> : <Dashboard />}
-                />
-                <Route
-                  path="/feedetails"
-                  element={role == "admin" ? <FeeDetails /> : <Dashboard />}
-                />
-
-                <Route
-                  path="/feefollowup"
-                  element={role == "admin" ? <Feefollowup /> : <Dashboard />}
-                />
-
-                <Route
-                  path="/feeview/:id"
-                  element={role == "admin" ? <FeeView /> : <Dashboard />}
-                />
-
-                <Route
-                  path="/addtofee/:id"
-                  element={role == "admin" ? <Addtofee /> : <Dashboard />}
-                />
-
-                <Route path="/studentdata" element={<StudentData />} />
-                <Route
-                  path="/studentdataview/:id"
                   element={
-                    role == "admin" ? <StudentDataView /> : <Dashboard />
+                    user ? <RegistrationForm /> : <Navigate to="/login" />
                   }
                 />
                 <Route
-                  path="/createuser"
-                  element={role == "admin" ? <CreateUserForm /> : <Dashboard />}
-                />
-                <Route
-                  path="/usersdata"
-                  element={role == "admin" ? <UsersData /> : <Dashboard />}
-                />
-
-                <Route
-                  path="/userview/:id"
-                  element={role == "admin" ? <UserView /> : <Dashboard />}
-                />
-
-                <Route
-                  path="/roles"
-                  element={role == "admin" ? <Roles /> : <Dashboard />}
-                />
-                <Route
-                  path="/studentApplicationprint/:id"
+                  path="/feedetails/:id"
                   element={
-                    role == "admin" ? (
-                      <StudentApplicationPrint />
+                    user && user.profile == "admin" ? (
+                      <FeeDetails />
                     ) : (
                       <Dashboard />
                     )
                   }
                 />
                 <Route
+                  path="/feedetails"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <FeeDetails />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+
+                <Route
+                  path="/feefollowup"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <Feefollowup />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+
+                <Route
+                  path="/feeview/:id"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <FeeView />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+
+                <Route
+                  path="/addtofee/:id"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <Addtofee />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+
+                <Route path="/studentdata" element={<StudentData />} />
+                <Route
+                  path="/studentdataview/:id"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <StudentDataView />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/createuser"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <CreateUserForm />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/usersdata"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <UsersData />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+
+                <Route
+                  path="/userview/:id"
+                  element={user ? <UserView /> : <Dashboard />}
+                />
+
+                <Route
+                  path="/roles"
+                  element={
+                    user && user.profile == "admin" ? <Roles /> : <Dashboard />
+                  }
+                />
+                <Route
+                  path="/studentApplicationprint/:id"
+                  element={user ? <StudentApplicationPrint /> : <Dashboard />}
+                />
+                <Route
                   path="/createrole"
-                  element={role == "admin" ? <CreateRole /> : <Dashboard />}
+                  element={
+                    user && user.profile == "admin" ? (
+                      <CreateRole />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
                 />
                 <Route
                   path="/roleaccess/:id"
-                  element={role == "admin" ? <RoleAccess /> : <Dashboard />}
+                  element={
+                    user && user.profile == "admin" ? (
+                      <RoleAccess />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
                 />
                 <Route
                   path="/edituser/:id"
-                  element={role == "admin" ? <Edit /> : <Dashboard />}
+                  element={
+                    user && user.profile == "admin" ? <Edit /> : <Dashboard />
+                  }
                 />
                 <Route
                   path="/editstudent/:id"
-                  element={
-                    role == "admin" ? <EditStudentForm /> : <Dashboard />
-                  }
+                  element={user ? <EditStudentForm /> : <Dashboard />}
                 />
-                <Route path="/inn" element={<Login />}></Route>
+                {/* <Route path="/inn" element={<Login />}></Route> */}
 
                 {/* <Route
                 path="/feedetails"
@@ -180,10 +248,8 @@ function App() {
               ></Route> */}
               </Routes>
             </main>
-          ) : (
-            <LoginPage />
-          )}
-        </div>
+          </div>
+        </BrowserRouter>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

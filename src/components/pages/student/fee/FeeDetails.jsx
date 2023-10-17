@@ -12,7 +12,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./FeeDetails.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
 const FeeDetails = () => {
   const navigator = useNavigate();
   const [getstudentData, setData] = useState("");
@@ -105,7 +105,7 @@ const FeeDetails = () => {
                 borderRadius: "5px",
               }}
             />{" "}
-            <h6 onClick={handleClick}> Filter</h6>
+            {/* <h6 onClick={handleClick}> Filter</h6> */}
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}
@@ -279,12 +279,20 @@ const FeeDetails = () => {
                         {item.admissiondate}
                         <br />
                         {item.nextduedate}
-                        
                       </TableCell>
                       <TableCell className="border border 1">
                         {item.totalinstallments &&
                           item.totalinstallments.length > 0 &&
                           item.totalinstallments.map((items, index) => {
+                            const dynamicStyle = {
+                              color: item.dueamount < 1 ? "green" : "red",
+                              fontSize: item.dueamount < 1 ? "20px" : "16px",
+                              fontWeight: item.dueamount < 1 ? "900" : "900",
+                            };
+                            const IconStyle = {
+                              display: item.dueamount < 1 ? true : "none",
+                              marginLeft: "10px",
+                            };
                             if (true) {
                               // settotalleft(item.totalinstallmentsleft);
                               // totalleft = item.totalinstallmentsleft;
@@ -303,7 +311,9 @@ const FeeDetails = () => {
                           })}
                       </TableCell>
                       <TableCell className="border border 1">
-                        <Link to={`/feeview/${item.id}`}>view</Link>{" "}
+                        <Link to={`/feeview/${item.id}`}>
+                          <VisibilityIcon />
+                        </Link>{" "}
                       </TableCell>
                     </TableRow>
                   ))

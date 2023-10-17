@@ -6,7 +6,7 @@ const CreateUserForm = () => {
   const navigate = useNavigate();
   const [fullname, setfullname] = useState("");
   const [email, setemail] = useState("");
-  const [phonenum, setphonenum] = useState("");
+  const [phonenumber, setphonenum] = useState("");
   const [designation, setdesignation] = useState("");
   const [department, setdepartment] = useState("");
   const [reportto, setreportto] = useState("");
@@ -33,8 +33,8 @@ const CreateUserForm = () => {
   }
 
   // Validate Phone Number
-  if (phonenum.length !== 10) {
-    newErrors.phonenum = "Phone number must be 10 digits";
+  if (phonenumber.length !== 10) {
+    newErrors.phonenumber = "Phone number must be 10 digits";
   }
 
   // Validate Designation
@@ -118,7 +118,7 @@ const CreateUserForm = () => {
     const user = {
       fullname,
       email,
-      phonenum,
+      phonenumber,
       designation,
       department,
       reportto,
@@ -275,7 +275,7 @@ const CreateUserForm = () => {
               name="phonenum"
               type="number"
               onChange={(e) => setphonenum(e.target.value)}
-              value={phonenum}
+              value={phonenumber}
               id="phonenumber"
               required
             />

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 // import image from "../../../images/thumbnail_Login.jpg";
-import loginimg1 from '../../../images/loginimg1.jpg';
+import loginimg1 from "../../../images/loginimg1.jpg";
 // import loginimg from '../../../images/loginimg.jpg'
 // import education from '../../../images/education.jpg';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import validation from "../logins/adminlogins/Loginvalidation";
-
+import validation from "./Loginvalidation";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 const LoginPage = () => {
   const navigate = useNavigate();
-
+  const { dispatch } = useAuthContext();
   const [values, setValues] = useState({
     email: "",
 
@@ -38,8 +38,6 @@ const LoginPage = () => {
         .post("http://localhost:3030/adminlogin", values)
 
         .then((res) => {
-          console.log("API Response:", res.data);
-
           if (res.data.Status === "Success") {
             const id = res.data.adminData.id;
 
@@ -54,11 +52,11 @@ const LoginPage = () => {
             localStorage.setItem("role", role);
 
             localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(res.data.adminData));
 
-            navigate("/" + role + "/" + id);
-
-            console.log(id);
-            window.location.reload()
+            dispatch({ type: "LOGIN", payload: res.data.adminData });
+            console.log("res.data", res.data);
+            navigate("/");
           } else {
             alert("Wrong Email or Password");
           }
@@ -148,42 +146,47 @@ const LoginPage = () => {
   return (
     <div className="login">
       <div className="containers ">
-        <form className="login-section  " onSubmit={handleSubmit}>
+        <form className="login-section  ">
           <div className="form-box ">
             <h2> Welcome Back</h2>
             <div className="input-box">
-
               <input
                 type="email"
                 name="email"
                 required
                 onChange={handleInput}
               />
-               {errors.email && <span className="text-danger">{errors.email}</span>}
+              {errors.email && (
+                <span className="text-danger">{errors.email}</span>
+              )}
               <label htmlFor=""> Enter Email</label>
             </div>
             <div className="input-box col-12 col-md-6 col-md-6">
-
               <input
                 type="password"
                 name="password"
                 required
                 onChange={handleInput}
               />
-              
-               {errors.password && (
-            <span className="text-danger">{errors.password}</span>
-          )}
+
+              {errors.password && (
+                <span className="text-danger">{errors.password}</span>
+              )}
               <label htmlFor=""> Enter Password</label>
             </div>
-            <div className="input-box">
-              <button className="btn"> Login</button> </div></div> </form>
+            <button
+              className="btn btn-primary input-box btnbrder"
+              onClick={handleSubmit}
+            >
+              {" "}
+              Login
+            </button>{" "}
+          </div>{" "}
+        </form>
         <div className="img">
           <img className="img w-100" src={loginimg1} alt="img" />
         </div>
-
       </div>
-
     </div>
     // <div className="login row ">
     //   <div className="subdiv col-12  col-md-6  col-lg-6 imagediv">

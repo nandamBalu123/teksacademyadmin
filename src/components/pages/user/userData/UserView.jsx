@@ -52,24 +52,35 @@ const UserView = () => {
          </div> 
 
          <div className="row">
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-          
-            <p> Name :  {singleUser.fullname}</p>
-            <p> EMail: {singleUser.email}</p>
-            <p> Mobile Number: {singleUser.phonenumber}</p>
-            <p > Designation : {singleUser.designation} </p>
-            <p></p>
+          <div className="col-6">
+           
+
+<p> Name : </p>
+<p> EMail: </p>
+<p> Mobile Number: {studentdata.mobilenumber}</p> <p></p>
           </div>
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-          <p> Department :  {singleUser.department}</p>
-         <p> Report To :  {singleUser.reportto}</p>
-         <p> Profile: {singleUser.profile}</p>
-         <p> Branch : {singleUser.branch}</p>
-           
-           
+          <div className="col-6 text-end">
+            
+            <p> Education Type: {studentdata.educationtype}</p>
+            <p>Marks: {studentdata.marks} </p>
+            <p> Academic Year:</p>
           </div>
         </div>
-        
+         <div className="row"> 
+         <div className="col-6 text-start">  
+        <h5 >Name :  Bhavitha</h5>
+         <p  > Email : bhavitha@gmail.com </p>
+         <p > phone No : 123456789 </p>
+         <p > Designation : Developer </p>
+         </div>
+         <div className="col-6 text-start"  >
+         <p> Department : IT</p>
+         <p> Report To : Bhaskar</p>
+         <p> Profile: Jr. Software Developer</p>
+         <p> Branch : Hi-Tech city</p>
+           </div>
+          
+           </div>
          {/* <h5> Name :  Bhavitha</h5>
          <p> Email : bhavitha@gmail.com </p>
          <p> phone No : 123456789 </p>
@@ -85,7 +96,69 @@ const UserView = () => {
 
     // <div className="container">
     //   <div className="data">
-    //     <h3 className="text-center pt-3 title fs-3"> User Details</h3>
+    //     <h3 className="text-cen
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ter pt-3 title fs-3"> User Details</h3>
     //     <hr className="w-50 m-auto" />
     //     <div className="details pt-3">
     //       <h5> Name : {singleUser.fullname} </h5> <br />
