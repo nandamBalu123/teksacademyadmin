@@ -350,7 +350,7 @@ const UsersData = () => {
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className=" bg-primary fs-6 border border-1">
+                <StyledTableCell className=" bg-primary fs-6 " align="center">
                   Name
                 </StyledTableCell>
                 <StyledTableCell className=" bg-primary fs-6" align="center">
@@ -383,33 +383,33 @@ const UsersData = () => {
               {filteredData &&
                 filteredData.map((user) => (
                   <StyledTableRow>
-                    <StyledTableCell align="center">
+                    <StyledTableCell align="center" className="p-0 m-0">
                       {user.fullname}
                     </StyledTableCell>
-                    <StyledTableCell align="center">
+                    <StyledTableCell align="center" className="p-0 m-0">
                       {user.email}
                     </StyledTableCell>
-                    <StyledTableCell align="center">
+                    <StyledTableCell align="center" className="p-0 m-0">
                       {" "}
                       {user.phonenumber}
                     </StyledTableCell>
-                    <StyledTableCell align="center">
+                    <StyledTableCell align="center" className="p-0 m-0">
                       {user.designation}
                     </StyledTableCell>
-                    <StyledTableCell align="center">
+                    <StyledTableCell align="center" className="p-0 m-0">
                       {user.department}
                     </StyledTableCell>
-                    <StyledTableCell align="center">
+                    <StyledTableCell align="center" className="p-0 m-0"  >
                       {user.reportto}
                     </StyledTableCell>
-                    <StyledTableCell align="center">
+                    <StyledTableCell align="center" className="p-0 m-0">
                       {user.profile}
                     </StyledTableCell>
-                    <StyledTableCell align="center">
+                    <StyledTableCell align="center" className="p-0 m-0">
                       {" "}
                       {user.branch}
                     </StyledTableCell>
-                    <StyledTableCell align="center">
+                    <StyledTableCell align="center" className="d-flex ">
                       {/* <RemoveRedEyeIcon onClick={handleview}/> */}
                       <Link
                         to={`/userview/${user.id}`}
@@ -417,10 +417,10 @@ const UsersData = () => {
                       >
                         <VisibilityIcon className="iconn" />
                       </Link>
-                      <Link to={`/edituser/${user.id}`}>
+                      <Link to={`/edituser/${user.id}`}  style={{ width: "40px" }}>
                         <ModeEditIcon />
                       </Link>
-                      <DeleteIcon onClick={() => handleDelete(user.id)} />
+                   <DeleteIcon  style={{ width: "40px" }} onClick={() => handleDelete(user.id)} />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

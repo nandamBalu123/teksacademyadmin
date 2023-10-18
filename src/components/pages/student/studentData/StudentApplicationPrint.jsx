@@ -57,7 +57,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
         <div className="application">
           <h3 className="text-center"> Application Form </h3>
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-6 col-md-6 col-lg-6 col-xl-6">
               <h4 style={{ marginLeft: "15px" }}>
                 {" "}
                 <strong> Kapil Knowledge Hub Private Limited</strong>
@@ -85,14 +85,15 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 www.teksacademy.com{" "}
               </p>
             </div>
-            <div className="col-lg-6 text-right">
+            <div className="col-6 col-md-6 col-lg-6 col-xl-6">
               <br />
               <img src={logo} className="tekslogo" style={{ width: "100%" }} />
               <h4 className="text-center" style={{ marginTop: "23px" }}>
                 {" "}
-                <h5 className="text-start">
+                <h5 className="text-start" 
+             >
                   {" "}
-                  <strong> Branch:</strong> {studentdata.branch}
+                  <strong className="fs-5"> Branch:</strong> {studentdata.branch}
                 </h5>
               </h4>
             </div>
@@ -107,7 +108,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               Student Details
             </div>
             <div className="row">
-              <div className="col-lg-9">
+              <div className="col-8 col-md-8 col-lg-8 col-xl-8">
                 <div className="table-responsive">
                   <table className="table table-bordered">
                     <thead> </thead>
@@ -153,7 +154,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   </table>
                 </div>{" "}
               </div>
-              <div className="col-lg-3">
+              <div className=" col-4 col-md-4 col-lg-4 col-xl-4">
                 <img src="" />
               </div>
             </div>
@@ -172,7 +173,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <br />
                   <tr>
                     {" "}
-                    <th>Country</th>{" "}
+                    <th >Country</th>{" "}
                     <td className="w-25">{studentdata.country} </td>{" "}
                     <th> Native Place</th>{" "}
                     <td className="w-25">{studentdata.native}</td>{" "}
@@ -186,7 +187,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <tr>
                     {" "}
                     <th>Present Address</th>{" "}
-                    <td className="w-25">
+                    <td className="w-25 ">
                       {studentdata.area}
                       {studentdata.state}
                       {studentdata.zipcode}{" "}
@@ -295,21 +296,24 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                         : "No Date"}{" "}
                     </td>{" "}
                     <th> Course Start Date</th>{" "}
-                    <td colspan="1">
+                    <td colspan="1" > 
                       {" "}
                       {studentdata.validitystartdate
                         ? studentdata.validitystartdate.substring(0, 10)
                         : "No Date"}{" "}
                     </td>{" "}
+                    
                   </tr>
                   <tr>
                     {" "}
                     <th> Expected End Date </th>
-                    <td colspan="4">
+                    <td  >
                       {studentdata.validityenddate
                         ? studentdata.validityenddate.substring(0, 10)
                         : "No Date"}{" "}
                     </td>{" "}
+                    <th > Reg Number</th> 
+                    <td colspan="1" ></td>
                   </tr>
                 </tbody>
               </table>
@@ -403,6 +407,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </div>
         </div>
       </div>
+     <br/>
+     <br/> <br/> <br/> <br/> <br/> <br/><br/>
+
       <div className="main-tc">
         <div className="tc">
           <div>
@@ -833,6 +840,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 requests that their information be deleted.
               </li>
             </ul>
+            <br/><br/>
             <strong>7. Modification</strong>
             <br />
             <ul>
