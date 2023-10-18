@@ -226,7 +226,7 @@ const EditStudentForm = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setgetusers(data.Result);
+        setgetusers(data);
       } catch (err) {
         // setError(err);
       }

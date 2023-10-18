@@ -17,7 +17,9 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import "./Dashboard.css";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 const Dashboard = () => {
+  const { user } = useAuthContext();
   const [getUsersData, setUsersData] = useState([]);
   const [getstudentData, setStudentData] = useState([]);
   
@@ -64,15 +66,6 @@ const Dashboard = () => {
 
 
 
-  // const branchData = getstudentData.reduce((result, student) => {
-  //   const branch = student.branch;
-  //   if (!result[branch]) {
-  //     result[branch] = [];
-  //   }
-  //   result[branch].push(student);
-  //   return result;
-  // }, {});
-
   const groupDataAndCalculatePercentage = (data, key) => {
     if (!Array.isArray(data)) {
       return {}; // Return an empty object if data is not an array
@@ -88,21 +81,60 @@ const Dashboard = () => {
     }, {});
   };
   
-  let getUsersDatalength;
-useEffect(() => {
-  // getUsersDatalength = getUsersData[1].length;
-  // console.log("getuserlength: ", getUsersData.Result.length);
-  
-}, [getUsersData])
+ 
 
   const branchStudentData = groupDataAndCalculatePercentage(getstudentData, "branch");
   const branchUserData = groupDataAndCalculatePercentage(getUsersData, "branch");
+  
+
+
+//   // Function to group data by branch
+// const groupDataByBranch = (data) => {
+//   const branchData = {};
+//   data.forEach((student) => {
+//     const branch = student.branch;
+//     if (!branchData[branch]) {
+//       branchData[branch] = [];
+//     }
+//     branchData[branch].push(student);
+//   });
+//   return branchData;
+// };
+
+// const branchStudentDatad = groupDataByBranch(getstudentData);
+
+// Calculate the final total amount for each branch
+// const finalTotalByBranch = {};
+// Object.keys(branchStudentData).forEach((branch) => {
+//   finalTotalByBranch[branch] = branchStudentData[branch].reduce((total, student) => {
+//     return total + parseFloat(student.finaltotal); // Assuming "amount" is the field you want to sum
+//   }, 0);
+
+
+// });
+
+
+
+// Calculate the final total amount and percentage for each branch
+const finalTotalByBranch = {};
+const totalAmount = getstudentData.reduce((total, student) => total + parseFloat(student.amount), 0);
+Object.keys(branchStudentData).forEach((branch) => {
+  const branchTotalAmount = branchStudentData[branch].reduce((total, student) => total + parseFloat(student.amount), 0);
+  const branchPercentage = (branchTotalAmount / totalAmount) * 100;
+  finalTotalByBranch[branch] = {
+    totalAmount: branchTotalAmount,
+    percentage: branchPercentage,
+    
+  };
+  console.log("totalAmounttotalAmount",totalAmount);
+});
+
   return (
     <>
       {/* Header */}
      <div > 
      <Box className="text-center">
-        <Header title="TEKS ACADEMY" subtitle="Welcome to your dashboard" />
+        <Header title={"Hi " + user.fullname} subtitle={"Welcome to TEKS ACADEMY"} />
       </Box>
      </div>
 
@@ -124,7 +156,7 @@ useEffect(() => {
           <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 ">
             <Card style={{ backgroundColor: "#e6acb4 " }} className="rounded rounded-3">
               <p className="pt-3">Total Users</p>
-              <p> {getUsersDatalength}</p>
+              <p> {getUsersData.length}</p>
             </Card>
           </div>
         </div>
@@ -136,11 +168,13 @@ useEffect(() => {
         <div className="justify-content-around pt-4 row progreebar-show">
         {Object.entries(branchStudentData).map(([branch, students]) => {
             const enrollmentPercentage = (students.length / getstudentData.length) * 100;
+            const totalCount = students.length;
             return (
               <div key={`student-${branch}`} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
                 <h6>{branch}</h6>
                 <BorderLinearProgress variant="determinate" value={enrollmentPercentage} />
-                {enrollmentPercentage.toFixed(2)}%
+                {enrollmentPercentage.toFixed(2)}%<br />
+                <span>Total Count: </span>{totalCount}
               </div>
             );
           })}
@@ -149,8 +183,59 @@ useEffect(() => {
       <div className="progreebar rounded rounded-5 mt-5 pb-4">
         <h4 className="pt-4 mt-3 enrollment ps-4"> Total Fee</h4>
         <div className="  justify-content-around pt-4 row progreebar-show">
-          
-          <Box className=" col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
+          {/* {Object.entries(finalTotalByBranch).map(([branch, totalAmount]) => {
+            return (
+            <div key={branch} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
+                <h6>{branch}</h6>
+                <BorderLinearProgress variant="determinate" value={enrollmentPercentage} />
+                {enrollmentPercentage.toFixed(2)}%<br />
+                <span>Total Count: </span>{totalCount}
+              </div>
+            )
+          // <div key={branch}>
+          //   <h3>{branch}</h3>
+          //   <p>Total Amount: {totalAmount}</p>
+          // </div>
+        )}} */}
+      {/* // {Object.entries(finalTotalByBranch).map(([branch, { totalAmount, percentage }]) => (
+      //   <div key={branch}>
+      //     <h3>{branch}</h3>
+      //     <p>Total Amount: {totalAmount}</p>
+      //     <p>Percentage: {percentage.toFixed(2)}%</p>
+      //   </div>
+      // ))} */}
+      {/* {Object.entries(finalTotalByBranch).map(([branch, totalAmount]) => {
+          console.log("finalTotalByBranch", finalTotalByBranch)
+            const enrollmentPercentage = (totalAmount / totalAmount) * 100;
+           
+            // const totalCount = totalAmount.length;
+            return (
+              <div key={branch} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
+                <h6>{branch}</h6>
+                <BorderLinearProgress variant="determinate" value={enrollmentPercentage}/>
+                {enrollmentPercentage.toFixed(2)}%<br />
+                <span>Total Amount: </span>{totalAmount}
+                
+              </div>
+            );
+          })}  */}
+        {/* {Object.entries(finalTotalByBranch).map(([branch, totalAmount]) => {
+          console.log("finalTotalByBranch", finalTotalByBranch)
+            const enrollmentPercentage = (totalAmount / totalAmount) * 100;
+           
+            // const totalCount = totalAmount.length;
+            return (
+              <div key={branch} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
+                <h6>{branch}</h6>
+                <BorderLinearProgress variant="determinate" value={enrollmentPercentage}/>
+                {enrollmentPercentage.toFixed(2)}%<br />
+                <span>Total Amount: </span>{totalAmount}
+                
+              </div>
+            );
+          })} */}
+
+          {/* <Box className=" col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
             <h6> Hi-tech City</h6>
             <BorderLinearProgress variant="determinate" value={40} />90,000( 40%) 
           </Box>
@@ -161,7 +246,7 @@ useEffect(() => {
           <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
             <h6>Dilsukhnagar </h6>
             <BorderLinearProgress variant="determinate" value={40} /> 90,000(40%)
-          </Box>
+          </Box> */}
         </div>
       </div>
       <div className="progreebar rounded rounded-5 mt-5 pb-4">
@@ -169,53 +254,21 @@ useEffect(() => {
         <div className="row justify-content-around pt-4 progreebar-show">
           {Object.entries(branchUserData).map(([branch, users]) => {
               const enrollmentPercentage = (users.length / getUsersData.length) * 100;
+              const totalCount = users.length;
               return (
                 <div key={`user-${branch}`} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
                   <h6>{branch}</h6>
                   <BorderLinearProgress variant="determinate" value={enrollmentPercentage} />
-                  {enrollmentPercentage.toFixed(2)}%
+                  {enrollmentPercentage.toFixed(2)}%<br />
+                  <span>Total Count: </span>{totalCount}
+
                 </div>
               );
             })}
-          {/* <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
-            <h6> Hi-tech City</h6>
-            <BorderLinearProgress variant="determinate" value={38} />180(38%) 
-          </Box>
-          <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
-            <h6> Ameerpet</h6>
-            <BorderLinearProgress variant="determinate" value={12} />70 (12%)
-          </Box>
-          <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
-            <h6>Dilsukhnagar </h6>
-            <BorderLinearProgress variant="determinate" value={50} /> 50%
-          </Box> */}
         </div>
       </div>
 
-      {/* <div > 
-      
      
-      This is for progress bar
-     <div className="progress mt-3"> 
-     <div className="enrollment">  
-     <h4 className="pt-3"> Total Entrollment</h4>
-     <div className="d-flex  justify-content-around">  
-     <Box className="w-25"> 
-     <h6> Hi-tech City</h6>
-    <BorderLinearProgress variant="determinate" value={75}  /> 75%
-   </Box>
-   <Box className="w-25"> 
-   <h6> Ameerpet</h6>
-    <BorderLinearProgress variant="determinate" value={25}  /> 25%
-   </Box>
-   <Box className="w-25"> 
-   <h6>Dilsukhnagar </h6>
-    <BorderLinearProgress variant="determinate" value={45}  /> 45%
-   </Box>
-     </div>
-    
-     </div>  </div>
-      */}
     </>
   );
 };
