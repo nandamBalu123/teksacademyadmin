@@ -2,6 +2,11 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  page-break-before: always;
+}
+@page {
+  size: A4;
+  margin: 1cm; /* Set margins as desired */
 }
 .application {
   border: 3px solid #000;

@@ -40,23 +40,27 @@ const UserView = () => {
             src="https://wallpapers.com/images/high/pretty-profile-pictures-k1qebyviiyl0wx0x.webp"
             alt="photo"
           />
-         
-          
          </div> 
-
-        
+         <div className="row">
+          <div className="col-12 col-md-6 col-xl-6 col-lg-6">
+            
+            <p> User Name :{singleUser.fullname}</p>
+            <p> Email: {singleUser.email}</p>
+            <p> Phone No: {singleUser.phonenumber}</p>
+            <p> Designation: {singleUser.designation}</p>
+       
+          </div>
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6  text-start ">
          
-         <hr className="w-50 m-auto" />
-         <div className="details pt-3">
-           <h5> Name : {singleUser.fullname} </h5> <br />
-           <h5> Email : {singleUser.email}</h5> <br />
-           <h5> Phone No :{singleUser.phonenumber}</h5> <br />
-           <h5> Designation: {singleUser.designation}</h5> <br />
-           <h5> Department : {singleUser.department}</h5> <br />
-           <h5> Report To : {singleUser.reportto}</h5> <br />
-           <h5> Profile : {singleUser.profile}</h5> <br />
-           <h5> Branch: {singleUser.branch}</h5>{" "}
-         </div>
+            <p>Department : {singleUser.department}</p>
+            <p> Report To : {singleUser.reportto}</p>
+            <p> Profile : {singleUser.profile} </p>
+            <p> Branch: {singleUser.branch}</p>
+           
+          </div>
+        
+        </div>
+      
        </div>
      </div>
   );

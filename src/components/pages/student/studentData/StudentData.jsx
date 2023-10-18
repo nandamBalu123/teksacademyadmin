@@ -576,7 +576,7 @@ const StudentData = () => {
                   // <li key={item.id}>{item.name}</li>
 
                   <StyledTableRow key={item.id}>
-                    <StyledTableCell className=" border border 2 text-center">
+                    <StyledTableCell className=" border border 2 text-center p-0 m-0">
                       {index + 1}
                     </StyledTableCell>
                     {/* 
@@ -584,31 +584,27 @@ const StudentData = () => {
                     {item.profilepic}
                   </StyledTableCell> */}
 
-                    <StyledTableCell className=" border border 1 text-center">
-                      {item.name}
-                      <br />
-
-                      {item.registrationnumber}
+                    <StyledTableCell className=" border border 1 text-center p-0 m-0">
+                      {item.name}<br/>
+                     {item.registrationnumber}
                     </StyledTableCell>
 
-                    <StyledTableCell align="left">
+                    <StyledTableCell align="left" className=" border border 1 text-center p-0 m-0">
                       {item.branch}
                       <br />
                       {item.courses}
                     </StyledTableCell>
 
-                    <StyledTableCell className=" border border 1 text-center">
+                    <StyledTableCell className=" border border 1 text-center p-0 m-0">
                       {item.enquirytakenby}
                       <br />
 
                       {item.leadsource}
                     </StyledTableCell>
 
-                    <StyledTableCell className=" border border 1 text-center  ">
+                    <StyledTableCell className=" border border 1 text-center p-0 m-0 ">
                       {item.mobilenumber}
-                      <br />
-
-                      <p
+                      <br /><p
                         style={{
                           width: "200px",
                           whiteSpace: "nowrap",
@@ -620,7 +616,7 @@ const StudentData = () => {
                       </p>
                     </StyledTableCell>
 
-                    <StyledTableCell className=" border border 1 text-center">
+                    <StyledTableCell className=" border border 1 text-center p-0 m-0">
                       {item.admissiondate
                         ? item.admissiondate.substring(0, 10)
                         : "No Date"}{" "}
@@ -628,10 +624,10 @@ const StudentData = () => {
                       {item.modeoftraining}
                     </StyledTableCell>
 
-                    <StyledTableCell className=" border border 1 text-center d-flex pb-3  ">
+                    <StyledTableCell  className=" text-center d-flex py-4 ">
                       <Link
                         to={`/studentdataview/${item.id}`}
-                        style={{ width: "40px", marginBottom: "10px" }}
+                        style={{ width: "40px" }}
                       >
                         <VisibilityIcon className="iconn" />
                       </Link>
