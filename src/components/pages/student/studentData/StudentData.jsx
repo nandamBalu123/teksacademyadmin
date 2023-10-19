@@ -512,24 +512,24 @@ const StudentData = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-            <TableCell className="bg-primary fs-6 border border 1 text-center   ">
+            <TableCell className="bg-primary fs-6 border border 1 text-center  text-light  ">
                   SNo
                 </TableCell>
                 <TableCell
-                  className="  bg-primary fs-6 border border 1 text-center "
+                  className="  bg-primary fs-6 border border 1 text-center text-light "
                   align="left"
                 >
                   Student Name <br /> Registration No
                 </TableCell>
                 <TableCell
-                  className="  bg-primary fs-6 border border 1 text-center "
+                  className="  bg-primary fs-6 border border 1 text-center text-light "
                   align="left"
                 >
                   Branch <br />Course
                 </TableCell>
                 
                 <TableCell
-                  className="bg-primary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center text-light"
                   align="left"
                 >
                   Counseller
@@ -537,7 +537,7 @@ const StudentData = () => {
                 </TableCell>
 
                 <TableCell
-                  className="bg-primary fs-6 border border 1 text-center "
+                  className="bg-primary fs-6 border border 1 text-center text-light "
                   align="left"
                 >
                   Contact Number <br />
@@ -545,7 +545,7 @@ const StudentData = () => {
                 </TableCell>
 
                 <TableCell
-                  className="bg-primary fs-6 border border 1 text-center "
+                  className="bg-primary fs-6 border border 1 text-center text-light "
                   align="left"
                 >
                   Joining Date <br />
@@ -553,7 +553,7 @@ const StudentData = () => {
                 </TableCell>
 
                 <TableCell
-                  className="bg-primary fs-6 border border 1 text-center"
+                  className="bg-primary fs-6 border border 1 text-center text-light"
                   align="left"
                 >
                   Actions
@@ -563,85 +563,7 @@ const StudentData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-           
-                  <TableRow >
-                    
-                        <TableCell >
-                          
-                        </TableCell>
-                    
-                  </TableRow>
-             
-          </TableBody>
-        </Table>
-      </TableContainer>
-     
-    </Paper>
-
-        <TableContainer >
-          <Table sx={{ minWidth: 1000 }}  stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow className="tablerow">
-                <TableCell className="bg-primary fs-6 border border 1 text-center   ">
-                  SNo
-                </TableCell>
-                {/* 
-                <StyledTableCell
-                  className="bg-secondary fs-6  border border 1 text-center"
-                  align="left"
-                >
-                  Photo
-                </StyledTableCell> */}
-
-                <TableCell
-                  className="  bg-primary fs-6 border border 1 text-center "
-                  align="left"
-                >
-                  Student Name <br /> Registration No
-                </TableCell>
-
-                <TableCell
-                  className="bg-primary fs-6 border border 1 text-center"
-                  align="left"
-                >
-                  Branch <br /> Course
-                </TableCell>
-
-                <TableCell
-                  className="bg-primary fs-6 border border 1 text-center"
-                  align="left"
-                >
-                  Counseller
-                  <br /> Source
-                </TableCell>
-
-                <TableCell
-                  className="bg-primary fs-6 border border 1 text-center "
-                  align="left"
-                >
-                  Contact Number <br />
-                  Email
-                </TableCell>
-
-                <TableCell
-                  className="bg-primary fs-6 border border 1 text-center "
-                  align="left"
-                >
-                  Joining Date <br />
-                  Traning Mode
-                </TableCell>
-
-                <TableCell
-                  className="bg-primary fs-6 border border 1 text-center"
-                  align="left"
-                >
-                  Actions
-                </TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {Array.isArray(records) && records.length > 0 ? (
+          {Array.isArray(records) && records.length > 0 ? (
                 records.map((item, index) => (
                   // <li key={item.id}>{item.name}</li>
 
@@ -745,10 +667,15 @@ const StudentData = () => {
                   <TableCell colSpan={3}>No data available</TableCell>
                 </TableRow>
               )}{" "}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                 
+             
+          </TableBody>
+        </Table>
+      </TableContainer>
+     
+    </Paper>
 
+       
         <div>
           <nav>
             <ul className="pagination">
