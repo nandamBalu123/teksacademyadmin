@@ -174,7 +174,10 @@ export default function RegistrationForm() {
     setGrandtotal(grandtotall);
     setfeedetailsbilling(array);
     setmaterialfee(materialfeee);
-
+    if (feedetails.length === 0) {
+      alert("please enter feedetails");
+      return;
+    }
     handleNext();
   };
   useEffect(() => {
@@ -307,7 +310,6 @@ export default function RegistrationForm() {
   };
 
   const handleStudentContactDetails = () => {
-  
     if (!country) {
       alert("please enter country");
       return;
@@ -334,6 +336,82 @@ export default function RegistrationForm() {
     }
     handleNext();
   };
+  const handleEducationDetails = () => {
+    if (!educationtype) {
+      alert("please enter educationtype");
+      return;
+    }
+    if (!marks) {
+      alert("please  enter marks");
+      return;
+    }
+    if (!academicyear) {
+      alert("please enter academicyear");
+      return;
+    }
+
+    handleNext();
+  };
+  const handlePhoto = () => {
+    // if (!profilepic) {
+    //   alert("please enter profilepic");
+    //   return;
+    // }
+
+    handleNext();
+  };
+  const handleEnquirydetails = () => {
+    if (!enquirydate) {
+      alert("please enter enquirydate");
+      return;
+    }
+    if (!enquirytakenby) {
+      alert("please  enter enquirytakenby");
+      return;
+    }
+    if (!coursepackage) {
+      alert("please enter coursepackage");
+      return;
+    }
+    if (!courses) {
+      alert("please enter courses");
+      return;
+    }
+    if (!leadsource) {
+      alert("please enter leadsource");
+      return;
+    }
+
+    handleNext();
+  };
+  const handleAdmissiondetails = () => {
+    if (!branch) {
+      alert("please enter branch");
+      return;
+    }
+    if (!modeoftraining) {
+      alert("please  enter modeoftraining");
+      return;
+    }
+    if (!admissionstatus) {
+      alert("please enter admissionstatus");
+      return;
+    }
+    if (!admissiondate) {
+      alert("please enter Native place");
+      return;
+    }
+    if (!validitystartdate) {
+      alert("please enter validitystartdate");
+      return;
+    }
+    if (!validityenddate) {
+      alert("please enter validityenddate ");
+      return;
+    }
+    handleNext();
+  };
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -347,6 +425,15 @@ export default function RegistrationForm() {
   };
 
   const handleSubmit = async () => {
+    ///validations
+    if (!admissionremarks) {
+      alert("please enter admissionremarks");
+      return;
+    }
+    if (!assets) {
+      alert("please enter assets ");
+      return;
+    }
     const studentRegistrationdata = {
       name,
       email,
@@ -399,7 +486,7 @@ export default function RegistrationForm() {
       feedetailsbilling,
       totalfeewithouttax,
       totalpaidamount,
-      selectedFile
+      selectedFile,
     };
     // studentRegistrationdata.append('file', selectedFile)
     console.log("studentRegistration", studentRegistrationdata);
@@ -495,8 +582,6 @@ export default function RegistrationForm() {
     const updatedTasks = feedetails.filter((task) => task.id !== id);
     setFeeDetails(updatedTasks);
   };
-
-  
 
   return (
     <div className="main-container container">
@@ -992,7 +1077,7 @@ export default function RegistrationForm() {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handleEducationDetails}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1039,7 +1124,13 @@ export default function RegistrationForm() {
                     class="image-input"
                     
                   /> */}
-                  <input type="file" onChange={(e) => { setSelectedFile(e.target.files[0])}} accept="image/*" />
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      setSelectedFile(e.target.files[0]);
+                    }}
+                    accept="image/*"
+                  />
                   <input
                     type="file"
                     id="imageInput"
@@ -1053,7 +1144,7 @@ export default function RegistrationForm() {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handlePhoto}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1224,7 +1315,7 @@ export default function RegistrationForm() {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handleEnquirydetails}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1396,7 +1487,7 @@ export default function RegistrationForm() {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handleAdmissiondetails}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1668,7 +1759,7 @@ export default function RegistrationForm() {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleFeecalculations}
+                    onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
