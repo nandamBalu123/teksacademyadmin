@@ -57,7 +57,7 @@ const Branch = () => {
                 className="bg-primary fs-6  border border 1"
                 align="center"
               >
-                SI.NO
+                id
               </StyledTableCell>
               <StyledTableCell
                 className="bg-primary fs-6  border border 1"

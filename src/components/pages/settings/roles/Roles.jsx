@@ -9,32 +9,15 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
-
+import { useRoleContext } from "../../../../hooks/useRoleContext";
 const Roles = () => {
-  const [getuserroless, setData] = useState([]);
-  useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios
-      .get("http://localhost:3030/getuserroles")
-      .then((response) => {
-        // Handle the successful response here
-        if (response.data.Status === "Success") {
-          setData(response.data.Result); // Update the data state with the fetched data
-          // console.log(response.data)
-        }
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  const { roles } = useRoleContext();
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     navigate("/createrole");
   };
-
-  console.log(getuserroless);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -75,7 +58,7 @@ const Roles = () => {
                 className="bg-primary fs-6  border border 1"
                 align="center"
               >
-                id
+                SI.NO
               </StyledTableCell>
               <StyledTableCell
                 className="bg-primary fs-6  border border 1"
@@ -94,11 +77,11 @@ const Roles = () => {
           </TableHead>
 
           <TableBody className="border border 1">
-            {Array.isArray(getuserroless) && getuserroless.length > 0 ? (
-              getuserroless.map((item) => (
+            {Array.isArray(roles) && roles.length > 0 ? (
+              roles.map((item, index) => (
                 <StyledTableRow key={item.id}>
                   <StyledTableCell className="border border 1 text-center">
-                    {item.id}
+                    {index + 1}
                   </StyledTableCell>
                   <StyledTableCell className="border border 1 text-center">
                     {item.role}

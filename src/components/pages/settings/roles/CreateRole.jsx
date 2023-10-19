@@ -5,7 +5,9 @@ import { useState } from "react";
 import { Update } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { useRoleContext } from "../../../../hooks/useRoleContext";
 const CreateRole = () => {
+  const { dispatch } = useRoleContext();
   const navigate = useNavigate();
   const [role, setRoleName] = useState("");
   const [description, setDescription] = useState("");
@@ -15,16 +17,7 @@ const CreateRole = () => {
     Delete: false,
     Create: false,
   });
-  // const handleCheckboxChange = async (event) => {
-  //   const name = event.target.name;
 
-  //   // Step 4: Update the state with the new checkbox value
-  //   setBasicAccess({
-  //     ...BasicAccess,
-  //     [name]: !BasicAccess.name,
-  //   });
-  //   console.log(BasicAccess);
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = {
@@ -49,7 +42,7 @@ const CreateRole = () => {
 
     if (response.ok) {
       console.log("User created successfully.");
-
+      dispatch({ type: "CREATE_ROLE", payload: json });
       // Reset the form fields
       setRoleName("");
       setDescription("");
@@ -60,9 +53,9 @@ const CreateRole = () => {
     navigate("/roles");
   };
   return (
-    <div style={{ marginTop: "30px" }} >
+    <div style={{ marginTop: "30px" }}>
       <p className="fs-5 ms-5">CreateRole</p>
-      <form >
+      <form>
         <Box
           component="form"
           sx={{

@@ -48,6 +48,7 @@ import EditStudentForm from "./components/pages/student/studentData/EditStudentF
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useEffect } from "react";
 import Branch from "./components/pages/settings/branch/Branch";
+import CreateBranch from "./components/pages/settings/branch/CreateBranch";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -187,14 +188,37 @@ function App() {
                 />
 
                 <Route
+                  path="/studentApplicationprint/:id"
+                  element={user ? <StudentApplicationPrint /> : <Dashboard />}
+                />
+
+                <Route
+                  path="/roleaccess/:id"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <RoleAccess />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+
+                <Route
+                  path="/edituser/:id"
+                  element={
+                    user && user.profile == "admin" ? <Edit /> : <Dashboard />
+                  }
+                />
+                <Route
+                  path="/editstudent/:id"
+                  element={user ? <EditStudentForm /> : <Dashboard />}
+                />
+
+                <Route
                   path="/roles"
                   element={
                     user && user.profile == "admin" ? <Roles /> : <Dashboard />
                   }
-                />
-                <Route
-                  path="/studentApplicationprint/:id"
-                  element={user ? <StudentApplicationPrint /> : <Dashboard />}
                 />
                 <Route
                   path="/createrole"
@@ -207,30 +231,20 @@ function App() {
                   }
                 />
                 <Route
-                  path="/roleaccess/:id"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <RoleAccess />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
-                <Route
                   path="/branch"
                   element={
                     user && user.profile == "admin" ? <Branch /> : <Dashboard />
                   }
                 />
                 <Route
-                  path="/edituser/:id"
+                  path="/createbranch"
                   element={
-                    user && user.profile == "admin" ? <Edit /> : <Dashboard />
+                    user && user.profile == "admin" ? (
+                      <CreateBranch />
+                    ) : (
+                      <Dashboard />
+                    )
                   }
-                />
-                <Route
-                  path="/editstudent/:id"
-                  element={user ? <EditStudentForm /> : <Dashboard />}
                 />
                 {/* <Route path="/inn" element={<Login />}></Route> */}
 
