@@ -228,7 +228,7 @@ const CreateUserForm = () => {
   }, []); // Empty dependency array means it runs once after the initial render
 
   return (
-    <div className="main-user-container">
+    <div className="main-user-container container">
       <h3>User Creation Form</h3>
       <div className="sub-user-container">
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>

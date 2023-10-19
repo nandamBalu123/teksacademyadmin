@@ -248,11 +248,11 @@ const StudentData = () => {
       search: "",
     });
   };
+  
   return (
-    <>
-      <h3 className="ms-5"> Student Data </h3>
-
-      <div className="studetdetails container ">
+    <div >
+  <div className="studetdetails container  mt-3">
+      <h3 className="ms-5 mt-4 "> Student Data </h3>
         <div className="row mb-3 px-4 pt-3">
           <div className="col-10 col-md-7 col-lg-7 col-xl-7  input-field">
             <input
@@ -270,7 +270,7 @@ const StudentData = () => {
                 background: "none",
                 border: "hidden",
                 borderRadius: "5px",
-                background: "none",
+               
               }}
               name="search"
               value={filterCriteria.search}
@@ -285,7 +285,7 @@ const StudentData = () => {
             {" "}
             <RefreshIcon onClick={filterreset} />{" "}
           </div>
-          <div className="col-2 col-md-1 col-lg-1 col-xl-1 pt-2">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
@@ -707,7 +707,7 @@ const StudentData = () => {
           </nav>
         </div>
       </div>
-    </>
+    </div>
   );
 
   function prevPage() {

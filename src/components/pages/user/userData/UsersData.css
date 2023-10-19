@@ -41,3 +41,6 @@
   .user-table{ 
     overflow-x: hidden;
   }
+  .input-field:hover{ 
+    border: hidden;
+  }

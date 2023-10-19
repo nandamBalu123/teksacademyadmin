@@ -86,7 +86,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-   <div > 
+   <div  className=""> 
      <Box
       sx={{
         "& .pro-sidebar-inner": {
