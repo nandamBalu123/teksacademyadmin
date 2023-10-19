@@ -16,6 +16,7 @@ import { blue } from "@mui/material/colors";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 // import { blue } from "@mui/material/colors";
+// import { useDropzone } from 'react-dropzone';
 export default function RegistrationForm() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -75,6 +76,7 @@ export default function RegistrationForm() {
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
   const [totalpaidamount, settotalpaidamount] = useState(0);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFeecalculations = () => {
     let grosstotall = 0;
@@ -397,7 +399,9 @@ export default function RegistrationForm() {
       feedetailsbilling,
       totalfeewithouttax,
       totalpaidamount,
+      selectedFile
     };
+    // studentRegistrationdata.append('file', selectedFile)
     console.log("studentRegistration", studentRegistrationdata);
     try {
       // Make the POST request
@@ -491,6 +495,9 @@ export default function RegistrationForm() {
     const updatedTasks = feedetails.filter((task) => task.id !== id);
     setFeeDetails(updatedTasks);
   };
+
+  
+
   return (
     <div className="main-container container">
       <div className="main-sub-container ">
@@ -1024,15 +1031,15 @@ export default function RegistrationForm() {
                     // }}
                   /> */}
 
-                  <input
+                  {/* <input
                     accept=".jpg, .jpeg, .png"
                     type="file"
                     src="your-image-url.jpg"
                     alt="Submit"
                     class="image-input"
-                  />
-                  {/* <input type="file" accept=".jpg, .jpeg, .png" /> */}
-
+                    
+                  /> */}
+                  <input type="file" onChange={(e) => { setSelectedFile(e.target.files[0])}} accept="image/*" />
                   <input
                     type="file"
                     id="imageInput"
