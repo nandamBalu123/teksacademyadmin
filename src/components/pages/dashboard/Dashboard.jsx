@@ -17,6 +17,7 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import "./Dashboard.css";
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { useAuthContext } from "../../../hooks/useAuthContext";
 const Dashboard = () => {
   const { user } = useAuthContext();
@@ -87,54 +88,41 @@ const Dashboard = () => {
   const branchUserData = groupDataAndCalculatePercentage(getUsersData, "branch");
   
 
-
-//   // Function to group data by branch
-// const groupDataByBranch = (data) => {
-//   const branchData = {};
-//   data.forEach((student) => {
-//     const branch = student.branch;
-//     if (!branchData[branch]) {
-//       branchData[branch] = [];
-//     }
-//     branchData[branch].push(student);
-//   });
-//   return branchData;
-// };
-
-// const branchStudentDatad = groupDataByBranch(getstudentData);
-
-// Calculate the final total amount for each branch
-// const finalTotalByBranch = {};
-// Object.keys(branchStudentData).forEach((branch) => {
-//   finalTotalByBranch[branch] = branchStudentData[branch].reduce((total, student) => {
-//     return total + parseFloat(student.finaltotal); // Assuming "amount" is the field you want to sum
-//   }, 0);
-
-
-// });
-
-
-
-// Calculate the final total amount and percentage for each branch
 const finalTotalByBranch = {};
-const totalAmount = getstudentData.reduce((total, student) => total + parseFloat(student.amount), 0);
-Object.keys(branchStudentData).forEach((branch) => {
-  const branchTotalAmount = branchStudentData[branch].reduce((total, student) => total + parseFloat(student.amount), 0);
-  const branchPercentage = (branchTotalAmount / totalAmount) * 100;
-  finalTotalByBranch[branch] = {
-    totalAmount: branchTotalAmount,
-    percentage: branchPercentage,
-    
-  };
-  console.log("totalAmounttotalAmount",totalAmount);
-});
+  let totalAmount = 0;
+  // Calculate the total amount and handle NaN values
+  getstudentData.forEach((student) => {
+    const amount = parseFloat(student.finaltotal);
+    if (!isNaN(amount)) {
+      totalAmount += amount;
+    }
+  });
+  
+  Object.keys(branchStudentData).forEach((branch) => {
+    let branchTotalAmount = 0;
+    // Calculate the total amount for each branch and handle NaN values
+    branchStudentData[branch].forEach((student) => {
+      const amount = parseFloat(student.finaltotal);
+      if (!isNaN(amount)) {
+        branchTotalAmount += amount;
+      }
+    });
 
+    const branchPercentage = (branchTotalAmount / totalAmount) * 100;
+    finalTotalByBranch[branch] = {
+      totalAmount: branchTotalAmount,
+      percentage: branchPercentage,
+    };
+  });
+  
   return (
     <>
       {/* Header */}
      <div > 
      <Box className="text-center">
-        <Header title={"Hi " + user.fullname} subtitle={"Welcome to TEKS ACADEMY"} />
+      {user && <Header title={"Hi " + user.fullname} subtitle={"Welcome to TEKS ACADEMY"} />}
+        
+        
       </Box>
      </div>
 
@@ -144,19 +132,19 @@ Object.keys(branchStudentData).forEach((branch) => {
           <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   ">
             <Card style={{ backgroundColor: "#d9e9e9" }} className="rounded rounded-3">
               <p className="pt-3">Total Enrollments</p>
-              <p> {getstudentData.length}</p>
+              <p><b> {getstudentData.length}</b></p>
             </Card>
           </div>
           <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3">
             <Card style={{ backgroundColor: "#b7e9da" }} className="rounded rounded-3">
               <p className="pt-3">Total Fee</p>
-              <p> </p>
+              <p><CurrencyRupeeIcon /><b> {totalAmount}</b></p>
             </Card>
           </div>
           <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 ">
             <Card style={{ backgroundColor: "#e6acb4 " }} className="rounded rounded-3">
               <p className="pt-3">Total Users</p>
-              <p> {getUsersData.length}</p>
+              <p><b> {getUsersData.length} </b></p>
             </Card>
           </div>
         </div>
@@ -183,70 +171,26 @@ Object.keys(branchStudentData).forEach((branch) => {
       <div className="progreebar rounded rounded-5 mt-5 pb-4">
         <h4 className="pt-4 mt-3 enrollment ps-4"> Total Fee</h4>
         <div className="  justify-content-around pt-4 row progreebar-show">
-          {/* {Object.entries(finalTotalByBranch).map(([branch, totalAmount]) => {
-            return (
+          
+      
+          {Object.entries(finalTotalByBranch).map(([branch, { totalAmount, percentage }]) => {
+          return (
             <div key={branch} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
-                <h6>{branch}</h6>
-                <BorderLinearProgress variant="determinate" value={enrollmentPercentage} />
-                {enrollmentPercentage.toFixed(2)}%<br />
-                <span>Total Count: </span>{totalCount}
-              </div>
-            )
+              <h6>{branch}</h6>
+              <BorderLinearProgress variant="determinate" value={percentage} />
+              {percentage.toFixed(2)}%<br />
+              <span>Total Amount: </span>{totalAmount}
+            </div>
+          );
+          
+          
+          
           // <div key={branch}>
           //   <h3>{branch}</h3>
           //   <p>Total Amount: {totalAmount}</p>
+          //   <p>Percentage: {percentage.toFixed(2)}%</p>
           // </div>
-        )}} */}
-      {/* // {Object.entries(finalTotalByBranch).map(([branch, { totalAmount, percentage }]) => (
-      //   <div key={branch}>
-      //     <h3>{branch}</h3>
-      //     <p>Total Amount: {totalAmount}</p>
-      //     <p>Percentage: {percentage.toFixed(2)}%</p>
-      //   </div>
-      // ))} */}
-      {/* {Object.entries(finalTotalByBranch).map(([branch, totalAmount]) => {
-          console.log("finalTotalByBranch", finalTotalByBranch)
-            const enrollmentPercentage = (totalAmount / totalAmount) * 100;
-           
-            // const totalCount = totalAmount.length;
-            return (
-              <div key={branch} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
-                <h6>{branch}</h6>
-                <BorderLinearProgress variant="determinate" value={enrollmentPercentage}/>
-                {enrollmentPercentage.toFixed(2)}%<br />
-                <span>Total Amount: </span>{totalAmount}
-                
-              </div>
-            );
-          })}  */}
-        {/* {Object.entries(finalTotalByBranch).map(([branch, totalAmount]) => {
-          console.log("finalTotalByBranch", finalTotalByBranch)
-            const enrollmentPercentage = (totalAmount / totalAmount) * 100;
-           
-            // const totalCount = totalAmount.length;
-            return (
-              <div key={branch} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
-                <h6>{branch}</h6>
-                <BorderLinearProgress variant="determinate" value={enrollmentPercentage}/>
-                {enrollmentPercentage.toFixed(2)}%<br />
-                <span>Total Amount: </span>{totalAmount}
-                
-              </div>
-            );
-          })} */}
-
-          {/* <Box className=" col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
-            <h6> Hi-tech City</h6>
-            <BorderLinearProgress variant="determinate" value={40} />90,000( 40%) 
-          </Box>
-          <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
-            <h6> Ameerpet</h6>
-            <BorderLinearProgress variant="determinate" value={20} />  20,000(20%)
-          </Box>
-          <Box className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
-            <h6>Dilsukhnagar </h6>
-            <BorderLinearProgress variant="determinate" value={40} /> 90,000(40%)
-          </Box> */}
+        })}
         </div>
       </div>
       <div className="progreebar rounded rounded-5 mt-5 pb-4">

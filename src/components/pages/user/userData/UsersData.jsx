@@ -346,7 +346,7 @@ const UsersData = () => {
         </Menu>
       </div>
       <div>
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} className="user-table">
           <Table sx={{ minWidth: 1000 }} aria-label="customized table">
             <TableHead>
               <TableRow>
