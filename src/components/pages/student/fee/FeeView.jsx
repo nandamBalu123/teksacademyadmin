@@ -353,16 +353,18 @@ const FeeView = () => {
             }
 
             return (
-              <div className="installment" key={index}>
+              <div className="installment  mt-5" key={index}>
                 <p className="ms-4">
                   {" "}
                   Instalment {index + 1} :{" "}
                   {parseFloat(installmentamount).toFixed(2)}
                 </p>
-                <div className="d-flex payment">
+                <div className="row">
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input"> 
                   <input
-                    type="date"
+                    type="date" 
                     name="duedate"
+                    className="w-100"
                     onChange={(e) => {
                       const updatedInstallment = {
                         ...installment,
@@ -372,9 +374,14 @@ const FeeView = () => {
                     }}
                     value={installment.duedate}
                   />
+                  <label> Due Date</label>
+                   </div>
+                  
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input"> 
                   <input
                     type="number"
                     name="paidamount"
+                    className="w-100"
                     onChange={(e) => {
                       const updatedInstallment = {
                         ...installment,
@@ -384,9 +391,13 @@ const FeeView = () => {
                     }}
                     value={installment.paidamount}
                   />
+                 <label> Paid Amount</label>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input"> 
                   <input
                     type="date"
                     name="paiddate"
+                    className="w-100"
                     onChange={(e) => {
                       const updatedInstallment = {
                         ...installment,
@@ -396,11 +407,14 @@ const FeeView = () => {
                     }}
                     value={installment.paiddate}
                   />
-
+                 <label> Paid Date</label>
+                  
+                  </div> 
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 mul-input">  
                   <select
-                    className="ms-3"
+                    className="w-100"
                     name="modeofpayment"
-                    placeholder="Mode of Payment"
+                   
                     onChange={(e) => {
                       const updatedInstallment = {
                         ...installment,
@@ -410,14 +424,18 @@ const FeeView = () => {
                     }}
                     value={installment.modeofpayment}
                   >
-                    <option value="">Mode of Payment</option>
+                    <option value="">---select---</option>
                     <option value="upi">UPI</option>
                     <option value="cash">Cash</option>
                     <option value="backtransfor"> Bank Transfor</option>
                     <option value="cheque"> CHEQUE</option>
                   </select>
-                  <input
+                  <label> Mode of Payments</label>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input" > 
+                 <input
                     type="text"
+                    className="w-100"
                     name="transactionid"
                     onChange={(e) => {
                       const updatedInstallment = {
@@ -428,17 +446,19 @@ const FeeView = () => {
                     }}
                     value={installment.transactionid}
                   />
-                </div>
-                <div className="updatebtn">
+                  <label> Transaction Id</label>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">  
                   <button
-                    className="update"
+                    className="btn btn-primary center"
                     // onClick={() => handleInstallmentUpdate(index, installment)}
                     onClick={updatedata}
                   >
                     Update
                   </button>
-                </div>
-              </div>
+                  </div>
+                  </div>
+           </div>
             );
           })}
       </div>

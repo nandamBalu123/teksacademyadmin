@@ -44,18 +44,18 @@ const UserView = () => {
          <div className="row">
           <div className="col-12 col-md-6 col-xl-6 col-lg-6">
             
-            <p> User Name :{singleUser.fullname}</p>
-            <p> Email: {singleUser.email}</p>
-            <p> Phone No: {singleUser.phonenumber}</p>
-            <p> Designation: {singleUser.designation}</p>
+            <p className="text-start"> User Name :{singleUser.fullname}</p>
+            <p className="text-start"> Email: {singleUser.email}</p>
+            <p className="text-start"> Phone No: {singleUser.phonenumber}</p>
+            <p className="text-start"> Designation: {singleUser.designation}</p>
        
           </div>
           <div className="col-12 col-md-6 col-lg-6 col-xl-6  text-start ">
          
-            <p>Department : {singleUser.department}</p>
-            <p> Report To : {singleUser.reportto}</p>
-            <p> Profile : {singleUser.profile} </p>
-            <p> Branch: {singleUser.branch}</p>
+            <p className="text-end">Department : {singleUser.department}</p>
+            <p className="text-end"> Report To : {singleUser.reportto}</p>
+            <p className="text-end"> Profile : {singleUser.profile} </p>
+            <p className="text-end"> Branch: {singleUser.branch}</p>
            
           </div>
         

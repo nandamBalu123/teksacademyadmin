@@ -507,102 +507,94 @@ const StudentData = () => {
     
   </tbody>
 </table> */}
-
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-            <TableHead>
-              <TableRow className="tablerow">
-                <StyledTableCell className="bg-primary fs-6 border border 1 text-center   ">
+<Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+            <TableCell className="bg-primary fs-6 border border 1 text-center  text-light  ">
                   SNo
-                </StyledTableCell>
-                {/* 
-                <StyledTableCell
-                  className="bg-secondary fs-6  border border 1 text-center"
-                  align="left"
-                >
-                  Photo
-                </StyledTableCell> */}
-
-                <StyledTableCell
-                  className="  bg-primary fs-6 border border 1 text-centerborder border 1 text-center"
+                </TableCell>
+                <TableCell
+                  className="  bg-primary fs-6 border border 1 text-center text-light "
                   align="left"
                 >
                   Student Name <br /> Registration No
-                </StyledTableCell>
-
-                <StyledTableCell
-                  className="bg-primary fs-6 border border 1 text-center"
+                </TableCell>
+                <TableCell
+                  className="  bg-primary fs-6 border border 1 text-center text-light "
                   align="left"
                 >
-                  Branch <br /> Course
-                </StyledTableCell>
-
-                <StyledTableCell
-                  className="bg-primary fs-6 border border 1 text-center"
+                  Branch <br />Course
+                </TableCell>
+                
+                <TableCell
+                  className="bg-primary fs-6 border border 1 text-center text-light"
                   align="left"
                 >
                   Counseller
                   <br /> Source
-                </StyledTableCell>
+                </TableCell>
 
-                <StyledTableCell
-                  className="bg-primary fs-6 border border 1 text-center "
+                <TableCell
+                  className="bg-primary fs-6 border border 1 text-center text-light "
                   align="left"
                 >
                   Contact Number <br />
                   Email
-                </StyledTableCell>
+                </TableCell>
 
-                <StyledTableCell
-                  className="bg-primary fs-6 border border 1 text-center "
+                <TableCell
+                  className="bg-primary fs-6 border border 1 text-center text-light "
                   align="left"
                 >
                   Joining Date <br />
                   Traning Mode
-                </StyledTableCell>
+                </TableCell>
 
-                <StyledTableCell
-                  className="bg-primary fs-6 border border 1 text-center"
+                <TableCell
+                  className="bg-primary fs-6 border border 1 text-center text-light"
                   align="left"
                 >
                   Actions
-                </StyledTableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {Array.isArray(records) && records.length > 0 ? (
+                </TableCell>
+                
+            
+            </TableRow>
+          </TableHead>
+          <TableBody>
+          {Array.isArray(records) && records.length > 0 ? (
                 records.map((item, index) => (
                   // <li key={item.id}>{item.name}</li>
 
-                  <StyledTableRow key={item.id}>
-                    <StyledTableCell className=" border border 2 text-center p-0 m-0">
+                  <TableRow key={item.id}>
+                    <TableCell className=" border border 2 text-center p-0 m-0">
                       {index + 1}
-                    </StyledTableCell>
+                    </TableCell>
                     {/* 
                   <StyledTableCell className=" border border 2 text-center">
                     {item.profilepic}
                   </StyledTableCell> */}
 
-                    <StyledTableCell className=" border border 1 text-center p-0 m-0">
+                    <TableCell className=" border border 1 text-center p-0 m-0">
                       {item.name}<br/>
                      {item.registrationnumber}
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell align="left" className=" border border 1 text-center p-0 m-0">
+                    <TableCell align="left" className=" border border 1 text-center p-0 m-0">
                       {item.branch}
                       <br />
                       {item.courses}
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className=" border border 1 text-center p-0 m-0">
+                    <TableCell className=" border border 1 text-center p-0 m-0">
                       {item.enquirytakenby}
                       <br />
 
                       {item.leadsource}
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className=" border border 1 text-center p-0 m-0 ">
+                    <TableCell className=" border border 1 text-center p-0 m-0 ">
                       {item.mobilenumber}
                       <br /><p
                         style={{
@@ -614,17 +606,17 @@ const StudentData = () => {
                       >
                         {item.email}
                       </p>
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className=" border border 1 text-center p-0 m-0">
+                    <TableCell className=" border border 1 text-center p-0 m-0">
                       {item.admissiondate
                         ? item.admissiondate.substring(0, 10)
                         : "No Date"}{" "}
                       <br />
                       {item.modeoftraining}
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell  className=" text-center d-flex py-4 ">
+                    <TableCell  className=" text-center d-flex py-4 ">
                       <Link
                         to={`/studentdataview/${item.id}`}
                         style={{ width: "40px" }}
@@ -667,18 +659,23 @@ const StudentData = () => {
                           className="iconn"
                         />
                       </Link>
-                    </StyledTableCell>
-                  </StyledTableRow>
+                    </TableCell>
+                  </TableRow>
                 ))
               ) : (
                 <TableRow>
                   <TableCell colSpan={3}>No data available</TableCell>
                 </TableRow>
               )}{" "}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                 
+             
+          </TableBody>
+        </Table>
+      </TableContainer>
+     
+    </Paper>
 
+       
         <div>
           <nav>
             <ul className="pagination">
