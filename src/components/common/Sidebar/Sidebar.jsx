@@ -86,7 +86,8 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <Box
+   <div > 
+     <Box
       sx={{
         "& .pro-sidebar-inner": {
           background: `white; !important`,
@@ -172,12 +173,14 @@ const Sidebar = () => {
 
           <Box paddingLeft={isCollapsed ? undefined : "1%"}>
             <Item
+          
               title="Dashboard"
+              
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              style={{ color: "black" }}
+              style={{ color: "black"  }}
             />
             {profile == "admin" ? (
               <SubMenu
@@ -208,10 +211,11 @@ const Sidebar = () => {
             <SubMenu
               style={{
                 color: colors.grey[100],
+               
               }}
               icon={<PeopleOutlinedIcon />}
               label={"Student Management"}
-              title={"Student Management"}
+              title={"Student Managem..."}
             >
               <Item
                 title="Student Details"
@@ -266,6 +270,7 @@ const Sidebar = () => {
         </Menu>
       </ProSidebar>
     </Box>
+   </div>
   );
 };
 
