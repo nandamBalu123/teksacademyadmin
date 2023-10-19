@@ -29,13 +29,14 @@ import CreateUserForm from "./components/pages/user/createUserForm/CreateUserFor
 import UsersData from "./components/pages/user/userData/UsersData";
 import LoginPage from "./components/pages/loginpage/LoginPage";
 import { Box } from "@mui/material";
-import CreateRole from "./components/pages/roles/CreateRole";
-import Roles from "./components/pages/roles/Roles";
+import CreateRole from "./components/pages/settings/roles/CreateRole";
+
+import Roles from "./components/pages/settings/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
 
 // import UserViewCopy from "./components/pages/user/userData/UserViewCopy";
 import Edit from "./components/pages/user/userData/EditUser";
-import RoleAccess from "./components/pages/roles/RoleAccess";
+import RoleAccess from "./components/pages/settings/roles/RoleAccess";
 import StudentDataView from "./components/pages/student/studentData/StudentDataView";
 
 import StudentApplicationPrint from "./components/pages/student/studentData/StudentApplicationPrint";
@@ -46,6 +47,7 @@ import Addtofee from "./components/pages/student/fee/Addtofee";
 import EditStudentForm from "./components/pages/student/studentData/EditStudentForm";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useEffect } from "react";
+import Branch from "./components/pages/settings/branch/Branch";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -67,7 +69,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-        
           <div className="app">
             {user ? <Sidebar /> : undefined}
             {/* <Sidebar /> */}
@@ -213,6 +214,12 @@ function App() {
                     ) : (
                       <Dashboard />
                     )
+                  }
+                />
+                <Route
+                  path="/branch"
+                  element={
+                    user && user.profile == "admin" ? <Branch /> : <Dashboard />
                   }
                 />
                 <Route
