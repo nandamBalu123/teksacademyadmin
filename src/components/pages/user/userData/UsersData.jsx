@@ -211,32 +211,29 @@ const UsersData = () => {
 
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
-    <div className="container-fluid" >
+    <div className="container" >
       <h2 className="ms-3">Users List</h2>
       <div className="mb-2">
         <div className="user-data">
           <input
             type="text"
+            className="input-field ps-2"
             placeholder="Search Here......"
             style={{
-              height: "55px",
-
-              padding: "10px",
-              margin: "3px",
-              // border: "1.5px solid black",
-              border: "none",
+              height: "45px",
+              width: "20%",
               outline: "none",
               borderTop: "none",
               borderBottom: "1.5px solid black",
               background: "none",
-              margin: "3px",
-
+              border: "hidden",
               borderRadius: "5px",
             }}
             name="search"
             value={filterCriteria.search}
             onChange={handleInputChange}
           />
+          <hr/>
           {/* For Filter */}
           <Button
             id="demo-positioned-button"
@@ -346,10 +343,11 @@ const UsersData = () => {
         </Menu>
       </div>
       <div>
-        <TableContainer component={Paper} className="user-table">
-          <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
+      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+          <TableRow>
                 <StyledTableCell className=" bg-primary fs-6 " align="center">
                   Name
                 </StyledTableCell>
@@ -378,9 +376,9 @@ const UsersData = () => {
                   Action
                 </StyledTableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredData &&
+          </TableHead>
+          <TableBody>
+          {filteredData &&
                 filteredData.map((user) => (
                   <StyledTableRow>
                     <StyledTableCell align="center" className="p-0 m-0">
@@ -424,56 +422,16 @@ const UsersData = () => {
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+               
+          </TableBody>
+        </Table>
+      </TableContainer>
+      
+    </Paper>
+      
       </div>
+     
 
-      {/* <table className="table">
-       
-        <tbody>
-    
-          {userData &&
-            userData.map((user) => (
-              <tr>
-                
-                <td>{user.fullname}</td>
-                <td>{user.email}</td>
-                <td>{user.phonenumber}</td>
-                <td>{user.designation}</td>
-                <td>{user.department}</td>
-                <td>{user.reportto}</td>
-                <td>{user.profile}</td>
-                <td>{user.branch}</td>
-                <td>
-                <button onClick={handleview}>View</button>
-              <button onClick={handleedit}>Edit</button>
-
-              <button onClick={() => deleteuser(user.id)}>Delete</button>
-              </td>
-              </tr>
-            ))}
-        </tbody>
-      </table> */}
-      {/* {userData &&
-      userData.map((user) => (
-        <tr>
-        <td>{user.fullname}</td>
-          <td>{user.email}</td>
-          <td>{user.phonenumber}</td>
-          <td>{user.designation}</td>
-          <td>{user.department}</td>
-          <td>{user.reportto}</td>
-          <td>{user.profile}</td>
-          <td>{user.branch}</td>
-          <td>
-          <button onClick={handleview}>View</button>
-        <button onClick={handleedit}>Edit</button>
-
-        <button onClick={() => deleteuser(user.id)}>Delete</button>
-        </td>
-        </tr>
-      ))} */}
     </div>
   );
 };
