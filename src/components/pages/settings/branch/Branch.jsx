@@ -18,8 +18,8 @@ const Branch = () => {
       .get("http://localhost:3030/getbranch")
       .then((response) => {
         // Handle the successful response here
-        if (response.data.Status === "Success") {
-          setData(response.data.Result); // Update the data state with the fetched data
+        if (response.data) {
+          setData(response.data); // Update the data state with the fetched data
           console.log("branch", response.data);
         }
       })
@@ -28,7 +28,7 @@ const Branch = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,29 +82,22 @@ const Branch = () => {
               >
                 Name
               </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6 border border 1"
-                align="center"
-              >
-                Description
-              </StyledTableCell>
+
               {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
             </TableRow>
           </TableHead>
 
           <TableBody className="border border 1">
             {Array.isArray(getbranches) && getbranches.length > 0 ? (
-              getbranches.map((item) => (
+              getbranches.map((item, index) => (
                 <StyledTableRow key={item.id}>
                   <StyledTableCell className="border border 1 text-center">
-                    {item.id}
+                    {index + 1}
                   </StyledTableCell>
                   <StyledTableCell className="border border 1 text-center">
                     {item.branch_name}
                   </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
-                    {/* {item.description} */}
-                  </StyledTableCell>
+
                   {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
                 </StyledTableRow>
               ))
