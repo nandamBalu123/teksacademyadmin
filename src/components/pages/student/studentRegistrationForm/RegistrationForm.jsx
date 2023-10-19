@@ -20,7 +20,7 @@ export default function RegistrationForm() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [mobilenumber, setMobileNumber] = useState(null);
+  const [mobilenumber, setMobileNumber] = useState("");
   const [parentsname, setParentsName] = useState("");
   const [birthdate, setBirthDate] = useState("");
   const [gender, setGender] = useState("");
@@ -252,7 +252,86 @@ export default function RegistrationForm() {
   }, [admissiondate, branch]);
 
   const [activeStep, setActiveStep] = React.useState(0);
+  /////////////------------------validations-------------------------------
+  const handleBasicDetails = () => {
+    if (!name) {
+      alert("please enter the name");
+      return;
+    }
+    if (!email) {
+      alert("please  enter email id");
+      return;
+    } else {
+      const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      if (!emailPattern.test(email)) {
+        alert("Invalid Email Address");
+        return;
+        // errors.email = 'Invalid email address';
+      }
+    }
+    if (!mobilenumber) {
+      alert("please enter mobilenumber");
+      return;
+    } else {
+      if (mobilenumber.length != 10) {
+        alert("incorrect mobile number");
+        return;
+      }
+    }
+    handleNext();
+  };
+  const handleStudentDetails = () => {
+    if (!parentsname) {
+      alert("please enter parent's name");
+      return;
+    }
+    if (!birthdate) {
+      alert("please  enter Date of birth");
+      return;
+    }
+    if (!gender) {
+      alert("please enter gender");
+      return;
+    }
+    if (!maritalstatus) {
+      alert("please enter marital status");
+      return;
+    }
+    if (!college) {
+      alert("please enter college name");
+      return;
+    }
+    handleNext();
+  };
 
+  const handleStudentContactDetails = () => {
+  
+    if (!country) {
+      alert("please enter country");
+      return;
+    }
+    if (!state) {
+      alert("please  enter State");
+      return;
+    }
+    if (!area) {
+      alert("please enter area");
+      return;
+    }
+    if (!native) {
+      alert("please enter Native place");
+      return;
+    }
+    if (!zipcode) {
+      alert("please enter zipcode");
+      return;
+    }
+    if (!whatsappno) {
+      alert("please enter WhatsApp Number");
+      return;
+    }
+    handleNext();
+  };
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -485,7 +564,7 @@ export default function RegistrationForm() {
                     <Button
                       className="bg-primary"
                       variant="contained"
-                      onClick={handleNext}
+                      onClick={handleBasicDetails}
                       sx={{ mt: 1, mr: 1 }}
                     >
                       {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -615,7 +694,7 @@ export default function RegistrationForm() {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handleStudentDetails}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -810,7 +889,7 @@ export default function RegistrationForm() {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={handleStudentContactDetails}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1508,7 +1587,6 @@ export default function RegistrationForm() {
                       <td className="border border-1">{grosstotal}</td>
                       <td className="border border-1">{totaldiscount}</td>
                       <td className="border border-1">{finaltotal}</td>
-                      
                     </tr>
                   </tbody>
                 </table>
@@ -1544,38 +1622,38 @@ export default function RegistrationForm() {
                         }
                       })}
                     {feedetailsbilling.length > 0 && (
-                      <tr >
-                        <td className="border border-1" > <strong> Sub Total</strong></td>
-                        <td className="border border-1 ">
-                        
-                         <strong> {parseFloat(totalfeewithouttax.toFixed(2))}{" "} </strong> 
+                      <tr>
+                        <td className="border border-1">
+                          {" "}
+                          <strong> Sub Total</strong>
                         </td>
                         <td className="border border-1 ">
-                    
+                          <strong>
+                            {" "}
+                            {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
+                          </strong>
+                        </td>
+                        <td className="border border-1 ">
                           <strong> {parseFloat(totaltax.toFixed(2))}</strong>
                         </td>
                         <td className="border border-1 ">
-                        <strong> {parseFloat(grandtotal.toFixed(2))}</strong>
+                          <strong> {parseFloat(grandtotal.toFixed(2))}</strong>
                         </td>
                       </tr>
                     )}
-                    <tr > 
-                      <td colspan="2" className="empty"> 
-                       
-                      </td>
-                      <td className="empty">  Material Fee  </td>
-                      <td > {materialfee} </td>
+                    <tr>
+                      <td colspan="2" className="empty"></td>
+                      <td className="empty"> Material Fee </td>
+                      <td> {materialfee} </td>
                     </tr>
-                    <tr > 
-                      <td colspan="2" className="empty"> 
-                        
-                      </td>
+                    <tr>
+                      <td colspan="2" className="empty"></td>
                       <td className="empty"> Grand Total</td>
                       <td> {finaltotal} </td>
                     </tr>
                   </tbody>
                 </table>
-                
+
                 <br />
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
