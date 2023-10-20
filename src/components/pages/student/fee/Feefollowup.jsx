@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import "./Feefolloup.css";
 import axios from "axios";
 
@@ -276,12 +277,11 @@ const Feefollowup = () => {
           {filterCriteria.pendingdate && 
             <h3 className="ms-3 mt-2">Pending</h3>
           }
-      <TableContainer component={Paper} className="pt-0" id="">
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          
+       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            
-            <TableRow>
+          <TableRow>
               <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                 {" "}
                 S.NO
@@ -320,9 +320,10 @@ const Feefollowup = () => {
                 View
               </TableCell>
             </TableRow>
+            
           </TableHead>
           <TableBody>
-            {Array.isArray(filtereddata) && filtereddata.length > 0 ? (
+          {Array.isArray(filtereddata) && filtereddata.length > 0 ? (
               filtereddata.map((item, index) => (
                 <TableRow
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -373,7 +374,7 @@ const Feefollowup = () => {
                   }
                   </TableCell>
                   <TableCell className="border border 1">
-                    <Link to={`/feeview/${item.id}`}>view</Link>
+                    <Link to={`/feeview/${item.id}`}><VisibilityIcon/></Link>
                   </TableCell>
                 </TableRow>
               ))
@@ -385,6 +386,8 @@ const Feefollowup = () => {
           </TableBody>
         </Table>
       </TableContainer>
+     
+    </Paper>
     </div>
   );
 };

@@ -53,6 +53,7 @@ import LeadSource from "./components/pages/settings/leadsource/LeadSource";
 import CreateLeadSource from "./components/pages/settings/leadsource/CreateLeadSource";
 import Department from "./components/pages/settings/departments/Department";
 import CreateDepartment from "./components/pages/settings/departments/CreateDepartment";
+import Certificate from "./components/pages/student/Certificate/Certificate";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -160,6 +161,7 @@ function App() {
                     )
                   }
                 />
+                <Route path="/certificate" element={<Certificate/>}/>
                 <Route
                   path="/createuser"
                   element={
