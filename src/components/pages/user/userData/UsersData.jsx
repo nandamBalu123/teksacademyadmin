@@ -208,17 +208,23 @@ const UsersData = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  // clear button reset
+
 
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container" >
-      <h2 className="ms-3">Users List</h2>
-      <div className="mb-2">
-        <div className="user-data">
+      <h2 className="ms-3 my-4">Users List</h2>
+
+      <div className="row mb-3 px-4 pt-3">
+
+        <div className="col-10 col-md-10 col-lg-10 col-xl-10">
+       
           <input
             type="text"
             className="input-field ps-2"
             placeholder="Search Here......"
+            autoComplete="off"
             style={{
               height: "45px",
               width: "20%",
@@ -233,8 +239,10 @@ const UsersData = () => {
             value={filterCriteria.search}
             onChange={handleInputChange}
           />
-          <hr/>
-          {/* For Filter */}
+         <hr className="w-50" />
+         </div>
+         
+          <div className="col-2 col-md-2 col-lg-2 col-xl-2 "> 
           <Button
             id="demo-positioned-button"
             aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -250,7 +258,8 @@ const UsersData = () => {
               Filter{" "}
             </button>
           </Button>
-        </div>
+        
+          </div>
 
         {/* For Filter */}
         {/* <Button
@@ -320,7 +329,7 @@ const UsersData = () => {
               style={{
                 height: "45px",
                 paddingLeft: "10px",
-                paddingRight: "115px",
+                paddingRight: "145px",
                 border: "1.5px solid black",
                 borderRadius: "5px",
               }}
@@ -338,7 +347,7 @@ const UsersData = () => {
           </MenuItem>
           <MenuItem className="d-flex justify-content-between"> 
               <button className="save"> Save</button>
-              <button className="clear"> Clear</button>
+              <button className="clear" > Clear</button>
               </MenuItem>
         </Menu>
       </div>

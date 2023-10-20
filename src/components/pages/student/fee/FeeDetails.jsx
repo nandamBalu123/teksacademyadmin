@@ -9,6 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CloseIcon from "@mui/icons-material/Close";
 import "./FeeDetails.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -182,8 +183,9 @@ const FeeDetails = () => {
               </button>
             </div>
           </div>
-          <div className="d-flex justify-content-between pt-3 pb-3">
-            <input
+          <div className="row pt-3 pb-3">
+          <div className="col-10 col-md-10 col-lg-10 col-xl-10"> 
+          <input
               type="text"
               className="input-field ps-2 "
               placeholder="Search Here..."
@@ -191,15 +193,18 @@ const FeeDetails = () => {
               style={{
                 height: "45px",
                 width: "50%",
-                border: "none",
+
                 outline: "none",
                 borderTop: "none",
                 borderBottom: "1.5px solid black",
                 background: "none",
+                border: "hidden",
                 borderRadius: "5px",
               }}
-            />{" "}
-            <h6 onClick={handleClick}> Filter</h6>
+            /><hr className="w-50"/>
+          </div>
+           <div className="col-2 col-md-2 col-lg-2 col-xl-2">  
+           <h6 onClick={handleClick}> Filter</h6>
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}
@@ -215,7 +220,13 @@ const FeeDetails = () => {
                 cursor: "pointer",
               }}
             >
+              <div className="d-flex justify-content-between"> 
               <MenuItem> Filter</MenuItem>
+              <MenuItem>
+                  {" "}
+                  <CloseIcon />{" "}
+                </MenuItem>
+              </div>
               <hr />
               <div className="d-flex">
                 <MenuItem className="pt-3 ">
@@ -295,7 +306,12 @@ const FeeDetails = () => {
                   </select>
                 </MenuItem>
               </div>
+              <MenuItem className="d-flex justify-content-between">
+                <button className="save"> Save</button>
+                <button className="clear"> Clear</button>
+              </MenuItem>
             </Menu>
+           </div>
           </div>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 440 }}>

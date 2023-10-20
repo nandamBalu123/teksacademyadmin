@@ -155,8 +155,9 @@ const Feefollowup = () => {
         </button>
         
       </div>
-      <div className="d-flex justify-content-between">
-        <input
+      <div className="row">
+       <div className="col-10 col-md-10 col-lg-10 col-xl-10 "> 
+       <input
           type="text"
           className="input-field ps-2 "
           placeholder="Search Here..."
@@ -164,18 +165,20 @@ const Feefollowup = () => {
           style={{
             height: "45px",
             width: "50%",
-            border: "none",
+            border: "hidden",
             outline: "none",
             borderTop: "none",
             borderBottom: "1.5px solid black",
             background: "none",
             borderRadius: "5px",
           }}
-        />
-        {/* <h6 onClick={handleClick} className="pe-4">
+        /><hr className="w-50 ms-3"/>
+         </div>
+        <div className="col-2 col-md-2 col-lg-2 col-xl-2"> 
+        <h6 onClick={handleClick} className="pe-4">
           {" "}
           Filter
-        </h6> */}
+        </h6>
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}
@@ -266,6 +269,7 @@ const Feefollowup = () => {
             </MenuItem>
           </div>
         </Menu>
+          </div> 
       </div>
       {filterCriteria.todaydate && 
             <h3 className="ms-3 mt-2">Today</h3>

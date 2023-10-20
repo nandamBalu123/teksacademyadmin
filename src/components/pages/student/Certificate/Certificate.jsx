@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import './Certificate.css';
 
 const Certificate = () => {
     // for edit the date
@@ -24,7 +25,9 @@ const Certificate = () => {
     };
   return (
     <div  className='container'>
-        <Paper sx={{ width: '100%', overflow: 'hidden' }} className='my-4'>
+       <div className='certificate mt-2'> 
+       <h3 className='mx-3 my-3'> Certificate </h3>
+       <Paper sx={{ width: '100%', overflow: 'hidden' }} className='my-4'>
       <TableContainer sx={{ maxHeight: 440 }} >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -81,6 +84,7 @@ const Certificate = () => {
       </TableContainer>
       
     </Paper> 
+       </div>
       
     </div>
   )
