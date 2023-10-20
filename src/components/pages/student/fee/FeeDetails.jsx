@@ -16,7 +16,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 const FeeDetails = () => {
   const navigator = useNavigate();
   const [getstudentData, setData] = useState([{ name: "" }]);
-  const [studentFeeRecordss, setFeerecords] = useState();
+  const [studentFeeRecordss, setFeerecords] = useState(getstudentData);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -112,8 +112,6 @@ const FeeDetails = () => {
       );
     });
     setFeerecords(filteredResults);
-    
-
   }, [filterCriteria, getstudentData]);
   const filterreset = () => {
     setFilterCriteria({
@@ -299,140 +297,141 @@ const FeeDetails = () => {
               </div>
             </Menu>
           </div>
-          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-          <TableRow>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                    {" "}
-                    S.NO
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                    Name
-                    <br /> Branch <br />
-                    Counsellor
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
-                    Contact
-                    <br />
-                    Email
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
-                    Course <br /> Date of Joining
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
-                    Total Fee
-                    <br /> Paid Fee
-                    <br /> Due Amount
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                    {" "}
-                    Created Date <br /> Next Due Date
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
-                    Paid Status{" "}
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
-                    View
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Array.isArray(studentFeeRecordss) &&
-                studentFeeRecordss.length > 0 ? (
-                  studentFeeRecordss.map((item, index) => (
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                      key={item.id}
-                    >
-                      <TableCell component="th" className="border border 1">
-                        {" "}
-                        {index + 1}
-                      </TableCell>
-                      <TableCell className="border border 1">
-                        {" "}
-                        {item.name}
-                        <br />
-                        {item.branch} <br />
-                        {item.enquirytakenby}
-                      </TableCell>
-                      <TableCell className="border border 1">
-                        {" "}
-                        {item.mobilenumber}
-                        <br /> {item.email}
-                      </TableCell>
-                      <TableCell className="border border 1">
-                        {" "}
-                        {item.courses}
-                        <br />
-                        {item.admissiondate}
-                      </TableCell>
-                      <TableCell className="border border 1">
-                        {" "}
-                        {item.finaltotal}
-                        <br /> {item.totalpaidamount} <br />
-                        {item.dueamount}
-                        <br />
-                      </TableCell>
-                      <TableCell className="border border 1">
-                        {" "}
-                        {item.admissiondate}
-                        <br />
-                        {item.nextduedate}
-                      </TableCell>
-                      <TableCell className="border border 1">
-                        {item.totalinstallments &&
-                          item.totalinstallments.length > 0 &&
-                          item.totalinstallments.map((items, index) => {
-                            const dynamicStyle = {
-                              color: item.dueamount < 1 ? "green" : "red",
-                              fontSize: item.dueamount < 1 ? "20px" : "16px",
-                              fontWeight: item.dueamount < 1 ? "900" : "900",
-                            };
-                            const IconStyle = {
-                              display: item.dueamount < 1 ? true : "none",
-                              marginLeft: "10px",
-                            };
-                            if (true) {
-                              // settotalleft(item.totalinstallmentsleft);
-                              // totalleft = item.totalinstallmentsleft;
-                              return (
-                                <div style={{ display: "flex" }}>
-                                  <span style={dynamicStyle}>
-                                    {items.totalinstallmentspaid}/
-                                    {items.totalinstallments}
-                                  </span>
-                                  <span style={dynamicStyle}>
-                                    <CheckCircleIcon style={IconStyle} />
-                                  </span>
-                                </div>
-                              );
-                            }
-                          })}
-                      </TableCell>
-                      <TableCell className="border border 1">
-                        <Link to={`/feeview/${item.id}`}>
-                          <VisibilityIcon />
-                        </Link>{" "}
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
+          <Paper sx={{ width: "100%", overflow: "hidden" }}>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
                   <TableRow>
-                    <TableCell colSpan={3}>No data available</TableCell>
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                      {" "}
+                      S.NO
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                      Name
+                      <br /> Branch <br />
+                      Counsellor
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                      {" "}
+                      Contact
+                      <br />
+                      Email
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                      {" "}
+                      Course <br /> Date of Joining
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                      {" "}
+                      Total Fee
+                      <br /> Paid Fee
+                      <br /> Due Amount
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                      {" "}
+                      Created Date <br /> Next Due Date
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                      {" "}
+                      Paid Status{" "}
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                      {" "}
+                      View
+                    </TableCell>
                   </TableRow>
-                )}{" "}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      
-    </Paper>
+                </TableHead>
+                <TableBody>
+                  {Array.isArray(studentFeeRecordss) &&
+                  studentFeeRecordss.length > 0 ? (
+                    studentFeeRecordss.map((item, index) => (
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                        key={item.id}
+                      >
+                        <TableCell component="th" className="border border 1">
+                          {" "}
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className="border border 1">
+                          {" "}
+                          {item.name}
+                          <br />
+                          {item.branch} <br />
+                          {item.enquirytakenby}
+                        </TableCell>
+                        <TableCell className="border border 1">
+                          {" "}
+                          {item.mobilenumber}
+                          <br /> {item.email}
+                        </TableCell>
+                        <TableCell className="border border 1">
+                          {" "}
+                          {item.courses}
+                          <br />
+                          {item.admissiondate}
+                        </TableCell>
+                        <TableCell className="border border 1">
+                          {" "}
+                          {item.finaltotal}
+                          <br /> {item.totalpaidamount} <br />
+                          {item.dueamount}
+                          <br />
+                        </TableCell>
+                        <TableCell className="border border 1">
+                          {" "}
+                          {item.admissiondate}
+                          <br />
+                          {item.nextduedate}
+                        </TableCell>
+                        <TableCell className="border border 1">
+                          {item.totalinstallments &&
+                            item.totalinstallments.length > 0 &&
+                            item.totalinstallments.map((items, index) => {
+                              const dynamicStyle = {
+                                color: item.dueamount < 1 ? "green" : "red",
+                                fontSize: item.dueamount < 1 ? "20px" : "16px",
+                                fontWeight: item.dueamount < 1 ? "900" : "900",
+                              };
+                              const IconStyle = {
+                                display: item.dueamount < 1 ? true : "none",
+                                marginLeft: "10px",
+                              };
+                              if (true) {
+                                // settotalleft(item.totalinstallmentsleft);
+                                // totalleft = item.totalinstallmentsleft;
+                                return (
+                                  <div style={{ display: "flex" }}>
+                                    <span style={dynamicStyle}>
+                                      {items.totalinstallmentspaid}/
+                                      {items.totalinstallments}
+                                    </span>
+                                    <span style={dynamicStyle}>
+                                      <CheckCircleIcon style={IconStyle} />
+                                    </span>
+                                  </div>
+                                );
+                              }
+                            })}
+                        </TableCell>
+                        <TableCell className="border border 1">
+                          <Link to={`/feeview/${item.id}`}>
+                            <VisibilityIcon />
+                          </Link>{" "}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={3}>No data available</TableCell>
+                    </TableRow>
+                  )}{" "}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
         </div>
       </div>
     </>
