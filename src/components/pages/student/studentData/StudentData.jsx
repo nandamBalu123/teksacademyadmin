@@ -248,11 +248,11 @@ const StudentData = () => {
       search: "",
     });
   };
-  
+
   return (
-    <div >
-  <div className="studetdetails container  mt-3">
-      <h3 className="ms-5 mt-4 "> Student Data </h3>
+    <div>
+      <div className="studetdetails container  mt-3">
+        <h3 className="ms-5 mt-4 "> Student Data </h3>
         <div className="row mb-3 px-4 pt-3">
           <div className="col-10 col-md-7 col-lg-7 col-xl-7  input-field">
             <input
@@ -270,7 +270,6 @@ const StudentData = () => {
                 background: "none",
                 border: "hidden",
                 borderRadius: "5px",
-               
               }}
               name="search"
               value={filterCriteria.search}
@@ -507,175 +506,175 @@ const StudentData = () => {
     
   </tbody>
 </table> */}
-<Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-            <TableCell className="bg-primary fs-6 border border 1 text-center  text-light  ">
-                  SNo
-                </TableCell>
-                <TableCell
-                  className="  bg-primary fs-6 border border 1 text-center text-light "
-                  align="left"
-                >
-                  Student Name <br /> Registration No
-                </TableCell>
-                <TableCell
-                  className="  bg-primary fs-6 border border 1 text-center text-light "
-                  align="left"
-                >
-                  Branch <br />Course
-                </TableCell>
-                
-                <TableCell
-                  className="bg-primary fs-6 border border 1 text-center text-light"
-                  align="left"
-                >
-                  Counseller
-                  <br /> Source
-                </TableCell>
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center  text-light  ">
+                    SNo
+                  </TableCell>
+                  <TableCell
+                    className="  bg-primary fs-6 border border 1 text-center text-light "
+                    align="left"
+                  >
+                    Student Name <br /> Registration No
+                  </TableCell>
+                  <TableCell
+                    className="  bg-primary fs-6 border border 1 text-center text-light "
+                    align="left"
+                  >
+                    Branch <br />
+                    Course
+                  </TableCell>
 
-                <TableCell
-                  className="bg-primary fs-6 border border 1 text-center text-light "
-                  align="left"
-                >
-                  Contact Number <br />
-                  Email
-                </TableCell>
+                  <TableCell
+                    className="bg-primary fs-6 border border 1 text-center text-light"
+                    align="left"
+                  >
+                    Counseller
+                    <br /> Source
+                  </TableCell>
 
-                <TableCell
-                  className="bg-primary fs-6 border border 1 text-center text-light "
-                  align="left"
-                >
-                  Joining Date <br />
-                  Traning Mode
-                </TableCell>
+                  <TableCell
+                    className="bg-primary fs-6 border border 1 text-center text-light "
+                    align="left"
+                  >
+                    Contact Number <br />
+                    Email
+                  </TableCell>
 
-                <TableCell
-                  className="bg-primary fs-6 border border 1 text-center text-light"
-                  align="left"
-                >
-                  Actions
-                </TableCell>
-                
-            
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          {Array.isArray(records) && records.length > 0 ? (
-                records.map((item, index) => (
-                  // <li key={item.id}>{item.name}</li>
+                  <TableCell
+                    className="bg-primary fs-6 border border 1 text-center text-light "
+                    align="left"
+                  >
+                    Joining Date <br />
+                    Traning Mode
+                  </TableCell>
 
-                  <TableRow key={item.id}>
-                    <TableCell className=" border border 2 text-center p-0 m-0">
-                      {index + 1}
-                    </TableCell>
-                    {/* 
+                  <TableCell
+                    className="bg-primary fs-6 border border 1 text-center text-light"
+                    align="left"
+                  >
+                    Actions
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Array.isArray(records) && records.length > 0 ? (
+                  records.map((item, index) => (
+                    // <li key={item.id}>{item.name}</li>
+
+                    <TableRow key={item.id}>
+                      <TableCell className=" border border 2 text-center p-0 m-0">
+                        {index + 1}
+                      </TableCell>
+                      {/* 
                   <StyledTableCell className=" border border 2 text-center">
                     {item.profilepic}
                   </StyledTableCell> */}
 
-                    <TableCell className=" border border 1 text-center p-0 m-0">
-                      {item.name}<br/>
-                     {item.registrationnumber}
-                    </TableCell>
+                      <TableCell className=" border border 1 text-center p-0 m-0">
+                        {item.name}
+                        <br />
+                        {item.registrationnumber}
+                      </TableCell>
 
-                    <TableCell align="left" className=" border border 1 text-center p-0 m-0">
-                      {item.branch}
-                      <br />
-                      {item.courses}
-                    </TableCell>
-
-                    <TableCell className=" border border 1 text-center p-0 m-0">
-                      {item.enquirytakenby}
-                      <br />
-
-                      {item.leadsource}
-                    </TableCell>
-
-                    <TableCell className=" border border 1 text-center p-0 m-0 ">
-                      {item.mobilenumber}
-                      <br /><p
-                        style={{
-                          width: "200px",
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
+                      <TableCell
+                        align="left"
+                        className=" border border 1 text-center p-0 m-0"
                       >
-                        {item.email}
-                      </p>
-                    </TableCell>
+                        {item.branch}
+                        <br />
+                        {item.courses}
+                      </TableCell>
 
-                    <TableCell className=" border border 1 text-center p-0 m-0">
-                      {item.admissiondate
-                        ? item.admissiondate.substring(0, 10)
-                        : "No Date"}{" "}
-                      <br />
-                      {item.modeoftraining}
-                    </TableCell>
+                      <TableCell className=" border border 1 text-center p-0 m-0">
+                        {item.enquirytakenby}
+                        <br />
 
-                    <TableCell  className=" text-center d-flex py-4 ">
-                      <Link
-                        to={`/studentdataview/${item.id}`}
-                        style={{ width: "40px" }}
-                      >
-                        <VisibilityIcon className="iconn" />
-                      </Link>
+                        {item.leadsource}
+                      </TableCell>
 
-                      <Link
-                        to={`/editstudent/${item.id}`}
-                        style={{ width: "40px" }}
-                      >
-                        <EditIcon className="iconn" />
-                      </Link>
-                      {item.addfee == 1 && (
+                      <TableCell className=" border border 1 text-center p-0 m-0 ">
+                        {item.mobilenumber}
+                        <br />
+                        <p
+                          style={{
+                            width: "200px",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {item.email}
+                        </p>
+                      </TableCell>
+
+                      <TableCell className=" border border 1 text-center p-0 m-0">
+                        {item.admissiondate
+                          ? item.admissiondate.substring(0, 10)
+                          : "No Date"}{" "}
+                        <br />
+                        {item.modeoftraining}
+                      </TableCell>
+
+                      <TableCell className=" text-center d-flex py-4 ">
                         <Link
-                          to={`/feeview/${item.id}`}
+                          to={`/studentdataview/${item.id}`}
                           style={{ width: "40px" }}
                         >
-                          <CurrencyRupeeIcon className="iconn" />
+                          <VisibilityIcon className="iconn" />
                         </Link>
-                      )}
-                      {item.addfee == 0 && (
+
                         <Link
-                          to={`/addtofee/${item.id}`}
+                          to={`/editstudent/${item.id}`}
                           style={{ width: "40px" }}
                         >
-                          <AddIcon className="iconn" />
+                          <EditIcon className="iconn" />
                         </Link>
-                      )}
+                        {item.addfee == 1 && (
+                          <Link
+                            to={`/feeview/${item.id}`}
+                            style={{ width: "40px" }}
+                          >
+                            <CurrencyRupeeIcon className="iconn" />
+                          </Link>
+                        )}
+                        {item.addfee == 0 && (
+                          <Link
+                            to={`/addtofee/${item.id}`}
+                            style={{ width: "40px" }}
+                          >
+                            <AddIcon className="iconn" />
+                          </Link>
+                        )}
 
-                      <Link
-                        to={`/studentApplicationprint/${item.id}`}
-                        style={{ width: "40px" }}
-                      >
-                        <PrintIcon className="iconn" />
-                      </Link>
-                      <Link to={`//${item.id}`} style={{ width: "40px" }}>
-                        <DeleteOutlineIcon
-                          style={{ color: "red" }}
-                          className="iconn"
-                        />
-                      </Link>
-                    </TableCell>
+                        <Link
+                          to={`/studentApplicationprint/${item.id}`}
+                          style={{ width: "40px" }}
+                        >
+                          <PrintIcon className="iconn" />
+                        </Link>
+                        <Link to={`//${item.id}`} style={{ width: "40px" }}>
+                          <DeleteOutlineIcon
+                            style={{ color: "red" }}
+                            className="iconn"
+                          />
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={3}>No data available</TableCell>
                   </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={3}>No data available</TableCell>
-                </TableRow>
-              )}{" "}
-                 
-             
-          </TableBody>
-        </Table>
-      </TableContainer>
-     
-    </Paper>
+                )}{" "}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
 
-       
         <div>
           <nav>
             <ul className="pagination">

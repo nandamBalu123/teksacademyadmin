@@ -15,8 +15,8 @@ import { useNavigate, Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 const FeeDetails = () => {
   const navigator = useNavigate();
-  const [getstudentData, setData] = useState("");
-  const [studentFeeRecordss, setFeerecords] = useState("");
+  const [getstudentData, setData] = useState([{ name: "" }]);
+  const [studentFeeRecordss, setFeerecords] = useState(getstudentData);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -42,6 +42,95 @@ const FeeDetails = () => {
       });
     // fetchData();
   }, []);
+  const [filterCriteria, setFilterCriteria] = useState({
+    fromdate: "",
+
+    todate: "",
+
+    branch: "",
+
+    leadsource: "",
+
+    modeoftraining: "",
+
+    enquirytakenby: "",
+
+    search: "",
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFilterCriteria({ ...filterCriteria, [name]: value });
+  };
+  useEffect(() => {
+    const filteredResults = getstudentData.filter((item) => {
+      const searchCondition = filterCriteria.search
+        ? item.name
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.branch
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.registrationnumber.includes(filterCriteria.search) ||
+          item.courses
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.enquirytakenby
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase())
+        : true;
+
+      const dateCondition =
+        filterCriteria.fromdate && filterCriteria.todate
+          ? item.admissiondate >= filterCriteria.fromdate &&
+            item.admissiondate <= filterCriteria.todate
+          : true;
+
+      const branchCondition = filterCriteria.branch
+        ? item.branch === filterCriteria.branch
+        : true;
+
+      const sourceCondition = filterCriteria.leadsource
+        ? item.leadsource === filterCriteria.leadsource
+        : true;
+
+      const modeCondition = filterCriteria.modeoftraining
+        ? item.modeoftraining === filterCriteria.modeoftraining
+        : true;
+
+      const counsellarCondition = filterCriteria.enquirytakenby
+        ? item.enquirytakenby === filterCriteria.enquirytakenby
+        : true;
+
+      return (
+        searchCondition &&
+        dateCondition &&
+        branchCondition &&
+        sourceCondition &&
+        modeCondition &&
+        counsellarCondition
+      );
+    });
+    setFeerecords(filteredResults);
+    // setFilteredData(filteredResults);
+  }, [filterCriteria, getstudentData]);
+  const filterreset = () => {
+    setFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+
+      branch: "",
+
+      leadsource: "",
+
+      modeoftraining: "",
+
+      enquirytakenby: "",
+
+      search: "",
+    });
+  };
   const noDueRecords = () => {
     const filteredResults = getstudentData.filter((item) => {
       const dueamount = item.dueamount === 0;
@@ -51,7 +140,8 @@ const FeeDetails = () => {
     setData(filteredResults);
   };
   const studentFeeRecords = () => {
-    setData(studentFeeRecordss);
+    // setData(studentFeeRecordss);
+    setFeerecords(getstudentData);
   };
   // style for paid status
   const dynamicStyle = {
@@ -70,22 +160,27 @@ const FeeDetails = () => {
           {" "}
           <h4> Fee Management(Registered Students)</h4>
           <div className="row pt-3">
-           <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3"> 
-           <button className="feebtn" onClick={studentFeeRecords}>
-              Student Fee Records
-            </button>
-           </div>
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3"> 
-            <button className="btn bg-success text-light" onClick={noDueRecords}>No Due Records</button>
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
+              <button className="feebtn" onClick={studentFeeRecords}>
+                Student Fee Records
+              </button>
             </div>
-            <div  className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3" > 
-            <button
-              className="feebtn "
-              onClick={() => navigator("/feefollowup")}
-            >
-              {" "}
-              Fee FollowUps
-            </button>
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
+              <button
+                className="btn bg-success text-light"
+                onClick={noDueRecords}
+              >
+                No Due Records
+              </button>
+            </div>
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
+              <button
+                className="feebtn "
+                onClick={() => navigator("/feefollowup")}
+              >
+                {" "}
+                Fee FollowUps
+              </button>
             </div>
           </div>
           <div className="d-flex justify-content-between pt-3 pb-3">
@@ -105,7 +200,7 @@ const FeeDetails = () => {
                 borderRadius: "5px",
               }}
             />{" "}
-            {/* <h6 onClick={handleClick}> Filter</h6> */}
+            <h6 onClick={handleClick}> Filter</h6>
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}
@@ -138,6 +233,8 @@ const FeeDetails = () => {
                       borderRadius: "5px",
                     }}
                     name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
                   />
                 </MenuItem>
                 <MenuItem className="pt-3 ">
@@ -152,6 +249,8 @@ const FeeDetails = () => {
                       borderRadius: "5px",
                     }}
                     name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
                   />
                 </MenuItem>
               </div>
@@ -168,6 +267,8 @@ const FeeDetails = () => {
                       borderRadius: "5px",
                     }}
                     name="branch"
+                    value={filterCriteria.branch}
+                    onChange={handleInputChange}
                   >
                     <option value="">Branch</option>
                     <option value="hitechcity"> Hitech city</option>
@@ -240,10 +341,11 @@ const FeeDetails = () => {
                     View
                   </TableCell>
                 </TableRow>
-          </TableHead>
-          <TableBody>
-          {Array.isArray(getstudentData) && getstudentData.length > 0 ? (
-                  getstudentData.map((item, index) => (
+              </TableHead>
+              <TableBody>
+                {Array.isArray(studentFeeRecordss) &&
+                studentFeeRecordss.length > 0 ? (
+                  studentFeeRecordss.map((item, index) => (
                     <TableRow
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                       key={item.id}
@@ -254,8 +356,10 @@ const FeeDetails = () => {
                       </TableCell>
                       <TableCell className="border border 1">
                         {" "}
-                        {item.branchname} <br />
                         {item.name}
+                        <br />
+                        {item.branch} <br />
+                        {item.enquirytakenby}
                       </TableCell>
                       <TableCell className="border border 1">
                         {" "}
