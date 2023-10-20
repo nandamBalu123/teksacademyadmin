@@ -17,8 +17,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 // import { blue } from "@mui/material/colors";
 // import { useDropzone } from 'react-dropzone';
+import { useAuthContext } from "../../../../hooks/useAuthContext";
+
 export default function RegistrationForm() {
+  const { user } = useAuthContext();
+
   const navigate = useNavigate();
+  const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobilenumber, setMobileNumber] = useState("");
@@ -434,6 +439,7 @@ export default function RegistrationForm() {
       alert("please enter assets ");
       return;
     }
+    setuserid(user.id);
     const studentRegistrationdata = {
       name,
       email,
@@ -487,6 +493,7 @@ export default function RegistrationForm() {
       totalfeewithouttax,
       totalpaidamount,
       selectedFile,
+      user_id,
     };
     // studentRegistrationdata.append('file', selectedFile)
     console.log("studentRegistration", studentRegistrationdata);
