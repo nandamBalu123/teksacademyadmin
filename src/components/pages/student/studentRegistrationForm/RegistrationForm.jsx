@@ -428,7 +428,12 @@ export default function RegistrationForm() {
   const handleReset = () => {
     setActiveStep(0);
   };
-
+  useEffect(() => {
+    setuserid(user.id);
+  }, [user]);
+  useEffect(() => {
+    console.log("userid", user_id);
+  }, [user_id]);
   const handleSubmit = async () => {
     ///validations
     if (!admissionremarks) {
@@ -439,7 +444,7 @@ export default function RegistrationForm() {
       alert("please enter assets ");
       return;
     }
-    setuserid(user.id);
+    // setuserid(user.id);
     const studentRegistrationdata = {
       name,
       email,
