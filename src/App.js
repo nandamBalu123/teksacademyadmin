@@ -49,6 +49,10 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import { useEffect } from "react";
 import Branch from "./components/pages/settings/branch/Branch";
 import CreateBranch from "./components/pages/settings/branch/CreateBranch";
+import LeadSource from "./components/pages/settings/leadsource/LeadSource";
+import CreateLeadSource from "./components/pages/settings/leadsource/CreateLeadSource";
+import Department from "./components/pages/settings/departments/Department";
+import CreateDepartment from "./components/pages/settings/departments/CreateDepartment";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -89,7 +93,6 @@ function App() {
                   path="/login"
                   element={!user ? <LoginPage /> : <Navigate to="/" />}
                 />
-
                 <Route
                   path="/registrationform"
                   element={
@@ -116,7 +119,6 @@ function App() {
                     )
                   }
                 />
-
                 <Route
                   path="/feefollowup"
                   element={
@@ -127,7 +129,6 @@ function App() {
                     )
                   }
                 />
-
                 <Route
                   path="/feeview/:id"
                   element={
@@ -138,7 +139,6 @@ function App() {
                     )
                   }
                 />
-
                 <Route
                   path="/addtofee/:id"
                   element={
@@ -149,7 +149,6 @@ function App() {
                     )
                   }
                 />
-
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
                   path="/studentdataview/:id"
@@ -181,17 +180,14 @@ function App() {
                     )
                   }
                 />
-
                 <Route
                   path="/userview/:id"
                   element={user ? <UserView /> : <Dashboard />}
                 />
-
                 <Route
                   path="/studentApplicationprint/:id"
                   element={user ? <StudentApplicationPrint /> : <Dashboard />}
                 />
-
                 <Route
                   path="/roleaccess/:id"
                   element={
@@ -202,7 +198,6 @@ function App() {
                     )
                   }
                 />
-
                 <Route
                   path="/edituser/:id"
                   element={
@@ -213,7 +208,6 @@ function App() {
                   path="/editstudent/:id"
                   element={user ? <EditStudentForm /> : <Dashboard />}
                 />
-
                 <Route
                   path="/roles"
                   element={
@@ -246,8 +240,47 @@ function App() {
                     )
                   }
                 />
+                <Route
+                  path="/leadsource"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <LeadSource />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/createleadsource"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <CreateLeadSource />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/departments"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <Department />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />{" "}
+                <Route
+                  path="/createdepartment"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <CreateDepartment />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
                 {/* <Route path="/inn" element={<Login />}></Route> */}
-
                 {/* <Route
                 path="/feedetails"
                 element={role=='admin'? <Feedetails/> :<Dashboard/>}/> */}

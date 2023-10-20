@@ -9,6 +9,8 @@ import { UsersContextProvider } from "./context/UserContext";
 import { BranchContextProvider } from "./context/BranchContext";
 import { RoleContextProvider } from "./context/RoleContext";
 import { SettingsContextProvider } from "./context/SettingsContext";
+import { LeadSourceContextProvider } from "./context/LeadSourceContext";
+import { DepartmentContextProvider } from "./context/DepartmentContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -16,9 +18,13 @@ root.render(
       <SettingsContextProvider>
         <RoleContextProvider>
           <BranchContextProvider>
-            <UsersContextProvider>
-              <App />
-            </UsersContextProvider>
+            <LeadSourceContextProvider>
+              <DepartmentContextProvider>
+                <UsersContextProvider>
+                  <App />
+                </UsersContextProvider>
+              </DepartmentContextProvider>
+            </LeadSourceContextProvider>
           </BranchContextProvider>
         </RoleContextProvider>
       </SettingsContextProvider>

@@ -431,9 +431,7 @@ export default function RegistrationForm() {
   useEffect(() => {
     setuserid(user.id);
   }, [user]);
-  useEffect(() => {
-    console.log("userid", user_id);
-  }, [user_id]);
+
   const handleSubmit = async () => {
     ///validations
     if (!admissionremarks) {
