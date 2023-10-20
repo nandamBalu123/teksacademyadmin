@@ -407,7 +407,7 @@ const CreateUserForm = () => {
       </div>
           </div>
           <div className="create-button">
-            <button type="submit" className="btn btn-primary mr-20 mt-5  ">
+            <button type="submit" className="btn btn-primary   ">
               Create User
             </button>
           </div>

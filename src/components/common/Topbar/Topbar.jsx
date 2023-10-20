@@ -88,17 +88,17 @@ const Topbar = () => {
           </IconButton> 
         </Box> */}
 
-        <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+        <div className="col-1 col-md-1 col-lg-1 col-xl-1 ">
           <IconButton>
             <NotificationsOutlinedIcon />
           </IconButton>{" "}
         </div>
-        <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+        <div className="col-1 col-md-1 col-lg-1 col-xl-1">
           <IconButton>
             <SettingsOutlinedIcon />
           </IconButton>
         </div>
-        <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+        <div className="col-1 col-md-1 col-lg-1 col-xl-1 ">
           <div>
             <Button
               id="basic-button"
