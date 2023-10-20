@@ -17,7 +17,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 const FeeDetails = () => {
   const navigator = useNavigate();
   const [getstudentData, setData] = useState([{ name: "" }]);
-  const [studentFeeRecordss, setFeerecords] = useState(getstudentData);
+  const [studentFeeRecordss, setFeerecords] = useState();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -64,7 +64,7 @@ const FeeDetails = () => {
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
   useEffect(() => {
-    const filteredResults = getstudentData.filter((item) => {
+    const filteredResults = studentFeeRecordss.filter((item) => {
       const searchCondition = filterCriteria.search
         ? item.name
             .toLowerCase()
@@ -113,7 +113,8 @@ const FeeDetails = () => {
       );
     });
     setFeerecords(filteredResults);
-    // setFilteredData(filteredResults);
+    
+
   }, [filterCriteria, getstudentData]);
   const filterreset = () => {
     setFilterCriteria({
@@ -138,7 +139,7 @@ const FeeDetails = () => {
 
       return dueamount;
     });
-    setData(filteredResults);
+    setFeerecords(filteredResults);
   };
   const studentFeeRecords = () => {
     // setData(studentFeeRecordss);
