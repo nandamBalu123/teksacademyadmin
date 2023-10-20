@@ -49,6 +49,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import { useEffect } from "react";
 import Branch from "./components/pages/settings/branch/Branch";
 import CreateBranch from "./components/pages/settings/branch/CreateBranch";
+import Certificate from "./components/pages/student/Certificate/Certificate";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -161,6 +162,7 @@ function App() {
                     )
                   }
                 />
+                <Route path="/certificate" element={<Certificate/>}/>
                 <Route
                   path="/createuser"
                   element={

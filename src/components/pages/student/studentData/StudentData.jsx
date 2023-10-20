@@ -432,7 +432,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "185px",
+                      paddingRight: "133px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}

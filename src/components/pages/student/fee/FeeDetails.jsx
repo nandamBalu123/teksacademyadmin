@@ -197,10 +197,11 @@ const FeeDetails = () => {
               </div>
             </Menu>
           </div>
-          <TableContainer component={Paper} className="pt-4">
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
+          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+          <TableRow>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                     {" "}
                     S.NO
@@ -239,9 +240,9 @@ const FeeDetails = () => {
                     View
                   </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {Array.isArray(getstudentData) && getstudentData.length > 0 ? (
+          </TableHead>
+          <TableBody>
+          {Array.isArray(getstudentData) && getstudentData.length > 0 ? (
                   getstudentData.map((item, index) => (
                     <TableRow
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -322,9 +323,11 @@ const FeeDetails = () => {
                     <TableCell colSpan={3}>No data available</TableCell>
                   </TableRow>
                 )}{" "}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          </TableBody>
+        </Table>
+      </TableContainer>
+      
+    </Paper>
         </div>
       </div>
     </>
