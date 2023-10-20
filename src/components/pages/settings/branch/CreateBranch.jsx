@@ -43,7 +43,7 @@ const CreateBranch = () => {
       console.log("User created successfully.");
       dispatch({ type: "CREATE_BRANCH", payload: json });
       // Reset the form fields
-      setbranch("");
+      // setbranch("");
       //   setDescription("");
       navigate("/branch");
     }

@@ -1,33 +1,33 @@
 import { createContext, useReducer, useEffect } from "react";
 import axios from "axios";
-export const BranchContext = createContext();
+export const CoursePackageContext = createContext();
 
-export const BranchReducer = (state, action) => {
+export const CoursePackageReducer = (state, action) => {
   switch (action.type) {
-    case "SET_BRANCHES":
+    case "SET_COURSESPACKAGES":
       return {
-        branches: action.payload,
+        coursepackages: action.payload,
       };
-    case "CREATE_BRANCH":
+    case "CREATE_COURSEPACKAGE":
       return {
-        branches: [...state.branches, action.payload],
+        coursepackages: [...state.coursepackages, action.payload],
       };
     default:
       return state;
   }
 };
 
-export const BranchContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(BranchReducer, {
-    branches: null,
+export const CoursePackageContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(CoursePackageReducer, {
+    coursepackages: null,
   });
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getbranch")
+      .get("http://localhost:3030/getcoursespackages")
       .then((response) => {
         if (response.data) {
-          dispatch({ type: "SET_BRANCHES", payload: response.data });
+          dispatch({ type: "SET_COURSESPACKAGES", payload: response.data });
         }
       })
       .catch((error) => {
@@ -35,11 +35,11 @@ export const BranchContextProvider = ({ children }) => {
       });
   }, []);
 
-  console.log("BranchContext state:", state);
+  console.log("CoursePakagesContext state:", state);
 
   return (
-    <BranchContext.Provider value={{ ...state, dispatch }}>
+    <CoursePackageContext.Provider value={{ ...state, dispatch }}>
       {children}
-    </BranchContext.Provider>
+    </CoursePackageContext.Provider>
   );
 };
