@@ -5,7 +5,7 @@ export const useCourseContext = () => {
   const context = useContext(CourseContext);
 
   if (!context) {
-    throw Error("useBranchContext must be used inside an useCourseContext");
+    throw Error("CourseContext must be used inside an CourseContext");
   }
 
   return context;

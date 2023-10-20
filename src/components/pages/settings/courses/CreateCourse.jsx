@@ -1,15 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./CreateBranch.css";
+import "./CreateCourse.css";
 import { useState } from "react";
 import { Update } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { useBranchContext } from "../../../../hooks/useBranchContext";
-const CreateBranch = () => {
-  const { dispatch } = useBranchContext();
+import { useCourseContext } from "../../../../hooks/useCourseContext";
+const CreateCourse = () => {
+  const { dispatch } = useCourseContext();
   const navigate = useNavigate();
-  const [branch_name, setbranch] = useState("");
+  const [course_name, setcourse] = useState("");
   //   const [description, setDescription] = useState("");
   const [BasicAccess, setBasicAccess] = useState({
     Read: false,
@@ -21,12 +21,12 @@ const CreateBranch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = {
-      branch_name,
+      course_name,
     };
 
     console.log("User Data:", user); // Log the user data being sent
 
-    const response = await fetch("http://localhost:3030/addbranch", {
+    const response = await fetch("http://localhost:3030/addcourses", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
@@ -40,12 +40,13 @@ const CreateBranch = () => {
     console.log("JSON Response:", json); // Log the parsed JSON response
 
     if (response.ok) {
-      console.log("User created successfully.");
-      dispatch({ type: "CREATE_BRANCH", payload: json });
+      console.log("cousre created successfully.", json);
+
+      dispatch({ type: "CREATE_COURSE", payload: json });
       // Reset the form fields
-      setbranch("");
+      // setbranch("");
       //   setDescription("");
-      navigate("/branch");
+      navigate("/courses");
     }
     // handleCheckboxChange();
     // console.log(role, description);
@@ -53,7 +54,7 @@ const CreateBranch = () => {
   };
   return (
     <div style={{ marginTop: "30px" }}>
-      <p className="fs-5 ms-5">Create Branch</p>
+      <p className="fs-5 ms-5">Create Course</p>
       <form>
         <Box
           component="form"
@@ -68,10 +69,10 @@ const CreateBranch = () => {
               <div className="col-12 col-md-6 col-lg-4 ">
                 <input
                   className="form-control"
-                  placeholder="Branch Name"
+                  placeholder="Course Name"
                   type="text"
-                  value={branch_name}
-                  onChange={(e) => setbranch(e.target.value)}
+                  value={course_name}
+                  onChange={(e) => setcourse(e.target.value)}
                   style={{ padding: "15px" }}
                 />
                 {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
@@ -112,4 +113,4 @@ const CreateBranch = () => {
   );
 };
 
-export default CreateBranch;
+export default CreateCourse;

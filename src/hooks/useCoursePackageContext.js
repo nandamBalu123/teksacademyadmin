@@ -1,12 +1,12 @@
-import { BranchContext } from "../context/BranchContext";
 import { useContext } from "react";
+import { CoursePackageContext } from "../context/CoursePackageContext";
 
-export const useBranchContext = () => {
-  const context = useContext(BranchContext);
+export const useCoursePackageContext = () => {
+  const context = useContext(CoursePackageContext);
 
   if (!context) {
     throw Error(
-      "useBranchContext must be used inside an BranchContextProvider"
+      "useCoursePackageContext must be used inside an CoursePackageContext"
     );
   }
 

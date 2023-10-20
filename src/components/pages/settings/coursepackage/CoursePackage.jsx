@@ -9,13 +9,13 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
-import { useBranchContext } from "../../../../hooks/useBranchContext";
-const Branch = () => {
-  const { branches } = useBranchContext();
+import { useCoursePackageContext } from "../../../../hooks/useCoursePackageContext";
+const CoursePackage = () => {
+  const { coursepackages } = useCoursePackageContext();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/createbranch");
+    navigate("/createcoursepackage");
   };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -40,13 +40,13 @@ const Branch = () => {
   return (
     <div className="container">
       <div className="flex">
-        <p className="fs-5 ms-3">Branches</p>
+        <p className="fs-5 ms-3">Course Packages</p>
         <button
           type="submit"
           className="btn btn-primary mr-20 ms-2 mb-2"
           onClick={handleSubmit}
         >
-          Add Branch
+          Add Course Package
         </button>
       </div>
       <TableContainer component={Paper}>
@@ -71,14 +71,14 @@ const Branch = () => {
           </TableHead>
 
           <TableBody className="border border 1">
-            {Array.isArray(branches) && branches.length > 0 ? (
-              branches.map((item, index) => (
+            {Array.isArray(coursepackages) && coursepackages.length > 0 ? (
+              coursepackages.map((item, index) => (
                 <StyledTableRow key={item.id}>
                   <StyledTableCell className="border border 1 text-center">
                     {index + 1}
                   </StyledTableCell>
                   <StyledTableCell className="border border 1 text-center">
-                    {item.branch_name}
+                    {item.coursespackages_name}
                   </StyledTableCell>
 
                   {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
@@ -96,4 +96,4 @@ const Branch = () => {
   );
 };
 
-export default Branch;
+export default CoursePackage;

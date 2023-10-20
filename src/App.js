@@ -54,6 +54,11 @@ import CreateLeadSource from "./components/pages/settings/leadsource/CreateLeadS
 import Department from "./components/pages/settings/departments/Department";
 import CreateDepartment from "./components/pages/settings/departments/CreateDepartment";
 import Certificate from "./components/pages/student/Certificate/Certificate";
+import CoursePackage from "./components/pages/settings/coursepackage/CoursePackage";
+import CreateCoursePackage from "./components/pages/settings/coursepackage/CreateCoursePackage";
+import Course from "./components/pages/settings/courses/Course";
+import CreateCourse from "./components/pages/settings/courses/CreateCourse";
+
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -161,7 +166,7 @@ function App() {
                     )
                   }
                 />
-                <Route path="/certificate" element={<Certificate/>}/>
+                <Route path="/certificate" element={<Certificate />} />
                 <Route
                   path="/createuser"
                   element={
@@ -277,6 +282,42 @@ function App() {
                   element={
                     user && user.profile == "admin" ? (
                       <CreateDepartment />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/courses"
+                  element={
+                    user && user.profile == "admin" ? <Course /> : <Dashboard />
+                  }
+                />{" "}
+                <Route
+                  path="/createcourse"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <CreateCourse />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/coursepackage"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <CoursePackage />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />{" "}
+                <Route
+                  path="/createcoursepackage"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <CreateCoursePackage />
                     ) : (
                       <Dashboard />
                     )

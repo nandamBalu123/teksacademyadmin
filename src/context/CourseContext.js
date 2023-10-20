@@ -35,7 +35,7 @@ export const CourseContextProvider = ({ children }) => {
       });
   }, []);
 
-  console.log("CourseContext state:", state);
+  console.log("BranchContext state:", state);
 
   return (
     <CourseContext.Provider value={{ ...state, dispatch }}>
