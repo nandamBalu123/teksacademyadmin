@@ -44,10 +44,7 @@ label {
 input {
   margin-left: 13px;
 }
-/* input:hover {
-  border: 15px solid rgb(141, 10, 10);
-  border-radius: 5px;
-} */
+
 .row {
   margin-top: 20px;
 }
@@ -73,12 +70,17 @@ StepLabel {
 .form {
   background-color: white;
   border: 1px solid whitesmoke;
- 
   padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 5%;
   margin: 0;
   border-radius: 30px;
+}
+.billingtable{ 
+  overflow: hidden;
+  width: 95%;
+  margin: auto;
+
 }
 
 /* table,th,td{ 

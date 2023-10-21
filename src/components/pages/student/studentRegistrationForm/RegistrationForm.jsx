@@ -11,7 +11,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "./RegistrationForm.css";
 import axios from "axios";
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import { blue } from "@mui/material/colors";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
@@ -610,12 +616,12 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form ">
                 <div className="row input ">
-                  <label className="col-12 col-md-5 label">
+                  <label className="col-12 col-md-2 label">
                     Name <span className="text-danger">*</span>&nbsp; :
                   </label>
                   <input
                     type="text"
-                    className="col-12 col-md-5"
+                    className="col-9 col-md-5"
                     required
                     style={{
                       height: "35px",
@@ -1460,7 +1466,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Registration No <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>
+                  </label > &nbsp;&nbsp;&nbsp;
 
                   {registrationnumber}
                 </div>
@@ -1694,7 +1700,34 @@ export default function RegistrationForm() {
 
             <StepContent>
               <form className="form">
-                <table className="table w-75 ms-5">
+
+              <TableContainer component={Paper} className="billingtable m-auto">
+      <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+        <TableHead>
+          <TableCell className="fs-6 py-3" align="center">
+          Gross Total
+          </TableCell>
+          <TableCell className="fs-6" align="center">
+          Total Discount
+          </TableCell>
+          <TableCell className="fs-6" align="center">
+           Total Amount
+          </TableCell>
+          </TableHead>
+          <TableBody>
+           <TableCell align="center"> 
+           {grosstotal}
+           </TableCell>
+           <TableCell align="center"> 
+           {totaldiscount}
+           </TableCell>
+           <TableCell align="center"> 
+           {finaltotal}
+           </TableCell>
+          </TableBody>
+          </Table>
+          </TableContainer>
+                {/* <table className="table w-75 ms-5">
                   <thead>
                     <tr>
                       <th className="border border-1 ">Gross Total</th>
@@ -1709,8 +1742,87 @@ export default function RegistrationForm() {
                       <td className="border border-1">{finaltotal}</td>
                     </tr>
                   </tbody>
-                </table>
-                <table class="table billing ">
+                </table> */}
+
+
+
+                <TableContainer component={Paper} className="billingtable m-auto mt-4">
+      <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+        <TableHead>
+       
+          
+          <TableRow className="border border1" >
+         
+            <TableCell align="left" className="fs-6 py-3"> Fee Type</TableCell>
+            <TableCell align="left" className="fs-6">Fee (Excl of GST)</TableCell>
+            <TableCell align="left" className="fs-6" >Tax</TableCell>
+            <TableCell align="left" className="fs-6">Fee (Incl of GST)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        
+        
+            {feedetailsbilling.length > 0 &&
+                      feedetailsbilling.map((item) => {
+                        if (item.feetype != "Material Fee") {
+                          return (
+                            <TableRow key={item.id} className="border border1">
+                              <TableCell >
+                                {item.feetype}
+                              </TableCell>
+                              <TableCell >
+                                {parseFloat(item.feewithouttax.toFixed(2))}
+                              </TableCell>
+                              <TableCell >
+                                {parseFloat(item.feetax.toFixed(2))}
+                              </TableCell>
+                              <TableCell>
+                                {parseFloat(item.feewithtax.toFixed(2))}
+                              </TableCell>
+                            </TableRow>
+                          );
+                        }
+                      })}
+                       {feedetailsbilling.length > 0 && (
+                      <TableRow className="border border1">
+                        <TableCell >
+                          {" "}
+                         <b>   Sub Total</b>
+                        </TableCell>
+                        <TableCell >
+                          
+                            {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
+                       
+                        </TableCell>
+                        <TableCell >
+                       {parseFloat(totaltax.toFixed(2))}
+                        </TableCell>
+                        <TableCell>
+                         {parseFloat(grandtotal.toFixed(2))}
+                        </TableCell>
+                      </TableRow>
+                    )}
+        
+       
+          <TableRow className="border border1">
+            <TableCell rowSpan={3} />
+            <TableCell rowSpan={3} />
+            <TableCell >Material Fee</TableCell>
+            <TableCell align="left">{materialfee}</TableCell>
+          </TableRow>
+          <TableRow className="border border1">
+      
+            <TableCell align="left">Grand Total</TableCell>
+            <TableCell align="left">{finaltotal}</TableCell>
+          </TableRow>
+          
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+
+
+                {/* <table class="table billing  mt-3">
                   <thead>
                     <tr>
                       <th className="border border-1">Fee Type</th>
@@ -1772,7 +1884,7 @@ export default function RegistrationForm() {
                       <td> {finaltotal} </td>
                     </tr>
                   </tbody>
-                </table>
+                </table> */}
 
                 <br />
               </form>

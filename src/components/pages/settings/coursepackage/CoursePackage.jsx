@@ -39,8 +39,8 @@ const CoursePackage = () => {
   }));
   return (
     <div className="container">
-      <div className="flex">
-        <p className="fs-5 ms-3">Course Packages</p>
+      <div className="flex mt-3">
+        <p className="fs-5 ms-3 ">Course Packages</p>
         <button
           type="submit"
           className="btn btn-primary mr-20 ms-2 mb-2"
