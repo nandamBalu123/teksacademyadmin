@@ -196,20 +196,70 @@ const Addtofee = () => {
            required/>
            <label> Due Amount</label>
            </div>
-           <div className="col-12 col-md-3 col-lg-3 col-xl-3 inputgroup"> 
+           {/* <div className="col-12 col-md-3 col-lg-3 col-xl-3 inputgroup"> 
            <input
               type="number"
               value={initialamount}
               onChange={(e) => setinitialamount(e.target.value)}
             />
             <label> Initial Amount </label>
-           </div>
+           </div> */}
             {/* <input type="text" value={studentdata.admissiondate} /> */}
             
             {/* <TextField id="outlined-basic"  label=" Course date" variant="outlined"  className="textfield" type="date"/> */}
 
             </div>
-          <div className="row ">
+            <div className="row"> 
+            
+                
+               
+            
+             <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup"> 
+                  <input
+                    type="number"
+                    name="paidamount"
+                    className="w-100"
+                  
+                  />
+                 <label> Intial Amount</label>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup"> 
+                  <input
+                    type="date"
+                    name="paiddate"
+                    className="w-100"
+                 
+                  />
+                 <label> Paid Date</label>
+                  
+                  </div> 
+                  <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup-select">  
+                  <select
+                    className="w-100"
+                    name="modeofpayment"
+                   
+                   
+                  >
+                    <option value="">---select---</option>
+                    <option value="upi">UPI</option>
+                    <option value="cash">Cash</option>
+                    <option value="backtransfor"> Bank Transfor</option>
+                    <option value="cheque"> CHEQUE</option>
+                  </select>
+                  <label> Mode of Payments</label>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup" > 
+                 <input
+                    type="text"
+                    className="w-100"
+                    name="transactionid"
+                    
+                  />
+                  <label> Transaction Id</label>
+                  </div>
+                  
+                  </div> 
+                  <div className="row ">
             <div className=" col-12 col-md-6 col-xl-6 col-lg-6 inputgroup"> 
             <input
               type="number"
@@ -232,11 +282,14 @@ const Addtofee = () => {
               onChange={(e) => settotalinstallment(e.target.value)}
             /> */}
           </div>
+                 
+             </div>
+         
           
 
           
         </div>{" "}
-      </div>
+ 
     </>
   );
 };

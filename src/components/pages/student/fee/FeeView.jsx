@@ -377,7 +377,7 @@ const FeeView = () => {
                   <label> Due Date</label>
                    </div>
                   
-                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input"> 
+                  {/* <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input"> 
                   <input
                     type="number"
                     name="paidamount"
@@ -456,7 +456,7 @@ const FeeView = () => {
                   >
                     Update
                   </button>
-                  </div>
+                  </div> */}
                   </div>
            </div>
             );
