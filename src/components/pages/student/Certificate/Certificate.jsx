@@ -25,7 +25,7 @@ const Certificate = () => {
       setAnchorEl(null);
     };
   return (
-    <div  className='container'>
+    <div  className='container '>
        <div className='certificate mt-2'> 
        <h3 className='mx-3 my-3'> Certificate </h3>
        <div className="row mb-3 px-4 pt-3">
@@ -35,11 +35,11 @@ const Certificate = () => {
     <input
       type="text"
       className="input-field ps-2"
-      placeholder="Search Here......"
+      placeholder="Search Here...."
       autoComplete="off"
       style={{
         height: "45px",
-        width: "20%",
+        width: "100%",
         outline: "none",
         borderTop: "none",
         borderBottom: "1.5px solid black",
@@ -50,7 +50,7 @@ const Certificate = () => {
       name="search"
     
     />
-   <hr className="w-50" />
+   <hr className="w-75" />
    </div>
    
     <div className="col-12 col-md-6 col-lg-2 col-xl-2 "> 
@@ -118,12 +118,8 @@ const Certificate = () => {
           paddingRight: "145px",
           border: "1.5px solid black",
           borderRadius: "5px",
-        }}
-   
-      
-      >
-       
-      </select>
+        }}>
+       </select>
     </MenuItem>
     <MenuItem>
       <label className="mt-3 me-3"> Branch: </label>
@@ -156,6 +152,46 @@ const Certificate = () => {
   </Menu>
   </div>
 </div>
+<div className='w-100'> 
+<table> 
+  <tr> 
+  <th> S.No </th>
+<th> Name</th>
+<th> Course</th>
+<th> Registration ID</th>
+<th> Course StartDate</th>
+<th> Course EndDate</th>
+  </tr>
+  <tr> 
+    <td data-cell="S.No" >1 </td>
+    <td data-cell="name"> Bhavitha </td>
+    <td data-cell="course"> React JS</td>
+    <td data-cell="registration">3214  </td>
+    <td data-cell="startdate">20-11-2023 </td>
+    <td data-cell="enddate"> 30-11-2023</td>
+  </tr>
+  <tr> 
+    <td data-cell="S.No" >1 </td>
+    <td data-cell="name"> Bhavitha </td>
+    <td data-cell="course"> React JS</td>
+    <td data-cell="registration">3214  </td>
+    <td data-cell="startdate">20-11-2023 </td>
+    <td data-cell="enddate"> 30-11-2023</td>
+  </tr>
+  <tr> 
+    <td data-cell="S.No" >1 </td>
+    <td data-cell="name"> Bhavitha </td>
+    <td data-cell="course"> React JS</td>
+    <td data-cell="registration">3214  </td>
+    <td data-cell="startdate">20-11-2023 </td>
+    <td data-cell="enddate"> 30-11-2023</td>
+  </tr>
+ 
+  
+
+</table>
+</div>
+
        <Paper sx={{ width: '100%', overflow: 'hidden' }} className='my-4'>
       <TableContainer sx={{ maxHeight: 440 }} >
         <Table stickyHeader aria-label="sticky table">

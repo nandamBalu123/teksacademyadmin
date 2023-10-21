@@ -1,6 +1,49 @@
 .certificate{ 
-    width: 99%;
-  border: 2px solid #f5f5f5;
+    width: 100%;
+
   border-radius: 20px;
   margin: auto;
+}
+table{ 
+  width: 100%;
+}
+table th{ 
+  border-collapse:collapse ;
+  background-color: #0070fc;
+  color: #f5f5f5;
+}
+th,td{ 
+  padding: 1rem;
+}
+th{ 
+  background:#0070fc ;
+}
+tr:nth-of-type(2n){ 
+  background-color: rgba(238, 232, 232,0.5);
+}
+@media (max-width:650px) {
+  table{ 
+    overflow: hidden;
+    width: 100%;
+  }
+  th{ 
+    display: none;
+  }
+td{ 
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 15ch auto;
+  padding: 0.5rem 1rem ;
+}  
+td:first-child{ 
+  padding-top: 2rem;
+}
+td:last-child{ 
+  padding-bottom: 2rem;
+}
+td::before{ 
+  content: attr(data-cell)":";
+  font-weight: 700;
+  text-transform: capitalize;
+}
 }
