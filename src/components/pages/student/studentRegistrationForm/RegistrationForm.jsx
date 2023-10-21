@@ -24,10 +24,13 @@ import { useNavigate } from "react-router-dom";
 // import { blue } from "@mui/material/colors";
 // import { useDropzone } from 'react-dropzone';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
-
+import { useBranchContext } from "../../../../hooks/useBranchContext";
 export default function RegistrationForm() {
   const { user } = useAuthContext();
-
+  const { branches } = useBranchContext();
+  useEffect(() => {
+    console.log("branhcess", branches);
+  }, [branches]);
   const navigate = useNavigate();
   const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
@@ -1377,10 +1380,19 @@ export default function RegistrationForm() {
                     value={branch}
                   >
                     <option value="">--select--</option>
+                    <option value="">--select--</option>
+
+                    {branches &&
+                      branches.map((item, index) => (
+                        <option key={item.id} value={item.branch_name}>
+                          {item.branch_name}
+                        </option>
+                      ))}
+                    {/* 
                     <option value="hitechcity">Hitech-city</option>
                     <option value="ameerpet">Ameerpet</option>
                     <option value="dilsukhnagar">Dilsukhnagar</option>
-                    <option value="gachibowli">Gachibowli</option>
+                    <option value="gachibowli">Gachibowli</option> */}
                   </select>
                 </div>
                 <br />

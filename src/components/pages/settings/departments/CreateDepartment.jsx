@@ -53,7 +53,7 @@ const CreateDepartment = () => {
   };
   return (
     <div style={{ marginTop: "30px" }}>
-      <p className="fs-5 ms-5">Create Branch</p>
+      <p className="fs-5 ms-5">Create Department</p>
       <form>
         <Box
           component="form"
