@@ -28,9 +28,7 @@ import { useBranchContext } from "../../../../hooks/useBranchContext";
 export default function RegistrationForm() {
   const { user } = useAuthContext();
   const { branches } = useBranchContext();
-  useEffect(() => {
-    console.log("branhcess", branches);
-  }, [branches]);
+
   const navigate = useNavigate();
   const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
@@ -227,6 +225,22 @@ export default function RegistrationForm() {
 
     setTotalamount(0);
   };
+  const ameerpetbranch = studentData.filter(
+    (item) => item.branch === "ameerpet"
+  );
+  const ameerpetcount = ameerpetbranch.length;
+  const hitechcitybranch = studentData.filter(
+    (item) => item.branch === "hitechcity"
+  );
+  const hitechcitycount = hitechcitybranch.length;
+  const dilsukhnagarbranch = studentData.filter(
+    (item) => item.branch === "dilsukhnagar"
+  );
+  const dilsukhnagarcount = dilsukhnagarbranch.length;
+  const gachibowlibranch = studentData.filter(
+    (item) => item.branch === "gachibowli"
+  );
+  const gachibowlicount = gachibowlibranch.length;
 
   useEffect(() => {
     let date = toString(admissiondate);
@@ -579,23 +593,6 @@ export default function RegistrationForm() {
         console.error("Error fetching data:", error);
       });
   }, []);
-
-  const ameerpetbranch = studentData.filter(
-    (item) => item.branch === "ameerpet"
-  );
-  const ameerpetcount = ameerpetbranch.length;
-  const hitechcitybranch = studentData.filter(
-    (item) => item.branch === "hitechcity"
-  );
-  const hitechcitycount = hitechcitybranch.length;
-  const dilsukhnagarbranch = studentData.filter(
-    (item) => item.branch === "dilsukhnagar"
-  );
-  const dilsukhnagarcount = dilsukhnagarbranch.length;
-  const gachibowlibranch = studentData.filter(
-    (item) => item.branch === "gachibowli"
-  );
-  const gachibowlicount = gachibowlibranch.length;
 
   const handleFeeDelete = (id) => {
     const updatedTasks = feedetails.filter((task) => task.id !== id);
@@ -1379,7 +1376,6 @@ export default function RegistrationForm() {
                     onChange={(e) => setBranch(e.target.value)}
                     value={branch}
                   >
-                    <option value="">--select--</option>
                     <option value="">--select--</option>
 
                     {branches &&

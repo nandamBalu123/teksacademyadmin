@@ -50,7 +50,8 @@ import { Link } from "react-router-dom";
 import { LastPage } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
-
+import { useBranchContext } from "../../../../hooks/useBranchContext";
+import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 import axios from "axios";
 // import { CSVLink } from "react-csv";
 // import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -81,6 +82,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
+  const { branches } = useBranchContext();
+  const { leadsources } = useLeadSourceContext();
+
   const [initialData, setData] = useState([{ name: "" }]);
   // const [initialData, setData] = useState(initialDataa);
 
@@ -282,7 +286,7 @@ const StudentData = () => {
             style={{ cursor: "pointer" }}
           >
             {" "}
-            <RefreshIcon onClick={filterreset} />{" "}
+            {/* <RefreshIcon onClick={filterreset} />{" "} */}
           </div>
           <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
             <h6>
@@ -373,10 +377,12 @@ const StudentData = () => {
                     onChange={handleInputChange}
                   >
                     <option value="">Branch</option>
-                    <option value="hitechcity"> Hitech city</option>
-                    <option value="ameerpet"> Ameerpet</option>
-                    <option value="dilsukhnagar"> Dilsukhnagar</option>
-                    <option value="gachibowli"> Gachibowli</option>
+                    {branches &&
+                      branches.map((item, index) => (
+                        <option key={item.id} value={item.branch_name}>
+                          {item.branch_name}
+                        </option>
+                      ))}
                   </select>
                 </MenuItem>
                 <MenuItem>
@@ -396,9 +402,12 @@ const StudentData = () => {
                     onChange={handleInputChange}
                   >
                     <option value="">LeadSource</option>
-                    <option value="walkin"> Walkin</option>
-                    <option value="justdail"> JustDail</option>
-                    <option value="referral"> Referral</option>
+                    {leadsources &&
+                      leadsources.map((item, index) => (
+                        <option key={item.id} value={item.leadsource}>
+                          {item.leadsource}
+                        </option>
+                      ))}
                   </select>
                 </MenuItem>{" "}
               </div>
@@ -439,6 +448,7 @@ const StudentData = () => {
                     value={filterCriteria.enquirytakenby}
                     onChange={handleInputChange}
                   >
+                    <option>counsellor</option>
                     {filteredcounsellor &&
                       filteredcounsellor.map((user, index) => (
                         <option value={user.fullname}> {user.fullname}</option>
@@ -451,8 +461,11 @@ const StudentData = () => {
                 </MenuItem>{" "}
               </div>
               <MenuItem className="d-flex justify-content-between">
-                <button className="save"> Save</button>
-                <button className="clear"> Clear</button>
+                {/* <button className="save"> Save</button> */}
+                <button className="clear" onClick={filterreset}>
+                  {" "}
+                  Clear
+                </button>
               </MenuItem>
             </Menu>
           </div>
