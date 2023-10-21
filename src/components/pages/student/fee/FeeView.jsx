@@ -196,10 +196,7 @@ const FeeView = () => {
                   {" "}
                   Total Amount
                 </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  {" "}
-                  Initial Amount{" "}
-                </TableCell>
+
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   {" "}
                   Paid Amount
@@ -217,7 +214,7 @@ const FeeView = () => {
               <TableRow
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" className="border border 1">
+                <TableCell className="border border 1">
                   {studentdata.name}
                 </TableCell>
                 <TableCell className="border border 1">
@@ -235,9 +232,7 @@ const FeeView = () => {
                 <TableCell className="border border 1">
                   {studentdata.finaltotal}
                 </TableCell>
-                <TableCell className="border border 1">
-                  {studentdata.initialamount}
-                </TableCell>
+
                 <TableCell className="border border 1">
                   {studentdata.totalpaidamount}
                 </TableCell>
@@ -270,6 +265,55 @@ const FeeView = () => {
                 </TableCell>
               </TableRow>
             </TableBody>
+          </Table>
+        </TableContainer>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  Initial Paid Amount
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                  {" "}
+                  Paid Date
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                  {" "}
+                  Mode of Payment
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                  {" "}
+                  Transition ID
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  {" "}
+                  Invoice
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {studentdata.initialpayment &&
+              studentdata.initialpayment.map((item, index) => (
+                <TableBody>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell className="border border 1">
+                      {item.initialamount}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.paiddate}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.modeofpayment}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.transactionID}
+                    </TableCell>
+                    <TableCell className="border border 1"></TableCell>
+                  </TableRow>
+                </TableBody>
+              ))}
           </Table>
         </TableContainer>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -323,7 +367,7 @@ const FeeView = () => {
                     <TableRow
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell component="th" className="border border 1">
+                      <TableCell className="border border 1">
                         {item.duedate}
                       </TableCell>
                       <TableCell className="border border 1">
@@ -360,105 +404,103 @@ const FeeView = () => {
                   {parseFloat(installmentamount).toFixed(2)}
                 </p>
                 <div className="row">
-                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input"> 
-                  <input
-                    type="date" 
-                    name="duedate"
-                    className="w-100"
-                    onChange={(e) => {
-                      const updatedInstallment = {
-                        ...installment,
-                        duedate: e.target.value,
-                      };
-                      handleInstallmentUpdate(index, updatedInstallment);
-                    }}
-                    value={installment.duedate}
-                  />
-                  <label> Due Date</label>
-                   </div>
-                  
-                  {/* <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input"> 
-                  <input
-                    type="number"
-                    name="paidamount"
-                    className="w-100"
-                    onChange={(e) => {
-                      const updatedInstallment = {
-                        ...installment,
-                        paidamount: e.target.value,
-                      };
-                      handleInstallmentUpdate(index, updatedInstallment);
-                    }}
-                    value={installment.paidamount}
-                  />
-                 <label> Paid Amount</label>
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                    <input
+                      type="date"
+                      name="duedate"
+                      className="w-100"
+                      onChange={(e) => {
+                        const updatedInstallment = {
+                          ...installment,
+                          duedate: e.target.value,
+                        };
+                        handleInstallmentUpdate(index, updatedInstallment);
+                      }}
+                      value={installment.duedate}
+                    />
+                    <label> Due Date</label>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input"> 
-                  <input
-                    type="date"
-                    name="paiddate"
-                    className="w-100"
-                    onChange={(e) => {
-                      const updatedInstallment = {
-                        ...installment,
-                        paiddate: e.target.value,
-                      };
-                      handleInstallmentUpdate(index, updatedInstallment);
-                    }}
-                    value={installment.paiddate}
-                  />
-                 <label> Paid Date</label>
-                  
-                  </div> 
-                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 mul-input">  
-                  <select
-                    className="w-100"
-                    name="modeofpayment"
-                   
-                    onChange={(e) => {
-                      const updatedInstallment = {
-                        ...installment,
-                        modeofpayment: e.target.value,
-                      };
-                      handleInstallmentUpdate(index, updatedInstallment);
-                    }}
-                    value={installment.modeofpayment}
-                  >
-                    <option value="">---select---</option>
-                    <option value="upi">UPI</option>
-                    <option value="cash">Cash</option>
-                    <option value="backtransfor"> Bank Transfor</option>
-                    <option value="cheque"> CHEQUE</option>
-                  </select>
-                  <label> Mode of Payments</label>
+
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                    <input
+                      type="number"
+                      name="paidamount"
+                      className="w-100"
+                      onChange={(e) => {
+                        const updatedInstallment = {
+                          ...installment,
+                          paidamount: e.target.value,
+                        };
+                        handleInstallmentUpdate(index, updatedInstallment);
+                      }}
+                      value={installment.paidamount}
+                    />
+                    <label> Paid Amount</label>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input" > 
-                 <input
-                    type="text"
-                    className="w-100"
-                    name="transactionid"
-                    onChange={(e) => {
-                      const updatedInstallment = {
-                        ...installment,
-                        transactionid: e.target.value,
-                      };
-                      handleInstallmentUpdate(index, updatedInstallment);
-                    }}
-                    value={installment.transactionid}
-                  />
-                  <label> Transaction Id</label>
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                    <input
+                      type="date"
+                      name="paiddate"
+                      className="w-100"
+                      onChange={(e) => {
+                        const updatedInstallment = {
+                          ...installment,
+                          paiddate: e.target.value,
+                        };
+                        handleInstallmentUpdate(index, updatedInstallment);
+                      }}
+                      value={installment.paiddate}
+                    />
+                    <label> Paid Date</label>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">  
-                  <button
-                    className="btn btn-primary center"
-                    // onClick={() => handleInstallmentUpdate(index, installment)}
-                    onClick={updatedata}
-                  >
-                    Update
-                  </button>
-                  </div> */}
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 mul-input">
+                    <select
+                      className="w-100"
+                      name="modeofpayment"
+                      onChange={(e) => {
+                        const updatedInstallment = {
+                          ...installment,
+                          modeofpayment: e.target.value,
+                        };
+                        handleInstallmentUpdate(index, updatedInstallment);
+                      }}
+                      value={installment.modeofpayment}
+                    >
+                      <option value="">---select---</option>
+                      <option value="upi">UPI</option>
+                      <option value="cash">Cash</option>
+                      <option value="backtransfor"> Bank Transfor</option>
+                      <option value="cheque"> CHEQUE</option>
+                    </select>
+                    <label> Mode of Payments</label>
                   </div>
-           </div>
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                    <input
+                      type="text"
+                      className="w-100"
+                      name="transactionid"
+                      onChange={(e) => {
+                        const updatedInstallment = {
+                          ...installment,
+                          transactionid: e.target.value,
+                        };
+                        handleInstallmentUpdate(index, updatedInstallment);
+                      }}
+                      value={installment.transactionid}
+                    />
+                    <label> Transaction Id</label>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">
+                    <button
+                      className="btn btn-primary center"
+                      // onClick={() => handleInstallmentUpdate(index, installment)}
+                      onClick={updatedata}
+                    >
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
             );
           })}
       </div>
