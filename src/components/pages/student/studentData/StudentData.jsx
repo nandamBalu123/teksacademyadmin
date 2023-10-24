@@ -13,7 +13,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 
 import TableRow from "@mui/material/TableRow";
-
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import PrintIcon from "@mui/icons-material/Print";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
@@ -208,22 +209,23 @@ const StudentData = () => {
     setfilteredcounsellor(filteruser);
   }, [getusers]);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setrecordsPerPage] = useState(10);
+  const [itemsPerPage, setrecordsPerPage] = useState(10);
 
   const handlerecorddata = (e) => {
     setrecordsPerPage(e.target.value);
-    setCurrentPage(1);
+    setPage(1);
   };
-  const lastIndex = currentPage * recordsPerPage;
 
-  const firstIndex = lastIndex - recordsPerPage;
+  const [page, setPage] = useState(1);
 
-  const records = filteredData.slice(firstIndex, lastIndex);
+  // Calculate the range of items to display on the current page
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
-  const npage = Math.ceil(initialData.length / recordsPerPage);
-
-  const numbers = [...Array(npage + 1).keys()].slice(1);
+  const records = filteredData.slice(startIndex, endIndex);
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -297,14 +299,10 @@ const StudentData = () => {
 
           <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
             {" "}
-          
-       
-          <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
+            <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               {" "}
               Filter
             </h6>
-      
-          
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}
@@ -492,7 +490,7 @@ const StudentData = () => {
             </CSVLink>{" "}
           </div>
         </div>
-        {/* 
+        {/*
         <table className="table table-striped">
         <thead>
     <tr>
@@ -508,19 +506,18 @@ const StudentData = () => {
                   <br /> Source</th>
       <th  className="bg-primary fs-6 border border 1 text-center text-light"
                   align="left">Contact Number
-                  <br /> Email ID</th>  
+                  <br /> Email ID</th>
                   <th  className="bg-primary fs-6 border border 1 text-center text-light"
                   align="left"> Joining Date <br />
                   Traning Mode
-                  </th>  
+                  </th>
                   <th  className="bg-primary fs-6 border border 1 text-center text-light"
                   align="left"> Actions
-                </th>                    
+                </th>
     </tr>
   </thead>
   <tbody>
-   
-    
+
   </tbody>
 </table> */}
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -586,7 +583,7 @@ const StudentData = () => {
                       <TableCell className=" border border 2 text-center p-0 m-0">
                         {index + 1}
                       </TableCell>
-                      {/* 
+                      {/*
                   <StyledTableCell className=" border border 2 text-center">
                     {item.profilepic}
                   </StyledTableCell> */}
@@ -692,53 +689,18 @@ const StudentData = () => {
           </TableContainer>
         </Paper>
 
-        <div>
-          <nav>
-            <ul className="pagination">
-              <li className="page-item">
-                <a href="#" className="prev" onClick={prevPage}>
-                  {" "}
-                  Prev{" "}
-                </a>
-              </li>
-
-              {numbers.map((n, i) => (
-                <li
-                  className={`page-item ${currentPage == n ? "active" : ""}`}
-                  key={i}
-                >
-                  <a href="#" className="mx-2 num " onClick={changePage(n)}>
-                    {n}{" "}
-                  </a>
-                </li>
-              ))}
-
-              <li className="page-item">
-                <a href="#" className="next" onClick={nextPage}>
-                  {" "}
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(filteredData.length / itemsPerPage)}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Stack>
         </div>
       </div>
     </div>
   );
-
-  function prevPage() {
-    if (currentPage !== firstIndex) {
-      setCurrentPage(currentPage - 1);
-    }
-  }
-
-  function changePage(id) {}
-
-  function nextPage() {
-    if (currentPage !== lastIndex) {
-      setCurrentPage(currentPage + 1);
-    }
-  }
 };
 
 export default StudentData;
