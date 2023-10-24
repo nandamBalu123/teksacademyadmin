@@ -27,4 +27,10 @@
 .feefollowupbtn:hover{ 
     background-color: #4c698d;
 }
+input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button{ 
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
 

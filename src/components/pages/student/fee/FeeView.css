@@ -84,4 +84,10 @@ margin: 20px 0;
     background-color: #fff;
     color: #0070fc;
 }
+input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button{ 
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
 
