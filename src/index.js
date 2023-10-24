@@ -14,25 +14,28 @@ import { DepartmentContextProvider } from "./context/DepartmentContext";
 
 import { CoursePackageContextProvider } from "./context/CoursePackageContext";
 import { CourseContextProvider } from "./context/CourseContext";
+import { StudentsContextProvider } from "./context/StudentsContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <RoleContextProvider>
-        <BranchContextProvider>
-          <LeadSourceContextProvider>
-            <DepartmentContextProvider>
-              <CourseContextProvider>
-                <CoursePackageContextProvider>
-                  <UsersContextProvider>
-                    <App />
-                  </UsersContextProvider>
-                </CoursePackageContextProvider>
-              </CourseContextProvider>
-            </DepartmentContextProvider>
-          </LeadSourceContextProvider>
-        </BranchContextProvider>
-      </RoleContextProvider>
+      <StudentsContextProvider>
+        <RoleContextProvider>
+          <BranchContextProvider>
+            <LeadSourceContextProvider>
+              <DepartmentContextProvider>
+                <CourseContextProvider>
+                  <CoursePackageContextProvider>
+                    <UsersContextProvider>
+                      <App />
+                    </UsersContextProvider>
+                  </CoursePackageContextProvider>
+                </CourseContextProvider>
+              </DepartmentContextProvider>
+            </LeadSourceContextProvider>
+          </BranchContextProvider>
+        </RoleContextProvider>
+      </StudentsContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

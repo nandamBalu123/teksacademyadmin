@@ -25,10 +25,11 @@ import { useNavigate } from "react-router-dom";
 // import { useDropzone } from 'react-dropzone';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
+import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 export default function RegistrationForm() {
   const { user } = useAuthContext();
   const { branches } = useBranchContext();
-
+  const { leadsources } = useLeadSourceContext();
   const navigate = useNavigate();
   const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
@@ -140,7 +141,7 @@ export default function RegistrationForm() {
         // settotalfeewithouttax((value) => value + coursefeeobject.feewithouttax);
         // settotaltax((value) => value + coursefeeobject.feetax);
         // setGrandtotal((value) => value + coursefeeobject.feewithtax);
-        grosstotall = grosstotall + parseInt(feedetails[i].amount * 0.65);
+        grosstotall = grosstotall + Math.round(feedetails[i].amount * 0.65);
         totaldiscountt =
           totaldiscountt + parseInt(feedetails[i].discount * 0.65);
 
@@ -158,7 +159,9 @@ export default function RegistrationForm() {
         };
         materialfeeobject.id = feedetails[i].id;
         materialfeeobject.feetype = "Material Fee";
-        materialfeeobject.feewithtax = feedetails[i].totalamount * 0.35;
+        materialfeeobject.feewithtax = Math.round(
+          feedetails[i].totalamount * 0.35
+        );
         materialfeeobject.feewithouttax = materialfeeobject.feewithtax;
         materialfeeobject.feetax = 0;
 
@@ -171,7 +174,7 @@ export default function RegistrationForm() {
         totaldiscountt =
           totaldiscountt + parseInt(feedetails[i].discount * 0.35);
         materialfeee =
-          materialfeee + parseInt(feedetails[i].totalamount * 0.35);
+          materialfeee + Math.round(feedetails[i].totalamount * 0.35);
         // totalfeewithouttaxx =
         //   totalfeewithouttaxx + materialfeeobject.feewithouttax;
         totaltaxx = totaltaxx + materialfeeobject.feetax;
@@ -227,6 +230,9 @@ export default function RegistrationForm() {
   };
 
   useEffect(() => {
+    const filterbranch = studentData.filter((item) => item.branch === branch);
+    const branchCount = filterbranch.length;
+
     let date = toString(admissiondate);
     let month = admissiondate[5] + admissiondate[6];
     let year = admissiondate[2] + admissiondate[3];
@@ -235,18 +241,18 @@ export default function RegistrationForm() {
       firstbranch = branch[0].toUpperCase();
     }
     let serialno;
-    if (branch == "hitechcity") {
-      serialno = hitechcitycount + 1;
+    if (branch) {
+      serialno = branchCount + 1;
     }
-    if (branch == "ameerpet") {
-      serialno = ameerpetcount + 1;
-    }
-    if (branch == "dilsukhnagar") {
-      serialno = dilsukhnagarcount + 1;
-    }
-    if (branch == "gachibowli") {
-      serialno = gachibowlicount + 1;
-    }
+    // if (branch == "ameerpet") {
+    //   serialno = ameerpetcount + 1;
+    // }
+    // if (branch == "dilsukhnagar") {
+    //   serialno = dilsukhnagarcount + 1;
+    // }
+    // if (branch == "gachibowli") {
+    //   serialno = gachibowlicount + 1;
+    // }
     if (serialno) {
       serialno = serialno.toString();
       if (serialno.length === 3) {
@@ -577,22 +583,6 @@ export default function RegistrationForm() {
         console.error("Error fetching data:", error);
       });
   }, []);
-  const ameerpetbranch = studentData.filter(
-    (item) => item.branch === "ameerpet"
-  );
-  const ameerpetcount = ameerpetbranch.length;
-  const hitechcitybranch = studentData.filter(
-    (item) => item.branch === "hitechcity"
-  );
-  const hitechcitycount = hitechcitybranch.length;
-  const dilsukhnagarbranch = studentData.filter(
-    (item) => item.branch === "dilsukhnagar"
-  );
-  const dilsukhnagarcount = dilsukhnagarbranch.length;
-  const gachibowlibranch = studentData.filter(
-    (item) => item.branch === "gachibowli"
-  );
-  const gachibowlicount = gachibowlibranch.length;
 
   const handleFeeDelete = (id) => {
     const updatedTasks = feedetails.filter((task) => task.id !== id);
@@ -1307,21 +1297,13 @@ export default function RegistrationForm() {
                     onChange={(e) => setLeadSource(e.target.value)}
                     value={leadsource}
                   >
-                    <option value="">--select--</option>
-                    <option value="justdail">Just Dail</option>
-                    <option value="walkin">Walkin</option>
-                    <option value="ivr">IVR</option>
-                    <option value="test">Test</option>
-                    <option value="studentrefferal">Student Refferal</option>
-                    <option value="employeeRefferal">Employee Refferal</option>
-                    <option value="crm">CRM</option>
-                    <option value="buddy">Buddy</option>
-                    <option value="sulekha">sulekha</option>
-                    <option value="personalReference">
-                      personal Reference
-                    </option>
-                    <option value="website">website</option>
-                    <option value="primelead">Prime Lead</option>
+                    <option>---select---</option>
+                    {leadsources &&
+                      leadsources.map((item, index) => (
+                        <option key={item.id} value={item.leadsource}>
+                          {item.leadsource}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <br />
