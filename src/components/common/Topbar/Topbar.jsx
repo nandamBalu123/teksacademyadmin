@@ -65,7 +65,7 @@ const Topbar = () => {
   return (
     <div className="container ">
       <div className="row topbar mt-0 ">
-        <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8 ">
+        <div className="col-sm-10 col-md-10 col-lg-9 col-xl-10 ">
           {/* <Box
             backgroundColor={colors.primary[400]}
             borderRadius="3px"
@@ -93,11 +93,7 @@ const Topbar = () => {
             <NotificationsOutlinedIcon />
           </IconButton>{" "}
         </div>
-        <div className="col-1 col-md-1 col-lg-1 col-xl-1">
-          <IconButton>
-            <SettingsOutlinedIcon />
-          </IconButton>
-        </div>
+       
         <div className="col-1 col-md-1 col-lg-1 col-xl-1 ">
           <div>
             <Button
