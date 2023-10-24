@@ -324,7 +324,7 @@ const StudentData = () => {
                 <MenuItem> Filter</MenuItem>
                 <MenuItem>
                   {" "}
-                  <CloseIcon />{" "}
+                  <CloseIcon onClick={handleClose} />{" "}
                 </MenuItem>
               </div>
               <hr />

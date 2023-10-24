@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import "./Feefolloup.css";
 import axios from "axios";
 
@@ -18,8 +18,8 @@ const Feefollowup = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const [getstudentData, setData] = useState([]);
-  const [filtereddata, setfiltereddata] = useState();
+  const [getstudentData, setData] = useState([{ name: "" }]);
+  const [filtereddata, setfiltereddata] = useState([{ name: "" }]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -91,8 +91,6 @@ const Feefollowup = () => {
     // setfiltereddata(filteredResults);
   }, [getstudentData, filterCriteria]);
 
- 
-
   const dynamicStyle = {
     color: getstudentData.dueamount < 1 ? "green" : "red",
     fontSize: getstudentData.dueamount < 1 ? "20px" : "16px",
@@ -102,10 +100,13 @@ const Feefollowup = () => {
     display: getstudentData.dueamount < 1 ? true : "none",
     marginLeft: "10px",
   };
+  let initialDataCount = getstudentData.length;
+  let recordCount = filtereddata.length;
   return (
     <div className="fee">
       <div className="feedetails">
-      <button className="feefollowupbtn bg-danger"
+        <button
+          className="feefollowupbtn bg-danger"
           onClick={() => {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
@@ -121,7 +122,8 @@ const Feefollowup = () => {
           {" "}
           Pending
         </button>
-        <button className="feefollowupbtn bg-warning"
+        <button
+          className="feefollowupbtn bg-warning"
           // className={`feebtn me-5 mb-2 ${displayTodayTable ? "active" : ""}`}
           // onClick={() => setDisplayTodayTable(true)}
 
@@ -137,7 +139,8 @@ const Feefollowup = () => {
           Today
         </button>
 
-        <button className="feefollowupbtn bg-secondary"
+        <button
+          className="feefollowupbtn bg-secondary"
           // className={`feebtn me-5 mb-2 ${displayTodayTable ? "active" : ""}`}
           // onClick={() => setDisplayTodayTable(true)}
 
@@ -153,179 +156,251 @@ const Feefollowup = () => {
           {" "}
           Upcoming{" "}
         </button>
-        
       </div>
       <div className="row">
-       <div className="col-10 col-md-10 col-lg-10 col-xl-10 "> 
-       <input
-          type="text"
-          className="input-field ps-2 "
-          placeholder="Search Here..."
-          autoComplete="off"
-          style={{
-            height: "45px",
-            width: "50%",
-            border: "hidden",
-            outline: "none",
-            borderTop: "none",
-            borderBottom: "1.5px solid black",
-            background: "none",
-            borderRadius: "5px",
-          }}
-        /><hr className="w-50 ms-3"/>
-         </div>
-        <div className="col-2 col-md-2 col-lg-2 col-xl-2"> 
-      <button className="btn btn-primary">   <h6 onClick={handleClick} >
-          {" "}
-          Filter
-        </h6></button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-          style={{
-            width: "600px",
-            borderRadius: "25px",
-            marginTop: "20px",
-            cursor: "pointer",
-          }}
-        >
-          <MenuItem> Filter</MenuItem>
-          <hr />
-          <div className="d-flex">
-            <MenuItem className="pt-3 ">
-              <div>
-                <label> From: </label>
-              </div>
+        <div className="col-10 col-md-10 col-lg-10 col-xl-10 ">
+          <input
+            type="text"
+            className="input-field ps-2 "
+            placeholder="Search Here..."
+            autoComplete="off"
+            style={{
+              height: "45px",
+              width: "50%",
+              border: "hidden",
+              outline: "none",
+              borderTop: "none",
+              borderBottom: "1.5px solid black",
+              background: "none",
+              borderRadius: "5px",
+            }}
+          />
+          <hr className="w-50 ms-3" />
+        </div>
+        <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
+          <h6>
+            {" "}
+            {recordCount}/{initialDataCount}
+          </h6>
+        </div>
+        <div className="col-2 col-md-2 col-lg-2 col-xl-2">
+          <button className="btn btn-primary">
+            {" "}
+            <h6 onClick={handleClick}> Filter</h6>
+          </button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+            style={{
+              width: "600px",
+              borderRadius: "25px",
+              marginTop: "20px",
+              cursor: "pointer",
+            }}
+          >
+            <MenuItem> Filter</MenuItem>
+            <hr />
+            <div className="d-flex">
+              <MenuItem className="pt-3 ">
+                <div>
+                  <label> From: </label>
+                </div>
 
-              <input
-                type="date"
-                className="form-control"
-                style={{
-                  height: "45px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                name="fromdate"
-              />
-            </MenuItem>
-            <MenuItem className="pt-3 ">
-              <label> To: </label>
-              <br />
-              <input
-                type="date"
-                className="form-control"
-                style={{
-                  height: "45px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                name="todate"
-              />
-            </MenuItem>
-          </div>
-          <div className="d-flex w-100 mt-3">
-            <MenuItem>
-              <select
-                id=""
-                placeholder="Filter Branch"
-                style={{
-                  height: "45px",
-                  paddingLeft: "10px",
-                  paddingRight: "115px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                name="branch"
-              >
-                <option value="">Branch</option>
-                <option value="hitechcity"> Hitech city</option>
-                <option value="ameerpet"> Ameerpet</option>
-                <option value="dilsukhnagar"> Dilsukhnagar</option>
-                <option value="gachibowli"> Gachibowli</option>
-              </select>
-            </MenuItem>
-            <MenuItem>
-              <select
-                id=""
-                placeholder="select Type"
-                style={{
-                  height: "45px",
+                <input
+                  type="date"
+                  className="form-control"
+                  style={{
+                    height: "45px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="fromdate"
+                />
+              </MenuItem>
+              <MenuItem className="pt-3 ">
+                <label> To: </label>
+                <br />
+                <input
+                  type="date"
+                  className="form-control"
+                  style={{
+                    height: "45px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="todate"
+                />
+              </MenuItem>
+            </div>
+            <div className="d-flex w-100 mt-3">
+              <MenuItem>
+                <select
+                  id=""
+                  placeholder="Filter Branch"
+                  style={{
+                    height: "45px",
+                    paddingLeft: "10px",
+                    paddingRight: "115px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="branch"
+                >
+                  <option value="">Branch</option>
+                  <option value="hitechcity"> Hitech city</option>
+                  <option value="ameerpet"> Ameerpet</option>
+                  <option value="dilsukhnagar"> Dilsukhnagar</option>
+                  <option value="gachibowli"> Gachibowli</option>
+                </select>
+              </MenuItem>
+              <MenuItem>
+                <select
+                  id=""
+                  placeholder="select Type"
+                  style={{
+                    height: "45px",
 
-                  paddingRight: "105px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                name="branch"
-              >
-                <option> Select Type</option>
-                <option value="paidamount"> Paid Amount</option>
-                <option value="dueamount"> Due Amount</option>
-              </select>
-            </MenuItem>
-          </div>
-        </Menu>
-          </div> 
+                    paddingRight: "105px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="branch"
+                >
+                  <option> Select Type</option>
+                  <option value="paidamount"> Paid Amount</option>
+                  <option value="dueamount"> Due Amount</option>
+                </select>
+              </MenuItem>
+            </div>
+          </Menu>
+        </div>
       </div>
-      {filterCriteria.todaydate && 
-            <h3 className="ms-3 mt-2">Today</h3>
-          }
-            {filterCriteria.upcomingdate && 
-            <h3 className="ms-3 mt-2">Upcoming</h3>
-          }
-          
-          {filterCriteria.pendingdate && 
-            <h3 className="ms-3 mt-2">Pending</h3>
-          }
-       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-          <TableRow>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                {" "}
-                S.NO
-              </TableCell>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                Name
-                <br /> Branch <br /> Counsellor
-              </TableCell>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                {" "}
-                Contact
-              </TableCell>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                {" "}
-                Email
-              </TableCell>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                {" "}
-                Course
-              </TableCell>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                {" "}
-                Due Date
-              </TableCell>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                {" "}
-                Due Amount{" "}
-              </TableCell>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                {" "}
-                Paid Status
-              </TableCell>
+      {filterCriteria.todaydate && <h3 className="ms-3 mt-2">Today</h3>}
+      {filterCriteria.upcomingdate && <h3 className="ms-3 mt-2">Upcoming</h3>}
 
+      {filterCriteria.pendingdate && <h3 className="ms-3 mt-2">Pending</h3>}
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  {" "}
+                  S.NO
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  Name
+                  <br /> Branch <br /> Counsellor
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                  {" "}
+                  Contact
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                  {" "}
+                  Email
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                  {" "}
+                  Course
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  {" "}
+                  Due Date
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                  {" "}
+                  Due Amount{" "}
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  {" "}
+                  Paid Status
+                </TableCell>
+
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                  {" "}
+                  View
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {Array.isArray(filtereddata) && filtereddata.length > 0 ? (
+                filtereddata.map((item, index) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" className="border border 1">
+                      {index + 1}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.name}
+                      <br />
+                      {item.branch}
+                      <br />
+                      {item.enquirytakenby}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.mobilenumber}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.email}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.courses}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.nextduedate}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.dueamount}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      {item.totalinstallments &&
+                        item.totalinstallments.length > 0 &&
+                        item.totalinstallments.map((items, index) => {
+                          if (true) {
+                            return (
+                              <div style={{ display: "flex" }}>
+                                <span style={dynamicStyle}>
+                                  {items.totalinstallmentspaid} /
+                                  {items.totalinstallments}
+                                </span>
+                                <span style={dynamicStyle}>
+                                  <CheckCircleIcon style={IconStyle} />
+                                </span>
+                              </div>
+                            );
+                          }
+                        })}
+                    </TableCell>
+                    <TableCell className="border border 1">
+                      <Link to={`/feeview/${item.id}`}>
+                        <VisibilityIcon />
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={3}>No data available</TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
               <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                 {" "}
                 View
               </TableCell>
-            </TableRow>
+           
             
-          </TableHead>
+       
           <TableBody>
           {Array.isArray(filtereddata) && filtereddata.length > 0 ? (
               filtereddata.map((item, index) => (
@@ -399,10 +474,9 @@ const Feefollowup = () => {
               </TableRow>
             )}
           </TableBody>
-        </Table>
-      </TableContainer>
+       
      
-    </Paper>
+  
     </div>
   );
 };
