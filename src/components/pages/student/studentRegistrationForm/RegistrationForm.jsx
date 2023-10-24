@@ -619,7 +619,7 @@ export default function RegistrationForm() {
                     value={name}
                   />
                 </div>
-                <br />
+           
                 <div className="row input ">
                   <label className="col-12 col-md-2 label">
                     Email <span className="text-danger"> *</span>&nbsp; :
@@ -637,7 +637,7 @@ export default function RegistrationForm() {
                     value={email}
                   />
                 </div>
-                <br />
+              
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Mobile Number<span className="text-danger"> *</span>&nbsp;:
@@ -655,7 +655,7 @@ export default function RegistrationForm() {
                     value={mobilenumber}
                   />
                 </div>
-                <br />
+            
 
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
@@ -698,7 +698,7 @@ export default function RegistrationForm() {
                     value={parentsname}
                   />
                 </div>
-                <br />
+        
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Birth Date <span className="text-danger"> *</span>&nbsp;:
@@ -717,7 +717,7 @@ export default function RegistrationForm() {
                     value={birthdate}
                   />
                 </div>
-                <br />
+              
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Gender <span className="text-danger"> *</span>&nbsp;:
@@ -741,7 +741,7 @@ export default function RegistrationForm() {
                     <option value="mca"> Others</option>
                   </select>
                 </div>
-                <br />
+         
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Marital Status <span className="text-danger"> *</span>&nbsp;
@@ -765,7 +765,7 @@ export default function RegistrationForm() {
                     <option value="degree">Married</option>
                   </select>
                 </div>
-                <br />
+             
                 <div className="row  ">
                   <label className="col-12 col-md-2 label">
                     College / School / Company{" "}
@@ -785,7 +785,7 @@ export default function RegistrationForm() {
                     value={college}
                   />
                 </div>
-                <br />
+            
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -844,7 +844,7 @@ export default function RegistrationForm() {
                     <option value="others">Others </option>
                   </select>
                 </div>
-                <br />
+          
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     State<span className="text-danger"> *</span>&nbsp;:
@@ -905,7 +905,7 @@ export default function RegistrationForm() {
                     <option value="others">Others</option>
                   </select>
                 </div>
-                <br />
+          
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Area<span className="text-danger"> *</span>&nbsp;:
@@ -924,7 +924,7 @@ export default function RegistrationForm() {
                     value={area}
                   />
                 </div>
-                <br />
+       
 
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
@@ -943,7 +943,7 @@ export default function RegistrationForm() {
                     value={native}
                   />
                 </div>
-                <br />
+             
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Zip Code <span className="text-danger"> *</span>&nbsp; :
@@ -961,7 +961,7 @@ export default function RegistrationForm() {
                     value={zipcode}
                   />
                 </div>
-                <br />
+       
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     WhatsApp Number <span className="text-danger"> *</span>
@@ -980,7 +980,7 @@ export default function RegistrationForm() {
                     value={whatsappno}
                   />
                 </div>
-                <br />
+             
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1039,7 +1039,7 @@ export default function RegistrationForm() {
                     <option value="other">others</option>
                   </select>
                 </div>
-                <br />
+               
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Percentage<span className="text-danger"> *</span>&nbsp;:
@@ -1057,7 +1057,7 @@ export default function RegistrationForm() {
                     value={marks}
                   />
                 </div>
-                <br />
+                
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Academic Year<span className="text-danger"> *</span>&nbsp;:
@@ -1076,7 +1076,7 @@ export default function RegistrationForm() {
                     value={academicyear}
                   />
                 </div>
-                <br />
+              
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1193,7 +1193,7 @@ export default function RegistrationForm() {
                     value={enquirydate}
                   />
                 </div>
-                <br />
+                
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Enquiry Taken By<span className="text-danger"> *</span>:
@@ -1223,7 +1223,7 @@ export default function RegistrationForm() {
                     <option value="Bhavitha">Bhavitha</option> */}
                   </select>
                 </div>
-                <br />
+            
 
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
@@ -1251,7 +1251,7 @@ export default function RegistrationForm() {
                     </option>
                   </select>
                 </div>
-                <br />
+              
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Courses<span className="text-danger"> *</span>&nbsp;:
@@ -1279,7 +1279,7 @@ export default function RegistrationForm() {
                     <option value="devops">Devops</option>
                   </select>
                 </div>
-                <br />
+              
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Lead Source<span className="text-danger"> *</span>&nbsp;:
@@ -1306,7 +1306,7 @@ export default function RegistrationForm() {
                       ))}
                   </select>
                 </div>
-                <br />
+              
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1373,7 +1373,7 @@ export default function RegistrationForm() {
                     <option value="gachibowli">Gachibowli</option> */}
                   </select>
                 </div>
-                <br />
+           
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Mode of Traning<span className="text-danger"> *</span>
@@ -1397,7 +1397,7 @@ export default function RegistrationForm() {
                     <option value="offline">Offline</option>
                   </select>
                 </div>
-                <br />
+             
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Admission Status<span className="text-danger"> *</span>
@@ -1421,7 +1421,7 @@ export default function RegistrationForm() {
                     <option value="inactive">Inactive</option>
                   </select>
                 </div>
-                <br />
+              
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Admission Date <span className="text-danger"> *</span>
@@ -1467,7 +1467,7 @@ export default function RegistrationForm() {
                     value={validitystartdate}
                   />
                 </div>
-                <br />
+              
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Validity End Date <span className="text-danger"> *</span>
@@ -1486,7 +1486,7 @@ export default function RegistrationForm() {
                     value={validityenddate}
                   />
                 </div>
-                <br />
+            
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1544,7 +1544,7 @@ export default function RegistrationForm() {
                     <option value="fee">Fee </option>
                   </select>
                 </div>
-                <br />
+            
 
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
@@ -1563,7 +1563,7 @@ export default function RegistrationForm() {
                     value={amount}
                   />
                 </div>
-                <br />
+          
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Discount <span className="text-danger"> *</span>&nbsp;:
@@ -1582,7 +1582,7 @@ export default function RegistrationForm() {
                   />
                 </div>
 
-                <br />
+        
                 {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Tax Amount <span className="text-danger"> *</span>&nbsp;:
@@ -1607,7 +1607,7 @@ export default function RegistrationForm() {
                 </button>
                 <br />
                 <br />
-                <br />
+                
                 {feedetails.length > 0 && (
                   <table class="table w-75 m-auto border border-1 ">
                     <thead>
@@ -1680,9 +1680,9 @@ export default function RegistrationForm() {
               <form className="form">
                 <TableContainer
                   component={Paper}
-                  className="billingtable m-auto"
+                  className="billingtable "
                 >
-                  <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+                  <Table sx={{ minWidth: 700 }} aria-label="spanning table"  >
                     <TableHead>
                       <TableCell className="fs-6 py-3" align="center">
                         Gross Total

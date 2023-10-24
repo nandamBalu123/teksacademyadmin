@@ -5,6 +5,9 @@
 .main-user-container {
   margin-top: 30px;
   padding-left: 30px;
+  background-color: #fff;
+  border-radius: 40px;
+  width: 98%;
 }
 .sub-user-container {
   margin-top: 40px;
@@ -17,7 +20,7 @@
 .create-button {
   display: flex;
   justify-content: end;
-  margin-right: 30px;
+  margin-right: 110px;
 }
 .selectt {
   margin-left: 13px;
@@ -53,7 +56,7 @@
 .error {
  color: red;
  margin:  0;
- padding-left: 11%;
+
 
 }
 .createuser{ 
@@ -64,3 +67,9 @@
 .userlabel{ 
   width: 33%;
 }
+input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button{ 
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
