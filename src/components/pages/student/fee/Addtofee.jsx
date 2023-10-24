@@ -219,6 +219,7 @@ const Addtofee = () => {
 
             {/* <TextField id="outlined-basic"  label=" Course date" variant="outlined"  className="textfield" type="date"/> */}
           </div>
+          <h4 className="my-3"> Initial Amount</h4><hr></hr>
           {initialpayment.map((payment, index) => (
             <div className="row" key={index}>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
@@ -229,7 +230,7 @@ const Addtofee = () => {
                   value={payment.initialamount}
                   onChange={(e) => handleInputChange(e, index, "initialamount")}
                 />
-                <label> Initial Amount</label>
+                <label> Initial Amount <span className="text-danger"> * </span></label>
               </div>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
                 <input
@@ -239,7 +240,7 @@ const Addtofee = () => {
                   value={payment.paiddate}
                   onChange={(e) => handleInputChange(e, index, "paiddate")}
                 />
-                <label> Paid Date</label>
+                <label> Paid Date <span className="text-danger"> * </span></label>
               </div>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup-select">
                 <select
@@ -254,7 +255,7 @@ const Addtofee = () => {
                   <option value="backtransfor"> Bank Transfor</option>
                   <option value="cheque"> CHEQUE</option>
                 </select>
-                <label> Mode of Payments</label>
+                <label> Mode of Payments <span className="text-danger"> * </span></label>
               </div>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
                 <input
@@ -264,7 +265,7 @@ const Addtofee = () => {
                   value={payment.transactionID}
                   onChange={(e) => handleInputChange(e, index, "transactionID")}
                 />
-                <label> Transaction Id</label>
+                <label> Transaction Id <span className="text-danger"> * </span></label>
               </div>
             </div>
             // <div key={index}>

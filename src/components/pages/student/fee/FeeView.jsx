@@ -165,10 +165,12 @@ const FeeView = () => {
       });
   };
   return (
-    <div className="fee">
+    <div className="fee container">
       <div className="feeview">
         <h4 className="pt-3"> Student Fee Details</h4>{" "}
         <hr style={{ height: "30%", paddingBottom: "30px" }} />
+        <div className='w-100'>
+
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -242,7 +244,7 @@ const FeeView = () => {
                 </TableCell>
 
                 <TableCell className="border border 1">
-                  {/* {studentdata.totalinstallments} */}
+             
                   {studentdata.totalinstallments &&
                     studentdata.totalinstallments.length > 0 &&
                     studentdata.totalinstallments.map((item, index) => {
@@ -267,7 +269,20 @@ const FeeView = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <TableContainer component={Paper}>
+</div>
+
+
+
+
+
+       
+
+
+
+
+
+
+        <TableContainer component={Paper} className="mt-4">
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>

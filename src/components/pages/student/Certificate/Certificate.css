@@ -21,6 +21,20 @@ th{
 tr:nth-of-type(2n){ 
   background-color: rgba(238, 232, 232,0.5);
 }
+.certificate-table{ 
+  width: 100%;
+}
+.startdate , .enddate{ 
+  border: none;
+  outline: none;
+ 
+}
+.startdate:focus{ 
+  border: none;
+}
+.enddate:focus{ 
+  border: none;
+}
 @media (max-width:650px) {
   table{ 
     overflow: hidden;

@@ -152,7 +152,9 @@ const Certificate = () => {
   </Menu>
   </div>
 </div>
-<div className='w-100'> 
+
+
+{/* <div className='certification-table container'> 
 <table> 
   <tr> 
   <th> S.No </th>
@@ -186,11 +188,8 @@ const Certificate = () => {
     <td data-cell="startdate">20-11-2023 </td>
     <td data-cell="enddate"> 30-11-2023</td>
   </tr>
- 
-  
-
-</table>
-</div>
+ </table>
+</div> */}
 
        <Paper sx={{ width: '100%', overflow: 'hidden' }} className='my-4'>
       <TableContainer sx={{ maxHeight: 440 }} >
@@ -215,8 +214,18 @@ const Certificate = () => {
                   <TableCell className='border border 1'> bhavitha</TableCell>
                   <TableCell className='border border 1 '> React Developer</TableCell>
                   <TableCell className='border border 1 '> 12345</TableCell>
-                  <TableCell className='border border 1 '> 21-10-2023</TableCell>
-                  <TableCell className='border border 1 '>22-10-2023
+                  <TableCell className='border border 1 '> 
+                  <input 
+                  type='date'
+                  name='startdate'
+                  className='startdate'
+                  /><ModeEditIcon/>  </TableCell>
+                  <TableCell className='border border 1 '>
+                  <input 
+                  type='date'
+                  name='enddate'
+                  className='enddate'
+                  /><ModeEditIcon/>
                  
                   {/* <Button
         id="basic-button"
