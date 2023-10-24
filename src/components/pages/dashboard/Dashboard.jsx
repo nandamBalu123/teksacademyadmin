@@ -124,7 +124,7 @@ const finalTotalByBranch = {};
     <>
       {/* Header */}
      <div > 
-     <Box className="text-center">
+     <Box className="text-center mt-3">
       {user && <Header title={"Hi " + user.fullname} subtitle={"Welcome to TEKS ACADEMY"} />}
         
         
@@ -172,20 +172,20 @@ const finalTotalByBranch = {};
           </div>
         </div>
         <div className="row"> 
-        
+{/*         
         <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
            >
             <Card style={{ backgroundColor: "#d9e9e9" }}  className="rounded rounded-3" >
-              <p className="pt-3">Total Enrollments</p>
-              <p><b> hjnjnj</b></p>
+              <p className="pt-3">Pending Fee Records</p>
+              <p><b>20</b></p>
             </Card>
           </div>
           <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3" >
             <Card style={{ backgroundColor: "#b7e9da" }} className="rounded rounded-3">
-              <p className="pt-3">Total Fee</p>
-              <p><b> hnhnhbh</b></p>
+              <p className="pt-3">Fee Followups</p>
+              <p><b>20</b></p>
             </Card>
-          </div>
+          </div> */}
          </div>
       </div>
 

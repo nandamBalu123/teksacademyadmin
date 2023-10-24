@@ -346,7 +346,18 @@ const Feefollowup = () => {
                     {item.mobilenumber}
                   </TableCell>
                   <TableCell className="border border 1">
-                    {item.email}
+                  <span
+                          style={{
+                            width: "200px",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize:"15px"
+                          }}
+                        >
+                          {item.email}
+                        </span>
+                   
                   </TableCell>
                   <TableCell className="border border 1">
                     {item.courses}

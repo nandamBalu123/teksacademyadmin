@@ -616,16 +616,17 @@ const StudentData = () => {
                       <TableCell className=" border border 1 text-center p-0 m-0 ">
                         {item.mobilenumber}
                         <br />
-                        <p
+                        <span
                           style={{
                             width: "200px",
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
+                            fontSize:"15px"
                           }}
                         >
                           {item.email}
-                        </p>
+                        </span>
                       </TableCell>
 
                       <TableCell className=" border border 1 text-center p-0 m-0">
