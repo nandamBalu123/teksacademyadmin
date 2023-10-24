@@ -394,6 +394,89 @@ const Feefollowup = () => {
           </Table>
         </TableContainer>
       </Paper>
+              <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                {" "}
+                View
+              </TableCell>
+           
+            
+       
+          <TableBody>
+          {Array.isArray(filtereddata) && filtereddata.length > 0 ? (
+              filtereddata.map((item, index) => (
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" className="border border 1">
+                    {index + 1}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {item.name}
+                    <br />
+                    {item.branch}
+                    <br />
+                    {item.enquirytakenby}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {item.mobilenumber}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                  <span
+                          style={{
+                            width: "200px",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize:"15px"
+                          }}
+                        >
+                          {item.email}
+                        </span>
+                   
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {item.courses}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {item.nextduedate}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {item.dueamount}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {item.totalinstallments && item.totalinstallments.length > 0 &&
+                    item.totalinstallments.map((items, index) => {
+                      if(true){
+                        return(
+                          <div style={{display: "flex"}}>
+                            <span style={dynamicStyle}>
+                              {items.totalinstallmentspaid} /
+                              {items.totalinstallments}
+                            </span>
+                            <span style={dynamicStyle}>
+                              <CheckCircleIcon style={IconStyle}/>
+                            </span>
+                          </div>
+                        )
+                      }
+                    })
+                      
+                  }
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    <Link to={`/feeview/${item.id}`}><VisibilityIcon/></Link>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={3}>No data available</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+       
+     
+  
     </div>
   );
 };

@@ -388,55 +388,55 @@ const UsersData = () => {
                   <TableHead>
                     <TableRow>
                       <StyledTableCell
-                        className=" bg-primary fs-6 "
+                        className=" bg-primary fs-6 border border1 "
                         align="center"
                       >
                         Name
                       </StyledTableCell>
                       <StyledTableCell
-                        className=" bg-primary fs-6"
+                        className=" bg-primary fs-6 border border1 "
                         align="center"
                       >
                         Email
                       </StyledTableCell>
                       <StyledTableCell
-                        className="  bg-primary fs-6"
+                        className="  bg-primary fs-6 border border1 "
                         align="center"
                       >
                         Phone No
                       </StyledTableCell>
                       <StyledTableCell
-                        className="bg-primary fs-6 "
+                        className="bg-primary fs-6 border border1 "
                         align="center"
                       >
                         Designation
                       </StyledTableCell>
                       <StyledTableCell
-                        className="bg-primary fs-6 "
+                        className="bg-primary fs-6 border border1 "
                         align="center"
                       >
                         Department
                       </StyledTableCell>
                       <StyledTableCell
-                        className="bg-primary fs-6"
+                        className="bg-primary fs-6 border border1 "
                         align="center"
                       >
                         Report To
                       </StyledTableCell>
                       <StyledTableCell
-                        className="bg-primary fs-6 "
+                        className="bg-primary fs-6 border border1  "
                         align="center"
                       >
                         Profile
                       </StyledTableCell>
                       <StyledTableCell
-                        className="bg-primary fs-6 "
+                        className="bg-primary fs-6 border border1  "
                         align="center"
                       >
                         Branch
                       </StyledTableCell>
                       <StyledTableCell
-                        className="bg-primary fs-6"
+                        className="bg-primary fs-6 border border1 "
                         align="center"
                       >
                         Action
@@ -447,29 +447,40 @@ const UsersData = () => {
                     {filteredData &&
                       filteredData.map((user) => (
                         <StyledTableRow>
-                          <StyledTableCell align="center" className="p-0 m-0">
+                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
                             {user.fullname}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0">
-                            {user.email}
+                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <span
+                          style={{
+                            width: "200px",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize:"15px"
+                          }}
+                        >
+                         {user.email}
+                        </span>
+                           
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0">
+                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
                             {" "}
                             {user.phonenumber}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0">
+                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
                             {user.designation}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0">
+                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
                             {user.department}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0">
+                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
                             {user.reportto}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0">
+                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
                             {user.profile}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0">
+                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
                             {" "}
                             {user.branch}
                           </StyledTableCell>

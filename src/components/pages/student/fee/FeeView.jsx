@@ -220,7 +220,18 @@ const FeeView = () => {
                   {studentdata.name}
                 </TableCell>
                 <TableCell className="border border 1">
-                  {studentdata.email}
+                <span
+                          style={{
+                            width: "200px",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize:"15px"
+                          }}
+                        >
+                         {studentdata.email}
+                        </span>
+                  
                 </TableCell>
                 <TableCell className="border border 1">
                   {studentdata.mobilenumber}
