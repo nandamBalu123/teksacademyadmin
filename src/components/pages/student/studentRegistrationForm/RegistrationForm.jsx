@@ -171,7 +171,7 @@ export default function RegistrationForm() {
         totaldiscountt =
           totaldiscountt + parseInt(feedetails[i].discount * 0.35);
         materialfeee =
-          materialfeee + parseInt(feedetails[i].totalamount * 0.35);
+          materialfeee + Math.round(feedetails[i].totalamount * 0.35);
         // totalfeewithouttaxx =
         //   totalfeewithouttaxx + materialfeeobject.feewithouttax;
         totaltaxx = totaltaxx + materialfeeobject.feetax;
@@ -227,6 +227,9 @@ export default function RegistrationForm() {
   };
 
   useEffect(() => {
+    const filterbranch = studentData.filter((item) => item.branch === branch);
+    const branchCount = filterbranch.length;
+
     let date = toString(admissiondate);
     let month = admissiondate[5] + admissiondate[6];
     let year = admissiondate[2] + admissiondate[3];
@@ -235,18 +238,18 @@ export default function RegistrationForm() {
       firstbranch = branch[0].toUpperCase();
     }
     let serialno;
-    if (branch == "hitechcity") {
-      serialno = hitechcitycount + 1;
+    if (branch) {
+      serialno = branchCount + 1;
     }
-    if (branch == "ameerpet") {
-      serialno = ameerpetcount + 1;
-    }
-    if (branch == "dilsukhnagar") {
-      serialno = dilsukhnagarcount + 1;
-    }
-    if (branch == "gachibowli") {
-      serialno = gachibowlicount + 1;
-    }
+    // if (branch == "ameerpet") {
+    //   serialno = ameerpetcount + 1;
+    // }
+    // if (branch == "dilsukhnagar") {
+    //   serialno = dilsukhnagarcount + 1;
+    // }
+    // if (branch == "gachibowli") {
+    //   serialno = gachibowlicount + 1;
+    // }
     if (serialno) {
       serialno = serialno.toString();
       if (serialno.length === 3) {
@@ -577,22 +580,6 @@ export default function RegistrationForm() {
         console.error("Error fetching data:", error);
       });
   }, []);
-  const ameerpetbranch = studentData.filter(
-    (item) => item.branch === "ameerpet"
-  );
-  const ameerpetcount = ameerpetbranch.length;
-  const hitechcitybranch = studentData.filter(
-    (item) => item.branch === "hitechcity"
-  );
-  const hitechcitycount = hitechcitybranch.length;
-  const dilsukhnagarbranch = studentData.filter(
-    (item) => item.branch === "dilsukhnagar"
-  );
-  const dilsukhnagarcount = dilsukhnagarbranch.length;
-  const gachibowlibranch = studentData.filter(
-    (item) => item.branch === "gachibowli"
-  );
-  const gachibowlicount = gachibowlibranch.length;
 
   const handleFeeDelete = (id) => {
     const updatedTasks = feedetails.filter((task) => task.id !== id);
