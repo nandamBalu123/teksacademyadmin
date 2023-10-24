@@ -14,7 +14,10 @@ import "./FeeDetails.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useBranchContext } from "../../../../hooks/useBranchContext";
 const FeeDetails = () => {
+  const { branches } = useBranchContext();
+
   const navigator = useNavigate();
   const [getstudentData, setData] = useState([{ name: "" }]);
   const [studentFeeRecordss, setFeerecords] = useState(getstudentData);
@@ -50,12 +53,6 @@ const FeeDetails = () => {
 
     branch: "",
 
-    leadsource: "",
-
-    modeoftraining: "",
-
-    enquirytakenby: "",
-
     search: "",
   });
   const handleInputChange = (e) => {
@@ -64,7 +61,7 @@ const FeeDetails = () => {
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
   useEffect(() => {
-    const filteredResults = studentFeeRecordss.filter((item) => {
+    const filteredResults = getstudentData.filter((item) => {
       const searchCondition = filterCriteria.search
         ? item.name
             .toLowerCase()
@@ -122,12 +119,6 @@ const FeeDetails = () => {
 
       branch: "",
 
-      leadsource: "",
-
-      modeoftraining: "",
-
-      enquirytakenby: "",
-
       search: "",
     });
   };
@@ -153,6 +144,7 @@ const FeeDetails = () => {
     display: getstudentData.dueamount < 1 ? true : "none",
     marginLeft: "10px",
   };
+
   return (
     <>
       <div className="fee">
@@ -184,134 +176,143 @@ const FeeDetails = () => {
             </div>
           </div>
           <div className="row pt-3 pb-3">
-          <div className="col-10 col-md-10 col-lg-10 col-xl-10"> 
-          <input
-              type="text"
-              className="input-field ps-2 "
-              placeholder="Search Here..."
-              autoComplete="off"
-              style={{
-                height: "45px",
-                width: "50%",
+            <div className="col-10 col-md-10 col-lg-10 col-xl-10">
+              <input
+                type="text"
+                className="input-field ps-2 "
+                placeholder="Search Here..."
+                autoComplete="off"
+                style={{
+                  height: "45px",
+                  width: "50%",
 
-                outline: "none",
-                borderTop: "none",
-                borderBottom: "1.5px solid black",
-                background: "none",
-                border: "hidden",
-                borderRadius: "5px",
-              }}
-            /><hr className="w-50"/>
-          </div>
-           <div className="col-2 col-md-2 col-lg-2 col-xl-2">  
-           <h6 onClick={handleClick}> Filter</h6>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-              style={{
-                width: "600px",
-                borderRadius: "25px",
-                marginTop: "20px",
-                cursor: "pointer",
-              }}
-            >
-              <div className="d-flex justify-content-between"> 
-              <MenuItem> Filter</MenuItem>
-              <MenuItem>
-                  {" "}
-                  <CloseIcon />{" "}
-                </MenuItem>
-              </div>
-              <hr />
-              <div className="d-flex">
-                <MenuItem className="pt-3 ">
-                  <div>
-                    <label> From: </label>
-                  </div>
+                  outline: "none",
+                  borderTop: "none",
+                  borderBottom: "1.5px solid black",
+                  background: "none",
+                  border: "hidden",
+                  borderRadius: "5px",
+                }}
+                name="search"
+                value={filterCriteria.search}
+                onChange={handleInputChange}
+              />
+              <hr className="w-50" />
+            </div>
+            <div className="col-2 col-md-2 col-lg-2 col-xl-2">
+              <h6 onClick={handleClick}> Filter</h6>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+                style={{
+                  width: "600px",
+                  borderRadius: "25px",
+                  marginTop: "20px",
+                  cursor: "pointer",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="d-flex">
+                  <MenuItem className="pt-3 ">
+                    <div>
+                      <label> From: </label>
+                    </div>
 
-                  <input
-                    type="date"
-                    className="form-control"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                </MenuItem>
-                <MenuItem className="pt-3 ">
-                  <label> To: </label>
-                  <br />
-                  <input
-                    type="date"
-                    className="form-control"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
-                  />
-                </MenuItem>
-              </div>
-              <div className="d-flex w-100 mt-3">
-                <MenuItem>
-                  <select
-                    id=""
-                    placeholder="Filter Branch"
-                    style={{
-                      height: "45px",
-                      paddingLeft: "10px",
-                      paddingRight: "115px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="branch"
-                    value={filterCriteria.branch}
-                    onChange={handleInputChange}
-                  >
-                    <option value="">Branch</option>
-                    <option value="hitechcity"> Hitech city</option>
-                    <option value="ameerpet"> Ameerpet</option>
-                    <option value="dilsukhnagar"> Dilsukhnagar</option>
-                    <option value="gachibowli"> Gachibowli</option>
-                  </select>
-                </MenuItem>
-                <MenuItem>
-                  <select
-                    id=""
-                    placeholder="select Type"
-                    style={{
-                      height: "45px",
+                    <input
+                      type="date"
+                      className="form-control"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="fromdate"
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+                  <MenuItem className="pt-3 ">
+                    <label> To: </label>
+                    <br />
+                    <input
+                      type="date"
+                      className="form-control"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="todate"
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+                </div>
+                <div className="d-flex w-100 mt-3">
+                  <MenuItem>
+                    <select
+                      id=""
+                      placeholder="Filter Branch"
+                      style={{
+                        height: "45px",
+                        paddingLeft: "10px",
+                        paddingRight: "115px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">Branch</option>
+                      {branches &&
+                        branches.map((item, index) => (
+                          <option key={item.id} value={item.branch_name}>
+                            {item.branch_name}
+                          </option>
+                        ))}
+                    </select>
+                  </MenuItem>
+                  <MenuItem>
+                    <select
+                      id=""
+                      placeholder="select Type"
+                      style={{
+                        height: "45px",
 
-                      paddingRight: "105px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="amount"
-                  >
-                    <option> Select Type</option>
-                    <option value="paidamount"> Paid Amount</option>
-                    <option value="dueamount"> Due Amount</option>
-                  </select>
+                        paddingRight: "105px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="amount"
+                    >
+                      <option> Select Type</option>
+                      <option value="paidamount"> Paid Amount</option>
+                      <option value="dueamount"> Due Amount</option>
+                    </select>
+                  </MenuItem>
+                </div>
+                <MenuItem className="d-flex justify-content-between">
+                  {/* <button className="save"> Save</button> */}
+                  <button className="clear" onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
                 </MenuItem>
-              </div>
-              <MenuItem className="d-flex justify-content-between">
-                <button className="save"> Save</button>
-                <button className="clear"> Clear</button>
-              </MenuItem>
-            </Menu>
-           </div>
+              </Menu>
+            </div>
           </div>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
@@ -367,7 +368,7 @@ const FeeDetails = () => {
                         }}
                         key={item.id}
                       >
-                        <TableCell component="th" className="border border 1">
+                        <TableCell className="border border 1">
                           {" "}
                           {index + 1}
                         </TableCell>

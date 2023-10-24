@@ -21,6 +21,7 @@ import favicon from "../../../images/favicon.jpeg";
 import axios from "axios";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 // let role = localStorage.getItem(role);
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -107,7 +108,7 @@ const Sidebar = () => {
           letterSpacing: "0.6px",
         }}
       >
-        <ProSidebar collapsed={isCollapsed} style={{height:"100vh"}}>
+        <ProSidebar collapsed={isCollapsed} style={{ height: "100vh" }}>
           <Menu iconShape="square">
             {/* LOGO AND MENU ICON */}
             <MenuItem
@@ -173,7 +174,6 @@ const Sidebar = () => {
 
             <Box paddingLeft={isCollapsed ? undefined : "1%"}>
               <Item
-             
                 title="Dashboard"
                 to="/"
                 icon={<HomeOutlinedIcon />}
@@ -233,7 +233,7 @@ const Sidebar = () => {
                 <Item
                   title="Fee Details"
                   to="/feedetails"
-                  icon={<AttachMoneyIcon />}
+                  icon={<CurrencyRupeeIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />

@@ -214,7 +214,13 @@ const UsersData = () => {
     setAnchorEl(null);
   };
   // clear button reset
-
+  const filterreset = () => {
+    setFilterCriteria({
+      search: "",
+      branch: "",
+      profile: "",
+    });
+  };
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
@@ -296,7 +302,7 @@ const UsersData = () => {
                 <MenuItem> Filter</MenuItem>
                 <MenuItem>
                   {" "}
-                  <CloseIcon />{" "}
+                  <CloseIcon onClick={handleClose} />{" "}
                 </MenuItem>
               </div>
               <hr />
@@ -353,8 +359,11 @@ const UsersData = () => {
                 </select>
               </MenuItem>
               <MenuItem className="d-flex justify-content-between">
-                <button className="save"> Save</button>
-                <button className="clear"> Clear</button>
+                {/* <button className="save"> Save</button> */}
+                <button className="clear" onClick={filterreset}>
+                  {" "}
+                  Clear
+                </button>
               </MenuItem>
             </Menu>
           </div>
