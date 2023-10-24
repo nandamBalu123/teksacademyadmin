@@ -144,7 +144,8 @@ const FeeDetails = () => {
     display: getstudentData.dueamount < 1 ? true : "none",
     marginLeft: "10px",
   };
-
+  let initialDataCount = getstudentData.length;
+  let recordCount = studentFeeRecordss.length;
   return (
     <>
       <div className="fee">
@@ -198,6 +199,12 @@ const FeeDetails = () => {
                 onChange={handleInputChange}
               />
               <hr className="w-50" />
+            </div>
+            <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
+              <h6>
+                {" "}
+                {recordCount}/{initialDataCount}
+              </h6>
             </div>
             <div className="col-2 col-md-2 col-lg-2 col-xl-2">
               <h6 onClick={handleClick}> Filter</h6>

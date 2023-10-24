@@ -221,6 +221,8 @@ const UsersData = () => {
       profile: "",
     });
   };
+  let initialDataCount = initialData.length;
+  let recordCount = filteredData.length;
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
@@ -228,7 +230,7 @@ const UsersData = () => {
         <h2 className="ms-3 my-3">Users List</h2>
 
         <div className="row mb-3 px-4 pt-3">
-          <div className="col-12 col-md-6 col-lg-10 col-xl-10">
+          <div className="col-12 col-md-9 col-lg-9 col-xl-9">
             <input
               type="text"
               className="input-field ps-2"
@@ -250,8 +252,17 @@ const UsersData = () => {
             />
             <hr className="w-50" />
           </div>
-
-          <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
+          <div className="col-6 col-md-1 col-lg-1 col-xl-1 pt-2">
+            <h6>
+              {" "}
+              {recordCount}/{initialDataCount}
+            </h6>
+          </div>
+          <div className="col-6 col-md-1 col-lg-1 col-xl-1">  
+          
+          
+           </div>
+          <div className="col-6 col-md-1 col-lg-1 col-xl-1 ">
             <Button
               id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -309,12 +320,12 @@ const UsersData = () => {
               <MenuItem>
                 <label className="mt-3 me-3">Profile:</label>
                 <select
-                  className="mt-3"
+                  className="mt-3 col-12 col-md-12 col-lg-12 col-xl-12 "
                   id=""
                   required
                   style={{
                     height: "45px",
-                    paddingRight: "145px",
+                    width: "75%",
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}
@@ -334,11 +345,12 @@ const UsersData = () => {
               <MenuItem>
                 <label className="mt-3 me-3"> Branch: </label>
                 <select
-                  className="mt-3"
+                  className="mt-3 col-12 col-md-12 col-lg-12 col-xl-12 "
                   id=""
                   required
                   style={{
                     height: "45px",
+                    width: "75%",
                     paddingLeft: "10px",
                     paddingRight: "145px",
                     border: "1.5px solid black",
