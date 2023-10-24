@@ -204,7 +204,7 @@ const FeeDetails = () => {
             /><hr className="w-50"/>
           </div>
            <div className="col-2 col-md-2 col-lg-2 col-xl-2">  
-           <h6 onClick={handleClick}> Filter</h6>
+        <button className="btn btn-primary ">    <h6 onClick={handleClick}> Filter</h6></button>
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}

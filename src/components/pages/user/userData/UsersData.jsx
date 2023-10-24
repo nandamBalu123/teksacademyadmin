@@ -303,12 +303,12 @@ const UsersData = () => {
               <MenuItem>
                 <label className="mt-3 me-3">Profile:</label>
                 <select
-                  className="mt-3"
+                  className="mt-3 col-12 col-md-12 col-lg-12 col-xl-12 "
                   id=""
                   required
                   style={{
                     height: "45px",
-                    paddingRight: "145px",
+                    width:"75%",
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}
@@ -328,11 +328,12 @@ const UsersData = () => {
               <MenuItem>
                 <label className="mt-3 me-3"> Branch: </label>
                 <select
-                  className="mt-3"
+                  className="mt-3 col-12 col-md-12 col-lg-12 col-xl-12 "
                   id=""
                   required
                   style={{
                     height: "45px",
+                    width:"75%",
                     paddingLeft: "10px",
                     paddingRight: "145px",
                     border: "1.5px solid black",

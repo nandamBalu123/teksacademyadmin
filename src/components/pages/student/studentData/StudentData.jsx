@@ -282,7 +282,7 @@ const StudentData = () => {
             <hr />
           </div>
           <div
-            className=" col-2 col-md-1 col-lg-1 col-xl-1 pt-2"
+            className=" col-2 col-md-1 col-lg-1 col-xl-1 "
             style={{ cursor: "pointer" }}
           >
             {" "}
@@ -297,10 +297,14 @@ const StudentData = () => {
 
           <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
             {" "}
-            <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
+          
+          <button className="btn btn-primary"> 
+          <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               {" "}
               Filter
             </h6>
+          </button>
+          
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}

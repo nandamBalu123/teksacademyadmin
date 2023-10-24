@@ -13,8 +13,10 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
+import GroupsIcon from '@mui/icons-material/Groups';
 import InfoIcon from "@mui/icons-material/Info";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import favicon from "../../../images/favicon.jpeg";
@@ -175,6 +177,7 @@ const Sidebar = () => {
               <Item
              
                 title="Dashboard"
+               
                 to="/"
                 icon={<HomeOutlinedIcon />}
                 selected={selected}
@@ -218,14 +221,14 @@ const Sidebar = () => {
                 <Item
                   title="Student Details"
                   to="/studentdata"
-                  icon={<InfoIcon />}
+                  icon={<GroupsIcon/>}
                   selected={selected}
                   setSelected={setSelected}
                 />
                 <Item
                   title="Registration Form"
                   to="/registrationform"
-                  icon={<Diversity3Icon />}
+                  icon={< PersonAddAlt1Icon/>}
                   selected={selected}
                   setSelected={setSelected}
                 />

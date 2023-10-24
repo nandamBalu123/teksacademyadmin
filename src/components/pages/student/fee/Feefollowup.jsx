@@ -175,10 +175,10 @@ const Feefollowup = () => {
         /><hr className="w-50 ms-3"/>
          </div>
         <div className="col-2 col-md-2 col-lg-2 col-xl-2"> 
-        <h6 onClick={handleClick} className="pe-4">
+      <button className="btn btn-primary">   <h6 onClick={handleClick} >
           {" "}
           Filter
-        </h6>
+        </h6></button>
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}

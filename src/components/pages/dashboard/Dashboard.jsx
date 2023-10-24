@@ -23,6 +23,11 @@ const Dashboard = () => {
   const { user } = useAuthContext();
   const [getUsersData, setUsersData] = useState([]);
   const [getstudentData, setStudentData] = useState([]);
+  const [displaydata, setDisplaydata] = useState({ 
+    enrollments:false,
+    fee:false,
+    users:false
+  });
   
 
   useEffect(() =>{
@@ -129,20 +134,38 @@ const finalTotalByBranch = {};
       
       <div className="contianer Dashboard">
         <div className="row">
-          <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   ">
-            <Card style={{ backgroundColor: "#d9e9e9" }} className="rounded rounded-3">
+         
+          <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
+           onClick={e=>setDisplaydata({ 
+            enrollments:true,
+            fee:false,
+            users:false,
+           })}>
+            <Card style={{ backgroundColor: "#d9e9e9" }}  className="rounded rounded-3" >
               <p className="pt-3">Total Enrollments</p>
               <p><b> {getstudentData.length}</b></p>
             </Card>
           </div>
-          <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3">
+       
+          <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3" 
+          onClick={e=>setDisplaydata({ 
+            enrollments:false,
+            fee:true,
+            users:false,
+          })}>
             <Card style={{ backgroundColor: "#b7e9da" }} className="rounded rounded-3">
               <p className="pt-3">Total Fee</p>
               <p><CurrencyRupeeIcon /><b> {totalAmount}</b></p>
             </Card>
           </div>
-          <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 ">
-            <Card style={{ backgroundColor: "#e6acb4 " }} className="rounded rounded-3">
+          <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 " 
+          onClick={ e=>setDisplaydata({ 
+            enrollments:false,
+            fee:false,
+            users:true,
+
+          })}>
+            <Card style={{ backgroundColor: "#e6acb4 " }} className="rounded rounded-3"  >
               <p className="pt-3">Total Users</p>
               <p><b> {getUsersData.length} </b></p>
             </Card>
@@ -151,66 +174,76 @@ const finalTotalByBranch = {};
       </div>
 
       {/* This is for progress bar */}
-      <div className="progreebar rounded rounded-5  pb-4 ">
-        <h4 className="pt-4 mt-3 enrollment ps-4"> Total Entrollment</h4>
-        <div className="justify-content-around pt-4 row progreebar-show">
-        {Object.entries(branchStudentData).map(([branch, students]) => {
-            const enrollmentPercentage = (students.length / getstudentData.length) * 100;
-            const totalCount = students.length;
+      {displaydata.enrollments && (
+         <div  className="progreebar rounded rounded-5  pb-4 ">
+         <h4 className="pt-4 mt-3 enrollment ps-4"  > Total Enrollment</h4>
+            <div className="justify-content-around pt-4 row progreebar-show" >
+            {Object.entries(branchStudentData).map(([branch, students]) => {
+                const enrollmentPercentage = (students.length / getstudentData.length) * 100;
+                const totalCount = students.length;
+                return (
+                  <div key={`student-${branch}`} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
+                    <h6>{branch}</h6>
+                    <BorderLinearProgress variant="determinate" value={enrollmentPercentage} />
+                    {enrollmentPercentage.toFixed(2)}%<br />
+                    <span>Total Count: </span>{totalCount}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+      )}
+      
+      {displaydata.fee && ( 
+         <div className="progreebar rounded rounded-5 pb-4">
+         <h4 className="pt-4 mt-3 enrollment ps-4"> Total Fee</h4> 
+          <div className="  justify-content-around pt-4 row progreebar-show">
+            
+        
+            {Object.entries(finalTotalByBranch).map(([branch, { totalAmount, percentage }]) => {
             return (
-              <div key={`student-${branch}`} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
+              <div key={branch} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
+                <h6>{branch}</h6>
+                <BorderLinearProgress variant="determinate" value={percentage} />
+                {percentage.toFixed(2)}%<br />
+                <span>Total Amount: </span>{totalAmount}
+              </div>
+            );
+            
+            
+            
+            // <div key={branch}>
+            //   <h3>{branch}</h3>
+            //   <p>Total Amount: {totalAmount}</p>
+            //   <p>Percentage: {percentage.toFixed(2)}%</p>
+            // </div>
+          })}
+          </div>
+        </div>
+
+      )}
+     {displaydata.users && ( 
+  <div className="progreebar rounded rounded-5 pb-4" >
+  <h4 className="pt-4 mt-3 enrollment ps-4" > Total Users</h4>
+      <div className="row justify-content-around pt-4 progreebar-show">
+        {Object.entries(branchUserData).map(([branch, users]) => {
+            const enrollmentPercentage = (users.length / getUsersData.length) * 100;
+            const totalCount = users.length;
+            return (
+              <div key={`user-${branch}`} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
                 <h6>{branch}</h6>
                 <BorderLinearProgress variant="determinate" value={enrollmentPercentage} />
                 {enrollmentPercentage.toFixed(2)}%<br />
                 <span>Total Count: </span>{totalCount}
+
               </div>
             );
           })}
-        </div>
       </div>
-      <div className="progreebar rounded rounded-5 mt-5 pb-4">
-        <h4 className="pt-4 mt-3 enrollment ps-4"> Total Fee</h4>
-        <div className="  justify-content-around pt-4 row progreebar-show">
-          
-      
-          {Object.entries(finalTotalByBranch).map(([branch, { totalAmount, percentage }]) => {
-          return (
-            <div key={branch} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
-              <h6>{branch}</h6>
-              <BorderLinearProgress variant="determinate" value={percentage} />
-              {percentage.toFixed(2)}%<br />
-              <span>Total Amount: </span>{totalAmount}
-            </div>
-          );
-          
-          
-          
-          // <div key={branch}>
-          //   <h3>{branch}</h3>
-          //   <p>Total Amount: {totalAmount}</p>
-          //   <p>Percentage: {percentage.toFixed(2)}%</p>
-          // </div>
-        })}
-        </div>
-      </div>
-      <div className="progreebar rounded rounded-5 mt-5 pb-4">
-        <h4 className="pt-4 mt-3 enrollment ps-4"> Total Users</h4>
-        <div className="row justify-content-around pt-4 progreebar-show">
-          {Object.entries(branchUserData).map(([branch, users]) => {
-              const enrollmentPercentage = (users.length / getUsersData.length) * 100;
-              const totalCount = users.length;
-              return (
-                <div key={`user-${branch}`} className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3">
-                  <h6>{branch}</h6>
-                  <BorderLinearProgress variant="determinate" value={enrollmentPercentage} />
-                  {enrollmentPercentage.toFixed(2)}%<br />
-                  <span>Total Count: </span>{totalCount}
-
-                </div>
-              );
-            })}
-        </div>
-      </div>
+    </div>
+     )}
+     
 
      
     </>
