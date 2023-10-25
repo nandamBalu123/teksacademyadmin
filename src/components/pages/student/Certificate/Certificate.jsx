@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,10 +14,12 @@ import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
 import "./Certificate.css";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
-
+import axios from "axios";
 const Certificate = () => {
   const { students } = useStudentsContext();
-  // for edit the date
+  const [courseStartDate, setcourseStartDate] = useState();
+  const [courseEndDate, setcourseEndDate] = useState();
+  const [CertificateStatus, setCertificateStatus] = useState();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -26,6 +28,36 @@ const Certificate = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleSubmit = async () => {
+    const studentdata = {
+      courseStartDate,
+      courseEndDate,
+      CertificateStatus,
+    };
+    try {
+      // Make the POST request
+      const response = await axios.post("http://localhost:3030/", studentdata);
+      // Handle a successful response here
+      console.log("Responsee:", response.data.insertId);
+    } catch (error) {
+      // Handle the error here
+      if (error.response) {
+        // The request was made and the server responded with a non-2xx status code
+        console.log(
+          "Server returned an error:",
+          error.response.status,
+          error.response.data
+        );
+      } else if (error.request) {
+        // The request was made, but no response was received
+        console.log("No response received:", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error("Request error:", error.message);
+      }
+    }
+  };
+
   return (
     <div className="container ">
       <div className="certificate mt-2">
@@ -187,7 +219,6 @@ const Certificate = () => {
                         {student.courses}
                       </TableCell>
                       <TableCell className="border border 1 ">
-                        {" "}
                         {student.registrationnumber}
                       </TableCell>
                       <TableCell className="border border 1 ">
@@ -195,15 +226,13 @@ const Certificate = () => {
                           type="date"
                           name="startdate"
                           className="startdate"
-                        />{" "}
+                        />
                       </TableCell>
                       <TableCell className="border border 1 ">
                         <input type="date" name="enddate" className="enddate" />
                       </TableCell>
                       <TableCell className="border border 1  text-center fs-6">
-                        {" "}
                         <button className="btn btn-primary center">
-                          {" "}
                           Apply
                         </button>
                       </TableCell>

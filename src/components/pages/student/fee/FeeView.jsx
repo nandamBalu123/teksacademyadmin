@@ -152,11 +152,9 @@ const FeeView = () => {
     };
     axios
       .put(`http://localhost:3030/addnewinstallments/${id}`, updatedData)
-
       .then((res) => {
         if (res.data.updated) {
           alert("Installment  Added");
-
           navigator(`/feeview/${id}`);
           window.location.reload();
         } else {
@@ -169,130 +167,115 @@ const FeeView = () => {
       <div className="feeview">
         <h4 className="pt-3"> Student Fee Details</h4>{" "}
         <hr style={{ height: "30%", paddingBottom: "30px" }} />
-        <div className='w-100'>
+        <div className="w-100">
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    {" "}
+                    Name
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    Email
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    {" "}
+                    Contact Number
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    {" "}
+                    Course
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    {" "}
+                    Date Of Joining
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    {" "}
+                    Total Amount
+                  </TableCell>
 
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  {" "}
-                  Name
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Email
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  {" "}
-                  Contact Number
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  {" "}
-                  Course
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  {" "}
-                  Date Of Joining
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  {" "}
-                  Total Amount
-                </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    {" "}
+                    Paid Amount
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    {" "}
+                    Due Amount
+                  </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    Paid Status
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell className="border border 1">
+                    {studentdata.name}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    <span
+                      style={{
+                        width: "200px",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        fontSize: "15px",
+                      }}
+                    >
+                      {studentdata.email}
+                    </span>
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {studentdata.mobilenumber}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {studentdata.courses}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {studentdata.admissiondate}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {studentdata.finaltotal}
+                  </TableCell>
 
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  {" "}
-                  Paid Amount
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  {" "}
-                  Due Amount
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  Paid Status
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell className="border border 1">
-                  {studentdata.name}
-                </TableCell>
-                <TableCell className="border border 1">
-                <span
-                          style={{
-                            width: "200px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            fontSize:"15px"
-                          }}
-                        >
-                         {studentdata.email}
-                        </span>
-                  
-                </TableCell>
-                <TableCell className="border border 1">
-                  {studentdata.mobilenumber}
-                </TableCell>
-                <TableCell className="border border 1">
-                  {studentdata.courses}
-                </TableCell>
-                <TableCell className="border border 1">
-                  {studentdata.admissiondate}
-                </TableCell>
-                <TableCell className="border border 1">
-                  {studentdata.finaltotal}
-                </TableCell>
+                  <TableCell className="border border 1">
+                    {studentdata.totalpaidamount}
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    {studentdata.dueamount}
+                    {/* {dueamount} */}
+                  </TableCell>
 
-                <TableCell className="border border 1">
-                  {studentdata.totalpaidamount}
-                </TableCell>
-                <TableCell className="border border 1">
-                  {studentdata.dueamount}
-                  {/* {dueamount} */}
-                </TableCell>
-
-                <TableCell className="border border 1">
-             
-                  {studentdata.totalinstallments &&
-                    studentdata.totalinstallments.length > 0 &&
-                    studentdata.totalinstallments.map((item, index) => {
-                      if (true) {
-                        // settotalleft(item.totalinstallmentsleft);
-                        totalleft = item.totalinstallmentsleft;
-                        return (
-                          <div style={{ display: "flex" }}>
-                            <span style={dynamicStyle}>
-                              {item.totalinstallmentspaid}/
-                              {item.totalinstallments}
-                            </span>
-                            <span style={dynamicStyle}>
-                              <CheckCircleIcon style={IconStyle} />
-                            </span>
-                          </div>
-                        );
-                      }
-                    })}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-</div>
-
-
-
-
-
-       
-
-
-
-
-
-
+                  <TableCell className="border border 1">
+                    {studentdata.totalinstallments &&
+                      studentdata.totalinstallments.length > 0 &&
+                      studentdata.totalinstallments.map((item, index) => {
+                        if (true) {
+                          // settotalleft(item.totalinstallmentsleft);
+                          totalleft = item.totalinstallmentsleft;
+                          return (
+                            <div style={{ display: "flex" }}>
+                              <span style={dynamicStyle}>
+                                {item.totalinstallmentspaid}/
+                                {item.totalinstallments}
+                              </span>
+                              <span style={dynamicStyle}>
+                                <CheckCircleIcon style={IconStyle} />
+                              </span>
+                            </div>
+                          );
+                        }
+                      })}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
         <TableContainer component={Paper} className="mt-4">
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -365,15 +348,15 @@ const FeeView = () => {
                   Paid Amount
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  {" "}
+          
                   Paid Date
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  {" "}
+            
                   Mode of Payment
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  {" "}
+        
                   Transition ID
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
