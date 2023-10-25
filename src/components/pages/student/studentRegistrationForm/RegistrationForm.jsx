@@ -21,6 +21,8 @@ import Paper from "@mui/material/Paper";
 import { blue } from "@mui/material/colors";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 // import { blue } from "@mui/material/colors";
 // import { useDropzone } from 'react-dropzone';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
@@ -1928,7 +1930,11 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  <select
+                 <div className="col-9 col-md-5">  <FormControlLabel control={<Checkbox />} label="Bag" />
+                 <FormControlLabel  control={<Checkbox />} label="Laptap" /> 
+                 <FormControlLabel control={<Checkbox />} label="LMS" />  
+                 <FormControlLabel control={<Checkbox />} label="Course Meterial" /> </div>
+                  {/* <select
                     className="col-9 col-md-5"
                     id=""
                     required
@@ -1945,7 +1951,7 @@ export default function RegistrationForm() {
                     <option value="bag"> Bag</option>
                     <option value="lms"> LMS</option>
                     <option value="coursematerial"> Course Materials</option>
-                  </select>
+                  </select> */}
                 </div>
               </form>
 
