@@ -330,96 +330,99 @@ const StudentData = () => {
               </div>
               <hr />
               <div className="row">
-                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
-                  <MenuItem>
+               <div className="col-12 col-md-5 col-lg-5 col-xl-5"> 
+               <MenuItem className="pt-3 ">
+                  <div>
                     <label> From: </label>
-                    <input
-                      type="date"
-                      className="w-100 ps-2"
-                      style={{
-                        height: "45px",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
-                      }}
-                      name="fromdate"
-                      value={filterCriteria.fromdate}
-                      onChange={handleInputChange}
-                    />
-                  </MenuItem>
-                </div>
-                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
-                  <MenuItem>
-                    <label> To: </label>
-
-                    <input
-                      type="date"
-                      className="w-100 ps-2"
-                      style={{
-                        height: "45px",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
-                      }}
-                      name="todate"
-                      value={filterCriteria.todate}
-                      onChange={handleInputChange}
-                    />
-                  </MenuItem>
-                </div>
+                  </div>
+                  <div> 
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                  </div>
+                </MenuItem>
+               </div>
+    
+               <div  className="col-12 col-md-6 col-lg-6 col-xl-6">
+               <MenuItem className="pt-3 ">
+                  <label className="ms-"> To: </label>
+                 
+                 <div> 
+                 <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                  />
+                 </div>
+                </MenuItem>
+                 </div>
               </div>
-              <div className=" row mt-3">
-                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
-                  <MenuItem>
-                    <select
-                      id=""
-                      placeholder="Filter Branch"
-                      style={{
-                        height: "45px",
-                        paddingLeft: "10px",
-                        paddingRight: "115px",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
-                      }}
-                      name="branch"
-                      value={filterCriteria.branch}
-                      onChange={handleInputChange}
-                    >
-                      <option value="">Branch</option>
-                      {branches &&
-                        branches.map((item, index) => (
-                          <option key={item.id} value={item.branch_name}>
-                            {item.branch_name}
-                          </option>
-                        ))}
-                    </select>
-                  </MenuItem>
-                </div>
-                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
-                  <MenuItem>
-                    <select
-                      id=""
-                      placeholder="Lead Source"
-                      required
-                      style={{
-                        height: "45px",
-                        paddingRight: "115px",
+              <div className="d-flex w-100 mt-3">
+                <MenuItem>
+                  <select
+                    id=""
+                    placeholder="Filter Branch"
+                    style={{
+                      height: "45px",
+                      paddingLeft: "10px",
+                      paddingRight: "115px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="branch"
+                    value={filterCriteria.branch}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Branch</option>
+                    {branches &&
+                      branches.map((item, index) => (
+                        <option key={item.id} value={item.branch_name}>
+                          {item.branch_name}
+                        </option>
+                      ))}
+                  </select>
+                </MenuItem>
+                <MenuItem>
+                  <select
+                    id=""
+                    placeholder="Lead Source"
+                    required
+                    style={{
+                      height: "45px",
+                      paddingRight: "115px",
 
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
-                      }}
-                      name="leadsource"
-                      value={filterCriteria.leadsource}
-                      onChange={handleInputChange}
-                    >
-                      <option value="">LeadSource</option>
-                      {leadsources &&
-                        leadsources.map((item, index) => (
-                          <option key={item.id} value={item.leadsource}>
-                            {item.leadsource}
-                          </option>
-                        ))}
-                    </select>
-                  </MenuItem>
-                </div>
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="leadsource"
+                    value={filterCriteria.leadsource}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">LeadSource</option>
+                    {leadsources &&
+                      leadsources.map((item, index) => (
+                        <option key={item.id} value={item.leadsource}>
+                          {item.leadsource}
+                        </option>
+                      ))}
+                  </select>
+                </MenuItem>{" "}
               </div>
               <div className="d-flex w-100 mt-3 mb-2">
                 <MenuItem>

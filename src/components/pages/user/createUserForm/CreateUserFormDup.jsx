@@ -545,10 +545,19 @@ const CreateUserForm = () => {
               </div> */}
             </div>
           </div>
-          <div className="create-button mt-5">
-            <button type="submit" className="btn btn-primary   ">
+          <div className="create-button mt-5 me-5">
+          <button
+          type="submit"
+                className="btn btn-primary mr-20 ms-2 mb-2"
+                style={{ textTransform: "capitalize" }}
+              >
+               Create User
+              </button>
+            {/* <button  className="btn btn-primary"
+            type="submit">
+              
               Create User
-            </button>
+            </button> */}
           </div>
         </form>
       </div>

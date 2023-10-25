@@ -1056,7 +1056,8 @@ export default function RegistrationForm() {
                     <option value="others">Others</option>
                   </select>
                   {othersOption && (
-                    <div>
+                    <div className="mt-3">
+                      <label className="col-12 col-md-2 label"> Others</label>
                       <input
                         type="text"
                         className="col-9 col-md-5"

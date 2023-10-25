@@ -254,15 +254,15 @@ const UsersData = () => {
         <h2 className="ms-3 my-3">Users List</h2>
 
         <div className="row mb-3 px-4 pt-3">
-          <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+          <div className="col-12 col-md-8 col-lg-8 col-xl-9">
             <input
               type="text"
-              className="input-field ps-2"
-              placeholder="Search Here......"
+              className="input-field "
+              placeholder="Search Here..."
               autoComplete="off"
               style={{
                 height: "45px",
-                width: "20%",
+                width: "100%",
                 outline: "none",
                 borderTop: "none",
                 borderBottom: "1.5px solid black",
@@ -274,16 +274,16 @@ const UsersData = () => {
               value={filterCriteria.search}
               onChange={handleInputChange}
             />
-            <hr className="w-50" />
+            <hr className="w-75" />
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 mt-4">
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 mt-3">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 mt-3">
-            <select onChange={handlerecorddata}>
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-2">  
+          <select  onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
@@ -299,7 +299,7 @@ const UsersData = () => {
               onClick={handleClick}
             >
               <button
-                className="btn btn-primary mr-20 ms-2 mb-2"
+                className="btn btn-primary"
                 style={{ textTransform: "capitalize" }}
               >
                 {" "}
@@ -346,9 +346,9 @@ const UsersData = () => {
               </div>
               <hr />
               <MenuItem>
-                <label className="mt-3 me-3">Profile:</label>
+                <label className="mt-3 me-2">Profile:</label>
                 <select
-                  className="mt-3 col-12 col-md-12 col-lg-12 col-xl-12 "
+                  className="mt-3 w-100 "
                   id=""
                   required
                   style={{
@@ -371,16 +371,15 @@ const UsersData = () => {
                 </select>
               </MenuItem>
               <MenuItem>
-                <label className="mt-3 me-3"> Branch: </label>
+                <label className="mt-3 me-2 "> Branch: </label>
                 <select
-                  className="mt-3 col-12 col-md-12 col-lg-12 col-xl-12 "
+                  className="mt-3 w-100 "
                   id=""
                   required
                   style={{
                     height: "45px",
                     width: "75%",
-                    paddingLeft: "10px",
-                    paddingRight: "145px",
+                 
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}

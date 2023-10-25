@@ -12,6 +12,8 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import "./Certificate.css";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 import axios from "axios";
@@ -20,6 +22,25 @@ const Certificate = () => {
   const [courseStartDate, setcourseStartDate] = useState();
   const [courseEndDate, setcourseEndDate] = useState();
   const [CertificateStatus, setCertificateStatus] = useState();
+  const [itemsPerPage, setrecordsPerPage] = useState(10);
+
+  const handlerecorddata = (e) => {
+    setrecordsPerPage(e.target.value);
+    setPage(1);
+  };
+
+  const [page, setPage] = useState(1);
+
+  // Calculate the range of items to display on the current page
+  ////////////////////pagination
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const records = students.slice(startIndex, endIndex);
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+////////////
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -60,13 +81,15 @@ const Certificate = () => {
       }
     }
   };
+  let initialDataCount = students.length;
+  let recordCount = students.length;
 
   return (
-    <div className="container ">
+    <div className="container main-certificate mt-3">
       <div className="certificate mt-2">
-        <h3 className="mx-3 my-3"> Certificate </h3>
-        <div className="row mb-3 px-4 pt-3">
-          <div className="col-12 col-md-6 col-lg-10 col-xl-10">
+        <h3 className="mx-3 mt-3"> Certificate </h3>
+        <div className="row mb-3 px-4 pt-2">
+          <div className="col-12 col-md-8 col-lg-8 col-xl-8">
             <input
               type="text"
               className="input-field ps-2"
@@ -86,8 +109,22 @@ const Certificate = () => {
             />
             <hr className="w-75" />
           </div>
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
+          <h6>
+            {" "}
+            {recordCount}/{initialDataCount}
+          </h6>
+        </div>
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-3">  
+        <select  onChange={handlerecorddata}>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+            </select>
+        </div>
 
-          <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
             <Button
               id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -150,8 +187,8 @@ const Certificate = () => {
                   required
                   style={{
                     height: "45px",
-                    paddingLeft: "10px",
-                    paddingRight: "145px",
+                  
+                    paddingRight: "50px",
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}
@@ -209,8 +246,8 @@ const Certificate = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {students &&
-                  students.map((student, index) => (
+                {records &&
+                records.map((student, index) => (
                     <TableRow>
                       <TableCell className="border border 1 ">
                         {index + 1}
@@ -245,6 +282,15 @@ const Certificate = () => {
             </Table>
           </TableContainer>
         </Paper>
+        <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(students.length / itemsPerPage)}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Stack>
+        </div>
       </div>
     </div>
   );
