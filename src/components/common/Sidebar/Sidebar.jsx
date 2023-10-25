@@ -13,10 +13,10 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
-import GroupsIcon from '@mui/icons-material/Groups';
+import GroupsIcon from "@mui/icons-material/Groups";
 import InfoIcon from "@mui/icons-material/Info";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import favicon from "../../../images/favicon.jpeg";
@@ -145,16 +145,16 @@ const Sidebar = () => {
               )}
             </MenuItem>
 
-            {!isCollapsed && (
+            {/* {!isCollapsed && (
               <Box mb="25px">
                 <Box display="flex" justifyContent="center" alignItems="center">
-                  {/* <img
+                  <img
                   alt="profile-user"
                   width="100px"
                   height="100px"
                   src={zaheer}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
-                /> */}
+                />
                 </Box>
                 <Box textAlign="center">
                   <Typography
@@ -164,7 +164,7 @@ const Sidebar = () => {
                     sx={{ m: "20px 0 0 0" }}
                     letterSpacing="1px"
                   >
-                    {/* Zaheer */}
+                    Zaheer
                     {fullname}
                   </Typography>
                   <Typography variant="h5" color={colors.grey[100]}>
@@ -172,18 +172,27 @@ const Sidebar = () => {
                   </Typography>
                 </Box>
               </Box>
-            )}
+            )} */}
 
             <Box paddingLeft={isCollapsed ? undefined : "1%"}>
-              <Item
+              <SubMenu
+                style={{
+                  color: colors.grey[100],
+                }}
+                icon={<HomeOutlinedIcon />}
+                label={"Dashboard"}
+                title={"Dashboard"}
+              >
+                <Link to="/" />
+              </SubMenu>
+              {/* <Item
                 title="Dashboard"
-               
                 to="/"
                 icon={<HomeOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
                 style={{ color: "black" }}
-              />
+              /> */}
               {profile == "admin" ? (
                 <SubMenu
                   style={{
@@ -221,14 +230,14 @@ const Sidebar = () => {
                 <Item
                   title="Student Details"
                   to="/studentdata"
-                  icon={<GroupsIcon/>}
+                  icon={<GroupsIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
                 <Item
                   title="Registration Form"
                   to="/registrationform"
-                  icon={< PersonAddAlt1Icon/>}
+                  icon={<PersonAddAlt1Icon />}
                   selected={selected}
                   setSelected={setSelected}
                 />

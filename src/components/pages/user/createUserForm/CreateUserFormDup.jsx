@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useDepartmentContext } from "../../../../hooks/useDepartmentcontext";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
-import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const CreateUserForm = () => {
   const { departments } = useDepartmentContext();
@@ -25,7 +25,7 @@ const CreateUserForm = () => {
   const [reportto, setreportto] = useState("");
   const [profile, setprofile] = useState("");
   const [branch, setbranch] = useState("");
-  const [errors, setErrors] = useState({});
+
   // const [profiles, setProfiles] = useState([]);
   const profilee = [];
 
@@ -33,48 +33,93 @@ const CreateUserForm = () => {
     e.preventDefault();
     const newErrors = {};
 
-    setErrors({});
-
-    if (!fullname.trim()) {
-      newErrors.fullname = "Full Name is required";
+    if (!fullname) {
+      alert("please enter the name");
+      return;
     }
-
-    // Validate Email
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Invalid email address";
+    if (!email) {
+      alert("please  enter email id");
+      return;
+    } else {
+      const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      if (!emailPattern.test(email)) {
+        alert("Invalid Email Address");
+        return;
+        // errors.email = 'Invalid email address';
+      }
     }
-
-    // Validate Phone Number
-    if (phonenumber.length !== 10) {
-      newErrors.phonenumber = "Phone number must be 10 digits";
+    if (!phonenumber) {
+      alert("please enter mobilenumber");
+      return;
+    } else {
+      if (phonenumber.length != 10) {
+        alert("incorrect mobile number");
+        return;
+      }
     }
-
-    // Validate Designation
-    if (!designation.trim()) {
-      newErrors.designation = "Designation is required";
+    if (!designation) {
+      alert("please enter the designation");
+      return;
     }
-
-    // Validate Department
-    if (!department.trim()) {
-      newErrors.department = "Department is required";
+    if (!department) {
+      alert("please enter the department");
+      return;
     }
-
-    // Validate Report To
-    if (!reportto.trim()) {
-      newErrors.reportto = "Report To is required";
+    if (!reportto) {
+      alert("please enter the reportto");
+      return;
     }
-
-    // Validate Profile
     if (!profile) {
-      newErrors.profile = "Profile is required";
+      alert("please enter the profile");
+      return;
     }
-
-    // Validate Branch
     if (!branch) {
-      newErrors.branch = "Branch is required";
+      alert("please enter the branch");
+      return;
     }
 
-    setErrors(newErrors);
+    // setErrors({});
+
+    // if (!fullname.trim()) {
+    //   newErrors.fullname = "Full Name is required";
+    // }
+
+    // // Validate Email
+    // if (!/\S+@\S+\.\S+/.test(email)) {
+    //   newErrors.email = "Invalid email address";
+    // }
+
+    // // Validate Phone Number
+    // if (phonenumber.length !== 10) {
+    //   newErrors.phonenumber = "Phone number must be 10 digits";
+    // }
+
+    // // Validate Designation
+    // if (!designation.trim()) {
+    //   newErrors.designation = "Designation is required";
+    // }
+
+    // // Validate Department
+    // if (!department.trim()) {
+    //   newErrors.department = "Department is required";
+    // }
+
+    // // Validate Report To
+    // if (!reportto.trim()) {
+    //   newErrors.reportto = "Report To is required";
+    // }
+
+    // // Validate Profile
+    // if (!profile) {
+    //   newErrors.profile = "Profile is required";
+    // }
+
+    // // Validate Branch
+    // if (!branch) {
+    //   newErrors.branch = "Branch is required";
+    // }
+
+    // setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       const user = {
         fullname,
@@ -163,15 +208,17 @@ const CreateUserForm = () => {
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="row ">
             <div className=" col-12 col-md-6 col-lg-6 col-xl-6">
-            <TextField   label="Full Name " 
-             name="fullname"
-             type="text"
-            variant="standard" 
-            className="mar w-75 " 
-            required
-            onChange={(e) => setfullname(e.target.value)}
+              <TextField
+                label="Full Name "
+                name="fullname"
+                type="text"
+                variant="standard"
+                className="mar w-75 "
+                required
+                onChange={(e) => setfullname(e.target.value)}
                 value={fullname}
-                id="fullname"/>
+                id="fullname"
+              />
               {/* <label className="mar userlabel " htmlFor="fullname">
                 Full Name<span className="star"> *</span>:
               </label> */}
@@ -183,25 +230,25 @@ const CreateUserForm = () => {
                 value={fullname}
                 id="fullname"
               /> */}
-              <div className="w-100  error">
+              {/* <div className="w-100  error">
                 {" "}
                 {errors.fullname && (
                   <span className="error">{errors.fullname}</span>
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-             
-            <TextField   label="Email ID" 
-             name="email"
-             type="email"
-            variant="standard" 
-            className="mar w-75 " 
-            onChange={(e) => setemail(e.target.value)}
-            value={email}
-            id="email"
-            required
-          />
+              <TextField
+                label="Email ID"
+                name="email"
+                type="email"
+                variant="standard"
+                className="mar w-75 "
+                onChange={(e) => setemail(e.target.value)}
+                value={email}
+                id="email"
+                required
+              />
               {/* <label className="mar userlabel" htmlFor="email">
                 Email ID<span className="star"> *</span>:
               </label>
@@ -214,23 +261,24 @@ const CreateUserForm = () => {
                 id="email"
                 required
               /> */}
-              <div className="w-100   error">
+              {/* <div className="w-100   error">
                 {errors.email && <span className="error">{errors.email}</span>}{" "}
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <TextField   label="Phone Number" 
-              className=" mar w-75"
-              variant="standard" 
-              name="phonenum"
-              type="number"
-              onChange={(e) => setphonenum(e.target.value)}
-              value={phonenumber}
-              id="phonenumber"
-              required
-          />
+              <TextField
+                label="Phone Number"
+                className=" mar w-75"
+                variant="standard"
+                name="phonenum"
+                type="number"
+                onChange={(e) => setphonenum(e.target.value)}
+                value={phonenumber}
+                id="phonenumber"
+                required
+              />
 
               {/* <label className="mar userlabel" htmlFor="phonenumber">
                 Phone No. <span className="star"> *</span>:
@@ -244,31 +292,29 @@ const CreateUserForm = () => {
                 id="phonenumber"
                 required
               /> */}
-              <div className="w-100  error">
-             
+              {/* <div className="w-100  error">
                 {errors.phonenum && (
                   <span className="error">{errors.phonenum}</span>
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <FormControl variant="standard"className="w-75">
-        <InputLabel>Designation</InputLabel>
-        <Select
-        className=" mar  "
-        name="designation"
-        type="text"
-        onChange={(e) => setdesignation(e.target.value)}
-        value={designation}
-        id="designation"
-        required
-        >
-         
-          <MenuItem >  ---select---</MenuItem>
-          <MenuItem  value="sr.counsellor">Sr. Counsellor </MenuItem>
-          <MenuItem  value="branchmanager">Branch Manager</MenuItem>
-        </Select>
-      </FormControl>
+              <FormControl variant="standard" className="w-75">
+                <InputLabel>Designation</InputLabel>
+                <Select
+                  className=" mar  "
+                  name="designation"
+                  type="text"
+                  onChange={(e) => setdesignation(e.target.value)}
+                  value={designation}
+                  id="designation"
+                  required
+                >
+                  <MenuItem> ---select---</MenuItem>
+                  <MenuItem value="sr.counsellor">Sr. Counsellor </MenuItem>
+                  <MenuItem value="branchmanager">Branch Manager</MenuItem>
+                </Select>
+              </FormControl>
 
               {/* <label className="mar userlabel" htmlFor="designation">
                 Designation<span className="star"> *</span> :
@@ -287,35 +333,35 @@ const CreateUserForm = () => {
                 <option> Sr. Counsellor </option>
                 <option> Branch Manager </option>
               </select> */}
-              <div className=" w-100  error">
+              {/* <div className=" w-100  error">
                 {" "}
                 {errors.designation && (
                   <span className="error">{errors.designation}</span>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <FormControl variant="standard"className="w-75">
-        <InputLabel>Department</InputLabel>
-        <Select
-        className=" mar  "
-        name="department"
-        id="department"
-        required
-        onChange={(e) => setdepartment(e.target.value)}
-        value={department}
-        >
-         
-          <MenuItem >  ---select---</MenuItem>\ {departments &&
-                  departments.map((item, index) => (
-          <MenuItem key={item.id} value={item.department_name}>{item.department_name} </MenuItem>
-          ))}
-          
-        </Select>
-      </FormControl>
-
+              <FormControl variant="standard" className="w-75">
+                <InputLabel>Department</InputLabel>
+                <Select
+                  className=" mar  "
+                  name="department"
+                  id="department"
+                  required
+                  onChange={(e) => setdepartment(e.target.value)}
+                  value={department}
+                >
+                  <MenuItem> ---select---</MenuItem>\{" "}
+                  {departments &&
+                    departments.map((item, index) => (
+                      <MenuItem key={item.id} value={item.department_name}>
+                        {item.department_name}{" "}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
 
               {/* <label className="mar userlabel" htmlFor="department">
                 Department<span className="star"> *</span>:
@@ -345,26 +391,25 @@ const CreateUserForm = () => {
                   ))}
               </select> */}
 
-              <div className="w-100  error">
+              {/* <div className="w-100  error">
                 {" "}
                 {errors.department && (
                   <span className="error">{errors.department}</span>
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <TextField   label="Report To" 
-            variant="standard"
-              className=" mar w-75"
-              name="reportto"
-              type="text"
-              onChange={(e) => setreportto(e.target.value)}
-              value={reportto}
-              id="reportto"
-              required
-          />
-
-
+              <TextField
+                label="Report To"
+                variant="standard"
+                className=" mar w-75"
+                name="reportto"
+                type="text"
+                onChange={(e) => setreportto(e.target.value)}
+                value={reportto}
+                id="reportto"
+                required
+              />
 
               {/* <label className="mar userlabel" htmlFor="reportto">
                 Report to <span className="star"> *</span> :
@@ -378,38 +423,34 @@ const CreateUserForm = () => {
                 id="reportto"
                 required
               /> */}
-              <div className="w-100  error">
+              {/* <div className="w-100  error">
                 {errors.reportto && (
                   <span className="error">{errors.reportto}</span>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <FormControl variant="standard"className="w-75">
-        <InputLabel>Role</InputLabel>
-        <Select
-        className="mar "
-        name="profile"
-        id="profile"
-        required
-        
-        onChange={(e) => setprofile(e.target.value)}
-        value={profile}
-       
-        >
-         
-          <MenuItem >  ---select---</MenuItem>
-          {roles &&
-                  roles.map((item, index) => (
-                    <MenuItem key={item.id} value={item.role}>
-                      {item.role}
-                    </MenuItem>
-                      ))}
-          
-        </Select>
-      </FormControl>
+              <FormControl variant="standard" className="w-75">
+                <InputLabel>Role</InputLabel>
+                <Select
+                  className="mar "
+                  name="profile"
+                  id="profile"
+                  required
+                  onChange={(e) => setprofile(e.target.value)}
+                  value={profile}
+                >
+                  <MenuItem> ---select---</MenuItem>
+                  {roles &&
+                    roles.map((item, index) => (
+                      <MenuItem key={item.id} value={item.role}>
+                        {item.role}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
 
               {/* <label className="mar userlabel" htmlFor="profile">
                 Role <span className="star"> *</span>:
@@ -437,37 +478,34 @@ const CreateUserForm = () => {
                     </option>
                   ))}
               </select> */}
-
+              {/* 
               <div className="w-100 error">
                 {" "}
                 {errors.profile && (
                   <span className="error">{errors.profile}</span>
                 )}
-              </div>
+              </div> */}
             </div>{" "}
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <FormControl variant="standard"className="w-75">
-        <InputLabel>Branch</InputLabel>
-        <Select
-         className=" mar"
-         id="branch"
-         name="branch"
-         required
-         onChange={(e) => setbranch(e.target.value)}
-         value={branch}
-       
-        >
-         
-          <MenuItem >  ---select---</MenuItem>
-          {branches &&
-                  branches.map((item, index) => (
-                    <MenuItem key={item.id} value={item.branch_name}>
-                      {item.branch_name}
-                    </MenuItem>
-                  ))}
-          
-        </Select>
-      </FormControl>
+              <FormControl variant="standard" className="w-75">
+                <InputLabel>Branch</InputLabel>
+                <Select
+                  className=" mar"
+                  id="branch"
+                  name="branch"
+                  required
+                  onChange={(e) => setbranch(e.target.value)}
+                  value={branch}
+                >
+                  <MenuItem> ---select---</MenuItem>
+                  {branches &&
+                    branches.map((item, index) => (
+                      <MenuItem key={item.id} value={item.branch_name}>
+                        {item.branch_name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
               {/* <label className="mar userlabel" htmlFor="branch">
                 Branch <span className="star"> *</span>:
               </label>
@@ -493,13 +531,13 @@ const CreateUserForm = () => {
                     </option>
                   ))}
               </select> */}
-
+              {/* 
               <div className="w-100  error">
                 {" "}
                 {errors.branch && (
                   <span className="error">{errors.branch}</span>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="create-button mt-5">

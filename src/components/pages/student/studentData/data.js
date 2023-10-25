@@ -1,3 +1,52 @@
+import React, { useState } from 'react';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+
+// Your data array
+const initialData = [...]; // Your data goes here
+
+const itemsPerPage = 10; // Number of items to display per page
+
+const PaginationExample = () => {
+  const [page, setPage] = useState(1);
+
+  // Calculate the range of items to display on the current page
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Slice the data array to display only the items for the current page
+  const displayedData = initialData.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+
+  return (
+    <div>
+      {/* Display your data for the current page here */}
+      <ul>
+        {displayedData.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+
+      {/* Render the Material-UI Pagination component */}
+      <Stack spacing={2}>
+        <Pagination
+          count={Math.ceil(initialData.length / itemsPerPage)}
+          page={page}
+          onChange={handlePageChange}
+          color="primary"
+        />
+      </Stack>
+    </div>
+  );
+};
+
+export default PaginationExample;
+
+
+
 export const initialDataa = [
   {
     id: 1,
