@@ -33,28 +33,11 @@ const Dashboard = () => {
     fee: false,
     users: false,
   });
-  const today = new Date();
-  let year = today.getFullYear();
-  let month = String(today.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-indexed
-  let day = String(today.getDate()).padStart(2, "0");
-
-  const todaydate = `${year}-${month}-${day}`;
-
-  const oneMonthBack = new Date();
-  oneMonthBack.setMonth(oneMonthBack.getMonth() - 1); // Go back one month
-
-  year = oneMonthBack.getFullYear();
-  month = String(oneMonthBack.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-indexed
-  day = String(oneMonthBack.getDate()).padStart(2, "0");
-
-  const oneMonthBackDate = `${year}-${month}-${day}`;
 
   const [filterCriteria, setFilterCriteria] = useState({
     fromdate: "",
 
     todate: "",
-    todaydate: todaydate,
-    oneMonthBackDate: oneMonthBackDate,
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -67,8 +50,6 @@ const Dashboard = () => {
       fromdate: "",
 
       todate: "",
-      todaydate: todaydate,
-      oneMonthBackDate: oneMonthBackDate,
     });
   };
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -105,12 +86,11 @@ const Dashboard = () => {
   }, []);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
-      const dateCondition =
-        filterCriteria.todaydate && filterCriteria.oneMonthBackDate
-          ? item.admissiondate >= filterCriteria.oneMonthBackDate &&
-            item.admissiondate <= filterCriteria.todaydate
-          : true;
-      return dateCondition;
+      const admissionDate = new Date(item.admissiondate);
+      const today = new Date();
+
+      let month = String(today.getMonth() + 1).padStart(2, "0");
+      return admissionDate.getMonth() === parseInt(month) - 1; // October is zero-indexed, so 9 represents October
     });
     setStudentData(filteredResults);
   }, [initialData]);
