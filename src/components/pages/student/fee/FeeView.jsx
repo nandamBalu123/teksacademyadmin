@@ -165,7 +165,7 @@ const FeeView = () => {
       });
   };
   return (
-    <div className="fee container">
+    <div className="fee container mt-3">
       <div className="feeview">
         <h4 className="pt-3"> Student Fee Details</h4>{" "}
         <hr style={{ height: "30%", paddingBottom: "30px" }} />
@@ -281,19 +281,7 @@ const FeeView = () => {
           </Table>
         </TableContainer>
 </div>
-
-
-
-
-
-       
-
-
-
-
-
-
-        <TableContainer component={Paper} className="mt-4">
+<TableContainer component={Paper} className="mt-4">
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -324,32 +312,31 @@ const FeeView = () => {
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell className="border border 1">
+                    <TableCell className="border border 1 text-center">
                       {item.initialamount}
                     </TableCell>
-                    <TableCell className="border border 1">
+                    <TableCell className="border border 1 text-center">
                       {item.paiddate}
                     </TableCell>
-                    <TableCell className="border border 1">
+                    <TableCell className="border border 1 text-center">
                       {item.modeofpayment}
                     </TableCell>
-                    <TableCell className="border border 1">
+                    <TableCell className="border border 1 text-center">
                       {item.transactionID}
                     </TableCell>
-                    <TableCell className="border border 1"></TableCell>
+                    <TableCell className="border border 1 text-center"></TableCell>
                   </TableRow>
                 </TableBody>
               ))}
           </Table>
         </TableContainer>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <span className="fs-3 pt-3"> Paid Installments</span>
+        <div className="row">
+          <span className="fs-3  col-12 col-md-9 col-lg-9 col-xl-9"> Paid Installments</span>
           <button
-            type="button"
-            class="btn btn-warning"
+             className="btn btn-warning col-12 col-md-2 col-lg-2 col-xl-2 my-2"
             onClick={addInstallment}
             // style={{ height: "40px", margin: "20px" }}
-            style={addInstallmentstyles}
+          
           >
             Add Installment
           </button>
@@ -393,22 +380,22 @@ const FeeView = () => {
                     <TableRow
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell className="border border 1">
+                      <TableCell className="border border 1 text-center">
                         {item.duedate}
                       </TableCell>
-                      <TableCell className="border border 1">
+                      <TableCell className="border border 1 text-center  ">
                         {item.paidamount}
                       </TableCell>
-                      <TableCell className="border border 1">
+                      <TableCell className="border border 1 text-center">
                         {item.paiddate}
                       </TableCell>
-                      <TableCell className="border border 1">
+                      <TableCell className="border border 1 text-center">
                         {item.modeofpayment}
                       </TableCell>
-                      <TableCell className="border border 1">
+                      <TableCell className="border border 1 text-center">
                         {item.transactionid}
                       </TableCell>
-                      <TableCell className="border border 1"></TableCell>
+                      <TableCell className="border border 1 text-center"></TableCell>
                     </TableRow>
                   </TableBody>
                 );

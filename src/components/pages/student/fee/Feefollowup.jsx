@@ -158,7 +158,7 @@ const Feefollowup = () => {
         </button>
       </div>
       <div className="row">
-        <div className="col-10 col-md-10 col-lg-10 col-xl-10 ">
+        <div className="col-12 col-md-9 col-lg-9 col-xl-9 ">
           <input
             type="text"
             className="input-field ps-2 "
@@ -167,27 +167,32 @@ const Feefollowup = () => {
             style={{
               height: "45px",
               width: "50%",
-              border: "hidden",
+              border: "none",
               outline: "none",
               borderTop: "none",
-              borderBottom: "1.5px solid black",
+            
               background: "none",
               borderRadius: "5px",
             }}
           />
           <hr className="w-50 ms-3" />
         </div>
-        <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
+        <div className="col-6 col-md-1 col-lg-1 col-xl-1 pt-2">
           <h6>
             {" "}
             {recordCount}/{initialDataCount}
           </h6>
         </div>
-        <div className="col-2 col-md-2 col-lg-2 col-xl-2">
-          <button className="btn btn-primary">
-            {" "}
-            <h6 onClick={handleClick}> Filter</h6>
-          </button>
+        <div className="col-6 col-md-1 col-lg-1 col-xl-1">
+        <button
+                className="btn btn-primary mr-20 ms-2 mb-2"
+                style={{ textTransform: "capitalize" }}
+                onClick={handleClick}
+              >
+                {" "}
+                Filter{" "}
+              </button>
+         
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
@@ -283,7 +288,7 @@ const Feefollowup = () => {
       {filterCriteria.todaydate && <h3 className="ms-3 mt-2">Today</h3>}
       {filterCriteria.upcomingdate && <h3 className="ms-3 mt-2">Upcoming</h3>}
 
-      {filterCriteria.pendingdate && <h3 className="ms-3 mt-2">Pending</h3>}
+      {filterCriteria.pendingdate && <h3 className="ms-3 mt-2 btn">Pending</h3>}
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -394,86 +399,14 @@ const Feefollowup = () => {
           </Table>
         </TableContainer>
       </Paper>
-              <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+              {/* <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                 {" "}
                 View
-              </TableCell>
+              </TableCell> */}
            
             
        
-          <TableBody>
-          {Array.isArray(filtereddata) && filtereddata.length > 0 ? (
-              filtereddata.map((item, index) => (
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" className="border border 1">
-                    {index + 1}
-                  </TableCell>
-                  <TableCell className="border border 1">
-                    {item.name}
-                    <br />
-                    {item.branch}
-                    <br />
-                    {item.enquirytakenby}
-                  </TableCell>
-                  <TableCell className="border border 1">
-                    {item.mobilenumber}
-                  </TableCell>
-                  <TableCell className="border border 1">
-                  <span
-                          style={{
-                            width: "200px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            fontSize:"15px"
-                          }}
-                        >
-                          {item.email}
-                        </span>
-                   
-                  </TableCell>
-                  <TableCell className="border border 1">
-                    {item.courses}
-                  </TableCell>
-                  <TableCell className="border border 1">
-                    {item.nextduedate}
-                  </TableCell>
-                  <TableCell className="border border 1">
-                    {item.dueamount}
-                  </TableCell>
-                  <TableCell className="border border 1">
-                    {item.totalinstallments && item.totalinstallments.length > 0 &&
-                    item.totalinstallments.map((items, index) => {
-                      if(true){
-                        return(
-                          <div style={{display: "flex"}}>
-                            <span style={dynamicStyle}>
-                              {items.totalinstallmentspaid} /
-                              {items.totalinstallments}
-                            </span>
-                            <span style={dynamicStyle}>
-                              <CheckCircleIcon style={IconStyle}/>
-                            </span>
-                          </div>
-                        )
-                      }
-                    })
-                      
-                  }
-                  </TableCell>
-                  <TableCell className="border border 1">
-                    <Link to={`/feeview/${item.id}`}><VisibilityIcon/></Link>
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={3}>No data available</TableCell>
-              </TableRow>
-            )}
-          </TableBody>
+         
        
      
   

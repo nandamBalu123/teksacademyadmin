@@ -230,7 +230,7 @@ const UsersData = () => {
         <h2 className="ms-3 my-3">Users List</h2>
 
         <div className="row mb-3 px-4 pt-3">
-          <div className="col-12 col-md-9 col-lg-9 col-xl-9">
+          <div className="col-12 col-md-8 col-lg-8 col-xl-8">
             <input
               type="text"
               className="input-field ps-2"
@@ -252,17 +252,17 @@ const UsersData = () => {
             />
             <hr className="w-50" />
           </div>
-          <div className="col-6 col-md-1 col-lg-1 col-xl-1 pt-2">
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-6 col-md-1 col-lg-1 col-xl-1">  
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1">  
           
           
            </div>
-          <div className="col-6 col-md-1 col-lg-1 col-xl-1 ">
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
             <Button
               id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}

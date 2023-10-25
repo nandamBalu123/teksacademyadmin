@@ -1677,12 +1677,12 @@ export default function RegistrationForm() {
             </StepLabel>
 
             <StepContent>
-              <form className="form">
+              <form className="form ">
                 <TableContainer
                   component={Paper}
                   className="billingtable "
                 >
-                  <Table sx={{ minWidth: 700 }} aria-label="spanning table"  >
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table"   >
                     <TableHead>
                       <TableCell className="fs-6 py-3" align="center">
                         Gross Total
@@ -1720,9 +1720,9 @@ export default function RegistrationForm() {
 
                 <TableContainer
                   component={Paper}
-                  className="billingtable m-auto mt-4"
+                  className="billingtable mt-4"
                 >
-                  <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+                  <Table sx={{ minWidth: 700 }} aria-label="spanning table" >
                     <TableHead>
                       <TableRow className="border border1">
                         <TableCell align="left" className="fs-6 py-3">
