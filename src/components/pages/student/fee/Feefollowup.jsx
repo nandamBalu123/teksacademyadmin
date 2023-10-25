@@ -30,7 +30,7 @@ const Feefollowup = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         setData(response.data);
 
@@ -170,7 +170,7 @@ const Feefollowup = () => {
               border: "none",
               outline: "none",
               borderTop: "none",
-            
+
               background: "none",
               borderRadius: "5px",
             }}
@@ -184,15 +184,15 @@ const Feefollowup = () => {
           </h6>
         </div>
         <div className="col-6 col-md-1 col-lg-1 col-xl-1">
-        <button
-                className="btn btn-primary mr-20 ms-2 mb-2"
-                style={{ textTransform: "capitalize" }}
-                onClick={handleClick}
-              >
-                {" "}
-                Filter{" "}
-              </button>
-         
+          <button
+            className="btn btn-primary mr-20 ms-2 mb-2"
+            style={{ textTransform: "capitalize" }}
+            onClick={handleClick}
+          >
+            {" "}
+            Filter{" "}
+          </button>
+
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
@@ -399,17 +399,10 @@ const Feefollowup = () => {
           </Table>
         </TableContainer>
       </Paper>
-              {/* <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+      {/* <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                 {" "}
                 View
               </TableCell> */}
-           
-            
-       
-         
-       
-     
-  
     </div>
   );
 };

@@ -33,7 +33,7 @@ const FeeDetails = () => {
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
@@ -207,7 +207,8 @@ const FeeDetails = () => {
               </h6>
             </div>
             <div className="col-1 col-md-1 col-lg-1 col-xl-1">
-            <button onClick={handleClick}
+              <button
+                onClick={handleClick}
                 className="btn btn-primary mr-20 ms-2 mb-2"
                 style={{ textTransform: "capitalize" }}
               >

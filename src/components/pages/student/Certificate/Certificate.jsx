@@ -36,7 +36,10 @@ const Certificate = () => {
     };
     try {
       // Make the POST request
-      const response = await axios.post("http://localhost:3030/", studentdata);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/`,
+        studentdata
+      );
       // Handle a successful response here
       console.log("Responsee:", response.data.insertId);
     } catch (error) {

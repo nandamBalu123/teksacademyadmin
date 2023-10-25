@@ -24,7 +24,7 @@ export const DepartmentContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getdepartment")
+      .get(`${process.env.REACT_APP_API_URL}/getdepartment`)
       .then((response) => {
         if (response.data) {
           dispatch({ type: "SET_DEPARTMENTS", payload: response.data });

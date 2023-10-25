@@ -122,7 +122,7 @@ const StudentData = () => {
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
@@ -135,7 +135,9 @@ const StudentData = () => {
       });
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3030/userdata");
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/userdata`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -227,7 +229,7 @@ const StudentData = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-////////////
+  ////////////
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -328,99 +330,96 @@ const StudentData = () => {
               </div>
               <hr />
               <div className="row">
-               <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
-               <MenuItem >
-                  <label> From: </label>
-                <input
-                    type="date"
-                    className="w-100 ps-2"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                
-                </MenuItem>
-               </div>
-               <div  className="col-6 col-md-6 col-lg-6 col-xl-6">
-               <MenuItem >
-                 <label> To: </label> 
-                 
-              
-                 <input
-                    type="date"
-                    className="w-100 ps-2"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
-                  />
-               
-                </MenuItem>
-                 </div>
+                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
+                  <MenuItem>
+                    <label> From: </label>
+                    <input
+                      type="date"
+                      className="w-100 ps-2"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="fromdate"
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+                </div>
+                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
+                  <MenuItem>
+                    <label> To: </label>
+
+                    <input
+                      type="date"
+                      className="w-100 ps-2"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="todate"
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+                </div>
               </div>
               <div className=" row mt-3">
-                <div  className="col-6 col-md-6 col-lg-6 col-xl-6"> 
-                <MenuItem>
-                  <select
-                    id=""
-                    placeholder="Filter Branch"
-                    style={{
-                      height: "45px",
-                      paddingLeft: "10px",
-                      paddingRight: "115px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="branch"
-                    value={filterCriteria.branch}
-                    onChange={handleInputChange}
-                  >
-                    <option value="">Branch</option>
-                    {branches &&
-                      branches.map((item, index) => (
-                        <option key={item.id} value={item.branch_name}>
-                          {item.branch_name}
-                        </option>
-                      ))}
-                  </select>
-                </MenuItem>
+                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
+                  <MenuItem>
+                    <select
+                      id=""
+                      placeholder="Filter Branch"
+                      style={{
+                        height: "45px",
+                        paddingLeft: "10px",
+                        paddingRight: "115px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">Branch</option>
+                      {branches &&
+                        branches.map((item, index) => (
+                          <option key={item.id} value={item.branch_name}>
+                            {item.branch_name}
+                          </option>
+                        ))}
+                    </select>
+                  </MenuItem>
                 </div>
-               <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
-               <MenuItem>
-                  <select
-                    id=""
-                    placeholder="Lead Source"
-                    required
-                    style={{
-                      height: "45px",
-                      paddingRight: "115px",
+                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
+                  <MenuItem>
+                    <select
+                      id=""
+                      placeholder="Lead Source"
+                      required
+                      style={{
+                        height: "45px",
+                        paddingRight: "115px",
 
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="leadsource"
-                    value={filterCriteria.leadsource}
-                    onChange={handleInputChange}
-                  >
-                    <option value="">LeadSource</option>
-                    {leadsources &&
-                      leadsources.map((item, index) => (
-                        <option key={item.id} value={item.leadsource}>
-                          {item.leadsource}
-                        </option>
-                      ))}
-                  </select>
-                </MenuItem>
-               </div>
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="leadsource"
+                      value={filterCriteria.leadsource}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">LeadSource</option>
+                      {leadsources &&
+                        leadsources.map((item, index) => (
+                          <option key={item.id} value={item.leadsource}>
+                            {item.leadsource}
+                          </option>
+                        ))}
+                    </select>
+                  </MenuItem>
+                </div>
               </div>
               <div className="d-flex w-100 mt-3 mb-2">
                 <MenuItem>
@@ -482,7 +481,7 @@ const StudentData = () => {
           </div>
           <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2 ">
             {" "}
-            <select  onChange={handlerecorddata}>
+            <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
@@ -628,7 +627,7 @@ const StudentData = () => {
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            fontSize:"15px"
+                            fontSize: "15px",
                           }}
                         >
                           {item.email}

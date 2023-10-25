@@ -24,7 +24,7 @@ export const LeadSourceContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getleadsource")
+      .get(`${process.env.REACT_APP_API_URL}/getleadsource`)
       .then((response) => {
         if (response.data) {
           dispatch({ type: "SET_LEADSOURCES", payload: response.data });

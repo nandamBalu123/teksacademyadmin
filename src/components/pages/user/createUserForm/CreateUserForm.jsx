@@ -65,13 +65,16 @@ const CreateUserForm = () => {
     onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2));
       console.log("User Data:", values);
-      const response = await fetch("http://localhost:3030/createUser", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/createUser`,
+        {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log("Response:", response); // Log the response from the server
 
       const json = await response.json();
@@ -93,7 +96,6 @@ const CreateUserForm = () => {
           </label>
           <div className="col-6 col-md-3">
             <input
-            
               id="fullname"
               name="fullname"
               type="text"

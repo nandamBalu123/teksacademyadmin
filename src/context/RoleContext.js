@@ -24,7 +24,7 @@ export const RoleContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getuserroles")
+      .get(`${process.env.REACT_APP_API_URL}/getuserroles`)
       .then((response) => {
         if (response.data) {
           dispatch({ type: "SET_ROLES", payload: response.data });
