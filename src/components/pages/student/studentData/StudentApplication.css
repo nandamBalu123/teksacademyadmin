@@ -3,17 +3,26 @@
   margin: 0;
   padding: 0;
   page-break-before: always;
+  border: 1.5px solid black;
 }
+
 @page {
   size: A4;
-  margin: 1cm; /* Set margins as desired */
+  margin: 5px;
+  padding: 10px;
+ 
 }
+
+.page-break {
+  page-break-before: always; /* Insert a page break before this element */
+}
+
 .application {
   border: 3px solid #000;
   padding: 0px 0;
   overflow: hidden;
 }
-th {
+th  {
   padding: 5px 10px !important;
 }
 .admform-sd img {
@@ -22,9 +31,21 @@ th {
   border: 3px solid #ccc;
   border-radius: 5px;
 }
+.borderright{ 
+  border: 2px solid #454545;
+  border-right: none;
+margin: 0;
+font-weight: bold;
+}
+.borderleft{ 
+  border: 2px solid #454545;
+  border-left: 1.5px solid #454545;
+  border-right: none;
+}
+
 .table-bordered td,
 .table-bordered th {
-  border: 3px solid #454545;
+  border: 2px solid #454545;
 }
 .page .container .admform-scd .td {
   border-right: none !important;

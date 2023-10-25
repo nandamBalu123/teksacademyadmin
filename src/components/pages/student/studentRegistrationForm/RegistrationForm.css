@@ -75,12 +75,9 @@ StepLabel {
 }
 .billingtable{ 
   overflow: hidden;
-  width: 95%;
-
   
-
-
 }
+
 
 /* table,th,td{ 
   border: 1px solid black;

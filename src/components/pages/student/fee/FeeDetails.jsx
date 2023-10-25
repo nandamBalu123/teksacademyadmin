@@ -177,7 +177,7 @@ const FeeDetails = () => {
             </div>
           </div>
           <div className="row pt-3 pb-3">
-            <div className="col-10 col-md-10 col-lg-10 col-xl-10">
+            <div className="col-9 col-md-9 col-lg-9 col-xl-9">
               <input
                 type="text"
                 className="input-field ps-2 "
@@ -200,14 +200,21 @@ const FeeDetails = () => {
               />
               <hr className="w-50" />
             </div>
-            <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
+            <div className="col-1 col-md-1 col-lg-1 col-xl-1 pt-2">
               <h6>
                 {" "}
                 {recordCount}/{initialDataCount}
               </h6>
             </div>
-            <div className="col-2 col-md-2 col-lg-2 col-xl-2">
-              <h6 onClick={handleClick}> Filter</h6>
+            <div className="col-1 col-md-1 col-lg-1 col-xl-1">
+            <button onClick={handleClick}
+                className="btn btn-primary mr-20 ms-2 mb-2"
+                style={{ textTransform: "capitalize" }}
+              >
+                {" "}
+                Filter{" "}
+              </button>
+              {/* <h6 onClick={handleClick}> Filter</h6> */}
               <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}

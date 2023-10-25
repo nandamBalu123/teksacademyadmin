@@ -212,7 +212,7 @@ const Dashboard = () => {
       {/* This is for progress bar */}
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
-          <h4 className="pt-4 mt-3 enrollment ps-4"> Total Entrollment</h4>
+          <h4 className="pt-4  enrollment ps-4"> Total Entrollment</h4>
           <div className="justify-content-around pt-4 row progreebar-show">
             {Object.entries(branchStudentData).map(([branch, students]) => {
               const enrollmentPercentage =
@@ -238,8 +238,8 @@ const Dashboard = () => {
         </div>
       )}
       {DisplayData.fee && (
-        <div className="progreebar rounded rounded-5 mt-5 pb-4">
-          <h4 className="pt-4 mt-3 enrollment ps-4"> Total Fee</h4>
+        <div className="progreebar rounded rounded-5  pb-4">
+          <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
           <div className="  justify-content-around pt-4 row progreebar-show">
             {Object.entries(finalTotalByBranch).map(
               ([branch, { totalAmount, percentage }]) => {
@@ -270,8 +270,8 @@ const Dashboard = () => {
         </div>
       )}
       {DisplayData.users && (
-        <div className="progreebar rounded rounded-5 mt-5 pb-4">
-          <h4 className="pt-4 mt-3 enrollment ps-4"> Total Users</h4>
+        <div className="progreebar rounded rounded-5  pb-4">
+          <h4 className="pt-4  enrollment ps-4"> Total Users</h4>
           <div className="row justify-content-around pt-4 progreebar-show">
             {Object.entries(branchUserData).map(([branch, users]) => {
               const enrollmentPercentage =

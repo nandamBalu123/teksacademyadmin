@@ -62,7 +62,7 @@ import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: theme.palette.common.blue,
 
     color: theme.palette.common.white,
   },
@@ -219,6 +219,7 @@ const StudentData = () => {
   const [page, setPage] = useState(1);
 
   // Calculate the range of items to display on the current page
+  ////////////////////pagination
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -226,7 +227,7 @@ const StudentData = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-
+////////////
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -326,15 +327,13 @@ const StudentData = () => {
                 </MenuItem>
               </div>
               <hr />
-              <div className="d-flex">
-                <MenuItem className="pt-3 ">
-                  <div>
-                    <label> From: </label>
-                  </div>
-
-                  <input
+              <div className="row">
+               <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
+               <MenuItem >
+                  <label> From: </label>
+                <input
                     type="date"
-                    className="form-control"
+                    className="w-100 ps-2"
                     style={{
                       height: "45px",
                       border: "1.5px solid black",
@@ -344,13 +343,17 @@ const StudentData = () => {
                     value={filterCriteria.fromdate}
                     onChange={handleInputChange}
                   />
+                
                 </MenuItem>
-                <MenuItem className="pt-3 ">
-                  <label> To: </label>
-                  <br />
-                  <input
+               </div>
+               <div  className="col-6 col-md-6 col-lg-6 col-xl-6">
+               <MenuItem >
+                 <label> To: </label> 
+                 
+              
+                 <input
                     type="date"
-                    className="form-control"
+                    className="w-100 ps-2"
                     style={{
                       height: "45px",
                       border: "1.5px solid black",
@@ -360,9 +363,12 @@ const StudentData = () => {
                     value={filterCriteria.todate}
                     onChange={handleInputChange}
                   />
+               
                 </MenuItem>
+                 </div>
               </div>
-              <div className="d-flex w-100 mt-3">
+              <div className=" row mt-3">
+                <div  className="col-6 col-md-6 col-lg-6 col-xl-6"> 
                 <MenuItem>
                   <select
                     id=""
@@ -387,7 +393,9 @@ const StudentData = () => {
                       ))}
                   </select>
                 </MenuItem>
-                <MenuItem>
+                </div>
+               <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
+               <MenuItem>
                   <select
                     id=""
                     placeholder="Lead Source"
@@ -411,7 +419,8 @@ const StudentData = () => {
                         </option>
                       ))}
                   </select>
-                </MenuItem>{" "}
+                </MenuItem>
+               </div>
               </div>
               <div className="d-flex w-100 mt-3 mb-2">
                 <MenuItem>
@@ -473,7 +482,7 @@ const StudentData = () => {
           </div>
           <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2 ">
             {" "}
-            <select name="cars" id="cars" onChange={handlerecorddata}>
+            <select  onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
