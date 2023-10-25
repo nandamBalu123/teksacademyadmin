@@ -328,12 +328,15 @@ const StudentData = () => {
               </div>
               <hr />
               <div className="row">
-               <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
-               <MenuItem >
-                  <label> From: </label>
-                <input
+               <div className="col-12 col-md-5 col-lg-5 col-xl-5"> 
+               <MenuItem className="pt-3 ">
+                  <div>
+                    <label> From: </label>
+                  </div>
+                  <div> 
+                  <input
                     type="date"
-                    className="w-100 ps-2"
+                    className="w-100"
                     style={{
                       height: "45px",
                       border: "1.5px solid black",
@@ -343,17 +346,18 @@ const StudentData = () => {
                     value={filterCriteria.fromdate}
                     onChange={handleInputChange}
                   />
-                
+                  </div>
                 </MenuItem>
                </div>
-               <div  className="col-6 col-md-6 col-lg-6 col-xl-6">
-               <MenuItem >
-                 <label> To: </label> 
+    
+               <div  className="col-12 col-md-6 col-lg-6 col-xl-6">
+               <MenuItem className="pt-3 ">
+                  <label className="ms-"> To: </label>
                  
-              
+                 <div> 
                  <input
                     type="date"
-                    className="w-100 ps-2"
+                    className="w-100"
                     style={{
                       height: "45px",
                       border: "1.5px solid black",
@@ -363,12 +367,11 @@ const StudentData = () => {
                     value={filterCriteria.todate}
                     onChange={handleInputChange}
                   />
-               
+                 </div>
                 </MenuItem>
                  </div>
               </div>
-              <div className=" row mt-3">
-                <div  className="col-6 col-md-6 col-lg-6 col-xl-6"> 
+              <div className="d-flex w-100 mt-3">
                 <MenuItem>
                   <select
                     id=""
@@ -393,9 +396,7 @@ const StudentData = () => {
                       ))}
                   </select>
                 </MenuItem>
-                </div>
-               <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
-               <MenuItem>
+                <MenuItem>
                   <select
                     id=""
                     placeholder="Lead Source"
@@ -419,8 +420,7 @@ const StudentData = () => {
                         </option>
                       ))}
                   </select>
-                </MenuItem>
-               </div>
+                </MenuItem>{" "}
               </div>
               <div className="d-flex w-100 mt-3 mb-2">
                 <MenuItem>

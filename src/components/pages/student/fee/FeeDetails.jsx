@@ -10,6 +10,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import "./FeeDetails.css";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -21,6 +23,22 @@ const FeeDetails = () => {
   const navigator = useNavigate();
   const [getstudentData, setData] = useState([{ name: "" }]);
   const [studentFeeRecordss, setFeerecords] = useState(getstudentData);
+  const [itemsPerPage, setrecordsPerPage] = useState(10);
+
+  const handlerecorddata = (e) => {
+    setrecordsPerPage(e.target.value);
+    setPage(1);
+  };
+  const [page, setPage] = useState(1);
+
+  // Calculate the range of items to display on the current page
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const records = studentFeeRecordss.slice(startIndex, endIndex);
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -148,11 +166,11 @@ const FeeDetails = () => {
   let recordCount = studentFeeRecordss.length;
   return (
     <>
-      <div className="fee">
+      <div className="main-feedetails container mt-3">
         <div className="feedetails">
           {" "}
-          <h4> Fee Management(Registered Students)</h4>
-          <div className="row pt-3">
+          <p className="fee-heading"> Fee Management(Registered Students)</p> 
+          <div className="row pt-1">
             <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
               <button className="feebtn" onClick={studentFeeRecords}>
                 Student Fee Records
@@ -177,15 +195,15 @@ const FeeDetails = () => {
             </div>
           </div>
           <div className="row pt-3 pb-3">
-            <div className="col-9 col-md-9 col-lg-9 col-xl-9">
+            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
               <input
                 type="text"
-                className="input-field ps-2 "
+                className="input-field "
                 placeholder="Search Here..."
                 autoComplete="off"
                 style={{
                   height: "45px",
-                  width: "50%",
+                  width: "100%",
 
                   outline: "none",
                   borderTop: "none",
@@ -198,15 +216,23 @@ const FeeDetails = () => {
                 value={filterCriteria.search}
                 onChange={handleInputChange}
               />
-              <hr className="w-50" />
+              <hr className="w-75" />
             </div>
-            <div className="col-1 col-md-1 col-lg-1 col-xl-1 pt-2">
+            <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2">
               <h6>
                 {" "}
                 {recordCount}/{initialDataCount}
               </h6>
             </div>
-            <div className="col-1 col-md-1 col-lg-1 col-xl-1">
+            <div className="col-4 col-md-1 col-lg-1 col-xl-1"> 
+            <select  onChange={handlerecorddata}>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+            </select>
+            </div>
+            <div className="col-4 col-md-1 col-lg-1 col-xl-1">
             <button onClick={handleClick}
                 className="btn btn-primary mr-20 ms-2 mb-2"
                 style={{ textTransform: "capitalize" }}
@@ -224,7 +250,7 @@ const FeeDetails = () => {
                   "aria-labelledby": "basic-button",
                 }}
                 style={{
-                  width: "600px",
+                  width: "",
                   borderRadius: "25px",
                   marginTop: "20px",
                   cursor: "pointer",
@@ -373,9 +399,9 @@ const FeeDetails = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {Array.isArray(studentFeeRecordss) &&
-                  studentFeeRecordss.length > 0 ? (
-                    studentFeeRecordss.map((item, index) => (
+                  {Array.isArray(records) &&
+                  records.length > 0 ? (
+                    records.map((item, index) => (
                       <TableRow
                         sx={{
                           "&:last-child td, &:last-child th": { border: 0 },
@@ -463,6 +489,15 @@ const FeeDetails = () => {
               </Table>
             </TableContainer>
           </Paper>
+          <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(studentFeeRecordss.length / itemsPerPage)}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Stack>
+        </div>
         </div>
       </div>
     </>
