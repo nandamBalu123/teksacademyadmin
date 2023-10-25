@@ -38,18 +38,24 @@ const Dashboard = () => {
     fromdate: "",
 
     todate: "",
+
+    monthdataCondition: true,
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({ ...filterCriteria, [name]: value });
+    setFilterCriteria({
+      ...filterCriteria,
+      monthdataCondition: false,
+      [name]: value,
+    });
   };
   //// reset filters
   const filterreset = () => {
     setFilterCriteria({
       fromdate: "",
-
       todate: "",
+      monthdataCondition: true,
     });
   };
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -60,6 +66,7 @@ const Dashboard = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   useEffect(() => {
     axios
       .get("http://localhost:3030/getstudent_data")
@@ -84,29 +91,28 @@ const Dashboard = () => {
         console.error("Get User Data: ", err);
       });
   }, []);
+  
+  console.log("fliter", filterCriteria);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
-      const admissionDate = new Date(item.admissiondate);
-      const today = new Date();
-
+      let admissionDate = new Date(item.admissiondate);
+      let today = new Date();
       let month = String(today.getMonth() + 1).padStart(2, "0");
-      return admissionDate.getMonth() === parseInt(month) - 1; // October is zero-indexed, so 9 represents October
-    });
-    setStudentData(filteredResults);
-  }, [initialData]);
-  useEffect(() => {
-    const filteredResults = initialData.filter((item) => {
       const dateCondition =
         filterCriteria.fromdate && filterCriteria.todate
           ? item.admissiondate >= filterCriteria.fromdate &&
             item.admissiondate <= filterCriteria.todate
           : true;
 
-      return dateCondition;
+      const monthdataCondition = filterCriteria.monthdataCondition
+        ? admissionDate.getMonth() === parseInt(month) - 1
+        : true;
+
+      return dateCondition && monthdataCondition;
     });
 
     setStudentData(filteredResults);
-  }, [filterCriteria]);
+  }, [filterCriteria, initialData]);
   <Box
     component="span"
     sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
@@ -257,6 +263,7 @@ const Dashboard = () => {
 
               <MenuItem className="d-flex justify-content-between">
                 {/* <button className="save"> Save</button> */}
+
                 <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear
