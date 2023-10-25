@@ -372,11 +372,11 @@ const StudentData = () => {
                 <MenuItem>
                   <select
                     id=""
+                    className="w-100 pe-5"
                     placeholder="Filter Branch"
                     style={{
                       height: "45px",
-                      paddingLeft: "10px",
-                      paddingRight: "115px",
+                   
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -398,11 +398,12 @@ const StudentData = () => {
                <MenuItem>
                   <select
                     id=""
+                    className="w-100"
                     placeholder="Lead Source"
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "115px",
+                    
 
                       border: "1.5px solid black",
                       borderRadius: "5px",
@@ -430,7 +431,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "102px",
+                      paddingRight: "90px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
