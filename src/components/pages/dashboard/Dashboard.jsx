@@ -17,23 +17,74 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import "./Dashboard.css";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import CloseIcon from "@mui/icons-material/Close";
+
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 const Dashboard = () => {
   const { user } = useAuthContext();
   const [getUsersData, setUsersData] = useState([]);
+  const [initialData, setinitialData] = useState([]);
   const [getstudentData, setStudentData] = useState([]);
   const [DisplayData, setDisplayData] = useState({
     enrollments: false,
     fee: false,
     users: false,
   });
+  const today = new Date();
+  let year = today.getFullYear();
+  let month = String(today.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-indexed
+  let day = String(today.getDate()).padStart(2, "0");
 
+  const todaydate = `${year}-${month}-${day}`;
+
+  const oneMonthBack = new Date();
+  oneMonthBack.setMonth(oneMonthBack.getMonth() - 1); // Go back one month
+
+  year = oneMonthBack.getFullYear();
+  month = String(oneMonthBack.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-indexed
+  day = String(oneMonthBack.getDate()).padStart(2, "0");
+
+  const oneMonthBackDate = `${year}-${month}-${day}`;
+
+  const [filterCriteria, setFilterCriteria] = useState({
+    fromdate: "",
+
+    todate: "",
+    todaydate: todaydate,
+    oneMonthBackDate: oneMonthBackDate,
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFilterCriteria({ ...filterCriteria, [name]: value });
+  };
+  //// reset filters
+  const filterreset = () => {
+    setFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+      todaydate: todaydate,
+      oneMonthBackDate: oneMonthBackDate,
+    });
+  };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   useEffect(() => {
     axios
       .get("http://localhost:3030/getstudent_data")
       .then((res) => {
         setStudentData(res.data);
+        setinitialData(res.data);
         console.log("res student data: ", res.data);
       })
       .catch((err) => {
@@ -52,6 +103,30 @@ const Dashboard = () => {
         console.error("Get User Data: ", err);
       });
   }, []);
+  useEffect(() => {
+    const filteredResults = initialData.filter((item) => {
+      const dateCondition =
+        filterCriteria.todaydate && filterCriteria.oneMonthBackDate
+          ? item.admissiondate >= filterCriteria.oneMonthBackDate &&
+            item.admissiondate <= filterCriteria.todaydate
+          : true;
+      return dateCondition;
+    });
+    setStudentData(filteredResults);
+  }, [initialData]);
+  useEffect(() => {
+    const filteredResults = initialData.filter((item) => {
+      const dateCondition =
+        filterCriteria.fromdate && filterCriteria.todate
+          ? item.admissiondate >= filterCriteria.fromdate &&
+            item.admissiondate <= filterCriteria.todate
+          : true;
+
+      return dateCondition;
+    });
+
+    setStudentData(filteredResults);
+  }, [filterCriteria]);
   <Box
     component="span"
     sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
@@ -132,6 +207,83 @@ const Dashboard = () => {
               subtitle={"Welcome to TEKS ACADEMY"}
             />
           )}
+
+          <span className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
+            {" "}
+            <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
+              {" "}
+              Filter
+            </h6>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+              style={{
+                width: "600px",
+                borderRadius: "25px",
+                marginTop: "20px",
+                cursor: "pointer",
+              }}
+            >
+              <div className="d-flex justify-content-between">
+                <MenuItem> Filter</MenuItem>
+                <MenuItem>
+                  {" "}
+                  <CloseIcon onClick={handleClose} />{" "}
+                </MenuItem>
+              </div>
+              <hr />
+              <div className="row">
+                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
+                  <MenuItem>
+                    <label> From: </label>
+                    <input
+                      type="date"
+                      className="w-100 ps-2"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="fromdate"
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+                </div>
+                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
+                  <MenuItem>
+                    <label> To: </label>
+
+                    <input
+                      type="date"
+                      className="w-100 ps-2"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="todate"
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+                </div>
+              </div>
+
+              <MenuItem className="d-flex justify-content-between">
+                {/* <button className="save"> Save</button> */}
+                <button className="clear" onClick={filterreset}>
+                  {" "}
+                  Clear
+                </button>
+              </MenuItem>
+            </Menu>
+          </span>
         </Box>
       </div>
 
@@ -191,8 +343,8 @@ const Dashboard = () => {
             </Card>
           </div>
         </div>
-        <div className="row"> 
-{/*         
+        <div className="row">
+          {/*         
         <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
            >
             <Card style={{ backgroundColor: "#d9e9e9" }}  className="rounded rounded-3" >
@@ -206,7 +358,7 @@ const Dashboard = () => {
               <p><b>20</b></p>
             </Card>
           </div> */}
-         </div>
+        </div>
       </div>
 
       {/* This is for progress bar */}
