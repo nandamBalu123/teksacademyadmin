@@ -24,7 +24,7 @@ export const BranchContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getbranch")
+      .get(`${process.env.REACT_APP_API_URL}/getbranch`)
       .then((response) => {
         if (response.data) {
           dispatch({ type: "SET_BRANCHES", payload: response.data });

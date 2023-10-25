@@ -134,13 +134,16 @@ const CreateUserForm = () => {
 
       console.log("User Data:", user); // Log the user data being sent
 
-      const response = await fetch("http://localhost:3030/createUser", {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/createUser`,
+        {
+          method: "POST",
+          body: JSON.stringify(user),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log("Response:", response); // Log the response from the server
 
@@ -173,7 +176,9 @@ const CreateUserForm = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3030/getuserroles");
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/getuserroles`
+      );
 
       console.log("Response status:", response.status); // Log response status
 
@@ -540,10 +545,19 @@ const CreateUserForm = () => {
               </div> */}
             </div>
           </div>
-          <div className="create-button mt-5">
-            <button type="submit" className="btn btn-primary   ">
+          <div className="create-button mt-5 me-5">
+          <button
+          type="submit"
+                className="btn btn-primary mr-20 ms-2 mb-2"
+                style={{ textTransform: "capitalize" }}
+              >
+               Create User
+              </button>
+            {/* <button  className="btn btn-primary"
+            type="submit">
+              
               Create User
-            </button>
+            </button> */}
           </div>
         </form>
       </div>

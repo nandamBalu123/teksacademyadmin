@@ -534,7 +534,7 @@ export default function RegistrationForm() {
     try {
       // Make the POST request
       const response = await axios.post(
-        "http://localhost:3030/student_form",
+        `${process.env.REACT_APP_API_URL}/student_form`,
         studentRegistrationdata
       );
       const id = response.data.insertId;
@@ -565,7 +565,9 @@ export default function RegistrationForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3030/userdata");
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/userdata`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -589,7 +591,7 @@ export default function RegistrationForm() {
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         // Handle the successful response here
         setStudentData(response.data); // Update the data state with the fetched data
@@ -1054,7 +1056,8 @@ export default function RegistrationForm() {
                     <option value="others">Others</option>
                   </select>
                   {othersOption && (
-                    <div>
+                    <div className="mt-3">
+                      <label className="col-12 col-md-2 label"> Others</label>
                       <input
                         type="text"
                         className="col-9 col-md-5"

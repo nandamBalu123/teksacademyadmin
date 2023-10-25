@@ -11,6 +11,8 @@ import Paper from "@mui/material/Paper";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import "./Feefolloup.css";
 import axios from "axios";
 
@@ -27,10 +29,30 @@ const Feefollowup = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const [itemsPerPage, setrecordsPerPage] = useState(10);
+
+  const handlerecorddata = (e) => {
+    setrecordsPerPage(e.target.value);
+    setPage(1);
+  };
+
+  const [page, setPage] = useState(1);
+
+  // Calculate the range of items to display on the current page
+  ////////////////////pagination
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const records = filtereddata.slice(startIndex, endIndex);
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+////////////
+
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         setData(response.data);
 
@@ -158,7 +180,7 @@ const Feefollowup = () => {
         </button>
       </div>
       <div className="row">
-        <div className="col-12 col-md-9 col-lg-9 col-xl-9 ">
+        <div className="col-12 col-md-8 col-lg-8 col-xl-8 ">
           <input
             type="text"
             className="input-field ps-2 "
@@ -166,24 +188,32 @@ const Feefollowup = () => {
             autoComplete="off"
             style={{
               height: "45px",
-              width: "50%",
+              width: "100%",
               border: "none",
               outline: "none",
               borderTop: "none",
-            
+
               background: "none",
               borderRadius: "5px",
             }}
           />
           <hr className="w-50 ms-3" />
         </div>
-        <div className="col-6 col-md-1 col-lg-1 col-xl-1 pt-2">
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2">
           <h6>
             {" "}
             {recordCount}/{initialDataCount}
           </h6>
         </div>
-        <div className="col-6 col-md-1 col-lg-1 col-xl-1">
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">  
+        <select  onChange={handlerecorddata}>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+            </select>
+        </div>
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1">
         <button
                 className="btn btn-primary mr-20 ms-2 mb-2"
                 style={{ textTransform: "capitalize" }}
@@ -334,8 +364,8 @@ const Feefollowup = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Array.isArray(filtereddata) && filtereddata.length > 0 ? (
-                filtereddata.map((item, index) => (
+              {Array.isArray(records) && records.length > 0 ? (
+                records.map((item, index) => (
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
@@ -399,18 +429,21 @@ const Feefollowup = () => {
           </Table>
         </TableContainer>
       </Paper>
+
+      <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(filtereddata.length / itemsPerPage)}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Stack>
+        </div>
               {/* <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                 {" "}
                 View
               </TableCell> */}
-           
-            
-       
-         
-       
-     
-  
-    </div>
+        </div>
   );
 };
 export default Feefollowup;

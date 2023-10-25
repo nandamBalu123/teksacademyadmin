@@ -64,7 +64,7 @@ const UsersData = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3030/getuserroles");
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/getuserroles`);
 
       console.log("Response status:", response.status); // Log response status
 
@@ -100,7 +100,7 @@ const UsersData = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3030/deleteuser/${id}`)
+      .delete(`${process.env.REACT_APP_API_URL}/deleteuser/${id}`)
       .then(() => setDeleted(!deleted))
       .catch((error) => {
         console.log("Error: ", error);
@@ -132,7 +132,7 @@ const UsersData = () => {
   // };
 
   // const [userData, setUserData] = useState([]);
-  
+
   // const [filteredData, setFilteredData] = useState(userData);
   const [error, setError] = useState(null);
   // const [open, setOpen] = useState(false);
@@ -151,7 +151,9 @@ const UsersData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3030/userdata");
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/userdata`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -245,7 +247,6 @@ const UsersData = () => {
   let recordCount = filteredData.length;
   // for filter change numbers 10,25,50
 
- 
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
@@ -253,15 +254,15 @@ const UsersData = () => {
         <h2 className="ms-3 my-3">Users List</h2>
 
         <div className="row mb-3 px-4 pt-3">
-          <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+          <div className="col-12 col-md-8 col-lg-8 col-xl-9">
             <input
               type="text"
-              className="input-field ps-2"
-              placeholder="Search Here......"
+              className="input-field "
+              placeholder="Search Here..."
               autoComplete="off"
               style={{
                 height: "45px",
-                width: "20%",
+                width: "100%",
                 outline: "none",
                 borderTop: "none",
                 borderBottom: "1.5px solid black",
@@ -273,23 +274,22 @@ const UsersData = () => {
               value={filterCriteria.search}
               onChange={handleInputChange}
             />
-            <hr className="w-50" />
+            <hr className="w-75" />
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 mt-4">
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 mt-3">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 mt-3">  
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-2">  
           <select  onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="75">75</option>
             </select>
-          
-           </div>
+          </div>
           <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
             <Button
               id="demo-positioned-button"
@@ -299,7 +299,7 @@ const UsersData = () => {
               onClick={handleClick}
             >
               <button
-                className="btn btn-primary mr-20 ms-2 mb-2"
+                className="btn btn-primary"
                 style={{ textTransform: "capitalize" }}
               >
                 {" "}
@@ -346,9 +346,9 @@ const UsersData = () => {
               </div>
               <hr />
               <MenuItem>
-                <label className="mt-3 me-3">Profile:</label>
+                <label className="mt-3 me-2">Profile:</label>
                 <select
-                  className="mt-3 col-12 col-md-12 col-lg-12 col-xl-12 "
+                  className="mt-3 w-100 "
                   id=""
                   required
                   style={{
@@ -371,16 +371,15 @@ const UsersData = () => {
                 </select>
               </MenuItem>
               <MenuItem>
-                <label className="mt-3 me-3"> Branch: </label>
+                <label className="mt-3 me-2 "> Branch: </label>
                 <select
-                  className="mt-3 col-12 col-md-12 col-lg-12 col-xl-12 "
+                  className="mt-3 w-100 "
                   id=""
                   required
                   style={{
                     height: "45px",
                     width: "75%",
-                    paddingLeft: "10px",
-                    paddingRight: "145px",
+                 
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}
@@ -475,40 +474,63 @@ const UsersData = () => {
                     {records &&
                       records.map((user) => (
                         <StyledTableRow>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.fullname}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
-                          <span
-                          style={{
-                            width: "200px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            fontSize:"15px"
-                          }}
-                        >
-                         {user.email}
-                        </span>
-                           
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
+                            <span
+                              style={{
+                                width: "200px",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                              }}
+                            >
+                              {user.email}
+                            </span>
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {" "}
                             {user.phonenumber}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.designation}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.department}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.reportto}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.profile}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {" "}
                             {user.branch}
                           </StyledTableCell>
@@ -538,20 +560,17 @@ const UsersData = () => {
               </TableContainer>
             </Paper>
             <div style={{ display: "flex", justifyContent: "center" }}>
-          <Stack spacing={2}>
-            <Pagination
-              count={Math.ceil(filteredData.length / itemsPerPage)}
-              onChange={handlePageChange}
-              color="primary"
-            />
-          </Stack>
-        </div>
+              <Stack spacing={2}>
+                <Pagination
+                  count={Math.ceil(filteredData.length / itemsPerPage)}
+                  onChange={handlePageChange}
+                  color="primary"
+                />
+              </Stack>
+            </div>
           </div>
-          
         </div>
-        
       </div>
-      
     </div>
   );
 };

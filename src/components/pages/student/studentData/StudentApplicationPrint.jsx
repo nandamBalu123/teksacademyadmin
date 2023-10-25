@@ -22,7 +22,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
-      .get(`http://localhost:3030/viewstudentdata/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
       .then((response) => {
         // Handle the successful response here
         // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
@@ -58,7 +58,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           <h3 className="text-center mt-2 "> Application Form </h3>
           <div className="row  ">
             <div className="col-5 col-md-5 col-lg-5 col-xl-5">
-              <h4 style={{ marginLeft: "15px", marginTop:"25px" }}>
+              <h4 style={{ marginLeft: "15px", marginTop: "25px" }}>
                 {" "}
                 <strong> Kapil Knowledge Hub Private Limited</strong>
               </h4>
@@ -88,30 +88,30 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             <div className="col-7 col-md-7 col-lg-7 col-xl-7">
               <br />
               <img src={logo} className="tekslogo" style={{ width: "100%" }} />
-              <div className="row"> 
-              <div className="col-5 col-md-5 col-lg-5 col-xl-5"> 
-              <h4 className="text-center" style={{ marginTop: "23px" }}>
-                {" "}
-                <h5 className="text-start" 
-             >
-                  {" "}
-                  <strong className="fs-5"> Branch:</strong> {studentdata.branch}
-                </h5>
-              </h4>
-              </div> 
-              <div className="col-7 col-md-7 col-lg-7 col-xl-7" >  
-              <h4 className="text-center" style={{ marginTop: "23px" }}>
-                {" "}
-                <h5 className="text-start" 
-             >
-             <strong className="fs-5">  Registration :</strong>{studentdata.registrationnumber}
-                </h5>
-              </h4>
-            </div> </div>
-              
+              <div className="row">
+                <div className="col-5 col-md-5 col-lg-5 col-xl-5">
+                  <h4 className="text-center" style={{ marginTop: "23px" }}>
+                    {" "}
+                    <h5 className="text-start">
+                      {" "}
+                      <strong className="fs-5"> Branch:</strong>{" "}
+                      {studentdata.branch}
+                    </h5>
+                  </h4>
+                </div>
+                <div className="col-7 col-md-7 col-lg-7 col-xl-7">
+                  <h4 className="text-center" style={{ marginTop: "23px" }}>
+                    {" "}
+                    <h5 className="text-start">
+                      <strong className="fs-5"> Registration :</strong>
+                      {studentdata.registrationnumber}
+                    </h5>
+                  </h4>
+                </div>{" "}
+              </div>
             </div>
           </div>
-          
+
           <div className="admform-sd  mt-4 ">
             <div
               className=" text-center caption "
@@ -128,10 +128,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     <tbody>
                       <tr>
                         {" "}
-                        <th style={{ width: "30.66%" }}>
-                          {" "}
-                          Student Name
-                        </th>{" "}
+                        <th style={{ width: "30.66%" }}> Student Name</th>{" "}
                         <td colspan="4">{studentdata.name}</td>{" "}
                       </tr>
                       <tr>
@@ -180,7 +177,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               {" "}
               Student Contact Details{" "}
             </div>
-{/* <div>
+            {/* <div>
   <div className="row">
     <div className="col-3 borderright"><b> Country</b></div>
     <div className="col-3 borderleft ">a</div>
@@ -229,7 +226,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <br />
                   <tr>
                     {" "}
-                    <td className="borderright" >Country</td>{" "}
+                    <td className="borderright">Country</td>{" "}
                     <td className="w-25 borderleft ">{studentdata.country} </td>
                     <td className="borderright">Native Place</td>{" "}
                     <td className="w-25 borderleft">{studentdata.native}</td>{" "}
@@ -238,8 +235,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     {" "}
                     <td className="borderright">State</td>{" "}
                     <td className="w-25 borderleft "> {studentdata.state} </td>
-                    <td className="borderright">Area</td> 
-                    <td className="w-25 borderleft ">{studentdata.area}</td>{" "}
+                    <td className="borderright">Area</td>
+                    <td className="w-25 borderleft ">
+                      {studentdata.area}
+                    </td>{" "}
                   </tr>
                   <tr>
                     {" "}
@@ -249,22 +248,29 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       {studentdata.state}
                       {studentdata.zipcode}{" "}
                     </td>{" "}
-                    <td className="borderright">  ZipCode</td>{" "}
+                    <td className="borderright"> ZipCode</td>{" "}
                     <td className="w-25 borderleft ">{studentdata.zipcode}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
                     <td className="borderright"> Mobile Number </td>{" "}
-                    <td className="w-25 borderleft "> {studentdata.mobilenumber}</td>{" "}
+                    <td className="w-25 borderleft ">
+                      {" "}
+                      {studentdata.mobilenumber}
+                    </td>{" "}
                     <td className="borderright"> WhatsApp Number</td>{" "}
-                    <td className="w-25 borderleft ">{studentdata.whatsappno}</td>{" "}
+                    <td className="w-25 borderleft ">
+                      {studentdata.whatsappno}
+                    </td>{" "}
                   </tr>
                   <tr>
                     {" "}
                     <td className="borderright"> Email Id </td>{" "}
                     <td className="w-25 borderleft  ">{studentdata.email} </td>{" "}
                     <td className="borderright">Parent Number</td>{" "}
-                    <td className="w-25 borderleft ">{studentdata.whatsappno}</td>{" "}
+                    <td className="w-25 borderleft ">
+                      {studentdata.whatsappno}
+                    </td>{" "}
                   </tr>
                 </tbody>
               </table>
@@ -313,7 +319,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <br />
                   <tr>
                     {" "}
-                    <td  className="borderright">Enquiry Date</td>{" "}
+                    <td className="borderright">Enquiry Date</td>{" "}
                     <td className="w-25 borderleft  ">
                       {" "}
                       {studentdata.enquirydate
@@ -326,51 +332,63 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <tr>
                     {" "}
                     <th className="borderright"> Enquiry Taken By </th>{" "}
-                    <td className="w-25 borderleft ">{studentdata.enquirytakenby} </td>{" "}
+                    <td className="w-25 borderleft ">
+                      {studentdata.enquirytakenby}{" "}
+                    </td>{" "}
                     <td className="borderright"> Lead Source </td>{" "}
-                    <td className="w-25 borderleft ">{studentdata.leadsource}</td>{" "}
+                    <td className="w-25 borderleft ">
+                      {studentdata.leadsource}
+                    </td>{" "}
                   </tr>
                   <tr>
                     {" "}
                     <td className="borderright"> Course Package </td>{" "}
-                    <td className="w-25 borderleft">{studentdata.coursepackage} </td>{" "}
+                    <td className="w-25 borderleft">
+                      {studentdata.coursepackage}{" "}
+                    </td>{" "}
                     <td className="borderright"> Course</td>{" "}
                     <td className="w-25 borderleft">{studentdata.courses}</td>{" "}
                   </tr>
                   <tr>
                     {" "}
                     <td className="borderright"> Admission Status </td>{" "}
-                    <td className="w-25 borderleft ">{studentdata.admissionstatus} </td>{" "}
+                    <td className="w-25 borderleft ">
+                      {studentdata.admissionstatus}{" "}
+                    </td>{" "}
                     <td className="borderright"> Mode of Training</td>{" "}
-                    <td className="w-25 borderleft ">{studentdata.modeoftraining}</td>{" "}
+                    <td className="w-25 borderleft ">
+                      {studentdata.modeoftraining}
+                    </td>{" "}
                   </tr>
                   <tr>
                     {" "}
                     <td className="borderright"> Admission Date </td>
-                    <td  className="w-25 borderleft ">
+                    <td className="w-25 borderleft ">
                       {studentdata.admissiondate
                         ? studentdata.admissiondate.substring(0, 10)
                         : "No Date"}{" "}
                     </td>{" "}
                     <td className="borderright"> Course Start Date</td>{" "}
-                    <td colspan="1" className="w-25 borderleft" > 
+                    <td colspan="1" className="w-25 borderleft">
                       {" "}
                       {studentdata.validitystartdate
                         ? studentdata.validitystartdate.substring(0, 10)
                         : "No Date"}{" "}
                     </td>{" "}
-                    
                   </tr>
                   <tr>
                     {" "}
                     <td className="borderright"> Expected End Date </td>
-                    <td  className="w-25 borderleft ">
+                    <td className="w-25 borderleft ">
                       {studentdata.validityenddate
                         ? studentdata.validityenddate.substring(0, 10)
                         : "No Date"}{" "}
                     </td>{" "}
-                    <td className="borderright" > Reg Number</td> 
-                    <td colspan="1"className="w-25 borderleft " > {studentdata.registrationnumber}</td>
+                    <td className="borderright"> Reg Number</td>
+                    <td colspan="1" className="w-25 borderleft ">
+                      {" "}
+                      {studentdata.registrationnumber}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -417,7 +435,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                         </td>
                       </tr>
                     ))}
-               
                 </tbody>
               </table>
             </div>
@@ -462,8 +479,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </div>
         </div>
       </div>
- 
-     
 
       <div className="main-tc page-break">
         <div className="tc">
@@ -567,8 +582,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 and subject to availability of resources.
               </li>
             </ul>
-            <br/>
-            <strong > 5. Conduct:</strong>
+            <br />
+            <strong> 5. Conduct:</strong>
             <ul>
               {" "}
               <li>
@@ -896,7 +911,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 requests that their information be deleted.
               </li>
             </ul>
-            <br/><br/>
+            <br />
+            <br />
             <strong>7. Modification</strong>
             <br />
             <ul>
@@ -926,19 +942,18 @@ function StudentApplicationPrint() {
   });
 
   return (
-    <div >
+    <div>
       {/* <h1>Your React App</h1> */}
       <div className="w-50  mt-3">
-      <button
-        onClick={handlePrint}
-        // style={{ margin: "30px" }}
-        className="btn btn-primary mb-3 m-auto"
-      
-      >
-        {" "}
-        {/* <LocalPrintshopIcon />{" "} */}
-        Print
-      </button>
+        <button
+          onClick={handlePrint}
+          // style={{ margin: "30px" }}
+          className="btn btn-primary mb-3 m-auto"
+        >
+          {" "}
+          {/* <LocalPrintshopIcon />{" "} */}
+          Print
+        </button>
       </div>
       <PrintableComponent ref={componentRef} />
     </div>

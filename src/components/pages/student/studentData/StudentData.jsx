@@ -122,7 +122,7 @@ const StudentData = () => {
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
@@ -135,7 +135,9 @@ const StudentData = () => {
       });
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3030/userdata");
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/userdata`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -227,7 +229,7 @@ const StudentData = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-////////////
+  ////////////
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -328,12 +330,15 @@ const StudentData = () => {
               </div>
               <hr />
               <div className="row">
-               <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
-               <MenuItem >
-                  <label> From: </label>
-                <input
+               <div className="col-12 col-md-5 col-lg-5 col-xl-5"> 
+               <MenuItem className="pt-3 ">
+                  <div>
+                    <label> From: </label>
+                  </div>
+                  <div> 
+                  <input
                     type="date"
-                    className="w-100 ps-2"
+                    className="w-100"
                     style={{
                       height: "45px",
                       border: "1.5px solid black",
@@ -343,17 +348,18 @@ const StudentData = () => {
                     value={filterCriteria.fromdate}
                     onChange={handleInputChange}
                   />
-                
+                  </div>
                 </MenuItem>
                </div>
-               <div  className="col-6 col-md-6 col-lg-6 col-xl-6">
-               <MenuItem >
-                 <label> To: </label> 
+    
+               <div  className="col-12 col-md-6 col-lg-6 col-xl-6">
+               <MenuItem className="pt-3 ">
+                  <label className="ms-"> To: </label>
                  
-              
+                 <div> 
                  <input
                     type="date"
-                    className="w-100 ps-2"
+                    className="w-100"
                     style={{
                       height: "45px",
                       border: "1.5px solid black",
@@ -363,12 +369,11 @@ const StudentData = () => {
                     value={filterCriteria.todate}
                     onChange={handleInputChange}
                   />
-               
+                 </div>
                 </MenuItem>
                  </div>
               </div>
-              <div className=" row mt-3">
-                <div  className="col-6 col-md-6 col-lg-6 col-xl-6"> 
+              <div className="d-flex w-100 mt-3">
                 <MenuItem>
                   <select
                     id=""
@@ -393,9 +398,7 @@ const StudentData = () => {
                       ))}
                   </select>
                 </MenuItem>
-                </div>
-               <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
-               <MenuItem>
+                <MenuItem>
                   <select
                     id=""
                     className="w-100"
@@ -420,8 +423,7 @@ const StudentData = () => {
                         </option>
                       ))}
                   </select>
-                </MenuItem>
-               </div>
+                </MenuItem>{" "}
               </div>
               <div className="d-flex w-100 mt-3 mb-2">
                 <MenuItem>
@@ -483,7 +485,7 @@ const StudentData = () => {
           </div>
           <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2 ">
             {" "}
-            <select  onChange={handlerecorddata}>
+            <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
@@ -629,7 +631,7 @@ const StudentData = () => {
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            fontSize:"15px"
+                            fontSize: "15px",
                           }}
                         >
                           {item.email}

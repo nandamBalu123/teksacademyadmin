@@ -19,7 +19,7 @@ const StudentDataView = () => {
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
-      .get(`http://localhost:3030/viewstudentdata/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
       .then((response) => {
         // Handle the successful response here
         setstudentdata(response.data[0]); // Update the data state with the fetched data

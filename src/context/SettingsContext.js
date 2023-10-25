@@ -46,7 +46,7 @@ export const SettingsContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getsettings")
+      .get(`${process.env.REACT_APP_API_URL}/getsettings`)
       .then((response) => {
         if (response.data) {
           dispatch({ type: "SET_SETTINGS", payload: response.data });

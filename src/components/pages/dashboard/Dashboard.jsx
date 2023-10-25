@@ -20,7 +20,7 @@ import "./Dashboard.css";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
-
+// require("dotenv").config();
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 const Dashboard = () => {
@@ -33,42 +33,29 @@ const Dashboard = () => {
     fee: false,
     users: false,
   });
-  const today = new Date();
-  let year = today.getFullYear();
-  let month = String(today.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-indexed
-  let day = String(today.getDate()).padStart(2, "0");
-
-  const todaydate = `${year}-${month}-${day}`;
-
-  const oneMonthBack = new Date();
-  oneMonthBack.setMonth(oneMonthBack.getMonth() - 1); // Go back one month
-
-  year = oneMonthBack.getFullYear();
-  month = String(oneMonthBack.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-indexed
-  day = String(oneMonthBack.getDate()).padStart(2, "0");
-
-  const oneMonthBackDate = `${year}-${month}-${day}`;
 
   const [filterCriteria, setFilterCriteria] = useState({
     fromdate: "",
 
     todate: "",
-    todaydate: todaydate,
-    oneMonthBackDate: oneMonthBackDate,
+
+    monthdataCondition: true,
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({ ...filterCriteria, [name]: value });
+    setFilterCriteria({
+      ...filterCriteria,
+      monthdataCondition: false,
+      [name]: value,
+    });
   };
   //// reset filters
   const filterreset = () => {
     setFilterCriteria({
       fromdate: "",
-
       todate: "",
-      todaydate: todaydate,
-      oneMonthBackDate: oneMonthBackDate,
+      monthdataCondition: true,
     });
   };
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -79,9 +66,10 @@ const Dashboard = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((res) => {
         setStudentData(res.data);
         setinitialData(res.data);
@@ -94,7 +82,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/userdata")
+      .get(`${process.env.REACT_APP_API_URL}/userdata`)
       .then((res) => {
         setUsersData(res.data);
         console.log("res user data: ", res.data);
@@ -103,30 +91,28 @@ const Dashboard = () => {
         console.error("Get User Data: ", err);
       });
   }, []);
+
+  console.log("fliter", filterCriteria);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
-      const dateCondition =
-        filterCriteria.todaydate && filterCriteria.oneMonthBackDate
-          ? item.admissiondate >= filterCriteria.oneMonthBackDate &&
-            item.admissiondate <= filterCriteria.todaydate
-          : true;
-      return dateCondition;
-    });
-    setStudentData(filteredResults);
-  }, [initialData]);
-  useEffect(() => {
-    const filteredResults = initialData.filter((item) => {
+      let admissionDate = new Date(item.admissiondate);
+      let today = new Date();
+      let month = String(today.getMonth() + 1).padStart(2, "0");
       const dateCondition =
         filterCriteria.fromdate && filterCriteria.todate
           ? item.admissiondate >= filterCriteria.fromdate &&
             item.admissiondate <= filterCriteria.todate
           : true;
 
-      return dateCondition;
+      const monthdataCondition = filterCriteria.monthdataCondition
+        ? admissionDate.getMonth() === parseInt(month) - 1
+        : true;
+
+      return dateCondition && monthdataCondition;
     });
 
     setStudentData(filteredResults);
-  }, [filterCriteria]);
+  }, [filterCriteria, initialData]);
   <Box
     component="span"
     sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
@@ -277,6 +263,7 @@ const Dashboard = () => {
 
               <MenuItem className="d-flex justify-content-between">
                 {/* <button className="save"> Save</button> */}
+
                 <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear

@@ -35,7 +35,7 @@ const LoginPage = () => {
     if (!errors.email && !errors.password) {
       axios
 
-        .post("http://localhost:3030/adminlogin", values)
+        .post(`${process.env.REACT_APP_API_URL}/adminlogin`, values)
 
         .then((res) => {
           if (res.data.Status === "Success") {

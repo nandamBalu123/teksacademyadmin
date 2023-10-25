@@ -1,6 +1,7 @@
 .main-container {
   /* background-color: brown; */
   width: 100%;
+  overflow: hidden;
 }
 .main-sub-container {
   width: 100%;
