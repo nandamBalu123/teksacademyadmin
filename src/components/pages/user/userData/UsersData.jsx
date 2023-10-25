@@ -19,6 +19,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import "./UsersData.css";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
@@ -35,9 +37,30 @@ import {
 const UsersData = () => {
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
+  const [initialData, setData] = useState([{ name: "" }]);
+  const [filteredData, setFilteredData] = useState(initialData);
+
+  console.log("initialData: ", initialData);
 
   const [deleted, setDeleted] = useState(false);
   const [profiles, setProfiles] = useState([]);
+  // for fillter changing numbers 10,20,30
+  const [itemsPerPage, setrecordsPerPage] = useState(10);
+
+  const handlerecorddata = (e) => {
+    setrecordsPerPage(e.target.value);
+    setPage(1);
+  };
+  const [page, setPage] = useState(1);
+
+  // Calculate the range of items to display on the current page
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const records = filteredData.slice(startIndex, endIndex);
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
 
   const fetchData = async () => {
     try {
@@ -109,10 +132,7 @@ const UsersData = () => {
   // };
 
   // const [userData, setUserData] = useState([]);
-  const [initialData, setData] = useState([{ name: "" }]);
-  const [filteredData, setFilteredData] = useState(initialData);
-
-  console.log("initialData: ", initialData);
+  
   // const [filteredData, setFilteredData] = useState(userData);
   const [error, setError] = useState(null);
   // const [open, setOpen] = useState(false);
@@ -223,6 +243,9 @@ const UsersData = () => {
   };
   let initialDataCount = initialData.length;
   let recordCount = filteredData.length;
+  // for filter change numbers 10,25,50
+
+ 
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
@@ -252,14 +275,19 @@ const UsersData = () => {
             />
             <hr className="w-50" />
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2">
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 mt-4">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1">  
-          
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 mt-3">  
+          <select  onChange={handlerecorddata}>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+            </select>
           
            </div>
           <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
@@ -444,8 +472,8 @@ const UsersData = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {filteredData &&
-                      filteredData.map((user) => (
+                    {records &&
+                      records.map((user) => (
                         <StyledTableRow>
                           <StyledTableCell align="center" className="p-0 m-0 border border1 ">
                             {user.fullname}
@@ -509,9 +537,21 @@ const UsersData = () => {
                 </Table>
               </TableContainer>
             </Paper>
-          </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(filteredData.length / itemsPerPage)}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Stack>
         </div>
+          </div>
+          
+        </div>
+        
       </div>
+      
     </div>
   );
 };
