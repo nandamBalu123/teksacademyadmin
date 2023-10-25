@@ -21,8 +21,8 @@ import Paper from "@mui/material/Paper";
 import { blue } from "@mui/material/colors";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 // import { blue } from "@mui/material/colors";
 // import { useDropzone } from 'react-dropzone';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
@@ -78,7 +78,7 @@ export default function RegistrationForm() {
   const [grandtotal, setGrandtotal] = useState(null);
   const [finaltotal, setfinaltotal] = useState(null);
   const [admissionremarks, setadmissionremarks] = useState("");
-  const [assets, setassets] = useState("");
+  const [assets, setassets] = useState([]);
   const [initialpayment, setinitialamount] = useState([]);
   const [dueamount, setdueamount] = useState(null);
   const [totalinstallments, settotalinstallments] = useState(0);
@@ -94,6 +94,16 @@ export default function RegistrationForm() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
+  const handleAssetChange = (event) => {
+    const assetName = event.target.name;
+    if (event.target.checked) {
+      // Add the selected asset to the array
+      setassets([...assets, assetName]);
+    } else {
+      // Remove the asset from the array if it's unchecked
+      setassets(assets.filter((asset) => asset !== assetName));
+    }
+  };
   const handleSelectChange = (e) => {
     const selectedValue = e.target.value;
     if (selectedValue === "others") {
@@ -1694,11 +1704,8 @@ export default function RegistrationForm() {
 
             <StepContent>
               <form className="form ">
-                <TableContainer
-                  component={Paper}
-                  className="billingtable "
-                >
-                  <Table sx={{ minWidth: 600 }} aria-label="spanning table"   >
+                <TableContainer component={Paper} className="billingtable ">
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
                     <TableHead>
                       <TableCell className="fs-6 py-3" align="center">
                         Gross Total
@@ -1734,11 +1741,8 @@ export default function RegistrationForm() {
                   </tbody>
                 </table> */}
 
-                <TableContainer
-                  component={Paper}
-                  className="billingtable mt-4"
-                >
-                  <Table sx={{ minWidth: 700 }} aria-label="spanning table" >
+                <TableContainer component={Paper} className="billingtable mt-4">
+                  <Table sx={{ minWidth: 700 }} aria-label="spanning table">
                     <TableHead>
                       <TableRow className="border border1">
                         <TableCell align="left" className="fs-6 py-3">
@@ -1944,10 +1948,58 @@ export default function RegistrationForm() {
                       borderRadius: "5px",
                     }}
                   /> */}
-                 <div className="col-9 col-md-5">  <FormControlLabel control={<Checkbox />} label="Bag" />
-                 <FormControlLabel  control={<Checkbox />} label="Laptap" /> 
-                 <FormControlLabel control={<Checkbox />} label="LMS" />  
-                 <FormControlLabel control={<Checkbox />} label="Course Meterial" /> </div>
+                  {/* <div className="col-9 col-md-5">
+                    {" "}
+                    <FormControlLabel control={<Checkbox />} label="Bag" />
+                    <FormControlLabel control={<Checkbox />} label="Laptap" />
+                    <FormControlLabel control={<Checkbox />} label="LMS" />
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Course Meterial"
+                    />{" "}
+                  </div> */}
+                  <div className="col-9 col-md-5">
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="bag"
+                          checked={assets.includes("bag")}
+                          onChange={handleAssetChange}
+                        />
+                      }
+                      label="Bag"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="laptop"
+                          checked={assets.includes("laptop")}
+                          onChange={handleAssetChange}
+                        />
+                      }
+                      label="Laptop"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="lms"
+                          checked={assets.includes("lms")}
+                          onChange={handleAssetChange}
+                        />
+                      }
+                      label="LMS"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="courseMaterial"
+                          checked={assets.includes("courseMaterial")}
+                          onChange={handleAssetChange}
+                        />
+                      }
+                      label="Course Material"
+                    />
+                  </div>
                   {/* <select
                     className="col-9 col-md-5"
                     id=""
