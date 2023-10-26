@@ -16,7 +16,6 @@ export const StudentsReducer = (state, action) => {
       return state;
   }
 };
-
 export const StudentsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(StudentsReducer, {
     students: null,

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useUsersContext } from "../../../../hooks/useUsersContext";
-import { useAuthContext } from "../../../../hooks/useAuthContext";
-import { NavLink, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -10,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Menu from "@mui/material/Menu";
@@ -64,7 +63,9 @@ const UsersData = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/getuserroles`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/getuserroles`
+      );
 
       console.log("Response status:", response.status); // Log response status
 
@@ -282,8 +283,8 @@ const UsersData = () => {
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-2">  
-          <select  onChange={handlerecorddata}>
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-2">
+            <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
@@ -379,7 +380,7 @@ const UsersData = () => {
                   style={{
                     height: "45px",
                     width: "75%",
-                 
+
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}

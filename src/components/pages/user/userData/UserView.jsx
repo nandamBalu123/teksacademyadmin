@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useAuthContext } from "../../../../hooks/useAuthContext";
-import { NavLink, useParams, useNavigate } from "react-router-dom";
+// import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { useParams } from "react-router-dom";
 import "./UserView.css";
 import axios from "axios";
 const UserView = () => {
   const [singleUser, setUser] = useState("");
 
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
   const { id } = useParams("");
   useEffect(() => {
     // Make a GET request to your backend API endpoint
@@ -22,14 +22,14 @@ const UserView = () => {
         // Handle any errors that occur during the request
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [id]);
 
-  const backgroundImageUrl = "url(../../../../images/userviewlogo.jpg)";
-  const divStyle = {
-    backgroundImage: backgroundImageUrl,
-    backgroundSize: "cover", // Adjust as needed
-    backgroundRepeat: "no-repeat", // Adjust as needed
-  };
+  // const backgroundImageUrl = "url(../../../../images/userviewlogo.jpg)";
+  // const divStyle = {
+  //   backgroundImage: backgroundImageUrl,
+  //   backgroundSize: "cover", // Adjust as needed
+  //   backgroundRepeat: "no-repeat", // Adjust as needed
+  // };
 
   return (
     <div className="container">
@@ -38,7 +38,7 @@ const UserView = () => {
           <img
             className="pic"
             src="https://wallpapers.com/images/high/pretty-profile-pictures-k1qebyviiyl0wx0x.webp"
-            alt="photo"
+            alt="pic"
           />
         </div>
         <div className="row">
