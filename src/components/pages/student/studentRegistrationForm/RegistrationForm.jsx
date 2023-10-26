@@ -1210,7 +1210,7 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Enquiry Date<span className="text-danger"> *</span>&nbsp;:
-                  </label>
+                  </label>&nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5"
@@ -1455,7 +1455,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Admission Date <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>
+                  </label>&nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5 "
@@ -1473,7 +1473,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Registration No <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>{" "}
+                  </label>&nbsp;
                   &nbsp;&nbsp;&nbsp;
                   {registrationnumber}
                 </div>
@@ -1482,7 +1482,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Validity Start Date <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>
+                  </label>&nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5 "
@@ -1501,7 +1501,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Validity End Date <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>
+                  </label>&nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5 "
@@ -1634,8 +1634,9 @@ export default function RegistrationForm() {
                 <br />
                 <br />
 
-                {feedetails.length > 0 && (
-                  <table class="table w-75 m-auto border border-1 ">
+
+ {/* {feedetails.length > 0 && (
+                  <table className="table w-75 m-auto border border-1 ">
                     <thead>
                       <tr>
                         <th className="border border-1 ">Fee Type</th>
@@ -1669,7 +1670,57 @@ export default function RegistrationForm() {
                         ))}
                     </tbody>
                   </table>
-                )}
+                )} */}
+                <TableContainer component={Paper} > 
+                <Table sx={{ minWidth: 600 }} aria-label="spanning table" > 
+                <TableHead> 
+                  <TableCell className="fs-6 py-3" align="center"> 
+                   Fee Type
+                  </TableCell>
+                  <TableCell className="fs-6 py-3" align="center"> 
+                   Amount
+                  </TableCell>
+                  <TableCell className="fs-6 py-3" align="center"> 
+                  Discount
+                  </TableCell>
+                  <TableCell className="fs-6 py-3" align="center"> 
+                   Tax Amount
+                  </TableCell>
+                  <TableCell className="fs-6 py-3" align="center"> 
+                   Total Amount
+                  </TableCell>
+                  <TableCell className="fs-6 py-3" align="center"> 
+                   Action
+                  </TableCell>
+                </TableHead>
+                <TableBody> 
+                  {feedetails.length > 0 &&
+                  feedetails.map((item)=>(
+                  <TableRow key={item.id}> 
+                  <TableCell align="center"> 
+                  {item.feetype}
+                  </TableCell>
+                  <TableCell align="center"> 
+                  {item.amount}
+                  </TableCell>
+                  <TableCell align="center"> 
+                  {item.discount}
+                  </TableCell>
+                  <TableCell align="center"> 
+                  {parseFloat(item.taxamount.toFixed(2))}
+                  </TableCell>
+                  <TableCell align="center"> 
+                  {item.totalamount}
+                  </TableCell>
+                  <TableCell onClick={() => handleFeeDelete(item.id)} align="center"> 
+                  <DeleteIcon />
+                  </TableCell>
+                  </TableRow>
+                  )) }
+                </TableBody>
+
+                </Table>
+                </TableContainer>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1724,24 +1775,7 @@ export default function RegistrationForm() {
                     </TableBody>
                   </Table>
                 </TableContainer>
-                {/* <table className="table w-75 ms-5">
-                  <thead>
-                    <tr>
-                      <th className="border border-1 ">Gross Total</th>
-                      <th className="border border-1">Total Discount</th>
-                      <th className="border border-1">Total Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-1">{grosstotal}</td>
-                      <td className="border border-1">{totaldiscount}</td>
-                      <td className="border border-1">{finaltotal}</td>
-                    </tr>
-                  </tbody>
-                </table> */}
-
-                <TableContainer component={Paper} className="billingtable mt-4">
+            <TableContainer component={Paper} className="billingtable mt-4">
                   <Table sx={{ minWidth: 700 }} aria-label="spanning table">
                     <TableHead>
                       <TableRow className="border border1">
@@ -1815,69 +1849,7 @@ export default function RegistrationForm() {
                   </Table>
                 </TableContainer>
 
-                {/* <table class="table billing  mt-3">
-                  <thead>
-                    <tr>
-                      <th className="border border-1">Fee Type</th>
-                      <th className="border border-1 ">Fee (excl Of GST) </th>
-                      <th className="border border-1">tax</th>
-                      <th className="border border-1">Fee (incl Of GST)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {feedetailsbilling.length > 0 &&
-                      feedetailsbilling.map((item) => {
-                        if (item.feetype != "Material Fee") {
-                          return (
-                            <tr key={item.id}>
-                              <td className="border border-1">
-                                {item.feetype}
-                              </td>
-                              <td className="border border-1">
-                                {parseFloat(item.feewithouttax.toFixed(2))}
-                              </td>
-                              <td className="border border-1">
-                                {parseFloat(item.feetax.toFixed(2))}
-                              </td>
-                              <td className="border border-1">
-                                {parseFloat(item.feewithtax.toFixed(2))}
-                              </td>
-                            </tr>
-                          );
-                        }
-                      })}
-                    {feedetailsbilling.length > 0 && (
-                      <tr>
-                        <td className="border border-1">
-                          {" "}
-                          <strong> Sub Total</strong>
-                        </td>
-                        <td className="border border-1 ">
-                          <strong>
-                            {" "}
-                            {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
-                          </strong>
-                        </td>
-                        <td className="border border-1 ">
-                          <strong> {parseFloat(totaltax.toFixed(2))}</strong>
-                        </td>
-                        <td className="border border-1 ">
-                          <strong> {parseFloat(grandtotal.toFixed(2))}</strong>
-                        </td>
-                      </tr>
-                    )}
-                    <tr>
-                      <td colspan="2" className="empty"></td>
-                      <td className="empty"> Material Fee </td>
-                      <td> {materialfee} </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" className="empty"></td>
-                      <td className="empty"> Grand Total</td>
-                      <td> {finaltotal} </td>
-                    </tr>
-                  </tbody>
-                </table> */}
+                
 
                 <br />
               </form>

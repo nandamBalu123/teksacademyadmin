@@ -106,7 +106,7 @@ const Certificate = () => {
             />
             <hr className="w-75" />
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3">
           <h6>
             {" "}
             {recordCount}/{initialDataCount}
@@ -284,7 +284,7 @@ const Certificate = () => {
             <Pagination
               count={Math.ceil(students.length / itemsPerPage)}
               onChange={handlePageChange}
-              color="primary"
+              color="info"
             />
           </Stack>
         </div>

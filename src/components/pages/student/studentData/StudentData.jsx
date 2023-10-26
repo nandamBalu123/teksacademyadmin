@@ -699,12 +699,12 @@ const StudentData = () => {
           </TableContainer>
         </Paper>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
           <Stack spacing={2}>
             <Pagination
               count={Math.ceil(filteredData.length / itemsPerPage)}
               onChange={handlePageChange}
-              color="primary"
+            color="info"
             />
           </Stack>
         </div>
