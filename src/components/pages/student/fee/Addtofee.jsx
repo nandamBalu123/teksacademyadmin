@@ -35,7 +35,7 @@ const Addtofee = () => {
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
-      .get(`http://localhost:3030/viewstudentdata/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
       .then((response) => {
         // Handle the successful response here
         setstudentdata(response.data[0]); // Update the data state with the fetched data
@@ -85,7 +85,7 @@ const Addtofee = () => {
     console.log("installments", installments);
     console.log("updatedData", updatedData);
     axios
-      .put(`http://localhost:3030/addfee/${id}`, updatedData)
+      .put(`${process.env.REACT_APP_API_URL}/addfee/${id}`, updatedData)
 
       .then((res) => {
         if (res.data.updated) {
@@ -219,7 +219,8 @@ const Addtofee = () => {
 
             {/* <TextField id="outlined-basic"  label=" Course date" variant="outlined"  className="textfield" type="date"/> */}
           </div>
-          <h4 className="my-3"> Initial Amount</h4><hr></hr>
+          <h4 className="my-3"> Initial Amount</h4>
+          <hr></hr>
           {initialpayment.map((payment, index) => (
             <div className="row" key={index}>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
@@ -230,7 +231,10 @@ const Addtofee = () => {
                   value={payment.initialamount}
                   onChange={(e) => handleInputChange(e, index, "initialamount")}
                 />
-                <label> Initial Amount <span className="text-danger"> * </span></label>
+                <label>
+                  {" "}
+                  Initial Amount <span className="text-danger"> * </span>
+                </label>
               </div>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
                 <input
@@ -240,7 +244,10 @@ const Addtofee = () => {
                   value={payment.paiddate}
                   onChange={(e) => handleInputChange(e, index, "paiddate")}
                 />
-                <label> Paid Date <span className="text-danger"> * </span></label>
+                <label>
+                  {" "}
+                  Paid Date <span className="text-danger"> * </span>
+                </label>
               </div>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup-select">
                 <select
@@ -255,7 +262,10 @@ const Addtofee = () => {
                   <option value="backtransfor"> Bank Transfor</option>
                   <option value="cheque"> CHEQUE</option>
                 </select>
-                <label> Mode of Payments <span className="text-danger"> * </span></label>
+                <label>
+                  {" "}
+                  Mode of Payments <span className="text-danger"> * </span>
+                </label>
               </div>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
                 <input
@@ -265,7 +275,10 @@ const Addtofee = () => {
                   value={payment.transactionID}
                   onChange={(e) => handleInputChange(e, index, "transactionID")}
                 />
-                <label> Transaction Id <span className="text-danger"> * </span></label>
+                <label>
+                  {" "}
+                  Transaction Id <span className="text-danger"> * </span>
+                </label>
               </div>
             </div>
             // <div key={index}>

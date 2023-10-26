@@ -25,7 +25,7 @@ const FeeView = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3030/viewstudentdata/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
       .then((response) => {
         // Handle the successful response here
         setstudentdata(response.data[0]); // Update the data state with the fetched data
@@ -98,7 +98,10 @@ const FeeView = () => {
       };
       console.log("updatedData", updatedData);
       axios
-        .put(`http://localhost:3030/feeinstallments/${id}`, updatedData)
+        .put(
+          `${process.env.REACT_APP_API_URL}/feeinstallments/${id}`,
+          updatedData
+        )
 
         .then((res) => {
           if (res.data.updated) {
@@ -151,7 +154,7 @@ const FeeView = () => {
       totalinstallments,
     };
     axios
-      .put(`http://localhost:3030/addnewinstallments/${id}`, updatedData)
+      .put(`${process.env.REACT_APP_API_URL}/addnewinstallments/${id}`, updatedData)
       .then((res) => {
         if (res.data.updated) {
           alert("Installment  Added");
@@ -326,12 +329,14 @@ const FeeView = () => {
           </Table>
         </TableContainer>
         <div className="row">
-          <span className="fs-3  col-12 col-md-9 col-lg-9 col-xl-9"> Paid Installments</span>
+          <span className="fs-3  col-12 col-md-9 col-lg-9 col-xl-9">
+            {" "}
+            Paid Installments
+          </span>
           <button
-             className="btn btn-warning col-12 col-md-2 col-lg-2 col-xl-2 my-2"
+            className="btn btn-warning col-12 col-md-2 col-lg-2 col-xl-2 my-2"
             onClick={addInstallment}
             // style={{ height: "40px", margin: "20px" }}
-          
           >
             Add Installment
           </button>
@@ -347,15 +352,12 @@ const FeeView = () => {
                   Paid Amount
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-          
                   Paid Date
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-            
                   Mode of Payment
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-        
                   Transition ID
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">

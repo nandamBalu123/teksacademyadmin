@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useUsersContext } from "../../../../hooks/useUsersContext";
-import { useAuthContext } from "../../../../hooks/useAuthContext";
-import { NavLink, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -10,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Menu from "@mui/material/Menu";
@@ -64,7 +63,9 @@ const UsersData = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3030/getuserroles");
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/getuserroles`
+      );
 
       console.log("Response status:", response.status); // Log response status
 
@@ -100,7 +101,7 @@ const UsersData = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3030/deleteuser/${id}`)
+      .delete(`${process.env.REACT_APP_API_URL}/deleteuser/${id}`)
       .then(() => setDeleted(!deleted))
       .catch((error) => {
         console.log("Error: ", error);
@@ -132,7 +133,7 @@ const UsersData = () => {
   // };
 
   // const [userData, setUserData] = useState([]);
-  
+
   // const [filteredData, setFilteredData] = useState(userData);
   const [error, setError] = useState(null);
   // const [open, setOpen] = useState(false);
@@ -151,7 +152,9 @@ const UsersData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3030/userdata");
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/userdata`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -245,7 +248,6 @@ const UsersData = () => {
   let recordCount = filteredData.length;
   // for filter change numbers 10,25,50
 
- 
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
@@ -281,15 +283,14 @@ const UsersData = () => {
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-2">  
-          <select  onChange={handlerecorddata}>
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-2">
+            <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="75">75</option>
             </select>
-          
-           </div>
+          </div>
           <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
             <Button
               id="demo-positioned-button"
@@ -379,7 +380,7 @@ const UsersData = () => {
                   style={{
                     height: "45px",
                     width: "75%",
-                 
+
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}
@@ -474,40 +475,63 @@ const UsersData = () => {
                     {records &&
                       records.map((user) => (
                         <StyledTableRow>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.fullname}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
-                          <span
-                          style={{
-                            width: "200px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            fontSize:"15px"
-                          }}
-                        >
-                         {user.email}
-                        </span>
-                           
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
+                            <span
+                              style={{
+                                width: "200px",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                              }}
+                            >
+                              {user.email}
+                            </span>
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {" "}
                             {user.phonenumber}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.designation}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.department}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.reportto}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {user.profile}
                           </StyledTableCell>
-                          <StyledTableCell align="center" className="p-0 m-0 border border1 ">
+                          <StyledTableCell
+                            align="center"
+                            className="p-0 m-0 border border1 "
+                          >
                             {" "}
                             {user.branch}
                           </StyledTableCell>
@@ -546,11 +570,8 @@ const UsersData = () => {
           </Stack>
         </div>
           </div>
-          
         </div>
-        
       </div>
-      
     </div>
   );
 };

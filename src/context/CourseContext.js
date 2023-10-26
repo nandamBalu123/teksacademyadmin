@@ -24,7 +24,7 @@ export const CourseContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getcourses")
+      .get(`${process.env.REACT_APP_API_URL}/getcourses`)
       .then((response) => {
         if (response.data) {
           dispatch({ type: "SET_COURSES", payload: response.data });

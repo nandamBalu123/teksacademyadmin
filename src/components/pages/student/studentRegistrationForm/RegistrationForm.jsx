@@ -28,7 +28,23 @@ import Checkbox from "@mui/material/Checkbox";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
+const Popup = ({ show, onClose, children }) => {
+  return (
+    <div className={`popup ${show ? "show" : ""}`}>
+      <div className="popup-content">
+        {children}
+        <button className="close-button" onClick={onClose}>
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
 export default function RegistrationForm() {
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
+  const openPopup = () => setPopupOpen(true);
+  const closePopup = () => setPopupOpen(false);
   const { user } = useAuthContext();
   const { branches } = useBranchContext();
   const { leadsources } = useLeadSourceContext();
@@ -534,7 +550,7 @@ export default function RegistrationForm() {
     try {
       // Make the POST request
       const response = await axios.post(
-        "http://localhost:3030/student_form",
+        `${process.env.REACT_APP_API_URL}/student_form`,
         studentRegistrationdata
       );
       const id = response.data.insertId;
@@ -565,7 +581,9 @@ export default function RegistrationForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3030/userdata");
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/userdata`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -589,7 +607,7 @@ export default function RegistrationForm() {
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         // Handle the successful response here
         setStudentData(response.data); // Update the data state with the fetched data
@@ -1159,7 +1177,7 @@ export default function RegistrationForm() {
                     src="your-image-url.jpg"
                     alt="Submit"
                     class="image-input"
-                    
+
                   /> */}
                   <input
                     type="file"
@@ -1247,11 +1265,6 @@ export default function RegistrationForm() {
                       filteredcounsellor.map((user, index) => (
                         <option value={user.fullname}> {user.fullname}</option>
                       ))}
-                    {/* <option value="">--select--</option>
-                    <option value="Bhavitha">Bhavitha</option>
-                    <option value="keerty">keerty</option>
-                    <option value="harsha">harsha</option>
-                    <option value="Bhavitha">Bhavitha</option> */}
                   </select>
                 </div>
 
@@ -1395,7 +1408,7 @@ export default function RegistrationForm() {
                           {item.branch_name}
                         </option>
                       ))}
-                    {/* 
+                    {/*
                     <option value="hitechcity">Hitech-city</option>
                     <option value="ameerpet">Ameerpet</option>
                     <option value="dilsukhnagar">Dilsukhnagar</option>
@@ -1994,15 +2007,185 @@ export default function RegistrationForm() {
               </form>
 
               <Box sx={{ mb: 2, mt: 2 }}>
+                {/* <div> */}
                 <Button
+                  className="bg-primary"
+                  variant="contained"
+                  onClick={openPopup}
+                  sx={{ mt: 1, mr: 1 }}
+                >
+                  Preview
+                </Button>
+                {/* <button onClick={openPopup}>Preview</button> */}
+                <Popup show={isPopupOpen} onClose={closePopup}>
+                  <div className="studentdataview ">
+                    <div className="bg">
+                      <img
+                        className="photo"
+                        src="https://wallpapers.com/images/high/pretty-profile-pictures-k1qebyviiyl0wx0x.webp"
+                        alt="photo"
+                      />
+                    </div>
+
+                    <div className="row">
+                      <div className="col-6">
+                        <h6> Basic Details</h6> <hr className="w-50" />
+                        <p> Name : {name}</p>
+                        <p> EMail: {email}</p>
+                        <p> Mobile Number: {mobilenumber}</p>
+                        <p></p>
+                      </div>
+                      <div className="col-6 text-end">
+                        <h6> Education Details</h6>
+                        <hr className="w-50  end" />{" "}
+                        <p> Education Type: {educationtype}</p>
+                        <p>Marks: {marks} </p>
+                        <p> Academic Year: {academicyear}</p>
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-4">
+                        <h6> Student Details</h6> <hr className="w-50" />
+                        <p> Parent's Name : {parentsname}</p>
+                        <p> Birth Date: {birthdate}</p>
+                        <p> Gender: {gender}</p>
+                        <p> Marital Status: {maritalstatus}</p>
+                        <p> College: {college}</p>
+                      </div>
+                      <div className="col-4  text-start ">
+                        <h6> Student Contact Details</h6>
+                        <hr className="w-50  start " />
+                        <p> Whatsapp Number: {whatsappno}</p>
+                        <p> State: {state} </p>
+                        <p>Area: {area} </p>
+                        <p> Native Place: {native}</p>
+                        <p> Zipcode: {zipcode}</p>
+                      </div>
+                      <div className="col-4 text-end">
+                        <h6> Enquiry Details</h6> <hr className="w-50 end" />
+                        <p> Enquiry Date : {enquirydate}</p>
+                        <p> Enquiry Taken By: {enquirytakenby}</p>
+                        <p> Course Package: {coursepackage}</p>
+                        <p> Course: {courses}</p>
+                        <p>Lead Source: {leadsource} </p>
+                      </div>
+                    </div>
+                    <h5 className="text-center mt-1">Admission Details </h5>
+                    <hr className="w-75 hr" />
+                    <div className="row">
+                      <div className="col-4">
+                        <p> Branch : {branch}</p>
+                        <p> Mode of Traning: {modeoftraining}</p>
+                      </div>
+                      <div className="col-4 text-start">
+                        <p>
+                          {" "}
+                          Validity :{validitystartdate} to {validityenddate}
+                        </p>
+                        <p> Registration No: {registrationnumber}</p>
+                      </div>
+                      <div className="col-4 text-end">
+                        {" "}
+                        <p> Admission Date: {admissiondate} </p>
+                        <p> Admission Status: {admissionstatus} </p>
+                      </div>
+                    </div>
+
+                    <TableContainer component={Paper} className="my-4">
+                      <Table
+                        sx={{ minWidth: 650 }}
+                        size="large"
+                        aria-label="a dense table"
+                      >
+                        <TableHead>
+                          <TableRow>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Fee Type{" "}
+                            </TableCell>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Amount{" "}
+                            </TableCell>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Discount
+                            </TableCell>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Tax Amount (Inclusive of GST)
+                            </TableCell>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Total Amount
+                            </TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {feedetails &&
+                            feedetails.map((item, index) => (
+                              <TableRow
+                                sx={{
+                                  "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                  },
+                                }}
+                                key={index}
+                              >
+                                <TableCell className="text-center border border-2">
+                                  {" "}
+                                  {item.feetype}
+                                </TableCell>
+                                <TableCell className="text-center border border-2">
+                                  {" "}
+                                  {item.amount}
+                                </TableCell>
+                                <TableCell className="text-center border border-2">
+                                  {item.discount}
+                                </TableCell>
+                                <TableCell className="text-center border border-2">
+                                  {parseFloat(item.taxamount).toFixed(2)}
+                                </TableCell>
+                                <TableCell className="text-center border border-2">
+                                  {item.totalamount}
+                                  <br />
+                                  {item.feetype === "fee" ? (
+                                    <>
+                                      Materialfee:{materialfee}
+                                      <br /> CourseFee:
+                                      {item.totalamount - materialfee}
+                                    </>
+                                  ) : (
+                                    <span></span>
+                                  )}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  </div>
+
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleSubmit}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Submit
+                  </Button>
+                </Popup>
+                {/* </div> */}
+                {/* <Button
                   className="bg-primary"
                   variant="contained"
                   onClick={handleSubmit}
                   sx={{ mt: 1, mr: 1 }}
                 >
-                  {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                  
                   Submit
-                </Button>
+                </Button> */}
                 <Button
                   className="bg-primary"
                   variant="contained"
@@ -2028,3 +2211,36 @@ export default function RegistrationForm() {
     </div>
   );
 }
+
+// import "./RegistrationForm.css";
+// // import Popup from './Popup';
+// const Popup = ({ show, onClose, children }) => {
+//   return (
+//     <div className={`popup ${show ? "show" : ""}`}>
+//       <div className="popup-content">
+//         {children}
+//         <button className="close-button" onClick={onClose}>
+//           Close
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+// function RegistrationForm() {
+//   const [isPopupOpen, setPopupOpen] = useState(false);
+
+//   const openPopup = () => setPopupOpen(true);
+//   const closePopup = () => setPopupOpen(false);
+
+//   return (
+//     <div>
+//       <button onClick={openPopup}>Open Popup</button>
+//       <Popup show={isPopupOpen} onClose={closePopup}>
+//         <h2>My Popup Content</h2>
+//         <p>This is the content of the popup.</p>
+//       </Popup>
+//     </div>
+//   );
+// }
+
+// export default RegistrationForm;

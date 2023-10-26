@@ -1,4 +1,4 @@
-*{ 
+* {
   margin: 0;
   padding: 0;
 }
@@ -19,8 +19,7 @@
 }
 .create-button {
   display: flex;
-  justify-content: end;
-  
+  flex: end;
 }
 .selectt {
   margin-left: 13px;
@@ -54,22 +53,19 @@
   }
 }
 .error {
- color: red;
- margin:  0;
-
-
+  color: red;
+  margin: 0;
 }
-.createuser{ 
+.createuser {
   background-color: #ff5700;
   color: #fff;
 }
 
-.userlabel{ 
+.userlabel {
   width: 33%;
 }
 input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button{ 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

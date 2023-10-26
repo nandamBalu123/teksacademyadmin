@@ -52,7 +52,7 @@ const Feefollowup = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         setData(response.data);
 
@@ -192,7 +192,7 @@ const Feefollowup = () => {
               border: "none",
               outline: "none",
               borderTop: "none",
-            
+
               background: "none",
               borderRadius: "5px",
             }}

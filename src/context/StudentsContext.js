@@ -16,7 +16,6 @@ export const StudentsReducer = (state, action) => {
       return state;
   }
 };
-
 export const StudentsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(StudentsReducer, {
     students: null,
@@ -24,7 +23,7 @@ export const StudentsContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         if (response.data) {
           dispatch({ type: "SET_STUDENTS", payload: response.data });

@@ -20,7 +20,7 @@ import "./Dashboard.css";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
-
+// require("dotenv").config();
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 const Dashboard = () => {
@@ -69,7 +69,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((res) => {
         setStudentData(res.data);
         setinitialData(res.data);
@@ -82,7 +82,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3030/userdata")
+      .get(`${process.env.REACT_APP_API_URL}/userdata`)
       .then((res) => {
         setUsersData(res.data);
         console.log("res user data: ", res.data);
@@ -91,7 +91,7 @@ const Dashboard = () => {
         console.error("Get User Data: ", err);
       });
   }, []);
-  
+
   console.log("fliter", filterCriteria);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {

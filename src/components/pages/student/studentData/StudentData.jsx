@@ -122,7 +122,7 @@ const StudentData = () => {
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
-      .get("http://localhost:3030/getstudent_data")
+      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
@@ -135,7 +135,9 @@ const StudentData = () => {
       });
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3030/userdata");
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/userdata`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -227,7 +229,7 @@ const StudentData = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-////////////
+  ////////////
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -375,11 +377,11 @@ const StudentData = () => {
                 <MenuItem>
                   <select
                     id=""
+                    className="w-100 pe-5"
                     placeholder="Filter Branch"
                     style={{
                       height: "45px",
-                      paddingLeft: "10px",
-                      paddingRight: "115px",
+                   
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -399,11 +401,12 @@ const StudentData = () => {
                 <MenuItem>
                   <select
                     id=""
+                    className="w-100"
                     placeholder="Lead Source"
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "115px",
+                    
 
                       border: "1.5px solid black",
                       borderRadius: "5px",
@@ -430,7 +433,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "102px",
+                      paddingRight: "90px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -482,7 +485,7 @@ const StudentData = () => {
           </div>
           <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2 ">
             {" "}
-            <select  onChange={handlerecorddata}>
+            <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
@@ -628,7 +631,7 @@ const StudentData = () => {
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            fontSize:"15px"
+                            fontSize: "15px",
                           }}
                         >
                           {item.email}
