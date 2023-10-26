@@ -110,6 +110,9 @@ export default function RegistrationForm() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
+  const [certificate_status, setcertificate_status] = useState([
+    { courseStartDate: "", courseEndDate: "", certificateStatus: "" },
+  ]);
   const handleAssetChange = (event) => {
     const assetName = event.target.name;
     if (event.target.checked) {
@@ -380,9 +383,15 @@ export default function RegistrationForm() {
       alert("please enter zipcode");
       return;
     }
+
     if (!whatsappno) {
-      alert("please enter WhatsApp Number");
+      alert("please enter whatsappno");
       return;
+    } else {
+      if (whatsappno.length != 10) {
+        alert("incorrect whatsappno ");
+        return;
+      }
     }
     handleNext();
   };
@@ -544,6 +553,7 @@ export default function RegistrationForm() {
       totalpaidamount,
       selectedFile,
       user_id,
+      certificate_status,
     };
     // studentRegistrationdata.append('file', selectedFile)
     console.log("studentRegistration", studentRegistrationdata);
@@ -554,7 +564,7 @@ export default function RegistrationForm() {
         studentRegistrationdata
       );
       const id = response.data.insertId;
-      navigate(`/addtofee/${id}`);
+      // navigate(`/addtofee/${id}`);
 
       // Handle a successful response here
       console.log("Responsee:", response.data.insertId);
@@ -2205,15 +2215,14 @@ export default function RegistrationForm() {
                   </Button>
                 </Popup>
                 {/* </div> */}
-                {/* <Button
+                <Button
                   className="bg-primary"
                   variant="contained"
                   onClick={handleSubmit}
                   sx={{ mt: 1, mr: 1 }}
                 >
-                  
                   Submit
-                </Button> */}
+                </Button>
                 <Button
                   className="bg-primary"
                   variant="contained"

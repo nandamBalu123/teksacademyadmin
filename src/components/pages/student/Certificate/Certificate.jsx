@@ -40,7 +40,7 @@ const Certificate = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-////////////
+  ////////////
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -110,19 +110,19 @@ const Certificate = () => {
             <hr className="w-75" />
           </div>
           <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
-          <h6>
-            {" "}
-            {recordCount}/{initialDataCount}
-          </h6>
-        </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-3">  
-        <select  onChange={handlerecorddata}>
+            <h6>
+              {" "}
+              {recordCount}/{initialDataCount}
+            </h6>
+          </div>
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-3">
+            <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="75">75</option>
             </select>
-        </div>
+          </div>
 
           <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
             <Button
@@ -187,7 +187,7 @@ const Certificate = () => {
                   required
                   style={{
                     height: "45px",
-                  
+
                     paddingRight: "50px",
                     border: "1.5px solid black",
                     borderRadius: "5px",
@@ -247,7 +247,7 @@ const Certificate = () => {
               </TableHead>
               <TableBody>
                 {records &&
-                records.map((student, index) => (
+                  records.map((student, index) => (
                     <TableRow>
                       <TableCell className="border border 1 ">
                         {index + 1}
@@ -266,6 +266,14 @@ const Certificate = () => {
                           type="date"
                           name="startdate"
                           className="startdate"
+                          // onChange={(e) => {
+                          //   const updatedInstallment = {
+                          //     ...student,
+                          //     duedate: e.target.value,
+                          //   };
+                          //   handleInstallmentUpdate(index, updatedInstallment);
+                          // }}
+                          // value={installment.duedate}
                         />
                       </TableCell>
                       <TableCell className="border border 1 ">
@@ -282,7 +290,10 @@ const Certificate = () => {
             </Table>
           </TableContainer>
         </Paper>
-        <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
+        <div
+          style={{ display: "flex", justifyContent: "center" }}
+          className="mt-3"
+        >
           <Stack spacing={2}>
             <Pagination
               count={Math.ceil(students.length / itemsPerPage)}
