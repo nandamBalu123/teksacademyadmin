@@ -26,7 +26,7 @@ const CreateLeadSource = () => {
 
     console.log("User Data:", user); // Log the user data being sent
 
-    const response = await fetch("http://localhost:3030/addleadsource", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/addleadsource`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
