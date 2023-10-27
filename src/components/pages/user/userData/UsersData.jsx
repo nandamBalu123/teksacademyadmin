@@ -560,15 +560,15 @@ const UsersData = () => {
                 </Table>
               </TableContainer>
             </Paper>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Stack spacing={2}>
-                <Pagination
-                  count={Math.ceil(filteredData.length / itemsPerPage)}
-                  onChange={handlePageChange}
-                  color="primary"
-                />
-              </Stack>
-            </div>
+            <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(filteredData.length / itemsPerPage)}
+              onChange={handlePageChange}
+              color="info"
+            />
+          </Stack>
+        </div>
           </div>
         </div>
       </div>

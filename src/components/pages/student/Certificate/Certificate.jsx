@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -16,27 +16,143 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import "./Certificate.css";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+import { useCourseContext } from "../../../../hooks/useCourseContext";
 import axios from "axios";
+import { useBranchContext } from "../../../../hooks/useBranchContext";
+import { useUsersContext } from "../../../../hooks/useUsersContext";
 const Certificate = () => {
   const { students } = useStudentsContext();
+  const { getcourses } = useCourseContext();
+  const { branches } = useBranchContext();
+  const { users } = useUsersContext();
+  const [filteredData, setFilteredData] = useState(students);
   const [courseStartDate, setcourseStartDate] = useState();
   const [courseEndDate, setcourseEndDate] = useState();
-  const [CertificateStatus, setCertificateStatus] = useState();
+  const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   const [itemsPerPage, setrecordsPerPage] = useState(10);
-
+  useEffect(() => {
+    if (users) {
+      const filteruser = users.filter((user) => {
+        const filtercounsellar = user.profile === "counsellor";
+        return filtercounsellar;
+      });
+      setfilteredcounsellor(filteruser);
+    }
+  }, [users]);
   const handlerecorddata = (e) => {
     setrecordsPerPage(e.target.value);
     setPage(1);
   };
+  ////filters
+  const [filterCriteria, setFilterCriteria] = useState({
+    fromdate: "",
 
+    todate: "",
+
+    branch: "",
+
+    course: "",
+
+    status: "",
+
+    enquirytakenby: "",
+
+    search: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFilterCriteria({ ...filterCriteria, [name]: value });
+  };
+  useEffect(() => {
+    if (students) {
+      const filteredResults = students.filter((item) => {
+        const searchCondition = filterCriteria.search
+          ? item.name
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.branch
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.registrationnumber
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.courses
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.enquirytakenby
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase())
+          : true;
+
+        const dateCondition =
+          filterCriteria.fromdate && filterCriteria.todate
+            ? item.admissiondate >= filterCriteria.fromdate &&
+              item.admissiondate <= filterCriteria.todate
+            : true;
+
+        const branchCondition = filterCriteria.branch
+          ? item.branch === filterCriteria.branch
+          : true;
+
+        const courseCondition = filterCriteria.course
+          ? item.courses === filterCriteria.course
+          : true;
+
+        const statusCondition = filterCriteria.status
+          ? item.status === filterCriteria.status
+          : true;
+
+        const counsellarCondition = filterCriteria.enquirytakenby
+          ? item.enquirytakenby === filterCriteria.enquirytakenby
+          : true;
+
+        return (
+          searchCondition &&
+          dateCondition &&
+          branchCondition &&
+          statusCondition &&
+          courseCondition &&
+          counsellarCondition
+        );
+      });
+
+      setFilteredData(filteredResults);
+    }
+  }, [students, filterCriteria]);
+  const filterreset = () => {
+    setFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+
+      branch: "",
+
+      course: "",
+
+      status: "",
+
+      enquirytakenby: "",
+
+      search: "",
+    });
+  };
   const [page, setPage] = useState(1);
 
   // Calculate the range of items to display on the current page
   ////////////////////pagination
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+  let records;
+  let initialDataCount;
+  let recordCount;
+  if (filteredData) {
+    records = filteredData.slice(startIndex, endIndex);
+    initialDataCount = filteredData.length;
+    recordCount = filteredData.length;
+  }
 
-  const records = students.slice(startIndex, endIndex);
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -49,40 +165,31 @@ const Certificate = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleSubmit = async () => {
-    const studentdata = {
-      courseStartDate,
-      courseEndDate,
-      CertificateStatus,
-    };
-    try {
-      // Make the POST request
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/`,
-        studentdata
-      );
-      // Handle a successful response here
-      console.log("Responsee:", response.data.insertId);
-    } catch (error) {
-      // Handle the error here
-      if (error.response) {
-        // The request was made and the server responded with a non-2xx status code
-        console.log(
-          "Server returned an error:",
-          error.response.status,
-          error.response.data
-        );
-      } else if (error.request) {
-        // The request was made, but no response was received
-        console.log("No response received:", error.request);
-      } else {
-        // Something happened in setting up the request that triggered an error
-        console.error("Request error:", error.message);
-      }
-    }
+  const handleRequest = (id) => {
+    let certificate_status = [
+      {
+        courseStartDate: courseStartDate,
+        courseEndDate: courseEndDate,
+        certificateStatus: "request pending",
+      },
+    ];
+    console.log("certificate_status", certificate_status);
+    console.log("id", id);
+    // axios
+    //   .put(
+    //     `${process.env.REACT_APP_API_URL}/certificate_status/${id}`,
+    //     certificate_status
+    //   )
+    //   .then((res) => {
+    //     if (res.data.updated) {
+    //       alert("Certificate updated successfully");
+    //     } else {
+    //       alert("Error please Try Again");
+    //     }
+    //   });
+    setcourseStartDate("");
+    setcourseEndDate("");
   };
-  let initialDataCount = students.length;
-  let recordCount = students.length;
 
   return (
     <div className="container main-certificate mt-3">
@@ -106,6 +213,8 @@ const Certificate = () => {
                 borderRadius: "5px",
               }}
               name="search"
+              value={filterCriteria.search}
+              onChange={handleInputChange}
             />
             <hr className="w-75" />
           </div>
@@ -136,8 +245,7 @@ const Certificate = () => {
                 className="btn btn-primary mr-20 ms-2 mb-2"
                 style={{ textTransform: "capitalize" }}
               >
-                {" "}
-                Filter{" "}
+                Filter
               </button>
             </Button>
 
@@ -165,8 +273,44 @@ const Certificate = () => {
                 </MenuItem>
               </div>
               <hr />
+              <MenuItem className="pt-3 ">
+                <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </MenuItem>
+              <MenuItem className="pt-3 ">
+                <label className="ms-"> To: </label>
+
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </MenuItem>
               <MenuItem>
-                <label className="mt-3 me-3">Profile:</label>
                 <select
                   className="mt-3"
                   id=""
@@ -177,10 +321,20 @@ const Certificate = () => {
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}
-                ></select>
+                  name="course"
+                  value={filterCriteria.course}
+                  onChange={handleInputChange}
+                >
+                  <option>Course</option>
+                  {getcourses &&
+                    getcourses.map((item, index) => (
+                      <option key={item.id} value={item.course_name}>
+                        {item.course_name}
+                      </option>
+                    ))}
+                </select>
               </MenuItem>
               <MenuItem>
-                <label className="mt-3 me-3"> Branch: </label>
                 <select
                   className="mt-3"
                   id=""
@@ -193,18 +347,68 @@ const Certificate = () => {
                     borderRadius: "5px",
                   }}
                   name="branch"
+                  value={filterCriteria.branch}
+                  onChange={handleInputChange}
                 >
-                  <option value="">--select--</option>
+                  <option value="">Branch</option>
+                  {branches &&
+                    branches.map((branch, index) => (
+                      <option key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </option>
+                    ))}
+                </select>
+              </MenuItem>
+              <MenuItem>
+                <select
+                  className="mt-3"
+                  id=""
+                  required
+                  style={{
+                    height: "45px",
 
-                  <option value="hitechcity">Hi-tech City</option>
-                  <option value="dilsukhnagar">dilshukanagar</option>
-                  <option value="ameerpet">ameerpet</option>
-                  <option value="gachibowli">gachibowli</option>
+                    paddingRight: "50px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="enquirytakenby"
+                  value={filterCriteria.enquirytakenby}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Counsellor</option>
+                  {filteredcounsellor &&
+                    filteredcounsellor.map((user, index) => (
+                      <option value={user.fullname}> {user.fullname}</option>
+                    ))}
+                </select>
+              </MenuItem>
+              <MenuItem>
+                <select
+                  className="mt-3"
+                  id=""
+                  required
+                  style={{
+                    height: "45px",
+
+                    paddingRight: "50px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="status"
+                  value={filterCriteria.status}
+                  onChange={handleInputChange}
+                >
+                  <option value="">---Status---</option>
+                  <option value="">Request Submitted</option>
+                  <option value="issued">Issued</option>
+                  <option value="">Pending</option>
                 </select>
               </MenuItem>
               <MenuItem className="d-flex justify-content-between">
-                <button className="save"> Save</button>
-                <button className="clear"> Clear</button>
+                <button className="clear" onClick={filterreset}>
+                  {" "}
+                  Clear
+                </button>
               </MenuItem>
             </Menu>
           </div>
@@ -240,15 +444,14 @@ const Certificate = () => {
                   </TableCell>
 
                   <TableCell className="bg-primary text-light fs-6">
-                    {" "}
-                    Certificate Issue
+                    Certificate Status
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {records &&
                   records.map((student, index) => (
-                    <TableRow>
+                    <TableRow key={student.id}>
                       <TableCell className="border border 1 ">
                         {index + 1}
                       </TableCell>
@@ -266,23 +469,53 @@ const Certificate = () => {
                           type="date"
                           name="startdate"
                           className="startdate"
-                          // onChange={(e) => {
-                          //   const updatedInstallment = {
-                          //     ...student,
-                          //     duedate: e.target.value,
-                          //   };
-                          //   handleInstallmentUpdate(index, updatedInstallment);
-                          // }}
-                          // value={installment.duedate}
+                          onChange={(e) => setcourseStartDate(e.target.value)}
+                          // value={student.certificate_status[0].courseStartDate}
                         />
                       </TableCell>
                       <TableCell className="border border 1 ">
-                        <input type="date" name="enddate" className="enddate" />
+                        <input
+                          type="date"
+                          name="enddate"
+                          className="enddate"
+                          onChange={(e) => setcourseEndDate(e.target.value)}
+                          // value={student.certificate_status[0].courseEndDate}
+                        />
                       </TableCell>
                       <TableCell className="border border 1  text-center fs-6">
-                        <button className="btn btn-primary center">
-                          Apply
+                        <button
+                          className="btn btn-primary center"
+                          onClick={(e) => handleRequest(student.id)}
+                        >
+                          Pending
                         </button>
+                        {/* {student.certificate_status[0].certificateStatus ===
+                          "" && (
+                          <button
+                            className="btn btn-primary center"
+                            onClick={(e) => handleRequest(student.id)}
+                          >
+                            Pending
+                          </button>
+                        )}
+                        {student.certificate_status[0].certificateStatus ===
+                          "request pending" && (
+                          <button
+                            className="btn btn-warning center"
+                            onClick={(e) => handleRequest(student.id)}
+                          >
+                            Request Submitted
+                          </button>
+                        )}
+                         {student.certificate_status[0].certificateStatus ===
+                          "issued" && (
+                          <button
+                            className="btn  btn-success center"
+                            onClick={(e) => handleRequest(student.id)}
+                          >
+                            Issued
+                          </button>
+                        )} */}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -294,13 +527,15 @@ const Certificate = () => {
           style={{ display: "flex", justifyContent: "center" }}
           className="mt-3"
         >
-          <Stack spacing={2}>
-            <Pagination
-              count={Math.ceil(students.length / itemsPerPage)}
-              onChange={handlePageChange}
-              color="primary"
-            />
-          </Stack>
+          {filteredData && (
+            <Stack spacing={2}>
+              <Pagination
+                count={Math.ceil(filteredData.length / itemsPerPage)}
+                onChange={handlePageChange}
+                color="primary"
+              />
+            </Stack>
+          )}
         </div>
       </div>
     </div>

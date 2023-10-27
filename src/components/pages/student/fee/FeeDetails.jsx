@@ -176,7 +176,7 @@ const FeeDetails = () => {
                 Student Fee Records
               </button>
             </div>
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
               <button
                 className="btn bg-success text-light"
                 onClick={noDueRecords}
@@ -184,7 +184,7 @@ const FeeDetails = () => {
                 No Due Records
               </button>
             </div>
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
               <button
                 className="feebtn "
                 onClick={() => navigator("/feefollowup")}
@@ -195,7 +195,7 @@ const FeeDetails = () => {
             </div>
           </div>
           <div className="row pt-3 pb-3">
-            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+            <div className="col-12 col-md-8 col-lg-8 col-xl-8 mb-2">
               <input
                 type="text"
                 className="input-field "
@@ -218,7 +218,7 @@ const FeeDetails = () => {
               />
               <hr className="w-75" />
             </div>
-            <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2">
+            <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
               <h6>
                 {" "}
                 {recordCount}/{initialDataCount}
@@ -494,7 +494,7 @@ const FeeDetails = () => {
             <Pagination
               count={Math.ceil(studentFeeRecordss.length / itemsPerPage)}
               onChange={handlePageChange}
-              color="primary"
+              color="info"
             />
           </Stack>
         </div>

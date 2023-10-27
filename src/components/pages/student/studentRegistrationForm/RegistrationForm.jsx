@@ -1,13 +1,11 @@
 // import * as React from "react";
 import React, { useEffect, useState } from "react";
-
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
-// import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import "./RegistrationForm.css";
 import axios from "axios";
@@ -23,11 +21,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-// import { blue } from "@mui/material/colors";
-// import { useDropzone } from 'react-dropzone';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
+import { useCoursePackageContext } from "../../../../hooks/useCoursePackageContext";
+import { useCourseContext } from "../../../../hooks/useCourseContext";
+import { useUsersContext } from "../../../../hooks/useUsersContext";
+
 const Popup = ({ show, onClose, children }) => {
   return (
     <div className={`popup ${show ? "show" : ""}`}>
@@ -48,6 +48,8 @@ export default function RegistrationForm() {
   const { user } = useAuthContext();
   const { branches } = useBranchContext();
   const { leadsources } = useLeadSourceContext();
+  const { getcourses } = useCourseContext();
+  const { coursepackages } = useCoursePackageContext();
   const navigate = useNavigate();
   const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
@@ -564,7 +566,7 @@ export default function RegistrationForm() {
         studentRegistrationdata
       );
       const id = response.data.insertId;
-      // navigate(`/addtofee/${id}`);
+      navigate(`/addtofee/${id}`);
 
       // Handle a successful response here
       console.log("Responsee:", response.data.insertId);
@@ -586,33 +588,19 @@ export default function RegistrationForm() {
       }
     }
   };
-  const [getusers, setgetusers] = useState([]);
+  const { users } = useUsersContext();
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/userdata`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setgetusers(data);
-      } catch (err) {
-        // setError(err);
-      }
-    };
 
-    fetchData();
-  }, []);
   useEffect(() => {
-    const filteruser = getusers.filter((user) => {
-      const filtercounsellar = user.profile === "counsellor";
-      return filtercounsellar;
-    });
-    setfilteredcounsellor(filteruser);
-  }, [getusers]);
+    if(users){
+      const filteruser = users.filter((user) => {
+        const filtercounsellar = user.profile === "counsellor";
+        return filtercounsellar;
+      });
+      setfilteredcounsellor(filteruser);
+    }
+   
+  }, [users]);
   const [studentData, setStudentData] = useState([{ name }, { name }]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
@@ -1239,6 +1227,7 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Enquiry Date<span className="text-danger"> *</span>&nbsp;:
                   </label>
+                  &nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5"
@@ -1296,12 +1285,12 @@ export default function RegistrationForm() {
                     value={coursepackage}
                   >
                     <option value="">--select--</option>
-                    <option value="businessanalytics">
-                      Business Analytics
-                    </option>
-                    <option value="postgraduationprogram">
-                      Business Analytics
-                    </option>
+                    {coursepackages &&
+                      coursepackages.map((item, index) => (
+                        <option key={item.id} value={item.coursepackages_name}>
+                          {item.coursepackages_name}
+                        </option>
+                      ))}
                   </select>
                 </div>
 
@@ -1323,13 +1312,12 @@ export default function RegistrationForm() {
                     value={courses}
                   >
                     <option value="">--select--</option>
-                    <option value="fullstack">Full Stack Java</option>
-                    <option value="reactjs">React JS </option>
-                    <option value="nodejs">Node JS</option>
-                    <option value="angular">Angular</option>
-                    <option value="revit">Revit</option>
-                    <option value="salesforce">Sales Force</option>
-                    <option value="devops">Devops</option>
+                    {getcourses &&
+                      getcourses.map((item, index) => (
+                        <option key={item.id} value={item.course_name}>
+                          {item.course_name}
+                        </option>
+                      ))}
                   </select>
                 </div>
 
@@ -1479,6 +1467,7 @@ export default function RegistrationForm() {
                     Admission Date <span className="text-danger"> *</span>
                     &nbsp;:
                   </label>
+                  &nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5 "
@@ -1496,8 +1485,8 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Registration No <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>{" "}
-                  &nbsp;&nbsp;&nbsp;
+                  </label>
+                  &nbsp; &nbsp;&nbsp;&nbsp;
                   {registrationnumber}
                 </div>
 
@@ -1506,6 +1495,7 @@ export default function RegistrationForm() {
                     Validity Start Date <span className="text-danger"> *</span>
                     &nbsp;:
                   </label>
+                  &nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5 "
@@ -1525,6 +1515,7 @@ export default function RegistrationForm() {
                     Validity End Date <span className="text-danger"> *</span>
                     &nbsp;:
                   </label>
+                  &nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5 "
@@ -1657,8 +1648,8 @@ export default function RegistrationForm() {
                 <br />
                 <br />
 
-                {feedetails.length > 0 && (
-                  <table class="table w-75 m-auto border border-1 ">
+                {/* {feedetails.length > 0 && (
+                  <table className="table w-75 m-auto border border-1 ">
                     <thead>
                       <tr>
                         <th className="border border-1 ">Fee Type</th>
@@ -1692,7 +1683,55 @@ export default function RegistrationForm() {
                         ))}
                     </tbody>
                   </table>
-                )}
+                )} */}
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
+                    <TableHead>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Fee Type
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Discount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Tax Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Total Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Action
+                      </TableCell>
+                    </TableHead>
+                    <TableBody>
+                      {feedetails.length > 0 &&
+                        feedetails.map((item) => (
+                          <TableRow key={item.id}>
+                            <TableCell align="center">{item.feetype}</TableCell>
+                            <TableCell align="center">{item.amount}</TableCell>
+                            <TableCell align="center">
+                              {item.discount}
+                            </TableCell>
+                            <TableCell align="center">
+                              {parseFloat(item.taxamount.toFixed(2))}
+                            </TableCell>
+                            <TableCell align="center">
+                              {item.totalamount}
+                            </TableCell>
+                            <TableCell
+                              onClick={() => handleFeeDelete(item.id)}
+                              align="center"
+                            >
+                              <DeleteIcon />
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1747,23 +1786,6 @@ export default function RegistrationForm() {
                     </TableBody>
                   </Table>
                 </TableContainer>
-                {/* <table className="table w-75 ms-5">
-                  <thead>
-                    <tr>
-                      <th className="border border-1 ">Gross Total</th>
-                      <th className="border border-1">Total Discount</th>
-                      <th className="border border-1">Total Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-1">{grosstotal}</td>
-                      <td className="border border-1">{totaldiscount}</td>
-                      <td className="border border-1">{finaltotal}</td>
-                    </tr>
-                  </tbody>
-                </table> */}
-
                 <TableContainer component={Paper} className="billingtable mt-4">
                   <Table sx={{ minWidth: 700 }} aria-label="spanning table">
                     <TableHead>
@@ -1837,70 +1859,6 @@ export default function RegistrationForm() {
                     </TableBody>
                   </Table>
                 </TableContainer>
-
-                {/* <table class="table billing  mt-3">
-                  <thead>
-                    <tr>
-                      <th className="border border-1">Fee Type</th>
-                      <th className="border border-1 ">Fee (excl Of GST) </th>
-                      <th className="border border-1">tax</th>
-                      <th className="border border-1">Fee (incl Of GST)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {feedetailsbilling.length > 0 &&
-                      feedetailsbilling.map((item) => {
-                        if (item.feetype != "Material Fee") {
-                          return (
-                            <tr key={item.id}>
-                              <td className="border border-1">
-                                {item.feetype}
-                              </td>
-                              <td className="border border-1">
-                                {parseFloat(item.feewithouttax.toFixed(2))}
-                              </td>
-                              <td className="border border-1">
-                                {parseFloat(item.feetax.toFixed(2))}
-                              </td>
-                              <td className="border border-1">
-                                {parseFloat(item.feewithtax.toFixed(2))}
-                              </td>
-                            </tr>
-                          );
-                        }
-                      })}
-                    {feedetailsbilling.length > 0 && (
-                      <tr>
-                        <td className="border border-1">
-                          {" "}
-                          <strong> Sub Total</strong>
-                        </td>
-                        <td className="border border-1 ">
-                          <strong>
-                            {" "}
-                            {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
-                          </strong>
-                        </td>
-                        <td className="border border-1 ">
-                          <strong> {parseFloat(totaltax.toFixed(2))}</strong>
-                        </td>
-                        <td className="border border-1 ">
-                          <strong> {parseFloat(grandtotal.toFixed(2))}</strong>
-                        </td>
-                      </tr>
-                    )}
-                    <tr>
-                      <td colspan="2" className="empty"></td>
-                      <td className="empty"> Material Fee </td>
-                      <td> {materialfee} </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" className="empty"></td>
-                      <td className="empty"> Grand Total</td>
-                      <td> {finaltotal} </td>
-                    </tr>
-                  </tbody>
-                </table> */}
 
                 <br />
               </form>

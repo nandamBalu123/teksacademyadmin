@@ -435,7 +435,7 @@ const Feefollowup = () => {
             <Pagination
               count={Math.ceil(filtereddata.length / itemsPerPage)}
               onChange={handlePageChange}
-              color="primary"
+              color="info"
             />
           </Stack>
         </div>

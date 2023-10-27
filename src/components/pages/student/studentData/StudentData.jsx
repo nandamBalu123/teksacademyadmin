@@ -159,7 +159,9 @@ const StudentData = () => {
           item.branch
             .toLowerCase()
             .includes(filterCriteria.search.toLowerCase()) ||
-          item.registrationnumber.includes(filterCriteria.search) ||
+          item.registrationnumber
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
           item.courses
             .toLowerCase()
             .includes(filterCriteria.search.toLowerCase()) ||
@@ -330,48 +332,48 @@ const StudentData = () => {
               </div>
               <hr />
               <div className="row">
-               <div className="col-12 col-md-5 col-lg-5 col-xl-5"> 
-               <MenuItem className="pt-3 ">
-                  <div>
-                    <label> From: </label>
-                  </div>
-                  <div> 
-                  <input
-                    type="date"
-                    className="w-100"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                  </div>
-                </MenuItem>
-               </div>
-    
-               <div  className="col-12 col-md-6 col-lg-6 col-xl-6">
-               <MenuItem className="pt-3 ">
-                  <label className="ms-"> To: </label>
-                 
-                 <div> 
-                 <input
-                    type="date"
-                    className="w-100"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
-                  />
-                 </div>
-                </MenuItem>
-                 </div>
+                <div className="col-12 col-md-5 col-lg-5 col-xl-5">
+                  <MenuItem className="pt-3 ">
+                    <div>
+                      <label> From: </label>
+                    </div>
+                    <div>
+                      <input
+                        type="date"
+                        className="w-100"
+                        style={{
+                          height: "45px",
+                          border: "1.5px solid black",
+                          borderRadius: "5px",
+                        }}
+                        name="fromdate"
+                        value={filterCriteria.fromdate}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </MenuItem>
+                </div>
+
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <MenuItem className="pt-3 ">
+                    <label className="ms-"> To: </label>
+
+                    <div>
+                      <input
+                        type="date"
+                        className="w-100"
+                        style={{
+                          height: "45px",
+                          border: "1.5px solid black",
+                          borderRadius: "5px",
+                        }}
+                        name="todate"
+                        value={filterCriteria.todate}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </MenuItem>
+                </div>
               </div>
               <div className="d-flex w-100 mt-3">
                 <MenuItem>
@@ -381,7 +383,7 @@ const StudentData = () => {
                     placeholder="Filter Branch"
                     style={{
                       height: "45px",
-                   
+
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -406,7 +408,6 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                    
 
                       border: "1.5px solid black",
                       borderRadius: "5px",
@@ -702,12 +703,15 @@ const StudentData = () => {
           </TableContainer>
         </Paper>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{ display: "flex", justifyContent: "center" }}
+          className="mt-3"
+        >
           <Stack spacing={2}>
             <Pagination
               count={Math.ceil(filteredData.length / itemsPerPage)}
               onChange={handlePageChange}
-              color="primary"
+              color="info"
             />
           </Stack>
         </div>

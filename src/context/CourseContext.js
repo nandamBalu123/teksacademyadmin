@@ -6,11 +6,11 @@ export const CourseReducer = (state, action) => {
   switch (action.type) {
     case "SET_COURSES":
       return {
-        courses: action.payload,
+        getcourses: action.payload,
       };
     case "CREATE_COURSE":
       return {
-        courses: [...state.courses, action.payload],
+        getcourses: [...state.getcourses, action.payload],
       };
     default:
       return state;
@@ -19,7 +19,7 @@ export const CourseReducer = (state, action) => {
 
 export const CourseContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CourseReducer, {
-    courses: null,
+    getcourses: null,
   });
 
   useEffect(() => {
