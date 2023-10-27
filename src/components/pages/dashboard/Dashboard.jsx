@@ -4,13 +4,9 @@ import * as React from "react";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import navigate from "react";
+
 import Header from "../../common/Header/Header";
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import { useEffect } from "react";
 import LinearProgress, {
@@ -353,6 +349,7 @@ const Dashboard = () => {
       </div>
 
       {/* This is for progress bar */}
+
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
           <h4 className="pt-4  enrollment ps-4"> Total Entrollment</h4>

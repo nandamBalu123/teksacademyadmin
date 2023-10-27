@@ -9,7 +9,7 @@ import { useCoursePackageContext } from "../../../../hooks/useCoursePackageConte
 const CreateCoursePackage = () => {
   const { dispatch } = useCoursePackageContext();
   const navigate = useNavigate();
-  const [coursespackage_name, setpackage] = useState("");
+  const [coursepackages_name, setpackage] = useState("");
   //   const [description, setDescription] = useState("");
   const [BasicAccess, setBasicAccess] = useState({
     Read: false,
@@ -21,7 +21,7 @@ const CreateCoursePackage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = {
-      coursespackage_name,
+      coursepackages_name,
     };
 
     console.log("User Data:", user); // Log the user data being sent
@@ -53,7 +53,7 @@ const CreateCoursePackage = () => {
   };
   return (
     <div style={{ marginTop: "30px" }}>
-      <p className="fs-5 ms-5">Create Branch</p>
+      <p className="fs-5 ms-5">Create Course Package</p>
       <form>
         <Box
           component="form"
@@ -70,7 +70,7 @@ const CreateCoursePackage = () => {
                   className="form-control"
                   placeholder="Package Name"
                   type="text"
-                  value={coursespackage_name}
+                  value={coursepackages_name}
                   onChange={(e) => setpackage(e.target.value)}
                   style={{ padding: "15px" }}
                 />
