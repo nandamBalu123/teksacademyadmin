@@ -194,7 +194,7 @@ const FeeDetails = () => {
               </button>
             </div>
           </div>
-          <div className="row pt-3 pb-3">
+          <div className="row  pb-3">
             <div className="col-12 col-md-8 col-lg-8 col-xl-8 mb-2">
               <input
                 type="text"
@@ -218,13 +218,13 @@ const FeeDetails = () => {
               />
               <hr className="w-75" />
             </div>
-            <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
+            <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3">
               <h6>
                 {" "}
                 {recordCount}/{initialDataCount}
               </h6>
             </div>
-            <div className="col-4 col-md-1 col-lg-1 col-xl-1"> 
+            <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2"> 
             <select  onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>

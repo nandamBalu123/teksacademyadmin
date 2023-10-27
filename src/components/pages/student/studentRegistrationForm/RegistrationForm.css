@@ -1,6 +1,7 @@
 .main-container {
   /* background-color: brown; */
   width: 100%;
+  position: relative;
 
 }
 .main-sub-container {
@@ -105,7 +106,8 @@ input::-webkit-inner-spin-button {
 
 .popup {
   display: none;
-  position: fixed;
+  position: absolute;
+
   top: 0;
   left: 0;
   width: 100%;
@@ -133,4 +135,10 @@ input::-webkit-inner-spin-button {
   top: 10px;
   right: 10px;
   cursor: pointer;
+  border: none;
+  background: none;
+}
+.pop-img{ 
+  width: 75%;
+
 }

@@ -23,6 +23,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import CloseIcon from '@mui/icons-material/Close';
 // import { blue } from "@mui/material/colors";
 // import { useDropzone } from 'react-dropzone';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
@@ -34,7 +35,7 @@ const Popup = ({ show, onClose, children }) => {
       <div className="popup-content">
         {children}
         <button className="close-button" onClick={onClose}>
-          Close
+          <CloseIcon/>
         </button>
       </div>
     </div>
@@ -2007,7 +2008,7 @@ export default function RegistrationForm() {
               </form>
 
               <Box sx={{ mb: 2, mt: 2 }}>
-                {/* <div> */}
+                
                 <Button
                   className="bg-primary"
                   variant="contained"
@@ -2018,7 +2019,139 @@ export default function RegistrationForm() {
                 </Button>
                 {/* <button onClick={openPopup}>Preview</button> */}
                 <Popup show={isPopupOpen} onClose={closePopup}>
-                  <div className="studentdataview ">
+                 <div className="row"> 
+                 <div className="col-12 col-md-7 col-lg-4 col-xl-4"> <img className="pop-img rounded-circle"
+                  src="https://assets-global.website-files.com/650865454c2393ac25711ff7/650865454c2393ac25714a3e_The%2520best%2520selfie%2520Ideas%2520for%2520sm%2520pfp-p-500.jpeg"
+                  alt="profile"
+                  /></div>
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4"> 
+                    <p> Name :{name}</p>
+                    <p> EMail: {email}</p>
+                    <p> Mobile Number: {mobilenumber}</p>
+                    <p> Registration No: {registrationnumber}</p>
+                    <p> Whatsapp Number: {whatsappno}</p>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4"> 
+                    <p> Admission Date: {admissiondate} </p>
+                    <p> Course: {courses}</p>
+                    <p> Branch : {branch}</p>
+                    <p> Validity Start Date:{validitystartdate}</p>
+                    <p> Validity End Date : {validityenddate}</p>
+                    
+                  </div>
+                 </div>
+                 <div className="row"> 
+                 <div className="col-12 col-md-6 col-lg-4 col-xl-4  mt-2 " > 
+                        <p>Country : {country}</p>
+                        <p> State: {state} </p>
+                        <p>Area: {area} </p>
+                        <p> Native Place: {native}</p>
+                        <p> Zipcode: {zipcode}</p>
+                 
+                 </div>
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2 " > 
+                  <p> Parent's Name : {parentsname}</p>
+                        <p> Birth Date: {birthdate}</p>
+                        <p> Gender: {gender} ,  {maritalstatus} </p>
+                        <p> College: {college} , {academicyear} </p>
+                        <p> Education Type: {educationtype} ,{marks}  </p>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2"> 
+                  <p> Enquiry Date : {enquirydate}</p>
+                        <p> Enquiry Taken By: {enquirytakenby}</p>
+                        <p> Course Package: {coursepackage}</p>
+                        <p>Lead Source: {leadsource} </p>
+                        <p> Mode of Traning: {modeoftraining}</p>
+                  </div>
+                 </div>
+                 <div> 
+                 <TableContainer component={Paper} className="my-4">
+                      <Table
+                        sx={{ minWidth: 650 }}
+                        size="large"
+                        aria-label="a dense table"
+                      >
+                        <TableHead>
+                          <TableRow>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Fee Type{" "}
+                            </TableCell>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Amount{" "}
+                            </TableCell>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Discount
+                            </TableCell>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Tax Amount (Inclusive of GST)
+                            </TableCell>
+                            <TableCell className="fs-6 text-center border border-2">
+                              {" "}
+                              Total Amount
+                            </TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {feedetails &&
+                            feedetails.map((item, index) => (
+                              <TableRow
+                                sx={{
+                                  "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                  },
+                                }}
+                                key={index}
+                              >
+                                <TableCell className="text-center border border-2">
+                                  {" "}
+                                  {item.feetype}
+                                </TableCell>
+                                <TableCell className="text-center border border-2">
+                                  {" "}
+                                  {item.amount}
+                                </TableCell>
+                                <TableCell className="text-center border border-2">
+                                  {item.discount}
+                                </TableCell>
+                                <TableCell className="text-center border border-2">
+                                  {parseFloat(item.taxamount).toFixed(2)}
+                                </TableCell>
+                                <TableCell className="text-center border border-2">
+                                
+                           
+                                  {item.feetype === "fee" ? (
+                                    <>
+                                      Materialfee:{materialfee}&nbsp; ,
+                                      CourseFee:
+                                      {item.totalamount - materialfee}
+                                    </>
+                                  ) : (
+                                    <span></span>
+                                  )}<br/>
+                                  <b>{item.totalamount}</b>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                 </div>
+                 <div className="row"> 
+                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                 Admission Remarks:{admissionremarks}
+                 </div>
+                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              Assets: {assets}
+                 </div>
+                 
+
+
+                 </div>
+                  {/* <div className="studentdataview ">
                     <div className="bg">
                       <img
                         className="photo"
@@ -2067,8 +2200,8 @@ export default function RegistrationForm() {
                         <p> Enquiry Date : {enquirydate}</p>
                         <p> Enquiry Taken By: {enquirytakenby}</p>
                         <p> Course Package: {coursepackage}</p>
-                        <p> Course: {courses}</p>
                         <p>Lead Source: {leadsource} </p>
+                           <p> Course: {courses}</p>
                       </div>
                     </div>
                     <h5 className="text-center mt-1">Admission Details </h5>
@@ -2165,16 +2298,18 @@ export default function RegistrationForm() {
                         </TableBody>
                       </Table>
                     </TableContainer>
-                  </div>
+                  </div> */}
 
-                  <Button
-                    className="bg-primary"
+                <div className="col-12 text-end "> 
+                <Button
+                    className="bg-primary "
                     variant="contained"
                     onClick={handleSubmit}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Submit
                   </Button>
+                </div>
                 </Popup>
                 {/* </div> */}
                 {/* <Button
