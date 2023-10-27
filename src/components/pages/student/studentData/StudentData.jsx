@@ -264,7 +264,7 @@ const StudentData = () => {
     <div>
       <div className="studetdetails container  mt-3">
         <h3 className="ms-5 mt-4 "> Student Data </h3>
-        <div className="row mb-3 px-4 pt-3">
+        <div className="row mb-3 px-4 ">
           <div className="col-10 col-md-7 col-lg-7 col-xl-7  input-field">
             <input
               type="text"

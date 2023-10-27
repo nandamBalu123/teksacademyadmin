@@ -215,7 +215,7 @@ const Dashboard = () => {
                 <MenuItem> Filter</MenuItem>
                 <MenuItem>
                   {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
+                  <CloseIcon onClick={handleClose} /> style={{ cursor: "pointer" }}
                 </MenuItem>
               </div>
               <hr />
@@ -260,7 +260,7 @@ const Dashboard = () => {
               <MenuItem className="d-flex justify-content-between">
                 {/* <button className="save"> Save</button> */}
 
-                <button className="clear" onClick={filterreset}>
+                <button className="clear" onClick={filterreset}> style={{ cursor: "pointer" }}
                   {" "}
                   Clear
                 </button>
@@ -274,8 +274,9 @@ const Dashboard = () => {
         <div className="row">
           <div
             className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
+            style={{ cursor: "pointer" }}
             onClick={(e) =>
-              setDisplayData({ enrollments: true, fee: false, users: false })
+              setDisplayData({ enrollments: true, fee: false, users: false }) 
             }
           >
             <Card
@@ -290,8 +291,10 @@ const Dashboard = () => {
           </div>
           <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
+            style={{ cursor: "pointer" }}
             onClick={(e) =>
               setDisplayData({ enrollments: false, fee: true, users: false })
+           
             }
           >
             <Card
@@ -307,6 +310,7 @@ const Dashboard = () => {
           </div>
           <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
+            style={{ cursor: "pointer" }}
             onClick={(e) =>
               setDisplayData({
                 enrollments: false,

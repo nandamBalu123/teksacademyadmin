@@ -26,7 +26,7 @@ const CreateBranch = () => {
 
     console.log("User Data:", user); // Log the user data being sent
 
-    const response = await fetch("http://localhost:3030/addbranch", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/addbranch`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
