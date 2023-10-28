@@ -14,6 +14,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import "./FeeDetails.css";
 import axios from "axios";
+
 import { useNavigate, Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
@@ -257,22 +258,22 @@ const FeeDetails = () => {
                 }}
               >
                 <div className="d-flex justify-content-between">
+                  
                   <MenuItem> Filter</MenuItem>
-                  <MenuItem>
+             <MenuItem  >
                     {" "}
-                    <CloseIcon onClick={handleClose} />{" "}
+                    <CloseIcon className="end" onClick={handleClose} />{" "}
                   </MenuItem>
+                
                 </div>
                 <hr />
-                <div className="d-flex">
-                  <MenuItem className="pt-3 ">
-                    <div>
-                      <label> From: </label>
-                    </div>
-
-                    <input
+                
+                <div className="row">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 feedetails-input"> 
+                  
+                <input
                       type="date"
-                      className="form-control"
+                      className="w-75"
                       style={{
                         height: "45px",
                         border: "1.5px solid black",
@@ -282,13 +283,14 @@ const FeeDetails = () => {
                       value={filterCriteria.fromdate}
                       onChange={handleInputChange}
                     />
-                  </MenuItem>
-                  <MenuItem className="pt-3 ">
-                    <label> To: </label>
-                    <br />
-                    <input
+                     <label> From: </label>
+               
+                  </div>
+                 
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 feedetails-input"> 
+                   <input
                       type="date"
-                      className="form-control"
+                      className="w-75"
                       style={{
                         height: "45px",
                         border: "1.5px solid black",
@@ -298,17 +300,18 @@ const FeeDetails = () => {
                       value={filterCriteria.todate}
                       onChange={handleInputChange}
                     />
-                  </MenuItem>
+                <label> To: </label>
+                  </div>
                 </div>
-                <div className="d-flex w-100 mt-3">
-                  <MenuItem>
+                <div className="row">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 feedetails-select"> 
+              
                     <select
                       id=""
-                      placeholder="Filter Branch"
+                  
+                      className="w-75 ms-3"
                       style={{
                         height: "45px",
-                        paddingLeft: "10px",
-                        paddingRight: "115px",
                         border: "1.5px solid black",
                         borderRadius: "5px",
                       }}
@@ -324,15 +327,16 @@ const FeeDetails = () => {
                           </option>
                         ))}
                     </select>
-                  </MenuItem>
-                  <MenuItem>
+                   <label> Branch</label>
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 feedetails-select"> 
+              
                     <select
                       id=""
-                      placeholder="select Type"
+                      className="w-75"
+                    
                       style={{
                         height: "45px",
-
-                        paddingRight: "105px",
                         border: "1.5px solid black",
                         borderRadius: "5px",
                       }}
@@ -342,7 +346,10 @@ const FeeDetails = () => {
                       <option value="paidamount"> Paid Amount</option>
                       <option value="dueamount"> Due Amount</option>
                     </select>
-                  </MenuItem>
+                 <label> Mode of Traning</label>
+                 </div>
+                  
+                 
                 </div>
                 <MenuItem className="d-flex justify-content-between">
                   {/* <button className="save"> Save</button> */}

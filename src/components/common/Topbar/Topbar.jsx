@@ -122,12 +122,12 @@ const Topbar = () => {
                   <h5 onClick={handleClose}>{fullname}</h5>
                   <p onClick={handleClose}>{email}</p>
                 </div>
-              </div>
-
+              </div> <hr/>
+             <div className="d-flex justify-content-between">
               <MenuItem onClick={handleProfile}>Profile</MenuItem>
               <MenuItem onClick={handleClose}>Setting </MenuItem>
-              <hr />
-              <MenuItem onClick={handleLogout}>Logout </MenuItem>
+             
+              <MenuItem onClick={handleLogout}>Logout </MenuItem></div>
             </Menu>
           </div>
         </div>

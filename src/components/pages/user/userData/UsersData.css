@@ -7,6 +7,7 @@
   border-radius: 5px;
   margin: auto;
   overflow: hidden;
+ 
 }
 .usertable{ 
   width: 100%;
@@ -24,10 +25,9 @@
     padding: 10px;
     border-radius: 10px;
 }
-.user-data{ 
-    display: flex;
-    justify-content: space-between;
-}
+
+
+
 .save , .clear{ 
     background-color: #0070fc;
     color: #fff;
@@ -49,6 +49,32 @@
     input::-webkit-inner-spin-button{ 
         -webkit-appearance: none;
         margin: 0;
+    }
+    .select-input{ 
+      position: relative;
+      margin: 10px 0;
+    }
+    .select-input label{ 
+      position: absolute;
+      top:2%;
+      left: 19%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      padding: 0 5px;
+    }
+    .select-input select{ 
+      width: 200px;
+            height: 50px;
+            font-size: 18px;
+            border-radius: 6px;
+            padding-left: 10px;
+            border: 1.9px solid black;
+    }
+    .select-input select:focus~label,
+    .select-input select:valid~label{ 
+      top:0 ;
+      background-color: #fff;
+      color: #0070fc;
     }
    
     

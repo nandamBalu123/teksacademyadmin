@@ -262,7 +262,7 @@ const StudentData = () => {
     <div>
       <div className="studetdetails container  mt-3">
         <h3 className="ms-5 mt-4 "> Student Data </h3>
-        <div className="row mb-3 px-4 ">
+        <div className="row mb-3 px-4 pt-3">
           <div className="col-10 col-md-7 col-lg-7 col-xl-7  input-field">
             <input
               type="text"
@@ -300,7 +300,7 @@ const StudentData = () => {
             </h6>
           </div>
 
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 ">
             {" "}
             <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               {" "}
@@ -329,11 +329,20 @@ const StudentData = () => {
                 </MenuItem>
               </div>
               <hr />
+          <form > 
+          
+          </form>
+
+
+
+
+
               <div className="row">
-               <div className="col-12 col-md-5 col-lg-5 col-xl-5"> 
+               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+               <label > From: </label>
                <MenuItem className="pt-3 ">
                   <div>
-                    <label> From: </label>
+                  
                   </div>
                   <div> 
                   <input
@@ -353,8 +362,9 @@ const StudentData = () => {
                </div>
     
                <div  className="col-12 col-md-6 col-lg-6 col-xl-6">
+               <label className="ms-4 m-0 p-0"> To: </label>
                <MenuItem className="pt-3 ">
-                  <label className="ms-"> To: </label>
+                 
                  
                  <div> 
                  <input
@@ -373,7 +383,8 @@ const StudentData = () => {
                 </MenuItem>
                  </div>
               </div>
-              <div className="d-flex w-100 mt-3">
+              <div className="row">  
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <MenuItem>
                   <select
                     id=""
@@ -397,8 +408,10 @@ const StudentData = () => {
                         </option>
                       ))}
                   </select>
-                </MenuItem>
-                <MenuItem>
+                </MenuItem>  </div>
+             
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+              <MenuItem>
                   <select
                     id=""
                     className="w-100"
@@ -423,8 +436,10 @@ const StudentData = () => {
                         </option>
                       ))}
                   </select>
-                </MenuItem>{" "}
-              </div>
+                </MenuItem>
+              </div> </div>
+             
+            
               <div className="d-flex w-100 mt-3 mb-2">
                 <MenuItem>
                   <select
@@ -467,15 +482,12 @@ const StudentData = () => {
                       filteredcounsellor.map((user, index) => (
                         <option value={user.fullname}> {user.fullname}</option>
                       ))}
-                    {/* <option value="kavya"> kavya</option>
-                    <option value="mark"> Mark</option>
-                    <option value="david"> David</option>
-                    <option value="kavya"> kavya</option> */}
+                   
                   </select>
                 </MenuItem>{" "}
               </div>
               <MenuItem className="d-flex justify-content-between">
-                {/* <button className="save"> Save</button> */}
+             
                 <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear
