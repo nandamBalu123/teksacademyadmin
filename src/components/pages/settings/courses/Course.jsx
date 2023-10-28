@@ -11,7 +11,7 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 const Course = () => {
-  const { courses } = useCourseContext();
+  const { getcourses } = useCourseContext();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,8 +71,8 @@ const Course = () => {
           </TableHead>
 
           <TableBody className="border border 1">
-            {Array.isArray(courses) && courses.length > 0 ? (
-              courses.map((item, index) => (
+            {Array.isArray(getcourses) && getcourses.length > 0 ? (
+              getcourses.map((item, index) => (
                 <StyledTableRow key={item.id}>
                   <StyledTableCell className="border border 1 text-center">
                     {index + 1}

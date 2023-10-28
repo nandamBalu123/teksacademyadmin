@@ -1,13 +1,11 @@
 // import * as React from "react";
 import React, { useEffect, useState } from "react";
-
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
-// import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import "./RegistrationForm.css";
 import axios from "axios";
@@ -29,6 +27,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
+import { useCoursePackageContext } from "../../../../hooks/useCoursePackageContext";
+import { useCourseContext } from "../../../../hooks/useCourseContext";
+import { useUsersContext } from "../../../../hooks/useUsersContext";
+
 const Popup = ({ show, onClose, children }) => {
   return (
     <div className={`popup ${show ? "show" : ""}`}>
@@ -49,6 +51,8 @@ export default function RegistrationForm() {
   const { user } = useAuthContext();
   const { branches } = useBranchContext();
   const { leadsources } = useLeadSourceContext();
+  const { getcourses } = useCourseContext();
+  const { coursepackages } = useCoursePackageContext();
   const navigate = useNavigate();
   const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
@@ -111,6 +115,9 @@ export default function RegistrationForm() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
+  const [certificate_status, setcertificate_status] = useState([
+    { courseStartDate: "", courseEndDate: "", certificateStatus: "" },
+  ]);
   const handleAssetChange = (event) => {
     const assetName = event.target.name;
     if (event.target.checked) {
@@ -381,9 +388,15 @@ export default function RegistrationForm() {
       alert("please enter zipcode");
       return;
     }
+
     if (!whatsappno) {
-      alert("please enter WhatsApp Number");
+      alert("please enter whatsappno");
       return;
+    } else {
+      if (whatsappno.length != 10) {
+        alert("incorrect whatsappno ");
+        return;
+      }
     }
     handleNext();
   };
@@ -545,6 +558,7 @@ export default function RegistrationForm() {
       totalpaidamount,
       selectedFile,
       user_id,
+      certificate_status,
     };
     // studentRegistrationdata.append('file', selectedFile)
     console.log("studentRegistration", studentRegistrationdata);
@@ -577,33 +591,19 @@ export default function RegistrationForm() {
       }
     }
   };
-  const [getusers, setgetusers] = useState([]);
+  const { users } = useUsersContext();
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/userdata`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setgetusers(data);
-      } catch (err) {
-        // setError(err);
-      }
-    };
 
-    fetchData();
-  }, []);
   useEffect(() => {
-    const filteruser = getusers.filter((user) => {
-      const filtercounsellar = user.profile === "counsellor";
-      return filtercounsellar;
-    });
-    setfilteredcounsellor(filteruser);
-  }, [getusers]);
+    if(users){
+      const filteruser = users.filter((user) => {
+        const filtercounsellar = user.profile === "counsellor";
+        return filtercounsellar;
+      });
+      setfilteredcounsellor(filteruser);
+    }
+   
+  }, [users]);
   const [studentData, setStudentData] = useState([{ name }, { name }]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
@@ -1229,7 +1229,8 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Enquiry Date<span className="text-danger"> *</span>&nbsp;:
-                  </label>&nbsp;
+                  </label>
+                  &nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5"
@@ -1287,12 +1288,12 @@ export default function RegistrationForm() {
                     value={coursepackage}
                   >
                     <option value="">--select--</option>
-                    <option value="businessanalytics">
-                      Business Analytics
-                    </option>
-                    <option value="postgraduationprogram">
-                      Business Analytics
-                    </option>
+                    {coursepackages &&
+                      coursepackages.map((item, index) => (
+                        <option key={item.id} value={item.coursepackages_name}>
+                          {item.coursepackages_name}
+                        </option>
+                      ))}
                   </select>
                 </div>
 
@@ -1314,13 +1315,12 @@ export default function RegistrationForm() {
                     value={courses}
                   >
                     <option value="">--select--</option>
-                    <option value="fullstack">Full Stack Java</option>
-                    <option value="reactjs">React JS </option>
-                    <option value="nodejs">Node JS</option>
-                    <option value="angular">Angular</option>
-                    <option value="revit">Revit</option>
-                    <option value="salesforce">Sales Force</option>
-                    <option value="devops">Devops</option>
+                    {getcourses &&
+                      getcourses.map((item, index) => (
+                        <option key={item.id} value={item.course_name}>
+                          {item.course_name}
+                        </option>
+                      ))}
                   </select>
                 </div>
 
@@ -1469,7 +1469,8 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Admission Date <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>&nbsp;
+                  </label>
+                  &nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5 "
@@ -1487,8 +1488,8 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Registration No <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>&nbsp;
-                  &nbsp;&nbsp;&nbsp;
+                  </label>
+                  &nbsp; &nbsp;&nbsp;&nbsp;
                   {registrationnumber}
                 </div>
 
@@ -1496,7 +1497,8 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Validity Start Date <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>&nbsp;
+                  </label>
+                  &nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5 "
@@ -1515,7 +1517,8 @@ export default function RegistrationForm() {
                   <label className="col-12 col-md-2 label">
                     Validity End Date <span className="text-danger"> *</span>
                     &nbsp;:
-                  </label>&nbsp;
+                  </label>
+                  &nbsp;
                   <input
                     type="date"
                     className="col-9 col-md-5 "
@@ -1648,8 +1651,7 @@ export default function RegistrationForm() {
                 <br />
                 <br />
 
-
- {/* {feedetails.length > 0 && (
+                {/* {feedetails.length > 0 && (
                   <table className="table w-75 m-auto border border-1 ">
                     <thead>
                       <tr>
@@ -1685,55 +1687,53 @@ export default function RegistrationForm() {
                     </tbody>
                   </table>
                 )} */}
-                <TableContainer component={Paper} > 
-                <Table sx={{ minWidth: 600 }} aria-label="spanning table" > 
-                <TableHead> 
-                  <TableCell className="fs-6 py-3" align="center"> 
-                   Fee Type
-                  </TableCell>
-                  <TableCell className="fs-6 py-3" align="center"> 
-                   Amount
-                  </TableCell>
-                  <TableCell className="fs-6 py-3" align="center"> 
-                  Discount
-                  </TableCell>
-                  <TableCell className="fs-6 py-3" align="center"> 
-                   Tax Amount
-                  </TableCell>
-                  <TableCell className="fs-6 py-3" align="center"> 
-                   Total Amount
-                  </TableCell>
-                  <TableCell className="fs-6 py-3" align="center"> 
-                   Action
-                  </TableCell>
-                </TableHead>
-                <TableBody> 
-                  {feedetails.length > 0 &&
-                  feedetails.map((item)=>(
-                  <TableRow key={item.id}> 
-                  <TableCell align="center"> 
-                  {item.feetype}
-                  </TableCell>
-                  <TableCell align="center"> 
-                  {item.amount}
-                  </TableCell>
-                  <TableCell align="center"> 
-                  {item.discount}
-                  </TableCell>
-                  <TableCell align="center"> 
-                  {parseFloat(item.taxamount.toFixed(2))}
-                  </TableCell>
-                  <TableCell align="center"> 
-                  {item.totalamount}
-                  </TableCell>
-                  <TableCell onClick={() => handleFeeDelete(item.id)} align="center"> 
-                  <DeleteIcon />
-                  </TableCell>
-                  </TableRow>
-                  )) }
-                </TableBody>
-
-                </Table>
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
+                    <TableHead>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Fee Type
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Discount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Tax Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Total Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Action
+                      </TableCell>
+                    </TableHead>
+                    <TableBody>
+                      {feedetails.length > 0 &&
+                        feedetails.map((item) => (
+                          <TableRow key={item.id}>
+                            <TableCell align="center">{item.feetype}</TableCell>
+                            <TableCell align="center">{item.amount}</TableCell>
+                            <TableCell align="center">
+                              {item.discount}
+                            </TableCell>
+                            <TableCell align="center">
+                              {parseFloat(item.taxamount.toFixed(2))}
+                            </TableCell>
+                            <TableCell align="center">
+                              {item.totalamount}
+                            </TableCell>
+                            <TableCell
+                              onClick={() => handleFeeDelete(item.id)}
+                              align="center"
+                            >
+                              <DeleteIcon />
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
                 </TableContainer>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
@@ -1789,7 +1789,7 @@ export default function RegistrationForm() {
                     </TableBody>
                   </Table>
                 </TableContainer>
-            <TableContainer component={Paper} className="billingtable mt-4">
+                <TableContainer component={Paper} className="billingtable mt-4">
                   <Table sx={{ minWidth: 700 }} aria-label="spanning table">
                     <TableHead>
                       <TableRow className="border border1">
@@ -1862,8 +1862,6 @@ export default function RegistrationForm() {
                     </TableBody>
                   </Table>
                 </TableContainer>
-
-                
 
                 <br />
               </form>
@@ -2312,15 +2310,14 @@ export default function RegistrationForm() {
                 </div>
                 </Popup>
                 {/* </div> */}
-                {/* <Button
+                <Button
                   className="bg-primary"
                   variant="contained"
                   onClick={handleSubmit}
                   sx={{ mt: 1, mr: 1 }}
                 >
-                  
                   Submit
-                </Button> */}
+                </Button>
                 <Button
                   className="bg-primary"
                   variant="contained"

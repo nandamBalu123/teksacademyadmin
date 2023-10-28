@@ -5,7 +5,7 @@ import App from "./App";
 
 import { AuthContextProvider } from "./context/AuthContext";
 
-import { UsersContextProvider } from "./context/UserContext";
+import { UsersContextProvider } from "./context/UsersContext";
 import { BranchContextProvider } from "./context/BranchContext";
 import { RoleContextProvider } from "./context/RoleContext";
 

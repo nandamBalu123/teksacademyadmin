@@ -4,7 +4,7 @@ export const CoursePackageContext = createContext();
 
 export const CoursePackageReducer = (state, action) => {
   switch (action.type) {
-    case "SET_COURSESPACKAGES":
+    case "SET_COURSEPACKAGES":
       return {
         coursepackages: action.payload,
       };
@@ -27,7 +27,7 @@ export const CoursePackageContextProvider = ({ children }) => {
       .get(`${process.env.REACT_APP_API_URL}/getcoursespackages`)
       .then((response) => {
         if (response.data) {
-          dispatch({ type: "SET_COURSESPACKAGES", payload: response.data });
+          dispatch({ type: "SET_COURSEPACKAGES", payload: response.data });
         }
       })
       .catch((error) => {

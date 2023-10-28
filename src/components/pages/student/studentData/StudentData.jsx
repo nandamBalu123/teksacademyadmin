@@ -159,7 +159,9 @@ const StudentData = () => {
           item.branch
             .toLowerCase()
             .includes(filterCriteria.search.toLowerCase()) ||
-          item.registrationnumber.includes(filterCriteria.search) ||
+          item.registrationnumber
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
           item.courses
             .toLowerCase()
             .includes(filterCriteria.search.toLowerCase()) ||
@@ -392,7 +394,7 @@ const StudentData = () => {
                     placeholder="Filter Branch"
                     style={{
                       height: "45px",
-                   
+
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -419,7 +421,6 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                    
 
                       border: "1.5px solid black",
                       borderRadius: "5px",
@@ -714,12 +715,15 @@ const StudentData = () => {
           </TableContainer>
         </Paper>
 
-        <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
+        <div
+          style={{ display: "flex", justifyContent: "center" }}
+          className="mt-3"
+        >
           <Stack spacing={2}>
             <Pagination
               count={Math.ceil(filteredData.length / itemsPerPage)}
               onChange={handlePageChange}
-            color="info"
+              color="info"
             />
           </Stack>
         </div>

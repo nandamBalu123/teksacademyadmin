@@ -78,7 +78,7 @@ const CoursePackage = () => {
                     {index + 1}
                   </StyledTableCell>
                   <StyledTableCell className="border border 1 text-center">
-                    {item.coursespackages_name}
+                    {item.coursepackages_name}
                   </StyledTableCell>
 
                   {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
