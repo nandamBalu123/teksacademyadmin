@@ -20,6 +20,7 @@ import { useCourseContext } from "../../../../hooks/useCourseContext";
 import axios from "axios";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
+import { GolfCourseSharp } from "@mui/icons-material";
 const Certificate = () => {
   const { students } = useStudentsContext();
   const { getcourses } = useCourseContext();
@@ -170,23 +171,27 @@ const Certificate = () => {
       {
         courseStartDate: courseStartDate,
         courseEndDate: courseEndDate,
-        certificateStatus: "request pending",
+        certificateStatus: "request Submitted",
       },
     ];
-    console.log("certificate_status", certificate_status);
+    const updatedData = {
+      certificate_status,
+    };
+    console.log("certificate_status", updatedData);
     console.log("id", id);
-    // axios
-    //   .put(
-    //     `${process.env.REACT_APP_API_URL}/certificate_status/${id}`,
-    //     certificate_status
-    //   )
-    //   .then((res) => {
-    //     if (res.data.updated) {
-    //       alert("Certificate updated successfully");
-    //     } else {
-    //       alert("Error please Try Again");
-    //     }
-    //   });
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL}/certificatestatus/${id}`,
+        updatedData
+      )
+      .then((res) => {
+        if (res.data.updated) {
+          // alert("Certificate updated successfully");
+          window.location.reload();
+        } else {
+          alert("Error please Try Again");
+        }
+      });
     setcourseStartDate("");
     setcourseEndDate("");
   };
@@ -437,6 +442,12 @@ const Certificate = () => {
                   </TableCell>
                   <TableCell className="bg-primary text-light fs-6 border border 1">
                     {" "}
+                    ValidityStartDate <br />
+                    validityenddate
+                  </TableCell>
+
+                  <TableCell className="bg-primary text-light fs-6 border border 1">
+                    {" "}
                     Course StartDate
                   </TableCell>
                   <TableCell className="bg-primary text-light fs-6 border border 1">
@@ -450,75 +461,98 @@ const Certificate = () => {
               </TableHead>
               <TableBody>
                 {records &&
-                  records.map((student, index) => (
-                    <TableRow key={student.id}>
-                      <TableCell className="border border 1 ">
-                        {index + 1}
-                      </TableCell>
-                      <TableCell className="border border 1">
-                        {student.name}
-                      </TableCell>
-                      <TableCell className="border border 1 ">
-                        {student.courses}
-                      </TableCell>
-                      <TableCell className="border border 1 ">
-                        {student.registrationnumber}
-                      </TableCell>
-                      <TableCell className="border border 1 ">
-                        <input
-                          type="date"
-                          name="startdate"
-                          className="startdate"
-                          onChange={(e) => setcourseStartDate(e.target.value)}
-                          // value={student.certificate_status[0].courseStartDate}
-                        />
-                      </TableCell>
-                      <TableCell className="border border 1 ">
-                        <input
-                          type="date"
-                          name="enddate"
-                          className="enddate"
-                          onChange={(e) => setcourseEndDate(e.target.value)}
-                          // value={student.certificate_status[0].courseEndDate}
-                        />
-                      </TableCell>
-                      <TableCell className="border border 1  text-center fs-6">
-                        <button
-                          className="btn btn-primary center"
-                          onClick={(e) => handleRequest(student.id)}
-                        >
-                          Pending
-                        </button>
-                        {/* {student.certificate_status[0].certificateStatus ===
-                          "" && (
-                          <button
-                            className="btn btn-primary center"
-                            onClick={(e) => handleRequest(student.id)}
-                          >
-                            Pending
-                          </button>
-                        )}
-                        {student.certificate_status[0].certificateStatus ===
-                          "request pending" && (
-                          <button
-                            className="btn btn-warning center"
-                            onClick={(e) => handleRequest(student.id)}
-                          >
-                            Request Submitted
-                          </button>
-                        )}
-                         {student.certificate_status[0].certificateStatus ===
-                          "issued" && (
-                          <button
-                            className="btn  btn-success center"
-                            onClick={(e) => handleRequest(student.id)}
-                          >
-                            Issued
-                          </button>
-                        )} */}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  records.map((student, index) => {
+                    const validitystartdate = student.validitystartdate;
+                    const dateTime = new Date(validitystartdate);
+                    const startdate = dateTime.toISOString().slice(0, 10);
+                    const validityenddate = student.validityenddate;
+                    const dateTimee = new Date(validitystartdate);
+                    const enddate = dateTimee.toISOString().slice(0, 10);
+
+                    const certificate_Status = student.certificate_status;
+                    const courseStartDate = certificate_Status
+                      .map((item) => item.courseStartDate)
+                      .join(", ");
+                    const courseEndDate = certificate_Status
+                      .map((item) => item.courseEndDate)
+                      .join(", ");
+                    const certificateStatus = certificate_Status
+                      .map((item) => item.certificateStatus)
+                      .join(", ");
+
+                    return (
+                      <TableRow key={student.id}>
+                        <TableCell className="border border 1 ">
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className="border border 1">
+                          {student.name}
+                        </TableCell>
+                        <TableCell className="border border 1 ">
+                          {student.courses}
+                        </TableCell>
+                        <TableCell className="border border 1 ">
+                          {student.registrationnumber}
+                        </TableCell>
+                        <TableCell className="border border 1 ">
+                          {startdate}
+                          <br />
+                          {enddate}
+                        </TableCell>
+
+                        <TableCell className="border border 1 ">
+                          <input
+                            type="date"
+                            name="startdate"
+                            className="startdate"
+                            onChange={(e) => setcourseStartDate(e.target.value)}
+                            value={
+                              courseStartDate !== ""
+                                ? courseStartDate
+                                : undefined
+                            }
+                          />
+                        </TableCell>
+                        <TableCell className="border border 1 ">
+                          <input
+                            type="date"
+                            name="enddate"
+                            className="enddate"
+                            onChange={(e) => setcourseEndDate(e.target.value)}
+                            value={
+                              courseEndDate !== "" ? courseEndDate : undefined
+                            }
+                          />
+                        </TableCell>
+                        <TableCell className="border border 1  text-center fs-6">
+                          {certificateStatus === "" && (
+                            <button
+                              className="btn btn-primary center"
+                              onClick={(e) => handleRequest(student.id)}
+                            >
+                              Request Certificate
+                            </button>
+                          )}
+                          {certificateStatus === "request Submitted" && (
+                            <button
+                              className="btn btn-warning center"
+                              onClick={(e) => handleRequest(student.id)}
+                            >
+                              Request Submitted
+                            </button>
+                          )}
+                          {certificateStatus === "issued" && (
+                            <button
+                              className="btn  btn-success center"
+                              onClick={(e) => handleRequest(student.id)}
+                            >
+                              Certificate Issued
+                            </button>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               </TableBody>
             </Table>
           </TableContainer>
