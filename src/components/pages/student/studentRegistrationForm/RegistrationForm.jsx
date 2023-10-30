@@ -17,12 +17,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { blue } from "@mui/material/colors";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
+import NativeSelect from "@mui/material/NativeSelect";
 // import { blue } from "@mui/material/colors";
 // import { useDropzone } from 'react-dropzone';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
@@ -38,7 +43,7 @@ const Popup = ({ show, onClose, children }) => {
       <div className="popup-content">
         {children}
         <button className="close-button" onClick={onClose}>
-          <CloseIcon/>
+          <CloseIcon />
         </button>
       </div>
     </div>
@@ -46,7 +51,7 @@ const Popup = ({ show, onClose, children }) => {
 };
 export default function RegistrationForm() {
   const [isPopupOpen, setPopupOpen] = useState(false);
-
+  let select = "select";
   const openPopup = () => setPopupOpen(true);
   const closePopup = () => setPopupOpen(false);
   const { user } = useAuthContext();
@@ -596,14 +601,13 @@ export default function RegistrationForm() {
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
 
   useEffect(() => {
-    if(users){
+    if (users) {
       const filteruser = users.filter((user) => {
         const filtercounsellar = user.profile === "counsellor";
         return filtercounsellar;
       });
       setfilteredcounsellor(filteruser);
     }
-   
   }, [users]);
   const [studentData, setStudentData] = useState([{ name }, { name }]);
   useEffect(() => {
@@ -640,97 +644,47 @@ export default function RegistrationForm() {
             </StepLabel>
             <StepContent>
               <form className="form ">
-                <div className="row input ">
-                  {/* <div className="col-12 col-md-6 col-lg-4 col-xl-4">
-                <TextField
-                label="Full Name "
-                name="fullname"
-                type="text"
-                variant="standard"
-                className="mar w-75 "
-                required
-                
-               
-              /> </div>
-               <div className="col-12 col-md-6 col-lg-4 col-xl-4">
-                <TextField
-                label="Full Name "
-                name="fullname"
-                type="text"
-                variant="standard"
-                className="mar w-75 "
-                required
-                
-               
-              /> </div>
-               <div className="col-12 col-md-6 col-lg-4 col-xl-4">
-                <TextField
-                label="Full Name "
-                name="fullname"
-                type="text"
-                variant="standard"
-                className="mar w-75 "
-                required
-                
-               
-              /> </div> */}
-                  <label className="col-12 col-md-2 label">
-                    Name <span className="text-danger">*</span>&nbsp; :
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid Black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                  />
-                </div>
-
-                <div className="row input ">
-                  <label className="col-12 col-md-2 label">
-                    Email <span className="text-danger"> *</span>&nbsp; :
-                  </label>
-                  <input
-                    type="email"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                  />
-                </div>
-
                 <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Mobile Number<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="number"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setMobileNumber(e.target.value)}
-                    value={mobilenumber}
-                  />
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                    <TextField
+                      label="Name"
+                      type="text"
+                      className=" w-100"
+                      required
+                      onChange={(e) => setName(e.target.value)}
+                      value={name}
+                      variant="standard"
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                    <TextField
+                      label="Email"
+                      type="email"
+                      variant="standard"
+                      className="mar w-100"
+                      required
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
+                    />{" "}
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                    <TextField
+                      label="Number "
+                      type="number"
+                      variant="standard"
+                      className="mar w-100"
+                      required
+                      onChange={(e) => setMobileNumber(e.target.value)}
+                      value={mobilenumber}
+                    />{" "}
+                  </div>
                 </div>
 
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="bg-primary continue-btn"
+                      style={{cursor:"pointer"}}
                       variant="contained"
                       onClick={handleBasicDetails}
                       sx={{ mt: 1, mr: 1 }}
@@ -751,112 +705,83 @@ export default function RegistrationForm() {
             <StepContent className="">
               <form className="form">
                 <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Parent's Name <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setParentsName(e.target.value)}
-                    value={parentsname}
-                  />
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                    <TextField
+                      label=" Parent's Name "
+                      type="text"
+                      variant="standard"
+                      className="mar w-75"
+                      required
+                      onChange={(e) => setParentsName(e.target.value)}
+                      value={parentsname}
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" Date of Birth"
+                      type="date"
+                      variant="standard"
+                      className="w-75"
+                      required
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={(e) => setBirthDate(e.target.value)}
+                      value={birthdate}
+                     
+                    />
+                  </div>
                 </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Birth Date <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;
-                  <input
-                    type="date"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setBirthDate(e.target.value)}
-                    value={birthdate}
-                  />
+                <div className="row">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2 ">
+                    <FormControl variant="standard" className="w-75">
+                      <InputLabel>Gender&nbsp;*</InputLabel>
+                      <Select
+                        id="gender"
+                        name="gender"
+                        required
+                        onChange={(e) => setGender(e.target.value)}
+                        value={gender}
+                      
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="male">Male</MenuItem>
+                        <MenuItem value="female">Female</MenuItem>
+                        <MenuItem value="others">Others</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <FormControl variant="standard" className="w-75">
+                      <InputLabel>Marital Status&nbsp;*</InputLabel>
+                      <Select
+                        id="maritalstatus"
+                        name="maritalstatus"
+                        required
+                        onChange={(e) => setMaritalStatus(e.target.value)}
+                        value={maritalstatus}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="single">Single</MenuItem>
+                        <MenuItem value="married">Married</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
                 </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Gender <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setGender(e.target.value)}
-                    value={gender}
-                  >
-                    <option value="">--select--</option>
-                    <option value="male">Male</option>
-
-                    <option value="female">Female </option>
-                    <option value="others"> Others</option>
-                  </select>
+                <div className="row"> 
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                      label="College/School/Company"
+                      type="text"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setCollege(e.target.value)}
+                      value={college}
+                      variant="standard"
+                    /> 
+                  </div>
                 </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Marital Status <span className="text-danger"> *</span>&nbsp;
-                    :
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setMaritalStatus(e.target.value)}
-                    value={maritalstatus}
-                  >
-                    <option value="">--select--</option>
-                    <option value="single">Single</option>
-                    <option value="married">Married</option>
-                  </select>
-                </div>
-
-                <div className="row  ">
-                  <label className="col-12 col-md-2 label">
-                    College / School / Company{" "}
-                    <span className="text-danger"> *</span>&nbsp; :
-                  </label>
-                  &nbsp;
-                  <input
-                    type="text"
-                    className="col-9 col-md-5  mt-3 "
-                    require
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setCollege(e.target.value)}
-                    value={college}
-                  />
-                </div>
-              </form>
+               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
                   <Button
@@ -889,166 +814,130 @@ export default function RegistrationForm() {
             </StepLabel>
             <StepContent>
               <form className="form">
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Country <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setCountry(e.target.value)}
-                    value={country}
-                  >
-                    <option value="">--select--</option>
-                    <option value="india">India </option>
-                    <option value="usa">USA </option>
-                    <option value="australia">Australia </option>
-                    <option value="china">China </option>
-                    <option value="others">Others </option>
-                  </select>
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    State<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setState(e.target.value)}
-                    value={state}
-                  >
-                    <option value="">--select--</option>
-                    <option value="Telangana">Telangana </option>
-                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                    <option value="Assam">Assam</option>
-                    <option value="Bihar">Bihar</option>
-                    <option value="Chhattisgarh">Chhattisgarh</option>
-                    <option value="Goa">Goa</option>
-                    <option value="Gujarat">Gujarat</option>
-                    <option value="Haryana">Haryana</option>
-                    <option value="Himachal Pradesh">Himachal Pradesh</option>
-                    <option value="Jharkhand">Jharkhand</option>
-                    <option value="Karnataka">Karnataka</option>
-                    <option value="Kerala">Kerala</option>
-                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                    <option value="Maharashtra">Maharashtra</option>
-                    <option value="Manipur">Manipur</option>
-                    <option value="Meghalaya">Meghalaya</option>
-                    <option value="Mizoram">Mizoram</option>
-                    <option value="Nagaland">Nagaland</option>
-                    <option value="Odisha">Odisha</option>
-                    <option value="Punjab">Punjab</option>
-                    <option value="Rajasthan">Rajasthan</option>
-                    <option value="Sikkim">Sikkim</option>
-                    <option value="Tamil Nadu">Tamil Nadu</option>
-
-                    <option value="Tripura">Tripura</option>
-                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                    <option value="Uttarakhand">Uttarakhand</option>
-                    <option value="West Bengal">West Bengal</option>
-                    <option value="Andaman and Nicobar Islands">
-                      Andaman and Nicobar Islands
-                    </option>
-                    <option value="Chandigarh">Chandigarh</option>
-                    <option value="Dadra and Nagar Haveli and Daman and Diu">
+                <div className="row"> 
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <FormControl variant="standard" className="w-75">
+                      <InputLabel>Country&nbsp;*</InputLabel>
+                      <Select
+                        
+                        name="country"
+                        required
+                        onChange={(e) => setCountry(e.target.value)}
+                        value={country}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="india">India</MenuItem>
+                        <MenuItem value="usa">USA</MenuItem>
+                        <MenuItem value="china">China</MenuItem>
+                        <MenuItem value="others">Others</MenuItem>
+                      </Select>
+                    </FormControl>
+                
+                </div>  
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <FormControl variant="standard" className="w-75">
+                      <InputLabel>State&nbsp;*</InputLabel>
+                      <Select
+                        
+                        name="state"
+                        required
+                        onChange={(e) => setState(e.target.value)}
+                        value={state}
+                      >
+                         <MenuItem value="">--select--</MenuItem>
+                    <MenuItem value="Telangana">Telangana </MenuItem>
+                    <MenuItem value="Andhra Pradesh">Andhra Pradesh</MenuItem>
+                    <MenuItem value="Arunachal Pradesh">Arunachal Pradesh</MenuItem>
+                    <MenuItem value="Assam">Assam</MenuItem>
+                    <MenuItem value="Bihar">Bihar</MenuItem>
+                    <MenuItem value="Chhattisgarh">Chhattisgarh</MenuItem>
+                    <MenuItem value="Goa">Goa</MenuItem>
+                    <MenuItem value="Gujarat">Gujarat</MenuItem>
+                    <MenuItem value="Haryana">Haryana</MenuItem>
+                    <MenuItem value="Himachal Pradesh">Himachal Pradesh</MenuItem>
+                    <MenuItem value="Jharkhand">Jharkhand</MenuItem>
+                    <MenuItem value="Karnataka">Karnataka</MenuItem>
+                    <MenuItem value="Kerala">Kerala</MenuItem>
+                    <MenuItem value="Madhya Pradesh">Madhya Pradesh</MenuItem>
+                    <MenuItem value="Maharashtra">Maharashtra</MenuItem>
+                    <MenuItem value="Manipur">Manipur</MenuItem>
+                    <MenuItem value="Meghalaya">Meghalaya</MenuItem>
+                    <MenuItem value="Mizoram">Mizoram</MenuItem>
+                    <MenuItem value="Nagaland">Nagaland</MenuItem>
+                    <MenuItem value="Odisha">Odisha</MenuItem>
+                    <MenuItem value="Punjab">Punjab</MenuItem>
+                    <MenuItem value="Rajasthan">Rajasthan</MenuItem>
+                    <MenuItem value="Sikkim">Sikkim</MenuItem>
+                    <MenuItem value="Tamil Nadu">Tamil Nadu</MenuItem>
+                    <MenuItem value="Tripura">Tripura</MenuItem>
+                    <MenuItem value="Uttar Pradesh">Uttar Pradesh</MenuItem>
+                    <MenuItem value="Uttarakhand">Uttarakhand</MenuItem>
+                    <MenuItem value="West Bengal">West Bengal</MenuItem>
+                    <MenuItem value="Andaman and NicobarIslands">Andaman and Nicobar Islands</MenuItem>
+                    <MenuItem value="Chandigarh">Chandigarh</MenuItem>
+                    <MenuItem value="Dadra and Nagar Haveli and Daman and Diu">
                       Dadra and Nagar Haveli and Daman and Diu
-                    </option>
-                    <option value="Lakshadweep">Lakshadweep</option>
-                    <option value="Delhi">Delhi</option>
-                    <option value="Puducherry">Puducherry</option>
-                    <option value="others">Others</option>
-                  </select>
+                    </MenuItem>
+                    <MenuItem value="Lakshadweep">Lakshadweep</MenuItem>
+                    <MenuItem value="Delhi">Delhi</MenuItem>
+                    <MenuItem value="Puducherry">Puducherry</MenuItem>
+                    <MenuItem value="others">Others</MenuItem>
+                      </Select>
+                    </FormControl>
+                
                 </div>
-
+                </div>
+              
+                   
                 <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Area<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setArea(e.target.value)}
-                    value={area}
-                  />
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Native Place <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setNative(e.target.value)}
-                    value={native}
-                  />
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Zip Code <span className="text-danger"> *</span>&nbsp; :
-                  </label>
-                  <input
-                    type="number"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setZipcode(e.target.value)}
-                    value={zipcode}
-                  />
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    WhatsApp Number <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  <input
-                    type="number"
-                    className="col-9 col-md-5 "
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setWhatsAppNo(e.target.value)}
-                    value={whatsappno}
-                  />
-                </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">  
+                  <TextField
+                      label="Area"
+                      type="text"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setArea(e.target.value)}
+                      value={area}
+                    />
+                   </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">  
+                  <TextField
+                      label="Native Place"
+                      type="text"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setNative(e.target.value)}
+                      value={native}
+                    />
+                  </div> 
+                  </div>
+                  <div className="row">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">  
+                    <TextField
+                      label="Zip Code"
+                      type="number"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setZipcode(e.target.value)}
+                      value={zipcode}
+                    />
+                    
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                    <TextField
+                      label="Whatsapp Number"
+                      type="number"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setWhatsAppNo(e.target.value)}
+                      value={whatsappno}
+                    />
+                     </div>
+                     </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1082,84 +971,49 @@ export default function RegistrationForm() {
 
             <StepContent>
               <form className="form">
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Education Type <span className="text-danger"> *</span>:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id="educationtype"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={handleSelectChange}
-                    value={educationtype}
-                  >
-                    <option value="">--select--</option>
-                    <option value="btech">B.Tech</option>
-                    <option value="degree">Degree</option>
-                    <option value="mca">MCA</option>
-                    <option value="ssc">SSC</option>
-                    <option value="others">Others</option>
-                  </select>
-                  {othersOption && (
-                    <div className="mt-3">
-                      <label className="col-12 col-md-2 label"> Others</label>
-                      <input
-                        type="text"
-                        className="col-9 col-md-5"
+              <div className="row ">
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                  <FormControl variant="standard" className="w-75">
+                      <InputLabel>Education Type&nbsp;*</InputLabel>
+                      <Select
+                        id="educationtype"
+                        name="educationtype"
                         required
-                        style={{
-                          height: "35px",
-                          border: "1.5px solid black",
-                          borderRadius: "5px",
-                        }}
-                        onChange={(e) => setCustomEducationType(e.target.value)}
-                        value={customEducationType}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Percentage<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="number"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setMarks(e.target.value)}
-                    value={marks}
-                  />
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Academic Year<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-
-                  <input
-                    type="number"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setAcademicyear(e.target.value)}
-                    value={academicyear}
-                  />
+                        onChange={handleSelectChange}
+                        value={educationtype}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                    
+                    <MenuItem value="btech">B.Tech</MenuItem>
+                    <MenuItem value="degree">Degree</MenuItem>
+                    <MenuItem value="mca">MCA</MenuItem>
+                    <MenuItem value="ssc">SSC</MenuItem>
+                    <MenuItem value="others">Others</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                    <TextField
+                      label="Percentage"
+                      type="number"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setMarks(e.target.value)}
+                      value={marks}
+                    />{" "}
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                    <TextField
+                      label="Academic Year "
+                      type="number"
+                      variant="standard"
+                      className="mar w-75"
+                      required
+                      onChange={(e) => setAcademicyear(e.target.value)}
+                      value={academicyear}
+                    />{" "}
+                  </div>
                 </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
@@ -1261,129 +1115,105 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Enquiry Date<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;
-                  <input
-                    type="date"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setEnquiryDate(e.target.value)}
-                    value={enquirydate}
-                  />
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Enquiry Taken By<span className="text-danger"> *</span>:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setEnquiryTakenBy(e.target.value)}
-                    value={enquirytakenby}
-                  >
-                    <option>---select--</option>
-                    {filteredcounsellor &&
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                  <TextField
+                      label=" Enquiry Date"
+                      type="date"
+                      variant="standard"
+                      className="w-75"
+                      required
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={(e) => setEnquiryDate(e.target.value)}
+                      value={enquirydate}
+                     
+                    />
+                  
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">  
+                  <FormControl variant="standard" className="w-75">
+                      <InputLabel>Enquiry Taken By&nbsp;*</InputLabel>
+                      <Select
+                        id=" enquirytakenby"
+                        name="enquirytakenby"
+                        required
+                        onChange={(e) => setEnquiryTakenBy(e.target.value)}
+                        value={enquirytakenby}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {filteredcounsellor &&
                       filteredcounsellor.map((user, index) => (
-                        <option value={user.fullname}> {user.fullname}</option>
+                        <MenuItem value={user.fullname}> {user.fullname}</MenuItem>
                       ))}
-                  </select>
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Course Package<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setCoursepakage(e.target.value)}
-                    value={coursepackage}
-                  >
-                    <option value="">--select--</option>
-                    {coursepackages &&
+                      </Select>
+                    </FormControl>
+                  </div></div>
+                   <div className="row ">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                    <FormControl variant="standard" className="w-75">
+                      <InputLabel>Course Package&nbsp;*</InputLabel>
+                      <Select
+                        id="coursepackage"
+                        name="coursepackage"
+                        required
+                        onChange={(e) => setCoursepakage(e.target.value)}
+                        value={coursepackage}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {coursepackages &&
                       coursepackages.map((item, index) => (
-                        <option key={item.id} value={item.coursepackages_name}>
+                        <MenuItem key={item.id} value={item.coursepackages_name}>
                           {item.coursepackages_name}
-                        </option>
+                        </MenuItem>
                       ))}
-                  </select>
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Courses<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setCourses(e.target.value)}
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                  <FormControl variant="standard" className="w-75">
+                      <InputLabel>Course&nbsp;*</InputLabel>
+                      <Select
+                        id="courses"
+                        name="courses"
+                        required
+                        onChange={(e) => setCourses(e.target.value)}
                     value={courses}
-                  >
-                    <option value="">--select--</option>
-                    {getcourses &&
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {getcourses &&
                       getcourses.map((item, index) => (
-                        <option key={item.id} value={item.course_name}>
+                        <MenuItem key={item.id} value={item.course_name}>
                           {item.course_name}
-                        </option>
+                        </MenuItem>
                       ))}
-                  </select>
+                      </Select>
+                    </FormControl>
+                  </div>
                 </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Lead Source<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setLeadSource(e.target.value)}
-                    value={leadsource}
-                  >
-                    <option>---select---</option>
-                    {leadsources &&
+               <div className="row ">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">  
+                <FormControl variant="standard" className="w-75">
+                      <InputLabel>Lead Source&nbsp;*</InputLabel>
+                      <Select
+                        id="leadsource"
+                        name="leadsource"
+                        required
+                        onChange={(e) => setLeadSource(e.target.value)}
+                        value={leadsource}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {leadsources &&
                       leadsources.map((item, index) => (
-                        <option key={item.id} value={item.leadsource}>
+                        <MenuItem key={item.id} value={item.leadsource}>
                           {item.leadsource}
-                        </option>
+                        </MenuItem>
                       ))}
-                  </select>
+                      </Select>
+                    </FormControl>
+                
                 </div>
+                  </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1419,153 +1249,120 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Branch<span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setBranch(e.target.value)}
-                    value={branch}
-                  >
-                    <option value="">--select--</option>
-
-                    {branches &&
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                  <FormControl variant="standard" className="w-75">
+                      <InputLabel>Branch&nbsp;*</InputLabel>
+                      <Select
+                        id="branch"
+                        name="branch"
+                        required
+                        onChange={(e) => setBranch(e.target.value)}
+                        value={branch}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {branches &&
                       branches.map((item, index) => (
-                        <option key={item.id} value={item.branch_name}>
+                        <MenuItem key={item.id} value={item.branch_name}>
                           {item.branch_name}
-                        </option>
+                        </MenuItem>
                       ))}
-                    {/*
-                    <option value="hitechcity">Hitech-city</option>
-                    <option value="ameerpet">Ameerpet</option>
-                    <option value="dilsukhnagar">Dilsukhnagar</option>
-                    <option value="gachibowli">Gachibowli</option> */}
-                  </select>
+                     
+                      </Select>
+                    </FormControl>
+                  </div>
+                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+                 <FormControl variant="standard" className="w-75">
+                      <InputLabel>Mode of Traning&nbsp;*</InputLabel>
+                      <Select
+                        id="modeoftraining"
+                        name="modeoftraining"
+                        required
+                        onChange={(e) => setModeOfTraining(e.target.value)}
+                        value={modeoftraining}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="online">Online</MenuItem>
+                   <MenuItem value="offline"> Offline</MenuItem>
+                     
+                      </Select>
+                    </FormControl>
+                 </div>
                 </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Mode of Traning<span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5 "
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setModeOfTraining(e.target.value)}
-                    value={modeoftraining}
-                  >
-                    <option value="">--select--</option>
-                    <option value="online">Online</option>
-                    <option value="offline">Offline</option>
-                  </select>
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Admission Status<span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5  "
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setAdmissionStatus(e.target.value)}
-                    value={admissionstatus}
-                  >
-                    <option value="">--select--</option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                  </select>
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Admission Date <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp;
-                  <input
-                    type="date"
-                    className="col-9 col-md-5 "
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setAdmissionDate(e.target.value)}
+                <div className="row">  
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                <FormControl variant="standard" className="w-75">
+                      <InputLabel>Admission Status&nbsp;*</InputLabel>
+                      <Select
+                        id="admissionstatus"
+                        name="admissionstatus"
+                        required
+                        onChange={(e) => setAdmissionStatus(e.target.value)}
+                        value={admissionstatus}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="active">Active</MenuItem>
+                   <MenuItem value="inactive"> Inactive</MenuItem>
+                     
+                      </Select>
+                    </FormControl>
+                 </div> 
+                 <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                  <TextField
+                      label="Admission Date"
+                      type="date"
+                      variant="standard"
+                      className="w-75"
+                      required
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={(e) => setAdmissionDate(e.target.value)}
                     value={admissiondate}
-                  />
-                </div>
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Registration No <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp; &nbsp;&nbsp;&nbsp;
-                  {registrationnumber}
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Validity Start Date <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp;
-                  <input
-                    type="date"
-                    className="col-9 col-md-5 "
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setValidityStartDate(e.target.value)}
-                    value={validitystartdate}
-                  />
-                </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Validity End Date <span className="text-danger"> *</span>
-                    &nbsp;:
-                  </label>
-                  &nbsp;
-                  <input
-                    type="date"
-                    className="col-9 col-md-5 "
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setValidityEndDate(e.target.value)}
+                     
+                    />
+               </div>
+                 </div>
+<div className="row ">
+<div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                  <TextField
+                      label="Validity Start Date"
+                      type="date"
+                      variant="standard"
+                      className="w-75"
+                      required
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                     
+                      onChange={(e) => setValidityStartDate(e.target.value)}
+                      value={validitystartdate}
+                    /></div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                    <TextField
+                        label="validity End Date"
+                        type="date"
+                        variant="standard"
+                        className="w-75"
+                        required
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={(e) => setValidityEndDate(e.target.value)}
                     value={validityenddate}
-                  />
-                </div>
+                       /> 
+                </div></div>
+              <div className="row ">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                    <TextField
+                        label="Registration Number"
+                    
+                        variant="standard"
+                        className="w-75"
+                        required
+                       value={registrationnumber}
+                      />
+                    </div>
+              </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1601,66 +1398,50 @@ export default function RegistrationForm() {
             <StepContent>
               <form onSubmit={handleFeeDetails} className="form">
                 <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Fee Type <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select
-                    className="col-9 col-md-5"
-                    id=""
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setfeetype(e.target.value)}
-                    value={feetype}
-                  >
-                    <option value="">--select--</option>
-                    <option value="admissionfee">Admission Fee</option>
-
-                    <option value="fee">Fee </option>
-                  </select>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                  <FormControl variant="standard" className="w-75">
+                      <InputLabel>Fee Type&nbsp;*</InputLabel>
+                      <Select
+                        id="feetype"
+                        name="Fee Type"
+                        required
+                        onChange={(e) => setfeetype(e.target.value)}
+                        value={feetype}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="admissionfee">Admission Fee</MenuItem>
+                       <MenuItem value="fee"> Fee</MenuItem>
+                     
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
+                    <TextField
+                        label="Amount"
+                        type="number"
+                        variant="standard"
+                        className="w-75"
+                        required
+                        
+                        onChange={(e) => setAmount(e.target.value)}
+                        value={amount}
+                       /> 
                 </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Amount <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="number"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setAmount(e.target.value)}
-                    value={amount}
-                  />
                 </div>
-
-                <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Discount <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  <input
-                    type="number"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setDiscount(e.target.value)}
-                    value={discount}
-                  />
+                <div className="row">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                  <TextField
+                        label="Discount"
+                        type="number"
+                        variant="standard"
+                        className="w-75"
+                        required
+                        onChange={(e) => setDiscount(e.target.value)}
+                        value={discount}
+                       /> 
+                  </div>
                 </div>
-
-                {/* <div className="row ">
+                      {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Tax Amount <span className="text-danger"> *</span>&nbsp;:
                   </label>
@@ -1930,29 +1711,21 @@ export default function RegistrationForm() {
             </StepLabel>
             <StepContent>
               <form className="form">
-                <div className="row input ">
-                  <label className="col-12 col-md-2 label">
-                    {" "}
-                    Admission Remarks <span className="text-danger "> *</span>
-                    &nbsp;:
-                  </label>
-                  <input
-                    type="text"
-                    className="col-9 col-md-5 "
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    onChange={(e) => setadmissionremarks(e.target.value)}
-                    value={admissionremarks}
-                  />
-                </div>
-                <br />
-
                 <div className="row ">
-                  <label className="col-12 col-md-2 label">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                  <TextField
+                        label="Remarks"
+                        type="text"
+                        variant="standard"
+                        className="w-75"
+                        required
+                        onChange={(e) => setadmissionremarks(e.target.value)}
+                        value={admissionremarks}
+                       />
+                  </div>
+                </div>
+                <br/>
+                 <label className="col-12 col-md-2 label">
                     Assets <span className="text-danger"> *</span>&nbsp;:
                   </label>
                   &nbsp;&nbsp;&nbsp;
@@ -2036,11 +1809,10 @@ export default function RegistrationForm() {
                     <option value="lms"> LMS</option>
                     <option value="coursematerial"> Course Materials</option>
                   </select> */}
-                </div>
+               
               </form>
 
               <Box sx={{ mb: 2, mt: 2 }}>
-                
                 <Button
                   className="bg-primary"
                   variant="contained"
@@ -2051,53 +1823,64 @@ export default function RegistrationForm() {
                 </Button>
                 {/* <button onClick={openPopup}>Preview</button> */}
                 <Popup show={isPopupOpen} onClose={closePopup}>
-                 <div className="row"> 
-                 <div className="col-12 col-md-7 col-lg-4 col-xl-4"> <img className="pop-img rounded-circle"
-                  src="https://assets-global.website-files.com/650865454c2393ac25711ff7/650865454c2393ac25714a3e_The%2520best%2520selfie%2520Ideas%2520for%2520sm%2520pfp-p-500.jpeg"
-                  alt="profile"
-                  /></div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4"> 
-                    <p> Name :{name}</p>
-                    <p> EMail: {email}</p>
-                    <p> Mobile Number: {mobilenumber}</p>
-                    <p> Registration No: {registrationnumber}</p>
-                    <p> Whatsapp Number: {whatsappno}</p>
+                  <div className="row">
+                    <div className="col-12 col-md-7 col-lg-4 col-xl-4">
+                      {" "}
+                      <img
+                        className="pop-img rounded-circle"
+                        src="https://assets-global.website-files.com/650865454c2393ac25711ff7/650865454c2393ac25714a3e_The%2520best%2520selfie%2520Ideas%2520for%2520sm%2520pfp-p-500.jpeg"
+                        alt="profile"
+                      />
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
+                      <p> Name :{name}</p>
+                      <p> EMail: {email}</p>
+                      <p> Mobile Number: {mobilenumber}</p>
+                      <p> Registration No: {registrationnumber}</p>
+                      <p> Whatsapp Number: {whatsappno}</p>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
+                      <p> Admission Date: {admissiondate} </p>
+                      <p> Course: {courses}</p>
+                      <p> Branch : {branch}</p>
+                      <p> Validity Start Date:{validitystartdate}</p>
+                      <p> Validity End Date : {validityenddate}</p>
+                    </div>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4"> 
-                    <p> Admission Date: {admissiondate} </p>
-                    <p> Course: {courses}</p>
-                    <p> Branch : {branch}</p>
-                    <p> Validity Start Date:{validitystartdate}</p>
-                    <p> Validity End Date : {validityenddate}</p>
-                    
+                  <div className="row">
+                    <div className="col-12 col-md-6 col-lg-4 col-xl-4  mt-2 ">
+                      <p>Country : {country}</p>
+                      <p> State: {state} </p>
+                      <p>Area: {area} </p>
+                      <p> Native Place: {native}</p>
+                      <p> Zipcode: {zipcode}</p>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2 ">
+                      <p> Parent's Name : {parentsname}</p>
+                      <p> Birth Date: {birthdate}</p>
+                      <p>
+                        {" "}
+                        Gender: {gender} , {maritalstatus}{" "}
+                      </p>
+                      <p>
+                        {" "}
+                        College: {college} , {academicyear}{" "}
+                      </p>
+                      <p>
+                        {" "}
+                        Education Type: {educationtype} ,{marks}{" "}
+                      </p>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                      <p> Enquiry Date : {enquirydate}</p>
+                      <p> Enquiry Taken By: {enquirytakenby}</p>
+                      <p> Course Package: {coursepackage}</p>
+                      <p>Lead Source: {leadsource} </p>
+                      <p> Mode of Traning: {modeoftraining}</p>
+                    </div>
                   </div>
-                 </div>
-                 <div className="row"> 
-                 <div className="col-12 col-md-6 col-lg-4 col-xl-4  mt-2 " > 
-                        <p>Country : {country}</p>
-                        <p> State: {state} </p>
-                        <p>Area: {area} </p>
-                        <p> Native Place: {native}</p>
-                        <p> Zipcode: {zipcode}</p>
-                 
-                 </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2 " > 
-                  <p> Parent's Name : {parentsname}</p>
-                        <p> Birth Date: {birthdate}</p>
-                        <p> Gender: {gender} ,  {maritalstatus} </p>
-                        <p> College: {college} , {academicyear} </p>
-                        <p> Education Type: {educationtype} ,{marks}  </p>
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2"> 
-                  <p> Enquiry Date : {enquirydate}</p>
-                        <p> Enquiry Taken By: {enquirytakenby}</p>
-                        <p> Course Package: {coursepackage}</p>
-                        <p>Lead Source: {leadsource} </p>
-                        <p> Mode of Traning: {modeoftraining}</p>
-                  </div>
-                 </div>
-                 <div> 
-                 <TableContainer component={Paper} className="my-4">
+                  <div>
+                    <TableContainer component={Paper} className="my-4">
                       <Table
                         sx={{ minWidth: 650 }}
                         size="large"
@@ -2153,8 +1936,6 @@ export default function RegistrationForm() {
                                   {parseFloat(item.taxamount).toFixed(2)}
                                 </TableCell>
                                 <TableCell className="text-center border border-2">
-                                
-                           
                                   {item.feetype === "fee" ? (
                                     <>
                                       Materialfee:{materialfee}&nbsp; ,
@@ -2163,7 +1944,8 @@ export default function RegistrationForm() {
                                     </>
                                   ) : (
                                     <span></span>
-                                  )}<br/>
+                                  )}
+                                  <br />
                                   <b>{item.totalamount}</b>
                                 </TableCell>
                               </TableRow>
@@ -2171,18 +1953,15 @@ export default function RegistrationForm() {
                         </TableBody>
                       </Table>
                     </TableContainer>
-                 </div>
-                 <div className="row"> 
-                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                 Admission Remarks:{admissionremarks}
-                 </div>
-                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              Assets: {assets}
-                 </div>
-                 
-
-
-                 </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      Admission Remarks:{admissionremarks}
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      Assets: {assets}
+                    </div>
+                  </div>
                   {/* <div className="studentdataview ">
                     <div className="bg">
                       <img
@@ -2332,16 +2111,16 @@ export default function RegistrationForm() {
                     </TableContainer>
                   </div> */}
 
-                <div className="col-12 text-end "> 
-                <Button
-                    className="bg-primary "
-                    variant="contained"
-                    onClick={handleSubmit}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Submit
-                  </Button>
-                </div>
+                  <div className="col-12 text-end ">
+                    <Button
+                      className="bg-primary "
+                      variant="contained"
+                      onClick={handleSubmit}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Submit
+                    </Button>
+                  </div>
                 </Popup>
                 {/* </div> */}
                 <Button
