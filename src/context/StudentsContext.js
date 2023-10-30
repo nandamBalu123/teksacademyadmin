@@ -12,6 +12,24 @@ export const StudentsReducer = (state, action) => {
       return {
         students: [...state.students, action.payload],
       };
+    case "UPDATE_STUDENT":
+      // Find the index of the user to be updated in the current state
+      const updatedStudentIndex = state.students.findIndex(
+        (user) => user._id === action.payload._id
+      );
+
+      if (updatedStudentIndex === -1) {
+        // User not found, no update needed
+        return state;
+      }
+
+      // Create a copy of the users array with the updated user
+      const updatedStudent = [...state.students];
+      updatedStudent[updatedStudentIndex].certificate_status = action.payload;
+
+      return {
+        students: updatedStudent,
+      };
     default:
       return state;
   }

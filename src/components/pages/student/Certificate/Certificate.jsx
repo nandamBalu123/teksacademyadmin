@@ -22,10 +22,11 @@ import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { GolfCourseSharp } from "@mui/icons-material";
 const Certificate = () => {
-  const { students } = useStudentsContext();
+  const { students, dispatch } = useStudentsContext();
   const { getcourses } = useCourseContext();
   const { branches } = useBranchContext();
   const { users } = useUsersContext();
+  // const {dispatch}= useStudentsContext()
   const [filteredData, setFilteredData] = useState(students);
   const [courseStartDate, setcourseStartDate] = useState();
   const [courseEndDate, setcourseEndDate] = useState();
@@ -187,7 +188,8 @@ const Certificate = () => {
       .then((res) => {
         if (res.data.updated) {
           // alert("Certificate updated successfully");
-          window.location.reload();
+          // dispatch({ type: "UPDATE_STUDENT", payload: certificate_status });
+          // window.location.reload();
         } else {
           alert("Error please Try Again");
         }
