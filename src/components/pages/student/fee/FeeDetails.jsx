@@ -268,12 +268,12 @@ const FeeDetails = () => {
                 </div>
                 <hr />
                 
-                <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 feedetails-input"> 
-                  
+                <div className="d-flex justify-content-between">
+                <MenuItem> 
+                <label> From: </label> 
                 <input
                       type="date"
-                      className="w-75"
+                    
                       style={{
                         height: "45px",
                         border: "1.5px solid black",
@@ -283,14 +283,12 @@ const FeeDetails = () => {
                       value={filterCriteria.fromdate}
                       onChange={handleInputChange}
                     />
-                     <label> From: </label>
-               
-                  </div>
-                 
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 feedetails-input"> 
-                   <input
+                </MenuItem>
+                <MenuItem> 
+                <label> To: </label>
+                <input
                       type="date"
-                      className="w-75"
+                   
                       style={{
                         height: "45px",
                         border: "1.5px solid black",
@@ -300,18 +298,18 @@ const FeeDetails = () => {
                       value={filterCriteria.todate}
                       onChange={handleInputChange}
                     />
-                <label> To: </label>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 feedetails-select"> 
-              
-                    <select
+                </MenuItem>
+                   </div>
+                <div className="d-flex justify-content-between">
+               <MenuItem> 
+             
+               
+               <select
                       id=""
-                  
-                      className="w-75 ms-3"
-                      style={{
+                      className="ms-1"
+                   style={{
                         height: "45px",
+                        paddingRight:"4rem",
                         border: "1.5px solid black",
                         borderRadius: "5px",
                       }}
@@ -327,27 +325,30 @@ const FeeDetails = () => {
                           </option>
                         ))}
                     </select>
-                   <label> Branch</label>
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 feedetails-select"> 
-              
-                    <select
+               </MenuItem>
+              <MenuItem> 
+              <select
                       id=""
-                      className="w-75"
-                    
-                      style={{
+                     style={{
                         height: "45px",
+                        paddingRight:"2rem",
                         border: "1.5px solid black",
                         borderRadius: "5px",
                       }}
                       name="amount"
                     >
-                      <option> Select Type</option>
+                      <option> Mode of Traning</option>
                       <option value="paidamount"> Paid Amount</option>
                       <option value="dueamount"> Due Amount</option>
                     </select>
-                 <label> Mode of Traning</label>
-                 </div>
+              </MenuItem>
+                  
+           
+                
+              
+                   
+         
+              
                   
                  
                 </div>

@@ -58,6 +58,7 @@ import CoursePackage from "./components/pages/settings/coursepackage/CoursePacka
 import CreateCoursePackage from "./components/pages/settings/coursepackage/CreateCoursePackage";
 import Course from "./components/pages/settings/courses/Course";
 import CreateCourse from "./components/pages/settings/courses/CreateCourse";
+import Requestedcertificates from "./components/pages/student/Certificate/Requestedcertificates";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 
@@ -176,6 +177,10 @@ function App() {
                       <Dashboard />
                     )
                   }
+                />
+                 <Route
+                  path="/requestedcertificates"
+                  element={user ? <Requestedcertificates /> : <Dashboard />}
                 />
                 <Route
                   path="/usersdata"

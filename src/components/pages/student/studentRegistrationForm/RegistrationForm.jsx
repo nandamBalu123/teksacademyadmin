@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import CloseIcon from '@mui/icons-material/Close';
+import TextField from "@mui/material/TextField";
 // import { blue } from "@mui/material/colors";
 // import { useDropzone } from 'react-dropzone';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
@@ -640,6 +641,39 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form ">
                 <div className="row input ">
+                  {/* <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+                <TextField
+                label="Full Name "
+                name="fullname"
+                type="text"
+                variant="standard"
+                className="mar w-75 "
+                required
+                
+               
+              /> </div>
+               <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+                <TextField
+                label="Full Name "
+                name="fullname"
+                type="text"
+                variant="standard"
+                className="mar w-75 "
+                required
+                
+               
+              /> </div>
+               <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+                <TextField
+                label="Full Name "
+                name="fullname"
+                type="text"
+                variant="standard"
+                className="mar w-75 "
+                required
+                
+               
+              /> </div> */}
                   <label className="col-12 col-md-2 label">
                     Name <span className="text-danger">*</span>&nbsp; :
                   </label>
