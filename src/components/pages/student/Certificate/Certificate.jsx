@@ -278,14 +278,14 @@ const Certificate = () => {
                 </MenuItem>
               </div>
               <hr />
-              <MenuItem className="pt-3 ">
-                <div>
-                  <label> From: </label>
-                </div>
-                <div>
-                  <input
+             <div className="row"> 
+           <div className=" col-12 col-md-6 col-lg-6 col-xl-6"> 
+           <MenuItem>
+          <label className="mt-3"> From: </label>
+             <input
+          
                     type="date"
-                    className="w-100"
+                  
                     style={{
                       height: "45px",
                       border: "1.5px solid black",
@@ -294,35 +294,108 @@ const Certificate = () => {
                     name="fromdate"
                     value={filterCriteria.fromdate}
                     onChange={handleInputChange}
-                  />
-                </div>
-              </MenuItem>
-              <MenuItem className="pt-3 ">
-                <label className="ms-"> To: </label>
-
-                <div>
-                  <input
+                  /></MenuItem>
+           </div>
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+          <MenuItem>
+               <label className="mt-3" > To: </label>
+               <input
                     type="date"
-                    className="w-100"
+                    
                     style={{
                       height: "45px",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
-                    name="todate"
-                    value={filterCriteria.todate}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
                     onChange={handleInputChange}
-                  />
-                </div>
-              </MenuItem>
-              <MenuItem>
+                  /></MenuItem>
+          </div>
+            </div>
+<div className="d-flex justify-content-between"> 
+          
+           <MenuItem>
+          
                 <select
                   className="mt-3"
                   id=""
                   required
                   style={{
                     height: "45px",
-                    paddingRight: "145px",
+                    paddingRight: "6rem",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="course"
+                  value={filterCriteria.course}
+                  onChange={handleInputChange}
+                >
+                  <option>Branch</option>
+                  {getcourses &&
+                    getcourses.map((item, index) => (
+                      <option key={item.id} value={item.course_name}>
+                        {item.course_name}
+                      </option>
+                    ))}
+                </select>
+              </MenuItem>
+        <MenuItem>
+                <select
+                  className="mt-3"
+                  id=""
+                  required
+                  style={{
+                    height: "45px",
+
+                    paddingRight: "4rem",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="enquirytakenby"
+                  value={filterCriteria.enquirytakenby}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Counsellor</option>
+                  {filteredcounsellor &&
+                    filteredcounsellor.map((user, index) => (
+                      <option value={user.fullname}> {user.fullname}</option>
+                    ))}
+                </select>
+              </MenuItem>
+             </div>
+             <div className="d-flex justify-content-between"> 
+             <MenuItem>
+                <select
+                  className="mt-3"
+                  id=""
+                  required
+                  style={{
+                    height: "45px",
+
+                    paddingRight: "2rem",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="status"
+                  value={filterCriteria.status}
+                  onChange={handleInputChange}
+                >
+                  <option value="">---Status---</option>
+                  <option value="">Request Submitted</option>
+                  <option value="issued">Issued</option>
+                  <option value="">Pending</option>
+                </select>
+              </MenuItem>
+           
+<MenuItem>
+                <select
+                  className="mt-3"
+                  id=""
+                  required
+                  style={{
+                    height: "45px",
+                    paddingRight: "5rem",
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}
@@ -339,76 +412,9 @@ const Certificate = () => {
                     ))}
                 </select>
               </MenuItem>
-              <MenuItem>
-                <select
-                  className="mt-3"
-                  id=""
-                  required
-                  style={{
-                    height: "45px",
-
-                    paddingRight: "50px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="branch"
-                  value={filterCriteria.branch}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Branch</option>
-                  {branches &&
-                    branches.map((branch, index) => (
-                      <option key={branch.id} value={branch.branch_name}>
-                        {branch.branch_name}
-                      </option>
-                    ))}
-                </select>
-              </MenuItem>
-              <MenuItem>
-                <select
-                  className="mt-3"
-                  id=""
-                  required
-                  style={{
-                    height: "45px",
-
-                    paddingRight: "50px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="enquirytakenby"
-                  value={filterCriteria.enquirytakenby}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Counsellor</option>
-                  {filteredcounsellor &&
-                    filteredcounsellor.map((user, index) => (
-                      <option value={user.fullname}> {user.fullname}</option>
-                    ))}
-                </select>
-              </MenuItem>
-              <MenuItem>
-                <select
-                  className="mt-3"
-                  id=""
-                  required
-                  style={{
-                    height: "45px",
-
-                    paddingRight: "50px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="status"
-                  value={filterCriteria.status}
-                  onChange={handleInputChange}
-                >
-                  <option value="">---Status---</option>
-                  <option value="">Request Submitted</option>
-                  <option value="issued">Issued</option>
-                  <option value="">Pending</option>
-                </select>
-              </MenuItem>
+             
+              </div>
+    
               <MenuItem className="d-flex justify-content-between">
                 <button className="clear" onClick={filterreset}>
                   {" "}
@@ -527,7 +533,7 @@ const Certificate = () => {
                         <TableCell className="border border 1  text-center fs-6">
                           {certificateStatus === "" && (
                             <button
-                              className="btn btn-primary center"
+                              className="btn btn-primary center m-0 px-1"
                               onClick={(e) => handleRequest(student.id)}
                             >
                               Request Certificate
@@ -535,7 +541,7 @@ const Certificate = () => {
                           )}
                           {certificateStatus === "request Submitted" && (
                             <button
-                              className="btn btn-warning center"
+                              className="btn btn-warning center m-0 px-1"
                               onClick={(e) => handleRequest(student.id)}
                             >
                               Request Submitted
@@ -543,7 +549,7 @@ const Certificate = () => {
                           )}
                           {certificateStatus === "issued" && (
                             <button
-                              className="btn  btn-success center"
+                              className="btn  btn-success center m-0 px-1"
                               onClick={(e) => handleRequest(student.id)}
                             >
                               Certificate Issued

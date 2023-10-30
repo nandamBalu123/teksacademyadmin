@@ -64,8 +64,9 @@ const Topbar = () => {
   }
   return (
     <div className="container ">
+      
       <div className="row topbar mt-0 ">
-        <div className="col-sm-10 col-md-10 col-lg-9 col-xl-10 ">
+        <div className="col-6 col-md-9 col-lg-10 col-xl-10 ">
           {/* <Box
             backgroundColor={colors.primary[400]}
             borderRadius="3px"
@@ -90,7 +91,7 @@ const Topbar = () => {
 
         <div className="col-1 col-md-1 col-lg-1 col-xl-1 ">
           <IconButton>
-            <NotificationsOutlinedIcon />
+            <NotificationsOutlinedIcon className="Topbar-icon end" ></NotificationsOutlinedIcon>
           </IconButton>{" "}
         </div>
        
@@ -103,7 +104,10 @@ const Topbar = () => {
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
             >
-              <PersonOutlinedIcon className="personicon"> </PersonOutlinedIcon>
+            
+              <PersonOutlinedIcon className="Topbar-icon end"> </PersonOutlinedIcon>
+             
+              
             </Button>
             <Menu
               id="basic-menu"

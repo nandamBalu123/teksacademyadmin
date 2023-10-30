@@ -36,6 +36,22 @@ import {
 const UsersData = () => {
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
+  const [isChecked , setIsChecked]=useState(false);
+  const [opening, setOpening] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpening(true);
+  };
+
+  const handleClosed = () => {
+    setOpening(false);
+  };
+  const handleok = () => {
+    setIsChecked(!isChecked);
+   
+    setOpening(false);
+   
+  };
   const [initialData, setData] = useState([{ name: "" }]);
   const [filteredData, setFilteredData] = useState(initialData);
 
@@ -549,10 +565,34 @@ const UsersData = () => {
                             >
                               <ModeEditIcon />
                             </Link>
-                            <DeleteIcon
-                              style={{ width: "40px" }}
-                              onClick={() => handleDelete(user.id)}
-                            />
+                            <div class="form-check form-switch">
+  <input class="form-check-input" 
+  type="checkbox" role="switch"
+   id="flexSwitchCheckChecked" 
+   checked={isChecked} 
+   onChange={handleClickOpen}/>
+  </div> <Dialog open={opening} onClose={handleClosed}>
+        
+        <DialogContent>
+        <DialogContentText> 
+          <label> Enter Remarks :</label>
+          </DialogContentText>
+          <DialogContentText>
+           
+          <textarea rows="4" cols="50" name="comment" form="usrform"></textarea>
+          </DialogContentText>
+          
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosed}>Cancel</Button>
+          {!isChecked  && <Button onClick={handleok}>Activate</Button>}
+
+          {isChecked && <Button onClick={handleok}>InActivate</Button>}
+        
+        
+        </DialogActions>
+      </Dialog>
+
                           </StyledTableCell>
                         </StyledTableRow>
                       ))}

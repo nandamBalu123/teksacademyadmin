@@ -18,12 +18,15 @@ import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import PrintIcon from "@mui/icons-material/Print";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import RotateLeftIcon from "@mui/icons-material/RotateLeft";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 
-import ShowChartIcon from "@mui/icons-material/ShowChart";
 
-import SearchIcon from "@mui/icons-material/Search";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -53,13 +56,14 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
+import Switch from '@mui/material/Switch';
 import axios from "axios";
 // import { CSVLink } from "react-csv";
 // import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 // import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 // import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.blue,
@@ -85,7 +89,24 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const StudentData = () => {
   const { branches } = useBranchContext();
   const { leadsources } = useLeadSourceContext();
+  const [isChecked, setIsChecked] = useState(false);
+  const [opening, setOpening] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpening(true);
+  };
+
+  const handleClosed = () => {
+    setOpening(false);
+  };
+  const handleok = () => {
+    setIsChecked(!isChecked);
+   
+    setOpening(false);
+   
+  };
+
+ 
   const [initialData, setData] = useState([{ name: "" }]);
   // const [initialData, setData] = useState(initialDataa);
 
@@ -118,7 +139,7 @@ const StudentData = () => {
   };
   const [getusers, setgetusers] = useState([]);
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
-
+  
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -302,7 +323,7 @@ const StudentData = () => {
             </h6>
           </div>
 
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 ">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-2 ">
             {" "}
             <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               {" "}
@@ -331,22 +352,13 @@ const StudentData = () => {
                 </MenuItem>
               </div>
               <hr />
-          <form > 
-          
-          </form>
-
-
-
-
-
-              <div className="row">
+              
+ <div className="row">
                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+             
+               <MenuItem >
                <label > From: </label>
-               <MenuItem className="pt-3 ">
-                  <div>
-                  
-                  </div>
-                  <div> 
+               
                   <input
                     type="date"
                     className="w-100"
@@ -359,17 +371,15 @@ const StudentData = () => {
                     value={filterCriteria.fromdate}
                     onChange={handleInputChange}
                   />
-                  </div>
+      
                 </MenuItem>
                </div>
     
                <div  className="col-12 col-md-6 col-lg-6 col-xl-6">
-               <label className="ms-4 m-0 p-0"> To: </label>
-               <MenuItem className="pt-3 ">
-                 
-                 
-                 <div> 
-                 <input
+              
+               <MenuItem >
+               <label > To: </label>
+                <input
                     type="date"
                     className="w-100"
                     style={{
@@ -381,8 +391,7 @@ const StudentData = () => {
                     value={filterCriteria.todate}
                     onChange={handleInputChange}
                   />
-                 </div>
-                </MenuItem>
+              </MenuItem>
                  </div>
               </div>
               <div className="row">  
@@ -394,7 +403,7 @@ const StudentData = () => {
                     placeholder="Filter Branch"
                     style={{
                       height: "45px",
-
+                     paddingRight:"5rem",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -421,7 +430,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-
+                     paddingRight:"2rem",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -439,7 +448,7 @@ const StudentData = () => {
                   </select>
                 </MenuItem>
               </div> </div>
-             
+            
             
               <div className="d-flex w-100 mt-3 mb-2">
                 <MenuItem>
@@ -449,7 +458,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "90px",
+                      paddingRight: "1rem",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -470,7 +479,7 @@ const StudentData = () => {
                     required
                     style={{
                       height: "45px",
-                      paddingRight: "133px",
+                      paddingRight: "4rem",
                       border: "1.5px solid black",
                       borderRadius: "5px",
                     }}
@@ -696,12 +705,44 @@ const StudentData = () => {
                         >
                           <PrintIcon className="iconn" />
                         </Link>
-                        <Link to={`//${item.id}`} style={{ width: "40px" }}>
-                          <DeleteOutlineIcon
-                            style={{ color: "red" }}
-                            className="iconn"
-                          />
-                        </Link>
+                      
+                        <div className="form-check form-switch">
+<input
+        className="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckChecked"
+        checked={isChecked}
+        onChange={handleClickOpen}
+      />
+
+</div>
+             
+
+      <Dialog open={opening} onClose={handleClosed}>
+      
+        <DialogContent>
+          <DialogContentText> 
+          <label> Enter Remarks :</label>
+          </DialogContentText>
+          <DialogContentText>
+           
+          <textarea rows="4" cols="50"  name="comment" form="usrform"></textarea>
+          </DialogContentText>
+          
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosed}>Cancel</Button>
+          {!isChecked  && <Button onClick={handleok}>Activate</Button>}
+
+          {isChecked && <Button onClick={handleok}>InActivate</Button>}
+        
+        
+        </DialogActions>
+      </Dialog>
+
+                       
+                     
                       </TableCell>
                     </TableRow>
                   ))
