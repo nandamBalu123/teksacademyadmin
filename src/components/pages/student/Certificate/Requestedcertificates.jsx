@@ -45,17 +45,246 @@ const Requestedcertificates = () => {
   const [issuedCertificates, setissuedCertificates] = useState(false);
   return (
     <div className="container req-certificate my-3">
-      <h4>Requested Certificates</h4>
-      {issuedCertificates && (
-        <button onClick={(e) => setissuedCertificates((e) => !e)}>
-          Requested Certificates
-        </button>
-      )}
-      {!issuedCertificates && (
-        <button onClick={(e) => setissuedCertificates((e) => !e)}>
-          Issued Certificates
-        </button>
-      )}
+      <div className="d-flex justify-content-between">
+        {!issuedCertificates && <span>Requested Certificates</span>}
+        {issuedCertificates && <span>Issued Certificates</span>}
+
+        {issuedCertificates && (
+          <button
+            class="btn btn-primary"
+            onClick={(e) => setissuedCertificates((e) => !e)}
+          >
+            Requested Certificates
+          </button>
+        )}
+        {!issuedCertificates && (
+          <button
+            class="btn btn-primary"
+            onClick={(e) => setissuedCertificates((e) => !e)}
+          >
+            Issued Certificates
+          </button>
+        )}
+      </div>
+
+      {/* <div className="row mb-3 px-4 pt-2">
+        <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+          <input
+            type="text"
+            className="input-field ps-2"
+            placeholder="Search Here...."
+            autoComplete="off"
+            style={{
+              height: "45px",
+              width: "100%",
+              outline: "none",
+              borderTop: "none",
+              borderBottom: "1.5px solid black",
+              background: "none",
+              border: "hidden",
+              borderRadius: "5px",
+            }}
+            name="search"
+            value={filterCriteria.search}
+            onChange={handleInputChange}
+          />
+          <hr className="w-75" />
+        </div>
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
+          <h6>
+            {" "}
+            {recordCount}/{initialDataCount}
+          </h6>
+        </div>
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-3">
+          <select onChange={handlerecorddata}>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="75">75</option>
+          </select>
+        </div>
+
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
+          <Button
+            id="demo-positioned-button"
+            aria-controls={open ? "demo-positioned-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          >
+            <button
+              className="btn btn-primary mr-20 ms-2 mb-2"
+              style={{ textTransform: "capitalize" }}
+            >
+              Filter
+            </button>
+          </Button>
+
+          <Menu
+            className="mt-5"
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+          >
+            <div className="d-flex justify-content-between">
+              <MenuItem> Filter</MenuItem>
+              <MenuItem>
+                {" "}
+                <CloseIcon onClick={handleClose} />{" "}
+              </MenuItem>
+            </div>
+            <hr />
+            <MenuItem className="pt-3 ">
+              <div>
+                <label> From: </label>
+              </div>
+              <div>
+                <input
+                  type="date"
+                  className="w-100"
+                  style={{
+                    height: "45px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="fromdate"
+                  value={filterCriteria.fromdate}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </MenuItem>
+            <MenuItem className="pt-3 ">
+              <label className="ms-"> To: </label>
+
+              <div>
+                <input
+                  type="date"
+                  className="w-100"
+                  style={{
+                    height: "45px",
+                    border: "1.5px solid black",
+                    borderRadius: "5px",
+                  }}
+                  name="todate"
+                  value={filterCriteria.todate}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <select
+                className="mt-3"
+                id=""
+                required
+                style={{
+                  height: "45px",
+                  paddingRight: "145px",
+                  border: "1.5px solid black",
+                  borderRadius: "5px",
+                }}
+                name="course"
+                value={filterCriteria.course}
+                onChange={handleInputChange}
+              >
+                <option>Course</option>
+                {getcourses &&
+                  getcourses.map((item, index) => (
+                    <option key={item.id} value={item.course_name}>
+                      {item.course_name}
+                    </option>
+                  ))}
+              </select>
+            </MenuItem>
+            <MenuItem>
+              <select
+                className="mt-3"
+                id=""
+                required
+                style={{
+                  height: "45px",
+
+                  paddingRight: "50px",
+                  border: "1.5px solid black",
+                  borderRadius: "5px",
+                }}
+                name="branch"
+                value={filterCriteria.branch}
+                onChange={handleInputChange}
+              >
+                <option value="">Branch</option>
+                {branches &&
+                  branches.map((branch, index) => (
+                    <option key={branch.id} value={branch.branch_name}>
+                      {branch.branch_name}
+                    </option>
+                  ))}
+              </select>
+            </MenuItem>
+            <MenuItem>
+              <select
+                className="mt-3"
+                id=""
+                required
+                style={{
+                  height: "45px",
+
+                  paddingRight: "50px",
+                  border: "1.5px solid black",
+                  borderRadius: "5px",
+                }}
+                name="enquirytakenby"
+                value={filterCriteria.enquirytakenby}
+                onChange={handleInputChange}
+              >
+                <option value="">Counsellor</option>
+                {filteredcounsellor &&
+                  filteredcounsellor.map((user, index) => (
+                    <option value={user.fullname}> {user.fullname}</option>
+                  ))}
+              </select>
+            </MenuItem>
+            <MenuItem>
+              <select
+                className="mt-3"
+                id=""
+                required
+                style={{
+                  height: "45px",
+
+                  paddingRight: "50px",
+                  border: "1.5px solid black",
+                  borderRadius: "5px",
+                }}
+                name="status"
+                value={filterCriteria.status}
+                onChange={handleInputChange}
+              >
+                <option value="">---Status---</option>
+                <option value="">Request Submitted</option>
+                <option value="issued">Issued</option>
+                <option value="">Pending</option>
+              </select>
+            </MenuItem>
+            <MenuItem className="d-flex justify-content-between">
+              <button className="clear" onClick={filterreset}>
+                {" "}
+                Clear
+              </button>
+            </MenuItem>
+          </Menu>
+        </div>
+      </div> */}
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">

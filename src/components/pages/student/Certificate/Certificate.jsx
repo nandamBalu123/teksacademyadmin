@@ -168,37 +168,41 @@ const Certificate = () => {
     setAnchorEl(null);
   };
   const handleRequest = (id) => {
-    let certificate_status = [
-      {
-        courseStartDate: courseStartDate,
-        courseEndDate: courseEndDate,
-        certificateStatus: "request Submitted",
-      },
-    ];
-    const updatedData = {
-      certificate_status,
-    };
-    const uploadcontext = { certificate_status, id };
-    console.log("certificate_status", updatedData);
-    console.log("id", id);
-    axios
-      .put(
-        `${process.env.REACT_APP_API_URL}/certificatestatus/${id}`,
-        updatedData
-      )
-      .then((res) => {
-        if (res.data.updated) {
-          // alert("Certificate updated successfully");
-          dispatch({
-            type: "UPDATE_CERTIFICATE_STATUS",
-            payload: uploadcontext,
-          });
-        } else {
-          alert("Error please Try Again");
-        }
-      });
-    setcourseStartDate("");
-    setcourseEndDate("");
+    if (courseStartDate && courseEndDate) {
+      let certificate_status = [
+        {
+          courseStartDate: courseStartDate,
+          courseEndDate: courseEndDate,
+          certificateStatus: "request Submitted",
+        },
+      ];
+      const updatedData = {
+        certificate_status,
+      };
+      const uploadcontext = { certificate_status, id };
+      console.log("certificate_status", updatedData);
+      console.log("id", id);
+      axios
+        .put(
+          `${process.env.REACT_APP_API_URL}/certificatestatus/${id}`,
+          updatedData
+        )
+        .then((res) => {
+          if (res.data.updated) {
+            // alert("Certificate updated successfully");
+            dispatch({
+              type: "UPDATE_CERTIFICATE_STATUS",
+              payload: uploadcontext,
+            });
+          } else {
+            alert("Error please Try Again");
+          }
+        });
+      setcourseStartDate("");
+      setcourseEndDate("");
+    } else {
+      alert("enter course start and end dates");
+    }
   };
 
   return (
