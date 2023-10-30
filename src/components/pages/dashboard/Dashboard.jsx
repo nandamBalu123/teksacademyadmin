@@ -90,24 +90,26 @@ const Dashboard = () => {
 
   console.log("fliter", filterCriteria);
   useEffect(() => {
-    const filteredResults = initialData.filter((item) => {
-      let admissionDate = new Date(item.admissiondate);
-      let today = new Date();
-      let month = String(today.getMonth() + 1).padStart(2, "0");
-      const dateCondition =
-        filterCriteria.fromdate && filterCriteria.todate
-          ? item.admissiondate >= filterCriteria.fromdate &&
-            item.admissiondate <= filterCriteria.todate
+    if (initialData) {
+      const filteredResults = initialData.filter((item) => {
+        let admissionDate = new Date(item.admissiondate);
+        let today = new Date();
+        let month = String(today.getMonth() + 1).padStart(2, "0");
+        const dateCondition =
+          filterCriteria.fromdate && filterCriteria.todate
+            ? item.admissiondate >= filterCriteria.fromdate &&
+              item.admissiondate <= filterCriteria.todate
+            : true;
+
+        const monthdataCondition = filterCriteria.monthdataCondition
+          ? admissionDate.getMonth() === parseInt(month) - 1
           : true;
 
-      const monthdataCondition = filterCriteria.monthdataCondition
-        ? admissionDate.getMonth() === parseInt(month) - 1
-        : true;
+        return dateCondition && monthdataCondition;
+      });
 
-      return dateCondition && monthdataCondition;
-    });
-
-    setStudentData(filteredResults);
+      setStudentData(filteredResults);
+    }
   }, [filterCriteria, initialData]);
   <Box
     component="span"
@@ -193,7 +195,7 @@ const Dashboard = () => {
           <span className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
             {" "}
             <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
-              {" "}
+            
               Filter
             </h6>
             <Menu
@@ -215,7 +217,10 @@ const Dashboard = () => {
                 <MenuItem> Filter</MenuItem>
                 <MenuItem>
                   {" "}
-                  <CloseIcon onClick={handleClose} /> style={{ cursor: "pointer" }}
+                  <CloseIcon
+                    onClick={handleClose}
+                    style={{ cursor: "pointer" }}
+                  />
                 </MenuItem>
               </div>
               <hr />
@@ -260,7 +265,11 @@ const Dashboard = () => {
               <MenuItem className="d-flex justify-content-between">
                 {/* <button className="save"> Save</button> */}
 
-                <button className="clear" onClick={filterreset}> style={{ cursor: "pointer" }}
+                <button
+                  className="clear"
+                  onClick={filterreset}
+                  style={{ cursor: "pointer" }}
+                >
                   {" "}
                   Clear
                 </button>
@@ -276,7 +285,7 @@ const Dashboard = () => {
             className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
             style={{ cursor: "pointer" }}
             onClick={(e) =>
-              setDisplayData({ enrollments: true, fee: false, users: false }) 
+              setDisplayData({ enrollments: true, fee: false, users: false })
             }
           >
             <Card
@@ -294,7 +303,6 @@ const Dashboard = () => {
             style={{ cursor: "pointer" }}
             onClick={(e) =>
               setDisplayData({ enrollments: false, fee: true, users: false })
-           
             }
           >
             <Card
