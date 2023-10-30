@@ -178,6 +178,7 @@ const Certificate = () => {
     const updatedData = {
       certificate_status,
     };
+    const uploadcontext = { certificate_status, id };
     console.log("certificate_status", updatedData);
     console.log("id", id);
     axios
@@ -188,8 +189,7 @@ const Certificate = () => {
       .then((res) => {
         if (res.data.updated) {
           // alert("Certificate updated successfully");
-          // dispatch({ type: "UPDATE_STUDENT", payload: certificate_status });
-          // window.location.reload();
+          dispatch({ type: "UPDATE_STUDENT", payload: uploadcontext });
         } else {
           alert("Error please Try Again");
         }

@@ -15,7 +15,7 @@ export const StudentsReducer = (state, action) => {
     case "UPDATE_STUDENT":
       // Find the index of the user to be updated in the current state
       const updatedStudentIndex = state.students.findIndex(
-        (user) => user._id === action.payload._id
+        (user) => user.id === action.payload.id
       );
 
       if (updatedStudentIndex === -1) {
@@ -25,7 +25,8 @@ export const StudentsReducer = (state, action) => {
 
       // Create a copy of the users array with the updated user
       const updatedStudent = [...state.students];
-      updatedStudent[updatedStudentIndex].certificate_status = action.payload;
+      updatedStudent[updatedStudentIndex].certificate_status =
+        action.payload.certificate_status;
 
       return {
         students: updatedStudent,
