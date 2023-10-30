@@ -594,3 +594,6 @@ export const initialDataa = [
     modeoftraining: "offline",
   },
 ];
+
+
+

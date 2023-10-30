@@ -154,7 +154,10 @@ const FeeView = () => {
       totalinstallments,
     };
     axios
-      .put(`${process.env.REACT_APP_API_URL}/addnewinstallments/${id}`, updatedData)
+      .put(
+        `${process.env.REACT_APP_API_URL}/addnewinstallments/${id}`,
+        updatedData
+      )
       .then((res) => {
         if (res.data.updated) {
           alert("Installment  Added");

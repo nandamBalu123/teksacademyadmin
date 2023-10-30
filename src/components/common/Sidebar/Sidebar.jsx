@@ -256,10 +256,10 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-                <Item 
-                title="Requestedcertificates"
-                to="/requestedcertificates"
-                icon={<CardMembershipIcon />}
+                <Item
+                  title="Requested Certificates"
+                  to="/requestedcertificates"
+                  icon={<CardMembershipIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />

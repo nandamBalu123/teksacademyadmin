@@ -12,10 +12,10 @@ export const StudentsReducer = (state, action) => {
       return {
         students: [...state.students, action.payload],
       };
-    case "UPDATE_STUDENT":
+    case "UPDATE_CERTIFICATE_STATUS":
       // Find the index of the user to be updated in the current state
-      const updatedStudentIndex = state.students.findIndex(
-        (user) => user._id === action.payload._id
+      let updatedStudentIndex = state.students.findIndex(
+        (user) => user.id === action.payload.id
       );
 
       if (updatedStudentIndex === -1) {
@@ -24,12 +24,14 @@ export const StudentsReducer = (state, action) => {
       }
 
       // Create a copy of the users array with the updated user
-      const updatedStudent = [...state.students];
-      updatedStudent[updatedStudentIndex].certificate_status = action.payload;
+      const updatedCertificate = [...state.students];
+      updatedCertificate[updatedStudentIndex].certificate_status =
+        action.payload.certificate_status;
 
       return {
-        students: updatedStudent,
+        students: updatedCertificate,
       };
+
     default:
       return state;
   }
