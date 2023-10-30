@@ -202,11 +202,11 @@ const Certificate = () => {
     <div className="container main-certificate mt-3">
       <div className="certificate mt-2">
         <h3 className="mx-3 mt-3"> Certificate </h3>
-        <div className="row mb-3  pt-2">
+        <div className="row mb-3 px-4 pt-2">
           <div className="col-12 col-md-8 col-lg-8 col-xl-8">
             <input
               type="text"
-              className="input-field ps-1"
+              className="input-field ps-2"
               placeholder="Search Here...."
               autoComplete="off"
               style={{
