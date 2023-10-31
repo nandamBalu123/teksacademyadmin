@@ -562,7 +562,7 @@ const Certificate = () => {
               <Pagination
                 count={Math.ceil(filteredData.length / itemsPerPage)}
                 onChange={handlePageChange}
-                color="primary"
+                color="info"
               />
             </Stack>
           )}

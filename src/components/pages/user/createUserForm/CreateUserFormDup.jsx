@@ -10,6 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import CheckIcon from '@mui/icons-material/Check';
 const CreateUserForm = () => {
   const { departments } = useDepartmentContext();
   const { roles } = useRoleContext();
@@ -544,11 +545,13 @@ const CreateUserForm = () => {
               </div> */}
             </div>
           </div>
-          <div className="create-button mt-5 me-5">
+        
+     
+          <div className="create-button mt-5 ">
           <button
           type="submit"
-                className="btn btn-primary mr-20 ms-2 mb-2"
-                style={{ textTransform: "capitalize" }}
+                className="btn btn-primary mr-20 ms-2 mb-2 "
+                style={{ textTransform: "capitalize"  }}
               >
                Create User
               </button>
