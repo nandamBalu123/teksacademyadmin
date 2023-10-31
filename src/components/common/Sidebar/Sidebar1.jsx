@@ -8,7 +8,7 @@ const Sidebar1 = () => {
 
   return (
     <div>
-        <div>
+        {/* <div>
         <div className="sidebar">
     <div className="logo-details">
       <i className='bx bxl-c-plus-plus icon'></i>
@@ -95,7 +95,7 @@ const Sidebar1 = () => {
       <div className="text">Dashboard</div>
   </section>
  
-    </div>
+    </div> */}
 
         {/* <section className={isActive ? 'active' : ""}>
             <div className='button' onClick={toggleSection}>
@@ -229,7 +229,7 @@ const Sidebar1 = () => {
      <div className='bottom-content'> </div>
      </div>
       </div> */}
-     <div className="sidebar">
+     {/* <div className="sidebar">
     <div className="logo_details">
       <i className="bx bxl-audible icon"></i>
       <div className="logo_name">Code Effect</div>
@@ -304,7 +304,7 @@ const Sidebar1 = () => {
   </div>
   <section className="home-section">
     <div className="text">Dashboard</div>
-  </section>
+  </section> */}
 
 
     </div>
