@@ -195,7 +195,6 @@ const Dashboard = () => {
           <span className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
             {" "}
             <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
-            
               Filter
             </h6>
             <Menu

@@ -27,7 +27,11 @@ export const initialDataa = [
     modeoftraining: "offline",
     admissiondate: "2023-10-12",
     certificate_status: [
-      { courseStartDate: "", courseEndDate: "", certificateStatus: "" },
+      {
+        courseStartDate: "",
+        courseEndDate: "",
+        certificateStatus: "request Submitted",
+      },
     ],
   },
 
@@ -59,7 +63,11 @@ export const initialDataa = [
     modeoftraining: "online",
     admissiondate: "2023-10-12",
     certificate_status: [
-      { courseStartDate: "", courseEndDate: "", certificateStatus: "" },
+      {
+        courseStartDate: "",
+        courseEndDate: "",
+        certificateStatus: "request Submitted",
+      },
     ],
   },
 
@@ -91,7 +99,11 @@ export const initialDataa = [
     modeoftraining: "offline",
     admissiondate: "2023-10-12",
     certificate_status: [
-      { courseStartDate: "", courseEndDate: "", certificateStatus: "" },
+      {
+        courseStartDate: "",
+        courseEndDate: "",
+        certificateStatus: "request Submitted",
+      },
     ],
   },
 
@@ -594,6 +606,3 @@ export const initialDataa = [
     modeoftraining: "offline",
   },
 ];
-
-
-
