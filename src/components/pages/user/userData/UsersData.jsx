@@ -323,21 +323,6 @@ const UsersData = () => {
                 Filter{" "}
               </button>
             </Button>
-
-            {/* For Filter */}
-            {/* <Button
-    id="demo-positioned-button"
-    aria-controls={open ? "demo-positioned-menu" : undefined}
-    aria-haspopup="true"
-    aria-expanded={open ? "true" : undefined}
-    onClick={handleClick}
-  >
-    <h6 className="filters" style={{ textTransform: "capitalize" }}>
-      {" "}
-      Filter{" "}
-    </h6>
-  </Button> */}
-
             <Menu
               className="mt-5"
               id="demo-positioned-menu"
