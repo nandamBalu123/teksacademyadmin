@@ -20,7 +20,9 @@ import React , {useState} from 'react'
 // import ListItemButton from '@mui/material/ListItemButton';
 // import ListItemIcon from '@mui/material/ListItemIcon';
 // import ListItemText from '@mui/material/ListItemText';
-// import InboxIcon from '@mui/icons-material/MoveToInbox';
+// import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+// import Diversity2Icon from '@mui/icons-material/Diversity2';
+// import DashboardIcon from '@mui/icons-material/Dashboard';
 // import MailIcon from '@mui/icons-material/Mail';
 
 // const drawerWidth = 240;
@@ -92,7 +94,7 @@ import React , {useState} from 'react'
 
 
 const Sidebar1 = () => {
-    // const theme = useTheme(); ////////////////////////////////////////////
+    // const theme = useTheme(); ////////////////
     // const [open, setOpen] = React.useState(false);
   
     // const handleDrawerOpen = () => {
@@ -134,7 +136,7 @@ const Sidebar1 = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Dashboard', 'User Management', 'Student Management', 'Drafts'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -150,38 +152,17 @@ const Sidebar1 = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <DashboardIcon /> : <ManageAccountsIcon/>  }
+                  
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
+              
             </ListItem>
           ))}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+     
       </Drawer>
      
     </Box> */}

@@ -19,6 +19,14 @@ import CloseIcon from "@mui/icons-material/Close";
 // require("dotenv").config();
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useAuthContext } from "../../../hooks/useAuthContext";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
 const Dashboard = () => {
   const { user } = useAuthContext();
   const [getUsersData, setUsersData] = useState([]);
@@ -191,10 +199,10 @@ const Dashboard = () => {
               subtitle={"Welcome to TEKS ACADEMY"}
             />
           )}
-
-          <span className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
+           
+        
             {" "}
-            <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
+            {/* <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               Filter
             </h6>
             <Menu
@@ -262,7 +270,7 @@ const Dashboard = () => {
               </div>
 
               <MenuItem className="d-flex justify-content-between">
-                {/* <button className="save"> Save</button> */}
+               
 
                 <button
                   className="clear"
@@ -273,8 +281,8 @@ const Dashboard = () => {
                   Clear
                 </button>
               </MenuItem>
-            </Menu>
-          </span>
+            </Menu> */}
+        
         </Box>
       </div>
 
@@ -359,7 +367,90 @@ const Dashboard = () => {
 
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
+          <div className="d-flex justify-content-between"> 
           <h4 className="pt-4  enrollment ps-4"> Total Entrollment</h4>
+          <div className="pt-2 pe-4">
+            <Button
+              id="demo-positioned-button"
+              aria-controls={open ? "demo-positioned-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <button
+                className="btn btn-primary "
+                style={{ textTransform: "capitalize" }}
+              >
+                {" "}
+                Filter{" "}
+              </button>
+            </Button>
+            <Menu
+              className="mt-5"
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+            >
+              <div className="d-flex justify-content-between">
+                <MenuItem> Filter</MenuItem>
+                <MenuItem>
+                  {" "}
+                  <CloseIcon onClick={handleClose} />{" "}
+                </MenuItem>
+              </div>
+              <hr />
+              <MenuItem>
+                    <label> From: </label>
+                    <input
+                      type="date"
+                      className="w-100 ps-2"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="fromdate"
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+                  <MenuItem>
+                    <label className="ps-3"> To: </label>
+
+                    <input
+                      type="date"
+                      className="w-100 ps-2"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="todate"
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+              <MenuItem className="text-end">
+                {/* <button className="save"> Save</button> */}
+                <button className="clear " onClick={filterreset}>
+                  {" "}
+                  Clear
+                </button>
+              </MenuItem>
+            </Menu>
+          </div>
+          </div>
+      
           <div className="justify-content-around pt-4 row progreebar-show">
             {Object.entries(branchStudentData).map(([branch, students]) => {
               const enrollmentPercentage =
@@ -386,7 +477,89 @@ const Dashboard = () => {
       )}
       {DisplayData.fee && (
         <div className="progreebar rounded rounded-5  pb-4">
-          <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
+        <div className="d-flex justify-content-between"> 
+        <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
+          <div className="pt-2 pe-4">
+            <Button
+              id="demo-positioned-button"
+              aria-controls={open ? "demo-positioned-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <button
+                className="btn btn-primary "
+                style={{ textTransform: "capitalize" }}
+              >
+                {" "}
+                Filter{" "}
+              </button>
+            </Button>
+            <Menu
+              className="mt-5"
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+            >
+              <div className="d-flex justify-content-between">
+                <MenuItem> Filter</MenuItem>
+                <MenuItem>
+                  {" "}
+                  <CloseIcon onClick={handleClose} />{" "}
+                </MenuItem>
+              </div>
+              <hr />
+              <MenuItem>
+                    <label> From: </label>
+                    <input
+                      type="date"
+                      className="w-100 ps-2"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="fromdate"
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+                  <MenuItem>
+                    <label className="ps-3"> To: </label>
+
+                    <input
+                      type="date"
+                      className="w-100 ps-2"
+                      style={{
+                        height: "45px",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="todate"
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
+                    />
+                  </MenuItem>
+              <MenuItem className="text-end">
+                {/* <button className="save"> Save</button> */}
+                <button className="clear " onClick={filterreset}>
+                  {" "}
+                  Clear
+                </button>
+              </MenuItem>
+            </Menu>
+          </div>
+        </div>
           <div className="  justify-content-around pt-4 row progreebar-show">
             {Object.entries(finalTotalByBranch).map(
               ([branch, { totalAmount, percentage }]) => {
