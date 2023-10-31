@@ -1,30 +1,102 @@
 import React , {useState} from 'react'
 import favicon from "../../../images/favicon.jpeg";
+import CloseIcon from "@mui/icons-material/Close";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import "./Sidebar1.css";
 
 const Sidebar1 = () => {
-// const [isActive , setIsActive]= useState(false);
-// const toggleSection =()=>{ 
-//     setIsActive(!isActive);
-// };
-// const navigationLinks =[
-//     { 
-//         href: "example.com",
-//         iconClass:'fa-regular fa-building',
-//         text:"Home",
-//         isActive:true,
-//     },
-//     { 
-//         href: "example.com",
-//         iconClass:'fa-regular fa-user',
-//         text:"People",
-//         count:10,
 
-//     },
-// ]
   return (
     <div>
+        {/* <div>
+        <div className="sidebar">
+    <div className="logo-details">
+      <i className='bx bxl-c-plus-plus icon'></i>
+        <div className="logo_name">CodingLab</div>
+        <i className='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul className="nav-list">
+      <li>
+          
+          <p> sgr</p>
+         <input type="text" placeholder="Search..."/>
+         <span className="tooltip">Search</span>
+      </li>
+      <li>
+        <a href="#">
+       <p > hbh</p>
+       <p className='hidden'>gvgvg</p>
+          <span className="links_name">Dashboard</span>
+        </a>
+         <span className="tooltip">Dashboard</span>
+      </li>
+      <li>
+       <a href="#">
+         <i className='bx bx-user' ></i>
+         <span className="links_name">User</span>
+       </a>
+       <span className="tooltip">User</span>
+     </li>
+     <li>
+       <a href="#">
+         <i className='bx bx-chat' ></i>
+         <span className="links_name">Messages</span>
+       </a>
+       <span className="tooltip">Messages</span>
+     </li>
+     <li>
+       <a href="#">
+         <i className='bx bx-pie-chart-alt-2' ></i>
+         <span className="links_name">Analytics</span>
+       </a>
+       <span className="tooltip">Analytics</span>
+     </li>
+     <li>
+       <a href="#">
+         <i className='bx bx-folder' ></i>
+         <span className="links_name">File Manager</span>
+       </a>
+       <span className="tooltip">Files</span>
+     </li>
+     <li>
+       <a href="#">
+         <i className='bx bx-cart-alt' ></i>
+         <span className="links_name">Order</span>
+       </a>
+       <span className="tooltip">Order</span>
+     </li>
+     <li>
+       <a href="#">
+         <i className='bx bx-heart' ></i>
+         <span className="links_name">Saved</span>
+       </a>
+       <span className="tooltip">Saved</span>
+     </li>
+     <li>
+       <a href="#">
+         <i className='bx bx-cog' ></i>
+         <span className="links_name">Setting</span>
+       </a>
+       <span className="tooltip">Setting</span>
+     </li>
+     <li className="profile">
+         <div className="profile-details">
+           <img src="profile.jpg" alt="profileImg"/>
+           <div className="name_job">
+             <div className="name">Prem Shahi</div>
+             <div className="job">Web designer</div>
+           </div>
+         </div>
+         <i className='bx bx-log-out' id="log_out" ></i>
+     </li>
+    </ul>
+  </div>
+  <section className="home-section">
+      <div className="text">Dashboard</div>
+  </section>
+ 
+    </div> */}
+
         {/* <section className={isActive ? 'active' : ""}>
             <div className='button' onClick={toggleSection}>
                 <i className='fa-solid fa-bars'/>  
@@ -71,21 +143,13 @@ const Sidebar1 = () => {
        </div>
       <div className='sidebar-links'>
         <h2><HomeOutlinedIcon /> &nbsp;Dashboard</h2>
-        <ul> 
-            <li> 
-                <a href='/' title='Home' className='tooltip'> 
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-home" width="24" height="24"
-              viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-              stroke-linejoin="round"> 
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M5 12l-2 0l9 -9l9 9l-2 0"></path>
-              <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
-              <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path>
-              </svg>
-              <span className='link hide'> Home</span>
-          <span className='tooltip_content'>Home</span>
+        <ul className='menu-link'> 
+            <li className='nav-link'> 
+            <a href='#'>
+                <span className='text nav-text'> Dashboard </span>
                  </a>
-            </li>
+
+                         </li>
            <li> 
            <a href='#orders' title='Orders' className='tooltip'> 
             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-box" width="24" height="24"
@@ -109,6 +173,140 @@ const Sidebar1 = () => {
         </ul>
          </div>
        </nav> */}
+     {/* <aside className='sidebar'> 
+     <header className='sidebar-header'> 
+     <div className='pro-img d-flex'> 
+                        <img src={favicon} alt='profile-pic' className='logo-small'/> 
+                        <div className='pro-info'>
+                            <h3> Teks Academy</h3> </div></div>
+                      
+     
+      </header></aside> */}
+      {/* <div> 
+      <nav className='sidebar close'> 
+      <header> 
+        <div className='image-text'> 
+        <span className='image'> 
+        <img src={favicon} alt='profile-pic' /> </span> 
+        <div className='text logo-text'>
+            <span className='name'> Name</span>
+            <span className='proffession'> Web Developer </span>
+             </div>
+        
+        </div>
+      <CloseIcon className='sidebar-icon' />
+      </header>
+      <section className='home'> 
+      <div className='text'> Dashboard Sidebar</div>
+      </section>
+       </nav>
+     <div className='menu-bar'> 
+     <div className='menu' >
+        <ul className='menu-links'>
+     <li className='nav-link' > 
+     <a href='#'> 
+     <span className='text nav-text'> Dashboard </span>
+     </a>
+     </li> 
+     <li className='nav-link' > 
+     <a href='#'> 
+     <span className='text nav-text'>Revenue</span>
+     </a>
+     </li>
+     <li className='nav-link' > 
+     <a href='#'> 
+     <span className='text nav-text'>Notification </span>
+     </a>
+     </li>
+     <li className='nav-link' > 
+     <a href='#'> 
+     <span className='text nav-text'> Analytics</span>
+     </a>
+     </li>
+     </ul>
+     </div>
+     
+     <div className='bottom-content'> </div>
+     </div>
+      </div> */}
+     {/* <div className="sidebar">
+    <div className="logo_details">
+      <i className="bx bxl-audible icon"></i>
+      <div className="logo_name">Code Effect</div>
+      <i className="bx bx-menu" id="btn"></i>
+    </div>
+    <ul className="nav-list">
+      <li>
+        <i classNameName="bx bx-search"></i>
+        <input type="text" placeholder="Search..."/>
+         <span className="tooltip">Search</span>
+      </li>
+      <li>
+        <a href="#">
+          <i className="bx bx-grid-alt"></i>
+          <span className="link_name">Dashboard</span>
+        </a>
+        <span className="tooltip">Dashboard</span>
+      </li>
+      <li>
+        <a href="#">
+          <i className="bx bx-user"></i>
+          <span className="link_name">User</span>
+        </a>
+        <span className="tooltip">User</span>
+      </li>
+      <li>
+        <a href="#">
+          <i className="bx bx-chat"></i>
+          <span className="link_name">Message</span>
+        </a>
+        <span className="tooltip">Message</span>
+      </li>
+      <li>
+        <a href="#">
+          <i className="bx bx-pie-chart-alt-2"></i>
+          <span className="link_name">Analytics</span>
+        </a>
+        <span className="tooltip">Analytics</span>
+      </li>
+      <li>
+        <a href="#">
+          <i className="bx bx-folder"></i>
+          <span className="link_name">File Manger</span>
+        </a>
+        <span className="tooltip">File Manger</span>
+      </li>
+      <li>
+        <a href="#">
+          <i className="bx bx-cart-alt"></i>
+          <span className="link_name">Order</span>
+        </a>
+        <span className="tooltip">Order</span>
+      </li>
+      <li>
+        <a href="#">
+          <i className="bx bx-cog"></i>
+          <span className="link_name">Settings</span>
+        </a>
+        <span className="tooltip">Settings</span>
+      </li>
+      <li className="profile">
+        <div className="profile_details">
+          <img src="profile.jpeg" alt="profile image"/>
+          <div className="profile_content">
+            <div className="name">Anna Jhon</div>
+            <div className="designation">Admin</div>
+          </div>
+        </div>
+        <i className="bx bx-log-out" id="log_out"></i>
+      </li>
+    </ul>
+  </div>
+  <section className="home-section">
+    <div className="text">Dashboard</div>
+  </section> */}
+
+
     </div>
    
   )
