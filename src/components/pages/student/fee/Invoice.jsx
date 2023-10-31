@@ -34,7 +34,91 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   const { name } = useParams();
 
   const [studentdata, setstudentdata] = useState([]);
+  const [invoice, setinvoice] = useState();
+  useEffect(() => {
+    // const filterbranch = studentdata.filter((item) => item.branch === branch);
+    // const branchCount = filterbranch.length;
 
+    // let date = toString(admissiondate);
+    // let DD = admissiondate[8] + admissiondate[9];
+    // let month = admissiondate[5] + admissiondate[6];
+    // let year = admissiondate[2] + admissiondate[3];
+    // let firstbranch;
+    // if (studentdata.branch) {
+    //   firstbranch = studentdata.branch[0].toUpperCase();
+    // }
+    // let serialno;
+    // if (branch) {
+    //   serialno = branchCount + 1;
+    // }
+
+    // if (serialno) {
+    //   serialno = serialno.toString();
+    //   if (serialno.length === 3) {
+    //     serialno = "0" + serialno;
+    //   }
+    //   if (serialno.length === 2) {
+    //     serialno = "00" + serialno;
+    //   }
+    //   if (serialno.length === 1) {
+    //     serialno = "000" + serialno;
+    //   }
+    // }
+    let firstbranch;
+    if (studentdata.branch) {
+      firstbranch = studentdata.branch[0].toUpperCase();
+    }
+
+    let paiddate;
+    if (name === "Admission Fee" && studentdata.initialpayment) {
+      let data = studentdata.initialpayment;
+      paiddate = data[index].paiddate;
+    }
+    if (name === "Installment" && studentdata.installments) {
+      let data = studentdata.installments;
+      paiddate = data[index].paiddate;
+    }
+    let regnumber;
+    if (studentdata.registrationnumber) {
+      let regnum = studentdata.registrationnumber;
+      regnumber = regnum.substring(9);
+    }
+    if (!studentdata) {
+      setinvoice("");
+    }
+    if (name === "Admission Fee" && studentdata.initialpayment) {
+      setinvoice(
+        "TA" +
+          firstbranch +
+          paiddate[8] +
+          paiddate[9] +
+          paiddate[5] +
+          paiddate[6] +
+          paiddate[2] +
+          paiddate[3] +
+          regnumber +
+          "-" +
+          regnumber +
+          `/${parseInt(index) + 1}`
+      );
+    }
+    if (name === "Installment" && studentdata.installments) {
+      setinvoice(
+        "TA" +
+          firstbranch +
+          paiddate[8] +
+          paiddate[9] +
+          paiddate[5] +
+          paiddate[6] +
+          paiddate[2] +
+          paiddate[3] +
+          regnumber +
+          "-" +
+          regnumber +
+          `/${parseInt(index) + 2}`
+      );
+    }
+  }, [studentdata]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -96,18 +180,20 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </p>
           <p>
             {" "}
-            <b>INVOICE NO:</b> 12345577
+            <b>INVOICE NO:</b> {invoice}
           </p>
           <p>
             {name === "Admission Fee" &&
             studentdata &&
             studentdata.initialpayment &&
             studentdata.initialpayment.length > 0 ? (
-              studentdata.initialpayment.map((student) => (
-                <span key={student.id}>
-                  <b>DATE:</b> {student.paiddate}
-                </span>
-              ))
+              studentdata.initialpayment.map((student) => {
+                return (
+                  <span key={student.id}>
+                    <b>DATE:</b> {student.paiddate}
+                  </span>
+                );
+              })
             ) : name === "Admission Fee" ? (
               <p>No initial payment data available</p>
             ) : null}
