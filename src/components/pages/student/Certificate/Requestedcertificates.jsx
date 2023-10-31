@@ -53,8 +53,6 @@ const Requestedcertificates = () => {
 
     course: "",
 
-    status: "",
-
     enquirytakenby: "",
 
     search: "",
@@ -101,10 +99,6 @@ const Requestedcertificates = () => {
           ? item.courses === filterCriteria.course
           : true;
 
-        const statusCondition = filterCriteria.status
-          ? item.status === filterCriteria.status
-          : true;
-
         const counsellarCondition = filterCriteria.enquirytakenby
           ? item.enquirytakenby === filterCriteria.enquirytakenby
           : true;
@@ -116,7 +110,6 @@ const Requestedcertificates = () => {
           searchCondition &&
           dateCondition &&
           branchCondition &&
-          statusCondition &&
           courseCondition &&
           counsellarCondition &&
           certificate_status_condition
@@ -135,8 +128,6 @@ const Requestedcertificates = () => {
       branch: "",
 
       course: "",
-
-      status: "",
 
       enquirytakenby: "",
 
@@ -422,7 +413,7 @@ const Requestedcertificates = () => {
                   ))}
               </select>
             </MenuItem>
-            <MenuItem>
+            {/* <MenuItem>
               <select
                 className="mt-3"
                 id=""
@@ -443,7 +434,7 @@ const Requestedcertificates = () => {
                 <option value="issued">Issued</option>
                 <option value="">Pending</option>
               </select>
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem className="d-flex justify-content-between">
               <button className="clear" onClick={filterreset}>
                 {" "}
