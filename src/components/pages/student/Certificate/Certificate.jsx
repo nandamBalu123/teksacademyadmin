@@ -526,7 +526,7 @@ const Certificate = () => {
                         <TableCell className="border border 1  text-center fs-6">
                           {certificateStatus === "" && (
                             <button
-                              className="btn btn-primary center  m-0 px-1"
+                              className="btn btn-primary text-center m-0 px-1"
                               onClick={(e) => handleRequest(student.id)}
                             >
                               Request Certificate

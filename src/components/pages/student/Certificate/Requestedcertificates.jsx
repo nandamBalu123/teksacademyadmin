@@ -397,12 +397,14 @@ const Requestedcertificates = () => {
                   if (certificateStatus === "issued") {
                     return (
                       <TableRow>
-                        <TableCell>{index + 1}</TableCell>
-                        <TableCell>{student.name}</TableCell>
-                        <TableCell>{student.courses}</TableCell>{" "}
-                        <TableCell>{student.registrationnumber}</TableCell>
-                        <TableCell>{courseStartDate}</TableCell>
-                        <TableCell>{courseEndDate}</TableCell>{" "}
+                        
+                        <TableCell className="border border 1">{index + 1}</TableCell>
+                        <TableCell className="border border 1">{student.name}</TableCell>
+                        <TableCell className="border border 1">{student.courses}</TableCell>{" "}
+                        <TableCell className="border border 1">{student.registrationnumber}</TableCell>
+                        <TableCell className="border border 1">{courseStartDate}</TableCell>
+                        <TableCell className="border border 1">{courseEndDate}</TableCell>{" "}
+                        <TableCell className="border border 1 text-center fs-6"> 
                         {certificateStatus === "request Submitted" && (
                           <button
                             className="btn btn-warning center m-0 px-1"
@@ -422,6 +424,8 @@ const Requestedcertificates = () => {
                             Certificate Issued
                           </button>
                         )}
+                        </TableCell>
+                        
                       </TableRow>
                     );
                   }
