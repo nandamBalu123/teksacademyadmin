@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { useLocation } from "react-router-dom";
+import LanguageIcon from "@mui/icons-material/Language";
 const PrintableComponent = React.forwardRef((props, ref) => {
   const location = useLocation();
   const dataFromState = location.state;
@@ -34,7 +35,91 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   const { name } = useParams();
 
   const [studentdata, setstudentdata] = useState([]);
+  const [invoice, setinvoice] = useState();
+  useEffect(() => {
+    // const filterbranch = studentdata.filter((item) => item.branch === branch);
+    // const branchCount = filterbranch.length;
 
+    // let date = toString(admissiondate);
+    // let DD = admissiondate[8] + admissiondate[9];
+    // let month = admissiondate[5] + admissiondate[6];
+    // let year = admissiondate[2] + admissiondate[3];
+    // let firstbranch;
+    // if (studentdata.branch) {
+    //   firstbranch = studentdata.branch[0].toUpperCase();
+    // }
+    // let serialno;
+    // if (branch) {
+    //   serialno = branchCount + 1;
+    // }
+
+    // if (serialno) {
+    //   serialno = serialno.toString();
+    //   if (serialno.length === 3) {
+    //     serialno = "0" + serialno;
+    //   }
+    //   if (serialno.length === 2) {
+    //     serialno = "00" + serialno;
+    //   }
+    //   if (serialno.length === 1) {
+    //     serialno = "000" + serialno;
+    //   }
+    // }
+    let firstbranch;
+    if (studentdata.branch) {
+      firstbranch = studentdata.branch[0].toUpperCase();
+    }
+
+    let paiddate;
+    if (name === "Admission Fee" && studentdata.initialpayment) {
+      let data = studentdata.initialpayment;
+      paiddate = data[index].paiddate;
+    }
+    if (name === "Installment" && studentdata.installments) {
+      let data = studentdata.installments;
+      paiddate = data[index].paiddate;
+    }
+    let regnumber;
+    if (studentdata.registrationnumber) {
+      let regnum = studentdata.registrationnumber;
+      regnumber = regnum.substring(9);
+    }
+    if (!studentdata) {
+      setinvoice("");
+    }
+    if (name === "Admission Fee" && studentdata.initialpayment) {
+      setinvoice(
+        "TA" +
+          firstbranch +
+          paiddate[8] +
+          paiddate[9] +
+          paiddate[5] +
+          paiddate[6] +
+          paiddate[2] +
+          paiddate[3] +
+          regnumber +
+          "-" +
+          regnumber +
+          `/${parseInt(index) + 1}`
+      );
+    }
+    if (name === "Installment" && studentdata.installments) {
+      setinvoice(
+        "TA" +
+          firstbranch +
+          paiddate[8] +
+          paiddate[9] +
+          paiddate[5] +
+          paiddate[6] +
+          paiddate[2] +
+          paiddate[3] +
+          regnumber +
+          "-" +
+          regnumber +
+          `/${parseInt(index) + 2}`
+      );
+    }
+  }, [studentdata]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -54,10 +139,11 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
   return (
     <div className="container invoice" ref={ref}>
-      <h3 className="text-center mt-3"> Fee Invoice</h3>
       <img className="logo-picture center" src={teksacademylogo} alt="logo" />
+      <h3 className="text-center mt-4"> Fee Invoice</h3>
+
       <div className="d-flex justify-content-between ">
-        <div >
+        <div>
           <h4 style={{ marginLeft: "15px", marginTop: "25px" }}>
             {" "}
             <strong> Kapil Knowledge Hub Private Limited</strong>
@@ -80,12 +166,12 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           <p>
             &nbsp;&nbsp;
             <strong>
-              <AlternateEmailIcon />{" "}
+              <LanguageIcon />{" "}
             </strong>{" "}
             www.teksacademy.com{" "}
           </p>
         </div>
-  
+
         <div>
           <h3 style={{ marginTop: "25px" }}>
             <strong> TEKS ACADEMY</strong>
@@ -96,18 +182,20 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </p>
           <p>
             {" "}
-            <b>INVOICE NO:</b> 12345577
+            <b>INVOICE NO:</b> {invoice}
           </p>
           <p>
             {name === "Admission Fee" &&
             studentdata &&
             studentdata.initialpayment &&
             studentdata.initialpayment.length > 0 ? (
-              studentdata.initialpayment.map((student) => (
-                <span key={student.id}>
-                  <b>DATE:</b> {student.paiddate}
-                </span>
-              ))
+              studentdata.initialpayment.map((student) => {
+                return (
+                  <span key={student.id}>
+                    <b>DATE:</b> {student.paiddate}
+                  </span>
+                );
+              })
             ) : name === "Admission Fee" ? (
               <p>No initial payment data available</p>
             ) : null}
@@ -145,41 +233,52 @@ const PrintableComponent = React.forwardRef((props, ref) => {
         <p className="mt-3">
           <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
         </p>
+        <p className="mt-3">
+          <b>Registration No:</b>{" "}
+          {studentdata && studentdata.registrationnumber}
+        </p>
       </div>
       <div className="table-responsive">
-                <table className="table table-bordered">
-                  <thead> 
-                  <tr >
-                   
-                       <td className="text-center bg-primary text-light border border 1"> Description</td>
-                        <td className="text-center bg-primary text-light border border 1">Fee Excl. Tax</td>{" "}
-                      <td className="text-center bg-primary text-light border border 1"> Tax</td>
-                      <td className="text-center bg-primary text-light border border 1">Total</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                 
+        <table className="table table-bordered">
+          <thead>
+            <tr>
+              <td className="text-center bg-primary text-light border border 1">
+                {" "}
+                Description
+              </td>
+              <td className="text-center bg-primary text-light border border 1">
+                Fee Excl. Tax
+              </td>{" "}
+              <td className="text-center bg-primary text-light border border 1">
+                {" "}
+                Tax
+              </td>
+              <td className="text-center bg-primary text-light border border 1">
+                Total
+              </td>
+            </tr>
+          </thead>
+          <tbody>
             {name === "Admission Fee" &&
             studentdata &&
             studentdata.initialpayment &&
             studentdata.initialpayment.length > 0 ? (
               studentdata.initialpayment.map((student) => (
                 <tr>
-                
                   <td className=" text-center border border 1">
                     Admission Fee
                   </td>
 
                   <td className=" text-center border border 1">
                     {/* parseFloat(169.49152542372883.toFixed(2)); */}
-                    {parseFloat(student.initialamount / 1.18).toFixed(3)}
+                    {parseFloat(student.initialamount / 1.18).toFixed(2)}
                     {/* {parseInt(student.initialamount) / 1.18} */}
                   </td>
                   <td className=" text-center border border 1">
                     {(
-                      parseFloat(student.initialamount).toFixed(3) -
-                      parseFloat(student.initialamount / 1.18).toFixed(3)
-                    ).toFixed(3)}
+                      parseFloat(student.initialamount).toFixed(2) -
+                      parseFloat(student.initialamount / 1.18).toFixed(2)
+                    ).toFixed(2)}
                   </td>
                   <td className=" text-center border border 1">
                     {student.initialamount}
@@ -197,7 +296,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 if (indx === parseInt(index)) {
                   return (
                     <tr>
-                   
                       <td className=" text-center border border 1">
                         Course Fee
                       </td>
@@ -209,14 +307,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       </td>
                       <td className=" text-center border border 1">
                         {(
-                          parseFloat(student.paidamount * 0.65).toFixed(3) -
+                          parseFloat(student.paidamount * 0.65).toFixed(2) -
                           parseFloat(
                             (student.paidamount * 0.65) / 1.18
-                          ).toFixed(3)
-                        ).toFixed(3)}
+                          ).toFixed(2)
+                        ).toFixed(2)}
                       </td>
                       <td className=" text-center border border 1">
-                        {parseFloat(student.paidamount * 0.65).toFixed(3)}
+                        {parseFloat(student.paidamount * 0.65).toFixed(2)}
                       </td>
                     </tr>
                   );
@@ -234,7 +332,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 if (indx === parseInt(index)) {
                   return (
                     <tr>
-                     
                       <td className="border border 1 text-center">
                         Material Fee
                       </td>
@@ -246,14 +343,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       </td>
                       <td className="border border 1 text-center">
                         {(
-                          parseFloat(student.paidamount * 0.35).toFixed(3) -
+                          parseFloat(student.paidamount * 0.35).toFixed(2) -
                           parseFloat(
                             (student.paidamount * 0.35) / 1.18
-                          ).toFixed(3)
-                        ).toFixed(3)}
+                          ).toFixed(2)
+                        ).toFixed(2)}
                       </td>
                       <td className="border border 1 text-center">
-                        {parseFloat(student.paidamount * 0.35).toFixed(3)}
+                        {parseFloat(student.paidamount * 0.35).toFixed(2)}
                       </td>
                     </tr>
                   );
@@ -270,10 +367,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             studentdata.initialpayment.length > 0 ? (
               studentdata.initialpayment.map((student) => (
                 <tr>
-              
-                  <td className="border border 1 text-center">
-                    Grand Total
-                  </td>
+                  <td className="border border 1 text-center">Grand Total</td>
 
                   <td className="border border 1 text-center"></td>
                   <td className="border border 1 text-center"></td>
@@ -293,12 +387,12 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 if (indx === parseInt(index)) {
                   return (
                     <tr>
-                   
-                      <td className="border border 1 text-center"> Grand Total</td>
-
                       <td className="border border 1 text-center">
-                   
+                        {" "}
+                        Grand Total
                       </td>
+
+                      <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center">
                         {student.paidamount}
@@ -311,10 +405,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             ) : name === "Installment" ? (
               <p>No payment date available</p>
             ) : null}
-         
-                  </tbody>
-                </table>
-              </div>
+          </tbody>
+        </table>
+      </div>
 
       {/* <TableContainer component={Paper}>
         <Table sx={{ minWidth: 1000 }} aria-label="customized table">
