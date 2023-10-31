@@ -8,6 +8,7 @@ import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import numberToWords from 'number-to-words';
 
 import "./Invoice.css";
 import teksacademylogo from "../../../../images/Teks-Logo-with-Trade.png";
@@ -25,6 +26,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { useLocation } from "react-router-dom";
 import LanguageIcon from "@mui/icons-material/Language";
+import { Hidden } from "@mui/material";
 const PrintableComponent = React.forwardRef((props, ref) => {
   const location = useLocation();
   const dataFromState = location.state;
@@ -36,6 +38,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
   const [studentdata, setstudentdata] = useState([]);
   const [invoice, setinvoice] = useState();
+  const [number, setNumber] = useState();
+  const [words, setWords] = useState('');
   useEffect(() => {
     // const filterbranch = studentdata.filter((item) => item.branch === branch);
     // const branchCount = filterbranch.length;
@@ -154,41 +158,17 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             <strong> Kapil Knowledge Hub Private Limited</strong>
           </h4>
           <p>&nbsp;&nbsp; CIN: U80100TG2018PTC123853 </p>
-          <p>
-            &nbsp;&nbsp;{" "}
-            <strong>
-              <EmailIcon />
-            </strong>
-            info@teksacademy.com{" "}
-          </p>
-          <p>
-            &nbsp;&nbsp;{" "}
-            <strong>
-              <LocalPhoneIcon />
-            </strong>{" "}
-            1800-120-4748
-          </p>
-          <p>
-            &nbsp;&nbsp;
-            <strong>
-              <LanguageIcon />{" "}
-            </strong>{" "}
-            www.teksacademy.com{" "}
-          </p>
+          <p>&nbsp;&nbsp; GSTIN: 36AAHCK0599C1ZI </p>
         </div>
 
         <div>
           <h3 style={{ marginTop: "25px" }}>
-            <strong> TEKS ACADEMY</strong>
+            <strong>
+              {" "}
+              <b>INVOICE NO:</b> {invoice}
+            </strong>
           </h3>
-          <p>
-            {" "}
-            <b>Branch:</b> {studentdata.branch}
-          </p>
-          <p>
-            {" "}
-            <b>INVOICE NO:</b> {invoice}
-          </p>
+
           <p>
             {name === "Admission Fee" &&
             studentdata &&
@@ -222,6 +202,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <p>No payment date available</p>
             ) : null}
           </p>
+          <p>
+            {" "}
+            <b>Branch:</b> {studentdata.branch}
+          </p>
         </div>
       </div>
       <div className="mt-3 ">
@@ -229,30 +213,27 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           <b> BILLING TO</b>{" "}
         </p>
         <hr className="w-25" />
-        <div className="d-flex justify-content-between">  
-        <div> 
-        <p className="mt-3">
-          <b>Name :</b> {studentdata && studentdata.name}
-        </p>
-        <p className="mt-3">
-          <b>Registration No:</b>{" "}
-          {studentdata && studentdata.registrationnumber}
-        </p>
+        <div className="d-flex justify-content-between">
+          <div>
+            <p className="mt-3">
+              <b>Name :</b> {studentdata && studentdata.name}
+            </p>
+            <p className="mt-3">
+              <b>Registration No:</b>{" "}
+              {studentdata && studentdata.registrationnumber}
+            </p>
+          </div>
+          <div>
+            <p className="mt-3">
+              <b>Email :</b> {studentdata && studentdata.email}
+            </p>
+            <p className="mt-3">
+              <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
+            </p>
+          </div>
         </div>
-        <div> 
-         
-        <p className="mt-3">
-          <b>Email :</b> {studentdata && studentdata.email}
-        </p>
-        <p className="mt-3">
-          <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
-        </p>
-        </div>
-        </div>
-       
-        
       </div>
-      <div className="table-responsive">
+      <div className="table-responsive" style={{ overflow: "hidden" }}>
         <table className="table table-bordered">
           <thead>
             <tr>
@@ -350,19 +331,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                         Material Fee
                       </td>
 
-                      <td className="border border 1 text-center">
-                        {parseFloat((student.paidamount * 0.35) / 1.18).toFixed(
-                          3
-                        )}
-                      </td>
-                      <td className="border border 1 text-center">
-                        {(
-                          parseFloat(student.paidamount * 0.35).toFixed(2) -
-                          parseFloat(
-                            (student.paidamount * 0.35) / 1.18
-                          ).toFixed(2)
-                        ).toFixed(2)}
-                      </td>
+                      <td className="border border 1 text-center"></td>
+                      <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center">
                         {parseFloat(student.paidamount * 0.35).toFixed(2)}
                       </td>
@@ -421,6 +391,32 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             ) : null}
           </tbody>
         </table>
+        <div className="row">
+          {studentdata && (
+            <h6 className="fs-6 fw-bold">
+              *Note: Total Due Amount: INR {studentdata.dueamount}
+            </h6>
+          )}
+        </div>
+        <hr style={{ marginTop: "260px" }} />
+        <div
+          className="d-flex align-items-end justify-content-between"
+          style={{ marginTop: "10px", overflow: "hidden" }}
+        >
+          <span>
+            <EmailIcon />
+            support@teksacademy.com{" "}
+          </span>
+
+          <span>
+            <LocalPhoneIcon />
+            1800-120-4748
+          </span>
+
+          <span>
+            <LanguageIcon /> www.teksacademy.com{" "}
+          </span>
+        </div>
       </div>
 
       {/* <TableContainer component={Paper}>
