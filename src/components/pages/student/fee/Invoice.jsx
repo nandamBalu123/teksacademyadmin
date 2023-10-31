@@ -139,8 +139,13 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
   return (
     <div className="container invoice" ref={ref}>
-      <img className="logo-picture center" src={teksacademylogo} alt="logo" />
-      <h3 className="text-center mt-4"> Fee Invoice</h3>
+      <img
+        className="logo-picture center mt-4"
+        src={teksacademylogo}
+        alt="logo"
+      />
+      <h3 className="text-center mt-5"> Fee Invoice</h3>
+      <hr />
 
       <div className="d-flex justify-content-between ">
         <div>
