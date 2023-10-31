@@ -219,24 +219,33 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </p>
         </div>
       </div>
-      <div className="mt-3">
+      <div className="mt-3 ">
         <p>
           <b> BILLING TO</b>{" "}
         </p>
         <hr className="w-25" />
+        <div className="d-flex justify-content-between">  
+        <div> 
         <p className="mt-3">
           <b>Name :</b> {studentdata && studentdata.name}
         </p>
+        <p className="mt-3">
+          <b>Registration No:</b>{" "}
+          {studentdata && studentdata.registrationnumber}
+        </p>
+        </div>
+        <div> 
+         
         <p className="mt-3">
           <b>Email :</b> {studentdata && studentdata.email}
         </p>
         <p className="mt-3">
           <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
         </p>
-        <p className="mt-3">
-          <b>Registration No:</b>{" "}
-          {studentdata && studentdata.registrationnumber}
-        </p>
+        </div>
+        </div>
+       
+        
       </div>
       <div className="table-responsive">
         <table className="table table-bordered">
