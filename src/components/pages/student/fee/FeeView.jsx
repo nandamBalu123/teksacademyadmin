@@ -312,45 +312,34 @@ const FeeView = () => {
               </TableRow>
             </TableHead>
             {studentdata.initialpayment &&
-              studentdata.initialpayment.map((item, index) => {
-                let dataToPass = {
-                  paidamount: item.initialamount,
-                  paiddate: item.paiddate,
-                  modeofpayment: item.modeofpayment,
-                  transactionid: item.transactionID,
-                };
-                return (
-                  <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell className="border border 1 text-center">
-                        {item.initialamount}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {item.paiddate}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {item.modeofpayment}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {item.transactionID}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        <Link
-                          to={{
-                            pathname: `/invoice`,
-                            state: dataToPass,
-                          }}
-                          style={{ width: "40px" }}
-                        >
-                          <CreditScoreIcon className="iconn" />
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                );
-              })}
+              studentdata.initialpayment.map((item, index) => (
+                <TableBody>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell className="border border 1 text-center">
+                      {item.initialamount}
+                    </TableCell>
+                    <TableCell className="border border 1 text-center">
+                      {item.paiddate}
+                    </TableCell>
+                    <TableCell className="border border 1 text-center">
+                      {item.modeofpayment}
+                    </TableCell>
+                    <TableCell className="border border 1 text-center">
+                      {item.transactionID}
+                    </TableCell>
+                    <TableCell className="border border 1 text-center">
+                      <Link
+                        to={`/invoice/${item.initialamount}/${item.paiddate}/${item.modeofpayment}/${item.transactionID}/${index}`}
+                        style={{ width: "40px" }}
+                      >
+                        <CreditScoreIcon className="iconn" />
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              ))}
           </Table>
         </TableContainer>
         <div className="row">
@@ -393,13 +382,6 @@ const FeeView = () => {
             </TableHead>
             {readinstallments &&
               readinstallments.map((item, index) => {
-                let dataToPass = {
-                  duedate: item.duedate,
-                  paidamount: item.paidamount,
-                  paiddate: item.paiddate,
-                  modeofpayment: item.modeofpayment,
-                  transactionid: item.transactionid,
-                };
                 if (item.paidamount < 1) {
                   return null; // Do not render anything
                 }
@@ -426,10 +408,7 @@ const FeeView = () => {
                       </TableCell>
                       <TableCell className="border border 1 text-center">
                         <Link
-                          to={{
-                            pathname: `/invoice`,
-                            state: dataToPass,
-                          }}
+                          to={`/invoice/${item.paidamount}/${item.paiddate}/${item.modeofpayment}/${item.transactionid}/${index}`}
                           style={{ width: "40px" }}
                         >
                           <CreditScoreIcon className="iconn" />

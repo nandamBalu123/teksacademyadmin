@@ -85,7 +85,7 @@ function App() {
         <BrowserRouter>
           <div className="app">
             {user ? <Sidebar /> : undefined}
-            {user ? <Sidebar1/> : undefined}
+            {user ? <Sidebar1 /> : undefined}
             {/* <Sidebar /> */}
 
             <div
@@ -149,17 +149,10 @@ function App() {
                     )
                   }
                 />
-                 <Route
-                  path="/invoice/:id"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <Invoice />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
+                <Route
+                  path="/invoice/:paidamount/:paiddate/:modeofpayment/:transactionid/:index"
+                  element={user ? <Invoice /> : <Dashboard />}
                 />
-               
                 <Route
                   path="/addtofee/:id"
                   element={
@@ -192,7 +185,7 @@ function App() {
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/requestedcertificates"
                   element={user ? <Requestedcertificates /> : <Dashboard />}
                 />
