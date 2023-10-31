@@ -28,26 +28,29 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   const location = useLocation();
   const dataFromState = location.state;
   console.log("dataFromState", dataFromState);
-  // const { id } = useParams();
+  const { id } = useParams();
 
-  // const [studentdata, setstudentdata] = useState([]);
+  const { index } = useParams();
+  const { name } = useParams();
 
-  // useEffect(() => {
-  //   // Make a GET request to your backend API endpoint
-  //   axios
-  //     .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
-  //     .then((response) => {
-  //       // Handle the successful response here
-  //       // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
-  //       setstudentdata(response.data[0]); // Update the data state with the fetched data
-  //       // setstudentdata()
-  //       // console.log("studentdata", response.data[0].feedetails);
-  //     })
-  //     .catch((error) => {
-  //       // Handle any errors that occur during the request
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }, []);
+  const [studentdata, setstudentdata] = useState([]);
+
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
+      .then((response) => {
+        // Handle the successful response here
+        // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
+        setstudentdata(response.data[0]); // Update the data state with the fetched data
+        // setstudentdata()
+        // console.log("studentdata", response.data[0].feedetails);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   return (
     <div className="container invoice" ref={ref}>
@@ -89,15 +92,42 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </h3>
           <p>
             {" "}
-            <b>Branch:</b> Hitech city
+            <b>Branch:</b> {studentdata.branch}
           </p>
           <p>
             {" "}
             <b>INVOICE NO:</b> 12345577
           </p>
           <p>
-            {" "}
-            <b>DATE:</b> 23-10-2023
+            {name === "Admission Fee" &&
+            studentdata &&
+            studentdata.initialpayment &&
+            studentdata.initialpayment.length > 0 ? (
+              studentdata.initialpayment.map((student) => (
+                <span key={student.id}>
+                  <b>DATE:</b> {student.paiddate}
+                </span>
+              ))
+            ) : name === "Admission Fee" ? (
+              <p>No initial payment data available</p>
+            ) : null}
+            {studentdata &&
+            name === "Installment" &&
+            studentdata.installments &&
+            studentdata.installments.length > 0 ? (
+              studentdata.installments.map((student, indx) => {
+                if (indx === parseInt(index)) {
+                  return (
+                    <span key={student.id}>
+                      <b>DATE:</b> {student.paiddate}
+                    </span>
+                  );
+                }
+                return null; // If the condition is not met, return null
+              })
+            ) : name === "Installment" ? (
+              <p>No payment date available</p>
+            ) : null}
           </p>
         </div>
       </div>
@@ -107,13 +137,13 @@ const PrintableComponent = React.forwardRef((props, ref) => {
         </p>
         <hr className="w-25" />
         <p className="mt-3">
-          <b>Name :</b> Yalamaddi Pavan Teja
+          <b>Name :</b> {studentdata && studentdata.name}
         </p>
         <p className="mt-3">
-          <b>Email :</b> pavan@gmail.com
+          <b>Email :</b> {studentdata && studentdata.email}
         </p>
         <p className="mt-3">
-          <b>Contact No:</b> 944630944630
+          <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
         </p>
       </div>
 
@@ -134,17 +164,18 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               >
                 Description
               </TableCell>
+
               <TableCell
                 className="bg-primary text-light fs-6  border border 1"
                 align="center"
               >
-                Qty.
+                Fee excl tax
               </TableCell>
               <TableCell
                 className="bg-primary text-light fs-6  border border 1"
                 align="center"
               >
-                Price
+                tax
               </TableCell>
               <TableCell
                 className="bg-primary text-light fs-6  border border 1"
@@ -158,53 +189,164 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </TableHead>
 
           <TableBody className="border border 1">
-            <TableRow>
-              <TableCell className="border border 1 text-center" rowSpan={3}>
-                1
-              </TableCell>
-              <TableCell className="border border 1 text-center">
-                Fee Payment
-              </TableCell>
+            {name === "Admission Fee" &&
+            studentdata &&
+            studentdata.initialpayment &&
+            studentdata.initialpayment.length > 0 ? (
+              studentdata.initialpayment.map((student) => (
+                <TableRow>
+                  <TableCell className="border border 1 text-center">
+                    1
+                  </TableCell>
+                  <TableCell className="border border 1 text-center">
+                    Admission Fee
+                  </TableCell>
 
-              <TableCell className="border border 1 text-center">1</TableCell>
-              <TableCell className="border border 1 text-center">
-                1500
-              </TableCell>
-              <TableCell className="border border 1 text-center">
-                1500
-              </TableCell>
+                  <TableCell className="border border 1 text-center">
+                    {/* parseFloat(169.49152542372883.toFixed(2)); */}
+                    {parseFloat(student.initialamount / 1.18).toFixed(3)}
+                    {/* {parseInt(student.initialamount) / 1.18} */}
+                  </TableCell>
+                  <TableCell className="border border 1 text-center">
+                    {(
+                      parseFloat(student.initialamount).toFixed(3) -
+                      parseFloat(student.initialamount / 1.18).toFixed(3)
+                    ).toFixed(3)}
+                  </TableCell>
+                  <TableCell className="border border 1 text-center">
+                    {student.initialamount}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : name === "Admission Fee" ? (
+              <p>No initial payment data available</p>
+            ) : null}
+            {studentdata &&
+            name === "Installment" &&
+            studentdata.installments &&
+            studentdata.installments.length > 0 ? (
+              studentdata.installments.map((student, indx) => {
+                if (indx === parseInt(index)) {
+                  return (
+                    <TableRow>
+                      <TableCell className="border border 1 text-center">
+                        1
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        Course Fee
+                      </TableCell>
 
-              {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
-            </TableRow>
+                      <TableCell className="border border 1 text-center">
+                        {parseFloat((student.paidamount * 0.65) / 1.18).toFixed(
+                          3
+                        )}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {(
+                          parseFloat(student.paidamount * 0.65).toFixed(3) -
+                          parseFloat(
+                            (student.paidamount * 0.65) / 1.18
+                          ).toFixed(3)
+                        ).toFixed(3)}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {parseFloat(student.paidamount * 0.65).toFixed(3)}
+                      </TableCell>
+                    </TableRow>
+                  );
+                }
+                return null; // If the condition is not met, return null
+              })
+            ) : name === "Installment" ? (
+              <p>No payment date available</p>
+            ) : null}
+            {studentdata &&
+            name === "Installment" &&
+            studentdata.installments &&
+            studentdata.installments.length > 0 ? (
+              studentdata.installments.map((student, indx) => {
+                if (indx === parseInt(index)) {
+                  return (
+                    <TableRow>
+                      <TableCell className="border border 1 text-center">
+                        2
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        Material Fee
+                      </TableCell>
 
-            <TableRow>
-              <TableCell className="border border 1 text-center">
-                Matirial fee
-              </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {parseFloat((student.paidamount * 0.35) / 1.18).toFixed(
+                          3
+                        )}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {(
+                          parseFloat(student.paidamount * 0.35).toFixed(3) -
+                          parseFloat(
+                            (student.paidamount * 0.35) / 1.18
+                          ).toFixed(3)
+                        ).toFixed(3)}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {parseFloat(student.paidamount * 0.35).toFixed(3)}
+                      </TableCell>
+                    </TableRow>
+                  );
+                }
+                return null; // If the condition is not met, return null
+              })
+            ) : name === "Installment" ? (
+              <p>No payment date available</p>
+            ) : null}
 
-              <TableCell className="border border 1 text-center">1</TableCell>
-              <TableCell className="border border 1 text-center">
-                1500
-              </TableCell>
-              <TableCell className="border border 1 text-center">
-                1500
-              </TableCell>
+            {name === "Admission Fee" &&
+            studentdata &&
+            studentdata.initialpayment &&
+            studentdata.initialpayment.length > 0 ? (
+              studentdata.initialpayment.map((student) => (
+                <TableRow>
+                  <TableCell className="border border 1 text-center"></TableCell>
+                  <TableCell className="border border 1 text-center">
+                    Grand Total
+                  </TableCell>
 
-              {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
-            </TableRow>
-            <TableRow>
-              <TableCell className="border border 1 text-center">
-                Grand Total
-              </TableCell>
+                  <TableCell className="border border 1 text-center"></TableCell>
+                  <TableCell className="border border 1 text-center"></TableCell>
+                  <TableCell className="border border 1 text-center">
+                    {student.initialamount}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : name === "Admission Fee" ? (
+              <p>No initial payment data available</p>
+            ) : null}
+            {studentdata &&
+            name === "Installment" &&
+            studentdata.installments &&
+            studentdata.installments.length > 0 ? (
+              studentdata.installments.map((student, indx) => {
+                if (indx === parseInt(index)) {
+                  return (
+                    <TableRow>
+                      <TableCell className="border border 1 text-center"></TableCell>
+                      <TableCell className="border border 1 text-center"></TableCell>
 
-              <TableCell className="border border 1 text-center"></TableCell>
-              <TableCell className="border border 1 text-center"></TableCell>
-              <TableCell className="border border 1 text-center">
-                1500
-              </TableCell>
-
-              {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
-            </TableRow>
+                      <TableCell className="border border 1 text-center">
+                        Grand Total
+                      </TableCell>
+                      <TableCell className="border border 1 text-center"></TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {student.paidamount}
+                      </TableCell>
+                    </TableRow>
+                  );
+                }
+                return null; // If the condition is not met, return null
+              })
+            ) : name === "Installment" ? (
+              <p>No payment date available</p>
+            ) : null}
           </TableBody>
         </Table>
       </TableContainer>

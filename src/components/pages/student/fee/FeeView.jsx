@@ -331,7 +331,7 @@ const FeeView = () => {
                     </TableCell>
                     <TableCell className="border border 1 text-center">
                       <Link
-                        to={`/invoice/${item.initialamount}/${item.paiddate}/${item.modeofpayment}/${item.transactionID}/${index}`}
+                        to={`/invoice/${id}/${index}/Admission Fee`}
                         style={{ width: "40px" }}
                       >
                         <CreditScoreIcon className="iconn" />
@@ -408,7 +408,7 @@ const FeeView = () => {
                       </TableCell>
                       <TableCell className="border border 1 text-center">
                         <Link
-                          to={`/invoice/${item.paidamount}/${item.paiddate}/${item.modeofpayment}/${item.transactionid}/${index}`}
+                          to={`/invoice/${id}/${index}/Installment`}
                           style={{ width: "40px" }}
                         >
                           <CreditScoreIcon className="iconn" />

@@ -150,7 +150,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/invoice/:paidamount/:paiddate/:modeofpayment/:transactionid/:index"
+                  path="/invoice/:id/:index/:name"
                   element={user ? <Invoice /> : <Dashboard />}
                 />
                 <Route
