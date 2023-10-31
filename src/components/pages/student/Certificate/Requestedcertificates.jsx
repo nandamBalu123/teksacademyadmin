@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -6,11 +6,162 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import TableRow from "@mui/material/TableRow";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import CloseIcon from "@mui/icons-material/Close";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+import { useCourseContext } from "../../../../hooks/useCourseContext";
 import axios from "axios";
+import { useBranchContext } from "../../../../hooks/useBranchContext";
+import { useUsersContext } from "../../../../hooks/useUsersContext";
 const Requestedcertificates = () => {
   const { students, dispatch } = useStudentsContext();
+
+  const { getcourses } = useCourseContext();
+  const { branches } = useBranchContext();
+  const { users } = useUsersContext();
+  const [filteredData, setFilteredData] = useState(students);
+  const [filteredcounsellor, setfilteredcounsellor] = useState([]);
+  const [itemsPerPage, setrecordsPerPage] = useState(10);
+
+  useEffect(() => {
+    if (users) {
+      const filteruser = users.filter((user) => {
+        const filtercounsellar = user.profile === "counsellor";
+        return filtercounsellar;
+      });
+      setfilteredcounsellor(filteruser);
+    }
+  }, [users]);
+  const handlerecorddata = (e) => {
+    setrecordsPerPage(e.target.value);
+    setPage(1);
+  };
+  const [filterCriteria, setFilterCriteria] = useState({
+    fromdate: "",
+
+    todate: "",
+
+    branch: "",
+
+    course: "",
+
+    enquirytakenby: "",
+
+    search: "",
+    certificate_Status: "request Submitted",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFilterCriteria({ ...filterCriteria, [name]: value });
+  };
+  useEffect(() => {
+    if (students) {
+      const filteredResults = students.filter((item) => {
+        const searchCondition = filterCriteria.search
+          ? item.name
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.branch
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.registrationnumber
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.courses
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.enquirytakenby
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase())
+          : true;
+
+        const dateCondition =
+          filterCriteria.fromdate && filterCriteria.todate
+            ? item.admissiondate >= filterCriteria.fromdate &&
+              item.admissiondate <= filterCriteria.todate
+            : true;
+
+        const branchCondition = filterCriteria.branch
+          ? item.branch === filterCriteria.branch
+          : true;
+
+        const courseCondition = filterCriteria.course
+          ? item.courses === filterCriteria.course
+          : true;
+
+        const counsellarCondition = filterCriteria.enquirytakenby
+          ? item.enquirytakenby === filterCriteria.enquirytakenby
+          : true;
+        const certificate_status_condition = filterCriteria.certificate_Status
+          ? item.certificate_status[0].certificateStatus ===
+            filterCriteria.certificate_Status
+          : true;
+        return (
+          searchCondition &&
+          dateCondition &&
+          branchCondition &&
+          courseCondition &&
+          counsellarCondition &&
+          certificate_status_condition
+        );
+      });
+
+      setFilteredData(filteredResults);
+    }
+  }, [students, filterCriteria]);
+  const filterreset = () => {
+    setFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+
+      branch: "",
+
+      course: "",
+
+      enquirytakenby: "",
+
+      search: "",
+      certificate_Status: "request Submitted",
+    });
+  };
+  const [page, setPage] = useState(1);
+
+  // Calculate the range of items to display on the current page
+  ////////////////////pagination
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  let records;
+  let initialDataCount;
+  let recordCount;
+  if (filteredData) {
+    records = filteredData.slice(startIndex, endIndex);
+    initialDataCount = filteredData.length;
+    recordCount = filteredData.length;
+  }
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
+  ////////////
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const handleRequest = (id, courseStartDate, courseEndDate) => {
     let certificate_status = [
       {
@@ -43,6 +194,20 @@ const Requestedcertificates = () => {
       });
   };
   const [issuedCertificates, setissuedCertificates] = useState(false);
+  const handleRequestedCertificates = () => {
+    setissuedCertificates((e) => !e);
+    setFilterCriteria({
+      ...filterCriteria,
+      certificate_Status: "request Submitted",
+    });
+  };
+  const handleIssuedCertificates = () => {
+    setissuedCertificates((e) => !e);
+    setFilterCriteria({
+      ...filterCriteria,
+      certificate_Status: "issued",
+    });
+  };
   return (
     <div className="container req-certificate my-3">
       <div className="d-flex justify-content-between">
@@ -50,24 +215,18 @@ const Requestedcertificates = () => {
         {issuedCertificates && <span>Issued Certificates</span>}
 
         {issuedCertificates && (
-          <button
-            class="btn btn-primary"
-            onClick={(e) => setissuedCertificates((e) => !e)}
-          >
+          <button class="btn btn-primary" onClick={handleRequestedCertificates}>
             Requested Certificates
           </button>
         )}
         {!issuedCertificates && (
-          <button
-            class="btn btn-primary"
-            onClick={(e) => setissuedCertificates((e) => !e)}
-          >
+          <button class="btn btn-primary" onClick={handleIssuedCertificates}>
             Issued Certificates
           </button>
         )}
       </div>
 
-      {/* <div className="row mb-3 px-4 pt-2">
+      <div className="row mb-3 px-4 pt-2">
         <div className="col-12 col-md-8 col-lg-8 col-xl-8">
           <input
             type="text"
@@ -254,7 +413,7 @@ const Requestedcertificates = () => {
                   ))}
               </select>
             </MenuItem>
-            <MenuItem>
+            {/* <MenuItem>
               <select
                 className="mt-3"
                 id=""
@@ -275,7 +434,7 @@ const Requestedcertificates = () => {
                 <option value="issued">Issued</option>
                 <option value="">Pending</option>
               </select>
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem className="d-flex justify-content-between">
               <button className="clear" onClick={filterreset}>
                 {" "}
@@ -284,7 +443,7 @@ const Requestedcertificates = () => {
             </MenuItem>
           </Menu>
         </div>
-      </div> */}
+      </div>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -321,9 +480,8 @@ const Requestedcertificates = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {!issuedCertificates &&
-                students &&
-                students.map((student, index) => {
+              {records &&
+                records.map((student, index) => {
                   const validitystartdate = student.validitystartdate;
                   const dateTime = new Date(validitystartdate);
                   const startdate = dateTime.toISOString().slice(0, 10);
@@ -340,71 +498,28 @@ const Requestedcertificates = () => {
                   const certificateStatus = certificate_Status
                     .map((item) => item.certificateStatus)
                     .join(", ");
-                  // if (certificateStatus === "request Submitted")
-                  if (certificateStatus !== "request Submitted") {
-                    return null; // Do not render anything
-                  }
+
                   return (
                     <TableRow>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>{student.name}</TableCell>
-                      <TableCell>{student.courses}</TableCell>{" "}
-                      <TableCell>{student.registrationnumber}</TableCell>
-                      <TableCell>{courseStartDate}</TableCell>
-                      <TableCell>{courseEndDate}</TableCell>{" "}
-                      {certificateStatus === "request Submitted" && (
-                        <button
-                          className="btn btn-warning center m-0 px-1"
-                          onClick={(e) =>
-                            handleRequest(
-                              student.id,
-                              courseStartDate,
-                              courseEndDate
-                            )
-                          }
-                        >
-                          Issue Certificate
-                        </button>
-                      )}
-                      {certificateStatus === "issued" && (
-                        <button className="btn  btn-success center m-0 px-1">
-                          Certificate Issued
-                        </button>
-                      )}
-                    </TableRow>
-                  );
-                })}
-              {issuedCertificates &&
-                students &&
-                students.map((student, index) => {
-                  const validitystartdate = student.validitystartdate;
-                  const dateTime = new Date(validitystartdate);
-                  const startdate = dateTime.toISOString().slice(0, 10);
-                  const validityenddate = student.validityenddate;
-                  const dateTimee = new Date(validitystartdate);
-                  const enddate = dateTimee.toISOString().slice(0, 10);
-                  const certificate_Status = student.certificate_status;
-                  const courseStartDate = certificate_Status
-                    .map((item) => item.courseStartDate)
-                    .join(", ");
-                  const courseEndDate = certificate_Status
-                    .map((item) => item.courseEndDate)
-                    .join(", ");
-                  const certificateStatus = certificate_Status
-                    .map((item) => item.certificateStatus)
-                    .join(", ");
-                  // if (certificateStatus === "request Submitted")
-                  if (certificateStatus === "issued") {
-                    return (
-                      <TableRow>
-                        
-                        <TableCell className="border border 1">{index + 1}</TableCell>
-                        <TableCell className="border border 1">{student.name}</TableCell>
-                        <TableCell className="border border 1">{student.courses}</TableCell>{" "}
-                        <TableCell className="border border 1">{student.registrationnumber}</TableCell>
-                        <TableCell className="border border 1">{courseStartDate}</TableCell>
-                        <TableCell className="border border 1">{courseEndDate}</TableCell>{" "}
-                        <TableCell className="border border 1 text-center fs-6"> 
+                      <TableCell className="border border 1 ">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className="border border 1 ">
+                        {student.name}
+                      </TableCell>
+                      <TableCell className="border border 1 ">
+                        {student.courses}
+                      </TableCell>{" "}
+                      <TableCell className="border border 1 ">
+                        {student.registrationnumber}
+                      </TableCell>
+                      <TableCell className="border border 1 ">
+                        {courseStartDate}
+                      </TableCell>
+                      <TableCell className="border border 1 ">
+                        {courseEndDate}
+                      </TableCell>{" "}
+                      <TableCell className="border border 1  text-center fs-6">
                         {certificateStatus === "request Submitted" && (
                           <button
                             className="btn btn-warning center m-0 px-1"
@@ -424,16 +539,28 @@ const Requestedcertificates = () => {
                             Certificate Issued
                           </button>
                         )}
-                        </TableCell>
-                        
-                      </TableRow>
-                    );
-                  }
+                      </TableCell>
+                    </TableRow>
+                  );
                 })}
             </TableBody>
           </Table>
         </TableContainer>
       </Paper>
+      <div
+        style={{ display: "flex", justifyContent: "center" }}
+        className="mt-3"
+      >
+        {filteredData && (
+          <Stack spacing={2}>
+            <Pagination
+              count={Math.ceil(filteredData.length / itemsPerPage)}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Stack>
+        )}
+      </div>
     </div>
   );
 };

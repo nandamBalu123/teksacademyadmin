@@ -55,11 +55,10 @@ const Certificate = () => {
 
     course: "",
 
-    status: "",
-
     enquirytakenby: "",
 
     search: "",
+    certificate_Status: "",
   });
 
   const handleInputChange = (e) => {
@@ -102,21 +101,21 @@ const Certificate = () => {
           ? item.courses === filterCriteria.course
           : true;
 
-        const statusCondition = filterCriteria.status
-          ? item.status === filterCriteria.status
-          : true;
-
         const counsellarCondition = filterCriteria.enquirytakenby
           ? item.enquirytakenby === filterCriteria.enquirytakenby
+          : true;
+        const certificate_status_condition = filterCriteria.certificate_Status
+          ? item.certificate_status[0].certificateStatus ===
+            filterCriteria.certificate_Status
           : true;
 
         return (
           searchCondition &&
           dateCondition &&
           branchCondition &&
-          statusCondition &&
           courseCondition &&
-          counsellarCondition
+          counsellarCondition &&
+          certificate_status_condition
         );
       });
 
@@ -133,11 +132,10 @@ const Certificate = () => {
 
       course: "",
 
-      status: "",
-
       enquirytakenby: "",
 
       search: "",
+      certificate_Status: "",
     });
   };
   const [page, setPage] = useState(1);
@@ -408,12 +406,12 @@ const Certificate = () => {
                     border: "1.5px solid black",
                     borderRadius: "5px",
                   }}
-                  name="status"
-                  value={filterCriteria.status}
+                  name="certificate_Status"
+                  value={filterCriteria.certificate_Status}
                   onChange={handleInputChange}
                 >
                   <option value="">---Status---</option>
-                  <option value="">Request Submitted</option>
+                  <option value="request Submitted">Request Submitted</option>
                   <option value="issued">Issued</option>
                   <option value="">Pending</option>
                 </select>
