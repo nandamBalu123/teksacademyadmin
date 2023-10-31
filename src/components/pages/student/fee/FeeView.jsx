@@ -11,6 +11,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CreditScoreIcon from "@mui/icons-material/CreditScore";
+import { Link } from "react-router-dom";
+
 const FeeView = () => {
   const { id } = useParams();
   const navigator = useNavigate();
@@ -21,6 +24,7 @@ const FeeView = () => {
   const [newpaidamount, setnewpaidamount] = useState();
   const [installmentamount, setinstallmentamount] = useState();
   // const [totoalleft, settotalleft] = useState();
+
   let totalleft;
 
   useEffect(() => {
@@ -308,27 +312,45 @@ const FeeView = () => {
               </TableRow>
             </TableHead>
             {studentdata.initialpayment &&
-              studentdata.initialpayment.map((item, index) => (
-                <TableBody>
-                  <TableRow
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell className="border border 1 text-center">
-                      {item.initialamount}
-                    </TableCell>
-                    <TableCell className="border border 1 text-center">
-                      {item.paiddate}
-                    </TableCell>
-                    <TableCell className="border border 1 text-center">
-                      {item.modeofpayment}
-                    </TableCell>
-                    <TableCell className="border border 1 text-center">
-                      {item.transactionID}
-                    </TableCell>
-                    <TableCell className="border border 1 text-center"></TableCell>
-                  </TableRow>
-                </TableBody>
-              ))}
+              studentdata.initialpayment.map((item, index) => {
+                let dataToPass = {
+                  paidamount: item.initialamount,
+                  paiddate: item.paiddate,
+                  modeofpayment: item.modeofpayment,
+                  transactionid: item.transactionID,
+                };
+                return (
+                  <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell className="border border 1 text-center">
+                        {item.initialamount}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {item.paiddate}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {item.modeofpayment}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {item.transactionID}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        <Link
+                          to={{
+                            pathname: `/invoice`,
+                            state: dataToPass,
+                          }}
+                          style={{ width: "40px" }}
+                        >
+                          <CreditScoreIcon className="iconn" />
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                );
+              })}
           </Table>
         </TableContainer>
         <div className="row">
@@ -371,6 +393,13 @@ const FeeView = () => {
             </TableHead>
             {readinstallments &&
               readinstallments.map((item, index) => {
+                let dataToPass = {
+                  duedate: item.duedate,
+                  paidamount: item.paidamount,
+                  paiddate: item.paiddate,
+                  modeofpayment: item.modeofpayment,
+                  transactionid: item.transactionid,
+                };
                 if (item.paidamount < 1) {
                   return null; // Do not render anything
                 }
@@ -395,7 +424,17 @@ const FeeView = () => {
                       <TableCell className="border border 1 text-center">
                         {item.transactionid}
                       </TableCell>
-                      <TableCell className="border border 1 text-center"></TableCell>
+                      <TableCell className="border border 1 text-center">
+                        <Link
+                          to={{
+                            pathname: `/invoice`,
+                            state: dataToPass,
+                          }}
+                          style={{ width: "40px" }}
+                        >
+                          <CreditScoreIcon className="iconn" />
+                        </Link>
+                      </TableCell>
                     </TableRow>
                   </TableBody>
                 );
