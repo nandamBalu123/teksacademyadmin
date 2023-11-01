@@ -170,30 +170,29 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       />
       <h3 className="text-center mt-5"> Fee Invoice</h3>
       <hr />
-
-      <div className="d-flex justify-content-between ">
-        <div>
-          <h4 style={{ marginLeft: "15px", marginTop: "25px" }}>
+      <div className="row"> 
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+      <h4 >
             {" "}
             <strong> Kapil Knowledge Hub Private Limited</strong>
-          </h4>
-          <p style={{ marginTop: "15px" }}>
-            &nbsp;&nbsp; CIN: U80100TG2018PTC123853{" "}
-          </p>
-          <p style={{ marginTop: "5px" }}>
-            &nbsp;&nbsp; GSTIN: 36AAHCK0599C1ZI{" "}
-          </p>
-        </div>
-
-        <div>
-          <h3 style={{ marginTop: "25px" }}>
+          </h4>  
+      </div>
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+      <h3 >
             <strong>
               {" "}
               <b>INVOICE NO:</b> {invoice}
             </strong>
           </h3>
-
-          <p style={{ marginTop: "15px" }}>
+ 
+      </div>
+</div>
+<div className="row m-0 p-0"> 
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+      <p >CIN: U80100TG2018PTC123853</p>
+      </div>
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+      <p >
             {name === "Admission Fee" &&
             studentdata &&
             studentdata.initialpayment &&
@@ -245,37 +244,48 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             ) : name === "Installment" ? (
               <p>No payment date available</p>
             ) : null}
+          </p> 
+      </div>
+</div>
+<div className="row m-0 p-0"> 
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+      <p >
+             GSTIN: 36AAHCK0599C1ZI{" "}
           </p>
-          <p style={{ marginTop: "5px" }}>
-            {" "}
+      </div>
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+      <p >
+          
             <b>Branch:</b> {studentdata.branch}
           </p>
-        </div>
+      
       </div>
-      <div className="mt-3 ">
+</div>
+      
+      <div className="mt-2 ">
         <p>
           <b> BILLING TO</b>{" "}
         </p>
         <hr className="w-25" />
-        <div className="row">
-          <div className="col">
+        <div className="row ">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Name :</b> {studentdata && studentdata.name}
           </div>
-          <div className="col">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Registration No:</b>{" "}
             {studentdata && studentdata.registrationnumber}
           </div>
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Email :</b> {studentdata && studentdata.email}
           </div>
-          <div className="col">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
           </div>
         </div>
         <div className="row mb-3">
-          <div className="col">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Address :</b>{" "}
             {studentdata && (
               <span>
@@ -508,10 +518,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </h6>
           )}
         </div>
-        <hr style={{ marginTop: "200px" }} />
+        <hr style={{ marginTop: "170px" }} />
         <div
           className="d-flex align-items-end justify-content-between"
-          style={{ marginTop: "10px", overflow: "hidden" }}
+          style={{ overflow: "hidden" }}
         >
           <span>
             <EmailIcon />
