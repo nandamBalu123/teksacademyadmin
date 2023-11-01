@@ -291,7 +291,7 @@ const FeeView = () => {
             <TableHead>
               <TableRow>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Initial Paid Amount
+                  Admission Fee
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                   {" "}

@@ -8,7 +8,7 @@ import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import numberToWords from 'number-to-words';
+import numberToWords from "number-to-words";
 
 import "./Invoice.css";
 import teksacademylogo from "../../../../images/Teks-Logo-with-Trade.png";
@@ -39,7 +39,27 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   const [studentdata, setstudentdata] = useState([]);
   const [invoice, setinvoice] = useState();
   const [number, setNumber] = useState();
-  const [words, setWords] = useState('');
+  useEffect(() => {
+    if (name === "Installment" && studentdata.installments) {
+      let data = studentdata.installments;
+      let paidamount = data[index].paidamount;
+      setNumber(paidamount);
+    }
+    if (name === "Admission Fee" && studentdata.initialpayment) {
+      let data = studentdata.initialpayment;
+      let initialamount = data[index].initialamount;
+      setNumber(initialamount);
+    }
+    if (number) {
+      let words = numberToWords.toWords(number);
+      words = words
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      setWords(words);
+    }
+  }, [studentdata]);
+  const [words, setWords] = useState("");
   useEffect(() => {
     // const filterbranch = studentdata.filter((item) => item.branch === branch);
     // const branchCount = filterbranch.length;
@@ -157,8 +177,12 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             {" "}
             <strong> Kapil Knowledge Hub Private Limited</strong>
           </h4>
-          <p>&nbsp;&nbsp; CIN: U80100TG2018PTC123853 </p>
-          <p>&nbsp;&nbsp; GSTIN: 36AAHCK0599C1ZI </p>
+          <p style={{ marginTop: "15px" }}>
+            &nbsp;&nbsp; CIN: U80100TG2018PTC123853{" "}
+          </p>
+          <p style={{ marginTop: "5px" }}>
+            &nbsp;&nbsp; GSTIN: 36AAHCK0599C1ZI{" "}
+          </p>
         </div>
 
         <div>
@@ -169,15 +193,24 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </strong>
           </h3>
 
-          <p>
+          <p style={{ marginTop: "15px" }}>
             {name === "Admission Fee" &&
             studentdata &&
             studentdata.initialpayment &&
             studentdata.initialpayment.length > 0 ? (
               studentdata.initialpayment.map((student) => {
+                const originalDate = new Date(student.paiddate);
+                const day = String(originalDate.getDate()).padStart(2, "0");
+                const month = String(originalDate.getMonth() + 1).padStart(
+                  2,
+                  "0"
+                ); // Month is zero-based, so we add 1.
+                const year = originalDate.getFullYear();
+
+                const formattedDate = `${day}-${month}-${year}`;
                 return (
                   <span key={student.id}>
-                    <b>DATE:</b> {student.paiddate}
+                    <b>DATE:</b> {formattedDate}
                   </span>
                 );
               })
@@ -189,10 +222,21 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             studentdata.installments &&
             studentdata.installments.length > 0 ? (
               studentdata.installments.map((student, indx) => {
+                const originalDate = new Date(student.paiddate);
+                const day = String(originalDate.getDate()).padStart(2, "0");
+                const month = String(originalDate.getMonth() + 1).padStart(
+                  2,
+                  "0"
+                ); // Month is zero-based, so we add 1.
+                const year = originalDate.getFullYear();
+
+                const formattedDate = `${day}-${month}-${year}`;
+
+                console.log(formattedDate);
                 if (indx === parseInt(index)) {
                   return (
                     <span key={student.id}>
-                      <b>DATE:</b> {student.paiddate}
+                      <b>DATE:</b> {formattedDate}
                     </span>
                   );
                 }
@@ -202,7 +246,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <p>No payment date available</p>
             ) : null}
           </p>
-          <p>
+          <p style={{ marginTop: "5px" }}>
             {" "}
             <b>Branch:</b> {studentdata.branch}
           </p>
@@ -213,26 +257,71 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           <b> BILLING TO</b>{" "}
         </p>
         <hr className="w-25" />
-        <div className="d-flex justify-content-between">
+        <div className="row">
+          <div className="col">
+            <b>Name :</b> {studentdata && studentdata.name}
+          </div>
+          <div className="col">
+            <b>Registration No:</b>{" "}
+            {studentdata && studentdata.registrationnumber}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <b>Email :</b> {studentdata && studentdata.email}
+          </div>
+          <div className="col">
+            <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
+          </div>
+        </div>
+        <div className="row mb-3">
+          <div className="col">
+            <b>Address :</b>{" "}
+            {studentdata && (
+              <span>
+                {studentdata.area},&nbsp;{studentdata.native},&nbsp;
+                {studentdata.state}, &nbsp;{studentdata.zipcode},&nbsp;
+                {studentdata.country}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+      {/* <div className="mt-3 ">
+        <p>
+          <b> BILLING TO</b>{" "}
+        </p>
+        <hr className="w-25" />
+        <div className="d-flex justify-content-space">
           <div>
             <p className="mt-3">
               <b>Name :</b> {studentdata && studentdata.name}
             </p>
             <p className="mt-3">
-              <b>Registration No:</b>{" "}
-              {studentdata && studentdata.registrationnumber}
+              <b>Email :</b> {studentdata && studentdata.email}
+            </p>
+            <p className="mt-3">
+              <b>Address :</b>{" "}
+              {studentdata && (
+                <span>
+                  {studentdata.area},&nbsp;{studentdata.native},&nbsp;
+                  {studentdata.state}, &nbsp;{studentdata.zipcode},&nbsp;
+                  {studentdata.country}
+                </span>
+              )}
             </p>
           </div>
           <div>
             <p className="mt-3">
-              <b>Email :</b> {studentdata && studentdata.email}
+              <b>Registration No:</b>{" "}
+              {studentdata && studentdata.registrationnumber}
             </p>
             <p className="mt-3">
               <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="table-responsive" style={{ overflow: "hidden" }}>
         <table className="table table-bordered">
           <thead>
@@ -240,6 +329,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <td className="text-center bg-primary text-light border border 1">
                 {" "}
                 Description
+              </td>
+              <td className="text-center bg-primary text-light border border 1">
+                {" "}
+                Payment Mode
               </td>
               <td className="text-center bg-primary text-light border border 1">
                 Fee Excl. Tax
@@ -263,7 +356,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <td className=" text-center border border 1">
                     Admission Fee
                   </td>
-
+                  <td className=" text-center border border 1">
+                    {student.modeofpayment}
+                  </td>
                   <td className=" text-center border border 1">
                     {/* parseFloat(169.49152542372883.toFixed(2)); */}
                     {parseFloat(student.initialamount / 1.18).toFixed(2)}
@@ -294,7 +389,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       <td className=" text-center border border 1">
                         Course Fee
                       </td>
-
+                      <td className=" text-center border border 1">
+                        {student.modeofpayment}
+                      </td>
                       <td className=" text-center border border 1">
                         {parseFloat((student.paidamount * 0.65) / 1.18).toFixed(
                           3
@@ -330,7 +427,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       <td className="border border 1 text-center">
                         Material Fee
                       </td>
-
+                      <td className=" text-center border border 1">
+                        {student.modeofpayment}
+                      </td>
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center">
@@ -355,6 +454,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
                   <td className="border border 1 text-center"></td>
                   <td className="border border 1 text-center"></td>
+
+                  <td className="border border 1 text-center"></td>
                   <td className="border border 1 text-center">
                     {student.initialamount}
                   </td>
@@ -378,6 +479,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center"></td>
+
+                      <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center">
                         {student.paidamount}
                       </td>
@@ -393,12 +496,19 @@ const PrintableComponent = React.forwardRef((props, ref) => {
         </table>
         <div className="row">
           {studentdata && (
+            <h6 className="fs-6">
+              Total Amount (in words): {words} Rupees only
+            </h6>
+          )}
+        </div>
+        <div className="row">
+          {studentdata && (
             <h6 className="fs-6 fw-bold">
               *Note: Total Due Amount: INR {studentdata.dueamount}
             </h6>
           )}
         </div>
-        <hr style={{ marginTop: "260px" }} />
+        <hr style={{ marginTop: "200px" }} />
         <div
           className="d-flex align-items-end justify-content-between"
           style={{ marginTop: "10px", overflow: "hidden" }}
