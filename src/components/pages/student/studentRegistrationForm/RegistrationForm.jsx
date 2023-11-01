@@ -79,6 +79,9 @@ export default function RegistrationForm() {
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
   const [profilepic, setProfilePpic] = useState("");
+  // const [file, setSelectedFile] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
+  // const [profilepic, setProfilePpic] = useState("");
   const [enquirydate, setEnquiryDate] = useState("");
   const [enquirytakenby, setEnquiryTakenBy] = useState("");
   const [coursepackage, setCoursepakage] = useState("");
@@ -121,6 +124,7 @@ export default function RegistrationForm() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
+  const [student_status, setStudent_status] = useState([]);
   const [certificate_status, setcertificate_status] = useState([
     { courseStartDate: "", courseEndDate: "", certificateStatus: "" },
   ]);
@@ -511,7 +515,12 @@ export default function RegistrationForm() {
       alert("please enter assets ");
       return;
     }
+
     // setuserid(user.id);
+    let file = new FormData();
+    file.append("file", selectedFile);
+    console.log("selected", selectedFile);
+    // let file = selectedFile
     const studentRegistrationdata = {
       name,
       email,
@@ -565,6 +574,8 @@ export default function RegistrationForm() {
       totalfeewithouttax,
       totalpaidamount,
       selectedFile,
+
+      student_status,
       user_id,
       certificate_status,
     };
@@ -736,7 +747,9 @@ export default function RegistrationForm() {
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2 ">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Gender<span> *</span></InputLabel>
+                      <InputLabel>
+                        Gender<span> *</span>
+                      </InputLabel>
                       <Select
                         id="gender"
                         name="gender"
@@ -753,7 +766,9 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Marital Status<span> *</span></InputLabel>
+                      <InputLabel>
+                        Marital Status<span> *</span>
+                      </InputLabel>
                       <Select
                         id="maritalstatus"
                         name="maritalstatus"
@@ -817,7 +832,9 @@ export default function RegistrationForm() {
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Country<span> *</span></InputLabel>
+                      <InputLabel>
+                        Country<span> *</span>
+                      </InputLabel>
                       <Select
                         name="country"
                         required
@@ -834,7 +851,9 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>State<span> *</span></InputLabel>
+                      <InputLabel>
+                        State<span> *</span>
+                      </InputLabel>
                       <Select
                         name="state"
                         required
@@ -978,7 +997,9 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Education Type<span> *</span></InputLabel>
+                      <InputLabel>
+                        Education Type<span> *</span>
+                      </InputLabel>
                       <Select
                         id="educationtype"
                         name="educationtype"
@@ -994,6 +1015,38 @@ export default function RegistrationForm() {
                         <MenuItem value="ssc">SSC</MenuItem>
                         <MenuItem value="others">Others</MenuItem>
                       </Select>
+                      {othersOption && (
+                        <div className="mt-3">
+                          <TextField
+                            label="Others"
+                            type="text"
+                            variant="standard"
+                            className=" w-75"
+                            required
+                            onChange={(e) =>
+                              setCustomEducationType(e.target.value)
+                            }
+                            value={customEducationType}
+                          />
+                          {/* <label className="col-12 col-md-2 label">
+                            Others
+                          </label>
+                          <input
+                            type="text"
+                            className="col-9 col-md-5"
+                            required
+                            style={{
+                              height: "35px",
+                              border: "1.5px solid black",
+                              borderRadius: "5px",
+                            }}
+                            onChange={(e) =>
+                              setCustomEducationType(e.target.value)
+                            }
+                            value={customEducationType}
+                          /> */}
+                        </div>
+                      )}
                     </FormControl>
                   </div>
                   <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
@@ -1053,27 +1106,25 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  {/* <label className="col-12 col-md-2">Image:</label> */}
                   {/* <input
-                    type="image"
-                    // className="col-9 col-md-5"
-                    // style={{
-                    //   height: "35px",
-                    //   border: "1.5px solid black",
-                    //   borderRadius: "5px",
-                    // }}
-                  /> */}
-
-                  {/* <input
-                    accept=".jpg, .jpeg, .png"
                     type="file"
-                    src="your-image-url.jpg"
-                    alt="Submit"
-                    class="image-input"
-
+                    name="file"
+                    onChange={(e) => {
+                      setSelectedFile(e.target.files[0]);
+                    }}
+                    accept=".jpg, .jpeg, .png"
                   /> */}
                   <input
                     type="file"
+                    name="file"
+                    onChange={(e) => {
+                      setSelectedFile(e.target.files[0]);
+                    }}
+                    accept=".jpg, .jpeg, .png"
+                  />
+                  {/* <input
+                    type="file"
+                    name="file"
                     onChange={(e) => {
                       setSelectedFile(e.target.files[0]);
                     }}
@@ -1084,7 +1135,7 @@ export default function RegistrationForm() {
                     id="imageInput"
                     accept=".jpg, .jpeg, .png"
                     style={{ display: "none" }}
-                  />
+                  /> */}
                 </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
@@ -1135,7 +1186,9 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Enquiry Taken By<span> *</span></InputLabel>
+                      <InputLabel>
+                        Enquiry Taken By<span> *</span>
+                      </InputLabel>
                       <Select
                         id=" enquirytakenby"
                         name="enquirytakenby"
@@ -1158,7 +1211,9 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Course Package<span> *</span></InputLabel>
+                      <InputLabel>
+                        Course Package<span> *</span>
+                      </InputLabel>
                       <Select
                         id="coursepackage"
                         name="coursepackage"
@@ -1181,7 +1236,9 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Course<span> *</span></InputLabel>
+                      <InputLabel>
+                        Course<span> *</span>
+                      </InputLabel>
                       <Select
                         id="courses"
                         name="courses"
@@ -1203,7 +1260,9 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Lead Source<span> *</span></InputLabel>
+                      <InputLabel>
+                        Lead Source<span> *</span>
+                      </InputLabel>
                       <Select
                         id="leadsource"
                         name="leadsource"
@@ -1259,7 +1318,9 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Branch<span> *</span></InputLabel>
+                      <InputLabel>
+                        Branch<span> *</span>
+                      </InputLabel>
                       <Select
                         id="branch"
                         name="branch"
@@ -1279,7 +1340,9 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Mode of Training<span> *</span></InputLabel>
+                      <InputLabel>
+                        Mode of Training<span> *</span>
+                      </InputLabel>
                       <Select
                         id="modeoftraining"
                         name="modeoftraining"
@@ -1297,7 +1360,9 @@ export default function RegistrationForm() {
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Admission Status<span> *</span></InputLabel>
+                      <InputLabel>
+                        Admission Status<span> *</span>
+                      </InputLabel>
                       <Select
                         id="admissionstatus"
                         name="admissionstatus"
@@ -1404,7 +1469,9 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Fee Type<span> *</span></InputLabel>
+                      <InputLabel>
+                        Fee Type<span> *</span>
+                      </InputLabel>
                       <Select
                         id="feetype"
                         name="Fee Type"

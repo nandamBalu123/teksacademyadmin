@@ -9,3 +9,6 @@
 .invoice {
   overflow: hidden;
 }
+.bold-row {
+  border: 5px solid black;
+}

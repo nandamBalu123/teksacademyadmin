@@ -19,7 +19,7 @@ export const UsersReducer = (state, action) => {
     case "UPDATE_USER":
       // Find the index of the user to be updated in the current state
       const updatedUserIndex = state.users.findIndex(
-        (user) => user._id === action.payload._id
+        (user) => user.id === action.payload.id
       );
 
       if (updatedUserIndex === -1) {
@@ -29,7 +29,7 @@ export const UsersReducer = (state, action) => {
 
       // Create a copy of the users array with the updated user
       const updatedUsers = [...state.users];
-      updatedUsers[updatedUserIndex] = action.payload;
+      updatedUsers[updatedUserIndex] .status= action.payload.status;
 
       return {
         users: updatedUsers,

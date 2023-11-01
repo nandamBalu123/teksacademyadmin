@@ -187,7 +187,14 @@ function App() {
                 />
                 <Route
                   path="/requestedcertificates"
-                  element={user ? <Requestedcertificates /> : <Dashboard />}
+                  element={
+                    user && user.profile == "admin" ? (
+                      <Requestedcertificates />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                  // element={user ? <Requestedcertificates /> : <Dashboard />}
                 />
                 <Route
                   path="/usersdata"
