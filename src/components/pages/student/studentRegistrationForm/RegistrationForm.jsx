@@ -158,7 +158,7 @@ export default function RegistrationForm() {
     let materialfeee = 0;
     const array = [];
     for (let i = 0; i < feedetails.length; i++) {
-      if (feedetails[i].feetype === "admissionfee") {
+      if (feedetails[i].feetype === "Admission Fee") {
         let admissionobject = {
           id: "",
           feetype: "",
@@ -745,7 +745,7 @@ export default function RegistrationForm() {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2 ">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-sm-2 ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Gender<span> *</span>
@@ -764,7 +764,7 @@ export default function RegistrationForm() {
                       </Select>
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-sm-2">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Marital Status<span> *</span>
@@ -1480,7 +1480,7 @@ export default function RegistrationForm() {
                         value={feetype}
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
-                        <MenuItem value="admissionfee">Admission Fee</MenuItem>
+                        <MenuItem value="Admission Fee">Admission Fee</MenuItem>
                         <MenuItem value="fee"> Fee</MenuItem>
                       </Select>
                     </FormControl>

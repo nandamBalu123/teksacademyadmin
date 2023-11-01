@@ -53,8 +53,7 @@ const Feefollowup = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-////////////
-
+  ////////////
 
   useEffect(() => {
     axios
@@ -211,24 +210,24 @@ const Feefollowup = () => {
             {recordCount}/{initialDataCount}
           </h6>
         </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">  
-        <select  onChange={handlerecorddata}>
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="75">75</option>
-            </select>
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
+          <select onChange={handlerecorddata}>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="75">75</option>
+          </select>
         </div>
         <div className="col-4 col-md-1 col-lg-1 col-xl-1">
-        <button
-                className="btn btn-primary mr-20 ms-2 mb-2"
-                style={{ textTransform: "capitalize" }}
-                onClick={handleClick}
-              >
-                {" "}
-                Filter{" "}
-              </button>
-         
+          <button
+            className="btn btn-primary mr-20 ms-2 mb-2"
+            style={{ textTransform: "capitalize" }}
+            onClick={handleClick}
+          >
+            {" "}
+            Filter{" "}
+          </button>
+
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
@@ -307,7 +306,7 @@ const Feefollowup = () => {
                 </select>
               </MenuItem>
               <MenuItem>
-                <select
+                {/* <select
                   id=""
                   placeholder="select Type"
                   style={{
@@ -322,7 +321,23 @@ const Feefollowup = () => {
                   <option> Select Type</option>
                   <option value="paidamount"> Paid Amount</option>
                   <option value="dueamount"> Due Amount</option>
-                </select>
+                </select> */}
+                {/* <select
+                      id=""
+                      style={{
+                        height: "45px",
+                        paddingRight: "2rem",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="modeoftraining"
+                      value={filterCriteria.modeoftraining}
+                      onChange={handleInputChange}
+                    >
+                      <option> Mode of Traning</option>
+                      <option value="online"> Online</option>
+                      <option value="offline"> Offline</option>
+                    </select> */}
               </MenuItem>
             </div>
           </Menu>
@@ -443,20 +458,23 @@ const Feefollowup = () => {
         </TableContainer>
       </Paper>
 
-      <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
-          <Stack spacing={2}>
-            <Pagination
-              count={Math.ceil(filtereddata.length / itemsPerPage)}
-              onChange={handlePageChange}
-              color="info"
-            />
-          </Stack>
-        </div>
-              {/* <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+      <div
+        style={{ display: "flex", justifyContent: "center" }}
+        className="mt-3"
+      >
+        <Stack spacing={2}>
+          <Pagination
+            count={Math.ceil(filtereddata.length / itemsPerPage)}
+            onChange={handlePageChange}
+            color="info"
+          />
+        </Stack>
+      </div>
+      {/* <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                 {" "}
                 View
               </TableCell> */}
-        </div>
+    </div>
   );
 };
 export default Feefollowup;
