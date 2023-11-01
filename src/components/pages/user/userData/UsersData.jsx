@@ -9,7 +9,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
 
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Menu from "@mui/material/Menu";
@@ -271,7 +274,7 @@ const UsersData = () => {
             </select>
           </div>
           <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
-            <Button
+          <Button
               id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
               aria-haspopup="true"
@@ -279,13 +282,13 @@ const UsersData = () => {
               onClick={handleClick}
             >
               <button
-                className="btn btn-primary"
+                className="btn btn-primary mr-20 ms-2 mb-2"
                 style={{ textTransform: "capitalize" }}
               >
-                {" "}
-                Filter{" "}
+                Filter
               </button>
             </Button>
+
             <Menu
               className="mt-5"
               id="demo-positioned-menu"
@@ -302,7 +305,7 @@ const UsersData = () => {
                 horizontal: "left",
               }}
             >
-             <div className="d-flex justify-content-between m-2">
+              <div className="d-flex justify-content-between m-2">
                <div > Filter</div>
              
               <div >
@@ -312,76 +315,54 @@ const UsersData = () => {
            
               </div>
               <hr />
-              <MenuItem>
-              <div className="row">  
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                
-
-              <label className="mt-3 me-2">Profile:</label>
-                 </div>
-               <div className="col-12 col-md-9 col-lg-9 col-xl-9"> 
-               <select
-                  className="mt-3 w-100 "
-                  id=""
-                  required
-                  style={{
-                    height: "45px",
-                    width: "75%",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="profile"
-                  value={filterCriteria.profile}
-                  onChange={handleInputChange}
-                >
-                  <option value="">--select--</option>
-                  {roles &&
-                    roles.map((item, index) => (
-                      <option key={item.id} value={item.role}>
-                        {item.role}
-                      </option>
-                    ))}
-                </select>
-               </div>
-             
-              </div>
           
-              </MenuItem>
-              <MenuItem>
-                <label className="mt-3 me-2 "> Branch: </label>
-                <select
-                  className="mt-3 w-100 "
-                  id=""
-                  required
-                  style={{
-                    height: "45px",
-                    width: "75%",
-
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="branch"
+              <div className="row m-2">  
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Profile</InputLabel>
+                      <Select
+                      
+                      name="profile"
+                      value={filterCriteria.profile}
+                      onChange={handleInputChange}
+                      >
+                       {roles &&
+                    roles.map((item, index) => (
+                      <MenuItem key={item.id} value={item.role}>
+                        {item.role}
+                      </MenuItem>
+                    ))}
+                
+                      </Select>
+                    </FormControl>
+                 </div>
+             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+             <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      
+                      name="branch"
                   value={filterCriteria.branch}
                   onChange={handleInputChange}
-                >
-                  <option value="">--select--</option>
-
-                  {branches &&
+                      >
+                      {branches &&
                     branches.map((item, index) => (
-                      <option key={item.id} value={item.branch_name}>
+                      <MenuItem key={item.id} value={item.branch_name}>
                         {item.branch_name}
-                      </option>
+                      </MenuItem>
                     ))}
-                </select>
-              </MenuItem>
-              <MenuItem className="d-flex justify-content-between">
-                {/* <button className="save"> Save</button> */}
+                
+                      </Select>
+                    </FormControl>
+               </div>
+              </div>
+              <div className="text-end me-2 mt-4">
                 <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear
                 </button>
-              </MenuItem>
-            </Menu>
+              </div>
+          </Menu>
           </div>
         </div>
         <div>
