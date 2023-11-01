@@ -32,13 +32,20 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
+import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { transcode } from "buffer";
 const UsersData = () => {
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
-  const [isChecked , setIsChecked]=useState(false);
+  const { users, dispatch } = useUsersContext();
+  const [isChecked, setIsChecked] = useState(false);
   const [opening, setOpening] = React.useState(false);
-
+  const [text, setText] = useState("");
+  useEffect(() => {
+    if (users) {
+      setData(users);
+    }
+  }, [users]);
   const handleClickOpen = () => {
     setOpening(true);
   };
@@ -46,19 +53,14 @@ const UsersData = () => {
   const handleClosed = () => {
     setOpening(false);
   };
-  const handleok = () => {
-    setIsChecked(!isChecked);
-   
-    setOpening(false);
-   
-  };
+
   const [initialData, setData] = useState([{ name: "" }]);
   const [filteredData, setFilteredData] = useState(initialData);
 
   console.log("initialData: ", initialData);
 
   const [deleted, setDeleted] = useState(false);
-  const [profiles, setProfiles] = useState([]);
+
   // for fillter changing numbers 10,20,30
   const [itemsPerPage, setrecordsPerPage] = useState(10);
 
@@ -77,43 +79,11 @@ const UsersData = () => {
     setPage(value);
   };
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/getuserroles`
-      );
-
-      console.log("Response status:", response.status); // Log response status
-
-      if (!response.ok) {
-        console.error(
-          "Network response error:",
-          response.status,
-          response.statusText
-        );
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      console.log("Fetched data:", data.Result); // Log the fetched data
-      const profileData = data.Result.map((item) => item.role);
-
-      setProfiles(profileData); // Update the state with the extracted role data
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData(); // Call fetchData when the component mounts
-    setProfiles(profiles);
-  }, []); // Empty dependency array means it runs once after the initial render
-
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
-  useEffect(() => {
-    fetchData();
-  }, [deleted]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [deleted]);
 
   const handleDelete = (id) => {
     axios
@@ -124,33 +94,6 @@ const UsersData = () => {
       });
   };
 
-  // const deleteuser = async (id) => {
-  //   try {
-  //     const res2 = await fetch(`http://localhost:3030/deleteuser/${id}`, {
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     if (res2.status === 404) {
-  //       console.log("User not found");
-  //     } else if (res2.status === 422) {
-  //       console.log("Unprocessable Entity");
-  //     } else if (res2.status === 200) {
-  //       const deletedata = await res2.json();
-  //       console.log("User deleted successfully", deletedata);
-  //     } else {
-  //       console.log("Unexpected error");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
-
-  // const [userData, setUserData] = useState([]);
-
-  // const [filteredData, setFilteredData] = useState(userData);
   const [error, setError] = useState(null);
   // const [open, setOpen] = useState(false);
   const [filterCriteria, setFilterCriteria] = useState({
@@ -165,25 +108,6 @@ const UsersData = () => {
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/userdata`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setData(data);
-      } catch (err) {
-        setError(err);
-      }
-    };
-
-    fetchData();
-  }, []);
-  // console.log(userData);
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
       const searchCondition = filterCriteria.search
@@ -264,6 +188,45 @@ const UsersData = () => {
   let recordCount = filteredData.length;
   // for filter change numbers 10,25,50
 
+  const handleok = (id) => {
+    setOpening(false);
+    setIsChecked(!isChecked);
+
+    if (text) {
+      let user_status = [
+        {
+          remarks: text,
+          status: true,
+        },
+      ];
+      const updatedData = {
+        user_status,
+      };
+      const uploadcontext = { user_status, id };
+      console.log("user_status", updatedData);
+      console.log("id", id);
+      axios
+        .put(
+          `${process.env.REACT_APP_API_URL}/certificatestatus/${id}`,
+          updatedData
+        )
+        .then((res) => {
+          if (res.data.updated) {
+            // alert("Certificate updated successfully");
+            dispatch({
+              type: "UPDATE_USER",
+              payload: uploadcontext,
+            });
+          } else {
+            alert("Error please Try Again");
+          }
+        });
+      // setcourseStartDate("");
+      setText("");
+    } else {
+      alert("enter course start and end dates");
+    }
+  };
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
@@ -551,33 +514,46 @@ const UsersData = () => {
                               <ModeEditIcon />
                             </Link>
                             <div class="form-check form-switch">
-  <input class="form-check-input" 
-  type="checkbox" role="switch"
-   id="flexSwitchCheckChecked" 
-   checked={isChecked} 
-   onChange={handleClickOpen}/>
-  </div> <Dialog open={opening} onClose={handleClosed}>
-        
-        <DialogContent>
-        <DialogContentText> 
-          <label> Enter Remarks :</label>
-          </DialogContentText>
-          <DialogContentText>
-           
-          <textarea rows="4" cols="50" name="comment" form="usrform"></textarea>
-          </DialogContentText>
-          
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClosed}>Cancel</Button>
-          {!isChecked  && <Button onClick={handleok}>Activate</Button>}
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                role="switch"
+                                id="flexSwitchCheckChecked"
+                                checked={isChecked}
+                                onChange={handleClickOpen}
+                              />
+                            </div>{" "}
+                            <Dialog open={opening} onClose={handleClosed}>
+                              <DialogContent>
+                                <DialogContentText>
+                                  <label> Enter Remarks :</label>
+                                </DialogContentText>
+                                <DialogContentText>
+                                  <textarea
+                                    rows="4"
+                                    cols="50"
+                                    name="comment"
+                                    form="usrform"
+                                    onChange={(e) => setText(e.target.value)}
+                                    value={text}
+                                  ></textarea>
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions>
+                                <Button onClick={handleClosed}>Cancel</Button>
+                                {/* {!isChecked && (
+                                  <Button onClick={(e) => handleok(user.id)}>
+                                    Activate
+                                  </Button>
+                                )}
 
-          {isChecked && <Button onClick={handleok}>InActivate</Button>}
-        
-        
-        </DialogActions>
-      </Dialog>
-
+                                {isChecked && (
+                                  <Button onClick={(e) => handleok(user.id)}>
+                                    InActivate
+                                  </Button>
+                                )} */}
+                              </DialogActions>
+                            </Dialog>
                           </StyledTableCell>
                         </StyledTableRow>
                       ))}
@@ -585,15 +561,18 @@ const UsersData = () => {
                 </Table>
               </TableContainer>
             </Paper>
-            <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
-          <Stack spacing={2}>
-            <Pagination
-              count={Math.ceil(filteredData.length / itemsPerPage)}
-              onChange={handlePageChange}
-              color="info"
-            />
-          </Stack>
-        </div>
+            <div
+              style={{ display: "flex", justifyContent: "center" }}
+              className="mt-3"
+            >
+              <Stack spacing={2}>
+                <Pagination
+                  count={Math.ceil(filteredData.length / itemsPerPage)}
+                  onChange={handlePageChange}
+                  color="info"
+                />
+              </Stack>
+            </div>
           </div>
         </div>
       </div>

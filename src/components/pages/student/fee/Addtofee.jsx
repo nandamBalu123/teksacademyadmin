@@ -219,7 +219,7 @@ const Addtofee = () => {
 
             {/* <TextField id="outlined-basic"  label=" Course date" variant="outlined"  className="textfield" type="date"/> */}
           </div>
-          <h4 className="my-3"> Initial Amount</h4>
+          <h4 className="my-3"> Admission Fee</h4>
           <hr></hr>
           {initialpayment.map((payment, index) => (
             <div className="row" key={index}>
@@ -315,7 +315,7 @@ const Addtofee = () => {
                 value={totalinstallment}
                 onChange={(e) => settotalinstallment(e.target.value)}
               />
-              <label>No.Of Installments </label>
+              <label>No.of Installments </label>
             </div>
             <div className="col-12 col-md-6 col-xl-6 col-lg-6">
               <button
