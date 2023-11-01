@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 
 import Header from "../../common/Header/Header";
-
+import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { useEffect } from "react";
 import LinearProgress, {
@@ -409,37 +409,58 @@ const Dashboard = () => {
                 </MenuItem>
               </div>
               <hr />
-              <MenuItem>
-                    <label> From: </label>
-                    <input
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+              
+                      label=" From:"
                       type="date"
-                      className="w-100 ps-2"
-                      style={{
-                        height: "45px",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
+                      variant="standard"
+                      className="  w-100"
+                       InputLabelProps={{
+                        shrink: true,
+                        
                       }}
                       name="fromdate"
-                      value={filterCriteria.fromdate}
-                      onChange={handleInputChange}
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
                     />
-                  </MenuItem>
-                  <MenuItem>
-                    <label className="ps-3"> To: </label>
-
-                    <input
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+                      label=" To:"
                       type="date"
-                      className="w-100 ps-2"
-                      style={{
-                        height: "45px",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
+                      variant="standard"
+                      className="w-100"
+                    
+                      InputLabelProps={{
+                        shrink: true,
                       }}
                       name="todate"
-                      value={filterCriteria.todate}
-                      onChange={handleInputChange}
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
                     />
-                  </MenuItem>
+                </div>
+             
+                {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+              </div>
+             
               <MenuItem className="text-end">
                 {/* <button className="save"> Save</button> */}
                 <button className="clear " onClick={filterreset}>
@@ -519,37 +540,58 @@ const Dashboard = () => {
                 </MenuItem>
               </div>
               <hr />
-              <MenuItem>
-                    <label> From: </label>
-                    <input
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+              
+                      label=" From:"
                       type="date"
-                      className="w-100 ps-2"
-                      style={{
-                        height: "45px",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
+                      variant="standard"
+                      className="  w-100"
+                       InputLabelProps={{
+                        shrink: true,
+                        
                       }}
                       name="fromdate"
-                      value={filterCriteria.fromdate}
-                      onChange={handleInputChange}
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
                     />
-                  </MenuItem>
-                  <MenuItem>
-                    <label className="ps-3"> To: </label>
-
-                    <input
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+                      label=" To:"
                       type="date"
-                      className="w-100 ps-2"
-                      style={{
-                        height: "45px",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
+                      variant="standard"
+                      className="w-100"
+                    
+                      InputLabelProps={{
+                        shrink: true,
                       }}
                       name="todate"
-                      value={filterCriteria.todate}
-                      onChange={handleInputChange}
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
                     />
-                  </MenuItem>
+                </div>
+             
+                {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+              </div>
+             
               <MenuItem className="text-end">
                 {/* <button className="save"> Save</button> */}
                 <button className="clear " onClick={filterreset}>
