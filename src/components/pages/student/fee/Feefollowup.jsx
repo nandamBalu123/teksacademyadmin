@@ -8,6 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -16,13 +17,15 @@ import Stack from "@mui/material/Stack";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useBranchContext } from "../../../../hooks/useBranchContext";
+import { useCourseContext } from "../../../../hooks/useCourseContext";
 import "./Feefolloup.css";
 import axios from "axios";
 
 const Feefollowup = () => {
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -35,6 +38,8 @@ const Feefollowup = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const { branches } = useBranchContext();
+  const { getcourses } = useCourseContext();
   const [itemsPerPage, setrecordsPerPage] = useState(10);
 
   const handlerecorddata = (e) => {
@@ -54,6 +59,11 @@ const Feefollowup = () => {
     setPage(value);
   };
   ////////////
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFilterCriteria({ ...filterCriteria, [name]: value });
+  };
 
   useEffect(() => {
     axios
@@ -204,13 +214,13 @@ const Feefollowup = () => {
           />
           <hr className="w-50 ms-3" />
         </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2">
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
           <h6>
             {" "}
             {recordCount}/{initialDataCount}
           </h6>
         </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3 ">
           <select onChange={handlerecorddata}>
             <option value="10">10</option>
             <option value="25">25</option>
@@ -219,16 +229,47 @@ const Feefollowup = () => {
           </select>
         </div>
         <div className="col-4 col-md-1 col-lg-1 col-xl-1">
-          <button
+        <Button
+              id="demo-positioned-button"
+              aria-controls={open ? "demo-positioned-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <button
+                className="btn btn-primary mr-20 ms-2 mb-2"
+                style={{ textTransform: "capitalize" }}
+              >
+                Filter
+              </button>
+            </Button>
+
+            <Menu
+              className="mt-5"
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+            >
+          {/* <button
             className="btn btn-primary mr-20 ms-2 mb-2"
             style={{ textTransform: "capitalize" }}
             onClick={handleClick}
           >
             {" "}
             Filter{" "}
-          </button>
+          </button> */}
 
-          <Menu
+          {/* <Menu
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
@@ -242,17 +283,110 @@ const Feefollowup = () => {
               marginTop: "20px",
               cursor: "pointer",
             }}
-          >
+          > */}
             <div className="d-flex justify-content-between m-2">
                <div > Filter</div>
-             <div >
-               
-                  <CloseIcon onClick={handleClose} />
-                </div>
+             <div ><CloseIcon onClick={handleClose} />
+</div>
            
               </div>
             <hr />
-            <div className="d-flex">
+            <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+              
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                       InputLabelProps={{
+                        shrink: true,
+                        
+                      }}
+                      name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                    
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+                
+             
+                {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+              </div>
+
+              <div className="row m-2"> 
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {branches &&
+                    branches.map((branch, index) => (
+                      <MenuItem key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Course</InputLabel>
+                      <Select
+                      
+                       name="course"
+                        value={filterCriteria.course}
+                        onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {getcourses &&
+                    getcourses.map((item, index) => (
+                      <MenuItem key={item.id} value={item.course_name}>
+                        {item.course_name}
+                      </MenuItem>
+                    ))}
+                      </Select>
+                    </FormControl>
+                </div>
+              
+              </div>
+            {/* <div className="d-flex">
               <MenuItem className="pt-3 ">
                 <div>
                   <label> From: </label>
@@ -283,63 +417,8 @@ const Feefollowup = () => {
                   name="todate"
                 />
               </MenuItem>
-            </div>
-            <div className="d-flex w-100 mt-3">
-              <MenuItem>
-                <select
-                  id=""
-                  placeholder="Filter Branch"
-                  style={{
-                    height: "45px",
-                    paddingLeft: "10px",
-                    paddingRight: "115px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="branch"
-                >
-                  <option value="">Branch</option>
-                  <option value="hitechcity"> Hitech city</option>
-                  <option value="ameerpet"> Ameerpet</option>
-                  <option value="dilsukhnagar"> Dilsukhnagar</option>
-                  <option value="gachibowli"> Gachibowli</option>
-                </select>
-              </MenuItem>
-              <MenuItem>
-                {/* <select
-                  id=""
-                  placeholder="select Type"
-                  style={{
-                    height: "45px",
-
-                    paddingRight: "105px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="branch"
-                >
-                  <option> Select Type</option>
-                  <option value="paidamount"> Paid Amount</option>
-                  <option value="dueamount"> Due Amount</option>
-                </select> */}
-                {/* <select
-                      id=""
-                      style={{
-                        height: "45px",
-                        paddingRight: "2rem",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
-                      }}
-                      name="modeoftraining"
-                      value={filterCriteria.modeoftraining}
-                      onChange={handleInputChange}
-                    >
-                      <option> Mode of Traning</option>
-                      <option value="online"> Online</option>
-                      <option value="offline"> Offline</option>
-                    </select> */}
-              </MenuItem>
-            </div>
+            </div> */}
+            
           </Menu>
         </div>
       </div>
