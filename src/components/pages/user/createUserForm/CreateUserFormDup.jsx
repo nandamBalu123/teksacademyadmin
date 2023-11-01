@@ -11,7 +11,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CheckIcon from "@mui/icons-material/Check";
+import { useUsersContext } from "../../../../hooks/useUsersContext";
 const CreateUserForm = () => {
+  const { users, dispatch } = useUsersContext();
   const { departments } = useDepartmentContext();
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
@@ -26,7 +28,6 @@ const CreateUserForm = () => {
   const [profile, setprofile] = useState("");
   const [branch, setbranch] = useState("");
   const [user_status, setUser_status] = useState([{ status: true }]);
-  // const [profiles, setProfiles] = useState([]);
   const profilee = [];
 
   const handleSubmit = async (e) => {
@@ -78,48 +79,6 @@ const CreateUserForm = () => {
       return;
     }
 
-    // setErrors({});
-
-    // if (!fullname.trim()) {
-    //   newErrors.fullname = "Full Name is required";
-    // }
-
-    // // Validate Email
-    // if (!/\S+@\S+\.\S+/.test(email)) {
-    //   newErrors.email = "Invalid email address";
-    // }
-
-    // // Validate Phone Number
-    // if (phonenumber.length !== 10) {
-    //   newErrors.phonenumber = "Phone number must be 10 digits";
-    // }
-
-    // // Validate Designation
-    // if (!designation.trim()) {
-    //   newErrors.designation = "Designation is required";
-    // }
-
-    // // Validate Department
-    // if (!department.trim()) {
-    //   newErrors.department = "Department is required";
-    // }
-
-    // // Validate Report To
-    // if (!reportto.trim()) {
-    //   newErrors.reportto = "Report To is required";
-    // }
-
-    // // Validate Profile
-    // if (!profile) {
-    //   newErrors.profile = "Profile is required";
-    // }
-
-    // // Validate Branch
-    // if (!branch) {
-    //   newErrors.branch = "Branch is required";
-    // }
-
-    // setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       const user = {
         fullname,
@@ -157,6 +116,8 @@ const CreateUserForm = () => {
         return false;
       }
       if (response.ok) {
+        dispatch({ type: "CREATE_USER", payload: json });
+
         console.log("User created successfully.");
         alert("User created successfully.");
         // Reset the form fields
@@ -172,40 +133,6 @@ const CreateUserForm = () => {
       }
     }
   };
-
-  const [profiles, setProfiles] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/getuserroles`
-      );
-
-      console.log("Response status:", response.status); // Log response status
-
-      if (!response.ok) {
-        console.error(
-          "Network response error:",
-          response.status,
-          response.statusText
-        );
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      console.log("Fetched data:", data.Result); // Log the fetched data
-      const profileData = data.Result.map((item) => item.role);
-
-      setProfiles(profileData); // Update the state with the extracted role data
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData(); // Call fetchData when the component mounts
-    setProfiles(profilee);
-  }, []); // Empty dependency array means it runs once after the initial render
 
   return (
     <div className="main-user-container container">
@@ -361,7 +288,9 @@ const CreateUserForm = () => {
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Department<span> *</span></InputLabel>
+                <InputLabel>
+                  Department<span> *</span>
+                </InputLabel>
                 <Select
                   className=" mar  "
                   name="department"
@@ -450,7 +379,9 @@ const CreateUserForm = () => {
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Role <span> *</span></InputLabel>
+                <InputLabel>
+                  Role <span> *</span>
+                </InputLabel>
                 <Select
                   className="mar "
                   name="profile"
@@ -505,7 +436,9 @@ const CreateUserForm = () => {
             </div>{" "}
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Branch<span> *</span></InputLabel>
+                <InputLabel>
+                  Branch<span> *</span>
+                </InputLabel>
                 <Select
                   className=" mar"
                   id="branch"
