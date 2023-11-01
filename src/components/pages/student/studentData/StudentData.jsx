@@ -454,7 +454,7 @@ const StudentData = () => {
                 <MenuItem>
                   <select
                     id=""
-                    placeholder="Mode of Traning"
+                    placeholder="Mode of Training"
                     required
                     style={{
                       height: "45px",
@@ -487,7 +487,7 @@ const StudentData = () => {
                     value={filterCriteria.enquirytakenby}
                     onChange={handleInputChange}
                   >
-                    <option>counsellor</option>
+                    <option>Counsellor</option>
                     {filteredcounsellor &&
                       filteredcounsellor.map((user, index) => (
                         <option value={user.fullname}> {user.fullname}</option>
@@ -580,7 +580,7 @@ const StudentData = () => {
                     className="bg-primary fs-6 border border 1 text-center text-light"
                     align="left"
                   >
-                    Counseller
+                    Counsellor
                     <br /> Source
                   </TableCell>
 
@@ -597,7 +597,7 @@ const StudentData = () => {
                     align="left"
                   >
                     Joining Date <br />
-                    Traning Mode
+                    Training Mode
                   </TableCell>
 
                   <TableCell

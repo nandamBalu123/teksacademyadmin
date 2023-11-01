@@ -85,7 +85,7 @@ function App() {
         <BrowserRouter>
           <div className="app">
             {user ? <Sidebar /> : undefined}
-            {user ? <Sidebar1 /> : undefined}
+            {/* {user ? <Sidebar1 /> : undefined} */}
             {/* <Sidebar /> */}
 
             <div

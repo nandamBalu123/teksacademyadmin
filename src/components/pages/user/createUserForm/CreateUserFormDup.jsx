@@ -305,7 +305,7 @@ const CreateUserForm = () => {
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Designation</InputLabel>
+                <InputLabel>Designation <span>*</span></InputLabel>
                 <Select
                   className=" mar  "
                   name="designation"
@@ -349,7 +349,7 @@ const CreateUserForm = () => {
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Department</InputLabel>
+                <InputLabel>Department<span> *</span></InputLabel>
                 <Select
                   className=" mar  "
                   name="department"
@@ -438,7 +438,7 @@ const CreateUserForm = () => {
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Role</InputLabel>
+                <InputLabel>Role <span> *</span></InputLabel>
                 <Select
                   className="mar "
                   name="profile"
@@ -493,7 +493,7 @@ const CreateUserForm = () => {
             </div>{" "}
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Branch</InputLabel>
+                <InputLabel>Branch<span> *</span></InputLabel>
                 <Select
                   className=" mar"
                   id="branch"
