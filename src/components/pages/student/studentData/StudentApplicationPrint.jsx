@@ -238,11 +238,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <tr>
                     {" "}
                     <td className="borderright">Present Address</td>{" "}
-                    <td className="w-25 borderleft  ">
-                      {studentdata.area}
-                      {studentdata.state}
-                      {studentdata.zipcode}{" "}
-                    </td>{" "}
+                    <td className="w-25 borderleft  ">{studentdata.area} </td>{" "}
                     <td className="borderright"> ZipCode</td>{" "}
                     <td className="w-25 borderleft ">{studentdata.zipcode}</td>{" "}
                   </tr>
@@ -262,10 +258,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     {" "}
                     <td className="borderright"> Email Id </td>{" "}
                     <td className="w-25 borderleft  ">{studentdata.email} </td>{" "}
-                    <td className="borderright">Parent Number</td>{" "}
-                    <td className="w-25 borderleft ">
-                      {studentdata.whatsappno}
-                    </td>{" "}
+                    <td className="borderright">State </td>{" "}
+                    <td className="w-25 borderleft ">{studentdata.state}</td>{" "}
                   </tr>
                 </tbody>
               </table>
@@ -290,7 +284,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     </tr>
                     <tr>
                       {" "}
-                      <td class="w-25">{studentdata.id}</td>{" "}
+                      <td class="w-25">1</td>{" "}
                       <td class="w-25">{studentdata.educationtype}</td>{" "}
                       <td class="w-25">{studentdata.marks}</td>{" "}
                       <td class="w-25">{studentdata.academicyear}</td>{" "}
@@ -416,18 +410,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                         <td>{item.feetype}</td>
                         <td>{item.amount}</td>
                         <td>{item.discount}</td>
-                        <td>{item.taxamount}</td>
-                        <td>
-                          {item.totalamount}{" "}
-                          {item.feetype === "fee" ? (
-                            <span>
-                              Materialfee:{item.materialfee} CourseFee:
-                              {item.coursefee}
-                            </span>
-                          ) : (
-                            <span></span>
-                          )}
-                        </td>
+                        <td>{parseFloat(item.taxamount).toFixed(2)}</td>
+                        <td>{item.totalamount} </td>
                       </tr>
                     ))}
                 </tbody>
@@ -450,7 +434,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <tr>
                     {" "}
                     <th> Provided </th>{" "}
-                    <td className="w-25">{studentdata.assets} </td>{" "}
+                    <td className="w-25">
+                      {studentdata.assets && studentdata.assets}
+                    </td>{" "}
                     <th> Issue Date </th>{" "}
                     <td className="w-25">{studentdata.admissiondate}</td>{" "}
                   </tr>
