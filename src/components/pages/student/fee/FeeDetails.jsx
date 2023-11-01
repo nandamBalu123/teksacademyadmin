@@ -140,6 +140,7 @@ const FeeDetails = () => {
       branch: "",
 
       search: "",
+      modeoftraining: "",
     });
   };
   const noDueRecords = () => {
