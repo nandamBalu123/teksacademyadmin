@@ -15,6 +15,11 @@ import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 import { useCourseContext } from "../../../../hooks/useCourseContext";
@@ -211,8 +216,8 @@ const Requestedcertificates = () => {
   return (
     <div className="container req-certificate my-3">
       <div className="d-flex justify-content-between">
-        {!issuedCertificates && <span>Requested Certificates</span>}
-        {issuedCertificates && <span>Issued Certificates</span>}
+        {!issuedCertificates && <h4>Requested Certificates</h4>}
+        {issuedCertificates && <h4>Issued Certificates</h4>}
 
         {issuedCertificates && (
           <button class="btn btn-primary" onClick={handleRequestedCertificates}>
@@ -226,11 +231,11 @@ const Requestedcertificates = () => {
         )}
       </div>
 
-      <div className="row mb-3 px-4 pt-2">
+      <div className="row mb-3  ">
         <div className="col-12 col-md-8 col-lg-8 col-xl-8">
           <input
             type="text"
-            className="input-field ps-2"
+            className="input-field "
             placeholder="Search Here...."
             autoComplete="off"
             style={{
@@ -271,10 +276,11 @@ const Requestedcertificates = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
+            
           >
             <button
               className="btn btn-primary mr-20 ms-2 mb-2"
-              style={{ textTransform: "capitalize" }}
+              style={{ textTransform: "capitalize"}}
             >
               Filter
             </button>
@@ -296,15 +302,66 @@ const Requestedcertificates = () => {
               horizontal: "left",
             }}
           >
-            <div className="d-flex justify-content-between">
-              <MenuItem> Filter</MenuItem>
-              <MenuItem>
+            <div className="d-flex justify-content-between m-2">
+              <div> Filter</div>
+              <div>
                 {" "}
                 <CloseIcon onClick={handleClose} />{" "}
-              </MenuItem>
+              </div>
             </div>
             <hr />
-            <MenuItem className="pt-3 ">
+            <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+              
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                       InputLabelProps={{
+                        shrink: true,
+                        
+                      }}
+                      name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                    
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+             
+                {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+              </div>
+            {/* <div className="row m-2 ">
               <div>
                 <label> From: </label>
               </div>
@@ -322,7 +379,7 @@ const Requestedcertificates = () => {
                   onChange={handleInputChange}
                 />
               </div>
-            </MenuItem>
+            </div>
             <MenuItem className="pt-3 ">
               <label className="ms-"> To: </label>
 
@@ -340,7 +397,69 @@ const Requestedcertificates = () => {
                   onChange={handleInputChange}
                 />
               </div>
-            </MenuItem>
+            </MenuItem> */}
+           <div className="row m-2">  
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Course</InputLabel>
+                      <Select
+                      
+                       name="course"
+                        value={filterCriteria.course}
+                        onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {getcourses &&
+                    getcourses.map((item, index) => (
+                      <MenuItem key={item.id} value={item.course_name}>
+                        {item.course_name}
+                      </MenuItem>
+                    ))}
+                      </Select>
+                    </FormControl>
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {branches &&
+                    branches.map((branch, index) => (
+                      <MenuItem key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+                </div>
+           </div>
+           <div className="row m-2">  
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+           <FormControl variant="standard" className="w-100">
+                      <InputLabel>Counsellor</InputLabel>
+                      <Select
+                      
+                      name="enquirytakenby"
+                      value={filterCriteria.enquirytakenby}
+                      onChange={handleInputChange}
+                      >
+                        
+                        {filteredcounsellor &&
+                    filteredcounsellor.map((user, index) => (
+                      <MenuItem value={user.fullname}> {user.fullname}</MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+           </div>
+           </div>
+{/* 
             <MenuItem>
               <select
                 className="mt-3"
@@ -364,8 +483,8 @@ const Requestedcertificates = () => {
                     </option>
                   ))}
               </select>
-            </MenuItem>
-            <MenuItem>
+            </MenuItem> */}
+            {/* <MenuItem>
               <select
                 className="mt-3"
                 id=""
@@ -389,8 +508,8 @@ const Requestedcertificates = () => {
                     </option>
                   ))}
               </select>
-            </MenuItem>
-            <MenuItem>
+            </MenuItem> */}
+            {/* <MenuItem>
               <select
                 className="mt-3"
                 id=""
@@ -412,7 +531,7 @@ const Requestedcertificates = () => {
                     <option value={user.fullname}> {user.fullname}</option>
                   ))}
               </select>
-            </MenuItem>
+            </MenuItem> */}
             {/* <MenuItem>
               <select
                 className="mt-3"
@@ -435,12 +554,12 @@ const Requestedcertificates = () => {
                 <option value="">Pending</option>
               </select>
             </MenuItem> */}
-            <MenuItem className="d-flex justify-content-between">
+            <div className="text-end me-2 my-2">
               <button className="clear" onClick={filterreset}>
                 {" "}
                 Clear
               </button>
-            </MenuItem>
+            </div>
           </Menu>
         </div>
       </div>
@@ -556,7 +675,7 @@ const Requestedcertificates = () => {
             <Pagination
               count={Math.ceil(filteredData.length / itemsPerPage)}
               onChange={handlePageChange}
-              color="primary"
+              color="info"
             />
           </Stack>
         )}

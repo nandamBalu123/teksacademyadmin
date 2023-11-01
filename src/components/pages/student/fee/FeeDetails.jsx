@@ -340,7 +340,7 @@ const FeeDetails = () => {
                       <option value="online"> Online</option>
                       <option value="offline"> Offline</option>
                     </select>
-                  </MenuItem>
+              </MenuItem>
                 </div>
                 <MenuItem className="d-flex justify-content-between">
                   {/* <button className="save"> Save</button> */}

@@ -60,7 +60,6 @@ export default function RegistrationForm() {
   const { getcourses } = useCourseContext();
   const { coursepackages } = useCoursePackageContext();
   const navigate = useNavigate();
-  const [student_status, setstudent_status] = useState([]);
   const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -79,8 +78,9 @@ export default function RegistrationForm() {
   const [educationtype, setEducationType] = useState("");
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
+  const [profilepic, setProfilePpic] = useState("");
   // const [file, setSelectedFile] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
   // const [profilepic, setProfilePpic] = useState("");
   const [enquirydate, setEnquiryDate] = useState("");
   const [enquirytakenby, setEnquiryTakenBy] = useState("");
@@ -121,9 +121,10 @@ export default function RegistrationForm() {
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
   const [totalpaidamount, settotalpaidamount] = useState(0);
-
+  const [selectedFile, setSelectedFile] = useState(null);
   const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
+  const [student_status, setStudent_status] = useState([]);
   const [certificate_status, setcertificate_status] = useState([
     { courseStartDate: "", courseEndDate: "", certificateStatus: "" },
   ]);
@@ -332,15 +333,6 @@ export default function RegistrationForm() {
       alert("please enter the name");
       return;
     }
-    if (name) {
-      setName(
-        name
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      );
-    }
-
     if (!email) {
       alert("please  enter email id");
       return;
@@ -367,14 +359,6 @@ export default function RegistrationForm() {
     if (!parentsname) {
       alert("please enter parent's name");
       return;
-    }
-    if (parentsname) {
-      setParentsName(
-        parentsname
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      );
     }
     if (!birthdate) {
       alert("please  enter Date of birth");
@@ -555,8 +539,7 @@ export default function RegistrationForm() {
       educationtype,
       marks,
       academicyear,
-      file,
-      // profilepic,
+      profilepic,
       enquirydate,
       enquirytakenby,
       coursepackage,
@@ -590,6 +573,7 @@ export default function RegistrationForm() {
       feedetailsbilling,
       totalfeewithouttax,
       totalpaidamount,
+      selectedFile,
 
       student_status,
       user_id,
@@ -1144,7 +1128,7 @@ export default function RegistrationForm() {
                     onChange={(e) => {
                       setSelectedFile(e.target.files[0]);
                     }}
-                    accept=".jpg, .jpeg, .png"
+                    accept="image/*"
                   />
                   <input
                     type="file"

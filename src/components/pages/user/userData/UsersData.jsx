@@ -311,8 +311,12 @@ const UsersData = () => {
               </div>
               <hr />
               <MenuItem>
-                <label className="mt-3 me-2">Profile:</label>
-                <select
+              <div className="row">  
+              <div className="col-12 col-md-3 col-lg-3 col-xl-3">
+              <label className="mt-3 me-2">Profile:</label>
+                 </div>
+               <div className="col-12 col-md-9 col-lg-9 col-xl-9"> 
+               <select
                   className="mt-3 w-100 "
                   id=""
                   required
@@ -334,6 +338,10 @@ const UsersData = () => {
                       </option>
                     ))}
                 </select>
+               </div>
+             
+              </div>
+          
               </MenuItem>
               <MenuItem>
                 <label className="mt-3 me-2 "> Branch: </label>
