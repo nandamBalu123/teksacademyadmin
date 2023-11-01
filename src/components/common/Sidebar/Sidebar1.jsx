@@ -1,5 +1,6 @@
-import React , {useState} from 'react'
-// import favicon from "../../../images/favicon.jpeg";
+import React, { useState } from "react";
+import favicon from "../../../images/favicon.jpeg";
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 // import CloseIcon from "@mui/icons-material/Close";
 // import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 // import "./Sidebar1.css";
@@ -22,7 +23,7 @@ import React , {useState} from 'react'
 // import ListItemText from '@mui/material/ListItemText';
 // import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 // import Diversity2Icon from '@mui/icons-material/Diversity2';
-// import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardIcon from "@mui/icons-material/Dashboard";
 // import MailIcon from '@mui/icons-material/Mail';
 
 // const drawerWidth = 240;
@@ -92,22 +93,80 @@ import React , {useState} from 'react'
 //   }),
 // );
 
-
 const Sidebar1 = () => {
-    // const theme = useTheme(); ////////////////
-    // const [open, setOpen] = React.useState(false);
-  
-    // const handleDrawerOpen = () => {
-    //   setOpen(true);
-    // };
-  
-    // const handleDrawerClose = () => {
-    //   setOpen(false);
-    // };
-  
+  // const theme = useTheme(); ////////////////
+  // const [open, setOpen] = React.useState(false);
+
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleDrawerClose = () => {
+  //   setOpen(false);
+  // };
+
   return (
     <div>
-        {/* <Box sx={{ display: 'flex' }}>
+      <div className="body"> 
+      <div className="sidebar">
+        <div className="logo-details">
+          <img src={favicon} alt="profile-pic" />
+          <div className="logo-name">Teks Academy</div>
+          <i id="btn"> <DoubleArrowIcon/></i>
+        </div>
+        <ul className="nav-list">
+          <li>
+            <a href="#">
+              {" "}
+              <i>
+                {" "}
+                <DashboardIcon />
+              </i>
+              <span className="link-name"> Dashboard</span>
+            </a>{" "}
+      </li>
+      <li>
+            <a href="#">
+              {" "}
+              <i>
+                {" "}
+                <DashboardIcon />
+              </i>
+              <span className="link-name">User Management</span>
+            </a>{" "}
+      </li>
+      <li>
+            <a href="#">
+              {" "}
+              <i>
+                {" "}
+                <DashboardIcon />
+              </i>
+              <span className="link-name">Student Management</span>
+            </a>{" "}
+      </li>
+      <li>
+            <a href="#">
+              {" "}
+              <i>
+                {" "}
+                <DashboardIcon />
+              </i>
+              <span className="link-name">Settings</span>
+            </a>{" "}
+      </li>
+        </ul>
+      </div>
+      </div>
+      {/* <body> 
+        <nav className='sidebar'>
+            <header>
+                <div className='image-text'> 
+               <img className='img' src={favicon} alt='logo-pic'/> 
+                
+                </div></header> </nav>
+    </body> */}
+      {/* <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -166,7 +225,7 @@ const Sidebar1 = () => {
       </Drawer>
      
     </Box> */}
-        {/* <div>
+      {/* <div>
         <div className="sidebar">
     <div className="logo-details">
       <i className='bx bxl-c-plus-plus icon'></i>
@@ -255,7 +314,7 @@ const Sidebar1 = () => {
  
     </div> */}
 
-        {/* <section className={isActive ? 'active' : ""}>
+      {/* <section className={isActive ? 'active' : ""}>
             <div className='button' onClick={toggleSection}>
                 <i className='fa-solid fa-bars'/>  
                 </div>
@@ -281,7 +340,7 @@ const Sidebar1 = () => {
                          </ul>
                           </div>
              </section> */}
-  {/* <nav className='sidebar'> 
+      {/* <nav className='sidebar'> 
       <div className='sidebar-top-wrapper'> 
       <div className='sidebar-top'>  
       <a href="#" className="logo__wrapper">
@@ -331,7 +390,7 @@ const Sidebar1 = () => {
         </ul>
          </div>
        </nav> */}
-     {/* <aside className='sidebar'> 
+      {/* <aside className='sidebar'> 
      <header className='sidebar-header'> 
      <div className='pro-img d-flex'> 
                         <img src={favicon} alt='profile-pic' className='logo-small'/> 
@@ -387,7 +446,7 @@ const Sidebar1 = () => {
      <div className='bottom-content'> </div>
      </div>
       </div> */}
-     {/* <div className="sidebar">
+      {/* <div className="sidebar">
     <div className="logo_details">
       <i className="bx bxl-audible icon"></i>
       <div className="logo_name">Code Effect</div>
@@ -463,12 +522,8 @@ const Sidebar1 = () => {
   <section className="home-section">
     <div className="text">Dashboard</div>
   </section> */}
-
-
     </div>
-   
-  )
-}
+  );
+};
 
-export default Sidebar1
-
+export default Sidebar1;

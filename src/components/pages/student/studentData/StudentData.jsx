@@ -281,10 +281,51 @@ const StudentData = () => {
     });
   };
 
+
+
+  // img
+  // const [files, setFiles] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   // Make a GET request to fetch the list of files
+  //   fetch('http://localhost:3030/files') // Replace with the actual endpoint of your Node.js server
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setFiles(data.response_data);
+  //       setLoading(false); // Set loading to false on success
+  //     })
+  //     .catch((err) => {
+  //       setError(err.message);
+  //       setLoading(false); // Set loading to false on error
+  //     });
+  // }, []);
+
   return (
     <div>
+      {/* <div>
+      {loading && <p>Loading files...</p>}
+      {error && <p>Error: {error}</p>}
+      {!loading && !error && (
+        <div>
+          {files.map((file, index) => (
+            <div key={index}>
+              <img src={file.s3_url} alt={file.filename} width={"100px"}/>
+            </div>
+          ))}
+        </div>
+      )}
+    </div> */}
+    
       <div className="studetdetails container  mt-3">
         <h3 className="ms-5 mt-4 "> Student Data </h3>
+        
         <div className="row mb-3 px-4 pt-3">
           <div className="col-10 col-md-7 col-lg-7 col-xl-7  input-field">
             <input
@@ -454,7 +495,7 @@ const StudentData = () => {
                 <MenuItem>
                   <select
                     id=""
-                    placeholder="Mode of Traning"
+                    placeholder="Mode of Training"
                     required
                     style={{
                       height: "45px",
@@ -487,7 +528,7 @@ const StudentData = () => {
                     value={filterCriteria.enquirytakenby}
                     onChange={handleInputChange}
                   >
-                    <option>counsellor</option>
+                    <option>Counsellor</option>
                     {filteredcounsellor &&
                       filteredcounsellor.map((user, index) => (
                         <option value={user.fullname}> {user.fullname}</option>
@@ -580,7 +621,7 @@ const StudentData = () => {
                     className="bg-primary fs-6 border border 1 text-center text-light"
                     align="left"
                   >
-                    Counseller
+                    Counsellor
                     <br /> Source
                   </TableCell>
 
@@ -597,7 +638,7 @@ const StudentData = () => {
                     align="left"
                   >
                     Joining Date <br />
-                    Traning Mode
+                    Training Mode
                   </TableCell>
 
                   <TableCell

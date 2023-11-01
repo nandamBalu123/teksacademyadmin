@@ -305,8 +305,8 @@ const CreateUserForm = () => {
               </div> */}
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <FormControl variant="standard" className="w-75">
-                <InputLabel>Designation</InputLabel>
+              {/* <FormControl variant="standard" className="w-75">
+                <InputLabel>Designation <span>*</span></InputLabel>
                 <Select
                   className=" mar  "
                   name="designation"
@@ -320,7 +320,18 @@ const CreateUserForm = () => {
                   <MenuItem value="sr.counsellor">Sr. Counsellor </MenuItem>
                   <MenuItem value="branchmanager">Branch Manager</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
+              <TextField
+                label="Designation"
+                className=" mar w-75"
+                variant="standard"
+                name="designation"
+                type="text"
+                onChange={(e) => setdesignation(e.target.value)}
+                value={designation}
+                id="designation"
+                required
+              />
 
               {/* <label className="mar userlabel" htmlFor="designation">
                 Designation<span className="star"> *</span> :
@@ -350,7 +361,7 @@ const CreateUserForm = () => {
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Department</InputLabel>
+                <InputLabel>Department<span> *</span></InputLabel>
                 <Select
                   className=" mar  "
                   name="department"
@@ -439,7 +450,7 @@ const CreateUserForm = () => {
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Role</InputLabel>
+                <InputLabel>Role <span> *</span></InputLabel>
                 <Select
                   className="mar "
                   name="profile"
@@ -494,7 +505,7 @@ const CreateUserForm = () => {
             </div>{" "}
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Branch</InputLabel>
+                <InputLabel>Branch<span> *</span></InputLabel>
                 <Select
                   className=" mar"
                   id="branch"

@@ -60,6 +60,7 @@ export default function RegistrationForm() {
   const { getcourses } = useCourseContext();
   const { coursepackages } = useCoursePackageContext();
   const navigate = useNavigate();
+  const [student_status, setstudent_status] = useState([]);
   const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -78,7 +79,7 @@ export default function RegistrationForm() {
   const [educationtype, setEducationType] = useState("");
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
-  const [profilepic, setProfilePpic] = useState("");
+  // const [profilepic, setProfilePpic] = useState("");
   const [enquirydate, setEnquiryDate] = useState("");
   const [enquirytakenby, setEnquiryTakenBy] = useState("");
   const [coursepackage, setCoursepakage] = useState("");
@@ -118,7 +119,7 @@ export default function RegistrationForm() {
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
   const [totalpaidamount, settotalpaidamount] = useState(0);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [file, setSelectedFile] = useState(null);
   const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
   const [certificate_status, setcertificate_status] = useState([
@@ -548,7 +549,8 @@ export default function RegistrationForm() {
       educationtype,
       marks,
       academicyear,
-      profilepic,
+      file,
+      // profilepic,
       enquirydate,
       enquirytakenby,
       coursepackage,
@@ -582,7 +584,8 @@ export default function RegistrationForm() {
       feedetailsbilling,
       totalfeewithouttax,
       totalpaidamount,
-      selectedFile,
+      
+      student_status,
       user_id,
       certificate_status,
     };
@@ -595,7 +598,7 @@ export default function RegistrationForm() {
         studentRegistrationdata
       );
       const id = response.data.insertId;
-      navigate(`/addtofee/${id}`);
+      // navigate(`/addtofee/${id}`);
 
       // Handle a successful response here
       console.log("Responsee:", response.data.insertId);
@@ -725,7 +728,7 @@ export default function RegistrationForm() {
             <StepContent className="">
               <form className="form">
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2 ">
                     <TextField
                       label=" Parent's Name "
                       type="text"
@@ -754,7 +757,7 @@ export default function RegistrationForm() {
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2 ">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Gender&nbsp;*</InputLabel>
+                      <InputLabel>Gender<span> *</span></InputLabel>
                       <Select
                         id="gender"
                         name="gender"
@@ -771,7 +774,7 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Marital Status&nbsp;*</InputLabel>
+                      <InputLabel>Marital Status<span> *</span></InputLabel>
                       <Select
                         id="maritalstatus"
                         name="maritalstatus"
@@ -835,7 +838,7 @@ export default function RegistrationForm() {
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Country&nbsp;*</InputLabel>
+                      <InputLabel>Country<span> *</span></InputLabel>
                       <Select
                         name="country"
                         required
@@ -852,7 +855,7 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>State&nbsp;*</InputLabel>
+                      <InputLabel>State<span> *</span></InputLabel>
                       <Select
                         name="state"
                         required
@@ -996,7 +999,7 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Education Type&nbsp;*</InputLabel>
+                      <InputLabel>Education Type<span> *</span></InputLabel>
                       <Select
                         id="educationtype"
                         name="educationtype"
@@ -1095,7 +1098,7 @@ export default function RegistrationForm() {
                     onChange={(e) => {
                       setSelectedFile(e.target.files[0]);
                     }}
-                    accept="image/*"
+                    accept=".jpg, .jpeg, .png"
                   />
                   <input
                     type="file"
@@ -1132,7 +1135,7 @@ export default function RegistrationForm() {
           {/* -----step 6--- */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Enquiry Details:</Typography>
+              <Typography fontSize={25}>Enquiry Details</Typography>
             </StepLabel>
             <StepContent>
               <form className="form">
@@ -1153,7 +1156,7 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Enquiry Taken By&nbsp;*</InputLabel>
+                      <InputLabel>Enquiry Taken By<span> *</span></InputLabel>
                       <Select
                         id=" enquirytakenby"
                         name="enquirytakenby"
@@ -1176,7 +1179,7 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Course Package&nbsp;*</InputLabel>
+                      <InputLabel>Course Package<span> *</span></InputLabel>
                       <Select
                         id="coursepackage"
                         name="coursepackage"
@@ -1199,7 +1202,7 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Course&nbsp;*</InputLabel>
+                      <InputLabel>Course<span> *</span></InputLabel>
                       <Select
                         id="courses"
                         name="courses"
@@ -1221,7 +1224,7 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Lead Source&nbsp;*</InputLabel>
+                      <InputLabel>Lead Source<span> *</span></InputLabel>
                       <Select
                         id="leadsource"
                         name="leadsource"
@@ -1277,7 +1280,7 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Branch&nbsp;*</InputLabel>
+                      <InputLabel>Branch<span> *</span></InputLabel>
                       <Select
                         id="branch"
                         name="branch"
@@ -1297,7 +1300,7 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Mode of Traning&nbsp;*</InputLabel>
+                      <InputLabel>Mode of Training<span> *</span></InputLabel>
                       <Select
                         id="modeoftraining"
                         name="modeoftraining"
@@ -1315,7 +1318,7 @@ export default function RegistrationForm() {
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Admission Status&nbsp;*</InputLabel>
+                      <InputLabel>Admission Status<span> *</span></InputLabel>
                       <Select
                         id="admissionstatus"
                         name="admissionstatus"
@@ -1422,7 +1425,7 @@ export default function RegistrationForm() {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
-                      <InputLabel>Fee Type&nbsp;*</InputLabel>
+                      <InputLabel>Fee Type<span> *</span></InputLabel>
                       <Select
                         id="feetype"
                         name="Fee Type"
