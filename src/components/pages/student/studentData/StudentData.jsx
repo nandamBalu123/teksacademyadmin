@@ -26,7 +26,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
 
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -327,7 +331,7 @@ const StudentData = () => {
         <h3 className="ms-5 mt-4 "> Student Data </h3>
         
         <div className="row mb-3 px-4 pt-3">
-          <div className="col-10 col-md-7 col-lg-7 col-xl-7  input-field">
+          <div className="col-10 col-md-8 col-lg-8 col-xl-8  input-field">
             <input
               type="text"
               className="input-field ps-2"
@@ -350,56 +354,93 @@ const StudentData = () => {
             />
             <hr />
           </div>
-          <div
-            className=" col-2 col-md-1 col-lg-1 col-xl-1 "
-            style={{ cursor: "pointer" }}
-          >
-            {" "}
-            {/* <RefreshIcon onClick={filterreset} />{" "} */}
-          </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2">
-            <h6>
-              {" "}
+          
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3 text-end">
+           
+             
               {recordCount}/{initialDataCount}
-            </h6>
+           
           </div>
 
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-2 ">
-            {" "}
-            <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
-              {" "}
-              Filter
-            </h6>
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1">
+          <Button
+              id="demo-positioned-button"
+              aria-controls={open ? "demo-positioned-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <button
+                className="btn btn-primary  mb-2"
+                style={{ textTransform: "capitalize" }}
+              >
+                Filter
+              </button>
+            </Button>
+
             <Menu
-              id="basic-menu"
+              className="mt-5"
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
               }}
-              style={{
-                width: "600px",
-                borderRadius: "25px",
-                marginTop: "20px",
-                cursor: "pointer",
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
               }}
             >
-              <div className="d-flex justify-content-between">
-                <MenuItem> Filter</MenuItem>
-                <MenuItem>
+              <div className="d-flex justify-content-between m-2">
+               <div > Filter</div>
+             
+              <div >
                   {" "}
                   <CloseIcon onClick={handleClose} />{" "}
-                </MenuItem>
+                </div>
+           
               </div>
               <hr />
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
               
- <div className="row">
-               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                       InputLabelProps={{
+                        shrink: true,
+                        
+                      }}
+                      name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                    
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                    />
+                </div>
              
-               <MenuItem >
-               <label > From: </label>
-               
+                {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
                   <input
                     type="date"
                     className="w-100"
@@ -412,31 +453,51 @@ const StudentData = () => {
                     value={filterCriteria.fromdate}
                     onChange={handleInputChange}
                   />
-      
-                </MenuItem>
-               </div>
-    
-               <div  className="col-12 col-md-6 col-lg-6 col-xl-6">
-              
-               <MenuItem >
-               <label > To: </label>
-                <input
-                    type="date"
-                    className="w-100"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
-                  />
-              </MenuItem>
-                 </div>
+                </div> */}
               </div>
-              <div className="row">  
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+
+              <div className="row m-2">  
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {branches &&
+                    branches.map((branch, index) => (
+                      <MenuItem key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Lead Source</InputLabel>
+                      <Select
+                      
+                      name="leadsource"
+                      value={filterCriteria.leadsource}
+                      onChange={handleInputChange}
+                      >
+                        
+                    {leadsources &&
+                      leadsources.map((item, index) => (
+                        <MenuItem key={item.id} value={item.leadsource}>
+                          {item.leadsource}
+                        </MenuItem>
+                      ))}
+                      </Select>
+                    </FormControl>
+                </div>
+
+              {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <MenuItem>
                   <select
                     id=""
@@ -460,8 +521,9 @@ const StudentData = () => {
                         </option>
                       ))}
                   </select>
-                </MenuItem>  </div>
-             
+                </MenuItem> 
+                 </div> */}
+{/*              
               <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
               <MenuItem>
                   <select
@@ -488,9 +550,48 @@ const StudentData = () => {
                       ))}
                   </select>
                 </MenuItem>
-              </div> </div>
+              </div> */}
+               </div>
+
+               <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Mode of Traning</InputLabel>
+                      <Select
+                      
+                      name="modeoftraining"
+                    value={filterCriteria.modeoftraining}
+                    onChange={handleInputChange}
+                      >
+                        
+                    
+                    <MenuItem value="online"> Online</MenuItem>
+                    <MenuItem value="offline"> Offline</MenuItem>
+                      </Select>
+                    </FormControl>
+                </div>
+                 
+<div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+<FormControl variant="standard" className="w-100">
+                      <InputLabel>Counsellors</InputLabel>
+                      <Select
+                      
+                      name="enquirytakenby"
+                      value={filterCriteria.enquirytakenby}
+                      onChange={handleInputChange}
+                      >
+                        
+                    
+                    {filteredcounsellor &&
+                      filteredcounsellor.map((user, index) => (
+                        <MenuItem value={user.fullname}> {user.fullname}</MenuItem>
+                      ))}
+                      </Select>
+                    </FormControl>
+</div>
+                 </div>
             
-            
+{/*             
               <div className="d-flex w-100 mt-3 mb-2">
                 <MenuItem>
                   <select
@@ -536,14 +637,13 @@ const StudentData = () => {
                    
                   </select>
                 </MenuItem>{" "}
-              </div>
-              <MenuItem className="d-flex justify-content-between">
-             
+              </div> */}
+               <div className="text-end me-2 mt-4">
                 <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear
                 </button>
-              </MenuItem>
+              </div>
             </Menu>
           </div>
           <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2 ">

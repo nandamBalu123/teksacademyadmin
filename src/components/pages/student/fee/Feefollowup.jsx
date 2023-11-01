@@ -384,8 +384,7 @@ const Feefollowup = () => {
                       </Select>
                     </FormControl>
                 </div>
-              
-              </div>
+               </div>
             {/* <div className="d-flex">
               <MenuItem className="pt-3 ">
                 <div>
@@ -425,7 +424,7 @@ const Feefollowup = () => {
       {filterCriteria.todaydate && <h3 className="ms-3 mt-2">Today</h3>}
       {filterCriteria.upcomingdate && <h3 className="ms-3 mt-2">Upcoming</h3>}
 
-      {filterCriteria.pendingdate && <h3 className="ms-3 mt-2 btn">Pending</h3>}
+      {filterCriteria.pendingdate && <h3 className="ms-3 mt-2 ">Pending</h3>}
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">

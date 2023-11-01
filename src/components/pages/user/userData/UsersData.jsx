@@ -302,17 +302,21 @@ const UsersData = () => {
                 horizontal: "left",
               }}
             >
-              <div className="d-flex justify-content-between">
-                <MenuItem> Filter</MenuItem>
-                <MenuItem>
+             <div className="d-flex justify-content-between m-2">
+               <div > Filter</div>
+             
+              <div >
                   {" "}
                   <CloseIcon onClick={handleClose} />{" "}
-                </MenuItem>
+                </div>
+           
               </div>
               <hr />
               <MenuItem>
               <div className="row">  
-              <div className="col-12 col-md-3 col-lg-3 col-xl-3">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                
+
               <label className="mt-3 me-2">Profile:</label>
                  </div>
                <div className="col-12 col-md-9 col-lg-9 col-xl-9"> 
