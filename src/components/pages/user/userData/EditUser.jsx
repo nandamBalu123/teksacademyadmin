@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
+import { useRoleContext } from "../../../../hooks/useRoleContext";
+import { useBranchContext } from "../../../../hooks/useBranchContext";
 import axios from "axios";
 const EditUser = () => {
   const navigate = useNavigate("");
   const [profiles, setProfiles] = useState([]);
+  const { roles } = useRoleContext();
+  const { branches } = useBranchContext();
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -187,7 +191,7 @@ const EditUser = () => {
       <div className="row m-auto">
         <div className="mb-4  col-xl-5 col-lg-5 col-md-6 col-12">
           <label htmlFor="exampleInputPassword1" className="form-label">
-            Profile
+            Role
           </label>
           <select
             className="form-control ms-2"
@@ -202,11 +206,12 @@ const EditUser = () => {
             onChange={setdata}
           >
             <option value="">--select--</option>
-            {profiles.map((profile) => (
-              <option key={profile} value={profile}>
-                {profile}
-              </option>
-            ))}
+            {roles &&
+              roles.map((item, index) => (
+                <option key={item.id} value={item.role}>
+                  {item.role}
+                </option>
+              ))}
           </select>
           {/* <input
               type="text"
@@ -231,10 +236,12 @@ const EditUser = () => {
           >
             <option value="">--select--</option>
 
-            <option value="hitechcity">Hi-tech City</option>
-            <option value="dilsukhnagar">dilshukanagar</option>
-            <option value="ameerpet">ameerpet</option>
-            <option value="gachibowli">gachibowli</option>
+            {branches &&
+              branches.map((item, index) => (
+                <option key={item.id} value={item.branch_name}>
+                  {item.branch_name}
+                </option>
+              ))}
           </select>
           {/* <input
               type="text"

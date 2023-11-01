@@ -333,6 +333,14 @@ export default function RegistrationForm() {
       alert("please enter the name");
       return;
     }
+    if (name) {
+      setName(
+        name
+          .split(" ")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
+      );
+    }
     if (!email) {
       alert("please  enter email id");
       return;
@@ -359,6 +367,14 @@ export default function RegistrationForm() {
     if (!parentsname) {
       alert("please enter parent's name");
       return;
+    }
+    if (parentsname) {
+      setParentsName(
+        parentsname
+          .split(" ")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")
+      );
     }
     if (!birthdate) {
       alert("please  enter Date of birth");
