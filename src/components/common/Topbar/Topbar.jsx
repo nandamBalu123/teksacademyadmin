@@ -129,7 +129,7 @@ const Topbar = () => {
               </div> <hr/>
              <div className="d-flex justify-content-between">
               <MenuItem onClick={handleProfile}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>Setting </MenuItem>
+              {/* <MenuItem onClick={handleClose}>Setting </MenuItem> */}
              
               <MenuItem onClick={handleLogout}>Logout </MenuItem></div>
             </Menu>

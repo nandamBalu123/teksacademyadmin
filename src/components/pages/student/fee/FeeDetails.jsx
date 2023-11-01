@@ -342,15 +342,6 @@ const FeeDetails = () => {
                       <option value="dueamount"> Due Amount</option>
                     </select>
               </MenuItem>
-                  
-           
-                
-              
-                   
-         
-              
-                  
-                 
                 </div>
                 <MenuItem className="d-flex justify-content-between">
                   {/* <button className="save"> Save</button> */}

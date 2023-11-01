@@ -14,6 +14,11 @@ import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import "./Certificate.css";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 import { useCourseContext } from "../../../../hooks/useCourseContext";
@@ -277,16 +282,50 @@ const Certificate = () => {
                 horizontal: "left",
               }}
             >
-              <div className="d-flex justify-content-between">
-                <MenuItem> Filter</MenuItem>
-                <MenuItem>
+              <div className="d-flex justify-content-between m-2">
+               <div > Filter</div>
+             
+              <div >
                   {" "}
                   <CloseIcon onClick={handleClose} />{" "}
-                </MenuItem>
+                </div>
+           
               </div>
               <hr />
-              <MenuItem className="pt-3 ">
-                <div>
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+              
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                       InputLabelProps={{
+                        shrink: true,
+                        
+                      }}
+                      name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                    
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+             
+                {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -302,9 +341,9 @@ const Certificate = () => {
                     value={filterCriteria.fromdate}
                     onChange={handleInputChange}
                   />
-                </div>
-              </MenuItem>
-              <MenuItem className="pt-3 ">
+                </div> */}
+              </div>
+              {/* <MenuItem className="pt-3 ">
                 <label className="ms-"> To: </label>
 
                 <div>
@@ -321,9 +360,29 @@ const Certificate = () => {
                     onChange={handleInputChange}
                   />
                 </div>
-              </MenuItem>
-              <MenuItem>
-                <select
+              </MenuItem> */}
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Course</InputLabel>
+                      <Select
+                      
+                       name="course"
+                        value={filterCriteria.course}
+                        onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {getcourses &&
+                    getcourses.map((item, index) => (
+                      <MenuItem key={item.id} value={item.course_name}>
+                        {item.course_name}
+                      </MenuItem>
+                    ))}
+                      </Select>
+                    </FormControl>
+                </div>
+              
+                {/* <select
                   className="mt-3"
                   id=""
                   required
@@ -344,9 +403,68 @@ const Certificate = () => {
                         {item.course_name}
                       </option>
                     ))}
-                </select>
-              </MenuItem>
-              <MenuItem>
+                </select> */}
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {branches &&
+                    branches.map((branch, index) => (
+                      <MenuItem key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+                </div>
+              </div>
+              <div className="row m-2">  
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Counsellor</InputLabel>
+                      <Select
+                      
+                      name="enquirytakenby"
+                      value={filterCriteria.enquirytakenby}
+                      onChange={handleInputChange}
+                      >
+                        
+                        {filteredcounsellor &&
+                    filteredcounsellor.map((user, index) => (
+                      <MenuItem value={user.fullname}> {user.fullname}</MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+               </div>
+               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+               <FormControl variant="standard" className="w-100">
+                      <InputLabel>Certificate Status</InputLabel>
+                      <Select
+                      
+                      name="enquirytakenby"
+                      value={filterCriteria.enquirytakenby}
+                      onChange={handleInputChange}
+                      >
+                        
+                        <MenuItem value="request Submitted">Request Submitted</MenuItem>
+                  <MenuItem value="issued">Issued  </MenuItem>
+                  <MenuItem value="">Pending</MenuItem>
+                   
+                      </Select>
+                    </FormControl>
+               </div>
+              </div>
+            
+
+              {/* <MenuItem>
                 <select
                   className="mt-3"
                   id=""
@@ -370,8 +488,8 @@ const Certificate = () => {
                       </option>
                     ))}
                 </select>
-              </MenuItem>
-              <MenuItem>
+              </MenuItem> */}
+              {/* <MenuItem>
                 <select
                   className="mt-3"
                   id=""
@@ -393,8 +511,8 @@ const Certificate = () => {
                       <option value={user.fullname}> {user.fullname}</option>
                     ))}
                 </select>
-              </MenuItem>
-              <MenuItem>
+              </MenuItem> */}
+              {/* <MenuItem>
                 <select
                   className="mt-3"
                   id=""
@@ -415,16 +533,28 @@ const Certificate = () => {
                   <option value="issued">Issued</option>
                   <option value="">Pending</option>
                 </select>
-              </MenuItem>
-              <MenuItem className="d-flex justify-content-between">
+              </MenuItem> */}
+              <div className="text-end me-2 mt-4">
                 <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear
                 </button>
-              </MenuItem>
+              </div>
             </Menu>
           </div>
         </div>
+
+        {/* <div class="dropdown">
+  <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  Fillter
+  </a>
+
+  <ul class="dropdown-menu ">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div> */}
 
         <Paper sx={{ width: "100%", overflow: "hidden" }} className="my-4">
           <TableContainer sx={{ maxHeight: 440 }}>

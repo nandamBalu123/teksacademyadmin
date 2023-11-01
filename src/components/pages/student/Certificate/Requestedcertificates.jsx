@@ -15,6 +15,11 @@ import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 import { useCourseContext } from "../../../../hooks/useCourseContext";
@@ -211,8 +216,8 @@ const Requestedcertificates = () => {
   return (
     <div className="container req-certificate my-3">
       <div className="d-flex justify-content-between">
-        {!issuedCertificates && <span>Requested Certificates</span>}
-        {issuedCertificates && <span>Issued Certificates</span>}
+        {!issuedCertificates && <h4>Requested Certificates</h4>}
+        {issuedCertificates && <h4>Issued Certificates</h4>}
 
         {issuedCertificates && (
           <button class="btn btn-primary" onClick={handleRequestedCertificates}>
@@ -226,11 +231,11 @@ const Requestedcertificates = () => {
         )}
       </div>
 
-      <div className="row mb-3 px-4 pt-2">
+      <div className="row mb-3  ">
         <div className="col-12 col-md-8 col-lg-8 col-xl-8">
           <input
             type="text"
-            className="input-field ps-2"
+            className="input-field "
             placeholder="Search Here...."
             autoComplete="off"
             style={{
@@ -296,15 +301,66 @@ const Requestedcertificates = () => {
               horizontal: "left",
             }}
           >
-            <div className="d-flex justify-content-between">
-              <MenuItem> Filter</MenuItem>
-              <MenuItem>
+            <div className="d-flex justify-content-between m-2">
+              <div> Filter</div>
+              <div>
                 {" "}
                 <CloseIcon onClick={handleClose} />{" "}
-              </MenuItem>
+              </div>
             </div>
             <hr />
-            <MenuItem className="pt-3 ">
+            <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+              
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                       InputLabelProps={{
+                        shrink: true,
+                        
+                      }}
+                      name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                    
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+             
+                {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+              </div>
+            {/* <div className="row m-2 ">
               <div>
                 <label> From: </label>
               </div>
@@ -322,7 +378,7 @@ const Requestedcertificates = () => {
                   onChange={handleInputChange}
                 />
               </div>
-            </MenuItem>
+            </div>
             <MenuItem className="pt-3 ">
               <label className="ms-"> To: </label>
 
@@ -340,7 +396,7 @@ const Requestedcertificates = () => {
                   onChange={handleInputChange}
                 />
               </div>
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem>
               <select
                 className="mt-3"

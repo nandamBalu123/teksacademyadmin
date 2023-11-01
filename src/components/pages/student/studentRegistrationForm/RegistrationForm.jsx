@@ -60,7 +60,6 @@ export default function RegistrationForm() {
   const { getcourses } = useCourseContext();
   const { coursepackages } = useCoursePackageContext();
   const navigate = useNavigate();
-  const [student_status, setstudent_status] = useState([]);
   const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -79,7 +78,7 @@ export default function RegistrationForm() {
   const [educationtype, setEducationType] = useState("");
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
-  // const [profilepic, setProfilePpic] = useState("");
+  const [profilepic, setProfilePpic] = useState("");
   const [enquirydate, setEnquiryDate] = useState("");
   const [enquirytakenby, setEnquiryTakenBy] = useState("");
   const [coursepackage, setCoursepakage] = useState("");
@@ -119,7 +118,7 @@ export default function RegistrationForm() {
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
   const [totalpaidamount, settotalpaidamount] = useState(0);
-  const [file, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
   const [certificate_status, setcertificate_status] = useState([
@@ -330,15 +329,6 @@ export default function RegistrationForm() {
       alert("please enter the name");
       return;
     }
-    if (name) {
-      setName(
-        name
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      );
-    }
-
     if (!email) {
       alert("please  enter email id");
       return;
@@ -365,14 +355,6 @@ export default function RegistrationForm() {
     if (!parentsname) {
       alert("please enter parent's name");
       return;
-    }
-    if (parentsname) {
-      setParentsName(
-        parentsname
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      );
     }
     if (!birthdate) {
       alert("please  enter Date of birth");
@@ -530,7 +512,6 @@ export default function RegistrationForm() {
       return;
     }
     // setuserid(user.id);
-
     const studentRegistrationdata = {
       name,
       email,
@@ -549,8 +530,7 @@ export default function RegistrationForm() {
       educationtype,
       marks,
       academicyear,
-      file,
-      // profilepic,
+      profilepic,
       enquirydate,
       enquirytakenby,
       coursepackage,
@@ -584,8 +564,7 @@ export default function RegistrationForm() {
       feedetailsbilling,
       totalfeewithouttax,
       totalpaidamount,
-      
-      student_status,
+      selectedFile,
       user_id,
       certificate_status,
     };
@@ -598,7 +577,7 @@ export default function RegistrationForm() {
         studentRegistrationdata
       );
       const id = response.data.insertId;
-      // navigate(`/addtofee/${id}`);
+      navigate(`/addtofee/${id}`);
 
       // Handle a successful response here
       console.log("Responsee:", response.data.insertId);
@@ -1098,7 +1077,7 @@ export default function RegistrationForm() {
                     onChange={(e) => {
                       setSelectedFile(e.target.files[0]);
                     }}
-                    accept=".jpg, .jpeg, .png"
+                    accept="image/*"
                   />
                   <input
                     type="file"
