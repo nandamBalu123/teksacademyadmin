@@ -257,9 +257,11 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <tr>
                     {" "}
                     <td className="borderright"> Email Id </td>{" "}
-                    <td className="w-25 borderleft  ">{studentdata.email} </td>{" "}
-                    <td className="borderright">State </td>{" "}
-                    <td className="w-25 borderleft ">{studentdata.state}</td>{" "}
+                    <td className="w-25 borderleft  " colSpan={3}>
+                      {studentdata.email}{" "}
+                    </td>{" "}
+                    {/* <td className="borderright"></td>{" "}
+                    <td className="w-25 borderleft "></td>{" "} */}
                   </tr>
                 </tbody>
               </table>
