@@ -10,7 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import CheckIcon from '@mui/icons-material/Check';
+import CheckIcon from "@mui/icons-material/Check";
 const CreateUserForm = () => {
   const { departments } = useDepartmentContext();
   const { roles } = useRoleContext();
@@ -25,7 +25,7 @@ const CreateUserForm = () => {
   const [reportto, setreportto] = useState("");
   const [profile, setprofile] = useState("");
   const [branch, setbranch] = useState("");
-
+  const [user_status, setUser_status] = useState([{ status: true }]);
   // const [profiles, setProfiles] = useState([]);
   const profilee = [];
 
@@ -130,6 +130,7 @@ const CreateUserForm = () => {
         reportto,
         profile,
         branch,
+        user_status,
       };
 
       console.log("User Data:", user); // Log the user data being sent
@@ -545,16 +546,15 @@ const CreateUserForm = () => {
               </div> */}
             </div>
           </div>
-        
-     
+
           <div className="create-button mt-5 ">
-          <button
-          type="submit"
-                className="btn btn-primary mr-20 ms-2 mb-2 "
-                style={{ textTransform: "capitalize"  }}
-              >
-               Create User
-              </button>
+            <button
+              type="submit"
+              className="btn btn-primary mr-20 ms-2 mb-2 "
+              style={{ textTransform: "capitalize" }}
+            >
+              Create User
+            </button>
             {/* <button  className="btn btn-primary"
             type="submit">
               

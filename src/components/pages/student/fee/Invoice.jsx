@@ -394,7 +394,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       </td>
                       <td className=" text-center border border 1">
                         {parseFloat((student.paidamount * 0.65) / 1.18).toFixed(
-                          3
+                          2
                         )}
                       </td>
                       <td className=" text-center border border 1">
@@ -406,7 +406,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                         ).toFixed(2)}
                       </td>
                       <td className=" text-center border border 1">
-                        {parseFloat(student.paidamount * 0.65).toFixed(2)}
+                        {parseInt(student.paidamount * 0.65)}
                       </td>
                     </tr>
                   );
@@ -433,7 +433,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center">
-                        {parseFloat(student.paidamount * 0.35).toFixed(2)}
+                        {parseInt(student.paidamount * 0.35)}
                       </td>
                     </tr>
                   );
@@ -450,14 +450,17 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             studentdata.initialpayment.length > 0 ? (
               studentdata.initialpayment.map((student) => (
                 <tr>
-                  <td className="border border 1 text-center">Grand Total</td>
+                  <td className="border border 1 text-center">
+                    {" "}
+                    <strong>Grand Total</strong>
+                  </td>
 
                   <td className="border border 1 text-center"></td>
                   <td className="border border 1 text-center"></td>
 
                   <td className="border border 1 text-center"></td>
                   <td className="border border 1 text-center">
-                    {student.initialamount}
+                    <strong>{student.initialamount}</strong>
                   </td>
                 </tr>
               ))
@@ -472,17 +475,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 if (indx === parseInt(index)) {
                   return (
                     <tr>
-                      <td className="border border 1 text-center">
-                        {" "}
-                        Grand Total
+                      <td className="border border-1 text-center">
+                        <strong>Grand Total</strong>
                       </td>
-
-                      <td className="border border 1 text-center"></td>
-                      <td className="border border 1 text-center"></td>
-
-                      <td className="border border 1 text-center"></td>
-                      <td className="border border 1 text-center">
-                        {student.paidamount}
+                      <td className="border border-1 text-center"></td>
+                      <td className="border border-1 text-center"></td>
+                      <td className="border border-1 text-center"></td>
+                      <td className="border border-1 text-center">
+                        <strong>{student.paidamount}</strong>
                       </td>
                     </tr>
                   );
@@ -508,7 +508,11 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </h6>
           )}
         </div>
-        <hr style={{ marginTop: "200px" }} />
+        <p style={{ marginTop: "160px", padding: "0px", marginBottom: "5px" }}>
+          *This bill has been automatically generated and doesn't need a
+          signature.
+        </p>
+        <hr />
         <div
           className="d-flex align-items-end justify-content-between"
           style={{ marginTop: "10px", overflow: "hidden" }}
