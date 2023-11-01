@@ -73,6 +73,7 @@ const FeeDetails = () => {
     branch: "",
 
     search: "",
+    modeoftraining: "",
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -170,7 +171,7 @@ const FeeDetails = () => {
       <div className="main-feedetails container mt-3">
         <div className="feedetails">
           {" "}
-          <p className="fee-heading"> Fee Management(Registered Students)</p> 
+          <p className="fee-heading"> Fee Management(Registered Students)</p>
           <div className="row pt-1">
             <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
               <button className="feebtn" onClick={studentFeeRecords}>
@@ -225,16 +226,17 @@ const FeeDetails = () => {
                 {recordCount}/{initialDataCount}
               </h6>
             </div>
-            <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2"> 
-            <select  onChange={handlerecorddata}>
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="75">75</option>
-            </select>
+            <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2">
+              <select onChange={handlerecorddata}>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+              </select>
             </div>
             <div className="col-4 col-md-1 col-lg-1 col-xl-1">
-            <button onClick={handleClick}
+              <button
+                onClick={handleClick}
                 className="btn btn-primary mr-20 ms-2 mb-2"
                 style={{ textTransform: "capitalize" }}
               >
@@ -258,22 +260,19 @@ const FeeDetails = () => {
                 }}
               >
                 <div className="d-flex justify-content-between">
-                  
                   <MenuItem> Filter</MenuItem>
-             <MenuItem  >
+                  <MenuItem>
                     {" "}
                     <CloseIcon className="end" onClick={handleClose} />{" "}
                   </MenuItem>
-                
                 </div>
                 <hr />
-                
+
                 <div className="d-flex justify-content-between">
-                <MenuItem> 
-                <label> From: </label> 
-                <input
+                  <MenuItem>
+                    <label> From: </label>
+                    <input
                       type="date"
-                    
                       style={{
                         height: "45px",
                         border: "1.5px solid black",
@@ -283,12 +282,11 @@ const FeeDetails = () => {
                       value={filterCriteria.fromdate}
                       onChange={handleInputChange}
                     />
-                </MenuItem>
-                <MenuItem> 
-                <label> To: </label>
-                <input
+                  </MenuItem>
+                  <MenuItem>
+                    <label> To: </label>
+                    <input
                       type="date"
-                   
                       style={{
                         height: "45px",
                         border: "1.5px solid black",
@@ -298,18 +296,16 @@ const FeeDetails = () => {
                       value={filterCriteria.todate}
                       onChange={handleInputChange}
                     />
-                </MenuItem>
-                   </div>
+                  </MenuItem>
+                </div>
                 <div className="d-flex justify-content-between">
-               <MenuItem> 
-             
-               
-               <select
+                  <MenuItem>
+                    <select
                       id=""
                       className="ms-1"
-                   style={{
+                      style={{
                         height: "45px",
-                        paddingRight:"4rem",
+                        paddingRight: "4rem",
                         border: "1.5px solid black",
                         borderRadius: "5px",
                       }}
@@ -325,21 +321,23 @@ const FeeDetails = () => {
                           </option>
                         ))}
                     </select>
-               </MenuItem>
-              <MenuItem> 
-              <select
+                  </MenuItem>
+                  <MenuItem>
+                    <select
                       id=""
-                     style={{
+                      style={{
                         height: "45px",
-                        paddingRight:"2rem",
+                        paddingRight: "2rem",
                         border: "1.5px solid black",
                         borderRadius: "5px",
                       }}
-                      name="amount"
+                      name="modeoftraining"
+                      value={filterCriteria.modeoftraining}
+                      onChange={handleInputChange}
                     >
                       <option> Mode of Traning</option>
-                      <option value="paidamount"> Paid Amount</option>
-                      <option value="dueamount"> Due Amount</option>
+                      <option value="online"> Online</option>
+                      <option value="offline"> Offline</option>
                     </select>
               </MenuItem>
                 </div>
@@ -398,8 +396,7 @@ const FeeDetails = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {Array.isArray(records) &&
-                  records.length > 0 ? (
+                  {Array.isArray(records) && records.length > 0 ? (
                     records.map((item, index) => (
                       <TableRow
                         sx={{
@@ -488,15 +485,18 @@ const FeeDetails = () => {
               </Table>
             </TableContainer>
           </Paper>
-          <div style={{ display: "flex", justifyContent: "center" }} className="mt-3">
-          <Stack spacing={2}>
-            <Pagination
-              count={Math.ceil(studentFeeRecordss.length / itemsPerPage)}
-              onChange={handlePageChange}
-              color="info"
-            />
-          </Stack>
-        </div>
+          <div
+            style={{ display: "flex", justifyContent: "center" }}
+            className="mt-3"
+          >
+            <Stack spacing={2}>
+              <Pagination
+                count={Math.ceil(studentFeeRecordss.length / itemsPerPage)}
+                onChange={handlePageChange}
+                color="info"
+              />
+            </Stack>
+          </div>
         </div>
       </div>
     </>
