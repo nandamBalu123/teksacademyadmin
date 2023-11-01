@@ -276,10 +276,11 @@ const Requestedcertificates = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
+            
           >
             <button
               className="btn btn-primary mr-20 ms-2 mb-2"
-              style={{ textTransform: "capitalize" }}
+              style={{ textTransform: "capitalize"}}
             >
               Filter
             </button>
@@ -553,12 +554,12 @@ const Requestedcertificates = () => {
                 <option value="">Pending</option>
               </select>
             </MenuItem> */}
-            <MenuItem className="d-flex justify-content-between">
+            <div className="text-end me-2 my-2">
               <button className="clear" onClick={filterreset}>
                 {" "}
                 Clear
               </button>
-            </MenuItem>
+            </div>
           </Menu>
         </div>
       </div>
