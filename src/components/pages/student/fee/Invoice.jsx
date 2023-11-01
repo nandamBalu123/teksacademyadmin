@@ -170,30 +170,29 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       />
       <h3 className="text-center mt-5"> Fee Invoice</h3>
       <hr />
-
-      <div className="d-flex justify-content-between ">
-        <div>
-          <h4 style={{ marginLeft: "15px", marginTop: "25px" }}>
+      <div className="row"> 
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+      <h4 >
             {" "}
             <strong> Kapil Knowledge Hub Private Limited</strong>
-          </h4>
-          <p style={{ marginTop: "15px" }}>
-            &nbsp;&nbsp; CIN: U80100TG2018PTC123853{" "}
-          </p>
-          <p style={{ marginTop: "5px" }}>
-            &nbsp;&nbsp; GSTIN: 36AAHCK0599C1ZI{" "}
-          </p>
-        </div>
-
-        <div>
-          <h3 style={{ marginTop: "25px" }}>
+          </h4>  
+      </div>
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+      <h3 >
             <strong>
               {" "}
               <b>INVOICE NO:</b> {invoice}
             </strong>
           </h3>
-
-          <p style={{ marginTop: "15px" }}>
+ 
+      </div>
+</div>
+<div className="row m-0 p-0"> 
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+      <p >CIN: U80100TG2018PTC123853</p>
+      </div>
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+      <p >
             {name === "Admission Fee" &&
             studentdata &&
             studentdata.initialpayment &&
@@ -245,37 +244,48 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             ) : name === "Installment" ? (
               <p>No payment date available</p>
             ) : null}
+          </p> 
+      </div>
+</div>
+<div className="row m-0 p-0"> 
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+      <p >
+             GSTIN: 36AAHCK0599C1ZI{" "}
           </p>
-          <p style={{ marginTop: "5px" }}>
-            {" "}
+      </div>
+      <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+      <p >
+          
             <b>Branch:</b> {studentdata.branch}
           </p>
-        </div>
+      
       </div>
-      <div className="mt-3 ">
+</div>
+      
+      <div className="mt-2 ">
         <p>
           <b> BILLING TO</b>{" "}
         </p>
         <hr className="w-25" />
-        <div className="row">
-          <div className="col">
+        <div className="row ">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Name :</b> {studentdata && studentdata.name}
           </div>
-          <div className="col">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Registration No:</b>{" "}
             {studentdata && studentdata.registrationnumber}
           </div>
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Email :</b> {studentdata && studentdata.email}
           </div>
-          <div className="col">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
           </div>
         </div>
         <div className="row mb-3">
-          <div className="col">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
             <b>Address :</b>{" "}
             {studentdata && (
               <span>
@@ -394,7 +404,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       </td>
                       <td className=" text-center border border 1">
                         {parseFloat((student.paidamount * 0.65) / 1.18).toFixed(
-                          3
+                          2
                         )}
                       </td>
                       <td className=" text-center border border 1">
@@ -406,7 +416,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                         ).toFixed(2)}
                       </td>
                       <td className=" text-center border border 1">
-                        {parseFloat(student.paidamount * 0.65).toFixed(2)}
+                        {parseInt(student.paidamount * 0.65)}
                       </td>
                     </tr>
                   );
@@ -433,7 +443,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center">
-                        {parseFloat(student.paidamount * 0.35).toFixed(2)}
+                        {parseInt(student.paidamount * 0.35)}
                       </td>
                     </tr>
                   );
@@ -450,14 +460,17 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             studentdata.initialpayment.length > 0 ? (
               studentdata.initialpayment.map((student) => (
                 <tr>
-                  <td className="border border 1 text-center">Grand Total</td>
+                  <td className="border border 1 text-center">
+                    {" "}
+                    <strong>Grand Total</strong>
+                  </td>
 
                   <td className="border border 1 text-center"></td>
                   <td className="border border 1 text-center"></td>
 
                   <td className="border border 1 text-center"></td>
                   <td className="border border 1 text-center">
-                    {student.initialamount}
+                    <strong>{student.initialamount}</strong>
                   </td>
                 </tr>
               ))
@@ -472,17 +485,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 if (indx === parseInt(index)) {
                   return (
                     <tr>
-                      <td className="border border 1 text-center">
-                        {" "}
-                        Grand Total
+                      <td className="border border-1 text-center">
+                        <strong>Grand Total</strong>
                       </td>
-
-                      <td className="border border 1 text-center"></td>
-                      <td className="border border 1 text-center"></td>
-
-                      <td className="border border 1 text-center"></td>
-                      <td className="border border 1 text-center">
-                        {student.paidamount}
+                      <td className="border border-1 text-center"></td>
+                      <td className="border border-1 text-center"></td>
+                      <td className="border border-1 text-center"></td>
+                      <td className="border border-1 text-center">
+                        <strong>{student.paidamount}</strong>
                       </td>
                     </tr>
                   );
@@ -508,10 +518,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </h6>
           )}
         </div>
-        <hr style={{ marginTop: "200px" }} />
+        <p style={{ marginTop: "160px", padding: "0px", marginBottom: "5px" }}>
+          *This bill has been automatically generated and doesn't need a
+          signature.
+        </p>
+        <hr />
         <div
           className="d-flex align-items-end justify-content-between"
-          style={{ marginTop: "10px", overflow: "hidden" }}
+          style={{ overflow: "hidden" }}
         >
           <span>
             <EmailIcon />

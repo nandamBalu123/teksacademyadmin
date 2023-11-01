@@ -846,7 +846,47 @@ body{
   box-sizing: border-box;
   font-family: "Poppins" , sans-serif;
 }
-.sidebar{
+:root{ 
+    --color-default:#004f83;
+    --color-second:#0067ac;
+    --color-white:#fff;
+    --color-body:#e4e9f7;
+    --color-light:#e0e0e0;
+  }
+  .body{ 
+    min-height: 100vh;
+  }
+  .sidebar .logo-details{ 
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .sidebar .logo-details .logo-name{ 
+    color: var(--color-white);
+    font-size: 22px;
+    font-weight:600 ;
+    transition: all .5s ease;
+  }
+  .sidebar .logo-details #btn{ 
+    position: absolute;
+    top: 50;
+
+  }
+/* .sidebar{ 
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: var(--sidebar-color);
+}
+ .sidebar .image-text .img{ 
+  width:20%;
+  border-radius: 50%;
+} */
+
+/* .sidebar{
   position: fixed;
   left: 0;
   top: 0;
@@ -1092,4 +1132,4 @@ body{
   }
 }
 
-
+ */
