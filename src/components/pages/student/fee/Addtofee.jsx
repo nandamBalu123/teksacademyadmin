@@ -233,7 +233,7 @@ const Addtofee = () => {
                 />
                 <label>
                   {" "}
-                  Initial Amount <span className="text-danger"> * </span>
+                  Admission Fee <span className="text-danger"> * </span>
                 </label>
               </div>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">

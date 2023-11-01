@@ -98,8 +98,8 @@ main {
 
 /* Sidebar */
 .sidebar {
-  background: rgb(0, 7, 61);
-  color: white;
+background-color: white;
+  color: black;
   height: 100vh;
   overflow-y: auto;
   

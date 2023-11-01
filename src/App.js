@@ -59,6 +59,8 @@ import CreateCoursePackage from "./components/pages/settings/coursepackage/Creat
 import Course from "./components/pages/settings/courses/Course";
 import CreateCourse from "./components/pages/settings/courses/CreateCourse";
 import Requestedcertificates from "./components/pages/student/Certificate/Requestedcertificates";
+import Sidebar1 from "./components/common/Sidebar/Sidebar1";
+import Invoice from "./components/pages/student/fee/Invoice";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 
@@ -83,6 +85,7 @@ function App() {
         <BrowserRouter>
           <div className="app">
             {user ? <Sidebar /> : undefined}
+            {user ? <Sidebar1 /> : undefined}
             {/* <Sidebar /> */}
 
             <div
@@ -147,6 +150,10 @@ function App() {
                   }
                 />
                 <Route
+                  path="/invoice/:id/:index/:name"
+                  element={user ? <Invoice /> : <Dashboard />}
+                />
+                <Route
                   path="/addtofee/:id"
                   element={
                     user && user.profile == "admin" ? (
@@ -178,7 +185,7 @@ function App() {
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/requestedcertificates"
                   element={user ? <Requestedcertificates /> : <Dashboard />}
                 />

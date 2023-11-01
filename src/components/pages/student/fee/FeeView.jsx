@@ -11,6 +11,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CreditScoreIcon from "@mui/icons-material/CreditScore";
+import { Link } from "react-router-dom";
+
 const FeeView = () => {
   const { id } = useParams();
   const navigator = useNavigate();
@@ -21,6 +24,7 @@ const FeeView = () => {
   const [newpaidamount, setnewpaidamount] = useState();
   const [installmentamount, setinstallmentamount] = useState();
   // const [totoalleft, settotalleft] = useState();
+
   let totalleft;
 
   useEffect(() => {
@@ -287,7 +291,7 @@ const FeeView = () => {
             <TableHead>
               <TableRow>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Initial Paid Amount
+                  Admission Fee
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                   {" "}
@@ -325,7 +329,14 @@ const FeeView = () => {
                     <TableCell className="border border 1 text-center">
                       {item.transactionID}
                     </TableCell>
-                    <TableCell className="border border 1 text-center"></TableCell>
+                    <TableCell className="border border 1 text-center">
+                      <Link
+                        to={`/invoice/${id}/${index}/Admission Fee`}
+                        style={{ width: "40px" }}
+                      >
+                        <CreditScoreIcon className="iconn" />
+                      </Link>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               ))}
@@ -395,7 +406,14 @@ const FeeView = () => {
                       <TableCell className="border border 1 text-center">
                         {item.transactionid}
                       </TableCell>
-                      <TableCell className="border border 1 text-center"></TableCell>
+                      <TableCell className="border border 1 text-center">
+                        <Link
+                          to={`/invoice/${id}/${index}/Installment`}
+                          style={{ width: "40px" }}
+                        >
+                          <CreditScoreIcon className="iconn" />
+                        </Link>
+                      </TableCell>
                     </TableRow>
                   </TableBody>
                 );

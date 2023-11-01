@@ -3,14 +3,9 @@ import { useReactToPrint } from "react-to-print";
 import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-// import logo from "../../../../images/Teks-Logo-with-Trade.png";
 import logo from "../../../../images/Teks-Logo-with-Trade.png";
-// import { useReactToPrint } from "react-to-print";
 import "./StudentApplication.css";
 import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
-
-// import "../fee/FeeDetails.CSS";
-// import "..fee/FeeDetails.CSS";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
