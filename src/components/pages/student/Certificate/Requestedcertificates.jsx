@@ -397,6 +397,68 @@ const Requestedcertificates = () => {
                 />
               </div>
             </MenuItem> */}
+           <div className="row m-2">  
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Course</InputLabel>
+                      <Select
+                      
+                       name="course"
+                        value={filterCriteria.course}
+                        onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {getcourses &&
+                    getcourses.map((item, index) => (
+                      <MenuItem key={item.id} value={item.course_name}>
+                        {item.course_name}
+                      </MenuItem>
+                    ))}
+                      </Select>
+                    </FormControl>
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {branches &&
+                    branches.map((branch, index) => (
+                      <MenuItem key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+                </div>
+           </div>
+           <div className="row m-2">  
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
+           <FormControl variant="standard" className="w-100">
+                      <InputLabel>Counsellor</InputLabel>
+                      <Select
+                      
+                      name="enquirytakenby"
+                      value={filterCriteria.enquirytakenby}
+                      onChange={handleInputChange}
+                      >
+                        
+                        {filteredcounsellor &&
+                    filteredcounsellor.map((user, index) => (
+                      <MenuItem value={user.fullname}> {user.fullname}</MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+           </div>
+           </div>
+{/* 
             <MenuItem>
               <select
                 className="mt-3"
@@ -420,8 +482,8 @@ const Requestedcertificates = () => {
                     </option>
                   ))}
               </select>
-            </MenuItem>
-            <MenuItem>
+            </MenuItem> */}
+            {/* <MenuItem>
               <select
                 className="mt-3"
                 id=""
@@ -445,8 +507,8 @@ const Requestedcertificates = () => {
                     </option>
                   ))}
               </select>
-            </MenuItem>
-            <MenuItem>
+            </MenuItem> */}
+            {/* <MenuItem>
               <select
                 className="mt-3"
                 id=""
@@ -468,7 +530,7 @@ const Requestedcertificates = () => {
                     <option value={user.fullname}> {user.fullname}</option>
                   ))}
               </select>
-            </MenuItem>
+            </MenuItem> */}
             {/* <MenuItem>
               <select
                 className="mt-3"
@@ -612,7 +674,7 @@ const Requestedcertificates = () => {
             <Pagination
               count={Math.ceil(filteredData.length / itemsPerPage)}
               onChange={handlePageChange}
-              color="primary"
+              color="info"
             />
           </Stack>
         )}
