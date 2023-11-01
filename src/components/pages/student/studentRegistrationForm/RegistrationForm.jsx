@@ -79,6 +79,8 @@ export default function RegistrationForm() {
   const [educationtype, setEducationType] = useState("");
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
+  // const [file, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   // const [profilepic, setProfilePpic] = useState("");
   const [enquirydate, setEnquiryDate] = useState("");
   const [enquirytakenby, setEnquiryTakenBy] = useState("");
@@ -119,7 +121,8 @@ export default function RegistrationForm() {
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
   const [totalpaidamount, settotalpaidamount] = useState(0);
-  const [file, setSelectedFile] = useState(null);
+  
+  
   const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
   const [certificate_status, setcertificate_status] = useState([
@@ -529,8 +532,12 @@ export default function RegistrationForm() {
       alert("please enter assets ");
       return;
     }
+    
     // setuserid(user.id);
-
+    let file = new FormData();
+    file.append("file", selectedFile);
+    console.log("selected",selectedFile)
+    // let file = selectedFile
     const studentRegistrationdata = {
       name,
       email,
@@ -598,7 +605,7 @@ export default function RegistrationForm() {
         studentRegistrationdata
       );
       const id = response.data.insertId;
-      // navigate(`/addtofee/${id}`);
+      navigate(`/addtofee/${id}`);
 
       // Handle a successful response here
       console.log("Responsee:", response.data.insertId);
@@ -1074,27 +1081,25 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  {/* <label className="col-12 col-md-2">Image:</label> */}
-                  {/* <input
-                    type="image"
-                    // className="col-9 col-md-5"
-                    // style={{
-                    //   height: "35px",
-                    //   border: "1.5px solid black",
-                    //   borderRadius: "5px",
-                    // }}
-                  /> */}
-
-                  {/* <input
-                    accept=".jpg, .jpeg, .png"
+                {/* <input
                     type="file"
-                    src="your-image-url.jpg"
-                    alt="Submit"
-                    class="image-input"
-
+                    name="file"
+                    onChange={(e) => {
+                      setSelectedFile(e.target.files[0]);
+                    }}
+                    accept=".jpg, .jpeg, .png"
                   /> */}
                   <input
                     type="file"
+                    name="file"
+                    onChange={(e) => {
+                      setSelectedFile(e.target.files[0]);
+                    }}
+                    accept=".jpg, .jpeg, .png"
+                  />
+                  {/* <input
+                    type="file"
+                    name="file"
                     onChange={(e) => {
                       setSelectedFile(e.target.files[0]);
                     }}
@@ -1105,7 +1110,7 @@ export default function RegistrationForm() {
                     id="imageInput"
                     accept=".jpg, .jpeg, .png"
                     style={{ display: "none" }}
-                  />
+                  /> */}
                 </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
