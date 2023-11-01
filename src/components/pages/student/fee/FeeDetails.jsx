@@ -12,6 +12,11 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CloseIcon from "@mui/icons-material/Close";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import "./FeeDetails.css";
 import axios from "axios";
 
@@ -259,16 +264,65 @@ const FeeDetails = () => {
                   cursor: "pointer",
                 }}
               >
-                <div className="d-flex justify-content-between">
-                  <MenuItem> Filter</MenuItem>
-                  <MenuItem>
-                    {" "}
-                    <CloseIcon className="end" onClick={handleClose} />{" "}
-                  </MenuItem>
-                </div>
+               <div className="d-flex justify-content-between m-2">
+               <div > Filter</div>
+               <div >
+                  {" "}
+                  <CloseIcon onClick={handleClose} />{" "}
+                </div></div>
                 <hr />
-
-                <div className="d-flex justify-content-between">
+                <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+              
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                       InputLabelProps={{
+                        shrink: true,
+                        
+                      }}
+                      name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                    
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                    />
+                </div>
+             
+                {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+              </div>
+                {/* <div className="d-flex justify-content-between">
                   <MenuItem>
                     <label> From: </label>
                     <input
@@ -297,8 +351,51 @@ const FeeDetails = () => {
                       onChange={handleInputChange}
                     />
                   </MenuItem>
+                </div> */}
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                  <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {branches &&
+                    branches.map((branch, index) => (
+                      <MenuItem key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+                   </div> 
+                   <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                  <FormControl variant="standard" className="w-100">
+                      <InputLabel>Mode of Traning</InputLabel>
+                      <Select
+                      
+                      name="modeoftraining"
+                      value={filterCriteria.modeoftraining}
+                      onChange={handleInputChange}
+                      >
+                        <MenuItem value="online"> Online</MenuItem>
+                      
+                      <MenuItem value="offline">Offline</MenuItem>
+                 
+                   
+                      </Select>
+                    </FormControl>
+                   </div> 
+
+
+
                 </div>
-                <div className="d-flex justify-content-between">
+
+                {/* <div className="d-flex justify-content-between">
                   <MenuItem>
                     <select
                       id=""
@@ -335,19 +432,18 @@ const FeeDetails = () => {
                       value={filterCriteria.modeoftraining}
                       onChange={handleInputChange}
                     >
-                      <option> Mode of Traning</option>
+                      
                       <option value="online"> Online</option>
                       <option value="offline"> Offline</option>
                     </select>
               </MenuItem>
-                </div>
-                <MenuItem className="d-flex justify-content-between">
-                  {/* <button className="save"> Save</button> */}
-                  <button className="clear" onClick={filterreset}>
-                    {" "}
-                    Clear
-                  </button>
-                </MenuItem>
+                </div> */}
+              <div className="text-end me-2 mt-4">
+                <button className="clear" onClick={filterreset}>
+                  {" "}
+                  Clear
+                </button>
+              </div>
               </Menu>
             </div>
           </div>

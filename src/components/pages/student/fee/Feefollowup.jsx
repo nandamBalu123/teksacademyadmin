@@ -13,6 +13,12 @@ import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import CloseIcon from "@mui/icons-material/Close";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import "./Feefolloup.css";
 import axios from "axios";
 
@@ -238,7 +244,14 @@ const Feefollowup = () => {
               cursor: "pointer",
             }}
           >
-            <MenuItem> Filter</MenuItem>
+            <div className="d-flex justify-content-between m-2">
+               <div > Filter</div>
+             <div >
+               
+                  <CloseIcon onClick={handleClose} />
+                </div>
+           
+              </div>
             <hr />
             <div className="d-flex">
               <MenuItem className="pt-3 ">
