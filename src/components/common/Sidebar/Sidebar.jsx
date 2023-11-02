@@ -175,16 +175,23 @@ const Sidebar = () => {
             )} */}
 
             <Box paddingLeft={isCollapsed ? undefined : "1%"}>
-              <SubMenu
+              <Item
                 style={{
                   color: colors.grey[100],
+                  
                 }}
                 icon={<HomeOutlinedIcon />}
                 label={"Dashboard"}
-                title={"Dashboard"}
+                
+                
+                title="Dashboard"
+                    to="/"
+                    
+                    selected={selected}
+                    setSelected={setSelected}
               >
-                <Link to="/" />
-              </SubMenu>
+                
+              </Item>
               {/* <Item
                 title="Dashboard"
                 to="/"
@@ -241,7 +248,7 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-                {profile == "admin" && 
+                
                 <Item
                 
                   title="Fee Details"
@@ -250,7 +257,7 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-              }
+              
                 <Item
                   title="Certificate"
                   to="/certificate"
