@@ -241,14 +241,16 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-
+                {profile == "admin" && 
                 <Item
+                
                   title="Fee Details"
                   to="/feedetails"
                   icon={<CurrencyRupeeIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
+              }
                 <Item
                   title="Certificate"
                   to="/certificate"
@@ -256,6 +258,7 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
+                {profile == "admin" &&
                 <Item
                   title="Requested Certificates"
                   to="/requestedcertificates"
@@ -263,6 +266,7 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
+                }
               </SubMenu>
               {profile == "admin" ? (
                 <SubMenu
