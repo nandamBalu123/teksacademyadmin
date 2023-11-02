@@ -505,11 +505,11 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </tbody>
         </table>
         <div className="row">
-          {studentdata && (
+          {/* {studentdata && (
             <h6 className="fs-6">
               Total Amount (in words): {words} Rupees only
             </h6>
-          )}
+          )} */}
         </div>
         <div className="row">
           {studentdata && (
