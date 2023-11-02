@@ -107,7 +107,52 @@ const Sidebar1 = () => {
 
   return (
     <div>
-      <div className="body"> 
+     <nav> 
+     <div className="sidebar-top">  
+      <span className="expand-btn"> 
+      <DoubleArrowIcon/>
+      </span>
+      <img src={favicon} alt="dashboard logo"/>
+      <h3 className="hide">Teks Academy</h3>
+      </div>
+      <div className="sidebar-links"> 
+      <ul>
+        <li> 
+          <a href="/" className="active" title="Dashboard">
+            <div className="icon">
+              <DashboardIcon/>
+            </div>
+            <span className="link hide"> Dashboard</span>
+             </a>
+        </li>
+        <li> 
+          <a href="/" className="active" title="Dashboard">
+            <div className="icon">
+              <DashboardIcon/>
+            </div>
+            <span className="link hide"> Dashboard</span>
+             </a>
+        </li>
+        <li> 
+          <a href="/" className="active" title="Dashboard">
+            <div className="icon">
+              <DashboardIcon/>
+            </div>
+            <span className="link hide"> Dashboard</span>
+             </a>
+        </li>
+        <li> 
+          <a href="/" className="active" title="Dashboard">
+            <div className="icon">
+              <DashboardIcon/>
+            </div>
+            <span className="link hide"> Dashboard</span>
+             </a>
+        </li>
+      </ul>
+      </div>
+     </nav>
+      {/* <div className="body"> 
       <div className="sidebar">
         <div className="logo-details">
           <img src={favicon} alt="profile-pic" />
@@ -157,7 +202,7 @@ const Sidebar1 = () => {
       </li>
         </ul>
       </div>
-      </div>
+      </div> */}
       {/* <body> 
         <nav className='sidebar'>
             <header>

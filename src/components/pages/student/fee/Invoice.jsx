@@ -295,6 +295,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </span>
             )}
           </div>
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+            <b>Course:</b> {studentdata && studentdata.courses}
+          </div>
         </div>
       </div>
       {/* <div className="mt-3 ">

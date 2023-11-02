@@ -178,10 +178,12 @@ const Sidebar = () => {
               <SubMenu
                 style={{
                   color: colors.grey[100],
+                  
                 }}
                 icon={<HomeOutlinedIcon />}
                 label={"Dashboard"}
                 title={"Dashboard"}
+                
               >
                 <Link to="/" />
               </SubMenu>
