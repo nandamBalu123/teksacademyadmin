@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
-
+import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
@@ -275,6 +275,111 @@ const UsersData = () => {
           </div>
           <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
           <Button
+         
+              id="demo-positioned-button"
+              aria-controls={open ? "demo-positioned-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <button
+                className="btn btn-primary "
+                style={{ textTransform: "capitalize" }}
+              >
+                {" "}
+                Filter{" "}
+              </button>
+            </Button>
+            <Menu
+              className="mt-5 "
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+            >
+              <div className="d-flex justify-content-between">
+                <MenuItem> Filter</MenuItem>
+                <MenuItem>
+                  {" "}
+                  <CloseIcon onClick={handleClose} />{" "}
+                </MenuItem>
+              </div>
+              <hr />
+              <div className="row m-2  ">
+                
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Profile</InputLabel>
+                      <Select
+                      
+                      name="profile"
+                      value={filterCriteria.profile}
+                      onChange={handleInputChange}
+                      >
+                          {roles &&
+                    roles.map((item, index) => (
+                      <MenuItem key={item.id} value={item.role}>
+                        {item.role}
+                      </MenuItem>
+                    ))}
+                      </Select>
+                    </FormControl> </div>
+
+                <div className="row m-2 "> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {branches &&
+                    branches.map((branch, index) => (
+                      <MenuItem key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </MenuItem>
+                    ))}
+                   
+                      </Select>
+                    </FormControl>
+                </div>
+                {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                    
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                    />
+                </div> */}
+             
+             
+             
+              <MenuItem className="text-end">
+              
+                <button className="clear " onClick={filterreset}>
+                  {" "}
+                  Clear
+                </button>
+              </MenuItem>
+            </Menu>
+          {/* <Button
               id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
               aria-haspopup="true"
@@ -287,9 +392,9 @@ const UsersData = () => {
               >
                 Filter
               </button>
-            </Button>
+            </Button> */}
 
-            <Menu
+            {/* <Menu
               className="mt-5"
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
@@ -362,7 +467,7 @@ const UsersData = () => {
                   Clear
                 </button>
               </div>
-          </Menu>
+          </Menu> */}
           </div>
         </div>
         <div>
