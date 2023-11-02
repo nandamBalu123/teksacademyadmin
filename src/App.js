@@ -112,7 +112,7 @@ function App() {
                 <Route
                   path="/feedetails/:id"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <FeeDetails />
                     ) : (
                       <Dashboard />
@@ -122,7 +122,7 @@ function App() {
                 <Route
                   path="/feedetails"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <FeeDetails />
                     ) : (
                       <Dashboard />
@@ -132,7 +132,7 @@ function App() {
                 <Route
                   path="/feefollowup"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <Feefollowup />
                     ) : (
                       <Dashboard />
