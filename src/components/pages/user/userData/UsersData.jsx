@@ -273,9 +273,8 @@ const UsersData = () => {
               <option value="75">75</option>
             </select>
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
-          <Button
-         
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 ">
+            <Button
               id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
               aria-haspopup="true"
@@ -283,15 +282,15 @@ const UsersData = () => {
               onClick={handleClick}
             >
               <button
-                className="btn btn-primary "
+                className="btn btn-primary mr-20 ms-2 mb-2"
                 style={{ textTransform: "capitalize" }}
               >
-                {" "}
-                Filter{" "}
+                Filter
               </button>
             </Button>
-            <Menu
-              className="mt-5 "
+
+            {/* <Menu
+              className="mt-5"
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
               anchorEl={anchorEl}
@@ -306,34 +305,36 @@ const UsersData = () => {
                 horizontal: "left",
               }}
             >
-              <div className="d-flex justify-content-between">
-                <MenuItem> Filter</MenuItem>
-                <MenuItem>
+              <div className="d-flex justify-content-between m-2">
+               <div > Filter</div>
+             
+              <div >
                   {" "}
                   <CloseIcon onClick={handleClose} />{" "}
-                </MenuItem>
+                </div>
+           
               </div>
               <hr />
-              <div className="row m-2  ">
-                
-              <FormControl variant="standard" className="w-100">
-                      <InputLabel>Profile</InputLabel>
+           
+             
+              <div className="row m-2 w-100">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Course</InputLabel>
                       <Select
-                      
-                      name="profile"
-                      value={filterCriteria.profile}
-                      onChange={handleInputChange}
+                      className="w-100 pe-5"
+                       name="course"
+                        value={filterCriteria.course}
+                        onChange={handleInputChange}
                       >
-                          {roles &&
-                    roles.map((item, index) => (
-                      <MenuItem key={item.id} value={item.role}>
-                        {item.role}
-                      </MenuItem>
-                    ))}
+                        <MenuItem value="select"> ---select---</MenuItem>
+                     
                       </Select>
-                    </FormControl> </div>
-
-                <div className="row m-2 "> 
+                    </FormControl>
+                </div>
+              
+             
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
                 <FormControl variant="standard" className="w-100">
                       <InputLabel>Branch</InputLabel>
                       <Select
@@ -353,48 +354,55 @@ const UsersData = () => {
                       </Select>
                     </FormControl>
                 </div>
-                {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
-                      label=" To:"
-                      type="date"
-                      variant="standard"
-                      className="w-100"
-                    
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
-                    />
-                </div> */}
-             
-             
-             
-              <MenuItem className="text-end">
+              </div>
+              <div className="row m-2">  
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Counsellor</InputLabel>
+                      <Select
+                      
+                      name="enquirytakenby"
+                      value={filterCriteria.enquirytakenby}
+                      onChange={handleInputChange}
+                      >
+
+                   
+                      </Select>
+                    </FormControl>
+               </div>
+               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+               <FormControl variant="standard" className="w-100">
+                      <InputLabel>Certificate Status</InputLabel>
+                      <Select
+                      
+                      name="enquirytakenby"
+                      value={filterCriteria.enquirytakenby}
+                      onChange={handleInputChange}
+                      >
+                        
+                        <MenuItem value="request Submitted">Request Submitted</MenuItem>
+                  <MenuItem value="issued">Issued  </MenuItem>
+                  <MenuItem value="">Pending</MenuItem>
+                   
+                      </Select>
+                    </FormControl>
+               </div>
+              </div>
+            
+
               
-                <button className="clear " onClick={filterreset}>
+            
+              <div className="text-end me-2 mt-4">
+                <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear
                 </button>
-              </MenuItem>
-            </Menu>
-          {/* <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              <button
-                className="btn btn-primary mr-20 ms-2 mb-2"
-                style={{ textTransform: "capitalize" }}
-              >
-                Filter
-              </button>
-            </Button> */}
+              </div>
+            </Menu> */}
+         
+          
 
-            {/* <Menu
+            <Menu
               className="mt-5"
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
@@ -426,17 +434,19 @@ const UsersData = () => {
               <FormControl variant="standard" className="w-100">
                       <InputLabel>Profile</InputLabel>
                       <Select
-                      
+                      style={{background:"none"}}
+                      className="pe-3"
                       name="profile"
                       value={filterCriteria.profile}
                       onChange={handleInputChange}
                       >
-                       {roles &&
-                    roles.map((item, index) => (
-                      <MenuItem key={item.id} value={item.role}>
-                        {item.role}
-                      </MenuItem>
-                    ))}
+                     
+                      {roles &&
+                        roles.map((item, index) => (
+                          <MenuItem key={item.id} value={item.role}>
+                            {item.role}
+                          </MenuItem>
+                        ))}
                 
                       </Select>
                     </FormControl>
@@ -445,7 +455,7 @@ const UsersData = () => {
              <FormControl variant="standard" className="w-100">
                       <InputLabel>Branch</InputLabel>
                       <Select
-                      
+                      className="pe-5"
                       name="branch"
                   value={filterCriteria.branch}
                   onChange={handleInputChange}
@@ -461,14 +471,45 @@ const UsersData = () => {
                     </FormControl>
                </div>
               </div>
+              <div className="row m-2"> 
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Department</InputLabel>
+                      <Select
+                      className="pe-5"
+                      
+                
+                      >
+                    <MenuItem> IT</MenuItem>
+                    <MenuItem> DM</MenuItem>
+                    <MenuItem> Counsellor</MenuItem>
+                      </Select>
+                    </FormControl>
+               </div>
+               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Report to</InputLabel>
+                      <Select
+                      className="pe-5"
+                      
+                
+                      >
+                    <MenuItem> Bhaskar</MenuItem>
+                    <MenuItem> Raghu</MenuItem>
+                    <MenuItem> Zaheer</MenuItem>
+                      </Select>
+                    </FormControl>
+               </div>
+
+               </div>
               <div className="text-end me-2 mt-4">
                 <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear
                 </button>
               </div>
-          </Menu> */}
-          </div>
+          </Menu>
+         </div>
         </div>
         <div>
           <div className="usertable">
