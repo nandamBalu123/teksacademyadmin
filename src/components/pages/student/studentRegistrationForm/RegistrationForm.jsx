@@ -761,7 +761,7 @@ export default function RegistrationForm() {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-sm-2 ">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Gender<span> *</span>
@@ -780,7 +780,7 @@ export default function RegistrationForm() {
                       </Select>
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-sm-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Marital Status<span> *</span>
@@ -846,7 +846,7 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Country<span> *</span>
@@ -865,7 +865,7 @@ export default function RegistrationForm() {
                       </Select>
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         State<span> *</span>
@@ -930,7 +930,7 @@ export default function RegistrationForm() {
                 </div>
 
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Area"
                       type="text"
@@ -941,7 +941,7 @@ export default function RegistrationForm() {
                       value={area}
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Native Place"
                       type="text"
@@ -954,7 +954,7 @@ export default function RegistrationForm() {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Zip Code"
                       type="number"
@@ -965,7 +965,7 @@ export default function RegistrationForm() {
                       value={zipcode}
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label="Whatsapp Number"
                       type="number"
@@ -1011,7 +1011,7 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Education Type<span> *</span>
@@ -1065,7 +1065,7 @@ export default function RegistrationForm() {
                       )}
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
                     <TextField
                       label="Percentage"
                       type="number"
@@ -1076,7 +1076,7 @@ export default function RegistrationForm() {
                       value={marks}
                     />{" "}
                   </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
                     <TextField
                       label="Academic Year "
                       type="number"
@@ -1186,7 +1186,7 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label=" Enquiry Date"
                       type="date"
@@ -1200,7 +1200,7 @@ export default function RegistrationForm() {
                       value={enquirydate}
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Enquiry Taken By<span> *</span>
@@ -1225,7 +1225,7 @@ export default function RegistrationForm() {
                   </div>
                 </div>
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Course Package<span> *</span>
@@ -1250,7 +1250,7 @@ export default function RegistrationForm() {
                       </Select>
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Course<span> *</span>
@@ -1274,7 +1274,7 @@ export default function RegistrationForm() {
                   </div>
                 </div>
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Lead Source<span> *</span>
@@ -1392,7 +1392,7 @@ export default function RegistrationForm() {
                       </Select>
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Admission Date"
                       type="date"
@@ -1408,7 +1408,7 @@ export default function RegistrationForm() {
                   </div>
                 </div>
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Validity Start Date"
                       type="date"
@@ -1422,7 +1422,7 @@ export default function RegistrationForm() {
                       value={validitystartdate}
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="validity End Date"
                       type="date"
@@ -1438,7 +1438,7 @@ export default function RegistrationForm() {
                   </div>
                 </div>
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Registration Number"
                       variant="standard"
@@ -1587,8 +1587,8 @@ export default function RegistrationForm() {
                     </tbody>
                   </table>
                 )} */}
-                <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
+                <TableContainer component={Paper} >
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table" >
                     <TableHead>
                       <TableCell className="fs-6 py-3" align="center">
                         Fee Type
@@ -1735,7 +1735,7 @@ export default function RegistrationForm() {
                         <TableRow className="border border1">
                           <TableCell>
                             {" "}
-                            <b> Sub Total</b>
+                            Sub Total
                           </TableCell>
                           <TableCell>
                             {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
@@ -1756,7 +1756,7 @@ export default function RegistrationForm() {
                         <TableCell align="left">{materialfee}</TableCell>
                       </TableRow>
                       <TableRow className="border border1">
-                        <TableCell align="left">Grand Total</TableCell>
+                        <TableCell align="left"><strong> Grand Total</strong></TableCell>
                         <TableCell align="left">{finaltotal}</TableCell>
                       </TableRow>
                     </TableBody>

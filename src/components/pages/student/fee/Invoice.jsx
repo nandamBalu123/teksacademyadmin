@@ -518,7 +518,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </h6>
           )}
         </div>
-        <p style={{ marginTop: "160px", padding: "0px", marginBottom: "5px" }}>
+        <p style={{ marginTop: "135px", padding: "0px", marginBottom: "5px" }}>
           *This bill has been automatically generated and doesn't need a
           signature.
         </p>
