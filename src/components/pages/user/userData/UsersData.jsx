@@ -38,18 +38,29 @@ const UsersData = () => {
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
   const { users, dispatch } = useUsersContext();
-  const [isChecked, setIsChecked] = useState(false);
+
   const [opening, setOpening] = React.useState(false);
   const [text, setText] = useState("");
+  const [id, setId] = useState("");
+  const [userstatus, setUserStatus] = useState("");
+  const [user_statuss, setuser_status] = useState("");
+
   useEffect(() => {
     if (users) {
       setData(users);
+      console.log("users", users);
     }
   }, [users]);
-  const handleClickOpen = () => {
+  const handleClickOpen = (id, userstatus, user_status) => {
+    setId(id);
+    setUserStatus(userstatus);
     setOpening(true);
+    setuser_status([user_status]);
+    console.log(id, userstatus, user_status);
   };
-
+  useEffect(() => {
+    console.log("use", id, userstatus, user_statuss);
+  });
   const handleClosed = () => {
     setOpening(false);
   };
@@ -187,34 +198,63 @@ const UsersData = () => {
   let initialDataCount = initialData.length;
   let recordCount = filteredData.length;
   // for filter change numbers 10,25,50
-
-  const handleok = (id) => {
+  const handleActivate = () => {
     setOpening(false);
-    setIsChecked(!isChecked);
 
     if (text) {
+      // let user_status = [
+      //   {
+      //     remarks: text,
+      //     status: true,
+      //   },
+      // ];
+      const uupdatedData = user_statuss.map((item, index) => {
+        if (index === 0) {
+          return { ...item, status: !item.status };
+        }
+        return item;
+      });
       let user_status = [
         {
-          remarks: text,
-          status: true,
+          ...uupdatedData[0],
+          activate_remarks: text,
+          date: new Date(),
         },
       ];
+
+      // let newObject = {
+      //   activate_remarks: text,
+      //   status: true,
+      //   date: new Date(),
+      // };
+      // let user_status = user_statuss;
+      // user_status.push(newObject);
+      // console.log("user_statuse", user_status);
+      // const updatedData = [
+      //   {
+      //     ...data[0], // Copy the existing object
+      //     newKey: 'new value', // Add the new key-value pair
+      //   },
+      //   ...data.slice(1), // Copy the rest of the array
+      // ];
+
+      // Update the state with the new array
+      // setData(updatedData);
+      // setuser_status((prevUserStatus) => [
+      //   { ...prevUserStatus, status: true, activateremarks: text },
+      // ]);
       const updatedData = {
         user_status,
       };
-      const uploadcontext = { user_status, id };
-      console.log("user_status", updatedData);
-      console.log("id", id);
+      let uploadcontext = { user_status, id };
+      uploadcontext.user_status = JSON.stringify(uploadcontext.user_status);
       axios
-        .put(
-          `${process.env.REACT_APP_API_URL}/certificatestatus/${id}`,
-          updatedData
-        )
+        .put(`${process.env.REACT_APP_API_URL}/userstatus/${id}`, updatedData)
         .then((res) => {
           if (res.data.updated) {
             // alert("Certificate updated successfully");
             dispatch({
-              type: "UPDATE_USER",
+              type: "UPDATE_USER_STATUS",
               payload: uploadcontext,
             });
           } else {
@@ -224,7 +264,63 @@ const UsersData = () => {
       // setcourseStartDate("");
       setText("");
     } else {
-      alert("enter course start and end dates");
+      alert("enter remarks");
+    }
+  };
+  const handleInActivate = () => {
+    setOpening(false);
+
+    if (text) {
+      // let user_status = [
+      //   {
+      //     remarks: text,
+      //     status: false,
+      //   },
+      // ];
+      const uupdatedData = user_statuss.map((item, index) => {
+        if (index === 0) {
+          return { ...item, status: !item.status };
+        }
+        return item;
+      });
+      let user_status = [
+        {
+          ...uupdatedData[0],
+          Inactivate_remarks: text,
+          date: new Date(),
+        },
+      ];
+      // setuser_status((prevUserStatus) => [
+      //   { ...prevUserStatus,prevUserStatus.InactiveRemarks:text },
+      // ]);
+
+      // setuser_status((prevUserStatus) => [
+      //   ...prevUserStatus,
+      //   { activateremarks: text },
+      // ]);
+      const updatedData = {
+        user_status,
+      };
+      let uploadcontext = { user_status, id };
+      uploadcontext.user_status = JSON.stringify(uploadcontext.user_status);
+
+      axios
+        .put(`${process.env.REACT_APP_API_URL}/userstatus/${id}`, updatedData)
+        .then((res) => {
+          if (res.data.updated) {
+            // alert("Certificate updated successfully");
+            dispatch({
+              type: "UPDATE_USER_STATUS",
+              payload: uploadcontext,
+            });
+          } else {
+            alert("Error please Try Again");
+          }
+        });
+      // setcourseStartDate("");
+      setText("");
+    } else {
+      alert("enter remarks");
     }
   };
   return (
@@ -302,50 +398,45 @@ const UsersData = () => {
                 horizontal: "left",
               }}
             >
-             <div className="d-flex justify-content-between m-2">
-               <div > Filter</div>
-             
-              <div >
+              <div className="d-flex justify-content-between m-2">
+                <div> Filter</div>
+
+                <div>
                   {" "}
                   <CloseIcon onClick={handleClose} />{" "}
                 </div>
-           
               </div>
               <hr />
               <MenuItem>
-              <div className="row">  
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                
-
-              <label className="mt-3 me-2">Profile:</label>
-                 </div>
-               <div className="col-12 col-md-9 col-lg-9 col-xl-9"> 
-               <select
-                  className="mt-3 w-100 "
-                  id=""
-                  required
-                  style={{
-                    height: "45px",
-                    width: "75%",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="profile"
-                  value={filterCriteria.profile}
-                  onChange={handleInputChange}
-                >
-                  <option value="">--select--</option>
-                  {roles &&
-                    roles.map((item, index) => (
-                      <option key={item.id} value={item.role}>
-                        {item.role}
-                      </option>
-                    ))}
-                </select>
-               </div>
-             
-              </div>
-          
+                <div className="row">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                    <label className="mt-3 me-2">Profile:</label>
+                  </div>
+                  <div className="col-12 col-md-9 col-lg-9 col-xl-9">
+                    <select
+                      className="mt-3 w-100 "
+                      id=""
+                      required
+                      style={{
+                        height: "45px",
+                        width: "75%",
+                        border: "1.5px solid black",
+                        borderRadius: "5px",
+                      }}
+                      name="profile"
+                      value={filterCriteria.profile}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">--select--</option>
+                      {roles &&
+                        roles.map((item, index) => (
+                          <option key={item.id} value={item.role}>
+                            {item.role}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                </div>
               </MenuItem>
               <MenuItem>
                 <label className="mt-3 me-2 "> Branch: </label>
@@ -525,47 +616,57 @@ const UsersData = () => {
                             >
                               <ModeEditIcon />
                             </Link>
-                            <div class="form-check form-switch">
-                              <input
-                                class="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked={isChecked}
-                                onChange={handleClickOpen}
-                              />
-                            </div>{" "}
-                            <Dialog open={opening} onClose={handleClosed}>
-                              <DialogContent>
-                                <DialogContentText>
-                                  <label> Enter Remarks :</label>
-                                </DialogContentText>
-                                <DialogContentText>
-                                  <textarea
-                                    rows="4"
-                                    cols="50"
-                                    name="comment"
-                                    form="usrform"
-                                    onChange={(e) => setText(e.target.value)}
-                                    value={text}
-                                  ></textarea>
-                                </DialogContentText>
-                              </DialogContent>
-                              <DialogActions>
-                                <Button onClick={handleClosed}>Cancel</Button>
-                                {/* {!isChecked && (
-                                  <Button onClick={(e) => handleok(user.id)}>
-                                    Activate
-                                  </Button>
-                                )}
-
-                                {isChecked && (
-                                  <Button onClick={(e) => handleok(user.id)}>
-                                    InActivate
-                                  </Button>
-                                )} */}
-                              </DialogActions>
-                            </Dialog>
+                            {user.user_status &&
+                              JSON.parse(user.user_status).map(
+                                // let userstatuslength=user.user_status.length
+                                (status, index) => {
+                                  let userstatus = status.status;
+                                  return (
+                                    <div class="form-check form-switch">
+                                      <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="flexSwitchCheckChecked"
+                                        checked={userstatus}
+                                        onChange={(e) =>
+                                          handleClickOpen(
+                                            user.id,
+                                            userstatus,
+                                            status
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  );
+                                }
+                              )}
+                            {/* {user.user_status &&
+                              JSON.parse(user.user_status).map(
+                              
+                                (status, index) => {
+                                  let userstatus = status.status;
+                                  return (
+                                    <div class="form-check form-switch">
+                                      <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="flexSwitchCheckChecked"
+                                        checked={userstatus}
+                                        onChange={(e) =>
+                                          handleClickOpen(
+                                            user.id,
+                                            userstatus,
+                                            status
+                                          )
+                                        }
+                                      />
+                                      
+                                    </div>
+                                  );
+                                }
+                              )} */}
                           </StyledTableCell>
                         </StyledTableRow>
                       ))}
@@ -573,6 +674,34 @@ const UsersData = () => {
                 </Table>
               </TableContainer>
             </Paper>
+            <Dialog open={opening} onClose={handleClosed}>
+              <DialogContent>
+                <DialogContentText>
+                  <label> Enter Remarks :</label>
+                </DialogContentText>
+                <DialogContentText>
+                  <textarea
+                    rows="4"
+                    cols="50"
+                    name="comment"
+                    form="usrform"
+                    onChange={(e) => setText(e.target.value)}
+                    value={text}
+                  ></textarea>
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClosed}>Cancel</Button>
+                {!userstatus && (
+                  <Button onClick={(e) => handleActivate()}>Activate</Button>
+                )}
+                {userstatus && (
+                  <Button onClick={(e) => handleInActivate()}>
+                    InActivate
+                  </Button>
+                )}
+              </DialogActions>
+            </Dialog>
             <div
               style={{ display: "flex", justifyContent: "center" }}
               className="mt-3"

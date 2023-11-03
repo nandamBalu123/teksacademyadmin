@@ -54,6 +54,16 @@ const UserView = () => {
             <p className="text-end"> Profile : {singleUser.profile} </p>
             <p className="text-end"> Branch: {singleUser.branch}</p>
           </div>
+          <p>
+            {singleUser.user_status &&
+              JSON.parse(singleUser.user_status).map((userstatus, index) => (
+                <span>
+                  <p>Activate remarks: {userstatus.activate_remarks}</p>
+
+                  <p>InActivate remarks:{userstatus.Inactivate_remarks}</p>
+                </span>
+              ))}
+          </p>
         </div>
       </div>
     </div>
