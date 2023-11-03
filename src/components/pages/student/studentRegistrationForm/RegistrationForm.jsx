@@ -78,9 +78,7 @@ export default function RegistrationForm() {
   const [educationtype, setEducationType] = useState("");
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
-  const [profilepic, setProfilePpic] = useState("");
-  // const [file, setSelectedFile] = useState(null);
-  // const [selectedFile, setSelectedFile] = useState(null);
+  const [file, setSelectedFile] = useState(null);
   // const [profilepic, setProfilePpic] = useState("");
   const [enquirydate, setEnquiryDate] = useState("");
   const [enquirytakenby, setEnquiryTakenBy] = useState("");
@@ -121,7 +119,6 @@ export default function RegistrationForm() {
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
   const [totalpaidamount, settotalpaidamount] = useState(0);
-  const [selectedFile, setSelectedFile] = useState(null);
   const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
   const [student_status, setStudent_status] = useState([]);
@@ -447,11 +444,11 @@ export default function RegistrationForm() {
     handleNext();
   };
   const handlePhoto = () => {
-    // if (!profilepic) {
-    //   alert("please enter profilepic");
-    //   return;
-    // }
-
+    if (!file) {
+      alert("please enter profilepic");
+      return;
+    }
+    setSelectedFile(null);
     handleNext();
   };
   const handleEnquirydetails = () => {
@@ -533,9 +530,9 @@ export default function RegistrationForm() {
     }
 
     // setuserid(user.id);
-    let file = new FormData();
-    file.append("file", selectedFile);
-    console.log("selected", selectedFile);
+    // const formdata = new FormData();
+    // formdata.append("file", file);
+    // console.log("selected", file);
     // let file = selectedFile
     const studentRegistrationdata = {
       name,
@@ -555,7 +552,7 @@ export default function RegistrationForm() {
       educationtype,
       marks,
       academicyear,
-      profilepic,
+      file,
       enquirydate,
       enquirytakenby,
       coursepackage,
@@ -568,7 +565,6 @@ export default function RegistrationForm() {
       admissiondate,
       validitystartdate,
       validityenddate,
-
       feedetails,
       grosstotal,
       totaldiscount,
@@ -580,31 +576,34 @@ export default function RegistrationForm() {
       totalinstallments,
       dueamount,
       addfee,
-
       initialpayment,
       duedatetype,
       installments,
       materialfee,
-
       feedetailsbilling,
       totalfeewithouttax,
       totalpaidamount,
-      selectedFile,
-
       student_status,
       user_id,
       certificate_status,
     };
     // studentRegistrationdata.append('file', selectedFile)
     console.log("studentRegistration", studentRegistrationdata);
+    console.log("photo", file);
     try {
       // Make the POST request
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/student_form`,
-        studentRegistrationdata
+        
+        studentRegistrationdata,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
       );
       const id = response.data.insertId;
-      navigate(`/addtofee/${id}`);
+      // navigate(`/addtofee/${id}`);
 
       // Handle a successful response here
       console.log("Responsee:", response.data.insertId);
@@ -1122,14 +1121,7 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  {/* <input
-                    type="file"
-                    name="file"
-                    onChange={(e) => {
-                      setSelectedFile(e.target.files[0]);
-                    }}
-                    accept=".jpg, .jpeg, .png"
-                  /> */}
+                  
                   <input
                     type="file"
                     name="file"
@@ -1138,20 +1130,6 @@ export default function RegistrationForm() {
                     }}
                     accept=".jpg, .jpeg, .png"
                   />
-                  {/* <input
-                    type="file"
-                    name="file"
-                    onChange={(e) => {
-                      setSelectedFile(e.target.files[0]);
-                    }}
-                    accept="image/*"
-                  />
-                  <input
-                    type="file"
-                    id="imageInput"
-                    accept=".jpg, .jpeg, .png"
-                    style={{ display: "none" }}
-                  /> */}
                 </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>

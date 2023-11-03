@@ -19,6 +19,8 @@ import CloseIcon from "@mui/icons-material/Close";
 // require("dotenv").config();
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useStudentsContext } from "../../../hooks/useStudentsContext"
+
 import {
   Button,
   Dialog,
@@ -29,6 +31,8 @@ import {
 } from "@mui/material";
 const Dashboard = () => {
   const { user } = useAuthContext();
+  const { students, dispatch } = useStudentsContext();
+
   const [getUsersData, setUsersData] = useState([]);
   const [initialData, setinitialData] = useState([]);
   const [getstudentData, setStudentData] = useState([]);
@@ -71,18 +75,13 @@ const Dashboard = () => {
     setAnchorEl(null);
   };
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
-      .then((res) => {
-        setStudentData(res.data);
-        setinitialData(res.data);
-        console.log("res student data: ", res.data);
-      })
-      .catch((err) => {
-        console.error("Get Student data: ", err);
-      });
-  }, []);
+   useEffect(()=>{
+    if(students){
+      setStudentData(students);
+      setinitialData(students);
+    }
+   },[students])
+ 
 
   useEffect(() => {
     axios

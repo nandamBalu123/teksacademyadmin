@@ -23,12 +23,14 @@ import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 import "./Feefolloup.css";
 import axios from "axios";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+
 
 const Feefollowup = () => {
   
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
+  const { students, dispatch } = useStudentsContext();
   const [getstudentData, setData] = useState([{ name: "" }]);
   const [filtereddata, setfiltereddata] = useState([{ name: "" }]);
 
@@ -64,20 +66,20 @@ const Feefollowup = () => {
 
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
+  const role = localStorage.getItem("role");
+  let userId = localStorage.getItem("id");
+   userId = parseInt(userId)
+   
+   useEffect(()=>{
+    if(students){
+     
+      setData(students); 
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
-      .then((response) => {
-        setData(response.data);
+    }
+    
+   },[students])
+ 
 
-        console.log("data", response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
-      });
-  }, []);
   const [filterCriteria, setFilterCriteria] = useState({
     dueamount: true,
     todaydate: "true",

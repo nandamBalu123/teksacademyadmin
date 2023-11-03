@@ -14,7 +14,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-
+import { useStudentsContext } from "../../../../hooks/useStudentsContext"
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./FeeDetails.css";
@@ -25,8 +25,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 const FeeDetails = () => {
   const { branches } = useBranchContext();
-
+  const { students, dispatch } = useStudentsContext();
   const navigator = useNavigate();
+  
   const [getstudentData, setData] = useState([{ name: "" }]);
   const [studentFeeRecordss, setFeerecords] = useState(getstudentData);
   const [itemsPerPage, setrecordsPerPage] = useState(10);
@@ -53,23 +54,16 @@ const FeeDetails = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
-      .then((response) => {
-        // Handle the successful response here
-        setData(response.data); // Update the data state with the fetched data
-        setFeerecords(response.data);
-        console.log("data", response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
-      });
-    // fetchData();
-  }, []);
+  const role = localStorage.getItem("role");
+  let userId = localStorage.getItem("id");
+   userId = parseInt(userId)
+   useEffect(()=>{
+    if(students){
+      setData(students); // Update the data state with the fetched data
+        setFeerecords(students);
+    }
+   },[students])
+ 
   const [filterCriteria, setFilterCriteria] = useState({
     fromdate: "",
 
@@ -85,6 +79,8 @@ const FeeDetails = () => {
 
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
+
+  
   useEffect(() => {
     const filteredResults = getstudentData.filter((item) => {
       const searchCondition = filterCriteria.search
@@ -135,6 +131,8 @@ const FeeDetails = () => {
       );
     });
     setFeerecords(filteredResults);
+
+   
   }, [filterCriteria, getstudentData]);
   const filterreset = () => {
     setFilterCriteria({

@@ -40,13 +40,37 @@ export const StudentsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(StudentsReducer, {
     students: null,
   });
-
+  const role = localStorage.getItem("role");
+  let userId = localStorage.getItem("id");
+   userId = parseInt(userId)
+   console.log("userId", role)
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         if (response.data) {
-          dispatch({ type: "SET_STUDENTS", payload: response.data });
+          if(role==="admin"){
+            dispatch({ type: "SET_STUDENTS", payload: response.data });
+          }
+   
+          if(role==="counsellor"){
+            const filteredResults = response.data.filter((item) => {
+              const user_id=parseInt(item.user_id);
+            
+                const dataaspercounsellor = userId
+                ? user_id === userId
+                : true;
+              return (
+               dataaspercounsellor
+              );
+            });
+            
+            dispatch({ type: "SET_STUDENTS", payload: filteredResults
+          });
+          }
+         
+
+          // dispatch({ type: "SET_STUDENTS", payload: response.data });
         }
       })
       .catch((error) => {
