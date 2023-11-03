@@ -100,12 +100,17 @@ const Sidebar = () => {
           },
           "& .pro-inner-item": {
             padding: "5px 14px 5px 20px !important",
+            fontSize:"14px !important",
+            fontWeight:"400 !important"
           },
           "& .pro-inner-item:hover": {
-            color: "#335eea !important",
+            background:"#f5f5f5 !important",
+            color:"#000 !important",
+            borderRadius:"20px !important",
+           
           },
           "& .pro-menu-item.active": {
-            color: "#335eea !important",
+            color: "#000 !important",
           },
           letterSpacing: "0.6px",
         }}
@@ -175,16 +180,25 @@ const Sidebar = () => {
             )} */}
 
             <Box paddingLeft={isCollapsed ? undefined : "1%"}>
-              <SubMenu
+              <Item
                 style={{
                   color: colors.grey[100],
+                
+                 
                 }}
                 icon={<HomeOutlinedIcon />}
                 label={"Dashboard"}
-                title={"Dashboard"}
+                
+                
+                title="Dashboard"
+             
+                    to="/"
+                    
+                    selected={selected}
+                    setSelected={setSelected}
               >
-                <Link to="/" />
-              </SubMenu>
+                
+              </Item>
               {/* <Item
                 title="Dashboard"
                 to="/"
@@ -241,14 +255,16 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-
+                
                 <Item
+                
                   title="Fee Details"
                   to="/feedetails"
                   icon={<CurrencyRupeeIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
+              
                 <Item
                   title="Certificate"
                   to="/certificate"
@@ -256,6 +272,7 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
+                {profile == "admin" &&
                 <Item
                   title="Requested Certificates"
                   to="/requestedcertificates"
@@ -263,6 +280,7 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
+                }
               </SubMenu>
               {profile == "admin" ? (
                 <SubMenu

@@ -295,6 +295,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </span>
             )}
           </div>
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+            <b>Course:</b> {studentdata && studentdata.courses}
+          </div>
         </div>
       </div>
       {/* <div className="mt-3 ">
@@ -505,11 +508,11 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </tbody>
         </table>
         <div className="row">
-          {studentdata && (
+          {/* {studentdata && (
             <h6 className="fs-6">
               Total Amount (in words): {words} Rupees only
             </h6>
-          )}
+          )} */}
         </div>
         <div className="row">
           {studentdata && (
@@ -518,7 +521,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </h6>
           )}
         </div>
-        <p style={{ marginTop: "160px", padding: "0px", marginBottom: "5px" }}>
+        <p style={{ marginTop: "135px", padding: "0px", marginBottom: "5px" }}>
           *This bill has been automatically generated and doesn't need a
           signature.
         </p>

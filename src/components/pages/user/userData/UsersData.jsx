@@ -9,7 +9,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-
+import InputLabel from "@mui/material/InputLabel";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Menu from "@mui/material/Menu";
@@ -23,6 +26,8 @@ import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
+import {useDepartmentContext} from '../../../../hooks/useDepartmentcontext';
+import {useUsersContext} from '../../../../hooks/useUsersContext'
 
 import {
   Button,
@@ -32,11 +37,13 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { useUsersContext } from "../../../../hooks/useUsersContext";
+// import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { transcode } from "buffer";
 const UsersData = () => {
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
+  const {departments} = useDepartmentContext();
+  const {reporttoo} = useUsersContext();
   const { users, dispatch } = useUsersContext();
 
   const [opening, setOpening] = React.useState(false);
@@ -111,6 +118,8 @@ const UsersData = () => {
     search: "",
     branch: "",
     profile: "",
+    department:"",
+    reportto :"",
   });
 
   const handleInputChange = (e) => {
@@ -149,8 +158,14 @@ const UsersData = () => {
       const profileCondition = filterCriteria.profile
         ? item.profile === filterCriteria.profile
         : true;
+        const departmentCondition =filterCriteria.department
+        ? item.department === filterCriteria.department
+        :true;
+        const reporttoCondition = filterCriteria.reportto
+        ? item.reportto === filterCriteria.reportto
+        :true;
 
-      return profileCondition && branchCondition && searchCondition;
+      return profileCondition && branchCondition && searchCondition && departmentCondition && reporttoCondition;
     });
 
     setFilteredData(filteredResults);
@@ -193,6 +208,7 @@ const UsersData = () => {
       search: "",
       branch: "",
       profile: "",
+      department:""
     });
   };
   let initialDataCount = initialData.length;
@@ -366,7 +382,7 @@ const UsersData = () => {
               <option value="75">75</option>
             </select>
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 ">
             <Button
               id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -375,14 +391,14 @@ const UsersData = () => {
               onClick={handleClick}
             >
               <button
-                className="btn btn-primary"
+                className="btn btn-primary mr-20 ms-2 mb-2"
                 style={{ textTransform: "capitalize" }}
               >
-                {" "}
-                Filter{" "}
+                Filter
               </button>
             </Button>
-            <Menu
+
+            {/* <Menu
               className="mt-5"
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
@@ -398,82 +414,220 @@ const UsersData = () => {
                 horizontal: "left",
               }}
             >
-              <div className="d-flex justify-content-between m-2">
-                <div> Filter</div>
-
-                <div>
+             <div className="d-flex justify-content-between m-2">
+               <div > Filter</div>
+             
+              <div >
                   {" "}
                   <CloseIcon onClick={handleClose} />{" "}
                 </div>
               </div>
               <hr />
-              <MenuItem>
-                <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <label className="mt-3 me-2">Profile:</label>
-                  </div>
-                  <div className="col-12 col-md-9 col-lg-9 col-xl-9">
-                    <select
-                      className="mt-3 w-100 "
-                      id=""
-                      required
-                      style={{
-                        height: "45px",
-                        width: "75%",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
-                      }}
-                      name="profile"
-                      value={filterCriteria.profile}
-                      onChange={handleInputChange}
-                    >
-                      <option value="">--select--</option>
-                      {roles &&
-                        roles.map((item, index) => (
-                          <option key={item.id} value={item.role}>
-                            {item.role}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
+           
+             
+              <div className="row m-2 w-100">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Course</InputLabel>
+                      <Select
+                      className="w-100 pe-5"
+                       name="course"
+                        value={filterCriteria.course}
+                        onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                     
+                      </Select>
+                    </FormControl>
                 </div>
-              </MenuItem>
-              <MenuItem>
-                <label className="mt-3 me-2 "> Branch: </label>
-                <select
-                  className="mt-3 w-100 "
-                  id=""
-                  required
-                  style={{
-                    height: "45px",
-                    width: "75%",
-
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="branch"
-                  value={filterCriteria.branch}
-                  onChange={handleInputChange}
-                >
-                  <option value="">--select--</option>
-
-                  {branches &&
-                    branches.map((item, index) => (
-                      <option key={item.id} value={item.branch_name}>
-                        {item.branch_name}
-                      </option>
+              
+             
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
+                <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        {branches &&
+                    branches.map((branch, index) => (
+                      <MenuItem key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </MenuItem>
                     ))}
-                </select>
-              </MenuItem>
-              <MenuItem className="d-flex justify-content-between">
-                {/* <button className="save"> Save</button> */}
+                   
+                      </Select>
+                    </FormControl>
+                </div>
+              </div>
+              <div className="row m-2">  
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Counsellor</InputLabel>
+                      <Select
+                      
+                      name="enquirytakenby"
+                      value={filterCriteria.enquirytakenby}
+                      onChange={handleInputChange}
+                      >
+
+                   
+                      </Select>
+                    </FormControl>
+               </div>
+               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+               <FormControl variant="standard" className="w-100">
+                      <InputLabel>Certificate Status</InputLabel>
+                      <Select
+                      
+                      name="enquirytakenby"
+                      value={filterCriteria.enquirytakenby}
+                      onChange={handleInputChange}
+                      >
+                        
+                        <MenuItem value="request Submitted">Request Submitted</MenuItem>
+                  <MenuItem value="issued">Issued  </MenuItem>
+                  <MenuItem value="">Pending</MenuItem>
+                   
+                      </Select>
+                    </FormControl>
+               </div>
+              </div>
+            
+
+              
+            
+              <div className="text-end me-2 mt-4">
                 <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear
                 </button>
-              </MenuItem>
-            </Menu>
-          </div>
+              </div>
+            </Menu> */}
+         
+          
+
+            <Menu
+              className="mt-5"
+              
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+            >
+              <div className="d-flex justify-content-between m-2">
+               <div > Filter</div>
+             
+              <div >
+                  {" "}
+                  <CloseIcon onClick={handleClose} />{" "}
+                </div>
+           
+              </div>
+              <hr />
+          
+              <div className="row m-2">  
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Profile</InputLabel>
+                      <Select
+                      style={{background:"none"}}
+                      className="pe-4 "
+                      name="profile"
+                      value={filterCriteria.profile}
+                      onChange={handleInputChange}
+                      >
+                     
+                      {roles &&
+                        roles.map((item, index) => (
+                          <MenuItem key={item.id} value={item.role}>
+                            {item.role}
+                          </MenuItem>
+                        ))}
+                
+                      </Select>
+                    </FormControl>
+                 </div>
+             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+             <FormControl variant="standard" className="w-100">
+                      <InputLabel>Branch</InputLabel>
+                      <Select
+                      className="pe-3 "
+                      name="branch"
+                  value={filterCriteria.branch}
+                  onChange={handleInputChange}
+                      >
+                      {branches &&
+                    branches.map((item, index) => (
+                      <MenuItem key={item.id} value={item.branch_name}>
+                        {item.branch_name}
+                      </MenuItem>
+                    ))}
+                
+                      </Select>
+                    </FormControl>
+               </div>
+              </div>
+              <div className="row m-2"> 
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Department</InputLabel>
+                      <Select
+                      className="pe-4"
+                      name="department"
+                      value={filterCriteria.department}
+                      onChange={handleInputChange}
+                
+                      >
+                 {departments && 
+                 departments.map((item, index)=>(
+                  <MenuItem key={item.id} value={item.department_name}> 
+                  {item.department_name}
+                  </MenuItem>
+                 ))}
+                      </Select>
+                    </FormControl>
+               </div>
+               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Report to</InputLabel>
+                      <Select
+                      className="pe-4"
+                      name="reportto"
+                      value={filterCriteria.reportto}
+                      onChange={handleInputChange}
+                       >
+                    {reporttoo && 
+                    reporttoo.map((item,index)=>( 
+                      <MenuItem key={item.id} value={item.reportto}> 
+                      {item.reportto}
+                       </MenuItem>
+                    ))}
+                      </Select>
+                    </FormControl>
+               </div>
+
+               </div>
+              <div className="text-end me-2 mt-4">
+                <button className="clear" onClick={filterreset}>
+                  {" "}
+                  Clear
+                </button>
+              </div>
+          </Menu>
+         </div>
         </div>
         <div>
           <div className="usertable">
@@ -543,22 +697,37 @@ const UsersData = () => {
                       records.map((user) => (
                         <StyledTableRow>
                           <StyledTableCell
+                          
                             align="center"
-                            className="p-0 m-0 border border1 "
+                            className="p-0 m-0 border border1 elipse"
                           >
-                            {user.fullname}
+                            <span 
+                           title={user.fullname}
+                            style={{
+                              width: "120px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > {user.fullname}  </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
                             <span
+                              title={user.email}
                               style={{
-                                width: "200px",
+                              
+                                width: "120px",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                                 fontSize: "15px",
+                                display:"block"
                               }}
                             >
                               {user.email}
@@ -568,39 +737,118 @@ const UsersData = () => {
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
+                            <span 
+                            title={user.phonenumber}
+                             style={{
+                              width: "90px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
+                              {user.phonenumber}
+                            </span>
                             {" "}
-                            {user.phonenumber}
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
+                            <span 
+                           title={user.designation}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
                             {user.designation}
+                            
+                        
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
+                             <span 
+                             title= {user.department}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
                             {user.department}
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
-                            {user.reportto}
+                             <span 
+                             title={user.reportto}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
+                             {user.reportto}
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
-                            {user.profile}
+                             <span 
+                             title={user.profile}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > {user.profile}
+                            
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
-                            {" "}
-                            {user.branch}
+                            <span 
+                             title={user.branch}
+                             style={{
+                              width: "90px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > {user.branch}
+                            
+                            </span>
+                          
                           </StyledTableCell>
                           <StyledTableCell align="center" className="d-flex ">
                             {/* <RemoveRedEyeIcon onClick={handleview}/> */}

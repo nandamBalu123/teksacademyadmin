@@ -51,9 +51,26 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       <div className="page">
         <div className="application">
           <h3 className="text-center mt-2 "> Application Form </h3>
-          <div className="row  ">
+          <div className="row">  
+          <div className="col-5 col-md-5 col-lg-5 col-xl-5 mt-2 " style={{ marginLeft: "10px" }}>  
+          <h5 ><strong>  Kapil Knowledge Hub Private Limited</strong></h5>
+          <p className="m-0 p-0"> CIN: U80100TG2018PTC123853</p>
+          <p className="m-0 p-0"><strong> <EmailIcon /></strong> info@teksacademy.com</p>
+          <p className="m-0 p-0"><strong> <LocalPhoneIcon /></strong> 1800-120-4748</p>
+          <p className="m-0 p-0"><strong> <AlternateEmailIcon /></strong> www.teksacademy.com</p>
+          </div>
+          <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
+          <img src={logo} style={{ width: "100%" }} />
+          <h5 className="text-center" style={{ marginTop: "10px" }}>
+              <strong className="fs-5"> Branch:</strong>
+                      {studentdata.branch}
+                    </h5>
+          </div>
+          </div>
+
+          {/* <div className="row  ">
             <div className="col-5 col-md-5 col-lg-5 col-xl-5">
-              <h4 style={{ marginLeft: "15px", marginTop: "25px" }}>
+              <h4 style={{ marginLeft: "15px" }}>
                 {" "}
                 <strong> Kapil Knowledge Hub Private Limited</strong>
               </h4>
@@ -82,35 +99,31 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </div>
             <div className="col-7 col-md-7 col-lg-7 col-xl-7">
               <br />
-              <img src={logo} className="tekslogo" style={{ width: "100%" }} />
-              <div className="row">
-                <div className="col-5 col-md-5 col-lg-5 col-xl-5">
-                  <h4 className="text-center" style={{ marginTop: "23px" }}>
-                    {" "}
-                    <h5 className="text-start">
-                      {" "}
-                      <strong className="fs-5"> Branch:</strong>{" "}
+              <img src={logo} style={{ width: "100%" }} />
+             <h5 className="text-center" style={{ marginTop: "10px" }}>
+                      
+                      <strong className="fs-5"> Branch:</strong>
                       {studentdata.branch}
                     </h5>
-                  </h4>
-                </div>
+                 
+               
                 <div className="col-7 col-md-7 col-lg-7 col-xl-7">
                   <h4 className="text-center" style={{ marginTop: "23px" }}>
-                    {" "}
+               
                     <h5 className="text-start">
                       <strong className="fs-5"> Registration :</strong>
                       {studentdata.registrationnumber}
                     </h5>
                   </h4>
-                </div>{" "}
-              </div>
+                </div>
+            
             </div>
-          </div>
+          </div> */}
 
-          <div className="admform-sd  mt-4 ">
+          <div className="admform-sd   ">
             <div
               className=" text-center caption "
-              style={{ fontSize: "25px", fontWeight: "600" }}
+              style={{ fontSize: "25px", fontWeight: "600", marginTop:"25px" }}
             >
               {" "}
               Student Details
@@ -267,7 +280,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </table>
             </div>
 
-            <div className="admform-scd  page-break ">
+            <div className="admform-scd   ">
               <div
                 className="text-center caption  "
                 style={{ fontSize: "25px", fontWeight: "600" }}
@@ -295,7 +308,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 </table>
               </div>
             </div>
-            <div className="admform-scd  mt-3">
+            <div className="admform-scd page-break ">
               <div
                 className="text-center caption"
                 style={{ fontSize: "25px", fontWeight: "600" }}
@@ -547,7 +560,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 material copy as per the center's policy.
               </li>
             </ul>
-            <strong> 4. Attendance :</strong>
+            <strong > 4. Attendance :</strong>
             <ul>
               <li>
                 Regular attendance is essential for successfully completing the
@@ -565,8 +578,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 and subject to availability of resources.
               </li>
             </ul>
-            <br />
-            <strong> 5. Conduct:</strong>
+         
+            <strong className="page-break"> 5. Conduct:</strong>
             <ul>
               {" "}
               <li>
@@ -608,7 +621,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </ul>
             <strong> 7.certificate :</strong>
             <ul>
-              <li className="pt-5">
+              <li >
                 The certificate will only be awarded to students who
                 successfully complete the course as per the center's criteria.
               </li>
@@ -717,22 +730,22 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 Regular attendance is important for the successful completion of
                 the course.
               </li>
-            </ul>
-            <ul>
               <li>
                 Students must inform the center in advance if they are unable to
                 attend a class due to valid reasons such as illness or
                 emergencies.
               </li>
-            </ul>
-            <ul>
-              {" "}
+        
+           
               <li>
-                {" "}
+               
                 If a student is absent for 3 consecutive days without
                 intimation, their admission may be terminated without refund.
               </li>
             </ul>
+            
+             
+            
             <strong> 17. Teaching Staff: </strong>
             <ul>
               {" "}
@@ -775,7 +788,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </li>
             </ul>
             <strong> 20. Course Duration:</strong>
-            <ul className="pt-5">
+            <ul >
               <li>
                 The course duration may vary from batch to batch, depending on
                 factors such as students' attendance, training methodology, and
@@ -846,7 +859,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </li>
             </ul>
             <strong>Privacy Policy:</strong>
-            <br />
+            <br /><br/>
             <strong> 1. Information Collections :</strong>
             <ul>
               <li>
@@ -879,23 +892,24 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </li>
             </ul>
             <strong> 5. Cookies:</strong>
+            <ul> 
             <li>
               We use cookies on our website to track user behavior and improve
               the user experience. Students can disable cookies in their web
               browser if they choose to do so.
             </li>
+            </ul>
+            
             <strong>6. Data Retention</strong>
             <ul>
-              {" "}
+           
               <li>
-                {" "}
-                We retain personal information for as long as necessary to
+                  We retain personal information for as long as necessary to
                 provide the course and related services, or until the student
                 requests that their information be deleted.
               </li>
             </ul>
-            <br />
-            <br />
+          
             <strong>7. Modification</strong>
             <br />
             <ul>
