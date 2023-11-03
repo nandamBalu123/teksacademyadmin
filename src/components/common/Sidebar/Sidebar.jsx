@@ -100,12 +100,17 @@ const Sidebar = () => {
           },
           "& .pro-inner-item": {
             padding: "5px 14px 5px 20px !important",
+            fontSize:"14px !important",
+            fontWeight:"400 !important"
           },
           "& .pro-inner-item:hover": {
-            color: "#335eea !important",
+            background:"#f5f5f5 !important",
+            color:"#000 !important",
+            borderRadius:"20px !important",
+           
           },
           "& .pro-menu-item.active": {
-            color: "#335eea !important",
+            color: "#000 !important",
           },
           letterSpacing: "0.6px",
         }}
@@ -178,13 +183,15 @@ const Sidebar = () => {
               <Item
                 style={{
                   color: colors.grey[100],
-                  
+                
+                 
                 }}
                 icon={<HomeOutlinedIcon />}
                 label={"Dashboard"}
                 
                 
                 title="Dashboard"
+             
                     to="/"
                     
                     selected={selected}

@@ -602,22 +602,37 @@ const UsersData = () => {
                       records.map((user) => (
                         <StyledTableRow>
                           <StyledTableCell
+                          
                             align="center"
-                            className="p-0 m-0 border border1 "
+                            className="p-0 m-0 border border1 elipse"
                           >
-                            {user.fullname}
+                            <span 
+                           title={user.fullname}
+                            style={{
+                              width: "120px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > {user.fullname}  </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
                             <span
+                              title={user.email}
                               style={{
-                                width: "200px",
+                              
+                                width: "120px",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                                 fontSize: "15px",
+                                display:"block"
                               }}
                             >
                               {user.email}
@@ -627,39 +642,118 @@ const UsersData = () => {
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
+                            <span 
+                            title={user.phonenumber}
+                             style={{
+                              width: "90px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
+                              {user.phonenumber}
+                            </span>
                             {" "}
-                            {user.phonenumber}
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
+                            <span 
+                           title={user.designation}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
                             {user.designation}
+                            
+                        
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
+                             <span 
+                             title= {user.department}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
                             {user.department}
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
-                            {user.reportto}
+                             <span 
+                             title={user.reportto}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
+                             {user.reportto}
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
-                            {user.profile}
+                             <span 
+                             title={user.profile}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > {user.profile}
+                            
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
-                            {" "}
-                            {user.branch}
+                            <span 
+                             title={user.branch}
+                             style={{
+                              width: "90px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > {user.branch}
+                            
+                            </span>
+                          
                           </StyledTableCell>
                           <StyledTableCell align="center" className="d-flex ">
                             {/* <RemoveRedEyeIcon onClick={handleview}/> */}
