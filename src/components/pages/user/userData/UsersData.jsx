@@ -26,6 +26,8 @@ import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
+import {useDepartmentContext} from '../../../../hooks/useDepartmentcontext';
+import {useUsersContext} from '../../../../hooks/useUsersContext'
 
 import {
   Button,
@@ -35,11 +37,13 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { useUsersContext } from "../../../../hooks/useUsersContext";
+// import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { transcode } from "buffer";
 const UsersData = () => {
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
+  const {departments} = useDepartmentContext();
+  const {reporttoo} = useUsersContext();
   const { users, dispatch } = useUsersContext();
   const [isChecked, setIsChecked] = useState(false);
   const [opening, setOpening] = React.useState(false);
@@ -103,6 +107,8 @@ const UsersData = () => {
     search: "",
     branch: "",
     profile: "",
+    department:"",
+    reportto :"",
   });
 
   const handleInputChange = (e) => {
@@ -141,8 +147,14 @@ const UsersData = () => {
       const profileCondition = filterCriteria.profile
         ? item.profile === filterCriteria.profile
         : true;
+        const departmentCondition =filterCriteria.department
+        ? item.department === filterCriteria.department
+        :true;
+        const reporttoCondition = filterCriteria.reportto
+        ? item.reportto === filterCriteria.reportto
+        :true;
 
-      return profileCondition && branchCondition && searchCondition;
+      return profileCondition && branchCondition && searchCondition && departmentCondition && reporttoCondition;
     });
 
     setFilteredData(filteredResults);
@@ -185,6 +197,7 @@ const UsersData = () => {
       search: "",
       branch: "",
       profile: "",
+      department:""
     });
   };
   let initialDataCount = initialData.length;
@@ -404,6 +417,7 @@ const UsersData = () => {
 
             <Menu
               className="mt-5"
+              
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
               anchorEl={anchorEl}
@@ -435,7 +449,7 @@ const UsersData = () => {
                       <InputLabel>Profile</InputLabel>
                       <Select
                       style={{background:"none"}}
-                      className="pe-3"
+                      className="pe-4 "
                       name="profile"
                       value={filterCriteria.profile}
                       onChange={handleInputChange}
@@ -455,7 +469,7 @@ const UsersData = () => {
              <FormControl variant="standard" className="w-100">
                       <InputLabel>Branch</InputLabel>
                       <Select
-                      className="pe-5"
+                      className="pe-3 "
                       name="branch"
                   value={filterCriteria.branch}
                   onChange={handleInputChange}
@@ -476,13 +490,18 @@ const UsersData = () => {
               <FormControl variant="standard" className="w-100">
                       <InputLabel>Department</InputLabel>
                       <Select
-                      className="pe-5"
-                      
+                      className="pe-4"
+                      name="department"
+                      value={filterCriteria.department}
+                      onChange={handleInputChange}
                 
                       >
-                    <MenuItem> IT</MenuItem>
-                    <MenuItem> DM</MenuItem>
-                    <MenuItem> Counsellor</MenuItem>
+                 {departments && 
+                 departments.map((item, index)=>(
+                  <MenuItem key={item.id} value={item.department_name}> 
+                  {item.department_name}
+                  </MenuItem>
+                 ))}
                       </Select>
                     </FormControl>
                </div>
@@ -490,13 +509,17 @@ const UsersData = () => {
               <FormControl variant="standard" className="w-100">
                       <InputLabel>Report to</InputLabel>
                       <Select
-                      className="pe-5"
-                      
-                
-                      >
-                    <MenuItem> Bhaskar</MenuItem>
-                    <MenuItem> Raghu</MenuItem>
-                    <MenuItem> Zaheer</MenuItem>
+                      className="pe-4"
+                      name="reportto"
+                      value={filterCriteria.reportto}
+                      onChange={handleInputChange}
+                       >
+                    {reporttoo && 
+                    reporttoo.map((item,index)=>( 
+                      <MenuItem key={item.id} value={item.reportto}> 
+                      {item.reportto}
+                       </MenuItem>
+                    ))}
                       </Select>
                     </FormControl>
                </div>
