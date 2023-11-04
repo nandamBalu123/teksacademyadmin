@@ -30,6 +30,8 @@ import {
   DialogActions,
 } from "@mui/material";
 const Dashboard = () => {
+
+  const role = localStorage.getItem('role');
   const { user } = useAuthContext();
   const { students, dispatch } = useStudentsContext();
 
@@ -333,6 +335,7 @@ const Dashboard = () => {
               })
             }
           >
+            {role == "admin" && 
             <Card
               style={{ backgroundColor: "#e6acb4 " }}
               className="rounded rounded-3"
@@ -342,6 +345,7 @@ const Dashboard = () => {
                 <b> {getUsersData.length} </b>
               </p>
             </Card>
+            }
           </div>
         </div>
         <div className="row">
