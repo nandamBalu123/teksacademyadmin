@@ -431,7 +431,7 @@ const FeeView = () => {
               <div className="installment  mt-5" key={index}>
                 <p className="ms-4">
                   {" "}
-                  Instalment {index + 1} :{" "}
+                  Installment {index + 1} :{" "}
                   {parseFloat(installmentamount).toFixed(2)}
                 </p>
                 <div className="row">

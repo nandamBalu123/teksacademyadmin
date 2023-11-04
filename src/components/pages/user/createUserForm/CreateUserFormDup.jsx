@@ -27,7 +27,9 @@ const CreateUserForm = () => {
   const [reportto, setreportto] = useState("");
   const [profile, setprofile] = useState("");
   const [branch, setbranch] = useState("");
-  const [user_status, setUser_status] = useState([{ status: true }]);
+  const [user_status, setUser_status] = useState([
+    { activate_remarks: "", status: true, Inactivate_remarks: "" },
+  ]);
   const profilee = [];
 
   const handleSubmit = async (e) => {
@@ -116,9 +118,12 @@ const CreateUserForm = () => {
         return false;
       }
       if (response.ok) {
-        dispatch({ type: "CREATE_USER", payload: json });
+        let parseJson = json;
+        parseJson.user_status = JSON.stringify(json.user_status);
+        console.log(json.user_status);
+        dispatch({ type: "CREATE_USER", payload: parseJson });
 
-        console.log("User created successfully.");
+        console.log("User created successfully.", user);
         alert("User created successfully.");
         // Reset the form fields
         setfullname("");

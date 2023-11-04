@@ -26,6 +26,8 @@ import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
+import {useDepartmentContext} from '../../../../hooks/useDepartmentcontext';
+import {useUsersContext} from '../../../../hooks/useUsersContext'
 
 import {
   Button,
@@ -35,24 +37,37 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
-import { useUsersContext } from "../../../../hooks/useUsersContext";
+// import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { transcode } from "buffer";
 const UsersData = () => {
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
+  const {departments} = useDepartmentContext();
+  const {reporttoo} = useUsersContext();
   const { users, dispatch } = useUsersContext();
-  const [isChecked, setIsChecked] = useState(false);
+
   const [opening, setOpening] = React.useState(false);
   const [text, setText] = useState("");
+  const [id, setId] = useState("");
+  const [userstatus, setUserStatus] = useState("");
+  const [user_statuss, setuser_status] = useState("");
+
   useEffect(() => {
     if (users) {
       setData(users);
+      console.log("users", users);
     }
   }, [users]);
-  const handleClickOpen = () => {
+  const handleClickOpen = (id, userstatus, user_status) => {
+    setId(id);
+    setUserStatus(userstatus);
     setOpening(true);
+    setuser_status([user_status]);
+    console.log(id, userstatus, user_status);
   };
-
+  useEffect(() => {
+    console.log("use", id, userstatus, user_statuss);
+  });
   const handleClosed = () => {
     setOpening(false);
   };
@@ -103,6 +118,8 @@ const UsersData = () => {
     search: "",
     branch: "",
     profile: "",
+    department:"",
+    reportto :"",
   });
 
   const handleInputChange = (e) => {
@@ -141,8 +158,14 @@ const UsersData = () => {
       const profileCondition = filterCriteria.profile
         ? item.profile === filterCriteria.profile
         : true;
+        const departmentCondition =filterCriteria.department
+        ? item.department === filterCriteria.department
+        :true;
+        const reporttoCondition = filterCriteria.reportto
+        ? item.reportto === filterCriteria.reportto
+        :true;
 
-      return profileCondition && branchCondition && searchCondition;
+      return profileCondition && branchCondition && searchCondition && departmentCondition && reporttoCondition;
     });
 
     setFilteredData(filteredResults);
@@ -185,39 +208,69 @@ const UsersData = () => {
       search: "",
       branch: "",
       profile: "",
+      department:""
     });
   };
   let initialDataCount = initialData.length;
   let recordCount = filteredData.length;
   // for filter change numbers 10,25,50
-
-  const handleok = (id) => {
+  const handleActivate = () => {
     setOpening(false);
-    setIsChecked(!isChecked);
 
     if (text) {
+      // let user_status = [
+      //   {
+      //     remarks: text,
+      //     status: true,
+      //   },
+      // ];
+      const uupdatedData = user_statuss.map((item, index) => {
+        if (index === 0) {
+          return { ...item, status: !item.status };
+        }
+        return item;
+      });
       let user_status = [
         {
-          remarks: text,
-          status: true,
+          ...uupdatedData[0],
+          activate_remarks: text,
+          date: new Date(),
         },
       ];
+
+      // let newObject = {
+      //   activate_remarks: text,
+      //   status: true,
+      //   date: new Date(),
+      // };
+      // let user_status = user_statuss;
+      // user_status.push(newObject);
+      // console.log("user_statuse", user_status);
+      // const updatedData = [
+      //   {
+      //     ...data[0], // Copy the existing object
+      //     newKey: 'new value', // Add the new key-value pair
+      //   },
+      //   ...data.slice(1), // Copy the rest of the array
+      // ];
+
+      // Update the state with the new array
+      // setData(updatedData);
+      // setuser_status((prevUserStatus) => [
+      //   { ...prevUserStatus, status: true, activateremarks: text },
+      // ]);
       const updatedData = {
         user_status,
       };
-      const uploadcontext = { user_status, id };
-      console.log("user_status", updatedData);
-      console.log("id", id);
+      let uploadcontext = { user_status, id };
+      uploadcontext.user_status = JSON.stringify(uploadcontext.user_status);
       axios
-        .put(
-          `${process.env.REACT_APP_API_URL}/certificatestatus/${id}`,
-          updatedData
-        )
+        .put(`${process.env.REACT_APP_API_URL}/userstatus/${id}`, updatedData)
         .then((res) => {
           if (res.data.updated) {
             // alert("Certificate updated successfully");
             dispatch({
-              type: "UPDATE_USER",
+              type: "UPDATE_USER_STATUS",
               payload: uploadcontext,
             });
           } else {
@@ -227,7 +280,63 @@ const UsersData = () => {
       // setcourseStartDate("");
       setText("");
     } else {
-      alert("enter course start and end dates");
+      alert("enter remarks");
+    }
+  };
+  const handleInActivate = () => {
+    setOpening(false);
+
+    if (text) {
+      // let user_status = [
+      //   {
+      //     remarks: text,
+      //     status: false,
+      //   },
+      // ];
+      const uupdatedData = user_statuss.map((item, index) => {
+        if (index === 0) {
+          return { ...item, status: !item.status };
+        }
+        return item;
+      });
+      let user_status = [
+        {
+          ...uupdatedData[0],
+          Inactivate_remarks: text,
+          date: new Date(),
+        },
+      ];
+      // setuser_status((prevUserStatus) => [
+      //   { ...prevUserStatus,prevUserStatus.InactiveRemarks:text },
+      // ]);
+
+      // setuser_status((prevUserStatus) => [
+      //   ...prevUserStatus,
+      //   { activateremarks: text },
+      // ]);
+      const updatedData = {
+        user_status,
+      };
+      let uploadcontext = { user_status, id };
+      uploadcontext.user_status = JSON.stringify(uploadcontext.user_status);
+
+      axios
+        .put(`${process.env.REACT_APP_API_URL}/userstatus/${id}`, updatedData)
+        .then((res) => {
+          if (res.data.updated) {
+            // alert("Certificate updated successfully");
+            dispatch({
+              type: "UPDATE_USER_STATUS",
+              payload: uploadcontext,
+            });
+          } else {
+            alert("Error please Try Again");
+          }
+        });
+      // setcourseStartDate("");
+      setText("");
+    } else {
+      alert("enter remarks");
     }
   };
   return (
@@ -305,14 +414,13 @@ const UsersData = () => {
                 horizontal: "left",
               }}
             >
-              <div className="d-flex justify-content-between m-2">
+             <div className="d-flex justify-content-between m-2">
                <div > Filter</div>
              
               <div >
                   {" "}
                   <CloseIcon onClick={handleClose} />{" "}
                 </div>
-           
               </div>
               <hr />
            
@@ -404,6 +512,7 @@ const UsersData = () => {
 
             <Menu
               className="mt-5"
+              
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
               anchorEl={anchorEl}
@@ -435,7 +544,7 @@ const UsersData = () => {
                       <InputLabel>Profile</InputLabel>
                       <Select
                       style={{background:"none"}}
-                      className="pe-3"
+                      className="pe-4 "
                       name="profile"
                       value={filterCriteria.profile}
                       onChange={handleInputChange}
@@ -455,7 +564,7 @@ const UsersData = () => {
              <FormControl variant="standard" className="w-100">
                       <InputLabel>Branch</InputLabel>
                       <Select
-                      className="pe-5"
+                      className="pe-3 "
                       name="branch"
                   value={filterCriteria.branch}
                   onChange={handleInputChange}
@@ -476,13 +585,18 @@ const UsersData = () => {
               <FormControl variant="standard" className="w-100">
                       <InputLabel>Department</InputLabel>
                       <Select
-                      className="pe-5"
-                      
+                      className="pe-4"
+                      name="department"
+                      value={filterCriteria.department}
+                      onChange={handleInputChange}
                 
                       >
-                    <MenuItem> IT</MenuItem>
-                    <MenuItem> DM</MenuItem>
-                    <MenuItem> Counsellor</MenuItem>
+                 {departments && 
+                 departments.map((item, index)=>(
+                  <MenuItem key={item.id} value={item.department_name}> 
+                  {item.department_name}
+                  </MenuItem>
+                 ))}
                       </Select>
                     </FormControl>
                </div>
@@ -490,13 +604,17 @@ const UsersData = () => {
               <FormControl variant="standard" className="w-100">
                       <InputLabel>Report to</InputLabel>
                       <Select
-                      className="pe-5"
-                      
-                
-                      >
-                    <MenuItem> Bhaskar</MenuItem>
-                    <MenuItem> Raghu</MenuItem>
-                    <MenuItem> Zaheer</MenuItem>
+                      className="pe-4"
+                      name="reportto"
+                      value={filterCriteria.reportto}
+                      onChange={handleInputChange}
+                       >
+                    {reporttoo && 
+                    reporttoo.map((item,index)=>( 
+                      <MenuItem key={item.id} value={item.reportto}> 
+                      {item.reportto}
+                       </MenuItem>
+                    ))}
                       </Select>
                     </FormControl>
                </div>
@@ -579,22 +697,37 @@ const UsersData = () => {
                       records.map((user) => (
                         <StyledTableRow>
                           <StyledTableCell
+                          
                             align="center"
-                            className="p-0 m-0 border border1 "
+                            className="p-0 m-0 border border1 elipse"
                           >
-                            {user.fullname}
+                            <span 
+                           title={user.fullname}
+                            style={{
+                              width: "120px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > {user.fullname}  </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
                             <span
+                              title={user.email}
                               style={{
-                                width: "200px",
+                              
+                                width: "120px",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                                 fontSize: "15px",
+                                display:"block"
                               }}
                             >
                               {user.email}
@@ -604,39 +737,118 @@ const UsersData = () => {
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
+                            <span 
+                            title={user.phonenumber}
+                             style={{
+                              width: "90px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
+                              {user.phonenumber}
+                            </span>
                             {" "}
-                            {user.phonenumber}
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
+                            <span 
+                           title={user.designation}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
                             {user.designation}
+                            
+                        
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
+                             <span 
+                             title= {user.department}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
                             {user.department}
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
-                            {user.reportto}
+                             <span 
+                             title={user.reportto}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > 
+                             {user.reportto}
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
-                            {user.profile}
+                             <span 
+                             title={user.profile}
+                             style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > {user.profile}
+                            
+                            </span>
+                            
                           </StyledTableCell>
                           <StyledTableCell
                             align="center"
                             className="p-0 m-0 border border1 "
                           >
-                            {" "}
-                            {user.branch}
+                            <span 
+                             title={user.branch}
+                             style={{
+                              width: "90px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display:"block"
+                            }}
+                            > {user.branch}
+                            
+                            </span>
+                          
                           </StyledTableCell>
                           <StyledTableCell align="center" className="d-flex ">
                             {/* <RemoveRedEyeIcon onClick={handleview}/> */}
@@ -652,47 +864,57 @@ const UsersData = () => {
                             >
                               <ModeEditIcon />
                             </Link>
-                            <div class="form-check form-switch">
-                              <input
-                                class="form-check-input"
-                                type="checkbox"
-                                role="switch"
-                                id="flexSwitchCheckChecked"
-                                checked={isChecked}
-                                onChange={handleClickOpen}
-                              />
-                            </div>{" "}
-                            <Dialog open={opening} onClose={handleClosed}>
-                              <DialogContent>
-                                <DialogContentText>
-                                  <label> Enter Remarks :</label>
-                                </DialogContentText>
-                                <DialogContentText>
-                                  <textarea
-                                    rows="4"
-                                    cols="50"
-                                    name="comment"
-                                    form="usrform"
-                                    onChange={(e) => setText(e.target.value)}
-                                    value={text}
-                                  ></textarea>
-                                </DialogContentText>
-                              </DialogContent>
-                              <DialogActions>
-                                <Button onClick={handleClosed}>Cancel</Button>
-                                {/* {!isChecked && (
-                                  <Button onClick={(e) => handleok(user.id)}>
-                                    Activate
-                                  </Button>
-                                )}
-
-                                {isChecked && (
-                                  <Button onClick={(e) => handleok(user.id)}>
-                                    InActivate
-                                  </Button>
-                                )} */}
-                              </DialogActions>
-                            </Dialog>
+                            {user.user_status &&
+                              JSON.parse(user.user_status).map(
+                                // let userstatuslength=user.user_status.length
+                                (status, index) => {
+                                  let userstatus = status.status;
+                                  return (
+                                    <div class="form-check form-switch">
+                                      <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="flexSwitchCheckChecked"
+                                        checked={userstatus}
+                                        onChange={(e) =>
+                                          handleClickOpen(
+                                            user.id,
+                                            userstatus,
+                                            status
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  );
+                                }
+                              )}
+                            {/* {user.user_status &&
+                              JSON.parse(user.user_status).map(
+                              
+                                (status, index) => {
+                                  let userstatus = status.status;
+                                  return (
+                                    <div class="form-check form-switch">
+                                      <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="flexSwitchCheckChecked"
+                                        checked={userstatus}
+                                        onChange={(e) =>
+                                          handleClickOpen(
+                                            user.id,
+                                            userstatus,
+                                            status
+                                          )
+                                        }
+                                      />
+                                      
+                                    </div>
+                                  );
+                                }
+                              )} */}
                           </StyledTableCell>
                         </StyledTableRow>
                       ))}
@@ -700,6 +922,34 @@ const UsersData = () => {
                 </Table>
               </TableContainer>
             </Paper>
+            <Dialog open={opening} onClose={handleClosed}>
+              <DialogContent>
+                <DialogContentText>
+                  <label> Enter Remarks :</label>
+                </DialogContentText>
+                <DialogContentText>
+                  <textarea
+                    rows="4"
+                    cols="50"
+                    name="comment"
+                    form="usrform"
+                    onChange={(e) => setText(e.target.value)}
+                    value={text}
+                  ></textarea>
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClosed}>Cancel</Button>
+                {!userstatus && (
+                  <Button onClick={(e) => handleActivate()}>Activate</Button>
+                )}
+                {userstatus && (
+                  <Button onClick={(e) => handleInActivate()}>
+                    InActivate
+                  </Button>
+                )}
+              </DialogActions>
+            </Dialog>
             <div
               style={{ display: "flex", justifyContent: "center" }}
               className="mt-3"

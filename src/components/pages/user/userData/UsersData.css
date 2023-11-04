@@ -76,5 +76,11 @@
       background-color: #fff;
       color: #0070fc;
     }
+    .elipse{ 
+      width: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
    
     
