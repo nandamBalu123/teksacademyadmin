@@ -15,6 +15,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import profilepic from "../../../images/profilepic.jpg";
+import profileimg from "../../../images/img4.png";
 import "./Topbar.css";
 import zIndex from "@mui/material/styles/zIndex";
 import { useAuthContext } from "../../../hooks/useAuthContext";
@@ -122,7 +123,7 @@ const Topbar = () => {
               }}
             >
               <div className="d-flex">
-                <img className="w-25" src={profilepic} alt="phpto" />
+                <img className="" src={profileimg} alt="phpto" />
 
                 <div className=" ms-3 mt-3">
                   {" "}
