@@ -815,7 +815,7 @@ const UsersData = () => {
                               >
                                 <ModeEditIcon />
                               </Link>
-                              {user.user_status !== undefined && (
+                              {/* {user.user_status !== undefined && (
                                 <div class="form-check form-switch">
                                   <input
                                     class="form-check-input"
@@ -832,7 +832,7 @@ const UsersData = () => {
                                     }
                                   />
                                 </div>
-                              )}
+                              )} */}
 
                               {/* {user.user_status &&
                               JSON.parse(user.user_status).map(

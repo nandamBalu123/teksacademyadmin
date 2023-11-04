@@ -55,7 +55,7 @@ const UserView = () => {
             <p className="text-end"> Profile : {singleUser.profile} </p>
             <p className="text-end"> Branch: {singleUser.branch}</p>
           </div>
-          <p>
+          {/* <p>
             {singleUser.user_remarks_history &&
               JSON.parse(singleUser.user_remarks_history).map(
                 (userstatus, index) => {
@@ -94,7 +94,7 @@ const UserView = () => {
                   );
                 }
               )}
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
