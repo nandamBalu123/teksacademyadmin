@@ -55,14 +55,44 @@ const UserView = () => {
             <p className="text-end"> Branch: {singleUser.branch}</p>
           </div>
           <p>
-            {singleUser.user_status &&
-              JSON.parse(singleUser.user_status).map((userstatus, index) => (
-                <span>
-                  <p>Activate remarks: {userstatus.activate_remarks}</p>
+            {singleUser.user_remarks_history &&
+              JSON.parse(singleUser.user_remarks_history).map(
+                (userstatus, index) => {
+                  const originalDate = new Date(userstatus.date);
+                  const day = String(originalDate.getDate()).padStart(2, "0");
+                  const month = String(originalDate.getMonth() + 1).padStart(
+                    2,
+                    "0"
+                  ); // Month is zero-based, so we add 1.
+                  const year = originalDate.getFullYear();
 
-                  <p>InActivate remarks:{userstatus.Inactivate_remarks}</p>
-                </span>
-              ))}
+                  const formattedDate = `${day}-${month}-${year}`;
+                  return (
+                    <span>
+                      {userstatus.Activate_remarks && (
+                        <div>
+                          <span>Si No: {index + 1}</span> &nbsp;
+                          <span>Date : {formattedDate}</span> &nbsp;
+                          <span>Status : Active</span>
+                          <span>Remakrs:{userstatus.Activate_remarks}</span>
+                          &nbsp;
+                        </div>
+                      )}
+                      {userstatus.Inactivate_remarks && (
+                        <span>
+                          <span>Si No: {index + 1}</span> &nbsp;
+                          <span>Date : {formattedDate}</span> &nbsp;
+                          <span>Status : Inactive</span> &nbsp;
+                          <span>
+                            Remakrs:{userstatus.Inactivate_remarks}
+                          </span>{" "}
+                          &nbsp;
+                        </span>
+                      )}
+                    </span>
+                  );
+                }
+              )}
           </p>
         </div>
       </div>

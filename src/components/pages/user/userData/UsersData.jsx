@@ -26,8 +26,8 @@ import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
-import {useDepartmentContext} from '../../../../hooks/useDepartmentcontext';
-import {useUsersContext} from '../../../../hooks/useUsersContext'
+import { useDepartmentContext } from "../../../../hooks/useDepartmentcontext";
+import { useUsersContext } from "../../../../hooks/useUsersContext";
 
 import {
   Button,
@@ -42,15 +42,15 @@ import {
 const UsersData = () => {
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
-  const {departments} = useDepartmentContext();
-  const {reporttoo} = useUsersContext();
+  const { departments } = useDepartmentContext();
+  const { reporttoo } = useUsersContext();
   const { users, dispatch } = useUsersContext();
 
   const [opening, setOpening] = React.useState(false);
   const [text, setText] = useState("");
   const [id, setId] = useState("");
-  const [userstatus, setUserStatus] = useState("");
-  const [user_statuss, setuser_status] = useState("");
+  const [userstatus, setUser_Status] = useState("");
+  const [userremarkshistory, setuser_remarks_history] = useState("");
 
   useEffect(() => {
     if (users) {
@@ -58,15 +58,14 @@ const UsersData = () => {
       console.log("users", users);
     }
   }, [users]);
-  const handleClickOpen = (id, userstatus, user_status) => {
+  const handleClickOpen = (id, userStatus, userRemarksHistory) => {
     setId(id);
-    setUserStatus(userstatus);
+    setUser_Status(userStatus);
+    setuser_remarks_history([userRemarksHistory]);
     setOpening(true);
-    setuser_status([user_status]);
-    console.log(id, userstatus, user_status);
   };
   useEffect(() => {
-    console.log("use", id, userstatus, user_statuss);
+    console.log("use", id, userstatus, userremarkshistory);
   });
   const handleClosed = () => {
     setOpening(false);
@@ -118,8 +117,8 @@ const UsersData = () => {
     search: "",
     branch: "",
     profile: "",
-    department:"",
-    reportto :"",
+    department: "",
+    reportto: "",
   });
 
   const handleInputChange = (e) => {
@@ -158,14 +157,20 @@ const UsersData = () => {
       const profileCondition = filterCriteria.profile
         ? item.profile === filterCriteria.profile
         : true;
-        const departmentCondition =filterCriteria.department
+      const departmentCondition = filterCriteria.department
         ? item.department === filterCriteria.department
-        :true;
-        const reporttoCondition = filterCriteria.reportto
+        : true;
+      const reporttoCondition = filterCriteria.reportto
         ? item.reportto === filterCriteria.reportto
-        :true;
+        : true;
 
-      return profileCondition && branchCondition && searchCondition && departmentCondition && reporttoCondition;
+      return (
+        profileCondition &&
+        branchCondition &&
+        searchCondition &&
+        departmentCondition &&
+        reporttoCondition
+      );
     });
 
     setFilteredData(filteredResults);
@@ -208,7 +213,8 @@ const UsersData = () => {
       search: "",
       branch: "",
       profile: "",
-      department:""
+      department: "",
+      reportto: "",
     });
   };
   let initialDataCount = initialData.length;
@@ -218,59 +224,28 @@ const UsersData = () => {
     setOpening(false);
 
     if (text) {
-      // let user_status = [
-      //   {
-      //     remarks: text,
-      //     status: true,
-      //   },
-      // ];
-      const uupdatedData = user_statuss.map((item, index) => {
-        if (index === 0) {
-          return { ...item, status: !item.status };
-        }
-        return item;
-      });
-      let user_status = [
-        {
-          ...uupdatedData[0],
-          activate_remarks: text,
-          date: new Date(),
-        },
-      ];
-
-      // let newObject = {
-      //   activate_remarks: text,
-      //   status: true,
-      //   date: new Date(),
-      // };
-      // let user_status = user_statuss;
-      // user_status.push(newObject);
-      // console.log("user_statuse", user_status);
-      // const updatedData = [
-      //   {
-      //     ...data[0], // Copy the existing object
-      //     newKey: 'new value', // Add the new key-value pair
-      //   },
-      //   ...data.slice(1), // Copy the rest of the array
-      // ];
-
-      // Update the state with the new array
-      // setData(updatedData);
-      // setuser_status((prevUserStatus) => [
-      //   { ...prevUserStatus, status: true, activateremarks: text },
-      // ]);
+      let user_status = true;
+      let user_remarks_history = userremarkshistory;
+      let newObject = {
+        Activate_remarks: text,
+        date: new Date(),
+      };
+      user_remarks_history.push(newObject);
       const updatedData = {
         user_status,
+        user_remarks_history,
       };
-      let uploadcontext = { user_status, id };
-      uploadcontext.user_status = JSON.stringify(uploadcontext.user_status);
+      let uploadcontext = { user_status, user_remarks_history, id };
+      uploadcontext.user_remarks_history = JSON.stringify(
+        uploadcontext.user_remarks_history
+      );
       axios
         .put(`${process.env.REACT_APP_API_URL}/userstatus/${id}`, updatedData)
         .then((res) => {
           if (res.data.updated) {
             // alert("Certificate updated successfully");
             dispatch({
-              type: "UPDATE_USER_STATUS",
+              type: "UPDATE_USER_REMARKS_HISTORY",
               payload: uploadcontext,
             });
           } else {
@@ -287,46 +262,28 @@ const UsersData = () => {
     setOpening(false);
 
     if (text) {
-      // let user_status = [
-      //   {
-      //     remarks: text,
-      //     status: false,
-      //   },
-      // ];
-      const uupdatedData = user_statuss.map((item, index) => {
-        if (index === 0) {
-          return { ...item, status: !item.status };
-        }
-        return item;
-      });
-      let user_status = [
-        {
-          ...uupdatedData[0],
-          Inactivate_remarks: text,
-          date: new Date(),
-        },
-      ];
-      // setuser_status((prevUserStatus) => [
-      //   { ...prevUserStatus,prevUserStatus.InactiveRemarks:text },
-      // ]);
-
-      // setuser_status((prevUserStatus) => [
-      //   ...prevUserStatus,
-      //   { activateremarks: text },
-      // ]);
+      let user_status = false;
+      let user_remarks_history = userremarkshistory;
+      let newObject = {
+        Inactivate_remarks: text,
+        date: new Date(),
+      };
+      user_remarks_history.push(newObject);
       const updatedData = {
         user_status,
+        user_remarks_history,
       };
-      let uploadcontext = { user_status, id };
-      uploadcontext.user_status = JSON.stringify(uploadcontext.user_status);
-
+      let uploadcontext = { user_status, user_remarks_history, id };
+      uploadcontext.user_remarks_history = JSON.stringify(
+        uploadcontext.user_remarks_history
+      );
       axios
         .put(`${process.env.REACT_APP_API_URL}/userstatus/${id}`, updatedData)
         .then((res) => {
           if (res.data.updated) {
             // alert("Certificate updated successfully");
             dispatch({
-              type: "UPDATE_USER_STATUS",
+              type: "UPDATE_USER_REMARKS_HISTORY",
               payload: uploadcontext,
             });
           } else {
@@ -339,6 +296,11 @@ const UsersData = () => {
       alert("enter remarks");
     }
   };
+  // const dynamicStyle = {
+  //   color: getstudentData.dueamount < 1 ? "green" : "red",
+  //   fontSize: getstudentData.dueamount < 1 ? "20px" : "16px",
+  //   fontWeight: getstudentData.dueamount < 1 ? "900" : "900",
+  // };
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
@@ -507,12 +469,9 @@ const UsersData = () => {
                 </button>
               </div>
             </Menu> */}
-         
-          
 
             <Menu
               className="mt-5"
-              
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
               anchorEl={anchorEl}
@@ -528,79 +487,74 @@ const UsersData = () => {
               }}
             >
               <div className="d-flex justify-content-between m-2">
-               <div > Filter</div>
-             
-              <div >
+                <div> Filter</div>
+
+                <div>
                   {" "}
                   <CloseIcon onClick={handleClose} />{" "}
                 </div>
-           
               </div>
               <hr />
-          
-              <div className="row m-2">  
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <FormControl variant="standard" className="w-100">
-                      <InputLabel>Profile</InputLabel>
-                      <Select
-                      style={{background:"none"}}
+
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>Profile</InputLabel>
+                    <Select
+                      style={{ background: "none" }}
                       className="pe-4 "
                       name="profile"
                       value={filterCriteria.profile}
                       onChange={handleInputChange}
-                      >
-                     
+                    >
                       {roles &&
                         roles.map((item, index) => (
                           <MenuItem key={item.id} value={item.role}>
                             {item.role}
                           </MenuItem>
                         ))}
-                
-                      </Select>
-                    </FormControl>
-                 </div>
-             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-             <FormControl variant="standard" className="w-100">
-                      <InputLabel>Branch</InputLabel>
-                      <Select
+                    </Select>
+                  </FormControl>
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>Branch</InputLabel>
+                    <Select
                       className="pe-3 "
                       name="branch"
-                  value={filterCriteria.branch}
-                  onChange={handleInputChange}
-                      >
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
+                    >
                       {branches &&
-                    branches.map((item, index) => (
-                      <MenuItem key={item.id} value={item.branch_name}>
-                        {item.branch_name}
-                      </MenuItem>
-                    ))}
-                
-                      </Select>
-                    </FormControl>
-               </div>
+                        branches.map((item, index) => (
+                          <MenuItem key={item.id} value={item.branch_name}>
+                            {item.branch_name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </div>
               </div>
-              <div className="row m-2"> 
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-              <FormControl variant="standard" className="w-100">
-                      <InputLabel>Department</InputLabel>
-                      <Select
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>Department</InputLabel>
+                    <Select
                       className="pe-4"
                       name="department"
                       value={filterCriteria.department}
                       onChange={handleInputChange}
-                
-                      >
-                 {departments && 
-                 departments.map((item, index)=>(
-                  <MenuItem key={item.id} value={item.department_name}> 
-                  {item.department_name}
-                  </MenuItem>
-                 ))}
-                      </Select>
-                    </FormControl>
-               </div>
-               {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                    >
+                      {departments &&
+                        departments.map((item, index) => (
+                          <MenuItem key={item.id} value={item.department_name}>
+                            {item.department_name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </div>
+                {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
               <FormControl variant="standard" className="w-100">
                       <InputLabel>Report to</InputLabel>
                       <Select
@@ -618,16 +572,15 @@ const UsersData = () => {
                       </Select>
                     </FormControl>
                </div> */}
-
-               </div>
+              </div>
               <div className="text-end me-2 mt-4">
                 <button className="clear" onClick={filterreset}>
                   {" "}
                   Clear
                 </button>
               </div>
-          </Menu>
-         </div>
+            </Menu>
+          </div>
         </div>
         <div>
           <div className="usertable">
@@ -694,202 +647,194 @@ const UsersData = () => {
                   </TableHead>
                   <TableBody>
                     {records &&
-                      records.map((user) => (
-                        <StyledTableRow>
-                          <StyledTableCell
-                          
-                            align="center"
-                            className="p-0 m-0 border border1 elipse"
-                          >
-                            <span 
-                           title={user.fullname}
-                            style={{
-                              width: "120px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display:"block"
-                            }}
-                            > {user.fullname}  </span>
-                            
-                          </StyledTableCell>
-                          <StyledTableCell
-                            align="center"
-                            className="p-0 m-0 border border1 "
-                          >
-                            <span
-                              title={user.email}
-                              style={{
-                              
-                                width: "120px",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display:"block"
-                              }}
+                      records.map((user, index) => {
+                        const dynamicStyle = {
+                          backgroundColor:
+                            user.user_status == 0 ? "#bdb7b7" : "",
+                        };
+                        return (
+                          <StyledTableRow style={dynamicStyle}>
+                            <StyledTableCell
+                              align="center"
+                              className="p-0 m-0 border border1 elipse "
                             >
-                              {user.email}
-                            </span>
-                          </StyledTableCell>
-                          <StyledTableCell
-                            align="center"
-                            className="p-0 m-0 border border1 "
-                          >
-                            <span 
-                            title={user.phonenumber}
-                             style={{
-                              width: "90px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display:"block"
-                            }}
-                            > 
-                              {user.phonenumber}
-                            </span>
-                            {" "}
-                            
-                          </StyledTableCell>
-                          <StyledTableCell
-                            align="center"
-                            className="p-0 m-0 border border1 "
-                          >
-                            <span 
-                           title={user.designation}
-                             style={{
-                              width: "100px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display:"block"
-                            }}
-                            > 
-                            {user.designation}
-                            
-                        
-                            </span>
-                            
-                          </StyledTableCell>
-                          <StyledTableCell
-                            align="center"
-                            className="p-0 m-0 border border1 "
-                          >
-                             <span 
-                             title= {user.department}
-                             style={{
-                              width: "100px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display:"block"
-                            }}
-                            > 
-                            {user.department}
-                            </span>
-                            
-                          </StyledTableCell>
-                          <StyledTableCell
-                            align="center"
-                            className="p-0 m-0 border border1 "
-                          >
-                             <span 
-                             title={user.reportto}
-                             style={{
-                              width: "100px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display:"block"
-                            }}
-                            > 
-                             {user.reportto}
-                            </span>
-                            
-                          </StyledTableCell>
-                          <StyledTableCell
-                            align="center"
-                            className="p-0 m-0 border border1 "
-                          >
-                             <span 
-                             title={user.profile}
-                             style={{
-                              width: "100px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display:"block"
-                            }}
-                            > {user.profile}
-                            
-                            </span>
-                            
-                          </StyledTableCell>
-                          <StyledTableCell
-                            align="center"
-                            className="p-0 m-0 border border1 "
-                          >
-                            <span 
-                             title={user.branch}
-                             style={{
-                              width: "90px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display:"block"
-                            }}
-                            > {user.branch}
-                            
-                            </span>
-                          
-                          </StyledTableCell>
-                          <StyledTableCell align="center" className="d-flex ">
-                            {/* <RemoveRedEyeIcon onClick={handleview}/> */}
-                            <Link
-                              to={`/userview/${user.id}`}
-                              style={{ width: "40px" }}
+                              <span
+                                title={user.fullname}
+                                style={{
+                                  width: "120px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {" "}
+                                {user.fullname}{" "}
+                              </span>
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              className="p-0 m-0 border border1 "
                             >
-                              <VisibilityIcon className="iconn" />
-                            </Link>
-                            <Link
-                              to={`/edituser/${user.id}`}
-                              style={{ width: "40px" }}
+                              <span
+                                title={user.email}
+                                style={{
+                                  width: "120px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {user.email}
+                              </span>
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              className="p-0 m-0 border border1 "
                             >
-                              <ModeEditIcon />
-                            </Link>
-                            {user.user_status &&
-                              JSON.parse(user.user_status).map(
-                                // let userstatuslength=user.user_status.length
-                                (status, index) => {
-                                  let userstatus = status.status;
-                                  return (
-                                    <div class="form-check form-switch">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        role="switch"
-                                        id="flexSwitchCheckChecked"
-                                        checked={userstatus}
-                                        onChange={(e) =>
-                                          handleClickOpen(
-                                            user.id,
-                                            userstatus,
-                                            status
-                                          )
-                                        }
-                                      />
-                                    </div>
-                                  );
-                                }
+                              <span
+                                title={user.phonenumber}
+                                style={{
+                                  width: "90px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {user.phonenumber}
+                              </span>{" "}
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              className="p-0 m-0 border border1 "
+                            >
+                              <span
+                                title={user.designation}
+                                style={{
+                                  width: "100px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {user.designation}
+                              </span>
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              className="p-0 m-0 border border1 "
+                            >
+                              <span
+                                title={user.department}
+                                style={{
+                                  width: "100px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {user.department}
+                              </span>
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              className="p-0 m-0 border border1 "
+                            >
+                              <span
+                                title={user.reportto}
+                                style={{
+                                  width: "100px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {user.reportto}
+                              </span>
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              className="p-0 m-0 border border1 "
+                            >
+                              <span
+                                title={user.profile}
+                                style={{
+                                  width: "100px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {" "}
+                                {user.profile}
+                              </span>
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              className="p-0 m-0 border border1 "
+                            >
+                              <span
+                                title={user.branch}
+                                style={{
+                                  width: "90px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {" "}
+                                {user.branch}
+                              </span>
+                            </StyledTableCell>
+                            <StyledTableCell align="center" className="d-flex ">
+                              {/* <RemoveRedEyeIcon onClick={handleview}/> */}
+                              <Link
+                                to={`/userview/${user.id}`}
+                                style={{ width: "40px" }}
+                              >
+                                <VisibilityIcon className="iconn" />
+                              </Link>
+                              <Link
+                                to={`/edituser/${user.id}`}
+                                style={{ width: "40px" }}
+                              >
+                                <ModeEditIcon />
+                              </Link>
+                              {user.user_status !== undefined && (
+                                <div class="form-check form-switch">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    role="switch"
+                                    id="flexSwitchCheckChecked"
+                                    checked={user.user_status ? true : false}
+                                    onChange={(e) =>
+                                      handleClickOpen(
+                                        user.id,
+                                        user.user_status,
+                                        user.user_remarks_history
+                                      )
+                                    }
+                                  />
+                                </div>
                               )}
-                            {/* {user.user_status &&
+
+                              {/* {user.user_status &&
                               JSON.parse(user.user_status).map(
                               
                                 (status, index) => {
@@ -915,9 +860,10 @@ const UsersData = () => {
                                   );
                                 }
                               )} */}
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      ))}
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        );
+                      })}
                   </TableBody>
                 </Table>
               </TableContainer>
@@ -943,6 +889,7 @@ const UsersData = () => {
                 {!userstatus && (
                   <Button onClick={(e) => handleActivate()}>Activate</Button>
                 )}
+
                 {userstatus && (
                   <Button onClick={(e) => handleInActivate()}>
                     InActivate

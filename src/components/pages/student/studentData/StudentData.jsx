@@ -18,13 +18,13 @@ import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import PrintIcon from "@mui/icons-material/Print";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
 
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -60,9 +60,9 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
-import Switch from '@mui/material/Switch';
+import Switch from "@mui/material/Switch";
 import axios from "axios";
-import { useStudentsContext } from "../../../../hooks/useStudentsContext"
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { CSVLink } from "react-csv";
@@ -70,7 +70,7 @@ import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 // import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+const label = { inputProps: { "aria-label": "Switch demo" } };
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.blue,
@@ -97,11 +97,10 @@ const StudentData = () => {
   const { branches } = useBranchContext();
   const { students, dispatch } = useStudentsContext();
 
-  const { users} = useUsersContext();
+  const { users } = useUsersContext();
   const { leadsources } = useLeadSourceContext();
   const [isChecked, setIsChecked] = useState(false);
   const [opening, setOpening] = React.useState(false);
-  
 
   const handleClickOpen = () => {
     setOpening(true);
@@ -112,35 +111,31 @@ const StudentData = () => {
   };
   const handleok = () => {
     setIsChecked(!isChecked);
-   
+
     setOpening(false);
-   
   };
 
- 
   const [initialData, setData] = useState([{ name: "" }]);
   // const [initialData, setData] = useState(initialDataa);
-// start
- 
-  
-    // console.log("initialDataklsjd: ", initialData)
-    // useEffect(() => {
-    //   // Fetch data based on the user's role and ID
-    //   if (role === "admin") {
-        
-    //     fetchAllData().then((data) => {
-    //       setData(data);
-    //     });
-    //   } else {
-        
-    //     fetchDataById(userId).then((data) => {
-    //       setData(data);
-    //     });
-    //   }
-    // }, [role, userId]);
+  // start
 
+  // console.log("initialDataklsjd: ", initialData)
+  // useEffect(() => {
+  //   // Fetch data based on the user's role and ID
+  //   if (role === "admin") {
 
-    // end
+  //     fetchAllData().then((data) => {
+  //       setData(data);
+  //     });
+  //   } else {
+
+  //     fetchDataById(userId).then((data) => {
+  //       setData(data);
+  //     });
+  //   }
+  // }, [role, userId]);
+
+  // end
 
   let initialDataCount = initialData.length;
 
@@ -173,14 +168,14 @@ const StudentData = () => {
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   const role = localStorage.getItem("role");
   let userId = localStorage.getItem("id");
-   userId = parseInt(userId)
-   
-   useEffect(()=>{
-    if(students){
+  userId = parseInt(userId);
+
+  useEffect(() => {
+    if (students) {
       setData(students);
     }
-   },[students])
- 
+  }, [students]);
+
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -188,21 +183,16 @@ const StudentData = () => {
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
-        if(role == "counsellor"){
+        if (role == "counsellor") {
           const filteredResults = response.data.filter((item) => {
-            const user_id=parseInt(item.user_id);
-          
-              const dataaspercounsellor = userId
-              ? user_id === userId
-              : true;
-            return (
-             dataaspercounsellor
-            );
+            const user_id = parseInt(item.user_id);
+
+            const dataaspercounsellor = userId ? user_id === userId : true;
+            return dataaspercounsellor;
           });
           setData(filteredResults); // Update the data state with the fetched data
         }
-       
-    
+
         console.log("data", response.data);
       })
       .catch((error) => {
@@ -227,65 +217,57 @@ const StudentData = () => {
     fetchData();
   }, []);
   useEffect(() => {
-    
-      const filteredResults = initialData.filter((item) => {
-      
-       
-        const searchCondition = filterCriteria.search
-          ? item.name
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.branch
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.registrationnumber
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.courses
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.enquirytakenby
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase())
-          : true;
-  
-        const dateCondition =
-          filterCriteria.fromdate && filterCriteria.todate
-            ? item.admissiondate >= filterCriteria.fromdate &&
-              item.admissiondate <= filterCriteria.todate
-            : true;
-  
-        const branchCondition = filterCriteria.branch
-          ? item.branch === filterCriteria.branch
-          : true;
-  
-        const sourceCondition = filterCriteria.leadsource
-          ? item.leadsource === filterCriteria.leadsource
-          : true;
-  
-        const modeCondition = filterCriteria.modeoftraining
-          ? item.modeoftraining === filterCriteria.modeoftraining
-          : true;
-  
-        const counsellarCondition = filterCriteria.enquirytakenby
-          ? item.enquirytakenby === filterCriteria.enquirytakenby
-          : true;
-          
-  
-        return (
-          searchCondition &&
-          dateCondition &&
-          branchCondition &&
-          sourceCondition &&
-          modeCondition &&
-          counsellarCondition 
-        );
-      });
-      setFilteredData(filteredResults);
-    
-   
+    const filteredResults = initialData.filter((item) => {
+      const searchCondition = filterCriteria.search
+        ? item.name
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.branch
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.registrationnumber
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.courses
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.enquirytakenby
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase())
+        : true;
 
-   
+      const dateCondition =
+        filterCriteria.fromdate && filterCriteria.todate
+          ? item.admissiondate >= filterCriteria.fromdate &&
+            item.admissiondate <= filterCriteria.todate
+          : true;
+
+      const branchCondition = filterCriteria.branch
+        ? item.branch === filterCriteria.branch
+        : true;
+
+      const sourceCondition = filterCriteria.leadsource
+        ? item.leadsource === filterCriteria.leadsource
+        : true;
+
+      const modeCondition = filterCriteria.modeoftraining
+        ? item.modeoftraining === filterCriteria.modeoftraining
+        : true;
+
+      const counsellarCondition = filterCriteria.enquirytakenby
+        ? item.enquirytakenby === filterCriteria.enquirytakenby
+        : true;
+
+      return (
+        searchCondition &&
+        dateCondition &&
+        branchCondition &&
+        sourceCondition &&
+        modeCondition &&
+        counsellarCondition
+      );
+    });
+    setFilteredData(filteredResults);
   }, [filterCriteria, initialData]);
 
   useEffect(() => {
@@ -342,8 +324,6 @@ const StudentData = () => {
       search: "",
     });
   };
-
-
 
   // img
   // const [files, setFiles] = useState([]);
@@ -809,10 +789,8 @@ const StudentData = () => {
 
                       <TableCell className=" border border 1 text-center p-0 m-0">
                         <span
-                        title={item.name}
-                      
+                          title={item.name}
                           style={{
-                            
                             width: "250px",
                             whiteSpace: "nowrap",
                             overflow: "hidden",
@@ -823,20 +801,21 @@ const StudentData = () => {
                           }}
                         >
                           {item.name}
-                          <span 
-                          title={item.registrationnumber}
-                          style={{
-                            
-                            width: "250px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            paddingLeft: "10px",
-                            textOverflow: "ellipsis",
-                            fontSize: "15px",
-                            display: "block",
-                          }}
-                          > {item.registrationnumber}</span>
-                          
+                          <span
+                            title={item.registrationnumber}
+                            style={{
+                              width: "250px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              paddingLeft: "10px",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display: "block",
+                            }}
+                          >
+                            {" "}
+                            {item.registrationnumber}
+                          </span>
                         </span>
                       </TableCell>
 
@@ -845,7 +824,7 @@ const StudentData = () => {
                         className=" border border 1 text-center p-0 m-0"
                       >
                         <span
-                        title={item.branch}
+                          title={item.branch}
                           style={{
                             width: "100px",
                             whiteSpace: "nowrap",
@@ -857,24 +836,26 @@ const StudentData = () => {
                         >
                           {item.branch}
                           <br />
-                          <span 
-                          title={item.courses}
-                           style={{
-                            width: "100px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                           
-                            textOverflow: "ellipsis",
-                            fontSize: "15px",
-                            display: "block",
-                          }}
-                          > {item.courses}</span>
-                          
+                          <span
+                            title={item.courses}
+                            style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display: "block",
+                            }}
+                          >
+                            {" "}
+                            {item.courses}
+                          </span>
                         </span>
                       </TableCell>
 
                       <TableCell className=" border border 1 text-center p-0 m-0">
-                      <span
+                        <span
                           style={{
                             width: "100px",
                             whiteSpace: "nowrap",
@@ -885,16 +866,14 @@ const StudentData = () => {
                             display: "block",
                           }}
                         >
-                           {item.enquirytakenby}
-                        <br />
+                          {item.enquirytakenby}
+                          <br />
 
-                        {item.leadsource}
+                          {item.leadsource}
                         </span>
-                       
                       </TableCell>
 
                       <TableCell className=" border border 1 text-center p-0 m-0 ">
-                       
                         <span
                           style={{
                             width: "150px",
@@ -902,33 +881,32 @@ const StudentData = () => {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             fontSize: "15px",
-                            display:"block"
+                            display: "block",
                           }}
                         >
-                           {item.mobilenumber}
-                        <br />
+                          {item.mobilenumber}
+                          <br />
                           {item.email}
                         </span>
                       </TableCell>
 
                       <TableCell className=" border border 1 text-center p-0 m-0">
-                      <span
+                        <span
                           style={{
                             width: "150px",
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             fontSize: "15px",
-                            display:"block"
+                            display: "block",
                           }}
                         >
-                            {item.admissiondate
-                          ? item.admissiondate.substring(0, 10)
-                          : "No Date"}{" "}
-                        <br />
-                        {item.modeoftraining}
+                          {item.admissiondate
+                            ? item.admissiondate.substring(0, 10)
+                            : "No Date"}{" "}
+                          <br />
+                          {item.modeoftraining}
                         </span>
-                       
                       </TableCell>
 
                       <TableCell className=" text-center d-flex py-4 ">

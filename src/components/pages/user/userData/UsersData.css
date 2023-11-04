@@ -1,86 +1,82 @@
+.row-disabled {
+  background-color: gray;
+  color: #fff;
+}
 
-
-
-.userlist{ 
-  
+.userlist {
   border: 2px solid #f5f5f5;
   border-radius: 5px;
   margin: auto;
   overflow: hidden;
- 
 }
-.usertable{ 
+.usertable {
   width: 100%;
   margin: auto;
 }
 
-.flex{ 
-    display: flex;
-    justify-content: space-between;
-   
+.flex {
+  display: flex;
+  justify-content: space-between;
 }
-.filters{ 
-    background-color: #0070fc;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
+.filters {
+  background-color: #0070fc;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-
-
-.save , .clear{ 
-    background-color: #0070fc;
-    color: #fff;
-    padding: 5px 19px 5px 19px;
-    border: none;
-    border-radius: 5px;
-  }
-  StyledTableCell { 
-    padding: 0;
-    margin: 0;
-  }
-  .user-table{ 
-    overflow-x: hidden;
-  }
-  .input-field:hover{ 
-    border: hidden;
-  }
-  input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button{ 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    .select-input{ 
-      position: relative;
-      margin: 10px 0;
-    }
-    .select-input label{ 
-      position: absolute;
-      top:2%;
-      left: 19%;
-      transform: translateY(-50%);
-      font-size: 15px;
-      padding: 0 5px;
-    }
-    .select-input select{ 
-      width: 200px;
-            height: 50px;
-            font-size: 18px;
-            border-radius: 6px;
-            padding-left: 10px;
-            border: 1.9px solid black;
-    }
-    .select-input select:focus~label,
-    .select-input select:valid~label{ 
-      top:0 ;
-      background-color: #fff;
-      color: #0070fc;
-    }
-    .elipse{ 
-      width: 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-   
-    
+.save,
+.clear {
+  background-color: #0070fc;
+  color: #fff;
+  padding: 5px 19px 5px 19px;
+  border: none;
+  border-radius: 5px;
+}
+StyledTableCell {
+  padding: 0;
+  margin: 0;
+}
+.user-table {
+  overflow-x: hidden;
+}
+.input-field:hover {
+  border: hidden;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.select-input {
+  position: relative;
+  margin: 10px 0;
+}
+.select-input label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.select-input select {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.select-input select:focus ~ label,
+.select-input select:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+.elipse {
+  width: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
