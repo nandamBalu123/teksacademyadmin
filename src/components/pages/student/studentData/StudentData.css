@@ -47,138 +47,128 @@ hr {
 }
 
 .iconn:hover {
- color: gray;
+  color: gray;
   transition: 0.1s;
 }
-.input-field:hover{ 
+.input-field:hover {
   border: hidden;
 }
-.studetdetails { 
-overflow-x:hidden ;
+.studetdetails {
+  overflow-x: hidden;
 }
 input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button{ 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    .studentdata-input{ 
-      position: relative;
-      margin: 10px 0;
-      
-      }
-      .studentdata-input label{ 
-          position: absolute;
-          top:2%;
-          left: 19%;
-          transform: translateY(-50%);
-          font-size: 15px;
-          padding: 0 5px;
-      
-      }
-      .studentdata-input input{ 
-          width: 200px;
-          height: 50px;
-          font-size: 18px;
-          border-radius: 6px;
-          padding-left: 10px;
-          border: 1.9px solid black;
-          
-      }
-      .studentdata-input input:focus~label,
-      .studentdata-input input:valid~label{ 
-          top:0 ;
-          background-color: #fff;
-          color: #0070fc;
-      }
-      .studentdata-select{ 
-        position: relative;
-        margin: 10px 0;
-        
-        }
-        .studentdata-select label{ 
-            position: absolute;
-            top:2%;
-            left: 19%;
-            transform: translateY(-50%);
-            font-size: 15px;
-            padding: 0 5px;
-        
-        }
-        .studentdata-select select{ 
-            width: 200px;
-            height: 50px;
-            font-size: 18px;
-            border-radius: 6px;
-            padding-left: 10px;
-            border: 1.9px solid black;
-            
-        }
-        .studentdata-select select:focus~label,
-        .studentdata-select select:valid~label{ 
-            top:0 ;
-            background-color: #fff;
-            color: #0070fc;
-        }
-        .input-input{ 
-          position: relative;
-          margin: 10px 0;
-          
-          }
-          .input-input label{ 
-              position: absolute;
-              top:2%;
-              left: 19%;
-              transform: translateY(-50%);
-              font-size: 15px;
-              padding: 0 5px;
-          
-          }
-          .input-input input{ 
-              width: 200px;
-              height: 50px;
-              font-size: 18px;
-              border-radius: 6px;
-              padding-left: 10px;
-              border: 1.9px solid black;
-              
-          }
-          .input-input input:focus~label,
-          .input-input input:valid~label{ 
-              top:0 ;
-              background-color: #fff;
-              color: #0070fc;
-          }
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.studentdata-input {
+  position: relative;
+  margin: 10px 0;
+}
+.studentdata-input label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.studentdata-input input {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.studentdata-input input:focus ~ label,
+.studentdata-input input:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+.studentdata-select {
+  position: relative;
+  margin: 10px 0;
+}
+.studentdata-select label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.studentdata-select select {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.studentdata-select select:focus ~ label,
+.studentdata-select select:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+.input-input {
+  position: relative;
+  margin: 10px 0;
+}
+.input-input label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.input-input input {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.input-input input:focus ~ label,
+.input-input input:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
 
-          .input-select{ 
-            position: relative;
-            margin: 10px 0;
-            
-            }
-            .input-select label{ 
-                position: absolute;
-                top:2%;
-                left: 19%;
-                outline: none;
-                transform: translateY(-50%);
-                font-size: 15px;
-                padding: 0 5px;
-            
-            }
-            .input-select select{ 
-                width: 200px;
-                height: 50px;
-                font-size: 18px;
-                border-radius: 6px;
-                padding-left: 10px;
-                border: 1.9px solid black;
-                
-            }
-        .input-select select:focus~label,
-        .input-select select:valid~label{ 
-            top:0 ;
-            background-color: #fff;
-            color: #0070fc;
-        }
-        
-        
-        
+.input-select {
+  position: relative;
+  margin: 10px 0;
+}
+.input-select label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  outline: none;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.input-select select {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.input-select select:focus ~ label,
+.input-select select:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+
+.disabled-row {
+  background-color: #f0f0f0;
+  color: #888888;
+}

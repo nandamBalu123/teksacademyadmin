@@ -27,7 +27,7 @@ const CreateUserForm = () => {
   const [reportto, setreportto] = useState("");
   const [profile, setprofile] = useState("");
   const [branch, setbranch] = useState("");
-  const [user_status, setUser_status] = useState();
+  const [user_status, setUser_status] = useState(true);
   const [user_remarks_history, setuser_remarks_history] = useState([]);
   const profilee = [];
 
