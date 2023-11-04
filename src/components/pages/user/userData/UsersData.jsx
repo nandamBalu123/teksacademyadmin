@@ -539,35 +539,37 @@ const UsersData = () => {
                       name="department"
                       value={filterCriteria.department}
                       onChange={handleInputChange}
-                    >
-                      {departments &&
-                        departments.map((item, index) => (
-                          <MenuItem key={item.id} value={item.department_name}>
-                            {item.department_name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Report to</InputLabel>
-                    <Select
+                
+                      >
+                 {departments && 
+                 departments.map((item, index)=>(
+                  <MenuItem key={item.id} value={item.department_name}> 
+                  {item.department_name}
+                  </MenuItem>
+                 ))}
+                      </Select>
+                    </FormControl>
+               </div>
+               {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+              <FormControl variant="standard" className="w-100">
+                      <InputLabel>Report to</InputLabel>
+                      <Select
                       className="pe-4"
                       name="reportto"
                       value={filterCriteria.reportto}
                       onChange={handleInputChange}
-                    >
-                      {reporttoo &&
-                        reporttoo.map((item, index) => (
-                          <MenuItem key={item.id} value={item.reportto}>
-                            {item.reportto}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
+                       >
+                    {reporttoo && 
+                    reporttoo.map((item,index)=>( 
+                      <MenuItem key={item.id} value={item.reportto}> 
+                      {item.reportto}
+                       </MenuItem>
+                    ))}
+                      </Select>
+                    </FormControl>
+               </div> */}
+
+               </div>
               <div className="text-end me-2 mt-4">
                 <button className="clear" onClick={filterreset}>
                   {" "}

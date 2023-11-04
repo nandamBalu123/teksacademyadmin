@@ -62,6 +62,9 @@ import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 import Switch from '@mui/material/Switch';
 import axios from "axios";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext"
+
+import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { CSVLink } from "react-csv";
 // import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 // import { LocalizationProvider } from "@mui/x-date-pickers-pro";
@@ -92,9 +95,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const StudentData = () => {
   const { branches } = useBranchContext();
+  const { students, dispatch } = useStudentsContext();
+
+  const { users} = useUsersContext();
   const { leadsources } = useLeadSourceContext();
   const [isChecked, setIsChecked] = useState(false);
   const [opening, setOpening] = React.useState(false);
+  
 
   const handleClickOpen = () => {
     setOpening(true);
@@ -113,6 +120,27 @@ const StudentData = () => {
  
   const [initialData, setData] = useState([{ name: "" }]);
   // const [initialData, setData] = useState(initialDataa);
+// start
+ 
+  
+    // console.log("initialDataklsjd: ", initialData)
+    // useEffect(() => {
+    //   // Fetch data based on the user's role and ID
+    //   if (role === "admin") {
+        
+    //     fetchAllData().then((data) => {
+    //       setData(data);
+    //     });
+    //   } else {
+        
+    //     fetchDataById(userId).then((data) => {
+    //       setData(data);
+    //     });
+    //   }
+    // }, [role, userId]);
+
+
+    // end
 
   let initialDataCount = initialData.length;
 
@@ -143,8 +171,16 @@ const StudentData = () => {
   };
   const [getusers, setgetusers] = useState([]);
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
-  
-  
+  const role = localStorage.getItem("role");
+  let userId = localStorage.getItem("id");
+   userId = parseInt(userId)
+   
+   useEffect(()=>{
+    if(students){
+      setData(students);
+    }
+   },[students])
+ 
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -152,7 +188,21 @@ const StudentData = () => {
       .then((response) => {
         // Handle the successful response here
         setData(response.data); // Update the data state with the fetched data
-
+        if(role == "counsellor"){
+          const filteredResults = response.data.filter((item) => {
+            const user_id=parseInt(item.user_id);
+          
+              const dataaspercounsellor = userId
+              ? user_id === userId
+              : true;
+            return (
+             dataaspercounsellor
+            );
+          });
+          setData(filteredResults); // Update the data state with the fetched data
+        }
+       
+    
         console.log("data", response.data);
       })
       .catch((error) => {
@@ -177,58 +227,65 @@ const StudentData = () => {
     fetchData();
   }, []);
   useEffect(() => {
-    const filteredResults = initialData.filter((item) => {
-      const searchCondition = filterCriteria.search
-        ? item.name
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.branch
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.registrationnumber
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.courses
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.enquirytakenby
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase())
-        : true;
-
-      const dateCondition =
-        filterCriteria.fromdate && filterCriteria.todate
-          ? item.admissiondate >= filterCriteria.fromdate &&
-            item.admissiondate <= filterCriteria.todate
+    
+      const filteredResults = initialData.filter((item) => {
+      
+       
+        const searchCondition = filterCriteria.search
+          ? item.name
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.branch
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.registrationnumber
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.courses
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase()) ||
+            item.enquirytakenby
+              .toLowerCase()
+              .includes(filterCriteria.search.toLowerCase())
           : true;
+  
+        const dateCondition =
+          filterCriteria.fromdate && filterCriteria.todate
+            ? item.admissiondate >= filterCriteria.fromdate &&
+              item.admissiondate <= filterCriteria.todate
+            : true;
+  
+        const branchCondition = filterCriteria.branch
+          ? item.branch === filterCriteria.branch
+          : true;
+  
+        const sourceCondition = filterCriteria.leadsource
+          ? item.leadsource === filterCriteria.leadsource
+          : true;
+  
+        const modeCondition = filterCriteria.modeoftraining
+          ? item.modeoftraining === filterCriteria.modeoftraining
+          : true;
+  
+        const counsellarCondition = filterCriteria.enquirytakenby
+          ? item.enquirytakenby === filterCriteria.enquirytakenby
+          : true;
+          
+  
+        return (
+          searchCondition &&
+          dateCondition &&
+          branchCondition &&
+          sourceCondition &&
+          modeCondition &&
+          counsellarCondition 
+        );
+      });
+      setFilteredData(filteredResults);
+    
+   
 
-      const branchCondition = filterCriteria.branch
-        ? item.branch === filterCriteria.branch
-        : true;
-
-      const sourceCondition = filterCriteria.leadsource
-        ? item.leadsource === filterCriteria.leadsource
-        : true;
-
-      const modeCondition = filterCriteria.modeoftraining
-        ? item.modeoftraining === filterCriteria.modeoftraining
-        : true;
-
-      const counsellarCondition = filterCriteria.enquirytakenby
-        ? item.enquirytakenby === filterCriteria.enquirytakenby
-        : true;
-
-      return (
-        searchCondition &&
-        dateCondition &&
-        branchCondition &&
-        sourceCondition &&
-        modeCondition &&
-        counsellarCondition
-      );
-    });
-
-    setFilteredData(filteredResults);
+   
   }, [filterCriteria, initialData]);
 
   useEffect(() => {

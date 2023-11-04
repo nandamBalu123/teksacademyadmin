@@ -50,13 +50,17 @@ const LoginPage = () => {
             console.log("role: ", role);
 
             localStorage.setItem("role", role);
-
+            localStorage.setItem("id", id)
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(res.data.adminData));
+
+            // Store token in a cookie
+          document.cookie = `token=${token}; path=/`; // Set the token cookie
 
             dispatch({ type: "LOGIN", payload: res.data.adminData });
             console.log("res.data", res.data);
             navigate("/");
+            window.location.reload();
           } else {
             alert("Wrong Email or Password");
           }

@@ -31,7 +31,9 @@ const Topbar = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("role");
     localStorage.removeItem("token");
+    localStorage.removeItem("id");
 
+   
     // dispatch logout action
     dispatch({ type: "LOGOUT" });
     navigate("/login");
@@ -41,6 +43,7 @@ const Topbar = () => {
     //     navigate("/login");
     //   })
     //   .catch((err) => cFuseronsole.log(err));
+    // window.location.reload();
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
