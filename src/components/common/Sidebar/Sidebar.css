@@ -20,3 +20,9 @@
   font-size: 18px !important;
   line-height: 1.5;
 }
+.profilelogo{ 
+  width: 100%;
+}
+.pro-sidebar{ 
+  background-color: rgb(153, 153, 192);
+}

@@ -15,6 +15,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import profilepic from "../../../images/profilepic.jpg";
+import pictureprofile from '../../../images/profilepicture.jpg';
 import "./Topbar.css";
 import zIndex from "@mui/material/styles/zIndex";
 import { useAuthContext } from "../../../hooks/useAuthContext";
@@ -93,6 +94,10 @@ const Topbar = () => {
         </Box> */}
 
         <div className="col-1 col-md-1 col-lg-1 col-xl-1 ">
+          <div className="row"> 
+          <div className="d-flex "> 
+          {/* <img src={pictureprofile} className="w-100"/> */}
+           </div> </div>
           {/* <IconButton>
             <NotificationsOutlinedIcon className="Topbar-icon end" ></NotificationsOutlinedIcon>
           </IconButton>{" "} */}
@@ -122,7 +127,7 @@ const Topbar = () => {
               }}
             >
               <div className="d-flex">
-                <img className="w-25" src={profilepic} alt="phpto" />
+                <img className="w-100" src={profilepic} alt="phpto" />
 
                 <div className=" ms-3 mt-3">
                   {" "}

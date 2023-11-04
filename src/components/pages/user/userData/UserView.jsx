@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 // import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useParams } from "react-router-dom";
 import "./UserView.css";
+import profilepic from '../../../../images/profilepicture.jpg'
 import axios from "axios";
 const UserView = () => {
   const [singleUser, setUser] = useState("");
@@ -37,7 +38,7 @@ const UserView = () => {
         <div className="backimg">
           <img
             className="pic"
-            src="https://wallpapers.com/images/high/pretty-profile-pictures-k1qebyviiyl0wx0x.webp"
+            src={profilepic}
             alt="pic"
           />
         </div>

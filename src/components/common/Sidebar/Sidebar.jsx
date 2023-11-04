@@ -19,8 +19,11 @@ import Diversity3Icon from "@mui/icons-material/Diversity3";
 import GroupsIcon from "@mui/icons-material/Groups";
 import InfoIcon from "@mui/icons-material/Info";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
+import profilelogo from '../../../images/Teks-Logo-with-Trade.png';
+import MenuIcon from '@mui/icons-material/Menu';
 import favicon from "../../../images/favicon.jpeg";
 import axios from "axios";
+
 import { useAuthContext } from "../../../hooks/useAuthContext";
 // let role = localStorage.getItem(role);
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
@@ -123,7 +126,7 @@ const Sidebar = () => {
               icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
               style={{
                 margin: "10px 8px 10px 5px",
-                color: colors.grey[100],
+              
               }}
             >
               {!isCollapsed && (
@@ -140,11 +143,11 @@ const Sidebar = () => {
                     className="tekslogo"
                     fontWeight="900"
                   >
-                    Teks Academy
-                    {/* <img className="w-25 rounded-5" src={favicon}/>  Teks Academy */}
+                  
+                    <img className="profilelogo" src={profilelogo}/>  
                   </Typography>
                   <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <CloseIcon />
+                    <MenuIcon />
                   </IconButton>
                 </Box>
               )}
@@ -182,7 +185,7 @@ const Sidebar = () => {
             <Box paddingLeft={isCollapsed ? undefined : "1%"}>
               <Item
                 style={{
-                  color: colors.grey[100],
+                
                 
                  
                 }}
@@ -209,9 +212,7 @@ const Sidebar = () => {
               /> */}
               {profile == "admin" ? (
                 <SubMenu
-                  style={{
-                    color: colors.grey[100],
-                  }}
+                 
                   icon={<PeopleOutlinedIcon />}
                   label={"User Details"}
                   title={"User Management"}

@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import profilepic from '../../../../images/profilepicture.jpg';
 import "./StudentDataView.css";
 import { useEffect } from "react";
 import axios from "axios";
@@ -38,7 +39,7 @@ const StudentDataView = () => {
         <div className="bg">
           <img
             className="photo"
-            src="https://wallpapers.com/images/high/pretty-profile-pictures-k1qebyviiyl0wx0x.webp"
+            src={profilepic}
             alt="photo"
           />
         </div>
