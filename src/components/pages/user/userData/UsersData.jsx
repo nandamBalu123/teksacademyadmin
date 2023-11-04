@@ -61,7 +61,7 @@ const UsersData = () => {
   const handleClickOpen = (id, userStatus, userRemarksHistory) => {
     setId(id);
     setUser_Status(userStatus);
-    setuser_remarks_history(JSON.parse([userRemarksHistory]));
+    setuser_remarks_history([userRemarksHistory]);
     setOpening(true);
   };
   useEffect(() => {
@@ -886,11 +886,11 @@ const UsersData = () => {
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClosed}>Cancel</Button>
-                {userstatus == false && (
+                {!userstatus && (
                   <Button onClick={(e) => handleActivate()}>Activate</Button>
                 )}
 
-                {userstatus == true && (
+                {userstatus && (
                   <Button onClick={(e) => handleInActivate()}>
                     InActivate
                   </Button>
