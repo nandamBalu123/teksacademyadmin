@@ -600,7 +600,7 @@ const UsersData = () => {
                       </Select>
                     </FormControl>
                </div>
-               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+               {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
               <FormControl variant="standard" className="w-100">
                       <InputLabel>Report to</InputLabel>
                       <Select
@@ -617,7 +617,7 @@ const UsersData = () => {
                     ))}
                       </Select>
                     </FormControl>
-               </div>
+               </div> */}
 
                </div>
               <div className="text-end me-2 mt-4">

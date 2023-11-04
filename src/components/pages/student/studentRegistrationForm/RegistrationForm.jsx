@@ -603,7 +603,7 @@ export default function RegistrationForm() {
         }
       );
       const id = response.data.insertId;
-      // navigate(`/addtofee/${id}`);
+      navigate(`/addtofee/${id}`);
 
       // Handle a successful response here
       console.log("Responsee:", response.data.insertId);
