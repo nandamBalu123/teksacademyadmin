@@ -55,14 +55,35 @@ const UserView = () => {
             <p className="text-end"> Branch: {singleUser.branch}</p>
           </div>
           <p>
-            {singleUser.user_status &&
-              JSON.parse(singleUser.user_status).map((userstatus, index) => (
-                <span>
-                  <p>Activate remarks: {userstatus.activate_remarks}</p>
-
-                  <p>InActivate remarks:{userstatus.Inactivate_remarks}</p>
-                </span>
-              ))}
+            {singleUser.user_remarks_history &&
+              JSON.parse(singleUser.user_remarks_history).map(
+                (userstatus, index) => (
+                  <span>
+                    {userstatus.Activate_remarks && (
+                      <div>
+                        <span>Si No: {index + 1}</span> &nbsp;
+                        <span>Date : {userstatus.date}</span> &nbsp;
+                        <span>
+                          Active Remakrs:{userstatus.Activate_remarks}
+                        </span>
+                        &nbsp;
+                        <span>Status : Active</span>
+                      </div>
+                    )}
+                    {userstatus.Inactivate_remarks && (
+                      <span>
+                        <span>Si No: {index + 1}</span> &nbsp;
+                        <span>Date : {userstatus.date}</span> &nbsp;
+                        <span>
+                          Inactive Remakrs:{userstatus.Inactivate_remarks}
+                        </span>{" "}
+                        &nbsp;
+                        <span>Status : Inactive</span> &nbsp;
+                      </span>
+                    )}
+                  </span>
+                )
+              )}
           </p>
         </div>
       </div>
