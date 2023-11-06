@@ -1,10 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Mooli&family=Roboto+Mono:ital,wght@0,400;0,500;0,600;1,500&family=Source+Sans+3:wght@400;600;700&display=swap");
-
+/* @import url("https://fonts.googleapis.com/css2?family=Mooli&family=Roboto+Mono:ital,wght@0,400;0,500;0,600;1,500&family=Source+Sans+3:wght@400;600;700&display=swap"); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 .tekslogo {
   /* font-family: "Mooli", sans-serif;
   font-family: "Roboto Mono", monospace; */
   /* font-weight: 1900; */
-  font-family: "Nunito", sans-serif;
+  /* font-family: "Nunito", sans-serif; */
+  font-family: "Poppins" , sans-serif;
 
   letter-spacing: 1px;
 }
@@ -19,4 +20,10 @@
   font-weight: 400;
   font-size: 18px !important;
   line-height: 1.5;
+}
+.profilelogo{ 
+  width: 100%;
+}
+.pro-sidebar{ 
+  background-color: none;
 }
