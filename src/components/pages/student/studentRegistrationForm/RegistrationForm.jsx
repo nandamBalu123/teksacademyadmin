@@ -444,11 +444,11 @@ export default function RegistrationForm() {
     handleNext();
   };
   const handlePhoto = () => {
-    if (!file) {
-      alert("please enter profilepic");
-      return;
-    }
-    setSelectedFile(null);
+    // if (!file) {
+    //   alert("please enter profilepic");
+    //   return;
+    // }
+
     handleNext();
   };
   const handleEnquirydetails = () => {
@@ -594,11 +594,11 @@ export default function RegistrationForm() {
       // Make the POST request
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/student_form`,
-        
+
         studentRegistrationdata,
         {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -1121,7 +1121,6 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  
                   <input
                     type="file"
                     name="file"
@@ -1565,8 +1564,8 @@ export default function RegistrationForm() {
                     </tbody>
                   </table>
                 )} */}
-                <TableContainer component={Paper} >
-                  <Table sx={{ minWidth: 600 }} aria-label="spanning table" >
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
                     <TableHead>
                       <TableCell className="fs-6 py-3" align="center">
                         Fee Type
@@ -1711,10 +1710,7 @@ export default function RegistrationForm() {
                         })}
                       {feedetailsbilling.length > 0 && (
                         <TableRow className="border border1">
-                          <TableCell>
-                            {" "}
-                            Sub Total
-                          </TableCell>
+                          <TableCell> Sub Total</TableCell>
                           <TableCell>
                             {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
                           </TableCell>
@@ -1734,7 +1730,9 @@ export default function RegistrationForm() {
                         <TableCell align="left">{materialfee}</TableCell>
                       </TableRow>
                       <TableRow className="border border1">
-                        <TableCell align="left"><strong> Grand Total</strong></TableCell>
+                        <TableCell align="left">
+                          <strong> Grand Total</strong>
+                        </TableCell>
                         <TableCell align="left">{finaltotal}</TableCell>
                       </TableRow>
                     </TableBody>

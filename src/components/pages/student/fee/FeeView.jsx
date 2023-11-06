@@ -75,6 +75,7 @@ const FeeView = () => {
           updatedDataa[0].totalinstallmentspaid + 1;
         settotalinstallments(updatedDataa);
       }
+
       let totalpaidamount;
       let dueamount;
       if (newpaidamount) {
@@ -92,7 +93,14 @@ const FeeView = () => {
           break;
         }
       }
-      console.log("nextduedate", nextduedate);
+
+      let updatedInstallmentAmount =
+        dueamount / totalinstallments[0].totalinstallmentsleft;
+      for (let i = 0; i < installments.length; i++) {
+        const updatedInstallments = [...installments];
+        updatedInstallments[i].dueamount = parseInt(updatedInstallmentAmount);
+        setInstallments(updatedInstallments);
+      }
       const updatedData = {
         installments,
         totalinstallments,
@@ -432,7 +440,7 @@ const FeeView = () => {
                 <p className="ms-4">
                   {" "}
                   Installment {index + 1} :{" "}
-                  {parseFloat(installmentamount).toFixed(2)}
+                  {parseFloat(installment.dueamount).toFixed(2)}
                 </p>
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">

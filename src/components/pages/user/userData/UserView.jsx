@@ -71,7 +71,6 @@ const UserView = () => {
                     <span>
                       {userstatus.Activate_remarks && (
                         <div>
-                          <span>Si No: {index + 1}</span> &nbsp;
                           <span>Date : {formattedDate}</span> &nbsp;
                           <span>Status : Active</span>
                           <span>Remakrs:{userstatus.Activate_remarks}</span>
@@ -80,7 +79,6 @@ const UserView = () => {
                       )}
                       {userstatus.Inactivate_remarks && (
                         <span>
-                          <span>Si No: {index + 1}</span> &nbsp;
                           <span>Date : {formattedDate}</span> &nbsp;
                           <span>Status : Inactive</span> &nbsp;
                           <span>

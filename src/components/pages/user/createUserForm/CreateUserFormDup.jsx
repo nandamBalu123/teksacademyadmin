@@ -28,7 +28,9 @@ const CreateUserForm = () => {
   const [profile, setprofile] = useState("");
   const [branch, setbranch] = useState("");
   const [user_status, setUser_status] = useState(true);
-  const [user_remarks_history, setuser_remarks_history] = useState([]);
+  const [user_remarks_history, setuser_remarks_history] = useState([
+    { Activate_remarks: "" },
+  ]);
   const profilee = [];
 
   const handleSubmit = async (e) => {

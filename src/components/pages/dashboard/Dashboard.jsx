@@ -19,7 +19,7 @@ import CloseIcon from "@mui/icons-material/Close";
 // require("dotenv").config();
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import { useStudentsContext } from "../../../hooks/useStudentsContext"
+import { useStudentsContext } from "../../../hooks/useStudentsContext";
 
 import {
   Button,
@@ -75,13 +75,12 @@ const Dashboard = () => {
     setAnchorEl(null);
   };
 
-   useEffect(()=>{
-    if(students){
+  useEffect(() => {
+    if (students) {
       setStudentData(students);
       setinitialData(students);
     }
-   },[students])
- 
+  }, [students]);
 
   useEffect(() => {
     axios
@@ -197,11 +196,8 @@ const Dashboard = () => {
               title={"Hi " + user.fullname}
               subtitle={"Welcome to TEKS ACADEMY"}
             />
-          )}
-           
-        
-            {" "}
-            {/* <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
+          )}{" "}
+          {/* <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               Filter
             </h6>
             <Menu
@@ -281,7 +277,6 @@ const Dashboard = () => {
                 </button>
               </MenuItem>
             </Menu> */}
-        
         </Box>
       </div>
 
@@ -319,6 +314,49 @@ const Dashboard = () => {
               <p>
                 <CurrencyRupeeIcon />
                 <b> {totalAmount}</b>
+              </p>
+            </Card>
+          </div>
+
+          <div
+            className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: false,
+                users: true,
+              })
+            }
+          >
+            <Card
+              style={{ backgroundColor: "#e6acb4 " }}
+              className="rounded rounded-3"
+            >
+              <p className="pt-3">Total Users</p>
+              <p>
+                <b> {getUsersData.length} </b>
+              </p>
+            </Card>
+          </div>
+          <div
+            className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: false,
+                users: true,
+              })
+            }
+          >
+            <Card
+              style={{ backgroundColor: "#e6acb4 " }}
+              className="rounded rounded-3"
+            >
+              <p className="pt-3">Total Users</p>
+              <p>
+                <b> {getUsersData.length} </b>
               </p>
             </Card>
           </div>
@@ -366,82 +404,79 @@ const Dashboard = () => {
 
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
-          <div className="d-flex justify-content-between"> 
-          <h4 className="pt-4  enrollment ps-4"> Total Entrollment</h4>
-          <div className="pt-2 pe-4">
-            <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              <button
-                className="btn btn-primary "
-                style={{ textTransform: "capitalize" }}
+          <div className="d-flex justify-content-between">
+            <h4 className="pt-4  enrollment ps-4"> Total Entrollment</h4>
+            <div className="pt-2 pe-4">
+              <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
               >
-                {" "}
-                Filter{" "}
-              </button>
-            </Button>
-            <Menu
-              className="mt-5"
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <div className="d-flex justify-content-between">
-                <MenuItem> Filter</MenuItem>
-                <MenuItem>
+                <button
+                  className="btn btn-primary "
+                  style={{ textTransform: "capitalize" }}
+                >
                   {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
-                </MenuItem>
-              </div>
-              <hr />
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
-              
+                  Filter{" "}
+                </button>
+              </Button>
+              <Menu
+                className="mt-5"
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" From:"
                       type="date"
                       variant="standard"
                       className="  w-100"
-                       InputLabelProps={{
+                      InputLabelProps={{
                         shrink: true,
-                        
                       }}
                       name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
                     />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" To:"
                       type="date"
                       variant="standard"
                       className="w-100"
-                    
                       InputLabelProps={{
                         shrink: true,
                       }}
                       name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
                     />
-                </div>
-             
-                {/* <div>
+                  </div>
+
+                  {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -458,19 +493,19 @@ const Dashboard = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-              </div>
-             
-              <MenuItem className="text-end">
-                {/* <button className="save"> Save</button> */}
-                <button className="clear " onClick={filterreset}>
-                  {" "}
-                  Clear
-                </button>
-              </MenuItem>
-            </Menu>
+                </div>
+
+                <MenuItem className="text-end">
+                  {/* <button className="save"> Save</button> */}
+                  <button className="clear " onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
           </div>
-          </div>
-      
+
           <div className="justify-content-around pt-4 row progreebar-show">
             {Object.entries(branchStudentData).map(([branch, students]) => {
               const enrollmentPercentage =
@@ -497,82 +532,79 @@ const Dashboard = () => {
       )}
       {DisplayData.fee && (
         <div className="progreebar rounded rounded-5  pb-4">
-        <div className="d-flex justify-content-between"> 
-        <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
-          <div className="pt-2 pe-4">
-            <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              <button
-                className="btn btn-primary "
-                style={{ textTransform: "capitalize" }}
+          <div className="d-flex justify-content-between">
+            <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
+            <div className="pt-2 pe-4">
+              <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
               >
-                {" "}
-                Filter{" "}
-              </button>
-            </Button>
-            <Menu
-              className="mt-5"
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <div className="d-flex justify-content-between">
-                <MenuItem> Filter</MenuItem>
-                <MenuItem>
+                <button
+                  className="btn btn-primary "
+                  style={{ textTransform: "capitalize" }}
+                >
                   {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
-                </MenuItem>
-              </div>
-              <hr />
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
-              
+                  Filter{" "}
+                </button>
+              </Button>
+              <Menu
+                className="mt-5"
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" From:"
                       type="date"
                       variant="standard"
                       className="  w-100"
-                       InputLabelProps={{
+                      InputLabelProps={{
                         shrink: true,
-                        
                       }}
                       name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
                     />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" To:"
                       type="date"
                       variant="standard"
                       className="w-100"
-                    
                       InputLabelProps={{
                         shrink: true,
                       }}
                       name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
                     />
-                </div>
-             
-                {/* <div>
+                  </div>
+
+                  {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -589,18 +621,18 @@ const Dashboard = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-              </div>
-             
-              <MenuItem className="text-end">
-                {/* <button className="save"> Save</button> */}
-                <button className="clear " onClick={filterreset}>
-                  {" "}
-                  Clear
-                </button>
-              </MenuItem>
-            </Menu>
+                </div>
+
+                <MenuItem className="text-end">
+                  {/* <button className="save"> Save</button> */}
+                  <button className="clear " onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
           </div>
-        </div>
           <div className="  justify-content-around pt-4 row progreebar-show">
             {Object.entries(finalTotalByBranch).map(
               ([branch, { totalAmount, percentage }]) => {
