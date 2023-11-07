@@ -451,22 +451,22 @@ const FeeDetails = () => {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0 ">
                       {" "}
                       S.NO
                     </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light  m-0 p-0 ">
                       Name
                       <br /> Branch <br />
                       Counsellor
                     </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
                       {" "}
                       Contact
                       <br />
                       Email
                     </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
                       {" "}
                       Course <br /> Date of Joining
                     </TableCell>
@@ -500,39 +500,200 @@ const FeeDetails = () => {
                         key={item.id}
                       >
                         <TableCell className="border border 1">
-                          {" "}
+                          
                           {index + 1}
                         </TableCell>
                         <TableCell className="border border 1">
-                          {" "}
-                          {item.name}
-                          <br />
-                          {item.branch} <br />
-                          {item.enquirytakenby}
+                        <span
+                                title={item.name}
+                                style={{
+                                  
+                                  width: "9rem",
+                                  
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {item.name}
+                              </span>
+                         
+                          
+                         
+                          <span
+                                title={item.branch}
+                                style={{
+                                  
+                                  width: "9rem",
+                                 
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                              {item.branch}
+                              </span>
+                          
+                           <span
+                                title=   {item.enquirytakenby}
+                                style={{
+                                  
+                                  width: "9rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {item.enquirytakenby}
+                              </span>
+                       
                         </TableCell>
                         <TableCell className="border border 1">
-                          {" "}
-                          {item.mobilenumber}
-                          <br /> {item.email}
+                        <span
+                                title= {item.mobilenumber}
+                                style={{
+                                  
+                                  width: "6rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                              {item.mobilenumber}
+                              </span>
+                              <span
+                                title= {item.email}
+                                style={{
+                                  
+                                  width: "8rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                              {item.email}
+                              </span>
+                          
+                        
                         </TableCell>
                         <TableCell className="border border 1">
-                          {" "}
-                          {item.courses}
-                          <br />
-                          {item.admissiondate}
+                        <span
+                                title=  {item.courses}
+                                style={{
+                                  
+                                  width: "6rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {item.courses}
+                              </span>
+                              <span
+                                title={item.admissiondate}
+                                style={{
+                                  
+                                  width: "6rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {item.admissiondate}
+                              </span>
+                         
+                          
                         </TableCell>
                         <TableCell className="border border 1">
-                          {" "}
-                          {item.finaltotal}
-                          <br /> {item.totalpaidamount} <br />
-                          {item.dueamount}
-                          <br />
+                        <span
+                                title=  {item.finaltotal}
+                                style={{
+                                  
+                                  width: "4rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                 {item.finaltotal}
+                              </span>
+                              <span
+                                title={item.totalpaidamount}
+                                style={{
+                                  
+                                  width: "4rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {item.totalpaidamount}
+                              </span>
+                              <span
+                                title={item.dueamount}
+                                style={{
+                                  
+                                  width: "4rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {item.dueamount}
+                              </span>
                         </TableCell>
                         <TableCell className="border border 1">
-                          {" "}
-                          {item.admissiondate}
-                          <br />
-                          {item.nextduedate}
+                        <span
+                                title={item.admissiondate}
+                                style={{
+                                  
+                                  width: "5rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                              {item.admissiondate}
+                              </span>
+                              <span
+                                title={item.nextduedate}
+                                style={{
+                                  
+                                  width: "5rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                              {item.nextduedate}
+                              </span>
+                          
+                         
+                          
                         </TableCell>
                         <TableCell className="border border 1">
                           {item.totalinstallments &&
