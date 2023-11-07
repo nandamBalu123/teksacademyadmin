@@ -250,39 +250,134 @@ const FeeView = () => {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell className="border border 1">
-                    {studentdata.name}
-                  </TableCell>
-                  <TableCell className="border border 1">
-                    <span
+                  <span
+                  title={studentdata.name}
                       style={{
-                        width: "200px",
+                        width: "7rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
-                        fontSize: "15px",
+                        fontSize: "14px",
+                        display:"block"
+                      }}
+
+                    >
+                      {studentdata.name}
+                    </span>
+                    
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    <span
+                    title={studentdata.email}
+                      style={{
+                        width: "7rem",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        fontSize: "14px",
+                        display:"block"
                       }}
                     >
                       {studentdata.email}
                     </span>
                   </TableCell>
                   <TableCell className="border border 1">
-                    {studentdata.mobilenumber}
+                  <span 
+                    title={studentdata.mobilenumber}
+                      style={{
+                        width: "5rem",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        display:"block"
+                      }}
+                    >
+                     {studentdata.mobilenumber}
+                    </span>
+                    
                   </TableCell>
                   <TableCell className="border border 1">
-                    {studentdata.courses}
+                  <span
+                    title={studentdata.courses}
+                      style={{
+                        width: "3rem",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        fontSize: "14px",
+                        display:"block"
+                      }}
+                    >
+                     {studentdata.courses}
+                    </span>
+                    
                   </TableCell>
                   <TableCell className="border border 1">
-                    {studentdata.admissiondate}
+                  <span 
+                    title={studentdata.admissiondate}
+                      style={{
+                        width: "5rem",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        display:"block"
+                      }}
+                    >
+                     {studentdata.admissiondate}
+                    </span>
+                    
                   </TableCell>
                   <TableCell className="border border 1">
-                    {studentdata.finaltotal}
+                  <span 
+                    title=  {studentdata.finaltotal}
+                      style={{
+                        width: "3rem",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        display:"block"
+                      }}
+                    >
+                       {studentdata.finaltotal}
+                    </span>
+                    
+                  
                   </TableCell>
 
                   <TableCell className="border border 1">
-                    {studentdata.totalpaidamount}
+                  <span 
+                    title=  {studentdata.totalpaidamount}
+                      style={{
+                        width: "3rem",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        display:"block"
+                      }}
+                    >
+                       {studentdata.totalpaidamount}
+                    </span>
+                    
                   </TableCell>
                   <TableCell className="border border 1">
-                    {studentdata.dueamount}
+                  <span 
+                    title=    {studentdata.dueamount}
+                      style={{
+                        width: "3rem",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        display:"block"
+                      }}
+                    >
+                           {studentdata.dueamount}
+                    </span>
+                
                     {/* {dueamount} */}
                   </TableCell>
 

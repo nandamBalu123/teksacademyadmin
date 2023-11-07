@@ -618,17 +618,69 @@ const Certificate = () => {
                           {index + 1}
                         </TableCell>
                         <TableCell className="border border 1">
-                          {student.name}
+                        <span
+                                title={student.name}
+                                style={{
+                                  
+                                  width: "6rem",
+                                  
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                               {student.name}
+                              </span>
+                          
                         </TableCell>
                         <TableCell className="border border 1 ">
-                          {student.courses}
+                        <span
+                                title=   {student.courses}
+                                style={{
+                                  
+                                  width: "4rem",
+                                  
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                  {student.courses}
+                              </span>
+                       
                         </TableCell>
                         <TableCell className="border border 1 ">
-                          {student.registrationnumber}
+                        <span
+                                title= {student.registrationnumber}
+                                style={{
+                                  
+                                  width: "7rem",
+                                  
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                   {student.registrationnumber}
+                              </span>
+                         
                         </TableCell>
 
                         <TableCell className="border border 1 ">
-                          <input
+                        <span
+                              
+                                style={{
+                                fontSize: "15px",
+                                 
+                                }}
+                                >
+                                  <input
                             type="date"
                             name="startdate"
                             className="startdate"
@@ -639,9 +691,18 @@ const Certificate = () => {
                                 : undefined
                             }
                           />
+                              </span>
+                         
                         </TableCell>
                         <TableCell className="border border 1 ">
-                          <input
+                        <span
+                              
+                              style={{
+                              
+                                  fontSize: "15px",
+                              
+                              }}>
+                              <input
                             type="date"
                             name="enddate"
                             className="enddate"
@@ -650,6 +711,8 @@ const Certificate = () => {
                               courseEndDate !== "" ? courseEndDate : undefined
                             }
                           />
+                            </span>
+                          
                         </TableCell>
                         <TableCell className="border border 1  text-center fs-6">
                           {certificateStatus === "" && (
