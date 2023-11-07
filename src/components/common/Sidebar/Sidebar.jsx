@@ -212,7 +212,9 @@ const Sidebar = () => {
               /> */}
               {profile == "admin" ? (
                 <SubMenu
-                 
+                style={{
+                  color: colors.grey[100],
+                }}
                   icon={<PeopleOutlinedIcon />}
                   label={"User Details"}
                   title={"User Management"}

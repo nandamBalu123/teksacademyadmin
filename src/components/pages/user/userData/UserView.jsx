@@ -3,8 +3,15 @@ import { useState, useEffect } from "react";
 // import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useParams } from "react-router-dom";
 import "./UserView.css";
-import profilepic from '../../../../images/profilepicture.jpg'
+import profilepic from "../../../../images/profilepicture.jpg";
 import axios from "axios";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 const UserView = () => {
   const [singleUser, setUser] = useState("");
 
@@ -36,11 +43,7 @@ const UserView = () => {
     <div className="container">
       <div className="userviewing">
         <div className="backimg">
-          <img
-            className="pic"
-            src={profilepic}
-            alt="pic"
-          />
+          <img className="pic" src={profilepic} alt="pic" />
         </div>
         <div className="row">
           <div className="col-12 col-md-6 col-xl-6 col-lg-6">
@@ -55,46 +58,76 @@ const UserView = () => {
             <p className="text-end"> Profile : {singleUser.profile} </p>
             <p className="text-end"> Branch: {singleUser.branch}</p>
           </div>
-          {/* <p>
-            {singleUser.user_remarks_history &&
-              JSON.parse(singleUser.user_remarks_history).map(
-                (userstatus, index) => {
-                  const originalDate = new Date(userstatus.date);
-                  const day = String(originalDate.getDate()).padStart(2, "0");
-                  const month = String(originalDate.getMonth() + 1).padStart(
-                    2,
-                    "0"
-                  ); // Month is zero-based, so we add 1.
-                  const year = originalDate.getFullYear();
 
-                  const formattedDate = `${day}-${month}-${year}`;
-                  return (
-                    <span>
-                      {userstatus.Activate_remarks && (
-                        <div>
-                          <span>Si No: {index + 1}</span> &nbsp;
-                          <span>Date : {formattedDate}</span> &nbsp;
-                          <span>Status : Active</span>
-                          <span>Remakrs:{userstatus.Activate_remarks}</span>
-                          &nbsp;
-                        </div>
-                      )}
-                      {userstatus.Inactivate_remarks && (
-                        <span>
-                          <span>Si No: {index + 1}</span> &nbsp;
-                          <span>Date : {formattedDate}</span> &nbsp;
-                          <span>Status : Inactive</span> &nbsp;
-                          <span>
-                            Remakrs:{userstatus.Inactivate_remarks}
-                          </span>{" "}
-                          &nbsp;
-                        </span>
-                      )}
-                    </span>
-                  );
-                }
-              )}
-          </p> */}
+          <TableContainer component={Paper} className="my-4">
+            <Table
+              sx={{ minWidth: 650 }}
+              size="large"
+              aria-label="a dense table"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="fs-6 text-center border border-2">
+                    Date
+                  </TableCell>
+                  <TableCell className="fs-6 text-center border border-2">
+                    Status
+                  </TableCell>
+                  <TableCell className="fs-6 text-center border border-2">
+                    Remarks
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {singleUser.user_remarks_history &&
+                  singleUser.user_remarks_history.map((userstatus, index) => {
+                    const originalDate = new Date(userstatus.date);
+                    const day = String(originalDate.getDate()).padStart(2, "0");
+                    const month = String(originalDate.getMonth() + 1).padStart(
+                      2,
+                      "0"
+                    ); // Month is zero-based, so we add 1.
+                    const year = originalDate.getFullYear();
+
+                    const formattedDate = `${day}-${month}-${year}`;
+                    return (
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                        key={index}
+                      >
+                        <TableCell className="text-center border border-2">
+                          {" "}
+                          {formattedDate}
+                        </TableCell>
+
+                        {userstatus.Activate_remarks && (
+                          <TableCell className="text-center border border-2">
+                            Active
+                          </TableCell>
+                        )}
+                        {userstatus.Inactivate_remarks && (
+                          <TableCell className="text-center border border-2">
+                            Inactive
+                          </TableCell>
+                        )}
+                        {userstatus.Activate_remarks && (
+                          <TableCell className="text-center border border-2">
+                            {userstatus.Activate_remarks}
+                          </TableCell>
+                        )}
+                        {userstatus.Inactivate_remarks && (
+                          <TableCell className="text-center border border-2">
+                            {userstatus.Inactivate_remarks}
+                          </TableCell>
+                        )}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
     </div>

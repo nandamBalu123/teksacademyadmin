@@ -61,12 +61,10 @@ const UsersData = () => {
   const handleClickOpen = (id, userStatus, userRemarksHistory) => {
     setId(id);
     setUser_Status(userStatus);
-    setuser_remarks_history([userRemarksHistory]);
+    setuser_remarks_history(userRemarksHistory);
     setOpening(true);
   };
-  useEffect(() => {
-    console.log("use", id, userstatus, userremarkshistory);
-  });
+
   const handleClosed = () => {
     setOpening(false);
   };
@@ -236,9 +234,9 @@ const UsersData = () => {
         user_remarks_history,
       };
       let uploadcontext = { user_status, user_remarks_history, id };
-      uploadcontext.user_remarks_history = JSON.stringify(
-        uploadcontext.user_remarks_history
-      );
+      // uploadcontext.user_remarks_history = JSON.stringify(
+      //   uploadcontext.user_remarks_history
+      // );
       axios
         .put(`${process.env.REACT_APP_API_URL}/userstatus/${id}`, updatedData)
         .then((res) => {
@@ -274,9 +272,9 @@ const UsersData = () => {
         user_remarks_history,
       };
       let uploadcontext = { user_status, user_remarks_history, id };
-      uploadcontext.user_remarks_history = JSON.stringify(
-        uploadcontext.user_remarks_history
-      );
+      // uploadcontext.user_remarks_history = JSON.stringify(
+      //   uploadcontext.user_remarks_history
+      // );
       axios
         .put(`${process.env.REACT_APP_API_URL}/userstatus/${id}`, updatedData)
         .then((res) => {
@@ -650,7 +648,7 @@ const UsersData = () => {
                       records.map((user, index) => {
                         const dynamicStyle = {
                           backgroundColor:
-                            user.user_status == 0 ? "#bdb7b7" : "",
+                            user.user_status == 0 ? "#e3dada" : "",
                         };
                         return (
                           <StyledTableRow style={dynamicStyle}>
@@ -661,6 +659,7 @@ const UsersData = () => {
                               <span
                                 title={user.fullname}
                                 style={{
+                                  color: user.user_status == 0 ? "#b8b2b2" : "",
                                   width: "120px",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
@@ -680,6 +679,7 @@ const UsersData = () => {
                               <span
                                 title={user.email}
                                 style={{
+                                  color: user.user_status == 0 ? "#b8b2b2" : "",
                                   width: "120px",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
@@ -698,6 +698,7 @@ const UsersData = () => {
                               <span
                                 title={user.phonenumber}
                                 style={{
+                                  color: user.user_status == 0 ? "#b8b2b2" : "",
                                   width: "90px",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
@@ -716,6 +717,7 @@ const UsersData = () => {
                               <span
                                 title={user.designation}
                                 style={{
+                                  color: user.user_status == 0 ? "#b8b2b2" : "",
                                   width: "100px",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
@@ -734,6 +736,7 @@ const UsersData = () => {
                               <span
                                 title={user.department}
                                 style={{
+                                  color: user.user_status == 0 ? "#b8b2b2" : "",
                                   width: "100px",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
@@ -752,6 +755,7 @@ const UsersData = () => {
                               <span
                                 title={user.reportto}
                                 style={{
+                                  color: user.user_status == 0 ? "#b8b2b2" : "",
                                   width: "100px",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
@@ -770,6 +774,7 @@ const UsersData = () => {
                               <span
                                 title={user.profile}
                                 style={{
+                                  color: user.user_status == 0 ? "#b8b2b2" : "",
                                   width: "100px",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
@@ -789,6 +794,7 @@ const UsersData = () => {
                               <span
                                 title={user.branch}
                                 style={{
+                                  color: user.user_status == 0 ? "#b8b2b2" : "",
                                   width: "90px",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
@@ -815,7 +821,7 @@ const UsersData = () => {
                               >
                                 <ModeEditIcon />
                               </Link>
-                              {/* {user.user_status !== undefined && (
+                              {user.user_status !== undefined && (
                                 <div class="form-check form-switch">
                                   <input
                                     class="form-check-input"
@@ -832,7 +838,7 @@ const UsersData = () => {
                                     }
                                   />
                                 </div>
-                              )} */}
+                              )}
 
                               {/* {user.user_status &&
                               JSON.parse(user.user_status).map(
@@ -886,15 +892,16 @@ const UsersData = () => {
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClosed}>Cancel</Button>
-                {!userstatus && (
-                  <Button onClick={(e) => handleActivate()}>Activate</Button>
-                )}
 
-                {userstatus && (
+                {userstatus === 0 || userstatus === false ? (
+                  <Button onClick={(e) => handleActivate()}>Activate</Button>
+                ) : null}
+
+                {userstatus === 1 || userstatus === true ? (
                   <Button onClick={(e) => handleInActivate()}>
                     InActivate
                   </Button>
-                )}
+                ) : null}
               </DialogActions>
             </Dialog>
             <div

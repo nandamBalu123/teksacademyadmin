@@ -19,7 +19,7 @@ import CloseIcon from "@mui/icons-material/Close";
 // require("dotenv").config();
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import { useStudentsContext } from "../../../hooks/useStudentsContext"
+import { useStudentsContext } from "../../../hooks/useStudentsContext";
 
 import {
   Button,
@@ -30,8 +30,7 @@ import {
   DialogActions,
 } from "@mui/material";
 const Dashboard = () => {
-
-  const role = localStorage.getItem('role');
+  const role = localStorage.getItem("role");
   const { user } = useAuthContext();
   const { students, dispatch } = useStudentsContext();
 
@@ -42,6 +41,7 @@ const Dashboard = () => {
     enrollments: false,
     fee: false,
     users: false,
+    dueAndReceivedAmount: false,
   });
 
   const [filterCriteria, setFilterCriteria] = useState({
@@ -77,13 +77,12 @@ const Dashboard = () => {
     setAnchorEl(null);
   };
 
-   useEffect(()=>{
-    if(students){
+  useEffect(() => {
+    if (students) {
       setStudentData(students);
       setinitialData(students);
     }
-   },[students])
- 
+  }, [students]);
 
   useEffect(() => {
     axios
@@ -152,7 +151,10 @@ const Dashboard = () => {
       return result;
     }, {});
   };
-
+  const branchwiseAllstudentsData = groupDataAndCalculatePercentage(
+    students,
+    "branch"
+  );
   const branchStudentData = groupDataAndCalculatePercentage(
     getstudentData,
     "branch"
@@ -163,6 +165,8 @@ const Dashboard = () => {
   );
 
   const finalTotalByBranch = {};
+  const finalDueAndReceivedByBranch = {};
+
   let totalAmount = 0;
   // Calculate the total amount and handle NaN values
   getstudentData.forEach((student) => {
@@ -174,6 +178,7 @@ const Dashboard = () => {
 
   Object.keys(branchStudentData).forEach((branch) => {
     let branchTotalAmount = 0;
+
     // Calculate the total amount for each branch and handle NaN values
     branchStudentData[branch].forEach((student) => {
       const amount = parseFloat(student.finaltotal);
@@ -183,12 +188,126 @@ const Dashboard = () => {
     });
 
     const branchPercentage = (branchTotalAmount / totalAmount) * 100;
+
     finalTotalByBranch[branch] = {
       totalAmount: branchTotalAmount,
       percentage: branchPercentage,
     };
   });
 
+  Object.keys(branchwiseAllstudentsData).forEach((branch) => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // Month is 0-based, so add 1 to get the current month
+    const currentYear = currentDate.getFullYear();
+
+    let totalDueAmount = 0;
+    let totalreceivedAmount = 0;
+
+    // Calculate the total amount for each branch and handle NaN values
+    branchwiseAllstudentsData[branch].forEach((student) => {
+      student.installments.forEach((installment) => {
+        if (installment.duedate) {
+          const dueDate = new Date(installment.duedate);
+          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+          const dueYear = dueDate.getFullYear();
+
+          if (dueMonth === currentMonth && dueYear === currentYear) {
+            totalDueAmount += parseInt(installment.dueamount, 10);
+          }
+        }
+        if (installment.paiddate) {
+          const dueDate = new Date(installment.paiddate);
+          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+          const dueYear = dueDate.getFullYear();
+
+          if (dueMonth === currentMonth && dueYear === currentYear) {
+            totalreceivedAmount += parseInt(installment.paidamount, 10);
+          }
+        }
+      });
+      student.initialpayment.forEach((payment) => {
+        if (payment.paiddate) {
+          const dueDate = new Date(payment.paiddate);
+          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+          const dueYear = dueDate.getFullYear();
+
+          if (dueMonth === currentMonth && dueYear === currentYear) {
+            totalreceivedAmount += parseInt(payment.initialamount, 10);
+          }
+        }
+      });
+    });
+
+    finalDueAndReceivedByBranch[branch] = {
+      totalDueAmount: totalDueAmount,
+      totalreceivedAmount: totalreceivedAmount,
+    };
+  });
+
+  const calculateDueAmountForCurrentMonth = () => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // Month is 0-based, so add 1 to get the current month
+    const currentYear = currentDate.getFullYear();
+
+    let totalDueAmount = 0;
+
+    students.forEach((item) => {
+      item.installments.forEach((installment) => {
+        if (installment.duedate) {
+          const dueDate = new Date(installment.duedate);
+          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+          const dueYear = dueDate.getFullYear();
+
+          if (dueMonth === currentMonth && dueYear === currentYear) {
+            totalDueAmount += parseInt(installment.dueamount, 10);
+          }
+        }
+      });
+    });
+
+    return totalDueAmount;
+  };
+  const calculatePaidAmountForCurrentMonth = () => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // Month is 0-based, so add 1 to get the current month
+    const currentYear = currentDate.getFullYear();
+
+    let totalreceivedAmount = 0;
+    students.forEach((item) => {
+      item.initialpayment.forEach((payment) => {
+        if (payment.paiddate) {
+          const dueDate = new Date(payment.paiddate);
+          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+          const dueYear = dueDate.getFullYear();
+
+          if (dueMonth === currentMonth && dueYear === currentYear) {
+            totalreceivedAmount += parseInt(payment.initialamount, 10);
+          }
+        }
+      });
+    });
+    students.forEach((item) => {
+      item.installments.forEach((installment) => {
+        if (installment.paiddate) {
+          const dueDate = new Date(installment.paiddate);
+          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+          const dueYear = dueDate.getFullYear();
+
+          if (dueMonth === currentMonth && dueYear === currentYear) {
+            totalreceivedAmount += parseInt(installment.paidamount, 10);
+          }
+        }
+      });
+    });
+
+    return totalreceivedAmount;
+  };
+  let AllbranchesDueAmount;
+  let AllbranchesreceivedAmount;
+  if (students) {
+    AllbranchesDueAmount = calculateDueAmountForCurrentMonth();
+    AllbranchesreceivedAmount = calculatePaidAmountForCurrentMonth();
+  }
   return (
     <>
       {/* Header */}
@@ -199,11 +318,8 @@ const Dashboard = () => {
               title={"Hi " + user.fullname}
               subtitle={"Welcome to TEKS ACADEMY"}
             />
-          )}
-           
-        
-            {" "}
-            {/* <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
+          )}{" "}
+          {/* <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               Filter
             </h6>
             <Menu
@@ -283,7 +399,6 @@ const Dashboard = () => {
                 </button>
               </MenuItem>
             </Menu> */}
-        
         </Box>
       </div>
 
@@ -293,7 +408,12 @@ const Dashboard = () => {
             className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
             style={{ cursor: "pointer" }}
             onClick={(e) =>
-              setDisplayData({ enrollments: true, fee: false, users: false })
+              setDisplayData({
+                enrollments: true,
+                fee: false,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
             }
           >
             <Card
@@ -310,7 +430,12 @@ const Dashboard = () => {
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
             style={{ cursor: "pointer" }}
             onClick={(e) =>
-              setDisplayData({ enrollments: false, fee: true, users: false })
+              setDisplayData({
+                enrollments: false,
+                fee: true,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
             }
           >
             <Card
@@ -321,10 +446,69 @@ const Dashboard = () => {
               <p>
                 <CurrencyRupeeIcon />
                 <b> {totalAmount}</b>
+                {/* <b>{sumDueAmount},</b>
+                <b>{sumreceivedAmount},</b> */}
               </p>
             </Card>
           </div>
           <div
+            className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: false,
+                users: false,
+                dueAndReceivedAmount: true,
+              })
+            }
+          >
+            <Card
+              style={{ backgroundColor: "#b7e9da" }}
+              className="rounded rounded-3"
+            >
+              <p className="pt-3">
+                <b>
+                  Due Amount : <CurrencyRupeeIcon />
+                  {AllbranchesDueAmount}
+                </b>
+              </p>
+              <p>
+                <b>
+                  Received Amount :
+                  <CurrencyRupeeIcon />
+                  {AllbranchesreceivedAmount}
+                </b>
+                {/* <b>{sumreceivedAmount},</b> */}
+              </p>
+            </Card>
+          </div>
+
+          {role === "admin" && (
+            <div
+              className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
+              style={{ cursor: "pointer" }}
+              onClick={(e) =>
+                setDisplayData({
+                  enrollments: false,
+                  fee: false,
+                  users: true,
+                  dueAndReceivedAmount: false,
+                })
+              }
+            >
+              <Card
+                style={{ backgroundColor: "#e6acb4 " }}
+                className="rounded rounded-3"
+              >
+                <p className="pt-3">Total Users</p>
+                <p>
+                  <b> {getUsersData.length} </b>
+                </p>
+              </Card>
+            </div>
+          )}
+          {/* <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
             style={{ cursor: "pointer" }}
             onClick={(e) =>
@@ -335,32 +519,38 @@ const Dashboard = () => {
               })
             }
           >
-            {role == "admin" && 
             <Card
               style={{ backgroundColor: "#e6acb4 " }}
               className="rounded rounded-3"
             >
-              <p className="pt-3">Total Users</p>
+              <p className="pt-3">Due amount and Received Amount</p>
               <p>
                 <b> {getUsersData.length} </b>
               </p>
             </Card>
-            }
-          </div>
+          </div> */}
         </div>
         <div className="row">
-          {/*         
-        <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
-           >
-            <Card style={{ backgroundColor: "#d9e9e9" }}  className="rounded rounded-3" >
+          {/* <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3">
+            <Card
+              style={{ backgroundColor: "#d9e9e9" }}
+              className="rounded rounded-3"
+            >
               <p className="pt-3">Pending Fee Records</p>
-              <p><b>20</b></p>
+              <p>
+                <b>20</b>
+              </p>
             </Card>
           </div>
-          <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3" >
-            <Card style={{ backgroundColor: "#b7e9da" }} className="rounded rounded-3">
+          <div className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3">
+            <Card
+              style={{ backgroundColor: "#b7e9da" }}
+              className="rounded rounded-3"
+            >
               <p className="pt-3">Fee Followups</p>
-              <p><b>20</b></p>
+              <p>
+                <b>20</b>
+              </p>
             </Card>
           </div> */}
         </div>
@@ -370,82 +560,79 @@ const Dashboard = () => {
 
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
-          <div className="d-flex justify-content-between"> 
-          <h4 className="pt-4  enrollment ps-4"> Total Entrollment</h4>
-          <div className="pt-2 pe-4">
-            <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              <button
-                className="btn btn-primary "
-                style={{ textTransform: "capitalize" }}
+          <div className="d-flex justify-content-between">
+            <h4 className="pt-4  enrollment ps-4"> Total Entrollment</h4>
+            <div className="pt-2 pe-4">
+              <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
               >
-                {" "}
-                Filter{" "}
-              </button>
-            </Button>
-            <Menu
-              className="mt-5"
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <div className="d-flex justify-content-between">
-                <MenuItem> Filter</MenuItem>
-                <MenuItem>
+                <button
+                  className="btn btn-primary "
+                  style={{ textTransform: "capitalize" }}
+                >
                   {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
-                </MenuItem>
-              </div>
-              <hr />
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
-              
+                  Filter{" "}
+                </button>
+              </Button>
+              <Menu
+                className="mt-5"
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" From:"
                       type="date"
                       variant="standard"
                       className="  w-100"
-                       InputLabelProps={{
+                      InputLabelProps={{
                         shrink: true,
-                        
                       }}
                       name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
                     />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" To:"
                       type="date"
                       variant="standard"
                       className="w-100"
-                    
                       InputLabelProps={{
                         shrink: true,
                       }}
                       name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
                     />
-                </div>
-             
-                {/* <div>
+                  </div>
+
+                  {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -462,19 +649,19 @@ const Dashboard = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-              </div>
-             
-              <MenuItem className="text-end">
-                {/* <button className="save"> Save</button> */}
-                <button className="clear " onClick={filterreset}>
-                  {" "}
-                  Clear
-                </button>
-              </MenuItem>
-            </Menu>
+                </div>
+
+                <MenuItem className="text-end">
+                  {/* <button className="save"> Save</button> */}
+                  <button className="clear " onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
           </div>
-          </div>
-      
+
           <div className="justify-content-around pt-4 row progreebar-show">
             {Object.entries(branchStudentData).map(([branch, students]) => {
               const enrollmentPercentage =
@@ -501,82 +688,79 @@ const Dashboard = () => {
       )}
       {DisplayData.fee && (
         <div className="progreebar rounded rounded-5  pb-4">
-        <div className="d-flex justify-content-between"> 
-        <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
-          <div className="pt-2 pe-4">
-            <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              <button
-                className="btn btn-primary "
-                style={{ textTransform: "capitalize" }}
+          <div className="d-flex justify-content-between">
+            <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
+            <div className="pt-2 pe-4">
+              <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
               >
-                {" "}
-                Filter{" "}
-              </button>
-            </Button>
-            <Menu
-              className="mt-5"
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <div className="d-flex justify-content-between">
-                <MenuItem> Filter</MenuItem>
-                <MenuItem>
+                <button
+                  className="btn btn-primary "
+                  style={{ textTransform: "capitalize" }}
+                >
                   {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
-                </MenuItem>
-              </div>
-              <hr />
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
-              
+                  Filter{" "}
+                </button>
+              </Button>
+              <Menu
+                className="mt-5"
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" From:"
                       type="date"
                       variant="standard"
                       className="  w-100"
-                       InputLabelProps={{
+                      InputLabelProps={{
                         shrink: true,
-                        
                       }}
                       name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
                     />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" To:"
                       type="date"
                       variant="standard"
                       className="w-100"
-                    
                       InputLabelProps={{
                         shrink: true,
                       }}
                       name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
                     />
-                </div>
-             
-                {/* <div>
+                  </div>
+
+                  {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -593,18 +777,18 @@ const Dashboard = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-              </div>
-             
-              <MenuItem className="text-end">
-                {/* <button className="save"> Save</button> */}
-                <button className="clear " onClick={filterreset}>
-                  {" "}
-                  Clear
-                </button>
-              </MenuItem>
-            </Menu>
+                </div>
+
+                <MenuItem className="text-end">
+                  {/* <button className="save"> Save</button> */}
+                  <button className="clear " onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
           </div>
-        </div>
           <div className="  justify-content-around pt-4 row progreebar-show">
             {Object.entries(finalTotalByBranch).map(
               ([branch, { totalAmount, percentage }]) => {
@@ -618,9 +802,10 @@ const Dashboard = () => {
                       variant="determinate"
                       value={percentage}
                     />
-                    <span>Total Amount: </span>
-                    {totalAmount}
-                    <span>({percentage.toFixed(2)}%)</span>
+                    <div>
+                      Total Amount: {totalAmount}{" "}
+                      <span>({percentage.toFixed(2)}%)</span>
+                    </div>
                   </div>
                 );
 
@@ -629,6 +814,137 @@ const Dashboard = () => {
                 //   <p>Total Amount: {totalAmount}</p>
                 //   <p>Percentage: {percentage.toFixed(2)}%</p>
                 // </div>
+              }
+            )}
+          </div>
+        </div>
+      )}
+      {DisplayData.dueAndReceivedAmount && (
+        <div className="progreebar rounded rounded-5  pb-4">
+          <div className="d-flex justify-content-between">
+            <h4 className="pt-4 enrollment ps-4">
+              {" "}
+              Due Amount and Received Amount
+            </h4>
+            <div className="pt-2 pe-4">
+              <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <button
+                  className="btn btn-primary "
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {" "}
+                  Filter{" "}
+                </button>
+              </Button>
+              <Menu
+                className="mt-5"
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="fromdate"
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+                </div>
+
+                <MenuItem className="text-end">
+                  {/* <button className="save"> Save</button> */}
+                  <button className="clear " onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
+          </div>
+          <div className="  justify-content-around pt-4 row progreebar-show">
+            {Object.entries(finalDueAndReceivedByBranch).map(
+              ([branch, { totalDueAmount, totalreceivedAmount }]) => {
+                return (
+                  <div
+                    key={branch}
+                    className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                  >
+                    <h6>
+                      <b>{branch}</b>
+                    </h6>
+                    {/* <BorderLinearProgress
+                      variant="determinate"
+                      // value={percentage}
+                    /> */}
+
+                    <div>Total Due Amount: {totalDueAmount}</div>
+                    <div>Total Received Amount: {totalreceivedAmount}</div>
+                  </div>
+                );
               }
             )}
           </div>

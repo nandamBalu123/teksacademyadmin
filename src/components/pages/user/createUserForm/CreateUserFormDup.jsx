@@ -12,6 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CheckIcon from "@mui/icons-material/Check";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
+import axios from "axios";
 const CreateUserForm = () => {
   const { users, dispatch } = useUsersContext();
   const { departments } = useDepartmentContext();
@@ -101,6 +102,7 @@ const CreateUserForm = () => {
         {
           method: "POST",
           body: JSON.stringify(user),
+
           headers: {
             "Content-Type": "application/json",
           },
@@ -118,12 +120,13 @@ const CreateUserForm = () => {
         return false;
       }
       if (response.ok) {
-        let parseJson = json;
-        parseJson.user_remarks_history = JSON.stringify(
-          json.user_remarks_history
-        );
-        console.log(json.user_remarks_history);
-        dispatch({ type: "CREATE_USER", payload: parseJson });
+        // let parseJson = json;
+        // parseJson.user_remarks_history = JSON.parse(json.user_remarks_history);
+        // console.log(parseJson);
+
+        const id = json.Result.insertId;
+        json.reqBody.id = id;
+        dispatch({ type: "CREATE_USER", payload: json.reqBody });
 
         console.log("User created successfully.", user);
         alert("User created successfully.");
