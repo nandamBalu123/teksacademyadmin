@@ -624,19 +624,94 @@ const Requestedcertificates = () => {
                         {index + 1}
                       </TableCell>
                       <TableCell className="border border 1 ">
-                        {student.name}
+                      <span
+                                title= {student.name}
+                                style={{
+                                  
+                                  width: "7rem",
+                                  
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                 {student.name}
+                              </span>
+                        
                       </TableCell>
                       <TableCell className="border border 1 ">
-                        {student.courses}
+                      <span
+                                title= {student.courses}
+                                style={{
+                                  
+                                  width: "7rem",
+                                  
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {student.courses}
+                              </span>
+                       
                       </TableCell>{" "}
                       <TableCell className="border border 1 ">
-                        {student.registrationnumber}
+                      <span
+                                title=   {student.registrationnumber}
+                                style={{
+                                  
+                                  width: "7rem",
+                                  
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                   {student.registrationnumber}
+                              </span>
+                     
                       </TableCell>
                       <TableCell className="border border 1 ">
-                        {courseStartDate}
+                      <span
+                                title={courseStartDate}
+                                style={{
+                                  
+                                  width: "7rem",
+                                  
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {courseStartDate}
+                              </span>
+                        
                       </TableCell>
                       <TableCell className="border border 1 ">
-                        {courseEndDate}
+                      <span
+                                title= {courseEndDate}
+                                style={{
+                                  
+                                  width: "7rem",
+                                  
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                 {courseEndDate}
+                              </span>
+                       
                       </TableCell>{" "}
                       <TableCell className="border border 1  text-center fs-6">
                         {certificateStatus === "request Submitted" && (
