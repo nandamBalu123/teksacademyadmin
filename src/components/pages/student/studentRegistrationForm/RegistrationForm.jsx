@@ -61,6 +61,8 @@ export default function RegistrationForm() {
   const { getcourses } = useCourseContext();
   const { coursepackages } = useCoursePackageContext();
   const navigate = useNavigate();
+
+  // registraion form data
   const [user_id, setuserid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -79,7 +81,7 @@ export default function RegistrationForm() {
   const [educationtype, setEducationType] = useState("");
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
-  const [file, setSelectedFile] = useState(null);
+  const [studentImage, setSelectedFile] = useState(null);
   // const [profilepic, setProfilePpic] = useState("");
   const [enquirydate, setEnquiryDate] = useState("");
   const [enquirytakenby, setEnquiryTakenBy] = useState("");
@@ -359,6 +361,10 @@ export default function RegistrationForm() {
         return;
       }
     }
+    if (!birthdate) {
+      alert("please  enter Date of birth");
+      return;
+    }
     handleNext();
   };
   const handleStudentDetails = () => {
@@ -374,10 +380,7 @@ export default function RegistrationForm() {
           .join(" ")
       );
     }
-    if (!birthdate) {
-      alert("please  enter Date of birth");
-      return;
-    }
+    
     if (!gender) {
       alert("please enter gender");
       return;
@@ -445,11 +448,10 @@ export default function RegistrationForm() {
     handleNext();
   };
   const handlePhoto = () => {
-    if (!file) {
-      alert("please enter profilepic");
+    if (!studentImage) {
+      alert('Please select a image to upload');
       return;
     }
-    setSelectedFile(null);
     handleNext();
   };
   const handleEnquirydetails = () => {
@@ -520,112 +522,249 @@ export default function RegistrationForm() {
   }, [user]);
 
   const handleSubmit = async () => {
-    ///validations
-    if (!admissionremarks) {
-      alert("please enter admissionremarks");
-      return;
-    }
-    if (!assets) {
-      alert("please enter assets ");
-      return;
-    }
-
-    // setuserid(user.id);
-    // const formdata = new FormData();
-    // formdata.append("file", file);
-    // console.log("selected", file);
-    // let file = selectedFile
-    const studentRegistrationdata = {
-      name,
-      email,
-      mobilenumber,
-      parentsname,
-      birthdate,
-      gender,
-      maritalstatus,
-      college,
-      country,
-      state,
-      area,
-      native,
-      zipcode,
-      whatsappno,
-      educationtype,
-      marks,
-      academicyear,
-      file,
-      enquirydate,
-      enquirytakenby,
-      coursepackage,
-      courses,
-      leadsource,
-      branch,
-      modeoftraining,
-      admissionstatus,
-      registrationnumber,
-      admissiondate,
-      validitystartdate,
-      validityenddate,
-      feedetails,
-      grosstotal,
-      totaldiscount,
-      totaltax,
-      grandtotal,
-      finaltotal,
-      admissionremarks,
-      assets,
-      totalinstallments,
-      dueamount,
-      addfee,
-      initialpayment,
-      duedatetype,
-      installments,
-      materialfee,
-      feedetailsbilling,
-      totalfeewithouttax,
-      totalpaidamount,
-      student_status,
-      user_id,
-      certificate_status,
-    };
-    // studentRegistrationdata.append('file', selectedFile)
-    console.log("studentRegistration", studentRegistrationdata);
-    console.log("photo", file);
-    try {
-      // Make the POST request
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/student_form`,
-        
-        studentRegistrationdata,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
-      const id = response.data.insertId;
-      navigate(`/addtofee/${id}`);
-
-      // Handle a successful response here
-      console.log("Responsee:", response.data.insertId);
-    } catch (error) {
-      // Handle the error here
-      if (error.response) {
-        // The request was made and the server responded with a non-2xx status code
-        console.log(
-          "Server returned an error:",
-          error.response.status,
-          error.response.data
-        );
-      } else if (error.request) {
-        // The request was made, but no response was received
-        console.log("No response received:", error.request);
-      } else {
-        // Something happened in setting up the request that triggered an error
-        console.error("Request error:", error.message);
+    const reader = new FileReader();
+  
+    reader.onload = async () => {
+      // Read the student image as a data URL
+      const photoData = reader.result.split(',')[1];
+  
+      // Validate the form data
+      if (!admissionremarks) {
+        alert("Please enter admission remarks");
+        return;
       }
-    }
+      if (!assets) {
+        alert("Please enter assets");
+        return;
+      }
+  
+      // Create the data object with the form fields
+      const studentRegistrationdata = {
+        name,
+        email,
+        mobilenumber,
+        parentsname,
+        birthdate,
+        gender,
+        maritalstatus,
+        college,
+        country,
+        state,
+        area,
+        native,
+        zipcode,
+        whatsappno,
+        educationtype,
+        marks,
+        academicyear,
+        filename: studentImage.name,
+        data: photoData,
+        enquirydate,
+        enquirytakenby,
+        coursepackage,
+        courses,
+        leadsource,
+        branch,
+        modeoftraining,
+        admissionstatus,
+        registrationnumber,
+        admissiondate,
+        validitystartdate,
+        validityenddate,
+        feedetails,
+        grosstotal,
+        totaldiscount,
+        totaltax,
+        grandtotal,
+        finaltotal,
+        admissionremarks,
+        assets,
+        totalinstallments,
+        dueamount,
+        addfee,
+        initialpayment,
+        duedatetype,
+        installments,
+        materialfee,
+        feedetailsbilling,
+        totalfeewithouttax,
+        totalpaidamount,
+        student_status,
+        user_id,
+        certificate_status,
+      };
+  
+      try {
+        // Make the POST request
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/student_form`,
+          studentRegistrationdata
+        );
+  
+        // Handle the response as needed
+        console.log("Response:", response.data);
+  
+        // You can navigate to another page or perform other actions here.
+      } catch (error) {
+        // Handle errors
+        if (error.response) {
+          console.log(
+            "Server returned an error:",
+            error.response.status,
+            error.response.data
+          );
+        } else if (error.request) {
+          console.log("No response received:", error.request);
+        } else {
+          console.error("Request error:", error.message);
+        }
+      }
+    };
+  
+    // Read the student image as a data URL
+    reader.readAsDataURL(studentImage);
   };
+  
+  
+
+
+
+
+
+//   const handleSubmit =  () => {
+
+    
+//     const reader = new FileReader();
+
+//     reader.onload = async () => {
+//     reader.readAsDataURL(studentImage);
+//       const photoData = reader.result.split(',')[1];
+
+//     ///validations
+//     if (!admissionremarks) {
+//       alert("please enter admissionremarks");
+//       return;
+//     }
+//     if (!assets) {
+//       alert("please enter assets ");
+//       return;
+//     }
+
+    
+//     // setuserid(user.id);
+//     // const formdata = new FormData();
+//     // formdata.append("file", file);
+//     // console.log("selected", file);
+//     // let file = selectedFile
+//     const studentRegistrationdata = {
+//       name,
+//       email,
+//       mobilenumber,
+//       parentsname,
+//       birthdate,
+//       gender,
+//       maritalstatus,
+//       college,
+//       country,
+//       state,
+//       area,
+//       native,
+//       zipcode,
+//       whatsappno,
+//       educationtype,
+//       marks,
+//       academicyear,
+//       filename: studentImage.name,
+//       data: photoData,
+//       enquirydate,
+//       enquirytakenby,
+//       coursepackage,
+//       courses,
+//       leadsource,
+//       branch,
+//       modeoftraining,
+//       admissionstatus,
+//       registrationnumber,
+//       admissiondate,
+//       validitystartdate,
+//       validityenddate,
+//       feedetails,
+//       grosstotal,
+//       totaldiscount,
+//       totaltax,
+//       grandtotal,
+//       finaltotal,
+//       admissionremarks,
+//       assets,
+//       totalinstallments,
+//       dueamount,
+//       addfee,
+//       initialpayment,
+//       duedatetype,
+//       installments,
+//       materialfee,
+//       feedetailsbilling,
+//       totalfeewithouttax,
+//       totalpaidamount,
+//       student_status,
+//       user_id,
+//       certificate_status,
+//     };
+
+    
+//     console.log("studentRegistration", studentRegistrationdata);
+
+//     //      const reader = new FileReader();
+//     //     reader.readAsDataURL(selectedFile);
+//     //     reader.onload = () => {
+//     //       const photoData = reader.result.split(',')[1];
+    
+//     //       axios.post('http://localhost:3030/upload', {
+//     //         filename: selectedFile.name,
+//     //         data: photoData,
+//     //       })
+//     //       .then(response => {
+//     //         console.log('File uploaded successfully', response.data);
+//     //       })
+//     //       .catch(error => {
+//     //         console.error('Error uploading file:', error);
+//     //       });
+//     //     };
+//     //   };
+
+        
+//     try {
+//       // Make the POST request
+//       const response = await axios.post(
+//         `${process.env.REACT_APP_API_URL}/student_form`,
+//         studentRegistrationdata,
+        
+//       );
+//       const id = response.data.insertId;
+//       // navigate(`/addtofee/${id}`);
+
+//       // Handle a successful response here
+//       console.log("Responsee:", response.data.insertId);
+//     } catch (error) {
+//       // Handle the error here
+//       if (error.response) {
+//         // The request was made and the server responded with a non-2xx status code
+//         console.log(
+//           "Server returned an error:",
+//           error.response.status,
+//           error.response.data
+//         );
+//       } else if (error.request) {
+//         // The request was made, but no response was received
+//         console.log("No response received:", error.request);
+//       } else {
+//         // Something happened in setting up the request that triggered an error
+//         console.error("Request error:", error.message);
+//       }
+//     }
+  
+//     }
+// }
   const { users } = useUsersContext();
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
 
@@ -660,8 +799,43 @@ export default function RegistrationForm() {
     setFeeDetails(updatedTasks);
   };
 
+// // new
+// const [selectedFile, setSelectedFilee] = useState(null);
+
+//   const handleFileChange = (e) => {
+//     setSelectedFilee(e.target.files[0]);
+//   };
+
+//   const handleUpload = () => {
+//     if (!selectedFile) {
+//       alert('Please select a file to upload');
+//       return;
+//     }
+
+//     const reader = new FileReader();
+//     reader.readAsDataURL(selectedFile);
+//     reader.onload = () => {
+//       const photoData = reader.result.split(',')[1];
+
+//       axios.post('http://localhost:3030/upload', {
+//         filename: selectedFile.name,
+//         data: photoData,
+//       })
+//       .then(response => {
+//         console.log('File uploaded successfully', response.data);
+//       })
+//       .catch(error => {
+//         console.error('Error uploading file:', error);
+//       });
+//     };
+//   };
+
   return (
     <div className="main-container container">
+      {/* <div className="App">
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Upload</button>
+    </div> */}
       <div className="main-sub-container ">
         <Typography fontSize={35}>Registration form</Typography>
 
@@ -1128,15 +1302,17 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  
-                  <input
+                <input type="file" onChange={(e) => {
+                    setSelectedFile(e.target.files[0]);
+                  }} />
+                  {/* <input
                     type="file"
                     name="file"
                     onChange={(e) => {
                       setSelectedFile(e.target.files[0]);
                     }}
                     accept=".jpg, .jpeg, .png"
-                  />
+                  /> */}
                 </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
