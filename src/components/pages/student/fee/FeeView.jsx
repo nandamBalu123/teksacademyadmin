@@ -57,6 +57,7 @@ const FeeView = () => {
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
     updatedInstallments[index] = updatedInstallment;
+    updatedInstallments[index].paymentdone = true;
     console.log("updatedInstallment", updatedInstallment.paidamount);
     setnewpaidamount(updatedInstallment.paidamount);
     setInstallments(updatedInstallments);
@@ -98,7 +99,10 @@ const FeeView = () => {
         dueamount / totalinstallments[0].totalinstallmentsleft;
       for (let i = 0; i < installments.length; i++) {
         const updatedInstallments = [...installments];
-        updatedInstallments[i].dueamount = parseInt(updatedInstallmentAmount);
+        if (updatedInstallments[i].paymentdone === false) {
+          updatedInstallments[i].dueamount = parseInt(updatedInstallmentAmount);
+        }
+
         setInstallments(updatedInstallments);
       }
       const updatedData = {
@@ -149,10 +153,12 @@ const FeeView = () => {
       updatedDataa[0].totalinstallmentsleft + 1;
     updatedDataa[0].totalinstallments = updatedDataa[0].totalinstallments + 1;
     settotalinstallments(updatedDataa);
+
     let iinstallment = installments;
     let newInstallment = {
       id: Date.now(),
       duedate: "",
+      dueamount: "",
       paidamount: "",
       paiddate: "",
       modeofpayment: "",
@@ -160,7 +166,19 @@ const FeeView = () => {
       paymentdone: false,
     };
     iinstallment.push(newInstallment);
-    setInstallments(iinstallment);
+    let updatedInstallmentAmount =
+      dueamountt / totalinstallments[0].totalinstallmentsleft;
+
+    for (let i = 0; i < iinstallment.length; i++) {
+      const updatedInstallments = [...iinstallment];
+      if (updatedInstallments[i].paymentdone === false) {
+        updatedInstallments[i].dueamount = parseInt(updatedInstallmentAmount);
+      }
+
+      setInstallments(updatedInstallments);
+    }
+    // setInstallments(iinstallment);
+
     const updatedData = {
       installments,
       totalinstallments,
@@ -508,7 +526,7 @@ const FeeView = () => {
                       <option value="">---select---</option>
                       <option value="upi">UPI</option>
                       <option value="cash">Cash</option>
-                      <option value="backtransfor"> Bank Transfor</option>
+                      <option value="banktransfer"> Bank Transfer</option>
                       <option value="cheque"> CHEQUE</option>
                     </select>
                     <label> Mode of Payments</label>
