@@ -194,7 +194,79 @@ const Dashboard = () => {
       percentage: branchPercentage,
     };
   });
+  const [filterDeuAndReceived, setfilterDeuAndReceived] = useState({
+    fromdate: "",
 
+    todate: "",
+
+    monthdataCondition: true,
+  });
+  const handleDeuAndReceivedInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setfilterDeuAndReceived({
+      ...filterDeuAndReceived,
+      monthdataCondition: false,
+      [name]: value,
+    });
+  };
+  //// reset filters
+  const filterDeuAndReceivedreset = () => {
+    setfilterDeuAndReceived({
+      fromdate: "",
+      todate: "",
+      monthdataCondition: true,
+    });
+  };
+
+  // Object.keys(branchwiseAllstudentsData).forEach((branch) => {
+  //   const currentDate = new Date();
+  //   const currentMonth = currentDate.getMonth() + 1; // Month is 0-based, so add 1 to get the current month
+  //   const currentYear = currentDate.getFullYear();
+
+  //   let totalDueAmount = 0;
+  //   let totalreceivedAmount = 0;
+
+  //   // Calculate the total amount for each branch and handle NaN values
+  //   branchwiseAllstudentsData[branch].forEach((student) => {
+  //     student.installments.forEach((installment) => {
+  //       if (installment.duedate && installment.paidamount === "") {
+  //         const dueDate = new Date(installment.duedate);
+  //         const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+  //         const dueYear = dueDate.getFullYear();
+
+  //         if (dueMonth === currentMonth && dueYear === currentYear) {
+  //           totalDueAmount += parseInt(installment.dueamount, 10);
+  //         }
+  //       }
+  //       if (installment.paiddate) {
+  //         const dueDate = new Date(installment.paiddate);
+  //         const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+  //         const dueYear = dueDate.getFullYear();
+
+  //         if (dueMonth === currentMonth && dueYear === currentYear) {
+  //           totalreceivedAmount += parseInt(installment.paidamount, 10);
+  //         }
+  //       }
+  //     });
+  //     student.initialpayment.forEach((payment) => {
+  //       if (payment.paiddate) {
+  //         const dueDate = new Date(payment.paiddate);
+  //         const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+  //         const dueYear = dueDate.getFullYear();
+
+  //         if (dueMonth === currentMonth && dueYear === currentYear) {
+  //           totalreceivedAmount += parseInt(payment.initialamount, 10);
+  //         }
+  //       }
+  //     });
+  //   });
+
+  //   finalDueAndReceivedByBranch[branch] = {
+  //     totalDueAmount: totalDueAmount,
+  //     totalreceivedAmount: totalreceivedAmount,
+  //   };
+  // });
   Object.keys(branchwiseAllstudentsData).forEach((branch) => {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1; // Month is 0-based, so add 1 to get the current month
@@ -206,33 +278,60 @@ const Dashboard = () => {
     // Calculate the total amount for each branch and handle NaN values
     branchwiseAllstudentsData[branch].forEach((student) => {
       student.installments.forEach((installment) => {
-        if (installment.duedate) {
-          const dueDate = new Date(installment.duedate);
-          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
-          const dueYear = dueDate.getFullYear();
+        if (installment.duedate && installment.paidamount === "") {
+          if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
+            if (
+              installment.duedate >= filterDeuAndReceived.fromdate &&
+              installment.duedate <= filterDeuAndReceived.todate
+            ) {
+              totalDueAmount += parseInt(installment.dueamount, 10);
+            }
+          } else {
+            const dueDate = new Date(installment.duedate);
+            const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+            const dueYear = dueDate.getFullYear();
 
-          if (dueMonth === currentMonth && dueYear === currentYear) {
-            totalDueAmount += parseInt(installment.dueamount, 10);
+            if (dueMonth === currentMonth && dueYear === currentYear) {
+              totalDueAmount += parseInt(installment.dueamount, 10);
+            }
           }
         }
         if (installment.paiddate) {
-          const dueDate = new Date(installment.paiddate);
-          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
-          const dueYear = dueDate.getFullYear();
+          if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
+            if (
+              installment.paiddate >= filterDeuAndReceived.fromdate &&
+              installment.paiddate <= filterDeuAndReceived.todate
+            ) {
+              totalreceivedAmount += parseInt(installment.paidamount, 10);
+            }
+          } else {
+            const dueDate = new Date(installment.paiddate);
+            const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+            const dueYear = dueDate.getFullYear();
 
-          if (dueMonth === currentMonth && dueYear === currentYear) {
-            totalreceivedAmount += parseInt(installment.paidamount, 10);
+            if (dueMonth === currentMonth && dueYear === currentYear) {
+              totalreceivedAmount += parseInt(installment.paidamount, 10);
+            }
           }
         }
       });
       student.initialpayment.forEach((payment) => {
         if (payment.paiddate) {
-          const dueDate = new Date(payment.paiddate);
-          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
-          const dueYear = dueDate.getFullYear();
+          if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
+            if (
+              payment.paiddate >= filterDeuAndReceived.fromdate &&
+              payment.paiddate <= filterDeuAndReceived.todate
+            ) {
+              totalreceivedAmount += parseInt(payment.initialamount, 10);
+            }
+          } else {
+            const dueDate = new Date(payment.paiddate);
+            const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+            const dueYear = dueDate.getFullYear();
 
-          if (dueMonth === currentMonth && dueYear === currentYear) {
-            totalreceivedAmount += parseInt(payment.initialamount, 10);
+            if (dueMonth === currentMonth && dueYear === currentYear) {
+              totalreceivedAmount += parseInt(payment.initialamount, 10);
+            }
           }
         }
       });
@@ -243,7 +342,6 @@ const Dashboard = () => {
       totalreceivedAmount: totalreceivedAmount,
     };
   });
-
   const calculateDueAmountForCurrentMonth = () => {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1; // Month is 0-based, so add 1 to get the current month
@@ -253,13 +351,22 @@ const Dashboard = () => {
 
     students.forEach((item) => {
       item.installments.forEach((installment) => {
-        if (installment.duedate) {
-          const dueDate = new Date(installment.duedate);
-          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
-          const dueYear = dueDate.getFullYear();
+        if (installment.duedate && installment.paidamount === "") {
+          if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
+            if (
+              installment.duedate >= filterDeuAndReceived.fromdate &&
+              installment.duedate <= filterDeuAndReceived.todate
+            ) {
+              totalDueAmount += parseInt(installment.dueamount, 10);
+            }
+          } else {
+            const dueDate = new Date(installment.duedate);
+            const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+            const dueYear = dueDate.getFullYear();
 
-          if (dueMonth === currentMonth && dueYear === currentYear) {
-            totalDueAmount += parseInt(installment.dueamount, 10);
+            if (dueMonth === currentMonth && dueYear === currentYear) {
+              totalDueAmount += parseInt(installment.dueamount, 10);
+            }
           }
         }
       });
@@ -276,12 +383,21 @@ const Dashboard = () => {
     students.forEach((item) => {
       item.initialpayment.forEach((payment) => {
         if (payment.paiddate) {
-          const dueDate = new Date(payment.paiddate);
-          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
-          const dueYear = dueDate.getFullYear();
+          if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
+            if (
+              payment.paiddate >= filterDeuAndReceived.fromdate &&
+              payment.paiddate <= filterDeuAndReceived.todate
+            ) {
+              totalreceivedAmount += parseInt(payment.initialamount, 10);
+            }
+          } else {
+            const dueDate = new Date(payment.paiddate);
+            const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+            const dueYear = dueDate.getFullYear();
 
-          if (dueMonth === currentMonth && dueYear === currentYear) {
-            totalreceivedAmount += parseInt(payment.initialamount, 10);
+            if (dueMonth === currentMonth && dueYear === currentYear) {
+              totalreceivedAmount += parseInt(payment.initialamount, 10);
+            }
           }
         }
       });
@@ -289,12 +405,21 @@ const Dashboard = () => {
     students.forEach((item) => {
       item.installments.forEach((installment) => {
         if (installment.paiddate) {
-          const dueDate = new Date(installment.paiddate);
-          const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
-          const dueYear = dueDate.getFullYear();
+          if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
+            if (
+              installment.paiddate >= filterDeuAndReceived.fromdate &&
+              installment.paiddate <= filterDeuAndReceived.todate
+            ) {
+              totalreceivedAmount += parseInt(installment.paidamount, 10);
+            }
+          } else {
+            const dueDate = new Date(installment.paiddate);
+            const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+            const dueYear = dueDate.getFullYear();
 
-          if (dueMonth === currentMonth && dueYear === currentYear) {
-            totalreceivedAmount += parseInt(installment.paidamount, 10);
+            if (dueMonth === currentMonth && dueYear === currentYear) {
+              totalreceivedAmount += parseInt(installment.paidamount, 10);
+            }
           }
         }
       });
@@ -309,10 +434,10 @@ const Dashboard = () => {
     AllbranchesreceivedAmount = calculatePaidAmountForCurrentMonth();
   }
   return (
-    <>
+    < div className="container main-dashboard">
       {/* Header */}
-      <div>
-        <Box className="text-center">
+      <div >
+        <Box className="text-center  mt-3">
           {user && (
             <Header
               title={"Hi " + user.fullname}
@@ -469,17 +594,17 @@ const Dashboard = () => {
             >
               <p className="pt-3">
                 <b>
-                  Due Amount : <CurrencyRupeeIcon />
-                  {AllbranchesDueAmount}
-                </b>
-              </p>
-              <p>
-                <b>
                   Received Amount :
                   <CurrencyRupeeIcon />
                   {AllbranchesreceivedAmount}
                 </b>
                 {/* <b>{sumreceivedAmount},</b> */}
+              </p>
+              <p>
+                <b>
+                  Pending Amount : <CurrencyRupeeIcon />
+                  {AllbranchesDueAmount}
+                </b>
               </p>
             </Card>
           </div>
@@ -561,7 +686,7 @@ const Dashboard = () => {
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
           <div className="d-flex justify-content-between">
-            <h4 className="pt-4  enrollment ps-4"> Total Entrollment</h4>
+            <h4 className="pt-4  enrollment ps-4"> Total Enrollment</h4>
             <div className="pt-2 pe-4">
               <Button
                 id="demo-positioned-button"
@@ -877,6 +1002,137 @@ const Dashboard = () => {
                         shrink: true,
                       }}
                       name="fromdate"
+                      value={filterDeuAndReceived.fromdate}
+                      onChange={handleDeuAndReceivedInputChange}
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                      value={filterDeuAndReceived.todate}
+                      onChange={handleDeuAndReceivedInputChange}
+                    />
+                  </div>
+
+                  {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+                </div>
+
+                <MenuItem className="text-end">
+                  {/* <button className="save"> Save</button> */}
+                  <button
+                    className="clear "
+                    onClick={filterDeuAndReceivedreset}
+                  >
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
+          </div>
+          <div className="  justify-content-around pt-4 row progreebar-show">
+            {Object.entries(finalDueAndReceivedByBranch).map(
+              ([branch, { totalDueAmount, totalreceivedAmount }]) => {
+                return (
+                  <div
+                    key={branch}
+                    className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                  >
+                    <h6>
+                      <b>{branch}</b>
+                    </h6>
+                    {/* <BorderLinearProgress
+                      variant="determinate"
+                      // value={percentage}
+                    /> */}
+
+                    <div>Total Received Amount: {totalreceivedAmount}</div>
+                    <div>Total Due Amount: {totalDueAmount}</div>
+                  </div>
+                );
+              }
+            )}
+          </div>
+        </div>
+      )}
+      {DisplayData.users && (
+        <div className="progreebar rounded rounded-5  pb-4">
+        <div className="d-flex justify-content-between"> 
+        <h4 className="pt-4  enrollment ps-4"> Total Users</h4>
+          <div className="pt-2 pe-4">
+              <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <button
+                  className="btn btn-primary "
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {" "}
+                  Filter{" "}
+                </button>
+              </Button>
+              <Menu
+                className="mt-5"
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="fromdate"
                       value={filterCriteria.fromdate}
                       onChange={handleInputChange}
                     />
@@ -924,35 +1180,7 @@ const Dashboard = () => {
                 </MenuItem>
               </Menu>
             </div>
-          </div>
-          <div className="  justify-content-around pt-4 row progreebar-show">
-            {Object.entries(finalDueAndReceivedByBranch).map(
-              ([branch, { totalDueAmount, totalreceivedAmount }]) => {
-                return (
-                  <div
-                    key={branch}
-                    className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                  >
-                    <h6>
-                      <b>{branch}</b>
-                    </h6>
-                    {/* <BorderLinearProgress
-                      variant="determinate"
-                      // value={percentage}
-                    /> */}
-
-                    <div>Total Due Amount: {totalDueAmount}</div>
-                    <div>Total Received Amount: {totalreceivedAmount}</div>
-                  </div>
-                );
-              }
-            )}
-          </div>
         </div>
-      )}
-      {DisplayData.users && (
-        <div className="progreebar rounded rounded-5  pb-4">
-          <h4 className="pt-4  enrollment ps-4"> Total Users</h4>
           <div className="row justify-content-around pt-4 progreebar-show">
             {Object.entries(branchUserData).map(([branch, users]) => {
               const enrollmentPercentage =
@@ -977,7 +1205,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

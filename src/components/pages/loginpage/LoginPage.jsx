@@ -8,8 +8,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import validation from "./Loginvalidation";
 import { useAuthContext } from "../../../hooks/useAuthContext";
+// import { useUsersContext } from "../../../hooks/useUsersContext";
+// import { useEffect } from "react";
 const LoginPage = () => {
   const navigate = useNavigate();
+  // const { users } = useUsersContext();
   const { dispatch } = useAuthContext();
   const [values, setValues] = useState({
     email: "",
@@ -22,7 +25,22 @@ const LoginPage = () => {
   const handleInput = (event) => {
     setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
+  // const [loginStatusCondition, setloginStatusCondition] = useState();
+  // useEffect(() => {
+  //   if (users) {
+  //     const filteredResults = users.filter((item) => {
+  //       const loginStatusCondition = values.email
+  //         ? item.email === values.email
+  //         : true;
 
+  //       return loginStatusCondition;
+  //     });
+  //     setloginStatusCondition(filteredResults);
+  //   }
+  // }, [, users, values]);
+  // useEffect(() => {
+  //   console.log("loginStatusCondition", loginStatusCondition);
+  // }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -50,12 +68,12 @@ const LoginPage = () => {
             console.log("role: ", role);
 
             localStorage.setItem("role", role);
-            localStorage.setItem("id", id)
+            localStorage.setItem("id", id);
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(res.data.adminData));
 
             // Store token in a cookie
-          document.cookie = `token=${token}; path=/`; // Set the token cookie
+            document.cookie = `token=${token}; path=/`; // Set the token cookie
 
             dispatch({ type: "LOGIN", payload: res.data.adminData });
             console.log("res.data", res.data);
