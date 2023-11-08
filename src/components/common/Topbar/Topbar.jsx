@@ -1,24 +1,27 @@
-import { Box, IconButton, useTheme } from "@mui/material";
-import { useContext } from "react";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import profilepic from '../../../images/img4.png';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { ColorModeContext, tokens } from "../../../theme";
-import InputBase from "@mui/material/InputBase";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import SearchIcon from "@mui/icons-material/Search";
-import * as React from "react";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import axios from "axios";
-import profilepic from "../../../images/profilepic.jpg";
-import pictureprofile from '../../../images/profilepicture.jpg';
-import "./Topbar.css";
-import zIndex from "@mui/material/styles/zIndex";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import {  useTheme } from "@mui/material";
+import { useContext } from "react";
+import './Topbar.css';
+
 
 const Topbar = () => {
   const { user } = useAuthContext();
@@ -46,19 +49,29 @@ const Topbar = () => {
     //   .catch((err) => cFuseronsole.log(err));
     // window.location.reload();
   };
+  
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
   const handleProfile = () => {
     navigate("");
     navigate("/userview/" + user.id);
-    setAnchorEl(null);
+    setAnchorElUser(null);
   };
   let fullname;
   let email;
@@ -67,84 +80,135 @@ const Topbar = () => {
     email = user.email;
   }
   return (
-    <div className="container ">
-      
-      <div className="row topbar mt-0 ">
-        <div className="col-6 col-md-9 col-lg-10 col-xl-10 ">
-          {/* <Box
-            backgroundColor={colors.primary[400]}
-            borderRadius="3px"
-            width={"35%"}
+    <div className='container'> 
+    <AppBar position="static" className='bg-white'>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
           >
-            <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-            <IconButton type="button" sx={{ p: 1 }}>
-              <SearchIcon />
-            </IconButton>
-          </Box> */}
-        </div>
+            LOGO
+          </Typography>
 
-        {/* <Box>
-          <IconButton onClick={colorMode.toggleColorMode}>
-            {theme.palette.mode === "dark" ? (
-              <DarkModeOutlinedIcon />
-            ) : (
-              <LightModeOutlinedIcon />
-            )}
-          </IconButton> 
-        </Box> */}
-
-        <div className="col-1 col-md-1 col-lg-1 col-xl-1 ">
-          <div className="row"> 
-          <div className="d-flex "> 
-          {/* <img src={pictureprofile} className="w-100"/> */}
-           </div> </div>
-          {/* <IconButton>
-            <NotificationsOutlinedIcon className="Topbar-icon end" ></NotificationsOutlinedIcon>
-          </IconButton>{" "} */}
-        </div>
-       
-        <div className="col-1 col-md-1 col-lg-1 col-xl-1 ">
-          <div>
-            <Button
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
+              onClick={handleOpenNavMenu}
+              color="inherit"
             >
-            
-              <PersonOutlinedIcon className="Topbar-icon end"> </PersonOutlinedIcon>
-             
-              
-            </Button>
+              <MenuIcon />
+            </IconButton>
             <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
               }}
             >
-              <div className="d-flex">
-                <img className="w-100" src={profilepic} alt="phpto" />
-
-                <div className=" ms-3 mt-3">
-                  {" "}
-                  <h5 onClick={handleClose}>{fullname}</h5>
-                  <p onClick={handleClose}>{email}</p>
-                </div>
-              </div> <hr/>
-             <div className="d-flex justify-content-between">
-              <MenuItem onClick={handleProfile}>Profile</MenuItem>
-              {/* <MenuItem onClick={handleClose}>Setting </MenuItem> */}
-             
-              <MenuItem onClick={handleLogout}>Logout </MenuItem></div>
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
             </Menu>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Box> */}
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography> */}
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box> */}
+
+          <Box sx={{ flexGrow: 1 , textAlign:"end"}} >
+            {/* <Tooltip title="Open settings"   > */}
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <img src={profilepic} alt=""  className='userpic'/>
+              </IconButton>
+            {/* </Tooltip> */}
+            <Menu
+              sx={{ mt: '45px'  }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+               <div className='d-flex justify-content-between'> 
+                <img src={profilepic} alt=""  className='dropdownuserimg'/>
+             <span> 
+             <MenuItem className='fs-5  ms-4 m-0 p-0 ' > {fullname}</MenuItem>
+               <MenuItem className='fs-11 text-center'> {email}</MenuItem>
+             </span>
+               </div><hr/>
+                <div className='d-flex justify-content-between'> 
+                <MenuItem className='fs-6' onClick={handleProfile}><AccountCircleIcon className='fs-5'/> &nbsp;Profile </MenuItem>
+                <MenuItem  className='fs-6'onClick={handleLogout}><PowerSettingsNewIcon className='fs-5'/> &nbsp; Logout </MenuItem>
+                </div>
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar> </div>
     // <div
     // className="topbar"
     //   style={{
