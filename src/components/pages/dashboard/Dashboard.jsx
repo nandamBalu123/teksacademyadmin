@@ -309,10 +309,10 @@ const Dashboard = () => {
     AllbranchesreceivedAmount = calculatePaidAmountForCurrentMonth();
   }
   return (
-    <>
+    < div className="container main-dashboard">
       {/* Header */}
-      <div>
-        <Box className="text-center">
+      <div >
+        <Box className="text-center  mt-3">
           {user && (
             <Header
               title={"Hi " + user.fullname}
@@ -561,7 +561,7 @@ const Dashboard = () => {
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
           <div className="d-flex justify-content-between">
-            <h4 className="pt-4  enrollment ps-4"> Total Entrollment</h4>
+            <h4 className="pt-4  enrollment ps-4"> Total Enrollment</h4>
             <div className="pt-2 pe-4">
               <Button
                 id="demo-positioned-button"
@@ -952,7 +952,107 @@ const Dashboard = () => {
       )}
       {DisplayData.users && (
         <div className="progreebar rounded rounded-5  pb-4">
-          <h4 className="pt-4  enrollment ps-4"> Total Users</h4>
+        <div className="d-flex justify-content-between"> 
+        <h4 className="pt-4  enrollment ps-4"> Total Users</h4>
+          <div className="pt-2 pe-4">
+              <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <button
+                  className="btn btn-primary "
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {" "}
+                  Filter{" "}
+                </button>
+              </Button>
+              <Menu
+                className="mt-5"
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="fromdate"
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+                </div>
+
+                <MenuItem className="text-end">
+                  {/* <button className="save"> Save</button> */}
+                  <button className="clear " onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
+        </div>
           <div className="row justify-content-around pt-4 progreebar-show">
             {Object.entries(branchUserData).map(([branch, users]) => {
               const enrollmentPercentage =
@@ -977,7 +1077,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

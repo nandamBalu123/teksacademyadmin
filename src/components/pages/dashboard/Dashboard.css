@@ -32,7 +32,9 @@
     width: 93%;
     margin: auto;
 }
-
+.main-dashboard{ 
+    overflow: hidden;
+}
 /* @media (min-width: 576px) { 
  .dashboardcard{ 
     margin-bottom: 20px;
