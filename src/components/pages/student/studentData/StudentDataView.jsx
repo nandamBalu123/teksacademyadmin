@@ -6,12 +6,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import profilepic from '../../../../images/profilepicture.jpg';
+import profilepic from "../../../../images/profilepicture.jpg";
 import "./StudentDataView.css";
 import { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import profilePic from "../../../../images/img4-11.png";
 const StudentDataView = () => {
   const { id } = useParams();
   console.log("id", id);
@@ -31,7 +31,6 @@ const StudentDataView = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-
   return (
     <>
       <h2 className="text-center"> Student Details From</h2>
@@ -39,7 +38,7 @@ const StudentDataView = () => {
         <div className="bg">
           <img
             className="photo"
-            src={profilepic}
+            src={`https://teksacademyimages.s3.amazonaws.com/${studentdata.studentImg}`}
             alt="photo"
           />
         </div>
