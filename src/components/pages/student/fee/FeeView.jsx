@@ -6,13 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import "./FeeView.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -435,13 +435,13 @@ const FeeView = () => {
                   {" "}
                   Transition ID
                 </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                {/* <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   {" "}
                   Admin Invoice
-                </TableCell>
+                </TableCell> */}
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   {" "}
-                  Student Invoice
+                  Invoice
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -463,14 +463,14 @@ const FeeView = () => {
                     <TableCell className="border border 1 text-center">
                       {item.transactionID}
                     </TableCell>
-                    <TableCell className="border border 1 text-center">
+                    {/* <TableCell className="border border 1 text-center">
                       <Link
                         to={`/invoice/${id}/${index}/Admission Fee/admininvoice`}
                         style={{ width: "40px" }}
                       >
                         <CreditScoreIcon className="iconn" />
                       </Link>
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell className="border border 1 text-center">
                       <Link
                         to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
@@ -496,36 +496,38 @@ const FeeView = () => {
           >
             Add Installment
           </button>
-           <div className="col-12 col-md-2 col-lg-2 col-xl-2 my-2 "> 
-           <button className="btn btn-primary" variant="outlined" onClick={handleClickOpen}> 
-            Discount
-           </button>
-           {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 my-2 ">
+            <button
+              className="btn btn-primary"
+              variant="outlined"
+              onClick={handleClickOpen}
+            >
+              Discount
+            </button>
+            {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
         Open form dialog
       </Button> */}
-      <Dialog open={open} onClose={handleClose}>
-        {/* <DialogTitle>DISCOUNT</DialogTitle> */}
-        <DialogContent>
-          {/* <DialogContentText>
+            <Dialog open={open} onClose={handleClose}>
+              {/* <DialogTitle>DISCOUNT</DialogTitle> */}
+              <DialogContent>
+                {/* <DialogContentText>
             To subscribe to this website, please enter your email address here. We
             will send updates occasionally.
           </DialogContentText> */}
-          <TextField
-            autoFocus
-            margin="dense"
-            
-            label="Discount"
-            type="number"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          
-          <Button onClick={handleClose}>Discount</Button>
-        </DialogActions>
-      </Dialog>
-           </div>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  label="Discount"
+                  type="number"
+                  fullWidth
+                  variant="standard"
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Discount</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
         </div>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
