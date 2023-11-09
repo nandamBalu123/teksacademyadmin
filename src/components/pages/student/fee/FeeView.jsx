@@ -6,13 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import "./FeeView.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -175,8 +175,8 @@ const FeeView = () => {
     let newInstallment = {
       id: Date.now(),
       duedate: "",
-      dueamount: "",
-      paidamount: "",
+      dueamount: 0,
+      paidamount: 0,
       paiddate: "",
       modeofpayment: "",
       transactionid: "",
@@ -267,134 +267,126 @@ const FeeView = () => {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell className="border border 1">
-                  <span
-                  title={studentdata.name}
+                    <span
+                      title={studentdata.name}
                       style={{
                         width: "7rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "14px",
-                        display:"block"
+                        display: "block",
                       }}
-
                     >
                       {studentdata.name}
                     </span>
-                    
                   </TableCell>
                   <TableCell className="border border 1">
                     <span
-                    title={studentdata.email}
+                      title={studentdata.email}
                       style={{
                         width: "7rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "14px",
-                        display:"block"
+                        display: "block",
                       }}
                     >
                       {studentdata.email}
                     </span>
                   </TableCell>
                   <TableCell className="border border 1">
-                  <span 
-                    title={studentdata.mobilenumber}
+                    <span
+                      title={studentdata.mobilenumber}
                       style={{
                         width: "5rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "13px",
-                        display:"block"
+                        display: "block",
                       }}
                     >
-                     {studentdata.mobilenumber}
+                      {studentdata.mobilenumber}
                     </span>
-                    
                   </TableCell>
                   <TableCell className="border border 1">
-                  <span
-                    title={studentdata.courses}
+                    <span
+                      title={studentdata.courses}
                       style={{
                         width: "3rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "14px",
-                        display:"block"
+                        display: "block",
                       }}
                     >
-                     {studentdata.courses}
+                      {studentdata.courses}
                     </span>
-                    
                   </TableCell>
                   <TableCell className="border border 1">
-                  <span 
-                    title={studentdata.admissiondate}
+                    <span
+                      title={studentdata.admissiondate}
                       style={{
                         width: "5rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "13px",
-                        display:"block"
+                        display: "block",
                       }}
                     >
-                     {studentdata.admissiondate}
+                      {studentdata.admissiondate}
                     </span>
-                    
                   </TableCell>
                   <TableCell className="border border 1">
-                  <span 
-                    title=  {studentdata.finaltotal}
+                    <span
+                      title={studentdata.finaltotal}
                       style={{
                         width: "3rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "13px",
-                        display:"block"
+                        display: "block",
                       }}
                     >
-                       {studentdata.finaltotal}
+                      {studentdata.finaltotal}
                     </span>
-                    
-                  
                   </TableCell>
 
                   <TableCell className="border border 1">
-                  <span 
-                    title=  {studentdata.totalpaidamount}
+                    <span
+                      title={studentdata.totalpaidamount}
                       style={{
                         width: "3rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "13px",
-                        display:"block"
+                        display: "block",
                       }}
                     >
-                       {studentdata.totalpaidamount}
+                      {studentdata.totalpaidamount}
                     </span>
-                    
                   </TableCell>
                   <TableCell className="border border 1">
-                  <span 
-                    title=    {studentdata.dueamount}
+                    <span
+                      title={studentdata.dueamount}
                       style={{
                         width: "3rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         fontSize: "13px",
-                        display:"block"
+                        display: "block",
                       }}
                     >
-                           {studentdata.dueamount}
+                      {studentdata.dueamount}
                     </span>
-                
+
                     {/* {dueamount} */}
                   </TableCell>
 
@@ -443,6 +435,10 @@ const FeeView = () => {
                   {" "}
                   Transition ID
                 </TableCell>
+                {/* <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  {" "}
+                  Admin Invoice
+                </TableCell> */}
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   {" "}
                   Invoice
@@ -467,9 +463,17 @@ const FeeView = () => {
                     <TableCell className="border border 1 text-center">
                       {item.transactionID}
                     </TableCell>
+                    {/* <TableCell className="border border 1 text-center">
+                      <Link
+                        to={`/invoice/${id}/${index}/Admission Fee/admininvoice`}
+                        style={{ width: "40px" }}
+                      >
+                        <CreditScoreIcon className="iconn" />
+                      </Link>
+                    </TableCell> */}
                     <TableCell className="border border 1 text-center">
                       <Link
-                        to={`/invoice/${id}/${index}/Admission Fee`}
+                        to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
                         style={{ width: "40px" }}
                       >
                         <CreditScoreIcon className="iconn" />
@@ -492,36 +496,38 @@ const FeeView = () => {
           >
             Add Installment
           </button>
-           <div className="col-12 col-md-2 col-lg-2 col-xl-2 my-2 "> 
-           <button className="btn btn-primary" variant="outlined" onClick={handleClickOpen}> 
-            Discount
-           </button>
-           {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 my-2 ">
+            <button
+              className="btn btn-primary"
+              variant="outlined"
+              onClick={handleClickOpen}
+            >
+              Discount
+            </button>
+            {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
         Open form dialog
       </Button> */}
-      <Dialog open={open} onClose={handleClose}>
-        {/* <DialogTitle>DISCOUNT</DialogTitle> */}
-        <DialogContent>
-          {/* <DialogContentText>
+            <Dialog open={open} onClose={handleClose}>
+              {/* <DialogTitle>DISCOUNT</DialogTitle> */}
+              <DialogContent>
+                {/* <DialogContentText>
             To subscribe to this website, please enter your email address here. We
             will send updates occasionally.
           </DialogContentText> */}
-          <TextField
-            autoFocus
-            margin="dense"
-            
-            label="Discount"
-            type="number"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          
-          <Button onClick={handleClose}>Discount</Button>
-        </DialogActions>
-      </Dialog>
-           </div>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  label="Discount"
+                  type="number"
+                  fullWidth
+                  variant="standard"
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Discount</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
         </div>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -544,7 +550,11 @@ const FeeView = () => {
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   {" "}
-                  Invoice
+                  Admin Invoice
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  {" "}
+                  Student Invoice
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -576,7 +586,15 @@ const FeeView = () => {
                       </TableCell>
                       <TableCell className="border border 1 text-center">
                         <Link
-                          to={`/invoice/${id}/${index}/Installment`}
+                          to={`/invoice/${id}/${index}/Installment/admininvoice`}
+                          style={{ width: "40px" }}
+                        >
+                          <CreditScoreIcon className="iconn" />
+                        </Link>
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        <Link
+                          to={`/invoice/${id}/${index}/Installment/studentinvoice`}
                           style={{ width: "40px" }}
                         >
                           <CreditScoreIcon className="iconn" />
