@@ -806,15 +806,15 @@ function Invoice() {
 
   return (
     <div>
-      {/* <h1>Your React App</h1> */}
-      <div className="w-50  mt-3">
+   
+      <div className="mt-3 text-end me-3 ">
         <button
           onClick={handlePrint}
-          // style={{ margin: "30px" }}
-          className="btn btn-primary mb-3 m-auto"
+          
+          className="btn btn-primary mb-3  end"
         >
           {" "}
-          {/* <LocalPrintshopIcon />{" "} */}
+         
           Print
         </button>
       </div>
