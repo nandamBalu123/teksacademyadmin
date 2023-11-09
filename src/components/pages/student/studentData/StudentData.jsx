@@ -366,18 +366,18 @@ const StudentData = () => {
     </div> */}
 
       <div className="studetdetails container  mt-3">
-        <h3 className="ms-5 mt-4 "> Student Data </h3>
+        <h3 className="ms-3 mt-4 "> Student Data </h3>
 
-        <div className="row mb-3 px-4 pt-3">
-          <div className="col-10 col-md-8 col-lg-8 col-xl-8  input-field">
+        <div className="row mb-3 ps-1 ">
+          <div className="col-12 col-md-8 col-lg-8 col-xl-8  input-field">
             <input
               type="text"
-              className="input-field ps-2"
+              className="input-field ps-1"
               placeholder="Search Here..."
               autoComplete="off"
               style={{
                 height: "45px",
-                width: "50%",
+                width: "100%",
 
                 outline: "none",
                 borderTop: "none",
@@ -392,29 +392,28 @@ const StudentData = () => {
             />
             <hr />
           </div>
-
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3 text-end">
-            {recordCount}/{initialDataCount}
-          </div>
-
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1">
-            <Button
+          <div className="col-12 col-md-4 col-lg-4 col-xl-4"> 
+          
+          <div className="d-flex justify-content-around">
+        <p className="pt-3">   {recordCount}/{initialDataCount}   </p>  
+        <p> <Button
               id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
+           
             >
-              <button
-                className="btn btn-primary  mb-2"
-                style={{ textTransform: "capitalize" }}
-              >
-                Filter
-              </button>
+             <button    className="btn btn-primary  "
+              style={{ textTransform: "capitalize" }}> 
+                    Filter
+             </button>
+                
+            
             </Button>
 
             <Menu
-              className="mt-5"
+              
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
               anchorEl={anchorEl}
@@ -439,7 +438,7 @@ const StudentData = () => {
               </div>
               <hr />
               <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                   <TextField
                     label=" From:"
                     type="date"
@@ -453,7 +452,7 @@ const StudentData = () => {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                   <TextField
                     label=" To:"
                     type="date"
@@ -668,26 +667,31 @@ const StudentData = () => {
                   Clear
                 </button>
               </div>
-            </Menu>
-          </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2 ">
-            {" "}
-            <select onChange={handlerecorddata}>
+            </Menu></p>
+            <p> 
+            <select onChange={handlerecorddata} className="mt-2">
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="75">75</option>
             </select>
-          </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-2 ">
+            </p>
+            <p> 
             <CSVLink
               data={filteredData}
               filename={"studentsdata.csv"}
               target="_blank"
             >
-              <DownloadIcon className="text-dark"></DownloadIcon>
-            </CSVLink>{" "}
-          </div>
+              <DownloadIcon className="text-dark mt-2"></DownloadIcon>
+            </CSVLink>
+         
+            </p>
+       
+</div>
+           </div>
+
+         
+         
         </div>
         {/*
         <table className="table table-striped">

@@ -485,7 +485,7 @@ const FeeView = () => {
           </Table>
         </TableContainer>
         <div className="row">
-          <span className="fs-3  col-12 col-md-8 col-lg-8 col-xl-8">
+          <span className="fs-3  col-6 col-md-8 col-lg-8 col-xl-8">
             {" "}
             Paid Installments
           </span>
@@ -496,7 +496,7 @@ const FeeView = () => {
           >
             Add Installment
           </button>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 my-2 ">
+          <div className="col-6 col-md-2 col-lg-2 col-xl-2 my-2 ">
             <button
               className="btn btn-primary"
               variant="outlined"
