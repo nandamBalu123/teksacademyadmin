@@ -111,68 +111,32 @@ function App() {
                 />
                 <Route
                   path="/feedetails/:id"
-                  element={
-                    user ? (
-                      <FeeDetails />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
+                  element={user ? <FeeDetails /> : <Dashboard />}
                 />
                 <Route
                   path="/feedetails"
-                  element={
-                    user ? (
-                      <FeeDetails />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
+                  element={user ? <FeeDetails /> : <Dashboard />}
                 />
                 <Route
                   path="/feefollowup"
-                  element={
-                    user ? (
-                      <Feefollowup />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
+                  element={user ? <Feefollowup /> : <Dashboard />}
                 />
                 <Route
                   path="/feeview/:id"
-                  element={
-                    user  ? (
-                      <FeeView />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
+                  element={user ? <FeeView /> : <Dashboard />}
                 />
                 <Route
-                  path="/invoice/:id/:index/:name"
+                  path="/invoice/:id/:index/:name/:nametype"
                   element={user ? <Invoice /> : <Dashboard />}
                 />
                 <Route
                   path="/addtofee/:id"
-                  element={
-                    user  ? (
-                      <Addtofee />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
+                  element={user ? <Addtofee /> : <Dashboard />}
                 />
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
                   path="/studentdataview/:id"
-                  element={
-                    user  ? (
-                      <StudentDataView />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
+                  element={user ? <StudentDataView /> : <Dashboard />}
                 />
                 <Route path="/certificate" element={<Certificate />} />
                 <Route
