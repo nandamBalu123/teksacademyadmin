@@ -35,7 +35,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
   const { index } = useParams();
   const { name } = useParams();
-
+  const { nametype } = useParams();
   const [studentdata, setstudentdata] = useState([]);
   const [invoice, setinvoice] = useState();
   const [number, setNumber] = useState();
@@ -170,29 +170,28 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       />
       <h3 className="text-center mt-5"> Fee Invoice</h3>
       <hr />
-      <div className="row"> 
-      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-      <h4 >
+      <div className="row">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+          <h4>
             {" "}
             <strong> Kapil Knowledge Hub Private Limited</strong>
-          </h4>  
-      </div>
-      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-      <h3 >
+          </h4>
+        </div>
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+          <h3>
             <strong>
               {" "}
               <b>INVOICE NO:</b> {invoice}
             </strong>
           </h3>
- 
+        </div>
       </div>
-</div>
-<div className="row m-0 p-0"> 
-      <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
-      <p >CIN: U80100TG2018PTC123853</p>
-      </div>
-      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-      <p >
+      <div className="row m-0 p-0">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+          <p>CIN: U80100TG2018PTC123853</p>
+        </div>
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+          <p>
             {name === "Admission Fee" &&
             studentdata &&
             studentdata.initialpayment &&
@@ -244,27 +243,23 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             ) : name === "Installment" ? (
               <p>No payment date available</p>
             ) : null}
-          </p> 
-      </div>
-</div>
-<div className="row m-0 p-0"> 
-      <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-      <p >
-             GSTIN: 36AAHCK0599C1ZI{" "}
           </p>
+        </div>
       </div>
-      <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
-      <p >
-          
+      <div className="row m-0 p-0">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+          <p>GSTIN: 36AAHCK0599C1ZI </p>
+        </div>
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+          <p>
             <b>Branch:</b> {studentdata.branch}
           </p>
-      
+        </div>
       </div>
-</div>
-      
+
       <div className="mt-2 ">
         <p>
-          <b> BILLING TO</b>{" "}
+          <b> BILLING TO</b>
         </p>
         <hr className="w-25" />
         <div className="row ">
@@ -272,7 +267,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             <b>Name :</b> {studentdata && studentdata.name}
           </div>
           <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <b>Registration No:</b>{" "}
+            <b>Registration No:</b>
             {studentdata && studentdata.registrationnumber}
           </div>
         </div>
@@ -399,28 +394,77 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 if (indx === parseInt(index)) {
                   return (
                     <tr>
-                      <td className=" text-center border border 1">
-                        Course Fee
-                      </td>
+                      {nametype === "studentinvoice" && (
+                        <td className=" text-center border border 1">Fee</td>
+                      )}
+                      {nametype === "admininvoice" && (
+                        <td className=" text-center border border 1">
+                          Course Fee
+                        </td>
+                      )}
+
                       <td className=" text-center border border 1">
                         {student.modeofpayment}
                       </td>
-                      <td className=" text-center border border 1">
+
+                      {nametype === "studentinvoice" && (
+                        <td className=" text-center border border 1">
+                          {parseFloat(student.paidamount / 1.18).toFixed(2)}
+                        </td>
+                      )}
+                      {nametype === "admininvoice" && (
+                        <td className=" text-center border border 1">
+                          {parseFloat(
+                            (student.paidamount * 0.65) / 1.18
+                          ).toFixed(2)}
+                        </td>
+                      )}
+
+                      {/* <td className=" text-center border border 1">
                         {parseFloat((student.paidamount * 0.65) / 1.18).toFixed(
                           2
                         )}
-                      </td>
-                      <td className=" text-center border border 1">
+                      </td> */}
+
+                      {nametype === "studentinvoice" && (
+                        <td className=" text-center border border 1">
+                          {(
+                            parseFloat(student.paidamount).toFixed(2) -
+                            parseFloat(student.paidamount / 1.18).toFixed(2)
+                          ).toFixed(2)}
+                        </td>
+                      )}
+                      {nametype === "admininvoice" && (
+                        <td className=" text-center border border 1">
+                          {(
+                            parseFloat(student.paidamount * 0.65).toFixed(2) -
+                            parseFloat(
+                              (student.paidamount * 0.65) / 1.18
+                            ).toFixed(2)
+                          ).toFixed(2)}
+                        </td>
+                      )}
+                      {/* <td className=" text-center border border 1">
                         {(
                           parseFloat(student.paidamount * 0.65).toFixed(2) -
                           parseFloat(
                             (student.paidamount * 0.65) / 1.18
                           ).toFixed(2)
                         ).toFixed(2)}
-                      </td>
-                      <td className=" text-center border border 1">
+                      </td> */}
+                      {nametype === "studentinvoice" && (
+                        <td className=" text-center border border 1">
+                          {parseInt(student.paidamount)}
+                        </td>
+                      )}
+                      {nametype === "admininvoice" && (
+                        <td className=" text-center border border 1">
+                          {parseInt(student.paidamount * 0.65)}
+                        </td>
+                      )}
+                      {/* <td className=" text-center border border 1">
                         {parseInt(student.paidamount * 0.65)}
-                      </td>
+                      </td> */}
                     </tr>
                   );
                 }
@@ -430,6 +474,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <p>No payment date available</p>
             ) : null}
             {studentdata &&
+            nametype === "admininvoice" &&
             name === "Installment" &&
             studentdata.installments &&
             studentdata.installments.length > 0 ? (
@@ -453,7 +498,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 }
                 return null; // If the condition is not met, return null
               })
-            ) : name === "Installment" ? (
+            ) : name === "Installment" && nametype === "admininvoice" ? (
               <p>No payment date available</p>
             ) : null}
 
@@ -761,15 +806,15 @@ function Invoice() {
 
   return (
     <div>
-      {/* <h1>Your React App</h1> */}
-      <div className="w-50  mt-3">
+   
+      <div className="mt-3 text-end me-3 ">
         <button
           onClick={handlePrint}
-          // style={{ margin: "30px" }}
-          className="btn btn-primary mb-3 m-auto"
+          
+          className="btn btn-primary mb-3  end"
         >
           {" "}
-          {/* <LocalPrintshopIcon />{" "} */}
+         
           Print
         </button>
       </div>

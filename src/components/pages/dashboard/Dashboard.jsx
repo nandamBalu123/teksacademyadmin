@@ -278,7 +278,7 @@ const Dashboard = () => {
     // Calculate the total amount for each branch and handle NaN values
     branchwiseAllstudentsData[branch].forEach((student) => {
       student.installments.forEach((installment) => {
-        if (installment.duedate && installment.paidamount === "") {
+        if (installment.duedate && installment.paidamount === 0) {
           if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
             if (
               installment.duedate >= filterDeuAndReceived.fromdate &&
@@ -351,7 +351,7 @@ const Dashboard = () => {
 
     students.forEach((item) => {
       item.installments.forEach((installment) => {
-        if (installment.duedate && installment.paidamount === "") {
+        if (installment.duedate && installment.paidamount === 0) {
           if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
             if (
               installment.duedate >= filterDeuAndReceived.fromdate &&
@@ -434,9 +434,9 @@ const Dashboard = () => {
     AllbranchesreceivedAmount = calculatePaidAmountForCurrentMonth();
   }
   return (
-    < div className="container main-dashboard">
+    <div className="container main-dashboard">
       {/* Header */}
-      <div >
+      <div>
         <Box className="text-center  mt-3">
           {user && (
             <Header
@@ -1080,9 +1080,9 @@ const Dashboard = () => {
       )}
       {DisplayData.users && (
         <div className="progreebar rounded rounded-5  pb-4">
-        <div className="d-flex justify-content-between"> 
-        <h4 className="pt-4  enrollment ps-4"> Total Users</h4>
-          <div className="pt-2 pe-4">
+          <div className="d-flex justify-content-between">
+            <h4 className="pt-4  enrollment ps-4"> Total Users</h4>
+            <div className="pt-2 pe-4">
               <Button
                 id="demo-positioned-button"
                 aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -1180,7 +1180,7 @@ const Dashboard = () => {
                 </MenuItem>
               </Menu>
             </div>
-        </div>
+          </div>
           <div className="row justify-content-around pt-4 progreebar-show">
             {Object.entries(branchUserData).map(([branch, users]) => {
               const enrollmentPercentage =

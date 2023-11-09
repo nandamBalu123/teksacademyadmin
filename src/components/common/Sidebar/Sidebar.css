@@ -25,5 +25,21 @@
   width: 100%;
 }
 .pro-sidebar{ 
+  color: black !important;
   background-color: none;
 }
+.pro-sidebar .pro-menu a{
+  color: black !important;
+
+}
+.pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu > .pro-inner-item:before{
+  color: black !important;
+}
+.pro-sidebar .pro-menu a:hover {
+  color: black !important; }
+  
+    .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item:focus {
+    
+      color: black !important; }
+
+      

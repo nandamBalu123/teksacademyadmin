@@ -68,7 +68,7 @@ const Addtofee = () => {
         id: Date.now(),
         duedate: "",
         dueamount: parseInt(dueamount) / parseInt(totalinstallment),
-        paidamount: "",
+        paidamount: 0,
         paiddate: "",
         modeofpayment: "",
         transactionid: "",
