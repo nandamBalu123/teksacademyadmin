@@ -305,8 +305,8 @@ const UsersData = () => {
       <div className="userlist mt-4">
         <h2 className="ms-3 my-3">Users List</h2>
 
-        <div className="row mb-3 px-4 pt-3">
-          <div className="col-12 col-md-8 col-lg-8 col-xl-9">
+        <div className="row mb-3 px-2 pt-3">
+          <div className="col-12 col-md-8 col-lg-8 col-xl-8">
             <input
               type="text"
               className="input-field "
@@ -328,13 +328,13 @@ const UsersData = () => {
             />
             <hr className="w-75" />
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 mt-3">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-3">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-2">
+          <div className="col-2 col-md-1 col-lg-1 col-xl-1 mt-2">
             <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
