@@ -52,7 +52,7 @@ export const StudentsContextProvider = ({ children }) => {
           if(role==="admin"){
             dispatch({ type: "SET_STUDENTS", payload: response.data });
           }
-   
+          
           if(role==="counsellor"){
             const filteredResults = response.data.filter((item) => {
               const user_id=parseInt(item.user_id);
@@ -72,6 +72,46 @@ export const StudentsContextProvider = ({ children }) => {
 
           // dispatch({ type: "SET_STUDENTS", payload: response.data });
         }
+
+
+        // if (response.data) {
+        //   if(role==="admin"){
+        //     dispatch({ type: "SET_STUDENTS", payload: response.data });
+        //   }
+        //   if(role === "branch manager"){
+        //     const filteredResults = response.data.filter((item) => {
+        //       const reportto=item.reportto;
+            
+        //         const dataaspercounsellor = reportto
+        //         ? reportto === reportto
+        //         : true;
+        //       return (
+        //        dataaspercounsellor
+        //       );
+        //     });
+            
+        //     dispatch({ type: "SET_STUDENTS", payload: filteredResults
+        //   });
+        //   }
+        //   if(role==="counsellor"){
+        //     const filteredResults = response.data.filter((item) => {
+        //       const user_id=parseInt(item.user_id);
+            
+        //         const dataaspercounsellor = userId
+        //         ? user_id === userId
+        //         : true;
+        //       return (
+        //        dataaspercounsellor
+        //       );
+        //     });
+            
+        //     dispatch({ type: "SET_STUDENTS", payload: filteredResults
+        //   });
+        //   }
+         
+
+        //   // dispatch({ type: "SET_STUDENTS", payload: response.data });
+        // }
       })
       .catch((error) => {
         // Handle any errors that occur during the request
