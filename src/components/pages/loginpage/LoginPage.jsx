@@ -62,6 +62,7 @@ const LoginPage = () => {
             const token = res.data.token;
 
             const role = res.data.adminData.profile;
+            const reportto = res.data.adminData.reportto;
 
             console.log("Received Token:", token);
 
@@ -69,6 +70,7 @@ const LoginPage = () => {
 
             localStorage.setItem("role", role);
             localStorage.setItem("id", id);
+            localStorage.setItem("reportto", reportto);
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(res.data.adminData));
 
