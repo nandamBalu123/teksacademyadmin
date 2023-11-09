@@ -146,17 +146,12 @@ const Sidebar = () => {
           "& .pro-inner-item:hover": {
             background:"#f5f5f5 !important",
             color:"blue !important",
-            borderRadius:"20px !important",
+            borderTopRightRadius:"20px !important",
+            borderBottomRightRadius:"20px !important"
+            // borderRadius:"20px !important",
            
           },
-          "& .pro-inner-item.active": {
-           
-            borderRadius:"50px !important",
-           
-          },
-          
-          
-
+     
           "& .pro-menu-item.active": {
             color: "blue !important",
           },

@@ -6,6 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import "./FeeView.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -144,6 +151,16 @@ const FeeView = () => {
     display: studentdata.dueamount < 1 ? "none" : true,
     height: "40px",
     margin: "20px",
+  };
+  //  for discount dialogue box
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   //////add installment
@@ -468,7 +485,7 @@ const FeeView = () => {
           </Table>
         </TableContainer>
         <div className="row">
-          <span className="fs-3  col-12 col-md-9 col-lg-9 col-xl-9">
+          <span className="fs-3  col-12 col-md-8 col-lg-8 col-xl-8">
             {" "}
             Paid Installments
           </span>
@@ -479,6 +496,36 @@ const FeeView = () => {
           >
             Add Installment
           </button>
+           <div className="col-12 col-md-2 col-lg-2 col-xl-2 my-2 "> 
+           <button className="btn btn-primary" variant="outlined" onClick={handleClickOpen}> 
+            Discount
+           </button>
+           {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
+        Open form dialog
+      </Button> */}
+      <Dialog open={open} onClose={handleClose}>
+        {/* <DialogTitle>DISCOUNT</DialogTitle> */}
+        <DialogContent>
+          {/* <DialogContentText>
+            To subscribe to this website, please enter your email address here. We
+            will send updates occasionally.
+          </DialogContentText> */}
+          <TextField
+            autoFocus
+            margin="dense"
+            
+            label="Discount"
+            type="number"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          
+          <Button onClick={handleClose}>Discount</Button>
+        </DialogActions>
+      </Dialog>
+           </div>
         </div>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
