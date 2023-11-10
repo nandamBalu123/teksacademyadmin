@@ -155,6 +155,11 @@ const Dashboard = () => {
     students,
     "branch"
   );
+  const CounsellorwiseAllstudentsData = groupDataAndCalculatePercentage(
+    getstudentData,
+    "enquirytakenby"
+  );
+
   const branchStudentData = groupDataAndCalculatePercentage(
     getstudentData,
     "branch"
@@ -166,7 +171,7 @@ const Dashboard = () => {
 
   const finalTotalByBranch = {};
   const finalDueAndReceivedByBranch = {};
-
+  const counsellorwisedataByBranch = {};
   let totalAmount = 0;
   // Calculate the total amount and handle NaN values
   getstudentData.forEach((student) => {
@@ -192,6 +197,24 @@ const Dashboard = () => {
     finalTotalByBranch[branch] = {
       totalAmount: branchTotalAmount,
       percentage: branchPercentage,
+    };
+  });
+  Object.keys(CounsellorwiseAllstudentsData).forEach((counsellor) => {
+    let counsellorTotalCount = 0;
+
+    // Calculate the total amount for each branch and handle NaN values
+    CounsellorwiseAllstudentsData[counsellor].forEach((student) => {
+      const amount = parseFloat(student.finaltotal);
+      if (!isNaN(amount)) {
+        counsellorTotalCount += amount;
+      }
+    });
+
+    const counsellorPercentage = (counsellorTotalCount / totalAmount) * 100;
+
+    counsellorwisedataByBranch[counsellor] = {
+      totalcount: counsellorTotalCount,
+      percentage: counsellorPercentage,
     };
   });
   const [filterDeuAndReceived, setfilterDeuAndReceived] = useState({
@@ -794,26 +817,50 @@ const Dashboard = () => {
           </div>
 
           <div className="justify-content-around pt-4 row progreebar-show">
-            {Object.entries(branchStudentData).map(([branch, students]) => {
-              const enrollmentPercentage =
-                (students.length / getstudentData.length) * 100;
-              const totalCount = students.length;
-              return (
-                <div
-                  key={`student-${branch}`}
-                  className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                >
-                  <h6>{branch}</h6>
-                  <BorderLinearProgress
-                    variant="determinate"
-                    value={enrollmentPercentage}
-                  />
-                  <span>Total Count: </span>
-                  {totalCount}
-                  <span>({enrollmentPercentage.toFixed(2)}%)</span>
-                </div>
-              );
-            })}
+            {role !== "branch manager" &&
+              Object.entries(branchStudentData).map(([branch, students]) => {
+                const enrollmentPercentage =
+                  (students.length / getstudentData.length) * 100;
+                const totalCount = students.length;
+                return (
+                  <div
+                    key={`student-${branch}`}
+                    className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                  >
+                    <h6>{branch}</h6>
+                    <BorderLinearProgress
+                      variant="determinate"
+                      value={enrollmentPercentage}
+                    />
+                    <span>Total Count: </span>
+                    {totalCount}
+                    <span>({enrollmentPercentage.toFixed(2)}%)</span>
+                  </div>
+                );
+              })}
+            {role === "branch manager" &&
+              Object.entries(CounsellorwiseAllstudentsData).map(
+                ([counsellor, students]) => {
+                  const enrollmentPercentage =
+                    (students.length / getstudentData.length) * 100;
+                  const totalCount = students.length;
+                  return (
+                    <div
+                      key={`student-${counsellor}`}
+                      className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                    >
+                      <h6>{counsellor}</h6>
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={enrollmentPercentage}
+                      />
+                      <span>Total Count: </span>
+                      {totalCount}
+                      <span>({enrollmentPercentage.toFixed(2)}%)</span>
+                    </div>
+                  );
+                }
+              )}
           </div>
         </div>
       )}
@@ -921,32 +968,49 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="  justify-content-around pt-4 row progreebar-show">
-            {Object.entries(finalTotalByBranch).map(
-              ([branch, { totalAmount, percentage }]) => {
-                return (
-                  <div
-                    key={branch}
-                    className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                  >
-                    <h6>{branch}</h6>
-                    <BorderLinearProgress
-                      variant="determinate"
-                      value={percentage}
-                    />
-                    <div>
-                      Total Amount: {totalAmount}{" "}
-                      <span>({percentage.toFixed(2)}%)</span>
+            {role !== "branch manager" &&
+              Object.entries(finalTotalByBranch).map(
+                ([branch, { totalAmount, percentage }]) => {
+                  return (
+                    <div
+                      key={branch}
+                      className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                    >
+                      <h6>{branch}</h6>
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={percentage}
+                      />
+                      <div>
+                        Total Amount: {totalAmount}{" "}
+                        <span>({percentage.toFixed(2)}%)</span>
+                      </div>
                     </div>
-                  </div>
-                );
+                  );
+                }
+              )}
 
-                // <div key={branch}>
-                //   <h3>{branch}</h3>
-                //   <p>Total Amount: {totalAmount}</p>
-                //   <p>Percentage: {percentage.toFixed(2)}%</p>
-                // </div>
-              }
-            )}
+            {role === "branch manager" &&
+              Object.entries(counsellorwisedataByBranch).map(
+                ([counsellor, { totalcount, percentage }]) => {
+                  return (
+                    <div
+                      key={counsellor}
+                      className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                    >
+                      <h6>{counsellor}</h6>
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={percentage}
+                      />
+                      <div>
+                        Total Amount: {totalcount}{" "}
+                        <span>({percentage.toFixed(2)}%)</span>
+                      </div>
+                    </div>
+                  );
+                }
+              )}
           </div>
         </div>
       )}
