@@ -135,6 +135,17 @@ export default function RegistrationForm() {
   //   userName = LoggedInuser.fullname;
   //   setEnquiryTakenBy(userName);
   // }
+  const [imageUrl, setImageUrl] = useState(null);
+  const displayImage = (file) => {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const imageUrl = e.target.result; // Get the base64 image data
+      setImageUrl(imageUrl);
+    };
+
+    reader.readAsDataURL(file);
+  };
   useEffect(() => {
     if (LoggedInuser) {
       userName = LoggedInuser.fullname;
@@ -799,6 +810,11 @@ export default function RegistrationForm() {
     }
   }, [users]);
   const [studentData, setStudentData] = useState([{ name }, { name }]);
+  useEffect(() => {
+    if (studentImage) {
+      displayImage(studentImage);
+    }
+  }, [studentImage]);
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -2131,11 +2147,21 @@ export default function RegistrationForm() {
                   <div className="row">
                     <div className="col-12 col-md-7 col-lg-4 col-xl-4">
                       {" "}
-                      <img
+                      {/* <img
                         className="pop-img rounded-circle w-100"
                         src={pictureprofile}
                         alt="profile"
-                      />
+                      /> */}
+                      {imageUrl && <img src={imageUrl} alt="Selected" />}
+                      {/* {!studentdata.studentImg && (
+                        <img src={profilePic} alt="photo" />
+                      )}
+                      {studentdata.studentImg && (
+                        <img
+                          src={`https://teksacademyimages.s3.amazonaws.com/${studentdata.studentImg}`}
+                          alt="photo"
+                        />
+                      )} */}
                     </div>
                     <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
                       <p> Name :{name}</p>
