@@ -472,16 +472,16 @@ export default function RegistrationForm() {
   };
   const handlePhoto = () => {
     if (!studentImage) {
-      alert('Please select an image to upload');
+      alert("Please select an image to upload");
       return;
     }
-  
+
     const maxSizeInBytes = 45 * 1024; // 40 KB in bytes
     if (studentImage.size > maxSizeInBytes) {
-      alert('Image size is too large. Maximum allowed size is 45 KB');
+      alert("Image size is too large. Maximum allowed size is 45 KB");
       return;
     }
-  
+
     // Image size is within the limit, proceed to the next step
     handleNext();
   };
@@ -634,7 +634,7 @@ export default function RegistrationForm() {
 
         // Handle the response as needed
         console.log("Response:", response.data);
-  
+
         // You can navigate to another page or perform other actions here.
       } catch (error) {
         // Handle errors
@@ -868,6 +868,28 @@ export default function RegistrationForm() {
             </StepLabel>
             <StepContent>
               <form className="form ">
+                {/* */}
+                {/* <FormControl variant="standard" className="w-75">
+                  <InputLabel>
+                    Lead Source<span> *</span>
+                  </InputLabel>
+                  <Select
+                    id="leadsource"
+                    name="leadsource"
+                    required
+                    onChange={(e) => setLeadSource(e.target.value)}
+                    value={leadsource}
+                  >
+                    <MenuItem value="select"> ---select---</MenuItem>
+                    {leadsources &&
+                      leadsources.map((item, index) => (
+                        <MenuItem key={item.id} value={item.leadsource}>
+                          {item.leadsource}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl> */}
+                {/*  */}
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <TextField
@@ -919,7 +941,6 @@ export default function RegistrationForm() {
                     />
                   </div>
                 </div>
-
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
@@ -1347,9 +1368,12 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                <input type="file" onChange={(e) => {
-                    setSelectedFile(e.target.files[0]);
-                  }} />
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      setSelectedFile(e.target.files[0]);
+                    }}
+                  />
                 </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
@@ -1398,23 +1422,22 @@ export default function RegistrationForm() {
                       value={enquirydate}
                     />
                   </div>
-                  {enquirytakenby && (
-                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                      <FormControl variant="standard" className="w-75">
-                        {enquirytakenby && (
-                          <TextField
-                            id="standard-read-only-input"
-                            label="Enquiry Taken By"
-                            defaultValue={enquirytakenby}
-                            InputProps={{
-                              readOnly: true,
-                            }}
-                            variant="standard"
-                          />
-                        )}
-                      </FormControl>
-                    </div>
-                  )}
+
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                    <FormControl variant="standard" className="w-75">
+                      {enquirytakenby && (
+                        <TextField
+                          id="standard-read-only-input"
+                          label="Enquiry Taken By"
+                          defaultValue={enquirytakenby}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                          variant="standard"
+                        />
+                      )}
+                    </FormControl>
+                  </div>
                 </div>
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">

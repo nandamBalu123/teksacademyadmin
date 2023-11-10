@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import profilepic from "../../../../images/profilepicture.jpg";
+// import profilepic from "../../../../images/profilepicture.jpg";
 import "./StudentDataView.css";
 import { useEffect } from "react";
 import axios from "axios";
@@ -36,11 +36,16 @@ const StudentDataView = () => {
       <h2 className="text-center"> Student Details From</h2>
       <div className="studentdataview ">
         <div className="bg">
-          <img
-            className="photo"
-            src={`https://teksacademyimages.s3.amazonaws.com/${studentdata.studentImg}`}
-            alt="photo"
-          />
+          {!studentdata.studentImg && (
+            <img className="photo" src={profilePic} alt="photo" />
+          )}
+          {studentdata.studentImg && (
+            <img
+              className="photo"
+              src={`https://teksacademyimages.s3.amazonaws.com/${studentdata.studentImg}`}
+              alt="photo"
+            />
+          )}
         </div>
 
         <div className="row">
