@@ -91,7 +91,7 @@ export default function RegistrationForm() {
   const [leadsource, setLeadSource] = useState("");
   const [branch, setBranch] = useState("");
   const [modeoftraining, setModeOfTraining] = useState("");
-  const [admissionstatus, setAdmissionStatus] = useState("");
+  // const [admissionstatus, setAdmissionStatus] = useState("");
   const [registrationnumber, setRegistrationNumber] = useState("");
   const [admissiondate, setAdmissionDate] = useState("");
   const [validitystartdate, setValidityStartDate] = useState("");
@@ -457,13 +457,6 @@ export default function RegistrationForm() {
     }
     handleNext();
   };
-  // const handlePhoto = () => {
-  //   if (!studentImage) {
-  //     alert('Please select a image to upload');
-  //     return;
-  //   }
-  //   handleNext();
-  // };
   const handlePhoto = () => {
     if (!studentImage) {
       alert('Please select an image to upload');
@@ -472,7 +465,7 @@ export default function RegistrationForm() {
   
     const maxSizeInBytes = 45 * 1024; // 40 KB in bytes
     if (studentImage.size > maxSizeInBytes) {
-      alert('Image size is too large. Maximum allowed size is 40 KB');
+      alert('Image size is too large. Maximum allowed size is 45 KB');
       return;
     }
   
@@ -592,7 +585,6 @@ export default function RegistrationForm() {
         leadsource,
         branch,
         modeoftraining,
-        admissionstatus,
         registrationnumber,
         admissiondate,
         validitystartdate,

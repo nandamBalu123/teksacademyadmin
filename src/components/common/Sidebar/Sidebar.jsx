@@ -26,7 +26,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
-
+import StorageIcon from "@mui/icons-material/Storage"
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 
@@ -327,6 +327,27 @@ const Sidebar = () => {
                 />
                 }
               </SubMenu><hr/>
+              {/* start */}
+              {profile == "admin" ? (
+                <SubMenu
+                  style={{
+                    // color: colors.grey[100],
+                    color: "black",
+                  }}
+                  icon={<StorageIcon />}
+                  label={"Inventory"}
+                  title={"Inventory"}
+                >
+                  <Item
+                    title="Inventory"
+                    to="/inventory"
+                    icon={<StorageIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </SubMenu>
+              ) : undefined}<hr />
+            {/* end */}
               {profile == "admin" ? (
                 <SubMenu
                   style={{

@@ -7,16 +7,19 @@ import Login from "./components/pages/logins/adminlogins/Login";
 
 import "./App.css";
 
-// import Signup from "./components/logins/adminlogins/Signup";
-// import Register from "./components/inventory/Register";
-// import Edit from "./components/inventory/Edit";
-// import Details from "./components/inventory/Details";
 
-// import Assignassets from "./components/inventory/Assignassets";
-// import Addassets from "./components/inventory/Addassets";
-// import Addassetsform from "./components/inventory/Addassetsform";
-// import Inventoryhome from "./components/inventory/Inventoryhome";
-// import ReturnAssetsForm from "./components/inventory/ReturnAssetsForm";
+// uncomand inventory start
+// import Signup from "../src/components/pages/inventory/Signup";
+import Register from "../src/components/pages/inventory/Register";
+import iEdit from "../src/components/pages/inventory/Edit";
+import Details from "../src/components/pages/inventory/Details";
+
+import Assignassets from "../src/components/pages/inventory/Assignassets";
+import Addassets from "../src/components/pages/inventory/Addassets";
+import Addassetsform from "../src/components/pages/inventory/Addassetsform";
+import Inventoryhome from "../src/components/pages/inventory/Inventoryhome";
+import ReturnAssetsForm from "../src/components/pages/inventory/ReturnAssetsForm";
+// uncomand inventory end
 import Dashboard from "./components/pages/dashboard/Dashboard";
 import Sidebar from "./components/common/Sidebar/Sidebar";
 import Topbar from "./components/common/Topbar/Topbar";
@@ -311,9 +314,9 @@ function App() {
                 path="/feedetails"
                 element={role=='admin'? <Feedetails/> :<Dashboard/>}/> */}
                 {/* <Route path="/formm" element={<Formm />}></Route> */}
-                {/*<Route path="/assignassets" element={<Assignassets />} />
+                <Route path="/assignassets" element={<Assignassets />} />
               <Route exact path="/register" element={<Register />} />{" "}
-              <Route exact path="/assignassets/edit/:id" element={<Edit />} />{" "}
+              <Route exact path="/assignassets/edit/:id" element={<iEdit />} />{" "}
               <Route
                 exact
                 path="/assignassets/view/:id"
@@ -325,7 +328,7 @@ function App() {
               <Route
                 path="/assignassets/returnassets/:id"
                 element={<ReturnAssetsForm />}
-              ></Route> */}
+              ></Route>
               </Routes>
             </main>
           </div>
