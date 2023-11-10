@@ -429,8 +429,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       {nametype === "studentinvoice" && (
                         <td className=" text-center border border 1">
                           {(
-                            parseFloat(student.paidamount).toFixed(2) -
-                            parseFloat(student.paidamount / 1.18).toFixed(2)
+                            parseFloat(student.paidamount ).toFixed(2) -
+                            parseFloat(
+                              (student.paidamount) / 1.18
+                            ).toFixed(2)
                           ).toFixed(2)}
                         </td>
                       )}

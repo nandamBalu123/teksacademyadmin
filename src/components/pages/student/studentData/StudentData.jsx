@@ -178,27 +178,27 @@ const StudentData = () => {
 
   useEffect(() => {
     // Make a GET request to your backend API endpoint
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
-      .then((response) => {
-        // Handle the successful response here
-        setData(response.data); // Update the data state with the fetched data
-        if (role == "counsellor") {
-          const filteredResults = response.data.filter((item) => {
-            const user_id = parseInt(item.user_id);
+    // axios
+    //   .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
+    //   .then((response) => {
+    //     // Handle the successful response here
+    //     setData(response.data); // Update the data state with the fetched data
+    //     if (role == "counsellor") {
+    //       const filteredResults = response.data.filter((item) => {
+    //         const user_id = parseInt(item.user_id);
 
-            const dataaspercounsellor = userId ? user_id === userId : true;
-            return dataaspercounsellor;
-          });
-          setData(filteredResults); // Update the data state with the fetched data
-        }
+    //         const dataaspercounsellor = userId ? user_id === userId : true;
+    //         return dataaspercounsellor;
+    //       });
+    //       setData(filteredResults); // Update the data state with the fetched data
+    //     }
 
-        console.log("data", response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
-      });
+    //     console.log("data", response.data);
+    //   })
+    //   .catch((error) => {
+    //     // Handle any errors that occur during the request
+    //     console.error("Error fetching data:", error);
+    //   });
     const fetchData = async () => {
       try {
         const response = await fetch(
