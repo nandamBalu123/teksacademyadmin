@@ -48,9 +48,13 @@ export const StudentsContextProvider = ({ children }) => {
   console.log("reportto", reportto);
   userId = parseInt(userId)
   console.log("userId", role);
+  let lusername
+if(userName){
+  lusername  = userName.fullname;
 
+}
 
-
+ 
 
   const [users, setUsers] = useState()
   useEffect(() => {
@@ -83,7 +87,7 @@ console.log("userdd", users)
       .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         if (response.data) {
-          if (role === "admin" && role == "RM") {
+          if (role === "admin" || role === "RM") {
             dispatch({ type: "SET_STUDENTS", payload: response.data });
           }
 
@@ -115,7 +119,8 @@ console.log("userdd", users)
                 console.log("muser_id", muser_id);
                 if (muser_id === userd_id) {
                   const ureportto = user.reportto;
-                  const lusername = userName.fullname;
+                  
+                  // const lusername = userName.fullname;
                   console.log("ureportto, lusername", ureportto, lusername);
                   return ureportto === lusername;
                 }
@@ -229,7 +234,7 @@ console.log("userdd", users)
         // Handle any errors that occur during the request
         console.error("Error fetching data:", error);
       });
-  }, [role, userName.fullname, users]);
+  }, [users]);
 
   console.log("StudentsContext state:", state);
 

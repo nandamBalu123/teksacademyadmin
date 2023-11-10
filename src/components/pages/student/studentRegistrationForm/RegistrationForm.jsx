@@ -91,7 +91,7 @@ export default function RegistrationForm() {
   const [leadsource, setLeadSource] = useState("");
   const [branch, setBranch] = useState("");
   const [modeoftraining, setModeOfTraining] = useState("");
-  const [admissionstatus, setAdmissionStatus] = useState("");
+  // const [admissionstatus, setAdmissionStatus] = useState("");
   const [registrationnumber, setRegistrationNumber] = useState("");
   const [admissiondate, setAdmissionDate] = useState("");
   const [validitystartdate, setValidityStartDate] = useState("");
@@ -472,9 +472,17 @@ export default function RegistrationForm() {
   };
   const handlePhoto = () => {
     if (!studentImage) {
-      alert("Please select a image to upload");
+      alert('Please select an image to upload');
       return;
     }
+  
+    const maxSizeInBytes = 45 * 1024; // 40 KB in bytes
+    if (studentImage.size > maxSizeInBytes) {
+      alert('Image size is too large. Maximum allowed size is 45 KB');
+      return;
+    }
+  
+    // Image size is within the limit, proceed to the next step
     handleNext();
   };
   const handleEnquirydetails = () => {
@@ -590,7 +598,6 @@ export default function RegistrationForm() {
         leadsource,
         branch,
         modeoftraining,
-        admissionstatus,
         registrationnumber,
         admissiondate,
         validitystartdate,
@@ -627,7 +634,7 @@ export default function RegistrationForm() {
 
         // Handle the response as needed
         console.log("Response:", response.data);
-
+  
         // You can navigate to another page or perform other actions here.
       } catch (error) {
         // Handle errors
@@ -1340,20 +1347,9 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  <input
-                    type="file"
-                    onChange={(e) => {
-                      setSelectedFile(e.target.files[0]);
-                    }}
-                  />
-                  {/* <input
-                    type="file"
-                    name="file"
-                    onChange={(e) => {
-                      setSelectedFile(e.target.files[0]);
-                    }}
-                    accept=".jpg, .jpeg, .png"
-                  /> */}
+                <input type="file" onChange={(e) => {
+                    setSelectedFile(e.target.files[0]);
+                  }} />
                 </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
