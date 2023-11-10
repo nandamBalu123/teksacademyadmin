@@ -25,9 +25,7 @@ import "./Feefolloup.css";
 import axios from "axios";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 
-
 const Feefollowup = () => {
-  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { students, dispatch } = useStudentsContext();
@@ -68,21 +66,17 @@ const Feefollowup = () => {
   };
   const role = localStorage.getItem("role");
   let userId = localStorage.getItem("id");
-   userId = parseInt(userId)
-   
-   useEffect(()=>{
-    if(students){
-     
-      setData(students); 
+  userId = parseInt(userId);
 
+  useEffect(() => {
+    if (students) {
+      setData(students);
     }
-    
-   },[students])
- 
+  }, [students]);
 
   const [filterCriteria, setFilterCriteria] = useState({
     dueamount: true,
-    todaydate: "true",
+    todaydate: true,
     upcomingdate: "",
     pendingdate: "",
   });
@@ -91,15 +85,19 @@ const Feefollowup = () => {
 
   useEffect(() => {
     const filteredResults = getstudentData.filter((item) => {
+      let nextduedate;
+      if (item.nextduedate) {
+        nextduedate = item.nextduedate;
+      }
       const dueamount = filterCriteria.dueamount ? item.dueamount != 0 : true;
       const todaydateCondition = filterCriteria.todaydate
-        ? item.nextduedate === todayFormatted
+        ? nextduedate === todayFormatted
         : true;
       const upcomingdateCondition = filterCriteria.upcomingdate
-        ? item.nextduedate > todayFormatted
+        ? nextduedate > todayFormatted
         : true;
       const pendingdateCondition = filterCriteria.pendingdate
-        ? item.nextduedate < todayFormatted
+        ? nextduedate < todayFormatted
         : true;
 
       return (
@@ -231,38 +229,38 @@ const Feefollowup = () => {
           </select>
         </div>
         <div className="col-4 col-md-1 col-lg-1 col-xl-1">
-        <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
+          <Button
+            id="demo-positioned-button"
+            aria-controls={open ? "demo-positioned-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          >
+            <button
+              className="btn btn-primary mr-20 ms-2 mb-2"
+              style={{ textTransform: "capitalize" }}
             >
-              <button
-                className="btn btn-primary mr-20 ms-2 mb-2"
-                style={{ textTransform: "capitalize" }}
-              >
-                Filter
-              </button>
-            </Button>
+              Filter
+            </button>
+          </Button>
 
-            <Menu
-              className="mt-5"
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-          {/* <button
+          <Menu
+            className="mt-5"
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+          >
+            {/* <button
             className="btn btn-primary mr-20 ms-2 mb-2"
             style={{ textTransform: "capitalize" }}
             onClick={handleClick}
@@ -271,7 +269,7 @@ const Feefollowup = () => {
             Filter{" "}
           </button> */}
 
-          {/* <Menu
+            {/* <Menu
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
@@ -287,47 +285,43 @@ const Feefollowup = () => {
             }}
           > */}
             <div className="d-flex justify-content-between m-2">
-               <div > Filter</div>
-             <div ><CloseIcon onClick={handleClose} />
-</div>
-           
+              <div> Filter</div>
+              <div>
+                <CloseIcon onClick={handleClose} />
               </div>
+            </div>
             <hr />
             <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                 <TextField
-              
-                      label=" From:"
-                      type="date"
-                      variant="standard"
-                      className="  w-100"
-                       InputLabelProps={{
-                        shrink: true,
-                        
-                      }}
-                      name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                  label=" From:"
+                  type="date"
+                  variant="standard"
+                  className="  w-100"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="fromdate"
+                  value={filterCriteria.fromdate}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                 <TextField
-                      label=" To:"
-                      type="date"
-                      variant="standard"
-                      className="w-100"
-                    
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
-                    />
-                </div>
-                
-             
-                {/* <div>
+                  label=" To:"
+                  type="date"
+                  variant="standard"
+                  className="w-100"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="todate"
+                  value={filterCriteria.todate}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -344,49 +338,46 @@ const Feefollowup = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-              </div>
+            </div>
 
-              <div className="row m-2"> 
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+            <div className="row m-2">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <FormControl variant="standard" className="w-100">
-                      <InputLabel>Branch</InputLabel>
-                      <Select
-                      
-                      name="branch"
-                      value={filterCriteria.branch}
-                      onChange={handleInputChange}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        {branches &&
-                    branches.map((branch, index) => (
-                      <MenuItem key={branch.id} value={branch.branch_name}>
-                        {branch.branch_name}
-                      </MenuItem>
-                    ))}
-                   
-                      </Select>
-                    </FormControl>
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
+                  <InputLabel>Branch</InputLabel>
+                  <Select
+                    name="branch"
+                    value={filterCriteria.branch}
+                    onChange={handleInputChange}
+                  >
+                    <MenuItem value="select"> ---select---</MenuItem>
+                    {branches &&
+                      branches.map((branch, index) => (
+                        <MenuItem key={branch.id} value={branch.branch_name}>
+                          {branch.branch_name}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              </div>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                 <FormControl variant="standard" className="w-100">
-                      <InputLabel>Course</InputLabel>
-                      <Select
-                      
-                       name="course"
-                        value={filterCriteria.course}
-                        onChange={handleInputChange}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        {getcourses &&
-                    getcourses.map((item, index) => (
-                      <MenuItem key={item.id} value={item.course_name}>
-                        {item.course_name}
-                      </MenuItem>
-                    ))}
-                      </Select>
-                    </FormControl>
-                </div>
-               </div>
+                  <InputLabel>Course</InputLabel>
+                  <Select
+                    name="course"
+                    value={filterCriteria.course}
+                    onChange={handleInputChange}
+                  >
+                    <MenuItem value="select"> ---select---</MenuItem>
+                    {getcourses &&
+                      getcourses.map((item, index) => (
+                        <MenuItem key={item.id} value={item.course_name}>
+                          {item.course_name}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
             {/* <div className="d-flex">
               <MenuItem className="pt-3 ">
                 <div>
@@ -419,7 +410,6 @@ const Feefollowup = () => {
                 />
               </MenuItem>
             </div> */}
-            
           </Menu>
         </div>
       </div>
