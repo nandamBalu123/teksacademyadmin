@@ -5,6 +5,7 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import logo from "../../../../images/Teks-Logo-with-Trade.png";
 import "./StudentApplication.css";
+import studentimg from '../../../../images/img4.png'
 import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -59,10 +60,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           <p className="m-0 p-0"><strong> <LocalPhoneIcon /></strong> 1800-120-4748</p>
           <p className="m-0 p-0"><strong> <AlternateEmailIcon /></strong> www.teksacademy.com</p>
           </div>
-          <div className="col-6 col-md-6 col-lg-6 col-xl-6"> 
-          <img src={logo} style={{ width: "100%" }} />
-          <h5 className="text-center" style={{ marginTop: "10px" }}>
-              <strong className="fs-5"> Branch:</strong>
+          <div className="col-6 col-md-6 col-lg-6 col-xl-6 text-end"> 
+          <img src={logo} style={{ width: "70%" }} />
+          <h5 className="text-center" style={{ marginTop: "10px" , marginLeft:"8rem"}}>
+              <strong className="fs-5 text-center"> Branch:</strong>
                       {studentdata.branch}
                     </h5>
           </div>
@@ -172,8 +173,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   </table>
                 </div>{" "}
               </div>
-              <div className=" col-4 col-md-4 col-lg-4 col-xl-4">
-                <img src="" />
+              <div className=" col-4 col-md-4 col-lg-4 col-xl-4 mt-4">
+                <img src={studentimg} />
               </div>
             </div>
           </div>
@@ -941,7 +942,7 @@ function StudentApplicationPrint() {
   return (
     <div>
       {/* <h1>Your React App</h1> */}
-      <div className="w-50  mt-3">
+      <div className="mt-3 text-end me-3 ">
         <button
           onClick={handlePrint}
           // style={{ margin: "30px" }}
