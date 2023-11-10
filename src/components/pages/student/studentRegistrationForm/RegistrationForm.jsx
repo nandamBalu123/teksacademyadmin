@@ -68,6 +68,7 @@ export default function RegistrationForm() {
   const [email, setEmail] = useState("");
   const [mobilenumber, setMobileNumber] = useState("");
   const [parentsname, setParentsName] = useState("");
+  const [parentsnumber , SetParentsNumber] = useState("")
   const [birthdate, setBirthDate] = useState("");
   const [gender, setGender] = useState("");
   const [maritalstatus, setMaritalStatus] = useState("");
@@ -380,6 +381,15 @@ export default function RegistrationForm() {
           .join(" ")
       );
     }
+    if (!parentsnumber) {
+      alert("please enter parent's mobilenumber");
+      return;
+    } else {
+      if (parentsnumber.length != 10) {
+        alert("incorrect  parent's mobile number");
+        return;
+      }
+    }
     
     if (!gender) {
       alert("please enter gender");
@@ -502,10 +512,10 @@ export default function RegistrationForm() {
       alert("please  enter modeoftraining");
       return;
     }
-    if (!admissionstatus) {
-      alert("please enter admissionstatus");
-      return;
-    }
+    // if (!admissionstatus) {
+    //   alert("please enter admissionstatus");
+    //   return;
+    // }
     if (!admissiondate) {
       alert("please enter Native place");
       return;
@@ -559,6 +569,7 @@ export default function RegistrationForm() {
         email,
         mobilenumber,
         parentsname,
+        parentsnumber,
         birthdate,
         gender,
         maritalstatus,
@@ -896,7 +907,7 @@ export default function RegistrationForm() {
                       required
                       onChange={(e) => setMobileNumber(e.target.value)}
                       value={mobilenumber}
-                    />{" "}
+                    />
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <TextField
@@ -952,6 +963,35 @@ export default function RegistrationForm() {
                     />
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
+
+                  <TextField
+                      label="Parent's Number "
+                      type="number"
+                      variant="standard"
+                      className="mar w-75"
+                      required
+                      onChange={(e) => SetParentsNumber(e.target.value)}
+                      value={parentsnumber}
+                    />
+                    {/* <FormControl variant="standard" className="w-75">
+                      <InputLabel>
+                        Parent's Number<span> *</span>
+                      </InputLabel>
+                      <Select
+                        id="parentsnumber"
+                        name="parentsnumber"
+                        required
+                        onChange={(e) => setParentsNumber(e.target.value)}
+                        value={parentsnumber}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="active">Active</MenuItem>
+                        <MenuItem value="inactive"> Inactive</MenuItem>
+                      </Select>
+                    </FormControl> */}
+                  </div> </div>
+                 <div className="row"> 
+                 <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Gender<span> *</span>
@@ -970,10 +1010,6 @@ export default function RegistrationForm() {
                       </Select>
                     </FormControl>
                   </div>
-                  
-                </div>
-                <div className="row">
-                 
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
@@ -992,6 +1028,13 @@ export default function RegistrationForm() {
                       </Select>
                     </FormControl>
                   </div>
+                 </div>
+                 
+                  
+               
+                <div className="row">
+                 
+                  
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label="College/School/Company"
@@ -1546,7 +1589,19 @@ export default function RegistrationForm() {
                 </div>
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <FormControl variant="standard" className="w-75">
+                  <TextField
+                      label="Admission Date"
+                      type="date"
+                      variant="standard"
+                      className="w-75"
+                      required
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={(e) => setAdmissionDate(e.target.value)}
+                      value={admissiondate}
+                    />
+                    {/* <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Admission Status<span> *</span>
                       </InputLabel>
@@ -1561,20 +1616,15 @@ export default function RegistrationForm() {
                         <MenuItem value="active">Active</MenuItem>
                         <MenuItem value="inactive"> Inactive</MenuItem>
                       </Select>
-                    </FormControl>
+                    </FormControl> */}
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                    <TextField
-                      label="Admission Date"
-                      type="date"
+                  <TextField
+                      label="Registration Number"
                       variant="standard"
                       className="w-75"
                       required
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      onChange={(e) => setAdmissionDate(e.target.value)}
-                      value={admissiondate}
+                      value={registrationnumber}
                     />
                   </div>
                 </div>
@@ -1608,7 +1658,7 @@ export default function RegistrationForm() {
                     />
                   </div>
                 </div>
-                <div className="row ">
+                {/* <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Registration Number"
@@ -1618,7 +1668,7 @@ export default function RegistrationForm() {
                       value={registrationnumber}
                     />
                   </div>
-                </div>
+                </div> */}
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>

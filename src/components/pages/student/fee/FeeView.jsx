@@ -64,7 +64,16 @@ const FeeView = () => {
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
     updatedInstallments[index] = updatedInstallment;
-    updatedInstallments[index].paymentdone = true;
+    if (parseInt(updatedInstallments[index].paidamount) > 0) {
+      updatedInstallments[index].paymentdone = true;
+    }
+    if (
+      parseInt(updatedInstallments[index].paidamount) < 1 ||
+      updatedInstallments[index].paidamount === ""
+    ) {
+      updatedInstallments[index].paymentdone = false;
+    }
+
     console.log("updatedInstallment", updatedInstallment.paidamount);
     setnewpaidamount(updatedInstallment.paidamount);
     setInstallments(updatedInstallments);

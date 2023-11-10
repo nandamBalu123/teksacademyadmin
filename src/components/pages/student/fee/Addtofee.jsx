@@ -188,7 +188,7 @@ const Addtofee = () => {
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
               <input
-                type="text"
+                type="date"
                 name="date"
                 value={studentdata.admissiondate}
                 required
@@ -197,7 +197,7 @@ const Addtofee = () => {
             </div>
             <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
               <input
-                type="text"
+                type="number"
                 name="text"
                 value={studentdata.finaltotal}
                 required
@@ -205,7 +205,7 @@ const Addtofee = () => {
               <label> Total Amount</label>
             </div>
             <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
-              <input type="text" name="dueamount" value={dueamount} required />
+              <input type="number" name="dueamount" value={dueamount} required />
               <label> Due Amount</label>
             </div>
             {/* <div className="col-12 col-md-3 col-lg-3 col-xl-3 inputgroup"> 
