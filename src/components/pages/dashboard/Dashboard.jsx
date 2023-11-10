@@ -278,7 +278,10 @@ const Dashboard = () => {
     // Calculate the total amount for each branch and handle NaN values
     branchwiseAllstudentsData[branch].forEach((student) => {
       student.installments.forEach((installment) => {
-        if (installment.duedate && installment.paidamount === 0) {
+        if (
+          (installment.duedate && installment.paidamount === 0) ||
+          installment.paidamount === ""
+        ) {
           if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
             if (
               installment.duedate >= filterDeuAndReceived.fromdate &&
@@ -351,7 +354,10 @@ const Dashboard = () => {
 
     students.forEach((item) => {
       item.installments.forEach((installment) => {
-        if (installment.duedate && installment.paidamount === 0) {
+        if (
+          (installment.duedate && installment.paidamount === 0) ||
+          installment.paidamount === ""
+        ) {
           if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
             if (
               installment.duedate >= filterDeuAndReceived.fromdate &&
