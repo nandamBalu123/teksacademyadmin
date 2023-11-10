@@ -7,8 +7,18 @@
   width: 50%;
 }
 .invoice {
+  width: 100%;
   overflow: hidden;
+  border: 1.5px solid black;
+  border-radius: 10px;
 }
 .bold-row {
   border: 5px solid black;
+}
+
+@page {
+  size: A4;
+  margin: 5px;
+  padding: 10px;
+ 
 }
