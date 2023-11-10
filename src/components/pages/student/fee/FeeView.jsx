@@ -30,6 +30,8 @@ const FeeView = () => {
   const [totalpaidamountt, settotalpaidamount] = useState();
   const [newpaidamount, setnewpaidamount] = useState();
   const [installmentamount, setinstallmentamount] = useState();
+  const [extraDiscount, setExtraDiscount] = useState();
+
   // const [totoalleft, settotalleft] = useState();
 
   let totalleft;
@@ -103,12 +105,14 @@ const FeeView = () => {
         dueamount = parseInt(dueamountt);
       }
 
+      // let nextduedate = [];
       let nextduedate;
       for (let i = 0; i < installments.length; i++) {
         if (installments[i].paidamount < 1) {
           nextduedate = installments[i].duedate;
           break;
         }
+        // nextduedate.push(installments[i].duedate);
       }
 
       let updatedInstallmentAmount =
@@ -145,7 +149,7 @@ const FeeView = () => {
             alert("Try Again");
           }
         });
-    } else alert("amount is greater than due amount");
+    } else alert("amount is not added");
   };
   const dynamicStyle = {
     color: studentdata.dueamount < 1 ? "green" : "red",
@@ -511,7 +515,7 @@ const FeeView = () => {
               variant="outlined"
               onClick={handleClickOpen}
             >
-              Discount
+              Extra Discount
             </button>
             {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
         Open form dialog
@@ -530,6 +534,7 @@ const FeeView = () => {
                   type="number"
                   fullWidth
                   variant="standard"
+                  onChange={(e) => setExtraDiscount(e.target.value)}
                 />
               </DialogContent>
               <DialogActions>

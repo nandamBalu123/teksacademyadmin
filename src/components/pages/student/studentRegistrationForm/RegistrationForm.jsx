@@ -27,7 +27,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
-import pictureprofile from '../../../../images/profilepicture.jpg';
+import pictureprofile from "../../../../images/profilepicture.jpg";
 import NativeSelect from "@mui/material/NativeSelect";
 // import { blue } from "@mui/material/colors";
 // import { useDropzone } from 'react-dropzone';
@@ -68,7 +68,7 @@ export default function RegistrationForm() {
   const [email, setEmail] = useState("");
   const [mobilenumber, setMobileNumber] = useState("");
   const [parentsname, setParentsName] = useState("");
-  const [parentsnumber , SetParentsNumber] = useState("")
+  const [parentsnumber, SetParentsNumber] = useState("");
   const [birthdate, setBirthDate] = useState("");
   const [gender, setGender] = useState("");
   const [maritalstatus, setMaritalStatus] = useState("");
@@ -129,6 +129,19 @@ export default function RegistrationForm() {
   const [certificate_status, setcertificate_status] = useState([
     { courseStartDate: "", courseEndDate: "", certificateStatus: "" },
   ]);
+  let LoggedInuser = JSON.parse(localStorage.getItem("user"));
+  let userName;
+  // if (LoggedInuser) {
+  //   userName = LoggedInuser.fullname;
+  //   setEnquiryTakenBy(userName);
+  // }
+  useEffect(() => {
+    if (LoggedInuser) {
+      userName = LoggedInuser.fullname;
+      setEnquiryTakenBy(userName);
+      console.log("userName", userName);
+    }
+  }, [LoggedInuser]);
   const handleAssetChange = (event) => {
     const assetName = event.target.name;
     if (event.target.checked) {
@@ -390,7 +403,7 @@ export default function RegistrationForm() {
         return;
       }
     }
-    
+
     if (!gender) {
       alert("please enter gender");
       return;
@@ -459,7 +472,7 @@ export default function RegistrationForm() {
   };
   const handlePhoto = () => {
     if (!studentImage) {
-      alert('Please select a image to upload');
+      alert("Please select a image to upload");
       return;
     }
     handleNext();
@@ -533,11 +546,11 @@ export default function RegistrationForm() {
 
   const handleSubmit = async () => {
     const reader = new FileReader();
-  
+
     reader.onload = async () => {
       // Read the student image as a data URL
-      const photoData = reader.result.split(',')[1];
-  
+      const photoData = reader.result.split(",")[1];
+
       // Validate the form data
       if (!admissionremarks) {
         alert("Please enter admission remarks");
@@ -547,7 +560,7 @@ export default function RegistrationForm() {
         alert("Please enter assets");
         return;
       }
-  
+
       // Create the data object with the form fields
       const studentRegistrationdata = {
         name,
@@ -604,17 +617,17 @@ export default function RegistrationForm() {
         user_id,
         certificate_status,
       };
-  
+
       try {
         // Make the POST request
         const response = await axios.post(
           `${process.env.REACT_APP_API_URL}/student_form`,
           studentRegistrationdata
         );
-  
+
         // Handle the response as needed
         console.log("Response:", response.data);
-  
+
         // You can navigate to another page or perform other actions here.
       } catch (error) {
         // Handle errors
@@ -631,151 +644,141 @@ export default function RegistrationForm() {
         }
       }
     };
-  
+
     // Read the student image as a data URL
     reader.readAsDataURL(studentImage);
   };
-  
-  
 
+  //   const handleSubmit =  () => {
 
+  //     const reader = new FileReader();
 
+  //     reader.onload = async () => {
+  //     reader.readAsDataURL(studentImage);
+  //       const photoData = reader.result.split(',')[1];
 
+  //     ///validations
+  //     if (!admissionremarks) {
+  //       alert("please enter admissionremarks");
+  //       return;
+  //     }
+  //     if (!assets) {
+  //       alert("please enter assets ");
+  //       return;
+  //     }
 
-//   const handleSubmit =  () => {
+  //     // setuserid(user.id);
+  //     // const formdata = new FormData();
+  //     // formdata.append("file", file);
+  //     // console.log("selected", file);
+  //     // let file = selectedFile
+  //     const studentRegistrationdata = {
+  //       name,
+  //       email,
+  //       mobilenumber,
+  //       parentsname,
+  //       birthdate,
+  //       gender,
+  //       maritalstatus,
+  //       college,
+  //       country,
+  //       state,
+  //       area,
+  //       native,
+  //       zipcode,
+  //       whatsappno,
+  //       educationtype,
+  //       marks,
+  //       academicyear,
+  //       filename: studentImage.name,
+  //       data: photoData,
+  //       enquirydate,
+  //       enquirytakenby,
+  //       coursepackage,
+  //       courses,
+  //       leadsource,
+  //       branch,
+  //       modeoftraining,
+  //       admissionstatus,
+  //       registrationnumber,
+  //       admissiondate,
+  //       validitystartdate,
+  //       validityenddate,
+  //       feedetails,
+  //       grosstotal,
+  //       totaldiscount,
+  //       totaltax,
+  //       grandtotal,
+  //       finaltotal,
+  //       admissionremarks,
+  //       assets,
+  //       totalinstallments,
+  //       dueamount,
+  //       addfee,
+  //       initialpayment,
+  //       duedatetype,
+  //       installments,
+  //       materialfee,
+  //       feedetailsbilling,
+  //       totalfeewithouttax,
+  //       totalpaidamount,
+  //       student_status,
+  //       user_id,
+  //       certificate_status,
+  //     };
 
-    
-//     const reader = new FileReader();
+  //     console.log("studentRegistration", studentRegistrationdata);
 
-//     reader.onload = async () => {
-//     reader.readAsDataURL(studentImage);
-//       const photoData = reader.result.split(',')[1];
+  //     //      const reader = new FileReader();
+  //     //     reader.readAsDataURL(selectedFile);
+  //     //     reader.onload = () => {
+  //     //       const photoData = reader.result.split(',')[1];
 
-//     ///validations
-//     if (!admissionremarks) {
-//       alert("please enter admissionremarks");
-//       return;
-//     }
-//     if (!assets) {
-//       alert("please enter assets ");
-//       return;
-//     }
+  //     //       axios.post('http://localhost:3030/upload', {
+  //     //         filename: selectedFile.name,
+  //     //         data: photoData,
+  //     //       })
+  //     //       .then(response => {
+  //     //         console.log('File uploaded successfully', response.data);
+  //     //       })
+  //     //       .catch(error => {
+  //     //         console.error('Error uploading file:', error);
+  //     //       });
+  //     //     };
+  //     //   };
 
-    
-//     // setuserid(user.id);
-//     // const formdata = new FormData();
-//     // formdata.append("file", file);
-//     // console.log("selected", file);
-//     // let file = selectedFile
-//     const studentRegistrationdata = {
-//       name,
-//       email,
-//       mobilenumber,
-//       parentsname,
-//       birthdate,
-//       gender,
-//       maritalstatus,
-//       college,
-//       country,
-//       state,
-//       area,
-//       native,
-//       zipcode,
-//       whatsappno,
-//       educationtype,
-//       marks,
-//       academicyear,
-//       filename: studentImage.name,
-//       data: photoData,
-//       enquirydate,
-//       enquirytakenby,
-//       coursepackage,
-//       courses,
-//       leadsource,
-//       branch,
-//       modeoftraining,
-//       admissionstatus,
-//       registrationnumber,
-//       admissiondate,
-//       validitystartdate,
-//       validityenddate,
-//       feedetails,
-//       grosstotal,
-//       totaldiscount,
-//       totaltax,
-//       grandtotal,
-//       finaltotal,
-//       admissionremarks,
-//       assets,
-//       totalinstallments,
-//       dueamount,
-//       addfee,
-//       initialpayment,
-//       duedatetype,
-//       installments,
-//       materialfee,
-//       feedetailsbilling,
-//       totalfeewithouttax,
-//       totalpaidamount,
-//       student_status,
-//       user_id,
-//       certificate_status,
-//     };
+  //     try {
+  //       // Make the POST request
+  //       const response = await axios.post(
+  //         `${process.env.REACT_APP_API_URL}/student_form`,
+  //         studentRegistrationdata,
 
-    
-//     console.log("studentRegistration", studentRegistrationdata);
+  //       );
+  //       const id = response.data.insertId;
+  //       // navigate(`/addtofee/${id}`);
 
-//     //      const reader = new FileReader();
-//     //     reader.readAsDataURL(selectedFile);
-//     //     reader.onload = () => {
-//     //       const photoData = reader.result.split(',')[1];
-    
-//     //       axios.post('http://localhost:3030/upload', {
-//     //         filename: selectedFile.name,
-//     //         data: photoData,
-//     //       })
-//     //       .then(response => {
-//     //         console.log('File uploaded successfully', response.data);
-//     //       })
-//     //       .catch(error => {
-//     //         console.error('Error uploading file:', error);
-//     //       });
-//     //     };
-//     //   };
+  //       // Handle a successful response here
+  //       console.log("Responsee:", response.data.insertId);
+  //     } catch (error) {
+  //       // Handle the error here
+  //       if (error.response) {
+  //         // The request was made and the server responded with a non-2xx status code
+  //         console.log(
+  //           "Server returned an error:",
+  //           error.response.status,
+  //           error.response.data
+  //         );
+  //       } else if (error.request) {
+  //         // The request was made, but no response was received
+  //         console.log("No response received:", error.request);
+  //       } else {
+  //         // Something happened in setting up the request that triggered an error
+  //         console.error("Request error:", error.message);
+  //       }
+  //     }
 
-        
-//     try {
-//       // Make the POST request
-//       const response = await axios.post(
-//         `${process.env.REACT_APP_API_URL}/student_form`,
-//         studentRegistrationdata,
-        
-//       );
-//       const id = response.data.insertId;
-//       // navigate(`/addtofee/${id}`);
-
-//       // Handle a successful response here
-//       console.log("Responsee:", response.data.insertId);
-//     } catch (error) {
-//       // Handle the error here
-//       if (error.response) {
-//         // The request was made and the server responded with a non-2xx status code
-//         console.log(
-//           "Server returned an error:",
-//           error.response.status,
-//           error.response.data
-//         );
-//       } else if (error.request) {
-//         // The request was made, but no response was received
-//         console.log("No response received:", error.request);
-//       } else {
-//         // Something happened in setting up the request that triggered an error
-//         console.error("Request error:", error.message);
-//       }
-//     }
-  
-//     }
-// }
+  //     }
+  // }
   const { users } = useUsersContext();
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
 
@@ -810,36 +813,36 @@ export default function RegistrationForm() {
     setFeeDetails(updatedTasks);
   };
 
-// // new
-// const [selectedFile, setSelectedFilee] = useState(null);
+  // // new
+  // const [selectedFile, setSelectedFilee] = useState(null);
 
-//   const handleFileChange = (e) => {
-//     setSelectedFilee(e.target.files[0]);
-//   };
+  //   const handleFileChange = (e) => {
+  //     setSelectedFilee(e.target.files[0]);
+  //   };
 
-//   const handleUpload = () => {
-//     if (!selectedFile) {
-//       alert('Please select a file to upload');
-//       return;
-//     }
+  //   const handleUpload = () => {
+  //     if (!selectedFile) {
+  //       alert('Please select a file to upload');
+  //       return;
+  //     }
 
-//     const reader = new FileReader();
-//     reader.readAsDataURL(selectedFile);
-//     reader.onload = () => {
-//       const photoData = reader.result.split(',')[1];
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(selectedFile);
+  //     reader.onload = () => {
+  //       const photoData = reader.result.split(',')[1];
 
-//       axios.post('http://localhost:3030/upload', {
-//         filename: selectedFile.name,
-//         data: photoData,
-//       })
-//       .then(response => {
-//         console.log('File uploaded successfully', response.data);
-//       })
-//       .catch(error => {
-//         console.error('Error uploading file:', error);
-//       });
-//     };
-//   };
+  //       axios.post('http://localhost:3030/upload', {
+  //         filename: selectedFile.name,
+  //         data: photoData,
+  //       })
+  //       .then(response => {
+  //         console.log('File uploaded successfully', response.data);
+  //       })
+  //       .catch(error => {
+  //         console.error('Error uploading file:', error);
+  //       });
+  //     };
+  //   };
 
   return (
     <div className="main-container container">
@@ -880,8 +883,9 @@ export default function RegistrationForm() {
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
                     />{" "}
-                  </div></div>
-                  <div className="row"> 
+                  </div>
+                </div>
+                <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <TextField
                       label="Number "
@@ -907,8 +911,7 @@ export default function RegistrationForm() {
                       value={birthdate}
                     />
                   </div>
-                  </div>
-                
+                </div>
 
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
@@ -947,8 +950,7 @@ export default function RegistrationForm() {
                     />
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
-
-                  <TextField
+                    <TextField
                       label="Parent's Number "
                       type="number"
                       variant="standard"
@@ -973,9 +975,10 @@ export default function RegistrationForm() {
                         <MenuItem value="inactive"> Inactive</MenuItem>
                       </Select>
                     </FormControl> */}
-                  </div> </div>
-                 <div className="row"> 
-                 <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
+                  </div>{" "}
+                </div>
+                <div className="row">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Gender<span> *</span>
@@ -1012,13 +1015,9 @@ export default function RegistrationForm() {
                       </Select>
                     </FormControl>
                   </div>
-                 </div>
-                 
-                  
-               
+                </div>
+
                 <div className="row">
-                 
-                  
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label="College/School/Company"
@@ -1031,7 +1030,6 @@ export default function RegistrationForm() {
                     />
                   </div>
                 </div>
-               
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
@@ -1039,7 +1037,6 @@ export default function RegistrationForm() {
                     className="bg-primary"
                     variant="contained"
                     onClick={handleBack}
-                    
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1205,7 +1202,6 @@ export default function RegistrationForm() {
                     className="bg-primary"
                     variant="contained"
                     onClick={handleBack}
-                    
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1218,7 +1214,7 @@ export default function RegistrationForm() {
                     onClick={handleStudentContactDetails}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                   Continue
+                    Continue
                   </Button>
                 </div>
               </Box>
@@ -1317,7 +1313,6 @@ export default function RegistrationForm() {
                     className="bg-primary"
                     variant="contained"
                     onClick={handleBack}
-                    
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1345,9 +1340,12 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                <input type="file" onChange={(e) => {
-                    setSelectedFile(e.target.files[0]);
-                  }} />
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      setSelectedFile(e.target.files[0]);
+                    }}
+                  />
                   {/* <input
                     type="file"
                     name="file"
@@ -1364,7 +1362,6 @@ export default function RegistrationForm() {
                     className="bg-primary"
                     variant="contained"
                     onClick={handleBack}
-                    
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1405,29 +1402,23 @@ export default function RegistrationForm() {
                       value={enquirydate}
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                    <FormControl variant="standard" className="w-75">
-                      <InputLabel>
-                        Enquiry Taken By<span> *</span>
-                      </InputLabel>
-                      <Select
-                        id=" enquirytakenby"
-                        name="enquirytakenby"
-                        required
-                        onChange={(e) => setEnquiryTakenBy(e.target.value)}
-                        value={enquirytakenby}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        {filteredcounsellor &&
-                          filteredcounsellor.map((user, index) => (
-                            <MenuItem value={user.fullname}>
-                              {" "}
-                              {user.fullname}
-                            </MenuItem>
-                          ))}
-                      </Select>
-                    </FormControl>
-                  </div>
+                  {enquirytakenby && (
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                      <FormControl variant="standard" className="w-75">
+                        {enquirytakenby && (
+                          <TextField
+                            id="standard-read-only-input"
+                            label="Enquiry Taken By"
+                            defaultValue={enquirytakenby}
+                            InputProps={{
+                              readOnly: true,
+                            }}
+                            variant="standard"
+                          />
+                        )}
+                      </FormControl>
+                    </div>
+                  )}
                 </div>
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
@@ -1519,7 +1510,6 @@ export default function RegistrationForm() {
                     variant="contained"
                     // disabled={index === 0}
                     onClick={handleEnquirydetails}
-                  
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Continue
@@ -1581,7 +1571,7 @@ export default function RegistrationForm() {
                 </div>
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <TextField
+                    <TextField
                       label="Admission Date"
                       type="date"
                       variant="standard"
@@ -1611,7 +1601,7 @@ export default function RegistrationForm() {
                     </FormControl> */}
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                  <TextField
+                    <TextField
                       label="Registration Number"
                       variant="standard"
                       className="w-75"
@@ -1678,7 +1668,6 @@ export default function RegistrationForm() {
                     variant="contained"
                     // disabled={index === 0}
                     onClick={handleAdmissiondetails}
-                    
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Continue
@@ -1801,8 +1790,8 @@ export default function RegistrationForm() {
                     </tbody>
                   </table>
                 )} */}
-                <TableContainer component={Paper} >
-                  <Table sx={{ minWidth: 600 }} aria-label="spanning table" >
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
                     <TableHead>
                       <TableCell className="fs-6 py-3" align="center">
                         Fee Type
@@ -1856,7 +1845,6 @@ export default function RegistrationForm() {
                     className="bg-primary"
                     variant="contained"
                     onClick={handleBack}
-                    
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -1948,10 +1936,7 @@ export default function RegistrationForm() {
                         })}
                       {feedetailsbilling.length > 0 && (
                         <TableRow className="border border1">
-                          <TableCell>
-                            {" "}
-                            Sub Total
-                          </TableCell>
+                          <TableCell> Sub Total</TableCell>
                           <TableCell>
                             {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
                           </TableCell>
@@ -1971,7 +1956,9 @@ export default function RegistrationForm() {
                         <TableCell align="left">{materialfee}</TableCell>
                       </TableRow>
                       <TableRow className="border border1">
-                        <TableCell align="left"><strong> Grand Total</strong></TableCell>
+                        <TableCell align="left">
+                          <strong> Grand Total</strong>
+                        </TableCell>
                         <TableCell align="left">{finaltotal}</TableCell>
                       </TableRow>
                     </TableBody>
@@ -1986,7 +1973,6 @@ export default function RegistrationForm() {
                     className="bg-primary"
                     variant="contained"
                     onClick={handleBack}
-                    
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -2436,7 +2422,6 @@ export default function RegistrationForm() {
                   variant="contained"
                   // disabled={index === 0}
                   onClick={openPopup}
-                 
                   sx={{ mt: 1, mr: 1 }}
                 >
                   Preview
@@ -2490,10 +2475,6 @@ export default function RegistrationForm() {
 // }
 
 // export default RegistrationForm;
-
-
-
-
 
 // // import * as React from "react";
 // import React, { useEffect, useState } from "react";
@@ -2877,7 +2858,7 @@ export default function RegistrationForm() {
 //           .join(" ")
 //       );
 //     }
-    
+
 //     if (!gender) {
 //       alert("please enter gender");
 //       return;
@@ -3020,11 +3001,11 @@ export default function RegistrationForm() {
 
 //   const handleSubmit = async () => {
 //     const reader = new FileReader();
-  
+
 //     reader.onload = async () => {
 //       // Read the student image as a data URL
 //       const photoData = reader.result.split(',')[1];
-  
+
 //       // Validate the form data
 //       if (!admissionremarks) {
 //         alert("Please enter admission remarks");
@@ -3034,7 +3015,7 @@ export default function RegistrationForm() {
 //         alert("Please enter assets");
 //         return;
 //       }
-  
+
 //       // Create the data object with the form fields
 //       const studentRegistrationdata = {
 //         name,
@@ -3090,17 +3071,17 @@ export default function RegistrationForm() {
 //         user_id,
 //         certificate_status,
 //       };
-  
+
 //       try {
 //         // Make the POST request
 //         const response = await axios.post(
 //           `${process.env.REACT_APP_API_URL}/student_form`,
 //           studentRegistrationdata
 //         );
-  
+
 //         // Handle the response as needed
 //         console.log("Response:", response.data);
-  
+
 //         // You can navigate to another page or perform other actions here.
 //       } catch (error) {
 //         // Handle errors
@@ -3117,20 +3098,13 @@ export default function RegistrationForm() {
 //         }
 //       }
 //     };
-  
+
 //     // Read the student image as a data URL
 //     reader.readAsDataURL(studentImage);
 //   };
-  
-  
-
-
-
-
 
 // //   const handleSubmit =  () => {
 
-    
 // //     const reader = new FileReader();
 
 // //     reader.onload = async () => {
@@ -3147,7 +3121,6 @@ export default function RegistrationForm() {
 // //       return;
 // //     }
 
-    
 // //     // setuserid(user.id);
 // //     // const formdata = new FormData();
 // //     // formdata.append("file", file);
@@ -3208,14 +3181,13 @@ export default function RegistrationForm() {
 // //       certificate_status,
 // //     };
 
-    
 // //     console.log("studentRegistration", studentRegistrationdata);
 
 // //     //      const reader = new FileReader();
 // //     //     reader.readAsDataURL(selectedFile);
 // //     //     reader.onload = () => {
 // //     //       const photoData = reader.result.split(',')[1];
-    
+
 // //     //       axios.post('http://localhost:3030/upload', {
 // //     //         filename: selectedFile.name,
 // //     //         data: photoData,
@@ -3229,13 +3201,12 @@ export default function RegistrationForm() {
 // //     //     };
 // //     //   };
 
-        
 // //     try {
 // //       // Make the POST request
 // //       const response = await axios.post(
 // //         `${process.env.REACT_APP_API_URL}/student_form`,
 // //         studentRegistrationdata,
-        
+
 // //       );
 // //       const id = response.data.insertId;
 // //       // navigate(`/addtofee/${id}`);
@@ -3259,7 +3230,7 @@ export default function RegistrationForm() {
 // //         console.error("Request error:", error.message);
 // //       }
 // //     }
-  
+
 // //     }
 // // }
 //   const { users } = useUsersContext();
@@ -3367,7 +3338,7 @@ export default function RegistrationForm() {
 //                       value={email}
 //                     />{" "}
 //                   </div></div>
-//                   <div className="row"> 
+//                   <div className="row">
 //                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
 //                     <TextField
 //                       label="Number "
@@ -3394,7 +3365,6 @@ export default function RegistrationForm() {
 //                     />
 //                   </div>
 //                   </div>
-                
 
 //                 <Box sx={{ mb: 2, mt: 2 }}>
 //                   <div>
@@ -3451,10 +3421,10 @@ export default function RegistrationForm() {
 //                       </Select>
 //                     </FormControl>
 //                   </div>
-                  
+
 //                 </div>
 //                 <div className="row">
-                 
+
 //                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
 //                     <FormControl variant="standard" className="w-75">
 //                       <InputLabel>
@@ -3485,7 +3455,7 @@ export default function RegistrationForm() {
 //                     />
 //                   </div>
 //                 </div>
-               
+
 //               </form>
 //               <Box sx={{ mb: 2, mt: 2 }}>
 //                 <div>
@@ -3493,7 +3463,7 @@ export default function RegistrationForm() {
 //                     className="bg-primary"
 //                     variant="contained"
 //                     onClick={handleBack}
-                    
+
 //                     sx={{ mt: 1, mr: 1 }}
 //                   >
 //                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -3659,7 +3629,7 @@ export default function RegistrationForm() {
 //                     className="bg-primary"
 //                     variant="contained"
 //                     onClick={handleBack}
-                    
+
 //                     sx={{ mt: 1, mr: 1 }}
 //                   >
 //                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -3771,7 +3741,7 @@ export default function RegistrationForm() {
 //                     className="bg-primary"
 //                     variant="contained"
 //                     onClick={handleBack}
-                    
+
 //                     sx={{ mt: 1, mr: 1 }}
 //                   >
 //                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -3818,7 +3788,7 @@ export default function RegistrationForm() {
 //                     className="bg-primary"
 //                     variant="contained"
 //                     onClick={handleBack}
-                    
+
 //                     sx={{ mt: 1, mr: 1 }}
 //                   >
 //                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -3973,7 +3943,7 @@ export default function RegistrationForm() {
 //                     variant="contained"
 //                     // disabled={index === 0}
 //                     onClick={handleEnquirydetails}
-                  
+
 //                     sx={{ mt: 1, mr: 1 }}
 //                   >
 //                     Continue
@@ -4125,7 +4095,7 @@ export default function RegistrationForm() {
 //                     variant="contained"
 //                     // disabled={index === 0}
 //                     onClick={handleAdmissiondetails}
-                    
+
 //                     sx={{ mt: 1, mr: 1 }}
 //                   >
 //                     Continue
@@ -4303,7 +4273,7 @@ export default function RegistrationForm() {
 //                     className="bg-primary"
 //                     variant="contained"
 //                     onClick={handleBack}
-                    
+
 //                     sx={{ mt: 1, mr: 1 }}
 //                   >
 //                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -4432,7 +4402,7 @@ export default function RegistrationForm() {
 //                     className="bg-primary"
 //                     variant="contained"
 //                     onClick={handleBack}
-                    
+
 //                     sx={{ mt: 1, mr: 1 }}
 //                   >
 //                     {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
@@ -4882,7 +4852,7 @@ export default function RegistrationForm() {
 //                   variant="contained"
 //                   // disabled={index === 0}
 //                   onClick={openPopup}
-                 
+
 //                   sx={{ mt: 1, mr: 1 }}
 //                 >
 //                   Preview
