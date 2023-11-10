@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // import Navbaar from '../Navbar/Navbaar';
 
 export default function ReturnAssets() {
-  var apiUrl = "https://demo.teksacademy.com:3000";
+  // var apiUrl = "https://demo.teksacademy.com:3000";
   // var apiUrl = 'http://localhost:3003/';
 
   // const [getuserdata, setUserdata] = useState([]);
@@ -55,7 +55,7 @@ export default function ReturnAssets() {
   console.log(id);
 
   const getdata = async () => {
-    const res = await fetch(`${apiUrl}/viewassets/${id}`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/viewassets/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export default function ReturnAssets() {
       returndate,
     } = inpval;
 
-    const res2 = await fetch(`${apiUrl}/updatassignassets/${id}`, {
+    const res2 = await fetch(`${process.env.REACT_APP_API_URL}/updatassignassets/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
