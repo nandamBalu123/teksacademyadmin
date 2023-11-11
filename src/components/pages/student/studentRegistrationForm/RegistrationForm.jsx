@@ -645,6 +645,8 @@ export default function RegistrationForm() {
 
         // Handle the response as needed
         console.log("Response:", response.data);
+        const id = response.data.insertId;
+        navigate(`/addtofee/${id}`);
 
         // You can navigate to another page or perform other actions here.
       } catch (error) {

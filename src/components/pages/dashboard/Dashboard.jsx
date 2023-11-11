@@ -1019,7 +1019,7 @@ const Dashboard = () => {
           <div className="d-flex justify-content-between">
             <h4 className="pt-4 enrollment ps-4">
               {" "}
-              Due Amount and Received Amount
+              Received Amount and Pending Amount
             </h4>
             <div className="pt-2 pe-4">
               <Button
@@ -1140,7 +1140,7 @@ const Dashboard = () => {
                     /> */}
 
                     <div>Total Received Amount: {totalreceivedAmount}</div>
-                    <div>Total Due Amount: {totalDueAmount}</div>
+                    <div>Total Pending Amount: {totalDueAmount}</div>
                   </div>
                 );
               }
