@@ -1,6 +1,11 @@
 import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { adddata } from "./context/ContextProvider";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 // import Navbaar from './Navbaar';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -133,8 +138,19 @@ export default function Addassetsform() {
                             <label for="exampleInputEmail1" class="form-label">Name*</label>
                             <input type="text" value={inpval.name} onChange={setdata} name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                         </div> */}
-              <div class="mb-3 col-lg-6 col-md-6 col-12">
-                <label for="exampleInputEmail1" class="form-label">
+              <div class="mb-3 col-lg-6 col-xl-6 col-md-6 col-12">
+              <TextField
+                label="Vender Name"
+                className=" mar w-100"
+                variant="standard"
+                name="vendername"
+                type="text"
+                value={inpval.vendername}
+                  onChange={setdata}
+                id="vendername"
+                required
+              />
+                {/* <label for="exampleInputEmail1" class="form-label">
                   Vender Name*
                 </label>
                 <input
@@ -145,7 +161,7 @@ export default function Addassetsform() {
                   class="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                />
+                /> */}
               </div>
               {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
                             <label for="exampleInputPassword1" class="form-label">Designation*</label>
@@ -166,8 +182,30 @@ export default function Addassetsform() {
                             <option value="dilsupnagar">Dilsupnagar</option>
                             </select>
                         </div> */}
-              <div className="mb-3 col-lg-6 col-md-6 col-12">
-                <label htmlFor="exampleInputPassword1" className="form-label">
+              <div className="mb-3 col-lg-6 col-xl-6 col-md-6 col-12">
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  Asset Type <span> *</span>
+                </InputLabel>
+                <Select
+                  className="mar "
+                  onChange={setdata}
+                  name="assettype"
+                  value={inpval.assettype} // Use 'value' instead of 'selected' for select input
+                  id="profile"
+                  required
+                  // onChange={(e) => setprofile(e.target.value)}
+                  // value={profile}
+                >
+                  <MenuItem value="shirt">Shirt</MenuItem>
+                  <MenuItem value="t-shirt">T-Shirt</MenuItem>
+                  <MenuItem value="laptop">Laptop</MenuItem>
+                  <MenuItem value="charger">Charger</MenuItem>
+                  <MenuItem value="mouse">Mouse</MenuItem>
+                  <MenuItem value="student bags">Student Bags</MenuItem>
+                </Select>
+              </FormControl>
+                {/* <label htmlFor="exampleInputPassword1" className="form-label">
                   Asset Type*
                 </label>
                 <select
@@ -185,10 +223,23 @@ export default function Addassetsform() {
                   <option value="charger">Charger</option>
                   <option value="mouse">Mouse</option>
                   <option value="student bags">Student Bags</option>
-                </select>
+                </select> */}
                 {inpval.assettype === "laptop" && (
-                  <div>
-                    <label htmlFor="brandname" className="form-label">
+                  <div className="row">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                    <TextField
+                label="Brand Name"
+                className=" mar w-100"
+                variant="standard"
+                name="brandname"
+                type="text"
+                value={inpval.brandname}
+                onChange={setdata}
+                id="brandname"
+                required
+              />
+                    </div> 
+                    {/* <label htmlFor="brandname" className="form-label">
                       Brand Name
                     </label>
                     <input
@@ -198,9 +249,21 @@ export default function Addassetsform() {
                       onChange={setdata}
                       className="form-control"
                       id="brandname"
-                    />
-
-                    <label htmlFor="remarks" className="form-label">
+                    /> */}
+                         <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                         <TextField
+                label="Remarks"
+                className=" mar w-100"
+                variant="standard"
+                name="remarks"
+                type="text"
+                value={inpval.remarks}
+                      onChange={setdata}
+                id="remarks"
+                required
+              />
+                          </div>
+                    {/* <label htmlFor="remarks" className="form-label">
                       Remarks
                     </label>
                     <input
@@ -210,7 +273,7 @@ export default function Addassetsform() {
                       onChange={setdata}
                       className="form-control"
                       id="remarks"
-                    />
+                    /> */}
                   </div>
                 )}
               </div>
@@ -225,10 +288,34 @@ export default function Addassetsform() {
                                 placeholderText="Select a date" // Placeholder text when no date is selected
                             />
                         </div> */}
-              <div class="mb-3 col-lg-6 col-md-6 col-12">
-                <label for="exampleInputPassword1" class="form-label">
-                  Asset Code*
-                </label>
+                        <div className="row mb-3"> 
+                        <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                        <TextField
+                label="Asset Code"
+                className=" mar w-100"
+                variant="standard"
+                name="assetcode"
+                type="text"
+                value={inpval.assetcode}
+                  onChange={setdata}
+                id="assetcode"
+                required
+              /></div>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                        <TextField
+                label="Quantity"
+                className=" mar w-100"
+                variant="standard"
+                name="anonymity"
+                type="number"
+                value={inpval.anonymity}
+                onChange={setdata}
+               
+                required
+              /></div>
+                        </div>
+              {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
+               
                 <input
                   type="text"
                   value={inpval.assetcode}
@@ -237,8 +324,8 @@ export default function Addassetsform() {
                   class="form-control"
                   id="exampleInputPassword1"
                 />
-              </div>
-              <div class="mb-3 col-lg-6 col-md-6 col-12">
+              </div> */}
+              {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
                 <label for="exampleInputPassword1" class="form-label">
                   Quantity*
                 </label>
@@ -250,7 +337,7 @@ export default function Addassetsform() {
                   class="form-control"
                   id="exampleInputPassword1"
                 />
-              </div>
+              </div> */}
               {/* <div className="mb-3 col-lg-3 col-md-6 col-12">
                             <label htmlFor="exampleInputPassword1" className="form-label">Return Date* </label><br></br>
                             <DatePicker
@@ -266,14 +353,25 @@ export default function Addassetsform() {
                             <label for="exampleInputPassword1" class="form-label">Remarks*</label>
                             <input type="text" value={inpval.remarks} onChange={setdata} name="remarks" class="form-control" id="exampleInputPassword1" />
                         </div> */}
+                         <div className="create-button mt-5 ">
+            <button
+              type="submit"
+              onClick={addinpdata}
+              className="btn btn-primary mr-20 ms-2 mb-2 "
+              style={{ textTransform: "capitalize" }}
+            >
+              submit
+            </button>
+           
+          </div>
 
-              <button
+              {/* <button
                 type="submit"
                 onClick={addinpdata}
                 class="btn btn-primary"
               >
                 Submit
-              </button>
+              </button> */}
             </div>
           </form>
         </div>
