@@ -13,7 +13,7 @@ import { updatedata } from "./context/ContextProvider";
 
 const Addassets = () => {
   // var apiUrl = 'https://demo.teksacademy.com:3000';
-  var apiUrl = "http://localhost:3003";
+  // var apiUrl = "http://localhost:3003";
 
   // start
 
@@ -36,7 +36,7 @@ const Addassets = () => {
   //     getdata();
   //   }, []);
   const getdata = async () => {
-    const res = await fetch(`${apiUrl}/getusers`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/getusers`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const Addassets = () => {
   }, []);
 
   const deleteuser = async (id) => {
-    const res2 = await fetch(`${apiUrl}/deleteuser/${id}`, {
+    const res2 = await fetch(`${process.env.REACT_APP_API_URL}/deleteuser/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -213,7 +213,7 @@ const Addassets = () => {
                 <div className="col-lg-3">
                   <div className="mt-2 mb-2">
                     <NavLink to="/addassetsform" className="btn btn-primary">
-                      Add Record
+                      Add Assets
                     </NavLink>
                     <br></br>
                     {/* <span>Rows : <strong>{getuserdata.length}</strong></span><br></br>
@@ -314,11 +314,11 @@ const Addassets = () => {
                               <RemoveRedEyeIcon />
                             </button>
                           </NavLink>
-                          <NavLink to={`edit/${element.id}`}>
+                          {/* <NavLink to={`edit/${element.id}`}>
                             <button className="btn btn-primary">
                               <CreateIcon />
                             </button>
-                          </NavLink>
+                          </NavLink> */}
                           <button
                             className="btn btn-danger"
                             onClick={() => deleteuser(element.id)}

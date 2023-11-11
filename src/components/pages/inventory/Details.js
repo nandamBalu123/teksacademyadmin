@@ -14,11 +14,11 @@ import { NavLink, useParams, useNavigate } from 'react-router-dom';
 const Details = () => {
 
 
-    var apiUrl = 'https://demo.teksacademy.com:3000';
+    // var apiUrl = 'https://demo.teksacademy.com:3000';
 // var apiUrl = 'http://localhost:3003/';
 
     const [getassigndata, setUserdata] = useState([]);
-    console.log(getassigndata);
+    console.log("getassigndata", getassigndata);
 
     const { id } = useParams("");
     console.log(id);
@@ -28,7 +28,7 @@ const Details = () => {
 
     const getdata = async () => {
 
-        const res = await fetch(`${apiUrl}/viewassets/${id}`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/viewassets/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -53,7 +53,7 @@ const Details = () => {
 
     const deleteuser = async (id) => {
 
-        const res2 = await fetch(`${apiUrl}/deleteuser/${id}`, {
+        const res2 = await fetch(`${process.env.REACT_APP_API_URL}/deleteuser/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

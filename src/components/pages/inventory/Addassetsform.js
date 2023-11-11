@@ -14,7 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // import Navbaar from '../Navbar/Navbaar';
 export default function Addassetsform() {
   // var apiUrl = 'https://demo.teksacademy.com:3000';
-  var apiUrl = "http://localhost:3003";
+  // var apiUrl = "http://localhost:3003";
   // datepicker
 
   const handleDateChange = (date) => {
@@ -93,7 +93,7 @@ export default function Addassetsform() {
     //     alert("remarks is required")
     // }
     else {
-      const res = await fetch(`${apiUrl}/create`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

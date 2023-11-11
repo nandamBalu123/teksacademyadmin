@@ -393,7 +393,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   </tr>
                   <tr>
                     {" "}
-                    <td className="borderright"> Admission Status </td>{" "}
+                    {/* <td className="borderright"> Admission Status </td>{" "} */}
                     <td className="w-25 borderleft ">
                       {studentdata.admissionstatus}{" "}
                     </td>{" "}

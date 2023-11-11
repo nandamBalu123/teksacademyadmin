@@ -339,8 +339,15 @@ const Sidebar = () => {
                   title={"Inventory"}
                 >
                   <Item
-                    title="Inventory"
-                    to="/inventory"
+                    title="Add Assets"
+                    to="/addassets"
+                    icon={<StorageIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Assign Assets"
+                    to="/assignassets"
                     icon={<StorageIcon />}
                     selected={selected}
                     setSelected={setSelected}

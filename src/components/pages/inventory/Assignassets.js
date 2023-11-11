@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { NavLink, Navigate } from "react-router-dom";
 import { adddata, deldata } from "./context/ContextProvider";
@@ -12,7 +13,7 @@ import Inventoryhome from "./Inventoryhome";
 
 // import Navbaar from '../Navbar/Navbaar';
 const Assignassets = () => {
-  var apiUrl = "https://demo.teksacademy.com:3000";
+  // var apiUrl = "https://demo.teksacademy.com:3000";
   // var apiUrl = 'http://localhost:3003/';
 
   const [getassigndata, setUserdata] = useState([]);
@@ -34,7 +35,7 @@ const Assignassets = () => {
   //     getdata();
   //   }, []);
   const getdata = async () => {
-    const res = await fetch(`${apiUrl}/getassets`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/getassets`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +58,7 @@ const Assignassets = () => {
   }, []);
 
   const deleteuser = async (id) => {
-    const res2 = await fetch(`${apiUrl}/deleteasset/${id}`, {
+    const res2 = await fetch(`${process.env.REACT_APP_API_URL}/deleteasset/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -618,14 +619,14 @@ const Assignassets = () => {
                               <RemoveRedEyeIcon />
                             </button>
                           </NavLink>
-                          <NavLink to={`edit/${element.id}`}>
+                          {/* <NavLink to={`edit/${element.id}`}>
                             <button className="btn btn-primary">
                               <CreateIcon />
                             </button>
-                          </NavLink>
+                          </NavLink> */}
                           <NavLink to={`returnassets/${element.id}`}>
                             <button className="btn btn-primary">
-                              {/* <FaArrowUp /> */}
+                              <ArrowDownwardIcon />
                             </button>
                           </NavLink>
                           <button

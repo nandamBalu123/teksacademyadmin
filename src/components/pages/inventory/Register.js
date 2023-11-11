@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 // import Navbaar from '../Navbar/Navbaar';
 const Register = () => {
-  var apiUrl = "https://demo.teksacademy.com:3000";
+  // var apiUrl = "https://demo.teksacademy.com:3000";
   // var apiUrl = 'http://localhost:3003/';
 
   // datepicker
@@ -92,7 +92,7 @@ const Register = () => {
     //     alert("remarks is required")
     // }
     else {
-      const res = await fetch(`${apiUrl}/assignasset`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/assignasset`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,6 +120,7 @@ const Register = () => {
       } else {
         navigate("/assignassets");
         // setUdata(data)
+        alert("Assigned Successefully")
         console.log("data added");
       }
     }

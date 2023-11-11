@@ -87,7 +87,7 @@ console.log("userdd", users)
       .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
         if (response.data) {
-          if (role === "admin" || role === "RM") {
+          if (role === "admin" || role === "Regional Manager") {
             dispatch({ type: "SET_STUDENTS", payload: response.data });
           }
 
