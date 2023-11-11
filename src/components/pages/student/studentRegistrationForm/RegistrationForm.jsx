@@ -1123,9 +1123,9 @@ export default function RegistrationForm() {
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
                         <MenuItem value="india">India</MenuItem>
-                        <MenuItem value="usa">USA</MenuItem>
-                        <MenuItem value="china">China</MenuItem>
-                        <MenuItem value="others">Others</MenuItem>
+                        {/* <MenuItem value="usa">USA</MenuItem> */}
+                        {/* <MenuItem value="china">China</MenuItem> */}
+                        {/* <MenuItem value="others">Others</MenuItem> */}
                       </Select>
                     </FormControl>
                   </div>
