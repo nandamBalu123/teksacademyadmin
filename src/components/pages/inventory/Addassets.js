@@ -274,8 +274,8 @@ const Addassets = () => {
               </div>
               <table class="table col-12" id="your-table-id">
                 <thead>
-                  <tr className="table-dark">
-                    <th scope="col">id</th>
+                  <tr className="table-primary">
+                    <th scope="col">ID</th>
                     {/* <th scope="col">Name</th> */}
                     <th scope="col">Vender Name</th>
                     {/* <th scope="col">Designation</th> */}

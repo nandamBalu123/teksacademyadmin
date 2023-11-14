@@ -20,8 +20,10 @@ import axios from "axios";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import { Link } from "react-router-dom";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 
 const FeeView = () => {
+  const { students, dispatch } = useStudentsContext();
   const { id } = useParams();
   const navigator = useNavigate();
   const [studentdata, setstudentdata] = useState("");
@@ -31,24 +33,40 @@ const FeeView = () => {
   const [newpaidamount, setnewpaidamount] = useState();
   const [installmentamount, setinstallmentamount] = useState();
   const [extraDiscount, setExtraDiscount] = useState();
+  const [text, setText] = useState("");
+  const [Discountremarkshistory, setDiscount_remarks_history] = useState("");
 
   // const [totoalleft, settotalleft] = useState();
 
   let totalleft;
 
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
+  //     .then((response) => {
+  //       // Handle the successful response here
+  //       setstudentdata(response.data[0]); // Update the data state with the fetched data
+  //       console.log("studentdata", response.data);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the request
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
-      .then((response) => {
-        // Handle the successful response here
-        setstudentdata(response.data[0]); // Update the data state with the fetched data
-        console.log("studentdata", response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
+    if (students && id) {
+      const filteredResults = students.filter((item) => {
+        const singlestudentCondition = id ? item.id === parseInt(id) : true;
+
+        return singlestudentCondition;
       });
-  }, []);
+      if (filteredResults) {
+        console.log("filteredResults[0]", filteredResults[0]);
+      }
+      setstudentdata(filteredResults[0]);
+    }
+  }, [students, id, dispatch]);
   // let totalinstallments;
   const [installments, setInstallments] = useState();
   const [readinstallments, setreadinstallments] = useState();
@@ -61,7 +79,7 @@ const FeeView = () => {
     settotalpaidamount(studentdata.totalpaidamount);
     setdueamount(studentdata.dueamount);
     setinstallmentamount(parseInt(studentdata.dueamount) / totalleft);
-  }, [studentdata]);
+  }, [studentdata, dispatch, students]);
 
   const handleInstallmentUpdate = (index, updatedInstallment) => {
     const updatedInstallments = [...installments];
@@ -132,7 +150,16 @@ const FeeView = () => {
         totalpaidamount,
         nextduedate,
       };
-      console.log("updatedData", updatedData);
+
+      const updateContext = {
+        installments,
+        totalinstallments,
+        dueamount,
+        totalpaidamount,
+        nextduedate,
+        id: studentdata.id,
+      };
+      console.log("updatedData", updatedData, updateContext);
       axios
         .put(
           `${process.env.REACT_APP_API_URL}/feeinstallments/${id}`,
@@ -142,9 +169,12 @@ const FeeView = () => {
         .then((res) => {
           if (res.data.updated) {
             alert("Fee Added");
-
-            navigator(`/feeview/${id}`);
-            window.location.reload();
+            dispatch({
+              type: "UPDATE_INSTALLMENTS",
+              payload: updateContext,
+            });
+            // navigator(`/feeview/${id}`);
+            // window.location.reload();
           } else {
             alert("Try Again");
           }
@@ -213,6 +243,11 @@ const FeeView = () => {
       installments,
       totalinstallments,
     };
+    const updateContext = {
+      installments,
+      totalinstallments,
+      id: studentdata.id,
+    };
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/addnewinstallments/${id}`,
@@ -221,13 +256,88 @@ const FeeView = () => {
       .then((res) => {
         if (res.data.updated) {
           alert("Installment  Added");
-          navigator(`/feeview/${id}`);
-          window.location.reload();
+          dispatch({
+            type: "UPDATE_ADDNEWINSTALLMENTS",
+            payload: updateContext,
+          });
+          // navigator(`/feeview/${id}`);
+          // window.location.reload();
         } else {
           alert("Try Again");
         }
       });
   };
+  /// extra discount
+
+  const handleApplyDiscount = () => {
+    setOpen(false);
+
+    let dueamount;
+    if (extraDiscount) {
+      dueamount = parseInt(dueamountt) - parseInt(extraDiscount);
+    }
+    let updatedInstallmentAmount =
+      dueamount / totalinstallments[0].totalinstallmentsleft;
+    for (let i = 0; i < installments.length; i++) {
+      const updatedInstallments = [...installments];
+      if (updatedInstallments[i].paymentdone === false) {
+        updatedInstallments[i].dueamount = parseInt(updatedInstallmentAmount);
+      }
+
+      setInstallments(updatedInstallments);
+    }
+    if (extraDiscount) {
+      let Extra_Discount_remarks_history = studentdata.extra_discount;
+      let newObject = {
+        Discount: parseInt(extraDiscount),
+        Discount_remarks: text,
+        date: new Date(),
+      };
+      Extra_Discount_remarks_history.push(newObject);
+      const updatedData = {
+        installments,
+        dueamount,
+        Extra_Discount_remarks_history,
+      };
+      const updateContext = {
+        installments,
+        dueamount,
+        Extra_Discount_remarks_history,
+        id: studentdata.id,
+      };
+
+      // let uploadcontext = { user_status, user_remarks_history, id };
+
+      axios
+        .put(
+          `${process.env.REACT_APP_API_URL}/extra_discount/${id}`,
+          updatedData
+        )
+        .then((res) => {
+          if (res.data.updated) {
+            alert("Discount Applied");
+            dispatch({
+              type: "UPDATE_EXTRA_DISCOUNT",
+              payload: updateContext,
+            });
+            // window.location.reload();
+          } else {
+            alert("Error please Try Again");
+          }
+        });
+      // setcourseStartDate("");
+      setText("");
+    } else {
+      alert("enter remarks");
+    }
+  };
+  let extra_discount_view = 0;
+  if (studentdata.extra_discount) {
+    let studentdata_extra_discount = studentdata.extra_discount;
+    for (let i = 0; i < studentdata_extra_discount.length; i++) {
+      extra_discount_view += parseInt(studentdata_extra_discount[i].Discount);
+    }
+  }
   return (
     <div className="fee container mt-3">
       <div className="feeview">
@@ -239,35 +349,31 @@ const FeeView = () => {
               <TableHead>
                 <TableRow>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                    {" "}
                     Name
                   </TableCell>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                     Email
                   </TableCell>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
                     Contact Number
                   </TableCell>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
                     Course
                   </TableCell>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
                     Date Of Joining
                   </TableCell>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                    {" "}
                     Total Amount
                   </TableCell>
 
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                    {" "}
                     Paid Amount
                   </TableCell>
+                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    Extra Discount
+                  </TableCell>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
                     Due Amount
                   </TableCell>
                   <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
@@ -298,7 +404,7 @@ const FeeView = () => {
                     <span
                       title={studentdata.email}
                       style={{
-                        width: "7rem",
+                        width: "5rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
@@ -328,7 +434,7 @@ const FeeView = () => {
                     <span
                       title={studentdata.courses}
                       style={{
-                        width: "3rem",
+                        width: "2.5rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
@@ -343,7 +449,7 @@ const FeeView = () => {
                     <span
                       title={studentdata.admissiondate}
                       style={{
-                        width: "5rem",
+                        width: "4.5rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
@@ -358,7 +464,7 @@ const FeeView = () => {
                     <span
                       title={studentdata.finaltotal}
                       style={{
-                        width: "3rem",
+                        width: "2.5rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
@@ -374,7 +480,7 @@ const FeeView = () => {
                     <span
                       title={studentdata.totalpaidamount}
                       style={{
-                        width: "3rem",
+                        width: "2.5rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
@@ -387,9 +493,25 @@ const FeeView = () => {
                   </TableCell>
                   <TableCell className="border border 1">
                     <span
+                      // title={studentdata.totalpaidamount}
+                      style={{
+                        width: "2.5rem",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        display: "block",
+                      }}
+                    >
+                      {extra_discount_view && <>{extra_discount_view}</>}
+                      {/* {studentdata.totalpaidamount} */}
+                    </span>
+                  </TableCell>
+                  <TableCell className="border border 1">
+                    <span
                       title={studentdata.dueamount}
                       style={{
-                        width: "3rem",
+                        width: "2.5rem",
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
@@ -511,7 +633,7 @@ const FeeView = () => {
           </button>
           <div className="col-6 col-md-2 col-lg-2 col-xl-2 my-2 ">
             <button
-              className="btn btn-primary"
+              className="btn btn-warning"
               variant="outlined"
               onClick={handleClickOpen}
             >
@@ -536,9 +658,21 @@ const FeeView = () => {
                   variant="standard"
                   onChange={(e) => setExtraDiscount(e.target.value)}
                 />
+                <DialogContentText>
+                  <textarea
+                    rows="3"
+                    cols="50"
+                    placeholder="Remarks"
+                    name="comment"
+                    form="usrform"
+                    onChange={(e) => setText(e.target.value)}
+                    value={text}
+                  ></textarea>
+                </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Discount</Button>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleApplyDiscount}>Apply</Button>
               </DialogActions>
             </Dialog>
           </div>

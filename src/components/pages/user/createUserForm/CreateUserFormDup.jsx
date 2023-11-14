@@ -509,11 +509,7 @@ const CreateUserForm = () => {
             >
               Create User
             </button>
-            {/* <button  className="btn btn-primary"
-            type="submit">
-              
-              Create User
-            </button> */}
+           
           </div>
         </form>
       </div>

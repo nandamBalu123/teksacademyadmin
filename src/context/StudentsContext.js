@@ -10,8 +10,113 @@ export const StudentsReducer = (state, action) => {
       };
     case "CREATE_STUDENT":
       return {
-        students: [...state.students, action.payload],
+        students: [action.payload, ...state.students],
       };
+    case "UPDATE_INSTALLMENTS":
+      // Find the index of the user to be updated in the current state
+      let updatedInstallmentStudentIndex = state.students.findIndex(
+        (user) => user.id === action.payload.id
+      );
+
+      if (updatedInstallmentStudentIndex === -1) {
+        // User not found, no update needed
+        return state;
+      }
+
+      // Create a copy of the users array with the updated user
+
+      let updatedInstallment = [...state.students];
+      updatedInstallment[updatedInstallmentStudentIndex].installments =
+        action.payload.installments;
+      updatedInstallment[updatedInstallmentStudentIndex].totalinstallments =
+        action.payload.totalinstallments;
+      updatedInstallment[updatedInstallmentStudentIndex].dueamount =
+        action.payload.dueamount;
+      updatedInstallment[updatedInstallmentStudentIndex].totalpaidamount =
+        action.payload.totalpaidamount;
+      updatedInstallment[updatedInstallmentStudentIndex].nextduedate =
+        action.payload.nextduedate;
+      return {
+        students: updatedInstallment,
+      };
+    case "UPDATE_ADDNEWINSTALLMENTS":
+      // Find the index of the user to be updated in the current state
+      let updatednewInstallmentStudentIndex = state.students.findIndex(
+        (user) => user.id === action.payload.id
+      );
+
+      if (updatednewInstallmentStudentIndex === -1) {
+        // User not found, no update needed
+        return state;
+      }
+
+      // Create a copy of the users array with the updated user
+
+      let updatedNewInstallment = [...state.students];
+      updatedNewInstallment[updatednewInstallmentStudentIndex].installments =
+        action.payload.installments;
+      updatedNewInstallment[
+        updatednewInstallmentStudentIndex
+      ].totalinstallments = action.payload.totalinstallments;
+
+      return {
+        students: updatedNewInstallment,
+      };
+    case "UPDATE_EXTRA_DISCOUNT":
+      // Find the index of the user to be updated in the current state
+      let updatedExtraDiscountStudentIndex = state.students.findIndex(
+        (user) => user.id === action.payload.id
+      );
+
+      if (updatedExtraDiscountStudentIndex === -1) {
+        // User not found, no update needed
+        return state;
+      }
+
+      // Create a copy of the users array with the updated user
+
+      let updatedExtraDiscount = [...state.students];
+      updatedExtraDiscount[updatedExtraDiscountStudentIndex].installments =
+        action.payload.installments;
+      updatedExtraDiscount[updatedExtraDiscountStudentIndex].dueamount =
+        action.payload.dueamount;
+      updatedExtraDiscount[updatedExtraDiscountStudentIndex].extra_discount =
+        action.payload.Extra_Discount_remarks_history;
+
+      return {
+        students: updatedExtraDiscount,
+      };
+    case "UPDATE_ADDTOFEE":
+      // Find the index of the user to be updated in the current state
+      let updatedAddToFeeStudentIndex = state.students.findIndex(
+        (user) => user.id === action.payload.id
+      );
+
+      if (updatedAddToFeeStudentIndex === -1) {
+        // User not found, no update needed
+        return state;
+      }
+
+      // Create a copy of the users array with the updated user
+
+      let updatedAddToFee = [...state.students];
+      updatedAddToFee[updatedAddToFeeStudentIndex].dueamount =
+        action.payload.dueamount;
+      updatedAddToFee[updatedAddToFeeStudentIndex].initialpayment =
+        action.payload.initialpayment;
+      updatedAddToFee[updatedAddToFeeStudentIndex].totalinstallments =
+        action.payload.totalinstallments;
+      updatedAddToFee[updatedAddToFeeStudentIndex].addfee =
+        action.payload.addfee;
+      updatedAddToFee[updatedAddToFeeStudentIndex].installments =
+        action.payload.installments;
+      updatedAddToFee[updatedAddToFeeStudentIndex].totalpaidamount =
+        action.payload.totalpaidamount;
+
+      return {
+        students: updatedAddToFee,
+      };
+
     case "UPDATE_CERTIFICATE_STATUS":
       // Find the index of the user to be updated in the current state
       let updatedStudentIndex = state.students.findIndex(
@@ -24,14 +129,13 @@ export const StudentsReducer = (state, action) => {
       }
 
       // Create a copy of the users array with the updated user
-      const updatedCertificate = [...state.students];
+      let updatedCertificate = [...state.students];
       updatedCertificate[updatedStudentIndex].certificate_status =
         action.payload.certificate_status;
 
       return {
         students: updatedCertificate,
       };
-
     default:
       return state;
   }
@@ -46,19 +150,15 @@ export const StudentsContextProvider = ({ children }) => {
 
   let reportto = localStorage.getItem("reportto");
   console.log("reportto", reportto);
-  userId = parseInt(userId)
+  userId = parseInt(userId);
   console.log("userId", role);
-  let lusername
-if(userName){
-  lusername  = userName.fullname;
+  let lusername;
+  if (userName) {
+    lusername = userName.fullname;
+  }
 
-}
-
- 
-
-  const [users, setUsers] = useState()
+  const [users, setUsers] = useState();
   useEffect(() => {
-
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -68,7 +168,7 @@ if(userName){
           throw new Error("Network response was not ok");
         }
         var data = await response.json();
-        setUsers(data)
+        setUsers(data);
 
         // dispatch({ type: "SET_USERS", payload: data });
       } catch (err) {
@@ -79,8 +179,7 @@ if(userName){
     fetchData();
   }, []);
 
-
-console.log("userdd", users)
+  console.log("userdd", users);
 
   useEffect(() => {
     axios
@@ -95,19 +194,15 @@ console.log("userdd", users)
             const filteredResults = response.data.filter((item) => {
               const user_id = parseInt(item.user_id);
 
-              const dataaspercounsellor = userId
-                ? user_id === userId
-                : true;
-              return (
-                dataaspercounsellor
-              );
+              const dataaspercounsellor = userId ? user_id === userId : true;
+              return dataaspercounsellor;
             });
 
             dispatch({
-              type: "SET_STUDENTS", payload: filteredResults
+              type: "SET_STUDENTS",
+              payload: filteredResults,
             });
           }
-
 
           if (role === "branch manager") {
             let userd_id;
@@ -119,78 +214,74 @@ console.log("userdd", users)
                 console.log("muser_id", muser_id);
                 if (muser_id === userd_id) {
                   const ureportto = user.reportto;
-                  
+
                   // const lusername = userName.fullname;
                   console.log("ureportto, lusername", ureportto, lusername);
                   return ureportto === lusername;
                 }
-          
+
                 return false;
               });
-          
-              return filterreportto.length > 0; 
+
+              return filterreportto.length > 0;
             });
 
-            
-          
             dispatch({
               type: "SET_STUDENTS",
               payload: filteredResults,
             });
           }
-          
-        //   if (role === "branch manager") {
-        //     const filteredResults = response.data.filter((item) => {
-        //       const user_id = parseInt(item.user_id); ////counsellor  id  9 1 1 1
-        //       const filterreportto = users.filter((user) => {
-        //         const muser_id = parseInt(user.id);
-                
-        //         if(muser_id === user_id){
-        //           const ureportto = user.reportto;
-        //           const lusername = userName.fullname;
 
-        //           if(ureportto == lusername){
-                     
-        //           }
+          //   if (role === "branch manager") {
+          //     const filteredResults = response.data.filter((item) => {
+          //       const user_id = parseInt(item.user_id); ////counsellor  id  9 1 1 1
+          //       const filterreportto = users.filter((user) => {
+          //         const muser_id = parseInt(user.id);
 
-        //         }
-        //         // const rp = user_id ? user.id === user_id : false
+          //         if(muser_id === user_id){
+          //           const ureportto = user.reportto;
+          //           const lusername = userName.fullname;
 
-        //         // return (reporttoo)
-        //       })
-        //       filterreportto();
-        //     //   const dataaspercounsellor = user_id
-        //     //     ? filterreportto === userName.fullname
+          //           if(ureportto == lusername){
 
-        //     //     : true;
-        //     //   return (
-        //     //     dataaspercounsellor
-        //     //   );
-        //     // });
-        //     // const filteredResults = response.data.filter((item) => {
-        //     //   const user_id=parseInt(item.user_id);
-        //     //   // userId, reportto
+          //           }
 
-        //     //     const dataaspercounsellor = userId
-        //     //     ? user_id === userId
-        //     //     : true;
+          //         }
+          //         // const rp = user_id ? user.id === user_id : false
 
-        //     //     const rept = dataaspercounsellor ? reportto 
-        //     //   return (
+          //         // return (reporttoo)
+          //       })
+          //       filterreportto();
+          //     //   const dataaspercounsellor = user_id
+          //     //     ? filterreportto === userName.fullname
 
-        //     //   );
-        //     // });
+          //     //     : true;
+          //     //   return (
+          //     //     dataaspercounsellor
+          //     //   );
+          //     // });
+          //     // const filteredResults = response.data.filter((item) => {
+          //     //   const user_id=parseInt(item.user_id);
+          //     //   // userId, reportto
 
-        //     dispatch({
-        //       type: "SET_STUDENTS", payload: filteredResults
-        //     });
-        //   })
+          //     //     const dataaspercounsellor = userId
+          //     //     ? user_id === userId
+          //     //     : true;
 
+          //     //     const rept = dataaspercounsellor ? reportto
+          //     //   return (
 
-        //   // dispatch({ type: "SET_STUDENTS", payload: response.data });
-        // }
+          //     //   );
+          //     // });
 
-      }
+          //     dispatch({
+          //       type: "SET_STUDENTS", payload: filteredResults
+          //     });
+          //   })
+
+          //   // dispatch({ type: "SET_STUDENTS", payload: response.data });
+          // }
+        }
         // if (response.data) {
         //   if(role==="admin"){
         //     dispatch({ type: "SET_STUDENTS", payload: response.data });
@@ -225,7 +316,6 @@ console.log("userdd", users)
         //     dispatch({ type: "SET_STUDENTS", payload: filteredResults
         //   });
         //   }
-
 
         //   // dispatch({ type: "SET_STUDENTS", payload: response.data });
         // }

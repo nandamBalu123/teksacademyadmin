@@ -12,27 +12,41 @@ import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 const PrintableComponent = React.forwardRef((props, ref) => {
   const { id } = useParams();
-
+  const { students, dispatch } = useStudentsContext();
   const [studentdata, setstudentdata] = useState([]);
 
+  // useEffect(() => {
+  //   // Make a GET request to your backend API endpoint
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
+  //     .then((response) => {
+  //       // Handle the successful response here
+  //       // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
+  //       setstudentdata(response.data[0]); // Update the data state with the fetched data
+  //       // setstudentdata()
+  //       // console.log("studentdata", response.data[0].feedetails);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the request
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
-      .then((response) => {
-        // Handle the successful response here
-        // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
-        setstudentdata(response.data[0]); // Update the data state with the fetched data
-        // setstudentdata()
-        // console.log("studentdata", response.data[0].feedetails);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
+    if (students && id) {
+      const filteredResults = students.filter((item) => {
+        const singlestudentCondition = id ? item.id === parseInt(id) : true;
+
+        return singlestudentCondition;
       });
-  }, []);
+      if (filteredResults) {
+        console.log("filteredResults[0]", filteredResults[0]);
+      }
+      setstudentdata(filteredResults[0]);
+    }
+  }, [students, id, dispatch]);
   // const jsonString = studentdata.feedetails;
 
   // // const jsonObject = JSON.parse(jsonString);
@@ -458,7 +472,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   </tr>
 
                   {studentdata.feedetails &&
-                    JSON.parse(studentdata.feedetails).map((item, index) => (
+                    studentdata.feedetails.map((item, index) => (
                       <tr key={index}>
                         <td>{item.feetype}</td>
                         <td>{item.amount}</td>
@@ -488,9 +502,23 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     {" "}
                     <th> Provided </th>{" "}
                     <td className="w-25">
-                      {studentdata.assets && studentdata.assets}
-                    </td>{" "}
-                    <th> Issue Date </th>{" "}
+                      {studentdata.assets &&
+                        studentdata.assets.map((item, index) => (
+                          <>
+                            {item}
+                            {index !== studentdata.assets.length - 1 && (
+                              <span>, </span>
+                            )}
+                          </>
+                        ))}
+                    </td>
+                    {/* <ul>
+                      {studentdata.assets &&
+                        studentdata.assets.map((asset, index) => (
+                          <li key={index}>{asset}</li>
+                        ))}
+                    </ul> */}
+                    <th> Issue Date </th>
                     <td className="w-25">{studentdata.admissiondate}</td>{" "}
                   </tr>
 
