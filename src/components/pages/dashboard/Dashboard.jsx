@@ -155,7 +155,11 @@ const Dashboard = () => {
     students,
     "branch"
   );
-  const CounsellorwiseAllstudentsData = groupDataAndCalculatePercentage(
+  const CounsellorrwiseAllstudentsData = groupDataAndCalculatePercentage(
+    students,
+    "enquirytakenby"
+  );
+  const CounsellorwisestudentsData = groupDataAndCalculatePercentage(
     getstudentData,
     "enquirytakenby"
   );
@@ -172,6 +176,7 @@ const Dashboard = () => {
   const finalTotalByBranch = {};
   const finalDueAndReceivedByBranch = {};
   const counsellorwisedataByBranch = {};
+  const finalCounsellorWiseDueAndReceivedByBranch = {};
   let totalAmount = 0;
   // Calculate the total amount and handle NaN values
   getstudentData.forEach((student) => {
@@ -199,11 +204,11 @@ const Dashboard = () => {
       percentage: branchPercentage,
     };
   });
-  Object.keys(CounsellorwiseAllstudentsData).forEach((counsellor) => {
+  Object.keys(CounsellorwisestudentsData).forEach((counsellor) => {
     let counsellorTotalCount = 0;
 
     // Calculate the total amount for each branch and handle NaN values
-    CounsellorwiseAllstudentsData[counsellor].forEach((student) => {
+    CounsellorwisestudentsData[counsellor].forEach((student) => {
       const amount = parseFloat(student.finaltotal);
       if (!isNaN(amount)) {
         counsellorTotalCount += amount;
@@ -290,6 +295,85 @@ const Dashboard = () => {
   //     totalreceivedAmount: totalreceivedAmount,
   //   };
   // });
+  Object.keys(CounsellorrwiseAllstudentsData).forEach((counsellor) => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // Month is 0-based, so add 1 to get the current month
+    const currentYear = currentDate.getFullYear();
+
+    let totalDueAmount = 0;
+    let totalreceivedAmount = 0;
+
+    // Calculate the total amount for each branch and handle NaN values
+
+    CounsellorrwiseAllstudentsData[counsellor].forEach((student) => {
+      student.installments.forEach((installment) => {
+        if (
+          (installment.duedate && installment.paidamount === 0) ||
+          installment.paidamount === ""
+        ) {
+          if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
+            if (
+              installment.duedate >= filterDeuAndReceived.fromdate &&
+              installment.duedate <= filterDeuAndReceived.todate
+            ) {
+              totalDueAmount += parseInt(installment.dueamount, 10);
+            }
+          } else {
+            const dueDate = new Date(installment.duedate);
+            const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+            const dueYear = dueDate.getFullYear();
+
+            if (dueMonth === currentMonth && dueYear === currentYear) {
+              totalDueAmount += parseInt(installment.dueamount, 10);
+            }
+          }
+        }
+        if (installment.paiddate) {
+          if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
+            if (
+              installment.paiddate >= filterDeuAndReceived.fromdate &&
+              installment.paiddate <= filterDeuAndReceived.todate
+            ) {
+              totalreceivedAmount += parseInt(installment.paidamount, 10);
+            }
+          } else {
+            const dueDate = new Date(installment.paiddate);
+            const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+            const dueYear = dueDate.getFullYear();
+
+            if (dueMonth === currentMonth && dueYear === currentYear) {
+              totalreceivedAmount += parseInt(installment.paidamount, 10);
+            }
+          }
+        }
+      });
+      student.initialpayment.forEach((payment) => {
+        if (payment.paiddate) {
+          if (filterDeuAndReceived.fromdate || filterDeuAndReceived.todate) {
+            if (
+              payment.paiddate >= filterDeuAndReceived.fromdate &&
+              payment.paiddate <= filterDeuAndReceived.todate
+            ) {
+              totalreceivedAmount += parseInt(payment.initialamount, 10);
+            }
+          } else {
+            const dueDate = new Date(payment.paiddate);
+            const dueMonth = dueDate.getMonth() + 1; // Month is 0-based, so add 1 to get the month
+            const dueYear = dueDate.getFullYear();
+
+            if (dueMonth === currentMonth && dueYear === currentYear) {
+              totalreceivedAmount += parseInt(payment.initialamount, 10);
+            }
+          }
+        }
+      });
+    });
+
+    finalCounsellorWiseDueAndReceivedByBranch[counsellor] = {
+      totalDueAmount: totalDueAmount,
+      totalreceivedAmount: totalreceivedAmount,
+    };
+  });
   Object.keys(branchwiseAllstudentsData).forEach((branch) => {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1; // Month is 0-based, so add 1 to get the current month
@@ -839,7 +923,7 @@ const Dashboard = () => {
                 );
               })}
             {role === "branch manager" &&
-              Object.entries(CounsellorwiseAllstudentsData).map(
+              Object.entries(CounsellorwisestudentsData).map(
                 ([counsellor, students]) => {
                   const enrollmentPercentage =
                     (students.length / getstudentData.length) * 100;
@@ -1124,27 +1208,78 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="  justify-content-around pt-4 row progreebar-show">
-            {Object.entries(finalDueAndReceivedByBranch).map(
-              ([branch, { totalDueAmount, totalreceivedAmount }]) => {
-                return (
-                  <div
-                    key={branch}
-                    className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                  >
-                    <h6>
-                      <b>{branch}</b>
-                    </h6>
-                    {/* <BorderLinearProgress
-                      variant="determinate"
-                      // value={percentage}
-                    /> */}
+            {role !== "branch manager" &&
+              Object.entries(finalDueAndReceivedByBranch).map(
+                ([branch, { totalDueAmount, totalreceivedAmount }]) => {
+                  const Receivedpercentage =
+                    (totalreceivedAmount / AllbranchesreceivedAmount) * 100;
+                  const Pendingpercentage =
+                    (totalDueAmount / AllbranchesDueAmount) * 100;
+                  return (
+                    <div
+                      key={branch}
+                      className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                    >
+                      <h6>
+                        <b>{branch}</b>
+                      </h6>
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={Receivedpercentage}
+                      />
 
-                    <div>Total Received Amount: {totalreceivedAmount}</div>
-                    <div>Total Pending Amount: {totalDueAmount}</div>
-                  </div>
-                );
-              }
-            )}
+                      <div>
+                        Received : {totalreceivedAmount}
+                        <span>({Receivedpercentage.toFixed(2)}%)</span>
+                      </div>
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={Pendingpercentage}
+                      />
+                      <div>
+                        Pending : {totalDueAmount}
+                        <span>({Pendingpercentage.toFixed(2)}%)</span>
+                      </div>
+                    </div>
+                  );
+                }
+              )}
+            {role === "branch manager" &&
+              Object.entries(finalCounsellorWiseDueAndReceivedByBranch).map(
+                ([counsellor, { totalDueAmount, totalreceivedAmount }]) => {
+                  const Receivedpercentage =
+                    (totalreceivedAmount / AllbranchesreceivedAmount) * 100;
+                  const Pendingpercentage =
+                    (totalDueAmount / AllbranchesDueAmount) * 100;
+                  return (
+                    <div
+                      key={counsellor}
+                      className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                    >
+                      <h6>
+                        <b>{counsellor}</b>
+                      </h6>
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={Receivedpercentage}
+                      />
+
+                      <div>
+                        Received : {totalreceivedAmount}
+                        <span>({Receivedpercentage.toFixed(2)}%)</span>
+                      </div>
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={Pendingpercentage}
+                      />
+                      <div>
+                        Pending : {totalDueAmount}
+                        <span>({Pendingpercentage.toFixed(2)}%)</span>
+                      </div>
+                    </div>
+                  );
+                }
+              )}
           </div>
         </div>
       )}

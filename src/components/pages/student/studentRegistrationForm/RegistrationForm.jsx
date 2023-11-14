@@ -37,6 +37,7 @@ import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 import { useCoursePackageContext } from "../../../../hooks/useCoursePackageContext";
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 
 const Popup = ({ show, onClose, children }) => {
   return (
@@ -51,6 +52,7 @@ const Popup = ({ show, onClose, children }) => {
   );
 };
 export default function RegistrationForm() {
+  const { dispatch } = useStudentsContext();
   const [isPopupOpen, setPopupOpen] = useState(false);
   let select = "select";
   const openPopup = () => setPopupOpen(true);
@@ -129,6 +131,7 @@ export default function RegistrationForm() {
   const [certificate_status, setcertificate_status] = useState([
     { courseStartDate: "", courseEndDate: "", certificateStatus: "" },
   ]);
+  const [extra_discount, setExtra_Discount] = useState([]);
   let LoggedInuser = JSON.parse(localStorage.getItem("user"));
   let userName;
   // if (LoggedInuser) {
@@ -634,6 +637,7 @@ export default function RegistrationForm() {
         student_status,
         user_id,
         certificate_status,
+        extra_discount,
       };
 
       try {
@@ -646,6 +650,12 @@ export default function RegistrationForm() {
         // Handle the response as needed
         console.log("Response:", response.data);
         const id = response.data.insertId;
+        let updateContext = studentRegistrationdata;
+        updateContext.id = response.data.insertId;
+        dispatch({
+          type: "CREATE_STUDENT",
+          payload: updateContext,
+        });
         navigate(`/addtofee/${id}`);
 
         // You can navigate to another page or perform other actions here.
