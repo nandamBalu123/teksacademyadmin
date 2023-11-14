@@ -27,6 +27,8 @@ import { styled } from "@mui/material/styles";
 import { useLocation } from "react-router-dom";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Hidden } from "@mui/material";
+import useFormattedDate from "../../../../hooks/useFormattedDate";
+
 const PrintableComponent = React.forwardRef((props, ref) => {
   const location = useLocation();
   const dataFromState = location.state;
@@ -39,6 +41,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   const [studentdata, setstudentdata] = useState([]);
   const [invoice, setinvoice] = useState();
   const [number, setNumber] = useState();
+
   useEffect(() => {
     if (name === "Installment" && studentdata.installments) {
       let data = studentdata.installments;
@@ -197,18 +200,33 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             studentdata.initialpayment &&
             studentdata.initialpayment.length > 0 ? (
               studentdata.initialpayment.map((student) => {
-                const originalDate = new Date(student.paiddate);
-                const day = String(originalDate.getDate()).padStart(2, "0");
-                const month = String(originalDate.getMonth() + 1).padStart(
-                  2,
-                  "0"
-                ); // Month is zero-based, so we add 1.
-                const year = originalDate.getFullYear();
+                let paidDate = new Date(student.paiddate);
+                const day = paidDate.getUTCDate();
+                const monthIndex = paidDate.getUTCMonth();
+                const year = paidDate.getUTCFullYear();
 
-                const formattedDate = `${day}-${month}-${year}`;
+                const monthAbbreviations = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+
+                // Formatting the date
+                paidDate = `${day < 10 ? "0" : ""}${day}-${
+                  monthAbbreviations[monthIndex]
+                }-${year}`;
                 return (
                   <span key={student.id}>
-                    <b>DATE:</b> {formattedDate}
+                    <b>DATE:</b> {paidDate}
                   </span>
                 );
               })
@@ -429,10 +447,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       {nametype === "studentinvoice" && (
                         <td className=" text-center border border 1">
                           {(
-                            parseFloat(student.paidamount ).toFixed(2) -
-                            parseFloat(
-                              (student.paidamount) / 1.18
-                            ).toFixed(2)
+                            parseFloat(student.paidamount).toFixed(2) -
+                            parseFloat(student.paidamount / 1.18).toFixed(2)
                           ).toFixed(2)}
                         </td>
                       )}
@@ -808,15 +824,9 @@ function Invoice() {
 
   return (
     <div>
-   
       <div className="mt-3 text-end me-3 ">
-        <button
-          onClick={handlePrint}
-          
-          className="btn btn-primary mb-3  end"
-        >
+        <button onClick={handlePrint} className="btn btn-primary mb-3  end">
           {" "}
-         
           Print
         </button>
       </div>
