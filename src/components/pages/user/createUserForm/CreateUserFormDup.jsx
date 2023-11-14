@@ -145,8 +145,8 @@ const CreateUserForm = () => {
   };
 
   return (
-    <div className="main-user-container container">
-      <h3 className="mt-4">User Creation Form</h3>
+    <div className="main-user-container container my-4">
+      <h4 className="my-3 text-center">User Creation Form</h4>
       <div className="sub-user-container">
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="row ">
@@ -509,11 +509,7 @@ const CreateUserForm = () => {
             >
               Create User
             </button>
-            {/* <button  className="btn btn-primary"
-            type="submit">
-              
-              Create User
-            </button> */}
+           
           </div>
         </form>
       </div>

@@ -2,10 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
+import { useDepartmentContext } from "../../../../hooks/useDepartmentcontext";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import './EditUser.css';
 import axios from "axios";
 const EditUser = () => {
   const navigate = useNavigate("");
   const [profiles, setProfiles] = useState([]);
+  const { departments } = useDepartmentContext();
   const { roles } = useRoleContext();
   const { branches } = useBranchContext();
   const fetchData = async () => {
@@ -14,7 +22,7 @@ const EditUser = () => {
         `${process.env.REACT_APP_API_URL}/getuserroles`
       );
 
-      console.log("Response status:", response.status); // Log response status
+    console.log("Response status:", response.status); // Log response status
 
       if (!response.ok) {
         console.error(
@@ -103,9 +111,25 @@ const EditUser = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="row m-auto">
-        <div className="mb-4 col-xl-5 col-lg-5 col-md-6 col-12 ">
+    <div className="container main-edituser-container my-4 ">
+      <h4 className="my-4 text-center"> Edit User Form</h4>
+      <div className="sub-edituser-container">
+        <form action="">
+        <div className="row ">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+        <TextField
+                label="Full Name "
+                name="fullname"
+                type="text"
+                variant="standard"
+                className="mar w-75 "
+                required
+                onChange={setdata}
+                value={user.fullname}
+                id="fullname"
+              />
+        </div>
+        {/* <div className="mb-4 col-xl-5 col-lg-5 col-md-6 col-12 ">
           <label>Full Name</label>
           <input
             type="text"
@@ -115,8 +139,21 @@ const EditUser = () => {
             name="fullname"
             required
           />
+        </div> */}
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+        <TextField
+                label="Email ID"
+                name="email"
+                type="email"
+                variant="standard"
+                className="mar w-75 "
+                value={user.email}
+            onChange={setdata}
+                id="email"
+                required
+              />
         </div>
-        <div className=" mb-4 col-xl-5 col-lg-5 col-md-6 col-12">
+        {/* <div className=" mb-4 col-xl-5 col-lg-5 col-md-6 col-12">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email
           </label>
@@ -129,9 +166,37 @@ const EditUser = () => {
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           />
+        </div> */}
+      </div>
+      <div className="row">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+        <TextField
+                label="Phone Number"
+                className=" mar w-75"
+                variant="standard"
+                name="phonenumber"
+                type="number"
+                value={user.phonenumber}
+            onChange={setdata}
+                id="phonenumber"
+                required
+              />
+        </div>
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+        <TextField
+                label="Designation"
+                className=" mar w-75"
+                variant="standard"
+                name="designation"
+                type="text"
+                value={user.designation}
+                onChange={setdata}
+                id="designation"
+                required
+              />
         </div>
       </div>
-      <div className="row m-auto">
+      {/* <div className="row m-auto">
         <div className="mb-4 col-xl-5 col-lg-5 col-md-6 col-12">
           <label htmlFor="exampleInputPassword1" className="form-label">
             Designation
@@ -158,109 +223,116 @@ const EditUser = () => {
             id="exampleInputPassword1"
           />
         </div>
-      </div>
+      </div> */}
+     <div className="row">
+     <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+     <FormControl variant="standard" className="w-75">
+                <InputLabel>
+                  Department
+                </InputLabel>
+                <Select
+                  className=" mar  "
+                  name="department"
+                  id="department"
+                  required
+                  value={user.department}
+                  onChange={setdata}
+                >
+                  {departments &&
+                    departments.map((item, index) => (
+                      <MenuItem key={item.id} value={item.department_name}>
+                        {item.department_name}{" "}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+        {/* <TextField
+                label="Department"
+                className=" mar w-75"
+                variant="standard"
+                name="department"
+                type="text"
+                value={user.department}
+            onChange={setdata}
+                id="department"
+                required
+              /> */}
+        </div>
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+         <TextField
+                label="Report to"
+                className=" mar w-75"
+                variant="standard"
+                name="reportto"
+                type="text"
+                value={user.reportto}
+                onChange={setdata}
+                id="reportto"
+                required
+              />
+        </div>
+       
 
-      <div className="row m-auto">
-        <div className="mb-4  col-xl-5 col-lg-5 col-md-6 col-12">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Department
-          </label>
-          <input
-            type="text"
-            value={user.department}
+     </div>
+     
+      <div className="row">
+        <div className="col-12 col-md-6 col-lg-6 col-md-6"> 
+
+              <FormControl variant="standard" className="w-75">
+                <InputLabel>
+                 Role
+                </InputLabel>
+                <Select
+                  className=" mar  "
+                  name="profile"
+                  id="profile"
+                  required
+                  value={user.profile}
             onChange={setdata}
-            name="department"
-            className="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-        <div className="mb-4 col-xl-5 col-lg-5 col-md-6 col-12">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Report To
-          </label>
-          <input
-            type="text"
-            value={user.reportto}
-            onChange={setdata}
-            name="reportto"
-            className="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-      </div>
-      <div className="row m-auto">
-        <div className="mb-4  col-xl-5 col-lg-5 col-md-6 col-12">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Role
-          </label>
-          <select
-            className="form-control ms-2"
-            id="exampleInputPassword1"
-            required
-            style={{
-              height: "45px",
-              paddingRight: "145px",
-            }}
-            name="profile"
-            value={user.profile}
-            onChange={setdata}
-          >
-            <option value="">--select--</option>
+                >
+                
             {roles &&
               roles.map((item, index) => (
-                <option key={item.id} value={item.role}>
+                <MenuItem key={item.id} value={item.role}>
                   {item.role}
-                </option>
+                </MenuItem>
               ))}
-          </select>
-          {/* <input
-              type="text"
-              value={user.profile}
-              onChange={setdata}
-              name="profile"
-              className="form-control"
-              id="exampleInputPassword1"
-            /> */}
-        </div>
-        <div className="mb-4 col-xl-5 col-lg-5 col-md-6 col-12">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Branch
-          </label>
-          <select
-            className="form-control ms-2"
-            id=""
-            required
-            name="branch"
-            value={user.branch}
-            onChange={setdata}
-          >
-            <option value="">--select--</option>
+                </Select>
+              </FormControl>
+               </div>
+               <div className="col-12 col-md-6 col-lg-6 col-md-6"> 
 
-            {branches &&
-              branches.map((item, index) => (
-                <option key={item.id} value={item.branch_name}>
-                  {item.branch_name}
-                </option>
-              ))}
-          </select>
-          {/* <input
-              type="text"
-              value={user.branch}
-              onChange={setdata}
-              name="branch"
-              className="form-control"
-              id="exampleInputPassword1"
-            /> */}
-        </div>
+              <FormControl variant="standard" className="w-75">
+                <InputLabel>
+                 Branch
+                </InputLabel>
+                <Select
+                  className=" mar  "
+                  name="branch"
+                  id="branch"
+                  required
+                  value={user.branch}
+                  onChange={setdata}
+                >
+                
+                {branches &&
+                    branches.map((item, index) => (
+                      <MenuItem key={item.id} value={item.branch_name}>
+                        {item.branch_name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+               </div>
       </div>
-
-      <div className="row m-auto">
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+    
+      <div className="row mb-3 ">
+        <div className="col-2 col-md-6 col-lg-6 col-xl-6">
           <NavLink to="/usersdata" className="btn btn-primary ">
             Back
           </NavLink>
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+        <div className="col-9 col-md-6 col-lg-6 col-xl-6 ">
           <button
             type="submit"
             onClick={handlesubmit}
@@ -269,6 +341,8 @@ const EditUser = () => {
             Submit
           </button>
         </div>
+      </div>
+        </form>
       </div>
     </div>
   );

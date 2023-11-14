@@ -17,7 +17,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-
+import './Requestedcertificates.css';
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
@@ -214,24 +214,25 @@ const Requestedcertificates = () => {
     });
   };
   return (
-    <div className="container req-certificate my-3">
-      <div className="d-flex justify-content-between">
-        {!issuedCertificates && <h4>Requested Certificates</h4>}
-        {issuedCertificates && <h4>Issued Certificates</h4>}
+    <div className="container req-main-certificate mt-3">
+   <div className="req-certificate mt-2"> 
+   <div className="row ">
+        {!issuedCertificates && <h4 className="col-12 col-md-9 col-lg-9 col-xl-9">Requested Certificates</h4>}
+        {issuedCertificates && <h4 className="col-12 col-md-9 col-lg-9 col-xl-9">Issued Certificates</h4>}
 
         {issuedCertificates && (
-          <button class="btn btn-primary" onClick={handleRequestedCertificates}>
+          <button className="btn btn-primary col-12 col-md-2 col-lg-2 col-xl-2 " onClick={handleRequestedCertificates}>
             Requested Certificates
           </button>
         )}
         {!issuedCertificates && (
-          <button class="btn btn-primary" onClick={handleIssuedCertificates}>
+          <button className="btn btn-primary col-12 col-md-2 col-lg-2 col-xl-2 " onClick={handleIssuedCertificates}>
             Issued Certificates
           </button>
         )}
       </div>
 
-      <div className="row mb-3  ">
+      <div className="row pb-3  ">
         <div className="col-12 col-md-8 col-lg-8 col-xl-8">
           <input
             type="text"
@@ -254,13 +255,13 @@ const Requestedcertificates = () => {
           />
           <hr className="w-75" />
         </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
+        <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3">
           <h6>
             {" "}
             {recordCount}/{initialDataCount}
           </h6>
         </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-3">
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-2">
           <select onChange={handlerecorddata}>
             <option value="10">10</option>
             <option value="25">25</option>
@@ -270,36 +271,37 @@ const Requestedcertificates = () => {
         </div>
 
         <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
-          <Button
+          {/* <Button
             id="demo-positioned-button"
             aria-controls={open ? "demo-positioned-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-          >
+          
+            
+          > */}
             <button
-              className="btn btn-primary mr-20 ms-2 mb-2"
-              style={{ textTransform: "capitalize" }}
+              className="btn btn-primary mr-20 ms-2 mb-2 mt-1"
+              onClick={handleClick}
+              style={{ textTransform: "capitalize"}}
             >
               Filter
             </button>
-          </Button>
+        
 
           <Menu
-            className="mt-5"
-            id="demo-positioned-menu"
-            aria-labelledby="demo-positioned-button"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+          style={{
+            width: "",
+            borderRadius: "25px",
+            marginTop: "20px",
+            cursor: "pointer",
+          }}
           >
             <div className="d-flex justify-content-between m-2">
               <div> Filter</div>
@@ -756,7 +758,7 @@ const Requestedcertificates = () => {
       </Paper>
       <div
         style={{ display: "flex", justifyContent: "center" }}
-        className="mt-3"
+        className="mt-3 mb-3"
       >
         {filteredData && (
           <Stack spacing={2}>
@@ -768,6 +770,7 @@ const Requestedcertificates = () => {
           </Stack>
         )}
       </div>
+   </div>
     </div>
   );
 };
