@@ -1,60 +1,57 @@
-.main-certificate{ 
+.main-certificate {
   width: 99%;
   border: 2px solid #f5f5f5;
   border-radius: 20px;
   margin: auto;
   overflow: hidden;
 }
-.certificate{ 
-    width: 100%;
-
+.certificate {
+  width: 100%;
   border-radius: 20px;
   margin: auto;
 }
 
-.certificate-table{ 
+.certificate-table {
   width: 100%;
 }
-.startdate , .enddate{ 
+.startdate,
+.enddate {
   border: none;
   outline: none;
- 
 }
-.startdate:focus{ 
+.startdate:focus {
   border: none;
 }
-.enddate:focus{ 
+.enddate:focus {
   border: none;
 }
-@media (max-width:650px) {
-  table{ 
+@media (max-width: 650px) {
+  table {
     overflow: hidden;
     width: 100%;
   }
-  th{ 
+  th {
     display: none;
   }
-td{ 
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 15ch auto;
-  padding: 0.5rem 1rem ;
-}  
-td:first-child{ 
-  padding-top: 2rem;
-}
-td:last-child{ 
-  padding-bottom: 2rem;
-}
-td::before{ 
- 
-  font-weight: 700;
-  text-transform: capitalize;
-}
+  td {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 15ch auto;
+    padding: 0.5rem 1rem;
+  }
+  td:first-child {
+    padding-top: 2rem;
+  }
+  td:last-child {
+    padding-bottom: 2rem;
+  }
+  td::before {
+    font-weight: 700;
+    text-transform: capitalize;
+  }
 }
 input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button{ 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
