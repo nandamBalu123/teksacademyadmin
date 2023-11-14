@@ -5,7 +5,10 @@ import "./Addtofee.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+
 const Addtofee = () => {
+  const { students, dispatch } = useStudentsContext();
   const navigator = useNavigate();
   const [dueamount, setdueamount] = useState();
   const [initialpayment, setinitialpayment] = useState([
@@ -32,21 +35,34 @@ const Addtofee = () => {
       },
     ]);
   }, [totalinstallment]);
+  // useEffect(() => {
+  //   // Make a GET request to your backend API endpoint
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
+  //     .then((response) => {
+  //       // Handle the successful response here
+  //       setstudentdata(response.data[0]); // Update the data state with the fetched data
+  //       console.log("studentdata", response.data);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the request
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
-      .then((response) => {
-        // Handle the successful response here
-        setstudentdata(response.data[0]); // Update the data state with the fetched data
-        console.log("studentdata", response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
+    if (students && id) {
+      const filteredResults = students.filter((item) => {
+        const singlestudentCondition = id ? item.id === parseInt(id) : true;
+
+        return singlestudentCondition;
       });
-  }, []);
-  console.log("studentdata", studentdata);
+      if (filteredResults) {
+        console.log("filteredResults[0]", filteredResults[0]);
+      }
+      setstudentdata(filteredResults[0]);
+    }
+  }, [students, id, dispatch]);
 
   const [selectedOption, setSelectedOption] = useState("option1");
   useEffect(() => {
@@ -83,6 +99,15 @@ const Addtofee = () => {
       installments,
       totalpaidamount,
     };
+    const updateContext = {
+      dueamount,
+      initialpayment,
+      totalinstallments,
+      addfee,
+      installments,
+      totalpaidamount,
+      id: studentdata.id,
+    };
     console.log("installments", installments);
     console.log("updatedData", updatedData);
     axios
@@ -91,7 +116,10 @@ const Addtofee = () => {
       .then((res) => {
         if (res.data.updated) {
           alert("Fee Added");
-
+          dispatch({
+            type: "UPDATE_ADDTOFEE",
+            payload: updateContext,
+          });
           navigator(`/feeview/${id}`);
         } else {
           alert("Try Again");
@@ -205,7 +233,12 @@ const Addtofee = () => {
               <label> Total Amount</label>
             </div>
             <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
-              <input type="number" name="dueamount" value={dueamount} required />
+              <input
+                type="number"
+                name="dueamount"
+                value={dueamount}
+                required
+              />
               <label> Due Amount</label>
             </div>
             {/* <div className="col-12 col-md-3 col-lg-3 col-xl-3 inputgroup"> 

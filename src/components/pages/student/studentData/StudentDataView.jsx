@@ -12,25 +12,40 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import profilePic from "../../../../images/img4-11.png";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 const StudentDataView = () => {
   const { id } = useParams();
   console.log("id", id);
+  const { students, dispatch } = useStudentsContext();
   const [studentdata, setstudentdata] = useState("");
 
+  // useEffect(() => {
+  //   // Make a GET request to your backend API endpoint
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
+  //     .then((response) => {
+  //       // Handle the successful response here
+  //       setstudentdata(response.data[0]); // Update the data state with the fetched data
+  //       console.log("studentdata", response.data);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the request
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
-      .then((response) => {
-        // Handle the successful response here
-        setstudentdata(response.data[0]); // Update the data state with the fetched data
-        console.log("studentdata", response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
+    if (students && id) {
+      const filteredResults = students.filter((item) => {
+        const singlestudentCondition = id ? item.id === parseInt(id) : true;
+
+        return singlestudentCondition;
       });
-  }, []);
+      if (filteredResults) {
+        console.log("filteredResults[0]", filteredResults[0]);
+      }
+      setstudentdata(filteredResults[0]);
+    }
+  }, [students, id, dispatch]);
   return (
     <>
       <h2 className="text-center"> Student Details From</h2>
@@ -142,7 +157,7 @@ const StudentDataView = () => {
             </TableHead>
             <TableBody>
               {studentdata.feedetails &&
-                JSON.parse(studentdata.feedetails).map((item, index) => (
+                studentdata.feedetails.map((item, index) => (
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     key={index}
