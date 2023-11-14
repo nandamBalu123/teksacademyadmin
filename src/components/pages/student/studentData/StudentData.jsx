@@ -392,82 +392,83 @@ const StudentData = () => {
             />
             <hr />
           </div>
-          <div className="col-12 col-md-4 col-lg-4 col-xl-4"> 
-          
-          <div className="d-flex justify-content-around">
-        <p className="pt-3">   {recordCount}/{initialDataCount}   </p>  
-        <p> <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-           
-            >
-             <button    className="btn btn-primary  "
-              style={{ textTransform: "capitalize" }}> 
+          <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+            <div className="d-flex justify-content-around">
+              <p className="pt-3">
+                {" "}
+                {recordCount}/{initialDataCount}{" "}
+              </p>
+              <p>
+                {" "}
+                <Button
+                  id="demo-positioned-button"
+                  aria-controls={open ? "demo-positioned-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <button
+                    className="btn btn-primary  "
+                    style={{ textTransform: "capitalize" }}
+                  >
                     Filter
-             </button>
-                
-            
-            </Button>
+                  </button>
+                </Button>
+                <Menu
+                  id="demo-positioned-menu"
+                  aria-labelledby="demo-positioned-button"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                >
+                  <div className="d-flex justify-content-between m-2">
+                    <div> Filter</div>
 
-            <Menu
-              
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <div className="d-flex justify-content-between m-2">
-                <div> Filter</div>
+                    <div>
+                      {" "}
+                      <CloseIcon onClick={handleClose} />{" "}
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row m-2">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <TextField
+                        label=" From:"
+                        type="date"
+                        variant="standard"
+                        className="  w-100"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        name="fromdate"
+                        value={filterCriteria.fromdate}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                      <TextField
+                        label=" To:"
+                        type="date"
+                        variant="standard"
+                        className="w-100"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        name="todate"
+                        value={filterCriteria.todate}
+                        onChange={handleInputChange}
+                      />
+                    </div>
 
-                <div>
-                  {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
-                </div>
-              </div>
-              <hr />
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <TextField
-                    label=" From:"
-                    type="date"
-                    variant="standard"
-                    className="  w-100"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                  <TextField
-                    label=" To:"
-                    type="date"
-                    variant="standard"
-                    className="w-100"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
-                  />
-                </div>
-
-                {/* <div>
+                    {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -484,46 +485,49 @@ const StudentData = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-              </div>
+                  </div>
 
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Branch</InputLabel>
-                    <Select
-                      name="branch"
-                      value={filterCriteria.branch}
-                      onChange={handleInputChange}
-                    >
-                      <MenuItem value="select"> ---select---</MenuItem>
-                      {branches &&
-                        branches.map((branch, index) => (
-                          <MenuItem key={branch.id} value={branch.branch_name}>
-                            {branch.branch_name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Lead Source</InputLabel>
-                    <Select
-                      name="leadsource"
-                      value={filterCriteria.leadsource}
-                      onChange={handleInputChange}
-                    >
-                      {leadsources &&
-                        leadsources.map((item, index) => (
-                          <MenuItem key={item.id} value={item.leadsource}>
-                            {item.leadsource}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
+                  <div className="row m-2">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <FormControl variant="standard" className="w-100">
+                        <InputLabel>Branch</InputLabel>
+                        <Select
+                          name="branch"
+                          value={filterCriteria.branch}
+                          onChange={handleInputChange}
+                        >
+                          <MenuItem value="select"> ---select---</MenuItem>
+                          {branches &&
+                            branches.map((branch, index) => (
+                              <MenuItem
+                                key={branch.id}
+                                value={branch.branch_name}
+                              >
+                                {branch.branch_name}
+                              </MenuItem>
+                            ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <FormControl variant="standard" className="w-100">
+                        <InputLabel>Lead Source</InputLabel>
+                        <Select
+                          name="leadsource"
+                          value={filterCriteria.leadsource}
+                          onChange={handleInputChange}
+                        >
+                          {leadsources &&
+                            leadsources.map((item, index) => (
+                              <MenuItem key={item.id} value={item.leadsource}>
+                                {item.leadsource}
+                              </MenuItem>
+                            ))}
+                        </Select>
+                      </FormControl>
+                    </div>
 
-                {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                    {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <MenuItem>
                   <select
                     id=""
@@ -549,7 +553,7 @@ const StudentData = () => {
                   </select>
                 </MenuItem> 
                  </div> */}
-                {/*              
+                    {/*              
               <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
               <MenuItem>
                   <select
@@ -577,44 +581,44 @@ const StudentData = () => {
                   </select>
                 </MenuItem>
               </div> */}
-              </div>
+                  </div>
 
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Mode of Traning</InputLabel>
-                    <Select
-                      name="modeoftraining"
-                      value={filterCriteria.modeoftraining}
-                      onChange={handleInputChange}
-                    >
-                      <MenuItem value="online"> Online</MenuItem>
-                      <MenuItem value="offline"> Offline</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
+                  <div className="row m-2">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <FormControl variant="standard" className="w-100">
+                        <InputLabel>Mode of Traning</InputLabel>
+                        <Select
+                          name="modeoftraining"
+                          value={filterCriteria.modeoftraining}
+                          onChange={handleInputChange}
+                        >
+                          <MenuItem value="online"> Online</MenuItem>
+                          <MenuItem value="offline"> Offline</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
 
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Counsellors</InputLabel>
-                    <Select
-                      name="enquirytakenby"
-                      value={filterCriteria.enquirytakenby}
-                      onChange={handleInputChange}
-                    >
-                      {filteredcounsellor &&
-                        filteredcounsellor.map((user, index) => (
-                          <MenuItem value={user.fullname}>
-                            {" "}
-                            {user.fullname}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <FormControl variant="standard" className="w-100">
+                        <InputLabel>Counsellors</InputLabel>
+                        <Select
+                          name="enquirytakenby"
+                          value={filterCriteria.enquirytakenby}
+                          onChange={handleInputChange}
+                        >
+                          {filteredcounsellor &&
+                            filteredcounsellor.map((user, index) => (
+                              <MenuItem value={user.fullname}>
+                                {" "}
+                                {user.fullname}
+                              </MenuItem>
+                            ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
 
-              {/*             
+                  {/*             
               <div className="d-flex w-100 mt-3 mb-2">
                 <MenuItem>
                   <select
@@ -661,37 +665,33 @@ const StudentData = () => {
                   </select>
                 </MenuItem>{" "}
               </div> */}
-              <div className="text-end me-2 mt-4">
-                <button className="clear" onClick={filterreset}>
-                  {" "}
-                  Clear
-                </button>
-              </div>
-            </Menu></p>
-            <p> 
-            <select onChange={handlerecorddata} className="mt-2">
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="75">75</option>
-            </select>
-            </p>
-            <p> 
-            <CSVLink
-              data={filteredData}
-              filename={"studentsdata.csv"}
-              target="_blank"
-            >
-              <DownloadIcon className="text-dark mt-2"></DownloadIcon>
-            </CSVLink>
-         
-            </p>
-       
-</div>
-           </div>
-
-         
-         
+                  <div className="text-end me-2 mt-4">
+                    <button className="clear" onClick={filterreset}>
+                      {" "}
+                      Clear
+                    </button>
+                  </div>
+                </Menu>
+              </p>
+              <p>
+                <select onChange={handlerecorddata} className="mt-2">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="75">75</option>
+                </select>
+              </p>
+              <p>
+                <CSVLink
+                  data={filteredData}
+                  filename={"studentsdata.csv"}
+                  target="_blank"
+                >
+                  <DownloadIcon className="text-dark mt-2"></DownloadIcon>
+                </CSVLink>
+              </p>
+            </div>
+          </div>
         </div>
         {/*
         <table className="table table-striped">
@@ -779,34 +779,43 @@ const StudentData = () => {
               </TableHead>
               <TableBody>
                 {Array.isArray(records) && records.length > 0 ? (
-                  records.map((item, index) => (
-                    // <li key={item.id}>{item.name}</li>
+                  records.map((item, index) => {
+                    let date = new Date(item.admissiondate );
+                    const day = date.getUTCDate();
+                    const monthIndex = date.getUTCMonth();
+                    const year = date.getUTCFullYear();
 
-                    <TableRow key={item.id}>
-                      <TableCell className=" border border 2 text-center p-0 m-0">
-                        {index + 1}
-                      </TableCell>
-                      {/*
-                  <StyledTableCell className=" border border 2 text-center">
-                    {item.profilepic}
-                  </StyledTableCell> */}
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
 
-                      <TableCell className=" border border 1 text-center p-0 m-0">
-                        <span
-                          title={item.name}
-                          style={{
-                            width: "250px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            paddingLeft: "10px",
-                            textOverflow: "ellipsis",
-                            fontSize: "15px",
-                            display: "block",
-                          }}
-                        >
-                          {item.name}
+                    // Formatting the date
+                    date = `${day < 10 ? "0" : ""}${day}-${
+                      monthAbbreviations[monthIndex]
+                    }-${year}`;
+
+                    // Updating the state with the formatted date
+
+                    return (
+                      <TableRow key={item.id}>
+                        <TableCell className=" border border 2 text-center p-0 m-0">
+                          {index + 1}
+                        </TableCell>
+
+                        <TableCell className=" border border 1 text-center p-0 m-0">
                           <span
-                            title={item.registrationnumber}
+                            title={item.name}
                             style={{
                               width: "250px",
                               whiteSpace: "nowrap",
@@ -817,179 +826,190 @@ const StudentData = () => {
                               display: "block",
                             }}
                           >
-                            {" "}
-                            {item.registrationnumber}
+                            {item.name}
+                            <span
+                              title={item.registrationnumber}
+                              style={{
+                                width: "250px",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                paddingLeft: "10px",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {" "}
+                              {item.registrationnumber}
+                            </span>
                           </span>
-                        </span>
-                      </TableCell>
+                        </TableCell>
 
-                      <TableCell
-                        align="left"
-                        className=" border border 1 text-center p-0 m-0"
-                      >
-                        <span
-                          title={item.branch}
-                          style={{
-                            width: "100px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            fontSize: "15px",
-                            display: "block",
-                          }}
+                        <TableCell
+                          align="left"
+                          className=" border border 1 text-center p-0 m-0"
                         >
-                          {item.branch}
-                          <br />
                           <span
-                            title={item.courses}
+                            title={item.branch}
                             style={{
                               width: "100px",
                               whiteSpace: "nowrap",
                               overflow: "hidden",
-
                               textOverflow: "ellipsis",
                               fontSize: "15px",
                               display: "block",
                             }}
                           >
-                            {" "}
-                            {item.courses}
+                            {item.branch}
+                            <br />
+                            <span
+                              title={item.courses}
+                              style={{
+                                width: "100px",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {" "}
+                              {item.courses}
+                            </span>
                           </span>
-                        </span>
-                      </TableCell>
+                        </TableCell>
 
-                      <TableCell className=" border border 1 text-center p-0 m-0">
-                        <span
-                          style={{
-                            width: "100px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            paddingLeft: "10px",
-                            textOverflow: "ellipsis",
-                            fontSize: "15px",
-                            display: "block",
-                          }}
-                        >
-                          {item.enquirytakenby}
-                          <br />
+                        <TableCell className=" border border 1 text-center p-0 m-0">
+                          <span
+                            style={{
+                              width: "100px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              paddingLeft: "10px",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display: "block",
+                            }}
+                          >
+                            {item.enquirytakenby}
+                            <br />
 
-                          {item.leadsource}
-                        </span>
-                      </TableCell>
+                            {item.leadsource}
+                          </span>
+                        </TableCell>
 
-                      <TableCell className=" border border 1 text-center p-0 m-0 ">
-                        <span
-                          style={{
-                            width: "150px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            fontSize: "15px",
-                            display: "block",
-                          }}
-                        >
-                          {item.mobilenumber}
-                          <br />
-                          {item.email}
-                        </span>
-                      </TableCell>
+                        <TableCell className=" border border 1 text-center p-0 m-0 ">
+                          <span
+                            style={{
+                              width: "150px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display: "block",
+                            }}
+                          >
+                            {item.mobilenumber}
+                            <br />
+                            {item.email}
+                          </span>
+                        </TableCell>
 
-                      <TableCell className=" border border 1 text-center p-0 m-0">
-                        <span
-                          style={{
-                            width: "150px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            fontSize: "15px",
-                            display: "block",
-                          }}
-                        >
-                          {item.admissiondate
-                            ? item.admissiondate.substring(0, 10)
-                            : "No Date"}{" "}
-                          <br />
-                          {item.modeoftraining}
-                        </span>
-                      </TableCell>
+                        <TableCell className=" border border 1 text-center p-0 m-0">
+                          <span
+                            style={{
+                              width: "150px",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display: "block",
+                            }}
+                          >
+                            {date ? date : "No Date"} <br />
+                            {item.modeoftraining}
+                          </span>
+                        </TableCell>
 
-                      <TableCell className=" text-center d-flex py-4 ">
-                        <Link
-                          to={`/studentdataview/${item.id}`}
-                          style={{ width: "40px" }}
-                        >
-                          <VisibilityIcon className="iconn" />
-                        </Link>
-
-                        <Link
-                          to={`/editstudent/${item.id}`}
-                          style={{ width: "40px" }}
-                        >
-                          <EditIcon className="iconn" />
-                        </Link>
-                        {item.addfee == 1 && (
+                        <TableCell className=" text-center d-flex py-4 ">
                           <Link
-                            to={`/feeview/${item.id}`}
+                            to={`/studentdataview/${item.id}`}
                             style={{ width: "40px" }}
                           >
-                            <CurrencyRupeeIcon className="iconn" />
+                            <VisibilityIcon className="iconn" />
                           </Link>
-                        )}
-                        {item.addfee == 0 && (
+
                           <Link
-                            to={`/addtofee/${item.id}`}
+                            to={`/editstudent/${item.id}`}
                             style={{ width: "40px" }}
                           >
-                            <AddIcon className="iconn" />
+                            <EditIcon className="iconn" />
                           </Link>
-                        )}
+                          {item.addfee == 1 && (
+                            <Link
+                              to={`/feeview/${item.id}`}
+                              style={{ width: "40px" }}
+                            >
+                              <CurrencyRupeeIcon className="iconn" />
+                            </Link>
+                          )}
+                          {item.addfee == 0 && (
+                            <Link
+                              to={`/addtofee/${item.id}`}
+                              style={{ width: "40px" }}
+                            >
+                              <AddIcon className="iconn" />
+                            </Link>
+                          )}
 
-                        <Link
-                          to={`/studentApplicationprint/${item.id}`}
-                          style={{ width: "40px" }}
-                        >
-                          <PrintIcon className="iconn" />
-                        </Link>
+                          <Link
+                            to={`/studentApplicationprint/${item.id}`}
+                            style={{ width: "40px" }}
+                          >
+                            <PrintIcon className="iconn" />
+                          </Link>
 
-                        <div className="form-check form-switch">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            role="switch"
-                            id="flexSwitchCheckChecked"
-                            checked={isChecked}
-                            onChange={handleClickOpen}
-                          />
-                        </div>
+                          <div className="form-check form-switch">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              role="switch"
+                              id="flexSwitchCheckChecked"
+                              checked={isChecked}
+                              onChange={handleClickOpen}
+                            />
+                          </div>
 
-                        <Dialog open={opening} onClose={handleClosed}>
-                          <DialogContent>
-                            <DialogContentText>
-                              <label> Enter Remarks :</label>
-                            </DialogContentText>
-                            <DialogContentText>
-                              <textarea
-                                rows="4"
-                                cols="50"
-                                name="comment"
-                                form="usrform"
-                              ></textarea>
-                            </DialogContentText>
-                          </DialogContent>
-                          <DialogActions>
-                            <Button onClick={handleClosed}>Cancel</Button>
-                            {!isChecked && (
-                              <Button onClick={handleok}>Activate</Button>
-                            )}
+                          <Dialog open={opening} onClose={handleClosed}>
+                            <DialogContent>
+                              <DialogContentText>
+                                <label> Enter Remarks :</label>
+                              </DialogContentText>
+                              <DialogContentText>
+                                <textarea
+                                  rows="4"
+                                  cols="50"
+                                  name="comment"
+                                  form="usrform"
+                                ></textarea>
+                              </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                              <Button onClick={handleClosed}>Cancel</Button>
+                              {!isChecked && (
+                                <Button onClick={handleok}>Activate</Button>
+                              )}
 
-                            {isChecked && (
-                              <Button onClick={handleok}>InActivate</Button>
-                            )}
-                          </DialogActions>
-                        </Dialog>
-                      </TableCell>
-                    </TableRow>
-                  ))
+                              {isChecked && (
+                                <Button onClick={handleok}>InActivate</Button>
+                              )}
+                            </DialogActions>
+                          </Dialog>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
                 ) : (
                   <TableRow>
                     <TableCell colSpan={3}>No data available</TableCell>

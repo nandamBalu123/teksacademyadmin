@@ -21,6 +21,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import { Link } from "react-router-dom";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+import useFormattedDate from "../../../../hooks/useFormattedDate";
 
 const FeeView = () => {
   const { students, dispatch } = useStudentsContext();
@@ -35,7 +36,7 @@ const FeeView = () => {
   const [extraDiscount, setExtraDiscount] = useState();
   const [text, setText] = useState("");
   const [Discountremarkshistory, setDiscount_remarks_history] = useState("");
-
+  let DateOfJoining = useFormattedDate(studentdata.admissiondate);
   // const [totoalleft, settotalleft] = useState();
 
   let totalleft;
@@ -447,7 +448,7 @@ const FeeView = () => {
                   </TableCell>
                   <TableCell className="border border 1">
                     <span
-                      title={studentdata.admissiondate}
+                      title={DateOfJoining}
                       style={{
                         width: "4.5rem",
                         whiteSpace: "nowrap",
@@ -457,7 +458,7 @@ const FeeView = () => {
                         display: "block",
                       }}
                     >
-                      {studentdata.admissiondate}
+                      {DateOfJoining}
                     </span>
                   </TableCell>
                   <TableCell className="border border 1">
@@ -581,24 +582,50 @@ const FeeView = () => {
               </TableRow>
             </TableHead>
             {studentdata.initialpayment &&
-              studentdata.initialpayment.map((item, index) => (
-                <TableBody>
-                  <TableRow
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell className="border border 1 text-center">
-                      {item.initialamount}
-                    </TableCell>
-                    <TableCell className="border border 1 text-center">
-                      {item.paiddate}
-                    </TableCell>
-                    <TableCell className="border border 1 text-center">
-                      {item.modeofpayment}
-                    </TableCell>
-                    <TableCell className="border border 1 text-center">
-                      {item.transactionID}
-                    </TableCell>
-                    {/* <TableCell className="border border 1 text-center">
+              studentdata.initialpayment.map((item, index) => {
+                let paidDate = new Date(item.paiddate);
+                const day = paidDate.getUTCDate();
+                const monthIndex = paidDate.getUTCMonth();
+                const year = paidDate.getUTCFullYear();
+
+                const monthAbbreviations = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+
+                // Formatting the date
+                paidDate = `${day < 10 ? "0" : ""}${day}-${
+                  monthAbbreviations[monthIndex]
+                }-${year}`;
+
+                return (
+                  <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell className="border border 1 text-center">
+                        {item.initialamount}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {paidDate}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {item.modeofpayment}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {item.transactionID}
+                      </TableCell>
+                      {/* <TableCell className="border border 1 text-center">
                       <Link
                         to={`/invoice/${id}/${index}/Admission Fee/admininvoice`}
                         style={{ width: "40px" }}
@@ -606,17 +633,18 @@ const FeeView = () => {
                         <CreditScoreIcon className="iconn" />
                       </Link>
                     </TableCell> */}
-                    <TableCell className="border border 1 text-center">
-                      <Link
-                        to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
-                        style={{ width: "40px" }}
-                      >
-                        <CreditScoreIcon className="iconn" />
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              ))}
+                      <TableCell className="border border 1 text-center">
+                        <Link
+                          to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
+                          style={{ width: "40px" }}
+                        >
+                          <CreditScoreIcon className="iconn" />
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                );
+              })}
           </Table>
         </TableContainer>
         <div className="row">
@@ -708,6 +736,37 @@ const FeeView = () => {
             </TableHead>
             {readinstallments &&
               readinstallments.map((item, index) => {
+                let paidDate = new Date(item.paiddate);
+                const day = paidDate.getUTCDate();
+                const monthIndex = paidDate.getUTCMonth();
+                const year = paidDate.getUTCFullYear();
+                let dueDate = new Date(item.duedate);
+                const dueday = dueDate.getUTCDate();
+                const duemonthIndex = dueDate.getUTCMonth();
+                const dueyear = dueDate.getUTCFullYear();
+                const monthAbbreviations = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+
+                // Formatting the date
+                paidDate = `${day < 10 ? "0" : ""}${day}-${
+                  monthAbbreviations[monthIndex]
+                }-${year}`;
+                dueDate = `${dueday < 10 ? "0" : ""}${dueday}-${
+                  monthAbbreviations[duemonthIndex]
+                }-${dueyear}`;
+
                 if (item.paidamount < 1) {
                   return null; // Do not render anything
                 }
@@ -718,13 +777,13 @@ const FeeView = () => {
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell className="border border 1 text-center">
-                        {item.duedate}
+                        {dueDate}
                       </TableCell>
                       <TableCell className="border border 1 text-center  ">
                         {item.paidamount}
                       </TableCell>
                       <TableCell className="border border 1 text-center">
-                        {item.paiddate}
+                        {paidDate}
                       </TableCell>
                       <TableCell className="border border 1 text-center">
                         {item.modeofpayment}

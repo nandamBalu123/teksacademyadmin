@@ -17,7 +17,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-
+import './Requestedcertificates.css';
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
@@ -214,24 +214,25 @@ const Requestedcertificates = () => {
     });
   };
   return (
-    <div className="container req-certificate my-3">
-      <div className="d-flex justify-content-between">
-        {!issuedCertificates && <h4>Requested Certificates</h4>}
-        {issuedCertificates && <h4>Issued Certificates</h4>}
+    <div className="container req-main-certificate mt-3">
+   <div className="req-certificate mt-2"> 
+   <div className="row ">
+        {!issuedCertificates && <h4 className="col-12 col-md-9 col-lg-9 col-xl-9">Requested Certificates</h4>}
+        {issuedCertificates && <h4 className="col-12 col-md-9 col-lg-9 col-xl-9">Issued Certificates</h4>}
 
         {issuedCertificates && (
-          <button class="btn btn-primary" onClick={handleRequestedCertificates}>
+          <button className="btn btn-primary col-12 col-md-2 col-lg-2 col-xl-2 " onClick={handleRequestedCertificates}>
             Requested Certificates
           </button>
         )}
         {!issuedCertificates && (
-          <button class="btn btn-primary" onClick={handleIssuedCertificates}>
+          <button className="btn btn-primary col-12 col-md-2 col-lg-2 col-xl-2 " onClick={handleIssuedCertificates}>
             Issued Certificates
           </button>
         )}
       </div>
 
-      <div className="row mb-3  ">
+      <div className="row pb-3  ">
         <div className="col-12 col-md-8 col-lg-8 col-xl-8">
           <input
             type="text"
@@ -254,13 +255,13 @@ const Requestedcertificates = () => {
           />
           <hr className="w-75" />
         </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
+        <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3">
           <h6>
             {" "}
             {recordCount}/{initialDataCount}
           </h6>
         </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-3">
+        <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-2">
           <select onChange={handlerecorddata}>
             <option value="10">10</option>
             <option value="25">25</option>
@@ -270,37 +271,37 @@ const Requestedcertificates = () => {
         </div>
 
         <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
-          <Button
+          {/* <Button
             id="demo-positioned-button"
             aria-controls={open ? "demo-positioned-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
+          
             
-          >
+          > */}
             <button
-              className="btn btn-primary mr-20 ms-2 mb-2"
+              className="btn btn-primary mr-20 ms-2 mb-2 mt-1"
+              onClick={handleClick}
               style={{ textTransform: "capitalize"}}
             >
               Filter
             </button>
-          </Button>
+        
 
           <Menu
-            className="mt-5"
-            id="demo-positioned-menu"
-            aria-labelledby="demo-positioned-button"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+          style={{
+            width: "",
+            borderRadius: "25px",
+            marginTop: "20px",
+            cursor: "pointer",
+          }}
           >
             <div className="d-flex justify-content-between m-2">
               <div> Filter</div>
@@ -311,39 +312,36 @@ const Requestedcertificates = () => {
             </div>
             <hr />
             <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                 <TextField
-              
-                      label=" From:"
-                      type="date"
-                      variant="standard"
-                      className="  w-100"
-                       InputLabelProps={{
-                        shrink: true,
-                        
-                      }}
-                      name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                    />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
+                  label=" From:"
+                  type="date"
+                  variant="standard"
+                  className="  w-100"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="fromdate"
+                  value={filterCriteria.fromdate}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                 <TextField
-                      label=" To:"
-                      type="date"
-                      variant="standard"
-                      className="w-100"
-                    
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
-                    />
-                </div>
-             
-                {/* <div>
+                  label=" To:"
+                  type="date"
+                  variant="standard"
+                  className="w-100"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="todate"
+                  value={filterCriteria.todate}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -360,7 +358,7 @@ const Requestedcertificates = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-              </div>
+            </div>
             {/* <div className="row m-2 ">
               <div>
                 <label> From: </label>
@@ -398,68 +396,65 @@ const Requestedcertificates = () => {
                 />
               </div>
             </MenuItem> */}
-           <div className="row m-2">  
-           <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
+            <div className="row m-2">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                 <FormControl variant="standard" className="w-100">
-                      <InputLabel>Course</InputLabel>
-                      <Select
-                      
-                       name="course"
-                        value={filterCriteria.course}
-                        onChange={handleInputChange}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        {getcourses &&
-                    getcourses.map((item, index) => (
-                      <MenuItem key={item.id} value={item.course_name}>
-                        {item.course_name}
-                      </MenuItem>
-                    ))}
-                      </Select>
-                    </FormControl>
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                  <InputLabel>Course</InputLabel>
+                  <Select
+                    name="course"
+                    value={filterCriteria.course}
+                    onChange={handleInputChange}
+                  >
+                    <MenuItem value="select"> ---select---</MenuItem>
+                    {getcourses &&
+                      getcourses.map((item, index) => (
+                        <MenuItem key={item.id} value={item.course_name}>
+                          {item.course_name}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              </div>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <FormControl variant="standard" className="w-100">
-                      <InputLabel>Branch</InputLabel>
-                      <Select
-                      
-                      name="branch"
-                      value={filterCriteria.branch}
-                      onChange={handleInputChange}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        {branches &&
-                    branches.map((branch, index) => (
-                      <MenuItem key={branch.id} value={branch.branch_name}>
-                        {branch.branch_name}
-                      </MenuItem>
-                    ))}
-                   
-                      </Select>
-                    </FormControl>
-                </div>
-           </div>
-           <div className="row m-2">  
-           <div className="col-12 col-md-6 col-lg-6 col-xl-6">  
-           <FormControl variant="standard" className="w-100">
-                      <InputLabel>Counsellor</InputLabel>
-                      <Select
-                      
-                      name="enquirytakenby"
-                      value={filterCriteria.enquirytakenby}
-                      onChange={handleInputChange}
-                      >
-                        
-                        {filteredcounsellor &&
-                    filteredcounsellor.map((user, index) => (
-                      <MenuItem value={user.fullname}> {user.fullname}</MenuItem>
-                    ))}
-                   
-                      </Select>
-                    </FormControl>
-           </div>
-           </div>
-{/* 
+                  <InputLabel>Branch</InputLabel>
+                  <Select
+                    name="branch"
+                    value={filterCriteria.branch}
+                    onChange={handleInputChange}
+                  >
+                    <MenuItem value="select"> ---select---</MenuItem>
+                    {branches &&
+                      branches.map((branch, index) => (
+                        <MenuItem key={branch.id} value={branch.branch_name}>
+                          {branch.branch_name}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
+            <div className="row m-2">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <FormControl variant="standard" className="w-100">
+                  <InputLabel>Counsellor</InputLabel>
+                  <Select
+                    name="enquirytakenby"
+                    value={filterCriteria.enquirytakenby}
+                    onChange={handleInputChange}
+                  >
+                    {filteredcounsellor &&
+                      filteredcounsellor.map((user, index) => (
+                        <MenuItem value={user.fullname}>
+                          {" "}
+                          {user.fullname}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
+            {/* 
             <MenuItem>
               <select
                 className="mt-3"
@@ -601,117 +596,137 @@ const Requestedcertificates = () => {
             <TableBody>
               {records &&
                 records.map((student, index) => {
-                  const validitystartdate = student.validitystartdate;
-                  const dateTime = new Date(validitystartdate);
-                  const startdate = dateTime.toISOString().slice(0, 10);
-                  const validityenddate = student.validityenddate;
-                  const dateTimee = new Date(validitystartdate);
-                  const enddate = dateTimee.toISOString().slice(0, 10);
                   const certificate_Status = student.certificate_status;
-                  const courseStartDate = certificate_Status
+                  let courseStartDate = certificate_Status
                     .map((item) => item.courseStartDate)
                     .join(", ");
-                  const courseEndDate = certificate_Status
+                  let courseEndDate = certificate_Status
                     .map((item) => item.courseEndDate)
                     .join(", ");
                   const certificateStatus = certificate_Status
                     .map((item) => item.certificateStatus)
                     .join(", ");
+                  courseStartDate = new Date(courseStartDate);
+                  const courseStartDateday = courseStartDate.getUTCDate();
+                  const courseStartDatemonthIndex =
+                    courseStartDate.getUTCMonth();
+                  const courseStartDateyear = courseStartDate.getUTCFullYear();
+                  //courseEndDate
+                  courseEndDate = new Date(courseEndDate);
+                  const courseEndDateday = courseEndDate.getUTCDate();
+                  const courseEndDatemonthIndex = courseEndDate.getUTCMonth();
+                  const courseEndDateyear = courseEndDate.getUTCFullYear();
+                  const monthAbbreviations = [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                  ];
 
+                  // Formatting the date
+                  courseStartDate = `${
+                    courseStartDateday < 10 ? "0" : ""
+                  }${courseStartDateday}-${
+                    monthAbbreviations[courseStartDatemonthIndex]
+                  }-${courseStartDateyear}`;
+
+                  courseEndDate = `${
+                    courseEndDateday < 10 ? "0" : ""
+                  }${courseEndDateday}-${
+                    monthAbbreviations[courseEndDatemonthIndex]
+                  }-${courseEndDateyear}`;
                   return (
                     <TableRow>
                       <TableCell className="border border 1 ">
                         {index + 1}
                       </TableCell>
                       <TableCell className="border border 1 ">
-                      <span
-                                title= {student.name}
-                                style={{
-                                  
-                                  width: "7rem",
-                                  
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                 {student.name}
-                              </span>
-                        
+                        <span
+                          title={student.name}
+                          style={{
+                            width: "7rem",
+
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize: "15px",
+                            display: "block",
+                          }}
+                        >
+                          {student.name}
+                        </span>
                       </TableCell>
                       <TableCell className="border border 1 ">
-                      <span
-                                title= {student.courses}
-                                style={{
-                                  
-                                  width: "7rem",
-                                  
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {student.courses}
-                              </span>
-                       
+                        <span
+                          title={student.courses}
+                          style={{
+                            width: "7rem",
+
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize: "15px",
+                            display: "block",
+                          }}
+                        >
+                          {student.courses}
+                        </span>
                       </TableCell>{" "}
                       <TableCell className="border border 1 ">
-                      <span
-                                title=   {student.registrationnumber}
-                                style={{
-                                  
-                                  width: "7rem",
-                                  
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                   {student.registrationnumber}
-                              </span>
-                     
+                        <span
+                          title={student.registrationnumber}
+                          style={{
+                            width: "7rem",
+
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize: "15px",
+                            display: "block",
+                          }}
+                        >
+                          {student.registrationnumber}
+                        </span>
                       </TableCell>
                       <TableCell className="border border 1 ">
-                      <span
-                                title={courseStartDate}
-                                style={{
-                                  
-                                  width: "7rem",
-                                  
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {courseStartDate}
-                              </span>
-                        
+                        <span
+                          title={courseStartDate}
+                          style={{
+                            width: "7rem",
+
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize: "15px",
+                            display: "block",
+                          }}
+                        >
+                          {courseStartDate}
+                        </span>
                       </TableCell>
                       <TableCell className="border border 1 ">
-                      <span
-                                title= {courseEndDate}
-                                style={{
-                                  
-                                  width: "7rem",
-                                  
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                 {courseEndDate}
-                              </span>
-                       
+                        <span
+                          title={courseEndDate}
+                          style={{
+                            width: "7rem",
+
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize: "15px",
+                            display: "block",
+                          }}
+                        >
+                          {courseEndDate}
+                        </span>
                       </TableCell>{" "}
                       <TableCell className="border border 1  text-center fs-6">
                         {certificateStatus === "request Submitted" && (
@@ -743,7 +758,7 @@ const Requestedcertificates = () => {
       </Paper>
       <div
         style={{ display: "flex", justifyContent: "center" }}
-        className="mt-3"
+        className="mt-3 mb-3"
       >
         {filteredData && (
           <Stack spacing={2}>
@@ -755,6 +770,7 @@ const Requestedcertificates = () => {
           </Stack>
         )}
       </div>
+   </div>
     </div>
   );
 };

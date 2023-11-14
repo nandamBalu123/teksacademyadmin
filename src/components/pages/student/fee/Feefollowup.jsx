@@ -444,7 +444,7 @@ const Feefollowup = () => {
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   {" "}
-                  Due Date
+                  Next Due Date
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                   {" "}
@@ -463,61 +463,87 @@ const Feefollowup = () => {
             </TableHead>
             <TableBody>
               {Array.isArray(records) && records.length > 0 ? (
-                records.map((item, index) => (
-                  <TableRow
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" className="border border 1">
-                      {index + 1}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.name}
-                      <br />
-                      {item.branch}
-                      <br />
-                      {item.enquirytakenby}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.mobilenumber}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.email}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.courses}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.nextduedate}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.dueamount}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      {item.totalinstallments &&
-                        item.totalinstallments.length > 0 &&
-                        item.totalinstallments.map((items, index) => {
-                          if (true) {
-                            return (
-                              <div style={{ display: "flex" }}>
-                                <span style={dynamicStyle}>
-                                  {items.totalinstallmentspaid} /
-                                  {items.totalinstallments}
-                                </span>
-                                <span style={dynamicStyle}>
-                                  <CheckCircleIcon style={IconStyle} />
-                                </span>
-                              </div>
-                            );
-                          }
-                        })}
-                    </TableCell>
-                    <TableCell className="border border 1">
-                      <Link to={`/feeview/${item.id}`}>
-                        <VisibilityIcon />
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                ))
+                records.map((item, index) => {
+                  let NextDueDate = new Date(item.nextduedate);
+                  const day = NextDueDate.getUTCDate();
+                  const monthIndex = NextDueDate.getUTCMonth();
+                  const year = NextDueDate.getUTCFullYear();
+
+                  const monthAbbreviations = [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                  ];
+
+                  // Formatting the date
+                  NextDueDate = `${day < 10 ? "0" : ""}${day}-${
+                    monthAbbreviations[monthIndex]
+                  }-${year}`;
+                  return (
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" className="border border 1">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.name}
+                        <br />
+                        {item.branch}
+                        <br />
+                        {item.enquirytakenby}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.mobilenumber}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.email}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.courses}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {NextDueDate}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.dueamount}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        {item.totalinstallments &&
+                          item.totalinstallments.length > 0 &&
+                          item.totalinstallments.map((items, index) => {
+                            if (true) {
+                              return (
+                                <div style={{ display: "flex" }}>
+                                  <span style={dynamicStyle}>
+                                    {items.totalinstallmentspaid} /
+                                    {items.totalinstallments}
+                                  </span>
+                                  <span style={dynamicStyle}>
+                                    <CheckCircleIcon style={IconStyle} />
+                                  </span>
+                                </div>
+                              );
+                            }
+                          })}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        <Link to={`/feeview/${item.id}`}>
+                          <VisibilityIcon />
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
               ) : (
                 <TableRow>
                   <TableCell colSpan={3}>No data available</TableCell>

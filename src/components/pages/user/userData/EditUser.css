@@ -1,1 +1,18 @@
-
+* {
+    margin: 0;
+    padding: 0;
+  }
+  .main-edituser-container{ 
+    margin-top: 30px;
+    padding-left: 30px;
+    background-color:#fcfcfc;
+    width: 99%;
+    border: 2px solid #f5f5f5;
+    border-radius: 20px;
+    margin: auto;
+  }
+ .sub-edituser-container{ 
+    margin-top: 20px;
+    margin-left: 20px;
+    
+ }
