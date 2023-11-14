@@ -13,12 +13,18 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import profilePic from "../../../../images/img4-11.png";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+import useFormattedDate from "../../../../hooks/useFormattedDate";
 const StudentDataView = () => {
   const { id } = useParams();
   console.log("id", id);
   const { students, dispatch } = useStudentsContext();
   const [studentdata, setstudentdata] = useState("");
 
+  let BirthDate = useFormattedDate(studentdata.birthdate);
+  let EnquiryDate = useFormattedDate(studentdata.enquirydate);
+  let ValidityStart = useFormattedDate(studentdata.validitystartdate);
+  let ValidityEnd = useFormattedDate(studentdata.validityenddate);
+  let AdmissionDate = useFormattedDate(studentdata.admissiondate);
   // useEffect(() => {
   //   // Make a GET request to your backend API endpoint
   //   axios
@@ -84,7 +90,7 @@ const StudentDataView = () => {
           <div className="col-4">
             <h6> Student Details</h6> <hr className="w-50" />
             <p> Parent's Name : {studentdata.parentsname}</p>
-            <p> Birth Date: {studentdata.birthdate}</p>
+            <p> Birth Date: {BirthDate}</p>
             <p> Gender: {studentdata.gender}</p>
             <p> Marital Status: {studentdata.maritalstatus}</p>
             <p> College: {studentdata.college}</p>
@@ -100,7 +106,7 @@ const StudentDataView = () => {
           </div>
           <div className="col-4 text-end">
             <h6> Enquiry Details</h6> <hr className="w-50 end" />
-            <p> Enquiry Date : {studentdata.enquirydate}</p>
+            <p> Enquiry Date : {EnquiryDate}</p>
             <p> Enquiry Taken By: {studentdata.enquirytakenby}</p>
             <p> Course Package: {studentdata.coursepackage}</p>
             <p> Course: {studentdata.courses}</p>
@@ -117,14 +123,13 @@ const StudentDataView = () => {
           <div className="col-4 text-start">
             <p>
               {" "}
-              Validity :{studentdata.validitystartdate} to{" "}
-              {studentdata.validityenddate}
+              Validity :{ValidityStart} to {ValidityEnd}
             </p>
             <p> Registration No: {studentdata.registrationnumber}</p>
           </div>
           <div className="col-4 text-end">
             {" "}
-            <p> Admission Date: {studentdata.admissiondate} </p>
+            <p> Admission Date: {AdmissionDate} </p>
             <p> Admission Status: {studentdata.admissionstatus} </p>
           </div>
         </div>

@@ -13,10 +13,18 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+import useFormattedDate from "../../../../hooks/useFormattedDate";
+
 const PrintableComponent = React.forwardRef((props, ref) => {
   const { id } = useParams();
   const { students, dispatch } = useStudentsContext();
   const [studentdata, setstudentdata] = useState([]);
+  let BirthDate = useFormattedDate(studentdata.birthdate);
+  let EnquiryDate = useFormattedDate(studentdata.enquirydate);
+  let AdmissionDate = useFormattedDate(studentdata.admissiondate);
+  let CourseStartDate = useFormattedDate(studentdata.validitystartdate);
+  let ExpectedEndDate = useFormattedDate(studentdata.validityenddate);
+  let IssueDate = useFormattedDate(studentdata.admissiondate);
 
   // useEffect(() => {
   //   // Make a GET request to your backend API endpoint
@@ -191,9 +199,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                         {" "}
                         <th> Date of Birth</th>{" "}
                         <td colspan="4">
-                          {studentdata.birthdate
-                            ? studentdata.birthdate.substring(0, 10)
-                            : "No Date"}
+                          {BirthDate ? BirthDate.substring(0, 10) : "No Date"}
                         </td>{" "}
                       </tr>
                       <tr>
@@ -378,9 +384,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     <td className="borderright">Enquiry Date</td>{" "}
                     <td className="w-25 borderleft  ">
                       {" "}
-                      {studentdata.enquirydate
-                        ? studentdata.enquirydate.substring(0, 10)
-                        : "No Date"}
+                      {EnquiryDate ? EnquiryDate : "No Date"}
                     </td>{" "}
                     <td className="borderright">Branch</td>{" "}
                     <td className="w-25 borderleft ">{studentdata.branch}</td>{" "}
@@ -420,25 +424,19 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     {" "}
                     <td className="borderright"> Admission Date </td>
                     <td className="w-25 borderleft ">
-                      {studentdata.admissiondate
-                        ? studentdata.admissiondate.substring(0, 10)
-                        : "No Date"}{" "}
+                      {AdmissionDate ? AdmissionDate : "No Date"}{" "}
                     </td>{" "}
                     <td className="borderright"> Course Start Date</td>{" "}
                     <td colspan="1" className="w-25 borderleft">
                       {" "}
-                      {studentdata.validitystartdate
-                        ? studentdata.validitystartdate.substring(0, 10)
-                        : "No Date"}{" "}
+                      {CourseStartDate ? CourseStartDate : "No Date"}{" "}
                     </td>{" "}
                   </tr>
                   <tr>
                     {" "}
                     <td className="borderright"> Expected End Date </td>
                     <td className="w-25 borderleft ">
-                      {studentdata.validityenddate
-                        ? studentdata.validityenddate.substring(0, 10)
-                        : "No Date"}{" "}
+                      {ExpectedEndDate ? ExpectedEndDate : "No Date"}{" "}
                     </td>{" "}
                     <td className="borderright"> Reg Number</td>
                     <td colspan="1" className="w-25 borderleft ">
@@ -519,7 +517,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                         ))}
                     </ul> */}
                     <th> Issue Date </th>
-                    <td className="w-25">{studentdata.admissiondate}</td>{" "}
+                    <td className="w-25">{IssueDate}</td>{" "}
                   </tr>
 
                   <tr>

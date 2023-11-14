@@ -12,6 +12,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import useFormattedDate from "../../../../hooks/useFormattedDate";
+
 const UserView = () => {
   const [singleUser, setUser] = useState("");
 
@@ -81,15 +83,41 @@ const UserView = () => {
               <TableBody>
                 {singleUser.user_remarks_history &&
                   singleUser.user_remarks_history.map((userstatus, index) => {
-                    const originalDate = new Date(userstatus.date);
-                    const day = String(originalDate.getDate()).padStart(2, "0");
-                    const month = String(originalDate.getMonth() + 1).padStart(
-                      2,
-                      "0"
-                    ); // Month is zero-based, so we add 1.
-                    const year = originalDate.getFullYear();
+                    // let date = useFormattedDate(userstatus.date);
+                    // const originalDate = new Date(userstatus.date);
+                    // const day = String(originalDate.getDate()).padStart(2, "0");
+                    // const month = String(originalDate.getMonth() + 1).padStart(
+                    //   2,
+                    //   "0"
+                    // ); // Month is zero-based, so we add 1.
+                    // const year = originalDate.getFullYear();
 
-                    const formattedDate = `${day}-${month}-${year}`;
+                    // const formattedDate = `${day}-${month}-${year}`;
+                    const date = new Date(userstatus.date);
+                    const day = date.getUTCDate();
+                    const monthIndex = date.getUTCMonth();
+                    const year = date.getUTCFullYear();
+
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
+
+                    // Formatting the date
+                    const Formatteddate = `${day < 10 ? "0" : ""}${day}-${
+                      monthAbbreviations[monthIndex]
+                    }-${year}`;
+
                     return (
                       <TableRow
                         sx={{
@@ -99,7 +127,7 @@ const UserView = () => {
                       >
                         <TableCell className="text-center border border-2">
                           {" "}
-                          {formattedDate}
+                          {Formatteddate}
                         </TableCell>
 
                         {userstatus.Activate_remarks && (
