@@ -14,7 +14,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-import { useStudentsContext } from "../../../../hooks/useStudentsContext"
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./FeeDetails.css";
@@ -27,7 +27,7 @@ const FeeDetails = () => {
   const { branches } = useBranchContext();
   const { students, dispatch } = useStudentsContext();
   const navigator = useNavigate();
-  
+
   const [getstudentData, setData] = useState([{ name: "" }]);
   const [studentFeeRecordss, setFeerecords] = useState(getstudentData);
   const [itemsPerPage, setrecordsPerPage] = useState(10);
@@ -56,14 +56,14 @@ const FeeDetails = () => {
   };
   const role = localStorage.getItem("role");
   let userId = localStorage.getItem("id");
-   userId = parseInt(userId)
-   useEffect(()=>{
-    if(students){
+  userId = parseInt(userId);
+  useEffect(() => {
+    if (students) {
       setData(students); // Update the data state with the fetched data
-        setFeerecords(students);
+      setFeerecords(students);
     }
-   },[students])
- 
+  }, [students]);
+
   const [filterCriteria, setFilterCriteria] = useState({
     fromdate: "",
 
@@ -80,7 +80,6 @@ const FeeDetails = () => {
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
 
-  
   useEffect(() => {
     const filteredResults = getstudentData.filter((item) => {
       const searchCondition = filterCriteria.search
@@ -131,8 +130,6 @@ const FeeDetails = () => {
       );
     });
     setFeerecords(filteredResults);
-
-   
   }, [filterCriteria, getstudentData]);
   const filterreset = () => {
     setFilterCriteria({
@@ -263,47 +260,45 @@ const FeeDetails = () => {
                   cursor: "pointer",
                 }}
               >
-               <div className="d-flex justify-content-between m-2">
-               <div > Filter</div>
-               <div >
-                  {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
-                </div></div>
+                <div className="d-flex justify-content-between m-2">
+                  <div> Filter</div>
+                  <div>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </div>
+                </div>
                 <hr />
                 <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
-              
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" From:"
                       type="date"
                       variant="standard"
                       className="  w-100"
-                       InputLabelProps={{
+                      InputLabelProps={{
                         shrink: true,
-                        
                       }}
                       name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
                     />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
                       label=" To:"
                       type="date"
                       variant="standard"
                       className="w-100"
-                    
                       InputLabelProps={{
                         shrink: true,
                       }}
                       name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
                     />
-                </div>
-             
-                {/* <div>
+                  </div>
+
+                  {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -320,7 +315,7 @@ const FeeDetails = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-              </div>
+                </div>
                 {/* <div className="d-flex justify-content-between">
                   <MenuItem>
                     <label> From: </label>
@@ -352,46 +347,41 @@ const FeeDetails = () => {
                   </MenuItem>
                 </div> */}
                 <div className="row m-2">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-                  <FormControl variant="standard" className="w-100">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                    <FormControl variant="standard" className="w-100">
                       <InputLabel>Branch</InputLabel>
                       <Select
-                      
-                      name="branch"
-                      value={filterCriteria.branch}
-                      onChange={handleInputChange}
+                        name="branch"
+                        value={filterCriteria.branch}
+                        onChange={handleInputChange}
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
                         {branches &&
-                    branches.map((branch, index) => (
-                      <MenuItem key={branch.id} value={branch.branch_name}>
-                        {branch.branch_name}
-                      </MenuItem>
-                    ))}
-                   
+                          branches.map((branch, index) => (
+                            <MenuItem
+                              key={branch.id}
+                              value={branch.branch_name}
+                            >
+                              {branch.branch_name}
+                            </MenuItem>
+                          ))}
                       </Select>
                     </FormControl>
-                   </div> 
-                   <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-                  <FormControl variant="standard" className="w-100">
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                    <FormControl variant="standard" className="w-100">
                       <InputLabel>Mode of Traning</InputLabel>
                       <Select
-                      
-                      name="modeoftraining"
-                      value={filterCriteria.modeoftraining}
-                      onChange={handleInputChange}
+                        name="modeoftraining"
+                        value={filterCriteria.modeoftraining}
+                        onChange={handleInputChange}
                       >
                         <MenuItem value="online"> Online</MenuItem>
-                      
-                      <MenuItem value="offline">Offline</MenuItem>
-                 
-                   
+
+                        <MenuItem value="offline">Offline</MenuItem>
                       </Select>
                     </FormControl>
-                   </div> 
-
-
-
+                  </div>
                 </div>
 
                 {/* <div className="d-flex justify-content-between">
@@ -437,12 +427,12 @@ const FeeDetails = () => {
                     </select>
               </MenuItem>
                 </div> */}
-              <div className="text-end me-2 mt-4">
-                <button className="clear" onClick={filterreset}>
-                  {" "}
-                  Clear
-                </button>
-              </div>
+                <div className="text-end me-2 mt-4">
+                  <button className="clear" onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </div>
               </Menu>
             </div>
           </div>
@@ -492,246 +482,263 @@ const FeeDetails = () => {
                 </TableHead>
                 <TableBody>
                   {Array.isArray(records) && records.length > 0 ? (
-                    records.map((item, index) => (
-                      <TableRow
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                        key={item.id}
-                      >
-                        <TableCell className="border border 1">
-                          
-                          {index + 1}
-                        </TableCell>
-                        <TableCell className="border border 1">
-                        <span
-                                title={item.name}
-                                style={{
-                                  
-                                  width: "9rem",
-                                  
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {item.name}
-                              </span>
-                         
-                          
-                         
-                          <span
-                                title={item.branch}
-                                style={{
-                                  
-                                  width: "9rem",
-                                 
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
+                    records.map((item, index) => {
+                      let AdmissionDate = new Date(item.admissiondate);
+                      const day = AdmissionDate.getUTCDate();
+                      const monthIndex = AdmissionDate.getUTCMonth();
+                      const year = AdmissionDate.getUTCFullYear();
+                      const monthAbbreviations = [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec",
+                      ];
+                      let NextDueDate;
+                      if (item.nextduedate) {
+                        NextDueDate = new Date(item.nextduedate);
+                        const NextDueday = NextDueDate.getUTCDate();
+                        const NextDuemonthIndex = NextDueDate.getUTCMonth();
+                        const NextDueyear = NextDueDate.getUTCFullYear();
+                        NextDueDate = `${
+                          NextDueday < 10 ? "0" : ""
+                        }${NextDueday}-${
+                          monthAbbreviations[NextDuemonthIndex]
+                        }-${NextDueyear}`;
+                      }
+
+                      // Formatting the date
+                      AdmissionDate = `${day < 10 ? "0" : ""}${day}-${
+                        monthAbbreviations[monthIndex]
+                      }-${year}`;
+
+                      return (
+                        <TableRow
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                          key={item.id}
+                        >
+                          <TableCell className="border border 1">
+                            {index + 1}
+                          </TableCell>
+                          <TableCell className="border border 1">
+                            <span
+                              title={item.name}
+                              style={{
+                                width: "9rem",
+
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.name}
+                            </span>
+
+                            <span
+                              title={item.branch}
+                              style={{
+                                width: "9rem",
+
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
                               {item.branch}
-                              </span>
-                          
-                           <span
-                                title=   {item.enquirytakenby}
-                                style={{
-                                  
-                                  width: "9rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {item.enquirytakenby}
-                              </span>
-                       
-                        </TableCell>
-                        <TableCell className="border border 1">
-                        <span
-                                title= {item.mobilenumber}
-                                style={{
-                                  
-                                  width: "6rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
+                            </span>
+
+                            <span
+                              title={item.enquirytakenby}
+                              style={{
+                                width: "9rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.enquirytakenby}
+                            </span>
+                          </TableCell>
+                          <TableCell className="border border 1">
+                            <span
+                              title={item.mobilenumber}
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
                               {item.mobilenumber}
-                              </span>
-                              <span
-                                title= {item.email}
-                                style={{
-                                  
-                                  width: "8rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
+                            </span>
+                            <span
+                              title={item.email}
+                              style={{
+                                width: "8rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
                               {item.email}
-                              </span>
-                          
-                        
-                        </TableCell>
-                        <TableCell className="border border 1">
-                        <span
-                                title=  {item.courses}
-                                style={{
-                                  
-                                  width: "6rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {item.courses}
-                              </span>
-                              <span
-                                title={item.admissiondate}
-                                style={{
-                                  
-                                  width: "6rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {item.admissiondate}
-                              </span>
-                         
-                          
-                        </TableCell>
-                        <TableCell className="border border 1">
-                        <span
-                                title=  {item.finaltotal}
-                                style={{
-                                  
-                                  width: "4rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                 {item.finaltotal}
-                              </span>
-                              <span
-                                title={item.totalpaidamount}
-                                style={{
-                                  
-                                  width: "4rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {item.totalpaidamount}
-                              </span>
-                              <span
-                                title={item.dueamount}
-                                style={{
-                                  
-                                  width: "4rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {item.dueamount}
-                              </span>
-                        </TableCell>
-                        <TableCell className="border border 1">
-                        <span
-                                title={item.admissiondate}
-                                style={{
-                                  
-                                  width: "5rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                              {item.admissiondate}
-                              </span>
-                              <span
-                                title={item.nextduedate}
-                                style={{
-                                  
-                                  width: "5rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                              {item.nextduedate}
-                              </span>
-                          
-                         
-                          
-                        </TableCell>
-                        <TableCell className="border border 1">
-                          {item.totalinstallments &&
-                            item.totalinstallments.length > 0 &&
-                            item.totalinstallments.map((items, index) => {
-                              const dynamicStyle = {
-                                color: item.dueamount < 1 ? "green" : "red",
-                                fontSize: item.dueamount < 1 ? "20px" : "16px",
-                                fontWeight: item.dueamount < 1 ? "900" : "900",
-                              };
-                              const IconStyle = {
-                                display: item.dueamount < 1 ? true : "none",
-                                marginLeft: "10px",
-                              };
-                              if (true) {
-                                // settotalleft(item.totalinstallmentsleft);
-                                // totalleft = item.totalinstallmentsleft;
-                                return (
-                                  <div style={{ display: "flex" }}>
-                                    <span style={dynamicStyle}>
-                                      {items.totalinstallmentspaid}/
-                                      {items.totalinstallments}
-                                    </span>
-                                    <span style={dynamicStyle}>
-                                      <CheckCircleIcon style={IconStyle} />
-                                    </span>
-                                  </div>
-                                );
-                              }
-                            })}
-                        </TableCell>
-                        <TableCell className="border border 1">
-                          <Link to={`/feeview/${item.id}`}>
-                            <VisibilityIcon />
-                          </Link>{" "}
-                        </TableCell>
-                      </TableRow>
-                    ))
+                            </span>
+                          </TableCell>
+                          <TableCell className="border border 1">
+                            <span
+                              title={item.courses}
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.courses}
+                            </span>
+                            <span
+                              title={AdmissionDate}
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {AdmissionDate}
+                            </span>
+                          </TableCell>
+                          <TableCell className="border border 1">
+                            <span
+                              title={item.finaltotal}
+                              style={{
+                                width: "4rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.finaltotal}
+                            </span>
+                            <span
+                              title={item.totalpaidamount}
+                              style={{
+                                width: "4rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.totalpaidamount}
+                            </span>
+                            <span
+                              title={item.dueamount}
+                              style={{
+                                width: "4rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.dueamount}
+                            </span>
+                          </TableCell>
+                          <TableCell className="border border 1">
+                            <span
+                              title={AdmissionDate}
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {AdmissionDate}
+                            </span>
+                            <span
+                              title={NextDueDate}
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {NextDueDate ? NextDueDate : "No NextDue Date"}
+                            </span>
+                          </TableCell>
+                          <TableCell className="border border 1">
+                            {item.totalinstallments &&
+                              item.totalinstallments.length > 0 &&
+                              item.totalinstallments.map((items, index) => {
+                                const dynamicStyle = {
+                                  color: item.dueamount < 1 ? "green" : "red",
+                                  fontSize:
+                                    item.dueamount < 1 ? "20px" : "16px",
+                                  fontWeight:
+                                    item.dueamount < 1 ? "900" : "900",
+                                };
+                                const IconStyle = {
+                                  display: item.dueamount < 1 ? true : "none",
+                                  marginLeft: "10px",
+                                };
+                                if (true) {
+                                  // settotalleft(item.totalinstallmentsleft);
+                                  // totalleft = item.totalinstallmentsleft;
+                                  return (
+                                    <div style={{ display: "flex" }}>
+                                      <span style={dynamicStyle}>
+                                        {items.totalinstallmentspaid}/
+                                        {items.totalinstallments}
+                                      </span>
+                                      <span style={dynamicStyle}>
+                                        <CheckCircleIcon style={IconStyle} />
+                                      </span>
+                                    </div>
+                                  );
+                                }
+                              })}
+                          </TableCell>
+                          <TableCell className="border border 1">
+                            <Link to={`/feeview/${item.id}`}>
+                              <VisibilityIcon />
+                            </Link>{" "}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })
                   ) : (
                     <TableRow>
                       <TableCell colSpan={3}>No data available</TableCell>
