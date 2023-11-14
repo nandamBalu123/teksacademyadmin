@@ -20,7 +20,14 @@ import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 const EditStudentForm = () => {
   // const [name, setName] = useState("");
   //   const [email, setEmail] = useState("");
@@ -53,6 +60,7 @@ const EditStudentForm = () => {
   //   const [validityStartDate, setValidityStartDate] = useState("");
   //   const [validityEndDate, setValidityEndDate] = useState("");
 
+  const { students, dispatch } = useStudentsContext();
   const [feetype, setfeetype] = useState("");
   const [amount, setAmount] = useState(0);
   const [discount, setDiscount] = useState(0);
@@ -69,7 +77,7 @@ const EditStudentForm = () => {
   const { leadsources } = useLeadSourceContext();
   const { branches } = useBranchContext();
   const [feedetails, setFeeDetails] = useState([]);
-
+  
   // useEffect(() => {
   //   setTotalamount(amount - discount);
   //   let actualfee = (totalamount * 100) / 118;
@@ -307,7 +315,6 @@ const EditStudentForm = () => {
     educationtype: "",
     marks: "",
     academicyear: "",
-    profilepic: "",
     enquirydate: "",
     enquirytakenby: "",
     coursepackage: "",
@@ -315,20 +322,19 @@ const EditStudentForm = () => {
     leadsource: "",
     branch: "",
     modeoftraining: "",
-    admissionstatus: "",
     registrationnumber: "",
     admissiondate: "",
     validitystartdate: "",
     validityenddate: "",
-    feedetails: "",
-    grosstotal: "",
-    totaldiscount: "",
-    totaltax: "",
-    grandtotal: "",
+    // feedetails: "",
+    // grosstotal: "",
+    // totaldiscount: "",
+    // totaltax: "",
+    // grandtotal: "",
     admissionremarks: "",
     assets: "",
-    settaxamount: "",
-    feetype: "",
+    // settaxamount: "",
+    // feetype: "",
   });
 
   const setdata = (e) => {
@@ -370,31 +376,46 @@ const EditStudentForm = () => {
   const { id } = useParams("");
   // console.log(id);
 
-  const getdata = async () => {
-    const res = await fetch(
-      `${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+  // const getdata = async () => {
+  //   const res = await fetch(
+  //     `${process.env.REACT_APP_API_URL}/  /${id}`,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+
+  //   const data = await res.json();
+  //   console.log("datan: " + data);
+
+  //   if (res.status === 422 || !data) {
+  //     console.log("error ");
+  //   } else {
+  //     setuser(data[0]);
+  //     console.log("get data");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getdata();
+  // }, []);
+
+  
+useEffect(() => {
+    if (students && id) {
+      const filteredResults = students.filter((item) => {
+        const singlestudentCondition = id ? item.id === parseInt(id) : true;
+ 
+        return singlestudentCondition;
+      });
+      if (filteredResults) {
+        console.log("filteredResults[0]", filteredResults[0]);
       }
-    );
-
-    const data = await res.json();
-    console.log("datan: " + data);
-
-    if (res.status === 422 || !data) {
-      console.log("error ");
-    } else {
-      setuser(data[0]);
-      console.log("get data");
+      setuser(filteredResults[0]);
     }
-  };
-
-  useEffect(() => {
-    getdata();
-  }, []);
+  }, [students, id, dispatch]);
 
   const handlesubmit = (e) => {
     e.preventDefault();
@@ -924,7 +945,21 @@ const EditStudentForm = () => {
                     />
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <FormControl variant="standard" className="w-75">
+                  <FormControl variant="standard" className="w-75">
+                      <TextField
+                          label="Enquiry Taken By"
+                          variant="standard"
+                          className="w-75"
+                          required
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          onChange={setdata}
+                          value={user.enquirytakenby}
+                          name="enquirytakenby"
+                        />
+                    </FormControl>
+                    {/* <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Enquiry Taken By<span> *</span>
                       </InputLabel>
@@ -944,7 +979,7 @@ const EditStudentForm = () => {
                             </MenuItem>
                           ))}
                       </Select>
-                    </FormControl>
+                    </FormControl> */}
                   </div>
                 </div>
 
@@ -1100,7 +1135,7 @@ const EditStudentForm = () => {
                 </div>
 
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Admission Status<span> *</span>
@@ -1117,7 +1152,7 @@ const EditStudentForm = () => {
                         <MenuItem value="inactive"> Inactive</MenuItem>
                       </Select>
                     </FormControl>
-                  </div>
+                  </div> */}
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <TextField
                       label="Admission Date"
@@ -1231,7 +1266,7 @@ const EditStudentForm = () => {
             <StepContent>
               <form onSubmit={handleFeeDetails} className="form">
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Fee Type<span> *</span>
@@ -1260,10 +1295,49 @@ const EditStudentForm = () => {
                         shrink: true,
                       }}
                       onChange={setdata}
-                      value={user.amount}
+                      value={user.grosstotal}
                       name="amount"
                     />
-                  </div>
+                  </div> */}
+
+                  {/* added */}
+                  <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
+                    <TableHead>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Fee Type
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Discount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Tax Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Total Amount
+                      </TableCell>
+                    </TableHead>
+                    <TableBody>
+                      {user.feedetails &&
+                        user.feedetails.map((item) => (
+                          <TableRow key={item.id}>
+                            <TableCell align="center">{item.feetype}</TableCell>
+                            <TableCell align="center">{item.amount}</TableCell>
+                            <TableCell align="center">{item.discount}</TableCell>
+                            <TableCell align="center">{parseFloat(item.taxamount.toFixed(2))}</TableCell>
+                            <TableCell align="center">{item.totalamount}</TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                  {/* added end */}
+
+
+                  
                   {/* <label className="col-12 col-md-2 label">
                     Fee Type <span className="text-danger"> *</span>&nbsp;:
                   </label>
@@ -1307,7 +1381,7 @@ const EditStudentForm = () => {
                 </div>
                 <br /> */}
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label="Discount"
                       type="number"
@@ -1318,10 +1392,10 @@ const EditStudentForm = () => {
                         shrink: true,
                       }}
                       onChange={setdata}
-                      value={user.discount}
+                      value={user.totaldiscount}
                       name="discount"
                     />
-                  </div>
+                  </div> */}
                   {/* <label className="col-12 col-md-2 label">
                     Discount <span className="text-danger"> *</span>&nbsp;:
                   </label>
@@ -1378,12 +1452,12 @@ const EditStudentForm = () => {
 
                   {totalamount}
                 </div> */}
-                <button
+                {/* <button
                   onClick={handleFeeDetails}
                   className="bg-primary text-light px-4 py-1  border border-none rounded-2 "
                 >
                   save
-                </button>
+                </button> */}
                 <br />
                 
               </form>
@@ -1434,7 +1508,7 @@ const EditStudentForm = () => {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {grosstotal}
+                  {user.grosstotal}
                 </div>
                 <br />
                 <div className="row ">
@@ -1452,7 +1526,7 @@ const EditStudentForm = () => {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {totaldiscount}
+                  {user.totaldiscount}
                 </div>
                 <br />
                 {/* <div className="row ">
@@ -1485,7 +1559,7 @@ const EditStudentForm = () => {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {totaltax}
+                  {user.totaltax}
                 </div>
                 <br />
                 <div className="row ">
@@ -1502,7 +1576,7 @@ const EditStudentForm = () => {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {grandtotal}
+                  {user.grandtotal}
                 </div>
                 <br />
                 <div className="row ">
