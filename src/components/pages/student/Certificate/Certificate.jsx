@@ -212,11 +212,11 @@ const Certificate = () => {
     <div className="container main-certificate mt-3">
       <div className="certificate mt-2">
         <h3 className="mx-3 mt-3"> Certificate </h3>
-        <div className="row mb-3 px-4 pt-2">
+        <div className="row pb-3">
           <div className="col-12 col-md-8 col-lg-8 col-xl-8">
             <input
               type="text"
-              className="input-field ps-2"
+              className="input-field "
               placeholder="Search Here...."
               autoComplete="off"
               style={{
@@ -235,13 +235,13 @@ const Certificate = () => {
             />
             <hr className="w-75" />
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
+          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3">
             <h6>
               {" "}
               {recordCount}/{initialDataCount}
             </h6>
           </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-3">
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-2">
             <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
@@ -251,37 +251,35 @@ const Certificate = () => {
           </div>
 
           <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
-            <Button
-              id="demo-positioned-button"
+            
+              {/* id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
-            >
+            > */}
               <button
-                className="btn btn-primary mr-20 ms-2 mb-2"
+                className="btn btn-primary mr-20 ms-2 mb-2 mt-1"
+                onClick={handleClick}
                 style={{ textTransform: "capitalize" }}
               >
                 Filter
               </button>
-            </Button>
-
-            <Menu
-              className="mt-5"
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+                style={{
+                  width: "",
+                  borderRadius: "25px",
+                  marginTop: "20px",
+                  cursor: "pointer",
+                }}
+              >
               <div className="d-flex justify-content-between m-2">
                <div > Filter</div>
              
@@ -556,7 +554,7 @@ const Certificate = () => {
   </ul>
 </div> */}
 
-        <Paper sx={{ width: "100%", overflow: "hidden" }} className="my-4">
+        <Paper sx={{ width: "100%", overflow: "hidden" }} >
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>

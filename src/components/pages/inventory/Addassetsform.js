@@ -304,7 +304,7 @@ export default function Addassetsform() {
               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
                         <TextField
                 label="Quantity"
-                className=" mar w-100"
+                className=" mar ms-3 w-100"
                 variant="standard"
                 name="anonymity"
                 type="number"
