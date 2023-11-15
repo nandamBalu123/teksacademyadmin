@@ -387,17 +387,22 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   </td>
                   <td className=" text-center border border 1">
                     {/* parseFloat(169.49152542372883.toFixed(2)); */}
-                    {parseFloat(student.initialamount / 1.18).toFixed(2)}
+
+                    {Number(
+                      parseFloat(student.initialamount / 1.18).toFixed(2)
+                    ).toLocaleString("en-IN")}
                     {/* {parseInt(student.initialamount) / 1.18} */}
                   </td>
                   <td className=" text-center border border 1">
-                    {(
-                      parseFloat(student.initialamount).toFixed(2) -
-                      parseFloat(student.initialamount / 1.18).toFixed(2)
-                    ).toFixed(2)}
+                    {Number(
+                      (
+                        parseFloat(student.initialamount).toFixed(2) -
+                        parseFloat(student.initialamount / 1.18).toFixed(2)
+                      ).toFixed(2)
+                    ).toLocaleString("en-IN")}
                   </td>
                   <td className=" text-center border border 1">
-                    {student.initialamount}
+                    {Number(student.initialamount).toLocaleString("en-IN")}
                   </td>
                 </tr>
               ))
@@ -427,14 +432,18 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
                       {nametype === "studentinvoice" && (
                         <td className=" text-center border border 1">
-                          {parseFloat(student.paidamount / 1.18).toFixed(2)}
+                          {Number(
+                            parseFloat(student.paidamount / 1.18).toFixed(2)
+                          ).toLocaleString("en-IN")}
                         </td>
                       )}
                       {nametype === "admininvoice" && (
                         <td className=" text-center border border 1">
-                          {parseFloat(
-                            (student.paidamount * 0.65) / 1.18
-                          ).toFixed(2)}
+                          {Number(
+                            parseFloat(
+                              (student.paidamount * 0.65) / 1.18
+                            ).toFixed(2)
+                          ).toLocaleString("en-IN")}
                         </td>
                       )}
 
@@ -446,20 +455,24 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
                       {nametype === "studentinvoice" && (
                         <td className=" text-center border border 1">
-                          {(
-                            parseFloat(student.paidamount).toFixed(2) -
-                            parseFloat(student.paidamount / 1.18).toFixed(2)
-                          ).toFixed(2)}
+                          {Number(
+                            (
+                              parseFloat(student.paidamount).toFixed(2) -
+                              parseFloat(student.paidamount / 1.18).toFixed(2)
+                            ).toFixed(2)
+                          ).toLocaleString("en-IN")}
                         </td>
                       )}
                       {nametype === "admininvoice" && (
                         <td className=" text-center border border 1">
-                          {(
-                            parseFloat(student.paidamount * 0.65).toFixed(2) -
-                            parseFloat(
-                              (student.paidamount * 0.65) / 1.18
+                          {Number(
+                            (
+                              parseFloat(student.paidamount * 0.65).toFixed(2) -
+                              parseFloat(
+                                (student.paidamount * 0.65) / 1.18
+                              ).toFixed(2)
                             ).toFixed(2)
-                          ).toFixed(2)}
+                          ).toLocaleString("en-IN")}
                         </td>
                       )}
                       {/* <td className=" text-center border border 1">
@@ -472,12 +485,16 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       </td> */}
                       {nametype === "studentinvoice" && (
                         <td className=" text-center border border 1">
-                          {parseInt(student.paidamount)}
+                          {Number(parseInt(student.paidamount)).toLocaleString(
+                            "en-IN"
+                          )}
                         </td>
                       )}
                       {nametype === "admininvoice" && (
                         <td className=" text-center border border 1">
-                          {parseInt(student.paidamount * 0.65)}
+                          {Number(
+                            parseInt(student.paidamount * 0.65)
+                          ).toLocaleString("en-IN")}
                         </td>
                       )}
                       {/* <td className=" text-center border border 1">
@@ -509,7 +526,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center"></td>
                       <td className="border border 1 text-center">
-                        {parseInt(student.paidamount * 0.35)}
+                        {Number(
+                          parseInt(student.paidamount * 0.35)
+                        ).toLocaleString("en-IN")}
                       </td>
                     </tr>
                   );
@@ -536,7 +555,12 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
                   <td className="border border 1 text-center"></td>
                   <td className="border border 1 text-center">
-                    <strong>{student.initialamount}</strong>
+                    <strong>
+                      {" "}
+                      {Number(
+                        parseInt(student.initialamount * 0.35)
+                      ).toLocaleString("en-IN")}
+                    </strong>
                   </td>
                 </tr>
               ))
@@ -558,7 +582,12 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       <td className="border border-1 text-center"></td>
                       <td className="border border-1 text-center"></td>
                       <td className="border border-1 text-center">
-                        <strong>{student.paidamount}</strong>
+                        <strong>
+                          {" "}
+                          {Number(
+                            parseInt(student.paidamount * 0.35)
+                          ).toLocaleString("en-IN")}
+                        </strong>
                       </td>
                     </tr>
                   );

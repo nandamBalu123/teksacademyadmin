@@ -172,23 +172,39 @@ const StudentDataView = () => {
                       {item.feetype}
                     </TableCell>
                     <TableCell className="text-center border border-2">
-                      {" "}
-                      {item.amount}
+                      {Number(
+                        parseFloat(item.amount).toFixed(2)
+                      ).toLocaleString("en-IN")}
                     </TableCell>
                     <TableCell className="text-center border border-2">
-                      {item.discount}
+                      {item.discount &&
+                        Number(
+                          parseFloat(item.discount).toFixed(2)
+                        ).toLocaleString("en-IN")}
+                      {!item.discount && <>0</>}
                     </TableCell>
                     <TableCell className="text-center border border-2">
-                      {parseFloat(item.taxamount).toFixed(2)}
+                      {Number(
+                        parseFloat(item.taxamount).toFixed(2)
+                      ).toLocaleString("en-IN")}
                     </TableCell>
                     <TableCell className="text-center border border-2">
-                      {item.totalamount}
+                      {Number(
+                        parseFloat(item.totalamount).toFixed(2)
+                      ).toLocaleString("en-IN")}
                       <br />
                       {item.feetype === "fee" ? (
                         <>
-                          Materialfee:{studentdata.materialfee}
-                          <br /> CourseFee:
-                          {item.totalamount - studentdata.materialfee}
+                          Materialfee:
+                          {Number(
+                            parseFloat(studentdata.materialfee).toFixed(2)
+                          ).toLocaleString("en-IN")}
+                          <br /> CourseFee:{" "}
+                          {Number(
+                            parseFloat(
+                              item.totalamount - studentdata.materialfee
+                            ).toFixed(2)
+                          ).toLocaleString("en-IN")}
                         </>
                       ) : (
                         <span></span>
