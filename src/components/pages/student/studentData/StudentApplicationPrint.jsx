@@ -73,8 +73,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   // });
   return (
     <div ref={ref}>
-      <div className="page">
-        <div className="application">
+      <div className="page ">
+        <div className="application ">
           <h3 className="text-center mt-2 "> Application Form </h3>
           <div className="row">
             <div
@@ -87,23 +87,20 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <p className="m-0 p-0"> CIN: U80100TG2018PTC123853</p>
               <p className="m-0 p-0">
                 <strong>
-                  {" "}
                   <EmailIcon />
-                </strong>{" "}
+                </strong>
                 info@teksacademy.com
               </p>
               <p className="m-0 p-0">
                 <strong>
-                  {" "}
                   <LocalPhoneIcon />
-                </strong>{" "}
+                </strong>
                 1800-120-4748
               </p>
               <p className="m-0 p-0">
                 <strong>
-                  {" "}
                   <AlternateEmailIcon />
-                </strong>{" "}
+                </strong>
                 www.teksacademy.com
               </p>
             </div>
@@ -122,30 +119,30 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           {/* <div className="row  ">
             <div className="col-5 col-md-5 col-lg-5 col-xl-5">
               <h4 style={{ marginLeft: "15px" }}>
-                {" "}
+                
                 <strong> Kapil Knowledge Hub Private Limited</strong>
               </h4>
               <p>&nbsp;&nbsp; CIN: U80100TG2018PTC123853 </p>
               <p>
-                &nbsp;&nbsp;{" "}
+                &nbsp;&nbsp;
                 <strong>
                   <EmailIcon />
                 </strong>
-                info@teksacademy.com{" "}
+                info@teksacademy.com
               </p>
               <p>
-                &nbsp;&nbsp;{" "}
+                &nbsp;&nbsp;
                 <strong>
                   <LocalPhoneIcon />
-                </strong>{" "}
+                </strong>
                 1800-120-4748
               </p>
               <p>
                 &nbsp;&nbsp;
                 <strong>
-                  <AlternateEmailIcon />{" "}
-                </strong>{" "}
-                www.teksacademy.com{" "}
+                  <AlternateEmailIcon />
+                </strong>
+                www.teksacademy.com
               </p>
             </div>
             <div className="col-7 col-md-7 col-lg-7 col-xl-7">
@@ -176,7 +173,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               className=" text-center caption "
               style={{ fontSize: "25px", fontWeight: "600", marginTop: "25px" }}
             >
-              {" "}
               Student Details
             </div>
             <div className="row ">
@@ -186,40 +182,49 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     <thead> </thead>
                     <tbody>
                       <tr>
-                        {" "}
-                        <th style={{ width: "30.66%" }}> Student Name</th>{" "}
-                        <td colspan="4">{studentdata.name}</td>{" "}
+                        <td
+                          style={{ width: "30.66%", background: "#e4ecff" }}
+                          className="w-25 borderleft "
+                        >
+                          <b> Student Name</b>
+                        </td>
+                        <td colspan="4">{studentdata.name}</td>
                       </tr>
                       <tr>
-                        {" "}
-                        <th>Parent Name </th>{" "}
-                        <td colspan="4">{studentdata.parentsname}</td>{" "}
+                        <td style={{ background: "#e4ecff" }}>
+                          <b>Parent Name</b>
+                        </td>
+                        <td colspan="4">{studentdata.parentsname}</td>
                       </tr>
                       <tr>
-                        {" "}
-                        <th> Date of Birth</th>{" "}
+                        <td style={{ background: "#e4ecff" }}>
+                          <b>Date of Birth</b>
+                        </td>
                         <td colspan="4">
                           {BirthDate ? BirthDate.substring(0, 10) : "No Date"}
-                        </td>{" "}
+                        </td>
                       </tr>
                       <tr>
-                        {" "}
-                        <th>Gender </th>{" "}
-                        <td colspan="4">{studentdata.gender}</td>{" "}
+                        <td style={{ background: "#e4ecff" }}>
+                          <b>Gender</b>
+                        </td>
+                        <td colspan="4">{studentdata.gender}</td>
                       </tr>
                       <tr>
-                        {" "}
-                        <th>Marital Status </th>{" "}
-                        <td colspan="4">{studentdata.maritalstatus}</td>{" "}
+                        <td style={{ background: "#e4ecff" }}>
+                          <b>Marital Status</b>
+                        </td>
+                        <td colspan="4">{studentdata.maritalstatus}</td>
                       </tr>
                       <tr>
-                        {" "}
-                        <th> College/Company</th>{" "}
-                        <td colspan="4">{studentdata.college}</td>{" "}
+                        <td style={{ background: "#e4ecff" }}>
+                          <b>College/Company</b>
+                        </td>
+                        <td colspan="4">{studentdata.college}</td>
                       </tr>
                     </tbody>
                   </table>
-                </div>{" "}
+                </div>
               </div>
               <div className=" col-4 col-md-4 col-lg-4 col-xl-4 mt-4">
                 {/* <img src={studentimg} /> */}
@@ -240,8 +245,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               className="text-center caption"
               style={{ fontSize: "25px", fontWeight: "600" }}
             >
-              {" "}
-              Student Contact Details{" "}
+              Student Contact Details
             </div>
             {/* <div>
   <div className="row">
@@ -291,48 +295,85 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 <tbody>
                   <br />
                   <tr>
-                    {" "}
-                    <td className="borderright">Country</td>{" "}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      Country
+                    </td>
                     <td className="w-25 borderleft ">{studentdata.country} </td>
-                    <td className="borderright">Native Place</td>{" "}
-                    <td className="w-25 borderleft">{studentdata.native}</td>{" "}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      Native Place
+                    </td>
+                    <td className="w-25 borderleft">{studentdata.native}</td>
                   </tr>
                   <tr>
-                    {" "}
-                    <td className="borderright">State</td>{" "}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      State
+                    </td>
                     <td className="w-25 borderleft "> {studentdata.state} </td>
-                    <td className="borderright">Area</td>
-                    <td className="w-25 borderleft ">
-                      {studentdata.area}
-                    </td>{" "}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      Area
+                    </td>
+                    <td className="w-25 borderleft ">{studentdata.area}</td>
                   </tr>
                   <tr>
-                    {" "}
-                    <td className="borderright">Present Address</td>{" "}
-                    <td className="w-25 borderleft  ">{studentdata.area} </td>{" "}
-                    <td className="borderright"> ZipCode</td>{" "}
-                    <td className="w-25 borderleft ">{studentdata.zipcode}</td>{" "}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      Present Address
+                    </td>
+                    <td className="w-25 borderleft  ">{studentdata.area} </td>
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      ZipCode
+                    </td>
+                    <td className="w-25 borderleft ">{studentdata.zipcode}</td>
                   </tr>
                   <tr>
-                    {" "}
-                    <td className="borderright"> Mobile Number </td>{" "}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      Mobile Number
+                    </td>
                     <td className="w-25 borderleft ">
-                      {" "}
                       {studentdata.mobilenumber}
-                    </td>{" "}
-                    <td className="borderright"> WhatsApp Number</td>{" "}
+                    </td>
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      WhatsApp Number
+                    </td>
                     <td className="w-25 borderleft ">
                       {studentdata.whatsappno}
-                    </td>{" "}
+                    </td>
                   </tr>
                   <tr>
-                    {" "}
-                    <td className="borderright"> Email Id </td>{" "}
-                    <td className="w-25 borderleft  " colSpan={3}>
-                      {studentdata.email}{" "}
-                    </td>{" "}
-                    {/* <td className="borderright"></td>{" "}
-                    <td className="w-25 borderleft "></td>{" "} */}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      Email Id
+                    </td>
+                    <td className="w-25 borderleft  ">{studentdata.email} </td>
+                    <td className="borderright"></td>
+                    <td className="w-25 borderleft "></td>
+                    {/* <td className="borderright"></td>
+                    <td className="w-25 borderleft "></td> */}
                   </tr>
                 </tbody>
               </table>
@@ -343,105 +384,96 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 className="text-center caption  "
                 style={{ fontSize: "25px", fontWeight: "600" }}
               >
-                {" "}
-                Education Details{" "}
+                Education Details
               </div>
               <div className="table-responsive">
                 <table class="table table-bordered">
                   <tbody>
                     <br />
                     <tr>
-                      {" "}
-                      <th>S No</th> <th> Education</th> <th> Marks Secured</th>{" "}
-                      <th> Academic Year</th>{" "}
+                      <td style={{ background: "#e4ecff" }}>
+                        <b> S.No</b>
+                      </td>
+                      <th style={{ background: "#e4ecff" }}> Education</th>
+                      <th style={{ background: "#e4ecff" }}>
+                        Marks(Percentage)
+                      </th>
+                      <th style={{ background: "#e4ecff" }}>Academic Year</th>
                     </tr>
                     <tr>
-                      {" "}
-                      <td class="w-25">1</td>{" "}
-                      <td class="w-25">{studentdata.educationtype}</td>{" "}
-                      <td class="w-25">{studentdata.marks}</td>{" "}
-                      <td class="w-25">{studentdata.academicyear}</td>{" "}
+                      <td class="w-25">1</td>
+                      <td class="w-25">{studentdata.educationtype}</td>
+                      <td class="w-25">{studentdata.marks}</td>
+                      <td class="w-25">{studentdata.academicyear}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-            <div className="admform-scd page-break ">
+            <div className="admform-scd page-break mt-3 ">
               <div
                 className="text-center caption"
                 style={{ fontSize: "25px", fontWeight: "600" }}
               >
-                {" "}
-                Admission Details{" "}
+                Admission Details
               </div>
             </div>
-            <div classNamen="table-responsive">
+            <div classNamen="table-responsive my-3">
               <table className="table ">
                 <tbody>
                   <br />
                   <tr>
-                    {" "}
-                    <td className="borderright">Enquiry Date</td>{" "}
+                    <td className="borderright" style={{ background: "#e4ecff" }}>Enquiry Date</td>
                     <td className="w-25 borderleft  ">
-                      {" "}
                       {EnquiryDate ? EnquiryDate : "No Date"}
-                    </td>{" "}
-                    <td className="borderright">Branch</td>{" "}
-                    <td className="w-25 borderleft ">{studentdata.branch}</td>{" "}
+                    </td>
+                    <td className="borderright" style={{ background: "#e4ecff" }}> Reg Number</td>
+                    <td className="w-25 borderleft ">
+                      {studentdata.registrationnumber}
+                    </td>
+                    {/* <td className="borderright">Branch</td>
+                    <td className="w-25 borderleft ">{studentdata.branch}</td> */}
                   </tr>
                   <tr>
-                    {" "}
-                    <th className="borderright"> Enquiry Taken By </th>{" "}
+                    <td className="borderright" style={{ background: "#e4ecff" }}> Enquiry Taken By </td>
                     <td className="w-25 borderleft ">
-                      {studentdata.enquirytakenby}{" "}
-                    </td>{" "}
-                    <td className="borderright"> Lead Source </td>{" "}
+                      {studentdata.enquirytakenby}
+                    </td>
+                    <td className="borderright" style={{ background: "#e4ecff" }}> Lead Source </td>
                     <td className="w-25 borderleft ">
                       {studentdata.leadsource}
-                    </td>{" "}
+                    </td>
                   </tr>
                   <tr>
-                    {" "}
-                    <td className="borderright"> Course Package </td>{" "}
+                    <td className="borderright" style={{ background: "#e4ecff" }}> Course Package </td>
                     <td className="w-25 borderleft">
-                      {studentdata.coursepackage}{" "}
-                    </td>{" "}
-                    <td className="borderright"> Course</td>{" "}
-                    <td className="w-25 borderleft">{studentdata.courses}</td>{" "}
+                      {studentdata.coursepackage}
+                    </td>
+                    <td className="borderright" style={{ background: "#e4ecff" }}> Course</td>
+                    <td className="w-25 borderleft">{studentdata.courses}</td>
                   </tr>
                   <tr>
-                    {" "}
-                    {/* <td className="borderright"> Admission Status </td>{" "} */}
+                    <td className="borderright" style={{ background: "#e4ecff" }}> Admission Date </td>
                     <td className="w-25 borderleft ">
-                      {studentdata.admissionstatus}{" "}
-                    </td>{" "}
-                    <td className="borderright"> Mode of Training</td>{" "}
+                      {AdmissionDate ? AdmissionDate : "No Date"}
+                    </td>
+                    {/* <td className="borderright"> Admission Status </td> */}
+                    {/* <td className="w-25 borderleft ">
+                      {studentdata.admissionstatus}
+                    </td> */}
+                    <td className="borderright" style={{ background: "#e4ecff" }}> Mode of Training</td>
                     <td className="w-25 borderleft ">
                       {studentdata.modeoftraining}
-                    </td>{" "}
+                    </td>
                   </tr>
                   <tr>
-                    {" "}
-                    <td className="borderright"> Admission Date </td>
+                    <td className="borderright" style={{ background: "#e4ecff" }} > Expected End Date </td>
                     <td className="w-25 borderleft ">
-                      {AdmissionDate ? AdmissionDate : "No Date"}{" "}
-                    </td>{" "}
-                    <td className="borderright"> Course Start Date</td>{" "}
+                      {ExpectedEndDate ? ExpectedEndDate : "No Date"}
+                    </td>
+                    <td className="borderright" style={{ background: "#e4ecff" }}> Course Start Date</td>
                     <td colspan="1" className="w-25 borderleft">
-                      {" "}
-                      {CourseStartDate ? CourseStartDate : "No Date"}{" "}
-                    </td>{" "}
-                  </tr>
-                  <tr>
-                    {" "}
-                    <td className="borderright"> Expected End Date </td>
-                    <td className="w-25 borderleft ">
-                      {ExpectedEndDate ? ExpectedEndDate : "No Date"}{" "}
-                    </td>{" "}
-                    <td className="borderright"> Reg Number</td>
-                    <td colspan="1" className="w-25 borderleft ">
-                      {" "}
-                      {studentdata.registrationnumber}
+                      {CourseStartDate ? CourseStartDate : "No Date"}
                     </td>
                   </tr>
                 </tbody>
@@ -449,24 +481,25 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </div>
           </div>
 
-          <div className="admform-scd">
+          <div className="admform-scd mt-4">
             <div
               className="text-center caption"
               style={{ fontSize: "25px", fontWeight: "600" }}
             >
-              {" "}
-              Fee Detail{" "}
+              Fee Detail
             </div>
             <div className="table-responsive">
               <table className="table table-bordered">
                 <tbody>
                   <br />
                   <tr>
-                    <th> Fees Type </th>
-                    <th> Fee Amount </th>
-                    <th> Discount </th>
-                    <th> Tax </th>
-                    <th className="col-sm-4"> Total Fee </th>
+                    <td style={{ background: "#e4ecff" }}>
+                      <b> Fees Type</b>
+                    </td>
+                    <th style={{ background: "#e4ecff" }}> Fee Amount </th>
+                    <th style={{ background: "#e4ecff" }}> Discount </th>
+                    <th style={{ background: "#e4ecff" }}> Tax </th>
+                    <th className="col-sm-4" style={{ background: "#e4ecff" }}> Total Fee </th>
                   </tr>
 
                   {studentdata.feedetails &&
@@ -507,8 +540,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               className="text-center caption"
               style={{ fontSize: "25px", fontWeight: "600" }}
             >
-              {" "}
-              Assets{" "}
+              Assets
             </div>
             <div className="table-responsive">
               <table className="table table-bordered">
@@ -516,8 +548,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <br />
 
                   <tr>
-                    {" "}
-                    <th> Provided </th>{" "}
+                    <td style={{ background: "#e4ecff" }}>
+                      <b> Provided</b>
+                    </td>
                     <td className="w-25">
                       {studentdata.assets &&
                         studentdata.assets.map((item, index) => (
@@ -535,22 +568,24 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                           <li key={index}>{asset}</li>
                         ))}
                     </ul> */}
-                    <th> Issue Date </th>
-                    <td className="w-25">{IssueDate}</td>{" "}
+                    <td style={{ background: "#e4ecff" }}>
+                      <b> Issue Date</b>
+                    </td>
+                    <td className="w-25">{IssueDate}</td>
                   </tr>
 
                   <tr>
-                    {" "}
-                    <th> Comments </th>{" "}
+                    <td style={{ background: "#e4ecff" }}>
+                      <b > Comments</b>
+                    </td>
                     <td className="w-25" colspan="4">
                       {studentdata.admissionremarks}
-                    </td>{" "}
+                    </td>
                   </tr>
                   <tr>
-                    {" "}
                     <td class="w-25" colspan="4" style={{ height: "100px" }}>
-                      <strong> For Office Purpose</strong>{" "}
-                    </td>{" "}
+                      <strong> For Office Purpose</strong>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -562,31 +597,25 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       <div className="main-tc page-break">
         <div className="tc">
           <div>
-            {" "}
             <h2 className="tclogo"> Terms & Conditions</h2>
           </div>
           <div className="info">
             <strong> 1. Admission :</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 The eligibility criteria for each course will be clearly
                 communicated to the students before admission, and students must
                 provide all required documents and information during the
                 admission process.
               </li>
               <li>
-                {" "}
                 Admission will be confirmed only after the completion of all
                 formalities and payment of full fees.
               </li>
             </ul>
             <strong> 2.Fees:</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 Fees for each course will be clearly communicated to the
                 students before admission, and they are non-refundable except in
                 case of course cancellation by the center or extenuating
@@ -595,29 +624,24 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 deductions.
               </li>
               <li>
-                {" "}
                 No course fee adjustment will be allowed from one course to
                 another course.
               </li>
               <li>
-                {" "}
                 No course fee adjustment will be allowed from one student to
                 another student
               </li>
               <li>
-                {" "}
                 Any request for course fee adjustment will not be entertained by
                 the coaching center under any circumstances.
               </li>
               <li> All course fees are non-transferable and non-refundable.</li>
               <li>
-                {" "}
                 Students are advised to choose their courses carefully and make
                 sure that they are fully committed to the course before paying
                 the course fee.
               </li>
               <li>
-                {" "}
                 In case a student is unable to complete the course due to valid
                 reasons, the course fee will not be refunded or adjusted against
                 any other course.
@@ -629,15 +653,12 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </ul>
             <strong> 3. Course Material :</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 The course material and digital goods provided by the coaching
                 center is copyrighted and cannot be reproduced or used for
                 commercial purposes without permission.
               </li>
               <li>
-                {" "}
                 Any damage or loss of course material will be the responsibility
                 of the student and may attract additional charges for extra
                 material copy as per the center's policy.
@@ -650,32 +671,26 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 course and obtaining a certificate.
               </li>
               <li>
-                {" "}
                 Students must inform the center in advance if they are unable to
                 attend a class due to valid reasons such as illness or
                 emergencies.
               </li>
               <li>
-                {" "}
                 Make-up classes may be arranged at the discretion of the center
                 and subject to availability of resources.
               </li>
             </ul>
             <strong className="page-break"> 5. Conduct:</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 Students must conduct themselves respectfully towards the center
                 staff, fellow students, and the center's property.
               </li>
               <li>
-                {" "}
                 Any form of harassment, discrimination, or bullying will not be
                 tolerated and may lead to immediate expulsion from the center.
               </li>
               <li>
-                {" "}
                 The use of drugs or alcohol within the center's premises is
                 strictly prohibited and may lead to immediate expulsion from the
                 center.
@@ -683,20 +698,16 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </ul>
             <strong> 6. Examinations :</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 The examination schedule and format will be communicated to the
                 students in advance.
               </li>
               <li>
-                {" "}
                 Students must adhere to the rules and regulations of the
                 examination, and any deviation may lead to disqualification or
                 cancellation of the examination.
               </li>
               <li>
-                {" "}
                 Students must return all examination papers and materials to the
                 center after the examination is over.
               </li>
@@ -708,7 +719,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 successfully complete the course as per the center's criteria.
               </li>
               <li>
-                {" "}
                 The certificate does not guarantee employment or acceptance into
                 any institution.
               </li>
@@ -721,7 +731,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 during any offsite activity.
               </li>
               <li>
-                {" "}
                 Students must take responsibility for their personal safety and
                 belongings while attending classes at the center or any other
                 location.
@@ -736,16 +745,13 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 students.
               </li>
               <li>
-                {" "}
                 The revised policies will be applicable to all existing and new
                 students
               </li>
             </ul>
             <strong> 10. Dispute Resolution :</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 Any dispute arising out of or related to these terms and
                 conditions shall be resolved amicably through mutual discussion
                 and agreement between the coaching center and the student.
@@ -753,14 +759,11 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </ul>
             <strong> 11. Termination of Admission :</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 The center reserves the right to terminate the admission of any
                 student at any time, without assigning any reason.
               </li>
               <li>
-                {" "}
                 In such cases, the center may refund a portion of the fees that
                 completely depends on centers decision and on the duration of
                 the course completed by the student and the center's policy.
@@ -768,9 +771,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </ul>
             <strong> 12. Placement Guarantee:</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 The center does not provide any placement guarantee to the
                 students but may assist them in finding suitable job
                 opportunities through guidance, counseling, and if any
@@ -780,7 +781,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             <strong>13. Using Id Card:</strong>
             <ul>
               <li>
-                {" "}
                 Each student will be issued an identification card (ID card) by
                 the coaching center, and it must be carried by the student at
                 all times while attending classes or any other activities
@@ -825,28 +825,22 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </ul>
             <strong> 17. Teaching Staff: </strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 While the center will endeavor to provide training with a
                 specific teaching staff, there is no commitment to do so.
               </li>
               <li>
-                {" "}
                 The center reserves the right to assign trainers on the basis of
                 availability, and students cannot demand a specific trainer.
               </li>
             </ul>
             <strong>18. Course Fees:</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 The course fees may vary from student to student, based on their
                 merit and other relevant factors as determined by the center.
               </li>
               <li>
-                {" "}
                 The center reserves the right to change the course fees at any
                 time without prior notice.
               </li>
@@ -854,12 +848,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             <strong>19. Course Curriculum:</strong>
             <ul>
               <li>
-                {" "}
                 The center reserves the right to update the course curriculum as
                 per its requirements, without any prior notice to the students.
               </li>
               <li>
-                {" "}
                 Students are expected to keep themselves updated with any
                 changes in the course curriculum.
               </li>
@@ -872,7 +864,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 other relevant factors as determined by the center.
               </li>
               <li>
-                {" "}
                 The center reserves the right to change the course duration at
                 any time without prior notice.
               </li>
@@ -899,38 +890,30 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </ul>
             <strong>22. Project Assignment : </strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 The coaching center will provide practice projects to the
                 students for their learning and skill development.
               </li>
               <li>
-                {" "}
                 The projects assigned may be either live or previous completed
                 projects, depending on availability and suitability.
               </li>
               <li>
-                {" "}
                 Students must complete the project within the given time frame
                 and submit it to the center for evaluation.
               </li>
             </ul>
             <strong>23.Intellectual Property:</strong>
             <ul>
-              {" "}
               <li>
-                {" "}
                 All intellectual property created by students during the live
                 project or internship will belong to the student.
               </li>
               <li>
-                {" "}
                 The coaching center may use such intellectual property for
                 promotional or educational purposes with the student's consent.
               </li>
               <li>
-                {" "}
                 The coaching center will not claim any ownership rights over the
                 student's intellectual property.
               </li>
@@ -941,7 +924,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             <strong> 1. Information Collections :</strong>
             <ul>
               <li>
-                {" "}
                 The coaching center will not claim any ownership rights over the
                 student's intellectual property.
               </li>
@@ -949,7 +931,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             <strong> 2. Use of Information:</strong>
             <ul>
               <li>
-                {" "}
                 We use the information collected to contact students regarding
                 course updates, provide course materials, and issue certificates
                 of completion.
@@ -999,7 +980,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             <div className="sign">
               <h6>Counsellor Signature</h6>
               <h6> Student Signature</h6>
-            </div>{" "}
+            </div>
           </div>
         </div>
       </div>
@@ -1022,8 +1003,7 @@ function StudentApplicationPrint() {
           // style={{ margin: "30px" }}
           className="btn btn-primary mb-3 m-auto"
         >
-          {" "}
-          {/* <LocalPrintshopIcon />{" "} */}
+          {/* <LocalPrintshopIcon /> */}
           Print
         </button>
       </div>

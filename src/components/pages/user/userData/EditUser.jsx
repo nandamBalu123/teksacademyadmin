@@ -123,7 +123,7 @@ const EditUser = () => {
                 type="text"
                 variant="standard"
                 className="mar w-75 "
-                required
+                
                 onChange={setdata}
                 value={user.fullname}
                 id="fullname"
@@ -150,7 +150,7 @@ const EditUser = () => {
                 value={user.email}
             onChange={setdata}
                 id="email"
-                required
+             
               />
         </div>
         {/* <div className=" mb-4 col-xl-5 col-lg-5 col-md-6 col-12">
@@ -179,7 +179,7 @@ const EditUser = () => {
                 value={user.phonenumber}
             onChange={setdata}
                 id="phonenumber"
-                required
+                
               />
         </div>
         <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
@@ -192,7 +192,7 @@ const EditUser = () => {
                 value={user.designation}
                 onChange={setdata}
                 id="designation"
-                required
+             
               />
         </div>
       </div>
@@ -234,7 +234,7 @@ const EditUser = () => {
                   className=" mar  "
                   name="department"
                   id="department"
-                  required
+                  
                   value={user.department}
                   onChange={setdata}
                 >
@@ -268,7 +268,7 @@ const EditUser = () => {
                 value={user.reportto}
                 onChange={setdata}
                 id="reportto"
-                required
+               
               />
         </div>
        
