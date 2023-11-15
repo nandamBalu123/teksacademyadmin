@@ -458,21 +458,21 @@ const FeeDetails = () => {
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
                       {" "}
-                      Course <br /> Date of Joining
+                      Course <br /> Date of Joining<br/> Total Fee
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                       {" "}
-                      Total Fee
-                      <br /> Paid Fee
-                      <br /> Due Amount
+                      Paid Fee
+                      <br />  Due Amount
+                      <br /> Next Due Date
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                       {" "}
-                      Created Date <br /> Next Due Date
+                      Total Installments
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                       {" "}
-                      Paid Status{" "}
+                  Paid Installments
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                       {" "}
@@ -629,8 +629,6 @@ const FeeDetails = () => {
                             >
                               {AdmissionDate}
                             </span>
-                          </TableCell>
-                          <TableCell className="border border 1">
                             <span
                               title={item.finaltotal}
                               style={{
@@ -644,6 +642,9 @@ const FeeDetails = () => {
                             >
                               {item.finaltotal}
                             </span>
+                          </TableCell>
+                          <TableCell className="border border 1">
+                           
                             <span
                               title={item.totalpaidamount}
                               style={{
@@ -670,21 +671,6 @@ const FeeDetails = () => {
                             >
                               {item.dueamount}
                             </span>
-                          </TableCell>
-                          <TableCell className="border border 1">
-                            <span
-                              title={AdmissionDate}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {AdmissionDate}
-                            </span>
                             <span
                               title={NextDueDate}
                               style={{
@@ -698,6 +684,39 @@ const FeeDetails = () => {
                             >
                               {NextDueDate ? NextDueDate : "No NextDue Date"}
                             </span>
+                          </TableCell>
+                          <TableCell className="border border 1">
+                           
+                          {item.totalinstallments &&
+                              item.totalinstallments.length > 0 &&
+                              item.totalinstallments.map((items, index) => {
+                                const dynamicStyle = {
+                                  color: item.dueamount < 1 ? "green" : "red",
+                                  fontSize:
+                                    item.dueamount < 1 ? "20px" : "16px",
+                                  fontWeight:
+                                    item.dueamount < 1 ? "900" : "900",
+                                };
+                                const IconStyle = {
+                                  display: item.dueamount < 1 ? true : "none",
+                                  marginLeft: "10px",
+                                };
+                                if (true) {
+                                  // settotalleft(item.totalinstallmentsleft);
+                                  // totalleft = item.totalinstallmentsleft;
+                                  return (
+                                    <div style={{ display: "flex" }}>
+                                      <span style={dynamicStyle}>
+                                 
+                                        {items.totalinstallments}
+                                      </span>
+                                      <span style={dynamicStyle}>
+                                        <CheckCircleIcon style={IconStyle} />
+                                      </span>
+                                    </div>
+                                  );
+                                }
+                              })}
                           </TableCell>
                           <TableCell className="border border 1">
                             {item.totalinstallments &&
@@ -720,8 +739,7 @@ const FeeDetails = () => {
                                   return (
                                     <div style={{ display: "flex" }}>
                                       <span style={dynamicStyle}>
-                                        {items.totalinstallmentspaid}/
-                                        {items.totalinstallments}
+                                        {items.totalinstallmentspaid}
                                       </span>
                                       <span style={dynamicStyle}>
                                         <CheckCircleIcon style={IconStyle} />
