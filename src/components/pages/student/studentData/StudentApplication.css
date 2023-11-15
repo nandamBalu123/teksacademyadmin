@@ -1,9 +1,9 @@
 .page {
   width: 100%;
-  margin: 0;
+ 
   padding: 0;
   page-break-before:always;
-  border: 1.5px solid black;
+  /* border: 1.5px solid black; */
 }
 
 @page {
@@ -18,8 +18,8 @@
 }
 
 .application {
-  border: 1.5px solid #000;
-  padding: 0px 0;
+  /* border: 1.5px solid #000; */
+  /* padding: 0px 0; */
   overflow: hidden;
 }
 th  {
@@ -31,16 +31,18 @@ th  {
   border: 3px solid #ccc;
   border-radius: 5px;
 }
+
 .borderright{ 
   border: 2px solid #454545;
-  border-right: none;
+  /* border-right: none; */
 margin: 0;
 font-weight: bold;
 }
 .borderleft{ 
   border: 2px solid #454545;
   border-left: 1.5px solid #454545;
-  border-right: none;
+  /* border-right: 2.5px solid #454545; */
+  /* border-right: none; */
 }
 
 .table-bordered td,
@@ -52,7 +54,7 @@ font-weight: bold;
   border-left: none !important;
 }
 .admform-scd td {
-  border-right: 0px;
+  border-right: 1.5px solid #454545;
 }
 .admform-scd th {
   border-left: none !important;
