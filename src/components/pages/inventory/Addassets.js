@@ -314,11 +314,11 @@ const Addassets = () => {
                               <RemoveRedEyeIcon />
                             </button>
                           </NavLink>
-                          {/* <NavLink to={`edit/${element.id}`}>
+                          <NavLink to={`edit/${element.id}`}>
                             <button className="btn btn-primary">
                               <CreateIcon />
                             </button>
-                          </NavLink> */}
+                          </NavLink>
                           <button
                             className="btn btn-danger"
                             onClick={() => deleteuser(element.id)}
