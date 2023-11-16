@@ -23,7 +23,7 @@ const Edit = () => {
 
   const [inpval, setINP] = useState({
     name: "",
-    vendername: "",
+    // vendername: "",
     designation: "",
     branch: "",
     assettype: "",
@@ -75,7 +75,7 @@ const Edit = () => {
 
     const {
       name,
-      vendername,
+      // vendername,
       designation,
       branch,
       assettype,
@@ -92,7 +92,7 @@ const Edit = () => {
       },
       body: JSON.stringify({
         name,
-        vendername,
+        // vendername,
         designation,
         branch,
         assettype,
@@ -134,19 +134,6 @@ const Edit = () => {
           </div>
           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
           <TextField
-                label="Vender Name"
-                className=" mar w-75"
-                variant="standard"
-                name="name"
-                type="text"
-                value={inpval.vendername}
-                onChange={setdata}
-              
-              />
-          </div> </div>
-           <div className="row"> 
-           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-           <TextField
                 label="Designation"
                 className=" mar w-75"
                 variant="standard"
@@ -156,7 +143,18 @@ const Edit = () => {
                 onChange={setdata}
             
               />
-           </div>
+          {/* <TextField
+                label="Vender Name"
+                className=" mar w-75"
+                variant="standard"
+                name="name"
+                type="text"
+                value={inpval.vendername}
+                onChange={setdata}
+              
+              /> */}
+          </div> </div>
+           <div className="row"> 
            <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
            <TextField
                 label="Branch"
@@ -170,8 +168,6 @@ const Edit = () => {
              
               />
            </div>
-           </div>
-           <div className="row"> 
            <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
            <TextField
                 label="Asset Type"
@@ -183,6 +179,8 @@ const Edit = () => {
                 name="assettype"
                  />
            </div>
+           </div>
+           <div className="row"> 
            <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
            <TextField
                 label="Issue Date"
@@ -198,9 +196,7 @@ const Edit = () => {
                 }}
               />
            </div>
-           </div>
-           <div className="row"> 
-           <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
            <TextField
                 label="Asset Code"
                 className=" mar w-75"
@@ -210,9 +206,11 @@ const Edit = () => {
                 onChange={setdata}
                 name="assetcode"
                  />
-             </div>
-             <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-             <TextField
+           </div>
+           </div>
+           <div className="row"> 
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+           <TextField
                 label="Quantity"
                 className=" mar w-75"
                 variant="standard"
@@ -221,9 +219,7 @@ const Edit = () => {
                 onChange={setdata}
                 name="anonymity"
                  />
-              </div>
-           </div>
-             <div className="row"> 
+             </div>
              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
              <TextField
                 label="Remarks"
@@ -234,8 +230,9 @@ const Edit = () => {
                 onChange={setdata}
                 name="remarks"
                  />
-             </div>
-             </div>
+              </div>
+           </div>
+            
              <div className="create-button  d-flex justify-content-between mt-4 ">
            
             <NavLink to="/assignassets ">
