@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CreateAssetTypeForm() {
+export default function Vendor() {
   return (
     <div>
       

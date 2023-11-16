@@ -21,7 +21,7 @@ import Inventoryhome from "../src/components/pages/inventory/Inventoryhome";
 import ReturnAssetsForm from "../src/components/pages/inventory/ReturnAssetsForm";
 import Addassetsview from "./components/pages/inventory/addassetsview";
 import AssetType from "./components/pages/inventory/Settings/AssetType";
-import CreateAssetTypeForm from "./components/pages/inventory/Settings/CreateAssetTypeForm";
+import Vendor from "./components/pages/inventory/Settings/Vendor";
 // uncomand inventory end
 import Dashboard from "./components/pages/dashboard/Dashboard";
 import Sidebar from "./components/common/Sidebar/Sidebar";
@@ -399,10 +399,10 @@ function App() {
                 }
               ></Route>
               <Route
-                path="/createassettypeform"
+                path="/vendor"
                 element={
                   user && user.profile == "admin" ? (
-                    <CreateAssetTypeForm />
+                    <Vendor />
                   ) : (
                     <Dashboard />
                   )
