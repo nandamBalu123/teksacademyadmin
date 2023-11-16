@@ -7,6 +7,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
+import Dialog from '@mui/material/Dialog';
+import Button from '@mui/material/Button';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import TextField from '@mui/material/TextField';
+import DialogTitle from '@mui/material/DialogTitle';
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 
@@ -36,17 +42,54 @@ export default function Vendor() {
       border: 0,
     },
   }));
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="container">
       <div className="flex mt-3">
         <p className="fs-5 ms-3">Vendor</p>
+
+        <React.Fragment>
         <button
+         onClick={handleClickOpen}
+          type="submit"
+          className="btn btn-primary mr-20 ms-2">
+         Add Vendor
+        </button>
+      
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Add Vendor Name</DialogTitle>
+        <DialogContent>
+        
+          <TextField
+            autoFocus
+            label="Vendor Name"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button >submit</Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+
+        {/* <button
           type="submit"
           className="btn btn-primary mr-20 ms-2 mb-2"
-          onClick={handleSubmit}
+        
         >
           Add Vendor
-        </button>
+        </button> */}
       </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 1000 }} aria-label="customized table">
