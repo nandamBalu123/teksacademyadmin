@@ -718,7 +718,11 @@ const Assignassets = () => {
                               <RemoveRedEyeIcon />
                             </button>
                           </NavLink>
-                         
+                          <NavLink to={`edit/${element.id}`}>
+                            <button className="btn btn-primary">
+                              <CreateIcon />
+                            </button>
+                          </NavLink>
                           <NavLink to={`returnassets/${element.id}`}>
                             <button className="btn btn-primary">
                               <ArrowDownwardIcon />
