@@ -880,7 +880,7 @@ const Assignassets = () => {
                   <TableRow >
                     <TableCell  className="bg-primary fs-6  border border 1 text-light">ID </TableCell>
                     <TableCell className="bg-primary fs-6  border border 1 text-light">Name </TableCell>
-                    <TableCell className="bg-primary fs-6  border border 1 text-light">Vender Name </TableCell>
+                    {/* <TableCell className="bg-primary fs-6  border border 1 text-light">Vender Name </TableCell> */}
                     <TableCell className="bg-primary fs-6  border border 1 text-light"> Branch</TableCell>
                     <TableCell className="bg-primary fs-6  border border 1 text-light"> Asset Type</TableCell>
                     <TableCell className="bg-primary fs-6  border border 1 text-light"> Brand Name </TableCell>
@@ -924,7 +924,7 @@ const Assignassets = () => {
                         <TableCell  className="border border 1 text-center">{id + 1}</TableCell>
                         {/* <td>{element.name}</td> */}
                         <TableCell  className="border border 1 text-center">{element.name}</TableCell>
-                        <TableCell  className="border border 1 text-center">{element.vendername}</TableCell>
+                        {/* <TableCell  className="border border 1 text-center">{element.vendername}</TableCell> */}
                         {/* <td>{element.designation}</td> */}
                         {/* <td>{element.branch}</td> */}
                         <TableCell  className="border border 1 text-center">{element.branch}</TableCell>
