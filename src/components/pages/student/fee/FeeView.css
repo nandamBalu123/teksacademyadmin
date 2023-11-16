@@ -1,93 +1,110 @@
-.fee{ 
-    width: 100%;
-    background-color: #fff;
+.fee {
+  width: 100%;
+  background-color: #fff;
+}
+.feeview {
+  width: 97%;
+  margin: auto;
+}
+.instalment {
+  width: 100%;
+  margin: auto;
+  padding-top: 30px;
+  border-radius: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.student-input {
+  position: relative;
+  margin: 20px 0;
+}
+.student-input label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
 
+  transform: translateY(-50%);
+  font-size: 14px;
+  padding: 0 5px;
 }
-.feeview{ 
-    width: 97%;
-     margin: auto;
+.student-input input {
+  width: 220px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
 }
-.instalment{ 
-    width: 100%;
-    margin: auto;
-    padding-top: 30px;
-    border-radius: 10px;
-    margin-top: 40px;
-     margin-bottom: 40px;
-     }
-.student-input{ 
-position: relative;
-margin: 20px 0;
+.student-input input:focus ~ label,
+.student-input input:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+.payment input,
+.payment select {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.updatebtn {
+  text-align: start;
+}
+.feeviewlabel {
+  width: 10%;
+}
+.mul-input {
+  position: relative;
+  margin: 20px 0;
+}
+.mul-input label {
+  position: absolute;
+  top: 2%;
+  left: 10%;
+  outline: none;
 
+  transform: translateY(-50%);
+  font-size: 14px;
+  padding: 0 5px;
 }
-.student-input label{ 
-    position: absolute;
-    top:2%;
-    left: 19%;
-    
-    transform: translateY(-50%);
-    font-size: 14px;
-    padding: 0 5px;
-
+.mul-input select {
+  width: 220px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
 }
-.student-input input{ 
-    width: 220px;
-    height: 50px;
-    font-size: 18px;
-    border-radius: 6px;
-    padding-left: 10px;
-    border: 1.9px solid black;
-    
-}
-.student-input input:focus~label,
-.student-input input:valid~label{ 
-    top:0 ;
-    background-color: #fff;
-    color: #0070fc;
-}
-.payment input , .payment select{ 
- padding: 10px;
- border: 1px solid black;
- border-radius: 10px;
-}
-.updatebtn{ 
-    text-align: start;
-}
-.feeviewlabel{ 
-    width: 10%;
-}
-.mul-input{ 
-    position: relative;
-    margin: 20px 0; 
-} 
-.mul-input label{ 
-    position: absolute;
-    top:2%;
-    left: 10%;
-    outline: none;
-    
-    transform: translateY(-50%);
-    font-size: 14px;
-    padding: 0 5px;  
-}
-.mul-input select{ 
-    width: 220px;
-    height: 50px;
-    font-size: 18px;
-    border-radius: 6px;
-    padding-left: 10px;
-    border: 1.9px solid black;
-}
-.mul-input select:focus~label,
-.mul-input select:valid~label{ 
-    top:0 ;
-    background-color: #fff;
-    color: #0070fc;
+.mul-input select:focus ~ label,
+.mul-input select:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
 }
 input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button{ 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+.hover-container {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-text {
+  position: absolute;
+  top: -150%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8f8f8;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.hover-container:hover .hover-text {
+  display: block;
+}

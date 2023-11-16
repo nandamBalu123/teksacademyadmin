@@ -506,10 +506,29 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     studentdata.feedetails.map((item, index) => (
                       <tr key={index}>
                         <td>{item.feetype}</td>
-                        <td>{item.amount}</td>
-                        <td>{item.discount}</td>
-                        <td>{parseFloat(item.taxamount).toFixed(2)}</td>
-                        <td>{item.totalamount} </td>
+                        <td>
+                          {Number(
+                            parseFloat(item.amount).toFixed(2)
+                          ).toLocaleString("en-IN")}
+                        </td>
+                        <td>
+                          {item.discount &&
+                            Number(
+                              parseFloat(item.discount).toFixed(2)
+                            ).toLocaleString("en-IN")}
+                          {!item.discount && <>0</>}
+                        </td>
+                        <td>
+                          {" "}
+                          {Number(
+                            parseFloat(item.taxamount).toFixed(2)
+                          ).toLocaleString("en-IN")}
+                        </td>
+                        <td>
+                          {Number(
+                            parseFloat(item.totalamount).toFixed(2)
+                          ).toLocaleString("en-IN")}{" "}
+                        </td>
                       </tr>
                     ))}
                 </tbody>

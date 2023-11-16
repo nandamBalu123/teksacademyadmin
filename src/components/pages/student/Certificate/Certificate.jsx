@@ -251,78 +251,73 @@ const Certificate = () => {
           </div>
 
           <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
-            
-              {/* id="demo-positioned-button"
+            {/* id="demo-positioned-button"
               aria-controls={open ? "demo-positioned-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
             > */}
-              <button
-                className="btn btn-primary mr-20 ms-2 mb-2 mt-1"
-                onClick={handleClick}
-                style={{ textTransform: "capitalize" }}
-              >
-                Filter
-              </button>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
-                style={{
-                  width: "",
-                  borderRadius: "25px",
-                  marginTop: "20px",
-                  cursor: "pointer",
-                }}
-              >
+            <button
+              className="btn btn-primary mr-20 ms-2 mb-2 mt-1"
+              onClick={handleClick}
+              style={{ textTransform: "capitalize" }}
+            >
+              Filter
+            </button>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+              style={{
+                width: "",
+                borderRadius: "25px",
+                marginTop: "20px",
+                cursor: "pointer",
+              }}
+            >
               <div className="d-flex justify-content-between m-2">
-               <div > Filter</div>
-             
-              <div >
+                <div> Filter</div>
+
+                <div>
                   {" "}
                   <CloseIcon onClick={handleClose} />{" "}
                 </div>
-           
               </div>
               <hr />
               <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
-              
-                      label=" From:"
-                      type="date"
-                      variant="standard"
-                      className="  w-100"
-                       InputLabelProps={{
-                        shrink: true,
-                        
-                      }}
-                      name="fromdate"
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <TextField
+                    label=" From:"
+                    type="date"
+                    variant="standard"
+                    className="  w-100"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="fromdate"
                     value={filterCriteria.fromdate}
                     onChange={handleInputChange}
-                    />
+                  />
                 </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2"> 
-                <TextField
-                      label=" To:"
-                      type="date"
-                      variant="standard"
-                      className="w-100"
-                    
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="todate"
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <TextField
+                    label=" To:"
+                    type="date"
+                    variant="standard"
+                    className="w-100"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="todate"
                     value={filterCriteria.todate}
                     onChange={handleInputChange}
-                    />
+                  />
                 </div>
-             
+
                 {/* <div>
                   <label> From: </label>
                 </div>
@@ -360,26 +355,25 @@ const Certificate = () => {
                 </div>
               </MenuItem> */}
               <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 "> 
-                <FormControl variant="standard" className="w-100">
-                      <InputLabel>Course</InputLabel>
-                      <Select
-                      
-                       name="course"
-                        value={filterCriteria.course}
-                        onChange={handleInputChange}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        {getcourses &&
-                    getcourses.map((item, index) => (
-                      <MenuItem key={item.id} value={item.course_name}>
-                        {item.course_name}
-                      </MenuItem>
-                    ))}
-                      </Select>
-                    </FormControl>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>Course</InputLabel>
+                    <Select
+                      name="course"
+                      value={filterCriteria.course}
+                      onChange={handleInputChange}
+                    >
+                      <MenuItem value="select"> ---select---</MenuItem>
+                      {getcourses &&
+                        getcourses.map((item, index) => (
+                          <MenuItem key={item.id} value={item.course_name}>
+                            {item.course_name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
                 </div>
-              
+
                 {/* <select
                   className="mt-3"
                   id=""
@@ -402,65 +396,61 @@ const Certificate = () => {
                       </option>
                     ))}
                 </select> */}
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-                <FormControl variant="standard" className="w-100">
-                      <InputLabel>Branch</InputLabel>
-                      <Select
-                      
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>Branch</InputLabel>
+                    <Select
                       name="branch"
                       value={filterCriteria.branch}
                       onChange={handleInputChange}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        {branches &&
-                    branches.map((branch, index) => (
-                      <MenuItem key={branch.id} value={branch.branch_name}>
-                        {branch.branch_name}
-                      </MenuItem>
-                    ))}
-                   
-                      </Select>
-                    </FormControl>
+                    >
+                      <MenuItem value="select"> ---select---</MenuItem>
+                      {branches &&
+                        branches.map((branch, index) => (
+                          <MenuItem key={branch.id} value={branch.branch_name}>
+                            {branch.branch_name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
                 </div>
               </div>
-              <div className="row m-2">  
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-              <FormControl variant="standard" className="w-100">
-                      <InputLabel>Counsellor</InputLabel>
-                      <Select
-                      
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>Counsellor</InputLabel>
+                    <Select
                       name="enquirytakenby"
                       value={filterCriteria.enquirytakenby}
                       onChange={handleInputChange}
-                      >
-                        
-                        {filteredcounsellor &&
-                    filteredcounsellor.map((user, index) => (
-                      <MenuItem value={user.fullname}> {user.fullname}</MenuItem>
-                    ))}
-                   
-                      </Select>
-                    </FormControl>
-               </div>
-               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-               <FormControl variant="standard" className="w-100">
-                      <InputLabel>Certificate Status</InputLabel>
-                      <Select
-                      
+                    >
+                      {filteredcounsellor &&
+                        filteredcounsellor.map((user, index) => (
+                          <MenuItem value={user.fullname}>
+                            {" "}
+                            {user.fullname}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>Certificate Status</InputLabel>
+                    <Select
                       name="enquirytakenby"
                       value={filterCriteria.enquirytakenby}
                       onChange={handleInputChange}
-                      >
-                        
-                        <MenuItem value="request Submitted">Request Submitted</MenuItem>
-                  <MenuItem value="issued">Issued  </MenuItem>
-                  <MenuItem value="">Pending</MenuItem>
-                   
-                      </Select>
-                    </FormControl>
-               </div>
+                    >
+                      <MenuItem value="request Submitted">
+                        Request Submitted
+                      </MenuItem>
+                      <MenuItem value="issued">Issued </MenuItem>
+                      <MenuItem value="">Pending</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
               </div>
-            
 
               {/* <MenuItem>
                 <select
@@ -554,7 +544,7 @@ const Certificate = () => {
   </ul>
 </div> */}
 
-        <Paper sx={{ width: "100%", overflow: "hidden" }} >
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -592,13 +582,6 @@ const Certificate = () => {
               <TableBody>
                 {records &&
                   records.map((student, index) => {
-                    const validitystartdate = student.validitystartdate;
-                    const dateTime = new Date(validitystartdate);
-                    const startdate = dateTime.toISOString().slice(0, 10);
-                    const validityenddate = student.validityenddate;
-                    const dateTimee = new Date(validitystartdate);
-                    const enddate = dateTimee.toISOString().slice(0, 10);
-
                     const certificate_Status = student.certificate_status;
                     const courseStartDate = certificate_Status
                       .map((item) => item.courseStartDate)
@@ -616,101 +599,91 @@ const Certificate = () => {
                           {index + 1}
                         </TableCell>
                         <TableCell className="border border 1">
-                        <span
-                                title={student.name}
-                                style={{
-                                  
-                                  width: "6rem",
-                                  
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                               {student.name}
-                              </span>
-                          
+                          <span
+                            title={student.name}
+                            style={{
+                              width: "6rem",
+
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display: "block",
+                            }}
+                          >
+                            {student.name}
+                          </span>
                         </TableCell>
                         <TableCell className="border border 1 ">
-                        <span
-                                title=   {student.courses}
-                                style={{
-                                  
-                                  width: "4rem",
-                                  
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                  {student.courses}
-                              </span>
-                       
+                          <span
+                            title={student.courses}
+                            style={{
+                              width: "4rem",
+
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display: "block",
+                            }}
+                          >
+                            {student.courses}
+                          </span>
                         </TableCell>
                         <TableCell className="border border 1 ">
-                        <span
-                                title= {student.registrationnumber}
-                                style={{
-                                  
-                                  width: "7rem",
-                                  
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                   {student.registrationnumber}
-                              </span>
-                         
+                          <span
+                            title={student.registrationnumber}
+                            style={{
+                              width: "7rem",
+
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "15px",
+                              display: "block",
+                            }}
+                          >
+                            {student.registrationnumber}
+                          </span>
                         </TableCell>
 
                         <TableCell className="border border 1 ">
-                        <span
-                              
-                                style={{
-                                fontSize: "15px",
-                                 
-                                }}
-                                >
-                                  <input
-                            type="date"
-                            name="startdate"
-                            className="startdate"
-                            onChange={(e) => setcourseStartDate(e.target.value)}
-                            value={
-                              courseStartDate !== ""
-                                ? courseStartDate
-                                : undefined
-                            }
-                          />
-                              </span>
-                         
+                          <span
+                            style={{
+                              fontSize: "15px",
+                            }}
+                          >
+                            <input
+                              type="date"
+                              name="startdate"
+                              className="startdate"
+                              onChange={(e) =>
+                                setcourseStartDate(e.target.value)
+                              }
+                              value={
+                                courseStartDate !== ""
+                                  ? courseStartDate
+                                  : undefined
+                              }
+                            />
+                          </span>
                         </TableCell>
                         <TableCell className="border border 1 ">
-                        <span
-                              
-                              style={{
-                              
-                                  fontSize: "15px",
-                              
-                              }}>
-                              <input
-                            type="date"
-                            name="enddate"
-                            className="enddate"
-                            onChange={(e) => setcourseEndDate(e.target.value)}
-                            value={
-                              courseEndDate !== "" ? courseEndDate : undefined
-                            }
-                          />
-                            </span>
-                          
+                          <span
+                            style={{
+                              fontSize: "15px",
+                            }}
+                          >
+                            <input
+                              type="date"
+                              name="enddate"
+                              className="enddate"
+                              onChange={(e) => setcourseEndDate(e.target.value)}
+                              value={
+                                courseEndDate !== "" ? courseEndDate : undefined
+                              }
+                            />
+                          </span>
                         </TableCell>
                         <TableCell className="border border 1  text-center fs-6">
                           {certificateStatus === "" && (
