@@ -24,8 +24,10 @@ import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
+import InventoryIcon from '@mui/icons-material/Inventory';
 import StorageIcon from "@mui/icons-material/Storage"
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
@@ -341,14 +343,14 @@ const Sidebar = () => {
                   <Item
                     title="Add Assets"
                     to="/addassets"
-                    icon={<StorageIcon />}
+                    icon={<InventoryIcon/>}
                     selected={selected}
                     setSelected={setSelected}
                   />
                   <Item
                     title="Assign Assets"
                     to="/assignassets"
-                    icon={<StorageIcon />}
+                    icon={<AssignmentTurnedInIcon/>}
                     selected={selected}
                     setSelected={setSelected}
                   />

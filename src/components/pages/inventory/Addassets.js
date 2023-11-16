@@ -5,6 +5,22 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { NavLink, Navigate } from "react-router-dom";
 import { adddata, deldata } from "./context/ContextProvider";
 import { updatedata } from "./context/ContextProvider";
+import { CardActionArea } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import laptapasset from "../../../images/Laptap-asset.avif";
+import tshirts from "../../../images/assets T-Shirts.avif";
+import shirts from "../../../images/shirt-asset.jpg";
 
 // import axios from 'axios'
 // import SideBar from "../Sidebar/SideBar";
@@ -59,12 +75,15 @@ const Addassets = () => {
   }, []);
 
   const deleteuser = async (id) => {
-    const res2 = await fetch(`${process.env.REACT_APP_API_URL}/deleteuser/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_API_URL}/deleteuser/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const deletedata = await res2.json();
     console.log(deletedata);
@@ -205,22 +224,220 @@ const Addassets = () => {
         ""
       )}
 
-      <div>
-        <div className="mt-5">
-          <div className="container">
-            <div className="col-lg-12">
-              <div className="row">
-                <div className="col-lg-3">
-                  <div className="mt-2 mb-2">
-                    <NavLink to="/addassetsform" className="btn btn-primary">
+      <div className="container">
+        <div className="d-flex justify-content-between mt-4"> 
+        <h4>Add Assets </h4>
+         <NavLink to="/addassetsform" className="btn btn-primary">
                       Add Assets
                     </NavLink>
-                    <br></br>
-                    {/* <span>Rows : <strong>{getuserdata.length}</strong></span><br></br>
+         </div>
+        <div className="assets-card row">
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            {/* style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: true,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
+            } */}
+
+            <Card
+              style={{ backgroundColor: "#f3a9b2" }}
+              className="rounded rounded-3"
+            >
+              <p className="pt-3 text-center">
+                {" "}
+                Total Laptops: <strong>{getLaptopCount()}</strong>{" "}
+              </p>
+            </Card> </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            {/* style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: true,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
+            } */}
+
+            <Card
+              style={{ backgroundColor: "#a6ebdc" }}
+              className="rounded rounded-3"
+            >
+              <p className="pt-3 text-center">
+              Total Tshirts: <strong>{getTshirtCount()}</strong>
+              </p>
+            </Card> </div> 
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            {/* style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: true,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
+            } */}
+
+            <Card
+              style={{ backgroundColor: "#b7e9da" }}
+              className="rounded rounded-3"
+            >
+              <p className="pt-3 text-center">
+              Total Shirt: <strong>{getShirtCount()}</strong>
+              </p>
+            </Card> </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            {/* style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: true,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
+            } */}
+
+            <Card
+              style={{ backgroundColor: "#f3a9b2" }}
+              className="rounded rounded-3"
+            >
+              <p className="pt-3 text-center">
+              Total charger: <strong>{getChargerCount()}</strong>
+              </p>
+            </Card> </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            {/* style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: true,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
+            } */}
+
+            <Card
+              style={{ backgroundColor: "#a6ebdc" }}
+              className="rounded rounded-3"
+            >
+              <p className="pt-3 text-center">
+              Total mouse: <strong>{getMouseCount()}</strong>
+              </p>
+            </Card> </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            {/* style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: true,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
+            } */}
+
+            <Card
+              style={{ backgroundColor: "#d4eaea" }}
+              className="rounded rounded-3"
+            >
+              <p className="pt-3 text-center">
+              Total bags: <strong>{getStudentsBags()}</strong>
+              </p>
+            </Card> </div>
+            </div>
+
+            {/* <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="100"
+                  image={laptapasset}
+                  alt="LaptapAsset"
+                />
+                <CardContent
+                  className="p-2"
+                  style={{
+                    backgroundColor: "#d9e9e9",
+                    fontSize: "15px",
+                    textAlign: "center",
+                  }}
+                >
+                  Total Laptps: <strong>{getLaptopCount()}</strong>
+                </CardContent>
+              </CardActionArea>
+            </Card> */}
+         
+          {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="100"
+                  image={tshirts}
+                  alt="LaptapAsset"
+                />
+                <CardContent
+                  className="p-2"
+                  style={{ backgroundColor: "#d9e9e9", fontSize: "15px" }}
+                >
+                  Total Tshirts:<strong>{getTshirtCount()}</strong>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </div> */}
+          {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="100"
+                  image={shirts}
+                  alt="Shirts"
+                />
+                <CardContent
+                  className="p-2"
+                  style={{ backgroundColor: "#d9e9e9", fontSize: "15px" }}
+                >
+                  Total shirt: <strong>{getShirtCount()}</strong>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </div> */}
+          {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="100"
+                  image="https://img.freepik.com/premium-vector/laptop-with-charger_389832-889.jpg?w=740"
+                  alt="Chargers"
+                />
+                <CardContent
+                  className="p-2"
+                  style={{ backgroundColor: "#d9e9e9", fontSize: "15px" }}
+                >
+                  Total charger: <strong>{getChargerCount()}</strong>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </div> */}
+       
+        <div className="col-lg-12">
+          <div className="row">
+            <div className="col-lg-3">
+              <div className=" mb-2">
+                {/* <NavLink to="/addassetsform" className="btn btn-primary">
+                      Add Assets
+                    </NavLink> */}
+                <br></br>
+                {/* <span>Rows : <strong>{getuserdata.length}</strong></span><br></br>
                                     <span>Total quantity: <strong>{getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</strong></span><br></br> */}
-                  </div>
-                </div>
-                <div className="col-lg-3">
+              </div>
+            </div>
+            {/* <div className="col-lg-3">
                   <div className="mt-2 mb-2">
                     <span>
                       Total laptops: <strong>{getLaptopCount()}</strong>
@@ -232,7 +449,7 @@ const Addassets = () => {
                     <br></br>
                   </div>
                 </div>
-                <div className="col-lg-3">
+            <div className="col-lg-3">
                   <div className="mt-2 mb-2">
                     <span>
                       Total shirt: <strong>{getShirtCount()}</strong>
@@ -255,9 +472,9 @@ const Addassets = () => {
                     </span>
                     <br></br>
                   </div>
-                </div>
-              </div>
-              {/* <div className="add_btn mt-2 mb-2">
+                </div> */}
+          </div>
+          {/* <div className="add_btn mt-2 mb-2">
                         <NavLink to="/addassetsform" className="btn btn-primary">Add Record</NavLink><br></br>
                         <span>Rows : {getuserdata.length}</span><br></br>
                         <span>Total laptops: {getLaptopCount()}</span><br></br>
@@ -269,93 +486,91 @@ const Addassets = () => {
                         <hr></hr>
                         <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
                     </div> */}
-              <div className="mt-2 mb-2">
-                {/* <NavLink to="/addassetsform" className="btn btn-primary">Add Record</NavLink><br></br> */}
-              </div>
-              <table class="table col-12" id="your-table-id">
-                <thead>
-                  <tr className="table-primary">
-                    <th scope="col">ID</th>
-                    {/* <th scope="col">Name</th> */}
-                    <th scope="col">Vender Name</th>
-                    {/* <th scope="col">Designation</th> */}
-                    {/* <th scope="col">Branch</th> */}
-                    <th scope="col">Asset Type</th>
-                    <th scope="col">Brand Name</th>
-                    {/* <th scope="col">Remarks</th> */}
-                    {/* <th scope="col">Issued Date</th> */}
-                    <th scope="col">Asset Code</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Status</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
 
-                <tbody>
+          {/* <NavLink to="/addassetsform" className="btn btn-primary">Add Record</NavLink><br></br> */}
+          <Paper sx={{ width: "100%", overflow: "hidden" }}>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">
+                      ID{" "}
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">
+                      Vender Name{" "}
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">
+                      {" "}
+                      Asset Type
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">
+                      {" "}
+                      Brand Name{" "}
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">
+                      Asset Code{" "}
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">
+                      {" "}
+                      Quantity
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">
+                      Status{" "}
+                    </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">
+                      Actions{" "}
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
                   {getuserdata.map((element, id) => (
                     <React.Fragment key={id}>
-                      <tr>
-                        <th scope="row">{id + 1}</th>
+                      <TableRow>
+                        <TableCell className="border border 1 text-center">
+                          {id + 1}
+                        </TableCell>
                         {/* <td>{element.name}</td> */}
-                        <td>{element.vendername}</td>
+                        <TableCell className="border border 1 text-center">
+                          {element.vendername}
+                        </TableCell>
                         {/* <td>{element.designation}</td> */}
                         {/* <td>{element.branch}</td> */}
-                        <td>{element.assettype}</td>
-                        <td>{element.brandname}</td>
+                        <TableCell className="border border 1 text-center">
+                          {element.assettype}
+                        </TableCell>
+                        <TableCell className="border border 1 text-center">
+                          {element.brandname}
+                        </TableCell>
                         {/* <td>{element.remarks}</td> */}
                         {/* <td>{element.issueddate}</td> */}
-                        <td>{element.assetcode}</td>
-                        <td>{element.anonymity}</td>
-                        <td>{element.returndate}</td>
-
-                        <td className="d-flex justify-content-between">
+                        <TableCell className="border border 1 text-center">
+                          {element.assetcode}
+                        </TableCell>
+                        <TableCell className="border border 1 text-center">
+                          {element.anonymity}
+                        </TableCell>
+                        <TableCell className="border border 1 text-center">
+                          {element.returndate}
+                        </TableCell>
+                        <TableCell className="border border 1 text-center">
                           <NavLink to={`view/${element.id}`}>
-                            <button className="btn btn-success">
-                              <RemoveRedEyeIcon />
-                            </button>
+                            <RemoveRedEyeIcon />{" "}
+                          </NavLink>{" "}
+                          <NavLink to={`edit/${element.id}`}>
+                            <CreateIcon />
                           </NavLink>
-                          {/* <NavLink to={`edit/${element.id}`}>
-                            <button className="btn btn-primary">
-                              <CreateIcon />
-                            </button>
-                          </NavLink> */}
-                          <button
-                            className="btn btn-danger"
+                          <DeleteOutlineIcon
                             onClick={() => deleteuser(element.id)}
-                          >
-                            <DeleteOutlineIcon />
-                          </button>
-                        </td>
-                      </tr>
+                            className="text-danger"
+                          />
+                        </TableCell>
+                      </TableRow>
                     </React.Fragment>
                   ))}
-                </tbody>
-                {/* <tbody>
-
-                            {
-                                getuserdata.map((element, id) => {
-                                    return (
-                                        <>
-                                            <tr>
-                                                <th scope="row">{id + 1}</th>
-                                                <td>{element.name}</td>
-                                                <td>{element.email}</td>
-                                                <td>{element.work}</td>
-                                                <td>{element.mobile}</td>
-                                                <td className="d-flex justify-content-between">
-                                                    <NavLink to={`view/${element.id}`}> <button className="btn btn-success"><RemoveRedEyeIcon /></button></NavLink>
-                                                    <NavLink to={`edit/${element.id}`}>  <button className="btn btn-primary"><CreateIcon /></button></NavLink>
-                                                    <button className="btn btn-danger" onClick={() => deleteuser(element.id)}><DeleteOutlineIcon /></button>
-                                                </td>
-                                            </tr>
-                                        </>
-                                    )
-                                })
-                            }
-                        </tbody> */}
-              </table>
-            </div>
-          </div>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
         </div>
       </div>
     </>
