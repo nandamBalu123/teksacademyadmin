@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { NavLink, Navigate } from "react-router-dom";
 import { adddata, deldata } from "./context/ContextProvider";
@@ -66,15 +66,12 @@ const Assignassets = () => {
   }, []);
 
   const deleteuser = async (id) => {
-    const res2 = await fetch(
-      `${process.env.REACT_APP_API_URL}/deleteasset/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res2 = await fetch(`${process.env.REACT_APP_API_URL}/deleteasset/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const deletedata = await res2.json();
     console.log(deletedata);
@@ -505,7 +502,7 @@ const Assignassets = () => {
                     <span>
                       Total Bags: <strong>{hcgetStudentsBags()}</strong>
                     </span>
-                    <br></br>
+                    <br></br> */}
 
                     {/* <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br> */}
                   </div>
@@ -516,6 +513,8 @@ const Assignassets = () => {
                     {/* <span>Rows : {getassigndata.length}</span><br></br> */}
                     <span>
                       Total Laptops: <strong>{apgetLaptopCount()}</strong>
+                    {/* <span>
+                      Total laptops: <strong>{apgetLaptopCount()}</strong>
                     </span>
                     <br></br>
                     <span>
@@ -537,7 +536,7 @@ const Assignassets = () => {
                     <span>
                       Total Bags: <strong>{apgetStudentsBags()}</strong>
                     </span>
-                    <br></br>
+                    <br></br> */}
 
                     {/* <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br> */}
                   </div>
@@ -548,6 +547,8 @@ const Assignassets = () => {
                     {/* <span>Rows : {getassigndata.length}</span><br></br> */}
                     <span>
                       Total Laptops: <strong>{dngetLaptopCount()}</strong>
+                    {/* <span>
+                      Total laptops: <strong>{dngetLaptopCount()}</strong>
                     </span>
                     <br></br>
                     <span>
@@ -569,7 +570,7 @@ const Assignassets = () => {
                     <span>
                       Total Bags: <strong>{dngetStudentsBags()}</strong>
                     </span>
-                    <br></br>
+                    <br></br> */}
 
                     {/* <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br> */}
                   </div>
@@ -588,134 +589,96 @@ const Assignassets = () => {
                             <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
                             
                         </div> */}
-              <Paper sx={{ width: "100%", overflow: "hidden" }}>
-                <TableContainer sx={{ maxHeight: 440 }}>
-                  <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
+               <Paper sx={{ width: "100%", overflow: "hidden" }} className="mt-3">
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow >
+                    <TableCell  className="bg-primary fs-6  border border 1 text-light">ID </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Name </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Vender Name </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light"> Branch</TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light"> Asset Type</TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light"> Brand Name </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Asset Code </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Issue Date </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light"> Quantity</TableCell>
+    
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Actions </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {getassigndata.map((element, id) => {
+                    let AssignDate = new Date(element.issueddate);
+                    const day = AssignDate.getUTCDate();
+                    const monthIndex = AssignDate.getUTCMonth();
+                    const year = AssignDate.getUTCFullYear();
+                
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
+                
+                    // Formatting the date
+                    AssignDate = `${day < 10 ? "0" : ""}${day}-${
+                      monthAbbreviations[monthIndex]
+                    }-${year}`;
+                
+                    return (
+                      <React.Fragment key={id}>
                       <TableRow>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          ID{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Name{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Vender Name{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          {" "}
-                          Branch
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          {" "}
-                          Asset Type
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          {" "}
-                          Brand Name{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Asset Code{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Issue Date{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          {" "}
-                          Quantity
-                        </TableCell>
-
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Actions{" "}
+                        <TableCell  className="border border 1 text-center">{id + 1}</TableCell>
+                        {/* <td>{element.name}</td> */}
+                        <TableCell  className="border border 1 text-center">{element.name}</TableCell>
+                        <TableCell  className="border border 1 text-center">{element.vendername}</TableCell>
+                        {/* <td>{element.designation}</td> */}
+                        {/* <td>{element.branch}</td> */}
+                        <TableCell  className="border border 1 text-center">{element.branch}</TableCell>
+                        <TableCell  className="border border 1 text-center">{element.assettype}</TableCell>
+                        <TableCell  className="border border 1 text-center">{element.brandname}</TableCell>
+                        {/* <td>{element.remarks}</td> */}
+                        {/* <td>{element.issueddate}</td> */}
+                        <TableCell  className="border border 1 text-center">{element.assetcode}</TableCell>
+                        <TableCell  className="border border 1 text-center">{AssignDate}</TableCell>
+                        <TableCell  className="border border 1 text-center">{element.anonymity}</TableCell>
+           
+                        <TableCell  className="border border 1 text-center">
+                          <NavLink to={`view/${element.id}`}>
+                            <RemoveRedEyeIcon />  
+                               </NavLink><NavLink to={`returnassets/${element.id}`}>
+                          
+                              <ArrowDownwardIcon />
+                            
+                          </NavLink>
+                          <NavLink to={`edit/${element.id}`}>
+                          <CreateIcon />
+                          </NavLink>
+                            <DeleteOutlineIcon
+                              onClick={() => deleteuser(element.id)}
+                              className="text-danger ms-2"
+                            />
+                    
                         </TableCell>
                       </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {getassigndata.map((element, id) => {
-                        let AssignDate = new Date(element.issueddate);
-                        const day = AssignDate.getUTCDate();
-                        const monthIndex = AssignDate.getUTCMonth();
-                        const year = AssignDate.getUTCFullYear();
-
-                        const monthAbbreviations = [
-                          "Jan",
-                          "Feb",
-                          "Mar",
-                          "Apr",
-                          "May",
-                          "Jun",
-                          "Jul",
-                          "Aug",
-                          "Sep",
-                          "Oct",
-                          "Nov",
-                          "Dec",
-                        ];
-
-                        // Formatting the date
-                        AssignDate = `${day < 10 ? "0" : ""}${day}-${
-                          monthAbbreviations[monthIndex]
-                        }-${year}`;
-
-                        return (
-                          <React.Fragment key={id}>
-                            <TableRow>
-                              <TableCell className="border border 1 text-center">
-                                {id + 1}
-                              </TableCell>
-                              {/* <td>{element.name}</td> */}
-                              <TableCell className="border border 1 text-center">
-                                {element.name}
-                              </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {element.vendername}
-                              </TableCell>
-                              {/* <td>{element.designation}</td> */}
-                              {/* <td>{element.branch}</td> */}
-                              <TableCell className="border border 1 text-center">
-                                {element.branch}
-                              </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {element.assettype}
-                              </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {element.brandname}
-                              </TableCell>
-                              {/* <td>{element.remarks}</td> */}
-                              {/* <td>{element.issueddate}</td> */}
-                              <TableCell className="border border 1 text-center">
-                                {element.assetcode}
-                              </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {AssignDate}
-                              </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {element.anonymity}
-                              </TableCell>
-
-                              <TableCell className="border border 1 text-center">
-                                <NavLink to={`view/${element.id}`}>
-                                  <RemoveRedEyeIcon />
-                                </NavLink>
-                                <NavLink to={`returnassets/${element.id}`}>
-                                  <ArrowDownwardIcon />
-                                </NavLink>
-                                <NavLink to={`edit/${element.id}`}>
-                                  <CreateIcon />
-                                </NavLink>
-                                <DeleteOutlineIcon
-                                  onClick={() => deleteuser(element.id)}
-                                  className="text-danger ms-2"
-                                />{" "}
-                              </TableCell>
-                            </TableRow>
-                          </React.Fragment>
-                        );
-                      })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Paper>
+                    </React.Fragment>
+                    )
+                  }
+                   
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
               <table class="table col-12">
                 {/* <thead>
                   <tr className="table-dark">
@@ -733,8 +696,7 @@ const Assignassets = () => {
 
                     <th scope="col"></th>
                   </tr>
-                </thead> */}
-                <tbody>
+                </thead> */}<tbody>
                   {/* {getassigndata.map((element, id) => (
                     <React.Fragment key={id}>
                       <tr>

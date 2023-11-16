@@ -233,15 +233,7 @@ const Addassets = () => {
          </div>
         <div className="assets-card row">
           <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            {/* style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: true,
-                users: false,
-                dueAndReceivedAmount: false,
-              })
-            } */}
+          
 
             <Card
               style={{ backgroundColor: "#f3a9b2" }}
@@ -253,15 +245,7 @@ const Addassets = () => {
               </p>
             </Card> </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            {/* style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: true,
-                users: false,
-                dueAndReceivedAmount: false,
-              })
-            } */}
+           
 
             <Card
               style={{ backgroundColor: "#a6ebdc" }}
@@ -272,15 +256,7 @@ const Addassets = () => {
               </p>
             </Card> </div> 
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            {/* style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: true,
-                users: false,
-                dueAndReceivedAmount: false,
-              })
-            } */}
+            
 
             <Card
               style={{ backgroundColor: "#b7e9da" }}
@@ -291,15 +267,7 @@ const Addassets = () => {
               </p>
             </Card> </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            {/* style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: true,
-                users: false,
-                dueAndReceivedAmount: false,
-              })
-            } */}
+           
 
             <Card
               style={{ backgroundColor: "#f3a9b2" }}
@@ -310,15 +278,7 @@ const Addassets = () => {
               </p>
             </Card> </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            {/* style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: true,
-                users: false,
-                dueAndReceivedAmount: false,
-              })
-            } */}
+            
 
             <Card
               style={{ backgroundColor: "#a6ebdc" }}
@@ -329,15 +289,7 @@ const Addassets = () => {
               </p>
             </Card> </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            {/* style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: true,
-                users: false,
-                dueAndReceivedAmount: false,
-              })
-            } */}
+           
 
             <Card
               style={{ backgroundColor: "#d4eaea" }}
