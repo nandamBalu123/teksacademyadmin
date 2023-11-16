@@ -879,8 +879,57 @@ export default function RegistrationForm() {
   //     };
   //   };
 
+  // const [zipCode, setZipCode] = useState('');
+  // const [locationInfo, setLocationInfo] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (zipcode && zipcode.length > 2) {
+        try {
+          const response = await axios.get(
+            `https://api.opencagedata.com/geocode/v1/json?q=${zipcode}&key=baae7304601949019149fb9c0db270ab`
+          );
+
+          if (response.data.results.length > 0) {
+            const { city, state, country, suburb } = response.data.results[0].components;
+            
+            setCountry(country);
+            setState(state);
+            setArea(suburb);
+            setNative(city);
+            // setLocationInfo({ city, state, country, areaName: suburb || 'Not found' });
+          } else {
+            // setLocationInfo({ city: 'Not found', state: 'Not found', country: 'Not found', areaName: 'Not found' });
+          }
+        } catch (error) {
+          console.error('Error fetching location information:', error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [zipcode]);
+
+  // const handleZipCodeChange = (e) => {
+  //   setZipCode(e.target.value);
+  // };
+
   return (
     <div className="main-container container">
+      {/* <div>
+      <form>
+        <label>
+          Zip Code:
+          <input type="text" value={zipCode} onChange={handleZipCodeChange} />
+        </label>
+      </form>
+      <div>
+        <p>Area Name: {locationInfo.areaName}</p>
+        <p>City: {locationInfo.city}</p>
+        <p>State: {locationInfo.state}</p>
+        <p>Country: {locationInfo.country}</p>
+      </div>
+    </div> */}
       {/* <div className="App">
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload</button>
@@ -1121,7 +1170,16 @@ export default function RegistrationForm() {
               <form className="form">
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <FormControl variant="standard" className="w-75">
+                  <TextField
+                      label=""
+                      type="text"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setCountry(e.target.value)}
+                      value={country}
+                    />
+                    {/* <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Country<span> *</span>
                       </InputLabel>
@@ -1133,14 +1191,20 @@ export default function RegistrationForm() {
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
                         <MenuItem value="india">India</MenuItem>
-                        <MenuItem value="usa">USA</MenuItem>
-                        <MenuItem value="china">China</MenuItem>
-                        <MenuItem value="others">Others</MenuItem>
                       </Select>
-                    </FormControl>
+                    </FormControl> */}
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                    <FormControl variant="standard" className="w-75">
+                  <TextField
+                      label="State"
+                      type="text"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setState(e.target.value)}
+                      value={state}
+                    />
+                    {/* <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         State<span> *</span>
                       </InputLabel>
@@ -1199,7 +1263,7 @@ export default function RegistrationForm() {
                         <MenuItem value="Puducherry">Puducherry</MenuItem>
                         <MenuItem value="others">Others</MenuItem>
                       </Select>
-                    </FormControl>
+                    </FormControl> */}
                   </div>
                 </div>
 
@@ -1231,7 +1295,7 @@ export default function RegistrationForm() {
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Zip Code"
-                      type="number"
+                      type="text"
                       variant="standard"
                       className=" w-75"
                       required

@@ -20,7 +20,17 @@ import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
+import Paper from "@mui/material/Paper";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 const EditStudentForm = () => {
   // const [name, setName] = useState("");
   //   const [email, setEmail] = useState("");
@@ -53,6 +63,7 @@ const EditStudentForm = () => {
   //   const [validityStartDate, setValidityStartDate] = useState("");
   //   const [validityEndDate, setValidityEndDate] = useState("");
 
+  const { students, dispatch } = useStudentsContext();
   const [feetype, setfeetype] = useState("");
   const [amount, setAmount] = useState(0);
   const [discount, setDiscount] = useState(0);
@@ -65,58 +76,13 @@ const EditStudentForm = () => {
   const [totaltax, settotaltax] = useState(0);
   const [grandtotal, setGrandtotal] = useState(0);
   const [admissionremarks, setadmissionremarks] = useState("");
-  const [assets, setassets] = useState("");
+  const [assets, setassets] = useState([]);
   const { leadsources } = useLeadSourceContext();
   const { branches } = useBranchContext();
   const [feedetails, setFeeDetails] = useState([]);
-
-  // useEffect(() => {
-  //   setTotalamount(amount - discount);
-  //   let actualfee = (totalamount * 100) / 118;
-  //   setTaxamount(totalamount - actualfee);
-  // });
-  // // useEffect(() => {}, [totalamount]);
-  // useEffect(() => {
-  //   let date = toString(admissionDate);
-  //   let month = admissionDate[5] + admissionDate[6];
-  //   let year = admissionDate[2] + admissionDate[3];
-  //   let firstbranch;
-  //   if (branch) {
-  //     firstbranch = branch[0].toUpperCase();
-  //   }
-  //   let serialno;
-  //   if (branch == "hitechcity") {
-  //     serialno = hitechcitycount + 1;
-  //   }
-  //   if (branch == "ameerpet") {
-  //     serialno = ameerpetcount + 1;
-  //   }
-  //   if (branch == "dilsukhnagar") {
-  //     serialno = dilsukhnagarcount + 1;
-  //   }
-  //   if (branch == "gachibowli") {
-  //     serialno = gachibowlicount + 1;
-  //   }
-  //   if (serialno) {
-  //     serialno = serialno.toString();
-  //     if (serialno.length === 3) {
-  //       serialno = "0" + serialno;
-  //     }
-  //     if (serialno.length === 2) {
-  //       serialno = "00" + serialno;
-  //     }
-  //     if (serialno.length === 1) {
-  //       serialno = "000" + serialno;
-  //     }
-  //   }
-
-  //   if (!admissionDate) {
-  //     setRegistrationNumber("");
-  //   }
-  //   if (admissionDate) {
-  //     setRegistrationNumber("TA" + firstbranch + month + year + serialno);
-  //   }
-  // }, [admissionDate, branch]);
+  
+  
+  
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -132,98 +98,7 @@ const EditStudentForm = () => {
     setActiveStep(0);
   };
 
-  // const handleFeeDetails = (e) => {
-  //   e.preventDefault();
-
-  //   setFeeDetails([
-  //     ...feedetails,
-  //     {
-  //       feetype: feetype,
-  //       amount: amount,
-  //       discount: discount,
-  //       taxamount: taxamount,
-  //       totalamount: totalamount,
-  //     },
-  //   ]);
-  //   setTaxamount(0);
-  //   setAmount(0);
-  //   setDiscount(0);
-  //   setTotalamount(0);
-  //   setGrosstotal((grosstotal) => grosstotal + parseInt(amount));
-  //   setTotalDiscount((totaldiscount) => totaldiscount + parseInt(discount));
-  //   settotaltax((totaltax) => totaltax + parseInt(taxamount));
-  //   setGrandtotal((grandtotal) => grandtotal + parseInt(totalamount));
-
-  //   console.log(feedetails);
-  // };
-  // const handleSubmit = async () => {
-  //   const studentRegistrationdata = {
-  //     name,
-  //     email,
-  //     mobileNumber,
-  //     parentsname,
-  //     birthdate,
-  //     gender,
-  //     maritalStatus,
-  //     college,
-  //     country,
-  //     state,
-  //     area,
-  //     native,
-  //     zipcode,
-  //     whatsAppNo,
-  //     educationType,
-  //     marks,
-  //     academicyear,
-  //     profilepic,
-  //     enquiryDate,
-  //     enquiryTakenBy,
-  //     coursePackage,
-  //     courses,
-  //     leadSource,
-  //     branch,
-  //     modeOfTraining,
-  //     admissionStatus,
-  //     registrationNumber,
-  //     admissionDate,
-  //     validityStartDate,
-  //     validityEndDate,
-  //     feedetails,
-  //     grosstotal,
-  //     totaldiscount,
-  //     totaltax,
-  //     grandtotal,
-  //     admissionremarks,
-  //     assets,
-  //   };
-  //   console.log("studentRegistration", studentRegistrationdata);
-  //   try {
-  //     // Make the POST request
-  //     const response = await axios.put(
-  //       `http://localhost:3030/updatestudentdata/${id}`,
-  //       studentRegistrationdata
-  //     );
-
-  //     // Handle a successful response here
-  //     console.log("Response:", response.data);
-  //   } catch (error) {
-  //     // Handle the error here
-  //     if (error.response) {
-  //       // The request was made and the server responded with a non-2xx status code
-  //       console.log(
-  //         "Server returned an error:",
-  //         error.response.status,
-  //         error.response.data
-  //       );
-  //     } else if (error.request) {
-  //       // The request was made, but no response was received
-  //       console.log("No response received:", error.request);
-  //     } else {
-  //       // Something happened in setting up the request that triggered an error
-  //       console.error("Request error:", error.message);
-  //     }
-  //   }
-  // };
+  
   const [getusers, setgetusers] = useState([]);
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   useEffect(() => {
@@ -289,47 +164,7 @@ const EditStudentForm = () => {
 
   const navigate = useNavigate("");
 
-  const [user, setuser] = useState({
-    name: "",
-    email: "",
-    mobilenumber: "",
-    parentsname: "",
-    birthdate: "",
-    gender: "",
-    maritalstatus: "",
-    college: "",
-    country: "",
-    state: "",
-    area: "",
-    native: "",
-    zipcode: "",
-    whatsappno: "",
-    educationtype: "",
-    marks: "",
-    academicyear: "",
-    profilepic: "",
-    enquirydate: "",
-    enquirytakenby: "",
-    coursepackage: "",
-    courses: "",
-    leadsource: "",
-    branch: "",
-    modeoftraining: "",
-    admissionstatus: "",
-    registrationnumber: "",
-    admissiondate: "",
-    validitystartdate: "",
-    validityenddate: "",
-    feedetails: "",
-    grosstotal: "",
-    totaldiscount: "",
-    totaltax: "",
-    grandtotal: "",
-    admissionremarks: "",
-    assets: "",
-    settaxamount: "",
-    feetype: "",
-  });
+  const [user, setuser] = useState({name: ''});
 
   const setdata = (e) => {
     console.log(e.target.value);
@@ -340,6 +175,31 @@ const EditStudentForm = () => {
         [name]: value,
       };
     });
+  };
+useEffect(()=>{
+  setuser((preval) => {
+    return {
+      ...preval,
+      assets: assets,
+    };
+  });
+},[assets])
+
+
+  
+
+  const handleAssetChange = (event) => {
+    const assetName = event.target.name;
+    if (event.target.checked) {
+      // Add the selected asset to the array
+      setassets([...assets, assetName]);
+      // const { name, value } = event.target;
+      
+    } else {
+      // Remove the asset from the array if it's unchecked
+      setassets(assets.filter((asset) => asset !== assetName));
+    }
+    
   };
 
   const handleFeeDetails = (e) => {
@@ -370,45 +230,100 @@ const EditStudentForm = () => {
   const { id } = useParams("");
   // console.log(id);
 
-  const getdata = async () => {
-    const res = await fetch(
-      `${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+  // const getdata = async () => {
+  //   const res = await fetch(
+  //     `${process.env.REACT_APP_API_URL}/  /${id}`,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+
+  //   const data = await res.json();
+  //   console.log("datan: " + data);
+
+  //   if (res.status === 422 || !data) {
+  //     console.log("error ");
+  //   } else {
+  //     setuser(data[0]);
+  //     console.log("get data");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getdata();
+  // }, []);
+
+  
+useEffect(() => {
+    if (students && id) {
+      const filteredResults = students.filter((item) => {
+        const singlestudentCondition = id ? item.id === parseInt(id) : true;
+ 
+        return singlestudentCondition;
+      });
+      if (filteredResults) {
+        console.log("filteredResults[0]", filteredResults[0]);
       }
-    );
-
-    const data = await res.json();
-    console.log("datan: " + data);
-
-    if (res.status === 422 || !data) {
-      console.log("error ");
-    } else {
-      setuser(data[0]);
-      console.log("get data");
+      setuser(filteredResults[0]);
     }
-  };
-
-  useEffect(() => {
-    getdata();
-  }, []);
+  }, [students, id, dispatch]);
 
   const handlesubmit = (e) => {
+    
     e.preventDefault();
     axios
       .put(`${process.env.REACT_APP_API_URL}/updatestudentdata/${id}`, user)
       .then((res) => {
         if (res.data.updated) {
           alert("User Updated");
-          navigate("/studentdata");
+          console.log("user", user);
+          // navigate("/studentdata");
         } else {
           alert("not updated");
         }
       });
   };
+
+ 
+// const [studentImage, setSelectedFile] = useState(null);
+//   const handlesubmit = (e) => {
+    
+//     const reader = new FileReader();
+
+//     reader.onload = async () => {
+//       // Read the student image as a data URL
+//       const photoData = reader.result.split(",")[1];
+//     e.preventDefault();
+//     axios
+//       .put(`${process.env.REACT_APP_API_URL}/updatestudentdata/${id}`, user)
+//       .then((res) => {
+//         if (res.data.updated) {
+//           alert("User Updated");
+//           console.log("user", user);
+//           // navigate("/studentdata");
+//         } else {
+//           alert("not updated");
+//         }
+//       });
+//   };
+  
+//     // Read the student image as a data URL
+//     reader.readAsDataURL(studentImage);
+// }
+
+   
+// useEffect(()=>{
+//   setuser((preval) => {
+//     return {
+//       ...preval,
+//       filename: studentImage.name,
+//       data: photoData,
+//     };
+//   });
+// },[studentImage])
 
   return (
     <div className="main-container container">
@@ -446,6 +361,9 @@ const EditStudentForm = () => {
                       name="email"
                       onChange={setdata}
                       value={user.email}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
                     />{" "}
                   </div>
                   <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
@@ -458,6 +376,9 @@ const EditStudentForm = () => {
                       name="mobilenumber"
                       onChange={setdata}
                       value={user.mobilenumber}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
                     />{" "}
                   </div>
                 </div>
@@ -570,20 +491,20 @@ const EditStudentForm = () => {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
                   </Button>
                 </div>
               </Box>
@@ -599,7 +520,17 @@ const EditStudentForm = () => {
               <form className="form">
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <FormControl variant="standard" className="w-75">
+                  <TextField
+                      label=""
+                      name="country"
+                      type="text"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={setdata}
+                      value={user.country}
+                    />
+                    {/* <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Country<span> *</span>
                       </InputLabel>
@@ -615,10 +546,20 @@ const EditStudentForm = () => {
                         <MenuItem value="china">China</MenuItem>
                         <MenuItem value="others">Others</MenuItem>
                       </Select>
-                    </FormControl>
+                    </FormControl> */}
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <FormControl variant="standard" className="w-75">
+                  <TextField
+                      label="State"
+                      name="state"
+                      type="text"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={setdata}
+                      value={user.state}
+                    />
+                    {/* <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         State<span> *</span>
                       </InputLabel>
@@ -677,7 +618,7 @@ const EditStudentForm = () => {
                         <MenuItem value="Puducherry">Puducherry</MenuItem>
                         <MenuItem value="others">Others</MenuItem>
                       </Select>
-                    </FormControl>
+                    </FormControl> */}
                   </div>
                 </div>
 
@@ -739,20 +680,20 @@ const EditStudentForm = () => {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
                   </Button>
                 </div>
               </Box>
@@ -820,20 +761,20 @@ const EditStudentForm = () => {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
                   </Button>
                 </div>
               </Box>
@@ -848,45 +789,33 @@ const EditStudentForm = () => {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  {/* <label className="col-12 col-md-2">Image:</label> */}
-                  {/* <input
-                    type="image"
-                    // className="col-9 col-md-5"
-                    // style={{
-                    //   height: "35px",
-                    //   border: "1.5px solid black",
-                    //   borderRadius: "5px",
-                    // }}
-                  /> */}
-
                   <input
+                    type="file"
+                    src={user.studentImg}
+                    class="image-input"
+                    onChange={setdata}
+                    name="studentImg"
+                    // value={user.studentImg}
+                  />
+                  {/* <input
                     accept=".jpg, .jpeg, .png"
                     type="file"
-                    src="your-image-url.jpg"
-                    alt="Submit"
-                    class="image-input"
-                  />
-                  {/* <input type="file" accept=".jpg, .jpeg, .png" /> */}
+                    onChange={setdata}
+                    variant="standard"
+                    value={user.studentImg}
+                    name=""
+                  /> */}
 
-                  <input
+                  {/* <input
                     type="file"
                     id="imageInput"
                     accept=".jpg, .jpeg, .png"
                     style={{ display: "none" }}
-                  />
+                  /> */}
                 </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
                 <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
                   <Button
                     className="bg-primary"
                     variant="contained"
@@ -895,6 +824,15 @@ const EditStudentForm = () => {
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
                   </Button>
                 </div>
               </Box>
@@ -924,26 +862,19 @@ const EditStudentForm = () => {
                     />
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <FormControl variant="standard" className="w-75">
-                      <InputLabel>
-                        Enquiry Taken By<span> *</span>
-                      </InputLabel>
-                      <Select
-                        id=" enquirytakenby"
-                        required
-                        onChange={setdata}
-                        value={user.enquirytakenby}
-                        name="enquirytakenby"
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        {filteredcounsellor &&
-                          filteredcounsellor.map((user, index) => (
-                            <MenuItem value={user.fullname}>
-                              {" "}
-                              {user.fullname}
-                            </MenuItem>
-                          ))}
-                      </Select>
+                  <FormControl variant="standard" className="w-75">
+                      <TextField
+                          label="Enquiry Taken By"
+                          variant="standard"
+                          className="w-75"
+                          required
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          onChange={setdata}
+                          value={user.enquirytakenby}
+                          name="enquirytakenby"
+                        />
                     </FormControl>
                   </div>
                 </div>
@@ -1028,20 +959,20 @@ const EditStudentForm = () => {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
                   </Button>
                 </div>
               </Box>
@@ -1100,7 +1031,7 @@ const EditStudentForm = () => {
                 </div>
 
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Admission Status<span> *</span>
@@ -1117,7 +1048,7 @@ const EditStudentForm = () => {
                         <MenuItem value="inactive"> Inactive</MenuItem>
                       </Select>
                     </FormControl>
-                  </div>
+                  </div> */}
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <TextField
                       label="Admission Date"
@@ -1202,20 +1133,20 @@ const EditStudentForm = () => {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
                   </Button>
                 </div>
               </Box>
@@ -1231,7 +1162,7 @@ const EditStudentForm = () => {
             <StepContent>
               <form onSubmit={handleFeeDetails} className="form">
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Fee Type<span> *</span>
@@ -1260,10 +1191,49 @@ const EditStudentForm = () => {
                         shrink: true,
                       }}
                       onChange={setdata}
-                      value={user.amount}
+                      value={user.grosstotal}
                       name="amount"
                     />
-                  </div>
+                  </div> */}
+
+                  {/* added */}
+                  <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
+                    <TableHead>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Fee Type
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Discount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Tax Amount
+                      </TableCell>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Total Amount
+                      </TableCell>
+                    </TableHead>
+                    <TableBody>
+                      {user.feedetails &&
+                        user.feedetails.map((item) => (
+                          <TableRow key={item.id}>
+                            <TableCell align="center">{item.feetype}</TableCell>
+                            <TableCell align="center">{item.amount}</TableCell>
+                            <TableCell align="center">{item.discount}</TableCell>
+                            <TableCell align="center">{parseFloat(item.taxamount.toFixed(2))}</TableCell>
+                            <TableCell align="center">{item.totalamount}</TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                  {/* added end */}
+
+
+                  
                   {/* <label className="col-12 col-md-2 label">
                     Fee Type <span className="text-danger"> *</span>&nbsp;:
                   </label>
@@ -1307,7 +1277,7 @@ const EditStudentForm = () => {
                 </div>
                 <br /> */}
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label="Discount"
                       type="number"
@@ -1318,10 +1288,10 @@ const EditStudentForm = () => {
                         shrink: true,
                       }}
                       onChange={setdata}
-                      value={user.discount}
+                      value={user.totaldiscount}
                       name="discount"
                     />
-                  </div>
+                  </div> */}
                   {/* <label className="col-12 col-md-2 label">
                     Discount <span className="text-danger"> *</span>&nbsp;:
                   </label>
@@ -1378,12 +1348,12 @@ const EditStudentForm = () => {
 
                   {totalamount}
                 </div> */}
-                <button
+                {/* <button
                   onClick={handleFeeDetails}
                   className="bg-primary text-light px-4 py-1  border border-none rounded-2 "
                 >
                   save
-                </button>
+                </button> */}
                 <br />
                 
               </form>
@@ -1392,20 +1362,20 @@ const EditStudentForm = () => {
                   <Button
                     className="bg-primary"
                     variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
                     // disabled={index === 0}
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     Back
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
                   </Button>
                 </div>
               </Box>
@@ -1434,7 +1404,7 @@ const EditStudentForm = () => {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {grosstotal}
+                  {user.grosstotal}
                 </div>
                 <br />
                 <div className="row ">
@@ -1452,7 +1422,7 @@ const EditStudentForm = () => {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {totaldiscount}
+                  {user.totaldiscount}
                 </div>
                 <br />
                 {/* <div className="row ">
@@ -1485,7 +1455,7 @@ const EditStudentForm = () => {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {totaltax}
+                  {user.totaltax}
                 </div>
                 <br />
                 <div className="row ">
@@ -1502,7 +1472,7 @@ const EditStudentForm = () => {
                       borderRadius: "5px",
                     }}
                   /> */}
-                  {grandtotal}
+                  {user.grandtotal}
                 </div>
                 <br />
                 <div className="row ">
@@ -1512,6 +1482,7 @@ const EditStudentForm = () => {
                     &nbsp;:
                   </label>
                   <input
+                  name="admissionremarks"
                     type="text"
                     className="col-9 col-md-5 "
                     required
@@ -1526,11 +1497,11 @@ const EditStudentForm = () => {
                 </div>
                 <br />
                 <div className="row ">
-                  <label className="col-12 col-md-2 label">
-                    Assets <span className="text-danger"> *</span>&nbsp;:
-                  </label>
-                  &nbsp;&nbsp;&nbsp;
-                  {/* <input
+                <label className="col-12 col-md-2 label">
+                  Assets <span className="text-danger"> *</span>&nbsp;:
+                </label>
+                &nbsp;&nbsp;&nbsp;
+                {/* <input
                     type="text"
                     className="col-9 col-md-5"
                     required
@@ -1540,6 +1511,67 @@ const EditStudentForm = () => {
                       borderRadius: "5px",
                     }}
                   /> */}
+                {/* <div className="col-9 col-md-5">
+                    {" "}
+                    <FormControlLabel control={<Checkbox />} label="Bag" />
+                    <FormControlLabel control={<Checkbox />} label="Laptap" />
+                    <FormControlLabel control={<Checkbox />} label="LMS" />
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Course Meterial"
+                    />{" "}
+                  </div> */}
+                <div className="col-9 col-md-5">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="bag"
+                        checked={assets.includes("bag")}
+                        onChange={handleAssetChange}
+                        value={user.assets}
+                      />
+                    }
+                    label="Bag"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="laptop"
+                        checked={assets.includes("laptop")}
+                        onChange={handleAssetChange}
+                        value={user.assets}
+                      />
+                    }
+                    label="Laptop"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="lms"
+                        checked={assets.includes("lms")}
+                        onChange={handleAssetChange}
+                        value={user.assets}
+                      />
+                    }
+                    label="LMS"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="courseMaterial"
+                        checked={assets.includes("courseMaterial")}
+                        onChange={handleAssetChange}
+                        value={user.assets}
+                      />
+                    }
+                    label="Course Material"
+                  />
+                </div>
+                  {/* <label className="col-12 col-md-2 label">
+                    Assets <span className="text-danger"> *</span>&nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;
+                  
                   <select
                     className="col-9 col-md-5"
                     id=""
@@ -1558,7 +1590,7 @@ const EditStudentForm = () => {
                     <option value="bag"> Bag</option>
                     <option value="lms"> LMS</option>
                     <option value="coursematerial"> Course Materials</option>
-                  </select>
+                  </select> */}
                 </div>
                 <br />
               </form>
