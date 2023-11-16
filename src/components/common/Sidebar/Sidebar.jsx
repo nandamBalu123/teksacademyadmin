@@ -354,6 +354,23 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  <SubMenu
+                  style={{
+                    // color: colors.grey[100],
+                    color: "black",
+                  }}
+                  icon={<StorageIcon />}
+                  label={"Settings"}
+                  title={"Settings"}
+                >
+                  <Item
+                    title="Add Assets Type"
+                    to="/assettype"
+                    icon={<InventoryIcon/>}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </SubMenu>
                 </SubMenu>
               ) : undefined}<hr />
             {/* end */}
