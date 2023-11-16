@@ -131,7 +131,7 @@ export default function Addassetsform() {
     <div>
       <div>
         <div className="container">
-          <NavLink to="/addassets">Back</NavLink>
+          
           <form className="mt-4">
             <div className="row">
               {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
@@ -353,7 +353,9 @@ export default function Addassetsform() {
                             <label for="exampleInputPassword1" class="form-label">Remarks*</label>
                             <input type="text" value={inpval.remarks} onChange={setdata} name="remarks" class="form-control" id="exampleInputPassword1" />
                         </div> */}
-                         <div className="create-button mt-5 ">
+                        <div className="d-flex justify-content-between">  
+                        <NavLink to="/addassets"><button className="btn btn-primary"> Back</button></NavLink>
+                         <div className="create-button ">
             <button
               type="submit"
               onClick={addinpdata}
@@ -364,6 +366,9 @@ export default function Addassetsform() {
             </button>
            
           </div>
+                        
+                        </div>
+                        
 
               {/* <button
                 type="submit"
