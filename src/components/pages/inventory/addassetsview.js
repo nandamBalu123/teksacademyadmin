@@ -73,10 +73,8 @@ const deleteuser = async (id) => {
 }
   return (
     <div className="container mt-3">
-      
-            <h1 style={{ fontWeight: 400 }}>Welcome </h1>
-            <NavLink to="/assignassets">Back</NavLink>
-            <Card sx={{ maxWidth: 600 }}>
+      <h4>Assets</h4>
+             <Card sx={{ maxWidth: 600 }}>
                 <CardContent>
                     <div className="add_btn">
                         <NavLink to={`/edit/${getassigndata.id}`}>  <button className="btn btn-primary mx-2"><CreateIcon /></button></NavLink>
@@ -104,6 +102,7 @@ const deleteuser = async (id) => {
 
                 </CardContent>
             </Card>
+            <NavLink to="/assignassets">Back</NavLink>
         
     </div>
   )

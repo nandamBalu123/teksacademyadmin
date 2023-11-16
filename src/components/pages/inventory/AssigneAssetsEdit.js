@@ -1,6 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { updatedata } from "./context/ContextProvider";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const Edit = () => {
   // var apiUrl = "https://demo.teksacademy.com:3000";
@@ -111,10 +116,148 @@ const Edit = () => {
 
   return (
     <div className="container">
-      <NavLink to="/assignassets">Back</NavLink>
+      
       <form className="mt-4">
         <div className="row">
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+          <TextField
+                label="Name"
+                className=" mar w-75"
+                variant="standard"
+                name="name"
+                type="text"
+                value={inpval.name}
+                  onChange={setdata}
+                id="name"
+               
+              />
+          </div>
+          <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+          <TextField
+                label="Vender Name"
+                className=" mar w-75"
+                variant="standard"
+                name="name"
+                type="text"
+                value={inpval.vendername}
+                onChange={setdata}
+              
+              />
+          </div> </div>
+           <div className="row"> 
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+           <TextField
+                label="Designation"
+                className=" mar w-75"
+                variant="standard"
+                name="designation"
+                type="text"
+                value={inpval.designation}
+                onChange={setdata}
+            
+              />
+           </div>
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+           <TextField
+                label="Branch"
+                className=" mar w-75"
+                variant="standard"
+              
+                type="text"
+                value={inpval.branch}
+                onChange={setdata}
+                name="branch"
+             
+              />
+           </div>
+           </div>
+           <div className="row"> 
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+           <TextField
+                label="Asset Type"
+                className=" mar w-75"
+                variant="standard"
+                type="text"
+                value={inpval.assettype}
+                onChange={setdata}
+                name="assettype"
+                 />
+           </div>
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+           <TextField
+                label="Issue Date"
+                className=" mar w-75"
+                variant="standard"
+              type="date"
+              value={inpval.issueddate}
+              onChange={setdata}
+              name="issueddate"
+                required
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+           </div>
+           </div>
+           <div className="row"> 
+           <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+           <TextField
+                label="Asset Code"
+                className=" mar w-75"
+                variant="standard"
+                type="text"
+                value={inpval.assetcode}
+                onChange={setdata}
+                name="assetcode"
+                 />
+             </div>
+             <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+             <TextField
+                label="Quantity"
+                className=" mar w-75"
+                variant="standard"
+                type="number"
+                value={inpval.anonymity}
+                onChange={setdata}
+                name="anonymity"
+                 />
+              </div>
+           </div>
+             <div className="row"> 
+             <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+             <TextField
+                label="Remarks"
+                className=" mar w-75"
+                variant="standard"
+                type="text"
+                value={inpval.remarks}
+                onChange={setdata}
+                name="remarks"
+                 />
+             </div>
+             </div>
+             <div className="create-button  d-flex justify-content-between mt-4 ">
+           
+            <NavLink to="/assignassets ">
+              <button className="btn btn-primary  "> 
+              Back
+              </button>
+           </NavLink>
+           
+            <button
+              type="submit"
+              onClick={updateuser}
+              className="btn btn-primary me-5"
+              style={{ textTransform: "capitalize" }}
+            >
+              submit
+            </button>
+           
+          </div>
+            
+
+         
+          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputEmail1" class="form-label">
               Name
             </label>
@@ -167,7 +310,7 @@ const Edit = () => {
               class="form-control"
               id="exampleInputPassword1"
             />
-          </div>
+          </div> */}
           {/* <div className="mb-3 col-lg-6 col-md-6 col-12">
                             <label htmlFor="exampleInputPassword1" className="form-label">Asset Type</label>
                             <select
@@ -186,7 +329,7 @@ const Edit = () => {
                                 <option value="student bags">Student Bags</option>
                             </select>
                         </div> */}
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
+          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Asset Type
             </label>
@@ -211,8 +354,8 @@ const Edit = () => {
               class="form-control"
               id="exampleInputPassword1"
             />
-          </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
+          </div> */}
+          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Asset Code
             </label>
@@ -224,8 +367,8 @@ const Edit = () => {
               class="form-control"
               id="exampleInputPassword1"
             />
-          </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
+          </div> */}
+          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Anonymity
             </label>
@@ -237,8 +380,8 @@ const Edit = () => {
               class="form-control"
               id="exampleInputPassword1"
             />
-          </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
+          </div> */}
+          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Remarks
             </label>
@@ -250,12 +393,12 @@ const Edit = () => {
               class="form-control"
               id="exampleInputPassword1"
             />
-          </div>
+          </div> */}
 
-          <button type="submit" onClick={updateuser} class="btn btn-primary">
+          {/* <button type="submit" onClick={updateuser} class="btn btn-primary">
             Submit
-          </button>
-        </div>
+          </button> */}
+       
       </form>
     </div>
   );

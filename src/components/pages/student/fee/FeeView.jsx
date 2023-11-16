@@ -463,7 +463,9 @@ const FeeView = () => {
                   </TableCell>
                   <TableCell className="border border 1">
                     <span
-                      title={studentdata.finaltotal}
+                      title={Number(studentdata.finaltotal).toLocaleString(
+                        "en-IN"
+                      )}
                       style={{
                         width: "2.5rem",
                         whiteSpace: "nowrap",
@@ -473,13 +475,15 @@ const FeeView = () => {
                         display: "block",
                       }}
                     >
-                      {studentdata.finaltotal}
+                      {Number(studentdata.finaltotal).toLocaleString("en-IN")}
                     </span>
                   </TableCell>
 
                   <TableCell className="border border 1">
                     <span
-                      title={studentdata.totalpaidamount}
+                      title={Number(studentdata.totalpaidamount).toLocaleString(
+                        "en-IN"
+                      )}
                       style={{
                         width: "2.5rem",
                         whiteSpace: "nowrap",
@@ -489,7 +493,9 @@ const FeeView = () => {
                         display: "block",
                       }}
                     >
-                      {studentdata.totalpaidamount}
+                      {Number(studentdata.totalpaidamount).toLocaleString(
+                        "en-IN"
+                      )}
                     </span>
                   </TableCell>
                   <TableCell className="border border 1">
@@ -504,13 +510,19 @@ const FeeView = () => {
                         display: "block",
                       }}
                     >
-                      {extra_discount_view && <>{extra_discount_view}</>}
+                      {extra_discount_view && (
+                        <>
+                          {Number(extra_discount_view).toLocaleString("en-IN")}
+                        </>
+                      )}
                       {/* {studentdata.totalpaidamount} */}
                     </span>
                   </TableCell>
                   <TableCell className="border border 1">
                     <span
-                      title={studentdata.dueamount}
+                      title={Number(studentdata.dueamount).toLocaleString(
+                        "en-IN"
+                      )}
                       style={{
                         width: "2.5rem",
                         whiteSpace: "nowrap",
@@ -520,7 +532,7 @@ const FeeView = () => {
                         display: "block",
                       }}
                     >
-                      {studentdata.dueamount}
+                      {Number(studentdata.dueamount).toLocaleString("en-IN")}
                     </span>
 
                     {/* {dueamount} */}
@@ -614,7 +626,7 @@ const FeeView = () => {
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell className="border border 1 text-center">
-                        {item.initialamount}
+                        {Number(item.initialamount).toLocaleString("en-IN")}
                       </TableCell>
                       <TableCell className="border border 1 text-center">
                         {paidDate}
@@ -710,27 +722,32 @@ const FeeView = () => {
             <TableHead>
               <TableRow>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  {" "}
+                  Installment
+                </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   Due Date
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Paid Amount
+                  Due Amount
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                   Paid Date
                 </TableCell>
+                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                  Paid Amount
+                </TableCell>
+
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                   Mode of Payment
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                   Transition ID
                 </TableCell>
+
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   {" "}
-                  Admin Invoice
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  {" "}
-                  Student Invoice
+                  Invoice
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -777,14 +794,24 @@ const FeeView = () => {
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell className="border border 1 text-center">
+                        Installment {index + 1}
+                      </TableCell>
+
+                      <TableCell className="border border 1 text-center">
                         {dueDate}
                       </TableCell>
-                      <TableCell className="border border 1 text-center  ">
-                        {item.paidamount}
+                      <TableCell className="border border 1 text-center">
+                        {Number(
+                          parseFloat(item.dueamount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                       </TableCell>
                       <TableCell className="border border 1 text-center">
                         {paidDate}
                       </TableCell>
+                      <TableCell className="border border 1 text-center  ">
+                        {Number(item.paidamount).toLocaleString("en-IN")}
+                      </TableCell>
+
                       <TableCell className="border border 1 text-center">
                         {item.modeofpayment}
                       </TableCell>
@@ -794,17 +821,19 @@ const FeeView = () => {
                       <TableCell className="border border 1 text-center">
                         <Link
                           to={`/invoice/${id}/${index}/Installment/admininvoice`}
-                          style={{ width: "40px" }}
+                          style={{ width: "40px", paddingRight: "15px" }}
+                          className=" hover-container"
                         >
                           <CreditScoreIcon className="iconn" />
+                          <div class="hover-text">admin</div>
                         </Link>
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
                         <Link
                           to={`/invoice/${id}/${index}/Installment/studentinvoice`}
                           style={{ width: "40px" }}
+                          className=" hover-container"
                         >
                           <CreditScoreIcon className="iconn" />
+                          <div class="hover-text">Student</div>
                         </Link>
                       </TableCell>
                     </TableRow>
@@ -825,7 +854,9 @@ const FeeView = () => {
                 <p className="ms-4">
                   {" "}
                   Installment {index + 1} :{" "}
-                  {parseFloat(installment.dueamount).toFixed(2)}
+                  {Number(
+                    parseFloat(installment.dueamount).toFixed(2)
+                  ).toLocaleString("en-IN")}
                 </p>
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
