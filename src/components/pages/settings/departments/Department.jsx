@@ -39,16 +39,29 @@ const Department = () => {
   }));
   return (
     <div className="container">
-      <div className="flex mt-3">
-        <p className="fs-5 ms-3">Departments</p>
-        <button
+      <div className="row"> 
+      <div className="col-12 col-md-9 col-lg-9 col-xl-9">
+      <h3 className="fs-5">Departments</h3> </div>
+      <div className="col-12 col-md-3 col-lg-3 col-xl-3">
+      <button
           type="submit"
-          className="btn btn-primary mr-20 ms-2 mb-2"
+          className="btn btn-primary mr-20  mb-2"
           onClick={handleSubmit}
         >
           Add Department
         </button>
+         </div>
       </div>
+      {/* <div className="d-flex justify-content-between mt-3">
+        <p className="fs-5">Departments</p>
+        <button
+          type="submit"
+          className="btn btn-primary mr-20  mb-2"
+          onClick={handleSubmit}
+        >
+          Add Department
+        </button>
+      </div> */}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 1000 }} aria-label="customized table">
           <TableHead>
