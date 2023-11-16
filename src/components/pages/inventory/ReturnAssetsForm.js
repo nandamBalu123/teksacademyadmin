@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { updatedata } from "./context/ContextProvider";
 import DatePicker from "react-datepicker";
+import TextField from "@mui/material/TextField";
 import "react-datepicker/dist/react-datepicker.css";
 // import SideBar from '../Sidebar/SideBar';
 
@@ -17,7 +18,7 @@ export default function ReturnAssets() {
   const handleDateChange = (date) => {
     setINP((prevState) => ({
       ...prevState,
-      returndate: date, // Update the 'work' property with the selected date
+      returndate: date.target.value // Update the 'work' property with the selected date
     }));
   };
 
@@ -128,8 +129,19 @@ export default function ReturnAssets() {
           <NavLink to="/assignassets">Back</NavLink>
           <form className="mt-4">
             <div className="row">
-              <div className="mb-3 col-lg-3 col-md-6 col-12">
-                <label htmlFor="remarks" className="form-label">
+              <div className="mb-3 col-lg-6 col-xl-6 col-md-6 col-12">
+              <TextField
+                label="Remarks"
+                className=" mar w-75"
+                variant="standard"
+                name="remarks"
+                type="text"
+                value={inpval.remarks}
+                  onChange={setdata}
+                id="remarks"
+               
+              />
+                {/* <label htmlFor="remarks" className="form-label">
                   Remarks
                 </label>
                 <input
@@ -139,13 +151,27 @@ export default function ReturnAssets() {
                   onChange={setdata}
                   className="form-control"
                   id="remarks"
-                />
+                /> */}
               </div>
-              <div className="mb-3 col-lg-6 col-md-6 col-12">
-                <label htmlFor="exampleInputPassword1" className="form-label">
+              <div className="mb-3 col-lg-6 col-xl-6 col-md-6 col-12">
+              <TextField
+                label="Return Date"
+                className=" mar w-75"
+                variant="standard"
+                name="returndate"
+                type="date"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                selected={inpval.returndate} // Set the selected date value
+                  onChange={handleDateChange} // Handle date selection
+                id="returndate"
+             
+              />
+                {/* <label htmlFor="exampleInputPassword1" className="form-label">
                   Return Date*{" "}
                 </label>
-                <br></br>
+              
                 <DatePicker
                   selected={inpval.returndate} // Set the selected date value
                   onChange={handleDateChange} // Handle date selection
@@ -153,7 +179,7 @@ export default function ReturnAssets() {
                   className="form-select form-control"
                   id="exampleInputPassword1"
                   placeholderText="Select a date" // Placeholder text when no date is selected
-                />
+                /> */}
               </div>
             </div>
             <br></br>

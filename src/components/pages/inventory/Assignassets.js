@@ -6,6 +6,14 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { NavLink, Navigate } from "react-router-dom";
 import { adddata, deldata } from "./context/ContextProvider";
 import { updatedata } from "./context/ContextProvider";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
 // import { FaArrowUp } from "react-icons/fa";
 import Inventoryhome from "./Inventoryhome";
 // import axios from 'axios'
@@ -577,38 +585,125 @@ const Assignassets = () => {
                             <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
                             
                         </div> */}
-
+               <Paper sx={{ width: "100%", overflow: "hidden" }}>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow >
+                    <TableCell  className="bg-primary fs-6  border border 1 text-light">ID </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Name </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Vender Name </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light"> Branch</TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light"> Asset Type</TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light"> Brand Name </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Asset Code </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Issue Date </TableCell>
+                    <TableCell className="bg-primary fs-6  border border 1 text-light"> Quantity</TableCell>
+    
+                    <TableCell className="bg-primary fs-6  border border 1 text-light">Actions </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {getassigndata.map((element, id) => {
+                    let AssignDate = new Date(element.issueddate);
+                    const day = AssignDate.getUTCDate();
+                    const monthIndex = AssignDate.getUTCMonth();
+                    const year = AssignDate.getUTCFullYear();
+                
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
+                
+                    // Formatting the date
+                    AssignDate = `${day < 10 ? "0" : ""}${day}-${
+                      monthAbbreviations[monthIndex]
+                    }-${year}`;
+                
+                    return (
+                      <React.Fragment key={id}>
+                      <TableRow>
+                        <TableCell  className="border border 1 text-center">{id + 1}</TableCell>
+                        {/* <td>{element.name}</td> */}
+                        <TableCell  className="border border 1 text-center">{element.name}</TableCell>
+                        <TableCell  className="border border 1 text-center">{element.vendername}</TableCell>
+                        {/* <td>{element.designation}</td> */}
+                        {/* <td>{element.branch}</td> */}
+                        <TableCell  className="border border 1 text-center">{element.branch}</TableCell>
+                        <TableCell  className="border border 1 text-center">{element.assettype}</TableCell>
+                        <TableCell  className="border border 1 text-center">{element.brandname}</TableCell>
+                        {/* <td>{element.remarks}</td> */}
+                        {/* <td>{element.issueddate}</td> */}
+                        <TableCell  className="border border 1 text-center">{element.assetcode}</TableCell>
+                        <TableCell  className="border border 1 text-center">{AssignDate}</TableCell>
+                        <TableCell  className="border border 1 text-center">{element.anonymity}</TableCell>
+           
+                        <TableCell  className="border border 1 text-center">
+                          <NavLink to={`view/${element.id}`}>
+                            <RemoveRedEyeIcon />  
+                               </NavLink><NavLink to={`returnassets/${element.id}`}>
+                          
+                              <ArrowDownwardIcon />
+                            
+                          </NavLink>
+                          <NavLink to={`edit/${element.id}`}>
+                          <CreateIcon />
+                          </NavLink>
+                            <DeleteOutlineIcon
+                              onClick={() => deleteuser(element.id)}
+                              className="text-danger ms-2"
+                            />
+                      {" "}
+                        </TableCell>
+                      </TableRow>
+                    </React.Fragment>
+                    )
+                  }
+                   
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
               <table class="table col-12">
-                <thead>
+                {/* <thead>
                   <tr className="table-dark">
                     <th scope="col">id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Vender Name</th>
-                    {/* <th scope="col">Designation</th> */}
+                 
                     <th scope="col">Branch</th>
                     <th scope="col">Asset Type</th>
                     <th scope="col">Brand Name</th>
-                    {/* <th scope="col">Remarks</th> */}
+              
                     <th scope="col">Asset Code</th>
                     <th scope="col">Issued Date</th>
                     <th scope="col">Quantity</th>
 
                     <th scope="col"></th>
                   </tr>
-                </thead>
-
-                <tbody>
-                  {getassigndata.map((element, id) => (
+                </thead> */}<tbody>
+                  {/* {getassigndata.map((element, id) => (
                     <React.Fragment key={id}>
                       <tr>
                         <th scope="row">{id + 1}</th>
                         <td>{element.name}</td>
                         <td>{element.vendername}</td>
-                        {/* <td>{element.designation}</td> */}
+                    
                         <td>{element.branch}</td>
                         <td>{element.assettype}</td>
                         <td>{element.brandname}</td>
-                        {/* <td>{element.remarks}</td> */}
+                      
                         <td>{element.assetcode}</td>
                         <td>{element.issueddate}</td>
                         <td>{element.anonymity}</td>
@@ -619,11 +714,7 @@ const Assignassets = () => {
                               <RemoveRedEyeIcon />
                             </button>
                           </NavLink>
-                          {/* <NavLink to={`edit/${element.id}`}>
-                            <button className="btn btn-primary">
-                              <CreateIcon />
-                            </button>
-                          </NavLink> */}
+                         
                           <NavLink to={`returnassets/${element.id}`}>
                             <button className="btn btn-primary">
                               <ArrowDownwardIcon />
@@ -638,7 +729,7 @@ const Assignassets = () => {
                         </td>
                       </tr>
                     </React.Fragment>
-                  ))}
+                  ))} */}
                 </tbody>
               </table>
             </div>
