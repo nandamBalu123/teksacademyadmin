@@ -306,7 +306,7 @@ const Addassets = () => {
               className="rounded rounded-3"
             >
               <p className="pt-3 text-center">
-              Total charger: <strong>{getChargerCount()}</strong>
+              Total Charger: <strong>{getChargerCount()}</strong>
               </p>
             </Card> </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
@@ -325,7 +325,7 @@ const Addassets = () => {
               className="rounded rounded-3"
             >
               <p className="pt-3 text-center">
-              Total mouse: <strong>{getMouseCount()}</strong>
+              Total Mouse: <strong>{getMouseCount()}</strong>
               </p>
             </Card> </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
@@ -344,7 +344,7 @@ const Addassets = () => {
               className="rounded rounded-3"
             >
               <p className="pt-3 text-center">
-              Total bags: <strong>{getStudentsBags()}</strong>
+              Total Bags: <strong>{getStudentsBags()}</strong>
               </p>
             </Card> </div>
             </div>

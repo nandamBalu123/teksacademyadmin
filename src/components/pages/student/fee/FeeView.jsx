@@ -922,10 +922,10 @@ const FeeView = () => {
                       value={installment.modeofpayment}
                     >
                       <option value="">---select---</option>
-                      <option value="upi">UPI</option>
-                      <option value="cash">Cash</option>
-                      <option value="banktransfer"> Bank Transfer</option>
-                      <option value="cheque"> CHEQUE</option>
+                      <option value="UPI">UPI</option>
+                      <option value="Cash">Cash</option>
+                      <option value="Bank Transfer">Bank Transfer</option>
+                      <option value="Cheque">Cheque</option>
                     </select>
                     <label> Mode of Payments</label>
                   </div>

@@ -6,41 +6,39 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../theme";
 import GroupsIcon from "@mui/icons-material/Groups";
-import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import SettingsIcon from '@mui/icons-material/Settings';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import GroupIcon from '@mui/icons-material/Group';
-import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
-import FeedIcon from '@mui/icons-material/Feed';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-import ImportContactsIcon from '@mui/icons-material/ImportContacts';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import PlaceIcon from '@mui/icons-material/Place';
-import SafetyDividerIcon from '@mui/icons-material/SafetyDivider';
-import SourceIcon from '@mui/icons-material/Source';
-import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
-import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
+import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import SettingsIcon from "@mui/icons-material/Settings";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import GroupIcon from "@mui/icons-material/Group";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import FeedIcon from "@mui/icons-material/Feed";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import ImportContactsIcon from "@mui/icons-material/ImportContacts";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import PlaceIcon from "@mui/icons-material/Place";
+import SafetyDividerIcon from "@mui/icons-material/SafetyDivider";
+import SourceIcon from "@mui/icons-material/Source";
+import LaptopChromebookIcon from "@mui/icons-material/LaptopChromebook";
+import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
-import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
-import InventoryIcon from '@mui/icons-material/Inventory';
-import StorageIcon from "@mui/icons-material/Storage"
+import InventoryIcon from "@mui/icons-material/Inventory";
+import StorageIcon from "@mui/icons-material/Storage";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 
-
-import profilelogo from '../../../images/Teks-Logo-with-Trade.png';
-import MenuIcon from '@mui/icons-material/Menu';
+import profilelogo from "../../../images/Teks-Logo-with-Trade.png";
+import MenuIcon from "@mui/icons-material/Menu";
 import favicon from "../../../images/favicon.jpeg";
 import axios from "axios";
 
 import { useAuthContext } from "../../../hooks/useAuthContext";
 // let role = localStorage.getItem(role);
-
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -49,10 +47,12 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
     <MenuItem
       active={selected === title}
-      style={{
-        // background: selected === title ? "blue !important": "black !important",
-        // color: "black",
-      }}
+      style={
+        {
+          // background: selected === title ? "blue !important": "black !important",
+          // color: "black",
+        }
+      }
       onClick={() => setSelected(title)}
       icon={icon}
     >
@@ -62,7 +62,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 // const [useritemsbgcolor , setUseritembgcolor] = useState(false);
-// handleitembgcolor =()=>{ 
+// handleitembgcolor =()=>{
 //   setUseritembgcolor
 // }
 
@@ -90,8 +90,8 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  console.log("selected",selected)
-  // const [active,setActive]=useState( { 
+  console.log("selected", selected);
+  // const [active,setActive]=useState( {
   //   createuser : false,
   //   userdata:false,
   //   studentdata:false,
@@ -103,9 +103,9 @@ const Sidebar = () => {
   //   branch:false,
   //   leadsource:false,
   // }
-    
+
   // );
-  // handleactive = ()=>{ 
+  // handleactive = ()=>{
   //   setActive (e =>!e);
   // }
   // let logggeduser = JSON.parse(user);
@@ -129,35 +129,32 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ height: "100vh" }}>
       <Box
         sx={{
           "& .pro-sidebar-inner": {
             background: `white; !important`,
-            
           },
           "& .pro-icon-wrapper": {
             backgroundColor: "transparent !important",
           },
           "& .pro-inner-item": {
             padding: "5px 14px 5px 20px !important",
-            fontSize:"14px !important",
-            fontWeight:"400 !important",
-            
+            fontSize: "14px !important",
+            fontWeight: "400 !important",
           },
           "& .pro-inner-item:hover": {
-            background:"#f5f5f5 !important",
-            color:"blue !important",
-            borderTopRightRadius:"20px !important",
-            borderBottomRightRadius:"20px !important"
+            background: "#f5f5f5 !important",
+            color: "blue !important",
+            borderTopRightRadius: "20px !important",
+            borderBottomRightRadius: "20px !important",
             // borderRadius:"20px !important",
-           
           },
-     
+
           "& .pro-menu-item.active": {
             color: "blue !important",
           },
-        
+
           letterSpacing: "0.6px",
         }}
       >
@@ -169,7 +166,6 @@ const Sidebar = () => {
               icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
               style={{
                 margin: "10px 8px 10px 5px",
-              
               }}
             >
               {!isCollapsed && (
@@ -186,8 +182,7 @@ const Sidebar = () => {
                     className="tekslogo"
                     fontWeight="900"
                   >
-                  
-                    <img className="profilelogo" src={profilelogo}/>  
+                    <img className="profilelogo" src={profilelogo} />
                   </Typography>
                   <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                     <MenuIcon />
@@ -232,17 +227,12 @@ const Sidebar = () => {
                 }}
                 icon={<SpaceDashboardIcon />}
                 label={"Dashboard"}
-                
-                
                 title="Dashboard"
-             
-                    to="/"
-                    
-                    selected={selected}
-                    setSelected={setSelected}
-              >
-                
-              </Item><hr/>
+                to="/"
+                selected={selected}
+                setSelected={setSelected}
+              ></Item>
+              <hr />
               {/* <Item
                 title="Dashboard"
                 to="/"
@@ -253,16 +243,14 @@ const Sidebar = () => {
               /> */}
               {profile == "admin" ? (
                 <SubMenu
-                style={{
-                  color: colors.grey[100],
-                }}
-                
-                  icon={<GroupsIcon/>}
+                  style={{
+                    color: colors.grey[100],
+                  }}
+                  icon={<GroupsIcon />}
                   label={"User Details"}
                   title={"User Management"}
                 >
                   <Item
-                  
                     title="Create User"
                     to="/createuser"
                     icon={<PersonAddIcon />}
@@ -278,7 +266,8 @@ const Sidebar = () => {
                     setSelected={setSelected}
                   />
                 </SubMenu>
-              ) : undefined}<hr/>
+              ) : undefined}
+              <hr />
 
               <SubMenu
                 style={{
@@ -291,7 +280,7 @@ const Sidebar = () => {
                 <Item
                   title="Student Details"
                   to="/studentdata"
-                  icon={<PeopleOutlineIcon/>}
+                  icon={<PeopleOutlineIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
@@ -302,33 +291,33 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-                
+
                 <Item
-                
                   title="Fee Details"
                   to="/feedetails"
                   icon={<CurrencyRupeeIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
-              
+
                 <Item
                   title="Certificate"
                   to="/certificate"
-                  icon={<WorkspacePremiumIcon/>}
+                  icon={<WorkspacePremiumIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
-                {profile == "admin" &&
-                <Item
-                  title="Requested Certificates"
-                  to="/requestedcertificates"
-                  icon={<ImportContactsIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                }
-              </SubMenu><hr/>
+                {profile == "admin" && (
+                  <Item
+                    title="Requested Certificates"
+                    to="/requestedcertificates"
+                    icon={<ImportContactsIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                )}
+              </SubMenu>
+              <hr />
               {/* start */}
               {profile == "admin" ? (
                 <SubMenu
@@ -343,20 +332,21 @@ const Sidebar = () => {
                   <Item
                     title="Add Assets"
                     to="/addassets"
-                    icon={<InventoryIcon/>}
+                    icon={<InventoryIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                   <Item
                     title="Assign Assets"
                     to="/assignassets"
-                    icon={<AssignmentTurnedInIcon/>}
+                    icon={<AssignmentTurnedInIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                 </SubMenu>
-              ) : undefined}<hr />
-            {/* end */}
+              ) : undefined}
+              <hr />
+              {/* end */}
               {profile == "admin" ? (
                 <SubMenu
                   style={{
@@ -370,21 +360,21 @@ const Sidebar = () => {
                   <Item
                     title="Roles"
                     to="/roles"
-                    icon={<ManageAccountsIcon/>}
+                    icon={<ManageAccountsIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                   <Item
                     title="Branch"
                     to="/branch"
-                    icon={<PlaceIcon/>}
+                    icon={<PlaceIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                   <Item
                     title="Departments"
                     to="/departments"
-                    icon={<SafetyDividerIcon/>}
+                    icon={<SafetyDividerIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
@@ -398,14 +388,14 @@ const Sidebar = () => {
                   <Item
                     title="Courses"
                     to="/courses"
-                    icon={<LaptopChromebookIcon/>}
+                    icon={<LaptopChromebookIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                   <Item
                     title="Course Package"
                     to="/coursepackage"
-                    icon={<CollectionsBookmarkIcon/>}
+                    icon={<CollectionsBookmarkIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />

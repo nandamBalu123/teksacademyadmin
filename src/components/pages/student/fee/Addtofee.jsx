@@ -291,10 +291,10 @@ const Addtofee = () => {
                   onChange={(e) => handleInputChange(e, index, "modeofpayment")}
                 >
                   <option value="">---select---</option>
-                  <option value="upi">UPI</option>
-                  <option value="cash">Cash</option>
-                  <option value="backtransfor"> Bank Transfor</option>
-                  <option value="cheque"> CHEQUE</option>
+                  <option value="UPI">UPI</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                  <option value="Cheque">Cheque</option>
                 </select>
                 <label>
                   {" "}

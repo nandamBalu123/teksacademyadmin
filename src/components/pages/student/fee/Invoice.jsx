@@ -30,6 +30,8 @@ import { Hidden } from "@mui/material";
 import useFormattedDate from "../../../../hooks/useFormattedDate";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+
 const PrintableComponent = React.forwardRef((props, ref) => {
   const location = useLocation();
   const dataFromState = location.state;
@@ -42,6 +44,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   const [studentdata, setstudentdata] = useState([]);
   const [invoice, setinvoice] = useState();
   const [number, setNumber] = useState();
+  const { students, dispatch } = useStudentsContext();
 
   useEffect(() => {
     if (name === "Installment" && studentdata.installments) {
@@ -148,23 +151,35 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       );
     }
   }, [studentdata]);
+  // useEffect(() => {
+  //   // Make a GET request to your backend API endpoint
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
+  //     .then((response) => {
+  //       // Handle the successful response here
+  //       // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
+  //       setstudentdata(response.data[0]); // Update the data state with the fetched data
+  //       // setstudentdata()
+  //       // console.log("studentdata", response.data[0].feedetails);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the request
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   useEffect(() => {
-    // Make a GET request to your backend API endpoint
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
-      .then((response) => {
-        // Handle the successful response here
-        // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
-        setstudentdata(response.data[0]); // Update the data state with the fetched data
-        // setstudentdata()
-        // console.log("studentdata", response.data[0].feedetails);
-      })
-      .catch((error) => {
-        // Handle any errors that occur during the request
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+    if (students && id) {
+      const filteredResults = students.filter((item) => {
+        const singlestudentCondition = id ? item.id === parseInt(id) : true;
 
+        return singlestudentCondition;
+      });
+      if (filteredResults) {
+        console.log("filteredResults[0]", filteredResults[0]);
+      }
+      setstudentdata(filteredResults[0]);
+    }
+  }, [students, id, dispatch]);
   return (
     <div className="container invoice" ref={ref}>
       <img
