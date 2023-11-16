@@ -7,7 +7,6 @@ import Login from "./components/pages/logins/adminlogins/Login";
 
 import "./App.css";
 
-
 // uncomand inventory start
 // import Signup from "../src/components/pages/inventory/Signup";
 import Register from "../src/components/pages/inventory/Register";
@@ -65,6 +64,7 @@ import CreateCourse from "./components/pages/settings/courses/CreateCourse";
 import Requestedcertificates from "./components/pages/student/Certificate/Requestedcertificates";
 import Sidebar1 from "./components/common/Sidebar/Sidebar1";
 import Invoice from "./components/pages/student/fee/Invoice";
+import ZipCodeLookup from "./components/pages/student/studentRegistrationForm/Zipcode";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 
@@ -113,6 +113,10 @@ function App() {
                     user ? <RegistrationForm /> : <Navigate to="/login" />
                   }
                 />
+                {/* <Route
+                  path="/ZipCodeLookup"
+                  element={user ? <ZipCodeLookup /> : <Navigate to="/login" />}
+                /> */}
                 <Route
                   path="/feedetails/:id"
                   element={user ? <FeeDetails /> : <Dashboard />}
@@ -315,77 +319,100 @@ function App() {
                 path="/feedetails"
                 element={role=='admin'? <Feedetails/> :<Dashboard/>}/> */}
                 {/* <Route path="/formm" element={<Formm />}></Route> */}
-                <Route path="/assignassets" element={
+                <Route
+                  path="/assignassets"
+                  element={
                     user && user.profile == "admin" ? (
                       <Assignassets />
                     ) : (
                       <Dashboard />
                     )
-                  }  />
+                  }
+                />
                 {/* <Route path="/addassets/view/:id" element={<Details />} /> */}
-              <Route path="/addassets/view/:id" element={
+                <Route
+                  path="/addassets/view/:id"
+                  element={
                     user && user.profile == "admin" ? (
                       <Addassetsview />
                     ) : (
                       <Dashboard />
                     )
-                  } />
-              <Route exact path="/register" element={
+                  }
+                />
+                <Route
+                  exact
+                  path="/register"
+                  element={
                     user && user.profile == "admin" ? (
                       <Register />
                     ) : (
                       <Dashboard />
                     )
-                  } />{" "}
-              <Route exact path="/assignassets/edit/:id" element={
+                  }
+                />{" "}
+                <Route
+                  exact
+                  path="/assignassets/edit/:id"
+                  element={
                     user && user.profile == "admin" ? (
                       <AssigneAssetsEdit />
                     ) : (
                       <Dashboard />
                     )
-                  } />
-              <Route
-                exact
-                path="/assignassets/view/:id"
-                element={
-                  user && user.profile == "admin" ? (
-                    <Details />
-                  ) : (
-                    <Dashboard />
-                  )
-                }
-              />
-              <Route path="/addassets" element={
+                  }
+                />
+                <Route
+                  exact
+                  path="/assignassets/view/:id"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <Details />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/addassets"
+                  element={
                     user && user.profile == "admin" ? (
                       <Addassets />
                     ) : (
                       <Addassets />
                     )
-                  }></Route>
-              <Route path="/addassetsform" element={
+                  }
+                ></Route>
+                <Route
+                  path="/addassetsform"
+                  element={
                     user && user.profile == "admin" ? (
                       <Addassetsform />
                     ) : (
                       <Dashboard />
                     )
-                  }></Route>
-              <Route path="/inventory" element={
+                  }
+                ></Route>
+                <Route
+                  path="/inventory"
+                  element={
                     user && user.profile == "admin" ? (
                       <Inventoryhome />
                     ) : (
                       <Dashboard />
                     )
-                  }></Route>
-              <Route
-                path="/assignassets/returnassets/:id"
-                element={
-                  user && user.profile == "admin" ? (
-                    <ReturnAssetsForm />
-                  ) : (
-                    <Dashboard />
-                  )
-                }
-              ></Route>
+                  }
+                ></Route>
+                <Route
+                  path="/assignassets/returnassets/:id"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <ReturnAssetsForm />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                ></Route>
               </Routes>
             </main>
           </div>

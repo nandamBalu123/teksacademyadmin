@@ -488,6 +488,16 @@ const Feefollowup = () => {
                   NextDueDate = `${day < 10 ? "0" : ""}${day}-${
                     monthAbbreviations[monthIndex]
                   }-${year}`;
+                  let Dueamount = item.dueamount;
+
+                  if (item.installments) {
+                    item.installments.map((installment) => {
+                      if (item.nextduedate === installment.duedate) {
+                        Dueamount = installment.dueamount;
+                      }
+                    });
+                  }
+
                   return (
                     <TableRow
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -515,7 +525,9 @@ const Feefollowup = () => {
                         {NextDueDate}
                       </TableCell>
                       <TableCell className="border border 1">
-                        {item.dueamount}
+                        {Number(
+                          parseFloat(Dueamount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                       </TableCell>
                       <TableCell className="border border 1">
                         {item.totalinstallments &&

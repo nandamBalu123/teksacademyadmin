@@ -458,12 +458,13 @@ const FeeDetails = () => {
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
                       {" "}
-                      Course <br /> Date of Joining<br/> Total Fee
+                      Course <br /> Date of Joining
+                      <br /> Total Fee
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                       {" "}
                       Paid Fee
-                      <br />  Due Amount
+                      <br /> Due Amount
                       <br /> Next Due Date
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
@@ -472,7 +473,7 @@ const FeeDetails = () => {
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                       {" "}
-                  Paid Installments
+                      Paid Installments
                     </TableCell>
                     <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                       {" "}
@@ -630,7 +631,9 @@ const FeeDetails = () => {
                               {AdmissionDate}
                             </span>
                             <span
-                              title={item.finaltotal}
+                              title={Number(
+                                parseFloat(item.finaltotal).toFixed(2)
+                              ).toLocaleString("en-IN")}
                               style={{
                                 width: "4rem",
                                 whiteSpace: "nowrap",
@@ -640,13 +643,16 @@ const FeeDetails = () => {
                                 display: "block",
                               }}
                             >
-                              {item.finaltotal}
+                              {Number(
+                                parseFloat(item.finaltotal).toFixed(2)
+                              ).toLocaleString("en-IN")}
                             </span>
                           </TableCell>
                           <TableCell className="border border 1">
-                           
                             <span
-                              title={item.totalpaidamount}
+                              title={Number(
+                                parseFloat(item.totalpaidamount).toFixed(2)
+                              ).toLocaleString("en-IN")}
                               style={{
                                 width: "4rem",
                                 whiteSpace: "nowrap",
@@ -656,10 +662,14 @@ const FeeDetails = () => {
                                 display: "block",
                               }}
                             >
-                              {item.totalpaidamount}
+                              {Number(
+                                parseFloat(item.totalpaidamount).toFixed(2)
+                              ).toLocaleString("en-IN")}
                             </span>
                             <span
-                              title={item.dueamount}
+                              title={Number(
+                                parseFloat(item.dueamount).toFixed(2)
+                              ).toLocaleString("en-IN")}
                               style={{
                                 width: "4rem",
                                 whiteSpace: "nowrap",
@@ -669,7 +679,9 @@ const FeeDetails = () => {
                                 display: "block",
                               }}
                             >
-                              {item.dueamount}
+                              {Number(
+                                parseFloat(item.dueamount).toFixed(2)
+                              ).toLocaleString("en-IN")}
                             </span>
                             <span
                               title={NextDueDate}
@@ -686,8 +698,7 @@ const FeeDetails = () => {
                             </span>
                           </TableCell>
                           <TableCell className="border border 1">
-                           
-                          {item.totalinstallments &&
+                            {item.totalinstallments &&
                               item.totalinstallments.length > 0 &&
                               item.totalinstallments.map((items, index) => {
                                 const dynamicStyle = {
@@ -707,7 +718,6 @@ const FeeDetails = () => {
                                   return (
                                     <div style={{ display: "flex" }}>
                                       <span style={dynamicStyle}>
-                                 
                                         {items.totalinstallments}
                                       </span>
                                       <span style={dynamicStyle}>

@@ -660,7 +660,12 @@ const Dashboard = () => {
             >
               <p className="pt-3">Total Enrollments</p>
               <p>
-                <b> {getstudentData.length}</b>
+                <b>
+                  {" "}
+                  {Number(
+                    parseFloat(getstudentData.length).toFixed(2)
+                  ).toLocaleString("en-IN")}
+                </b>
               </p>
             </Card>
           </div>
@@ -683,7 +688,11 @@ const Dashboard = () => {
               <p className="pt-3">Total Fee</p>
               <p>
                 <CurrencyRupeeIcon />
-                <b> {totalAmount}</b>
+                <b>
+                  {Number(parseFloat(totalAmount).toFixed(2)).toLocaleString(
+                    "en-IN"
+                  )}
+                </b>
                 {/* <b>{sumDueAmount},</b>
                 <b>{sumreceivedAmount},</b> */}
               </p>
@@ -709,14 +718,18 @@ const Dashboard = () => {
                 <b>
                   Received Amount :
                   <CurrencyRupeeIcon />
-                  {AllbranchesreceivedAmount}
+                  {Number(
+                    parseFloat(AllbranchesreceivedAmount).toFixed(2)
+                  ).toLocaleString("en-IN")}
                 </b>
                 {/* <b>{sumreceivedAmount},</b> */}
               </p>
               <p>
                 <b>
                   Pending Amount : <CurrencyRupeeIcon />
-                  {AllbranchesDueAmount}
+                  {Number(
+                    parseFloat(AllbranchesDueAmount).toFixed(2)
+                  ).toLocaleString("en-IN")}
                 </b>
               </p>
             </Card>
@@ -741,7 +754,11 @@ const Dashboard = () => {
               >
                 <p className="pt-3">Total Users</p>
                 <p>
-                  <b> {getUsersData.length} </b>
+                  <b>
+                    {Number(
+                      parseFloat(getUsersData.length).toFixed(2)
+                    ).toLocaleString("en-IN")}
+                  </b>
                 </p>
               </Card>
             </div>
@@ -917,7 +934,10 @@ const Dashboard = () => {
                       value={enrollmentPercentage}
                     />
                     <span>Total Count: </span>
-                    {totalCount}
+
+                    {Number(parseFloat(totalCount).toFixed(2)).toLocaleString(
+                      "en-IN"
+                    )}
                     <span>({enrollmentPercentage.toFixed(2)}%)</span>
                   </div>
                 );
@@ -939,7 +959,10 @@ const Dashboard = () => {
                         value={enrollmentPercentage}
                       />
                       <span>Total Count: </span>
-                      {totalCount}
+                      {}{" "}
+                      {Number(parseFloat(totalCount).toFixed(2)).toLocaleString(
+                        "en-IN"
+                      )}
                       <span>({enrollmentPercentage.toFixed(2)}%)</span>
                     </div>
                   );
@@ -1066,7 +1089,10 @@ const Dashboard = () => {
                         value={percentage}
                       />
                       <div>
-                        Total Amount: {totalAmount}{" "}
+                        Total Amount:
+                        {Number(
+                          parseFloat(totalAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({percentage.toFixed(2)}%)</span>
                       </div>
                     </div>
@@ -1088,7 +1114,10 @@ const Dashboard = () => {
                         value={percentage}
                       />
                       <div>
-                        Total Amount: {totalcount}{" "}
+                        Total Amount:{" "}
+                        {Number(
+                          parseFloat(totalcount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({percentage.toFixed(2)}%)</span>
                       </div>
                     </div>
@@ -1229,7 +1258,10 @@ const Dashboard = () => {
                       />
 
                       <div>
-                        Received : {totalreceivedAmount}
+                        Received :{" "}
+                        {Number(
+                          parseFloat(totalreceivedAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({Receivedpercentage.toFixed(2)}%)</span>
                       </div>
                       <BorderLinearProgress
@@ -1237,7 +1269,10 @@ const Dashboard = () => {
                         value={Pendingpercentage}
                       />
                       <div>
-                        Pending : {totalDueAmount}
+                        Pending :{" "}
+                        {Number(
+                          parseFloat(totalDueAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({Pendingpercentage.toFixed(2)}%)</span>
                       </div>
                     </div>
@@ -1265,7 +1300,10 @@ const Dashboard = () => {
                       />
 
                       <div>
-                        Received : {totalreceivedAmount}
+                        Received : {}{" "}
+                        {Number(
+                          parseFloat(totalreceivedAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({Receivedpercentage.toFixed(2)}%)</span>
                       </div>
                       <BorderLinearProgress
@@ -1273,7 +1311,10 @@ const Dashboard = () => {
                         value={Pendingpercentage}
                       />
                       <div>
-                        Pending : {totalDueAmount}
+                        Pending : {}{" "}
+                        {Number(
+                          parseFloat(totalDueAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({Pendingpercentage.toFixed(2)}%)</span>
                       </div>
                     </div>
@@ -1402,7 +1443,9 @@ const Dashboard = () => {
                     value={enrollmentPercentage}
                   />
                   <span>Total Count: </span>
-                  {totalCount}
+                  {Number(parseFloat(totalCount).toFixed(2)).toLocaleString(
+                    "en-IN"
+                  )}
                   <span>({enrollmentPercentage.toFixed(2)}%)</span>
                 </div>
               );

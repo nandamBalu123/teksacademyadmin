@@ -28,7 +28,8 @@ import { useLocation } from "react-router-dom";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Hidden } from "@mui/material";
 import useFormattedDate from "../../../../hooks/useFormattedDate";
-
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 const PrintableComponent = React.forwardRef((props, ref) => {
   const location = useLocation();
   const dataFromState = location.state;
@@ -557,9 +558,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <td className="border border 1 text-center">
                     <strong>
                       {" "}
-                      {Number(
-                        parseInt(student.initialamount * 0.35)
-                      ).toLocaleString("en-IN")}
+                      {Number(parseInt(student.initialamount)).toLocaleString(
+                        "en-IN"
+                      )}
                     </strong>
                   </td>
                 </tr>
@@ -584,9 +585,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       <td className="border border-1 text-center">
                         <strong>
                           {" "}
-                          {Number(
-                            parseInt(student.paidamount * 0.35)
-                          ).toLocaleString("en-IN")}
+                          {Number(parseInt(student.paidamount)).toLocaleString(
+                            "en-IN"
+                          )}
                         </strong>
                       </td>
                     </tr>
@@ -851,12 +852,83 @@ function Invoice() {
     content: () => componentRef.current,
   });
 
+  const handleSavePdf = () => {
+    const content = componentRef.current;
+
+    if (content) {
+      const pdfName = `${studentdata.name} ${studentdata.registrationnumber}.pdf`; // Set your default PDF name here
+      html2canvas(content, {
+        scale: 2, // Increase the scale for higher resolution
+        logging: true, // Enable logging to console for debugging
+        width: content.scrollWidth, // Set the width to the full content width
+        height: content.scrollHeight, // Set the height to the full content height
+        windowWidth: document.documentElement.offsetWidth, // Set the window width for responsive designs
+        windowHeight: document.documentElement.offsetHeight, // Set the window height for responsive designs
+      }).then((canvas) => {
+        const imgData = canvas.toDataURL("image/jpeg", 1.0); // Increase quality to 1.0
+
+        const pdf = new jsPDF("p", "mm", "a4");
+        pdf.addImage(
+          imgData,
+          "JPEG",
+          0,
+          0,
+          pdf.internal.pageSize.getWidth(),
+          pdf.internal.pageSize.getHeight()
+        );
+        pdf.save(pdfName);
+      });
+
+      // html2canvas(content).then((canvas) => {
+      //   const imgData = canvas.toDataURL("image/jpeg");
+      //   const pdf = new jsPDF("p", "mm", "a4");
+
+      //   pdf.addImage(
+      //     imgData,
+      //     "JPEG",
+      //     0,
+      //     0,
+      //     pdf.internal.pageSize.getWidth(),
+      //     pdf.internal.pageSize.getHeight()
+      //   );
+      //   pdf.save(pdfName);
+      // });
+    }
+  };
+
+  const location = useLocation();
+  const dataFromState = location.state;
+  console.log("dataFromState", dataFromState);
+  const { id } = useParams();
+
+  const [studentdata, setstudentdata] = useState([]);
+
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
+      .then((response) => {
+        // Handle the successful response here
+        // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
+        setstudentdata(response.data[0]); // Update the data state with the fetched data
+        // setstudentdata()
+        // console.log("studentdata", response.data[0].feedetails);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   return (
     <div>
       <div className="mt-3 text-end me-3 ">
         <button onClick={handlePrint} className="btn btn-primary mb-3  end">
           {" "}
           Print
+        </button>
+        <button onClick={handleSavePdf} className="btn btn-primary mb-3  end">
+          {" "}
+          Save as PDF
         </button>
       </div>
       <PrintableComponent ref={componentRef} />

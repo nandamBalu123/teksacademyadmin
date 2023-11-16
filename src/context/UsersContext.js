@@ -54,7 +54,26 @@ export const UsersContextProvider = ({ children }) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        const data = await response.json();
+        let data = await response.json();
+        const dataWithTitleCase = data.map((item) => {
+          const newItem = {};
+
+          for (const key in item) {
+            if (Object.prototype.hasOwnProperty.call(item, key)) {
+              if (typeof item[key] === "string" && key !== "email") {
+                newItem[key] = item[key]
+                  .split(" ")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ");
+              } else {
+                newItem[key] = item[key];
+              }
+            }
+          }
+
+          return newItem;
+        });
+        data = dataWithTitleCase;
         dispatch({ type: "SET_USERS", payload: data });
       } catch (err) {
         // setError(err);
