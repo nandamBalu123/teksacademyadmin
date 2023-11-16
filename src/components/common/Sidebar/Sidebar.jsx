@@ -359,7 +359,7 @@ const Sidebar = () => {
                     // color: colors.grey[100],
                     color: "black",
                   }}
-                  icon={<StorageIcon />}
+                  icon={<SettingsIcon/>}
                   label={"Settings"}
                   title={"Settings"}
                 >
