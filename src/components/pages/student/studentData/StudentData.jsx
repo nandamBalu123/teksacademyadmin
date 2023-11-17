@@ -350,7 +350,7 @@ const StudentData = () => {
   // }, []);
 
   return (
-    <div>
+    <div className="container">
       {/* <div>
       {loading && <p>Loading files...</p>}
       {error && <p>Error: {error}</p>}
@@ -365,10 +365,10 @@ const StudentData = () => {
       )}
     </div> */}
 
-      <div className="studetdetails container  mt-3">
-        <h3 className="ms-3 mt-4 "> Student Data </h3>
+      <div className="studetdetails   mt-3">
+        <h4 className=" mt-3 text-center"> Student Data </h4>
 
-        <div className="row mb-3 ps-1 ">
+        <div className="row mb-1 ps-1 ">
           <div className="col-12 col-md-8 col-lg-8 col-xl-8  input-field">
             <input
               type="text"
@@ -723,58 +723,59 @@ const StudentData = () => {
 
   </tbody>
 </table> */}
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+       <div className="student-table"> 
+       <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center  text-light  ">
+                  <StyledTableCell className="bg-primary fs-6 border border 1 text-center  text-light  ">
                     SNo
-                  </TableCell>
-                  <TableCell
+                  </StyledTableCell>
+                  <StyledTableCell
                     className="  bg-primary fs-6 border border 1 text-center text-light "
                     align="left"
                   >
                     Student Name <br /> Registration No
-                  </TableCell>
-                  <TableCell
+                  </StyledTableCell>
+                  <StyledTableCell
                     className="  bg-primary fs-6 border border 1 text-center text-light "
                     align="left"
                   >
                     Branch <br />
                     Course
-                  </TableCell>
+                  </StyledTableCell>
 
-                  <TableCell
+                  <StyledTableCell
                     className="bg-primary fs-6 border border 1 text-center text-light"
                     align="left"
                   >
                     Counsellor
                     <br /> Source
-                  </TableCell>
+                  </StyledTableCell>
 
-                  <TableCell
+                  <StyledTableCell
                     className="bg-primary fs-6 border border 1 text-center text-light "
                     align="left"
                   >
                     Contact Number <br />
                     Email
-                  </TableCell>
+                  </StyledTableCell>
 
-                  <TableCell
+                  <StyledTableCell
                     className="bg-primary fs-6 border border 1 text-center text-light "
                     align="left"
                   >
                     Joining Date <br />
                     Training Mode
-                  </TableCell>
+                  </StyledTableCell>
 
-                  <TableCell
+                  <StyledTableCell
                     className="bg-primary fs-6 border border 1 text-center text-light"
                     align="left"
                   >
                     Actions
-                  </TableCell>
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -809,11 +810,11 @@ const StudentData = () => {
 
                     return (
                       <TableRow key={item.id}>
-                        <TableCell className=" border border 2 text-center p-0 m-0">
+                        <StyledTableCell className=" border border 2 text-center p-0 m-0">
                           {index + 1}
-                        </TableCell>
+                        </StyledTableCell>
 
-                        <TableCell className=" border border 1 text-center p-0 m-0">
+                        <StyledTableCell className=" border border 1 text-center p-0 m-0">
                           <span
                             title={item.name}
                             style={{
@@ -843,9 +844,9 @@ const StudentData = () => {
                               {item.registrationnumber}
                             </span>
                           </span>
-                        </TableCell>
+                        </StyledTableCell>
 
-                        <TableCell
+                        <StyledTableCell
                           align="left"
                           className=" border border 1 text-center p-0 m-0"
                         >
@@ -878,9 +879,9 @@ const StudentData = () => {
                               {item.courses}
                             </span>
                           </span>
-                        </TableCell>
+                        </StyledTableCell>
 
-                        <TableCell className=" border border 1 text-center p-0 m-0">
+                        <StyledTableCell className=" border border 1 text-center p-0 m-0">
                           <span
                             style={{
                               width: "100px",
@@ -897,9 +898,9 @@ const StudentData = () => {
 
                             {item.leadsource}
                           </span>
-                        </TableCell>
+                        </StyledTableCell>
 
-                        <TableCell className=" border border 1 text-center p-0 m-0 ">
+                        <StyledTableCell className=" border border 1 text-center p-0 m-0 ">
                           <span
                             style={{
                               width: "150px",
@@ -914,9 +915,9 @@ const StudentData = () => {
                             <br />
                             {item.email}
                           </span>
-                        </TableCell>
+                        </StyledTableCell>
 
-                        <TableCell className=" border border 1 text-center p-0 m-0">
+                        <StyledTableCell className=" border border 1 text-center p-0 m-0">
                           <span
                             style={{
                               width: "150px",
@@ -930,9 +931,9 @@ const StudentData = () => {
                             {date ? date : "No Date"} <br />
                             {item.modeoftraining}
                           </span>
-                        </TableCell>
+                        </StyledTableCell>
 
-                        <TableCell className=" text-center d-flex py-4 ">
+                        <StyledTableCell className=" text-center d-flex py-4 ">
                           <Link
                             to={`/studentdataview/${item.id}`}
                             style={{ width: "40px" }}
@@ -1006,7 +1007,7 @@ const StudentData = () => {
                               )}
                             </DialogActions>
                           </Dialog>
-                        </TableCell>
+                        </StyledTableCell>
                       </TableRow>
                     );
                   })
@@ -1019,6 +1020,7 @@ const StudentData = () => {
             </Table>
           </TableContainer>
         </Paper>
+       </div>
 
         <div
           style={{ display: "flex", justifyContent: "center" }}

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Table from "@mui/material/Table";
+import { styled } from "@mui/material/styles";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -23,6 +25,29 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
+
+const label = { inputProps: { "aria-label": "Switch demo" } };
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.blue,
+
+    color: theme.palette.common.white,
+  },
+
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 const FeeDetails = () => {
   const { branches } = useBranchContext();
   const { students, dispatch } = useStudentsContext();
@@ -168,13 +193,16 @@ const FeeDetails = () => {
   let initialDataCount = getstudentData.length;
   let recordCount = studentFeeRecordss.length;
   return (
-    <>
-      <div className="main-feedetails container mt-3">
+    <div className="container">
+      <div className="main-feedetails  mt-3">
         <div className="feedetails">
           {" "}
-          <p className="fee-heading"> Fee Management(Registered Students)</p>
-          <div className="row pt-1">
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3">
+          <h4 className="mt-1 text-center">
+            {" "}
+            Fee Management (Registered Students)
+          </h4>
+          <div className="row pt-2">
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-2">
               <button className="feebtn" onClick={studentFeeRecords}>
                 Student Fee Records
               </button>
@@ -198,10 +226,10 @@ const FeeDetails = () => {
             </div>
           </div>
           <div className="row  pb-3">
-            <div className="col-12 col-md-8 col-lg-8 col-xl-8 mb-2">
+            <div className="col-12 col-md-9 col-lg-9 col-xl-9 ">
               <input
                 type="text"
-                className="input-field "
+                className="input-field ms-2 "
                 placeholder="Search Here..."
                 autoComplete="off"
                 style={{
@@ -219,86 +247,87 @@ const FeeDetails = () => {
                 value={filterCriteria.search}
                 onChange={handleInputChange}
               />
-              <hr className="w-75" />
+              <hr className="w-75 ms-2" />
             </div>
-            <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3">
-              <h6>
-                {" "}
-                {recordCount}/{initialDataCount}
-              </h6>
-            </div>
-            <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-2">
-              <select onChange={handlerecorddata}>
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="75">75</option>
-              </select>
-            </div>
-            <div className="col-4 col-md-1 col-lg-1 col-xl-1">
-              <button
-                onClick={handleClick}
-                className="btn btn-primary mr-20 ms-2 mb-2"
-                style={{ textTransform: "capitalize" }}
-              >
-                {" "}
-                Filter{" "}
-              </button>
-              {/* <h6 onClick={handleClick}> Filter</h6> */}
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
-                style={{
-                  width: "",
-                  borderRadius: "25px",
-                  marginTop: "20px",
-                  cursor: "pointer",
-                }}
-              >
-                <div className="d-flex justify-content-between m-2">
-                  <div> Filter</div>
-                  <div>
+            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mt-1">
+              <div className="d-flex justify-content-evenly">
+                <p className="mt-2">
+                  {" "}
+                  {recordCount}/{initialDataCount}{" "}
+                </p>
+                <p className="mt-2">
+                  <select onChange={handlerecorddata}>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="75">75</option>
+                  </select>{" "}
+                </p>
+                <span>
+                  {" "}
+                  <button
+                    onClick={handleClick}
+                    className="btn btn-primary  ms-2 "
+                    style={{ textTransform: "capitalize" }}
+                  >
                     {" "}
-                    <CloseIcon onClick={handleClose} />{" "}
-                  </div>
-                </div>
-                <hr />
-                <div className="row m-2">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label=" From:"
-                      type="date"
-                      variant="standard"
-                      className="  w-100"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="fromdate"
-                      value={filterCriteria.fromdate}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label=" To:"
-                      type="date"
-                      variant="standard"
-                      className="w-100"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="todate"
-                      value={filterCriteria.todate}
-                      onChange={handleInputChange}
-                    />
-                  </div>
+                    Filter{" "}
+                  </button>
+                  {/* <h6 onClick={handleClick}> Filter</h6> */}
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                    style={{
+                      width: "",
+                      borderRadius: "25px",
+                      marginTop: "20px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <div className="d-flex justify-content-between m-2">
+                      <div> Filter</div>
+                      <div>
+                        {" "}
+                        <CloseIcon onClick={handleClose} />{" "}
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row m-2">
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                        <TextField
+                          label=" From:"
+                          type="date"
+                          variant="standard"
+                          className="  w-100"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          name="fromdate"
+                          value={filterCriteria.fromdate}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                        <TextField
+                          label=" To:"
+                          type="date"
+                          variant="standard"
+                          className="w-100"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          name="todate"
+                          value={filterCriteria.todate}
+                          onChange={handleInputChange}
+                        />
+                      </div>
 
-                  {/* <div>
+                      {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -315,8 +344,8 @@ const FeeDetails = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-                </div>
-                {/* <div className="d-flex justify-content-between">
+                    </div>
+                    {/* <div className="d-flex justify-content-between">
                   <MenuItem>
                     <label> From: </label>
                     <input
@@ -346,45 +375,45 @@ const FeeDetails = () => {
                     />
                   </MenuItem>
                 </div> */}
-                <div className="row m-2">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <FormControl variant="standard" className="w-100">
-                      <InputLabel>Branch</InputLabel>
-                      <Select
-                        name="branch"
-                        value={filterCriteria.branch}
-                        onChange={handleInputChange}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        {branches &&
-                          branches.map((branch, index) => (
-                            <MenuItem
-                              key={branch.id}
-                              value={branch.branch_name}
-                            >
-                              {branch.branch_name}
-                            </MenuItem>
-                          ))}
-                      </Select>
-                    </FormControl>
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <FormControl variant="standard" className="w-100">
-                      <InputLabel>Mode of Traning</InputLabel>
-                      <Select
-                        name="modeoftraining"
-                        value={filterCriteria.modeoftraining}
-                        onChange={handleInputChange}
-                      >
-                        <MenuItem value="online"> Online</MenuItem>
+                    <div className="row m-2">
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>Branch</InputLabel>
+                          <Select
+                            name="branch"
+                            value={filterCriteria.branch}
+                            onChange={handleInputChange}
+                          >
+                            <MenuItem value="select"> ---select---</MenuItem>
+                            {branches &&
+                              branches.map((branch, index) => (
+                                <MenuItem
+                                  key={branch.id}
+                                  value={branch.branch_name}
+                                >
+                                  {branch.branch_name}
+                                </MenuItem>
+                              ))}
+                          </Select>
+                        </FormControl>
+                      </div>
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>Mode of Traning</InputLabel>
+                          <Select
+                            name="modeoftraining"
+                            value={filterCriteria.modeoftraining}
+                            onChange={handleInputChange}
+                          >
+                            <MenuItem value="online"> Online</MenuItem>
 
-                        <MenuItem value="offline">Offline</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </div>
-                </div>
+                            <MenuItem value="offline">Offline</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </div>
+                    </div>
 
-                {/* <div className="d-flex justify-content-between">
+                    {/* <div className="d-flex justify-content-between">
                   <MenuItem>
                     <select
                       id=""
@@ -427,13 +456,15 @@ const FeeDetails = () => {
                     </select>
               </MenuItem>
                 </div> */}
-                <div className="text-end me-2 mt-4">
-                  <button className="clear" onClick={filterreset}>
-                    {" "}
-                    Clear
-                  </button>
-                </div>
-              </Menu>
+                    <div className="text-end me-2 mt-4">
+                      <button className="clear" onClick={filterreset}>
+                        {" "}
+                        Clear
+                      </button>
+                    </div>
+                  </Menu>
+                </span>
+              </div>
             </div>
           </div>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -441,43 +472,44 @@ const FeeDetails = () => {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0 ">
+                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0 ">
                       {" "}
                       S.NO
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light  m-0 p-0 ">
+                    </StyledTableCell>
+                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light  m-0 p-0 ">
                       Name
                       <br /> Branch <br />
                       Counsellor
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
+                    </StyledTableCell>
+                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
                       {" "}
                       Contact
                       <br />
                       Email
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
+                    </StyledTableCell>
+                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
                       {" "}
-                      Course <br /> Date of Joining<br/> Total Fee
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                      Course <br /> Date of Joining
+                      <br /> Total Fee
+                    </StyledTableCell>
+                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light">
                       {" "}
                       Paid Fee
-                      <br />  Due Amount
+                      <br /> Due Amount
                       <br /> Next Due Date
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    </StyledTableCell>
+                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                       {" "}
                       Total Installments
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    </StyledTableCell>
+                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light">
                       {" "}
-                  Paid Installments
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                      Paid Installments
+                    </StyledTableCell>
+                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light">
                       {" "}
                       View
-                    </TableCell>
+                    </StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -526,10 +558,10 @@ const FeeDetails = () => {
                           }}
                           key={item.id}
                         >
-                          <TableCell className="border border 1">
+                          <StyledTableCell className="border border 1">
                             {index + 1}
-                          </TableCell>
-                          <TableCell className="border border 1">
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1">
                             <span
                               title={item.name}
                               style={{
@@ -573,8 +605,8 @@ const FeeDetails = () => {
                             >
                               {item.enquirytakenby}
                             </span>
-                          </TableCell>
-                          <TableCell className="border border 1">
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1">
                             <span
                               title={item.mobilenumber}
                               style={{
@@ -601,8 +633,8 @@ const FeeDetails = () => {
                             >
                               {item.email}
                             </span>
-                          </TableCell>
-                          <TableCell className="border border 1">
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1">
                             <span
                               title={item.courses}
                               style={{
@@ -642,9 +674,8 @@ const FeeDetails = () => {
                             >
                               {item.finaltotal}
                             </span>
-                          </TableCell>
-                          <TableCell className="border border 1">
-                           
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1">
                             <span
                               title={item.totalpaidamount}
                               style={{
@@ -684,10 +715,9 @@ const FeeDetails = () => {
                             >
                               {NextDueDate ? NextDueDate : "No NextDue Date"}
                             </span>
-                          </TableCell>
-                          <TableCell className="border border 1">
-                           
-                          {item.totalinstallments &&
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1">
+                            {item.totalinstallments &&
                               item.totalinstallments.length > 0 &&
                               item.totalinstallments.map((items, index) => {
                                 const dynamicStyle = {
@@ -707,7 +737,6 @@ const FeeDetails = () => {
                                   return (
                                     <div style={{ display: "flex" }}>
                                       <span style={dynamicStyle}>
-                                 
                                         {items.totalinstallments}
                                       </span>
                                       <span style={dynamicStyle}>
@@ -717,8 +746,8 @@ const FeeDetails = () => {
                                   );
                                 }
                               })}
-                          </TableCell>
-                          <TableCell className="border border 1">
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1">
                             {item.totalinstallments &&
                               item.totalinstallments.length > 0 &&
                               item.totalinstallments.map((items, index) => {
@@ -748,12 +777,12 @@ const FeeDetails = () => {
                                   );
                                 }
                               })}
-                          </TableCell>
-                          <TableCell className="border border 1">
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1">
                             <Link to={`/feeview/${item.id}`}>
                               <VisibilityIcon />
                             </Link>{" "}
-                          </TableCell>
+                          </StyledTableCell>
                         </TableRow>
                       );
                     })
@@ -780,7 +809,7 @@ const FeeDetails = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default FeeDetails;
