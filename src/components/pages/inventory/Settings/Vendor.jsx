@@ -17,11 +17,29 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 
 export default function Vendor() {
-  const navigate = useNavigate();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    navigate("/createbranch");
+  const [vendorName, setVendorName] = useState([]);
+  const handleNameChange = (event) => {
+    setVendorName(event.target.value);
   };
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/addvendorname`, vendorName)
+      .then((res) => {
+        if (res.data.updated) {
+          alert("vendor Updated");
+          // navigate("/usersdata");
+        } else {
+          alert("not updated");
+        }
+      });
+  };
+
+  const navigate = useNavigate();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   navigate("/createbranch");
+  // };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -57,39 +75,38 @@ export default function Vendor() {
         <p className="fs-5 ms-3">Vendor</p>
 
         <React.Fragment>
-        <button
-         onClick={handleClickOpen}
-          type="submit"
-          className="btn btn-primary mr-20 ms-2">
-         Add Vendor
-        </button>
-      
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Vendor Name</DialogTitle>
-        <DialogContent>
-        
-          <TextField
-            autoFocus
-            label="Vendor Name"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button >submit</Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
+          <button
+            onClick={handleClickOpen}
+            type="submit"
+            className="btn btn-primary mr-20 ms-2">
+            Add Vendor
+          </button>
 
-        {/* <button
-          type="submit"
-          className="btn btn-primary mr-20 ms-2 mb-2"
-        
-        >
-          Add Vendor
-        </button> */}
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Add Vendor Name</DialogTitle>
+            <DialogContent>
+
+              <TextField
+                autoFocus
+                label="Vendor Name"
+                type="text"
+                fullWidth
+                variant="standard"
+                value={vendorName}
+                onChange={handleNameChange}
+              // autoFocus
+              // label="Vendor Name"
+              // type="text"
+              // fullWidth
+              // variant="standard"
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handlesubmit}>submit</Button>
+            </DialogActions>
+          </Dialog>
+        </React.Fragment>
       </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 1000 }} aria-label="customized table">
@@ -107,8 +124,6 @@ export default function Vendor() {
               >
                 Name
               </StyledTableCell>
-
-              {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
             </TableRow>
           </TableHead>
 
