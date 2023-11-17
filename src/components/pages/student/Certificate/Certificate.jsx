@@ -209,14 +209,15 @@ const Certificate = () => {
   };
 
   return (
-    <div className="container main-certificate mt-3">
+  <div className="container"> 
+      <div className=" main-certificate mt-3">
       <div className="certificate mt-2">
-        <h3 className="mx-3 mt-3"> Certificate </h3>
-        <div className="row pb-3">
-          <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+        <h4 className="mx-3 mt-3 text-center"> Certificate </h4>
+        <div className="row pb-1">
+          <div className="col-12 col-md-9 col-lg-9 col-xl-9">
             <input
               type="text"
-              className="input-field "
+              className="input-field ms-2"
               placeholder="Search Here...."
               autoComplete="off"
               style={{
@@ -233,32 +234,24 @@ const Certificate = () => {
               value={filterCriteria.search}
               onChange={handleInputChange}
             />
-            <hr className="w-75" />
+            <hr className="w-75 ms-2" />
           </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3">
-            <h6>
-              {" "}
-              {recordCount}/{initialDataCount}
-            </h6>
-          </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-2">
-            <select onChange={handlerecorddata}>
+          <div className="col-12 col-md-3 col-lg-3 col-xl-3 mt-1"> 
+          <div className="d-flex justify-content-evenly"> 
+          <p className="mt-2"> 
+          {recordCount}/{initialDataCount}
+           </p>
+           <p className="mt-2">   
+           <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="75">75</option>
             </select>
-          </div>
-
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
-            {/* id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            > */}
-            <button
-              className="btn btn-primary mr-20 ms-2 mb-2 mt-1"
+           </p>
+           <span> 
+           <button
+              className="btn btn-primary  ms-2 "
               onClick={handleClick}
               style={{ textTransform: "capitalize" }}
             >
@@ -529,7 +522,11 @@ const Certificate = () => {
                 </button>
               </div>
             </Menu>
+           </span>
+           </div>
           </div>
+
+         
         </div>
 
         {/* <div class="dropdown">
@@ -731,6 +728,7 @@ const Certificate = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 
