@@ -82,7 +82,7 @@ const CreateUserForm = () => {
     }
 
     if (Object.keys(newErrors).length === 0) {
-      const user = {
+      let user = {
         fullname,
         email,
         phonenumber,
@@ -96,7 +96,28 @@ const CreateUserForm = () => {
       };
 
       console.log("User Data:", user); // Log the user data being sent
+      user = [user];
+      const dataWithTitleCase = user.map((item) => {
+        const newItem = {};
 
+        for (const key in item) {
+          if (Object.prototype.hasOwnProperty.call(item, key)) {
+            if (typeof item[key] === "string" && key !== "email") {
+              newItem[key] = item[key]
+                .split(" ")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ");
+            } else {
+              newItem[key] = item[key];
+            }
+          }
+        }
+
+        return newItem;
+      });
+      user = dataWithTitleCase[0];
+
+     
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/createUser`,
         {
@@ -146,7 +167,7 @@ const CreateUserForm = () => {
 
   return (
     <div className="main-user-container container my-4">
-      <h4 className="my-3 text-center">User Creation Form</h4>
+      <h4 className="my-3 ">User Creation Form</h4>
       <div className="sub-user-container">
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="row ">

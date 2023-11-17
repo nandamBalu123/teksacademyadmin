@@ -588,7 +588,10 @@ const Assignassets = () => {
                             <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
                             
                         </div> */}
-              <Paper sx={{ width: "100%", overflow: "hidden" }}>
+              <Paper
+                sx={{ width: "100%", overflow: "hidden" }}
+                className="mt-3"
+              >
                 <TableContainer sx={{ maxHeight: 440 }}>
                   <Table stickyHeader aria-label="sticky table">
                     <TableHead>
@@ -599,9 +602,7 @@ const Assignassets = () => {
                         <TableCell className="bg-primary fs-6  border border 1 text-light">
                           Name{" "}
                         </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Vender Name{" "}
-                        </TableCell>
+                        {/* <TableCell className="bg-primary fs-6  border border 1 text-light">Vender Name </TableCell> */}
                         <TableCell className="bg-primary fs-6  border border 1 text-light">
                           {" "}
                           Branch
@@ -667,9 +668,7 @@ const Assignassets = () => {
                               <TableCell className="border border 1 text-center">
                                 {element.name}
                               </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {element.vendername}
-                              </TableCell>
+                              {/* <TableCell  className="border border 1 text-center">{element.vendername}</TableCell> */}
                               {/* <td>{element.designation}</td> */}
                               {/* <td>{element.branch}</td> */}
                               <TableCell className="border border 1 text-center">
@@ -706,7 +705,7 @@ const Assignassets = () => {
                                 <DeleteOutlineIcon
                                   onClick={() => deleteuser(element.id)}
                                   className="text-danger ms-2"
-                                />{" "}
+                                />
                               </TableCell>
                             </TableRow>
                           </React.Fragment>

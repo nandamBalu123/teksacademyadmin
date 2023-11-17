@@ -361,14 +361,7 @@ export default function RegistrationForm() {
       alert("please enter the name");
       return;
     }
-    if (name) {
-      setName(
-        name
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      );
-    }
+
     if (!email) {
       alert("please  enter email id");
       return;
@@ -400,14 +393,7 @@ export default function RegistrationForm() {
       alert("please enter parent's name");
       return;
     }
-    if (parentsname) {
-      setParentsName(
-        parentsname
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      );
-    }
+
     if (!parentsnumber) {
       alert("please enter parent's mobilenumber");
       return;
@@ -584,7 +570,7 @@ export default function RegistrationForm() {
       }
 
       // Create the data object with the form fields
-      const studentRegistrationdata = {
+      let studentRegistrationdata = {
         name,
         email,
         mobilenumber,
@@ -640,6 +626,27 @@ export default function RegistrationForm() {
         extra_discount,
       };
 
+      ///title case
+      studentRegistrationdata = [studentRegistrationdata];
+      const dataWithTitleCase = studentRegistrationdata.map((item) => {
+        const newItem = {};
+
+        for (const key in item) {
+          if (Object.prototype.hasOwnProperty.call(item, key)) {
+            if (typeof item[key] === "string" && key !== "email") {
+              newItem[key] = item[key]
+                .split(" ")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ");
+            } else {
+              newItem[key] = item[key];
+            }
+          }
+        }
+
+        return newItem;
+      });
+      studentRegistrationdata = dataWithTitleCase[0];
       try {
         // Make the POST request
         const response = await axios.post(
@@ -891,8 +898,9 @@ export default function RegistrationForm() {
           );
 
           if (response.data.results.length > 0) {
-            const { city, state, country, suburb } = response.data.results[0].components;
-            
+            const { city, state, country, suburb } =
+              response.data.results[0].components;
+
             setCountry(country);
             setState(state);
             setArea(suburb);
@@ -902,7 +910,7 @@ export default function RegistrationForm() {
             // setLocationInfo({ city: 'Not found', state: 'Not found', country: 'Not found', areaName: 'Not found' });
           }
         } catch (error) {
-          console.error('Error fetching location information:', error);
+          console.error("Error fetching location information:", error);
         }
       }
     };
@@ -1170,7 +1178,7 @@ export default function RegistrationForm() {
               <form className="form">
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <TextField
+                    <TextField
                       label=""
                       type="text"
                       variant="standard"
@@ -1195,7 +1203,7 @@ export default function RegistrationForm() {
                     </FormControl> */}
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                  <TextField
+                    <TextField
                       label="State"
                       type="text"
                       variant="standard"

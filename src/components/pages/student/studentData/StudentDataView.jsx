@@ -14,6 +14,9 @@ import { useParams } from "react-router-dom";
 import profilePic from "../../../../images/img4-11.png";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 import useFormattedDate from "../../../../hooks/useFormattedDate";
+import { Link } from "react-router-dom";
+import CreditScoreIcon from "@mui/icons-material/CreditScore";
+
 const StudentDataView = () => {
   const { id } = useParams();
   console.log("id", id);
@@ -213,6 +216,195 @@ const StudentDataView = () => {
                   </TableRow>
                 ))}
             </TableBody>
+          </Table>
+        </TableContainer>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell className=" fs-6 border border 1 text-center">
+                  {" "}
+                  Installment
+                </TableCell>
+                <TableCell className=" fs-6 border border 1 text-center ">
+                  Due Date
+                </TableCell>
+                <TableCell className=" fs-6 border border 1 text-center  ">
+                  Due Amount
+                </TableCell>
+                <TableCell className="fs-6 border border 1 text-center ">
+                  Paid Date
+                </TableCell>
+                <TableCell className=" fs-6 border border 1 text-center  ">
+                  Paid Amount
+                </TableCell>
+
+                <TableCell className=" fs-6 border border 1 text-center ">
+                  Mode of Payment
+                </TableCell>
+                <TableCell className=" fs-6 border border 1 text-center">
+                  Transition ID
+                </TableCell>
+
+                <TableCell className=" fs-6 border border 1 text-center  ">
+                  {" "}
+                  Invoice
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {studentdata.installments &&
+              studentdata.installments.map((item, index) => {
+                let paidDate = new Date(item.paiddate);
+                const day = paidDate.getUTCDate();
+                const monthIndex = paidDate.getUTCMonth();
+                const year = paidDate.getUTCFullYear();
+                let dueDate = new Date(item.duedate);
+                const dueday = dueDate.getUTCDate();
+                const duemonthIndex = dueDate.getUTCMonth();
+                const dueyear = dueDate.getUTCFullYear();
+                const monthAbbreviations = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+
+                // Formatting the date
+                paidDate = `${day < 10 ? "0" : ""}${day}-${
+                  monthAbbreviations[monthIndex]
+                }-${year}`;
+                dueDate = `${dueday < 10 ? "0" : ""}${dueday}-${
+                  monthAbbreviations[duemonthIndex]
+                }-${dueyear}`;
+
+                if (item.paidamount < 1) {
+                  return null; // Do not render anything
+                }
+
+                return (
+                  <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell className="border border 1 text-center">
+                        Installment {index + 1}
+                      </TableCell>
+
+                      <TableCell className="border border 1 text-center">
+                        {dueDate}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {Number(
+                          parseFloat(item.dueamount).toFixed(2)
+                        ).toLocaleString("en-IN")}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {paidDate}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center  ">
+                        {Number(item.paidamount).toLocaleString("en-IN")}
+                      </TableCell>
+
+                      <TableCell className="border border 1 text-center">
+                        {item.modeofpayment}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {item.transactionid}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        <Link
+                          to={`/invoice/${id}/${index}/Installment/admininvoice`}
+                          style={{ width: "40px", paddingRight: "15px" }}
+                          className=" hover-container"
+                        >
+                          <CreditScoreIcon className="iconn" />
+                          <div class="hover-text">admin</div>
+                        </Link>
+                        <Link
+                          to={`/invoice/${id}/${index}/Installment/studentinvoice`}
+                          style={{ width: "40px" }}
+                          className=" hover-container"
+                        >
+                          <CreditScoreIcon className="iconn" />
+                          <div class="hover-text">Student</div>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                );
+              })}
+          </Table>
+        </TableContainer>
+        <div>Extra Discount</div>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell className=" fs-6 border border 1 text-center">
+                  Date
+                </TableCell>
+                <TableCell className=" fs-6 border border 1 text-center">
+                  Extra Discount
+                </TableCell>
+                <TableCell className=" fs-6 border border 1 text-center ">
+                  Remarks
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {studentdata.extra_discount &&
+              studentdata.extra_discount.map((item, index) => {
+                let date = new Date(item.date);
+                const day = date.getUTCDate();
+                const monthIndex = date.getUTCMonth();
+                const year = date.getUTCFullYear();
+
+                const monthAbbreviations = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+
+                // Formatting the date
+                date = `${day < 10 ? "0" : ""}${day}-${
+                  monthAbbreviations[monthIndex]
+                }-${year}`;
+
+                return (
+                  <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell className="border border 1 text-center">
+                        {date}
+                      </TableCell>
+                      <TableCell className="border border 1 text-center">
+                        {item.Discount}
+                      </TableCell>
+
+                      <TableCell className="border border 1 text-center">
+                        {item.Discount_remarks}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                );
+              })}
           </Table>
         </TableContainer>
       </div>

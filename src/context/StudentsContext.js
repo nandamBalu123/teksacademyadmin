@@ -185,26 +185,26 @@ export const StudentsContextProvider = ({ children }) => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/getstudent_data`)
       .then((response) => {
-        const dataWithTitleCase = response.data.map((item) => {
-          const newItem = {};
+        // const dataWithTitleCase = response.data.map((item) => {
+        //   const newItem = {};
 
-          for (const key in item) {
-            if (Object.prototype.hasOwnProperty.call(item, key)) {
-              if (typeof item[key] === "string" && key !== "email") {
-                newItem[key] = item[key]
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ");
-              } else {
-                newItem[key] = item[key];
-              }
-            }
-          }
+        //   for (const key in item) {
+        //     if (Object.prototype.hasOwnProperty.call(item, key)) {
+        //       if (typeof item[key] === "string" && key !== "email") {
+        //         newItem[key] = item[key]
+        //           .split(" ")
+        //           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        //           .join(" ");
+        //       } else {
+        //         newItem[key] = item[key];
+        //       }
+        //     }
+        //   }
 
-          return newItem;
-        });
-        response.data = dataWithTitleCase;
-        console.log("dataWithTitleCase", dataWithTitleCase);
+        //   return newItem;
+        // });
+        // response.data = dataWithTitleCase;
+
         if (response.data) {
           if (role === "admin" || role === "Regional Manager") {
             dispatch({ type: "SET_STUDENTS", payload: response.data });

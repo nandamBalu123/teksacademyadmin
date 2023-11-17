@@ -20,10 +20,29 @@ const CreateDepartment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = {
+    let user = {
       department_name,
     };
+    user = [user];
+    const dataWithTitleCase = user.map((item) => {
+      const newItem = {};
 
+      for (const key in item) {
+        if (Object.prototype.hasOwnProperty.call(item, key)) {
+          if (typeof item[key] === "string" && key !== "email") {
+            newItem[key] = item[key]
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ");
+          } else {
+            newItem[key] = item[key];
+          }
+        }
+      }
+
+      return newItem;
+    });
+    user = dataWithTitleCase[0];
     console.log("User Data:", user); // Log the user data being sent
 
     const response = await fetch(`${process.env.REACT_APP_API_URL}/adddepartment`, {
