@@ -7,21 +7,33 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 
-import DialogTitle from '@mui/material/DialogTitle';
+import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 
 export default function AssetType() {
-    const navigate = useNavigate();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    navigate("/createbranch");
+  const navigate = useNavigate();
+  const [assettype, setAssetype] = useState(["laptop", "bag"]);
+  const [newAssettype, setNewAssettype] = useState();
+  const handlesubmit = () => {
+    assettype.unshift(newAssettype);
+    console.log("assettype", assettype);
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/addassettype`, assettype)
+      .then((res) => {
+        if (res.data.updated) {
+          alert("assest Updated");
+          setOpen(false);
+        } else {
+          alert("not updated");
+        }
+      });
   };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -57,33 +69,33 @@ export default function AssetType() {
       <div className="flex mt-3">
         <p className="fs-5 ms-3">Asset Type</p>
         <React.Fragment>
-        <button
-         onClick={handleClickOpen}
-          type="submit"
-          className="btn btn-primary mr-20 ms-2">
-          Add Asset Type
-        </button>
-      
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Asset Type</DialogTitle>
-        <DialogContent>
-        
-          <TextField
-            autoFocus
-            
-            
-            label="Asset Type"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button >submit</Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
+          <button
+            onClick={handleClickOpen}
+            type="submit"
+            className="btn btn-primary mr-20 ms-2"
+          >
+            Add Asset Type
+          </button>
+
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Add Asset Type</DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                label="Asset Type"
+                type="text"
+                fullWidth
+                variant="standard"
+                value={newAssettype}
+                onChange={(e) => setNewAssettype(e.target.value)}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handlesubmit}>submit</Button>
+            </DialogActions>
+          </Dialog>
+        </React.Fragment>
 
         {/* <button
           type="submit"
@@ -112,28 +124,19 @@ export default function AssetType() {
             </TableRow>
           </TableHead>
 
-          {/* <TableBody className="border border 1">
-            {Array.isArray(branches) && branches.length > 0 ? (
-              branches.map((item, index) => (
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell className="border border 1 text-center">
-                    {index + 1}
-                  </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
-                    {item.branch_name}
-                  </StyledTableCell>
-
-                  
-                </StyledTableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={3}>No data available</TableCell>
-              </TableRow>
-            )}
-          </TableBody> */}
+          {assettype &&
+            assettype.map((element, index) => (
+              <StyledTableRow key={index}>
+                <StyledTableCell className="border border 1 text-center">
+                  {index + 1}
+                </StyledTableCell>
+                <StyledTableCell className="border border 1 text-center">
+                  {element}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
         </Table>
       </TableContainer>
     </div>
-  )
+  );
 }
