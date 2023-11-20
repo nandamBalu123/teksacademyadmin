@@ -19,7 +19,21 @@ import axios from "axios";
 
 export default function AssetType() {
   const navigate = useNavigate();
-  const [assettype, setAssetype] = useState(["laptop", "bag"]);
+  const [assettype, setAssetype] = useState();
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/getvendorname`)
+      .then((response) => {
+        if (response.data) {
+          // dispatch({ type: "SET_BRANCHES", payload: response.data });
+          setAssetype(response.data);
+          console.log("response.data", response.data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   const [newAssettype, setNewAssettype] = useState();
   const handlesubmit = () => {
     assettype.unshift(newAssettype);
