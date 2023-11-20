@@ -674,7 +674,7 @@ const StudentData = () => {
                 </Menu>
               </p>
               <p>
-                <select onChange={handlerecorddata} className="mt-2">
+                <select onChange={handlerecorddata} className="mt-3">
                   <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
@@ -687,7 +687,7 @@ const StudentData = () => {
                   filename={"studentsdata.csv"}
                   target="_blank"
                 >
-                  <DownloadIcon className="text-dark mt-2"></DownloadIcon>
+                  <DownloadIcon className="text-dark mt-4"></DownloadIcon>
                 </CSVLink>
               </p>
             </div>
