@@ -14,6 +14,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import Card from "@mui/material/Card";
 // import { FaArrowUp } from "react-icons/fa";
 import Inventoryhome from "./Inventoryhome";
 // import axios from 'axios'
@@ -32,6 +33,14 @@ const Assignassets = () => {
   const { updata, setUPdata } = useContext(updatedata);
 
   const { dltdata, setDLTdata } = useContext(deldata);
+  const [Displayassets, setDisplayassets] = useState({
+    secendrabad:false,
+    hitechcity: false,
+    ameerpet: false,
+    dilsukhnagar: false,
+    kukatpally:false
+  
+  });
 
   // const getdata = async () => {
   //     const response = await axios.get('http://localhost:3003/getusers');
@@ -438,157 +447,323 @@ const Assignassets = () => {
         ""
       )}
 
-      <div>
+      <div className="container">
         <div className="mt-5">
-          <div className="container">
-            <div className="col-lg-12">
-              <div className="row">
-                <div className="col-lg-3">
-                  <div className="">
-                    <NavLink to="/register" className="btn btn-primary">
+        <div className="d-flex justify-content-between"> 
+           <h4> Assign Data</h4>
+           <NavLink to="/register" className="btn btn-primary">
                       Assign data
                     </NavLink>
-                    <br></br>
-                    {/* <span>Rows : {getassigndata.length}</span><br></br> */}
-                    <span>
-                      Total laptops: <strong>{getLaptopCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total t-shirt: <strong>{getTshirtCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total shirt: <strong>{getShirtCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total charger: <strong>{getChargerCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total mouse: <strong>{getMouseCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total bags: <strong>{getStudentsBags()}</strong>
-                    </span>
-                    <br></br>
+            </div>
+            <div className="row mb-3">
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#f3a9b2" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            
+              Total laptops: <strong>{getLaptopCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#a6ebdc" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            
+              Total t-shirt: <strong>{getTshirtCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#b7e9da" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            
+              Total shirt: <strong>{getShirtCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#f3a9b2" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            
+              Total charger: <strong>{getChargerCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#a6ebdc" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+              
+              Total mouse: <strong>{getMouseCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#b7e9da" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            
+            Total bags: <strong>{getStudentsBags()}</strong>
+            </p>
+          </Card> </div>  </div>
+          <div  className="row ms-5"> 
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 " 
+          //  style={{cursor:"pointer"}}
+          //   onClick={ (e)=> setDisplayassets({ 
+          //   secendrabad:true,
+          //   hitechcity:false,
+          //   ameerpet:false,
+          //   dilsukhnagar:false,
+          //   kukatpally:false
+          //  })}
+           > 
+           <h4>Secendrabad</h4>
+           </div>
+           <div className="col-12 col-md-2 col-lg-2 col-xl-2 ms-2" 
+           style={{cursor:"pointer"}}
+            onClick={ (e)=> setDisplayassets({ 
+            secendrabad:false,
+            hitechcity:true,
+            ameerpet:false,
+            dilsukhnagar:false,
+            kukatpally:false
+           })}> 
+           <h4>Hitech City</h4>
+           </div>
+           <div className="col-12 col-md-2 col-lg-2 col-xl-2" 
+            style={{cursor:"pointer"}}
+             onClick={ (e)=> setDisplayassets({ 
+              secendrabad:false,
+              hitechcity:false,
+              ameerpet:true,
+              dilsukhnagar:false,
+              kukatpally:false
+             })}> 
+           <h4>Ameerpet</h4>
+           </div>
+           <div className="col-12 col-md-2 col-lg-2 col-xl-2" 
+            style={{cursor:"pointer"}} 
+            onClick={ (e)=> setDisplayassets({ 
+              secendrabad:false,
+              hitechcity:false,
+              ameerpet:false,
+              dilsukhnagar:true,
+              kukatpally:false
+             })}>
+            
+           <h4>Dilsukhnagar</h4>
+           </div>
+           <div className="col-12 col-md-3 col-lg-3 col-xl-3" 
+            style={{cursor:"pointer"}} 
+            // onClick={ (e)=> setDisplayassets({ 
+            //   secendrabad:false,
+            //   hitechcity:false,
+            //   ameerpet:false,
+            //   dilsukhnagar:false,
+            //   kukatpally:true
+            //  })}
+             >
+            
+           <h4>Kukatpally</h4>
+           </div>
+           </div>
 
-                    {/* <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br> */}
-                  </div>
-                </div>
-                <div className="col-lg-3">
-                  <div className="mt-2 mb-2">
-                    <h4>Hitech City</h4>
-                    {/* <span>Rows : {getassigndata.length}</span><br></br> */}
-                    <span>
-                      Total laptops: <strong>{hcgetLaptopCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total t-shirt: <strong>{hcgetTshirtCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total shirt: <strong>{hcgetShirtCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total charger: <strong>{hcgetChargerCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total mouse: <strong>{hcgetMouseCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total bags: <strong>{hcgetStudentsBags()}</strong>
-                    </span>
-                    <br></br>
+           
+           {Displayassets.hitechcity && (
+             <div className="row mb-3">
+             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+         <Card
+           style={{ backgroundColor: "#f3a9b2" }}
+           className="rounded rounded-3"
+         >
+           <p className="pt-3 text-center">
+           Total laptops: <strong>{hcgetLaptopCount()}</strong>
+           
+           </p>
+         </Card> </div>
+         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+         <Card
+           style={{ backgroundColor: "#a6ebdc" }}
+           className="rounded rounded-3"
+         >
+           <p className="pt-3 text-center">
+           
+             Total t-shirt: <strong>{hcgetTshirtCount()}</strong>
+           </p>
+         </Card> </div>
+         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+         <Card
+           style={{ backgroundColor: "#b7e9da" }}
+           className="rounded rounded-3"
+         >
+           <p className="pt-3 text-center">
+            
+             Total shirt: <strong>{hcgetShirtCount()}</strong>
+           </p>
+         </Card> </div>
+         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+         <Card
+           style={{ backgroundColor: "#f3a9b2" }}
+           className="rounded rounded-3"
+         >
+           <p className="pt-3 text-center">
+           
+           Total charger: <strong>{hcgetChargerCount()}</strong>
+           </p>
+         </Card> </div>
+         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+         <Card
+           style={{ backgroundColor: "#a6ebdc" }}
+           className="rounded rounded-3"
+         >
+           <p className="pt-3 text-center">
+             
+           Total mouse: <strong>{hcgetMouseCount()}</strong>
+           </p>
+         </Card> </div>
+         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+         <Card
+           style={{ backgroundColor: "#b7e9da" }}
+           className="rounded rounded-3"
+         >
+           <p className="pt-3 text-center">
+           
+           Total bags: <strong>{hcgetStudentsBags()}</strong>
+           </p>
+         </Card> </div>  </div>
+           )}
 
-                    {/* <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br> */}
-                  </div>
-                </div>
-                <div className="col-lg-3">
-                  <div className="mt-2 mb-2">
-                    <h4>Ameerpet</h4>
-                    {/* <span>Rows : {getassigndata.length}</span><br></br> */}
-                    <span>
-                      Total laptops: <strong>{apgetLaptopCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total t-shirt: <strong>{apgetTshirtCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total shirt: <strong>{apgetShirtCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total charger: <strong>{apgetChargerCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total mouse: <strong>{apgetMouseCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total bags: <strong>{apgetStudentsBags()}</strong>
-                    </span>
-                    <br></br>
+           {Displayassets.ameerpet && ( 
+              <div className="row mb-3">
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#f3a9b2" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            Total laptops: <strong>{apgetLaptopCount()}</strong>
+            
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#a6ebdc" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            
+            Total t-shirt: <strong>{apgetTshirtCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#b7e9da" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            Total shirt: <strong>{apgetShirtCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#f3a9b2" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            
+            Total charger: <strong>{apgetChargerCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#a6ebdc" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            Total mouse: <strong>{apgetMouseCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#b7e9da" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            Total bags: <strong>{apgetStudentsBags()}</strong>
+            </p>
+          </Card> </div>  </div>
+           )}
 
-                    {/* <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br> */}
-                  </div>
-                </div>
-                <div className="col-lg-3">
-                  <div className="mt-2 mb-2">
-                    <h4>Dilsukhnagar</h4>
-                    {/* <span>Rows : {getassigndata.length}</span><br></br> */}
-                    <span>
-                      Total laptops: <strong>{dngetLaptopCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total t-shirt: <strong>{dngetTshirtCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total shirt: <strong>{dngetShirtCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total charger: <strong>{dngetChargerCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total mouse: <strong>{dngetMouseCount()}</strong>
-                    </span>
-                    <br></br>
-                    <span>
-                      Total bags: <strong>{dngetStudentsBags()}</strong>
-                    </span>
-                    <br></br>
-
-                    {/* <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br> */}
-                  </div>
-                </div>
-              </div>
-              {/* <div className="add_btn mt-2 mb-2">
-                            <NavLink to="/register" className="btn btn-primary">Assign data</NavLink><br></br>
-                            <span>Rows : {getassigndata.length}</span><br></br>
-                            <span>Total laptops: {getLaptopCount()}</span><br></br>
-                            <span>Total t-shirt: {getTshirtCount()}</span><br></br>
-                            <span>Total shirt: {getShirtCount()}</span><br></br>
-                            <span>Total charger: {getChargerCount()}</span><br></br>
-                            <span>Total mouse: {getMouseCount()}</span><br></br>
-                            <span>Total bags: {getStudentsBags()}</span><br></br>
-                            <hr></hr>
-                            <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
-                            
-                        </div> */}
-              <Paper
+{Displayassets.dilsukhnagar && ( 
+              <div className="row mb-3">
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#f3a9b2" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            Total laptops: <strong>{dngetLaptopCount()}</strong>
+            
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#a6ebdc" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            Total t-shirt: <strong>{dngetTshirtCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#b7e9da" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            Total shirt: <strong>{dngetShirtCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#f3a9b2" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            
+            Total charger: <strong>{dngetChargerCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#a6ebdc" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            Total mouse: <strong>{dngetMouseCount()}</strong>
+            </p>
+          </Card> </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <Card
+            style={{ backgroundColor: "#b7e9da" }}
+            className="rounded rounded-3"
+          >
+            <p className="pt-3 text-center">
+            Total bags: <strong>{dngetStudentsBags()}</strong>
+            </p>
+          </Card> </div>  </div>
+           )}
+            <Paper
                 sx={{ width: "100%", overflow: "hidden" }}
                 className="mt-3"
               >
@@ -715,8 +890,156 @@ const Assignassets = () => {
                   </Table>
                 </TableContainer>
               </Paper>
-              <table class="table col-12">
-                {/* <thead>
+            <div className="col-lg-12">
+              {/* <div className="row">
+                <div className="col-lg-3">
+                  <div className="">
+                    <NavLink to="/register" className="btn btn-primary">
+                      Assign data
+                    </NavLink>
+                    <br></br>
+                    <span>Rows : {getassigndata.length}</span><br></br>
+                    <span>
+                      Total laptops: <strong>{getLaptopCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total t-shirt: <strong>{getTshirtCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total shirt: <strong>{getShirtCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total charger: <strong>{getChargerCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total mouse: <strong>{getMouseCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total bags: <strong>{getStudentsBags()}</strong>
+                    </span>
+                    <br></br>
+
+                    <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <div className="mt-2 mb-2">
+                    <h4>Hitech City</h4>
+                    <span>Rows : {getassigndata.length}</span><br></br>
+                    <span>
+                      Total laptops: <strong>{hcgetLaptopCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total t-shirt: <strong>{hcgetTshirtCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total shirt: <strong>{hcgetShirtCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total charger: <strong>{hcgetChargerCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total mouse: <strong>{hcgetMouseCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total bags: <strong>{hcgetStudentsBags()}</strong>
+                    </span>
+                    <br></br>
+
+                    <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <div className="mt-2 mb-2">
+                    <h4>Ameerpet</h4>
+                    <span>Rows : {getassigndata.length}</span><br></br>
+                    <span>
+                      Total laptops: <strong>{apgetLaptopCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total t-shirt: <strong>{apgetTshirtCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total shirt: <strong>{apgetShirtCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total charger: <strong>{apgetChargerCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total mouse: <strong>{apgetMouseCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total bags: <strong>{apgetStudentsBags()}</strong>
+                    </span>
+                    <br></br>
+
+                    <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
+                  </div>
+                </div>
+                <div className="col-lg-3">
+                  <div className="mt-2 mb-2">
+                    <h4>Dilsukhnagar</h4>
+                    <span>Rows : {getassigndata.length}</span><br></br>
+                    <span>
+                      Total laptops: <strong>{dngetLaptopCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total t-shirt: <strong>{dngetTshirtCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total shirt: <strong>{dngetShirtCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total charger: <strong>{dngetChargerCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total mouse: <strong>{dngetMouseCount()}</strong>
+                    </span>
+                    <br></br>
+                    <span>
+                      Total bags: <strong>{dngetStudentsBags()}</strong>
+                    </span>
+                    <br></br>
+
+                    <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
+                  </div>
+                </div>
+              </div> */}
+              {/* <div className="add_btn mt-2 mb-2">
+                            <NavLink to="/register" className="btn btn-primary">Assign data</NavLink><br></br>
+                            <span>Rows : {getassigndata.length}</span><br></br>
+                            <span>Total laptops: {getLaptopCount()}</span><br></br>
+                            <span>Total t-shirt: {getTshirtCount()}</span><br></br>
+                            <span>Total shirt: {getShirtCount()}</span><br></br>
+                            <span>Total charger: {getChargerCount()}</span><br></br>
+                            <span>Total mouse: {getMouseCount()}</span><br></br>
+                            <span>Total bags: {getStudentsBags()}</span><br></br>
+                            <hr></hr>
+                            <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
+                            
+                        </div> */}
+             
+              {/* <table class="table col-12">
+                <thead>
                   <tr className="table-dark">
                     <th scope="col">id</th>
                     <th scope="col">Name</th>
@@ -732,9 +1055,9 @@ const Assignassets = () => {
 
                     <th scope="col"></th>
                   </tr>
-                </thead> */}
+                </thead>
                 <tbody>
-                  {/* {getassigndata.map((element, id) => (
+                  {getassigndata.map((element, id) => (
                     <React.Fragment key={id}>
                       <tr>
                         <th scope="row">{id + 1}</th>
@@ -770,11 +1093,11 @@ const Assignassets = () => {
                         </td>
                       </tr>
                     </React.Fragment>
-                  ))} */}
+                  ))}
                 </tbody>
-              </table>
+              </table> */}
             </div>
-          </div>
+        
         </div>
       </div>
     </>

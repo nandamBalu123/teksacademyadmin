@@ -31,7 +31,8 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import StorageIcon from "@mui/icons-material/Storage";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
-
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import StackedBarChartIcon from '@mui/icons-material/StackedBarChart';
 import profilelogo from "../../../images/Teks-Logo-with-Trade.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import favicon from "../../../images/favicon.jpeg";
@@ -371,6 +372,31 @@ const Sidebar = () => {
               ) : undefined}
               <hr />
               {/* end */}
+              {/* reports start */}
+              {profile == "admin" ? (
+                <SubMenu
+                  style={{
+                    // color: colors.grey[100],
+                    color: "black",
+                  }}
+                  icon={<AssessmentIcon/>}
+                  label={"Reports"}
+                  title={"Reports"}
+                >
+                  <Item
+                    title="Reports Data"
+                    to="/reports"
+                    icon={<StackedBarChartIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                 
+                 
+                  
+                </SubMenu>
+              ) : undefined}
+              <hr/>
+              {/* Settings start */}
               {profile == "admin" ? (
                 <SubMenu
                   style={{
