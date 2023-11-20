@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import './Assignassets.css';
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
@@ -447,10 +448,10 @@ const Assignassets = () => {
         ""
       )}
 
-      <div className="container">
-        <div className="mt-5">
-        <div className="d-flex justify-content-between"> 
-           <h4> Assign Data</h4>
+      <div className="container mt-3">
+        <div className="mt-3 assign-assets">
+        <div className="d-flex justify-content-between mt-4"> 
+           <h4 className="ms-2"> Assign Data</h4>
            <NavLink to="/register" className="btn btn-primary">
                       Assign data
                     </NavLink>
