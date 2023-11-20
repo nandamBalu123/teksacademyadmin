@@ -19,6 +19,8 @@ import Addassetsform from "../src/components/pages/inventory/Addassetsform";
 import Inventoryhome from "../src/components/pages/inventory/Inventoryhome";
 import ReturnAssetsForm from "../src/components/pages/inventory/ReturnAssetsForm";
 import Addassetsview from "./components/pages/inventory/addassetsview";
+import AssetType from "./components/pages/inventory/Settings/AssetType";
+import Vendor from "./components/pages/inventory/Settings/Vendor";
 // uncomand inventory end
 import Dashboard from "./components/pages/dashboard/Dashboard";
 import Sidebar from "./components/common/Sidebar/Sidebar";
@@ -400,18 +402,37 @@ function App() {
                     ) : (
                       <Dashboard />
                     )
-                  }
-                ></Route>
-                <Route
-                  path="/assignassets/returnassets/:id"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <ReturnAssetsForm />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                ></Route>
+                  }></Route>
+              <Route
+                path="/assignassets/returnassets/:id"
+                element={
+                  user && user.profile == "admin" ? (
+                    <ReturnAssetsForm />
+                  ) : (
+                    <Dashboard />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/assettype"
+                element={
+                  user && user.profile == "admin" ? (
+                    <AssetType />
+                  ) : (
+                    <Dashboard />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/vendor"
+                element={
+                  user && user.profile == "admin" ? (
+                    <Vendor />
+                  ) : (
+                    <Dashboard />
+                  )
+                }
+              ></Route>
               </Routes>
             </main>
           </div>

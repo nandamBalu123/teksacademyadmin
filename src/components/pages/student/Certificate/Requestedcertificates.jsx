@@ -214,11 +214,12 @@ const Requestedcertificates = () => {
     });
   };
   return (
-    <div className="container req-main-certificate mt-3">
+   <div className="container"> 
+     <div className=" req-main-certificate mt-3">
       <div className="req-certificate mt-2">
         <div className="row ">
           {!issuedCertificates && (
-            <h4 className="col-12 col-md-9 col-lg-9 col-xl-9">
+            <h4 className="col-12 col-md-9 col-lg-9 col-xl-9 ms-3">
               Requested Certificates
             </h4>
           )}
@@ -267,33 +268,21 @@ const Requestedcertificates = () => {
               value={filterCriteria.search}
               onChange={handleInputChange}
             />
-            <hr className="w-75" />
+            <hr className="w-75 ms-2" />
           </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 pt-3">
-            <h6>
-              {" "}
-              {recordCount}/{initialDataCount}
-            </h6>
-          </div>
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1  pt-2">
-            <select onChange={handlerecorddata}>
+          <div className="col-12 col-md-3 col-lg-3 col-xl-3 mt-1">  
+          <div className="d-flex justify-content-evenly"> 
+          <p className="mt-2">  {recordCount}/{initialDataCount} </p>
+          <p className="mt-2"> 
+          <select onChange={handlerecorddata}>
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="75">75</option>
             </select>
-          </div>
-
-          <div className="col-4 col-md-1 col-lg-1 col-xl-1 ">
-            {/* <Button
-            id="demo-positioned-button"
-            aria-controls={open ? "demo-positioned-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          
-            
-          > */}
-            <button
+          </p>
+          <span> 
+          <button
               className="btn btn-primary mr-20 ms-2 mb-2 mt-1"
               onClick={handleClick}
               style={{ textTransform: "capitalize" }}
@@ -569,10 +558,14 @@ const Requestedcertificates = () => {
                 </button>
               </div>
             </Menu>
+          </span>
           </div>
+          </div>
+
+         
         </div>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
+          <TableContainer sx={{ maxHeight: 400 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
@@ -671,7 +664,7 @@ const Requestedcertificates = () => {
                           <span
                             title={student.name}
                             style={{
-                              width: "7rem",
+                              width: "5rem",
 
                               whiteSpace: "nowrap",
                               overflow: "hidden",
@@ -687,7 +680,7 @@ const Requestedcertificates = () => {
                           <span
                             title={student.courses}
                             style={{
-                              width: "7rem",
+                              width: "6rem",
 
                               whiteSpace: "nowrap",
                               overflow: "hidden",
@@ -703,7 +696,7 @@ const Requestedcertificates = () => {
                           <span
                             title={student.registrationnumber}
                             style={{
-                              width: "7rem",
+                              width: "6rem",
 
                               whiteSpace: "nowrap",
                               overflow: "hidden",
@@ -719,7 +712,7 @@ const Requestedcertificates = () => {
                           <span
                             title={formattedcourseStartDate}
                             style={{
-                              width: "7rem",
+                              width: "6rem",
 
                               whiteSpace: "nowrap",
                               overflow: "hidden",
@@ -735,7 +728,7 @@ const Requestedcertificates = () => {
                           <span
                             title={courseEndDate}
                             style={{
-                              width: "7rem",
+                              width: "6rem",
 
                               whiteSpace: "nowrap",
                               overflow: "hidden",
@@ -791,6 +784,7 @@ const Requestedcertificates = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

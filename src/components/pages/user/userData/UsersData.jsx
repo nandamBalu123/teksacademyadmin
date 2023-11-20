@@ -302,10 +302,10 @@ const UsersData = () => {
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
-      <div className="userlist mt-4">
-        <h2 className="ms-3 my-3">Users List</h2>
+      <div className="userlist mt-3">
+        <h4 className=" mt-3  text-center">Users List</h4>
 
-        <div className="row mb-3 px-2 pt-3">
+        <div className="row  px-2 ">
           <div className="col-12 col-md-8 col-lg-8 col-xl-8">
             <input
               type="text"

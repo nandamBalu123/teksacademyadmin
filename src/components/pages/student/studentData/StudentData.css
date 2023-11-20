@@ -2,7 +2,7 @@
 .studetdetails {
   width: 99%;
   border: 2px solid #f5f5f5;
-  border-radius: 20px;
+  border-radius: 8px;
   margin: auto;
   overflow: hidden;
 }
@@ -56,6 +56,10 @@ hr {
 }
 .studetdetails {
   overflow-x: hidden;
+}
+.student-table{ 
+  width: 100%;
+  margin: auto;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

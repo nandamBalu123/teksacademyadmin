@@ -8,14 +8,16 @@
   background-color:#fcfcfc;
   width: 99%;
   border: 2px solid #f5f5f5;
-  border-radius: 20px;
+  border-radius: 8px;
   margin: auto;
 
 }
 .sub-user-container {
-  margin-top: 20px;
+  margin: auto;
+  text-align: center;
+  /* margin-top: 20px;
   margin-left: 30px;
-  margin-right: 30px;
+  margin-right: 30px; */
 }
 .star {
   color: red;

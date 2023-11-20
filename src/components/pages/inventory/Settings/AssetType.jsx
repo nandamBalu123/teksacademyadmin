@@ -7,15 +7,21 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+
+import DialogTitle from '@mui/material/DialogTitle';
 import { styled } from "@mui/material/styles";
 import axios from "axios";
-import { useDepartmentContext } from "../../../../hooks/useDepartmentcontext";
-const Department = () => {
-  const { departments } = useDepartmentContext();
-  const navigate = useNavigate();
+
+export default function AssetType() {
+    const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/createdepartment");
+    navigate("/createbranch");
   };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -37,31 +43,54 @@ const Department = () => {
       border: 0,
     },
   }));
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="container">
-      <div className="row"> 
-      <div className="col-12 col-md-9 col-lg-9 col-xl-9">
-      <h3 className="fs-5">Departments</h3> </div>
-      <div className="col-12 col-md-3 col-lg-3 col-xl-3">
-      <button
-          type="submit"
-          className="btn btn-primary mr-20  mb-2"
-          onClick={handleSubmit}
-        >
-          Add Department
-        </button>
-         </div>
-      </div>
-      {/* <div className="d-flex justify-content-between mt-3">
-        <p className="fs-5">Departments</p>
+      <div className="flex mt-3">
+        <p className="fs-5 ms-3">Asset Type</p>
+        <React.Fragment>
         <button
+         onClick={handleClickOpen}
           type="submit"
-          className="btn btn-primary mr-20  mb-2"
-          onClick={handleSubmit}
-        >
-          Add Department
+          className="btn btn-primary mr-20 ms-2">
+          Add Asset Type
         </button>
-      </div> */}
+      
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Add Asset Type</DialogTitle>
+        <DialogContent>
+        
+          <TextField
+            autoFocus
+            
+            
+            label="Asset Type"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button >submit</Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+
+        {/* <button
+          type="submit"
+          className="btn btn-primary mr-20 ms-2 mb-2">
+          Add Asset Type
+        </button> */}
+      </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 1000 }} aria-label="customized table">
           <TableHead>
@@ -70,7 +99,7 @@ const Department = () => {
                 className="bg-primary fs-6  border border 1"
                 align="center"
               >
-                id
+                SI.NO
               </StyledTableCell>
               <StyledTableCell
                 className="bg-primary fs-6  border border 1"
@@ -83,18 +112,18 @@ const Department = () => {
             </TableRow>
           </TableHead>
 
-          <TableBody className="border border 1">
-            {Array.isArray(departments) && departments.length > 0 ? (
-              departments.map((item, index) => (
+          {/* <TableBody className="border border 1">
+            {Array.isArray(branches) && branches.length > 0 ? (
+              branches.map((item, index) => (
                 <StyledTableRow key={item.id}>
                   <StyledTableCell className="border border 1 text-center">
                     {index + 1}
                   </StyledTableCell>
                   <StyledTableCell className="border border 1 text-center">
-                    {item.department_name}
+                    {item.branch_name}
                   </StyledTableCell>
 
-                  {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
+                  
                 </StyledTableRow>
               ))
             ) : (
@@ -102,11 +131,9 @@ const Department = () => {
                 <TableCell colSpan={3}>No data available</TableCell>
               </TableRow>
             )}
-          </TableBody>
+          </TableBody> */}
         </Table>
       </TableContainer>
     </div>
-  );
-};
-
-export default Department;
+  )
+}
