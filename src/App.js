@@ -68,6 +68,7 @@ import Requestedcertificates from "./components/pages/student/Certificate/Reques
 import Sidebar1 from "./components/common/Sidebar/Sidebar1";
 import Invoice from "./components/pages/student/fee/Invoice";
 import ZipCodeLookup from "./components/pages/student/studentRegistrationForm/Zipcode";
+import Reports from "./components/pages/Reports/Reports";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 
@@ -432,6 +433,17 @@ function App() {
                 element={
                   user && user.profile == "admin" ? (
                     <Vendor />
+                  ) : (
+                    <Dashboard />
+                  )
+                }
+              ></Route>
+              {/* Reports */}
+              <Route
+                path="/reports"
+                element={
+                  user && user.profile == "admin" ? (
+                    <Reports/>
                   ) : (
                     <Dashboard />
                   )
