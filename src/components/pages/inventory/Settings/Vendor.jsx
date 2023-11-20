@@ -17,6 +17,8 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 
 export default function Vendor() {
+  const navigate = useNavigate();
+
   const [vendorName, setVendorName] = useState(["hp", "dell", "lenova"]);
   const [newVendorName, setNewVendorName] = useState();
   const handlesubmit = () => {
@@ -28,13 +30,12 @@ export default function Vendor() {
         if (res.data.updated) {
           alert("vendor Updated");
           setOpen(false);
+          setNewVendorName("");
         } else {
           alert("not updated");
         }
       });
   };
-
-  const navigate = useNavigate();
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -56,6 +57,7 @@ export default function Vendor() {
     },
   }));
   const [open, setOpen] = React.useState(false);
+  const [editopen, seteditOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -64,28 +66,45 @@ export default function Vendor() {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleDelete = (index) => {
-    console.log("index", index);
-    console.log("vendorName", vendorName);
-
-    let updatedassettype = vendorName;
-    updatedassettype.splice(index, 1);
-    console.log("updatedassettype", updatedassettype);
-    setVendorName(updatedassettype);
-    console.log("vendorNameafter", vendorName);
+  const handleClickEditOpen = () => {
+    seteditOpen(true);
   };
-  useEffect(() => {
-    const handleDelete = (index) => {
-      console.log("index", index);
-      console.log("vendorName", vendorName);
 
-      let updatedassettype = vendorName;
-      updatedassettype.splice(index, 1);
-      console.log("updatedassettype", updatedassettype);
-      setVendorName(updatedassettype);
-      console.log("vendorNameafter", vendorName);
-    };
-  }, [vendorName]);
+  const handleeditClose = () => {
+    seteditOpen(false);
+  };
+  const handleDelete = (index) => {
+    let updatedVendorName = [...vendorName];
+    updatedVendorName.splice(index, 1);
+    setVendorName(updatedVendorName);
+  };
+  const [i, setI] = useState();
+  const handleEdit = (index) => {
+    setI(index);
+    seteditOpen(true);
+    let updatedVendorName = [...vendorName];
+    setNewVendorName(updatedVendorName[index]);
+  };
+
+  const SubmithandleEdit = () => {
+    let updatedVendorName = [...vendorName];
+    console.log("fgdf", i);
+    updatedVendorName[i] = newVendorName;
+    setVendorName(updatedVendorName);
+
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/addvendorname`, vendorName)
+      .then((res) => {
+        if (res.data.updated) {
+          alert("vendor Updated");
+          setNewVendorName("");
+
+          seteditOpen(false);
+        } else {
+          alert("not updated");
+        }
+      });
+  };
   return (
     <div className="container">
       <div className="flex mt-3">
@@ -121,6 +140,29 @@ export default function Vendor() {
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
               <Button onClick={handlesubmit}>submit</Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog open={editopen} onClose={handleeditClose}>
+            <DialogTitle>Edit Vendor Name</DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                label="Vendor Name"
+                type="text"
+                fullWidth
+                variant="standard"
+                value={newVendorName}
+                onChange={(e) => setNewVendorName(e.target.value)}
+                // autoFocus
+                // label="Vendor Name"
+                // type="text"
+                // fullWidth
+                // variant="standard"
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleeditClose}>Cancel</Button>
+              <Button onClick={SubmithandleEdit}>Update</Button>
             </DialogActions>
           </Dialog>
         </React.Fragment>
@@ -161,7 +203,7 @@ export default function Vendor() {
                 </StyledTableCell>
                 <StyledTableCell className="border border 1 text-center">
                   <button onClick={(e) => handleDelete(index)}>delete</button>
-                  <button>edit</button>
+                  <button onClick={(e) => handleEdit(index)}>edit</button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

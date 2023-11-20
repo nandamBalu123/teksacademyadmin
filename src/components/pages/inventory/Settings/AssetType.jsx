@@ -30,6 +30,7 @@ export default function AssetType() {
         if (res.data.updated) {
           alert("assest Updated");
           setOpen(false);
+          setNewAssettype("");
         } else {
           alert("not updated");
         }
@@ -56,6 +57,7 @@ export default function AssetType() {
     },
   }));
   const [open, setOpen] = React.useState(false);
+  const [editopen, seteditOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -63,6 +65,45 @@ export default function AssetType() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleClickEditOpen = () => {
+    seteditOpen(true);
+  };
+
+  const handleeditClose = () => {
+    seteditOpen(false);
+  };
+  const handleDelete = (index) => {
+    let updatedAssetType = [...assettype];
+    updatedAssetType.splice(index, 1);
+    setAssetype(updatedAssetType);
+  };
+  const [i, setI] = useState();
+  const handleEdit = (index) => {
+    setI(index);
+    seteditOpen(true);
+    let updatedAssetType = [...assettype];
+    setNewAssettype(updatedAssetType[index]);
+  };
+
+  const SubmithandleEdit = () => {
+    let updatedAssetType = [...assettype];
+
+    updatedAssetType[i] = newAssettype;
+    setAssetype(updatedAssetType);
+
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/addassettype`, assettype)
+      .then((res) => {
+        if (res.data.updated) {
+          alert("vendor Updated");
+          setNewAssettype("");
+
+          seteditOpen(false);
+        } else {
+          alert("not updated");
+        }
+      });
   };
   return (
     <div className="container">
@@ -95,6 +136,29 @@ export default function AssetType() {
               <Button onClick={handlesubmit}>submit</Button>
             </DialogActions>
           </Dialog>
+          <Dialog open={editopen} onClose={handleeditClose}>
+            <DialogTitle>Edit Vendor Name</DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                label="Asset Name"
+                type="text"
+                fullWidth
+                variant="standard"
+                value={newAssettype}
+                onChange={(e) => setNewAssettype(e.target.value)}
+                // autoFocus
+                // label="Vendor Name"
+                // type="text"
+                // fullWidth
+                // variant="standard"
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleeditClose}>Cancel</Button>
+              <Button onClick={SubmithandleEdit}>Update</Button>
+            </DialogActions>
+          </Dialog>
         </React.Fragment>
 
         {/* <button
@@ -119,7 +183,12 @@ export default function AssetType() {
               >
                 Name
               </StyledTableCell>
-
+              <StyledTableCell
+                className="bg-primary fs-6  border border 1"
+                align="center"
+              >
+                Actions
+              </StyledTableCell>
               {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
             </TableRow>
           </TableHead>
@@ -132,6 +201,10 @@ export default function AssetType() {
                 </StyledTableCell>
                 <StyledTableCell className="border border 1 text-center">
                   {element}
+                </StyledTableCell>
+                <StyledTableCell className="border border 1 text-center">
+                  <button onClick={(e) => handleDelete(index)}>delete</button>
+                  <button onClick={(e) => handleEdit(index)}>edit</button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
