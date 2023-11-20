@@ -127,7 +127,7 @@ const Edit = () => {
                 name="name"
                 type="text"
                 value={inpval.name}
-                  onChange={setdata}
+                  
                 id="name"
                
               />
@@ -140,7 +140,7 @@ const Edit = () => {
                 name="designation"
                 type="text"
                 value={inpval.designation}
-                onChange={setdata}
+                
             
               />
           {/* <TextField
@@ -150,7 +150,7 @@ const Edit = () => {
                 name="name"
                 type="text"
                 value={inpval.vendername}
-                onChange={setdata}
+                
               
               /> */}
           </div> </div>
@@ -163,7 +163,7 @@ const Edit = () => {
               
                 type="text"
                 value={inpval.branch}
-                onChange={setdata}
+                
                 name="branch"
              
               />
@@ -175,7 +175,7 @@ const Edit = () => {
                 variant="standard"
                 type="text"
                 value={inpval.assettype}
-                onChange={setdata}
+                
                 name="assettype"
                  />
            </div>
@@ -188,7 +188,7 @@ const Edit = () => {
                 variant="standard"
               type="date"
               value={inpval.issueddate}
-              onChange={setdata}
+              
               name="issueddate"
                 required
                 InputLabelProps={{
@@ -203,7 +203,7 @@ const Edit = () => {
                 variant="standard"
                 type="text"
                 value={inpval.assetcode}
-                onChange={setdata}
+                
                 name="assetcode"
                  />
            </div>
@@ -216,7 +216,7 @@ const Edit = () => {
                 variant="standard"
                 type="number"
                 value={inpval.anonymity}
-                onChange={setdata}
+                
                 name="anonymity"
                  />
              </div>
@@ -227,7 +227,7 @@ const Edit = () => {
                 variant="standard"
                 type="text"
                 value={inpval.remarks}
-                onChange={setdata}
+                
                 name="remarks"
                  />
               </div>
@@ -261,7 +261,7 @@ const Edit = () => {
             <input
               type="text"
               value={inpval.name}
-              onChange={setdata}
+              
               name="name"
               class="form-control"
               id="exampleInputEmail1"
@@ -275,7 +275,7 @@ const Edit = () => {
             <input
               type="text"
               value={inpval.vendername}
-              onChange={setdata}
+              
               name="name"
               class="form-control"
               id="exampleInputEmail1"
@@ -289,7 +289,7 @@ const Edit = () => {
             <input
               type="email"
               value={inpval.designation}
-              onChange={setdata}
+              
               name="designation"
               class="form-control"
               id="exampleInputPassword1"
@@ -302,7 +302,7 @@ const Edit = () => {
             <input
               type="text"
               value={inpval.branch}
-              onChange={setdata}
+              
               name="branch"
               class="form-control"
               id="exampleInputPassword1"
@@ -312,7 +312,7 @@ const Edit = () => {
                             <label htmlFor="exampleInputPassword1" className="form-label">Asset Type</label>
                             <select
                                 selected={inpval.assettype}
-                                onChange={setdata}
+                                
                                 name="assettype"
                                 className="form-select"
                                 id="exampleInputPassword1"
@@ -333,7 +333,7 @@ const Edit = () => {
             <input
               type="text"
               value={inpval.assettype}
-              onChange={setdata}
+              
               name="assettype"
               class="form-control"
               id="exampleInputPassword1"
@@ -346,7 +346,7 @@ const Edit = () => {
             <input
               type="text"
               value={inpval.issueddate}
-              onChange={setdata}
+              
               name="issueddate"
               class="form-control"
               id="exampleInputPassword1"
@@ -359,7 +359,7 @@ const Edit = () => {
             <input
               type="text"
               value={inpval.assetcode}
-              onChange={setdata}
+              
               name="assetcode"
               class="form-control"
               id="exampleInputPassword1"
@@ -372,7 +372,7 @@ const Edit = () => {
             <input
               type="text"
               value={inpval.anonymity}
-              onChange={setdata}
+              
               name="anonymity"
               class="form-control"
               id="exampleInputPassword1"
@@ -385,7 +385,7 @@ const Edit = () => {
             <input
               type="text"
               value={inpval.remarks}
-              onChange={setdata}
+              
               name="remarks"
               class="form-control"
               id="exampleInputPassword1"

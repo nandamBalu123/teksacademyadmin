@@ -8,7 +8,7 @@ import Login from "./components/pages/logins/adminlogins/Login";
 import "./App.css";
 
 
-// uncomand inventory start
+// inventory start
 // import Signup from "../src/components/pages/inventory/Signup";
 import Register from "../src/components/pages/inventory/Register";
 import AssigneAssetsEdit from "./components/pages/inventory/AssigneAssetsEdit";
@@ -22,7 +22,8 @@ import ReturnAssetsForm from "../src/components/pages/inventory/ReturnAssetsForm
 import Addassetsview from "./components/pages/inventory/addassetsview";
 import AssetType from "./components/pages/inventory/Settings/AssetType";
 import Vendor from "./components/pages/inventory/Settings/Vendor";
-// uncomand inventory end
+import Addassetsedit from "./components/pages/inventory/Addassetsedit";
+// inventory end
 import Dashboard from "./components/pages/dashboard/Dashboard";
 import Sidebar from "./components/common/Sidebar/Sidebar";
 import Topbar from "./components/common/Topbar/Topbar";
@@ -324,10 +325,17 @@ function App() {
                       <Dashboard />
                     )
                   }  />
-                {/* <Route path="/addassets/view/:id" element={<Details />} /> */}
+                
               <Route path="/addassets/view/:id" element={
                     user && user.profile == "admin" ? (
                       <Addassetsview />
+                    ) : (
+                      <Dashboard />
+                    )
+                  } />
+                  <Route path="/addassets/edit/:id" element={
+                    user && user.profile == "admin" ? (
+                      <Addassetsedit />
                     ) : (
                       <Dashboard />
                     )
@@ -388,6 +396,8 @@ function App() {
                   )
                 }
               ></Route>
+
+              {/* inventory settings */}
               <Route
                 path="/assettype"
                 element={
