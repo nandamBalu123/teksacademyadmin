@@ -225,11 +225,14 @@ const Addassets = () => {
       )}
 
       <div className="container">
-        <div className="d-flex justify-content-between mt-4"> 
-        <h4>Add Assets </h4>
+        <div className="row mt-4"> 
+        <div className="col-12 col-md-10 col-lg-10 col-xl-10 ">
+        <h4>Add Assets </h4></div>
+         <div className="col-12 col-md-2 col-lg-2 col-xl-2"> 
          <NavLink to="/addassetsform" className="btn btn-primary">
                       Add Assets
                     </NavLink>
+          </div>
          </div>
         <div className="assets-card row">
           <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
