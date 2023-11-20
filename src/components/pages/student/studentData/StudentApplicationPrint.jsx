@@ -72,9 +72,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
   // });
   return (
-    <div ref={ref}>
+    <div ref={ref} className="container">
       <div className="page ">
         <div className="application ">
+          
           <h3 className="text-center mt-2 "> Application Form </h3>
           <div className="row">
             <div
@@ -997,11 +998,11 @@ function StudentApplicationPrint() {
   return (
     <div>
       {/* <h1>Your React App</h1> */}
-      <div className="mt-3 text-end me-3 ">
+      <div className="mt-3  text-end me-5 mb-4 ">
         <button
           onClick={handlePrint}
           // style={{ margin: "30px" }}
-          className="btn btn-primary mb-3 m-auto"
+          className="btn btn-primary "
         >
           {/* <LocalPrintshopIcon /> */}
           Print

@@ -38,7 +38,7 @@ const RoleAccess = () => {
                 <h5 className='my-4'> Modele & Object Permissions</h5>
 
                 <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table  aria-label="simple table">
         <TableHead>
           <TableRow>
 
