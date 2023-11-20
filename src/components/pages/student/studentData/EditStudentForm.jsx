@@ -325,6 +325,8 @@ useEffect(() => {
 //   });
 // },[studentImage])
 
+
+
   return (
     <div className="main-container container">
       <div className="main-sub-container ">
@@ -406,7 +408,7 @@ useEffect(() => {
             <StepContent className="">
               <form className="form">
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2 ">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label=" Parent's Name "
                       type="text"
@@ -418,7 +420,7 @@ useEffect(() => {
                       name="parentsname"
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label=" Date of Birth"
                       type="date"
@@ -472,7 +474,7 @@ useEffect(() => {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="College/School/Company"
                       type="text"
@@ -519,9 +521,21 @@ useEffect(() => {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                    <TextField
+                      label="Zip Code"
+                      type="number"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={setdata}
+                      value={user.zipcode}
+                      name="zipcode"
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                   <TextField
-                      label=""
+                      label="Country"
                       name="country"
                       type="text"
                       variant="standard"
@@ -548,7 +562,11 @@ useEffect(() => {
                       </Select>
                     </FormControl> */}
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  
+                </div>
+
+                <div className="row ">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                   <TextField
                       label="State"
                       name="state"
@@ -620,10 +638,7 @@ useEffect(() => {
                       </Select>
                     </FormControl> */}
                   </div>
-                </div>
-
-                <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Area"
                       type="text"
@@ -635,7 +650,10 @@ useEffect(() => {
                       name="area"
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                 
+                </div>
+                <div className="row ">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Native Place"
                       type="text"
@@ -647,21 +665,7 @@ useEffect(() => {
                       name="native"
                     />
                   </div>
-                </div>
-                <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label="Zip Code"
-                      type="number"
-                      variant="standard"
-                      className=" w-75"
-                      required
-                      onChange={setdata}
-                      value={user.zipcode}
-                      name="zipcode"
-                    />
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label="Whatsapp Number"
                       type="number"
@@ -846,7 +850,7 @@ useEffect(() => {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label=" Enquiry Date"
                       type="date"
@@ -861,12 +865,12 @@ useEffect(() => {
                       name="enquirydate"
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                   <FormControl variant="standard" className="w-75">
                       <TextField
                           label="Enquiry Taken By"
                           variant="standard"
-                          className="w-75"
+                          
                           required
                           InputLabelProps={{
                             shrink: true,
@@ -880,7 +884,7 @@ useEffect(() => {
                 </div>
 
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Course Package<span> *</span>
@@ -905,7 +909,7 @@ useEffect(() => {
                       </Select>
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Course<span> *</span>
@@ -930,7 +934,7 @@ useEffect(() => {
                 </div>
 
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Lead Source<span> *</span>
@@ -1049,7 +1053,7 @@ useEffect(() => {
                       </Select>
                     </FormControl>
                   </div> */}
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label="Admission Date"
                       type="date"
@@ -1064,10 +1068,19 @@ useEffect(() => {
                       name="admissiondate"
                     />
                   </div>
+ <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label="Registration Number"
+                      variant="standard"
+                      className="w-75"
+                      required
+                      value={user.registrationnumber}
+                    />
+                  </div>
                 </div>
 
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label="Validity Start Date"
                       type="date"
@@ -1082,7 +1095,7 @@ useEffect(() => {
                       name="validitystartdate"
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-cl-6 col-lg-6 mt-2">
+                  <div className="col-12 col-md-6 col-cl-6 col-lg-6">
                     <TextField
                       label="validity End Date"
                       type="date"
@@ -1117,15 +1130,7 @@ useEffect(() => {
                 </div>
 
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label="Registration Number"
-                      variant="standard"
-                      className="w-75"
-                      required
-                      value={user.registrationnumber}
-                    />
-                  </div>
+                 
                 </div>
               </form>
               <Box sx={{ mb: 2, mt: 2 }}>
@@ -1390,41 +1395,110 @@ useEffect(() => {
 
             <StepContent>
               <form className="form">
-                <div className="row ">
+              <TableContainer component={Paper} className="billingtable ">
+                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
+                    <TableHead>
+                      <TableCell className="fs-6 py-3" align="center">
+                        Gross Total
+                      </TableCell>
+                      <TableCell className="fs-6" align="center">
+                        Total Discount
+                      </TableCell>
+                      <TableCell className="fs-6" align="center">
+                        Total Amount
+                      </TableCell>
+                    </TableHead>
+                    <TableBody>
+                      <TableCell align="center">0</TableCell>
+                      <TableCell align="center">0</TableCell>
+                      <TableCell align="center">0</TableCell>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <TableContainer component={Paper} className="billingtable mt-4">
+                  <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+                    <TableHead>
+                      <TableRow className="border border1">
+                        <TableCell align="left" className="fs-6 py-3">
+                          {" "}
+                          Fee Type
+                        </TableCell>
+                        <TableCell align="left" className="fs-6">
+                          Fee (Excl of GST)
+                        </TableCell>
+                        <TableCell align="left" className="fs-6">
+                          Tax
+                        </TableCell>
+                        <TableCell align="left" className="fs-6">
+                          Fee (Incl of GST)
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      
+                              <TableRow
+                               
+                                className="border border1"
+                              >
+                                <TableCell>0</TableCell>
+                                <TableCell>
+                                   0
+                                </TableCell>
+                                <TableCell>
+                                 0
+                                </TableCell>
+                                <TableCell>
+                                 0
+                                </TableCell>
+                              </TableRow>
+                          
+                 
+                        <TableRow className="border border1">
+                          <TableCell> Sub Total</TableCell>
+                          <TableCell>
+                            0
+                          </TableCell>
+                          <TableCell>
+                       0
+                          </TableCell>
+                          <TableCell>
+                        0
+                          </TableCell>
+                        </TableRow>
+                  
+
+                      <TableRow className="border border1">
+                        <TableCell rowSpan={3} />
+                        <TableCell rowSpan={3} />
+                        <TableCell>Material Fee</TableCell>
+                        <TableCell align="left">0</TableCell>
+                      </TableRow>
+                      <TableRow className="border border1">
+                        <TableCell align="left">
+                          <strong> Grand Total</strong>
+                        </TableCell>
+                        <TableCell align="left">0</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Gross Total <span className="text-danger"> *</span>&nbsp;:
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                
                   {user.grosstotal}
-                </div>
-                <br />
+                </div> */}
+                {/* <br />
                 <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Discount <span className="text-danger"> *</span>
                     &nbsp; :
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                 
                   {user.totaldiscount}
-                </div>
-                <br />
+                </div> */}
+               
                 {/* <div className="row ">
                   <label className="col-12 col-md-2">
                     Net Total <span className="text-danger"> *</span>&nbsp;:
@@ -1441,41 +1515,23 @@ useEffect(() => {
                   />
                 </div> */}
 
-                <div className="row ">
+                {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Total Tax <span className="text-danger"> *</span>&nbsp;:
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                 
                   {user.totaltax}
-                </div>
-                <br />
-                <div className="row ">
+                </div> */}
+           
+                {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Grand Total<span className="text-danger"> *</span>&nbsp;:
                   </label>
-                  {/* <input
-                    type="text"
-                    className="col-9 col-md-5"
-                    required
-                    style={{
-                      height: "35px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                  /> */}
+                 
                   {user.grandtotal}
-                </div>
-                <br />
-                <div className="row ">
+                </div> */}
+              
+                {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     {" "}
                     Admission Remarks <span className="text-danger "> *</span>
@@ -1494,9 +1550,56 @@ useEffect(() => {
                     onChange={setdata}
                     value={user.admissionremarks}
                   />
+                </div> */}
+               
+              </form>
+              <Box sx={{ mb: 2, mt: 2 }}>
+                <div>
+                <Button
+                    className="bg-primary"
+                    variant="contained"
+                    // disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Continue
+                  </Button>
+                 
+                  
                 </div>
-                <br />
+              </Box>
+            </StepContent>
+          </Step>
+          {/* -----Step 10 -------- */}
+          <Step>
+            <StepLabel>
+              <Typography fontSize={25}>Others</Typography>
+            </StepLabel>
+            <StepContent>
+              <form className="form">
                 <div className="row ">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                    <TextField
+                      label="Remarks"
+                      type="text"
+                      variant="standard"
+                      className="w-75"
+                      required
+                      onChange={setdata}
+                      value={user.admissionremarks}
+                    />
+                  </div>
+                  </div>
+                  <div className="row ">
                 <label className="col-12 col-md-2 label">
                   Assets <span className="text-danger"> *</span>&nbsp;:
                 </label>
@@ -1592,19 +1695,11 @@ useEffect(() => {
                     <option value="coursematerial"> Course Materials</option>
                   </select> */}
                 </div>
-                <br />
-              </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handlesubmit}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Submit
-                  </Button>
+                 
+                 
+               
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
                   <Button
                     className="bg-primary"
                     variant="contained"
@@ -1614,8 +1709,18 @@ useEffect(() => {
                   >
                     Back
                   </Button>
-                </div>
-              </Box>
+                  <Button
+                    className="bg-primary"
+                    variant="contained"
+                    onClick={handlesubmit}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                    Submit
+                  </Button>
+                  </div>
+                </Box>
+              </form>
             </StepContent>
           </Step>
         </Stepper>
