@@ -7,28 +7,27 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material/Button';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import TextField from '@mui/material/TextField';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from "@mui/material/Dialog";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import TextField from "@mui/material/TextField";
+import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 
 export default function Vendor() {
-  const [vendorName, setVendorName] = useState([]);
-  const handleNameChange = (event) => {
-    setVendorName(event.target.value);
-  };
-  const handlesubmit = (e) => {
-    e.preventDefault();
+  const [vendorName, setVendorName] = useState(["hp", "dell", "lenova"]);
+  const [newVendorName, setNewVendorName] = useState();
+  const handlesubmit = () => {
+    vendorName.unshift(newVendorName);
+    console.log("vendorName", vendorName);
     axios
       .put(`${process.env.REACT_APP_API_URL}/addvendorname`, vendorName)
       .then((res) => {
         if (res.data.updated) {
           alert("vendor Updated");
-          // navigate("/usersdata");
+          setOpen(false);
         } else {
           alert("not updated");
         }
@@ -36,10 +35,6 @@ export default function Vendor() {
   };
 
   const navigate = useNavigate();
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   navigate("/createbranch");
-  // };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -69,6 +64,28 @@ export default function Vendor() {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleDelete = (index) => {
+    console.log("index", index);
+    console.log("vendorName", vendorName);
+
+    let updatedassettype = vendorName;
+    updatedassettype.splice(index, 1);
+    console.log("updatedassettype", updatedassettype);
+    setVendorName(updatedassettype);
+    console.log("vendorNameafter", vendorName);
+  };
+  useEffect(() => {
+    const handleDelete = (index) => {
+      console.log("index", index);
+      console.log("vendorName", vendorName);
+
+      let updatedassettype = vendorName;
+      updatedassettype.splice(index, 1);
+      console.log("updatedassettype", updatedassettype);
+      setVendorName(updatedassettype);
+      console.log("vendorNameafter", vendorName);
+    };
+  }, [vendorName]);
   return (
     <div className="container">
       <div className="flex mt-3">
@@ -78,27 +95,27 @@ export default function Vendor() {
           <button
             onClick={handleClickOpen}
             type="submit"
-            className="btn btn-primary mr-20 ms-2">
+            className="btn btn-primary mr-20 ms-2"
+          >
             Add Vendor
           </button>
 
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Add Vendor Name</DialogTitle>
             <DialogContent>
-
               <TextField
                 autoFocus
                 label="Vendor Name"
                 type="text"
                 fullWidth
                 variant="standard"
-                value={vendorName}
-                onChange={handleNameChange}
-              // autoFocus
-              // label="Vendor Name"
-              // type="text"
-              // fullWidth
-              // variant="standard"
+                value={newVendorName}
+                onChange={(e) => setNewVendorName(e.target.value)}
+                // autoFocus
+                // label="Vendor Name"
+                // type="text"
+                // fullWidth
+                // variant="standard"
               />
             </DialogContent>
             <DialogActions>
@@ -124,31 +141,32 @@ export default function Vendor() {
               >
                 Name
               </StyledTableCell>
+              <StyledTableCell
+                className="bg-primary fs-6  border border 1"
+                align="center"
+              >
+                Actions
+              </StyledTableCell>
             </TableRow>
           </TableHead>
 
-          {/* <TableBody className="border border 1">
-            {Array.isArray(branches) && branches.length > 0 ? (
-              branches.map((item, index) => (
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell className="border border 1 text-center">
-                    {index + 1}
-                  </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
-                    {item.branch_name}
-                  </StyledTableCell>
-
-                  
-                </StyledTableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={3}>No data available</TableCell>
-              </TableRow>
-            )}
-          </TableBody> */}
+          {vendorName &&
+            vendorName.map((element, index) => (
+              <StyledTableRow key={index}>
+                <StyledTableCell className="border border 1 text-center">
+                  {index + 1}
+                </StyledTableCell>
+                <StyledTableCell className="border border 1 text-center">
+                  {element}
+                </StyledTableCell>
+                <StyledTableCell className="border border 1 text-center">
+                  <button onClick={(e) => handleDelete(index)}>delete</button>
+                  <button>edit</button>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
         </Table>
       </TableContainer>
     </div>
-  )
+  );
 }
