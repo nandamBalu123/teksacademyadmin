@@ -129,10 +129,11 @@ const Addtofee = () => {
 
   return (
     <>
-      <div className="addfee container">
-        <div className="adding">
+      <div className=" container mt-3">
+      <div className=" addfee"> 
+      <div className="adding">
           {" "}
-          <h4> Add Fee Details</h4> <hr />
+          <h4 className="text-center"> Add Fee Details</h4> 
           {/* <div className="row pt-5">
             <TextField
               label="Name"
@@ -261,7 +262,7 @@ const Addtofee = () => {
                 <input
                   type="number"
                   name="paidamount"
-                  className="w-100"
+                  // className="w-100"
                   value={payment.initialamount}
                   onChange={(e) => handleInputChange(e, index, "initialamount")}
                 />
@@ -274,7 +275,7 @@ const Addtofee = () => {
                 <input
                   type="date"
                   name="paiddate"
-                  className="w-100"
+                  // className="w-100"
                   value={payment.paiddate}
                   onChange={(e) => handleInputChange(e, index, "paiddate")}
                 />
@@ -285,7 +286,7 @@ const Addtofee = () => {
               </div>
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup-select">
                 <select
-                  className="w-100"
+                  // className="w-100"
                   name="modeofpayment"
                   value={payment.modeofpayment}
                   onChange={(e) => handleInputChange(e, index, "modeofpayment")}
@@ -304,7 +305,7 @@ const Addtofee = () => {
               <div className="col-12 col-md-6 col-lg-3 col-xl-3 inputgroup">
                 <input
                   type="text"
-                  className="w-100"
+                  // className="w-100"
                   name="transactionid"
                   value={payment.transactionID}
                   onChange={(e) => handleInputChange(e, index, "transactionID")}
@@ -369,6 +370,7 @@ const Addtofee = () => {
             /> */}
           </div>
         </div>
+      </div>
       </div>{" "}
     </>
   );
