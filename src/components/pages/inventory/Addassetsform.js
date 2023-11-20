@@ -205,27 +205,21 @@ export default function Addassetsform() {
                   <MenuItem value="student bags">Student Bags</MenuItem>
                 </Select>
               </FormControl>
-                {/* <label htmlFor="exampleInputPassword1" className="form-label">
-                  Asset Type*
-                </label>
-                <select
-                  value={inpval.assettype} // Use 'value' instead of 'selected' for select input
-                  // selected={inpval.assettype}
-                  onChange={setdata}
-                  name="assettype"
-                  className="form-select"
-                  id="exampleInputPassword1"
-                >
-                  <option value="">Select Asset</option>
-                  <option value="shirt">Shirt</option>
-                  <option value="t-shirt">T-Shirt</option>
-                  <option value="laptop">Laptop</option>
-                  <option value="charger">Charger</option>
-                  <option value="mouse">Mouse</option>
-                  <option value="student bags">Student Bags</option>
-                </select> */}
+              
                 {inpval.assettype === "laptop" && (
                   <div className="row">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                        <TextField
+                label="Asset Code"
+                className=" mar w-100"
+                variant="standard"
+                name="assetcode"
+                type="text"
+                value={inpval.assetcode}
+                  onChange={setdata}
+                id="assetcode"
+                required
+              /></div>
                     <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
                     <TextField
                 label="Brand Name"
@@ -239,17 +233,7 @@ export default function Addassetsform() {
                 required
               />
                     </div> 
-                    {/* <label htmlFor="brandname" className="form-label">
-                      Brand Name
-                    </label>
-                    <input
-                      type="text"
-                      name="brandname"
-                      value={inpval.brandname}
-                      onChange={setdata}
-                      className="form-control"
-                      id="brandname"
-                    /> */}
+                    
                          <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
                          <TextField
                 label="Remarks"
@@ -289,7 +273,7 @@ export default function Addassetsform() {
                             />
                         </div> */}
                         <div className="row mb-3"> 
-                        <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                        {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
                         <TextField
                 label="Asset Code"
                 className=" mar w-100"
@@ -300,7 +284,7 @@ export default function Addassetsform() {
                   onChange={setdata}
                 id="assetcode"
                 required
-              /></div>
+              /></div> */}
               <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
                         <TextField
                 label="Quantity"
