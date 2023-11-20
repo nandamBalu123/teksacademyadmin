@@ -46,9 +46,7 @@ const Dashboard = () => {
 
   const [filterCriteria, setFilterCriteria] = useState({
     fromdate: "",
-
     todate: "",
-
     monthdataCondition: true,
   });
   const handleInputChange = (e) => {
