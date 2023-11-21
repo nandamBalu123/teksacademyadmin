@@ -9,6 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Link } from "react-router-dom";
 import Report from "./Report";
+import axios from "axios";
 const Reports = () => {
   const [newReportName, setNewReportName] = useState();
 
@@ -17,6 +18,19 @@ const Reports = () => {
     { reportName: "CourseWiseData" },
     { reportName: "CounsellorWiseData" },
   ]);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/getreports`)
+      .then((response) => {
+        if (response.data) {
+          // setData(response.data);
+          console.log("response.data", response.data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   const handleCreateReport = () => {
     let newReport = { reportName: newReportName };
     let updatedData = [...data];
