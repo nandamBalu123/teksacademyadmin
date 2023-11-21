@@ -71,8 +71,8 @@ const CreateBranch = () => {
     // navigate("/roles");
   };
   return (
-    <div style={{ marginTop: "30px" }}>
-      <p className="fs-5 ms-5">Create Branch</p>
+    <div  className="container mt-3">
+      
       <form>
         <Box
           component="form"
@@ -82,17 +82,29 @@ const CreateBranch = () => {
           noValidate
           autoComplete="off"
         >
-          <div className="container createrole">
+          <div className="createrole">
+
             <div className="row">
-              <div className="col-12 col-md-6 col-lg-4 ">
-                <input
+            <h4 className="text-center">Create Branch</h4>
+              <div className="col-12 col-md-6 col-lg-6 ">
+              <TextField
+                label="Branch Name"
+                className=" mar w-75"
+                variant="standard"
+                name="branchname"
+                type="text"
+                value={branch_name}
+                onChange={(e) => setbranch(e.target.value)}
+              
+            />
+                {/* <input
                   className="form-control"
                   placeholder="Branch Name"
                   type="text"
                   value={branch_name}
                   onChange={(e) => setbranch(e.target.value)}
                   style={{ padding: "15px" }}
-                />
+                /> */}
                 {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
               </div>
               <div className="col-12 col-md-6 col-lg-4 ">

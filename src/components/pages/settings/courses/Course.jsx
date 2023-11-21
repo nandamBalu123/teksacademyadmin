@@ -40,7 +40,7 @@ const Course = () => {
   return (
     <div className="container">
       <div className="flex mt-3">
-        <p className="fs-5 ms-3">Courses</p>
+        <h4 className=" ms-3">Courses</h4>
         <button
           type="submit"
           className="btn btn-primary mr-20 ms-2 mb-2"
@@ -50,7 +50,7 @@ const Course = () => {
         </button>
       </div>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell

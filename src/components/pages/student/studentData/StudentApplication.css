@@ -20,6 +20,10 @@
 .application {
   /* border: 1.5px solid #000; */
   /* padding: 0px 0; */
+  /* border: 2px solid #f5f5f5; */
+  /* border-radius: 8px; */
+  margin: auto;
+  
   overflow: hidden;
 }
 th  {

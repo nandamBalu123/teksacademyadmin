@@ -74,8 +74,8 @@ const CreateCoursePackage = () => {
     // navigate("/roles");
   };
   return (
-    <div style={{ marginTop: "30px" }}>
-      <p className="fs-5 ms-5">Create Course Package</p>
+    <div className="container mt-3">
+   
       <form>
         <Box
           component="form"
@@ -85,17 +85,28 @@ const CreateCoursePackage = () => {
           noValidate
           autoComplete="off"
         >
-          <div className="container createrole">
+          <div className=" createcoursepackage">
+          <h4 className="text-center mt-3">Create Course Package</h4>
             <div className="row">
-              <div className="col-12 col-md-6 col-lg-4 ">
-                <input
+              <div className="col-12 col-md-6 col-lg-6 ">
+              <TextField
+                label="Package Name"
+                className=" mar w-75"
+                variant="standard"
+                name="packagename"
+                type="text"
+                value={coursepackages_name}
+                onChange={(e) => setpackage(e.target.value)}
+              
+            />
+                {/* <input
                   className="form-control"
                   placeholder="Package Name"
                   type="text"
                   value={coursepackages_name}
                   onChange={(e) => setpackage(e.target.value)}
                   style={{ padding: "15px" }}
-                />
+                /> */}
                 {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
               </div>
               <div className="col-12 col-md-6 col-lg-4 ">
