@@ -93,6 +93,7 @@ const CreateBranch = () => {
                 variant="standard"
                 name="branchname"
                 type="text"
+                value={branch_name}
                 onChange={(e) => setbranch(e.target.value)}
               
             />

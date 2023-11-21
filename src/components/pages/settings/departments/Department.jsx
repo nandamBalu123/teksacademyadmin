@@ -45,7 +45,7 @@ const Department = () => {
       <div className="col-12 col-md-3 col-lg-3 col-xl-3">
       <button
           type="submit"
-          className="btn btn-primary mr-20  mb-2"
+          className="btn btn-primary  mb-2"
           onClick={handleSubmit}
         >
           Add Department
@@ -63,7 +63,7 @@ const Department = () => {
         </button>
       </div> */}
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+        <Table  aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell

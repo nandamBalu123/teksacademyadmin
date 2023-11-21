@@ -71,8 +71,8 @@ const CreateDepartment = () => {
     // navigate("/roles");
   };
   return (
-    <div style={{ marginTop: "30px" }}>
-      <p className="fs-5 ms-5">Create Department</p>
+    <div className="container mt-3">
+    
       <form>
         <Box
           component="form"
@@ -82,20 +82,31 @@ const CreateDepartment = () => {
           noValidate
           autoComplete="off"
         >
-          <div className="container createrole">
+          <div className=" createdepartment">
+          <h4 className="text-center mt-2">Create Department</h4>
             <div className="row">
-              <div className="col-12 col-md-6 col-lg-4 ">
-                <input
+              <div className="col-12 col-md-6 col-lg-6 ">
+              <TextField
+                label="Department Name"
+                className=" w-75"
+                variant="standard"
+                name="departmentname"
+                type="text"
+                value={department_name}
+                onChange={(e) => setdepartment(e.target.value)}
+              
+            />
+                {/* <input
                   className="form-control"
                   placeholder="Department Name"
                   type="text"
                   value={department_name}
                   onChange={(e) => setdepartment(e.target.value)}
                   style={{ padding: "15px" }}
-                />
+                /> */}
                 {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
               </div>
-              <div className="col-12 col-md-6 col-lg-4 ">
+           
                 {/* <input
                   className="form-control"
                   placeholder="Role Description"
@@ -105,9 +116,9 @@ const CreateDepartment = () => {
                   style={{ padding: "15px" }}
                 /> */}
                 {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
-              </div>
+             
             </div>
-            <div className="container ">
+            <div className="ms-3">
               <button
                 type="submit"
                 class="btn btn-primary my-4 "

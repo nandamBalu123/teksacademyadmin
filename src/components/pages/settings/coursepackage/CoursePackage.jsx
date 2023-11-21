@@ -50,7 +50,7 @@ const CoursePackage = () => {
         </button>
       </div>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+        <Table  aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell
