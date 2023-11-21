@@ -40,9 +40,9 @@ const Reports = () => {
       .put(`${process.env.REACT_APP_API_URL}/addnewreport`, data)
       .then((res) => {
         if (res.data.updated) {
-          alert("vendor Updated");
+          alert("Report Added");
         } else {
-          alert("not updated");
+          alert("not Added");
         }
       });
   };
