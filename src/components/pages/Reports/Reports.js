@@ -36,6 +36,15 @@ const Reports = () => {
     let updatedData = [...data];
     updatedData.push(newReport);
     setData(updatedData);
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/addnewreport`, data)
+      .then((res) => {
+        if (res.data.updated) {
+          alert("vendor Updated");
+        } else {
+          alert("not updated");
+        }
+      });
   };
   useEffect(() => {
     console.log("data", data);
