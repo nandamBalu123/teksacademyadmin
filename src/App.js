@@ -7,7 +7,6 @@ import Login from "./components/pages/logins/adminlogins/Login";
 
 import "./App.css";
 
-
 // inventory start
 // import Signup from "../src/components/pages/inventory/Signup";
 import Register from "../src/components/pages/inventory/Register";
@@ -69,7 +68,7 @@ import Sidebar1 from "./components/common/Sidebar/Sidebar1";
 import Invoice from "./components/pages/student/fee/Invoice";
 import ZipCodeLookup from "./components/pages/student/studentRegistrationForm/Zipcode";
 import Reports from "./components/pages/Reports/Reports";
-
+import Report from "./components/pages/Reports/Report";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -331,23 +330,32 @@ function App() {
                     ) : (
                       <Dashboard />
                     )
-                  }  />
-                
-              <Route path="/addassets/view/:id" element={
+                  }
+                />
+                <Route
+                  path="/addassets/view/:id"
+                  element={
                     user && user.profile == "admin" ? (
                       <Addassetsview />
                     ) : (
                       <Dashboard />
                     )
-                  } />
-                  <Route path="/addassets/edit/:id" element={
+                  }
+                />
+                <Route
+                  path="/addassets/edit/:id"
+                  element={
                     user && user.profile == "admin" ? (
                       <Addassetsedit />
                     ) : (
                       <Dashboard />
                     )
-                  } />
-              <Route exact path="/register" element={
+                  }
+                />
+                <Route
+                  exact
+                  path="/register"
+                  element={
                     user && user.profile == "admin" ? (
                       <Register />
                     ) : (
@@ -405,50 +413,52 @@ function App() {
                     ) : (
                       <Dashboard />
                     )
-                  }></Route>
-              <Route
-                path="/assignassets/returnassets/:id"
-                element={
-                  user && user.profile == "admin" ? (
-                    <ReturnAssetsForm />
-                  ) : (
-                    <Dashboard />
-                  )
-                }
-              ></Route>
-
-              {/* inventory settings */}
-              <Route
-                path="/assettype"
-                element={
-                  user && user.profile == "admin" ? (
-                    <AssetType />
-                  ) : (
-                    <Dashboard />
-                  )
-                }
-              ></Route>
-              <Route
-                path="/vendor"
-                element={
-                  user && user.profile == "admin" ? (
-                    <Vendor />
-                  ) : (
-                    <Dashboard />
-                  )
-                }
-              ></Route>
-              {/* Reports */}
-              <Route
-                path="/reports"
-                element={
-                  user && user.profile == "admin" ? (
-                    <Reports/>
-                  ) : (
-                    <Dashboard />
-                  )
-                }
-              ></Route>
+                  }
+                ></Route>
+                <Route
+                  path="/assignassets/returnassets/:id"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <ReturnAssetsForm />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                ></Route>
+                {/* inventory settings */}
+                <Route
+                  path="/assettype"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <AssetType />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                ></Route>
+                <Route
+                  path="/vendor"
+                  element={
+                    user && user.profile == "admin" ? <Vendor /> : <Dashboard />
+                  }
+                ></Route>
+                {/* Reports */}
+                <Route
+                  path="/reports"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <Reports />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                ></Route>
+                <Route
+                  path="/report/:id"
+                  element={
+                    user && user.profile == "admin" ? <Report /> : <Dashboard />
+                  }
+                ></Route>
               </Routes>
             </main>
           </div>

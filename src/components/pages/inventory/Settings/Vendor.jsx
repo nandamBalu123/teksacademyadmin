@@ -19,21 +19,21 @@ import axios from "axios";
 export default function Vendor() {
   const navigate = useNavigate();
 
-  const [vendorName, setVendorName] = useState();
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/getvendorname`)
-      .then((response) => {
-        if (response.data) {
-          // dispatch({ type: "SET_BRANCHES", payload: response.data });
-          setVendorName(response.data);
-          console.log("response.data", response.data);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  const [vendorName, setVendorName] = useState(["kiran", "kumar"]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/getvendorname`)
+  //     .then((response) => {
+  //       if (response.data) {
+  //         // dispatch({ type: "SET_BRANCHES", payload: response.data });
+  //         setVendorName(response.data);
+  //         console.log("response.data", response.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
   const [newVendorName, setNewVendorName] = useState();
   const handlesubmit = () => {
     vendorName.unshift(newVendorName);
