@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Mooli&family=Source+Sans+3:wght@400;600;700&display=swap");
+
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: sans-serif; */
-  font-family: "Nunito", sans-serif;
+
 }
 .login {
   display: flex;
