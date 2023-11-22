@@ -724,7 +724,7 @@ const StudentData = () => {
   </tbody>
 </table> */}
        <div className="student-table"> 
-       <Paper sx={{ width: "100%", overflow: "hidden" }}>
+       <Paper >
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -818,7 +818,7 @@ const StudentData = () => {
                           <span
                             title={item.name}
                             style={{
-                              width: "250px",
+                              width: "9rem",
                               whiteSpace: "nowrap",
                               overflow: "hidden",
                               paddingLeft: "10px",
@@ -831,7 +831,7 @@ const StudentData = () => {
                             <span
                               title={item.registrationnumber}
                               style={{
-                                width: "250px",
+                                width: "9rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 paddingLeft: "10px",
