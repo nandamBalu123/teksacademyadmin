@@ -765,7 +765,7 @@ const Assignassets = () => {
           </Card> </div>  </div>
            )}
             <Paper
-                sx={{ width: "100%", overflow: "hidden" }}
+                
                 className="mt-3"
               >
                 <TableContainer sx={{ maxHeight: 440 }}>

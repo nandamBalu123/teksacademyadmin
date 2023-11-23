@@ -53,7 +53,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 // import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { CSVLink } from "react-csv";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { LastPage } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
@@ -972,43 +972,43 @@ const StudentData = () => {
                           
                         </StyledTableCell>
 
-                        <StyledTableCell className=" text-center d-flex  py-4 ">
-                          <Link
+                        <StyledTableCell className="text-center d-flex" >
+                          <NavLink
                             to={`/studentdataview/${item.id}`}
-                            style={{ width: "30px" }}
+                           
                           >
-                            <VisibilityIcon className="iconn"  />
-                          </Link>
+                            <VisibilityIcon   style={{ width: "40px" }}  />
+                          </NavLink>
 
-                          <Link
+                          <NavLink
                             to={`/editstudent/${item.id}`}
-                            style={{ width: "30px" }}
+                            
                           >
-                            <EditIcon className="iconn" />
-                          </Link>
+                            <EditIcon  style={{ width: "40px" }}/>
+                          </NavLink>
                           {item.addfee == 1 && (
-                            <Link
+                            <NavLink
                               to={`/feeview/${item.id}`}
-                              style={{ width: "30px" }}
+                             
                             >
-                              <CurrencyRupeeIcon className="iconn" />
-                            </Link>
+                              <CurrencyRupeeIcon style={{ width: "40px" }}/>
+                            </NavLink>
                           )}
                           {item.addfee == 0 && (
-                            <Link
+                            <NavLink
                               to={`/addtofee/${item.id}`}
-                              style={{ width: "30px" }}
+                              
                             >
-                              <AddIcon className="iconn" />
-                            </Link>
+                              <AddIcon  style={{ width: "40px" }} />
+                            </NavLink>
                           )}
 
-                          <Link
+                          <NavLink
                             to={`/studentApplicationprint/${item.id}`}
-                            style={{ width: "30px" }}
+                            
                           >
-                            <PrintIcon className="iconn" />
-                          </Link>
+                            <PrintIcon className="iconn" style={{ width: "40px" }}/>
+                          </NavLink>
 
                           <div className="form-check form-switch ">
                             <input

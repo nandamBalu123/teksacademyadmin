@@ -529,14 +529,17 @@ const Addassets = () => {
                         <StyledTableCell className="Table-cell">
                           {element.returndate}
                         </StyledTableCell>
-                        <StyledTableCell className="Table-cell">
-                          <NavLink to={`view/${element.id}`}>
-                            <RemoveRedEyeIcon />
+                        <StyledTableCell className="Table-cell text-center">
+                          <NavLink to={`view/${element.id}`} 
+                          >
+                            <RemoveRedEyeIcon style={{width:"40px"}}/>
                           </NavLink>
-                          <NavLink to={`edit/${element.id}`}>
-                            <CreateIcon />
+                          <NavLink to={`edit/${element.id}`}
+                          >
+                            <CreateIcon style={{width:"40px"}}/>
                           </NavLink>
                           <DeleteOutlineIcon
+                          style={{width:"40px"}}
                             onClick={() => deleteuser(element.id)}
                             className="text-danger"
                           />

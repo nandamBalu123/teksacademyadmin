@@ -44,10 +44,10 @@ hr {
   color: white;
 }
 
-.iconn:hover {
+/* .iconn:hover {
   color: gray;
   transition: 0.1s;
-}
+} */
 .input-field:hover {
   border: hidden;
 }
