@@ -723,142 +723,126 @@ const StudentData = () => {
 
   </tbody>
 </table> */}
-       <div className="student-table"> 
-       <Paper >
-          <TableContainer sx={{ maxHeight: 440 }} >
-            <Table stickyHeader aria-label="sticky table" borderAxis="both">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell className="table-cell-heading">
-                    SNo
-                  </StyledTableCell>
-                  <StyledTableCell
-                    className="table-cell-heading"
-                    
-                  >
-                    Student Name <br /> Registration No
-                  </StyledTableCell>
-                  <StyledTableCell
-                      className="table-cell-heading"
-                  >
-                    Branch <br />
-                    Course
-                  </StyledTableCell>
+        <div className="student-table">
+          <Paper>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table" borderAxis="both">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell className="table-cell-heading">
+                      SNo
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Student Name <br /> Registration No
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Branch <br />
+                      Course
+                    </StyledTableCell>
 
-                  <StyledTableCell
-                     className="table-cell-heading"
-                  >
-                    Counsellor
-                    <br /> Source
-                  </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Counsellor
+                      <br /> Source
+                    </StyledTableCell>
 
-                  <StyledTableCell
-                      className="table-cell-heading"
-                  >
-                    Contact Number <br />
-                    Email
-                  </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Contact Number <br />
+                      Email
+                    </StyledTableCell>
 
-                  <StyledTableCell
-                    className="table-cell-heading"
-                  >
-                    Joining Date <br />
-                    Training Mode
-                  </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Joining Date <br />
+                      Training Mode
+                    </StyledTableCell>
 
-                  <StyledTableCell
-                      className="table-cell-heading"
-                  >
-                    Actions
-                  </StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Array.isArray(records) && records.length > 0 ? (
-                  records.map((item, index) => {
-                    let date = new Date(item.admissiondate );
-                    const day = date.getUTCDate();
-                    const monthIndex = date.getUTCMonth();
-                    const year = date.getUTCFullYear();
+                    <StyledTableCell className="table-cell-heading">
+                      Actions
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Array.isArray(records) && records.length > 0 ? (
+                    records.map((item, index) => {
+                      let date = new Date(item.admissiondate);
+                      const day = date.getUTCDate();
+                      const monthIndex = date.getUTCMonth();
+                      const year = date.getUTCFullYear();
 
-                    const monthAbbreviations = [
-                      "Jan",
-                      "Feb",
-                      "Mar",
-                      "Apr",
-                      "May",
-                      "Jun",
-                      "Jul",
-                      "Aug",
-                      "Sep",
-                      "Oct",
-                      "Nov",
-                      "Dec",
-                    ];
+                      const monthAbbreviations = [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec",
+                      ];
 
-                    // Formatting the date
-                    date = `${day < 10 ? "0" : ""}${day}-${
-                      monthAbbreviations[monthIndex]
-                    }-${year}`;
+                      // Formatting the date
+                      date = `${day < 10 ? "0" : ""}${day}-${
+                        monthAbbreviations[monthIndex]
+                      }-${year}`;
 
-                    // Updating the state with the formatted date
+                      // Updating the state with the formatted date
 
-                    return (
-                      <StyledTableRow  key={item.id}  >
-                        <StyledTableCell className="Table-cell text-center">
-                          {index + 1}
-                        </StyledTableCell>
+                      return (
+                        <StyledTableRow key={item.id}>
+                          <StyledTableCell className="Table-cell text-center">
+                            {index + 1}
+                          </StyledTableCell>
 
-                        <StyledTableCell className="Table-cell">
-                          <span
-                            title={item.name}
-                            style={{
-                              width: "9rem",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {item.name}
+                          <StyledTableCell className="Table-cell">
                             <span
-                              title={item.registrationnumber}
+                              title={item.name}
                               style={{
                                 width: "9rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
-                               
+
                                 textOverflow: "ellipsis",
                                 fontSize: "15px",
                                 display: "block",
                               }}
                             >
-                              {" "}
-                              {item.registrationnumber}
-                            </span>
-                          </span>
-                        </StyledTableCell>
+                              {item.name}
+                              <span
+                                title={item.registrationnumber}
+                                style={{
+                                  width: "9rem",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
 
-                        <StyledTableCell  className="Table-cell"
-                        
-                          
-                        >
-                          <span
-                            title={item.branch}
-                            style={{
-                              width: "6rem",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {item.branch}
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {" "}
+                                {item.registrationnumber}
+                              </span>
                             </span>
-                          
+                          </StyledTableCell>
+
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              title={item.branch}
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.branch}
+                            </span>
+
                             <span
                               title={item.courses}
                               style={{
@@ -874,192 +858,171 @@ const StudentData = () => {
                               {" "}
                               {item.courses}
                             </span>
-                          
-                        </StyledTableCell>
+                          </StyledTableCell>
 
-                        <StyledTableCell className="Table-cell" >
-                          <span
-                            style={{
-                              width: "6rem",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                           
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {item.enquirytakenby}
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.enquirytakenby}
                             </span>
                             <span
-                            style={{
-                              width: "6rem",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                           
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {item.leadsource}
-                            </span>
-                            
-                         
-                        </StyledTableCell>
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
 
-                        <StyledTableCell  className="Table-cell">
-                          <span
-                            style={{
-                              width: "8rem",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                             
-                              
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {item.mobilenumber}
-                            </span>
-                           
-                            <span 
-                             style={{
-                              width: "8rem",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              
-                             
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
                             >
-                               {item.email}
+                              {item.leadsource}
                             </span>
-                           
-                         
-                        </StyledTableCell>
+                          </StyledTableCell>
 
-                        <StyledTableCell  className="Table-cell">
-                          <span
-                            style={{
-                              width: "7rem",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {date ? date : "No Date"} 
-                            </span>
-                           
+                          <StyledTableCell className="Table-cell">
                             <span
-                            style={{
-                              width: "7rem",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                           {item.modeoftraining} 
+                              style={{
+                                width: "8rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.mobilenumber}
                             </span>
-                            
-                          
-                        </StyledTableCell>
 
-                        <StyledTableCell className="text-center d-flex" >
-                          <NavLink
-                            to={`/studentdataview/${item.id}`}
-                           
-                          >
-                            <VisibilityIcon   style={{ width: "40px" }}  />
-                          </NavLink>
+                            <span
+                              style={{
+                                width: "8rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
 
-                          <NavLink
-                            to={`/editstudent/${item.id}`}
-                            
-                          >
-                            <EditIcon  style={{ width: "40px" }}/>
-                          </NavLink>
-                          {item.addfee == 1 && (
-                            <NavLink
-                              to={`/feeview/${item.id}`}
-                             
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
                             >
-                              <CurrencyRupeeIcon style={{ width: "40px" }}/>
-                            </NavLink>
-                          )}
-                          {item.addfee == 0 && (
-                            <NavLink
-                              to={`/addtofee/${item.id}`}
-                              
+                              {item.email}
+                            </span>
+                          </StyledTableCell>
+
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                width: "7rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
                             >
-                              <AddIcon  style={{ width: "40px" }} />
+                              {date ? date : "No Date"}
+                            </span>
+
+                            <span
+                              style={{
+                                width: "7rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.modeoftraining}
+                            </span>
+                          </StyledTableCell>
+
+                          <StyledTableCell className="text-center d-flex">
+                            <NavLink to={`/studentdataview/${item.id}`}>
+                              <VisibilityIcon style={{ width: "40px" }} />
                             </NavLink>
-                          )}
 
-                          <NavLink
-                            to={`/studentApplicationprint/${item.id}`}
-                            
-                          >
-                            <PrintIcon className="iconn" style={{ width: "40px" }}/>
-                          </NavLink>
+                            <NavLink to={`/editstudent/${item.id}`}>
+                              <EditIcon style={{ width: "40px" }} />
+                            </NavLink>
+                            {item.addfee == 1 && (
+                              <NavLink to={`/feeview/${item.id}`}>
+                                <CurrencyRupeeIcon style={{ width: "40px" }} />
+                              </NavLink>
+                            )}
+                            {item.addfee == 0 && (
+                              <NavLink to={`/addtofee/${item.id}`}>
+                                <AddIcon style={{ width: "40px" }} />
+                              </NavLink>
+                            )}
 
-                          <div className="form-check form-switch ">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              role="switch"
-                              id="flexSwitchCheckChecked"
-                              checked={isChecked}
-                              onChange={handleClickOpen}
-                            />
-                          </div>
+                            <NavLink to={`/studentApplicationprint/${item.id}`}>
+                              <PrintIcon
+                                className="iconn"
+                                style={{ width: "40px" }}
+                              />
+                            </NavLink>
 
-                          <Dialog open={opening} onClose={handleClosed}>
-                            <DialogContent>
-                              <DialogContentText>
-                                <label> Enter Remarks :</label>
-                              </DialogContentText>
-                              <DialogContentText>
-                                <textarea
-                                  rows="4"
-                                  cols="50"
-                                  name="comment"
-                                  form="usrform"
-                                ></textarea>
-                              </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                              <Button onClick={handleClosed}>Cancel</Button>
-                              {!isChecked && (
-                                <Button onClick={handleok}>Activate</Button>
-                              )}
+                            <div className="form-check form-switch ">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                role="switch"
+                                id="flexSwitchCheckChecked"
+                                checked={isChecked}
+                                onChange={handleClickOpen}
+                              />
+                            </div>
 
-                              {isChecked && (
-                                <Button onClick={handleok}>InActivate</Button>
-                              )}
-                            </DialogActions>
-                          </Dialog>
-                        </StyledTableCell>
-                      </StyledTableRow >
-                    );
-                  })
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={3}>No data available</TableCell>
-                  </TableRow>
-                )}{" "}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-       </div>
+                            <Dialog open={opening} onClose={handleClosed}>
+                              <DialogContent>
+                                <DialogContentText>
+                                  <label> Enter Remarks :</label>
+                                </DialogContentText>
+                                <DialogContentText>
+                                  <textarea
+                                    rows="4"
+                                    cols="50"
+                                    name="comment"
+                                    form="usrform"
+                                  ></textarea>
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions>
+                                <Button onClick={handleClosed}>Cancel</Button>
+                                {!isChecked && (
+                                  <Button onClick={handleok}>Activate</Button>
+                                )}
+
+                                {isChecked && (
+                                  <Button onClick={handleok}>InActivate</Button>
+                                )}
+                              </DialogActions>
+                            </Dialog>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      );
+                    })
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={3}>No data available</TableCell>
+                    </TableRow>
+                  )}{" "}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </div>
 
         <div
           style={{ display: "flex", justifyContent: "center" }}

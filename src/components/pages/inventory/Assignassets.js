@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import './Assignassets.css';
+import "./Assignassets.css";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
@@ -9,19 +9,36 @@ import { adddata, deldata } from "./context/ContextProvider";
 import { updatedata } from "./context/ContextProvider";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
+import { styled } from "@mui/material/styles";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Card from "@mui/material/Card";
-// import { FaArrowUp } from "react-icons/fa";
-import Inventoryhome from "./Inventoryhome";
-// import axios from 'axios'
-// import SideBar from '../Sidebar/SideBar';
+const label = { inputProps: { "aria-label": "Switch demo" } };
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.blue,
 
-// import Navbaar from '../Navbar/Navbaar';
+    color: theme.palette.common.white,
+  },
+
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 const Assignassets = () => {
   // var apiUrl = "https://demo.teksacademy.com:3000";
   // var apiUrl = 'http://localhost:3003/';
@@ -35,12 +52,11 @@ const Assignassets = () => {
 
   const { dltdata, setDLTdata } = useContext(deldata);
   const [Displayassets, setDisplayassets] = useState({
-    secendrabad:false,
+    secendrabad: false,
     hitechcity: false,
     ameerpet: false,
     dilsukhnagar: false,
-    kukatpally:false
-  
+    kukatpally: false,
   });
 
   // const getdata = async () => {
@@ -450,449 +466,468 @@ const Assignassets = () => {
 
       <div className="container mt-3">
         <div className="mt-3 assign-assets">
-        <div className="d-flex justify-content-between mt-4"> 
-           <h4 className="ms-2"> Assign Data</h4>
-           <NavLink to="/register" className="btn btn-primary">
-                      Assign data
-                    </NavLink>
+          <div className="d-flex justify-content-between mt-4">
+            <h4 className="ms-2"> Assign Data</h4>
+            <NavLink to="/register" className="btn btn-primary">
+              Assign data
+            </NavLink>
+          </div>
+          <div className="row mb-3">
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{ backgroundColor: "#f3a9b2" }}
+                className="rounded rounded-3"
+              >
+                <p className="pt-3 text-center">
+                  Total laptops: <strong>{getLaptopCount()}</strong>
+                </p>
+              </Card>{" "}
             </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{ backgroundColor: "#a6ebdc" }}
+                className="rounded rounded-3"
+              >
+                <p className="pt-3 text-center">
+                  Total t-shirt: <strong>{getTshirtCount()}</strong>
+                </p>
+              </Card>{" "}
+            </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{ backgroundColor: "#b7e9da" }}
+                className="rounded rounded-3"
+              >
+                <p className="pt-3 text-center">
+                  Total shirt: <strong>{getShirtCount()}</strong>
+                </p>
+              </Card>{" "}
+            </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{ backgroundColor: "#f3a9b2" }}
+                className="rounded rounded-3"
+              >
+                <p className="pt-3 text-center">
+                  Total charger: <strong>{getChargerCount()}</strong>
+                </p>
+              </Card>{" "}
+            </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{ backgroundColor: "#a6ebdc" }}
+                className="rounded rounded-3"
+              >
+                <p className="pt-3 text-center">
+                  Total mouse: <strong>{getMouseCount()}</strong>
+                </p>
+              </Card>{" "}
+            </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{ backgroundColor: "#b7e9da" }}
+                className="rounded rounded-3"
+              >
+                <p className="pt-3 text-center">
+                  Total bags: <strong>{getStudentsBags()}</strong>
+                </p>
+              </Card>{" "}
+            </div>{" "}
+          </div>
+          <div className="row ms-5">
+            <div
+              className="col-12 col-md-2 col-lg-2 col-xl-2 "
+              //  style={{cursor:"pointer"}}
+              //   onClick={ (e)=> setDisplayassets({
+              //   secendrabad:true,
+              //   hitechcity:false,
+              //   ameerpet:false,
+              //   dilsukhnagar:false,
+              //   kukatpally:false
+              //  })}
+            >
+              <h4>Secendrabad</h4>
+            </div>
+            <div
+              className="col-12 col-md-2 col-lg-2 col-xl-2 ms-2"
+              style={{ cursor: "pointer" }}
+              onClick={(e) =>
+                setDisplayassets({
+                  secendrabad: false,
+                  hitechcity: true,
+                  ameerpet: false,
+                  dilsukhnagar: false,
+                  kukatpally: false,
+                })
+              }
+            >
+              <h4>Hitech City</h4>
+            </div>
+            <div
+              className="col-12 col-md-2 col-lg-2 col-xl-2"
+              style={{ cursor: "pointer" }}
+              onClick={(e) =>
+                setDisplayassets({
+                  secendrabad: false,
+                  hitechcity: false,
+                  ameerpet: true,
+                  dilsukhnagar: false,
+                  kukatpally: false,
+                })
+              }
+            >
+              <h4>Ameerpet</h4>
+            </div>
+            <div
+              className="col-12 col-md-2 col-lg-2 col-xl-2"
+              style={{ cursor: "pointer" }}
+              onClick={(e) =>
+                setDisplayassets({
+                  secendrabad: false,
+                  hitechcity: false,
+                  ameerpet: false,
+                  dilsukhnagar: true,
+                  kukatpally: false,
+                })
+              }
+            >
+              <h4>Dilsukhnagar</h4>
+            </div>
+            <div
+              className="col-12 col-md-3 col-lg-3 col-xl-3"
+              style={{ cursor: "pointer" }}
+              // onClick={ (e)=> setDisplayassets({
+              //   secendrabad:false,
+              //   hitechcity:false,
+              //   ameerpet:false,
+              //   dilsukhnagar:false,
+              //   kukatpally:true
+              //  })}
+            >
+              <h4>Kukatpally</h4>
+            </div>
+          </div>
+
+          {Displayassets.hitechcity && (
             <div className="row mb-3">
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#f3a9b2" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            
-              Total laptops: <strong>{getLaptopCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#a6ebdc" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            
-              Total t-shirt: <strong>{getTshirtCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#b7e9da" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            
-              Total shirt: <strong>{getShirtCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#f3a9b2" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            
-              Total charger: <strong>{getChargerCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#a6ebdc" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-              
-              Total mouse: <strong>{getMouseCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#b7e9da" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            
-            Total bags: <strong>{getStudentsBags()}</strong>
-            </p>
-          </Card> </div>  </div>
-          <div  className="row ms-5"> 
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 " 
-          //  style={{cursor:"pointer"}}
-          //   onClick={ (e)=> setDisplayassets({ 
-          //   secendrabad:true,
-          //   hitechcity:false,
-          //   ameerpet:false,
-          //   dilsukhnagar:false,
-          //   kukatpally:false
-          //  })}
-           > 
-           <h4>Secendrabad</h4>
-           </div>
-           <div className="col-12 col-md-2 col-lg-2 col-xl-2 ms-2" 
-           style={{cursor:"pointer"}}
-            onClick={ (e)=> setDisplayassets({ 
-            secendrabad:false,
-            hitechcity:true,
-            ameerpet:false,
-            dilsukhnagar:false,
-            kukatpally:false
-           })}> 
-           <h4>Hitech City</h4>
-           </div>
-           <div className="col-12 col-md-2 col-lg-2 col-xl-2" 
-            style={{cursor:"pointer"}}
-             onClick={ (e)=> setDisplayassets({ 
-              secendrabad:false,
-              hitechcity:false,
-              ameerpet:true,
-              dilsukhnagar:false,
-              kukatpally:false
-             })}> 
-           <h4>Ameerpet</h4>
-           </div>
-           <div className="col-12 col-md-2 col-lg-2 col-xl-2" 
-            style={{cursor:"pointer"}} 
-            onClick={ (e)=> setDisplayassets({ 
-              secendrabad:false,
-              hitechcity:false,
-              ameerpet:false,
-              dilsukhnagar:true,
-              kukatpally:false
-             })}>
-            
-           <h4>Dilsukhnagar</h4>
-           </div>
-           <div className="col-12 col-md-3 col-lg-3 col-xl-3" 
-            style={{cursor:"pointer"}} 
-            // onClick={ (e)=> setDisplayassets({ 
-            //   secendrabad:false,
-            //   hitechcity:false,
-            //   ameerpet:false,
-            //   dilsukhnagar:false,
-            //   kukatpally:true
-            //  })}
-             >
-            
-           <h4>Kukatpally</h4>
-           </div>
-           </div>
-
-           
-           {Displayassets.hitechcity && (
-             <div className="row mb-3">
-             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-         <Card
-           style={{ backgroundColor: "#f3a9b2" }}
-           className="rounded rounded-3"
-         >
-           <p className="pt-3 text-center">
-           Total laptops: <strong>{hcgetLaptopCount()}</strong>
-           
-           </p>
-         </Card> </div>
-         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-         <Card
-           style={{ backgroundColor: "#a6ebdc" }}
-           className="rounded rounded-3"
-         >
-           <p className="pt-3 text-center">
-           
-             Total t-shirt: <strong>{hcgetTshirtCount()}</strong>
-           </p>
-         </Card> </div>
-         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-         <Card
-           style={{ backgroundColor: "#b7e9da" }}
-           className="rounded rounded-3"
-         >
-           <p className="pt-3 text-center">
-            
-             Total shirt: <strong>{hcgetShirtCount()}</strong>
-           </p>
-         </Card> </div>
-         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-         <Card
-           style={{ backgroundColor: "#f3a9b2" }}
-           className="rounded rounded-3"
-         >
-           <p className="pt-3 text-center">
-           
-           Total charger: <strong>{hcgetChargerCount()}</strong>
-           </p>
-         </Card> </div>
-         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-         <Card
-           style={{ backgroundColor: "#a6ebdc" }}
-           className="rounded rounded-3"
-         >
-           <p className="pt-3 text-center">
-             
-           Total mouse: <strong>{hcgetMouseCount()}</strong>
-           </p>
-         </Card> </div>
-         <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-         <Card
-           style={{ backgroundColor: "#b7e9da" }}
-           className="rounded rounded-3"
-         >
-           <p className="pt-3 text-center">
-           
-           Total bags: <strong>{hcgetStudentsBags()}</strong>
-           </p>
-         </Card> </div>  </div>
-           )}
-
-           {Displayassets.ameerpet && ( 
-              <div className="row mb-3">
+                <Card
+                  style={{ backgroundColor: "#f3a9b2" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total laptops: <strong>{hcgetLaptopCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#f3a9b2" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            Total laptops: <strong>{apgetLaptopCount()}</strong>
-            
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#a6ebdc" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            
-            Total t-shirt: <strong>{apgetTshirtCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#b7e9da" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            Total shirt: <strong>{apgetShirtCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#f3a9b2" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            
-            Total charger: <strong>{apgetChargerCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#a6ebdc" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            Total mouse: <strong>{apgetMouseCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#b7e9da" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            Total bags: <strong>{apgetStudentsBags()}</strong>
-            </p>
-          </Card> </div>  </div>
-           )}
-
-{Displayassets.dilsukhnagar && ( 
-              <div className="row mb-3">
+                <Card
+                  style={{ backgroundColor: "#a6ebdc" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total t-shirt: <strong>{hcgetTshirtCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#f3a9b2" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            Total laptops: <strong>{dngetLaptopCount()}</strong>
-            
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#a6ebdc" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            Total t-shirt: <strong>{dngetTshirtCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#b7e9da" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            Total shirt: <strong>{dngetShirtCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#f3a9b2" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            
-            Total charger: <strong>{dngetChargerCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#a6ebdc" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            Total mouse: <strong>{dngetMouseCount()}</strong>
-            </p>
-          </Card> </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          <Card
-            style={{ backgroundColor: "#b7e9da" }}
-            className="rounded rounded-3"
-          >
-            <p className="pt-3 text-center">
-            Total bags: <strong>{dngetStudentsBags()}</strong>
-            </p>
-          </Card> </div>  </div>
-           )}
-            <Paper
-                
-                className="mt-3"
-              >
-                <TableContainer sx={{ maxHeight: 440 }}>
-                  <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          ID{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Name{" "}
-                        </TableCell>
-                        {/* <TableCell className="bg-primary fs-6  border border 1 text-light">Vender Name </TableCell> */}
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          {" "}
-                          Branch
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          {" "}
-                          Asset Type
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          {" "}
-                          Brand Name{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Asset Code{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Issue Date{" "}
-                        </TableCell>
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          {" "}
-                          Quantity
-                        </TableCell>
+                <Card
+                  style={{ backgroundColor: "#b7e9da" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total shirt: <strong>{hcgetShirtCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#f3a9b2" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total charger: <strong>{hcgetChargerCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#a6ebdc" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total mouse: <strong>{hcgetMouseCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#b7e9da" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total bags: <strong>{hcgetStudentsBags()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>{" "}
+            </div>
+          )}
 
-                        <TableCell className="bg-primary fs-6  border border 1 text-light">
-                          Actions{" "}
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {getassigndata.map((element, id) => {
-                        let AssignDate = new Date(element.issueddate);
-                        const day = AssignDate.getUTCDate();
-                        const monthIndex = AssignDate.getUTCMonth();
-                        const year = AssignDate.getUTCFullYear();
+          {Displayassets.ameerpet && (
+            <div className="row mb-3">
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#f3a9b2" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total laptops: <strong>{apgetLaptopCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#a6ebdc" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total t-shirt: <strong>{apgetTshirtCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#b7e9da" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total shirt: <strong>{apgetShirtCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#f3a9b2" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total charger: <strong>{apgetChargerCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#a6ebdc" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total mouse: <strong>{apgetMouseCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#b7e9da" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total bags: <strong>{apgetStudentsBags()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>{" "}
+            </div>
+          )}
 
-                        const monthAbbreviations = [
-                          "Jan",
-                          "Feb",
-                          "Mar",
-                          "Apr",
-                          "May",
-                          "Jun",
-                          "Jul",
-                          "Aug",
-                          "Sep",
-                          "Oct",
-                          "Nov",
-                          "Dec",
-                        ];
+          {Displayassets.dilsukhnagar && (
+            <div className="row mb-3">
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#f3a9b2" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total laptops: <strong>{dngetLaptopCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#a6ebdc" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total t-shirt: <strong>{dngetTshirtCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#b7e9da" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total shirt: <strong>{dngetShirtCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#f3a9b2" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total charger: <strong>{dngetChargerCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#a6ebdc" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total mouse: <strong>{dngetMouseCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#b7e9da" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total bags: <strong>{dngetStudentsBags()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>{" "}
+            </div>
+          )}
+          <Paper className="mt-3">
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell className="table-cell-heading">
+                      ID{" "}
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Name{" "}
+                    </StyledTableCell>
+                    {/* <StyledTableCell className="table-cell-heading">Vender Name </StyledTableCell> */}
+                    <StyledTableCell className="table-cell-heading">
+                      {" "}
+                      Branch
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      {" "}
+                      Asset Type
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      {" "}
+                      Brand Name{" "}
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Asset Code{" "}
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Issue Date{" "}
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      {" "}
+                      Quantity
+                    </StyledTableCell>
 
-                        // Formatting the date
-                        AssignDate = `${day < 10 ? "0" : ""}${day}-${
-                          monthAbbreviations[monthIndex]
-                        }-${year}`;
+                    <StyledTableCell className="table-cell-heading">
+                      Actions{" "}
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {getassigndata.map((element, id) => {
+                    let AssignDate = new Date(element.issueddate);
+                    const day = AssignDate.getUTCDate();
+                    const monthIndex = AssignDate.getUTCMonth();
+                    const year = AssignDate.getUTCFullYear();
 
-                        return (
-                          <React.Fragment key={id}>
-                            <TableRow>
-                              <TableCell className="border border 1 text-center">
-                                {id + 1}
-                              </TableCell>
-                              {/* <td>{element.name}</td> */}
-                              <TableCell className="border border 1 text-center">
-                                {element.name}
-                              </TableCell>
-                              {/* <TableCell  className="border border 1 text-center">{element.vendername}</TableCell> */}
-                              {/* <td>{element.designation}</td> */}
-                              {/* <td>{element.branch}</td> */}
-                              <TableCell className="border border 1 text-center">
-                                {element.branch}
-                              </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {element.assettype}
-                              </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {element.brandname}
-                              </TableCell>
-                              {/* <td>{element.remarks}</td> */}
-                              {/* <td>{element.issueddate}</td> */}
-                              <TableCell className="border border 1 text-center">
-                                {element.assetcode}
-                              </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {AssignDate}
-                              </TableCell>
-                              <TableCell className="border border 1 text-center">
-                                {element.anonymity}
-                              </TableCell>
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
 
-                              <TableCell className="border border 1 text-center">
-                                <NavLink to={`view/${element.id}`}>
-                                  <RemoveRedEyeIcon />
-                                </NavLink>
-                                <NavLink to={`returnassets/${element.id}`}>
-                                  <ArrowDownwardIcon />
-                                </NavLink>
-                                <NavLink to={`edit/${element.id}`}>
-                                  <CreateIcon />
-                                </NavLink>
-                                <DeleteOutlineIcon
-                                  onClick={() => deleteuser(element.id)}
-                                  className="text-danger ms-2"
-                                />
-                              </TableCell>
-                            </TableRow>
-                          </React.Fragment>
-                        );
-                      })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Paper>
-            <div className="col-lg-12">
-              {/* <div className="row">
+                    // Formatting the date
+                    AssignDate = `${day < 10 ? "0" : ""}${day}-${
+                      monthAbbreviations[monthIndex]
+                    }-${year}`;
+
+                    return (
+                      <React.Fragment>
+                        <StyledTableRow key={id}>
+                          <StyledTableCell className="Table-cell">
+                            {id + 1}
+                          </StyledTableCell>
+                          {/* <td>{element.name}</td> */}
+                          <StyledTableCell className="Table-cell">
+                            {element.name}
+                          </StyledTableCell>
+                          {/* <StyledTableCell  className="Table-cell">{element.vendername}</StyledTableCell> */}
+                          {/* <td>{element.designation}</td> */}
+                          {/* <td>{element.branch}</td> */}
+                          <StyledTableCell className="Table-cell">
+                            {element.branch}
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            {element.assettype}
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            {element.brandname}
+                          </StyledTableCell>
+                          {/* <td>{element.remarks}</td> */}
+                          {/* <td>{element.issueddate}</td> */}
+                          <StyledTableCell className="Table-cell">
+                            {element.assetcode}
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            {AssignDate}
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            {element.anonymity}
+                          </StyledTableCell>
+
+                          <StyledTableCell className="Table-cell">
+                            <NavLink to={`view/${element.id}`}>
+                              <RemoveRedEyeIcon />
+                            </NavLink>
+                            <NavLink to={`returnassets/${element.id}`}>
+                              <ArrowDownwardIcon />
+                            </NavLink>
+                            <NavLink to={`edit/${element.id}`}>
+                              <CreateIcon />
+                            </NavLink>
+                            <DeleteOutlineIcon
+                              onClick={() => deleteuser(element.id)}
+                              className="text-danger ms-2"
+                            />
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      </React.Fragment>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+          <div className="col-lg-12">
+            {/* <div className="row">
                 <div className="col-lg-3">
                   <div className="">
                     <NavLink to="/register" className="btn btn-primary">
@@ -1025,7 +1060,7 @@ const Assignassets = () => {
                   </div>
                 </div>
               </div> */}
-              {/* <div className="add_btn mt-2 mb-2">
+            {/* <div className="add_btn mt-2 mb-2">
                             <NavLink to="/register" className="btn btn-primary">Assign data</NavLink><br></br>
                             <span>Rows : {getassigndata.length}</span><br></br>
                             <span>Total laptops: {getLaptopCount()}</span><br></br>
@@ -1038,8 +1073,8 @@ const Assignassets = () => {
                             <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
                             
                         </div> */}
-             
-              {/* <table class="table col-12">
+
+            {/* <table class="table col-12">
                 <thead>
                   <tr className="table-dark">
                     <th scope="col">id</th>
@@ -1097,8 +1132,7 @@ const Assignassets = () => {
                   ))}
                 </tbody>
               </table> */}
-            </div>
-        
+          </div>
         </div>
       </div>
     </>
