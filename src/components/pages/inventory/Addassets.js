@@ -7,12 +7,13 @@ import { adddata, deldata } from "./context/ContextProvider";
 import { updatedata } from "./context/ContextProvider";
 import { CardActionArea } from "@mui/material";
 import Card from "@mui/material/Card";
+import { styled } from "@mui/material/styles";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
@@ -21,7 +22,28 @@ import Typography from "@mui/material/Typography";
 import laptapasset from "../../../images/Laptap-asset.avif";
 import tshirts from "../../../images/assets T-Shirts.avif";
 import shirts from "../../../images/shirt-asset.jpg";
+const label = { inputProps: { "aria-label": "Switch demo" } };
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.blue,
 
+    color: theme.palette.common.white,
+  },
+
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 // import axios from 'axios'
 // import SideBar from "../Sidebar/SideBar";
 
@@ -243,8 +265,8 @@ const Addassets = () => {
               className="rounded rounded-3"
             >
               <p className="pt-3 text-center">
-                {" "}
-                Total Laptops: <strong>{getLaptopCount()}</strong>{" "}
+                
+                Total Laptops: <strong>{getLaptopCount()}</strong>
               </p>
             </Card> </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
@@ -445,72 +467,72 @@ const Addassets = () => {
           {/* <NavLink to="/addassetsform" className="btn btn-primary">Add Record</NavLink><br></br> */}
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
-              <Table stickyHeader aria-label="sticky table">
+              <Table stickyHeader aria-label="sticky table" borderAxis="both">
                 <TableHead>
                   <TableRow>
-                    <TableCell className="bg-primary fs-6  border border 1 text-light">
-                      ID{" "}
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6  border border 1 text-light">
-                      Vender Name{" "}
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6  border border 1 text-light">
-                      {" "}
+                    <StyledTableCell className="table-cell-heading ">
+                      ID
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Vender Name
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      
                       Asset Type
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6  border border 1 text-light">
-                      {" "}
-                      Brand Name{" "}
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6  border border 1 text-light">
-                      Asset Code{" "}
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6  border border 1 text-light">
-                      {" "}
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      
+                      Brand Name
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Asset Code
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      
                       Quantity
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6  border border 1 text-light">
-                      Status{" "}
-                    </TableCell>
-                    <TableCell className="bg-primary fs-6  border border 1 text-light">
-                      Actions{" "}
-                    </TableCell>
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Status
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Actions
+                    </StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {getuserdata.map((element, id) => (
                     <React.Fragment key={id}>
-                      <TableRow>
-                        <TableCell className="border border 1 text-center">
+                      <StyledTableRow>
+                        <StyledTableCell className="Table-cell text-center">
                           {id + 1}
-                        </TableCell>
+                        </StyledTableCell>
                         {/* <td>{element.name}</td> */}
-                        <TableCell className="border border 1 text-center">
+                        <StyledTableCell className="Table-cell">
                           {element.vendername}
-                        </TableCell>
+                        </StyledTableCell>
                         {/* <td>{element.designation}</td> */}
                         {/* <td>{element.branch}</td> */}
-                        <TableCell className="border border 1 text-center">
+                        <StyledTableCell className="Table-cell">
                           {element.assettype}
-                        </TableCell>
-                        <TableCell className="border border 1 text-center">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell">
                           {element.brandname}
-                        </TableCell>
+                        </StyledTableCell>
                         {/* <td>{element.remarks}</td> */}
                         {/* <td>{element.issueddate}</td> */}
-                        <TableCell className="border border 1 text-center">
+                        <StyledTableCell className="Table-cell">
                           {element.assetcode}
-                        </TableCell>
-                        <TableCell className="border border 1 text-center">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell">
                           {element.anonymity}
-                        </TableCell>
-                        <TableCell className="border border 1 text-center">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell">
                           {element.returndate}
-                        </TableCell>
-                        <TableCell className="border border 1 text-center">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell">
                           <NavLink to={`view/${element.id}`}>
-                            <RemoveRedEyeIcon />{" "}
-                          </NavLink>{" "}
+                            <RemoveRedEyeIcon />
+                          </NavLink>
                           <NavLink to={`edit/${element.id}`}>
                             <CreateIcon />
                           </NavLink>
@@ -518,8 +540,8 @@ const Addassets = () => {
                             onClick={() => deleteuser(element.id)}
                             className="text-danger"
                           />
-                        </TableCell>
-                      </TableRow>
+                        </StyledTableCell>
+                      </StyledTableRow>
                     </React.Fragment>
                   ))}
                 </TableBody>

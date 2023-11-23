@@ -18,6 +18,7 @@
 .enddate {
   border: none;
   outline: none;
+  
 }
 .startdate:focus {
   border: none;

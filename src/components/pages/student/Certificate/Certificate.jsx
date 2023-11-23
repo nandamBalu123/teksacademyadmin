@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell , { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
@@ -16,7 +16,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-
+import { styled } from "@mui/material/styles";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./Certificate.css";
@@ -26,6 +26,26 @@ import axios from "axios";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { GolfCourseSharp } from "@mui/icons-material";
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.blue,
+
+    color: theme.palette.common.white,
+  },
+
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 const Certificate = () => {
   const { students, dispatch } = useStudentsContext();
   const { getcourses } = useCourseContext();
@@ -541,39 +561,39 @@ const Certificate = () => {
   </ul>
 </div> */}
 
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <Paper >
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell className="bg-primary text-light fs-6 border border 1">
-                    {" "}
+                  <StyledTableCell className="table-cell-heading">
+                 
                     S. No
-                  </TableCell>
-                  <TableCell className="bg-primary text-light fs-6 border border 1">
-                    {" "}
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                   
                     Name
-                  </TableCell>
-                  <TableCell className="bg-primary text-light fs-6 border border 1">
-                    {" "}
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                 
                     Course
-                  </TableCell>
-                  <TableCell className="bg-primary text-light fs-6 border border 1">
-                    {" "}
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                   
                     Registration ID
-                  </TableCell>
+                  </StyledTableCell>
 
-                  <TableCell className="bg-primary text-light fs-6 border border 1">
-                    {" "}
+                  <StyledTableCell className="table-cell-heading">
+                    
                     Course StartDate
-                  </TableCell>
-                  <TableCell className="bg-primary text-light fs-6 border border 1">
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
                     Course EndDate
-                  </TableCell>
+                  </StyledTableCell>
 
-                  <TableCell className="bg-primary text-light fs-6">
+                  <StyledTableCell className="table-cell-heading">
                     Certificate Status
-                  </TableCell>
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -591,11 +611,11 @@ const Certificate = () => {
                       .join(", ");
 
                     return (
-                      <TableRow key={student.id}>
-                        <TableCell className="border border 1 ">
+                      <StyledTableRow key={student.id}>
+                        <StyledTableCell className="Table-cell text-center">
                           {index + 1}
-                        </TableCell>
-                        <TableCell className="border border 1">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell">
                           <span
                             title={student.name}
                             style={{
@@ -610,8 +630,8 @@ const Certificate = () => {
                           >
                             {student.name}
                           </span>
-                        </TableCell>
-                        <TableCell className="border border 1 ">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell">
                           <span
                             title={student.courses}
                             style={{
@@ -626,8 +646,8 @@ const Certificate = () => {
                           >
                             {student.courses}
                           </span>
-                        </TableCell>
-                        <TableCell className="border border 1 ">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell">
                           <span
                             title={student.registrationnumber}
                             style={{
@@ -642,17 +662,19 @@ const Certificate = () => {
                           >
                             {student.registrationnumber}
                           </span>
-                        </TableCell>
+                        </StyledTableCell>
 
-                        <TableCell className="border border 1 ">
+                         <StyledTableCell className="Table-cell">
                           <span
                             style={{
                               fontSize: "15px",
+                              background:"none"
                             }}
                           >
                             <input
                               type="date"
                               name="startdate"
+                              style={{ background: 'transparent' }}
                               className="startdate"
                               onChange={(e) =>
                                 setcourseStartDate(e.target.value)
@@ -664,14 +686,15 @@ const Certificate = () => {
                               }
                             />
                           </span>
-                        </TableCell>
-                        <TableCell className="border border 1 ">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell">
                           <span
                             style={{
                               fontSize: "15px",
                             }}
                           >
                             <input
+                            style={{ background: 'transparent' }}
                               type="date"
                               name="enddate"
                               className="enddate"
@@ -681,8 +704,8 @@ const Certificate = () => {
                               }
                             />
                           </span>
-                        </TableCell>
-                        <TableCell className="border border 1  text-center fs-6">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell">
                           {certificateStatus === "" && (
                             <button
                               className="btn btn-primary text-center m-0 px-1"
@@ -704,8 +727,8 @@ const Certificate = () => {
                               Certificate Issued
                             </button>
                           )}
-                        </TableCell>
-                      </TableRow>
+                        </StyledTableCell>
+                      </StyledTableRow>
                     );
                   })}
               </TableBody>
