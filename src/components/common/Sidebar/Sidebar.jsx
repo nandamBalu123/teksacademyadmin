@@ -128,7 +128,7 @@ const Sidebar = () => {
       setIsCollapsed(false);
     }
     if (screenSize > 721) {
-      setIsCollapsed(false);
+      setIsCollapsed(true);
     }
   }, []);
 
@@ -318,12 +318,15 @@ const Sidebar = () => {
               <SubMenu
                 style={{
                   color: colors.grey[100],
+                  
+                  
                 }}
                 icon={<Diversity3Icon />}
                 label={"Student Management"}
-                title={"Student Managem..."}
+                title={"Student Management"}
               >
                 <Item
+                className="dashboard-item"
                   title="Student Details"
                   to="/studentdata"
                   icon={<PeopleOutlineIcon />}
@@ -369,6 +372,7 @@ const Sidebar = () => {
                 <SubMenu
                   style={{
                     // color: colors.grey[100],
+                    
                     color: "black",
                   }}
                   icon={<StorageIcon />}
@@ -389,12 +393,7 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                  
-                </SubMenu>
-              ) : undefined}
-              
-              {profile == "admin" ? (
-                <SubMenu
+                  <SubMenu
                 style={{
                   // color: colors.grey[100],
                   color: "black",
@@ -418,7 +417,10 @@ const Sidebar = () => {
                   setSelected={setSelected}
                 />
               </SubMenu>
+                  
+                </SubMenu>
               ) : undefined}
+            
               <hr />
               {/* end */}
               {/* reports start */}

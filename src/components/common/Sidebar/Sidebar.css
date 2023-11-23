@@ -1,18 +1,20 @@
-
-.tekslogo {
+.dashboard-item{ 
  
-
-  letter-spacing: 1px;
+  font-weight: 500;
+}
+.tekslogo {
+ letter-spacing: 1px;
 }
 
 
 .css-17w9904-MuiTypography-root {
   margin: 0;
-  
-  font-weight: 400;
-  
+  font-family: inherit !important;
+  /* font-size: 35px; */
+  font-weight: 500 !important;
+  /* font-size: 1rem !important; */
   /* font-size: 18px !important; */
-  line-height: 1.5;
+  line-height: 1rem !important;
 }
 .profilelogo{ 
   width: 100%;

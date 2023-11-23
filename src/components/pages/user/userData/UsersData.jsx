@@ -582,63 +582,36 @@ const UsersData = () => {
         </div>
         <div>
           <div className="usertable">
-            <Paper sx={{ width: "100%", overflow: "hidden" }}>
+            <Paper>
               <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell
-                        className=" bg-primary fs-6 border border1 "
-                        align="center"
-                      >
+                      <StyledTableCell className=" table-cell-heading ">
                         Name
                       </StyledTableCell>
-                      <StyledTableCell
-                        className=" bg-primary fs-6 border border1 "
-                        align="center"
-                      >
+                      <StyledTableCell className=" table-cell-heading ">
                         Email
                       </StyledTableCell>
-                      <StyledTableCell
-                        className="  bg-primary fs-6 border border1 "
-                        align="center"
-                      >
+                      <StyledTableCell className="table-cell-heading">
                         Phone No
                       </StyledTableCell>
-                      <StyledTableCell
-                        className="bg-primary fs-6 border border1 "
-                        align="center"
-                      >
+                      <StyledTableCell className=" table-cell-heading">
                         Designation
                       </StyledTableCell>
-                      <StyledTableCell
-                        className="bg-primary fs-6 border border1 "
-                        align="center"
-                      >
+                      <StyledTableCell className="table-cell-heading">
                         Department
                       </StyledTableCell>
-                      <StyledTableCell
-                        className="bg-primary fs-6 border border1 "
-                        align="center"
-                      >
+                      <StyledTableCell className=" table-cell-heading">
                         Report To
                       </StyledTableCell>
-                      <StyledTableCell
-                        className="bg-primary fs-6 border border1  "
-                        align="center"
-                      >
+                      <StyledTableCell className=" table-cell-heading" >
                         Profile
                       </StyledTableCell>
-                      <StyledTableCell
-                        className="bg-primary fs-6 border border1  "
-                        align="center"
-                      >
+                      <StyledTableCell className="table-cell-heading">
                         Branch
                       </StyledTableCell>
-                      <StyledTableCell
-                        className="bg-primary fs-6 border border1 "
-                        align="center"
-                      >
+                      <StyledTableCell className="table-cell-heading">
                         Action
                       </StyledTableCell>
                     </TableRow>
@@ -653,28 +626,26 @@ const UsersData = () => {
                         return (
                           <StyledTableRow style={dynamicStyle}>
                             <StyledTableCell
-                              align="center"
-                              className="p-0 m-0 border border1 elipse "
+                              className="Table-cell"
                             >
                               <span
                                 title={user.fullname}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "120px",
+                                  width: "115px",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
-                                  fontSize: "15px",
+                                  // fontSize: "15px",
                                   display: "block",
                                 }}
                               >
-                                {" "}
-                                {user.fullname}{" "}
+                                {user.fullname}
                               </span>
                             </StyledTableCell>
                             <StyledTableCell
                               align="center"
-                              className="p-0 m-0 border border1 "
+                              className="Table-cell"
                             >
                               <span
                                 title={user.email}
@@ -692,8 +663,8 @@ const UsersData = () => {
                               </span>
                             </StyledTableCell>
                             <StyledTableCell
-                              align="center"
-                              className="p-0 m-0 border border1 "
+                             
+                              className="Table-cell"
                             >
                               <span
                                 title={user.phonenumber}
@@ -711,8 +682,8 @@ const UsersData = () => {
                               </span>{" "}
                             </StyledTableCell>
                             <StyledTableCell
-                              align="center"
-                              className="p-0 m-0 border border1 "
+                            
+                              className="Table-cell"
                             >
                               <span
                                 title={user.designation}
@@ -730,8 +701,7 @@ const UsersData = () => {
                               </span>
                             </StyledTableCell>
                             <StyledTableCell
-                              align="center"
-                              className="p-0 m-0 border border1 "
+                              className="Table-cell "
                             >
                               <span
                                 title={user.department}
@@ -749,8 +719,7 @@ const UsersData = () => {
                               </span>
                             </StyledTableCell>
                             <StyledTableCell
-                              align="center"
-                              className="p-0 m-0 border border1 "
+                             className="Table-cell "
                             >
                               <span
                                 title={user.reportto}
@@ -768,8 +737,7 @@ const UsersData = () => {
                               </span>
                             </StyledTableCell>
                             <StyledTableCell
-                              align="center"
-                              className="p-0 m-0 border border1 "
+                              className="Table-cell "
                             >
                               <span
                                 title={user.profile}
@@ -788,8 +756,7 @@ const UsersData = () => {
                               </span>
                             </StyledTableCell>
                             <StyledTableCell
-                              align="center"
-                              className="p-0 m-0 border border1 "
+                            className="Table-cell "
                             >
                               <span
                                 title={user.branch}
@@ -809,16 +776,10 @@ const UsersData = () => {
                             </StyledTableCell>
                             <StyledTableCell align="center" className="d-flex ">
                               {/* <RemoveRedEyeIcon onClick={handleview}/> */}
-                              <Link
-                                to={`/userview/${user.id}`}
-                                style={{ width: "40px" }}
-                              >
+                              <Link to={`/userview/${user.id}`}>
                                 <VisibilityIcon className="iconn" />
                               </Link>
-                              <Link
-                                to={`/edituser/${user.id}`}
-                                style={{ width: "40px" }}
-                              >
+                              <Link to={`/edituser/${user.id}`}>
                                 <ModeEditIcon />
                               </Link>
                               {user.user_status !== undefined && (

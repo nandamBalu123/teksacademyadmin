@@ -729,50 +729,45 @@ const StudentData = () => {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell className="bg-primary fs-6 border border 1 text-center  text-light  ">
+                  <StyledTableCell className="table-cell-heading">
                     SNo
                   </StyledTableCell>
                   <StyledTableCell
-                    className="  bg-primary fs-6 border border 1 text-center text-light "
-                    align="left"
+                    className="table-cell-heading"
+                    
                   >
                     Student Name <br /> Registration No
                   </StyledTableCell>
                   <StyledTableCell
-                    className="  bg-primary fs-6 border border 1 text-center text-light "
-                    align="left"
+                      className="table-cell-heading"
                   >
                     Branch <br />
                     Course
                   </StyledTableCell>
 
                   <StyledTableCell
-                    className="bg-primary fs-6 border border 1 text-center text-light"
-                    align="left"
+                     className="table-cell-heading"
                   >
                     Counsellor
                     <br /> Source
                   </StyledTableCell>
 
                   <StyledTableCell
-                    className="bg-primary fs-6 border border 1 text-center text-light "
-                    align="left"
+                      className="table-cell-heading"
                   >
                     Contact Number <br />
                     Email
                   </StyledTableCell>
 
                   <StyledTableCell
-                    className="bg-primary fs-6 border border 1 text-center text-light "
-                    align="left"
+                    className="table-cell-heading"
                   >
                     Joining Date <br />
                     Training Mode
                   </StyledTableCell>
 
                   <StyledTableCell
-                    className="bg-primary fs-6 border border 1 text-center text-light"
-                    align="left"
+                      className="table-cell-heading"
                   >
                     Actions
                   </StyledTableCell>
@@ -809,7 +804,7 @@ const StudentData = () => {
                     // Updating the state with the formatted date
 
                     return (
-                      <TableRow key={item.id}>
+                      <StyledTableRow  key={item.id}>
                         <StyledTableCell className=" border border 2 text-center p-0 m-0">
                           {index + 1}
                         </StyledTableCell>
@@ -1008,7 +1003,7 @@ const StudentData = () => {
                             </DialogActions>
                           </Dialog>
                         </StyledTableCell>
-                      </TableRow>
+                      </StyledTableRow >
                     );
                   })
                 ) : (
