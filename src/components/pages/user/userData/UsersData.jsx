@@ -580,7 +580,9 @@ const UsersData = () => {
             </Menu>
           </div>
         </div>
-        <div>
+        <div >
+          
+       
           <div className="usertable">
             <Paper>
               <TableContainer sx={{ maxHeight: 440 }}>
@@ -775,7 +777,7 @@ const UsersData = () => {
                               </span>
                             </StyledTableCell>
                             <StyledTableCell align="center" className="d-flex ">
-                              {/* <RemoveRedEyeIcon onClick={handleview}/> */}
+                              
                               <Link to={`/userview/${user.id}`}>
                                 <VisibilityIcon className="iconn" />
                               </Link>
@@ -800,34 +802,7 @@ const UsersData = () => {
                                   />
                                 </div>
                               )}
-
-                              {/* {user.user_status &&
-                              JSON.parse(user.user_status).map(
-                              
-                                (status, index) => {
-                                  let userstatus = status.status;
-                                  return (
-                                    <div class="form-check form-switch">
-                                      <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        role="switch"
-                                        id="flexSwitchCheckChecked"
-                                        checked={userstatus}
-                                        onChange={(e) =>
-                                          handleClickOpen(
-                                            user.id,
-                                            userstatus,
-                                            status
-                                          )
-                                        }
-                                      />
-                                      
-                                    </div>
-                                  );
-                                }
-                              )} */}
-                            </StyledTableCell>
+                              </StyledTableCell>
                           </StyledTableRow>
                         );
                       })}
@@ -878,6 +853,36 @@ const UsersData = () => {
               </Stack>
             </div>
           </div>
+            
+
+                              {/* {user.user_status &&
+                              JSON.parse(user.user_status).map(
+                              
+                                (status, index) => {
+                                  let userstatus = status.status;
+                                  return (
+                                    <div class="form-check form-switch">
+                                      <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="flexSwitchCheckChecked"
+                                        checked={userstatus}
+                                        onChange={(e) =>
+                                          handleClickOpen(
+                                            user.id,
+                                            userstatus,
+                                            status
+                                          )
+                                        }
+                                      />
+                                      
+                                    </div>
+                                  );
+                                }
+                              )} */}
+                            
+        
         </div>
       </div>
     </div>

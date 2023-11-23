@@ -472,41 +472,41 @@ const FeeDetails = () => {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0 ">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       S.NO
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light  m-0 p-0 ">
+                    <StyledTableCell className="table-cell-heading">
                       Name
                       <br /> Branch <br />
                       Counsellor
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       Contact
                       <br />
                       Email
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       Course <br /> Date of Joining
                       <br /> Total Fee
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       Paid Fee
                       <br /> Due Amount
                       <br /> Next Due Date
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
-                      Total Installments
+                      Total <br/>Installments
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
-                      Paid Installments
+                      Paid <br/> Installments
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       View
                     </StyledTableCell>
@@ -552,16 +552,16 @@ const FeeDetails = () => {
                       }-${year}`;
 
                       return (
-                        <TableRow
+                        <StyledTableRow
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                           key={item.id}
                         >
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell text-center">
                             {index + 1}
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <span
                               title={item.name}
                               style={{
@@ -606,7 +606,7 @@ const FeeDetails = () => {
                               {item.enquirytakenby}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <span
                               title={item.mobilenumber}
                               style={{
@@ -634,7 +634,7 @@ const FeeDetails = () => {
                               {item.email}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <span
                               title={item.courses}
                               style={{
@@ -679,7 +679,7 @@ const FeeDetails = () => {
                               ).toLocaleString("en-IN")}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <span
                               title={Number(
                                 parseFloat(item.totalpaidamount).toFixed(2)
@@ -728,8 +728,18 @@ const FeeDetails = () => {
                               {NextDueDate ? NextDueDate : "No NextDue Date"}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
-                            {item.totalinstallments &&
+                          <StyledTableCell className="Table-cell">
+                           <span 
+                           style={{
+                            width: "3rem",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            fontSize: "15px",
+                            display: "block",
+                          }}
+                           > 
+                           {item.totalinstallments &&
                               item.totalinstallments.length > 0 &&
                               item.totalinstallments.map((items, index) => {
                                 const dynamicStyle = {
@@ -758,8 +768,9 @@ const FeeDetails = () => {
                                   );
                                 }
                               })}
+                           </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             {item.totalinstallments &&
                               item.totalinstallments.length > 0 &&
                               item.totalinstallments.map((items, index) => {
@@ -790,18 +801,18 @@ const FeeDetails = () => {
                                 }
                               })}
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <Link to={`/feeview/${item.id}`}>
                               <VisibilityIcon />
                             </Link>{" "}
                           </StyledTableCell>
-                        </TableRow>
+                        </StyledTableRow>
                       );
                     })
                   ) : (
-                    <TableRow>
-                      <TableCell colSpan={3}>No data available</TableCell>
-                    </TableRow>
+                    <StyledTableRow>
+                      <StyledTableCell colSpan={3}>No data available</StyledTableCell>
+                    </StyledTableRow>
                   )}{" "}
                 </TableBody>
               </Table>
