@@ -50,19 +50,13 @@ const LeadSource = () => {
         </button>
       </div>
       <TableContainer component={Paper}>
-        <Table  aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
-                id
+              <StyledTableCell className="table-cell-heading" align="center">
+                ID
               </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 Name
               </StyledTableCell>
 
@@ -70,26 +64,30 @@ const LeadSource = () => {
             </TableRow>
           </TableHead>
 
-          <TableBody className="border border 1">
-            {Array.isArray(leadsources) && leadsources.length > 0 ? (
-              leadsources.map((item, index) => (
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell className="border border 1 text-center">
-                    {index + 1}
-                  </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
-                    {item.leadsource}
-                  </StyledTableCell>
+          {Array.isArray(leadsources) && leadsources.length > 0 ? (
+            leadsources.map((item, index) => (
+              <StyledTableRow key={item.id}>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
+                  {index + 1}
+                </StyledTableCell>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
+                  {item.leadsource}
+                </StyledTableCell>
 
-                  {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
-                </StyledTableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={3}>No data available</TableCell>
-              </TableRow>
-            )}
-          </TableBody>
+                {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
+              </StyledTableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={3}>No data available</TableCell>
+            </TableRow>
+          )}
         </Table>
       </TableContainer>
     </div>

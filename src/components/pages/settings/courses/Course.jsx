@@ -39,11 +39,11 @@ const Course = () => {
   }));
   return (
     <div className="container">
-      <div className="flex mt-3">
+      <div className="flex my-3">
         <h4 className=" ms-3">Courses</h4>
         <button
           type="submit"
-          className="btn btn-primary mr-20 ms-2 mb-2"
+          className="btn btn-primary  me-3"
           onClick={handleSubmit}
         >
           Add Course
@@ -53,16 +53,10 @@ const Course = () => {
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 SI.NO
               </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 Name
               </StyledTableCell>
 
@@ -70,26 +64,30 @@ const Course = () => {
             </TableRow>
           </TableHead>
 
-          <TableBody className="border border 1">
-            {Array.isArray(getcourses) && getcourses.length > 0 ? (
-              getcourses.map((item, index) => (
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell className="border border 1 text-center">
-                    {index + 1}
-                  </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
-                    {item.course_name}
-                  </StyledTableCell>
+          {Array.isArray(getcourses) && getcourses.length > 0 ? (
+            getcourses.map((item, index) => (
+              <StyledTableRow key={item.id}>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
+                  {index + 1}
+                </StyledTableCell>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
+                  {item.course_name}
+                </StyledTableCell>
 
-                  {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
-                </StyledTableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={3}>No data available</TableCell>
-              </TableRow>
-            )}
-          </TableBody>
+                {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
+              </StyledTableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={3}>No data available</TableCell>
+            </TableRow>
+          )}
         </Table>
       </TableContainer>
     </div>

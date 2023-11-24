@@ -39,19 +39,16 @@ const Department = () => {
   }));
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-12 col-md-9 col-lg-9 col-xl-9">
-          <h3 className="fs-5">Departments</h3>{" "}
-        </div>
-        <div className="col-12 col-md-3 col-lg-3 col-xl-3">
-          <button
-            type="submit"
-            className="btn btn-primary  mb-2"
-            onClick={handleSubmit}
-          >
-            Add Department
-          </button>
-        </div>
+      <div className="d-flex justify-content-between my-3">
+        <h4 className="ms-3">Departments</h4>
+
+        <button
+          type="submit"
+          className="btn btn-primary me-3"
+          onClick={handleSubmit}
+        >
+          Add Department
+        </button>
       </div>
       {/* <div className="d-flex justify-content-between mt-3">
         <p className="fs-5">Departments</p>
