@@ -726,7 +726,7 @@ const StudentData = () => {
         <div className="student-table">
           <Paper>
             <TableContainer sx={{ maxHeight: 440 }}>
-              <Table stickyHeader aria-label="sticky table" borderAxis="both">
+              <Table stickyHeader aria-label="sticky table " borderAxis="both">
                 <TableHead>
                   <TableRow>
                     <StyledTableCell className="table-cell-heading">
@@ -947,7 +947,7 @@ const StudentData = () => {
                             </span>
                           </StyledTableCell>
 
-                          <StyledTableCell className="text-center d-flex">
+                          <StyledTableCell className="text-center d-flex mt-2">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon style={{ width: "40px" }} />
                             </NavLink>
@@ -973,7 +973,7 @@ const StudentData = () => {
                               />
                             </NavLink>
 
-                            <div className="form-check form-switch ">
+                            <div className="form-check form-switch ms-1">
                               <input
                                 className="form-check-input"
                                 type="checkbox"

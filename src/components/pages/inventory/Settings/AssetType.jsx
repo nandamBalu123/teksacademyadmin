@@ -12,9 +12,11 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import axios from "axios";
 
 export default function AssetType() {
@@ -182,23 +184,23 @@ export default function AssetType() {
         </button> */}
       </div>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+        <Table stickyHeader aria-label="sticky table " borderAxis="both">
           <TableHead>
             <TableRow>
               <StyledTableCell
-                className="bg-primary fs-6  border border 1"
+                className="table-cell-heading"
                 align="center"
               >
                 SI.NO
               </StyledTableCell>
               <StyledTableCell
-                className="bg-primary fs-6  border border 1"
+                className="table-cell-heading"
                 align="center"
               >
                 Name
               </StyledTableCell>
               <StyledTableCell
-                className="bg-primary fs-6  border border 1"
+                className="table-cell-heading"
                 align="center"
               >
                 Actions
@@ -210,15 +212,22 @@ export default function AssetType() {
           {assettype &&
             assettype.map((element, index) => (
               <StyledTableRow key={index}>
-                <StyledTableCell className="border border 1 text-center">
+                <StyledTableCell className="Table-cell text-center"
+                style={{fontSize:"15px"}}>
                   {index + 1}
                 </StyledTableCell>
-                <StyledTableCell className="border border 1 text-center">
+                <StyledTableCell className="Table-cell text-center" 
+                style={{fontSize:"15px"}}>
                   {element}
                 </StyledTableCell>
-                <StyledTableCell className="border border 1 text-center">
-                  <button onClick={(e) => handleDelete(index)}>delete</button>
-                  <button onClick={(e) => handleEdit(index)}>edit</button>
+                <StyledTableCell className="Table-cell text-center">
+                <ModeEditIcon onClick={(e) => handleEdit(index)}/>
+                <DeleteOutlineIcon
+                             onClick={(e) => handleDelete(index)} 
+                              className="text-danger ms-2"
+                            />
+                  {/* <button onClick={(e) => handleDelete(index)} >delete</button> */}
+
                 </StyledTableCell>
               </StyledTableRow>
             ))}

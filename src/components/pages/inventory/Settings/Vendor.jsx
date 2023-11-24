@@ -182,23 +182,23 @@ export default function Vendor() {
         </React.Fragment>
       </div>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell
-                className="bg-primary fs-6  border border 1"
+                className="table-cell-heading"
                 align="center"
               >
                 SI.NO
               </StyledTableCell>
               <StyledTableCell
-                className="bg-primary fs-6  border border 1"
+                className="table-cell-heading"
                 align="center"
               >
                 Name
               </StyledTableCell>
               <StyledTableCell
-                className="bg-primary fs-6  border border 1"
+                className="table-cell-heading"
                 align="center"
               >
                 Actions
@@ -209,13 +209,16 @@ export default function Vendor() {
           {vendorName &&
             vendorName.map((element, index) => (
               <StyledTableRow key={index}>
-                <StyledTableCell className="border border 1 text-center">
+                <StyledTableCell className="Table-cell"
+                style={{fontSize:"15px"}}>
                   {index + 1}
                 </StyledTableCell>
-                <StyledTableCell className="border border 1 text-center">
+                <StyledTableCell className="Table-cell"
+                style={{fontSize:"15px"}}>
                   {element}
                 </StyledTableCell>
-                <StyledTableCell className="border border 1 text-center">
+                <StyledTableCell className="Table-cell"
+                style={{fontSize:"15px"}}   >
                   <button onClick={(e) => handleDelete(index)}>delete</button>
                   <button onClick={(e) => handleEdit(index)}>edit</button>
                 </StyledTableCell>
