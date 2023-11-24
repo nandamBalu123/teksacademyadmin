@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Reports.css";
+import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,6 +11,25 @@ import TableRow from "@mui/material/TableRow";
 import { Link } from "react-router-dom";
 import Report from "./Report";
 import axios from "axios";
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 const Reports = () => {
   const [newReportName, setNewReportName] = useState();
 
@@ -53,28 +73,27 @@ const Reports = () => {
   return (
     <div className="container mt-3">
       <div className="reports">
-        <h4 className=" mt-3 text-center">Reports</h4>
-        <button onClick={handleCreateReport}>Create Report</button>
-        <input
+        <div className="d-flex justify-content-between mt-3">
+          <h4 className="ms-3">Reports</h4>
+          <button onClick={handleCreateReport} className="me-3 btn btn-primary">
+            Create Report
+          </button>
+        </div>
+
+        {/* <input
           value={newReportName}
           onChange={(e) => setNewReportName(e.target.value)}
-        />
+        /> */}
         <TableContainer component={Paper} className="mt-4">
-          <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+          <Table aria-label="customized table">
             <TableHead>
               <TableRow>
-                <TableCell
-                  className="bg-primary fs-6  border border 1 text-light"
-                  align="center"
-                >
+                <StyledTableCell className="table-cell-heading" align="center">
                   S.No
-                </TableCell>
-                <TableCell
-                  className="bg-primary fs-6  border border 1 text-light"
-                  align="center"
-                >
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
                   Report Name
-                </TableCell>
+                </StyledTableCell>
 
                 {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
               </TableRow>
@@ -82,18 +101,16 @@ const Reports = () => {
             {data &&
               data.map((report, index) => {
                 return (
-                  <TableBody className="border border 1">
-                    <TableRow>
-                      <TableCell className="border border 1 text-center">
-                        {index + 1}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        <Link to={`/report/${index}`} style={{ width: "40px" }}>
-                          {report.reportName}
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
+                  <StyledTableRow>
+                    <StyledTableCell className="Table-cell text-center">
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell className="Table-cell text-center">
+                      <Link to={`/report/${index}`} style={{ width: "40px" }}>
+                        {report.reportName}
+                      </Link>
+                    </StyledTableCell>
+                  </StyledTableRow>
                 );
               })}
           </Table>

@@ -51,45 +51,36 @@ const Roles = () => {
         </button>
       </div>
       <TableContainer component={Paper}>
-        <Table  aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 SI.NO
               </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 Name
               </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6 border border 1"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 Description
               </StyledTableCell>
-              {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
+              {/* <StyledTableCell className='  bg-primary fs-6 Table-cell' align="center">Type</StyledTableCell> */}
             </TableRow>
           </TableHead>
 
-          <TableBody className="border border 1">
+          <TableBody className="Table-cell">
             {Array.isArray(roles) && roles.length > 0 ? (
               roles.map((item, index) => (
                 <StyledTableRow key={item.id}>
-                  <StyledTableCell className="border border 1 text-center">
+                  <StyledTableCell className="Table-cell text-center">
                     {index + 1}
                   </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
+                  <StyledTableCell className="Table-cell text-center">
                     {item.role}
                   </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
+                  <StyledTableCell className="Table-cell text-center">
                     {item.description}
                   </StyledTableCell>
-                  {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
+                  {/* <StyledTableCell className=" Table-cell text-center"> Custom</StyledTableCell> */}
                 </StyledTableRow>
               ))
             ) : (
@@ -176,21 +167,21 @@ export default Roles;
 //         <Table sx={{ minWidth: 1000 }} aria-label="customized table " >
 //           <TableHead  >
 //             <TableRow  >
-//               <StyledTableCell className=' bg-primary fs-6  border border 1' align="center">id</StyledTableCell>
-//               <StyledTableCell className=' bg-primary fs-6  border border 1' align="center">Name</StyledTableCell>
-//               <StyledTableCell className=' bg-primary fs-6 border border 1' align="center">Description</StyledTableCell>
-//               {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
+//               <StyledTableCell className=' bg-primary fs-6  Table-cell' align="center">id</StyledTableCell>
+//               <StyledTableCell className=' bg-primary fs-6  Table-cell' align="center">Name</StyledTableCell>
+//               <StyledTableCell className=' bg-primary fs-6 Table-cell' align="center">Description</StyledTableCell>
+//               {/* <StyledTableCell className='  bg-primary fs-6 Table-cell' align="center">Type</StyledTableCell> */}
 
 //             </TableRow>
 //           </TableHead>
 
-//           <TableBody className="border border 1">
+//           <TableBody className="Table-cell">
 //             {getuserroles.map((item) => (
 //             <StyledTableRow>
-//               <StyledTableCell className=" border border 1 text-center">{item.id}</StyledTableCell>
-//               <StyledTableCell className=" border border 1 text-center">{item.role}</StyledTableCell>
-//               <StyledTableCell className=" border border 1 text-center">{item.description}</StyledTableCell>
-//               {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
+//               <StyledTableCell className=" Table-cell text-center">{item.id}</StyledTableCell>
+//               <StyledTableCell className=" Table-cell text-center">{item.role}</StyledTableCell>
+//               <StyledTableCell className=" Table-cell text-center">{item.description}</StyledTableCell>
+//               {/* <StyledTableCell className=" Table-cell text-center"> Custom</StyledTableCell> */}
 //             </StyledTableRow>
 //              ))}
 //           </TableBody>

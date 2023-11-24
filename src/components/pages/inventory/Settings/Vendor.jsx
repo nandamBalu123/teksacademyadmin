@@ -14,6 +14,8 @@ import DialogContent from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import axios from "axios";
 
 export default function Vendor() {
@@ -185,22 +187,13 @@ export default function Vendor() {
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell
-                className="table-cell-heading"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 SI.NO
               </StyledTableCell>
-              <StyledTableCell
-                className="table-cell-heading"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 Name
               </StyledTableCell>
-              <StyledTableCell
-                className="table-cell-heading"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 Actions
               </StyledTableCell>
             </TableRow>
@@ -209,18 +202,30 @@ export default function Vendor() {
           {vendorName &&
             vendorName.map((element, index) => (
               <StyledTableRow key={index}>
-                <StyledTableCell className="Table-cell"
-                style={{fontSize:"15px"}}>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
                   {index + 1}
                 </StyledTableCell>
-                <StyledTableCell className="Table-cell"
-                style={{fontSize:"15px"}}>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
                   {element}
                 </StyledTableCell>
-                <StyledTableCell className="Table-cell"
-                style={{fontSize:"15px"}}   >
-                  <button onClick={(e) => handleDelete(index)}>delete</button>
-                  <button onClick={(e) => handleEdit(index)}>edit</button>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
+                  <ModeEditIcon
+                    onClick={(e) => handleEdit(index)}
+                    className="text-primary "
+                  />
+                  <DeleteOutlineIcon
+                    onClick={(e) => handleDelete(index)}
+                    className="text-danger ms-2"
+                  />
                 </StyledTableCell>
               </StyledTableRow>
             ))}

@@ -187,22 +187,13 @@ export default function AssetType() {
         <Table stickyHeader aria-label="sticky table " borderAxis="both">
           <TableHead>
             <TableRow>
-              <StyledTableCell
-                className="table-cell-heading"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 SI.NO
               </StyledTableCell>
-              <StyledTableCell
-                className="table-cell-heading"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 Name
               </StyledTableCell>
-              <StyledTableCell
-                className="table-cell-heading"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 Actions
               </StyledTableCell>
               {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
@@ -212,22 +203,28 @@ export default function AssetType() {
           {assettype &&
             assettype.map((element, index) => (
               <StyledTableRow key={index}>
-                <StyledTableCell className="Table-cell text-center"
-                style={{fontSize:"15px"}}>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
                   {index + 1}
                 </StyledTableCell>
-                <StyledTableCell className="Table-cell text-center" 
-                style={{fontSize:"15px"}}>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
                   {element}
                 </StyledTableCell>
                 <StyledTableCell className="Table-cell text-center">
-                <ModeEditIcon onClick={(e) => handleEdit(index)}/>
-                <DeleteOutlineIcon
-                             onClick={(e) => handleDelete(index)} 
-                              className="text-danger ms-2"
-                            />
+                  <ModeEditIcon
+                    onClick={(e) => handleEdit(index)}
+                    className="text-primary"
+                  />
+                  <DeleteOutlineIcon
+                    onClick={(e) => handleDelete(index)}
+                    className="text-danger ms-2"
+                  />
                   {/* <button onClick={(e) => handleDelete(index)} >delete</button> */}
-
                 </StyledTableCell>
               </StyledTableRow>
             ))}

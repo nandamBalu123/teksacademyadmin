@@ -39,18 +39,19 @@ const Department = () => {
   }));
   return (
     <div className="container">
-      <div className="row"> 
-      <div className="col-12 col-md-9 col-lg-9 col-xl-9">
-      <h3 className="fs-5">Departments</h3> </div>
-      <div className="col-12 col-md-3 col-lg-3 col-xl-3">
-      <button
-          type="submit"
-          className="btn btn-primary  mb-2"
-          onClick={handleSubmit}
-        >
-          Add Department
-        </button>
-         </div>
+      <div className="row">
+        <div className="col-12 col-md-9 col-lg-9 col-xl-9">
+          <h3 className="fs-5">Departments</h3>{" "}
+        </div>
+        <div className="col-12 col-md-3 col-lg-3 col-xl-3">
+          <button
+            type="submit"
+            className="btn btn-primary  mb-2"
+            onClick={handleSubmit}
+          >
+            Add Department
+          </button>
+        </div>
       </div>
       {/* <div className="d-flex justify-content-between mt-3">
         <p className="fs-5">Departments</p>
@@ -63,19 +64,13 @@ const Department = () => {
         </button>
       </div> */}
       <TableContainer component={Paper}>
-        <Table  aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
-                id
+              <StyledTableCell className="table-cell-heading" align="center">
+                ID
               </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
+              <StyledTableCell className="table-cell-heading" align="center">
                 Name
               </StyledTableCell>
 
@@ -83,26 +78,30 @@ const Department = () => {
             </TableRow>
           </TableHead>
 
-          <TableBody className="border border 1">
-            {Array.isArray(departments) && departments.length > 0 ? (
-              departments.map((item, index) => (
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell className="border border 1 text-center">
-                    {index + 1}
-                  </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
-                    {item.department_name}
-                  </StyledTableCell>
+          {Array.isArray(departments) && departments.length > 0 ? (
+            departments.map((item, index) => (
+              <StyledTableRow key={item.id}>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
+                  {index + 1}
+                </StyledTableCell>
+                <StyledTableCell
+                  className="Table-cell text-center"
+                  style={{ fontSize: "15px" }}
+                >
+                  {item.department_name}
+                </StyledTableCell>
 
-                  {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
-                </StyledTableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={3}>No data available</TableCell>
-              </TableRow>
-            )}
-          </TableBody>
+                {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
+              </StyledTableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={3}>No data available</TableCell>
+            </TableRow>
+          )}
         </Table>
       </TableContainer>
     </div>
