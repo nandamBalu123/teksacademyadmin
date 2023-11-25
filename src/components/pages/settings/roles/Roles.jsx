@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
+import "./Roles.css";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
 const Roles = () => {
   const { roles } = useRoleContext();
@@ -40,57 +41,59 @@ const Roles = () => {
   }));
   return (
     <div className="container">
-      <div className="flex mt-3">
-        <p className="fs-5 ms-3">Roles</p>
-        <button
-          type="submit"
-          className="btn btn-primary mr-20 ms-2 mb-2"
-          onClick={handleSubmit}
-        >
-          Add Role
-        </button>
-      </div>
-      <TableContainer component={Paper}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell className="table-cell-heading" align="center">
-                SI.NO
-              </StyledTableCell>
-              <StyledTableCell className="table-cell-heading" align="center">
-                Name
-              </StyledTableCell>
-              <StyledTableCell className="table-cell-heading" align="center">
-                Description
-              </StyledTableCell>
-              {/* <StyledTableCell className='  bg-primary fs-6 Table-cell' align="center">Type</StyledTableCell> */}
-            </TableRow>
-          </TableHead>
-
-          <TableBody className="Table-cell">
-            {Array.isArray(roles) && roles.length > 0 ? (
-              roles.map((item, index) => (
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell className="Table-cell text-center">
-                    {index + 1}
-                  </StyledTableCell>
-                  <StyledTableCell className="Table-cell text-center">
-                    {item.role}
-                  </StyledTableCell>
-                  <StyledTableCell className="Table-cell text-center">
-                    {item.description}
-                  </StyledTableCell>
-                  {/* <StyledTableCell className=" Table-cell text-center"> Custom</StyledTableCell> */}
-                </StyledTableRow>
-              ))
-            ) : (
+      <div className="roles">
+        <div className="flex mt-3">
+          <p className="fs-5 ms-3">Roles</p>
+          <button
+            type="submit"
+            className="btn btn-primary mr-20 ms-2 mb-2"
+            onClick={handleSubmit}
+          >
+            Add Role
+          </button>
+        </div>
+        <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
               <TableRow>
-                <TableCell colSpan={3}>No data available</TableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  SI.NO
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Name
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Description
+                </StyledTableCell>
+                {/* <StyledTableCell className='  bg-primary fs-6 Table-cell' align="center">Type</StyledTableCell> */}
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+
+            <TableBody className="Table-cell">
+              {Array.isArray(roles) && roles.length > 0 ? (
+                roles.map((item, index) => (
+                  <StyledTableRow key={item.id}>
+                    <StyledTableCell className="Table-cell text-center">
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell className="Table-cell text-center">
+                      {item.role}
+                    </StyledTableCell>
+                    <StyledTableCell className="Table-cell text-center">
+                      {item.description}
+                    </StyledTableCell>
+                    {/* <StyledTableCell className=" Table-cell text-center"> Custom</StyledTableCell> */}
+                  </StyledTableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={3}>No data available</TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
+import "./CoursePackage.css";
 import { useCoursePackageContext } from "../../../../hooks/useCoursePackageContext";
 const CoursePackage = () => {
   const { coursepackages } = useCoursePackageContext();
@@ -38,60 +39,62 @@ const CoursePackage = () => {
     },
   }));
   return (
-    <div className="container">
-      <div className="flex mt-3">
-        <p className="fs-5 ms-3 ">Course Packages</p>
-        <button
-          type="submit"
-          className="btn btn-primary ms-2 mb-2"
-          onClick={handleSubmit}
-        >
-          Add Course Package
-        </button>
-      </div>
-      <TableContainer component={Paper}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell className="table-cell-heading" align="center">
-                id
-              </StyledTableCell>
-              <StyledTableCell className="table-cell-heading" align="center">
-                Name
-              </StyledTableCell>
-
-              {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
-            </TableRow>
-          </TableHead>
-
-          <TableBody className="border border 1">
-            {Array.isArray(coursepackages) && coursepackages.length > 0 ? (
-              coursepackages.map((item, index) => (
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {index + 1}
-                  </StyledTableCell>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {item.coursepackages_name}
-                  </StyledTableCell>
-
-                  {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
-                </StyledTableRow>
-              ))
-            ) : (
+    <div className="container mt-3">
+      <div className="coursepackage">
+        <div className="flex mt-3">
+          <p className="fs-5 ms-3 ">Course Packages</p>
+          <button
+            type="submit"
+            className="btn btn-primary ms-2 mb-2"
+            onClick={handleSubmit}
+          >
+            Add Course Package
+          </button>
+        </div>
+        <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
               <TableRow>
-                <TableCell colSpan={3}>No data available</TableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  id
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Name
+                </StyledTableCell>
+
+                {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+
+            <TableBody className="border border 1">
+              {Array.isArray(coursepackages) && coursepackages.length > 0 ? (
+                coursepackages.map((item, index) => (
+                  <StyledTableRow key={item.id}>
+                    <StyledTableCell
+                      className="Table-cell text-center"
+                      style={{ fontSize: "15px" }}
+                    >
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell
+                      className="Table-cell text-center"
+                      style={{ fontSize: "15px" }}
+                    >
+                      {item.coursepackages_name}
+                    </StyledTableCell>
+
+                    {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
+                  </StyledTableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={3}>No data available</TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 };
