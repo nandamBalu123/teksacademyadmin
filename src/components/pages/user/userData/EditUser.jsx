@@ -134,13 +134,13 @@ const EditUser = () => {
 
   return (
     <div className="container main-edituser-container my-4 ">
-      <h4 className="my-4 text-center"> Edit User Form</h4>
+      <h4 className="my-3 text-center"> Edit User Form</h4>
       <div className="sub-edituser-container">
         <form action="">
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
-                label="Full Name "
+                label={<span className="label-family"> Full Name</span>}
                 name="fullname"
                 type="text"
                 variant="standard"
@@ -163,7 +163,7 @@ const EditUser = () => {
         </div> */}
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
-                label="Email ID"
+                label={<span className="label-family">Email ID</span>}
                 name="email"
                 type="email"
                 variant="standard"
@@ -191,7 +191,7 @@ const EditUser = () => {
           <div className="row">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
-                label="Phone Number"
+                label={<span className="label-family">Phone No.</span>}
                 className=" mar w-75"
                 variant="standard"
                 name="phonenumber"
@@ -203,7 +203,7 @@ const EditUser = () => {
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
-                label="Designation"
+                label={<span className="label-family">Designation</span>}
                 className=" mar w-75"
                 variant="standard"
                 name="designation"
@@ -245,11 +245,12 @@ const EditUser = () => {
           <div className="row">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Department</InputLabel>
+                <InputLabel>
+                  <span className="label-family">Department</span>
+                </InputLabel>
                 <Select
-                  className=" mar  "
+                  className="mar"
                   name="department"
-                  id="department"
                   value={user.department}
                   onChange={setdata}
                 >
@@ -275,7 +276,7 @@ const EditUser = () => {
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
-                label="Report to"
+                label={<span className="label-family">Report To</span>}
                 className=" mar w-75"
                 variant="standard"
                 name="reportto"
@@ -290,9 +291,11 @@ const EditUser = () => {
           <div className="row">
             <div className="col-12 col-md-6 col-lg-6 col-md-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Role</InputLabel>
+                <InputLabel>
+                  <span className="label-family">Role</span>
+                </InputLabel>
                 <Select
-                  className=" mar  "
+                  className="mar"
                   name="profile"
                   id="profile"
                   required
@@ -310,9 +313,11 @@ const EditUser = () => {
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-md-6">
               <FormControl variant="standard" className="w-75">
-                <InputLabel>Branch</InputLabel>
+                <InputLabel>
+                  <span className="label-family">Branch</span>
+                </InputLabel>
                 <Select
-                  className=" mar  "
+                  className="mar"
                   name="branch"
                   id="branch"
                   required

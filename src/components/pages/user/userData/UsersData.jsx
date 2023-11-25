@@ -305,7 +305,7 @@ const UsersData = () => {
       <div className="userlist mt-3">
         <h4 className=" mt-3  text-center">Users List</h4>
 
-        <div className="row  px-2 ">
+        <div className="row  px-2 mb-1 ">
           <div className="col-12 col-md-8 col-lg-8 col-xl-8">
             <input
               type="text"
@@ -326,39 +326,38 @@ const UsersData = () => {
               value={filterCriteria.search}
               onChange={handleInputChange}
             />
-            <hr className="w-75" />
+            <hr className="w-100" />
           </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 mt-3">
-            <h6>
-              {" "}
-              {recordCount}/{initialDataCount}
-            </h6>
-          </div>
-          <div className="col-2 col-md-1 col-lg-1 col-xl-1 mt-2">
-            <select onChange={handlerecorddata}>
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="75">75</option>
-            </select>
-          </div>
-          <div className="col-3 col-md-1 col-lg-1 col-xl-1 ">
-            <Button
-              id="demo-positioned-button"
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              <button
-                className="btn btn-primary mr-20 ms-2 mb-2"
-                style={{ textTransform: "capitalize" }}
-              >
-                Filter
-              </button>
-            </Button>
+          <div className="col-12 col-md-4 col-xl-4 col-lg-4">
+            <div className="d-flex justify-content-evenly">
+              <h6 className="mt-3">
+                {recordCount}/{initialDataCount}
+              </h6>
+              <span className="mt-3">
+                <select onChange={handlerecorddata}>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="75">75</option>
+                </select>
+              </span>
+              <div>
+                <Button
+                  id="demo-positioned-button"
+                  aria-controls={open ? "demo-positioned-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <button
+                    className="btn btn-primary "
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    Filter
+                  </button>
+                </Button>
 
-            {/* <Menu
+                {/* <Menu
               className="mt-5"
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
@@ -378,8 +377,8 @@ const UsersData = () => {
                <div > Filter</div>
              
               <div >
-                  {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
+                  
+                  <CloseIcon onClick={handleClose} />
                 </div>
               </div>
               <hr />
@@ -462,97 +461,99 @@ const UsersData = () => {
             
               <div className="text-end me-2 mt-4">
                 <button className="clear" onClick={filterreset}>
-                  {" "}
+                  
                   Clear
                 </button>
               </div>
             </Menu> */}
 
-            <Menu
-              className="mt-5"
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <div className="d-flex justify-content-between m-2">
-                <div> Filter</div>
+                <Menu
+                  className="mt-5"
+                  id="demo-positioned-menu"
+                  aria-labelledby="demo-positioned-button"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                >
+                  <div className="d-flex justify-content-between m-2">
+                    <div> Filter</div>
 
-                <div>
-                  {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
-                </div>
-              </div>
-              <hr />
+                    <div>
+                      <CloseIcon onClick={handleClose} />
+                    </div>
+                  </div>
+                  <hr />
 
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Profile</InputLabel>
-                    <Select
-                      style={{ background: "none" }}
-                      className="pe-4 "
-                      name="profile"
-                      value={filterCriteria.profile}
-                      onChange={handleInputChange}
-                    >
-                      {roles &&
-                        roles.map((item, index) => (
-                          <MenuItem key={item.id} value={item.role}>
-                            {item.role}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Branch</InputLabel>
-                    <Select
-                      className="pe-3 "
-                      name="branch"
-                      value={filterCriteria.branch}
-                      onChange={handleInputChange}
-                    >
-                      {branches &&
-                        branches.map((item, index) => (
-                          <MenuItem key={item.id} value={item.branch_name}>
-                            {item.branch_name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Department</InputLabel>
-                    <Select
-                      className="pe-4"
-                      name="department"
-                      value={filterCriteria.department}
-                      onChange={handleInputChange}
-                    >
-                      {departments &&
-                        departments.map((item, index) => (
-                          <MenuItem key={item.id} value={item.department_name}>
-                            {item.department_name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
-                {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+                  <div className="row m-2">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <FormControl variant="standard" className="w-100">
+                        <InputLabel>Profile</InputLabel>
+                        <Select
+                          style={{ background: "none" }}
+                          className="pe-4 "
+                          name="profile"
+                          value={filterCriteria.profile}
+                          onChange={handleInputChange}
+                        >
+                          {roles &&
+                            roles.map((item, index) => (
+                              <MenuItem key={item.id} value={item.role}>
+                                {item.role}
+                              </MenuItem>
+                            ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <FormControl variant="standard" className="w-100">
+                        <InputLabel>Branch</InputLabel>
+                        <Select
+                          className="pe-3 "
+                          name="branch"
+                          value={filterCriteria.branch}
+                          onChange={handleInputChange}
+                        >
+                          {branches &&
+                            branches.map((item, index) => (
+                              <MenuItem key={item.id} value={item.branch_name}>
+                                {item.branch_name}
+                              </MenuItem>
+                            ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="row m-2">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <FormControl variant="standard" className="w-100">
+                        <InputLabel>Department</InputLabel>
+                        <Select
+                          className="pe-4"
+                          name="department"
+                          value={filterCriteria.department}
+                          onChange={handleInputChange}
+                        >
+                          {departments &&
+                            departments.map((item, index) => (
+                              <MenuItem
+                                key={item.id}
+                                value={item.department_name}
+                              >
+                                {item.department_name}
+                              </MenuItem>
+                            ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
               <FormControl variant="standard" className="w-100">
                       <InputLabel>Report to</InputLabel>
                       <Select
@@ -570,19 +571,18 @@ const UsersData = () => {
                       </Select>
                     </FormControl>
                </div> */}
-              </div>
-              <div className="text-end me-2 mt-4">
-                <button className="clear" onClick={filterreset}>
-                  {" "}
-                  Clear
-                </button>
-              </div>
-            </Menu>
+                  </div>
+                  <div className="text-end me-2 mt-4">
+                    <button className="clear" onClick={filterreset}>
+                      Clear
+                    </button>
+                  </div>
+                </Menu>
+              </div>{" "}
+            </div>
           </div>
         </div>
-        <div >
-          
-       
+        <div>
           <div className="usertable">
             <Paper>
               <TableContainer sx={{ maxHeight: 440 }}>
@@ -607,7 +607,7 @@ const UsersData = () => {
                       <StyledTableCell className=" table-cell-heading">
                         Report To
                       </StyledTableCell>
-                      <StyledTableCell className=" table-cell-heading" >
+                      <StyledTableCell className=" table-cell-heading">
                         Profile
                       </StyledTableCell>
                       <StyledTableCell className="table-cell-heading">
@@ -627,9 +627,7 @@ const UsersData = () => {
                         };
                         return (
                           <StyledTableRow style={dynamicStyle}>
-                            <StyledTableCell
-                              className="Table-cell"
-                            >
+                            <StyledTableCell className="Table-cell">
                               <span
                                 title={user.fullname}
                                 style={{
@@ -664,10 +662,7 @@ const UsersData = () => {
                                 {user.email}
                               </span>
                             </StyledTableCell>
-                            <StyledTableCell
-                             
-                              className="Table-cell"
-                            >
+                            <StyledTableCell className="Table-cell">
                               <span
                                 title={user.phonenumber}
                                 style={{
@@ -681,12 +676,9 @@ const UsersData = () => {
                                 }}
                               >
                                 {user.phonenumber}
-                              </span>{" "}
+                              </span>
                             </StyledTableCell>
-                            <StyledTableCell
-                            
-                              className="Table-cell"
-                            >
+                            <StyledTableCell className="Table-cell">
                               <span
                                 title={user.designation}
                                 style={{
@@ -702,9 +694,7 @@ const UsersData = () => {
                                 {user.designation}
                               </span>
                             </StyledTableCell>
-                            <StyledTableCell
-                              className="Table-cell "
-                            >
+                            <StyledTableCell className="Table-cell ">
                               <span
                                 title={user.department}
                                 style={{
@@ -720,9 +710,7 @@ const UsersData = () => {
                                 {user.department}
                               </span>
                             </StyledTableCell>
-                            <StyledTableCell
-                             className="Table-cell "
-                            >
+                            <StyledTableCell className="Table-cell ">
                               <span
                                 title={user.reportto}
                                 style={{
@@ -738,9 +726,7 @@ const UsersData = () => {
                                 {user.reportto}
                               </span>
                             </StyledTableCell>
-                            <StyledTableCell
-                              className="Table-cell "
-                            >
+                            <StyledTableCell className="Table-cell ">
                               <span
                                 title={user.profile}
                                 style={{
@@ -753,13 +739,10 @@ const UsersData = () => {
                                   display: "block",
                                 }}
                               >
-                                {" "}
                                 {user.profile}
                               </span>
                             </StyledTableCell>
-                            <StyledTableCell
-                            className="Table-cell "
-                            >
+                            <StyledTableCell className="Table-cell ">
                               <span
                                 title={user.branch}
                                 style={{
@@ -772,12 +755,10 @@ const UsersData = () => {
                                   display: "block",
                                 }}
                               >
-                                {" "}
                                 {user.branch}
                               </span>
                             </StyledTableCell>
                             <StyledTableCell align="center" className="d-flex ">
-                              
                               <Link to={`/userview/${user.id}`}>
                                 <VisibilityIcon className="iconn" />
                               </Link>
@@ -802,7 +783,7 @@ const UsersData = () => {
                                   />
                                 </div>
                               )}
-                              </StyledTableCell>
+                            </StyledTableCell>
                           </StyledTableRow>
                         );
                       })}
@@ -853,9 +834,8 @@ const UsersData = () => {
               </Stack>
             </div>
           </div>
-            
 
-                              {/* {user.user_status &&
+          {/* {user.user_status &&
                               JSON.parse(user.user_status).map(
                               
                                 (status, index) => {
@@ -881,8 +861,6 @@ const UsersData = () => {
                                   );
                                 }
                               )} */}
-                            
-        
         </div>
       </div>
     </div>
