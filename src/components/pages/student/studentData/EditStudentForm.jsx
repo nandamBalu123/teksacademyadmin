@@ -80,9 +80,6 @@ const EditStudentForm = () => {
   const { leadsources } = useLeadSourceContext();
   const { branches } = useBranchContext();
   const [feedetails, setFeeDetails] = useState([]);
-  
-  
-  
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -98,7 +95,6 @@ const EditStudentForm = () => {
     setActiveStep(0);
   };
 
-  
   const [getusers, setgetusers] = useState([]);
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   useEffect(() => {
@@ -164,7 +160,7 @@ const EditStudentForm = () => {
 
   const navigate = useNavigate("");
 
-  const [user, setuser] = useState({name: ''});
+  const [user, setuser] = useState({ name: "" });
 
   const setdata = (e) => {
     console.log(e.target.value);
@@ -176,17 +172,14 @@ const EditStudentForm = () => {
       };
     });
   };
-useEffect(()=>{
-  setuser((preval) => {
-    return {
-      ...preval,
-      assets: assets,
-    };
-  });
-},[assets])
-
-
-  
+  useEffect(() => {
+    setuser((preval) => {
+      return {
+        ...preval,
+        assets: assets,
+      };
+    });
+  }, [assets]);
 
   const handleAssetChange = (event) => {
     const assetName = event.target.name;
@@ -194,12 +187,10 @@ useEffect(()=>{
       // Add the selected asset to the array
       setassets([...assets, assetName]);
       // const { name, value } = event.target;
-      
     } else {
       // Remove the asset from the array if it's unchecked
       setassets(assets.filter((asset) => asset !== assetName));
     }
-    
   };
 
   const handleFeeDetails = (e) => {
@@ -256,12 +247,11 @@ useEffect(()=>{
   //   getdata();
   // }, []);
 
-  
-useEffect(() => {
+  useEffect(() => {
     if (students && id) {
       const filteredResults = students.filter((item) => {
         const singlestudentCondition = id ? item.id === parseInt(id) : true;
- 
+
         return singlestudentCondition;
       });
       if (filteredResults) {
@@ -272,7 +262,6 @@ useEffect(() => {
   }, [students, id, dispatch]);
 
   const handlesubmit = (e) => {
-    
     e.preventDefault();
     axios
       .put(`${process.env.REACT_APP_API_URL}/updatestudentdata/${id}`, user)
@@ -287,79 +276,77 @@ useEffect(() => {
       });
   };
 
- 
-// const [studentImage, setSelectedFile] = useState(null);
-//   const handlesubmit = (e) => {
-    
-//     const reader = new FileReader();
+  // const [studentImage, setSelectedFile] = useState(null);
+  //   const handlesubmit = (e) => {
 
-//     reader.onload = async () => {
-//       // Read the student image as a data URL
-//       const photoData = reader.result.split(",")[1];
-//     e.preventDefault();
-//     axios
-//       .put(`${process.env.REACT_APP_API_URL}/updatestudentdata/${id}`, user)
-//       .then((res) => {
-//         if (res.data.updated) {
-//           alert("User Updated");
-//           console.log("user", user);
-//           // navigate("/studentdata");
-//         } else {
-//           alert("not updated");
-//         }
-//       });
-//   };
-  
-//     // Read the student image as a data URL
-//     reader.readAsDataURL(studentImage);
-// }
+  //     const reader = new FileReader();
 
-   
-// useEffect(()=>{
-//   setuser((preval) => {
-//     return {
-//       ...preval,
-//       filename: studentImage.name,
-//       data: photoData,
-//     };
-//   });
-// },[studentImage])
+  //     reader.onload = async () => {
+  //       // Read the student image as a data URL
+  //       const photoData = reader.result.split(",")[1];
+  //     e.preventDefault();
+  //     axios
+  //       .put(`${process.env.REACT_APP_API_URL}/updatestudentdata/${id}`, user)
+  //       .then((res) => {
+  //         if (res.data.updated) {
+  //           alert("User Updated");
+  //           console.log("user", user);
+  //           // navigate("/studentdata");
+  //         } else {
+  //           alert("not updated");
+  //         }
+  //       });
+  //   };
 
+  //     // Read the student image as a data URL
+  //     reader.readAsDataURL(studentImage);
+  // }
 
+  // useEffect(()=>{
+  //   setuser((preval) => {
+  //     return {
+  //       ...preval,
+  //       filename: studentImage.name,
+  //       data: photoData,
+  //     };
+  //   });
+  // },[studentImage])
 
   return (
     <div className="main-container container">
       <div className="main-sub-container ">
-        <Typography fontSize={35}>Registration form</Typography>
+        <Typography>
+          <h4 className="mt-3"> Registration form</h4>
+        </Typography>
 
         <Stepper activeStep={activeStep} orientation="vertical">
           {/* -----step 1--- */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Basic Details</Typography>
+              <Typography>
+                <h5> Basic Details</h5>
+              </Typography>
             </StepLabel>
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
-                      label="Name"
+                      label={<span className="label-family">Full Name</span>}
                       type="text"
-                      className=" w-100"
-                      required
+                      className=" w-75"
                       onChange={setdata}
                       name="name"
                       value={user.name}
                       variant="standard"
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label="Email"
+                      label={<span className="label-family">Email ID</span>}
                       type="email"
                       variant="standard"
-                      className="mar w-100"
-                      required
+                      className="mar w-75"
                       name="email"
                       onChange={setdata}
                       value={user.email}
@@ -368,22 +355,40 @@ useEffect(() => {
                       }}
                     />{" "}
                   </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                </div>
+                <div className="row">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label="Number "
+                      label={<span className="label-family">Phone Number</span>}
                       type="number"
                       variant="standard"
-                      className="mar w-100"
-                      required
+                      className="mar w-75"
                       name="mobilenumber"
                       onChange={setdata}
                       value={user.mobilenumber}
                       InputLabelProps={{
                         shrink: true,
                       }}
-                    />{" "}
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                    <TextField
+                      label={
+                        <span className="label-family">Date of Birth</span>
+                      }
+                      type="date"
+                      variant="standard"
+                      className="w-75"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      onChange={setdata}
+                      value={user.birthdate}
+                      name="birthdate"
+                    />
                   </div>
                 </div>
+
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
@@ -403,47 +408,46 @@ useEffect(() => {
           {/* -----step 2--- */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Student Details</Typography>
+              <Typography>
+                <h5> Student Details</h5>
+              </Typography>
             </StepLabel>
             <StepContent className="">
               <form className="form">
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label=" Parent's Name "
+                      label={
+                        <span className="label-family">Parent's Name</span>
+                      }
                       type="text"
                       variant="standard"
                       className="mar w-75"
-                      required
                       onChange={setdata}
                       value={user.parentsname}
                       name="parentsname"
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
                     <TextField
-                      label=" Date of Birth"
-                      type="date"
+                      label={
+                        <span className="label-family">Parent's Number</span>
+                      }
+                      type="number"
                       variant="standard"
-                      className="w-75"
-                      required
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      onChange={setdata}
-                      value={user.birthdate}
-                      name="birthdate"
+                      className="mar w-75"
                     />
                   </div>
+                </div>
+                <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2 ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
-                        Gender<span> *</span>
+                        <span className="label-family">Gender</span>
                       </InputLabel>
                       <Select
                         id="gender"
                         name="gender"
-                        required
                         onChange={setdata}
                         value={user.gender}
                       >
@@ -457,12 +461,11 @@ useEffect(() => {
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
-                        Marital Status<span> *</span>
+                        <span className="label-family">Marital Status</span>
                       </InputLabel>
                       <Select
                         id="maritalstatus"
                         name="maritalstatus"
-                        required
                         onChange={setdata}
                         value={user.maritalstatus}
                       >
@@ -473,13 +476,17 @@ useEffect(() => {
                     </FormControl>
                   </div>
                 </div>
+
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label="College/School/Company"
+                      label={
+                        <span className="label-family">
+                          College/School/Company
+                        </span>
+                      }
                       type="text"
                       className=" w-75"
-                      required
                       onChange={setdata}
                       value={user.college}
                       name="college"
@@ -487,43 +494,45 @@ useEffect(() => {
                     />
                   </div>
                 </div>
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      // disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Continue
+                    </Button>
+                  </div>
+                </Box>
               </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                </div>
-              </Box>
             </StepContent>
           </Step>
           {/* -----step 3--- */}
 
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Student Contact Details</Typography>
+              <Typography>
+                <h5>Stdent Contact Details</h5>
+              </Typography>
             </StepLabel>
             <StepContent>
               <form className="form">
                 <div className="row ">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
-                      label="Zip Code"
+                      label={<span className="label-family">Pin Code</span>}
                       type="number"
                       variant="standard"
                       className=" w-75"
@@ -534,8 +543,8 @@ useEffect(() => {
                     />
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                  <TextField
-                      label="Country"
+                    <TextField
+                      label={<span className="label-family">Country</span>}
                       name="country"
                       type="text"
                       variant="standard"
@@ -562,13 +571,12 @@ useEffect(() => {
                       </Select>
                     </FormControl> */}
                   </div>
-                  
                 </div>
 
                 <div className="row ">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <TextField
-                      label="State"
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                    <TextField
+                      label={<span className="label-family">State</span>}
                       name="state"
                       type="text"
                       variant="standard"
@@ -640,7 +648,7 @@ useEffect(() => {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label="Area"
+                      label={<span className="label-family">Area</span>}
                       type="text"
                       variant="standard"
                       className=" w-75"
@@ -650,12 +658,11 @@ useEffect(() => {
                       name="area"
                     />
                   </div>
-                 
                 </div>
                 <div className="row ">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label="Native Place"
+                      label={<span className="label-family">Native Place</span>}
                       type="text"
                       variant="standard"
                       className=" w-75"
@@ -667,7 +674,9 @@ useEffect(() => {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label="Whatsapp Number"
+                      label={
+                        <span className="label-family">Whatsapp Number</span>
+                      }
                       type="number"
                       variant="standard"
                       className=" w-75"
@@ -678,35 +687,37 @@ useEffect(() => {
                     />
                   </div>
                 </div>
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      // disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Continue
+                    </Button>
+                  </div>
+                </Box>
               </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                </div>
-              </Box>
             </StepContent>
           </Step>
           {/* -----step 4--- */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Education Details</Typography>
+              <Typography>
+                <h5>Education Details</h5>
+              </Typography>
             </StepLabel>
 
             <StepContent>
@@ -715,7 +726,7 @@ useEffect(() => {
                   <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
-                        Education Type<span> *</span>
+                        <span className="label-family">Education Type</span>
                       </InputLabel>
                       <Select
                         id="educationtype"
@@ -736,7 +747,7 @@ useEffect(() => {
                   </div>
                   <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
                     <TextField
-                      label="Percentage"
+                      label={<span className="label-family">Percentage</span>}
                       type="number"
                       variant="standard"
                       className=" w-75"
@@ -748,7 +759,9 @@ useEffect(() => {
                   </div>
                   <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
                     <TextField
-                      label="Academic Year "
+                      label={
+                        <span className="label-family">Academic Year</span>
+                      }
                       type="number"
                       variant="standard"
                       className="mar w-75"
@@ -759,35 +772,37 @@ useEffect(() => {
                     />{" "}
                   </div>
                 </div>
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      // disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Continue
+                    </Button>
+                  </div>
+                </Box>
               </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                </div>
-              </Box>
             </StepContent>
           </Step>
           {/* Step 5 */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Photo</Typography>
+              <Typography>
+                <h5>Photo</h5>
+              </Typography>
             </StepLabel>
 
             <StepContent>
@@ -817,42 +832,44 @@ useEffect(() => {
                     style={{ display: "none" }}
                   /> */}
                 </div>
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      // disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Continue
+                    </Button>
+                  </div>
+                </Box>
               </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                </div>
-              </Box>
             </StepContent>
           </Step>
           {/* -----step 6--- */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Enquiry Details:</Typography>
+              <Typography>
+                <h5>Enquiry Details</h5>
+              </Typography>
             </StepLabel>
             <StepContent>
               <form className="form">
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
-                      label=" Enquiry Date"
+                      label={<span className="label-family">Enquiry Date</span>}
                       type="date"
                       variant="standard"
                       className="w-75"
@@ -866,19 +883,20 @@ useEffect(() => {
                     />
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-75">
+                    <FormControl variant="standard" className="w-75">
                       <TextField
-                          label="Enquiry Taken By"
-                          variant="standard"
-                          
-                          required
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          onChange={setdata}
-                          value={user.enquirytakenby}
-                          name="enquirytakenby"
-                        />
+                        label={
+                          <span className="label-family">Enquiry Taken By</span>
+                        }
+                        variant="standard"
+                        required
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={setdata}
+                        value={user.enquirytakenby}
+                        name="enquirytakenby"
+                      />
                     </FormControl>
                   </div>
                 </div>
@@ -887,7 +905,7 @@ useEffect(() => {
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
-                        Course Package<span> *</span>
+                        <span className="label-family">Course Package</span>
                       </InputLabel>
                       <Select
                         id="coursepackage"
@@ -912,7 +930,7 @@ useEffect(() => {
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
-                        Course<span> *</span>
+                        <span className="label-family">Course</span>
                       </InputLabel>
                       <Select
                         id="courses"
@@ -937,7 +955,7 @@ useEffect(() => {
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
-                        Lead Source<span> *</span>
+                        <span className="label-family">Lead Source</span>
                       </InputLabel>
                       <Select
                         id="leadsource"
@@ -957,36 +975,37 @@ useEffect(() => {
                     </FormControl>
                   </div>
                 </div>
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      // disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Continue
+                    </Button>
+                  </div>
+                </Box>
               </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                </div>
-              </Box>
             </StepContent>
           </Step>
           {/* -----step 7--- */}
           <Step>
             <StepLabel>
-              {" "}
-              <Typography fontSize={25}>Admission Details</Typography>
+              <Typography>
+                <h5>Admission Details</h5>
+              </Typography>
             </StepLabel>
 
             <StepContent>
@@ -995,7 +1014,7 @@ useEffect(() => {
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
-                        Branch<span> *</span>
+                        <span className="label-family">Branch</span>
                       </InputLabel>
                       <Select
                         id="branch"
@@ -1017,7 +1036,7 @@ useEffect(() => {
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
-                        Mode of Training<span> *</span>
+                        <span className="label-family">Mode of Traning</span>
                       </InputLabel>
                       <Select
                         id="modeoftraining"
@@ -1055,11 +1074,12 @@ useEffect(() => {
                   </div> */}
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
-                      label="Admission Date"
+                      label={
+                        <span className="label-family">Admission Date</span>
+                      }
                       type="date"
                       variant="standard"
                       className="w-75"
-                      required
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -1068,12 +1088,15 @@ useEffect(() => {
                       name="admissiondate"
                     />
                   </div>
- <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
                     <TextField
-                      label="Registration Number"
+                      label={
+                        <span className="label-family">
+                          Registration Number
+                        </span>
+                      }
                       variant="standard"
                       className="w-75"
-                      required
                       value={user.registrationnumber}
                     />
                   </div>
@@ -1082,11 +1105,14 @@ useEffect(() => {
                 <div className="row ">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
-                      label="Validity Start Date"
+                      label={
+                        <span className="label-family">
+                          Validity Start Date
+                        </span>
+                      }
                       type="date"
                       variant="standard"
                       className="w-75"
-                      required
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -1097,11 +1123,12 @@ useEffect(() => {
                   </div>
                   <div className="col-12 col-md-6 col-cl-6 col-lg-6">
                     <TextField
-                      label="validity End Date"
+                      label={
+                        <span className="label-family">Validity End Date</span>
+                      }
                       type="date"
                       variant="standard"
                       className="w-75"
-                      required
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -1129,44 +1156,42 @@ useEffect(() => {
                   {/* {user.registrationnumber} */}
                 </div>
 
-                <div className="row ">
-                 
-                </div>
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      // disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Continue
+                    </Button>
+                  </div>
+                </Box>
               </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                </div>
-              </Box>
             </StepContent>
           </Step>
           {/* -----step 8--- */}
           <Step>
             <StepLabel>
-              {" "}
-              <Typography fontSize={25}>Fee Details</Typography>{" "}
+              <Typography>
+                <h5> Fee Details</h5>
+              </Typography>{" "}
             </StepLabel>
 
             <StepContent>
-              <form onSubmit={handleFeeDetails} className="form">
-                <div className="row ">
+              <form onSubmit={handleFeeDetails}>
+                <div>
                   {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
@@ -1203,42 +1228,65 @@ useEffect(() => {
 
                   {/* added */}
                   <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
-                    <TableHead>
-                      <TableCell className="fs-6 py-3" align="center">
-                        Fee Type
-                      </TableCell>
-                      <TableCell className="fs-6 py-3" align="center">
-                        Amount
-                      </TableCell>
-                      <TableCell className="fs-6 py-3" align="center">
-                        Discount
-                      </TableCell>
-                      <TableCell className="fs-6 py-3" align="center">
-                        Tax Amount
-                      </TableCell>
-                      <TableCell className="fs-6 py-3" align="center">
-                        Total Amount
-                      </TableCell>
-                    </TableHead>
-                    <TableBody>
-                      {user.feedetails &&
-                        user.feedetails.map((item) => (
-                          <TableRow key={item.id}>
-                            <TableCell align="center">{item.feetype}</TableCell>
-                            <TableCell align="center">{item.amount}</TableCell>
-                            <TableCell align="center">{item.discount}</TableCell>
-                            <TableCell align="center">{parseFloat(item.taxamount.toFixed(2))}</TableCell>
-                            <TableCell align="center">{item.totalamount}</TableCell>
-                          </TableRow>
-                        ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                    <Table aria-label="spanning table">
+                      <TableHead>
+                        <TableCell
+                          className="registration-tablehead"
+                          align="center"
+                        >
+                          Fee Type
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablehead"
+                        >
+                          Amount
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablehead"
+                        >
+                          Discount
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablehead"
+                        >
+                          Tax Amount
+                        </TableCell>
+                        <TableCell
+                          align="center "
+                          className="registration-tablehead"
+                        >
+                          Total Amount
+                        </TableCell>
+                      </TableHead>
+                      <TableBody>
+                        {user.feedetails &&
+                          user.feedetails.map((item) => (
+                            <TableRow key={item.id}>
+                              <TableCell align="center">
+                                {item.feetype}
+                              </TableCell>
+                              <TableCell align="center">
+                                {item.amount}
+                              </TableCell>
+                              <TableCell align="center">
+                                {item.discount}
+                              </TableCell>
+                              <TableCell align="center">
+                                {parseFloat(item.taxamount.toFixed(2))}
+                              </TableCell>
+                              <TableCell align="center">
+                                {item.totalamount}
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                   {/* added end */}
 
-
-                  
                   {/* <label className="col-12 col-md-2 label">
                     Fee Type <span className="text-danger"> *</span>&nbsp;:
                   </label>
@@ -1281,8 +1329,8 @@ useEffect(() => {
                   />
                 </div>
                 <br /> */}
-                <div className="row ">
-                  {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+
+                {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label="Discount"
                       type="number"
@@ -1297,7 +1345,7 @@ useEffect(() => {
                       name="discount"
                     />
                   </div> */}
-                  {/* <label className="col-12 col-md-2 label">
+                {/* <label className="col-12 col-md-2 label">
                     Discount <span className="text-danger"> *</span>&nbsp;:
                   </label>
                   <input
@@ -1313,8 +1361,6 @@ useEffect(() => {
                     value={user.discount}
                     name="discount"
                   /> */}
-                </div>
-                <br />
 
                 {/* <div className="row ">
                   <label className="col-12 col-md-2">
@@ -1359,125 +1405,199 @@ useEffect(() => {
                 >
                   save
                 </button> */}
-                <br />
-                
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      // disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Continue
+                    </Button>
+                  </div>
+                </Box>
               </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                </div>
-              </Box>
             </StepContent>
           </Step>
           {/* -----step 9--- */}
           <Step>
             <StepLabel>
-              {" "}
-              <Typography fontSize={25}>Billing</Typography>{" "}
+              <Typography>
+                <h5>Billing</h5>
+              </Typography>{" "}
             </StepLabel>
 
             <StepContent>
-              <form className="form">
-              <TableContainer component={Paper} className="billingtable ">
-                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
+              <form>
+                <TableContainer component={Paper} className="billingtable ">
+                  <Table aria-label="spanning table">
                     <TableHead>
-                      <TableCell className="fs-6 py-3" align="center">
+                      <TableCell
+                        className="registration-tablehead"
+                        align="center"
+                      >
                         Gross Total
                       </TableCell>
-                      <TableCell className="fs-6" align="center">
+                      <TableCell
+                        className="registration-tablehead"
+                        align="center"
+                      >
                         Total Discount
                       </TableCell>
-                      <TableCell className="fs-6" align="center">
+                      <TableCell
+                        className="registration-tablehead"
+                        align="center"
+                      >
                         Total Amount
                       </TableCell>
                     </TableHead>
                     <TableBody>
-                      <TableCell align="center">0</TableCell>
-                      <TableCell align="center">0</TableCell>
-                      <TableCell align="center">0</TableCell>
+                      <TableCell
+                        align="center"
+                        className="registration-tablebody"
+                      >
+                        0
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        className="registration-tablebody"
+                      >
+                        0
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        className="registration-tablebody"
+                      >
+                        0
+                      </TableCell>
                     </TableBody>
                   </Table>
                 </TableContainer>
                 <TableContainer component={Paper} className="billingtable mt-4">
-                  <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+                  <Table aria-label="spanning table">
                     <TableHead>
                       <TableRow className="border border1">
-                        <TableCell align="left" className="fs-6 py-3">
-                          {" "}
+                        <TableCell
+                          align="center"
+                          className="registration-tablehead"
+                        >
                           Fee Type
                         </TableCell>
-                        <TableCell align="left" className="fs-6">
+                        <TableCell
+                          align="center"
+                          className="registration-tablehead"
+                        >
                           Fee (Excl of GST)
                         </TableCell>
-                        <TableCell align="left" className="fs-6">
+                        <TableCell
+                          align="center"
+                          className="registration-tablehead"
+                        >
                           Tax
                         </TableCell>
-                        <TableCell align="left" className="fs-6">
+                        <TableCell
+                          align="center"
+                          className="registration-tablehead"
+                        >
                           Fee (Incl of GST)
                         </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      
-                              <TableRow
-                               
-                                className="border border1"
-                              >
-                                <TableCell>0</TableCell>
-                                <TableCell>
-                                   0
-                                </TableCell>
-                                <TableCell>
-                                 0
-                                </TableCell>
-                                <TableCell>
-                                 0
-                                </TableCell>
-                              </TableRow>
-                          
-                 
-                        <TableRow className="border border1">
-                          <TableCell> Sub Total</TableCell>
-                          <TableCell>
-                            0
-                          </TableCell>
-                          <TableCell>
-                       0
-                          </TableCell>
-                          <TableCell>
-                        0
-                          </TableCell>
-                        </TableRow>
-                  
+                      <TableRow>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          0
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          0
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          0
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          0
+                        </TableCell>
+                      </TableRow>
 
-                      <TableRow className="border border1">
+                      <TableRow>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          Sub Total
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          0
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          0
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          0
+                        </TableCell>
+                      </TableRow>
+
+                      <TableRow>
                         <TableCell rowSpan={3} />
                         <TableCell rowSpan={3} />
-                        <TableCell>Material Fee</TableCell>
-                        <TableCell align="left">0</TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          Material Fee
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          0
+                        </TableCell>
                       </TableRow>
                       <TableRow className="border border1">
-                        <TableCell align="left">
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
                           <strong> Grand Total</strong>
                         </TableCell>
-                        <TableCell align="left">0</TableCell>
+                        <TableCell
+                          align="center"
+                          className="registration-tablebody"
+                        >
+                          0
+                        </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -1498,7 +1618,7 @@ useEffect(() => {
                  
                   {user.totaldiscount}
                 </div> */}
-               
+
                 {/* <div className="row ">
                   <label className="col-12 col-md-2">
                     Net Total <span className="text-danger"> *</span>&nbsp;:
@@ -1522,7 +1642,7 @@ useEffect(() => {
                  
                   {user.totaltax}
                 </div> */}
-           
+
                 {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
                     Grand Total<span className="text-danger"> *</span>&nbsp;:
@@ -1530,10 +1650,10 @@ useEffect(() => {
                  
                   {user.grandtotal}
                 </div> */}
-              
+
                 {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
-                    {" "}
+                   
                     Admission Remarks <span className="text-danger "> *</span>
                     &nbsp;:
                   </label>
@@ -1551,60 +1671,58 @@ useEffect(() => {
                     value={user.admissionremarks}
                   />
                 </div> */}
-               
+                <Box sx={{ mb: 2, mt: 2 }}>
+                  <div>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      // disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handleNext}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Continue
+                    </Button>
+                  </div>
+                </Box>
               </form>
-              <Box sx={{ mb: 2, mt: 2 }}>
-                <div>
-                <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Continue
-                  </Button>
-                 
-                  
-                </div>
-              </Box>
             </StepContent>
           </Step>
           {/* -----Step 10 -------- */}
           <Step>
             <StepLabel>
-              <Typography fontSize={25}>Others</Typography>
+              <Typography>
+                <h5>Others</h5>
+              </Typography>
             </StepLabel>
             <StepContent>
               <form className="form">
                 <div className="row ">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
-                      label="Remarks"
+                      label={<span className="label-family">Remarks</span>}
                       type="text"
                       variant="standard"
                       className="w-75"
-                      required
                       onChange={setdata}
                       value={user.admissionremarks}
                     />
                   </div>
-                  </div>
-                  <div className="row ">
-                <label className="col-12 col-md-2 label">
-                  Assets <span className="text-danger"> *</span>&nbsp;:
-                </label>
-                &nbsp;&nbsp;&nbsp;
-                {/* <input
+                </div>
+                <div className="row ">
+                  <label className="col-12 col-md-2 label">
+                    Assets &nbsp;:
+                  </label>
+                  &nbsp;&nbsp;&nbsp;
+                  {/* <input
                     type="text"
                     className="col-9 col-md-5"
                     required
@@ -1614,8 +1732,8 @@ useEffect(() => {
                       borderRadius: "5px",
                     }}
                   /> */}
-                {/* <div className="col-9 col-md-5">
-                    {" "}
+                  {/* <div className="col-9 col-md-5">
+                   
                     <FormControlLabel control={<Checkbox />} label="Bag" />
                     <FormControlLabel control={<Checkbox />} label="Laptap" />
                     <FormControlLabel control={<Checkbox />} label="LMS" />
@@ -1624,52 +1742,52 @@ useEffect(() => {
                       label="Course Meterial"
                     />{" "}
                   </div> */}
-                <div className="col-9 col-md-5">
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="bag"
-                        checked={assets.includes("bag")}
-                        onChange={handleAssetChange}
-                        value={user.assets}
-                      />
-                    }
-                    label="Bag"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="laptop"
-                        checked={assets.includes("laptop")}
-                        onChange={handleAssetChange}
-                        value={user.assets}
-                      />
-                    }
-                    label="Laptop"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="lms"
-                        checked={assets.includes("lms")}
-                        onChange={handleAssetChange}
-                        value={user.assets}
-                      />
-                    }
-                    label="LMS"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="courseMaterial"
-                        checked={assets.includes("courseMaterial")}
-                        onChange={handleAssetChange}
-                        value={user.assets}
-                      />
-                    }
-                    label="Course Material"
-                  />
-                </div>
+                  <div className="col-9 col-md-5">
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="bag"
+                          checked={assets.includes("bag")}
+                          onChange={handleAssetChange}
+                          value={user.assets}
+                        />
+                      }
+                      label="Bag"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="laptop"
+                          checked={assets.includes("laptop")}
+                          onChange={handleAssetChange}
+                          value={user.assets}
+                        />
+                      }
+                      label="Laptop"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="lms"
+                          checked={assets.includes("lms")}
+                          onChange={handleAssetChange}
+                          value={user.assets}
+                        />
+                      }
+                      label="LMS"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="courseMaterial"
+                          checked={assets.includes("courseMaterial")}
+                          onChange={handleAssetChange}
+                          value={user.assets}
+                        />
+                      }
+                      label="Course Material"
+                    />
+                  </div>
                   {/* <label className="col-12 col-md-2 label">
                     Assets <span className="text-danger"> *</span>&nbsp;:
                   </label>
@@ -1695,29 +1813,27 @@ useEffect(() => {
                     <option value="coursematerial"> Course Materials</option>
                   </select> */}
                 </div>
-                 
-                 
-               
+
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    // disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    className="bg-primary"
-                    variant="contained"
-                    onClick={handlesubmit}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
-                    Submit
-                  </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      // disabled={index === 0}
+                      onClick={handleBack}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      className="bg-primary"
+                      variant="contained"
+                      onClick={handlesubmit}
+                      sx={{ mt: 1, mr: 1 }}
+                    >
+                      {/* {index === steps.length - 1 ? "Finish" : "Continue"} */}
+                      Submit
+                    </Button>
                   </div>
                 </Box>
               </form>

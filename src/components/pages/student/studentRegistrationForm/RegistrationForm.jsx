@@ -1000,7 +1000,7 @@ export default function RegistrationForm() {
                       required
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
-                    />{" "}
+                    />
                   </div>
                 </div>
                 <div className="row">
@@ -1053,7 +1053,6 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                {" "}
                 <h5> Student Details</h5>
               </Typography>
             </StepLabel>
@@ -1085,23 +1084,7 @@ export default function RegistrationForm() {
                       onChange={(e) => SetParentsNumber(e.target.value)}
                       value={parentsnumber}
                     />
-                    {/* <FormControl variant="standard" className="w-75">
-                      <InputLabel>
-                        Parent's Number<span> *</span>
-                      </InputLabel>
-                      <Select
-                        id="parentsnumber"
-                        name="parentsnumber"
-                        required
-                        onChange={(e) => setParentsNumber(e.target.value)}
-                        value={parentsnumber}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        <MenuItem value="active">Active</MenuItem>
-                        <MenuItem value="inactive"> Inactive</MenuItem>
-                      </Select>
-                    </FormControl> */}
-                  </div>{" "}
+                  </div>
                 </div>
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
@@ -1194,7 +1177,6 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                {" "}
                 <h5>Stdent Contact Details</h5>
               </Typography>
             </StepLabel>
@@ -1451,7 +1433,7 @@ export default function RegistrationForm() {
                       required
                       onChange={(e) => setMarks(e.target.value)}
                       value={marks}
-                    />{" "}
+                    />
                   </div>
                   <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
                     <TextField
@@ -1464,7 +1446,7 @@ export default function RegistrationForm() {
                       required
                       onChange={(e) => setAcademicyear(e.target.value)}
                       value={academicyear}
-                    />{" "}
+                    />
                   </div>
                 </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
@@ -1564,7 +1546,6 @@ export default function RegistrationForm() {
                     <FormControl variant="standard" className="w-75">
                       {enquirytakenby && (
                         <TextField
-                          id="standard-read-only-input"
                           label={
                             <span className="label-family">
                               Enquiry Taken By
@@ -1688,9 +1669,7 @@ export default function RegistrationForm() {
           {/* -----step 7--- */}
           <Step>
             <StepLabel>
-              {" "}
               <Typography>
-                {" "}
                 <h5>Admission Details</h5>
               </Typography>
             </StepLabel>
@@ -1865,10 +1844,9 @@ export default function RegistrationForm() {
           {/* -----step 8--- */}
           <Step>
             <StepLabel>
-              {" "}
               <Typography>
                 <h5> Fee Details</h5>
-              </Typography>{" "}
+              </Typography>
             </StepLabel>
 
             <StepContent>
@@ -1929,7 +1907,7 @@ export default function RegistrationForm() {
                 <br />
                 {/* <div className="row ">
                   <label className="col-12 col-md-2 label">
-                    Total Amount (Inclusive of GST){" "}
+                    Total Amount (Inclusive of GST)
                     <span className="text-danger"> *</span>&nbsp;:
                   </label>
 
@@ -1966,7 +1944,7 @@ export default function RegistrationForm() {
                             <td className="border border-1">{item.amount}</td>
                             <td className="border border-1">{item.discount}</td>
                             <td className="border border-1">
-                              {" "}
+                              
                               {parseFloat(item.taxamount.toFixed(2))}
                             </td>
                             <td className="border border-1">
@@ -2090,17 +2068,15 @@ export default function RegistrationForm() {
           {/* -----step 9--- */}
           <Step>
             <StepLabel>
-              {" "}
               <Typography>
-                {" "}
                 <h5>Billing</h5>
-              </Typography>{" "}
+              </Typography>
             </StepLabel>
 
             <StepContent>
               <form className="form ">
                 <TableContainer component={Paper} className="billingtable ">
-                  <Table sx={{ minWidth: 600 }} aria-label="spanning table">
+                  <Table aria-label="spanning table">
                     <TableHead>
                       <TableCell
                         className="registration-tablehead"
@@ -2144,14 +2120,13 @@ export default function RegistrationForm() {
                   </Table>
                 </TableContainer>
                 <TableContainer component={Paper} className="billingtable mt-4">
-                  <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+                  <Table aria-label="spanning table">
                     <TableHead>
                       <TableRow className="border border1">
                         <TableCell
                           align="center"
                           className="registration-tablehead"
                         >
-                          {" "}
                           Fee Type
                         </TableCell>
                         <TableCell
@@ -2214,14 +2189,13 @@ export default function RegistrationForm() {
                             align="center"
                             className="registration-tablebody"
                           >
-                            {" "}
                             Sub Total
                           </TableCell>
                           <TableCell
                             align="center"
                             className="registration-tablebody"
                           >
-                            {parseFloat(totalfeewithouttax.toFixed(2))}{" "}
+                            {parseFloat(totalfeewithouttax.toFixed(2))}
                           </TableCell>
                           <TableCell
                             align="center"
@@ -2300,7 +2274,6 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                {" "}
                 <h5>Others</h5>
               </Typography>
             </StepLabel>
@@ -2335,14 +2308,14 @@ export default function RegistrationForm() {
                     }}
                   /> */}
                 {/* <div className="col-9 col-md-5">
-                    {" "}
+                    
                     <FormControlLabel control={<Checkbox />} label="Bag" />
                     <FormControlLabel control={<Checkbox />} label="Laptap" />
                     <FormControlLabel control={<Checkbox />} label="LMS" />
                     <FormControlLabel
                       control={<Checkbox />}
                       label="Course Meterial"
-                    />{" "}
+                    />
                   </div> */}
                 <div className="col-9 col-md-5">
                   <FormControlLabel
@@ -2417,7 +2390,6 @@ export default function RegistrationForm() {
                   <Popup show={isPopupOpen} onClose={closePopup}>
                     <div className="row">
                       <div className="col-12 col-md-7 col-lg-4 col-xl-4">
-                        {" "}
                         {/* <img
                         className="pop-img rounded-circle w-100"
                         src={pictureprofile}
@@ -2461,16 +2433,13 @@ export default function RegistrationForm() {
                         <p> Parent's Name : {parentsname}</p>
                         <p> Birth Date: {birthdate}</p>
                         <p>
-                          {" "}
-                          Gender: {gender} , {maritalstatus}{" "}
+                          Gender: {gender} , {maritalstatus}
                         </p>
                         <p>
-                          {" "}
-                          College: {college} , {academicyear}{" "}
+                          College: {college} , {academicyear}
                         </p>
                         <p>
-                          {" "}
-                          Education Type: {educationtype} ,{marks}{" "}
+                          Education Type: {educationtype} ,{marks}
                         </p>
                       </div>
                       <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
@@ -2491,23 +2460,18 @@ export default function RegistrationForm() {
                           <TableHead>
                             <TableRow>
                               <TableCell className="fs-6 text-center border border-2">
-                                {" "}
-                                Fee Type{" "}
+                                Fee Type
                               </TableCell>
                               <TableCell className="fs-6 text-center border border-2">
-                                {" "}
-                                Amount{" "}
+                                Amount
                               </TableCell>
                               <TableCell className="fs-6 text-center border border-2">
-                                {" "}
                                 Discount
                               </TableCell>
                               <TableCell className="fs-6 text-center border border-2">
-                                {" "}
                                 Tax Amount (Inclusive of GST)
                               </TableCell>
                               <TableCell className="fs-6 text-center border border-2">
-                                {" "}
                                 Total Amount
                               </TableCell>
                             </TableRow>
@@ -2524,11 +2488,9 @@ export default function RegistrationForm() {
                                   key={index}
                                 >
                                   <TableCell className="text-center border border-2">
-                                    {" "}
                                     {item.feetype}
                                   </TableCell>
                                   <TableCell className="text-center border border-2">
-                                    {" "}
                                     {item.amount}
                                   </TableCell>
                                   <TableCell className="text-center border border-2">
