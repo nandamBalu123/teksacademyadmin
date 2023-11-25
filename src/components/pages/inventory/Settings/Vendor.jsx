@@ -17,6 +17,7 @@ import { styled } from "@mui/material/styles";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import axios from "axios";
+import "./Vendor.css";
 
 export default function Vendor() {
   const navigate = useNavigate();
@@ -122,115 +123,117 @@ export default function Vendor() {
       });
   };
   return (
-    <div className="container">
-      <div className="flex mt-3">
-        <p className="fs-5 ms-3">Vendor</p>
+    <div className="container mt-3">
+      <div className="vendor">
+        <div className="flex my-3">
+          <p className="fs-5 ms-3">Vendor</p>
 
-        <React.Fragment>
-          <button
-            onClick={handleClickOpen}
-            type="submit"
-            className="btn btn-primary mr-20 ms-2"
-          >
-            Add Vendor
-          </button>
+          <React.Fragment>
+            <button
+              onClick={handleClickOpen}
+              type="submit"
+              className="btn btn-primary me-3"
+            >
+              Add Vendor
+            </button>
 
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Add Vendor Name</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                label="Vendor Name"
-                type="text"
-                fullWidth
-                variant="standard"
-                value={newVendorName}
-                onChange={(e) => setNewVendorName(e.target.value)}
-                // autoFocus
-                // label="Vendor Name"
-                // type="text"
-                // fullWidth
-                // variant="standard"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={handlesubmit}>submit</Button>
-            </DialogActions>
-          </Dialog>
-          <Dialog open={editopen} onClose={handleeditClose}>
-            <DialogTitle>Edit Vendor Name</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                label="Vendor Name"
-                type="text"
-                fullWidth
-                variant="standard"
-                value={newVendorName}
-                onChange={(e) => setNewVendorName(e.target.value)}
-                // autoFocus
-                // label="Vendor Name"
-                // type="text"
-                // fullWidth
-                // variant="standard"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleeditClose}>Cancel</Button>
-              <Button onClick={SubmithandleEdit}>Update</Button>
-            </DialogActions>
-          </Dialog>
-        </React.Fragment>
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Add Vendor Name</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  label="Vendor Name"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={newVendorName}
+                  onChange={(e) => setNewVendorName(e.target.value)}
+                  // autoFocus
+                  // label="Vendor Name"
+                  // type="text"
+                  // fullWidth
+                  // variant="standard"
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handlesubmit}>submit</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog open={editopen} onClose={handleeditClose}>
+              <DialogTitle>Edit Vendor Name</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  label="Vendor Name"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={newVendorName}
+                  onChange={(e) => setNewVendorName(e.target.value)}
+                  // autoFocus
+                  // label="Vendor Name"
+                  // type="text"
+                  // fullWidth
+                  // variant="standard"
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleeditClose}>Cancel</Button>
+                <Button onClick={SubmithandleEdit}>Update</Button>
+              </DialogActions>
+            </Dialog>
+          </React.Fragment>
+        </div>
+        <TableContainer component={Paper} className="mb-3">
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  SI.NO
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Name
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Actions
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+
+            {vendorName &&
+              vendorName.map((element, index) => (
+                <StyledTableRow key={index}>
+                  <StyledTableCell
+                    className="Table-cell text-center"
+                    style={{ fontSize: "15px" }}
+                  >
+                    {index + 1}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    className="Table-cell text-center"
+                    style={{ fontSize: "15px" }}
+                  >
+                    {element}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    className="Table-cell text-center"
+                    style={{ fontSize: "15px" }}
+                  >
+                    <ModeEditIcon
+                      onClick={(e) => handleEdit(index)}
+                      className="text-primary "
+                    />
+                    <DeleteOutlineIcon
+                      onClick={(e) => handleDelete(index)}
+                      className="text-danger ms-2"
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+          </Table>
+        </TableContainer>
       </div>
-      <TableContainer component={Paper}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell className="table-cell-heading" align="center">
-                SI.NO
-              </StyledTableCell>
-              <StyledTableCell className="table-cell-heading" align="center">
-                Name
-              </StyledTableCell>
-              <StyledTableCell className="table-cell-heading" align="center">
-                Actions
-              </StyledTableCell>
-            </TableRow>
-          </TableHead>
-
-          {vendorName &&
-            vendorName.map((element, index) => (
-              <StyledTableRow key={index}>
-                <StyledTableCell
-                  className="Table-cell text-center"
-                  style={{ fontSize: "15px" }}
-                >
-                  {index + 1}
-                </StyledTableCell>
-                <StyledTableCell
-                  className="Table-cell text-center"
-                  style={{ fontSize: "15px" }}
-                >
-                  {element}
-                </StyledTableCell>
-                <StyledTableCell
-                  className="Table-cell text-center"
-                  style={{ fontSize: "15px" }}
-                >
-                  <ModeEditIcon
-                    onClick={(e) => handleEdit(index)}
-                    className="text-primary "
-                  />
-                  <DeleteOutlineIcon
-                    onClick={(e) => handleDelete(index)}
-                    className="text-danger ms-2"
-                  />
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-        </Table>
-      </TableContainer>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell , { tableCellClasses } from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
@@ -229,109 +229,109 @@ const Certificate = () => {
   };
 
   return (
-  <div className="container"> 
+    <div className="container">
       <div className=" main-certificate mt-3">
-      <div className="certificate mt-2">
-        <h4 className="mx-3 mt-3 text-center"> Certificate </h4>
-        <div className="row pb-1">
-          <div className="col-12 col-md-9 col-lg-9 col-xl-9">
-            <input
-              type="text"
-              className="input-field ms-2"
-              placeholder="Search Here...."
-              autoComplete="off"
-              style={{
-                height: "45px",
-                width: "100%",
-                outline: "none",
-                borderTop: "none",
-                borderBottom: "1.5px solid black",
-                background: "none",
-                border: "hidden",
-                borderRadius: "5px",
-              }}
-              name="search"
-              value={filterCriteria.search}
-              onChange={handleInputChange}
-            />
-            <hr className="w-75 ms-2" />
-          </div>
-          <div className="col-12 col-md-3 col-lg-3 col-xl-3 mt-1"> 
-          <div className="d-flex justify-content-evenly"> 
-          <p className="mt-2"> 
-          {recordCount}/{initialDataCount}
-           </p>
-           <p className="mt-2">   
-           <select onChange={handlerecorddata}>
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="75">75</option>
-            </select>
-           </p>
-           <span> 
-           <button
-              className="btn btn-primary  ms-2 "
-              onClick={handleClick}
-              style={{ textTransform: "capitalize" }}
-            >
-              Filter
-            </button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-              style={{
-                width: "",
-                borderRadius: "25px",
-                marginTop: "20px",
-                cursor: "pointer",
-              }}
-            >
-              <div className="d-flex justify-content-between m-2">
-                <div> Filter</div>
-
-                <div>
-                  {" "}
-                  <CloseIcon onClick={handleClose} />{" "}
-                </div>
-              </div>
-              <hr />
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                  <TextField
-                    label=" From:"
-                    type="date"
-                    variant="standard"
-                    className="  w-100"
-                    InputLabelProps={{
-                      shrink: true,
+        <div className="certificate mt-2">
+          <h4 className="mx-3 mt-3 text-center"> Certificate </h4>
+          <div className="row pb-1">
+            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+              <input
+                type="text"
+                className="input-field ms-2"
+                placeholder="Search Here...."
+                autoComplete="off"
+                style={{
+                  height: "45px",
+                  width: "100%",
+                  outline: "none",
+                  borderTop: "none",
+                  borderBottom: "1.5px solid black",
+                  background: "none",
+                  border: "hidden",
+                  borderRadius: "5px",
+                }}
+                name="search"
+                value={filterCriteria.search}
+                onChange={handleInputChange}
+              />
+              <hr className="w-75 ms-2" />
+            </div>
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-1">
+              <div className="d-flex justify-content-evenly">
+                <p className="mt-2">
+                  {recordCount}/{initialDataCount}
+                </p>
+                <p className="mt-2">
+                  <select onChange={handlerecorddata}>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="75">75</option>
+                  </select>
+                </p>
+                <span>
+                  <button
+                    className="btn btn-primary   "
+                    onClick={handleClick}
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    Filter
+                  </button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
                     }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                  <TextField
-                    label=" To:"
-                    type="date"
-                    variant="standard"
-                    className="w-100"
-                    InputLabelProps={{
-                      shrink: true,
+                    style={{
+                      width: "",
+                      borderRadius: "25px",
+                      marginTop: "20px",
+                      cursor: "pointer",
                     }}
-                    name="todate"
-                    value={filterCriteria.todate}
-                    onChange={handleInputChange}
-                  />
-                </div>
+                  >
+                    <div className="d-flex justify-content-between m-2">
+                      <div> Filter</div>
 
-                {/* <div>
+                      <div>
+                        {" "}
+                        <CloseIcon onClick={handleClose} />{" "}
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row m-2">
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                        <TextField
+                          label=" From:"
+                          type="date"
+                          variant="standard"
+                          className="  w-100"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          name="fromdate"
+                          value={filterCriteria.fromdate}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                        <TextField
+                          label=" To:"
+                          type="date"
+                          variant="standard"
+                          className="w-100"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          name="todate"
+                          value={filterCriteria.todate}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+
+                      {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -348,8 +348,8 @@ const Certificate = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-              </div>
-              {/* <MenuItem className="pt-3 ">
+                    </div>
+                    {/* <MenuItem className="pt-3 ">
                 <label className="ms-"> To: </label>
 
                 <div>
@@ -367,27 +367,30 @@ const Certificate = () => {
                   />
                 </div>
               </MenuItem> */}
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Course</InputLabel>
-                    <Select
-                      name="course"
-                      value={filterCriteria.course}
-                      onChange={handleInputChange}
-                    >
-                      <MenuItem value="select"> ---select---</MenuItem>
-                      {getcourses &&
-                        getcourses.map((item, index) => (
-                          <MenuItem key={item.id} value={item.course_name}>
-                            {item.course_name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
+                    <div className="row m-2">
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>Course</InputLabel>
+                          <Select
+                            name="course"
+                            value={filterCriteria.course}
+                            onChange={handleInputChange}
+                          >
+                            <MenuItem value="select"> ---select---</MenuItem>
+                            {getcourses &&
+                              getcourses.map((item, index) => (
+                                <MenuItem
+                                  key={item.id}
+                                  value={item.course_name}
+                                >
+                                  {item.course_name}
+                                </MenuItem>
+                              ))}
+                          </Select>
+                        </FormControl>
+                      </div>
 
-                {/* <select
+                      {/* <select
                   className="mt-3"
                   id=""
                   required
@@ -409,63 +412,66 @@ const Certificate = () => {
                       </option>
                     ))}
                 </select> */}
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Branch</InputLabel>
-                    <Select
-                      name="branch"
-                      value={filterCriteria.branch}
-                      onChange={handleInputChange}
-                    >
-                      <MenuItem value="select"> ---select---</MenuItem>
-                      {branches &&
-                        branches.map((branch, index) => (
-                          <MenuItem key={branch.id} value={branch.branch_name}>
-                            {branch.branch_name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
-              <div className="row m-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Counsellor</InputLabel>
-                    <Select
-                      name="enquirytakenby"
-                      value={filterCriteria.enquirytakenby}
-                      onChange={handleInputChange}
-                    >
-                      {filteredcounsellor &&
-                        filteredcounsellor.map((user, index) => (
-                          <MenuItem value={user.fullname}>
-                            {" "}
-                            {user.fullname}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>Certificate Status</InputLabel>
-                    <Select
-                      name="enquirytakenby"
-                      value={filterCriteria.enquirytakenby}
-                      onChange={handleInputChange}
-                    >
-                      <MenuItem value="request Submitted">
-                        Request Submitted
-                      </MenuItem>
-                      <MenuItem value="issued">Issued </MenuItem>
-                      <MenuItem value="">Pending</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>Branch</InputLabel>
+                          <Select
+                            name="branch"
+                            value={filterCriteria.branch}
+                            onChange={handleInputChange}
+                          >
+                            <MenuItem value="select"> ---select---</MenuItem>
+                            {branches &&
+                              branches.map((branch, index) => (
+                                <MenuItem
+                                  key={branch.id}
+                                  value={branch.branch_name}
+                                >
+                                  {branch.branch_name}
+                                </MenuItem>
+                              ))}
+                          </Select>
+                        </FormControl>
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>Counsellor</InputLabel>
+                          <Select
+                            name="enquirytakenby"
+                            value={filterCriteria.enquirytakenby}
+                            onChange={handleInputChange}
+                          >
+                            {filteredcounsellor &&
+                              filteredcounsellor.map((user, index) => (
+                                <MenuItem value={user.fullname}>
+                                  {" "}
+                                  {user.fullname}
+                                </MenuItem>
+                              ))}
+                          </Select>
+                        </FormControl>
+                      </div>
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>Certificate Status</InputLabel>
+                          <Select
+                            name="enquirytakenby"
+                            value={filterCriteria.enquirytakenby}
+                            onChange={handleInputChange}
+                          >
+                            <MenuItem value="request Submitted">
+                              Request Submitted
+                            </MenuItem>
+                            <MenuItem value="issued">Issued </MenuItem>
+                            <MenuItem value="">Pending</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </div>
+                    </div>
 
-              {/* <MenuItem>
+                    {/* <MenuItem>
                 <select
                   className="mt-3"
                   id=""
@@ -490,7 +496,7 @@ const Certificate = () => {
                     ))}
                 </select>
               </MenuItem> */}
-              {/* <MenuItem>
+                    {/* <MenuItem>
                 <select
                   className="mt-3"
                   id=""
@@ -513,7 +519,7 @@ const Certificate = () => {
                     ))}
                 </select>
               </MenuItem> */}
-              {/* <MenuItem>
+                    {/* <MenuItem>
                 <select
                   className="mt-3"
                   id=""
@@ -535,21 +541,19 @@ const Certificate = () => {
                   <option value="">Pending</option>
                 </select>
               </MenuItem> */}
-              <div className="text-end me-2 mt-4">
-                <button className="clear" onClick={filterreset}>
-                  {" "}
-                  Clear
-                </button>
+                    <div className="text-end me-2 mt-4">
+                      <button className="clear" onClick={filterreset}>
+                        {" "}
+                        Clear
+                      </button>
+                    </div>
+                  </Menu>
+                </span>
               </div>
-            </Menu>
-           </span>
-           </div>
+            </div>
           </div>
 
-         
-        </div>
-
-        {/* <div class="dropdown">
+          {/* <div class="dropdown">
   <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
   Fillter
   </a>
@@ -561,197 +565,196 @@ const Certificate = () => {
   </ul>
 </div> */}
 
-        <Paper >
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell className="table-cell-heading">
-                 
-                    S. No
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
-                   
-                    Name
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
-                 
-                    Course
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
-                   
-                    Registration ID
-                  </StyledTableCell>
+          <Paper>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell className="table-cell-heading">
+                      S. No
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Name
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Course
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Registration ID
+                    </StyledTableCell>
 
-                  <StyledTableCell className="table-cell-heading">
-                    
-                    Course StartDate
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
-                    Course EndDate
-                  </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Course StartDate
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      Course EndDate
+                    </StyledTableCell>
 
-                  <StyledTableCell className="table-cell-heading">
-                    Certificate Status
-                  </StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {records &&
-                  records.map((student, index) => {
-                    const certificate_Status = student.certificate_status;
-                    const courseStartDate = certificate_Status
-                      .map((item) => item.courseStartDate)
-                      .join(", ");
-                    const courseEndDate = certificate_Status
-                      .map((item) => item.courseEndDate)
-                      .join(", ");
-                    const certificateStatus = certificate_Status
-                      .map((item) => item.certificateStatus)
-                      .join(", ");
+                    <StyledTableCell className="table-cell-heading">
+                      Certificate Status
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {records &&
+                    records.map((student, index) => {
+                      const certificate_Status = student.certificate_status;
+                      const courseStartDate = certificate_Status
+                        .map((item) => item.courseStartDate)
+                        .join(", ");
+                      const courseEndDate = certificate_Status
+                        .map((item) => item.courseEndDate)
+                        .join(", ");
+                      const certificateStatus = certificate_Status
+                        .map((item) => item.certificateStatus)
+                        .join(", ");
 
-                    return (
-                      <StyledTableRow key={student.id}>
-                        <StyledTableCell className="Table-cell text-center">
-                          {index + 1}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell">
-                          <span
-                            title={student.name}
-                            style={{
-                              width: "6rem",
+                      return (
+                        <StyledTableRow key={student.id}>
+                          <StyledTableCell className="Table-cell text-center">
+                            {index + 1}
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              title={student.name}
+                              style={{
+                                width: "5rem",
 
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {student.name}
-                          </span>
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell">
-                          <span
-                            title={student.courses}
-                            style={{
-                              width: "4rem",
-
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {student.courses}
-                          </span>
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell">
-                          <span
-                            title={student.registrationnumber}
-                            style={{
-                              width: "7rem",
-
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {student.registrationnumber}
-                          </span>
-                        </StyledTableCell>
-
-                         <StyledTableCell className="Table-cell">
-                          <span
-                            style={{
-                              fontSize: "15px",
-                              background:"none"
-                            }}
-                          >
-                            <input
-                              type="date"
-                              name="startdate"
-                              style={{ background: 'transparent' }}
-                              className="startdate"
-                              onChange={(e) =>
-                                setcourseStartDate(e.target.value)
-                              }
-                              value={
-                                courseStartDate !== ""
-                                  ? courseStartDate
-                                  : undefined
-                              }
-                            />
-                          </span>
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell">
-                          <span
-                            style={{
-                              fontSize: "15px",
-                            }}
-                          >
-                            <input
-                            style={{ background: 'transparent' }}
-                              type="date"
-                              name="enddate"
-                              className="enddate"
-                              onChange={(e) => setcourseEndDate(e.target.value)}
-                              value={
-                                courseEndDate !== "" ? courseEndDate : undefined
-                              }
-                            />
-                          </span>
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell">
-                          {certificateStatus === "" && (
-                            <button
-                              className="btn btn-primary text-center m-0 px-1"
-                              onClick={(e) => handleRequest(student.id)}
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
                             >
-                              Request Certificate
-                            </button>
-                          )}
-                          {certificateStatus === "request Submitted" && (
-                            <button
-                              className="btn btn-warning center  m-0 px-1"
-                              // onClick={(e) => handleRequest(student.id)}
+                              {student.name}
+                            </span>
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              title={student.courses}
+                              style={{
+                                width: "4rem",
+
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
                             >
-                              Request Submitted
-                            </button>
-                          )}
-                          {certificateStatus === "issued" && (
-                            <button className="btn  btn-success center  m-0 px-1">
-                              Certificate Issued
-                            </button>
-                          )}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-        <div
-          style={{ display: "flex", justifyContent: "center" }}
-          className="mt-3"
-        >
-          {filteredData && (
-            <Stack spacing={2}>
-              <Pagination
-                count={Math.ceil(filteredData.length / itemsPerPage)}
-                onChange={handlePageChange}
-                color="info"
-              />
-            </Stack>
-          )}
+                              {student.courses}
+                            </span>
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              title={student.registrationnumber}
+                              style={{
+                                width: "7rem",
+
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {student.registrationnumber}
+                            </span>
+                          </StyledTableCell>
+
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                fontSize: "15px",
+                                background: "none",
+                              }}
+                            >
+                              <input
+                                type="date"
+                                name="startdate"
+                                style={{ background: "transparent" }}
+                                className="startdate"
+                                onChange={(e) =>
+                                  setcourseStartDate(e.target.value)
+                                }
+                                value={
+                                  courseStartDate !== ""
+                                    ? courseStartDate
+                                    : undefined
+                                }
+                              />
+                            </span>
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              <input
+                                style={{ background: "transparent" }}
+                                type="date"
+                                name="enddate"
+                                className="enddate"
+                                onChange={(e) =>
+                                  setcourseEndDate(e.target.value)
+                                }
+                                value={
+                                  courseEndDate !== ""
+                                    ? courseEndDate
+                                    : undefined
+                                }
+                              />
+                            </span>
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            {certificateStatus === "" && (
+                              <button
+                                className="btn btn-primary text-center m-0 px-1"
+                                onClick={(e) => handleRequest(student.id)}
+                              >
+                                Request Certificate
+                              </button>
+                            )}
+                            {certificateStatus === "request Submitted" && (
+                              <button
+                                className="btn btn-warning center  m-0 px-1"
+                                // onClick={(e) => handleRequest(student.id)}
+                              >
+                                Request Submitted
+                              </button>
+                            )}
+                            {certificateStatus === "issued" && (
+                              <button className="btn  btn-success center  m-0 px-1">
+                                Certificate Issued
+                              </button>
+                            )}
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+          <div
+            style={{ display: "flex", justifyContent: "center" }}
+            className="mt-3"
+          >
+            {filteredData && (
+              <Stack spacing={2}>
+                <Pagination
+                  count={Math.ceil(filteredData.length / itemsPerPage)}
+                  onChange={handlePageChange}
+                  color="info"
+                />
+              </Stack>
+            )}
+          </div>
         </div>
       </div>
     </div>
-  </div>
   );
 };
 

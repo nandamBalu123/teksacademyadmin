@@ -247,86 +247,80 @@ const Addassets = () => {
       )}
 
       <div className="container">
-        <div className="row mt-4"> 
-        <div className="col-12 col-md-10 col-lg-10 col-xl-10 ">
-        <h4>Add Assets </h4></div>
-         <div className="col-12 col-md-2 col-lg-2 col-xl-2"> 
-         <NavLink to="/addassetsform" className="btn btn-primary">
-                      Add Assets
-                    </NavLink>
+        <div className="row mt-4">
+          <div className="col-12 col-md-10 col-lg-10 col-xl-10 ">
+            <h4>Add Assets </h4>
           </div>
-         </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+            <NavLink to="/addassetsform" className="btn btn-primary">
+              Add Assets
+            </NavLink>
+          </div>
+        </div>
         <div className="assets-card row">
           <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-          
-
             <Card
               style={{ backgroundColor: "#f3a9b2" }}
-              className="rounded rounded-3"
+              className="rounded rounded-3 mb-2"
             >
               <p className="pt-3 text-center">
-                
                 Total Laptops: <strong>{getLaptopCount()}</strong>
               </p>
-            </Card> </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-           
-
+            </Card>{" "}
+          </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card
               style={{ backgroundColor: "#a6ebdc" }}
-              className="rounded rounded-3"
+              className="rounded rounded-3 mb-2"
             >
               <p className="pt-3 text-center">
-              Total Tshirts: <strong>{getTshirtCount()}</strong>
+                Total Tshirts: <strong>{getTshirtCount()}</strong>
               </p>
-            </Card> </div> 
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            
-
+            </Card>{" "}
+          </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card
               style={{ backgroundColor: "#b7e9da" }}
-              className="rounded rounded-3"
+              className="rounded rounded-3 mb-2"
             >
               <p className="pt-3 text-center">
-              Total Shirt: <strong>{getShirtCount()}</strong>
+                Total Shirt: <strong>{getShirtCount()}</strong>
               </p>
-            </Card> </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-           
-
+            </Card>{" "}
+          </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card
               style={{ backgroundColor: "#f3a9b2" }}
-              className="rounded rounded-3"
+              className="rounded rounded-3 mb-2"
             >
               <p className="pt-3 text-center">
-              Total Charger: <strong>{getChargerCount()}</strong>
+                Total Charger: <strong>{getChargerCount()}</strong>
               </p>
-            </Card> </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            
-
+            </Card>{" "}
+          </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card
               style={{ backgroundColor: "#a6ebdc" }}
-              className="rounded rounded-3"
+              className="rounded rounded-3 mb-2"
             >
               <p className="pt-3 text-center">
-              Total Mouse: <strong>{getMouseCount()}</strong>
+                Total Mouse: <strong>{getMouseCount()}</strong>
               </p>
-            </Card> </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-           
-
+            </Card>{" "}
+          </div>
+          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card
               style={{ backgroundColor: "#d4eaea" }}
-              className="rounded rounded-3"
+              className="rounded rounded-3 mb-2"
             >
               <p className="pt-3 text-center">
-              Total Bags: <strong>{getStudentsBags()}</strong>
+                Total Bags: <strong>{getStudentsBags()}</strong>
               </p>
-            </Card> </div>
-            </div>
+            </Card>{" "}
+          </div>
+        </div>
 
-            {/* <Card sx={{ maxWidth: 345 }}>
+        {/* <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -346,8 +340,8 @@ const Addassets = () => {
                 </CardContent>
               </CardActionArea>
             </Card> */}
-         
-          {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+
+        {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
@@ -365,7 +359,7 @@ const Addassets = () => {
               </CardActionArea>
             </Card>
           </div> */}
-          {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+        {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
@@ -383,7 +377,7 @@ const Addassets = () => {
               </CardActionArea>
             </Card>
           </div> */}
-          {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+        {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
@@ -401,7 +395,7 @@ const Addassets = () => {
               </CardActionArea>
             </Card>
           </div> */}
-       
+
         <div className="col-lg-12">
           <div className="row">
             <div className="col-lg-3">
@@ -477,18 +471,15 @@ const Addassets = () => {
                       Vender Name
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      
                       Asset Type
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      
                       Brand Name
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
                       Asset Code
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      
                       Quantity
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
@@ -530,16 +521,14 @@ const Addassets = () => {
                           {element.returndate}
                         </StyledTableCell>
                         <StyledTableCell className="Table-cell text-center">
-                          <NavLink to={`view/${element.id}`} 
-                          >
-                            <RemoveRedEyeIcon style={{width:"40px"}}/>
+                          <NavLink to={`view/${element.id}`}>
+                            <RemoveRedEyeIcon style={{ width: "40px" }} />
                           </NavLink>
-                          <NavLink to={`edit/${element.id}`}
-                          >
-                            <CreateIcon style={{width:"40px"}}/>
+                          <NavLink to={`edit/${element.id}`}>
+                            <CreateIcon style={{ width: "40px" }} />
                           </NavLink>
                           <DeleteOutlineIcon
-                          style={{width:"40px"}}
+                            style={{ width: "40px" }}
                             onClick={() => deleteuser(element.id)}
                             className="text-danger"
                           />
