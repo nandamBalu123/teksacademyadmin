@@ -4,7 +4,7 @@ import * as React from "react";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-
+import { Link } from "react-router-dom";
 import Header from "../../common/Header/Header";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
@@ -639,66 +639,66 @@ const Dashboard = () => {
       </div>
 
       <div className="contianer Dashboard">
-        <div className="row"> 
-        <div className="col-12 col-md-1 col-lg-1 col-xl-1 m-sm-3"> </div>
-        <div className="col-12 col-md-3 col-lg-3 col-xl-3 " 
-        style={{ cursor: "pointer" }}
-        onClick={(e) =>
-          setDisplayData({
-            enrollments: true,
-            fee: false,
-            users: false,
-            dueAndReceivedAmount: false,
-          })
-        }
-        >  
-        <Card
-              style={{ backgroundColor:"#00c292" }}
+        <div className="row">
+          <div className="col-12 col-md-1 col-lg-1 col-xl-1 m-sm-3"> </div>
+          <div
+            className="col-12 col-md-3 col-lg-3 col-xl-3 "
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: true,
+                fee: false,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
+            }
+          >
+            <Card
+              style={{ backgroundColor: "#00c292" }}
               className="rounded rounded-3 mb-1"
             >
               <p className="text-center pt-3">Total Enrollments</p>
-             
             </Card>
-        </div>
-        <div className="col-12 col-md-3 col-lg-3 col-xl-3 " 
-        style={{ cursor: "pointer" }}
-        onClick={(e) =>
-          setDisplayData({
-            enrollments: false,
-            fee: true,
-            feefollowup: false,
-            
-          })
-        }
-        >  
-        <Card
-              style={{ backgroundColor: "#03a9f3"  }}
+          </div>
+          <div
+            className="col-12 col-md-3 col-lg-3 col-xl-3 "
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: true,
+                feefollowup: false,
+              })
+            }
+          >
+            <Card
+              style={{ backgroundColor: "#03a9f3" }}
               className="rounded rounded-3 mb-1"
             >
               <p className="text-center pt-3">Fee Details</p>
-             
             </Card>
+          </div>
+          <div
+            className="col-12 col-md-3 col-lg-3 col-xl-3 "
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: false,
+                feefollowup: true,
+              })
+            }
+          >
+            <Link to="/feedetails">
+              <Card
+                style={{ backgroundColor: "#f87146" }}
+                className="rounded rounded-3 mb-1"
+              >
+                <p className="text-center pt-3">Fee Followups</p>
+              </Card>
+            </Link>
+          </div>
         </div>
-        <div className="col-12 col-md-3 col-lg-3 col-xl-3 " 
-        style={{ cursor: "pointer" }}
-        onClick={(e) =>
-          setDisplayData({
-            enrollments: false,
-            fee: false,
-            feefollowup: true,
-           
-          })
-        }
-        >  
-        <Card
-              style={{ backgroundColor: "#f87146"  }}
-              className="rounded rounded-3 mb-1"
-            >
-              <p className="text-center pt-3">Fee Followups</p>
-             
-            </Card>
-        </div>
-         </div>
         <div className="row">
           {/* <div
             className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
@@ -741,7 +741,7 @@ const Dashboard = () => {
               })
             }
           > */}
-            {/* <Card
+          {/* <Card
               style={{ backgroundColor: '#09c3f7' }}
               className="rounded rounded-3"
             >
@@ -753,9 +753,9 @@ const Dashboard = () => {
                     "en-IN"
                   )}
                 </b> */}
-                {/* <b>{sumDueAmount},</b>
+          {/* <b>{sumDueAmount},</b>
                 <b>{sumreceivedAmount},</b> */}
-              {/* </p>
+          {/* </p>
             </Card> */}
           {/* </div> */}
           {/* <div
@@ -874,13 +874,13 @@ const Dashboard = () => {
       {/* This is for progress bar */}
 
       {DisplayData.enrollments && (
-     
-        
-          
-          <div className=" "> 
-          <div className="d-flex justify-content-between"> 
-         <h4 className="text-center mt-3"> Current Month Enrollment Details</h4> 
-         <div className=" tex-end">
+        <div className=" ">
+          <div className="d-flex justify-content-between">
+            <h4 className="text-center mt-3">
+              {" "}
+              Current Month Enrollment Details
+            </h4>
+            <div className=" tex-end">
               <Button
                 id="demo-positioned-button"
                 aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -978,57 +978,57 @@ const Dashboard = () => {
                 </MenuItem>
               </Menu>
             </div>
-         </div>
+          </div>
           {/* <h4 className="text-center mt-3 ">  Current Month Enrollment Details </h4> */}
-          <div className="row "> 
-          {/* <div className="col-12 col-md-2 col-xl-2 col-lg-2"> </div> */}
-          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-          <Card
-              // style={{ background:"#0090f7"}}
-              className="rounded rounded-3"
-            >
-              <p className="text-center pt-3"><b> No of Enrollments</b> 
-              <p className="pt-3"> 6</p> </p>
-             
-            </Card>
-             </div>
-          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2"> 
-          <Card
-              // style={{ background:"#ff3741"}}
-              className="rounded rounded-3"
-            >
-              <p className="text-center pt-3"><b>Booking Amount</b> 
-              <p className="pt-3"> 40,000</p> </p>
-             
-            </Card>
-           </div>
-          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2"> 
-          <Card
-              // style={{ background:"#ffa300"}}
-              className="rounded rounded-3"
-            >
-              <p className="text-center pt-3"><b>Received Amount</b> 
-              <p className="pt-3"> 10,000</p> </p>
-             
-            </Card>
-           </div>
-          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">  
-          <Card
-              // style={{ background:"#00b6a6"}}
-              className="rounded rounded-3"
-            >
-              <p className="text-center pt-3"><b>DueAmount</b> 
-              <p className="pt-3"> 0,000</p> </p>
-             
-            </Card></div>
-         
+          <div className="row ">
+            {/* <div className="col-12 col-md-2 col-xl-2 col-lg-2"> </div> */}
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#0090f7"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b> No of Enrollments</b>
+                  <p className="pt-3"> 6</p>{" "}
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#ff3741"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>Booking Amount</b>
+                  <p className="pt-3"> 40,000</p>{" "}
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#ffa300"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>Received Amount</b>
+                  <p className="pt-3"> 10,000</p>{" "}
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#00b6a6"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>DueAmount</b>
+                  <p className="pt-3"> 0,000</p>{" "}
+                </p>
+              </Card>
+            </div>
           </div>
-
-          </div>
-        
+        </div>
       )}
-
-
 
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
@@ -1103,12 +1103,9 @@ const Dashboard = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-
-              
                 </div>
 
                 <MenuItem className="text-end">
-                
                   <button className="clear " onClick={filterreset}>
                     {" "}
                     Clear
@@ -1173,11 +1170,11 @@ const Dashboard = () => {
         </div>
       )}
 
-      {DisplayData.fee && ( 
-         <div className=""> 
-         <div className="d-flex justify-content-between"> 
-         <h4 className="text-center mt-3"> Current Month Fee Details</h4> 
-         <div className=" tex-end">
+      {DisplayData.fee && (
+        <div className="">
+          <div className="d-flex justify-content-between">
+            <h4 className="text-center mt-3"> Current Month Fee Details</h4>
+            <div className=" tex-end">
               <Button
                 id="demo-positioned-button"
                 aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -1275,32 +1272,34 @@ const Dashboard = () => {
                 </MenuItem>
               </Menu>
             </div>
-         </div>
-        
-         <div className="row  "> 
-         <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
-         <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2"> 
-          <Card
-              // style={{ background:"#ff3741"}}
-              className="rounded rounded-3"
-            >
-              <p className="text-center pt-3"><b>Fee Received</b> 
-              <p className="pt-3"> 1,40,000</p> </p>
-             
-            </Card>
-           </div>
-           <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2"> 
-          <Card
-              // style={{ background:"#ff3741"}}
-              className="rounded rounded-3"
-            >
-              <p className="text-center pt-3"><b>Fee Yet To Received</b> 
-              <p className="pt-3">2,40,000</p> </p>
-             
-            </Card>
-           </div>
-         </div>
           </div>
+
+          <div className="row  ">
+            <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#ff3741"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>Fee Received</b>
+                  <p className="pt-3"> 1,40,000</p>{" "}
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#ff3741"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>Fee Yet To Received</b>
+                  <p className="pt-3">2,40,000</p>{" "}
+                </p>
+              </Card>
+            </div>
+          </div>
+        </div>
       )}
       {DisplayData.fee && (
         <div className="progreebar rounded rounded-5  pb-4">

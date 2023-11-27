@@ -140,8 +140,9 @@ const Feefollowup = () => {
   let initialDataCount = getstudentData.length;
   let recordCount = filtereddata.length;
   return (
-    <div className="fee">
+    <div className="fee container mt-3">
       <div className="feedetails">
+        <h4 className="text-center"> Fee Followups</h4>
         <button
           className="feefollowupbtn bg-danger"
           onClick={() => {
@@ -156,8 +157,7 @@ const Feefollowup = () => {
             }));
           }}
         >
-          {" "}
-          Pending
+          Over Due
         </button>
         <button
           className="feefollowupbtn bg-warning"
@@ -190,8 +190,7 @@ const Feefollowup = () => {
             }));
           }}
         >
-          {" "}
-          Upcoming{" "}
+          Upcoming
         </button>
       </div>
       <div className="row">
@@ -416,7 +415,7 @@ const Feefollowup = () => {
       {filterCriteria.todaydate && <h3 className="ms-3 mt-2">Today</h3>}
       {filterCriteria.upcomingdate && <h3 className="ms-3 mt-2">Upcoming</h3>}
 
-      {filterCriteria.pendingdate && <h3 className="ms-3 mt-2 ">Pending</h3>}
+      {filterCriteria.pendingdate && <h3 className="ms-3 mt-2 ">Over Due</h3>}
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -444,7 +443,7 @@ const Feefollowup = () => {
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
                   {" "}
-                  Next Due Date
+                  Due Date
                 </TableCell>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
                   {" "}

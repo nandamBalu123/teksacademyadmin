@@ -197,14 +197,11 @@ const FeeDetails = () => {
       <div className="main-feedetails  mt-3">
         <div className="feedetails">
           {" "}
-          <h4 className="mt-1 text-center">
-            {" "}
-            Fee Management (Registered Students)
-          </h4>
+          <h4 className="mt-1 text-center"> Fee Management</h4>
           <div className="row pt-2">
             <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-2">
               <button className="feebtn" onClick={studentFeeRecords}>
-                Student Fee Records
+                Fee Records
               </button>
             </div>
             <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
@@ -500,11 +497,12 @@ const FeeDetails = () => {
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
                       {" "}
-                      Total <br/>Installments
+                      Total <br />
+                      Installments
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
                       {" "}
-                      Paid <br/> Installments
+                      Paid <br /> Installments
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
                       {" "}
@@ -729,46 +727,46 @@ const FeeDetails = () => {
                             </span>
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
-                           <span 
-                           style={{
-                            width: "3rem",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            fontSize: "15px",
-                            display: "block",
-                          }}
-                           > 
-                           {item.totalinstallments &&
-                              item.totalinstallments.length > 0 &&
-                              item.totalinstallments.map((items, index) => {
-                                const dynamicStyle = {
-                                  color: item.dueamount < 1 ? "green" : "red",
-                                  fontSize:
-                                    item.dueamount < 1 ? "20px" : "16px",
-                                  fontWeight:
-                                    item.dueamount < 1 ? "900" : "900",
-                                };
-                                const IconStyle = {
-                                  display: item.dueamount < 1 ? true : "none",
-                                  marginLeft: "10px",
-                                };
-                                if (true) {
-                                  // settotalleft(item.totalinstallmentsleft);
-                                  // totalleft = item.totalinstallmentsleft;
-                                  return (
-                                    <div style={{ display: "flex" }}>
-                                      <span style={dynamicStyle}>
-                                        {items.totalinstallments}
-                                      </span>
-                                      <span style={dynamicStyle}>
-                                        <CheckCircleIcon style={IconStyle} />
-                                      </span>
-                                    </div>
-                                  );
-                                }
-                              })}
-                           </span>
+                            <span
+                              style={{
+                                width: "3rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.totalinstallments &&
+                                item.totalinstallments.length > 0 &&
+                                item.totalinstallments.map((items, index) => {
+                                  const dynamicStyle = {
+                                    color: item.dueamount < 1 ? "green" : "red",
+                                    fontSize:
+                                      item.dueamount < 1 ? "20px" : "16px",
+                                    fontWeight:
+                                      item.dueamount < 1 ? "900" : "900",
+                                  };
+                                  const IconStyle = {
+                                    display: item.dueamount < 1 ? true : "none",
+                                    marginLeft: "10px",
+                                  };
+                                  if (true) {
+                                    // settotalleft(item.totalinstallmentsleft);
+                                    // totalleft = item.totalinstallmentsleft;
+                                    return (
+                                      <div style={{ display: "flex" }}>
+                                        <span style={dynamicStyle}>
+                                          {items.totalinstallments}
+                                        </span>
+                                        <span style={dynamicStyle}>
+                                          <CheckCircleIcon style={IconStyle} />
+                                        </span>
+                                      </div>
+                                    );
+                                  }
+                                })}
+                            </span>
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
                             {item.totalinstallments &&
@@ -811,7 +809,9 @@ const FeeDetails = () => {
                     })
                   ) : (
                     <StyledTableRow>
-                      <StyledTableCell colSpan={3}>No data available</StyledTableCell>
+                      <StyledTableCell colSpan={3}>
+                        No data available
+                      </StyledTableCell>
                     </StyledTableRow>
                   )}{" "}
                 </TableBody>

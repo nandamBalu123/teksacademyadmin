@@ -342,7 +342,7 @@ const FeeView = () => {
   return (
     <div className="fee container mt-3">
       <div className="feeview">
-        <h4 className="pt-3"> Student Fee Details</h4>{" "}
+        <h4 className="mt-3"> Student Fee Details</h4>
         <hr style={{ height: "30%", paddingBottom: "30px" }} />
         <div className="w-100">
           <TableContainer component={Paper}>

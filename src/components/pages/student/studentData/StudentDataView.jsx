@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
 // import profilepic from "../../../../images/profilepicture.jpg";
 import "./StudentDataView.css";
 import { useEffect } from "react";
@@ -42,6 +43,7 @@ const StudentDataView = () => {
   //       console.error("Error fetching data:", error);
   //     });
   // }, []);
+
   useEffect(() => {
     if (students && id) {
       const filteredResults = students.filter((item) => {
@@ -55,11 +57,428 @@ const StudentDataView = () => {
       setstudentdata(filteredResults[0]);
     }
   }, [students, id, dispatch]);
+
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
+  }));
+
   return (
-    <>
-      <h2 className="text-center"> Student Details From</h2>
+    <div className="container mt-3">
+      <div className="studentdataview">
+        <h4 className="text-center mt-3"> Student Details From</h4>
+        <div className="row">
+          <div className="col-12 col-md-7 col-lg-4 col-xl-4">
+            {!studentdata.studentImg && <img src={profilePic} alt="photo" />}
+            {studentdata.studentImg && (
+              <img
+                className=" w-75"
+                src={`https://teksacademyimages.s3.amazonaws.com/${studentdata.studentImg}`}
+                alt="photo"
+              />
+            )}
+          </div>
+          <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
+            <p>
+              <b> Name :</b>
+              {studentdata.name}
+            </p>
+            <p>
+              <b>EMail: </b>
+              {studentdata.email}
+            </p>
+            <p>
+              <b>Mobile Number:</b>
+              {studentdata.mobilenumber}
+            </p>
+            <p>
+              <b> Registration No:</b>
+              {studentdata.registrationnumber}
+            </p>
+            <p>
+              <b>Whatsapp Number:</b> {studentdata.whatsappno}
+            </p>
+          </div>
+          <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
+            <p>
+              <b> Admission Date:</b>
+              {AdmissionDate}
+            </p>
+            <p>
+              <b> Course:</b>
+              {studentdata.courses}
+            </p>
+            <p>
+              <b> Branch :</b>
+              {studentdata.branch}
+            </p>
+            <p>
+              <b> Validity Start Date:</b>
+              {ValidityStart}
+            </p>
+            <p>
+              <b>Validity End Date :</b>
+              {ValidityEnd}
+            </p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-md-6 col-lg-4 col-xl-4  mt-2 ">
+            <p>
+              <b> Country : </b>
+              {studentdata.country}
+            </p>
+            <p>
+              <b> State:</b>
+              {studentdata.state}
+            </p>
+            <p>
+              <b> Area:</b>
+              {studentdata.area}
+            </p>
+            <p>
+              <b>Native Place:</b>
+              {studentdata.native}
+            </p>
+            <p>
+              <b>Zipcode:</b>
+              {studentdata.zipcode}
+            </p>
+            <p>
+              <b> Admission Remarks:</b>
+              {studentdata.admissionremarks}
+            </p>
+          </div>
+          <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2 ">
+            <p>
+              <b>Parent's Name :</b>
+              {studentdata.parentsname}
+            </p>
+            <p>
+              <b>Birth Date:</b> {BirthDate}
+            </p>
+            <p>
+              <p>
+                <b>Gender:</b> {studentdata.gender}
+              </p>
+            </p>
+            <p>
+              <b>College:</b>
+              {studentdata.college}
+            </p>
+            <p>
+              <b>Education Type:</b> {studentdata.educationtype}
+            </p>
+            <p>
+              <b> Assets:</b>
+              {studentdata.assets}
+            </p>
+          </div>
+          <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+            <p>
+              <b>Enquiry Date : </b>
+              {EnquiryDate}
+            </p>
+            <p>
+              <b> Enquiry Taken By:</b>
+              {studentdata.enquirytakenby}
+            </p>
+            <p>
+              <b>Course Package:</b>
+              {studentdata.coursepackage}
+            </p>
+            <p>
+              <b>Lead Source:</b>
+              {studentdata.leadsource}
+            </p>
+            <p>
+              <b> Mode of Traning:</b>
+              {studentdata.modeoftraining}
+            </p>
+          </div>
+        </div>
+
+        <TableContainer component={Paper} className="my-4">
+          <Table aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell className=" table-cell-heading">
+                  Fee Type
+                </StyledTableCell>
+                <StyledTableCell className=" table-cell-heading">
+                  Amount
+                </StyledTableCell>
+                <StyledTableCell className=" table-cell-heading">
+                  Discount
+                </StyledTableCell>
+                <StyledTableCell className=" table-cell-heading">
+                  Tax Amount (Inclusive of GST)
+                </StyledTableCell>
+                <StyledTableCell className=" table-cell-heading">
+                  Total Amount
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {studentdata.feedetails &&
+                studentdata.feedetails.map((item, index) => (
+                  <StyledTableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    key={index}
+                  >
+                    <StyledTableCell className="Table-cell text-center">
+                      {item.feetype}
+                    </StyledTableCell>
+                    <StyledTableCell className="Table-cell text-center">
+                      {Number(
+                        parseFloat(item.amount).toFixed(2)
+                      ).toLocaleString("en-IN")}
+                    </StyledTableCell>
+                    <StyledTableCell className="Table-cell text-center">
+                      {item.discount &&
+                        Number(
+                          parseFloat(item.discount).toFixed(2)
+                        ).toLocaleString("en-IN")}
+                      {!item.discount && <>0</>}
+                    </StyledTableCell>
+                    <StyledTableCell className="Table-cell text-center">
+                      {Number(
+                        parseFloat(item.taxamount).toFixed(2)
+                      ).toLocaleString("en-IN")}
+                    </StyledTableCell>
+                    <StyledTableCell className="Table-cell text-center">
+                      {Number(
+                        parseFloat(item.totalamount).toFixed(2)
+                      ).toLocaleString("en-IN")}
+                      <br />
+                      {item.feetype === "fee" ? (
+                        <>
+                          Materialfee:
+                          {Number(
+                            parseFloat(studentdata.materialfee).toFixed(2)
+                          ).toLocaleString("en-IN")}
+                          <br /> CourseFee:{" "}
+                          {Number(
+                            parseFloat(
+                              item.totalamount - studentdata.materialfee
+                            ).toFixed(2)
+                          ).toLocaleString("en-IN")}
+                        </>
+                      ) : (
+                        <span></span>
+                      )}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell className="table-cell-heading">
+                  Installment
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading">
+                  Due Date
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading">
+                  Due Amount
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading">
+                  Paid Date
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading">
+                  Paid Amount
+                </StyledTableCell>
+
+                <StyledTableCell className="table-cell-heading">
+                  Mode of Payment
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading">
+                  Transition ID
+                </StyledTableCell>
+
+                <StyledTableCell className="table-cell-heading">
+                  Invoice
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+            {studentdata.installments &&
+              studentdata.installments.map((item, index) => {
+                let paidDate = new Date(item.paiddate);
+                const day = paidDate.getUTCDate();
+                const monthIndex = paidDate.getUTCMonth();
+                const year = paidDate.getUTCFullYear();
+                let dueDate = new Date(item.duedate);
+                const dueday = dueDate.getUTCDate();
+                const duemonthIndex = dueDate.getUTCMonth();
+                const dueyear = dueDate.getUTCFullYear();
+                const monthAbbreviations = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+
+                // Formatting the date
+                paidDate = `${day < 10 ? "0" : ""}${day}-${
+                  monthAbbreviations[monthIndex]
+                }-${year}`;
+                dueDate = `${dueday < 10 ? "0" : ""}${dueday}-${
+                  monthAbbreviations[duemonthIndex]
+                }-${dueyear}`;
+
+                if (item.paidamount < 1) {
+                  return null; // Do not render anything
+                }
+
+                return (
+                  <TableBody>
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell className=" Table-cell text-center">
+                        Installment {index + 1}
+                      </TableCell>
+
+                      <TableCell className="Table-cell text-center">
+                        {dueDate}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {Number(
+                          parseFloat(item.dueamount).toFixed(2)
+                        ).toLocaleString("en-IN")}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {paidDate}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center  ">
+                        {Number(item.paidamount).toLocaleString("en-IN")}
+                      </TableCell>
+
+                      <TableCell className="Table-cell text-center">
+                        {item.modeofpayment}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {item.transactionid}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        <Link
+                          to={`/invoice/${id}/${index}/Installment/admininvoice`}
+                          style={{ width: "40px", paddingRight: "15px" }}
+                          className=" hover-container"
+                        >
+                          <CreditScoreIcon className="iconn" />
+                          <div class="hover-text">admin</div>
+                        </Link>
+                        <Link
+                          to={`/invoice/${id}/${index}/Installment/studentinvoice`}
+                          style={{ width: "40px" }}
+                          className=" hover-container"
+                        >
+                          <CreditScoreIcon className="iconn" />
+                          <div class="hover-text">Student</div>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                );
+              })}
+          </Table>
+        </TableContainer>
+        <h5 className="mt-3"> Extra Discount</h5>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell className="table-cell-heading">
+                  Date
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading">
+                  Extra Discount
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading">
+                  Remarks
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+            {studentdata.extra_discount &&
+              studentdata.extra_discount.map((item, index) => {
+                let date = new Date(item.date);
+                const day = date.getUTCDate();
+                const monthIndex = date.getUTCMonth();
+                const year = date.getUTCFullYear();
+
+                const monthAbbreviations = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+
+                // Formatting the date
+                date = `${day < 10 ? "0" : ""}${day}-${
+                  monthAbbreviations[monthIndex]
+                }-${year}`;
+
+                return (
+                  <TableBody>
+                    <StyledTableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <StyledTableCell className="Table-cell">
+                        {date}
+                      </StyledTableCell>
+                      <StyledTableCell className="Table-cell">
+                        {item.Discount}
+                      </StyledTableCell>
+
+                      <StyledTableCell className="Table-cell">
+                        {item.Discount_remarks}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  </TableBody>
+                );
+              })}
+          </Table>
+        </TableContainer>
+      </div>
+
       <div className="studentdataview ">
-        <div className="bg">
+        {/* <div className="bg">
           {!studentdata.studentImg && (
             <img className="photo" src={profilePic} alt="photo" />
           )}
@@ -125,13 +544,13 @@ const StudentDataView = () => {
           </div>
           <div className="col-4 text-start">
             <p>
-              {" "}
+             
               Validity :{ValidityStart} to {ValidityEnd}
             </p>
             <p> Registration No: {studentdata.registrationnumber}</p>
           </div>
           <div className="col-4 text-end">
-            {" "}
+           
             <p> Admission Date: {AdmissionDate} </p>
             <p> Admission Status: {studentdata.admissionstatus} </p>
           </div>
@@ -142,23 +561,23 @@ const StudentDataView = () => {
             <TableHead>
               <TableRow>
                 <TableCell className="fs-6 text-center border border-2">
-                  {" "}
+                 
                   Fee Type{" "}
                 </TableCell>
                 <TableCell className="fs-6 text-center border border-2">
-                  {" "}
+                 
                   Amount{" "}
                 </TableCell>
                 <TableCell className="fs-6 text-center border border-2">
-                  {" "}
+                 
                   Discount
                 </TableCell>
                 <TableCell className="fs-6 text-center border border-2">
-                  {" "}
+                 
                   Tax Amount (Inclusive of GST)
                 </TableCell>
                 <TableCell className="fs-6 text-center border border-2">
-                  {" "}
+                 
                   Total Amount
                 </TableCell>
               </TableRow>
@@ -171,7 +590,7 @@ const StudentDataView = () => {
                     key={index}
                   >
                     <TableCell className="text-center border border-2">
-                      {" "}
+                     
                       {item.feetype}
                     </TableCell>
                     <TableCell className="text-center border border-2">
@@ -223,7 +642,7 @@ const StudentDataView = () => {
             <TableHead>
               <TableRow>
                 <TableCell className=" fs-6 border border 1 text-center">
-                  {" "}
+                 
                   Installment
                 </TableCell>
                 <TableCell className=" fs-6 border border 1 text-center ">
@@ -247,7 +666,7 @@ const StudentDataView = () => {
                 </TableCell>
 
                 <TableCell className=" fs-6 border border 1 text-center  ">
-                  {" "}
+                 
                   Invoice
                 </TableCell>
               </TableRow>
@@ -406,9 +825,9 @@ const StudentDataView = () => {
                 );
               })}
           </Table>
-        </TableContainer>
+        </TableContainer> */}
       </div>
-    </>
+    </div>
   );
 };
 export default StudentDataView;
