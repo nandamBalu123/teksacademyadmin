@@ -185,71 +185,7 @@ const FeeView = () => {
       return updatedInstallments;
     });
   };
-  // const UpdateDueDateAndDueAmount = (index) => {
-  //  // Update state
-  //  const updatedInstallments = installments
 
-  //  // Now that state is updated, proceed with other actions
-  //  let nextduedate;
-  //  for (let i = 0; i < updatedInstallments.length; i++) {
-  //    if (updatedInstallments[i].paidamount < 1) {
-  //      nextduedate = updatedInstallments[i].duedate;
-  //      break;
-  //    }
-  //  }
-
-  //  // let totalpaidamount = 0;
-  //  // totalpaidamount = totalpaidamount + parseInt(admissionFee.admissionfee);
-  //  // for (let i = 0; i < updatedInstallments.length; i++) {
-  //  //   if (updateInstallments[i].paidamount) {
-  //  //     totalpaidamount =
-  //  //       totalpaidamount + parseInt(updateInstallments[i].paidamount);
-  //  //   }
-  //  // }
-
-  //  const updatedData = {
-  //    installments: updatedInstallments,
-  //   //  totalinstallments,
-  //   //  dueamount,
-  //   //  totalpaidamount,
-  //    nextduedate,
-  //  };
-
-  //  // console.log("updatedDataa", updatedData, updateContext);
-
-  //  const updateContext = {
-  //    installments: updatedInstallments,
-  //   //  totalinstallments,
-  //   //  dueamount,
-  //   //  totalpaidamount,
-  //    nextduedate,
-  //    id: studentdata.id,
-  //  };
-
-  //  console.log("updatedDataaa", updatedData, updateContext);
-
-  //  try {
-  //    const res = await axios.put(
-  //      `${process.env.REACT_APP_API_URL}/feeinstallments/${id}`,
-  //      updatedData
-  //    );
-
-  //    if (res.data.updated) {
-  //      alert("Fee Added");
-  //      dispatch({
-  //        type: "UPDATE_INSTALLMENTS",
-  //        payload: updateContext,
-  //      });
-  //      // navigator(`/feeview/${id}`);
-  //      // window.location.reload();
-  //    } else {
-  //      alert("Try Again");
-  //    }
-  //  } catch (error) {
-  //    console.error("Error updating data:", error);
-  //    // Handle errors here
-  //  }
-  // };
   const UpdateDueDateAndDueAmount = () => {
     // e.preventDefault();
 
@@ -288,7 +224,7 @@ const FeeView = () => {
 
       .then((res) => {
         if (res.data.updated) {
-          alert("Fee Added");
+          alert("Date and Amount Added");
           dispatch({
             type: "UPDATE_DUE_DATE_DUE_AMOUNT",
             payload: updateContext,
@@ -521,11 +457,64 @@ const FeeView = () => {
     marginLeft: "10px",
   };
   return (
-    <div>
-      {studentdata && <h4 className="pt-3"> {studentdata.name} Fee Details</h4>}
-      <div className="w-100">
+    <div className="container">
+      <div className="d-flex justify-content-between my-2">
+        {studentdata && (
+          <h4 className="pt-3"> {studentdata.name} Fee Details</h4>
+        )}
+        <span>
+          {studentdata && studentdata.installments[0] && (
+            <div>
+              <button
+                className="btn btn-warning"
+                variant="outlined"
+                onClick={handleClickOpen}
+              >
+                Extra Discount
+              </button>
+              {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
+          Open form dialog
+        </Button> */}
+              <Dialog open={open} onClose={handleClose}>
+                {/* <DialogTitle>DISCOUNT</DialogTitle> */}
+                <DialogContent>
+                  {/* <DialogContentText>
+              To subscribe to this website, please enter your email address here. We
+              will send updates occasionally.
+            </DialogContentText> */}
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    label="Discount"
+                    type="number"
+                    fullWidth
+                    variant="standard"
+                    onChange={(e) => setExtraDiscount(e.target.value)}
+                  />
+                  <DialogContentText>
+                    <textarea
+                      rows="3"
+                      cols="50"
+                      placeholder="Remarks"
+                      name="comment"
+                      form="usrform"
+                      onChange={(e) => setText(e.target.value)}
+                      value={text}
+                    ></textarea>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>Cancel</Button>
+                  <Button onClick={handleApplyDiscount}>Apply</Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+          )}{" "}
+        </span>
+      </div>
+      <div className="mb-3">
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
@@ -556,14 +545,14 @@ const FeeView = () => {
                     title={Number(studentdata.finaltotal).toLocaleString(
                       "en-IN"
                     )}
-                    style={{
-                      width: "2.5rem",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      fontSize: "13px",
-                      display: "block",
-                    }}
+                    // style={{
+                    //   width: "2.5rem",
+                    //   whiteSpace: "nowrap",
+                    //   overflow: "hidden",
+                    //   textOverflow: "ellipsis",
+                    //   fontSize: "13px",
+                    //   display: "block",
+                    // }}
                   >
                     {Number(studentdata.finaltotal).toLocaleString("en-IN")}
                   </span>
@@ -574,14 +563,14 @@ const FeeView = () => {
                     title={Number(studentdata.totalpaidamount).toLocaleString(
                       "en-IN"
                     )}
-                    style={{
-                      width: "2.5rem",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      fontSize: "13px",
-                      display: "block",
-                    }}
+                    // style={{
+                    //   width: "2.5rem",
+                    //   whiteSpace: "nowrap",
+                    //   overflow: "hidden",
+                    //   textOverflow: "ellipsis",
+                    //   fontSize: "13px",
+                    //   display: "block",
+                    // }}
                   >
                     {Number(studentdata.totalpaidamount).toLocaleString(
                       "en-IN"
@@ -594,14 +583,14 @@ const FeeView = () => {
                     title={Number(studentdata.dueamount).toLocaleString(
                       "en-IN"
                     )}
-                    style={{
-                      width: "2.5rem",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      fontSize: "13px",
-                      display: "block",
-                    }}
+                    // style={{
+                    //   width: "2.5rem",
+                    //   whiteSpace: "nowrap",
+                    //   overflow: "hidden",
+                    //   textOverflow: "ellipsis",
+                    //   fontSize: "13px",
+                    //   display: "block",
+                    // }}
                   >
                     {Number(studentdata.dueamount).toLocaleString("en-IN")}
                   </span>
@@ -611,15 +600,15 @@ const FeeView = () => {
 
                 <TableCell className="border border 1">
                   <span
-                    // title={studentdata.totalpaidamount}
-                    style={{
-                      width: "2.5rem",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      fontSize: "13px",
-                      display: "block",
-                    }}
+                  // title={studentdata.totalpaidamount}
+                  // style={{
+                  //   width: "2.5rem",
+                  //   whiteSpace: "nowrap",
+                  //   overflow: "hidden",
+                  //   textOverflow: "ellipsis",
+                  //   fontSize: "13px",
+                  //   display: "block",
+                  // }}
                   >
                     {extra_discount_view && (
                       <>{Number(extra_discount_view).toLocaleString("en-IN")}</>
@@ -651,54 +640,8 @@ const FeeView = () => {
           </Table>
         </TableContainer>
       </div>
-
-      {studentdata && studentdata.installments[0] && (
-        <div className="col-6 col-md-2 col-lg-2 col-xl-2 my-2 ">
-          <button
-            className="btn btn-warning"
-            variant="outlined"
-            onClick={handleClickOpen}
-          >
-            Extra Discount
-          </button>
-          {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
-          Open form dialog
-        </Button> */}
-          <Dialog open={open} onClose={handleClose}>
-            {/* <DialogTitle>DISCOUNT</DialogTitle> */}
-            <DialogContent>
-              {/* <DialogContentText>
-              To subscribe to this website, please enter your email address here. We
-              will send updates occasionally.
-            </DialogContentText> */}
-              <TextField
-                autoFocus
-                margin="dense"
-                label="Discount"
-                type="number"
-                fullWidth
-                variant="standard"
-                onChange={(e) => setExtraDiscount(e.target.value)}
-              />
-              <DialogContentText>
-                <textarea
-                  rows="3"
-                  cols="50"
-                  placeholder="Remarks"
-                  name="comment"
-                  form="usrform"
-                  onChange={(e) => setText(e.target.value)}
-                  value={text}
-                ></textarea>
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={handleApplyDiscount}>Apply</Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-      )}
+      <h4> Collect Fee</h4>
+      <hr className="mb-2 w-75" />
       {/* admission fee payment */}
       {studentdata && !studentdata.initialpayment[0] && (
         <div>
@@ -803,12 +746,13 @@ const FeeView = () => {
                   className=" btn btn-primary "
                   onClick={handleNoOfInstallments}
                 >
-                  Add Installments
+                  Add No. of Installments
                 </button>
               </div>
             </div>
           </div>
         )}
+
       {/* installments payment */}
       <div>
         {studentdata &&
@@ -819,12 +763,12 @@ const FeeView = () => {
             }
             return (
               <div className="installment" key={index}>
-                <h3>
+                <h5 className="mt-1 ms-2">
                   Installment {installment.installmentNumber}
                   {installment.subInstallmentNumber != 0 && (
                     <>/ {installment.subInstallmentNumber}</>
                   )}
-                </h3>
+                </h5>
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
                     <input
