@@ -723,113 +723,100 @@ const StudentData = () => {
 
   </tbody>
 </table> */}
-       <div className="student-table"> 
-       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell className="bg-primary fs-6 border border 1 text-center  text-light  ">
-                    SNo
-                  </StyledTableCell>
-                  <StyledTableCell
-                    className="  bg-primary fs-6 border border 1 text-center text-light "
-                    align="left"
-                  >
-                    Student Name <br /> Registration No
-                  </StyledTableCell>
-                  <StyledTableCell
-                    className="  bg-primary fs-6 border border 1 text-center text-light "
-                    align="left"
-                  >
-                    Branch <br />
-                    Course
-                  </StyledTableCell>
+        <div className="student-table">
+          <Paper sx={{ width: "100%", overflow: "hidden" }}>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center  text-light  ">
+                      SNo
+                    </StyledTableCell>
+                    <StyledTableCell
+                      className="  bg-primary fs-6 border border 1 text-center text-light "
+                      align="left"
+                    >
+                      Student Name <br /> Registration No
+                    </StyledTableCell>
+                    <StyledTableCell
+                      className="  bg-primary fs-6 border border 1 text-center text-light "
+                      align="left"
+                    >
+                      Branch <br />
+                      Course
+                    </StyledTableCell>
 
-                  <StyledTableCell
-                    className="bg-primary fs-6 border border 1 text-center text-light"
-                    align="left"
-                  >
-                    Counsellor
-                    <br /> Source
-                  </StyledTableCell>
+                    <StyledTableCell
+                      className="bg-primary fs-6 border border 1 text-center text-light"
+                      align="left"
+                    >
+                      Counsellor
+                      <br /> Source
+                    </StyledTableCell>
 
-                  <StyledTableCell
-                    className="bg-primary fs-6 border border 1 text-center text-light "
-                    align="left"
-                  >
-                    Contact Number <br />
-                    Email
-                  </StyledTableCell>
+                    <StyledTableCell
+                      className="bg-primary fs-6 border border 1 text-center text-light "
+                      align="left"
+                    >
+                      Contact Number <br />
+                      Email
+                    </StyledTableCell>
 
-                  <StyledTableCell
-                    className="bg-primary fs-6 border border 1 text-center text-light "
-                    align="left"
-                  >
-                    Joining Date <br />
-                    Training Mode
-                  </StyledTableCell>
+                    <StyledTableCell
+                      className="bg-primary fs-6 border border 1 text-center text-light "
+                      align="left"
+                    >
+                      Joining Date <br />
+                      Training Mode
+                    </StyledTableCell>
 
-                  <StyledTableCell
-                    className="bg-primary fs-6 border border 1 text-center text-light"
-                    align="left"
-                  >
-                    Actions
-                  </StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Array.isArray(records) && records.length > 0 ? (
-                  records.map((item, index) => {
-                    let date = new Date(item.admissiondate );
-                    const day = date.getUTCDate();
-                    const monthIndex = date.getUTCMonth();
-                    const year = date.getUTCFullYear();
+                    <StyledTableCell
+                      className="bg-primary fs-6 border border 1 text-center text-light"
+                      align="left"
+                    >
+                      Actions
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Array.isArray(records) && records.length > 0 ? (
+                    records.map((item, index) => {
+                      let date = new Date(item.admissiondate);
+                      const day = date.getUTCDate();
+                      const monthIndex = date.getUTCMonth();
+                      const year = date.getUTCFullYear();
 
-                    const monthAbbreviations = [
-                      "Jan",
-                      "Feb",
-                      "Mar",
-                      "Apr",
-                      "May",
-                      "Jun",
-                      "Jul",
-                      "Aug",
-                      "Sep",
-                      "Oct",
-                      "Nov",
-                      "Dec",
-                    ];
+                      const monthAbbreviations = [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec",
+                      ];
 
-                    // Formatting the date
-                    date = `${day < 10 ? "0" : ""}${day}-${
-                      monthAbbreviations[monthIndex]
-                    }-${year}`;
+                      // Formatting the date
+                      date = `${day < 10 ? "0" : ""}${day}-${
+                        monthAbbreviations[monthIndex]
+                      }-${year}`;
 
-                    // Updating the state with the formatted date
+                      // Updating the state with the formatted date
 
-                    return (
-                      <TableRow key={item.id}>
-                        <StyledTableCell className=" border border 2 text-center p-0 m-0">
-                          {index + 1}
-                        </StyledTableCell>
+                      return (
+                        <TableRow key={item.id}>
+                          <StyledTableCell className=" border border 2 text-center p-0 m-0">
+                            {index + 1}
+                          </StyledTableCell>
 
-                        <StyledTableCell className=" border border 1 text-center p-0 m-0">
-                          <span
-                            title={item.name}
-                            style={{
-                              width: "250px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              paddingLeft: "10px",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {item.name}
+                          <StyledTableCell className=" border border 1 text-center p-0 m-0">
                             <span
-                              title={item.registrationnumber}
+                              title={item.name}
                               style={{
                                 width: "250px",
                                 whiteSpace: "nowrap",
@@ -840,114 +827,135 @@ const StudentData = () => {
                                 display: "block",
                               }}
                             >
-                              {" "}
-                              {item.registrationnumber}
+                              {item.name}
+                              <span
+                                title={item.registrationnumber}
+                                style={{
+                                  width: "250px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  paddingLeft: "10px",
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {" "}
+                                {item.registrationnumber}
+                              </span>
                             </span>
-                          </span>
-                        </StyledTableCell>
+                          </StyledTableCell>
 
-                        <StyledTableCell
-                          align="left"
-                          className=" border border 1 text-center p-0 m-0"
-                        >
-                          <span
-                            title={item.branch}
-                            style={{
-                              width: "100px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
+                          <StyledTableCell
+                            align="left"
+                            className=" border border 1 text-center p-0 m-0"
                           >
-                            {item.branch}
-                            <br />
                             <span
-                              title={item.courses}
+                              title={item.branch}
                               style={{
                                 width: "100px",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
-
                                 textOverflow: "ellipsis",
                                 fontSize: "15px",
                                 display: "block",
                               }}
                             >
-                              {" "}
-                              {item.courses}
+                              {item.branch}
+                              <br />
+                              <span
+                                title={item.courses}
+                                style={{
+                                  width: "100px",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+
+                                  textOverflow: "ellipsis",
+                                  fontSize: "15px",
+                                  display: "block",
+                                }}
+                              >
+                                {" "}
+                                {item.courses}
+                              </span>
                             </span>
-                          </span>
-                        </StyledTableCell>
+                          </StyledTableCell>
 
-                        <StyledTableCell className=" border border 1 text-center p-0 m-0">
-                          <span
-                            style={{
-                              width: "100px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              paddingLeft: "10px",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {item.enquirytakenby}
-                            <br />
+                          <StyledTableCell className=" border border 1 text-center p-0 m-0">
+                            <span
+                              style={{
+                                width: "100px",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                paddingLeft: "10px",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.enquirytakenby}
+                              <br />
 
-                            {item.leadsource}
-                          </span>
-                        </StyledTableCell>
+                              {item.leadsource}
+                            </span>
+                          </StyledTableCell>
 
-                        <StyledTableCell className=" border border 1 text-center p-0 m-0 ">
-                          <span
-                            style={{
-                              width: "150px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {item.mobilenumber}
-                            <br />
-                            {item.email}
-                          </span>
-                        </StyledTableCell>
+                          <StyledTableCell className=" border border 1 text-center p-0 m-0 ">
+                            <span
+                              style={{
+                                width: "150px",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.mobilenumber}
+                              <br />
+                              {item.email}
+                            </span>
+                          </StyledTableCell>
 
-                        <StyledTableCell className=" border border 1 text-center p-0 m-0">
-                          <span
-                            style={{
-                              width: "150px",
-                              whiteSpace: "nowrap",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              fontSize: "15px",
-                              display: "block",
-                            }}
-                          >
-                            {date ? date : "No Date"} <br />
-                            {item.modeoftraining}
-                          </span>
-                        </StyledTableCell>
+                          <StyledTableCell className=" border border 1 text-center p-0 m-0">
+                            <span
+                              style={{
+                                width: "150px",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {date ? date : "No Date"} <br />
+                              {item.modeoftraining}
+                            </span>
+                          </StyledTableCell>
 
-                        <StyledTableCell className=" text-center d-flex py-4 ">
-                          <Link
-                            to={`/studentdataview/${item.id}`}
-                            style={{ width: "40px" }}
-                          >
-                            <VisibilityIcon className="iconn" />
-                          </Link>
+                          <StyledTableCell className=" text-center d-flex py-4 ">
+                            <Link
+                              to={`/studentdataview/${item.id}`}
+                              style={{ width: "40px" }}
+                            >
+                              <VisibilityIcon className="iconn" />
+                            </Link>
 
-                          <Link
-                            to={`/editstudent/${item.id}`}
-                            style={{ width: "40px" }}
-                          >
-                            <EditIcon className="iconn" />
-                          </Link>
-                          {item.addfee == 1 && (
+                            <Link
+                              to={`/editstudent/${item.id}`}
+                              style={{ width: "40px" }}
+                            >
+                              <EditIcon className="iconn" />
+                            </Link>
+
+                            <Link
+                              to={`/feeview/${item.id}`}
+                              style={{ width: "40px" }}
+                            >
+                              <CurrencyRupeeIcon className="iconn" />
+                            </Link>
+
+                            {/* {item.addfee == 1 && (
                             <Link
                               to={`/feeview/${item.id}`}
                               style={{ width: "40px" }}
@@ -962,65 +970,65 @@ const StudentData = () => {
                             >
                               <AddIcon className="iconn" />
                             </Link>
-                          )}
+                          )} */}
 
-                          <Link
-                            to={`/studentApplicationprint/${item.id}`}
-                            style={{ width: "40px" }}
-                          >
-                            <PrintIcon className="iconn" />
-                          </Link>
+                            <Link
+                              to={`/studentApplicationprint/${item.id}`}
+                              style={{ width: "40px" }}
+                            >
+                              <PrintIcon className="iconn" />
+                            </Link>
 
-                          <div className="form-check form-switch">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              role="switch"
-                              id="flexSwitchCheckChecked"
-                              checked={isChecked}
-                              onChange={handleClickOpen}
-                            />
-                          </div>
+                            <div className="form-check form-switch">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                role="switch"
+                                id="flexSwitchCheckChecked"
+                                checked={isChecked}
+                                onChange={handleClickOpen}
+                              />
+                            </div>
 
-                          <Dialog open={opening} onClose={handleClosed}>
-                            <DialogContent>
-                              <DialogContentText>
-                                <label> Enter Remarks :</label>
-                              </DialogContentText>
-                              <DialogContentText>
-                                <textarea
-                                  rows="4"
-                                  cols="50"
-                                  name="comment"
-                                  form="usrform"
-                                ></textarea>
-                              </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                              <Button onClick={handleClosed}>Cancel</Button>
-                              {!isChecked && (
-                                <Button onClick={handleok}>Activate</Button>
-                              )}
+                            <Dialog open={opening} onClose={handleClosed}>
+                              <DialogContent>
+                                <DialogContentText>
+                                  <label> Enter Remarks :</label>
+                                </DialogContentText>
+                                <DialogContentText>
+                                  <textarea
+                                    rows="4"
+                                    cols="50"
+                                    name="comment"
+                                    form="usrform"
+                                  ></textarea>
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions>
+                                <Button onClick={handleClosed}>Cancel</Button>
+                                {!isChecked && (
+                                  <Button onClick={handleok}>Activate</Button>
+                                )}
 
-                              {isChecked && (
-                                <Button onClick={handleok}>InActivate</Button>
-                              )}
-                            </DialogActions>
-                          </Dialog>
-                        </StyledTableCell>
-                      </TableRow>
-                    );
-                  })
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={3}>No data available</TableCell>
-                  </TableRow>
-                )}{" "}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-       </div>
+                                {isChecked && (
+                                  <Button onClick={handleok}>InActivate</Button>
+                                )}
+                              </DialogActions>
+                            </Dialog>
+                          </StyledTableCell>
+                        </TableRow>
+                      );
+                    })
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={3}>No data available</TableCell>
+                    </TableRow>
+                  )}{" "}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </div>
 
         <div
           style={{ display: "flex", justifyContent: "center" }}

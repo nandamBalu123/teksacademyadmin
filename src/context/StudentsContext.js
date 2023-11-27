@@ -116,6 +116,83 @@ export const StudentsReducer = (state, action) => {
       return {
         students: updatedAddToFee,
       };
+    case "UPDATE_ADMISSIONFEE":
+      // Find the index of the user to be updated in the current state
+      let updatedAdmissionFeeStudentIndex = state.students.findIndex(
+        (user) => user.id === action.payload.id
+      );
+
+      if (updatedAdmissionFeeStudentIndex === -1) {
+        // User not found, no update needed
+        return state;
+      }
+
+      // Create a copy of the users array with the updated user
+
+      let updatedAdmissionFee = [...state.students];
+      updatedAdmissionFee[updatedAdmissionFeeStudentIndex].dueamount =
+        action.payload.dueamount;
+      updatedAdmissionFee[updatedAdmissionFeeStudentIndex].initialpayment =
+        action.payload.initialpayment;
+      updatedAdmissionFee[updatedAdmissionFeeStudentIndex].totalpaidamount =
+        action.payload.totalpaidamount;
+
+      return {
+        students: updatedAdmissionFee,
+      };
+    case "UPDATE_NO_OF_INSTALLMENTS":
+      // Find the index of the user to be updated in the current state
+      let updatednoOfInstallmentsStudentIndex = state.students.findIndex(
+        (user) => user.id === action.payload.id
+      );
+      // Find the index of the user to be updated in the current state
+
+      if (updatednoOfInstallmentsStudentIndex === -1) {
+        // User not found, no update needed
+        return state;
+      }
+
+      // Create a copy of the users array with the updated user
+
+      let updatednoOfInstallments = [...state.students];
+
+      updatednoOfInstallments[
+        updatednoOfInstallmentsStudentIndex
+      ].totalinstallments = action.payload.totalinstallments;
+      updatednoOfInstallments[updatednoOfInstallmentsStudentIndex].addfee =
+        action.payload.addfee;
+      updatednoOfInstallments[
+        updatednoOfInstallmentsStudentIndex
+      ].installments = action.payload.installments;
+
+      return {
+        students: updatednoOfInstallments,
+      };
+    case "UPDATE_DUE_DATE_DUE_AMOUNT":
+      // Find the index of the user to be updated in the current state
+      let updated_dueDate_dueAmount_StudentIndex = state.students.findIndex(
+        (user) => user.id === action.payload.id
+      );
+      // Find the index of the user to be updated in the current state
+
+      if (updated_dueDate_dueAmount_StudentIndex === -1) {
+        // User not found, no update needed
+        return state;
+      }
+
+      // Create a copy of the users array with the updated user
+
+      let updated_duedate_dueamount = [...state.students];
+
+      updated_duedate_dueamount[
+        updated_dueDate_dueAmount_StudentIndex
+      ].installments = action.payload.installments;
+      updated_duedate_dueamount[
+        updated_dueDate_dueAmount_StudentIndex
+      ].nextduedate = action.payload.nextduedate;
+      return {
+        students: updated_duedate_dueamount,
+      };
 
     case "UPDATE_CERTIFICATE_STATUS":
       // Find the index of the user to be updated in the current state

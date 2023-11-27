@@ -6,9 +6,9 @@ import axios from "axios";
 const Report = () => {
   const { id } = useParams();
   const [data, setData] = useState([
-    { reportName: "BranchWiseData" },
-    { reportName: "CourseWiseData" },
-    { reportName: "CounsellorWiseData" },
+    { reportName: "BranchWise Data" },
+    { reportName: "CourseWise Data" },
+    { reportName: "CounsellorWise Data" },
   ]);
   useEffect(() => {
     axios

@@ -14,9 +14,9 @@ const Reports = () => {
   const [newReportName, setNewReportName] = useState();
 
   const [data, setData] = useState([
-    { reportName: "BranchWiseData" },
-    { reportName: "CourseWiseData" },
-    { reportName: "CounsellorWiseData" },
+    { reportName: "BranchWise Data" },
+    { reportName: "CourseWise Data" },
+    { reportName: "CounsellorWise Data" },
   ]);
   useEffect(() => {
     axios
@@ -54,6 +54,7 @@ const Reports = () => {
     <div className="container mt-3">
       <div className="reports">
         <h4 className=" mt-3 text-center">Reports</h4>
+        <Link to={`/report/create`}>Create Report</Link>
         <button onClick={handleCreateReport}>Create Report</button>
         <input
           value={newReportName}

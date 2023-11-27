@@ -48,7 +48,7 @@ import StudentApplicationPrint from "./components/pages/student/studentData/Stud
 import FeeDetails from "./components/pages/student/fee/FeeDetails";
 import Feefollowup from "./components/pages/student/fee/Feefollowup";
 import FeeView from "./components/pages/student/fee/FeeView";
-import Addtofee from "./components/pages/student/fee/Addtofee";
+// import Addtofee from "./components/pages/student/fee/Addtofee";
 import EditStudentForm from "./components/pages/student/studentData/EditStudentForm";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useEffect } from "react";
@@ -69,6 +69,7 @@ import Invoice from "./components/pages/student/fee/Invoice";
 import ZipCodeLookup from "./components/pages/student/studentRegistrationForm/Zipcode";
 import Reports from "./components/pages/Reports/Reports";
 import Report from "./components/pages/Reports/Report";
+import CreateReport from "./components/pages/Reports/CreateReport";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -140,10 +141,10 @@ function App() {
                   path="/invoice/:id/:index/:name/:nametype"
                   element={user ? <Invoice /> : <Dashboard />}
                 />
-                <Route
+                {/* <Route
                   path="/addtofee/:id"
                   element={user ? <Addtofee /> : <Dashboard />}
-                />
+                /> */}
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
                   path="/studentdataview/:id"
@@ -457,6 +458,16 @@ function App() {
                   path="/report/:id"
                   element={
                     user && user.profile == "admin" ? <Report /> : <Dashboard />
+                  }
+                ></Route>
+                <Route
+                  path="/report/create"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <CreateReport />
+                    ) : (
+                      <Dashboard />
+                    )
                   }
                 ></Route>
               </Routes>

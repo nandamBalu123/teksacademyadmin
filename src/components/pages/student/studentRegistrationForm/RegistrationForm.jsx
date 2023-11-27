@@ -351,6 +351,10 @@ export default function RegistrationForm() {
     }
     if (admissiondate) {
       setRegistrationNumber("TA" + firstbranch + DD + month + year + serialno);
+// do{}
+// while()
+
+     
     }
   }, [admissiondate, branch]);
 
