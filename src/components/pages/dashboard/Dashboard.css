@@ -14,26 +14,36 @@
     background-color:#e6acb4 ;
     text-align: center; 
 } */
-.progreebar{ 
-    width: 95%;
-    margin: auto;
-    background-color: white;
-    
+.progreebar {
+  width: 95%;
+  margin: auto;
+  background-color: white;
 }
-.enrollment{ 
-    width: 92%;
-   }
-.Dashboard{ 
-    overflow-x: hidden;
-    margin: auto;
-    width: 96%;
+.dashboard-enrollments,
+.dashboard-fee {
+  width: 99%;
+  border: 2px solid #f5f5f5;
+  border-radius: 8px;
+  margin: auto;
+  overflow: hidden;
 }
-.progreebar-show{ 
-    width: 93%;
-    margin: auto;
+.enrollment {
+  width: 92%;
 }
-.main-dashboard{ 
-    overflow: hidden;
+.Dashboard {
+  overflow-x: hidden;
+  margin: auto;
+  width: 96%;
+}
+.progreebar-show {
+  width: 93%;
+  margin: auto;
+}
+.main-dashboard {
+  overflow: hidden;
+}
+.css-17w9904-MuiTypography-root {
+  font-size: 1rem !important;
 }
 /* @media (min-width: 576px) { 
  .dashboardcard{ 

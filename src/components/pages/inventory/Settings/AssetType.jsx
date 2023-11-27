@@ -12,10 +12,13 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import axios from "axios";
+import "./AssetType.css";
 
 export default function AssetType() {
   const navigate = useNavigate();
@@ -121,109 +124,115 @@ export default function AssetType() {
   };
   return (
     <div className="container">
-      <div className="flex mt-3">
-        <p className="fs-5 ms-3">Asset Type</p>
-        <React.Fragment>
-          <button
-            onClick={handleClickOpen}
-            type="submit"
-            className="btn btn-primary mr-20 ms-2"
-          >
-            Add Asset Type
-          </button>
+      <div className="Assettype mt-3">
+        <div className="flex my-3">
+          <h4 className="ms-3"> Asset Type</h4>
+          <React.Fragment>
+            <button
+              onClick={handleClickOpen}
+              type="submit"
+              className="btn btn-primary me-3 "
+            >
+              Add Asset Type
+            </button>
 
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Add Asset Type</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                label="Asset Type"
-                type="text"
-                fullWidth
-                variant="standard"
-                value={newAssettype}
-                onChange={(e) => setNewAssettype(e.target.value)}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={handlesubmit}>submit</Button>
-            </DialogActions>
-          </Dialog>
-          <Dialog open={editopen} onClose={handleeditClose}>
-            <DialogTitle>Edit Vendor Name</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                label="Asset Name"
-                type="text"
-                fullWidth
-                variant="standard"
-                value={newAssettype}
-                onChange={(e) => setNewAssettype(e.target.value)}
-                // autoFocus
-                // label="Vendor Name"
-                // type="text"
-                // fullWidth
-                // variant="standard"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleeditClose}>Cancel</Button>
-              <Button onClick={SubmithandleEdit}>Update</Button>
-            </DialogActions>
-          </Dialog>
-        </React.Fragment>
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Add Asset Type</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  label="Asset Type"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={newAssettype}
+                  onChange={(e) => setNewAssettype(e.target.value)}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handlesubmit}>submit</Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog open={editopen} onClose={handleeditClose}>
+              <DialogTitle>Edit Vendor Name</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  label="Asset Name"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  value={newAssettype}
+                  onChange={(e) => setNewAssettype(e.target.value)}
+                  // autoFocus
+                  // label="Vendor Name"
+                  // type="text"
+                  // fullWidth
+                  // variant="standard"
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleeditClose}>Cancel</Button>
+                <Button onClick={SubmithandleEdit}>Update</Button>
+              </DialogActions>
+            </Dialog>
+          </React.Fragment>
 
-        {/* <button
+          {/* <button
           type="submit"
           className="btn btn-primary mr-20 ms-2 mb-2">
           Add Asset Type
         </button> */}
-      </div>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
-                SI.NO
-              </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
-                Name
-              </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
-                Actions
-              </StyledTableCell>
-              {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
-            </TableRow>
-          </TableHead>
+        </div>
+        <TableContainer component={Paper} className="mb-3">
+          <Table stickyHeader aria-label="sticky table " borderAxis="both">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  SI.NO
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Name
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Actions
+                </StyledTableCell>
+                {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
+              </TableRow>
+            </TableHead>
 
-          {assettype &&
-            assettype.map((element, index) => (
-              <StyledTableRow key={index}>
-                <StyledTableCell className="border border 1 text-center">
-                  {index + 1}
-                </StyledTableCell>
-                <StyledTableCell className="border border 1 text-center">
-                  {element}
-                </StyledTableCell>
-                <StyledTableCell className="border border 1 text-center">
-                  <button onClick={(e) => handleDelete(index)}>delete</button>
-                  <button onClick={(e) => handleEdit(index)}>edit</button>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-        </Table>
-      </TableContainer>
+            {assettype &&
+              assettype.map((element, index) => (
+                <StyledTableRow key={index}>
+                  <StyledTableCell
+                    className="Table-cell text-center"
+                    style={{ fontSize: "15px" }}
+                  >
+                    {index + 1}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    className="Table-cell text-center"
+                    style={{ fontSize: "15px" }}
+                  >
+                    {element}
+                  </StyledTableCell>
+                  <StyledTableCell className="Table-cell text-center">
+                    <ModeEditIcon
+                      onClick={(e) => handleEdit(index)}
+                      className="text-primary"
+                    />
+                    <DeleteOutlineIcon
+                      onClick={(e) => handleDelete(index)}
+                      className="text-danger ms-2"
+                    />
+                    {/* <button onClick={(e) => handleDelete(index)} >delete</button> */}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 }

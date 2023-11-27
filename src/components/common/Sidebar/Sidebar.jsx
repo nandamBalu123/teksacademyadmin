@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Sidebar.css";
 import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, IconButton, Tooltip, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../theme";
@@ -31,23 +31,25 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import StorageIcon from "@mui/icons-material/Storage";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import StackedBarChartIcon from '@mui/icons-material/StackedBarChart';
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import StackedBarChartIcon from "@mui/icons-material/StackedBarChart";
 import profilelogo from "../../../images/Teks-Logo-with-Trade.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import favicon from "../../../images/favicon.jpeg";
 import axios from "axios";
 
 import { useAuthContext } from "../../../hooks/useAuthContext";
+import { hover } from "@testing-library/user-event/dist/hover";
 // let role = localStorage.getItem(role);
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+const Item = ({ title, to, icon, selected, setSelected, tooltip }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   return (
     <MenuItem
       active={selected === title}
+      hover={selected === tooltip}
       style={
         {
           // background: selected === title ? "blue !important": "black !important",
@@ -122,10 +124,10 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (screenSize < 720) {
-      setIsCollapsed(true);
+      setIsCollapsed(false);
     }
     if (screenSize > 721) {
-      setIsCollapsed(false);
+      setIsCollapsed(true);
     }
   }, []);
 
@@ -159,17 +161,17 @@ const Sidebar = () => {
           letterSpacing: "0.6px",
         }}
       >
-        <ProSidebar collapsed={isCollapsed} style={{ height: "100vh" }}>
+        <ProSidebar collapsed={!isCollapsed} style={{ height: "100vh" }}>
           <Menu iconShape="square">
             {/* LOGO AND MENU ICON */}
             <MenuItem
               onClick={() => setIsCollapsed(!isCollapsed)}
-              icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+              icon={!isCollapsed ? <MenuOutlinedIcon /> : undefined}
               style={{
-                margin: "10px 8px 10px 5px",
+                margin: "10px 8px 10px 15px",
               }}
             >
-              {!isCollapsed && (
+              {isCollapsed && (
                 <Box
                   display="flex"
                   justifyContent="space-between"
@@ -185,9 +187,8 @@ const Sidebar = () => {
                   >
                     <img className="profilelogo" src={profilelogo} />
                   </Typography>
-                  <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <MenuIcon />
-                  </IconButton>
+
+                  <CloseIcon onClick={() => setIsCollapsed(!isCollapsed)} />
                 </Box>
               )}
             </MenuItem>
@@ -232,7 +233,9 @@ const Sidebar = () => {
                 to="/"
                 selected={selected}
                 setSelected={setSelected}
-              ></Item>
+              >
+                {" "}
+              </Item>
               <hr />
               {/* <Item
                 title="Dashboard"
@@ -242,7 +245,42 @@ const Sidebar = () => {
                 setSelected={setSelected}
                 style={{ color: "black" }}
               /> */}
-              {profile == "admin" ? (
+
+              {profile === "admin" ? (
+                <div>
+                  <div title="User Management">
+                    <SubMenu
+                      style={{
+                        color: colors.grey[100],
+                      }}
+                      icon={<GroupsIcon />}
+                      label={"User Details"}
+                      title={"User Management"}
+                    >
+                      <div title="Create user">
+                        <Item
+                          title="Create User"
+                          to="/createuser"
+                          icon={<PersonAddIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                      <div title="User Details">
+                        <Item
+                          title="User Details"
+                          to="/usersdata"
+                          icon={<GroupIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                    </SubMenu>
+                  </div>
+                  <hr title="Separator Tooltip" />
+                </div>
+              ) : undefined}
+              {/* {profile == "admin" ? (
                 <SubMenu
                   style={{
                     color: colors.grey[100],
@@ -253,6 +291,7 @@ const Sidebar = () => {
                 >
                   <Item
                     title="Create User"
+                   
                     to="/createuser"
                     icon={<PersonAddIcon />}
                     selected={selected}
@@ -268,7 +307,7 @@ const Sidebar = () => {
                   />
                 </SubMenu>
               ) : undefined}
-              <hr />
+              <hr /> */}
 
               <SubMenu
                 style={{
@@ -279,16 +318,17 @@ const Sidebar = () => {
                 title={"Student Managem..."}
               >
                 <Item
-                  title="Student Details"
-                  to="/studentdata"
-                  icon={<PeopleOutlineIcon />}
+                  title="Registration Form"
+                  to="/registrationform"
+                  icon={<FeedIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
                 <Item
-                  title="Registration Form"
-                  to="/registrationform"
-                  icon={<FeedIcon />}
+                  className="dashboard-item"
+                  title="Enrolled Students"
+                  to="/studentdata"
+                  icon={<PeopleOutlineIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
@@ -324,6 +364,7 @@ const Sidebar = () => {
                 <SubMenu
                   style={{
                     // color: colors.grey[100],
+
                     color: "black",
                   }}
                   icon={<StorageIcon />}
@@ -345,31 +386,32 @@ const Sidebar = () => {
                     setSelected={setSelected}
                   />
                   <SubMenu
-                  style={{
-                    // color: colors.grey[100],
-                    color: "black",
-                  }}
-                  icon={<SettingsIcon/>}
-                  label={"Settings"}
-                  title={"Settings"}
-                >
-                  <Item
-                    title="Add Assets Type"
-                    to="/assettype"
-                    icon={<InventoryIcon/>}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  <Item
-                    title="Add Vendor"
-                    to="/vendor"
-                    icon={<InventoryIcon/>}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                </SubMenu>
+                    style={{
+                      // color: colors.grey[100],
+                      color: "black",
+                    }}
+                    icon={<SettingsIcon />}
+                    label={"Settings"}
+                    title={"Settings"}
+                  >
+                    <Item
+                      title="Add Assets Type"
+                      to="/assettype"
+                      icon={<InventoryIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                    <Item
+                      title="Add Vendor"
+                      to="/vendor"
+                      icon={<InventoryIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  </SubMenu>
                 </SubMenu>
               ) : undefined}
+
               <hr />
               {/* end */}
               {/* reports start */}
@@ -379,7 +421,7 @@ const Sidebar = () => {
                     // color: colors.grey[100],
                     color: "black",
                   }}
-                  icon={<AssessmentIcon/>}
+                  icon={<AssessmentIcon />}
                   label={"Reports"}
                   title={"Reports"}
                 >
@@ -390,12 +432,9 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                 
-                 
-                  
                 </SubMenu>
               ) : undefined}
-              <hr/>
+              <hr />
               {/* Settings start */}
               {profile == "admin" ? (
                 <SubMenu

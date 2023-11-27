@@ -2,11 +2,10 @@
   /* background-color: brown; */
   width: 100%;
   position: relative;
-
 }
 .main-sub-container {
   width: 100%;
-  margin-left: 2em;
+  /* padding-left: 30px; */
   /* background-color: aqua; */
 }
 @media (max-width: 1320px) {
@@ -44,9 +43,7 @@ label {
   font-size: large;
 }
 
-.row {
-  margin-top: 20px;
-}
+
 StepLabel {
   font-size: xx-large;
 }
@@ -71,10 +68,9 @@ StepLabel {
   background-color: white;
   border: 1px solid whitesmoke;
   margin: 0;
-
+  padding-left: 30px;
   border-radius: 30px;
 }
-
 
 /* table,th,td{ 
   border: 1px solid black;
@@ -105,7 +101,6 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   display: none;
 } */
-
 
 .popup {
   display: none;
@@ -141,7 +136,6 @@ input::-webkit-inner-spin-button {
   border: none;
   background: none;
 }
-.pop-img{ 
+.pop-img {
   width: 75%;
-
 }

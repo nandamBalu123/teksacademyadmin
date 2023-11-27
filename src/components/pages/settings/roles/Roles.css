@@ -1,8 +1,10 @@
-th{ 
-    background-color: blue;
+.flex {
+  display: flex;
+  justify-content: space-between;
 }
-.flex{ 
-    display: flex;
-    justify-content: space-around;
-    
+.roles {
+  border: 2px solid #f5f5f5;
+  border-radius: 8px;
+  margin: auto;
+  overflow: hidden;
 }

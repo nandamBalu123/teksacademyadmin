@@ -1,17 +1,13 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-.main-edituser-container {
-  margin-top: 30px;
+.addassetsform {
   padding-left: 30px;
   background-color: #fcfcfc;
   width: 99%;
   border: 2px solid #f5f5f5;
-  border-radius: 20px;
+  border-radius: 8px;
   margin: auto;
-}
-.sub-edituser-container {
-  /* text-align: center; */
-  margin: 0 auto;
 }

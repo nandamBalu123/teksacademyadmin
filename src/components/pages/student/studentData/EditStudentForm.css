@@ -74,9 +74,9 @@ StepLabel {
   background-color: white;
   border: 1px solid whitesmoke;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 20px;
-  padding-left: 5%;
+  /* padding-left: 5%; */
   margin: 0;
   border-radius: 30px;
 }
@@ -84,8 +84,7 @@ StepLabel {
   width: 210px;
 }
 input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button{ 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

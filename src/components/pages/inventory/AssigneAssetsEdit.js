@@ -6,6 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import "./AssigneAssetsEdit.css";
 
 const Edit = () => {
   // var apiUrl = "https://demo.teksacademy.com:3000";
@@ -48,12 +49,15 @@ const Edit = () => {
   console.log(id);
 
   const getdata = async () => {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/viewassets/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/viewassets/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await res.json();
     console.log(data);
@@ -85,23 +89,26 @@ const Edit = () => {
       remarks,
     } = inpval;
 
-    const res2 = await fetch(`${process.env.REACT_APP_API_URL}/updatassignassets/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        // vendername,
-        designation,
-        branch,
-        assettype,
-        issueddate,
-        assetcode,
-        anonymity,
-        remarks,
-      }),
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_API_URL}/updatassignassets/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          // vendername,
+          designation,
+          branch,
+          assettype,
+          issueddate,
+          assetcode,
+          anonymity,
+          remarks,
+        }),
+      }
+    );
 
     const data2 = await res2.json();
     console.log(data2);
@@ -115,35 +122,32 @@ const Edit = () => {
   };
 
   return (
-    <div className="container">
-      
-      <form className="mt-4">
-        <div className="row">
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-          <TextField
-                label="Name"
+    <div className="container mt-3">
+      <div className="Assignassetsedit">
+        <h4 className="text-center mt-3"> Assign Assets Edit</h4>
+        <form className="mt-4">
+          <div className="row">
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <TextField
+                label={<span className="label-family">Full Name</span>}
                 className=" mar w-75"
                 variant="standard"
                 name="name"
                 type="text"
                 value={inpval.name}
-                  
                 id="name"
-               
               />
-          </div>
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-          <TextField
-                label="Designation"
+            </div>
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <TextField
+                label={<span className="label-family">Designation</span>}
                 className=" mar w-75"
                 variant="standard"
                 name="designation"
                 type="text"
                 value={inpval.designation}
-                
-            
               />
-          {/* <TextField
+              {/* <TextField
                 label="Vender Name"
                 className=" mar w-75"
                 variant="standard"
@@ -153,94 +157,84 @@ const Edit = () => {
                 
               
               /> */}
-          </div> </div>
-           <div className="row"> 
-           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-           <TextField
-                label="Branch"
+            </div>{" "}
+          </div>
+          <div className="row">
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <TextField
+                label={<span className="label-family">Branch</span>}
                 className=" mar w-75"
                 variant="standard"
-              
                 type="text"
                 value={inpval.branch}
-                
                 name="branch"
-             
               />
-           </div>
-           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-           <TextField
-                label="Asset Type"
+            </div>
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <TextField
+                label={<span className="label-family">Asset Type</span>}
                 className=" mar w-75"
                 variant="standard"
                 type="text"
                 value={inpval.assettype}
-                
                 name="assettype"
-                 />
-           </div>
-           </div>
-           <div className="row"> 
-           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-           <TextField
-                label="Issue Date"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <TextField
+                label={<span className="label-family">Issue Date</span>}
                 className=" mar w-75"
                 variant="standard"
-              type="date"
-              value={inpval.issueddate}
-              
-              name="issueddate"
+                type="date"
+                value={inpval.issueddate}
+                name="issueddate"
                 required
                 InputLabelProps={{
                   shrink: true,
                 }}
               />
-           </div>
-           <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-           <TextField
-                label="Asset Code"
+            </div>
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <TextField
+                label={<span className="label-family">Asset Code</span>}
                 className=" mar w-75"
                 variant="standard"
                 type="text"
                 value={inpval.assetcode}
-                
                 name="assetcode"
-                 />
-           </div>
-           </div>
-           <div className="row"> 
-           <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-           <TextField
-                label="Quantity"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <TextField
+                label={<span className="label-family">Quantity</span>}
                 className=" mar w-75"
                 variant="standard"
                 type="number"
                 value={inpval.anonymity}
-                
                 name="anonymity"
-                 />
-             </div>
-             <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
-             <TextField
-                label="Remarks"
+              />
+            </div>
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <TextField
+                label={<span className="label-family">Remarks</span>}
                 className=" mar w-75"
                 variant="standard"
                 type="text"
                 value={inpval.remarks}
-                
                 name="remarks"
-                 />
-              </div>
-           </div>
-            
-             <div className="create-button  d-flex justify-content-between mt-4 ">
-           
+              />
+            </div>
+          </div>
+
+          <div className="create-button  d-flex justify-content-between mt-4 ">
             <NavLink to="/assignassets ">
-              <button className="btn btn-primary  "> 
-              Back
-              </button>
-           </NavLink>
-           
+              <button className="btn btn-primary  ">Back</button>
+            </NavLink>
+
             <button
               type="submit"
               onClick={updateuser}
@@ -249,11 +243,8 @@ const Edit = () => {
             >
               submit
             </button>
-           
           </div>
-            
 
-         
           {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputEmail1" class="form-label">
               Name
@@ -395,8 +386,8 @@ const Edit = () => {
           {/* <button type="submit" onClick={updateuser} class="btn btn-primary">
             Submit
           </button> */}
-       
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

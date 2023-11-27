@@ -1,8 +1,35 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@500&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Slabo+27px&500@display=swap'); */
 .App {
   text-align: center;
 }
-*{ 
- font-family: sans-serif;
+* {
+  /* font-family: sans-serif,serif; */
+  /* font-family: 'Roboto', sans-serif; */
+  /* font-family: 'Lato', sans-serif; */
+  /* font-family: 'Open Sans', sans-serif; */
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5rem;
+  font-weight: 300;
+  font-size: 1rem;
+  /* font-size: .75rem; */
+  /* font-family: 'Noto Sans', sans-serif; */
+  /* font-family: 'Rubik', sans-serif; */
+  /* font-family: 'Barlow', sans-serif; */
+  /* font-family: 'Slabo 27px', serif; */
+  /* font-size:14px ; */
+  /* font-size: 15px; */
+  /* font-size: 16px; */
+  /* font-size: 17px; */
+  font-weight: 500;
 }
 
 .App-logo {
@@ -40,39 +67,35 @@
   }
 }
 
-
 /* inventory */
 
-.add_btn{
+.add_btn {
   text-align: right;
 }
 
-.container{
+.container {
   overflow: auto;
 }
 
-.left_view h3{
+.left_view h3 {
   font-size: 21px;
 }
 
-.left_view p{
+.left_view p {
   font-weight: 600;
 }
 
-.left_view span{
+.left_view span {
   font-weight: 400;
 }
 
-.right_view p{
+.right_view p {
   font-weight: 600;
 }
 
-
-.right_view span{
+.right_view span {
   font-weight: 400;
 }
-
-
 
 /* new */
 
@@ -98,11 +121,10 @@ main {
 
 /* Sidebar */
 .sidebar {
-background-color: white;
+  background-color: white;
   color: black;
   height: 100vh;
   overflow-y: auto;
-  
 }
 
 .top_section {
@@ -187,4 +209,43 @@ background-color: white;
 .menu_container .link {
   padding-left: 20px;
   border-bottom: #fff 0.5px solid;
+}
+.table-cell-heading {
+  font-family: "Roobert", "Inter", sans-serif, serif !important;
+  line-height: 1.4rem;
+  font-size: 1rem !important;
+  background-color: #0070fc !important;
+  border: 1px solid #f5f5f5 !important;
+  text-align: center !important;
+}
+.Table-cell {
+  padding: 0.5rem 0 0.5rem 0.5rem !important;
+  margin: 0 !important;
+  font-family: "Poppins", sans-serif !important;
+  line-height: 1.4rem;
+  font-weight: 200 !important ;
+  border: 1px solid #e3eee3 !important;
+}
+.label-family,
+.btn-style {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+.registration-tablehead {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  text-align: center;
+  padding: 1rem 0 1rem 0 !important;
+}
+.registration-tablebody {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 0.8rem !important;
+  text-align: center;
+  padding: 0.8rem 0 0.8rem 0 !important;
+}
+.row {
+  margin-top: 10px;
 }

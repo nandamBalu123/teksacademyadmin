@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
+import "./LeadSource.css";
 import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 const LeadSource = () => {
   const { leadsources } = useLeadSourceContext();
@@ -38,46 +39,46 @@ const LeadSource = () => {
     },
   }));
   return (
-    <div className="container">
-      <div className="flex mt-3">
-        <p className="fs-5 ms-3">Lead Sources</p>
-        <button
-          type="submit"
-          className="btn btn-primary mr-20 ms-2 mb-2"
-          onClick={handleSubmit}
-        >
-          Add Lead Source
-        </button>
-      </div>
-      <TableContainer component={Paper}>
-        <Table  aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
-                id
-              </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
-                Name
-              </StyledTableCell>
+    <div className="container mt-3">
+      <div className="leadsource">
+        <div className="d-flex justify-content-between my-3">
+          <h4 className="ms-2"> Lead Source</h4>
+          <button
+            type="submit"
+            className="btn btn-primary   me-2"
+            onClick={handleSubmit}
+          >
+            Add Lead Source
+          </button>
+        </div>
+        <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  ID
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Name
+                </StyledTableCell>
 
-              {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
-            </TableRow>
-          </TableHead>
+                {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
+              </TableRow>
+            </TableHead>
 
-          <TableBody className="border border 1">
             {Array.isArray(leadsources) && leadsources.length > 0 ? (
               leadsources.map((item, index) => (
                 <StyledTableRow key={item.id}>
-                  <StyledTableCell className="border border 1 text-center">
+                  <StyledTableCell
+                    className="Table-cell text-center"
+                    style={{ fontSize: "15px" }}
+                  >
                     {index + 1}
                   </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
+                  <StyledTableCell
+                    className="Table-cell text-center"
+                    style={{ fontSize: "15px" }}
+                  >
                     {item.leadsource}
                   </StyledTableCell>
 
@@ -89,9 +90,9 @@ const LeadSource = () => {
                 <TableCell colSpan={3}>No data available</TableCell>
               </TableRow>
             )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 };

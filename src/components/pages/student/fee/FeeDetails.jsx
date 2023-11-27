@@ -197,14 +197,11 @@ const FeeDetails = () => {
       <div className="main-feedetails  mt-3">
         <div className="feedetails">
           {" "}
-          <h4 className="mt-1 text-center">
-            {" "}
-            Fee Management (Registered Students)
-          </h4>
+          <h4 className="mt-1 text-center"> Fee Management</h4>
           <div className="row pt-2">
             <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-2">
               <button className="feebtn" onClick={studentFeeRecords}>
-                Student Fee Records
+                Fee Records
               </button>
             </div>
             <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
@@ -472,41 +469,42 @@ const FeeDetails = () => {
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0 ">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       S.NO
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light  m-0 p-0 ">
+                    <StyledTableCell className="table-cell-heading">
                       Name
                       <br /> Branch <br />
                       Counsellor
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       Contact
                       <br />
                       Email
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light m-0 p-0">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       Course <br /> Date of Joining
                       <br /> Total Fee
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       Paid Fee
                       <br /> Due Amount
                       <br /> Next Due Date
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
-                      Total Installments
+                      Total <br />
+                      Installments
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
-                      Paid Installments
+                      Paid <br /> Installments
                     </StyledTableCell>
-                    <StyledTableCell className="bg-primary fs-6 border border 1 text-center text-light">
+                    <StyledTableCell className="table-cell-heading">
                       {" "}
                       View
                     </StyledTableCell>
@@ -552,16 +550,16 @@ const FeeDetails = () => {
                       }-${year}`;
 
                       return (
-                        <TableRow
+                        <StyledTableRow
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                           key={item.id}
                         >
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell text-center">
                             {index + 1}
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <span
                               title={item.name}
                               style={{
@@ -606,7 +604,7 @@ const FeeDetails = () => {
                               {item.enquirytakenby}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <span
                               title={item.mobilenumber}
                               style={{
@@ -634,7 +632,7 @@ const FeeDetails = () => {
                               {item.email}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <span
                               title={item.courses}
                               style={{
@@ -679,7 +677,7 @@ const FeeDetails = () => {
                               ).toLocaleString("en-IN")}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <span
                               title={Number(
                                 parseFloat(item.totalpaidamount).toFixed(2)
@@ -728,38 +726,49 @@ const FeeDetails = () => {
                               {NextDueDate ? NextDueDate : "No NextDue Date"}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
-                            {item.totalinstallments &&
-                              item.totalinstallments.length > 0 &&
-                              item.totalinstallments.map((items, index) => {
-                                const dynamicStyle = {
-                                  color: item.dueamount < 1 ? "green" : "red",
-                                  fontSize:
-                                    item.dueamount < 1 ? "20px" : "16px",
-                                  fontWeight:
-                                    item.dueamount < 1 ? "900" : "900",
-                                };
-                                const IconStyle = {
-                                  display: item.dueamount < 1 ? true : "none",
-                                  marginLeft: "10px",
-                                };
-                                if (true) {
-                                  // settotalleft(item.totalinstallmentsleft);
-                                  // totalleft = item.totalinstallmentsleft;
-                                  return (
-                                    <div style={{ display: "flex" }}>
-                                      <span style={dynamicStyle}>
-                                        {items.totalinstallments}
-                                      </span>
-                                      <span style={dynamicStyle}>
-                                        <CheckCircleIcon style={IconStyle} />
-                                      </span>
-                                    </div>
-                                  );
-                                }
-                              })}
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                width: "3rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.totalinstallments &&
+                                item.totalinstallments.length > 0 &&
+                                item.totalinstallments.map((items, index) => {
+                                  const dynamicStyle = {
+                                    color: item.dueamount < 1 ? "green" : "red",
+                                    fontSize:
+                                      item.dueamount < 1 ? "20px" : "16px",
+                                    fontWeight:
+                                      item.dueamount < 1 ? "900" : "900",
+                                  };
+                                  const IconStyle = {
+                                    display: item.dueamount < 1 ? true : "none",
+                                    marginLeft: "10px",
+                                  };
+                                  if (true) {
+                                    // settotalleft(item.totalinstallmentsleft);
+                                    // totalleft = item.totalinstallmentsleft;
+                                    return (
+                                      <div style={{ display: "flex" }}>
+                                        <span style={dynamicStyle}>
+                                          {items.totalinstallments}
+                                        </span>
+                                        <span style={dynamicStyle}>
+                                          <CheckCircleIcon style={IconStyle} />
+                                        </span>
+                                      </div>
+                                    );
+                                  }
+                                })}
+                            </span>
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             {item.totalinstallments &&
                               item.totalinstallments.length > 0 &&
                               item.totalinstallments.map((items, index) => {
@@ -790,18 +799,20 @@ const FeeDetails = () => {
                                 }
                               })}
                           </StyledTableCell>
-                          <StyledTableCell className="border border 1">
+                          <StyledTableCell className="Table-cell">
                             <Link to={`/feeview/${item.id}`}>
                               <VisibilityIcon />
                             </Link>{" "}
                           </StyledTableCell>
-                        </TableRow>
+                        </StyledTableRow>
                       );
                     })
                   ) : (
-                    <TableRow>
-                      <TableCell colSpan={3}>No data available</TableCell>
-                    </TableRow>
+                    <StyledTableRow>
+                      <StyledTableCell colSpan={3}>
+                        No data available
+                      </StyledTableCell>
+                    </StyledTableRow>
                   )}{" "}
                 </TableBody>
               </Table>

@@ -187,7 +187,13 @@ const PrintableComponent = React.forwardRef((props, ref) => {
         src={teksacademylogo}
         alt="logo"
       />
-      <h3 className="text-center mt-5"> Fee Invoice</h3>
+      {nametype === "studentinvoice" && (
+        <h3 className="text-center mt-5"> Fee Receipt</h3>
+      )}
+      {nametype === "admininvoice" && (
+        <h3 className="text-center mt-5"> Fee Invoice</h3>
+      )}
+
       <hr />
       <div className="row">
         <div className="col-12 col-md-6 col-lg-6 col-xl-6">

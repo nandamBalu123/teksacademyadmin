@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
+import "./Course.css";
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 const Course = () => {
   const { getcourses } = useCourseContext();
@@ -38,46 +39,46 @@ const Course = () => {
     },
   }));
   return (
-    <div className="container">
-      <div className="flex mt-3">
-        <h4 className=" ms-3">Courses</h4>
-        <button
-          type="submit"
-          className="btn btn-primary mr-20 ms-2 mb-2"
-          onClick={handleSubmit}
-        >
-          Add Course
-        </button>
-      </div>
-      <TableContainer component={Paper}>
-        <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
-                SI.NO
-              </StyledTableCell>
-              <StyledTableCell
-                className="bg-primary fs-6  border border 1"
-                align="center"
-              >
-                Name
-              </StyledTableCell>
+    <div className="container mt-3">
+      <div className="course">
+        <div className="flex my-3">
+          <h4 className=" ms-3">Courses</h4>
+          <button
+            type="submit"
+            className="btn btn-primary  me-3"
+            onClick={handleSubmit}
+          >
+            Add Course
+          </button>
+        </div>
+        <TableContainer component={Paper}>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  SI.NO
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Name
+                </StyledTableCell>
 
-              {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
-            </TableRow>
-          </TableHead>
+                {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
+              </TableRow>
+            </TableHead>
 
-          <TableBody className="border border 1">
             {Array.isArray(getcourses) && getcourses.length > 0 ? (
               getcourses.map((item, index) => (
                 <StyledTableRow key={item.id}>
-                  <StyledTableCell className="border border 1 text-center">
+                  <StyledTableCell
+                    className="Table-cell text-center"
+                    style={{ fontSize: "15px" }}
+                  >
                     {index + 1}
                   </StyledTableCell>
-                  <StyledTableCell className="border border 1 text-center">
+                  <StyledTableCell
+                    className="Table-cell text-center"
+                    style={{ fontSize: "15px" }}
+                  >
                     {item.course_name}
                   </StyledTableCell>
 
@@ -89,9 +90,9 @@ const Course = () => {
                 <TableCell colSpan={3}>No data available</TableCell>
               </TableRow>
             )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 };

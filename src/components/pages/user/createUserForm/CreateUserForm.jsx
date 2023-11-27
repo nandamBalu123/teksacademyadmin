@@ -117,7 +117,6 @@ const CreateUserForm = () => {
       });
       user = dataWithTitleCase[0];
 
-     
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/createUser`,
         {
@@ -173,11 +172,11 @@ const CreateUserForm = () => {
           <div className="row ">
             <div className=" col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
-                label="Full Name "
+                label={<span className="label-family">Full Name</span>}
                 name="fullname"
                 type="text"
                 variant="standard"
-                className="mar w-75 "
+                className="mar w-75  "
                 required
                 onChange={(e) => setfullname(e.target.value)}
                 value={fullname}
@@ -203,7 +202,7 @@ const CreateUserForm = () => {
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
-                label="Email ID"
+                label={<span className="label-family">Email ID</span>}
                 name="email"
                 type="email"
                 variant="standard"
@@ -233,7 +232,7 @@ const CreateUserForm = () => {
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
-                label="Phone Number"
+                label={<span className="label-family">Phone Number</span>}
                 className=" mar w-75"
                 variant="standard"
                 name="phonenum"
@@ -280,7 +279,7 @@ const CreateUserForm = () => {
                 </Select>
               </FormControl> */}
               <TextField
-                label="Designation"
+                label={<span className="label-family">Designation</span>}
                 className=" mar w-75"
                 variant="standard"
                 name="designation"
@@ -320,7 +319,12 @@ const CreateUserForm = () => {
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
                 <InputLabel>
-                  Department<span> *</span>
+                  {
+                    <span className="label-family">
+                      Department <span>*</span>
+                    </span>
+                  }
+                  {/* Department<span> *</span> */}
                 </InputLabel>
                 <Select
                   className=" mar  "
@@ -377,7 +381,7 @@ const CreateUserForm = () => {
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
-                label="Report To"
+                label={<span className="label-family">Report To</span>}
                 variant="standard"
                 className=" mar w-75"
                 name="reportto"
@@ -411,7 +415,11 @@ const CreateUserForm = () => {
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
                 <InputLabel>
-                  Role <span> *</span>
+                  <span className="label-family">
+                    Role <span>*</span>
+                  </span>
+
+                  {/* Role <span> *</span> */}
                 </InputLabel>
                 <Select
                   className="mar "
@@ -468,7 +476,11 @@ const CreateUserForm = () => {
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
                 <InputLabel>
-                  Branch<span> *</span>
+                  <span className="label-family">
+                    Branch <span>*</span>
+                  </span>
+
+                  {/* Branch<span> *</span> */}
                 </InputLabel>
                 <Select
                   className=" mar"
@@ -525,7 +537,7 @@ const CreateUserForm = () => {
           <div className="create-button mt-5 ">
             <button
               type="submit"
-              className="btn btn-primary mr-20 ms-2 mb-2 "
+              className="btn btn-primary  mb-4 "
               style={{ textTransform: "capitalize" }}
             >
               Create User

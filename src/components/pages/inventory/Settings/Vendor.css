@@ -3,14 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-.flex {
-  display: flex;
-  justify-content: space-between;
-}
-.branch {
+.vendor {
+  background-color: #fcfcfc;
+  width: 99%;
   border: 2px solid #f5f5f5;
   border-radius: 8px;
   margin: auto;
-  overflow: hidden;
 }
