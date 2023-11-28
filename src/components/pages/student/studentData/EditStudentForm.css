@@ -41,9 +41,9 @@ label {
   margin-bottom: 7px;
   font-size: large;
 }
-input {
+/* input {
   margin-left: 13px;
-}
+} */
 /* input:hover {
   border: 15px solid rgb(141, 10, 10);
   border-radius: 5px;

@@ -219,7 +219,7 @@ const FeeView = () => {
     console.log("updatedData", updatedData, updateContext);
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/updateduedateandaueamount/${id}`,
+        `${process.env.REACT_APP_API_URL}/updateduedateanddueamount/${id}`,
         updatedData
       )
 
@@ -957,7 +957,7 @@ const FeeView = () => {
           studentdata.initialpayment[0] &&
           studentdata.initialpayment[0].paymentdone === true && (
             <TableContainer component={Paper} className="mt-4">
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <StyledTableCell className="table-cell-heading">

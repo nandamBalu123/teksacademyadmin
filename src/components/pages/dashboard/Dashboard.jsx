@@ -975,45 +975,39 @@ const Dashboard = () => {
             {/* <div className="col-12 col-md-2 col-xl-2 col-lg-2"> </div> */}
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                // style={{ background:"#0090f7"}}
-                className="blue"
+                className="sub-blue"
+                // style={{ background: "#4676a0", color: "white" }}
               >
-                <p className="text-center pt-3">
-                  <b> No of Enrollments</b>
-                  <p className="pt-3"> 6</p>{" "}
+                <p>
+                  <b>No of Enrollments </b>
+                  <p className="pt-1"> 6</p>
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                // style={{ background:"#ff3741"}}
-                className="orange"
+                className="sub-orange"
+                // style={{ background: "#ed8155", color: "white" }}
               >
-                <p className="text-center pt-3">
+                <p>
                   <b>Booking Amount</b>
-                  <p className="pt-3"> 40,000</p>{" "}
+                  <p className="pt-1"> 40,000</p>{" "}
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card
-                // style={{ background:"#ffa300"}}
-                className="blue"
-              >
-                <p className="text-center pt-3">
-                  <b>Received Amount</b>
-                  <p className="pt-3"> 10,000</p>{" "}
+              <Card className="sub-blue">
+                <p>
+                  <b> Received Amount</b>
+                  <p className="pt-1"> 10,000</p>{" "}
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card
-                // style={{ background:"#00b6a6"}}
-                className="orange"
-              >
-                <p className="text-center pt-3">
-                  <b>DueAmount</b>
-                  <p className="pt-3"> 0,000</p>{" "}
+              <Card className="sub-orange">
+                <p>
+                  <b>Due Amount</b>
+                  <p className="pt-1"> 30,000</p>{" "}
                 </p>
               </Card>
             </div>
@@ -1270,22 +1264,22 @@ const Dashboard = () => {
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 // style={{ background:"#ff3741"}}
-                className="rounded rounded-3"
+                className="sub-blue"
               >
-                <p className="text-center pt-3">
+                <p>
                   <b>Fee Received</b>
-                  <p className="pt-3"> 1,40,000</p>{" "}
+                  <p className="pt-1"> 1,40,000</p>{" "}
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 // style={{ background:"#ff3741"}}
-                className="rounded rounded-3"
+                className="sub-orange"
               >
-                <p className="text-center pt-3">
+                <p>
                   <b>Fee Yet To Received</b>
-                  <p className="pt-3">2,40,000</p>{" "}
+                  <p className="pt-1">2,40,000</p>{" "}
                 </p>
               </Card>
             </div>

@@ -250,12 +250,31 @@ main {
   margin-top: 10px;
 }
 .blue {
-  background-color: #195489 !important;
+  background-color: #004493 !important;
   color: #fff !important;
   border-radius: 8px !important;
 }
 .orange {
-  background-color: #e9622b !important;
+  background-color: #ff1e20 !important;
   color: #fff !important;
   border-radius: 8px !important;
+}
+.green {
+  background-color: #198754 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+}
+.sub-blue {
+  background-color: #d1dce7 !important;
+  color: #000 !important;
+  border-radius: 8px !important;
+  text-align: center;
+  padding-top: 9px;
+}
+.sub-orange {
+  background-color: #f4b095 !important;
+  color: #000 !important;
+  border-radius: 8px !important;
+  text-align: center;
+  padding-top: 9px;
 }
