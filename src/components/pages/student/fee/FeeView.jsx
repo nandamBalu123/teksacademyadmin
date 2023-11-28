@@ -219,7 +219,7 @@ const FeeView = () => {
     console.log("updatedData", updatedData, updateContext);
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/updateduedateandaueamount/${id}`,
+        `${process.env.REACT_APP_API_URL}/updateduedateanddueamount/${id}`,
         updatedData
       )
 

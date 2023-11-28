@@ -70,6 +70,7 @@ import ZipCodeLookup from "./components/pages/student/studentRegistrationForm/Zi
 import Reports from "./components/pages/Reports/Reports";
 import Report from "./components/pages/Reports/Report";
 import CreateReport from "./components/pages/Reports/CreateReport";
+import FeeReceived from "./components/pages/student/fee/FeeReceived";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -132,6 +133,10 @@ function App() {
                 <Route
                   path="/feefollowup"
                   element={user ? <Feefollowup /> : <Dashboard />}
+                />
+                <Route
+                  path="/feereceived"
+                  element={user ? <FeeReceived /> : <Dashboard />}
                 />
                 <Route
                   path="/feeview/:id"
