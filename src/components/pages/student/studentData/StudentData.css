@@ -175,3 +175,9 @@ input::-webkit-inner-spin-button {
   background-color: #f0f0f0;
   color: #888888;
 }
+.flex-container {
+  display: flex;
+  /* Adjust the gap according to your preference */
+  align-items: center; /* Align items vertically at the center */
+  justify-content: center;
+}

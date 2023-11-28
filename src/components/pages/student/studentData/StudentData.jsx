@@ -395,11 +395,18 @@ const StudentData = () => {
           <div className="col-12 col-md-4 col-lg-4 col-xl-4">
             <div className="d-flex justify-content-around">
               <p className="pt-3">
-                {" "}
                 {recordCount}/{initialDataCount}{" "}
               </p>
+
               <p>
-                {" "}
+                <select onChange={handlerecorddata} className="mt-3">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="75">75</option>
+                </select>
+              </p>
+              <p>
                 <Button
                   id="demo-positioned-button"
                   aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -674,14 +681,6 @@ const StudentData = () => {
                 </Menu>
               </p>
               <p>
-                <select onChange={handlerecorddata} className="mt-3">
-                  <option value="10">10</option>
-                  <option value="25">25</option>
-                  <option value="50">50</option>
-                  <option value="75">75</option>
-                </select>
-              </p>
-              <p>
                 <CSVLink
                   data={filteredData}
                   filename={"studentsdata.csv"}
@@ -844,33 +843,19 @@ const StudentData = () => {
                             </span>
 
                             <span
-                              title={item.branch}
+                              title={item.courses}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
+
                                 textOverflow: "ellipsis",
                                 fontSize: "15px",
                                 display: "block",
                               }}
                             >
-                              {item.branch}
-                              <br />
-                              <span
-                                title={item.courses}
-                                style={{
-                                  width: "100px",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {" "}
-                                {item.courses}
-                              </span>
+                              {" "}
+                              {item.courses}
                             </span>
                           </StyledTableCell>
 
@@ -969,10 +954,7 @@ const StudentData = () => {
                             <NavLink to={`/editstudent/${item.id}`}>
                               <EditIcon style={{ width: "40px" }} />
                             </NavLink>
-                            <NavLink to={`/feeview/${item.id}`}>
-                              <CurrencyRupeeIcon style={{ width: "40px" }} />
-                            </NavLink>
-                            {/* {item.addfee == 1 && (
+                            {item.addfee == 1 && (
                               <NavLink to={`/feeview/${item.id}`}>
                                 <CurrencyRupeeIcon style={{ width: "40px" }} />
                               </NavLink>
@@ -981,7 +963,7 @@ const StudentData = () => {
                               <NavLink to={`/addtofee/${item.id}`}>
                                 <AddIcon style={{ width: "40px" }} />
                               </NavLink>
-                            )} */}
+                            )}
 
                             <NavLink to={`/studentApplicationprint/${item.id}`}>
                               <PrintIcon
