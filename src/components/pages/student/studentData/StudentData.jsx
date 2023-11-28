@@ -954,7 +954,10 @@ const StudentData = () => {
                             <NavLink to={`/editstudent/${item.id}`}>
                               <EditIcon style={{ width: "40px" }} />
                             </NavLink>
-                            {item.addfee == 1 && (
+                            <NavLink to={`/feeview/${item.id}`}>
+                              <CurrencyRupeeIcon style={{ width: "40px" }} />
+                            </NavLink>
+                            {/* {item.addfee == 1 && (
                               <NavLink to={`/feeview/${item.id}`}>
                                 <CurrencyRupeeIcon style={{ width: "40px" }} />
                               </NavLink>
@@ -963,7 +966,7 @@ const StudentData = () => {
                               <NavLink to={`/addtofee/${item.id}`}>
                                 <AddIcon style={{ width: "40px" }} />
                               </NavLink>
-                            )}
+                            )} */}
 
                             <NavLink to={`/studentApplicationprint/${item.id}`}>
                               <PrintIcon
