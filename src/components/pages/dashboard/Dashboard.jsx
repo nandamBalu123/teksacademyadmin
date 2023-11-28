@@ -653,10 +653,7 @@ const Dashboard = () => {
               })
             }
           >
-            <Card
-              style={{ backgroundColor: "#00c292" }}
-              className="rounded rounded-3 mb-1"
-            >
+            <Card className="blue">
               <p className="text-center pt-3">Total Enrollments</p>
             </Card>
           </div>
@@ -671,10 +668,7 @@ const Dashboard = () => {
               })
             }
           >
-            <Card
-              style={{ backgroundColor: "#03a9f3" }}
-              className="rounded rounded-3 mb-1"
-            >
+            <Card className="orange">
               <p className="text-center pt-3">Fee Details</p>
             </Card>
           </div>
@@ -690,10 +684,7 @@ const Dashboard = () => {
             }
           >
             <Link to="/feedetails">
-              <Card
-                style={{ backgroundColor: "#f87146" }}
-                className="rounded rounded-3 mb-1"
-              >
+              <Card className="blue">
                 <p className="text-center pt-3">Fee Followups</p>
               </Card>
             </Link>
@@ -985,7 +976,7 @@ const Dashboard = () => {
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 // style={{ background:"#0090f7"}}
-                className="rounded rounded-3"
+                className="blue"
               >
                 <p className="text-center pt-3">
                   <b> No of Enrollments</b>
@@ -996,7 +987,7 @@ const Dashboard = () => {
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 // style={{ background:"#ff3741"}}
-                className="rounded rounded-3"
+                className="orange"
               >
                 <p className="text-center pt-3">
                   <b>Booking Amount</b>
@@ -1007,7 +998,7 @@ const Dashboard = () => {
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 // style={{ background:"#ffa300"}}
-                className="rounded rounded-3"
+                className="blue"
               >
                 <p className="text-center pt-3">
                   <b>Received Amount</b>
@@ -1018,7 +1009,7 @@ const Dashboard = () => {
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 // style={{ background:"#00b6a6"}}
-                className="rounded rounded-3"
+                className="orange"
               >
                 <p className="text-center pt-3">
                   <b>DueAmount</b>

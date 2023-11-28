@@ -52,7 +52,8 @@ const Assignassets = () => {
 
   const { dltdata, setDLTdata } = useContext(deldata);
   const [Displayassets, setDisplayassets] = useState({
-    secendrabad: false,
+    allbranches: false,
+    secunderabad: false,
     hitechcity: false,
     ameerpet: false,
     dilsukhnagar: false,
@@ -472,141 +473,181 @@ const Assignassets = () => {
               Assign data
             </NavLink>
           </div>
-          <div className="row mb-3">
+
+          <div className="row ">
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
-                style={{ backgroundColor: "#f3a9b2" }}
+                style={{ backgroundColor: "#b7e9da" }}
                 className="rounded rounded-3"
+                onClick={(e) =>
+                  setDisplayassets({
+                    allbranches: true,
+                    secendrabad: false,
+                    hitechcity: false,
+                    ameerpet: false,
+                    dilsukhnagar: false,
+                    kukatpally: false,
+                  })
+                }
               >
-                <p className="pt-3 text-center">
-                  Total laptops: <strong>{getLaptopCount()}</strong>
-                </p>
-              </Card>{" "}
-            </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-              <Card
-                style={{ backgroundColor: "#a6ebdc" }}
-                className="rounded rounded-3"
-              >
-                <p className="pt-3 text-center">
-                  Total t-shirt: <strong>{getTshirtCount()}</strong>
-                </p>
-              </Card>{" "}
+                <p className="text-center pt-3">All Branches</p>
+              </Card>
             </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
                 style={{ backgroundColor: "#b7e9da" }}
                 className="rounded rounded-3"
+                onClick={(e) =>
+                  setDisplayassets({
+                    allbranches: false,
+                    secendrabad: true,
+                    hitechcity: false,
+                    ameerpet: false,
+                    dilsukhnagar: false,
+                    kukatpally: false,
+                  })
+                }
               >
-                <p className="pt-3 text-center">
-                  Total shirt: <strong>{getShirtCount()}</strong>
-                </p>
-              </Card>{" "}
+                <p className="text-center pt-3">Secunderabad</p>
+              </Card>
             </div>
+
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
-                style={{ backgroundColor: "#f3a9b2" }}
+                style={{ backgroundColor: "#b7e9da" }}
                 className="rounded rounded-3"
+                onClick={(e) =>
+                  setDisplayassets({
+                    allbranches: false,
+                    secendrabad: false,
+                    hitechcity: true,
+                    ameerpet: false,
+                    dilsukhnagar: false,
+                    kukatpally: false,
+                  })
+                }
               >
-                <p className="pt-3 text-center">
-                  Total charger: <strong>{getChargerCount()}</strong>
-                </p>
-              </Card>{" "}
+                <p className="text-center pt-3">Hi-tech City</p>
+              </Card>
             </div>
+
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
-                style={{ backgroundColor: "#a6ebdc" }}
+                style={{ backgroundColor: "#b7e9da" }}
                 className="rounded rounded-3"
+                onClick={(e) =>
+                  setDisplayassets({
+                    allbranches: false,
+                    secendrabad: false,
+                    hitechcity: false,
+                    ameerpet: true,
+                    dilsukhnagar: false,
+                    kukatpally: false,
+                  })
+                }
               >
-                <p className="pt-3 text-center">
-                  Total mouse: <strong>{getMouseCount()}</strong>
-                </p>
-              </Card>{" "}
+                <p className="text-center pt-3">Ameerpet</p>
+              </Card>
             </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
                 style={{ backgroundColor: "#b7e9da" }}
                 className="rounded rounded-3"
+                onClick={(e) =>
+                  setDisplayassets({
+                    allbranches: false,
+                    secendrabad: false,
+                    hitechcity: false,
+                    ameerpet: false,
+                    dilsukhnagar: true,
+                    kukatpally: false,
+                  })
+                }
               >
-                <p className="pt-3 text-center">
-                  Total bags: <strong>{getStudentsBags()}</strong>
-                </p>
-              </Card>{" "}
-            </div>{" "}
-          </div>
-          <div className="row ms-5">
-            <div
-              className="col-12 col-md-2 col-lg-2 col-xl-2 "
-              //  style={{cursor:"pointer"}}
-              //   onClick={ (e)=> setDisplayassets({
-              //   secendrabad:true,
-              //   hitechcity:false,
-              //   ameerpet:false,
-              //   dilsukhnagar:false,
-              //   kukatpally:false
-              //  })}
-            >
-              <h4>Secendrabad</h4>
+                <p className="text-center pt-3">Dilsukhnagar</p>
+              </Card>
             </div>
-            <div
-              className="col-12 col-md-2 col-lg-2 col-xl-2 ms-2"
-              style={{ cursor: "pointer" }}
-              onClick={(e) =>
-                setDisplayassets({
-                  secendrabad: false,
-                  hitechcity: true,
-                  ameerpet: false,
-                  dilsukhnagar: false,
-                  kukatpally: false,
-                })
-              }
-            >
-              <h4>Hitech City</h4>
-            </div>
-            <div
-              className="col-12 col-md-2 col-lg-2 col-xl-2"
-              style={{ cursor: "pointer" }}
-              onClick={(e) =>
-                setDisplayassets({
-                  secendrabad: false,
-                  hitechcity: false,
-                  ameerpet: true,
-                  dilsukhnagar: false,
-                  kukatpally: false,
-                })
-              }
-            >
-              <h4>Ameerpet</h4>
-            </div>
-            <div
-              className="col-12 col-md-2 col-lg-2 col-xl-2"
-              style={{ cursor: "pointer" }}
-              onClick={(e) =>
-                setDisplayassets({
-                  secendrabad: false,
-                  hitechcity: false,
-                  ameerpet: false,
-                  dilsukhnagar: true,
-                  kukatpally: false,
-                })
-              }
-            >
-              <h4>Dilsukhnagar</h4>
-            </div>
-            <div
-              className="col-12 col-md-3 col-lg-3 col-xl-3"
-              style={{ cursor: "pointer" }}
-              // onClick={ (e)=> setDisplayassets({
-              //   secendrabad:false,
-              //   hitechcity:false,
-              //   ameerpet:false,
-              //   dilsukhnagar:false,
-              //   kukatpally:true
-              //  })}
-            >
-              <h4>Kukatpally</h4>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{ backgroundColor: "#b7e9da" }}
+                className="rounded rounded-3"
+                // onClick={ (e)=> setDisplayassets({
+                // allbranches:false,
+                //   secendrabad:false,
+                //   hitechcity:false,
+                //   ameerpet:false,
+                //   dilsukhnagar:false,
+                //   kukatpally:true
+                //  })}
+              >
+                <p className="text-center pt-3">kukatpally</p>
+              </Card>
             </div>
           </div>
+          {Displayassets.allbranches && (
+            <div className="row mb-3">
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#f3a9b2" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total laptops: <strong>{getLaptopCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#a6ebdc" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total t-shirt: <strong>{getTshirtCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#b7e9da" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total shirt: <strong>{getShirtCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#f3a9b2" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total charger: <strong>{getChargerCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#a6ebdc" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total mouse: <strong>{getMouseCount()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>
+              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+                <Card
+                  style={{ backgroundColor: "#b7e9da" }}
+                  className="rounded rounded-3"
+                >
+                  <p className="pt-3 text-center">
+                    Total bags: <strong>{getStudentsBags()}</strong>
+                  </p>
+                </Card>{" "}
+              </div>{" "}
+            </div>
+          )}
 
           {Displayassets.hitechcity && (
             <div className="row mb-3">

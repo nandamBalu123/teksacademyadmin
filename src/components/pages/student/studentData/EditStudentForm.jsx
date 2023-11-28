@@ -536,7 +536,6 @@ const EditStudentForm = () => {
                       type="number"
                       variant="standard"
                       className=" w-75"
-                      required
                       onChange={setdata}
                       value={user.zipcode}
                       name="zipcode"
@@ -549,7 +548,6 @@ const EditStudentForm = () => {
                       type="text"
                       variant="standard"
                       className=" w-75"
-                      required
                       onChange={setdata}
                       value={user.country}
                     />
@@ -581,7 +579,6 @@ const EditStudentForm = () => {
                       type="text"
                       variant="standard"
                       className=" w-75"
-                      required
                       onChange={setdata}
                       value={user.state}
                     />
@@ -652,7 +649,6 @@ const EditStudentForm = () => {
                       type="text"
                       variant="standard"
                       className=" w-75"
-                      required
                       onChange={setdata}
                       value={user.area}
                       name="area"
@@ -666,7 +662,6 @@ const EditStudentForm = () => {
                       type="text"
                       variant="standard"
                       className=" w-75"
-                      required
                       onChange={setdata}
                       value={user.native}
                       name="native"
@@ -680,7 +675,6 @@ const EditStudentForm = () => {
                       type="number"
                       variant="standard"
                       className=" w-75"
-                      required
                       onChange={setdata}
                       value={user.whatsappno}
                       name="whatsappno"
@@ -751,7 +745,6 @@ const EditStudentForm = () => {
                       type="number"
                       variant="standard"
                       className=" w-75"
-                      required
                       onChange={setdata}
                       value={user.marks}
                       name="marks"
@@ -765,7 +758,6 @@ const EditStudentForm = () => {
                       type="number"
                       variant="standard"
                       className="mar w-75"
-                      required
                       onChange={setdata}
                       value={user.academicyear}
                       name="academicyear"
@@ -873,7 +865,6 @@ const EditStudentForm = () => {
                       type="date"
                       variant="standard"
                       className="w-75"
-                      required
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -889,7 +880,6 @@ const EditStudentForm = () => {
                           <span className="label-family">Enquiry Taken By</span>
                         }
                         variant="standard"
-                        required
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -910,7 +900,6 @@ const EditStudentForm = () => {
                       <Select
                         id="coursepackage"
                         name="coursepackage"
-                        required
                         onChange={setdata}
                         value={user.coursepackage}
                       >
@@ -935,7 +924,6 @@ const EditStudentForm = () => {
                       <Select
                         id="courses"
                         name="courses"
-                        required
                         onChange={setdata}
                         value={user.courses}
                       >
@@ -960,7 +948,6 @@ const EditStudentForm = () => {
                       <Select
                         id="leadsource"
                         name="leadsource"
-                        required
                         onChange={setdata}
                         value={user.leadsource}
                       >

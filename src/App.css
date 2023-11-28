@@ -249,3 +249,13 @@ main {
 .row {
   margin-top: 10px;
 }
+.blue {
+  background-color: #195489 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+}
+.orange {
+  background-color: #e9622b !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+}

@@ -1,9 +1,10 @@
 import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
@@ -456,284 +457,310 @@ const FeeView = () => {
     display: studentdata.dueamount < 1 ? true : "none",
     marginLeft: "10px",
   };
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
+  }));
+
   return (
-    <div className="container">
-      <div className="d-flex justify-content-between my-2">
-        {studentdata && (
-          <h4 className="pt-3"> {studentdata.name} Fee Details</h4>
-        )}
-        <span>
-          {studentdata && studentdata.installments[0] && (
-            <div>
-              <button
-                className="btn btn-warning"
-                variant="outlined"
-                onClick={handleClickOpen}
-              >
-                Extra Discount
-              </button>
-              {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
+    <div className="container mt-3">
+      <div className="feeview">
+        <div className="d-flex justify-content-between my-2 ms-2">
+          {studentdata && (
+            <h4 className="pt-3"> {studentdata.name} Fee Details</h4>
+          )}
+          <span>
+            {studentdata && studentdata.installments[0] && (
+              <div>
+                <button
+                  className="btn btn-warning"
+                  variant="outlined"
+                  onClick={handleClickOpen}
+                >
+                  Extra Discount
+                </button>
+                {/* <Button variant="outlined" onClick={handleClickOpen} className="btn btn-primary">
           Open form dialog
         </Button> */}
-              <Dialog open={open} onClose={handleClose}>
-                {/* <DialogTitle>DISCOUNT</DialogTitle> */}
-                <DialogContent>
-                  {/* <DialogContentText>
+                <Dialog open={open} onClose={handleClose}>
+                  {/* <DialogTitle>DISCOUNT</DialogTitle> */}
+                  <DialogContent>
+                    {/* <DialogContentText>
               To subscribe to this website, please enter your email address here. We
               will send updates occasionally.
             </DialogContentText> */}
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    label="Discount"
-                    type="number"
-                    fullWidth
-                    variant="standard"
-                    onChange={(e) => setExtraDiscount(e.target.value)}
-                  />
-                  <DialogContentText>
-                    <textarea
-                      rows="3"
-                      cols="50"
-                      placeholder="Remarks"
-                      name="comment"
-                      form="usrform"
-                      onChange={(e) => setText(e.target.value)}
-                      value={text}
-                    ></textarea>
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose}>Cancel</Button>
-                  <Button onClick={handleApplyDiscount}>Apply</Button>
-                </DialogActions>
-              </Dialog>
-            </div>
-          )}{" "}
-        </span>
-      </div>
-      <div className="mb-3">
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Total Amount
-                </TableCell>
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      label="Discount"
+                      type="number"
+                      fullWidth
+                      variant="standard"
+                      onChange={(e) => setExtraDiscount(e.target.value)}
+                    />
+                    <DialogContentText>
+                      <textarea
+                        rows="3"
+                        cols="50"
+                        placeholder="Remarks"
+                        name="comment"
+                        form="usrform"
+                        onChange={(e) => setText(e.target.value)}
+                        value={text}
+                      ></textarea>
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleApplyDiscount}>Apply</Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
+            )}{" "}
+          </span>
+        </div>
+        <div className="mb-3">
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell className="table-cell-heading">
+                    Total Amount
+                  </StyledTableCell>
 
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Paid Amount
-                </TableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Paid Amount
+                  </StyledTableCell>
 
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  Due Amount
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Extra Discount
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  Paid Status
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell className="border border 1">
-                  <span
-                    title={Number(studentdata.finaltotal).toLocaleString(
-                      "en-IN"
-                    )}
-                    // style={{
-                    //   width: "2.5rem",
-                    //   whiteSpace: "nowrap",
-                    //   overflow: "hidden",
-                    //   textOverflow: "ellipsis",
-                    //   fontSize: "13px",
-                    //   display: "block",
-                    // }}
-                  >
-                    {Number(studentdata.finaltotal).toLocaleString("en-IN")}
-                  </span>
-                </TableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Due Amount
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Extra Discount
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Paid Status
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <StyledTableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <StyledTableCell className="Table-cell text-center">
+                    <span
+                      title={Number(studentdata.finaltotal).toLocaleString(
+                        "en-IN"
+                      )}
+                      style={{
+                        // width: "2.5rem",
+                        // whiteSpace: "nowrap",
+                        // overflow: "hidden",
+                        // textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        // display: "block",
+                      }}
+                    >
+                      {Number(studentdata.finaltotal).toLocaleString("en-IN")}
+                    </span>
+                  </StyledTableCell>
 
-                <TableCell className="border border 1">
-                  <span
-                    title={Number(studentdata.totalpaidamount).toLocaleString(
-                      "en-IN"
-                    )}
-                    // style={{
-                    //   width: "2.5rem",
-                    //   whiteSpace: "nowrap",
-                    //   overflow: "hidden",
-                    //   textOverflow: "ellipsis",
-                    //   fontSize: "13px",
-                    //   display: "block",
-                    // }}
-                  >
-                    {Number(studentdata.totalpaidamount).toLocaleString(
-                      "en-IN"
-                    )}
-                  </span>
-                </TableCell>
+                  <StyledTableCell className="Table-cell text-center">
+                    <span
+                      title={Number(studentdata.totalpaidamount).toLocaleString(
+                        "en-IN"
+                      )}
+                      style={{
+                        // width: "2.5rem",
+                        // whiteSpace: "nowrap",
+                        // overflow: "hidden",
+                        // textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        // display: "block",
+                      }}
+                    >
+                      {Number(studentdata.totalpaidamount).toLocaleString(
+                        "en-IN"
+                      )}
+                    </span>
+                  </StyledTableCell>
 
-                <TableCell className="border border 1">
-                  <span
-                    title={Number(studentdata.dueamount).toLocaleString(
-                      "en-IN"
-                    )}
-                    // style={{
-                    //   width: "2.5rem",
-                    //   whiteSpace: "nowrap",
-                    //   overflow: "hidden",
-                    //   textOverflow: "ellipsis",
-                    //   fontSize: "13px",
-                    //   display: "block",
-                    // }}
-                  >
-                    {Number(studentdata.dueamount).toLocaleString("en-IN")}
-                  </span>
+                  <StyledTableCell className="Table-cell text-center">
+                    <span
+                      title={Number(studentdata.dueamount).toLocaleString(
+                        "en-IN"
+                      )}
+                      style={{
+                        // width: "2.5rem",
+                        // whiteSpace: "nowrap",
+                        // overflow: "hidden",
+                        // textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        // display: "block",
+                      }}
+                    >
+                      {Number(studentdata.dueamount).toLocaleString("en-IN")}
+                    </span>
 
-                  {/* {dueamount} */}
-                </TableCell>
+                    {/* {dueamount} */}
+                  </StyledTableCell>
 
-                <TableCell className="border border 1">
-                  <span
-                  // title={studentdata.totalpaidamount}
-                  // style={{
-                  //   width: "2.5rem",
-                  //   whiteSpace: "nowrap",
-                  //   overflow: "hidden",
-                  //   textOverflow: "ellipsis",
-                  //   fontSize: "13px",
-                  //   display: "block",
-                  // }}
-                  >
-                    {extra_discount_view && (
-                      <>{Number(extra_discount_view).toLocaleString("en-IN")}</>
-                    )}
-                  </span>
-                </TableCell>
+                  <StyledTableCell className="Table-cell text-center">
+                    <span
+                      title={studentdata.totalpaidamount}
+                      style={{
+                        // width: "2.5rem",
+                        // whiteSpace: "nowrap",
+                        // overflow: "hidden",
+                        // textOverflow: "ellipsis",
+                        fontSize: "13px",
+                        // display: "block",
+                      }}
+                    >
+                      {extra_discount_view && (
+                        <>
+                          {Number(extra_discount_view).toLocaleString("en-IN")}
+                        </>
+                      )}
+                    </span>
+                  </StyledTableCell>
 
-                <TableCell className="border border 1">
-                  {studentdata.totalinstallments &&
-                    studentdata.totalinstallments.length > 0 &&
-                    studentdata.totalinstallments.map((item, index) => {
-                      if (true) {
-                        return (
-                          <div style={{ display: "flex" }}>
-                            <span style={dynamicStyle}>
-                              {item.totalinstallmentspaid}/
-                              {item.totalinstallments}
-                            </span>
-                            <span style={dynamicStyle}>
-                              <CheckCircleIcon style={IconStyle} />
-                            </span>
-                          </div>
-                        );
-                      }
-                    })}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
-      <h4> Collect Fee</h4>
-      <hr className="mb-2 w-75" />
-      {/* admission fee payment */}
-      {studentdata && !studentdata.initialpayment[0] && (
-        <div>
-          <h4 className="my-3"> Admission Fee</h4>
-          <hr></hr>
-          <div className="row">
-            <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup">
-              <input
-                type="number"
-                name="initialamount"
-                value={admissionFee.initialamount}
-                onChange={handleInputChange}
-              />
-              <label>
-                Admission Fee <span className="text-danger"> * </span>
-              </label>
-            </div>
-            <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup">
-              <input
-                type="date"
-                name="paiddate"
-                value={admissionFee.paiddate}
-                onChange={handleInputChange}
-              />
-              <label>
-                Paid Date <span className="text-danger"> * </span>
-              </label>
-            </div>
-            <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup-select">
-              <select
-                name="modeofpayment"
-                value={admissionFee.modeofpayment}
-                onChange={handleInputChange}
-              >
-                <option value="">---select---</option>
-                <option value="UPI">UPI</option>
-                <option value="Cash">Cash</option>
-                <option value="Bank Transfer">Bank Transfer</option>
-                <option value="Cheque">Cheque</option>
-              </select>
-              <label>
-                Mode of Payments <span className="text-danger"> * </span>
-              </label>
-            </div>
-            <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup ms-3">
-              <input
-                type="text"
-                name="transactionID"
-                value={admissionFee.transactionID}
-                onChange={handleInputChange}
-              />
-              <label>
-                Transaction Id <span className="text-danger"> * </span>
-              </label>
-            </div>
-            <div className="col-12 col-md-6 col-lg-2 col-xl-2">
-              <button
-                className="btn btn-primary my-2 end"
-                onClick={handleAdmissionFee}
-              >
-                Update
-              </button>
+                  <StyledTableCell className="Table-cell text-center">
+                    {studentdata.totalinstallments &&
+                      studentdata.totalinstallments.length > 0 &&
+                      studentdata.totalinstallments.map((item, index) => {
+                        if (true) {
+                          return (
+                            <div style={{ fontSize: "13px" }}>
+                              <span
+                                style={dynamicStyle}
+                                className="text-center"
+                              >
+                                {item.totalinstallmentspaid}/
+                                {item.totalinstallments}
+                              </span>
+                              <span style={dynamicStyle}>
+                                <CheckCircleIcon style={IconStyle} />
+                              </span>
+                            </div>
+                          );
+                        }
+                      })}
+                  </StyledTableCell>
+                </StyledTableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+        {/* <h4 className="ms-2"> Collect Fee</h4>
+        <hr className="mb-2 w-75" /> */}
+        {/* admission fee payment */}
+        {studentdata && !studentdata.initialpayment[0] && (
+          <div>
+            <h4 className="my-3 ms-2"> Admission Fee</h4>
+            <hr></hr>
+            <div className="row mb-3">
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup">
+                <input
+                  type="number"
+                  name="initialamount"
+                  value={admissionFee.initialamount}
+                  onChange={handleInputChange}
+                />
+                <label>
+                  Admission Fee <span className="text-danger"> * </span>
+                </label>
+              </div>
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup">
+                <input
+                  type="date"
+                  name="paiddate"
+                  value={admissionFee.paiddate}
+                  onChange={handleInputChange}
+                />
+                <label>
+                  Paid Date <span className="text-danger"> * </span>
+                </label>
+              </div>
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup-select">
+                <select
+                  name="modeofpayment"
+                  value={admissionFee.modeofpayment}
+                  onChange={handleInputChange}
+                >
+                  <option value="">---select---</option>
+                  <option value="UPI">UPI</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                  <option value="Cheque">Cheque</option>
+                </select>
+                <label>
+                  Mode of Payments <span className="text-danger"> * </span>
+                </label>
+              </div>
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup ms-3">
+                <input
+                  type="text"
+                  name="transactionID"
+                  value={admissionFee.transactionID}
+                  onChange={handleInputChange}
+                />
+                <label>
+                  Transaction Id <span className="text-danger"> * </span>
+                </label>
+              </div>
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2">
+                <button
+                  className="btn btn-primary my-2 end"
+                  onClick={handleAdmissionFee}
+                >
+                  Update
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* enter no of installments */}
-      {studentdata &&
-        studentdata.initialpayment[0] &&
-        studentdata.initialpayment[0].paymentdone === true &&
-        !studentdata.totalinstallments[0] && (
-          // !studentdata.totalinstallments[0] &&
-          <div>
-            <h4 className="mt-3"> Fee Installments</h4>
-            <hr className="mt-1 mb-3" />
-            <div className="row m-0 p-0">
-              <div className="col-3 col-md-3 col-lg-3 col-xl-3 pt-2">
-                Enter No.of Installments :-
-              </div>
+        {/* enter no of installments */}
+        {studentdata &&
+          studentdata.initialpayment[0] &&
+          studentdata.initialpayment[0].paymentdone === true &&
+          !studentdata.totalinstallments[0] && (
+            // !studentdata.totalinstallments[0] &&
+            <div>
+              <h4 className="mt-3"> Fee Installments</h4>
+              <hr className="mt-1 mb-3" />
+              <div className="row m-0 p-0">
+                <div className="col-3 col-md-3 col-lg-3 col-xl-3 pt-2">
+                  Enter No.of Installments :-
+                </div>
 
-              <span className="col-2 col-md-2 col-lg-2 col-xl-2">
-                <TextField
-                  type="number"
-                  variant="standard"
-                  className="w-75 "
-                  value={noOfinstallments}
-                  onChange={(e) => setNoOfinstallments(e.target.value)}
-                />
-              </span>
+                <span className="col-2 col-md-2 col-lg-2 col-xl-2">
+                  <TextField
+                    type="number"
+                    variant="standard"
+                    className="w-75 "
+                    value={noOfinstallments}
+                    onChange={(e) => setNoOfinstallments(e.target.value)}
+                  />
+                </span>
 
-              {/* <div className=" col-12 col-md-6 col-xl-6 col-lg-6 inputgroup">
+                {/* <div className=" col-12 col-md-6 col-xl-6 col-lg-6 inputgroup">
                     <input
                       type="number"
                       value={noOfinstallments}
@@ -741,230 +768,339 @@ const FeeView = () => {
                     />
                     <label> Enter No.of Installments </label>
                   </div> */}
-              <div className="col-12 col-md-6 col-xl-6 col-lg-6">
-                <button
-                  className=" btn btn-primary "
-                  onClick={handleNoOfInstallments}
-                >
-                  Add No. of Installments
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-      {/* installments payment */}
-      <div>
-        {studentdata &&
-          installments &&
-          installments.map((installment, index) => {
-            if (installment.paymentdone === true) {
-              return null; // Do not render anything
-            }
-            return (
-              <div className="installment" key={index}>
-                <h5 className="mt-1 ms-2">
-                  Installment {installment.installmentNumber}
-                  {installment.subInstallmentNumber != 0 && (
-                    <>/ {installment.subInstallmentNumber}</>
-                  )}
-                </h5>
-                <div className="row">
-                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
-                    <input
-                      type="date"
-                      name="Installment Date"
-                      className="w-100"
-                      onChange={(e) =>
-                        handleInstallmentUpdate(
-                          index,
-                          "duedate",
-                          e.target.value
-                        )
-                      }
-                      value={installment.duedate}
-                    />
-                    <label> Installment Date</label>
-                  </div>
-
-                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
-                    <input
-                      type="number"
-                      name="Installment Amount"
-                      className="w-100"
-                      onChange={(e) =>
-                        handleInstallmentUpdate(
-                          index,
-                          "dueamount",
-                          parseFloat(e.target.value)
-                        )
-                      }
-                      value={installment.dueamount}
-                    />
-                    <label> Installment Amount</label>
-                  </div>
-                  {studentdata &&
-                    studentdata.installments[index] &&
-                    studentdata.installments[index].duedate &&
-                    studentdata.installments[index].dueamount && (
-                      <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
-                        <input
-                          type="date"
-                          name="paiddate"
-                          className="w-100"
-                          onChange={(e) =>
-                            handleInstallmentUpdate(
-                              index,
-                              "paiddate",
-                              e.target.value
-                            )
-                          }
-                          value={installment.paiddate}
-                        />
-                        <label> Paid Date</label>
-                      </div>
-                    )}
-                  {studentdata &&
-                    studentdata.installments[index] &&
-                    studentdata.installments[index].duedate &&
-                    studentdata.installments[index].dueamount && (
-                      <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
-                        <input
-                          type="number"
-                          name="paidamount"
-                          className="w-100"
-                          onChange={(e) =>
-                            handleInstallmentUpdate(
-                              index,
-                              "paidamount",
-                              parseFloat(e.target.value)
-                            )
-                          }
-                          value={installment.paidamount}
-                        />
-                        <label> Paid Amount</label>
-                      </div>
-                    )}
-                  {studentdata &&
-                    studentdata.installments[index] &&
-                    studentdata.installments[index].duedate &&
-                    studentdata.installments[index].dueamount && (
-                      <div className="col-12 col-md-6 col-lg-2 col-xl-2 mul-input">
-                        <select
-                          className="w-100"
-                          name="modeofpayment"
-                          onChange={(e) =>
-                            handleInstallmentUpdate(
-                              index,
-                              "modeofpayment",
-                              e.target.value
-                            )
-                          }
-                          value={installment.modeofpayment}
-                        >
-                          <option value="">---select---</option>
-                          <option value="UPI">UPI</option>
-                          <option value="Cash">Cash</option>
-                          <option value="Bank Transfer">Bank Transfer</option>
-                          <option value="Cheque">Cheque</option>
-                        </select>
-                        <label> Mode of Payments</label>
-                      </div>
-                    )}
-                  {studentdata &&
-                    studentdata.installments[index] &&
-                    studentdata.installments[index].duedate &&
-                    studentdata.installments[index].dueamount && (
-                      <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
-                        <input
-                          type="text"
-                          className="w-100"
-                          name="transactionid"
-                          onChange={(e) =>
-                            handleInstallmentUpdate(
-                              index,
-                              "transactionid",
-                              e.target.value
-                            )
-                          }
-                          value={installment.transactionid}
-                        />
-                        <label> Transaction Id</label>
-                      </div>
-                    )}
-
-                  {studentdata &&
-                    studentdata.installments[index] &&
-                    studentdata.installments[index].duedate &&
-                    studentdata.installments[index].dueamount && (
-                      <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">
-                        <button
-                          className="btn btn-primary center"
-                          onClick={() => handleUpdateClick(index)}
-                        >
-                          Update
-                        </button>
-                      </div>
-                    )}
-                  {studentdata &&
-                    studentdata.installments[index] &&
-                    !studentdata.installments[index].duedate &&
-                    !studentdata.installments[index].dueamount && (
-                      <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">
-                        <button
-                          className="btn btn-primary center"
-                          onClick={UpdateDueDateAndDueAmount}
-                        >
-                          Update
-                        </button>
-                      </div>
-                    )}
+                <div className="col-12 col-md-6 col-xl-6 col-lg-6">
+                  <button
+                    className=" btn btn-primary "
+                    onClick={handleNoOfInstallments}
+                  >
+                    Add No. of Installments
+                  </button>
                 </div>
               </div>
-            );
-          })}
-      </div>
-      {/* Display admission fee payment table*/}
+            </div>
+          )}
 
-      {studentdata &&
-        studentdata.initialpayment[0] &&
-        studentdata.initialpayment[0].paymentdone === true && (
-          <TableContainer component={Paper} className="mt-4">
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                    Admission Fee
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
-                    Paid Date
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
-                    Mode of Payment
-                  </TableCell>
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                    {" "}
-                    Transition ID
-                  </TableCell>
-                  {/* <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+        {/* installments payment */}
+        <div>
+          {studentdata &&
+            installments &&
+            installments.map((installment, index) => {
+              if (installment.paymentdone === true) {
+                return null; // Do not render anything
+              }
+              return (
+                <div className="installment" key={index}>
+                  <h5 className="mt-1 ms-2">
+                    Installment {installment.installmentNumber}
+                    {installment.subInstallmentNumber != 0 && (
+                      <>/ {installment.subInstallmentNumber}</>
+                    )}
+                  </h5>
+                  <div className="row">
+                    <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                      <input
+                        type="date"
+                        name="Installment Date"
+                        className="w-100"
+                        onChange={(e) =>
+                          handleInstallmentUpdate(
+                            index,
+                            "duedate",
+                            e.target.value
+                          )
+                        }
+                        value={installment.duedate}
+                      />
+                      <label> Installment Date</label>
+                    </div>
+
+                    <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                      <input
+                        type="number"
+                        name="Installment Amount"
+                        className="w-100"
+                        onChange={(e) =>
+                          handleInstallmentUpdate(
+                            index,
+                            "dueamount",
+                            parseFloat(e.target.value)
+                          )
+                        }
+                        value={installment.dueamount}
+                      />
+                      <label> Installment Amount</label>
+                    </div>
+                    {studentdata &&
+                      studentdata.installments[index] &&
+                      studentdata.installments[index].duedate &&
+                      studentdata.installments[index].dueamount && (
+                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                          <input
+                            type="date"
+                            name="paiddate"
+                            className="w-100"
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "paiddate",
+                                e.target.value
+                              )
+                            }
+                            value={installment.paiddate}
+                          />
+                          <label> Paid Date</label>
+                        </div>
+                      )}
+                    {studentdata &&
+                      studentdata.installments[index] &&
+                      studentdata.installments[index].duedate &&
+                      studentdata.installments[index].dueamount && (
+                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                          <input
+                            type="number"
+                            name="paidamount"
+                            className="w-100"
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "paidamount",
+                                parseFloat(e.target.value)
+                              )
+                            }
+                            value={installment.paidamount}
+                          />
+                          <label> Paid Amount</label>
+                        </div>
+                      )}
+                    {studentdata &&
+                      studentdata.installments[index] &&
+                      studentdata.installments[index].duedate &&
+                      studentdata.installments[index].dueamount && (
+                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 mul-input">
+                          <select
+                            className="w-100"
+                            name="modeofpayment"
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "modeofpayment",
+                                e.target.value
+                              )
+                            }
+                            value={installment.modeofpayment}
+                          >
+                            <option value="">---select---</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Cheque">Cheque</option>
+                          </select>
+                          <label> Mode of Payments</label>
+                        </div>
+                      )}
+                    {studentdata &&
+                      studentdata.installments[index] &&
+                      studentdata.installments[index].duedate &&
+                      studentdata.installments[index].dueamount && (
+                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                          <input
+                            type="text"
+                            className="w-100"
+                            name="transactionid"
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "transactionid",
+                                e.target.value
+                              )
+                            }
+                            value={installment.transactionid}
+                          />
+                          <label> Transaction Id</label>
+                        </div>
+                      )}
+
+                    {studentdata &&
+                      studentdata.installments[index] &&
+                      studentdata.installments[index].duedate &&
+                      studentdata.installments[index].dueamount && (
+                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">
+                          <button
+                            className="btn btn-primary center"
+                            onClick={() => handleUpdateClick(index)}
+                          >
+                            Update
+                          </button>
+                        </div>
+                      )}
+                    {studentdata &&
+                      studentdata.installments[index] &&
+                      !studentdata.installments[index].duedate &&
+                      !studentdata.installments[index].dueamount && (
+                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">
+                          <button
+                            className="btn btn-primary center"
+                            onClick={UpdateDueDateAndDueAmount}
+                          >
+                            Update
+                          </button>
+                        </div>
+                      )}
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+        {/* Display admission fee payment table*/}
+
+        {studentdata &&
+          studentdata.initialpayment[0] &&
+          studentdata.initialpayment[0].paymentdone === true && (
+            <TableContainer component={Paper} className="mt-4">
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell className="table-cell-heading">
+                      Admission Fee
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      {" "}
+                      Paid Date
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      {" "}
+                      Mode of Payment
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      {" "}
+                      Transition ID
+                    </StyledTableCell>
+                    {/* <TableCell className="table-cell-heading">
                   {" "}
                   Admin Invoice
                 </TableCell> */}
-                  <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
+                    <StyledTableCell className="table-cell-heading">
+                      {" "}
+                      Invoice
+                    </StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                {studentdata.initialpayment &&
+                  studentdata.initialpayment.map((item, index) => {
+                    let paidDate = new Date(item.paiddate);
+                    const day = paidDate.getUTCDate();
+                    const monthIndex = paidDate.getUTCMonth();
+                    const year = paidDate.getUTCFullYear();
+
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
+
+                    // Formatting the date
+                    paidDate = `${day < 10 ? "0" : ""}${day}-${
+                      monthAbbreviations[monthIndex]
+                    }-${year}`;
+
+                    return (
+                      <TableBody>
+                        <StyledTableRow
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <StyledTableCell className="border border 1 text-center">
+                            {Number(item.initialamount).toLocaleString("en-IN")}
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1 text-center">
+                            {paidDate}
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1 text-center">
+                            {item.modeofpayment}
+                          </StyledTableCell>
+                          <StyledTableCell className="border border 1 text-center">
+                            {item.transactionID}
+                          </StyledTableCell>
+                          {/* <TableCell className="border border 1 text-center">
+                      <Link
+                        to={`/invoice/${id}/${index}/Admission Fee/admininvoice`}
+                        style={{ width: "40px" }}
+                      >
+                        <CreditScoreIcon className="iconn" />
+                      </Link>
+                    </TableCell> */}
+                          <StyledTableCell className="border border 1 text-center">
+                            <Link
+                              to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
+                              style={{ width: "40px" }}
+                            >
+                              <CreditScoreIcon className="iconn" />
+                            </Link>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      </TableBody>
+                    );
+                  })}
+              </Table>
+            </TableContainer>
+          )}
+        {/* Display course fee payment table*/}
+
+        {studentdata && studentdata.installments[0] && (
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell className="table-cell-heading">
+                    {" "}
+                    Installment
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Due Date
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Due Amount
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Paid Date
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Paid Amount
+                  </StyledTableCell>
+
+                  <StyledTableCell className="table-cell-heading">
+                    Mode of Payment
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Transition ID
+                  </StyledTableCell>
+
+                  <StyledTableCell className="table-cell-heading">
                     {" "}
                     Invoice
-                  </TableCell>
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
-              {studentdata.initialpayment &&
-                studentdata.initialpayment.map((item, index) => {
+              {installments &&
+                installments.map((item, index) => {
                   let paidDate = new Date(item.paiddate);
                   const day = paidDate.getUTCDate();
                   const monthIndex = paidDate.getUTCMonth();
                   const year = paidDate.getUTCFullYear();
-
+                  let dueDate = new Date(item.duedate);
+                  const dueday = dueDate.getUTCDate();
+                  const duemonthIndex = dueDate.getUTCMonth();
+                  const dueyear = dueDate.getUTCFullYear();
                   const monthAbbreviations = [
                     "Jan",
                     "Feb",
@@ -984,183 +1120,75 @@ const FeeView = () => {
                   paidDate = `${day < 10 ? "0" : ""}${day}-${
                     monthAbbreviations[monthIndex]
                   }-${year}`;
+                  dueDate = `${dueday < 10 ? "0" : ""}${dueday}-${
+                    monthAbbreviations[duemonthIndex]
+                  }-${dueyear}`;
+
+                  if (item.paidamount < 1) {
+                    return null; // Do not render anything
+                  }
 
                   return (
                     <TableBody>
-                      <TableRow
+                      <StyledTableRow
                         sx={{
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <TableCell className="border border 1 text-center">
-                          {Number(item.initialamount).toLocaleString("en-IN")}
-                        </TableCell>
-                        <TableCell className="border border 1 text-center">
+                        <StyledTableCell className="Table-cell text-center">
+                          Installment {item.installmentNumber}{" "}
+                          {item.subInstallmentNumber != 0 && (
+                            <>/ {item.subInstallmentNumber}</>
+                          )}
+                        </StyledTableCell>
+
+                        <StyledTableCell className="Table-cell text-center">
+                          {dueDate}
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
+                          {Number(
+                            parseFloat(item.dueamount).toFixed(2)
+                          ).toLocaleString("en-IN")}
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
                           {paidDate}
-                        </TableCell>
-                        <TableCell className="border border 1 text-center">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
+                          {Number(item.paidamount).toLocaleString("en-IN")}
+                        </StyledTableCell>
+
+                        <StyledTableCell className="Table-cell text-center">
                           {item.modeofpayment}
-                        </TableCell>
-                        <TableCell className="border border 1 text-center">
-                          {item.transactionID}
-                        </TableCell>
-                        {/* <TableCell className="border border 1 text-center">
-                      <Link
-                        to={`/invoice/${id}/${index}/Admission Fee/admininvoice`}
-                        style={{ width: "40px" }}
-                      >
-                        <CreditScoreIcon className="iconn" />
-                      </Link>
-                    </TableCell> */}
-                        <TableCell className="border border 1 text-center">
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
+                          {item.transactionid}
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
                           <Link
-                            to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
-                            style={{ width: "40px" }}
+                            to={`/invoice/${id}/${index}/Installment/admininvoice`}
+                            style={{ width: "40px", paddingRight: "15px" }}
+                            className=" hover-container"
                           >
                             <CreditScoreIcon className="iconn" />
+                            <div class="hover-text">admin</div>
                           </Link>
-                        </TableCell>
-                      </TableRow>
+                          <Link
+                            to={`/invoice/${id}/${index}/Installment/studentinvoice`}
+                            style={{ width: "40px" }}
+                            className=" hover-container"
+                          >
+                            <CreditScoreIcon className="iconn" />
+                            <div class="hover-text">Student</div>
+                          </Link>
+                        </StyledTableCell>
+                      </StyledTableRow>
                     </TableBody>
                   );
                 })}
             </Table>
           </TableContainer>
         )}
-      {/* Display course fee payment table*/}
-
-      {studentdata && studentdata.installments[0] && (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  {" "}
-                  Installment
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Due Date
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Due Amount
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  Paid Date
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  Paid Amount
-                </TableCell>
-
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  Mode of Payment
-                </TableCell>
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light">
-                  Transition ID
-                </TableCell>
-
-                <TableCell className="bg-primary fs-6 border border 1 text-center text-light ">
-                  {" "}
-                  Invoice
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            {installments &&
-              installments.map((item, index) => {
-                let paidDate = new Date(item.paiddate);
-                const day = paidDate.getUTCDate();
-                const monthIndex = paidDate.getUTCMonth();
-                const year = paidDate.getUTCFullYear();
-                let dueDate = new Date(item.duedate);
-                const dueday = dueDate.getUTCDate();
-                const duemonthIndex = dueDate.getUTCMonth();
-                const dueyear = dueDate.getUTCFullYear();
-                const monthAbbreviations = [
-                  "Jan",
-                  "Feb",
-                  "Mar",
-                  "Apr",
-                  "May",
-                  "Jun",
-                  "Jul",
-                  "Aug",
-                  "Sep",
-                  "Oct",
-                  "Nov",
-                  "Dec",
-                ];
-
-                // Formatting the date
-                paidDate = `${day < 10 ? "0" : ""}${day}-${
-                  monthAbbreviations[monthIndex]
-                }-${year}`;
-                dueDate = `${dueday < 10 ? "0" : ""}${dueday}-${
-                  monthAbbreviations[duemonthIndex]
-                }-${dueyear}`;
-
-                if (item.paidamount < 1) {
-                  return null; // Do not render anything
-                }
-
-                return (
-                  <TableBody>
-                    <TableRow
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <TableCell className="border border 1 text-center">
-                        Installment {item.installmentNumber}{" "}
-                        {item.subInstallmentNumber != 0 && (
-                          <>/ {item.subInstallmentNumber}</>
-                        )}
-                      </TableCell>
-
-                      <TableCell className="border border 1 text-center">
-                        {dueDate}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {Number(
-                          parseFloat(item.dueamount).toFixed(2)
-                        ).toLocaleString("en-IN")}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {paidDate}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center  ">
-                        {Number(item.paidamount).toLocaleString("en-IN")}
-                      </TableCell>
-
-                      <TableCell className="border border 1 text-center">
-                        {item.modeofpayment}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {item.transactionid}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        <Link
-                          to={`/invoice/${id}/${index}/Installment/admininvoice`}
-                          style={{ width: "40px", paddingRight: "15px" }}
-                          className=" hover-container"
-                        >
-                          <CreditScoreIcon className="iconn" />
-                          <div class="hover-text">admin</div>
-                        </Link>
-                        <Link
-                          to={`/invoice/${id}/${index}/Installment/studentinvoice`}
-                          style={{ width: "40px" }}
-                          className=" hover-container"
-                        >
-                          <CreditScoreIcon className="iconn" />
-                          <div class="hover-text">Student</div>
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                );
-              })}
-          </Table>
-        </TableContainer>
-      )}
+      </div>
     </div>
   );
 };
