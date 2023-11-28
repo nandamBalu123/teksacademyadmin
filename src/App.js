@@ -48,7 +48,7 @@ import StudentApplicationPrint from "./components/pages/student/studentData/Stud
 import FeeDetails from "./components/pages/student/fee/FeeDetails";
 import Feefollowup from "./components/pages/student/fee/Feefollowup";
 import FeeView from "./components/pages/student/fee/FeeView";
-// import Addtofee from "./components/pages/student/fee/Addtofee";
+import Addtofee from "./components/pages/student/fee/Addtofee";
 import EditStudentForm from "./components/pages/student/studentData/EditStudentForm";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useEffect } from "react";
@@ -141,10 +141,10 @@ function App() {
                   path="/invoice/:id/:index/:name/:nametype"
                   element={user ? <Invoice /> : <Dashboard />}
                 />
-                {/* <Route
-                  path="/addtofee/:id"
+                <Route
+                  path="/addtofee"
                   element={user ? <Addtofee /> : <Dashboard />}
-                /> */}
+                />
                 <Route path="/studentdata" element={<StudentData />} />
                 <Route
                   path="/studentdataview/:id"
