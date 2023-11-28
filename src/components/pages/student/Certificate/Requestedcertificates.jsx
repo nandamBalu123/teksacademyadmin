@@ -292,7 +292,7 @@ const Requestedcertificates = () => {
               />
               <hr className="w-75 ms-2" />
             </div>
-            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mt-1">
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-1">
               <div className="d-flex justify-content-evenly">
                 <p className="mt-2">
                   {" "}

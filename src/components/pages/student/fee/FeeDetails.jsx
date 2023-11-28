@@ -21,7 +21,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./FeeDetails.css";
 import axios from "axios";
-
+import Card from "@mui/material/Card";
 import { useNavigate, Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
@@ -199,27 +199,41 @@ const FeeDetails = () => {
           {" "}
           <h4 className="mt-1 text-center"> Fee Management</h4>
           <div className="row pt-2">
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-2">
-              <button className="feebtn" onClick={studentFeeRecords}>
+            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
+              <Card className="blue" onClick={studentFeeRecords}>
+                <p className="text-center pt-3">Fee Records</p>
+              </Card>
+              {/* <button className="feebtn" onClick={studentFeeRecords}>
                 Fee Records
-              </button>
+              </button> */}
             </div>
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
-              <button
+            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2 ">
+              <Card className="blue" onClick={noDueRecords}>
+                <p className="text-center pt-3">No Due Records</p>
+              </Card>
+              {/* <button
                 className="btn bg-success text-light"
                 onClick={noDueRecords}
               >
                 No Due Records
-              </button>
+              </button> */}
             </div>
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mb-3 ">
-              <button
+            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
+              <Card className="blue" onClick={() => navigator("/feefollowup")}>
+                <p className="text-center pt-3">Fee followups</p>
+              </Card>
+              {/* <button
                 className="feebtn "
                 onClick={() => navigator("/feefollowup")}
               >
                 {" "}
                 Fee FollowUps
-              </button>
+              </button> */}
+            </div>
+            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
+              <Card className="blue">
+                <p className="text-center pt-3">Fee Received</p>
+              </Card>
             </div>
           </div>
           <div className="row  pb-3">

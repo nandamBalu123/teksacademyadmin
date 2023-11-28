@@ -70,7 +70,17 @@
 // import React, { useState } from "react";
 import { format, parseISO } from "date-fns";
 import React, { useEffect, useState } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { useNavigate } from "react-router-dom";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+import "./FeeReceived.css";
 
 const FeeReceived = () => {
   const { students, dispatch } = useStudentsContext();
@@ -109,34 +119,98 @@ const FeeReceived = () => {
     (total, payment) => total + payment.amount,
     0
   );
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
+  }));
   return (
-    <div>
-      <h2>Payment Details</h2>
-      <p>Total Amount: {totalAmount}</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Student Name</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Mode of Payment</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedPayments.map((payment, index) => (
-            <tr key={index}>
-              <td>{payment.studentName}</td>
-              <td>
-                {payment.date
-                  ? format(parseISO(payment.date), "yyyy-MM-dd")
-                  : "Invalid Date"}
-              </td>
-              <td>{payment.amount}</td>
-              <td>{payment.modeOfPayment}</td>
+    <div className="container mt-3">
+      <div className="feereceived ">
+        <h4 className="text-center my-3">Payment Details</h4>
+        <h5>Total Amount: {totalAmount}</h5>
+        <TableContainer component={Paper} className="mb-3">
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Name
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Date
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Amount
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading" align="center">
+                  Mode of Payment
+                </StyledTableCell>
+                {/* <StyledTableCell className='  bg-primary fs-6 Table-cell' align="center">Type</StyledTableCell> */}
+              </TableRow>
+            </TableHead>
+
+            <TableBody className="Table-cell">
+              {sortedPayments.map((payment, index) => (
+                <StyledTableRow key={index}>
+                  <StyledTableCell className="Table-cell text-center">
+                    {payment.studentName}
+                  </StyledTableCell>
+                  <StyledTableCell className="Table-cell text-center">
+                    {payment.date
+                      ? format(parseISO(payment.date), "yyyy-MM-dd")
+                      : "Invalid Date"}
+                  </StyledTableCell>
+                  <StyledTableCell className="Table-cell text-center">
+                    {payment.amount}
+                  </StyledTableCell>
+                  <StyledTableCell className=" Table-cell text-center">
+                    {payment.modeOfPayment}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        {/* <table>
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Mode of Payment</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sortedPayments.map((payment, index) => (
+              <tr key={index}>
+                <td>{payment.studentName}</td>
+                <td>
+                  {payment.date
+                    ? format(parseISO(payment.date), "yyyy-MM-dd")
+                    : "Invalid Date"}
+                </td>
+                <td>{payment.amount}</td>
+                <td>{payment.modeOfPayment}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table> */}
+      </div>
     </div>
   );
 };
