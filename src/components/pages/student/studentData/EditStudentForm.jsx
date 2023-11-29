@@ -1242,7 +1242,7 @@ const EditStudentForm = () => {
                           Tax Amount
                         </TableCell>
                         <TableCell
-                          align="center "
+                          align="center"
                           className="registration-tablehead"
                         >
                           Total Amount
@@ -1252,19 +1252,34 @@ const EditStudentForm = () => {
                         {user.feedetails &&
                           user.feedetails.map((item) => (
                             <TableRow key={item.id}>
-                              <TableCell align="center">
+                              <TableCell
+                                align="center"
+                                className="registration-tablebody"
+                              >
                                 {item.feetype}
                               </TableCell>
-                              <TableCell align="center">
+                              <TableCell
+                                align="center"
+                                className="registration-tablebody"
+                              >
                                 {item.amount}
                               </TableCell>
-                              <TableCell align="center">
+                              <TableCell
+                                align="center"
+                                className="registration-tablebody"
+                              >
                                 {item.discount}
                               </TableCell>
-                              <TableCell align="center">
+                              <TableCell
+                                align="center"
+                                className="registration-tablebody"
+                              >
                                 {parseFloat(item.taxamount.toFixed(2))}
                               </TableCell>
-                              <TableCell align="center">
+                              <TableCell
+                                align="center"
+                                className="registration-tablebody"
+                              >
                                 {item.totalamount}
                               </TableCell>
                             </TableRow>
