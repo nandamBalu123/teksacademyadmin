@@ -791,7 +791,7 @@ const StudentData = () => {
 
                       return (
                         <StyledTableRow key={item.id}>
-                          <StyledTableCell className="Table-cell text-center">
+                          <StyledTableCell className="Table-cell">
                             {index + 1}
                           </StyledTableCell>
 

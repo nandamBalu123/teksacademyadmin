@@ -478,7 +478,7 @@ const FeeDetails = () => {
               </div>
             </div>
           </div>
-          <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <Paper>
             <TableContainer sx={{ maxHeight: 440 }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -570,7 +570,7 @@ const FeeDetails = () => {
                           }}
                           key={item.id}
                         >
-                          <StyledTableCell className="Table-cell text-center">
+                          <StyledTableCell className="Table-cell ">
                             {index + 1}
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
@@ -622,7 +622,7 @@ const FeeDetails = () => {
                             <span
                               title={item.mobilenumber}
                               style={{
-                                width: "6rem",
+                                width: "8rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -650,7 +650,7 @@ const FeeDetails = () => {
                             <span
                               title={item.courses}
                               style={{
-                                width: "6rem",
+                                width: "8rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -663,7 +663,7 @@ const FeeDetails = () => {
                             <span
                               title={AdmissionDate}
                               style={{
-                                width: "6rem",
+                                width: "8rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -678,7 +678,7 @@ const FeeDetails = () => {
                                 parseFloat(item.finaltotal).toFixed(2)
                               ).toLocaleString("en-IN")}
                               style={{
-                                width: "4rem",
+                                width: "8rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -697,7 +697,7 @@ const FeeDetails = () => {
                                 parseFloat(item.totalpaidamount).toFixed(2)
                               ).toLocaleString("en-IN")}
                               style={{
-                                width: "4rem",
+                                width: "8rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -714,7 +714,7 @@ const FeeDetails = () => {
                                 parseFloat(item.dueamount).toFixed(2)
                               ).toLocaleString("en-IN")}
                               style={{
-                                width: "4rem",
+                                width: "8rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -729,7 +729,7 @@ const FeeDetails = () => {
                             <span
                               title={NextDueDate}
                               style={{
-                                width: "6rem",
+                                width: "8rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -740,7 +740,7 @@ const FeeDetails = () => {
                               {NextDueDate ? NextDueDate : "No NextDue Date"}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          <StyledTableCell className="Table-cell text-center">
                             <span
                               style={{
                                 width: "3rem",
@@ -769,7 +769,7 @@ const FeeDetails = () => {
                                     // settotalleft(item.totalinstallmentsleft);
                                     // totalleft = item.totalinstallmentsleft;
                                     return (
-                                      <div style={{ display: "flex" }}>
+                                      <div>
                                         <span style={dynamicStyle}>
                                           {items.totalinstallments}
                                         </span>
@@ -822,11 +822,11 @@ const FeeDetails = () => {
                       );
                     })
                   ) : (
-                    <StyledTableRow>
-                      <StyledTableCell colSpan={3}>
+                    <TableRow>
+                      <TableCell className="Table-cell">
                         No data available
-                      </StyledTableCell>
-                    </StyledTableRow>
+                      </TableCell>
+                    </TableRow>
                   )}{" "}
                 </TableBody>
               </Table>

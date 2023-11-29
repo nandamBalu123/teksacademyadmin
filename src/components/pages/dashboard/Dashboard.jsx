@@ -549,12 +549,13 @@ const Dashboard = () => {
       {/* Header */}
       <div>
         <Box className="text-center  mt-3">
-          {user && (
-            <Header
-              title={"Hi " + user.fullname}
-              subtitle={"Welcome to TEKS ACADEMY"}
-            />
-          )}{" "}
+          {user && <h3>{"Hi " + user.fullname}</h3>}
+          <h5>
+            {" "}
+            Welcome to{" "}
+            <span style={{ color: "#e96228", fontSize: "25px" }}>TEKS </span>
+            <span style={{ color: "#195489", fontSize: "25px" }}> ACADEMY</span>
+          </h5>
           {/* <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               Filter
             </h6>
@@ -638,7 +639,7 @@ const Dashboard = () => {
         </Box>
       </div>
 
-      <div className="contianer Dashboard">
+      <div className="contianer Dashboard ">
         <div className="row">
           <div className="col-12 col-md-1 col-lg-1 col-xl-1 m-sm-3"> </div>
           <div
@@ -653,7 +654,15 @@ const Dashboard = () => {
               })
             }
           >
-            <Card className="blue">
+            <Card
+              style={{
+                background: "#4f45b6",
+                textAlign: "center",
+                borderRadius: "8px",
+                color: "white",
+                boxShadow: "3px 3px 6px  gray",
+              }}
+            >
               <p className="text-center pt-3">Total Enrollments</p>
             </Card>
           </div>
@@ -668,7 +677,15 @@ const Dashboard = () => {
               })
             }
           >
-            <Card className="orange">
+            <Card
+              style={{
+                background: "#FF9F24",
+                textAlign: "center",
+                borderRadius: "8px",
+                color: "white",
+                boxShadow: "3px 3px 6px  gray",
+              }}
+            >
               <p className="text-center pt-3">Fee Details</p>
             </Card>
           </div>
@@ -684,7 +701,15 @@ const Dashboard = () => {
             }
           >
             <Link to="/feedetails">
-              <Card className="blue">
+              <Card
+                style={{
+                  background: "#008959",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+              >
                 <p className="text-center pt-3">Fee Followups</p>
               </Card>
             </Link>
@@ -867,10 +892,10 @@ const Dashboard = () => {
       {DisplayData.enrollments && (
         <div className=" ">
           <div className="d-flex justify-content-between">
-            <h4 className="text-center mt-3">
+            <h5 className="text-center mt-3">
               {" "}
               Current Month Enrollment Details
-            </h4>
+            </h5>
             <div className=" tex-end">
               <Button
                 id="demo-positioned-button"
@@ -975,38 +1000,72 @@ const Dashboard = () => {
             {/* <div className="col-12 col-md-2 col-xl-2 col-lg-2"> </div> */}
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                className="sub-blue"
+                style={{
+                  background: "#fd746e",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "#fff",
+                  boxShadow: "3px 3px 6px  gray",
+                  // boxShadow: "5px 7px 7px  gray",
+                  paddingTop: "10px",
+                }}
                 // style={{ background: "#4676a0", color: "white" }}
               >
-                <p>
-                  <b>No of Enrollments </b>
-                  <p className="pt-1"> 6</p>
-                </p>
+                <h6>No of Enrollments</h6>
+                <p>6</p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                className="sub-orange"
+                style={{
+                  background: "#7fa1e4",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                  // boxShadow: "5px 7px 7px  gray",
+                  paddingTop: "10px",
+                }}
                 // style={{ background: "#ed8155", color: "white" }}
               >
                 <p>
-                  <b>Booking Amount</b>
+                  <h6>Booking Amount</h6>
                   <p className="pt-1"> 40,000</p>{" "}
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card className="sub-blue">
+              <Card
+                style={{
+                  background: "#F4ae5b",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                  // boxShadow: "5px 7px 7px  gray",
+                  paddingTop: "10px",
+                }}
+              >
                 <p>
-                  <b> Received Amount</b>
+                  <h6> Received Amount</h6>
                   <p className="pt-1"> 10,000</p>{" "}
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card className="sub-orange">
+              <Card
+                style={{
+                  background: "#5ec394",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                  // boxShadow: "5px 7px 7px  gray",
+                  paddingTop: "10px",
+                }}
+              >
                 <p>
-                  <b>Due Amount</b>
+                  <h6>Due Amount</h6>
                   <p className="pt-1"> 30,000</p>{" "}
                 </p>
               </Card>
@@ -1015,7 +1074,7 @@ const Dashboard = () => {
         </div>
       )}
 
-      {DisplayData.enrollments && (
+      {/* {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
           <div className="d-flex justify-content-between">
             <h4 className="pt-4  enrollment ps-4"> Total Enrollment</h4>
@@ -1153,12 +1212,12 @@ const Dashboard = () => {
               )}
           </div>
         </div>
-      )}
+      )} */}
 
       {DisplayData.fee && (
         <div className="">
           <div className="d-flex justify-content-between">
-            <h4 className="text-center mt-3"> Current Month Fee Details</h4>
+            <h5 className=" mt-3"> Current Month Fee Details</h5>
             <div className=" tex-end">
               <Button
                 id="demo-positioned-button"
@@ -1264,10 +1323,18 @@ const Dashboard = () => {
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 // style={{ background:"#ff3741"}}
-                className="sub-blue"
+                style={{
+                  background: "#fd746e",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                  // boxShadow: "5px 7px 7px  gray",
+                  paddingTop: "10px",
+                }}
               >
                 <p>
-                  <b>Fee Received</b>
+                  <h6>Fee Received</h6>
                   <p className="pt-1"> 1,40,000</p>{" "}
                 </p>
               </Card>
@@ -1275,10 +1342,18 @@ const Dashboard = () => {
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 // style={{ background:"#ff3741"}}
-                className="sub-orange"
+                style={{
+                  background: "#5ec394",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                  // boxShadow: "5px 7px 7px  gray",
+                  paddingTop: "10px",
+                }}
               >
                 <p>
-                  <b>Fee Yet To Received</b>
+                  <h6>Fee Yet To Received</h6>
                   <p className="pt-1">2,40,000</p>{" "}
                 </p>
               </Card>
@@ -1286,7 +1361,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-      {DisplayData.fee && (
+      {/* {DisplayData.fee && (
         <div className="progreebar rounded rounded-5  pb-4">
           <div className="d-flex justify-content-between">
             <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
@@ -1360,27 +1435,11 @@ const Dashboard = () => {
                     />
                   </div>
 
-                  {/* <div>
-                  <label> From: </label>
-                </div>
-                <div>
-                  <input
-                    type="date"
-                    className="w-100"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                </div> */}
+              
                 </div>
 
                 <MenuItem className="text-end">
-                  {/* <button className="save"> Save</button> */}
+           
                   <button className="clear " onClick={filterreset}>
                     {" "}
                     Clear
@@ -1441,7 +1500,7 @@ const Dashboard = () => {
               )}
           </div>
         </div>
-      )}
+      )} */}
       {DisplayData.dueAndReceivedAmount && (
         <div className="progreebar rounded rounded-5  pb-4">
           <div className="d-flex justify-content-between">

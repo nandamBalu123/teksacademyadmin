@@ -1578,7 +1578,7 @@ const EditStudentForm = () => {
                           align="center"
                           className="registration-tablebody"
                         >
-                          Material Fee
+                          <strong>Material Fee </strong>
                         </TableCell>
                         <TableCell
                           align="center"

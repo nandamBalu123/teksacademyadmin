@@ -7,13 +7,37 @@ import profilepic from "../../../../images/profilepicture.jpg";
 import axios from "axios";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+
+import { styled } from "@mui/material/styles";
 import useFormattedDate from "../../../../hooks/useFormattedDate";
 
+const label = { inputProps: { "aria-label": "Switch demo" } };
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.blue,
+
+    color: theme.palette.common.white,
+  },
+
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 const UserView = () => {
   const [singleUser, setUser] = useState("");
 
@@ -44,7 +68,8 @@ const UserView = () => {
   return (
     <div className="container mt-3">
       <div className="userviewing">
-        <h4 className="text-center my-3"> User View</h4>
+        <h5 className="my-3 ms-2 "> User View</h5>
+
         <div className="row">
           <div className="col-12 col-md-3 col-lg-3 col-xl-3">
             <img className="w-75" src={profilepic} alt="pic" />
@@ -90,18 +115,18 @@ const UserView = () => {
           </div>
         </div>
         <TableContainer component={Paper} className="my-4">
-          <Table sx={{ minWidth: 650 }} size="large" aria-label="a dense table">
+          <Table size="large" aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <TableCell className="fs-6 text-center border border-2">
+                <StyledTableCell className="table-cell-heading">
                   Date
-                </TableCell>
-                <TableCell className="fs-6 text-center border border-2">
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading">
                   Status
-                </TableCell>
-                <TableCell className="fs-6 text-center border border-2">
+                </StyledTableCell>
+                <StyledTableCell className="table-cell-heading">
                   Remarks
-                </TableCell>
+                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -143,38 +168,38 @@ const UserView = () => {
                   }-${year}`;
 
                   return (
-                    <TableRow
+                    <StyledTableRow
                       sx={{
                         "&:last-child td, &:last-child th": { border: 0 },
                       }}
                       key={index}
                     >
-                      <TableCell className="text-center border border-2">
+                      <StyledTableCell className="table-cell-heading">
                         {" "}
                         {Formatteddate}
-                      </TableCell>
+                      </StyledTableCell>
 
                       {userstatus.Activate_remarks && (
-                        <TableCell className="text-center border border-2">
+                        <StyledTableCell className="table-cell-heading">
                           Active
-                        </TableCell>
+                        </StyledTableCell>
                       )}
                       {userstatus.Inactivate_remarks && (
-                        <TableCell className="text-center border border-2">
+                        <StyledTableCell className="table-cell-heading">
                           Inactive
-                        </TableCell>
+                        </StyledTableCell>
                       )}
                       {userstatus.Activate_remarks && (
-                        <TableCell className="text-center border border-2">
+                        <StyledTableCell className="table-cell-heading">
                           {userstatus.Activate_remarks}
-                        </TableCell>
+                        </StyledTableCell>
                       )}
                       {userstatus.Inactivate_remarks && (
-                        <TableCell className="text-center border border-2">
+                        <StyledTableCell className="table-cell-heading">
                           {userstatus.Inactivate_remarks}
-                        </TableCell>
+                        </StyledTableCell>
                       )}
-                    </TableRow>
+                    </StyledTableRow>
                   );
                 })}
             </TableBody>

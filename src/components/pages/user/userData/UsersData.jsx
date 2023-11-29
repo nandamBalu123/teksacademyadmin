@@ -303,7 +303,7 @@ const UsersData = () => {
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
       <div className="userlist mt-3">
-        <h4 className=" mt-3  text-center">Users List</h4>
+        <h5 className=" mt-3 ms-3">Users List</h5>
 
         <div className="row  px-2 mb-1 ">
           <div className="col-12 col-md-8 col-lg-8 col-xl-8">
@@ -636,17 +636,14 @@ const UsersData = () => {
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
-                                  // fontSize: "15px",
+                                  fontSize: "15px",
                                   display: "block",
                                 }}
                               >
                                 {user.fullname}
                               </span>
                             </StyledTableCell>
-                            <StyledTableCell
-                              align="center"
-                              className="Table-cell"
-                            >
+                            <StyledTableCell className="Table-cell">
                               <span
                                 title={user.email}
                                 style={{
