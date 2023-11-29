@@ -133,8 +133,8 @@ export default function Addassetsform() {
       <div>
         <div className="container">
           <div className="addassetsform mt-4">
-            <h4 className="mt-4 text-center"> Add Asset Form</h4>
-            <form className="mt-4">
+            <h5 className="mt-4 ms-2"> Add Asset Form</h5>
+            <form>
               <div className="row">
                 {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
                             <label for="exampleInputEmail1" class="form-label">Name*</label>
@@ -281,8 +281,8 @@ export default function Addassetsform() {
                                 placeholderText="Select a date" // Placeholder text when no date is selected
                             />
                         </div> */}
-                <div className="row mb-3">
-                  {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
+
+                {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6"> 
                         <TextField
                 label="Asset Code"
                 className=" mar w-100"
@@ -294,19 +294,19 @@ export default function Addassetsform() {
                 id="assetcode"
                 required
               /></div> */}
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <TextField
-                      label={<span className="label-family">Quantity</span>}
-                      className=" mar ms-3 w-75"
-                      variant="standard"
-                      name="anonymity"
-                      type="number"
-                      value={inpval.anonymity}
-                      onChange={setdata}
-                      required
-                    />
-                  </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mb-3">
+                  <TextField
+                    label={<span className="label-family">Quantity</span>}
+                    className=" mar ms-3 w-75"
+                    variant="standard"
+                    name="anonymity"
+                    type="number"
+                    value={inpval.anonymity}
+                    onChange={setdata}
+                    required
+                  />
                 </div>
+
                 {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
                
                 <input

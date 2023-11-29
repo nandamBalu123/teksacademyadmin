@@ -45,13 +45,16 @@ const CreateDepartment = () => {
     user = dataWithTitleCase[0];
     console.log("User Data:", user); // Log the user data being sent
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/adddepartment`, {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/adddepartment`,
+      {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     console.log("Response:", response); // Log the response from the server
 
     const json = await response.json();
@@ -72,7 +75,6 @@ const CreateDepartment = () => {
   };
   return (
     <div className="container mt-3">
-    
       <form>
         <Box
           component="form"
@@ -83,20 +85,19 @@ const CreateDepartment = () => {
           autoComplete="off"
         >
           <div className=" createdepartment">
-          <h4 className="text-center mt-2">Create Department</h4>
-            <div className="row">
-              <div className="col-12 col-md-6 col-lg-6 ">
+            <h5 className="text-center mt-3">Create Department</h5>
+
+            <div className="col-12 col-md-6 col-lg-6 ">
               <TextField
-                label="Department Name"
+                label={<span className="label-family">Department Name</span>}
                 className=" w-75"
                 variant="standard"
                 name="departmentname"
                 type="text"
                 value={department_name}
                 onChange={(e) => setdepartment(e.target.value)}
-              
-            />
-                {/* <input
+              />
+              {/* <input
                   className="form-control"
                   placeholder="Department Name"
                   type="text"
@@ -104,10 +105,10 @@ const CreateDepartment = () => {
                   onChange={(e) => setdepartment(e.target.value)}
                   style={{ padding: "15px" }}
                 /> */}
-                {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
-              </div>
-           
-                {/* <input
+              {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
+            </div>
+
+            {/* <input
                   className="form-control"
                   placeholder="Role Description"
                   type="text"
@@ -115,9 +116,8 @@ const CreateDepartment = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   style={{ padding: "15px" }}
                 /> */}
-                {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
-             
-            </div>
+            {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
+
             <div className="ms-3">
               <button
                 type="submit"

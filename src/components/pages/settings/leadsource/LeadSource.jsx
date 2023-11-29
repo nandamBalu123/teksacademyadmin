@@ -42,7 +42,7 @@ const LeadSource = () => {
     <div className="container mt-3">
       <div className="leadsource">
         <div className="d-flex justify-content-between my-3">
-          <h4 className="ms-2"> Lead Source</h4>
+          <h5 className="ms-2"> Lead Source</h5>
           <button
             type="submit"
             className="btn btn-primary   me-2"
@@ -69,17 +69,11 @@ const LeadSource = () => {
             {Array.isArray(leadsources) && leadsources.length > 0 ? (
               leadsources.map((item, index) => (
                 <StyledTableRow key={item.id}>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {index + 1}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}> {index + 1}</span>
                   </StyledTableCell>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {item.leadsource}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}> {item.leadsource}</span>
                   </StyledTableCell>
 
                   {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}

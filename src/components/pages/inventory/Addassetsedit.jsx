@@ -54,8 +54,8 @@ export default function Addassetsedit() {
     // </div>
     <div className="container mt-3">
       <div className="editaddassets">
-        <h4 className="mt-3 text-center">Add Asset Edit Form</h4>
-        <form className="mt-4">
+        <h5 className="mt-3">Add Asset Edit Form</h5>
+        <form className="">
           <div className="row">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
@@ -150,7 +150,7 @@ export default function Addassetsedit() {
           </div>
 
           <div className="create-button  d-flex justify-content-between my-4 ">
-            <NavLink to="/assignassets ">
+            <NavLink to="/addassets ">
               <button className="btn btn-primary  ">Back</button>
             </NavLink>
 

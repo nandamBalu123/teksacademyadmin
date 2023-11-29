@@ -126,7 +126,7 @@ export default function Vendor() {
     <div className="container mt-3">
       <div className="vendor">
         <div className="flex my-3">
-          <p className="fs-5 ms-3">Vendor</p>
+          <h5 className=" ms-3">Vendor</h5>
 
           <React.Fragment>
             <button
@@ -204,17 +204,11 @@ export default function Vendor() {
             {vendorName &&
               vendorName.map((element, index) => (
                 <StyledTableRow key={index}>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {index + 1}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}> {index + 1}</span>
                   </StyledTableCell>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {element}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}> {element}</span>
                   </StyledTableCell>
                   <StyledTableCell
                     className="Table-cell text-center"

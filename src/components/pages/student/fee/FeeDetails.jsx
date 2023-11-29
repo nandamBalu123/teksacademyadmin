@@ -202,7 +202,7 @@ const FeeDetails = () => {
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
               <Card
                 style={{
-                  background: "#4f45b6",
+                  background: "#195489",
                   textAlign: "center",
                   borderRadius: "8px",
                   color: "white",

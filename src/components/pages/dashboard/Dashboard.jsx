@@ -656,7 +656,7 @@ const Dashboard = () => {
           >
             <Card
               style={{
-                background: "#4f45b6",
+                background: "#195489",
                 textAlign: "center",
                 borderRadius: "8px",
                 color: "white",

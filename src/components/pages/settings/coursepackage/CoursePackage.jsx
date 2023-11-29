@@ -42,10 +42,10 @@ const CoursePackage = () => {
     <div className="container mt-3">
       <div className="coursepackage">
         <div className="flex mt-3">
-          <p className="fs-5 ms-3 ">Course Packages</p>
+          <h5 className="fs- ms-3 ">Course Packages</h5>
           <button
             type="submit"
-            className="btn btn-primary ms-2 mb-2"
+            className="btn btn-primary me-2 mb-2"
             onClick={handleSubmit}
           >
             Add Course Package
@@ -56,7 +56,7 @@ const CoursePackage = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell className="table-cell-heading" align="center">
-                  id
+                  ID
                 </StyledTableCell>
                 <StyledTableCell className="table-cell-heading" align="center">
                   Name
@@ -70,17 +70,14 @@ const CoursePackage = () => {
               {Array.isArray(coursepackages) && coursepackages.length > 0 ? (
                 coursepackages.map((item, index) => (
                   <StyledTableRow key={item.id}>
-                    <StyledTableCell
-                      className="Table-cell text-center"
-                      style={{ fontSize: "15px" }}
-                    >
-                      {index + 1}
+                    <StyledTableCell className="Table-cell text-center">
+                      <span style={{ fontSize: "15px" }}> {index + 1}</span>
                     </StyledTableCell>
-                    <StyledTableCell
-                      className="Table-cell text-center"
-                      style={{ fontSize: "15px" }}
-                    >
-                      {item.coursepackages_name}
+                    <StyledTableCell className="Table-cell text-center">
+                      <span style={{ fontSize: "15px" }}>
+                        {" "}
+                        {item.coursepackages_name}
+                      </span>
                     </StyledTableCell>
 
                     {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}

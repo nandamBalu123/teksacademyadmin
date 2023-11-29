@@ -42,10 +42,10 @@ const Branch = () => {
     <div className="container mt-2">
       <div className="branch">
         <div className="flex mt-3">
-          <h4 className="fs-5 ms-3">Branches</h4>
+          <h5 className=" ms-3">Branches</h5>
           <button
             type="submit"
-            className="btn btn-primary mr-20 ms-2 mb-2"
+            className="btn btn-primary me-2 mb-2"
             onClick={handleSubmit}
           >
             Add Branch
@@ -69,17 +69,14 @@ const Branch = () => {
             {Array.isArray(branches) && branches.length > 0 ? (
               branches.map((item, index) => (
                 <StyledTableRow key={item.id}>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {index + 1}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}> {index + 1}</span>
                   </StyledTableCell>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {item.branch_name}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}>
+                      {" "}
+                      {item.branch_name}{" "}
+                    </span>
                   </StyledTableCell>
 
                   {/* <StyledTableCell className=" Table-cell text-center"> Custom</StyledTableCell> */}

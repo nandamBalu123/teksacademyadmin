@@ -126,7 +126,7 @@ export default function AssetType() {
     <div className="container">
       <div className="Assettype mt-3">
         <div className="flex my-3">
-          <h4 className="ms-3"> Asset Type</h4>
+          <h5 className="ms-3"> Asset Type</h5>
           <React.Fragment>
             <button
               onClick={handleClickOpen}
@@ -205,17 +205,11 @@ export default function AssetType() {
             {assettype &&
               assettype.map((element, index) => (
                 <StyledTableRow key={index}>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {index + 1}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}> {index + 1} </span>
                   </StyledTableCell>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {element}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}>{element} </span>
                   </StyledTableCell>
                   <StyledTableCell className="Table-cell text-center">
                     <ModeEditIcon

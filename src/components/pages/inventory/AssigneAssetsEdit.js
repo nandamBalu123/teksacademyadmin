@@ -124,7 +124,7 @@ const Edit = () => {
   return (
     <div className="container mt-3">
       <div className="Assignassetsedit">
-        <h4 className="text-center mt-3"> Assign Assets Edit</h4>
+        <h5 className="mt-3"> Assign Assets Edit</h5>
         <form className="mt-4">
           <div className="row">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -230,7 +230,7 @@ const Edit = () => {
             </div>
           </div>
 
-          <div className="create-button  d-flex justify-content-between mt-4 ">
+          <div className="create-button  d-flex justify-content-between my-4 ">
             <NavLink to="/assignassets ">
               <button className="btn btn-primary  ">Back</button>
             </NavLink>

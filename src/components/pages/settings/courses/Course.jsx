@@ -42,7 +42,7 @@ const Course = () => {
     <div className="container mt-3">
       <div className="course">
         <div className="flex my-3">
-          <h4 className=" ms-3">Courses</h4>
+          <h5 className=" ms-3">Courses</h5>
           <button
             type="submit"
             className="btn btn-primary  me-3"
@@ -69,17 +69,14 @@ const Course = () => {
             {Array.isArray(getcourses) && getcourses.length > 0 ? (
               getcourses.map((item, index) => (
                 <StyledTableRow key={item.id}>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {index + 1}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}> {index + 1}</span>
                   </StyledTableCell>
                   <StyledTableCell
                     className="Table-cell text-center"
                     style={{ fontSize: "15px" }}
                   >
-                    {item.course_name}
+                    <span style={{ fontSize: "15px" }}>{item.course_name}</span>
                   </StyledTableCell>
 
                   {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}

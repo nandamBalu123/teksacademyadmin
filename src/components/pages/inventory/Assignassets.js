@@ -415,7 +415,7 @@ const Assignassets = () => {
             class="alert alert-success alert-dismissible fade show"
             role="alert"
           >
-            <strong>{udata.name}</strong> added succesfully!
+            {udata.name} added succesfully!
             <button
               type="button"
               class="btn-close"
@@ -433,7 +433,7 @@ const Assignassets = () => {
             class="alert alert-success alert-dismissible fade show"
             role="alert"
           >
-            <strong>{updata.name}</strong> updated succesfully!
+            {updata.name} updated succesfully!
             <button
               type="button"
               class="btn-close"
@@ -452,7 +452,7 @@ const Assignassets = () => {
             class="alert alert-danger alert-dismissible fade show"
             role="alert"
           >
-            <strong>{dltdata.name}</strong> deleted succesfully!
+            {dltdata.name} deleted succesfully!
             <button
               type="button"
               class="btn-close"
@@ -468,17 +468,22 @@ const Assignassets = () => {
       <div className="container mt-3">
         <div className="mt-3 assign-assets">
           <div className="d-flex justify-content-between mt-4">
-            <h4 className="ms-2"> Assign Data</h4>
+            <h5 className="ms-2"> Assign Data</h5>
             <NavLink to="/register" className="btn btn-primary">
               Assign data
             </NavLink>
           </div>
 
-          <div className="row ">
+          <div className="row px-2">
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
-                style={{ backgroundColor: "#b7e9da" }}
-                className="rounded rounded-3"
+                style={{
+                  background: "#195489",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
                 onClick={(e) =>
                   setDisplayassets({
                     allbranches: true,
@@ -495,8 +500,13 @@ const Assignassets = () => {
             </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
-                style={{ backgroundColor: "#b7e9da" }}
-                className="rounded rounded-3"
+                style={{
+                  background: "#FF9F24",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
                 onClick={(e) =>
                   setDisplayassets({
                     allbranches: false,
@@ -514,8 +524,13 @@ const Assignassets = () => {
 
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
-                style={{ backgroundColor: "#b7e9da" }}
-                className="rounded rounded-3"
+                style={{
+                  background: "#008959",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
                 onClick={(e) =>
                   setDisplayassets({
                     allbranches: false,
@@ -533,8 +548,13 @@ const Assignassets = () => {
 
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
-                style={{ backgroundColor: "#b7e9da" }}
-                className="rounded rounded-3"
+                style={{
+                  background: "#195489",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
                 onClick={(e) =>
                   setDisplayassets({
                     allbranches: false,
@@ -551,8 +571,13 @@ const Assignassets = () => {
             </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
-                style={{ backgroundColor: "#b7e9da" }}
-                className="rounded rounded-3"
+                style={{
+                  background: "#FF9F24",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
                 onClick={(e) =>
                   setDisplayassets({
                     allbranches: false,
@@ -569,8 +594,13 @@ const Assignassets = () => {
             </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
               <Card
-                style={{ backgroundColor: "#b7e9da" }}
-                className="rounded rounded-3"
+                style={{
+                  background: "#008959",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
                 // onClick={ (e)=> setDisplayassets({
                 // allbranches:false,
                 //   secendrabad:false,
@@ -585,64 +615,94 @@ const Assignassets = () => {
             </div>
           </div>
           {Displayassets.allbranches && (
-            <div className="row mb-3">
+            <div className="row mb-3 px-3">
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#f3a9b2" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#fd746e",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total laptops: <strong>{getLaptopCount()}</strong>
+                    Total Laptops: {getLaptopCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#a6ebdc" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#7fa1e4",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total t-shirt: <strong>{getTshirtCount()}</strong>
+                    Total T-shirt: {getTshirtCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#b7e9da" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#F4ae5b",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total shirt: <strong>{getShirtCount()}</strong>
+                    Total Shirt:{getShirtCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#f3a9b2" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#5ec394",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total charger: <strong>{getChargerCount()}</strong>
+                    Total Charger:{getChargerCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#a6ebdc" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#f3a9b2",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total mouse: <strong>{getMouseCount()}</strong>
+                    Total Mouse:{getMouseCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#b7e9da" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#a6ebdc",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total bags: <strong>{getStudentsBags()}</strong>
+                    Total Bags:{getStudentsBags()}
                   </p>
                 </Card>{" "}
               </div>{" "}
@@ -650,64 +710,94 @@ const Assignassets = () => {
           )}
 
           {Displayassets.hitechcity && (
-            <div className="row mb-3">
+            <div className="row mb-3 px-3">
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#f3a9b2" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#fd746e",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total laptops: <strong>{hcgetLaptopCount()}</strong>
+                    Total laptops: {hcgetLaptopCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#a6ebdc" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#7fa1e4",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total t-shirt: <strong>{hcgetTshirtCount()}</strong>
+                    Total t-shirt: {hcgetTshirtCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#b7e9da" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#F4ae5b",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total shirt: <strong>{hcgetShirtCount()}</strong>
+                    Total shirt: {hcgetShirtCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#f3a9b2" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#5ec394",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total charger: <strong>{hcgetChargerCount()}</strong>
+                    Total charger: {hcgetChargerCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#a6ebdc" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#f3a9b2",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total mouse: <strong>{hcgetMouseCount()}</strong>
+                    Total mouse: {hcgetMouseCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#b7e9da" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#a6ebdc",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total bags: <strong>{hcgetStudentsBags()}</strong>
+                    Total bags: {hcgetStudentsBags()}
                   </p>
                 </Card>{" "}
               </div>{" "}
@@ -715,64 +805,94 @@ const Assignassets = () => {
           )}
 
           {Displayassets.ameerpet && (
-            <div className="row mb-3">
+            <div className="row mb-3 px-3">
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#f3a9b2" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#fd746e",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total laptops: <strong>{apgetLaptopCount()}</strong>
+                    Total laptops: {apgetLaptopCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#a6ebdc" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#7fa1e4",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total t-shirt: <strong>{apgetTshirtCount()}</strong>
+                    Total t-shirt: {apgetTshirtCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#b7e9da" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#F4ae5b",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total shirt: <strong>{apgetShirtCount()}</strong>
+                    Total shirt: {apgetShirtCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#f3a9b2" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#5ec394",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total charger: <strong>{apgetChargerCount()}</strong>
+                    Total charger: {apgetChargerCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#a6ebdc" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#f3a9b2",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total mouse: <strong>{apgetMouseCount()}</strong>
+                    Total mouse: {apgetMouseCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#b7e9da" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#a6ebdc",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total bags: <strong>{apgetStudentsBags()}</strong>
+                    Total bags: {apgetStudentsBags()}
                   </p>
                 </Card>{" "}
               </div>{" "}
@@ -780,64 +900,94 @@ const Assignassets = () => {
           )}
 
           {Displayassets.dilsukhnagar && (
-            <div className="row mb-3">
+            <div className="row mb-3 px-3">
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#f3a9b2" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#fd746e",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total laptops: <strong>{dngetLaptopCount()}</strong>
+                    Total laptops: {dngetLaptopCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#a6ebdc" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#7fa1e4",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total t-shirt: <strong>{dngetTshirtCount()}</strong>
+                    Total t-shirt: {dngetTshirtCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#b7e9da" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#F4ae5b",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total shirt: <strong>{dngetShirtCount()}</strong>
+                    Total shirt: {dngetShirtCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#f3a9b2" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#5ec394",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total charger: <strong>{dngetChargerCount()}</strong>
+                    Total charger: {dngetChargerCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#a6ebdc" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#f3a9b2",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total mouse: <strong>{dngetMouseCount()}</strong>
+                    Total mouse: {dngetMouseCount()}
                   </p>
                 </Card>{" "}
               </div>
               <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
                 <Card
-                  style={{ backgroundColor: "#b7e9da" }}
-                  className="rounded rounded-3"
+                  style={{
+                    background: "#a6ebdc",
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    color: "#000",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
                 >
                   <p className="pt-3 text-center">
-                    Total bags: <strong>{dngetStudentsBags()}</strong>
+                    Total bags: {dngetStudentsBags()}
                   </p>
                 </Card>{" "}
               </div>{" "}
@@ -914,34 +1064,82 @@ const Assignassets = () => {
                       <React.Fragment>
                         <StyledTableRow key={id}>
                           <StyledTableCell className="Table-cell">
-                            {id + 1}
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {id + 1}
+                            </span>
                           </StyledTableCell>
                           {/* <td>{element.name}</td> */}
                           <StyledTableCell className="Table-cell">
-                            {element.name}
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.name}
+                            </span>
                           </StyledTableCell>
                           {/* <StyledTableCell  className="Table-cell">{element.vendername}</StyledTableCell> */}
                           {/* <td>{element.designation}</td> */}
                           {/* <td>{element.branch}</td> */}
                           <StyledTableCell className="Table-cell">
-                            {element.branch}
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.branch}
+                            </span>
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
-                            {element.assettype}
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.assettype}
+                            </span>
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
-                            {element.brandname}
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.brandname}
+                            </span>
                           </StyledTableCell>
                           {/* <td>{element.remarks}</td> */}
                           {/* <td>{element.issueddate}</td> */}
                           <StyledTableCell className="Table-cell">
-                            {element.assetcode}
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.assetcode}
+                            </span>
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
-                            {AssignDate}
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {AssignDate}
+                            </span>
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
-                            {element.anonymity}
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.anonymity}
+                            </span>
                           </StyledTableCell>
 
                           <StyledTableCell className="Table-cell">
@@ -977,27 +1175,27 @@ const Assignassets = () => {
                     <br></br>
                     <span>Rows : {getassigndata.length}</span><br></br>
                     <span>
-                      Total laptops: <strong>{getLaptopCount()}</strong>
+                      Total laptops: {getLaptopCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total t-shirt: <strong>{getTshirtCount()}</strong>
+                      Total t-shirt: {getTshirtCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total shirt: <strong>{getShirtCount()}</strong>
+                      Total shirt: {getShirtCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total charger: <strong>{getChargerCount()}</strong>
+                      Total charger: {getChargerCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total mouse: <strong>{getMouseCount()}</strong>
+                      Total mouse: {getMouseCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total bags: <strong>{getStudentsBags()}</strong>
+                      Total bags: {getStudentsBags()}
                     </span>
                     <br></br>
 
@@ -1009,27 +1207,27 @@ const Assignassets = () => {
                     <h4>Hitech City</h4>
                     <span>Rows : {getassigndata.length}</span><br></br>
                     <span>
-                      Total laptops: <strong>{hcgetLaptopCount()}</strong>
+                      Total laptops: {hcgetLaptopCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total t-shirt: <strong>{hcgetTshirtCount()}</strong>
+                      Total t-shirt: {hcgetTshirtCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total shirt: <strong>{hcgetShirtCount()}</strong>
+                      Total shirt: {hcgetShirtCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total charger: <strong>{hcgetChargerCount()}</strong>
+                      Total charger: {hcgetChargerCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total mouse: <strong>{hcgetMouseCount()}</strong>
+                      Total mouse: {hcgetMouseCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total bags: <strong>{hcgetStudentsBags()}</strong>
+                      Total bags: {hcgetStudentsBags()}
                     </span>
                     <br></br>
 
@@ -1041,27 +1239,27 @@ const Assignassets = () => {
                     <h4>Ameerpet</h4>
                     <span>Rows : {getassigndata.length}</span><br></br>
                     <span>
-                      Total laptops: <strong>{apgetLaptopCount()}</strong>
+                      Total laptops: {apgetLaptopCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total t-shirt: <strong>{apgetTshirtCount()}</strong>
+                      Total t-shirt: {apgetTshirtCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total shirt: <strong>{apgetShirtCount()}</strong>
+                      Total shirt: {apgetShirtCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total charger: <strong>{apgetChargerCount()}</strong>
+                      Total charger: {apgetChargerCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total mouse: <strong>{apgetMouseCount()}</strong>
+                      Total mouse: {apgetMouseCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total bags: <strong>{apgetStudentsBags()}</strong>
+                      Total bags: {apgetStudentsBags()}
                     </span>
                     <br></br>
 
@@ -1073,27 +1271,27 @@ const Assignassets = () => {
                     <h4>Dilsukhnagar</h4>
                     <span>Rows : {getassigndata.length}</span><br></br>
                     <span>
-                      Total laptops: <strong>{dngetLaptopCount()}</strong>
+                      Total laptops: {dngetLaptopCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total t-shirt: <strong>{dngetTshirtCount()}</strong>
+                      Total t-shirt: {dngetTshirtCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total shirt: <strong>{dngetShirtCount()}</strong>
+                      Total shirt: {dngetShirtCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total charger: <strong>{dngetChargerCount()}</strong>
+                      Total charger: {dngetChargerCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total mouse: <strong>{dngetMouseCount()}</strong>
+                      Total mouse: {dngetMouseCount()}
                     </span>
                     <br></br>
                     <span>
-                      Total bags: <strong>{dngetStudentsBags()}</strong>
+                      Total bags: {dngetStudentsBags()}
                     </span>
                     <br></br>
 

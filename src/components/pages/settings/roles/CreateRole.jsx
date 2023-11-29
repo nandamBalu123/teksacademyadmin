@@ -73,10 +73,7 @@ const CreateRole = () => {
   };
   return (
     <div className="container mt-3">
- 
-     
       <form>
-     
         <Box
           component="form"
           sx={{
@@ -86,18 +83,18 @@ const CreateRole = () => {
           autoComplete="off"
         >
           <div className=" createrole mt-3">
-          <h4 className="text-center mt-3">CreateRole</h4>
+            <h5 className="text-center mt-3">CreateRole</h5>
             <div className="row text-center">
               <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-              <TextField
-                label="Role Name"
-                className=" mar w-75"
-                variant="standard"
-                name="rolename"
-                type="text"
-                value={role}
+                <TextField
+                  label={<span className="label-family">Role Name</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  name="rolename"
+                  type="text"
+                  value={role}
                   onChange={(e) => setRoleName(e.target.value)}
-            />
+                />
                 {/* <input
                   className="form-control"
                   placeholder="Role Name"
@@ -109,16 +106,15 @@ const CreateRole = () => {
                 {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
               </div>
               <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-              <TextField
-                label="Role Description"
-                className=" mar w-75"
-                variant="standard"
-                name="roledescription"
-                type="text"
-                onChange={(e) => setDescription(e.target.value)}
-              
-            />
-                
+                <TextField
+                  label={<span className="label-family">Role Description</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  name="roledescription"
+                  type="text"
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+
                 {/* <input
                   className="form-control"
                   placeholder="Role Description"
@@ -151,10 +147,10 @@ const CreateRole = () => {
          */}
       </form>
 
-        {/* <div>
+      {/* <div>
           <h2>Module & Object Permissions</h2>
         </div> */}
-        {/* <div>
+      {/* <div>
           <table class="table" border="1">
             <thead border="1">
               <tr>
@@ -279,7 +275,6 @@ const CreateRole = () => {
             </tbody>
           </table>
         </div> */}
-     
     </div>
   );
 };

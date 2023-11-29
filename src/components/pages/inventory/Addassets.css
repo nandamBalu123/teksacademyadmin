@@ -1,8 +1,9 @@
-th {
-  padding: 5px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.createcourse {
-  padding-left: 2rem;
+.addassets {
   border: 2px solid #f5f5f5;
   border-radius: 8px;
   margin: auto;

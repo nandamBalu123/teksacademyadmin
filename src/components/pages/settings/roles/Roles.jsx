@@ -40,13 +40,13 @@ const Roles = () => {
     },
   }));
   return (
-    <div className="container">
+    <div className="container mt-3">
       <div className="roles">
         <div className="flex mt-3">
-          <p className="fs-5 ms-3">Roles</p>
+          <h5 className="ms-3">Roles</h5>
           <button
             type="submit"
-            className="btn btn-primary mr-20 ms-2 mb-2"
+            className="btn btn-primary me-3 mb-2"
             onClick={handleSubmit}
           >
             Add Role
@@ -73,14 +73,17 @@ const Roles = () => {
               {Array.isArray(roles) && roles.length > 0 ? (
                 roles.map((item, index) => (
                   <StyledTableRow key={item.id}>
-                    <StyledTableCell className="Table-cell text-center">
-                      {index + 1}
+                    <StyledTableCell className="Table-cell ">
+                      <span style={{ fontSize: "15px" }}> {index + 1}</span>
                     </StyledTableCell>
-                    <StyledTableCell className="Table-cell text-center">
-                      {item.role}
+                    <StyledTableCell className="Table-cell ">
+                      <span style={{ fontSize: "15px" }}>{item.role} </span>
                     </StyledTableCell>
-                    <StyledTableCell className="Table-cell text-center">
-                      {item.description}
+                    <StyledTableCell className="Table-cell ">
+                      <span style={{ fontSize: "15px" }}>
+                        {" "}
+                        {item.description}{" "}
+                      </span>
                     </StyledTableCell>
                     {/* <StyledTableCell className=" Table-cell text-center"> Custom</StyledTableCell> */}
                   </StyledTableRow>

@@ -75,7 +75,6 @@ const CreateCoursePackage = () => {
   };
   return (
     <div className="container mt-3">
-   
       <form>
         <Box
           component="form"
@@ -86,19 +85,18 @@ const CreateCoursePackage = () => {
           autoComplete="off"
         >
           <div className=" createcoursepackage">
-          <h4 className="text-center mt-3">Create Course Package</h4>
+            <h5 className="text-center mt-3">Create Course Package</h5>
             <div className="row">
               <div className="col-12 col-md-6 col-lg-6 ">
-              <TextField
-                label="Package Name"
-                className=" mar w-75"
-                variant="standard"
-                name="packagename"
-                type="text"
-                value={coursepackages_name}
-                onChange={(e) => setpackage(e.target.value)}
-              
-            />
+                <TextField
+                  label={<span className="label-family">Package Name</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  name="packagename"
+                  type="text"
+                  value={coursepackages_name}
+                  onChange={(e) => setpackage(e.target.value)}
+                />
                 {/* <input
                   className="form-control"
                   placeholder="Package Name"

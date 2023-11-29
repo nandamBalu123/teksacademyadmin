@@ -45,13 +45,16 @@ const CreateLeadSource = () => {
     user = dataWithTitleCase[0];
     console.log("User Data:", user); // Log the user data being sent
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/addleadsource`, {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/addleadsource`,
+      {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     console.log("Response:", response); // Log the response from the server
 
     const json = await response.json();
@@ -72,7 +75,6 @@ const CreateLeadSource = () => {
   };
   return (
     <div className="container mt-3">
-      
       <form>
         <Box
           component="form"
@@ -83,19 +85,18 @@ const CreateLeadSource = () => {
           autoComplete="off"
         >
           <div className="createleadsource">
-          <h4 className="text-center mt-3">Create Lead Source</h4>
+            <h5 className="text-center mt-3">Create Lead Source</h5>
             <div className="row">
               <div className="col-12 col-md-6 col-lg-6 ">
-              <TextField
-                label="Lead Source"
-                className=" w-75"
-                variant="standard"
-                name="leadsource"
-                type="text"
-                value={leadsource}
+                <TextField
+                  label={<span className="label-family">Lead Source</span>}
+                  className=" w-75"
+                  variant="standard"
+                  name="leadsource"
+                  type="text"
+                  value={leadsource}
                   onChange={(e) => setleadsource(e.target.value)}
-              
-            />
+                />
                 {/* <input
                   className="form-control"
                   placeholder="Lead Source"
@@ -106,8 +107,8 @@ const CreateLeadSource = () => {
                 /> */}
                 {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
               </div>
-            
-                {/* <input
+
+              {/* <input
                   className="form-control"
                   placeholder="Role Description"
                   type="text"
@@ -115,8 +116,7 @@ const CreateLeadSource = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   style={{ padding: "15px" }}
                 /> */}
-                {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
-         
+              {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
             </div>
             <div className="ms-3">
               <button

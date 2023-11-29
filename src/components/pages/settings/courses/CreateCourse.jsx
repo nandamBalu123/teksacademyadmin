@@ -45,13 +45,16 @@ const CreateCourse = () => {
     user = dataWithTitleCase[0];
     console.log("User Data:", user); // Log the user data being sent
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/addcourses`, {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/addcourses`,
+      {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     console.log("Response:", response); // Log the response from the server
 
     const json = await response.json();
@@ -72,8 +75,7 @@ const CreateCourse = () => {
     // navigate("/roles");
   };
   return (
-    <div className="container mt-3" >
-   
+    <div className="container mt-3">
       <form>
         <Box
           component="form"
@@ -84,19 +86,18 @@ const CreateCourse = () => {
           autoComplete="off"
         >
           <div className="container createcourse">
-          <h4 className="text-center mt-3">Create Course</h4>
+            <h5 className="text-center mt-3">Create Course</h5>
             <div className="row">
               <div className="col-12 col-md-6 col-lg-6 ">
-              <TextField
-                label="Course Name"
-                className=" mar w-75"
-                variant="standard"
-                name="coursename"
-                type="text"
-                value={course_name}
-                onChange={(e) => setcourse(e.target.value)}
-              
-            />
+                <TextField
+                  label={<span className="label-family">Course Name</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  name="coursename"
+                  type="text"
+                  value={course_name}
+                  onChange={(e) => setcourse(e.target.value)}
+                />
                 {/* <input
                   className="form-control"
                   placeholder="Course Name"

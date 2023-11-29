@@ -103,7 +103,7 @@ const Reports = () => {
                 return (
                   <StyledTableRow>
                     <StyledTableCell className="Table-cell text-center">
-                      {index + 1}
+                      <span style={{ fontSize: "15px" }}>{index + 1} </span>
                     </StyledTableCell>
                     <StyledTableCell className="Table-cell text-center">
                       <Link to={`/report/${index}`} style={{ width: "40px" }}>

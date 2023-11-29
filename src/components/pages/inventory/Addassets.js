@@ -22,6 +22,7 @@ import Typography from "@mui/material/Typography";
 import laptapasset from "../../../images/Laptap-asset.avif";
 import tshirts from "../../../images/assets T-Shirts.avif";
 import shirts from "../../../images/shirt-asset.jpg";
+import "./Addassets.css";
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -246,81 +247,129 @@ const Addassets = () => {
         ""
       )}
 
-      <div className="container">
-        <div className="row mt-4">
-          <div className="col-12 col-md-10 col-lg-10 col-xl-10 ">
-            <h4>Add Assets </h4>
+      <div className="container mt-3">
+        <div className="addassets">
+          <div className="row mt-4 ">
+            <div className="col-12 col-md-10 col-lg-10 col-xl-10 ">
+              <h5 className=" ms-2">Add Assets </h5>
+            </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+              <NavLink to="/addassetsform" className="btn btn-primary">
+                Add Assets
+              </NavLink>
+            </div>
           </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-            <NavLink to="/addassetsform" className="btn btn-primary">
-              Add Assets
-            </NavLink>
-          </div>
-        </div>
-        <div className="assets-card row">
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          <div className=" row px-2">
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{
+                  background: "#195489",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+              >
+                <p className="pt-3 text-center">
+                  Total Laptops: {getLaptopCount()}
+                </p>
+              </Card>
+            </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{
+                  background: "#FF9F24",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+              >
+                <p className="pt-3 text-center">
+                  Total T-Shirts:{getTshirtCount()}
+                </p>
+              </Card>{" "}
+            </div>
+            {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card
-              style={{ backgroundColor: "#f3a9b2" }}
-              className="rounded rounded-3 mb-2"
+              style={{
+                background: "#FF9F24",
+                textAlign: "center",
+                borderRadius: "8px",
+                color: "white",
+                boxShadow: "3px 3px 6px  gray",
+                // boxShadow: "5px 7px 7px  gray",
+                paddingTop: "10px",
+              }}
             >
-              <p className="pt-3 text-center">
-                Total Laptops: <strong>{getLaptopCount()}</strong>
-              </p>
+              <h6 className="py-2 text-center">
+                Total Tshirts:{getTshirtCount()}
+              </h6>
             </Card>{" "}
+          </div> */}
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{
+                  background: "#008959",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+              >
+                <p className="pt-3 text-center">
+                  Total Shirt:{getShirtCount()}
+                </p>
+              </Card>{" "}
+            </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{
+                  background: "#195489",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+              >
+                <p className="pt-3 text-center">
+                  Total Charger:{getChargerCount()}
+                </p>
+              </Card>
+            </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{
+                  background: "#FF9F24",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+              >
+                <p className="pt-3 text-center">
+                  Total Mouse:{getMouseCount()}
+                </p>
+              </Card>{" "}
+            </div>
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <Card
+                style={{
+                  background: "#008959",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+              >
+                <p className="pt-3 text-center">
+                  Total Bags:{getStudentsBags()}
+                </p>
+              </Card>{" "}
+            </div>
           </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            <Card
-              style={{ backgroundColor: "#a6ebdc" }}
-              className="rounded rounded-3 mb-2"
-            >
-              <p className="pt-3 text-center">
-                Total Tshirts: <strong>{getTshirtCount()}</strong>
-              </p>
-            </Card>{" "}
-          </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            <Card
-              style={{ backgroundColor: "#b7e9da" }}
-              className="rounded rounded-3 mb-2"
-            >
-              <p className="pt-3 text-center">
-                Total Shirt: <strong>{getShirtCount()}</strong>
-              </p>
-            </Card>{" "}
-          </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            <Card
-              style={{ backgroundColor: "#f3a9b2" }}
-              className="rounded rounded-3 mb-2"
-            >
-              <p className="pt-3 text-center">
-                Total Charger: <strong>{getChargerCount()}</strong>
-              </p>
-            </Card>{" "}
-          </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            <Card
-              style={{ backgroundColor: "#a6ebdc" }}
-              className="rounded rounded-3 mb-2"
-            >
-              <p className="pt-3 text-center">
-                Total Mouse: <strong>{getMouseCount()}</strong>
-              </p>
-            </Card>{" "}
-          </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
-            <Card
-              style={{ backgroundColor: "#d4eaea" }}
-              className="rounded rounded-3 mb-2"
-            >
-              <p className="pt-3 text-center">
-                Total Bags: <strong>{getStudentsBags()}</strong>
-              </p>
-            </Card>{" "}
-          </div>
-        </div>
 
-        {/* <Card sx={{ maxWidth: 345 }}>
+          {/* <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -341,7 +390,7 @@ const Addassets = () => {
               </CardActionArea>
             </Card> */}
 
-        {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
@@ -359,7 +408,7 @@ const Addassets = () => {
               </CardActionArea>
             </Card>
           </div> */}
-        {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
@@ -377,7 +426,7 @@ const Addassets = () => {
               </CardActionArea>
             </Card>
           </div> */}
-        {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+          {/* <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
@@ -396,19 +445,16 @@ const Addassets = () => {
             </Card>
           </div> */}
 
-        <div className="col-lg-12">
-          <div className="row">
-            <div className="col-lg-3">
-              <div className=" mb-2">
-                {/* <NavLink to="/addassetsform" className="btn btn-primary">
+          <div className="col-lg-12">
+            <div className="row">
+              {/* <NavLink to="/addassetsform" className="btn btn-primary">
                       Add Assets
                     </NavLink> */}
-                <br></br>
-                {/* <span>Rows : <strong>{getuserdata.length}</strong></span><br></br>
+              <br></br>
+              {/* <span>Rows : <strong>{getuserdata.length}</strong></span><br></br>
                                     <span>Total quantity: <strong>{getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</strong></span><br></br> */}
-              </div>
-            </div>
-            {/* <div className="col-lg-3">
+
+              {/* <div className="col-lg-3">
                   <div className="mt-2 mb-2">
                     <span>
                       Total laptops: <strong>{getLaptopCount()}</strong>
@@ -444,8 +490,8 @@ const Addassets = () => {
                     <br></br>
                   </div>
                 </div> */}
-          </div>
-          {/* <div className="add_btn mt-2 mb-2">
+            </div>
+            {/* <div className="add_btn mt-2 mb-2">
                         <NavLink to="/addassetsform" className="btn btn-primary">Add Record</NavLink><br></br>
                         <span>Rows : {getuserdata.length}</span><br></br>
                         <span>Total laptops: {getLaptopCount()}</span><br></br>
@@ -458,88 +504,133 @@ const Addassets = () => {
                         <span>Total quantity: {getLaptopCount() + getTshirtCount() + getShirtCount() + getChargerCount() + getMouseCount() + getStudentsBags()}</span><br></br>
                     </div> */}
 
-          {/* <NavLink to="/addassetsform" className="btn btn-primary">Add Record</NavLink><br></br> */}
-          <Paper sx={{ width: "100%", overflow: "hidden" }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-              <Table stickyHeader aria-label="sticky table" borderAxis="both">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell className="table-cell-heading ">
-                      ID
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
-                      Vender Name
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
-                      Asset Type
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
-                      Brand Name
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
-                      Asset Code
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
-                      Quantity
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
-                      Status
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
-                      Actions
-                    </StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {getuserdata.map((element, id) => (
-                    <React.Fragment key={id}>
-                      <StyledTableRow>
-                        <StyledTableCell className="Table-cell text-center">
-                          {id + 1}
-                        </StyledTableCell>
-                        {/* <td>{element.name}</td> */}
-                        <StyledTableCell className="Table-cell">
-                          {element.vendername}
-                        </StyledTableCell>
-                        {/* <td>{element.designation}</td> */}
-                        {/* <td>{element.branch}</td> */}
-                        <StyledTableCell className="Table-cell">
-                          {element.assettype}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell">
-                          {element.brandname}
-                        </StyledTableCell>
-                        {/* <td>{element.remarks}</td> */}
-                        {/* <td>{element.issueddate}</td> */}
-                        <StyledTableCell className="Table-cell">
-                          {element.assetcode}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell">
-                          {element.anonymity}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell">
-                          {element.returndate}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
-                          <NavLink to={`view/${element.id}`}>
-                            <RemoveRedEyeIcon style={{ width: "40px" }} />
-                          </NavLink>
-                          <NavLink to={`edit/${element.id}`}>
-                            <CreateIcon style={{ width: "40px" }} />
-                          </NavLink>
-                          <DeleteOutlineIcon
-                            style={{ width: "40px" }}
-                            onClick={() => deleteuser(element.id)}
-                            className="text-danger"
-                          />
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    </React.Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
+            {/* <NavLink to="/addassetsform" className="btn btn-primary">Add Record</NavLink><br></br> */}
+            <Paper sx={{ width: "100%", overflow: "hidden" }}>
+              <TableContainer sx={{ maxHeight: 440 }}>
+                <Table stickyHeader aria-label="sticky table" borderAxis="both">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell className="table-cell-heading">
+                        ID
+                      </StyledTableCell>
+                      <StyledTableCell className="table-cell-heading">
+                        Vendor Name
+                      </StyledTableCell>
+                      <StyledTableCell className="table-cell-heading">
+                        Asset Type
+                      </StyledTableCell>
+                      <StyledTableCell className="table-cell-heading">
+                        Brand Name
+                      </StyledTableCell>
+                      <StyledTableCell className="table-cell-heading">
+                        Asset Code
+                      </StyledTableCell>
+                      <StyledTableCell className="table-cell-heading">
+                        Quantity
+                      </StyledTableCell>
+                      <StyledTableCell className="table-cell-heading">
+                        Status
+                      </StyledTableCell>
+                      <StyledTableCell className="table-cell-heading">
+                        Action
+                      </StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {getuserdata.map((element, id) => (
+                      <React.Fragment key={id}>
+                        <StyledTableRow>
+                          <StyledTableCell className="Table-cell ">
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {" "}
+                              {id + 1}
+                            </span>
+                          </StyledTableCell>
+                          {/* <td>{element.name}</td> */}
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.vendername}
+                            </span>
+                          </StyledTableCell>
+                          {/* <td>{element.designation}</td> */}
+                          {/* <td>{element.branch}</td> */}
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.assettype}
+                            </span>
+                          </StyledTableCell>
+
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.brandname}
+                            </span>
+                          </StyledTableCell>
+                          {/* <td>{element.remarks}</td> */}
+                          {/* <td>{element.issueddate}</td> */}
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.assetcode}
+                            </span>
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.anonymity}
+                            </span>
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              style={{
+                                fontSize: "15px",
+                              }}
+                            >
+                              {element.returndate}
+                            </span>
+                          </StyledTableCell>
+                          <StyledTableCell className="Table-cell text-center">
+                            <NavLink to={`view/${element.id}`}>
+                              <RemoveRedEyeIcon style={{ width: "40px" }} />
+                            </NavLink>
+                            <NavLink to={`edit/${element.id}`}>
+                              <CreateIcon style={{ width: "40px" }} />
+                            </NavLink>
+                            <DeleteOutlineIcon
+                              style={{ width: "40px" }}
+                              onClick={() => deleteuser(element.id)}
+                              className="text-danger"
+                            />
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      </React.Fragment>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </div>
         </div>
       </div>
     </>

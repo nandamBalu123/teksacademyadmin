@@ -42,10 +42,10 @@ const Department = () => {
     <div className="container mt-3">
       <div className="department">
         <div className="row mb-3">
-          <div className="col-12 col-md-8 col-lg-9 col-xl-10">
-            <h4 className="ms-1">Departments</h4>
+          <div className="col-12 col-md-8 col-lg-9 col-xl-9">
+            <h5 className="ms-2">Departments</h5>
           </div>
-          <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+          <div className="col-12 col-md-3 col-lg-3 col-xl-3">
             <button
               type="submit"
               className="btn btn-primary "
@@ -83,17 +83,14 @@ const Department = () => {
             {Array.isArray(departments) && departments.length > 0 ? (
               departments.map((item, index) => (
                 <StyledTableRow key={item.id}>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {index + 1}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}> {index + 1}</span>
                   </StyledTableCell>
-                  <StyledTableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    {item.department_name}
+                  <StyledTableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}>
+                      {" "}
+                      {item.department_name}
+                    </span>
                   </StyledTableCell>
 
                   {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
