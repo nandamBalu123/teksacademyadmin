@@ -232,7 +232,7 @@ const Certificate = () => {
     <div className="container">
       <div className=" main-certificate mt-3">
         <div className="certificate mt-2">
-          <h4 className="mx-3 mt-3 text-center"> Certificate </h4>
+          <h5 className="mx-2 mt-3 "> Certificate </h5>
           <div className="row pb-1">
             <div className="col-12 col-md-8 col-lg-8 col-xl-8">
               <input
@@ -646,11 +646,11 @@ const Certificate = () => {
                               {student.courses}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          <StyledTableCell className="Table-cell text-center">
                             <span
                               title={student.registrationnumber}
                               style={{
-                                width: "7rem",
+                                width: "8rem",
 
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",

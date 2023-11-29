@@ -366,7 +366,7 @@ const StudentData = () => {
     </div> */}
 
       <div className="studetdetails   mt-3">
-        <h4 className=" mt-3 text-center"> Student Data </h4>
+        <h5 className=" mt-3 ms-2"> Student Data </h5>
 
         <div className="row mb-1 ps-1 ">
           <div className="col-12 col-md-8 col-lg-8 col-xl-8  input-field">

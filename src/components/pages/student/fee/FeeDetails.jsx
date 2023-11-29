@@ -195,12 +195,21 @@ const FeeDetails = () => {
   return (
     <div className="container">
       <div className="main-feedetails  mt-3">
-        <div className="feedetails">
+        <div>
           {" "}
-          <h4 className="mt-1 text-center"> Fee Management</h4>
+          <h5 className="mt-3 ms-2"> Fee Management</h5>
           <div className="row pt-2">
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
-              <Card className="blue" onClick={studentFeeRecords}>
+              <Card
+                style={{
+                  background: "#4f45b6",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+                onClick={studentFeeRecords}
+              >
                 <p className="text-center pt-3">Fee Records</p>
               </Card>
               {/* <button className="feebtn" onClick={studentFeeRecords}>
@@ -208,7 +217,16 @@ const FeeDetails = () => {
               </button> */}
             </div>
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2 ">
-              <Card className="blue" onClick={noDueRecords}>
+              <Card
+                style={{
+                  background: "#ff9f24",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+                onClick={noDueRecords}
+              >
                 <p className="text-center pt-3">No Due Records</p>
               </Card>
               {/* <button
@@ -219,7 +237,16 @@ const FeeDetails = () => {
               </button> */}
             </div>
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
-              <Card className="blue" onClick={() => navigator("/feefollowup")}>
+              <Card
+                style={{
+                  background: "#008959",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+                onClick={() => navigator("/feefollowup")}
+              >
                 <p className="text-center pt-3">Fee followups</p>
               </Card>
               {/* <button
@@ -231,7 +258,15 @@ const FeeDetails = () => {
               </button> */}
             </div>
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
-              <Card className="blue">
+              <Card
+                style={{
+                  background: "#195489",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
+              >
                 <p className="text-center pt-3">Fee Received</p>
               </Card>
             </div>
@@ -740,17 +775,8 @@ const FeeDetails = () => {
                               {NextDueDate ? NextDueDate : "No NextDue Date"}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="Table-cell text-center">
-                            <span
-                              style={{
-                                width: "3rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
+                          <StyledTableCell className="Table-cell ">
+                            <span>
                               {item.totalinstallments &&
                                 item.totalinstallments.length > 0 &&
                                 item.totalinstallments.map((items, index) => {
@@ -801,7 +827,7 @@ const FeeDetails = () => {
                                   // settotalleft(item.totalinstallmentsleft);
                                   // totalleft = item.totalinstallmentsleft;
                                   return (
-                                    <div style={{ display: "flex" }}>
+                                    <div>
                                       <span style={dynamicStyle}>
                                         {items.totalinstallmentspaid}
                                       </span>

@@ -1,87 +1,80 @@
-.main-feedetails{ 
-    width: 99%;
-    border: 2px solid #f5f5f5;
-    border-radius: 8px;
-    margin: auto;
-    overflow: hidden;
+.main-feedetails {
+  border: 2px solid #f5f5f5;
+  border-radius: 8px;
+  margin: auto;
+  overflow: hidden;
 }
-.feedetails-input{ 
-    position: relative;
-    margin: 10px 0;
-    
-    }
-    .feedetails-input label{ 
-        position: absolute;
-        top:2%;
-        left: 19%;
-        transform: translateY(-50%);
-        font-size: 15px;
-        padding: 0 5px;
-    
-    }
-    .feedetails-input input{ 
-        width: 200px;
-        height: 50px;
-        font-size: 18px;
-        border-radius: 6px;
-        padding-left: 10px;
-        border: 1.9px solid black;
-        
-    }
-    .feedetails-input input:focus~label,
-    .feedetails-input input:valid~label{ 
-        top:0 ;
-        background-color: #fff;
-        color: #0070fc;
-    }
-    .feedetails-select{ 
-        position: relative;
-        margin: 10px 0;
-        
-        }
-        .feedetails-select label{ 
-            position: absolute;
-            top:2%;
-            left: 19%;
-            outline: none;
-            transform: translateY(-50%);
-            font-size: 15px;
-            padding: 0 5px;
-        
-        }
-        .feedetails-select select{ 
-            width: 200px;
-            height: 50px;
-            font-size: 18px;
-            border-radius: 6px;
-            padding-left: 10px;
-            border: 1.9px solid black;
-            
-        }
-        .feedetails-select select:focus~label,
-    .feedetails-select select:valid~label{ 
-        top:0 ;
-        background-color: #fff;
-        color: #0070fc;
-    }
-.feedetails{ 
+.feedetails-input {
+  position: relative;
+  margin: 10px 0;
+}
+.feedetails-input label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.feedetails-input input {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.feedetails-input input:focus ~ label,
+.feedetails-input input:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+.feedetails-select {
+  position: relative;
+  margin: 10px 0;
+}
+.feedetails-select label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  outline: none;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.feedetails-select select {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.feedetails-select select:focus ~ label,
+.feedetails-select select:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+/* .feedetails{ 
     padding-top: 30px;
     width: 97%;
     margin: auto;
-}
-.feebtn{ 
-    padding: 10px;
-    background-color: #0070fc;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+} */
+.feebtn {
+  padding: 10px;
+  background-color: #0070fc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
 }
 input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button{ 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    /* @media (min-width: 576px) {  
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* @media (min-width: 576px) {  
         .fee-heading{ 
             font-size: small;
 
@@ -97,8 +90,3 @@ input::-webkit-outer-spin-button,
             font-size: xx-large;
         }
     } */
-
-   
-    
-
-    

@@ -10,6 +10,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -193,96 +194,142 @@ const Feefollowup = () => {
     marginLeft: "10px",
   };
   return (
-    <div className="fee container mt-3">
+    <div className=" container mt-3">
       <div className="feedetails">
-        <h4 className="text-center"> Fee Followups</h4>
-
-        <button
-          onClick={() => handleFilterChange("overdue")}
-          className="feefollowupbtn bg-danger "
-        >
-          Over Due
-        </button>
-        <button
-          onClick={() => handleFilterChange("today")}
-          className="feefollowupbtn bg-warning"
-        >
-          Today
-        </button>
-        <button
-          onClick={() => handleFilterChange("upcoming")}
-          className="feefollowupbtn bg-secondary"
-        >
-          Upcoming
-        </button>
-      </div>
-      <div className="row">
-        <div className="col-12 col-md-8 col-lg-8 col-xl-8 ">
-          <input
-            type="text"
-            className="input-field ps-2 "
-            placeholder="Search Here..."
-            autoComplete="off"
-            style={{
-              height: "45px",
-              width: "100%",
-              border: "none",
-              outline: "none",
-              borderTop: "none",
-
-              background: "none",
-              borderRadius: "5px",
-            }}
-          />
-          <hr className="w-50 ms-3" />
-        </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
-          <h6>
-            {" "}
-            {recordCount}/{initialDataCount}
-          </h6>
-        </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3 ">
-          <select onChange={handlerecorddata}>
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="75">75</option>
-          </select>
-        </div>
-        <div className="col-4 col-md-1 col-lg-1 col-xl-1">
-          <Button
-            id="demo-positioned-button"
-            aria-controls={open ? "demo-positioned-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-          >
-            <button
-              className="btn btn-primary mr-20 ms-2 mb-2"
-              style={{ textTransform: "capitalize" }}
+        <h5 className=" ms-2 mt-3 mb-2"> Fee Followups</h5>
+        <div className="row">
+          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+            <Card
+              // style={{ background:"#ff3741"}}
+              style={{
+                background: "#dc3545",
+                textAlign: "center",
+                borderRadius: "8px",
+                color: "white",
+                boxShadow: "3px 3px 6px  gray",
+                // boxShadow: "5px 7px 7px  gray",
+                paddingTop: "10px",
+              }}
+              onClick={() => handleFilterChange("overdue")}
             >
-              Filter
-            </button>
-          </Button>
-
-          <Menu
-            className="mt-5"
-            id="demo-positioned-menu"
-            aria-labelledby="demo-positioned-button"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
+              <p>
+                <h6>Over Due</h6>
+              </p>
+            </Card>
+          </div>
+          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+            <Card
+              // style={{ background:"#ff3741"}}
+              style={{
+                background: "#ffc107",
+                textAlign: "center",
+                borderRadius: "8px",
+                color: "white",
+                boxShadow: "3px 3px 6px  gray",
+                // boxShadow: "5px 7px 7px  gray",
+                paddingTop: "10px",
+              }}
+              onClick={() => handleFilterChange("today")}
+            >
+              <p>
+                <h6>Today</h6>
+              </p>
+            </Card>
+          </div>
+          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+            <Card
+              // style={{ background:"#ff3741"}}
+              style={{
+                background: "#69757d",
+                textAlign: "center",
+                borderRadius: "8px",
+                color: "white",
+                boxShadow: "3px 3px 6px  gray",
+                // boxShadow: "5px 7px 7px  gray",
+                paddingTop: "10px",
+              }}
+              onClick={() => handleFilterChange("upcoming")}
+            >
+              <p>
+                <h6>Upcoming</h6>
+              </p>
+            </Card>
+          </div>
+          {/* <button
+            onClick={() => handleFilterChange("upcoming")}
+            className="feefollowupbtn bg-secondary"
           >
-            {/* <button
+            Upcoming
+          </button>{" "} */}
+        </div>
+
+        <div className="row">
+          <div className="col-12 col-md-8 col-lg-8 col-xl-8 ">
+            <input
+              type="text"
+              className="input-field ps-2 "
+              placeholder="Search Here..."
+              autoComplete="off"
+              style={{
+                height: "45px",
+                width: "100%",
+                border: "none",
+                outline: "none",
+                borderTop: "none",
+
+                background: "none",
+                borderRadius: "5px",
+              }}
+            />
+            <hr className="w-75 ms-2" />
+          </div>
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3">
+            <h6>
+              {" "}
+              {recordCount}/{initialDataCount}
+            </h6>
+          </div>
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1 pt-3 ">
+            <select onChange={handlerecorddata}>
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+            </select>
+          </div>
+          <div className="col-4 col-md-1 col-lg-1 col-xl-1">
+            <Button
+              id="demo-positioned-button"
+              aria-controls={open ? "demo-positioned-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              <button
+                className="btn btn-primary mr-20 ms-2 mb-2"
+                style={{ textTransform: "capitalize" }}
+              >
+                Filter
+              </button>
+            </Button>
+
+            <Menu
+              className="mt-5"
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+            >
+              {/* <button
             className="btn btn-primary mr-20 ms-2 mb-2"
             style={{ textTransform: "capitalize" }}
             onClick={handleClick}
@@ -291,7 +338,7 @@ const Feefollowup = () => {
             Filter{" "}
           </button> */}
 
-            {/* <Menu
+              {/* <Menu
             id="basic-menu"
             anchorEl={anchorEl}
             open={open}
@@ -306,44 +353,44 @@ const Feefollowup = () => {
               cursor: "pointer",
             }}
           > */}
-            <div className="d-flex justify-content-between m-2">
-              <div> Filter</div>
-              <div>
-                <CloseIcon onClick={handleClose} />
+              <div className="d-flex justify-content-between m-2">
+                <div> Filter</div>
+                <div>
+                  <CloseIcon onClick={handleClose} />
+                </div>
               </div>
-            </div>
-            <hr />
-            <div className="row m-2">
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                <TextField
-                  label=" From:"
-                  type="date"
-                  variant="standard"
-                  className="  w-100"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="fromdate"
-                  value={filterCriteria.fromdate}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                <TextField
-                  label=" To:"
-                  type="date"
-                  variant="standard"
-                  className="w-100"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="todate"
-                  value={filterCriteria.todate}
-                  onChange={handleInputChange}
-                />
-              </div>
+              <hr />
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <TextField
+                    label=" From:"
+                    type="date"
+                    variant="standard"
+                    className="  w-100"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                  <TextField
+                    label=" To:"
+                    type="date"
+                    variant="standard"
+                    className="w-100"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="todate"
+                    value={filterCriteria.todate}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-              {/* <div>
+                {/* <div>
                   <label> From: </label>
                 </div>
                 <div>
@@ -360,198 +407,200 @@ const Feefollowup = () => {
                     onChange={handleInputChange}
                   />
                 </div> */}
-            </div>
-
-            <div className="row m-2">
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                <FormControl variant="standard" className="w-100">
-                  <InputLabel>Branch</InputLabel>
-                  <Select
-                    name="branch"
-                    value={filterCriteria.branch}
-                    onChange={handleInputChange}
-                  >
-                    <MenuItem value="select"> ---select---</MenuItem>
-                    {branches &&
-                      branches.map((branch, index) => (
-                        <MenuItem key={branch.id} value={branch.branch_name}>
-                          {branch.branch_name}
-                        </MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
               </div>
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                <FormControl variant="standard" className="w-100">
-                  <InputLabel>Course</InputLabel>
-                  <Select
-                    name="course"
-                    value={filterCriteria.course}
-                    onChange={handleInputChange}
-                  >
-                    <MenuItem value="select"> ---select---</MenuItem>
-                    {getcourses &&
-                      getcourses.map((item, index) => (
-                        <MenuItem key={item.id} value={item.course_name}>
-                          {item.course_name}
-                        </MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
-              </div>
-            </div>
-          </Menu>
-        </div>
-      </div>
-      <div className="row">
-        <h4 className="col-12 col-md-6 col-lg-6 col-xl-6">
-          All {filterType.charAt(0).toUpperCase() + filterType.slice(1)}{" "}
-          Installments
-        </h4>
-        <p className="col-12 col-md-6 col-lg-6 col-xl-6">
-          Sum of Due Amounts: {sumDueAmount}
-        </p>
-      </div>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell className="table-cell-heading">
-                  {" "}
-                  S.NO
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
-                  Name
-                  <br /> Branch <br /> Counsellor
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
-                  {" "}
-                  Contact
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
-                  {" "}
-                  Email
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
-                  {" "}
-                  Course
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
-                  {" "}
-                  Due Date
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
-                  {" "}
-                  Due Amount{" "}
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
-                  {" "}
-                  Paid Status
-                </StyledTableCell>
 
-                <StyledTableCell className="table-cell-heading">
-                  {" "}
-                  View
-                </StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {Array.isArray(filteredInstallments) &&
-              filteredInstallments.length > 0 ? (
-                filteredInstallments.map((item, index) => {
-                  let NextDueDate = new Date(item.nextduedate);
-                  const day = NextDueDate.getUTCDate();
-                  const monthIndex = NextDueDate.getUTCMonth();
-                  const year = NextDueDate.getUTCFullYear();
-
-                  const monthAbbreviations = [
-                    "Jan",
-                    "Feb",
-                    "Mar",
-                    "Apr",
-                    "May",
-                    "Jun",
-                    "Jul",
-                    "Aug",
-                    "Sep",
-                    "Oct",
-                    "Nov",
-                    "Dec",
-                  ];
-
-                  // Formatting the date
-                  NextDueDate = `${day < 10 ? "0" : ""}${day}-${
-                    monthAbbreviations[monthIndex]
-                  }-${year}`;
-
-                  return (
-                    <StyledTableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              <div className="row m-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>Branch</InputLabel>
+                    <Select
+                      name="branch"
+                      value={filterCriteria.branch}
+                      onChange={handleInputChange}
                     >
-                      <StyledTableCell
-                        component="th"
-                        className="Table-cell text-center"
-                      >
-                        {index + 1}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center">
-                        {item.name}
-                        <br />
-                        {item.branch}
-                        <br />
-                        {item.enquirytakenby}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center">
-                        {item.mobilenumber}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center">
-                        {item.email}
-                      </StyledTableCell>
-                      <TableCell className="Table-cell text-center">
-                        {item.courses}
-                      </TableCell>
-                      <StyledTableCell className="Table-cell text-center">
-                        {item.duedate}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center">
-                        {Number(
-                          parseFloat(item.dueamount).toFixed(2)
-                        ).toLocaleString("en-IN")}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center">
-                        {item.totalinstallments &&
-                          item.totalinstallments.length > 0 &&
-                          item.totalinstallments.map((items, index) => {
-                            if (true) {
-                              return (
-                                <div style={{ display: "flex" }}>
-                                  <span style={dynamicStyle}>
-                                    {items.totalinstallmentspaid} /
-                                    {items.totalinstallments}
-                                  </span>
-                                  <span style={dynamicStyle}>
-                                    <CheckCircleIcon style={IconStyle} />
-                                  </span>
-                                </div>
-                              );
-                            }
-                          })}
-                      </StyledTableCell>
-                      <StyledTableCell className="border border 1">
-                        <Link to={`/feeview/${item.id}`}>
-                          <VisibilityIcon />
-                        </Link>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  );
-                })
-              ) : (
+                      <MenuItem value="select"> ---select---</MenuItem>
+                      {branches &&
+                        branches.map((branch, index) => (
+                          <MenuItem key={branch.id} value={branch.branch_name}>
+                            {branch.branch_name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>Course</InputLabel>
+                    <Select
+                      name="course"
+                      value={filterCriteria.course}
+                      onChange={handleInputChange}
+                    >
+                      <MenuItem value="select"> ---select---</MenuItem>
+                      {getcourses &&
+                        getcourses.map((item, index) => (
+                          <MenuItem key={item.id} value={item.course_name}>
+                            {item.course_name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+            </Menu>
+          </div>
+        </div>
+        <div className="row">
+          <h5 className="col-12 col-md-6 col-lg-6 col-xl-6 ms-2">
+            All {filterType.charAt(0).toUpperCase() + filterType.slice(1)}{" "}
+            Installments
+          </h5>
+          <p className="col-12 col-md-5 col-lg-5 col-xl-5">
+            <strong> Sum of Due Amounts: </strong> {sumDueAmount}
+          </p>
+        </div>
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
                 <TableRow>
-                  <TableCell colSpan={3}>No data available</TableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    {" "}
+                    S.NO
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    Name
+                    <br /> Branch <br /> Counsellor
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    {" "}
+                    Contact
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    {" "}
+                    Email
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    {" "}
+                    Course
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    {" "}
+                    Due Date
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    {" "}
+                    Due Amount{" "}
+                  </StyledTableCell>
+                  <StyledTableCell className="table-cell-heading">
+                    {" "}
+                    Paid Status
+                  </StyledTableCell>
+
+                  <StyledTableCell className="table-cell-heading">
+                    {" "}
+                    View
+                  </StyledTableCell>
                 </TableRow>
-              )}
-              {/* {filteredInstallments.map((installment) => (
+              </TableHead>
+              <TableBody>
+                {Array.isArray(filteredInstallments) &&
+                filteredInstallments.length > 0 ? (
+                  filteredInstallments.map((item, index) => {
+                    let NextDueDate = new Date(item.nextduedate);
+                    const day = NextDueDate.getUTCDate();
+                    const monthIndex = NextDueDate.getUTCMonth();
+                    const year = NextDueDate.getUTCFullYear();
+
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
+
+                    // Formatting the date
+                    NextDueDate = `${day < 10 ? "0" : ""}${day}-${
+                      monthAbbreviations[monthIndex]
+                    }-${year}`;
+
+                    return (
+                      <StyledTableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <StyledTableCell
+                          component="th"
+                          className="Table-cell text-center"
+                        >
+                          {index + 1}
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
+                          {item.name}
+                          <br />
+                          {item.branch}
+                          <br />
+                          {item.enquirytakenby}
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
+                          {item.mobilenumber}
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
+                          {item.email}
+                        </StyledTableCell>
+                        <TableCell className="Table-cell text-center">
+                          {item.courses}
+                        </TableCell>
+                        <StyledTableCell className="Table-cell text-center">
+                          {item.duedate}
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
+                          {Number(
+                            parseFloat(item.dueamount).toFixed(2)
+                          ).toLocaleString("en-IN")}
+                        </StyledTableCell>
+                        <StyledTableCell className="Table-cell text-center">
+                          {item.totalinstallments &&
+                            item.totalinstallments.length > 0 &&
+                            item.totalinstallments.map((items, index) => {
+                              if (true) {
+                                return (
+                                  <div style={{ display: "flex" }}>
+                                    <span style={dynamicStyle}>
+                                      {items.totalinstallmentspaid} /
+                                      {items.totalinstallments}
+                                    </span>
+                                    <span style={dynamicStyle}>
+                                      <CheckCircleIcon style={IconStyle} />
+                                    </span>
+                                  </div>
+                                );
+                              }
+                            })}
+                        </StyledTableCell>
+                        <StyledTableCell className="border border 1">
+                          <Link to={`/feeview/${item.id}`}>
+                            <VisibilityIcon />
+                          </Link>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  })
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={3}>No data available</TableCell>
+                  </TableRow>
+                )}
+                {/* {filteredInstallments.map((installment) => (
                 <tr key={installment.id}>
                   <td>{installment.name}</td>
                   <td>{installment.installmentNumber}</td>
@@ -559,11 +608,11 @@ const Feefollowup = () => {
                   <td>{installment.dueamount}</td>
                 </tr>
               ))} */}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-      {/* <table>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+        {/* <table>
         <thead>
           <tr>
             <th>Student Name</th>
@@ -583,6 +632,7 @@ const Feefollowup = () => {
           ))}
         </tbody>
       </table> */}
+      </div>
     </div>
   );
 };

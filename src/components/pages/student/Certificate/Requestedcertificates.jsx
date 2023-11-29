@@ -12,7 +12,6 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 
-
 import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
 import Pagination from "@mui/material/Pagination";
@@ -275,7 +274,7 @@ const Requestedcertificates = () => {
             <div className="col-12 col-md-8 col-lg-8 col-xl-8">
               <input
                 type="text"
-                className="input-field "
+                className="input-field ms-2 "
                 placeholder="Search Here...."
                 autoComplete="off"
                 style={{

@@ -946,7 +946,7 @@ export default function RegistrationForm() {
     </div> */}
       <div className="main-sub-container ">
         <Typography>
-          <h4 className="mt-3"> Registration form</h4>
+          <h5 className="mt-3"> Registration form</h5>
         </Typography>
 
         <Stepper activeStep={activeStep} orientation="vertical">
@@ -954,7 +954,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5> Basic Details</h5>
+                <h6> Basic Details</h6>
               </Typography>
             </StepLabel>
             <StepContent>
@@ -1055,7 +1055,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5> Student Details</h5>
+                <h6> Student Details</h6>
               </Typography>
             </StepLabel>
             <StepContent>
@@ -1179,7 +1179,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5>Stdent Contact Details</h5>
+                <h6>Stdent Contact Details</h6>
               </Typography>
             </StepLabel>
             <StepContent>
@@ -1363,7 +1363,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5>Education Details</h5>
+                <h6>Education Details</h6>
               </Typography>
             </StepLabel>
 
@@ -1480,7 +1480,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5>Photo</h5>
+                <h6>Photo</h6>
               </Typography>
             </StepLabel>
 
@@ -1523,7 +1523,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5>Enquiry Details</h5>
+                <h6>Enquiry Details</h6>
               </Typography>
             </StepLabel>
             <StepContent>
@@ -1672,7 +1672,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5>Admission Details</h5>
+                <h6>Admission Details</h6>
               </Typography>
             </StepLabel>
 
@@ -1847,7 +1847,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5> Fee Details</h5>
+                <h6> Fee Details</h6>
               </Typography>
             </StepLabel>
 
@@ -2071,7 +2071,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5>Billing</h5>
+                <h6>Billing</h6>
               </Typography>
             </StepLabel>
 
@@ -2276,7 +2276,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h5>Others</h5>
+                <h6>Others</h6>
               </Typography>
             </StepLabel>
             <StepContent>
