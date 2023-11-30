@@ -4,7 +4,7 @@
 }
 .main-user-container {
   margin-top: 30px;
-  padding-left: 30px;
+
   background-color: #fcfcfc;
   width: 99%;
   border: 2px solid #f5f5f5;
@@ -54,6 +54,9 @@
   .inputt {
     margin-right: 30px;
   }
+}
+.mar {
+  text-align: left !important;
 }
 .error {
   color: red;

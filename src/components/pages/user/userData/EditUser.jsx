@@ -134,8 +134,8 @@ const EditUser = () => {
 
   return (
     <div className="container main-edituser-container my-4 ">
-      <h4 className="my-3 text-center"> Edit User Form</h4>
-      <div className="sub-edituser-container">
+      <h5 className="my-3 text-center"> Edit User Form</h5>
+      <div className="sub-edituser-container text-center">
         <form action="">
           <div className="row ">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -335,21 +335,17 @@ const EditUser = () => {
             </div>
           </div>
 
-          <div className="row mb-3 ">
-            <div className="col-2 col-md-6 col-lg-6 col-xl-6">
-              <NavLink to="/usersdata" className="btn btn-primary ">
-                Back
-              </NavLink>
-            </div>
-            <div className="col-9 col-md-6 col-lg-6 col-xl-6 ">
-              <button
-                type="submit"
-                onClick={handlesubmit}
-                className="btn btn-primary end "
-              >
-                Submit
-              </button>
-            </div>
+          <div className="d-flex justify-content-between my-3">
+            <NavLink to="/usersdata" className="btn btn-color  ms-sm-5">
+              Back
+            </NavLink>
+            <button
+              type="submit"
+              onClick={handlesubmit}
+              className="btn btn-color me-sm-5"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>

@@ -655,7 +655,10 @@ const FeeView = () => {
                                 {item.totalinstallments}
                               </span>
                               <span style={dynamicStyle}>
-                                <CheckCircleIcon style={IconStyle} />
+                                <CheckCircleIcon
+                                  style={IconStyle}
+                                  className="icon-color"
+                                />
                               </span>
                             </div>
                           );
@@ -1044,7 +1047,7 @@ const FeeView = () => {
                               to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
                               style={{ width: "40px" }}
                             >
-                              <CreditScoreIcon className="iconn" />
+                              <CreditScoreIcon className="icon-color" />
                             </Link>
                           </StyledTableCell>
                         </StyledTableRow>
@@ -1057,7 +1060,7 @@ const FeeView = () => {
         {/* Display course fee payment table*/}
 
         {studentdata && studentdata.installments[0] && (
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} className="mt-4">
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
@@ -1169,7 +1172,7 @@ const FeeView = () => {
                             style={{ width: "40px", paddingRight: "15px" }}
                             className=" hover-container"
                           >
-                            <CreditScoreIcon className="iconn" />
+                            <CreditScoreIcon className="icon-color" />
                             <div class="hover-text">admin</div>
                           </Link>
                           <Link
@@ -1177,7 +1180,7 @@ const FeeView = () => {
                             style={{ width: "40px" }}
                             className=" hover-container"
                           >
-                            <CreditScoreIcon className="iconn" />
+                            <CreditScoreIcon className="icon-color" />
                             <div class="hover-text">Student</div>
                           </Link>
                         </StyledTableCell>

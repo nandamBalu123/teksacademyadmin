@@ -1037,7 +1037,7 @@ export default function RegistrationForm() {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       style={{ cursor: "pointer" }}
                       variant="contained"
                       onClick={handleBasicDetails}
@@ -1152,7 +1152,7 @@ export default function RegistrationForm() {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleBack}
                       sx={{ mt: 1, mr: 1 }}
@@ -1161,7 +1161,7 @@ export default function RegistrationForm() {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleStudentDetails}
@@ -1337,7 +1337,7 @@ export default function RegistrationForm() {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleBack}
                       sx={{ mt: 1, mr: 1 }}
@@ -1346,7 +1346,7 @@ export default function RegistrationForm() {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleStudentContactDetails}
@@ -1454,7 +1454,7 @@ export default function RegistrationForm() {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleBack}
                       sx={{ mt: 1, mr: 1 }}
@@ -1463,7 +1463,7 @@ export default function RegistrationForm() {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleEducationDetails}
@@ -1497,7 +1497,7 @@ export default function RegistrationForm() {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleBack}
                       sx={{ mt: 1, mr: 1 }}
@@ -1506,7 +1506,7 @@ export default function RegistrationForm() {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handlePhoto}
@@ -1646,7 +1646,7 @@ export default function RegistrationForm() {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleBack}
                       sx={{ mt: 1, mr: 1 }}
@@ -1655,7 +1655,7 @@ export default function RegistrationForm() {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleEnquirydetails}
@@ -1810,7 +1810,7 @@ export default function RegistrationForm() {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleBack}
                       sx={{ mt: 1, mr: 1 }}
@@ -1819,7 +1819,7 @@ export default function RegistrationForm() {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleAdmissiondetails}
@@ -1915,10 +1915,7 @@ export default function RegistrationForm() {
 
                   {totalamount}
                 </div> */}
-                <button
-                  onClick={handleFeeDetails}
-                  className="bg-primary text-light px-4 py-1  border border-none rounded-2 "
-                >
+                <button onClick={handleFeeDetails} className="btn btn-color">
                   save
                 </button>
                 <br />
@@ -2045,7 +2042,7 @@ export default function RegistrationForm() {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleBack}
                       sx={{ mt: 1, mr: 1 }}
@@ -2054,7 +2051,7 @@ export default function RegistrationForm() {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleFeecalculations}
@@ -2250,7 +2247,7 @@ export default function RegistrationForm() {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleBack}
                       sx={{ mt: 1, mr: 1 }}
@@ -2260,7 +2257,7 @@ export default function RegistrationForm() {
                     </Button>
 
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleNext}
@@ -2381,7 +2378,7 @@ export default function RegistrationForm() {
                   </select> */}
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <Button
-                    className="bg-primary"
+                    className="btn btn-color"
                     variant="contained"
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
@@ -2531,7 +2528,7 @@ export default function RegistrationForm() {
 
                     <div className="col-12 text-end ">
                       <Button
-                        className="bg-primary "
+                        className="btn btn-color"
                         variant="contained"
                         onClick={handleSubmit}
                         sx={{ mt: 1, mr: 1 }}

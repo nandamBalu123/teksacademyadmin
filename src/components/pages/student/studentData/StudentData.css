@@ -1,5 +1,4 @@
 .studetdetails {
-  width: 99%;
   border: 2px solid #f5f5f5;
   border-radius: 8px;
   margin: auto;
@@ -180,4 +179,8 @@ input::-webkit-inner-spin-button {
   /* Adjust the gap according to your preference */
   align-items: center; /* Align items vertically at the center */
   justify-content: center;
+}
+.css-8bba1v-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: #4676a0 !important;
+  color: white !important;
 }

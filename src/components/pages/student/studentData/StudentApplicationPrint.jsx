@@ -1044,7 +1044,7 @@ function StudentApplicationPrint() {
         <button
           onClick={handlePrint}
           // style={{ margin: "30px" }}
-          className="btn btn-primary "
+          className="btn btn-color "
         >
           {/* <LocalPrintshopIcon /> */}
           Print

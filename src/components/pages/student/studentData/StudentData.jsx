@@ -366,7 +366,7 @@ const StudentData = () => {
     </div> */}
 
       <div className="studetdetails   mt-3">
-        <h5 className=" mt-3 ms-2"> Student Data </h5>
+        <h5 className=" mt-3 text-center"> Student Data </h5>
 
         <div className="row mb-1 ps-1 ">
           <div className="col-12 col-md-8 col-lg-8 col-xl-8  input-field">
@@ -415,7 +415,7 @@ const StudentData = () => {
                   onClick={handleClick}
                 >
                   <button
-                    className="btn btn-primary  "
+                    className="btn btn-color"
                     style={{ textTransform: "capitalize" }}
                   >
                     Filter
@@ -686,7 +686,7 @@ const StudentData = () => {
                   filename={"studentsdata.csv"}
                   target="_blank"
                 >
-                  <DownloadIcon className="text-dark mt-4"></DownloadIcon>
+                  <DownloadIcon className="icon-color mt-4"></DownloadIcon>
                 </CSVLink>
               </p>
             </div>
@@ -948,14 +948,23 @@ const StudentData = () => {
 
                           <StyledTableCell className="text-center d-flex mt-2">
                             <NavLink to={`/studentdataview/${item.id}`}>
-                              <VisibilityIcon style={{ width: "40px" }} />
+                              <VisibilityIcon
+                                style={{ width: "40px" }}
+                                className="icon-color"
+                              />
                             </NavLink>
 
                             <NavLink to={`/editstudent/${item.id}`}>
-                              <EditIcon style={{ width: "40px" }} />
+                              <EditIcon
+                                style={{ width: "40px" }}
+                                className="icon-color"
+                              />
                             </NavLink>
                             <NavLink to={`/feeview/${item.id}`}>
-                              <CurrencyRupeeIcon style={{ width: "40px" }} />
+                              <CurrencyRupeeIcon
+                                style={{ width: "40px" }}
+                                className="icon-color"
+                              />
                             </NavLink>
                             {/* {item.addfee == 1 && (
                               <NavLink to={`/feeview/${item.id}`}>
@@ -970,7 +979,7 @@ const StudentData = () => {
 
                             <NavLink to={`/studentApplicationprint/${item.id}`}>
                               <PrintIcon
-                                className="iconn"
+                                className="icon-color"
                                 style={{ width: "40px" }}
                               />
                             </NavLink>
