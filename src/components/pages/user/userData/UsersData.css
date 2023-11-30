@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 .row-disabled {
   background-color: gray;
   color: #fff;
@@ -37,7 +37,6 @@
 StyledTableCell {
   padding: 0;
   margin: 0;
- 
 }
 
 .user-table {
@@ -82,4 +81,12 @@ input::-webkit-inner-spin-button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.form-switch .form-check-input:checked {
+  background-color: #4676a0; /* Change to your desired color */
+  border-color: #4676a0; /* Change to your desired color */
+}
+.css-fljopr-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: #4676a0 !important;
+  color: white !important;
 }

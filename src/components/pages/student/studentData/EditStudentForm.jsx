@@ -392,7 +392,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleNext}
                       sx={{ mt: 1, mr: 1 }}
@@ -497,7 +497,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleBack}
@@ -506,7 +506,7 @@ const EditStudentForm = () => {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleNext}
                       sx={{ mt: 1, mr: 1 }}
@@ -684,7 +684,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleBack}
@@ -693,7 +693,7 @@ const EditStudentForm = () => {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleNext}
                       sx={{ mt: 1, mr: 1 }}
@@ -767,7 +767,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleBack}
@@ -776,7 +776,7 @@ const EditStudentForm = () => {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleNext}
                       sx={{ mt: 1, mr: 1 }}
@@ -827,7 +827,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleBack}
@@ -836,7 +836,7 @@ const EditStudentForm = () => {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleNext}
                       sx={{ mt: 1, mr: 1 }}
@@ -965,7 +965,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleBack}
@@ -974,7 +974,7 @@ const EditStudentForm = () => {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleNext}
                       sx={{ mt: 1, mr: 1 }}
@@ -1146,7 +1146,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleBack}
@@ -1155,7 +1155,7 @@ const EditStudentForm = () => {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleNext}
                       sx={{ mt: 1, mr: 1 }}
@@ -1410,7 +1410,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleBack}
@@ -1419,7 +1419,7 @@ const EditStudentForm = () => {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleNext}
                       sx={{ mt: 1, mr: 1 }}
@@ -1676,7 +1676,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleBack}
@@ -1685,7 +1685,7 @@ const EditStudentForm = () => {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handleNext}
                       sx={{ mt: 1, mr: 1 }}
@@ -1819,7 +1819,7 @@ const EditStudentForm = () => {
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       // disabled={index === 0}
                       onClick={handleBack}
@@ -1828,7 +1828,7 @@ const EditStudentForm = () => {
                       Back
                     </Button>
                     <Button
-                      className="bg-primary"
+                      className="btn btn-color"
                       variant="contained"
                       onClick={handlesubmit}
                       sx={{ mt: 1, mr: 1 }}

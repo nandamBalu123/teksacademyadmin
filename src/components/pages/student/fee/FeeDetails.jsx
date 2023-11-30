@@ -196,7 +196,6 @@ const FeeDetails = () => {
     <div className="container">
       <div className="main-feedetails  mt-3">
         <div>
-          {" "}
           <h5 className="mt-3 ms-2"> Fee Management</h5>
           <div className="row pt-2">
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
@@ -253,7 +252,7 @@ const FeeDetails = () => {
                 className="feebtn "
                 onClick={() => navigator("/feefollowup")}
               >
-                {" "}
+                
                 Fee FollowUps
               </button> */}
             </div>
@@ -298,8 +297,7 @@ const FeeDetails = () => {
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mt-1">
               <div className="d-flex justify-content-evenly">
                 <p className="mt-2">
-                  {" "}
-                  {recordCount}/{initialDataCount}{" "}
+                  {recordCount}/{initialDataCount}
                 </p>
                 <p className="mt-2">
                   <select onChange={handlerecorddata}>
@@ -307,17 +305,15 @@ const FeeDetails = () => {
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="75">75</option>
-                  </select>{" "}
+                  </select>
                 </p>
                 <span>
-                  {" "}
                   <button
                     onClick={handleClick}
-                    className="btn btn-primary  ms-2 "
+                    className="btn btn-color ms-2 "
                     style={{ textTransform: "capitalize" }}
                   >
-                    {" "}
-                    Filter{" "}
+                    Filter
                   </button>
                   {/* <h6 onClick={handleClick}> Filter</h6> */}
                   <Menu
@@ -338,8 +334,7 @@ const FeeDetails = () => {
                     <div className="d-flex justify-content-between m-2">
                       <div> Filter</div>
                       <div>
-                        {" "}
-                        <CloseIcon onClick={handleClose} />{" "}
+                        <CloseIcon onClick={handleClose} />
                       </div>
                     </div>
                     <hr />
@@ -504,7 +499,6 @@ const FeeDetails = () => {
                 </div> */}
                     <div className="text-end me-2 mt-4">
                       <button className="clear" onClick={filterreset}>
-                        {" "}
                         Clear
                       </button>
                     </div>
@@ -519,7 +513,6 @@ const FeeDetails = () => {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell className="table-cell-heading">
-                      {" "}
                       S.NO
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
@@ -528,33 +521,27 @@ const FeeDetails = () => {
                       Counsellor
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      {" "}
                       Contact
                       <br />
                       Email
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      {" "}
                       Course <br /> Date of Joining
                       <br /> Total Fee
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      {" "}
                       Paid Fee
                       <br /> Due Amount
                       <br /> Next Due Date
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      {" "}
                       Total <br />
                       Installments
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      {" "}
                       Paid <br /> Installments
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      {" "}
                       View
                     </StyledTableCell>
                   </TableRow>
@@ -842,7 +829,7 @@ const FeeDetails = () => {
                           <StyledTableCell className="Table-cell">
                             <Link to={`/feeview/${item.id}`}>
                               <VisibilityIcon />
-                            </Link>{" "}
+                            </Link>
                           </StyledTableCell>
                         </StyledTableRow>
                       );
@@ -853,7 +840,7 @@ const FeeDetails = () => {
                         No data available
                       </TableCell>
                     </TableRow>
-                  )}{" "}
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>

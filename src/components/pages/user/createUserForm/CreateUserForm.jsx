@@ -166,10 +166,10 @@ const CreateUserForm = () => {
 
   return (
     <div className="main-user-container container my-4">
-      <h5 className="mt-4  ">User Creation Form</h5>
-      <div className="sub-user-container">
-        <form onSubmit={handleSubmit} className="needs-validation" noValidate>
-          <div className="row ">
+      <h5 className="mt-4  text-center">User Creation Form</h5>
+      <div className="sub-user-container text-center ">
+        <form onSubmit={handleSubmit} className="needs-validation " noValidate>
+          <div className="row">
             <div className=" col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
                 label={<span className="label-family">Full Name</span>}
@@ -315,7 +315,7 @@ const CreateUserForm = () => {
               </div> */}
             </div>
           </div>
-          <div className="row ">
+          <div className="row">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
                 <InputLabel>
@@ -327,7 +327,7 @@ const CreateUserForm = () => {
                   {/* Department<span> *</span> */}
                 </InputLabel>
                 <Select
-                  className=" mar  "
+                  className="mar"
                   name="department"
                   id="department"
                   required
@@ -534,10 +534,10 @@ const CreateUserForm = () => {
             </div>
           </div>
 
-          <div className="create-button mt-5 ">
+          <div className="create-button mt-4 ">
             <button
               type="submit"
-              className="btn btn-primary  mb-4 "
+              className=" btn btn-color  mb-4 me-5"
               style={{ textTransform: "capitalize" }}
             >
               Create User

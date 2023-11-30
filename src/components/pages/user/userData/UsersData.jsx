@@ -303,7 +303,7 @@ const UsersData = () => {
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
       <div className="userlist mt-3">
-        <h5 className=" mt-3 ms-3">Users List</h5>
+        <h5 className=" mt-3 ms-3 text-center">Users List</h5>
 
         <div className="row  px-2 mb-1 ">
           <div className="col-12 col-md-8 col-lg-8 col-xl-8">
@@ -350,7 +350,7 @@ const UsersData = () => {
                   onClick={handleClick}
                 >
                   <button
-                    className="btn btn-primary "
+                    className="btn btn-color "
                     style={{ textTransform: "capitalize" }}
                   >
                     Filter
@@ -757,14 +757,15 @@ const UsersData = () => {
                             </StyledTableCell>
                             <StyledTableCell align="center" className="d-flex ">
                               <Link to={`/userview/${user.id}`}>
-                                <VisibilityIcon className="iconn" />
+                                <VisibilityIcon className=" icon-color" />
                               </Link>
                               <Link to={`/edituser/${user.id}`}>
-                                <ModeEditIcon />
+                                <ModeEditIcon className="icon-color" />
                               </Link>
                               {user.user_status !== undefined && (
-                                <div class="form-check form-switch">
+                                <div class="form-check form-switch ">
                                   <input
+                                    style={{ cursor: "pointer" }}
                                     class="form-check-input"
                                     type="checkbox"
                                     role="switch"
@@ -820,13 +821,12 @@ const UsersData = () => {
             </Dialog>
             <div
               style={{ display: "flex", justifyContent: "center" }}
-              className="mt-3"
+              className="my-3"
             >
               <Stack spacing={2}>
                 <Pagination
                   count={Math.ceil(filteredData.length / itemsPerPage)}
                   onChange={handlePageChange}
-                  color="info"
                 />
               </Stack>
             </div>

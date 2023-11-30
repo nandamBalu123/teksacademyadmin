@@ -359,41 +359,39 @@ const StudentDataView = () => {
 
                 return (
                   <TableBody>
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell className=" Table-cell text-center">
+                    <StyledTableRow>
+                      <StyledTableCell className=" Table-cell text-center">
                         Installment {index + 1}
-                      </TableCell>
+                      </StyledTableCell>
 
-                      <TableCell className="Table-cell text-center">
+                      <StyledTableCell className="Table-cell text-center">
                         {dueDate}
-                      </TableCell>
-                      <TableCell className="Table-cell text-center">
+                      </StyledTableCell>
+                      <StyledTableCell className="Table-cell text-center">
                         {Number(
                           parseFloat(item.dueamount).toFixed(2)
                         ).toLocaleString("en-IN")}
-                      </TableCell>
-                      <TableCell className="Table-cell text-center">
+                      </StyledTableCell>
+                      <StyledTableCell className="Table-cell text-center">
                         {paidDate}
-                      </TableCell>
-                      <TableCell className="Table-cell text-center  ">
+                      </StyledTableCell>
+                      <StyledTableCell className="Table-cell text-center  ">
                         {Number(item.paidamount).toLocaleString("en-IN")}
-                      </TableCell>
+                      </StyledTableCell>
 
-                      <TableCell className="Table-cell text-center">
+                      <StyledTableCell className="Table-cell text-center">
                         {item.modeofpayment}
-                      </TableCell>
-                      <TableCell className="Table-cell text-center">
+                      </StyledTableCell>
+                      <StyledTableCell className="Table-cell text-center">
                         {item.transactionid}
-                      </TableCell>
-                      <TableCell className="Table-cell text-center">
+                      </StyledTableCell>
+                      <StyledTableCell className="Table-cell text-center">
                         <Link
                           to={`/invoice/${id}/${index}/Installment/admininvoice`}
                           style={{ width: "40px", paddingRight: "15px" }}
                           className=" hover-container"
                         >
-                          <CreditScoreIcon className="iconn" />
+                          <CreditScoreIcon className="icon-color" />
                           <div class="hover-text">admin</div>
                         </Link>
                         <Link
@@ -401,11 +399,11 @@ const StudentDataView = () => {
                           style={{ width: "40px" }}
                           className=" hover-container"
                         >
-                          <CreditScoreIcon className="iconn" />
+                          <CreditScoreIcon className="icon-color" />
                           <div class="hover-text">Student</div>
                         </Link>
-                      </TableCell>
-                    </TableRow>
+                      </StyledTableCell>
+                    </StyledTableRow>
                   </TableBody>
                 );
               })}

@@ -75,11 +75,11 @@ const PrintableComponent = React.forwardRef((props, ref) => {
     <div ref={ref} className="container">
       <div className="page ">
         <div className="application ">
-          
-          <h3 className="text-center mt-2 "> Application Form </h3>
-          <div className="row">
+          <h5 className="text-center mt-5 ">Application Form</h5>
+
+          <div className="row align-items-center">
             <div
-              className="col-5 col-md-5 col-lg-5 col-xl-5 mt-2 "
+              className="col-12 col-md-5 col-lg-5 col-xl-5 mt-2 "
               style={{ marginLeft: "10px" }}
             >
               <h5>
@@ -105,15 +105,12 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 www.teksacademy.com
               </p>
             </div>
-            <div className="col-6 col-md-6 col-lg-6 col-xl-6 text-end">
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6 text-center mt-2">
               <img src={logo} style={{ width: "70%" }} />
-              <h5
-                className="text-center"
-                style={{ marginTop: "10px", marginLeft: "8rem" }}
-              >
-                <strong className="fs-5 text-center"> Branch:</strong>
+              <p style={{ marginTop: "10px" }}>
+                <strong> Branch:</strong>
                 {studentdata.branch}
-              </h5>
+              </p>
             </div>
           </div>
 
@@ -169,23 +166,23 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </div>
           </div> */}
 
-          <div className="admform-sd   ">
-            <div
-              className=" text-center caption "
-              style={{ fontSize: "25px", fontWeight: "600", marginTop: "25px" }}
+          <div className="admform-sd">
+            <h5
+              className=" text-center caption py-1"
+              style={{ fontWeight: "500", marginTop: "30px" }}
             >
               Student Details
-            </div>
+            </h5>
             <div className="row ">
-              <div className="col-8 col-md-8 col-lg-8 col-xl-8">
+              <div className="col-12 col-md-8 col-lg-8 col-xl-8">
                 <div className="table-responsive">
                   <table className="table table-bordered">
                     <thead> </thead>
                     <tbody>
                       <tr>
                         <td
-                          style={{ width: "30.66%", background: "#e4ecff" }}
-                          className="w-25 borderleft "
+                          style={{ background: "#e4ecff" }}
+                          // className="w-25 borderleft "s
                         >
                           <b> Student Name</b>
                         </td>
@@ -227,7 +224,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   </table>
                 </div>
               </div>
-              <div className=" col-4 col-md-4 col-lg-4 col-xl-4 mt-4">
+              <div className=" col-12 col-md-4 col-lg-4 col-xl-4 mt-4">
                 {/* <img src={studentimg} /> */}
                 {!studentdata.studentImg && (
                   <img src={profilePic} alt="photo" />
@@ -241,56 +238,13 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </div>
             </div>
           </div>
-          <div className="admform-scd ">
-            <div
-              className="text-center caption"
-              style={{ fontSize: "25px", fontWeight: "600" }}
+          <div className="admform-scd">
+            <h5
+              className=" text-center caption py-1"
+              style={{ fontWeight: "500" }}
             >
               Student Contact Details
-            </div>
-            {/* <div>
-  <div className="row">
-    <div className="col-3 borderright"><b> Country</b></div>
-    <div className="col-3 borderleft ">a</div>
-
-    <div className="col-3 borderright">a</div>
-    <div className="col-3 borderleft">a</div>
-
-  </div>
-  <div className="row">
-  <div className="col-3 borderright"><b> Country</b></div>
-    <div className="col-3 borderleft ">a</div>
-
-    <div className="col-3 borderright">a</div>
-    <div className="col-3 borderleft">a</div>
-
-  </div>
-  <div className="row">
-  <div className="col-3 borderright"><b> Country</b></div>
-    <div className="col-3 borderleft ">a</div>
-
-    <div className="col-3 borderright">a</div>
-    <div className="col-3 borderleft">a</div>
-
-  </div>
-  <div className="row">
-  <div className="col-3 borderright"><b> Country</b></div>
-    <div className="col-3 borderleft ">a</div>
-
-    <div className="col-3 borderright">a</div>
-    <div className="col-3 borderleft">a</div>
-
-  </div>
-  <div className="row">
-  <div className="col-3 borderright"><b> Country</b></div>
-    <div className="col-3 borderleft ">a</div>
-
-    <div className="col-3 borderright">a</div>
-    <div className="col-3 borderleft">a</div>
-
-  </div>
-</div> */}
-
+            </h5>
             <div className="table-responsive">
               <table className="table">
                 <tbody>
@@ -302,14 +256,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     >
                       Country
                     </td>
-                    <td className="w-25 borderleft ">{studentdata.country} </td>
+                    <td className=" borderleft ">{studentdata.country} </td>
                     <td
                       className="borderright"
                       style={{ background: "#e4ecff" }}
                     >
                       Native Place
                     </td>
-                    <td className="w-25 borderleft">{studentdata.native}</td>
+                    <td className=" borderleft">{studentdata.native}</td>
                   </tr>
                   <tr>
                     <td
@@ -318,14 +272,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     >
                       State
                     </td>
-                    <td className="w-25 borderleft "> {studentdata.state} </td>
+                    <td className=" borderleft "> {studentdata.state} </td>
                     <td
                       className="borderright"
                       style={{ background: "#e4ecff" }}
                     >
                       Area
                     </td>
-                    <td className="w-25 borderleft ">{studentdata.area}</td>
+                    <td className="borderleft ">{studentdata.area}</td>
                   </tr>
                   <tr>
                     <td
@@ -334,14 +288,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     >
                       Present Address
                     </td>
-                    <td className="w-25 borderleft  ">{studentdata.area} </td>
+                    <td className=" borderleft  ">{studentdata.area} </td>
                     <td
                       className="borderright"
                       style={{ background: "#e4ecff" }}
                     >
                       ZipCode
                     </td>
-                    <td className="w-25 borderleft ">{studentdata.zipcode}</td>
+                    <td className=" borderleft ">{studentdata.zipcode}</td>
                   </tr>
                   <tr>
                     <td
@@ -350,18 +304,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     >
                       Mobile Number
                     </td>
-                    <td className="w-25 borderleft ">
-                      {studentdata.mobilenumber}
-                    </td>
+                    <td className="borderleft ">{studentdata.mobilenumber}</td>
                     <td
                       className="borderright"
                       style={{ background: "#e4ecff" }}
                     >
                       WhatsApp Number
                     </td>
-                    <td className="w-25 borderleft ">
-                      {studentdata.whatsappno}
-                    </td>
+                    <td className="borderleft ">{studentdata.whatsappno}</td>
                   </tr>
                   <tr>
                     <td
@@ -370,125 +320,201 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     >
                       Email Id
                     </td>
-                    <td className="w-25 borderleft  ">{studentdata.email} </td>
+                    <td className="borderleft  ">{studentdata.email} </td>
                     <td className="borderright"></td>
-                    <td className="w-25 borderleft "></td>
+                    <td className="borderleft "></td>
                     {/* <td className="borderright"></td>
                     <td className="w-25 borderleft "></td> */}
                   </tr>
                 </tbody>
               </table>
-            </div>
-
-            <div className="admform-scd   ">
-              <div
-                className="text-center caption  "
-                style={{ fontSize: "25px", fontWeight: "600" }}
-              >
-                Education Details
-              </div>
-              <div className="table-responsive">
-                <table class="table table-bordered">
-                  <tbody>
-                    <br />
-                    <tr>
-                      <td style={{ background: "#e4ecff" }}>
-                        <b> S.No</b>
-                      </td>
-                      <th style={{ background: "#e4ecff" }}> Education</th>
-                      <th style={{ background: "#e4ecff" }}>
-                        Marks(Percentage)
-                      </th>
-                      <th style={{ background: "#e4ecff" }}>Academic Year</th>
-                    </tr>
-                    <tr>
-                      <td class="w-25">1</td>
-                      <td class="w-25">{studentdata.educationtype}</td>
-                      <td class="w-25">{studentdata.marks}</td>
-                      <td class="w-25">{studentdata.academicyear}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div className="admform-scd page-break mt-3 ">
-              <div
-                className="text-center caption"
-                style={{ fontSize: "25px", fontWeight: "600" }}
-              >
-                Admission Details
-              </div>
-            </div>
-            <div classNamen="table-responsive my-3">
-              <table className="table ">
+            </div>{" "}
+          </div>
+          <div className="admform-scd">
+            <h5
+              className=" text-center caption py-1"
+              style={{ fontWeight: "500" }}
+            >
+              Education Details
+            </h5>
+            <div className="table-responsive">
+              <table className="table">
                 <tbody>
                   <br />
+
                   <tr>
-                    <td className="borderright" style={{ background: "#e4ecff" }}>Enquiry Date</td>
-                    <td className="w-25 borderleft  ">
-                      {EnquiryDate ? EnquiryDate : "No Date"}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      S.No
                     </td>
-                    <td className="borderright" style={{ background: "#e4ecff" }}> Reg Number</td>
-                    <td className="w-25 borderleft ">
-                      {studentdata.registrationnumber}
+
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      Education
                     </td>
-                    {/* <td className="borderright">Branch</td>
-                    <td className="w-25 borderleft ">{studentdata.branch}</td> */}
-                  </tr>
-                  <tr>
-                    <td className="borderright" style={{ background: "#e4ecff" }}> Enquiry Taken By </td>
-                    <td className="w-25 borderleft ">
-                      {studentdata.enquirytakenby}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      Marks(Percentage)
                     </td>
-                    <td className="borderright" style={{ background: "#e4ecff" }}> Lead Source </td>
-                    <td className="w-25 borderleft ">
-                      {studentdata.leadsource}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="borderright" style={{ background: "#e4ecff" }}> Course Package </td>
-                    <td className="w-25 borderleft">
-                      {studentdata.coursepackage}
-                    </td>
-                    <td className="borderright" style={{ background: "#e4ecff" }}> Course</td>
-                    <td className="w-25 borderleft">{studentdata.courses}</td>
-                  </tr>
-                  <tr>
-                    <td className="borderright" style={{ background: "#e4ecff" }}> Admission Date </td>
-                    <td className="w-25 borderleft ">
-                      {AdmissionDate ? AdmissionDate : "No Date"}
-                    </td>
-                    {/* <td className="borderright"> Admission Status </td> */}
-                    {/* <td className="w-25 borderleft ">
-                      {studentdata.admissionstatus}
-                    </td> */}
-                    <td className="borderright" style={{ background: "#e4ecff" }}> Mode of Training</td>
-                    <td className="w-25 borderleft ">
-                      {studentdata.modeoftraining}
+                    <td
+                      className="borderright"
+                      style={{ background: "#e4ecff" }}
+                    >
+                      Acdemic Year
                     </td>
                   </tr>
                   <tr>
-                    <td className="borderright" style={{ background: "#e4ecff" }} > Expected End Date </td>
-                    <td className="w-25 borderleft ">
-                      {ExpectedEndDate ? ExpectedEndDate : "No Date"}
-                    </td>
-                    <td className="borderright" style={{ background: "#e4ecff" }}> Course Start Date</td>
-                    <td colspan="1" className="w-25 borderleft">
-                      {CourseStartDate ? CourseStartDate : "No Date"}
-                    </td>
+                    <td className=" borderleft"> 1 </td>
+                    <td className=" borderleft">{studentdata.educationtype}</td>
+                    <td className=" borderleft">{studentdata.marks}</td>
+                    <td className=" borderleft">{studentdata.academicyear}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          <div className="admform-scd mt-4">
+          {/* <div className="admform-scd   ">
             <div
-              className="text-center caption"
+              className="text-center caption  "
               style={{ fontSize: "25px", fontWeight: "600" }}
             >
-              Fee Detail
+              Education Details
             </div>
+            <div className="table-responsive">
+              <table class="table table-bordered">
+                <tbody>
+                  <br />
+                  <tr>
+                    <td style={{ background: "#e4ecff" }}>
+                      <b> S.No</b>
+                    </td>
+                    <th style={{ background: "#e4ecff" }}>
+                      {" "}
+                      <b>Education</b>
+                    </th>
+                    <th style={{ background: "#e4ecff" }}>
+                      <b>Marks(Percentage)</b>
+                    </th>
+                    <th style={{ background: "#e4ecff" }}>
+                      <b>Academic Year</b>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td class="w-25">1</td>
+                    <td class="w-25">{studentdata.educationtype}</td>
+                    <td class="w-25">{studentdata.marks}</td>
+                    <td class="w-25">{studentdata.academicyear}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div> */}
+
+          <div className="admform-scd page-break mt-4 ">
+            <h5
+              className=" text-center caption py-1"
+              style={{ fontWeight: "500" }}
+            >
+              Admission Details
+            </h5>
+          </div>
+          <div classNamen="table-responsive my-3">
+            <table className="table ">
+              <tbody>
+                <br />
+                <tr>
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    Enquiry Date
+                  </td>
+                  <td className=" borderleft  ">
+                    {EnquiryDate ? EnquiryDate : "No Date"}
+                  </td>
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    {" "}
+                    Reg Number
+                  </td>
+                  <td className="borderleft ">
+                    {studentdata.registrationnumber}
+                  </td>
+                  {/* <td className="borderright">Branch</td>
+                    <td className="w-25 borderleft ">{studentdata.branch}</td> */}
+                </tr>
+                <tr>
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    {" "}
+                    Enquiry Taken By{" "}
+                  </td>
+                  <td className="borderleft ">{studentdata.enquirytakenby}</td>
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    {" "}
+                    Lead Source{" "}
+                  </td>
+                  <td className="borderleft ">{studentdata.leadsource}</td>
+                </tr>
+                <tr>
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    {" "}
+                    Course Package{" "}
+                  </td>
+                  <td className="borderleft">{studentdata.coursepackage}</td>
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    {" "}
+                    Course
+                  </td>
+                  <td className="borderleft">{studentdata.courses}</td>
+                </tr>
+                <tr>
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    {" "}
+                    Admission Date{" "}
+                  </td>
+                  <td className="borderleft ">
+                    {AdmissionDate ? AdmissionDate : "No Date"}
+                  </td>
+                  {/* <td className="borderright"> Admission Status </td> */}
+                  {/* <td className="w-25 borderleft ">
+                      {studentdata.admissionstatus}
+                    </td> */}
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    {" "}
+                    Mode of Training
+                  </td>
+                  <td className="borderleft ">{studentdata.modeoftraining}</td>
+                </tr>
+                <tr>
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    {" "}
+                    Expected End Date{" "}
+                  </td>
+                  <td className="borderleft ">
+                    {ExpectedEndDate ? ExpectedEndDate : "No Date"}
+                  </td>
+                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                    {" "}
+                    Course Start Date
+                  </td>
+                  <td colspan="1" className="borderleft">
+                    {CourseStartDate ? CourseStartDate : "No Date"}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="admform-scd mt-4">
+            <h5
+              className=" text-center caption py-1"
+              style={{ fontWeight: "500" }}
+            >
+              Fee Details
+            </h5>
             <div className="table-responsive">
               <table className="table table-bordered">
                 <tbody>
@@ -497,10 +523,19 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     <td style={{ background: "#e4ecff" }}>
                       <b> Fees Type</b>
                     </td>
-                    <th style={{ background: "#e4ecff" }}> Fee Amount </th>
-                    <th style={{ background: "#e4ecff" }}> Discount </th>
-                    <th style={{ background: "#e4ecff" }}> Tax </th>
-                    <th className="col-sm-4" style={{ background: "#e4ecff" }}> Total Fee </th>
+                    <td style={{ background: "#e4ecff" }}>
+                      <b> Fee Amount</b>{" "}
+                    </td>
+                    <td style={{ background: "#e4ecff" }}>
+                      {" "}
+                      <b>Discount</b>{" "}
+                    </td>
+                    <td style={{ background: "#e4ecff" }}>
+                      <b>Tax</b>
+                    </td>
+                    <td className="col-sm-4" style={{ background: "#e4ecff" }}>
+                      <b>Total Fee</b>
+                    </td>
                   </tr>
 
                   {studentdata.feedetails &&
@@ -537,12 +572,12 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </div>
           </div>
           <div className="admform-scd">
-            <div
-              className="text-center caption"
-              style={{ fontSize: "25px", fontWeight: "600" }}
+            <h5
+              className=" text-center caption py-1"
+              style={{ fontWeight: "500" }}
             >
               Assets
-            </div>
+            </h5>
             <div className="table-responsive">
               <table className="table table-bordered">
                 <tbody>
@@ -552,7 +587,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     <td style={{ background: "#e4ecff" }}>
                       <b> Provided</b>
                     </td>
-                    <td className="w-25">
+                    <td>
                       {studentdata.assets &&
                         studentdata.assets.map((item, index) => (
                           <>
@@ -572,19 +607,17 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     <td style={{ background: "#e4ecff" }}>
                       <b> Issue Date</b>
                     </td>
-                    <td className="w-25">{IssueDate}</td>
+                    <td>{IssueDate}</td>
                   </tr>
 
                   <tr>
                     <td style={{ background: "#e4ecff" }}>
-                      <b > Comments</b>
+                      <b> Comments</b>
                     </td>
-                    <td className="w-25" colspan="4">
-                      {studentdata.admissionremarks}
-                    </td>
+                    <td colspan="4">{studentdata.admissionremarks}</td>
                   </tr>
                   <tr>
-                    <td class="w-25" colspan="4" style={{ height: "100px" }}>
+                    <td colspan="4" style={{ height: "100px" }}>
                       <strong> For Office Purpose</strong>
                     </td>
                   </tr>
@@ -598,7 +631,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       <div className="main-tc page-break">
         <div className="tc">
           <div>
-            <h2 className="tclogo"> Terms & Conditions</h2>
+            <h4 className="tclogo"> Terms & Conditions</h4>
           </div>
           <div className="info">
             <strong> 1. Admission :</strong>
@@ -681,22 +714,25 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 and subject to availability of resources.
               </li>
             </ul>
-            <strong className="page-break"> 5. Conduct:</strong>
-            <ul>
-              <li>
-                Students must conduct themselves respectfully towards the center
-                staff, fellow students, and the center's property.
-              </li>
-              <li>
-                Any form of harassment, discrimination, or bullying will not be
-                tolerated and may lead to immediate expulsion from the center.
-              </li>
-              <li>
-                The use of drugs or alcohol within the center's premises is
-                strictly prohibited and may lead to immediate expulsion from the
-                center.
-              </li>
-            </ul>
+            <div className="page-break pt-4 ">
+              <strong> 5. Conduct:</strong>
+              <ul>
+                <li>
+                  Students must conduct themselves respectfully towards the
+                  center staff, fellow students, and the center's property.
+                </li>
+                <li>
+                  Any form of harassment, discrimination, or bullying will not
+                  be tolerated and may lead to immediate expulsion from the
+                  center.
+                </li>
+                <li>
+                  The use of drugs or alcohol within the center's premises is
+                  strictly prohibited and may lead to immediate expulsion from
+                  the center.
+                </li>
+              </ul>
+            </div>
             <strong> 6. Examinations :</strong>
             <ul>
               <li>
@@ -770,15 +806,17 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 the course completed by the student and the center's policy.
               </li>
             </ul>
-            <strong> 12. Placement Guarantee:</strong>
-            <ul>
-              <li>
-                The center does not provide any placement guarantee to the
-                students but may assist them in finding suitable job
-                opportunities through guidance, counseling, and if any
-                recommendations.
-              </li>
-            </ul>
+            <div className="page-break pt-4">
+              <strong> 12. Placement Guarantee:</strong>
+              <ul>
+                <li>
+                  The center does not provide any placement guarantee to the
+                  students but may assist them in finding suitable job
+                  opportunities through guidance, counseling, and if any
+                  recommendations.
+                </li>
+              </ul>{" "}
+            </div>
             <strong>13. Using Id Card:</strong>
             <ul>
               <li>
@@ -857,18 +895,20 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 changes in the course curriculum.
               </li>
             </ul>
-            <strong> 20. Course Duration:</strong>
-            <ul>
-              <li>
-                The course duration may vary from batch to batch, depending on
-                factors such as students' attendance, training methodology, and
-                other relevant factors as determined by the center.
-              </li>
-              <li>
-                The center reserves the right to change the course duration at
-                any time without prior notice.
-              </li>
-            </ul>
+            <div className="page-break pt-3">
+              <strong> 20. Course Duration:</strong>
+              <ul>
+                <li>
+                  The course duration may vary from batch to batch, depending on
+                  factors such as students' attendance, training methodology,
+                  and other relevant factors as determined by the center.
+                </li>
+                <li>
+                  The center reserves the right to change the course duration at
+                  any time without prior notice.
+                </li>
+              </ul>{" "}
+            </div>
             <strong>21. Paid Internship Support: </strong>
             <ul>
               <li>
@@ -944,13 +984,15 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 without the student's consent, except as required by law.
               </li>
             </ul>
-            <strong> 4. Security:</strong>
-            <ul>
-              <li>
-                We take reasonable measures to ensure the security of the
-                personal information collected from students.
-              </li>
-            </ul>
+            <div className="page-break pt-3">
+              <strong> 4. Security:</strong>
+              <ul>
+                <li>
+                  We take reasonable measures to ensure the security of the
+                  personal information collected from students.
+                </li>
+              </ul>{" "}
+            </div>
             <strong> 5. Cookies:</strong>
             <ul>
               <li>
@@ -1002,7 +1044,7 @@ function StudentApplicationPrint() {
         <button
           onClick={handlePrint}
           // style={{ margin: "30px" }}
-          className="btn btn-primary "
+          className="btn btn-color "
         >
           {/* <LocalPrintshopIcon /> */}
           Print

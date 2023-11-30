@@ -1,8 +1,8 @@
 .page {
   width: 100%;
- 
+
   padding: 0;
-  page-break-before:always;
+  page-break-before: always;
   /* border: 1.5px solid black; */
 }
 
@@ -10,7 +10,6 @@
   size: A4;
   margin: 5px;
   padding: 10px;
- 
 }
 
 .page-break {
@@ -23,10 +22,10 @@
   /* border: 2px solid #f5f5f5; */
   /* border-radius: 8px; */
   margin: auto;
-  
+
   overflow: hidden;
 }
-th  {
+th {
   padding: 5px 10px !important;
 }
 .admform-sd img {
@@ -36,13 +35,13 @@ th  {
   border-radius: 5px;
 }
 
-.borderright{ 
+.borderright {
   border: 2px solid #454545;
   /* border-right: none; */
-margin: 0;
-font-weight: bold;
+  margin: 0;
+  font-weight: bold;
 }
-.borderleft{ 
+.borderleft {
   border: 2px solid #454545;
   border-left: 1.5px solid #454545;
   /* border-right: 2.5px solid #454545; */
@@ -96,7 +95,7 @@ font-weight: bold;
   padding-bottom: 30px;
 }
 .caption {
-  background-color: #00619d;
+  background-color: #4676a0;
   color: #fff;
 }
 .print {
@@ -105,8 +104,7 @@ font-weight: bold;
   margin-right: 10px;
 }
 input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button{ 
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
