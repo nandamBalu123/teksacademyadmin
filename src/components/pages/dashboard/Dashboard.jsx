@@ -4,7 +4,7 @@ import * as React from "react";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-
+import { Link } from "react-router-dom";
 import Header from "../../common/Header/Header";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
@@ -40,15 +40,13 @@ const Dashboard = () => {
   const [DisplayData, setDisplayData] = useState({
     enrollments: false,
     fee: false,
-    users: false,
+    feefollowup: false,
     dueAndReceivedAmount: false,
   });
 
   const [filterCriteria, setFilterCriteria] = useState({
     fromdate: "",
-
     todate: "",
-
     monthdataCondition: true,
   });
   const handleInputChange = (e) => {
@@ -642,8 +640,9 @@ const Dashboard = () => {
 
       <div className="contianer Dashboard">
         <div className="row">
+          <div className="col-12 col-md-1 col-lg-1 col-xl-1 m-sm-3"> </div>
           <div
-            className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
+            className="col-12 col-md-3 col-lg-3 col-xl-3 "
             style={{ cursor: "pointer" }}
             onClick={(e) =>
               setDisplayData({
@@ -655,16 +654,82 @@ const Dashboard = () => {
             }
           >
             <Card
+              style={{ backgroundColor: "#00c292" }}
+              className="rounded rounded-3 mb-1"
+            >
+              <p className="text-center pt-3">Total Enrollments</p>
+            </Card>
+          </div>
+          <div
+            className="col-12 col-md-3 col-lg-3 col-xl-3 "
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: true,
+                feefollowup: false,
+              })
+            }
+          >
+            <Card
+              style={{ backgroundColor: "#03a9f3" }}
+              className="rounded rounded-3 mb-1"
+            >
+              <p className="text-center pt-3">Fee Details</p>
+            </Card>
+          </div>
+          <div
+            className="col-12 col-md-3 col-lg-3 col-xl-3 "
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: false,
+                feefollowup: true,
+              })
+            }
+          >
+            <Link to="/feedetails">
+              <Card
+                style={{ backgroundColor: "#f87146" }}
+                className="rounded rounded-3 mb-1"
+              >
+                <p className="text-center pt-3">Fee Followups</p>
+              </Card>
+            </Link>
+          </div>
+        </div>
+        <div className="row">
+          {/* <div
+            className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: true,
+                fee: false,
+                users: false,
+                dueAndReceivedAmount: false,
+              })
+            }
+          >
+
+
+            <Card
               style={{ backgroundColor: "#d9e9e9" }}
               className="rounded rounded-3"
             >
               <p className="pt-3">Total Enrollments</p>
               <p>
-                <b> {getstudentData.length}</b>
+                <b>
+                  {" "}
+                  {Number(
+                    parseFloat(getstudentData.length).toFixed(2)
+                  ).toLocaleString("en-IN")}
+                </b>
               </p>
             </Card>
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
             style={{ cursor: "pointer" }}
             onClick={(e) =>
@@ -675,21 +740,25 @@ const Dashboard = () => {
                 dueAndReceivedAmount: false,
               })
             }
-          >
-            <Card
-              style={{ backgroundColor: "#b7e9da" }}
+          > */}
+          {/* <Card
+              style={{ backgroundColor: '#09c3f7' }}
               className="rounded rounded-3"
             >
               <p className="pt-3">Total Fee</p>
               <p>
                 <CurrencyRupeeIcon />
-                <b> {totalAmount}</b>
-                {/* <b>{sumDueAmount},</b>
+                <b>
+                  {Number(parseFloat(totalAmount).toFixed(2)).toLocaleString(
+                    "en-IN"
+                  )}
+                </b> */}
+          {/* <b>{sumDueAmount},</b>
                 <b>{sumreceivedAmount},</b> */}
-              </p>
-            </Card>
-          </div>
-          <div
+          {/* </p>
+            </Card> */}
+          {/* </div> */}
+          {/* <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
             style={{ cursor: "pointer" }}
             onClick={(e) =>
@@ -702,27 +771,31 @@ const Dashboard = () => {
             }
           >
             <Card
-              style={{ backgroundColor: "#b7e9da" }}
+              style={{ backgroundColor: '#ffc574' }}
               className="rounded rounded-3"
             >
               <p className="pt-3">
                 <b>
                   Received Amount :
                   <CurrencyRupeeIcon />
-                  {AllbranchesreceivedAmount}
+                  {Number(
+                    parseFloat(AllbranchesreceivedAmount).toFixed(2)
+                  ).toLocaleString("en-IN")}
                 </b>
-                {/* <b>{sumreceivedAmount},</b> */}
+               
               </p>
               <p>
                 <b>
                   Pending Amount : <CurrencyRupeeIcon />
-                  {AllbranchesDueAmount}
+                  {Number(
+                    parseFloat(AllbranchesDueAmount).toFixed(2)
+                  ).toLocaleString("en-IN")}
                 </b>
               </p>
             </Card>
-          </div>
+          </div> */}
 
-          {role === "admin" && (
+          {/* {role === "admin" && (
             <div
               className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
               style={{ cursor: "pointer" }}
@@ -741,11 +814,15 @@ const Dashboard = () => {
               >
                 <p className="pt-3">Total Users</p>
                 <p>
-                  <b> {getUsersData.length} </b>
+                  <b>
+                    {Number(
+                      parseFloat(getUsersData.length).toFixed(2)
+                    ).toLocaleString("en-IN")}
+                  </b>
                 </p>
               </Card>
             </div>
-          )}
+          )} */}
           {/* <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
             style={{ cursor: "pointer" }}
@@ -796,6 +873,163 @@ const Dashboard = () => {
 
       {/* This is for progress bar */}
 
+      {DisplayData.enrollments && (
+        <div className=" ">
+          <div className="d-flex justify-content-between">
+            <h4 className="text-center mt-3">
+              {" "}
+              Current Month Enrollment Details
+            </h4>
+            <div className=" tex-end">
+              <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <button
+                  className="btn btn-primary "
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {" "}
+                  Filter{" "}
+                </button>
+              </Button>
+              <Menu
+                className="mt-5"
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="fromdate"
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
+                </div>
+
+                <MenuItem className="text-end">
+                  {/* <button className="save"> Save</button> */}
+                  <button className="clear " onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
+          </div>
+          {/* <h4 className="text-center mt-3 ">  Current Month Enrollment Details </h4> */}
+          <div className="row ">
+            {/* <div className="col-12 col-md-2 col-xl-2 col-lg-2"> </div> */}
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#0090f7"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b> No of Enrollments</b>
+                  <p className="pt-3"> 6</p>{" "}
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#ff3741"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>Booking Amount</b>
+                  <p className="pt-3"> 40,000</p>{" "}
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#ffa300"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>Received Amount</b>
+                  <p className="pt-3"> 10,000</p>{" "}
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#00b6a6"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>DueAmount</b>
+                  <p className="pt-3"> 0,000</p>{" "}
+                </p>
+              </Card>
+            </div>
+          </div>
+        </div>
+      )}
+      {/*old data
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
           <div className="d-flex justify-content-between">
@@ -869,28 +1103,9 @@ const Dashboard = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-
-                  {/* <div>
-                  <label> From: </label>
-                </div>
-                <div>
-                  <input
-                    type="date"
-                    className="w-100"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                </div> */}
                 </div>
 
                 <MenuItem className="text-end">
-                  {/* <button className="save"> Save</button> */}
                   <button className="clear " onClick={filterreset}>
                     {" "}
                     Clear
@@ -917,7 +1132,10 @@ const Dashboard = () => {
                       value={enrollmentPercentage}
                     />
                     <span>Total Count: </span>
-                    {totalCount}
+
+                    {Number(parseFloat(totalCount).toFixed(2)).toLocaleString(
+                      "en-IN"
+                    )}
                     <span>({enrollmentPercentage.toFixed(2)}%)</span>
                   </div>
                 );
@@ -939,7 +1157,10 @@ const Dashboard = () => {
                         value={enrollmentPercentage}
                       />
                       <span>Total Count: </span>
-                      {totalCount}
+                      {}{" "}
+                      {Number(parseFloat(totalCount).toFixed(2)).toLocaleString(
+                        "en-IN"
+                      )}
                       <span>({enrollmentPercentage.toFixed(2)}%)</span>
                     </div>
                   );
@@ -947,12 +1168,13 @@ const Dashboard = () => {
               )}
           </div>
         </div>
-      )}
+      )} */}
+
       {DisplayData.fee && (
-        <div className="progreebar rounded rounded-5  pb-4">
+        <div className="">
           <div className="d-flex justify-content-between">
-            <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
-            <div className="pt-2 pe-4">
+            <h4 className="text-center mt-3"> Current Month Fee Details</h4>
+            <div className=" tex-end">
               <Button
                 id="demo-positioned-button"
                 aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -1051,6 +1273,118 @@ const Dashboard = () => {
               </Menu>
             </div>
           </div>
+
+          <div className="row  ">
+            <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#ff3741"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>Fee Received</b>
+                  <p className="pt-3"> 1,40,000</p>{" "}
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                // style={{ background:"#ff3741"}}
+                className="rounded rounded-3"
+              >
+                <p className="text-center pt-3">
+                  <b>Fee Yet To Received</b>
+                  <p className="pt-3">2,40,000</p>{" "}
+                </p>
+              </Card>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* old data {DisplayData.fee && (
+        <div className="progreebar rounded rounded-5  pb-4">
+          <div className="d-flex justify-content-between">
+            <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
+            <div className="pt-2 pe-4">
+              <Button
+                id="demo-positioned-button"
+                aria-controls={open ? "demo-positioned-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <button
+                  className="btn btn-primary "
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {" "}
+                  Filter{" "}
+                </button>
+              </Button>
+              <Menu
+                className="mt-5"
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                <div className="d-flex justify-content-between">
+                  <MenuItem> Filter</MenuItem>
+                  <MenuItem>
+                    {" "}
+                    <CloseIcon onClick={handleClose} />{" "}
+                  </MenuItem>
+                </div>
+                <hr />
+                <div className="row m-2">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" From:"
+                      type="date"
+                      variant="standard"
+                      className="  w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="fromdate"
+                      value={filterCriteria.fromdate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                    <TextField
+                      label=" To:"
+                      type="date"
+                      variant="standard"
+                      className="w-100"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      name="todate"
+                      value={filterCriteria.todate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+
+                <MenuItem className="text-end">
+                  <button className="clear " onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
+          </div>
           <div className="  justify-content-around pt-4 row progreebar-show">
             {role !== "branch manager" &&
               Object.entries(finalTotalByBranch).map(
@@ -1066,7 +1400,10 @@ const Dashboard = () => {
                         value={percentage}
                       />
                       <div>
-                        Total Amount: {totalAmount}{" "}
+                        Total Amount:
+                        {Number(
+                          parseFloat(totalAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({percentage.toFixed(2)}%)</span>
                       </div>
                     </div>
@@ -1088,7 +1425,10 @@ const Dashboard = () => {
                         value={percentage}
                       />
                       <div>
-                        Total Amount: {totalcount}{" "}
+                        Total Amount:{" "}
+                        {Number(
+                          parseFloat(totalcount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({percentage.toFixed(2)}%)</span>
                       </div>
                     </div>
@@ -1097,7 +1437,7 @@ const Dashboard = () => {
               )}
           </div>
         </div>
-      )}
+      )} */}
       {DisplayData.dueAndReceivedAmount && (
         <div className="progreebar rounded rounded-5  pb-4">
           <div className="d-flex justify-content-between">
@@ -1229,7 +1569,10 @@ const Dashboard = () => {
                       />
 
                       <div>
-                        Received : {totalreceivedAmount}
+                        Received :{" "}
+                        {Number(
+                          parseFloat(totalreceivedAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({Receivedpercentage.toFixed(2)}%)</span>
                       </div>
                       <BorderLinearProgress
@@ -1237,7 +1580,10 @@ const Dashboard = () => {
                         value={Pendingpercentage}
                       />
                       <div>
-                        Pending : {totalDueAmount}
+                        Pending :{" "}
+                        {Number(
+                          parseFloat(totalDueAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({Pendingpercentage.toFixed(2)}%)</span>
                       </div>
                     </div>
@@ -1265,7 +1611,10 @@ const Dashboard = () => {
                       />
 
                       <div>
-                        Received : {totalreceivedAmount}
+                        Received : {}{" "}
+                        {Number(
+                          parseFloat(totalreceivedAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({Receivedpercentage.toFixed(2)}%)</span>
                       </div>
                       <BorderLinearProgress
@@ -1273,7 +1622,10 @@ const Dashboard = () => {
                         value={Pendingpercentage}
                       />
                       <div>
-                        Pending : {totalDueAmount}
+                        Pending : {}{" "}
+                        {Number(
+                          parseFloat(totalDueAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
                         <span>({Pendingpercentage.toFixed(2)}%)</span>
                       </div>
                     </div>
@@ -1402,7 +1754,9 @@ const Dashboard = () => {
                     value={enrollmentPercentage}
                   />
                   <span>Total Count: </span>
-                  {totalCount}
+                  {Number(parseFloat(totalCount).toFixed(2)).toLocaleString(
+                    "en-IN"
+                  )}
                   <span>({enrollmentPercentage.toFixed(2)}%)</span>
                 </div>
               );
