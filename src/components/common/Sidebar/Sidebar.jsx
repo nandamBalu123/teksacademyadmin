@@ -34,6 +34,9 @@ import Diversity3Icon from "@mui/icons-material/Diversity3";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import StackedBarChartIcon from "@mui/icons-material/StackedBarChart";
 import profilelogo from "../../../images/Teks-Logo-with-Trade.png";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
+import Diversity2Icon from "@mui/icons-material/Diversity2";
+import AirplayIcon from "@mui/icons-material/Airplay";
 import MenuIcon from "@mui/icons-material/Menu";
 import favicon from "../../../images/favicon.jpeg";
 import axios from "axios";
@@ -414,6 +417,32 @@ const Sidebar = () => {
 
               <hr />
               {/* end */}
+              {/* leads start */}
+              {profile == "admin" ? (
+                <SubMenu
+                  style={{ color: "black" }}
+                  icon={<Diversity2Icon />}
+                  label={"Leads"}
+                  title={"Leads"}
+                >
+                  <SubMenu
+                    style={{ color: "black" }}
+                    icon={<LeaderboardIcon />}
+                    label={"Website Leads"}
+                    title={"Website Leads"}
+                  >
+                    <Item
+                      title="Webinar"
+                      to="/webinar"
+                      icon={<AirplayIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  </SubMenu>
+                </SubMenu>
+              ) : undefined}
+              <hr />
+              {/* end webinar */}
               {/* reports start */}
               {profile == "admin" ? (
                 <SubMenu
@@ -443,7 +472,7 @@ const Sidebar = () => {
                     color: "black",
                   }}
                   icon={<SettingsIcon />}
-                  label={"Roles Management"}
+                  label={"Settings"}
                   title={"Settings"}
                 >
                   <Item
@@ -490,6 +519,7 @@ const Sidebar = () => {
                   />
                 </SubMenu>
               ) : undefined}
+              <hr />
             </Box>
           </Menu>
         </ProSidebar>

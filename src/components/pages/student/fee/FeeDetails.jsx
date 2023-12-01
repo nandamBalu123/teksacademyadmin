@@ -197,7 +197,7 @@ const FeeDetails = () => {
       <div className="main-feedetails  mt-3">
         <div>
           <h5 className="mt-3 ms-2"> Fee Management</h5>
-          <div className="row pt-2">
+          <div className="row p-2">
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
               <Card
                 style={{
@@ -271,7 +271,7 @@ const FeeDetails = () => {
             </div>
           </div>
           <div className="row  pb-3">
-            <div className="col-12 col-md-9 col-lg-9 col-xl-9 ">
+            <div className="col-12 col-md-8 col-lg-8 col-xl-8 ">
               <input
                 type="text"
                 className="input-field ms-2 "
@@ -294,7 +294,7 @@ const FeeDetails = () => {
               />
               <hr className="w-75 ms-2" />
             </div>
-            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mt-1">
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-1">
               <div className="d-flex justify-content-evenly">
                 <p className="mt-2">
                   {recordCount}/{initialDataCount}
@@ -310,7 +310,7 @@ const FeeDetails = () => {
                 <span>
                   <button
                     onClick={handleClick}
-                    className="btn btn-color ms-2 "
+                    className="btn btn-color"
                     style={{ textTransform: "capitalize" }}
                   >
                     Filter
@@ -498,7 +498,7 @@ const FeeDetails = () => {
               </MenuItem>
                 </div> */}
                     <div className="text-end me-2 mt-4">
-                      <button className="clear" onClick={filterreset}>
+                      <button className="btn btn-color" onClick={filterreset}>
                         Clear
                       </button>
                     </div>
@@ -787,7 +787,10 @@ const FeeDetails = () => {
                                           {items.totalinstallments}
                                         </span>
                                         <span style={dynamicStyle}>
-                                          <CheckCircleIcon style={IconStyle} />
+                                          <CheckCircleIcon
+                                            style={IconStyle}
+                                            className="icon-color"
+                                          />
                                         </span>
                                       </div>
                                     );
@@ -819,7 +822,10 @@ const FeeDetails = () => {
                                         {items.totalinstallmentspaid}
                                       </span>
                                       <span style={dynamicStyle}>
-                                        <CheckCircleIcon style={IconStyle} />
+                                        <CheckCircleIcon
+                                          style={IconStyle}
+                                          className="icon-color"
+                                        />
                                       </span>
                                     </div>
                                   );
@@ -828,7 +834,7 @@ const FeeDetails = () => {
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
                             <Link to={`/feeview/${item.id}`}>
-                              <VisibilityIcon />
+                              <VisibilityIcon className="icon-color" />
                             </Link>
                           </StyledTableCell>
                         </StyledTableRow>

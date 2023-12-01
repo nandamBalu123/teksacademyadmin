@@ -123,31 +123,32 @@ const Edit = () => {
 
   return (
     <div className="container mt-3">
-      <div className="Assignassetsedit">
+      <div className="main-assignassetsedit">
         <h5 className="mt-3"> Assign Assets Edit</h5>
-        <form className="mt-4">
-          <div className="row">
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <TextField
-                label={<span className="label-family">Full Name</span>}
-                className=" mar w-75"
-                variant="standard"
-                name="name"
-                type="text"
-                value={inpval.name}
-                id="name"
-              />
-            </div>
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <TextField
-                label={<span className="label-family">Designation</span>}
-                className=" mar w-75"
-                variant="standard"
-                name="designation"
-                type="text"
-                value={inpval.designation}
-              />
-              {/* <TextField
+        <div className="assignassetsedit text-center">
+          <form className="mt-4">
+            <div className="row ">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">Full Name</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  name="name"
+                  type="text"
+                  value={inpval.name}
+                  id="name"
+                />
+              </div>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">Designation</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  name="designation"
+                  type="text"
+                  value={inpval.designation}
+                />
+                {/* <TextField
                 label="Vender Name"
                 className=" mar w-75"
                 variant="standard"
@@ -157,95 +158,95 @@ const Edit = () => {
                 
               
               /> */}
-            </div>{" "}
-          </div>
-          <div className="row">
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <TextField
-                label={<span className="label-family">Branch</span>}
-                className=" mar w-75"
-                variant="standard"
-                type="text"
-                value={inpval.branch}
-                name="branch"
-              />
+              </div>{" "}
             </div>
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <TextField
-                label={<span className="label-family">Asset Type</span>}
-                className=" mar w-75"
-                variant="standard"
-                type="text"
-                value={inpval.assettype}
-                name="assettype"
-              />
+            <div className="row">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">Branch</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  type="text"
+                  value={inpval.branch}
+                  name="branch"
+                />
+              </div>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">Asset Type</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  type="text"
+                  value={inpval.assettype}
+                  name="assettype"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <TextField
-                label={<span className="label-family">Issue Date</span>}
-                className=" mar w-75"
-                variant="standard"
-                type="date"
-                value={inpval.issueddate}
-                name="issueddate"
-                required
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+            <div className="row">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">Issue Date</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  type="date"
+                  value={inpval.issueddate}
+                  name="issueddate"
+                  required
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </div>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">Asset Code</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  type="text"
+                  value={inpval.assetcode}
+                  name="assetcode"
+                />
+              </div>
             </div>
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <TextField
-                label={<span className="label-family">Asset Code</span>}
-                className=" mar w-75"
-                variant="standard"
-                type="text"
-                value={inpval.assetcode}
-                name="assetcode"
-              />
+            <div className="row">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">Quantity</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  type="number"
+                  value={inpval.anonymity}
+                  name="anonymity"
+                />
+              </div>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">Remarks</span>}
+                  className=" mar w-75"
+                  variant="standard"
+                  type="text"
+                  value={inpval.remarks}
+                  name="remarks"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <TextField
-                label={<span className="label-family">Quantity</span>}
-                className=" mar w-75"
-                variant="standard"
-                type="number"
-                value={inpval.anonymity}
-                name="anonymity"
-              />
-            </div>
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <TextField
-                label={<span className="label-family">Remarks</span>}
-                className=" mar w-75"
-                variant="standard"
-                type="text"
-                value={inpval.remarks}
-                name="remarks"
-              />
-            </div>
-          </div>
 
-          <div className="create-button  d-flex justify-content-between my-4 ">
-            <NavLink to="/assignassets ">
-              <button className="btn btn-primary  ">Back</button>
-            </NavLink>
+            <div className="create-button  d-flex justify-content-between my-4 ">
+              <NavLink to="/assignassets ">
+                <button className="btn btn-color ms-sm-5">Back</button>
+              </NavLink>
 
-            <button
-              type="submit"
-              onClick={updateuser}
-              className="btn btn-primary me-5"
-              style={{ textTransform: "capitalize" }}
-            >
-              submit
-            </button>
-          </div>
+              <button
+                type="submit"
+                onClick={updateuser}
+                className="btn btn-color me-sm-5"
+                style={{ textTransform: "capitalize" }}
+              >
+                submit
+              </button>
+            </div>
 
-          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
+            {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputEmail1" class="form-label">
               Name
             </label>
@@ -299,7 +300,7 @@ const Edit = () => {
               id="exampleInputPassword1"
             />
           </div> */}
-          {/* <div className="mb-3 col-lg-6 col-md-6 col-12">
+            {/* <div className="mb-3 col-lg-6 col-md-6 col-12">
                             <label htmlFor="exampleInputPassword1" className="form-label">Asset Type</label>
                             <select
                                 selected={inpval.assettype}
@@ -317,7 +318,7 @@ const Edit = () => {
                                 <option value="student bags">Student Bags</option>
                             </select>
                         </div> */}
-          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
+            {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Asset Type
             </label>
@@ -343,7 +344,7 @@ const Edit = () => {
               id="exampleInputPassword1"
             />
           </div> */}
-          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
+            {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Asset Code
             </label>
@@ -356,7 +357,7 @@ const Edit = () => {
               id="exampleInputPassword1"
             />
           </div> */}
-          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
+            {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Anonymity
             </label>
@@ -369,7 +370,7 @@ const Edit = () => {
               id="exampleInputPassword1"
             />
           </div> */}
-          {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
+            {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Remarks
             </label>
@@ -383,10 +384,11 @@ const Edit = () => {
             />
           </div> */}
 
-          {/* <button type="submit" onClick={updateuser} class="btn btn-primary">
+            {/* <button type="submit" onClick={updateuser} class="btn btn-primary">
             Submit
           </button> */}
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

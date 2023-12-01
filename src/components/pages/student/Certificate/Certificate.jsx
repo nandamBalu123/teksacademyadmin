@@ -271,7 +271,7 @@ const Certificate = () => {
                 </p>
                 <span>
                   <button
-                    className="btn btn-primary   "
+                    className="btn btn-color"
                     onClick={handleClick}
                     style={{ textTransform: "capitalize" }}
                   >
@@ -542,7 +542,7 @@ const Certificate = () => {
                 </select>
               </MenuItem> */}
                     <div className="text-end me-2 mt-4">
-                      <button className="clear" onClick={filterreset}>
+                      <button className="btn btn-color" onClick={filterreset}>
                         {" "}
                         Clear
                       </button>
@@ -711,7 +711,7 @@ const Certificate = () => {
                           <StyledTableCell className="Table-cell">
                             {certificateStatus === "" && (
                               <button
-                                className="btn btn-primary text-center m-0 px-1"
+                                className="btn btn-color text-center m-0 px-1"
                                 onClick={(e) => handleRequest(student.id)}
                               >
                                 Request Certificate

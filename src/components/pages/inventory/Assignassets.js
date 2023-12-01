@@ -469,13 +469,13 @@ const Assignassets = () => {
         <div className="mt-3 assign-assets">
           <div className="d-flex justify-content-between mt-4">
             <h5 className="ms-2"> Assign Data</h5>
-            <NavLink to="/register" className="btn btn-primary">
+            <NavLink to="/register" className="btn btn-color me-3">
               Assign data
             </NavLink>
           </div>
 
           <div className="row px-2">
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
                 style={{
                   background: "#195489",
@@ -498,7 +498,7 @@ const Assignassets = () => {
                 <p className="text-center pt-3">All Branches</p>
               </Card>
             </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
                 style={{
                   background: "#FF9F24",
@@ -522,7 +522,7 @@ const Assignassets = () => {
               </Card>
             </div>
 
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
                 style={{
                   background: "#008959",
@@ -546,7 +546,7 @@ const Assignassets = () => {
               </Card>
             </div>
 
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
                 style={{
                   background: "#195489",
@@ -569,7 +569,7 @@ const Assignassets = () => {
                 <p className="text-center pt-3">Ameerpet</p>
               </Card>
             </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
                 style={{
                   background: "#FF9F24",
@@ -592,7 +592,7 @@ const Assignassets = () => {
                 <p className="text-center pt-3">Dilsukhnagar</p>
               </Card>
             </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
                 style={{
                   background: "#008959",
@@ -616,7 +616,8 @@ const Assignassets = () => {
           </div>
           {Displayassets.allbranches && (
             <div className="row mb-3 px-3">
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <h5> All Branches Data</h5>
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#fd746e",
@@ -631,7 +632,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#7fa1e4",
@@ -646,7 +647,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#F4ae5b",
@@ -661,7 +662,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#5ec394",
@@ -676,7 +677,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#f3a9b2",
@@ -691,7 +692,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#a6ebdc",
@@ -711,7 +712,8 @@ const Assignassets = () => {
 
           {Displayassets.hitechcity && (
             <div className="row mb-3 px-3">
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <h5> Hi-Tech City Data</h5>
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#fd746e",
@@ -726,7 +728,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#7fa1e4",
@@ -741,7 +743,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#F4ae5b",
@@ -756,7 +758,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#5ec394",
@@ -771,7 +773,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#f3a9b2",
@@ -786,7 +788,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#a6ebdc",
@@ -806,7 +808,8 @@ const Assignassets = () => {
 
           {Displayassets.ameerpet && (
             <div className="row mb-3 px-3">
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <h5> Ameerpet Data</h5>
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#fd746e",
@@ -821,7 +824,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#7fa1e4",
@@ -836,7 +839,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#F4ae5b",
@@ -851,7 +854,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#5ec394",
@@ -866,7 +869,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#f3a9b2",
@@ -881,7 +884,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#a6ebdc",
@@ -901,7 +904,8 @@ const Assignassets = () => {
 
           {Displayassets.dilsukhnagar && (
             <div className="row mb-3 px-3">
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <h5> Dilsukhnagar Data</h5>
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#fd746e",
@@ -916,7 +920,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#7fa1e4",
@@ -931,7 +935,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#F4ae5b",
@@ -946,7 +950,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#5ec394",
@@ -961,7 +965,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#f3a9b2",
@@ -976,7 +980,7 @@ const Assignassets = () => {
                   </p>
                 </Card>{" "}
               </div>
-              <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   style={{
                     background: "#a6ebdc",
@@ -1144,13 +1148,13 @@ const Assignassets = () => {
 
                           <StyledTableCell className="Table-cell">
                             <NavLink to={`view/${element.id}`}>
-                              <RemoveRedEyeIcon />
+                              <RemoveRedEyeIcon className="icon-color" />
                             </NavLink>
                             <NavLink to={`returnassets/${element.id}`}>
-                              <ArrowDownwardIcon />
+                              <ArrowDownwardIcon className="icon-color" />
                             </NavLink>
                             <NavLink to={`edit/${element.id}`}>
-                              <CreateIcon />
+                              <CreateIcon className="icon-color" />
                             </NavLink>
                             <DeleteOutlineIcon
                               onClick={() => deleteuser(element.id)}

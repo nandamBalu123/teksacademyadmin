@@ -369,7 +369,7 @@ const StudentData = () => {
         <h5 className=" mt-3 text-center"> Student Data </h5>
 
         <div className="row mb-1 ps-1 ">
-          <div className="col-12 col-md-8 col-lg-8 col-xl-8  input-field">
+          <div className="col-12 col-md-7 col-lg-8 col-xl-8  input-field">
             <input
               type="text"
               className="input-field ps-1"
@@ -392,7 +392,7 @@ const StudentData = () => {
             />
             <hr />
           </div>
-          <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+          <div className="col-12 col-md-5 col-lg-4 col-xl-4">
             <div className="d-flex justify-content-around">
               <p className="pt-3">
                 {recordCount}/{initialDataCount}{" "}
@@ -673,7 +673,7 @@ const StudentData = () => {
                 </MenuItem>{" "}
               </div> */}
                   <div className="text-end me-2 mt-4">
-                    <button className="clear" onClick={filterreset}>
+                    <button className="btn btn-color" onClick={filterreset}>
                       {" "}
                       Clear
                     </button>
@@ -1037,7 +1037,7 @@ const StudentData = () => {
 
         <div
           style={{ display: "flex", justifyContent: "center" }}
-          className="mt-3"
+          className="my-3"
         >
           <Stack spacing={2}>
             <Pagination

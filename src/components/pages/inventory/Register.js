@@ -385,13 +385,13 @@ const Register = () => {
 
                 <div className="create-button  d-flex justify-content-between my-4 ">
                   <NavLink to="/assignassets">
-                    <button className="btn btn-primary  ">Back</button>
+                    <button className="btn btn-color">Back</button>
                   </NavLink>
 
                   <button
                     type="submit"
                     onClick={addinpdata}
-                    className="btn btn-primary me-5 "
+                    className="btn btn-color me-5 "
                     style={{ textTransform: "capitalize" }}
                   >
                     submit

@@ -104,7 +104,7 @@ function Addassetsview() {
         </div>
         <div className="text-end me-5">
           <NavLink to="/addassets">
-            <button className="btn btn-primary mb-4 "> Back</button>
+            <button className="btn btn-color mb-4 "> Back</button>
           </NavLink>
         </div>
       </div>

@@ -2547,7 +2547,7 @@ export default function RegistrationForm() {
                   Submit
                 </Button> */}
                   <Button
-                    className="bg-primary"
+                    className="btn btn-color"
                     variant="contained"
                     // disabled={index === 0}
                     onClick={openPopup}

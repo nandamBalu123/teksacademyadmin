@@ -45,7 +45,7 @@ const Branch = () => {
           <h5 className=" ms-3">Branches</h5>
           <button
             type="submit"
-            className="btn btn-primary me-2 mb-2"
+            className="btn btn-color me-2 mb-2"
             onClick={handleSubmit}
           >
             Add Branch

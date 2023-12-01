@@ -75,7 +75,7 @@ const Reports = () => {
       <div className="reports">
         <div className="d-flex justify-content-between mt-3">
           <h4 className="ms-3">Reports</h4>
-          <button onClick={handleCreateReport} className="me-3 btn btn-primary">
+          <button onClick={handleCreateReport} className="me-3 btn btn-color">
             Create Report
           </button>
         </div>
