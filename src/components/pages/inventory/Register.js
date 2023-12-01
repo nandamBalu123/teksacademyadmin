@@ -139,8 +139,8 @@ const Register = () => {
       <div>
         <div className="container mt-3">
           <div className="register">
-            <h5 className="mt-3"> Assign Assets Form</h5>
-            <form>
+            <h5 className="mt-3 text-center"> Assign Assets Form</h5>
+            <form className="text-center">
               <div className="row">
                 <div className=" col-lg-6 col-md-6 col-12">
                   <TextField
@@ -174,7 +174,7 @@ const Register = () => {
                 <div className=" col-lg-6 col-md-6 col-12">
                   <TextField
                     label="Designation"
-                    className="mar w-75 ms-2"
+                    className="mar w-75 "
                     variant="standard"
                     name="designation"
                     type="text"
@@ -196,7 +196,7 @@ const Register = () => {
                 /> */}
                 </div>
                 <div className="row">
-                  <div className="mb-3 col-lg-6 col-md-6 col-12">
+                  <div className=" col-lg-6 col-md-6 col-12">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Branch<span> *</span>
@@ -215,24 +215,9 @@ const Register = () => {
                         <MenuItem value="dilsupnagar">Dilsupnagar</MenuItem>
                       </Select>
                     </FormControl>
-                    {/* <label htmlFor="exampleInputPassword1" className="form-label">
-  Branch*
-</label>
-<select
-  selected={inpval.branch}
-  onChange={setdata}
-  name="branch"
-  className="form-select"
-  id="exampleInputPassword1"
->
-  <option value="">Select Branch</option>
-  <option value="Ameerpet">Ameerpet</option>
-  <option value="hi-tech city">Hi-tech city</option>
-  <option value="dilsupnagar">Dilsupnagar</option>
-</select> */}
                   </div>
-                  <div className="mb-3 col-lg-6 col-md-6 col-12">
-                    <FormControl variant="standard" className="w-75 ms-4">
+                  <div className=" col-lg-6 col-md-6 col-12">
+                    <FormControl variant="standard" className="w-75 ms-sm-4">
                       <InputLabel>
                         Asset Type<span> *</span>
                       </InputLabel>
@@ -334,7 +319,7 @@ const Register = () => {
                     type="date"
                     name="issueddate"
                     variant="standard"
-                    className="w-75"
+                    className="w-75 mar"
                     required
                     InputLabelProps={{
                       shrink: true,
@@ -383,15 +368,15 @@ const Register = () => {
                   />
                 </div>
 
-                <div className="create-button  d-flex justify-content-between my-4 ">
+                <div className="create-button  d-flex justify-content-between my-3 ">
                   <NavLink to="/assignassets">
-                    <button className="btn btn-color">Back</button>
+                    <button className="btn btn-color ms-sm-5">Back</button>
                   </NavLink>
 
                   <button
                     type="submit"
                     onClick={addinpdata}
-                    className="btn btn-color me-5 "
+                    className="btn btn-color me-sm-5 "
                     style={{ textTransform: "capitalize" }}
                   >
                     submit

@@ -54,8 +54,8 @@ export default function Addassetsedit() {
     // </div>
     <div className="container mt-3">
       <div className="editaddassets">
-        <h5 className="mt-3">Add Asset Edit Form</h5>
-        <form className="">
+        <h5 className="mt-3 text-center">Add Asset Edit Form</h5>
+        <form className="text-center">
           <div className="row">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
@@ -151,12 +151,12 @@ export default function Addassetsedit() {
 
           <div className="create-button  d-flex justify-content-between my-4 ">
             <NavLink to="/addassets ">
-              <button className="btn btn-color">Back</button>
+              <button className="btn btn-color ms-sm-5">Back</button>
             </NavLink>
 
             <button
               type="submit"
-              className="btn btn-color me-5 ms-2"
+              className="btn btn-color me-sm-5"
               style={{ textTransform: "capitalize" }}
             >
               submit

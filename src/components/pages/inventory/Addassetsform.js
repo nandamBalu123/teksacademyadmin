@@ -133,7 +133,7 @@ export default function Addassetsform() {
       <div>
         <div className="container">
           <div className="addassetsform mt-4  ">
-            <h5 className="mt-4 ms-2"> Add Asset Form</h5>
+            <h5 className="mt-4 text-center"> Add Asset Form</h5>
             <form>
               <div className="row text-center">
                 {/* <div class="mb-3 col-lg-6 col-md-6 col-12">
@@ -297,7 +297,7 @@ export default function Addassetsform() {
                 <div className="col-12 col-md-6 col-lg-6 col-xl-6 mb-3">
                   <TextField
                     label={<span className="label-family">Quantity</span>}
-                    className=" mar ms-3 w-75"
+                    className=" mar w-75"
                     variant="standard"
                     name="anonymity"
                     type="number"
@@ -346,15 +346,15 @@ export default function Addassetsform() {
                             <label for="exampleInputPassword1" class="form-label">Remarks*</label>
                             <input type="text" value={inpval.remarks} onChange={setdata} name="remarks" class="form-control" id="exampleInputPassword1" />
                         </div> */}
-                <div className="d-flex justify-content-between mb-3">
+                <div className="d-flex justify-content-between mb-3 ">
                   <NavLink to="/addassets">
-                    <button className="btn btn-color ms-sm-3"> Back</button>
+                    <button className="btn btn-color ms-sm-5"> Back</button>
                   </NavLink>
                   <div className="create-button ">
                     <button
                       type="submit"
                       onClick={addinpdata}
-                      className="btn btn-color me-sm-3 "
+                      className="btn btn-color me-sm-5"
                       style={{ textTransform: "capitalize" }}
                     >
                       submit
