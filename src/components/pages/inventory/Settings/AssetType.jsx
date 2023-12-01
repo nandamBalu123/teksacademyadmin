@@ -131,7 +131,7 @@ export default function AssetType() {
             <button
               onClick={handleClickOpen}
               type="submit"
-              className="btn btn-primary me-3 "
+              className="btn btn-color me-3 "
             >
               Add Asset Type
             </button>
@@ -214,7 +214,7 @@ export default function AssetType() {
                   <StyledTableCell className="Table-cell text-center">
                     <ModeEditIcon
                       onClick={(e) => handleEdit(index)}
-                      className="text-primary"
+                      className="icon-color"
                     />
                     <DeleteOutlineIcon
                       onClick={(e) => handleDelete(index)}

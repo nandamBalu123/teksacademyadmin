@@ -3,7 +3,7 @@
   background-color: #fff;
 }
 .feeview {
-  border: 2px solid #f5f5f5;
+  border: 2px solid #fff;
   border-radius: 8px;
   margin: auto;
   overflow: hidden;
@@ -40,7 +40,7 @@
 .student-input input:valid ~ label {
   top: 0;
   background-color: #fff;
-  color: #0070fc;
+  color: #4676a0;
 }
 .payment input,
 .payment select {
@@ -80,7 +80,7 @@
 .mul-input select:valid ~ label {
   top: 0;
   background-color: #fff;
-  color: #0070fc;
+  color: #4676a0;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -124,7 +124,7 @@ input::-webkit-inner-spin-button {
   width: 22%;
 }
 .addtofee {
-  background-color: #0060e9;
+  background-color: #4676a0;
   color: #fff;
   border: none;
 
@@ -160,7 +160,7 @@ input::-webkit-inner-spin-button {
 .inputgroup input:valid ~ label {
   top: 0;
   font-size: 14px;
-  color: #0060e9;
+  color: #4676a0;
   background-color: #fff;
 }
 .inputgroup-select {
@@ -191,7 +191,7 @@ input::-webkit-inner-spin-button {
 .inputgroup-select select:valid ~ label {
   top: 0;
   background-color: #fff;
-  color: #0070fc;
+  color: #4676a0;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

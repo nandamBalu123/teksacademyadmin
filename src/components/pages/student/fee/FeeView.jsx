@@ -727,9 +727,9 @@ const FeeView = () => {
                   Transaction Id <span className="text-danger"> * </span>
                 </label>
               </div>
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2">
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-3">
                 <button
-                  className="btn btn-primary my-2 end"
+                  className="btn btn-color end"
                   onClick={handleAdmissionFee}
                 >
                   Update
@@ -929,7 +929,7 @@ const FeeView = () => {
                       studentdata.installments[index].dueamount && (
                         <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">
                           <button
-                            className="btn btn-primary center"
+                            className="btn btn-color center"
                             onClick={() => handleUpdateClick(index)}
                           >
                             Update
@@ -942,7 +942,7 @@ const FeeView = () => {
                       !studentdata.installments[index].dueamount && (
                         <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">
                           <button
-                            className="btn btn-primary center"
+                            className="btn btn-color center"
                             onClick={UpdateDueDateAndDueAmount}
                           >
                             Update

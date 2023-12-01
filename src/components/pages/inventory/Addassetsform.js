@@ -348,13 +348,13 @@ export default function Addassetsform() {
                         </div> */}
                 <div className="d-flex justify-content-between mb-3">
                   <NavLink to="/addassets">
-                    <button className="btn btn-primary"> Back</button>
+                    <button className="btn btn-color"> Back</button>
                   </NavLink>
                   <div className="create-button ">
                     <button
                       type="submit"
                       onClick={addinpdata}
-                      className="btn btn-primary me-3 "
+                      className="btn btn-color me-3 "
                       style={{ textTransform: "capitalize" }}
                     >
                       submit

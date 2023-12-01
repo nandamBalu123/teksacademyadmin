@@ -254,7 +254,7 @@ const Addassets = () => {
               <h5 className=" ms-2">Add Assets </h5>
             </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-              <NavLink to="/addassetsform" className="btn btn-primary">
+              <NavLink to="/addassetsform" className="btn btn-color">
                 Add Assets
               </NavLink>
             </div>
@@ -612,10 +612,16 @@ const Addassets = () => {
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell text-center">
                             <NavLink to={`view/${element.id}`}>
-                              <RemoveRedEyeIcon style={{ width: "40px" }} />
+                              <RemoveRedEyeIcon
+                                style={{ width: "40px" }}
+                                className="icon-color"
+                              />
                             </NavLink>
                             <NavLink to={`edit/${element.id}`}>
-                              <CreateIcon style={{ width: "40px" }} />
+                              <CreateIcon
+                                style={{ width: "40px" }}
+                                className="icon-color"
+                              />
                             </NavLink>
                             <DeleteOutlineIcon
                               style={{ width: "40px" }}

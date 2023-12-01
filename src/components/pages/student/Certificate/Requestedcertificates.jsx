@@ -254,7 +254,7 @@ const Requestedcertificates = () => {
 
             {issuedCertificates && (
               <button
-                className="btn btn-primary col-12 col-md-2 col-lg-2 col-xl-2 "
+                className="btn btn-color col-12 col-md-2 col-lg-2 col-xl-2 "
                 onClick={handleRequestedCertificates}
               >
                 Requested Certificates
@@ -262,7 +262,7 @@ const Requestedcertificates = () => {
             )}
             {!issuedCertificates && (
               <button
-                className="btn btn-primary col-12 col-md-2 col-lg-2 col-xl-2 "
+                className="btn btn-color col-12 col-md-2 col-lg-2 col-xl-2 "
                 onClick={handleIssuedCertificates}
               >
                 Issued Certificates
@@ -309,7 +309,7 @@ const Requestedcertificates = () => {
                 </p>
                 <span>
                   <button
-                    className="btn btn-primary mr-20 ms-2 mb-2 mt-1"
+                    className="btn btn-color mr-20 ms-2 mb-2 mt-1"
                     onClick={handleClick}
                     style={{ textTransform: "capitalize" }}
                   >

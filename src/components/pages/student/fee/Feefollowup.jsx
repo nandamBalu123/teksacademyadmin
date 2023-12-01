@@ -306,7 +306,7 @@ const Feefollowup = () => {
               onClick={handleClick}
             >
               <button
-                className="btn btn-primary mr-20 ms-2 mb-2"
+                className="btn btn-color mb-2"
                 style={{ textTransform: "capitalize" }}
               >
                 Filter
@@ -589,7 +589,7 @@ const Feefollowup = () => {
                         </StyledTableCell>
                         <StyledTableCell className="border border 1">
                           <Link to={`/feeview/${item.id}`}>
-                            <VisibilityIcon />
+                            <VisibilityIcon className="icon-color" />
                           </Link>
                         </StyledTableCell>
                       </StyledTableRow>

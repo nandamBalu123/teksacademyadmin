@@ -469,7 +469,7 @@ const Assignassets = () => {
         <div className="mt-3 assign-assets">
           <div className="d-flex justify-content-between mt-4">
             <h5 className="ms-2"> Assign Data</h5>
-            <NavLink to="/register" className="btn btn-primary">
+            <NavLink to="/register" className="btn btn-color me-3">
               Assign data
             </NavLink>
           </div>
@@ -1144,13 +1144,13 @@ const Assignassets = () => {
 
                           <StyledTableCell className="Table-cell">
                             <NavLink to={`view/${element.id}`}>
-                              <RemoveRedEyeIcon />
+                              <RemoveRedEyeIcon className="icon-color" />
                             </NavLink>
                             <NavLink to={`returnassets/${element.id}`}>
-                              <ArrowDownwardIcon />
+                              <ArrowDownwardIcon className="icon-color" />
                             </NavLink>
                             <NavLink to={`edit/${element.id}`}>
-                              <CreateIcon />
+                              <CreateIcon className="icon-color" />
                             </NavLink>
                             <DeleteOutlineIcon
                               onClick={() => deleteuser(element.id)}

@@ -132,7 +132,7 @@ export default function Vendor() {
             <button
               onClick={handleClickOpen}
               type="submit"
-              className="btn btn-primary me-3"
+              className="btn btn-color me-3"
             >
               Add Vendor
             </button>
@@ -216,7 +216,7 @@ export default function Vendor() {
                   >
                     <ModeEditIcon
                       onClick={(e) => handleEdit(index)}
-                      className="text-primary "
+                      className="icon-color"
                     />
                     <DeleteOutlineIcon
                       onClick={(e) => handleDelete(index)}

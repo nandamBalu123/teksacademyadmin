@@ -787,7 +787,10 @@ const FeeDetails = () => {
                                           {items.totalinstallments}
                                         </span>
                                         <span style={dynamicStyle}>
-                                          <CheckCircleIcon style={IconStyle} />
+                                          <CheckCircleIcon
+                                            style={IconStyle}
+                                            className="icon-color"
+                                          />
                                         </span>
                                       </div>
                                     );
@@ -819,7 +822,10 @@ const FeeDetails = () => {
                                         {items.totalinstallmentspaid}
                                       </span>
                                       <span style={dynamicStyle}>
-                                        <CheckCircleIcon style={IconStyle} />
+                                        <CheckCircleIcon
+                                          style={IconStyle}
+                                          className="icon-color"
+                                        />
                                       </span>
                                     </div>
                                   );
@@ -828,7 +834,7 @@ const FeeDetails = () => {
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
                             <Link to={`/feeview/${item.id}`}>
-                              <VisibilityIcon />
+                              <VisibilityIcon className="icon-color" />
                             </Link>
                           </StyledTableCell>
                         </StyledTableRow>

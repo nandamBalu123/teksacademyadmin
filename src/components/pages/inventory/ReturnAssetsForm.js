@@ -4,6 +4,7 @@ import { updatedata } from "./context/ContextProvider";
 import DatePicker from "react-datepicker";
 import TextField from "@mui/material/TextField";
 import "react-datepicker/dist/react-datepicker.css";
+import "./RetunAssetsForm.css";
 // import SideBar from '../Sidebar/SideBar';
 
 // import Navbaar from '../Navbar/Navbaar';
@@ -18,7 +19,7 @@ export default function ReturnAssets() {
   const handleDateChange = (date) => {
     setINP((prevState) => ({
       ...prevState,
-      returndate: date.target.value // Update the 'work' property with the selected date
+      returndate: date.target.value, // Update the 'work' property with the selected date
     }));
   };
 
@@ -56,12 +57,15 @@ export default function ReturnAssets() {
   console.log(id);
 
   const getdata = async () => {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/viewassets/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/viewassets/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await res.json();
     console.log(data);
@@ -93,23 +97,26 @@ export default function ReturnAssets() {
       returndate,
     } = inpval;
 
-    const res2 = await fetch(`${process.env.REACT_APP_API_URL}/updatassignassets/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        designation,
-        branch,
-        assettype,
-        brandname,
-        assetcode,
-        anonymity,
-        remarks,
-        returndate,
-      }),
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_API_URL}/updatassignassets/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          designation,
+          branch,
+          assettype,
+          brandname,
+          assetcode,
+          anonymity,
+          remarks,
+          returndate,
+        }),
+      }
+    );
 
     const data2 = await res2.json();
     console.log(data2);
@@ -123,13 +130,12 @@ export default function ReturnAssets() {
   };
 
   return (
-    <div>
-      <div>
-        <div className="container">
-          <NavLink to="/assignassets">Back</NavLink>
-          <form className="mt-4">
-            <div className="row">
-              <div className="mb-3 col-lg-6 col-xl-6 col-md-6 col-12">
+    <div className="container mt-3">
+      <div className="return-assets">
+        <h5 className="text-center my-3"> Retun Assets</h5>
+        <form className="mt-4">
+          <div className="row">
+            <div className="mb-3 col-lg-6 col-xl-6 col-md-6 col-12">
               <TextField
                 label="Remarks"
                 className=" mar w-75"
@@ -137,11 +143,10 @@ export default function ReturnAssets() {
                 name="remarks"
                 type="text"
                 value={inpval.remarks}
-                  onChange={setdata}
+                onChange={setdata}
                 id="remarks"
-               
               />
-                {/* <label htmlFor="remarks" className="form-label">
+              {/* <label htmlFor="remarks" className="form-label">
                   Remarks
                 </label>
                 <input
@@ -152,8 +157,8 @@ export default function ReturnAssets() {
                   className="form-control"
                   id="remarks"
                 /> */}
-              </div>
-              <div className="mb-3 col-lg-6 col-xl-6 col-md-6 col-12">
+            </div>
+            <div className="mb-3 col-lg-6 col-xl-6 col-md-6 col-12">
               <TextField
                 label="Return Date"
                 className=" mar w-75"
@@ -164,11 +169,10 @@ export default function ReturnAssets() {
                   shrink: true,
                 }}
                 selected={inpval.returndate} // Set the selected date value
-                  onChange={handleDateChange} // Handle date selection
+                onChange={handleDateChange} // Handle date selection
                 id="returndate"
-             
               />
-                {/* <label htmlFor="exampleInputPassword1" className="form-label">
+              {/* <label htmlFor="exampleInputPassword1" className="form-label">
                   Return Date*{" "}
                 </label>
               
@@ -180,15 +184,22 @@ export default function ReturnAssets() {
                   id="exampleInputPassword1"
                   placeholderText="Select a date" // Placeholder text when no date is selected
                 /> */}
-              </div>
             </div>
-            <br></br>
-
-            <button type="submit" onClick={updateuser} class="btn btn-primary">
+          </div>
+          <br></br>
+          <div className="d-flex justify-content-between mb-3">
+            <NavLink to="/assignassets" className="btn btn-color ">
+              Back
+            </NavLink>
+            <button
+              type="submit"
+              onClick={updateuser}
+              class="btn btn-color me-sm-5"
+            >
               Submit
             </button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );
