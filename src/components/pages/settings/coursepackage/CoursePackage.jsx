@@ -45,7 +45,7 @@ const CoursePackage = () => {
           <h5 className="fs- ms-3 ">Course Packages</h5>
           <button
             type="submit"
-            className="btn btn-primary me-2 mb-2"
+            className="btn btn-color me-2 mb-2"
             onClick={handleSubmit}
           >
             Add Course Package

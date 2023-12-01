@@ -121,7 +121,7 @@ const CreateLeadSource = () => {
             <div className="ms-3">
               <button
                 type="submit"
-                class="btn btn-primary my-4 "
+                class="btn btn-color my-4 "
                 onClick={handleSubmit}
               >
                 Submit

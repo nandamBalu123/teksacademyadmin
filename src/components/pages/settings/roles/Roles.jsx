@@ -46,7 +46,7 @@ const Roles = () => {
           <h5 className="ms-3">Roles</h5>
           <button
             type="submit"
-            className="btn btn-primary me-3 mb-2"
+            className="btn btn-color me-3 mb-2"
             onClick={handleSubmit}
           >
             Add Role

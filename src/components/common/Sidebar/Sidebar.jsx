@@ -417,6 +417,32 @@ const Sidebar = () => {
 
               <hr />
               {/* end */}
+              {/* leads start */}
+              {profile == "admin" ? (
+                <SubMenu
+                  style={{ color: "black" }}
+                  icon={<Diversity2Icon />}
+                  label={"Leads"}
+                  title={"Leads"}
+                >
+                  <SubMenu
+                    style={{ color: "black" }}
+                    icon={<LeaderboardIcon />}
+                    label={"Website Leads"}
+                    title={"Website Leads"}
+                  >
+                    <Item
+                      title="Webinar"
+                      to="/webinar"
+                      icon={<AirplayIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  </SubMenu>
+                </SubMenu>
+              ) : undefined}
+              <hr />
+              {/* end webinar */}
               {/* reports start */}
               {profile == "admin" ? (
                 <SubMenu
@@ -494,30 +520,6 @@ const Sidebar = () => {
                 </SubMenu>
               ) : undefined}
               <hr />
-              {/* leads start */}
-              {profile == "admin" ? (
-                <SubMenu
-                  style={{ color: "black" }}
-                  icon={<Diversity2Icon />}
-                  label={"Leads"}
-                  title={"Leads"}
-                >
-                  <SubMenu
-                    style={{ color: "black" }}
-                    icon={<LeaderboardIcon />}
-                    label={"Website Leads"}
-                    title={"Website Leads"}
-                  >
-                    <Item
-                      title="Webinar"
-                      to="/webinar"
-                      icon={<AirplayIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  </SubMenu>
-                </SubMenu>
-              ) : undefined}
             </Box>
           </Menu>
         </ProSidebar>

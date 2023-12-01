@@ -48,7 +48,7 @@ const Department = () => {
           <div className="col-12 col-md-3 col-lg-3 col-xl-3">
             <button
               type="submit"
-              className="btn btn-primary "
+              className="btn btn-color"
               onClick={handleSubmit}
             >
               Add Department

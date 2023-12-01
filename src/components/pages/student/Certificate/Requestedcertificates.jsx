@@ -242,19 +242,19 @@ const Requestedcertificates = () => {
         <div className="req-certificate mt-2">
           <div className="row ">
             {!issuedCertificates && (
-              <h4 className="col-12 col-md-9 col-lg-9 col-xl-9 ms-3">
+              <h4 className="col-12 col-md-8 col-lg-8 col-xl-8 ms-2">
                 Requested Certificates
               </h4>
             )}
             {issuedCertificates && (
-              <h4 className="col-12 col-md-9 col-lg-9 col-xl-9">
+              <h4 className="col-12 col-md-8 col-lg-8 col-xl-8">
                 Issued Certificates
               </h4>
             )}
 
             {issuedCertificates && (
               <button
-                className="btn btn-color col-12 col-md-2 col-lg-2 col-xl-2 "
+                className="btn btn-color col-12 col-md-4 col-lg-4 col-xl-4"
                 onClick={handleRequestedCertificates}
               >
                 Requested Certificates
@@ -262,7 +262,7 @@ const Requestedcertificates = () => {
             )}
             {!issuedCertificates && (
               <button
-                className="btn btn-color col-12 col-md-2 col-lg-2 col-xl-2 "
+                className="btn btn-color col-12 col-md-3 col-lg-3 col-xl-3"
                 onClick={handleIssuedCertificates}
               >
                 Issued Certificates
@@ -584,7 +584,7 @@ const Requestedcertificates = () => {
               </select>
             </MenuItem> */}
                     <div className="text-end me-2 my-2">
-                      <button className="clear" onClick={filterreset}>
+                      <button className="btn btn-color" onClick={filterreset}>
                         {" "}
                         Clear
                       </button>

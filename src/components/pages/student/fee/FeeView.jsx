@@ -800,7 +800,7 @@ const FeeView = () => {
                     )}
                   </h5>
                   <div className="row">
-                    <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                    <div className="col-12 col-md-6 col-lg-4 col-xl-2 student-input">
                       <input
                         type="date"
                         name="Installment Date"
@@ -817,7 +817,7 @@ const FeeView = () => {
                       <label> Installment Date</label>
                     </div>
 
-                    <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                    <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input">
                       <input
                         type="number"
                         name="Installment Amount"
@@ -837,7 +837,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input">
                           <input
                             type="date"
                             name="paiddate"
@@ -858,7 +858,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input">
                           <input
                             type="number"
                             name="paidamount"
@@ -879,7 +879,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 mul-input">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mul-input">
                           <select
                             className="w-100"
                             name="modeofpayment"
@@ -905,7 +905,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input">
                           <input
                             type="text"
                             className="w-100"
@@ -927,7 +927,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input ">
                           <button
                             className="btn btn-color center"
                             onClick={() => handleUpdateClick(index)}
@@ -940,7 +940,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       !studentdata.installments[index].duedate &&
                       !studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-2 col-xl-2 student-input ">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input ">
                           <button
                             className="btn btn-color center"
                             onClick={UpdateDueDateAndDueAmount}

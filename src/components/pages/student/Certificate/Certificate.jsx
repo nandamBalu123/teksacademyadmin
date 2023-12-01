@@ -542,7 +542,7 @@ const Certificate = () => {
                 </select>
               </MenuItem> */}
                     <div className="text-end me-2 mt-4">
-                      <button className="clear" onClick={filterreset}>
+                      <button className="btn btn-color" onClick={filterreset}>
                         {" "}
                         Clear
                       </button>

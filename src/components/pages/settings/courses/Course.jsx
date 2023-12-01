@@ -45,7 +45,7 @@ const Course = () => {
           <h5 className=" ms-3">Courses</h5>
           <button
             type="submit"
-            className="btn btn-primary  me-3"
+            className="btn btn-color me-3"
             onClick={handleSubmit}
           >
             Add Course

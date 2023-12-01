@@ -228,7 +228,7 @@ const Webinar = () => {
                   </div>
 
                   <div className="text-end me-2 mt-4">
-                    <button className="clear" onClick={filterreset}>
+                    <button className="btn btn-color" onClick={filterreset}>
                       {" "}
                       Clear
                     </button>
@@ -278,7 +278,7 @@ const Webinar = () => {
         </div>
         <div
           style={{ display: "flex", justifyContent: "center" }}
-          className="mt-3"
+          className="my-3"
         >
           <Stack spacing={2}>
             <Pagination

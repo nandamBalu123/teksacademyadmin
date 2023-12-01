@@ -254,13 +254,13 @@ const Addassets = () => {
               <h5 className=" ms-2">Add Assets </h5>
             </div>
             <div className="col-12 col-md-2 col-lg-2 col-xl-2">
-              <NavLink to="/addassetsform" className="btn btn-color">
+              <NavLink to="/addassetsform" className="btn btn-color me-2">
                 Add Assets
               </NavLink>
             </div>
           </div>
           <div className=" row px-2">
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 style={{
                   background: "#195489",
@@ -275,7 +275,7 @@ const Addassets = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 style={{
                   background: "#FF9F24",
@@ -307,7 +307,7 @@ const Addassets = () => {
               </h6>
             </Card>{" "}
           </div> */}
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 style={{
                   background: "#008959",
@@ -322,7 +322,7 @@ const Addassets = () => {
                 </p>
               </Card>{" "}
             </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1 ">
               <Card
                 style={{
                   background: "#195489",
@@ -337,7 +337,7 @@ const Addassets = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 style={{
                   background: "#FF9F24",
@@ -352,7 +352,7 @@ const Addassets = () => {
                 </p>
               </Card>{" "}
             </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2 ">
+            <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 style={{
                   background: "#008959",

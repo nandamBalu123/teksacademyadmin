@@ -45,7 +45,7 @@ const LeadSource = () => {
           <h5 className="ms-2"> Lead Source</h5>
           <button
             type="submit"
-            className="btn btn-primary   me-2"
+            className="btn btn-color me-2"
             onClick={handleSubmit}
           >
             Add Lead Source
