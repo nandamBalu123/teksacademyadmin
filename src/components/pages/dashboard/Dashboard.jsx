@@ -548,13 +548,14 @@ const Dashboard = () => {
     <div className="container main-dashboard">
       {/* Header */}
       <div>
-        <Box className="text-center  mt-3">
-          {user && (
-            <Header
-              title={"Hi " + user.fullname}
-              subtitle={"Welcome to TEKS ACADEMY"}
-            />
-          )}{" "}
+        <Box className="text-center  mt-4">
+          {user && <h4>{"Hi " + user.fullname}</h4>}
+          <h5>
+            {" "}
+            Welcome to{" "}
+            <span style={{ color: "#e96228", fontSize: "25px" }}>TEKS </span>
+            <span style={{ color: "#195489", fontSize: "25px" }}> ACADEMY</span>
+          </h5>
           {/* <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               Filter
             </h6>
@@ -654,8 +655,13 @@ const Dashboard = () => {
             }
           >
             <Card
-              style={{ backgroundColor: "#00c292" }}
-              className="rounded rounded-3 mb-1"
+              style={{
+                background: "#004493",
+                textAlign: "center",
+                borderRadius: "8px",
+                color: "white",
+                boxShadow: "3px 3px 6px  gray",
+              }}
             >
               <p className="text-center pt-3">Total Enrollments</p>
             </Card>
@@ -672,8 +678,13 @@ const Dashboard = () => {
             }
           >
             <Card
-              style={{ backgroundColor: "#03a9f3" }}
-              className="rounded rounded-3 mb-1"
+              style={{
+                background: "#ff9f24",
+                textAlign: "center",
+                borderRadius: "8px",
+                color: "white",
+                boxShadow: "3px 3px 6px  gray",
+              }}
             >
               <p className="text-center pt-3">Fee Details</p>
             </Card>
@@ -691,8 +702,13 @@ const Dashboard = () => {
           >
             <Link to="/feedetails">
               <Card
-                style={{ backgroundColor: "#f87146" }}
-                className="rounded rounded-3 mb-1"
+                style={{
+                  background: "#008959",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
               >
                 <p className="text-center pt-3">Fee Followups</p>
               </Card>
@@ -889,7 +905,7 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-primary "
+                  className="btn btn-color"
                   style={{ textTransform: "capitalize" }}
                 >
                   {" "}
@@ -971,7 +987,7 @@ const Dashboard = () => {
 
                 <MenuItem className="text-end">
                   {/* <button className="save"> Save</button> */}
-                  <button className="clear " onClick={filterreset}>
+                  <button className="btn btn-color" onClick={filterreset}>
                     {" "}
                     Clear
                   </button>
@@ -984,45 +1000,65 @@ const Dashboard = () => {
             {/* <div className="col-12 col-md-2 col-xl-2 col-lg-2"> </div> */}
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                // style={{ background:"#0090f7"}}
-                className="rounded rounded-3"
+                style={{
+                  background: "#fd746e",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
               >
                 <p className="text-center pt-3">
-                  <b> No of Enrollments</b>
-                  <p className="pt-3"> 6</p>{" "}
+                  No of Enrollments
+                  <p className="pt-1"> 6</p>
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                // style={{ background:"#ff3741"}}
-                className="rounded rounded-3"
+                style={{
+                  background: "#7fa1e4",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
               >
                 <p className="text-center pt-3">
-                  <b>Booking Amount</b>
-                  <p className="pt-3"> 40,000</p>{" "}
+                  Booking Amount
+                  <p className="pt-1"> 40,000</p>{" "}
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                // style={{ background:"#ffa300"}}
-                className="rounded rounded-3"
+                style={{
+                  background: "#f4ae5b",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
               >
                 <p className="text-center pt-3">
-                  <b>Received Amount</b>
-                  <p className="pt-3"> 10,000</p>{" "}
+                  Received Amount
+                  <p className="pt-1"> 10,000</p>{" "}
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                // style={{ background:"#00b6a6"}}
-                className="rounded rounded-3"
+                style={{
+                  background: "#5ec394",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
               >
                 <p className="text-center pt-3">
-                  <b>DueAmount</b>
-                  <p className="pt-3"> 0,000</p>{" "}
+                  DueAmount
+                  <p className="pt-1"> 0,000</p>{" "}
                 </p>
               </Card>
             </div>
@@ -1183,7 +1219,7 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-primary "
+                  className="btn btn-color"
                   style={{ textTransform: "capitalize" }}
                 >
                   {" "}
@@ -1265,7 +1301,7 @@ const Dashboard = () => {
 
                 <MenuItem className="text-end">
                   {/* <button className="save"> Save</button> */}
-                  <button className="clear " onClick={filterreset}>
+                  <button className="btn btn-color" onClick={filterreset}>
                     {" "}
                     Clear
                   </button>
@@ -1278,23 +1314,33 @@ const Dashboard = () => {
             <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                // style={{ background:"#ff3741"}}
-                className="rounded rounded-3"
+                style={{
+                  background: "#fd746e",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
               >
                 <p className="text-center pt-3">
-                  <b>Fee Received</b>
-                  <p className="pt-3"> 1,40,000</p>{" "}
+                  Fee Received
+                  <p className="pt-1"> 1,40,000</p>{" "}
                 </p>
               </Card>
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                // style={{ background:"#ff3741"}}
-                className="rounded rounded-3"
+                style={{
+                  background: "#7fa1e4",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  color: "white",
+                  boxShadow: "3px 3px 6px  gray",
+                }}
               >
                 <p className="text-center pt-3">
-                  <b>Fee Yet To Received</b>
-                  <p className="pt-3">2,40,000</p>{" "}
+                  Fee Yet To Received
+                  <p className="pt-1">2,40,000</p>{" "}
                 </p>
               </Card>
             </div>
@@ -1454,7 +1500,7 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-primary "
+                  className="btn btn-color"
                   style={{ textTransform: "capitalize" }}
                 >
                   {" "}
@@ -1537,7 +1583,7 @@ const Dashboard = () => {
                 <MenuItem className="text-end">
                   {/* <button className="save"> Save</button> */}
                   <button
-                    className="clear "
+                    className="btn btn-color"
                     onClick={filterDeuAndReceivedreset}
                   >
                     {" "}
@@ -1648,7 +1694,7 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-primary "
+                  className="btn btn-color "
                   style={{ textTransform: "capitalize" }}
                 >
                   {" "}
@@ -1730,7 +1776,7 @@ const Dashboard = () => {
 
                 <MenuItem className="text-end">
                   {/* <button className="save"> Save</button> */}
-                  <button className="clear " onClick={filterreset}>
+                  <button className="btn btn-color" onClick={filterreset}>
                     {" "}
                     Clear
                   </button>
