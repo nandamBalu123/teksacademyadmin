@@ -196,7 +196,7 @@ const Register = () => {
                 /> */}
                 </div>
                 <div className="row">
-                  <div className=" col-lg-6 col-md-6 col-12">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Branch<span> *</span>
@@ -216,7 +216,7 @@ const Register = () => {
                       </Select>
                     </FormControl>
                   </div>
-                  <div className=" col-lg-6 col-md-6 col-12">
+                  <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                     <FormControl variant="standard" className="w-75 ms-sm-4">
                       <InputLabel>
                         Asset Type<span> *</span>
@@ -259,7 +259,7 @@ const Register = () => {
                 </select> */}
                     {inpval.assettype === "laptop" && (
                       <div className="row">
-                        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                           <TextField
                             label="Brand Name"
                             className=" mar w-75"
@@ -312,23 +312,23 @@ const Register = () => {
                     )}
                   </div>
                 </div>
+                <div className="row">
+                  <div className="mb-3 col-lg-6 col-md-6 col-12">
+                    <TextField
+                      label="Issue Date"
+                      type="date"
+                      name="issueddate"
+                      variant="standard"
+                      className="w-75 mar"
+                      required
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      selected={inpval.issueddate} // Set the selected date value
+                      onChange={handleDateChange} // Handle date selection
+                    />
 
-                <div className="mb-3 col-lg-6 col-md-6 col-12">
-                  <TextField
-                    label="Issue Date"
-                    type="date"
-                    name="issueddate"
-                    variant="standard"
-                    className="w-75 mar"
-                    required
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    selected={inpval.issueddate} // Set the selected date value
-                    onChange={handleDateChange} // Handle date selection
-                  />
-
-                  {/* <label htmlFor="exampleInputPassword1" className="form-label">
+                    {/* <label htmlFor="exampleInputPassword1" className="form-label">
                   Issued Date*{" "}
                 </label>
                 <br></br>
@@ -340,20 +340,22 @@ const Register = () => {
                   id="exampleInputPassword1"
                   placeholderText="Select a date" // Placeholder text when no date is selected
                 /> */}
+                  </div>
+                  <div class="mb-3 col-lg-6 col-md-6 col-12">
+                    <TextField
+                      label="Asset Code"
+                      className=" mar w-75 ms-sm-4"
+                      variant="standard"
+                      name="assetcode"
+                      type="text"
+                      value={inpval.assetcode}
+                      onChange={setdata}
+                      id="assetcode"
+                      required
+                    />
+                  </div>
                 </div>
-                <div class="mb-3 col-lg-6 col-md-6 col-12">
-                  <TextField
-                    label="Asset Code"
-                    className=" mar w-75 ms-3"
-                    variant="standard"
-                    name="assetcode"
-                    type="text"
-                    value={inpval.assetcode}
-                    onChange={setdata}
-                    id="assetcode"
-                    required
-                  />
-                </div>
+
                 <div class="mb-3 col-lg-6 col-md-6 col-12">
                   <TextField
                     label="Quantity"

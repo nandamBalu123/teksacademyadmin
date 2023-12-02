@@ -124,7 +124,7 @@ const Edit = () => {
   return (
     <div className="container mt-3">
       <div className="main-assignassetsedit">
-        <h5 className="mt-3"> Assign Assets Edit</h5>
+        <h5 className="mt-3 text-center"> Assign Assets Edit</h5>
         <div className="assignassetsedit text-center">
           <form className="mt-4">
             <div className="row ">
