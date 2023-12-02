@@ -632,7 +632,7 @@ const UsersData = () => {
                                 title={user.fullname}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "115px",
+                                  width: "7rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -648,7 +648,7 @@ const UsersData = () => {
                                 title={user.email}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "120px",
+                                  width: "7rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -664,7 +664,7 @@ const UsersData = () => {
                                 title={user.phonenumber}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "90px",
+                                  width: "6rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -680,7 +680,7 @@ const UsersData = () => {
                                 title={user.designation}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "100px",
+                                  width: "6rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -696,7 +696,7 @@ const UsersData = () => {
                                 title={user.department}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "100px",
+                                  width: "7rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -712,7 +712,7 @@ const UsersData = () => {
                                 title={user.reportto}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "100px",
+                                  width: "5rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -728,7 +728,7 @@ const UsersData = () => {
                                 title={user.profile}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "100px",
+                                  width: "6rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -744,7 +744,7 @@ const UsersData = () => {
                                 title={user.branch}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "90px",
+                                  width: "5rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",

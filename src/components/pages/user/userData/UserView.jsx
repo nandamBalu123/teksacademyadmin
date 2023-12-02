@@ -68,7 +68,7 @@ const UserView = () => {
   return (
     <div className="container mt-3">
       <div className="userviewing">
-        <h5 className="my-3 ms-2 "> User View</h5>
+        <h5 className="my-3 text-center"> User View</h5>
 
         <div className="row">
           <div className="col-12 col-md-3 col-lg-3 col-xl-3">
