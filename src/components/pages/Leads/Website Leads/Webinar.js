@@ -94,7 +94,6 @@ const Webinar = () => {
   // }, [role, userId]);
 
   // end
-
   let initialDataCount = initialData.length;
 
   const [filteredData, setFilteredData] = useState(initialData);
@@ -123,7 +122,30 @@ const Webinar = () => {
       search: "",
     });
   };
+
+  const [jsonData, setJsonData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // const response = await fetch('https://demo.teksacademy.com:3000/webinardec');
+        const response = await fetch('https://demo.teksacademy.com:3000/webinardec');
+        const data = await response.json();
+        setJsonData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false); // Set loading to false regardless of success or error
+      }
+    };
+  
+    fetchData();
+  }, []);
+
+
   return (
+
     <div className="container mt-3">
       <div className="webinar">
         <h5 className="text-center mt-3"> Webinar Leads</h5>
@@ -267,11 +289,24 @@ const Webinar = () => {
                     </StyledTableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
+                {/* <TableBody>
                   <TableRow>
                     <TableCell colSpan={3}>No data available</TableCell>
                   </TableRow>{" "}
+                </TableBody> */}
+                <TableBody>
+                  {jsonData.map((webinar, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{webinar.id}</TableCell>
+                      <TableCell>{webinar.date}</TableCell>
+                      <TableCell>{webinar.name}</TableCell>
+                      <TableCell>{webinar.email}</TableCell>
+                      <TableCell>{webinar.phone}</TableCell>
+                      <TableCell>{webinar.course}</TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
+
               </Table>
             </TableContainer>
           </Paper>
