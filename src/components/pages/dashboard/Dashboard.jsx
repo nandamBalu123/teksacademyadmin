@@ -544,6 +544,9 @@ const Dashboard = () => {
     AllbranchesDueAmount = calculateDueAmountForCurrentMonth();
     AllbranchesreceivedAmount = calculatePaidAmountForCurrentMonth();
   }
+
+
+
   return (
     <div className="container main-dashboard">
       {/* Header */}
@@ -1010,7 +1013,10 @@ const Dashboard = () => {
               >
                 <p className="text-center pt-3">
                   No of Enrollments
-                  <p className="pt-1"> 6</p>
+                  <p className="pt-1"> {Number(
+                    parseFloat(students.length).toFixed(2)
+                  ).toLocaleString("en-IN")}</p>
+                  {console.log("student data", getstudentData)}
                 </p>
               </Card>
             </div>
