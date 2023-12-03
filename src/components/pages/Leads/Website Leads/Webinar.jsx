@@ -130,7 +130,7 @@ const Webinar = () => {
     const fetchData = async () => {
       try {
         // const response = await fetch('https://demo.teksacademy.com:3000/webinardec');
-        const response = await fetch('https://demo.teksacademy.com:3000/webinardec');
+        const response = await fetch(`https://demo.teksacademy.com:3000/webinardec`);
         const data = await response.json();
         setJsonData(data);
       } catch (error) {
