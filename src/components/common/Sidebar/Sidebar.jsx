@@ -151,14 +151,14 @@ const Sidebar = () => {
           },
           "& .pro-inner-item:hover": {
             background: "#f5f5f5 !important",
-            color: "blue !important",
+            color: "#4676a0 !important",
             borderTopRightRadius: "20px !important",
             borderBottomRightRadius: "20px !important",
             // borderRadius:"20px !important",
           },
 
           "& .pro-menu-item.active": {
-            color: "blue !important",
+            color: "#4676a0 !important",
           },
 
           letterSpacing: "0.6px",
