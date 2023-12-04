@@ -9,7 +9,7 @@
 .invoice {
   width: 100%;
   overflow: hidden;
-  border: 1.5px solid black;
+  /* border: 1.5px solid black; */
   border-radius: 10px;
 }
 .bold-row {
