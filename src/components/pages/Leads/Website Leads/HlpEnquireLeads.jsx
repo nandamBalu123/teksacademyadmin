@@ -94,13 +94,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const WhatsApp = () => {
+const HlpEnquireLeads = () => {
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
   // const { students, dispatch } = useStudentsContext();
 
 
+  console.log("branches", branches);
+  console.log("courses", getcourses);
 
 
   const { users } = useUsersContext();
@@ -166,7 +168,7 @@ const WhatsApp = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/whatsappleads`)
+      .get(`https://demo.teksacademy.com:3000/hlpefleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
@@ -209,21 +211,24 @@ const WhatsApp = () => {
         item.email
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
-        item.course
+        item.city
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
+        item.course
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
         item.phone
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
-        item.Date
+        item.date
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase())
         : true;
 
       const dateCondition =
         filterCriteria.fromdate && filterCriteria.todate
-          ? item.Date >= filterCriteria.fromdate &&
-          item.Date <= filterCriteria.todate
+          ? item.date >= filterCriteria.fromdate &&
+          item.date <= filterCriteria.todate
           : true;
 
       // const branchCondition = filterCriteria.course
@@ -323,7 +328,7 @@ const WhatsApp = () => {
 
     <div className="container">
       <div className="studetdetails   mt-3">
-        <h5 className=" mt-3 text-center"> Whatsapp Leads </h5>
+        <h5 className=" mt-3 text-center"> HLP Enquire Leads </h5>
 
         <div className="row mb-1 ps-1 ">
           <div className="col-12 col-md-7 col-lg-8 col-xl-8  input-field">
@@ -442,7 +447,7 @@ const WhatsApp = () => {
                           value={filterCriteria.course}
                           onChange={handleInputChange}
                         >
-                          {/* <MenuItem value="select"> ---select---</MenuItem> */}
+                         
 
                           {getcourses &&
                             getcourses.map((item, index) => (
@@ -493,9 +498,11 @@ const WhatsApp = () => {
                     <StyledTableCell className="table-cell-heading">
                       Email
                     </StyledTableCell>
-
                     <StyledTableCell className="table-cell-heading">
                       Course
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      City
                     </StyledTableCell>
 
                     <StyledTableCell className="table-cell-heading">
@@ -578,10 +585,25 @@ const WhatsApp = () => {
                               {item.email}
                             </span>
                           </StyledTableCell>
-
                           <StyledTableCell className="Table-cell">
                             <span
                               title={item.course}
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.course}
+                            </span>
+                          </StyledTableCell>
+
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              title={item.city}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
@@ -592,7 +614,7 @@ const WhatsApp = () => {
                                 display: "block",
                               }}
                             >
-                              {item.course}
+                              {item.city}
                             </span>
                           </StyledTableCell>
 
@@ -614,7 +636,7 @@ const WhatsApp = () => {
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
                             <span
-                              title={item.Date}
+                              title={item.date}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
@@ -625,7 +647,7 @@ const WhatsApp = () => {
                                 display: "block",
                               }}
                             >
-                              {item.Date}
+                              {item.date}
                             </span>
                           </StyledTableCell>
 
@@ -714,4 +736,4 @@ const WhatsApp = () => {
   );
 };
 
-export default WhatsApp;
+export default HlpEnquireLeads;

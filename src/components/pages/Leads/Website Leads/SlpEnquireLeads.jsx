@@ -94,13 +94,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const WhatsApp = () => {
+const SlpEnquireLeads = () => {
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
   // const { students, dispatch } = useStudentsContext();
 
 
+  console.log("branches", branches);
+  console.log("courses", getcourses);
 
 
   const { users } = useUsersContext();
@@ -166,7 +168,7 @@ const WhatsApp = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/whatsappleads`)
+      .get(`https://demo.teksacademy.com:3000/slpefleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
@@ -210,29 +212,32 @@ const WhatsApp = () => {
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
         item.course
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+        item.city
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
         item.phone
           .toLowerCase()
-          .includes(filterCriteria.search.toLowerCase()) ||
-        item.Date
-          .toLowerCase()
-          .includes(filterCriteria.search.toLowerCase())
+          .includes(filterCriteria.search.toLowerCase()) 
+        // item.date
+        //   .toLowerCase()
+        //   .includes(filterCriteria.search.toLowerCase())
         : true;
 
       const dateCondition =
         filterCriteria.fromdate && filterCriteria.todate
-          ? item.Date >= filterCriteria.fromdate &&
-          item.Date <= filterCriteria.todate
+          ? item.date >= filterCriteria.fromdate &&
+          item.date <= filterCriteria.todate
           : true;
 
       // const branchCondition = filterCriteria.course
       //   ? item.course === filterCriteria.course
       //   : true;
-      const branchCondition = filterCriteria.course
-        ? item.course
+      const branchCondition = filterCriteria.city
+        ? item.city
           .toLowerCase()
-          .includes(filterCriteria.course.toLowerCase())
+          .includes(filterCriteria.city.toLowerCase())
         : true;
 
       // const sourceCondition = filterCriteria.course
@@ -323,7 +328,7 @@ const WhatsApp = () => {
 
     <div className="container">
       <div className="studetdetails   mt-3">
-        <h5 className=" mt-3 text-center"> Whatsapp Leads </h5>
+        <h5 className=" mt-3 text-center"> SLP Enquire Leads </h5>
 
         <div className="row mb-1 ps-1 ">
           <div className="col-12 col-md-7 col-lg-8 col-xl-8  input-field">
@@ -433,16 +438,16 @@ const WhatsApp = () => {
                     </div>
                   </div>
 
-                  <div className="row m-2">
+                  {/* <div className="row m-2">
                     <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                       <FormControl variant="standard" className="w-100">
                         <InputLabel>Course</InputLabel>
                         <Select
                           name="course"
-                          value={filterCriteria.course}
+                          value={filterCriteria.city}
                           onChange={handleInputChange}
                         >
-                          {/* <MenuItem value="select"> ---select---</MenuItem> */}
+                         
 
                           {getcourses &&
                             getcourses.map((item, index) => (
@@ -456,7 +461,7 @@ const WhatsApp = () => {
                         </Select>
                       </FormControl>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="text-end me-2 mt-4">
                     <button className="btn btn-color" onClick={filterreset}>
                       {" "}
@@ -495,16 +500,16 @@ const WhatsApp = () => {
                     </StyledTableCell>
 
                     <StyledTableCell className="table-cell-heading">
-                      Course
+                      City
                     </StyledTableCell>
 
                     <StyledTableCell className="table-cell-heading">
                       Contact Number
                     </StyledTableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    {/* <StyledTableCell className="table-cell-heading">
                       Date
-                    </StyledTableCell>
+                    </StyledTableCell> */}
 
                     {/* <StyledTableCell className="table-cell-heading">
                       Actions
@@ -581,7 +586,7 @@ const WhatsApp = () => {
 
                           <StyledTableCell className="Table-cell">
                             <span
-                              title={item.course}
+                              title={item.city}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
@@ -592,7 +597,7 @@ const WhatsApp = () => {
                                 display: "block",
                               }}
                             >
-                              {item.course}
+                              {item.city}
                             </span>
                           </StyledTableCell>
 
@@ -612,9 +617,9 @@ const WhatsApp = () => {
                               {item.phone}
                             </span>
                           </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          {/* <StyledTableCell className="Table-cell">
                             <span
-                              title={item.Date}
+                              title={item.date}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
@@ -625,9 +630,9 @@ const WhatsApp = () => {
                                 display: "block",
                               }}
                             >
-                              {item.Date}
+                              {item.date}
                             </span>
-                          </StyledTableCell>
+                          </StyledTableCell> */}
 
 
                           {/* <StyledTableCell className="text-center d-flex mt-2">
@@ -714,4 +719,4 @@ const WhatsApp = () => {
   );
 };
 
-export default WhatsApp;
+export default SlpEnquireLeads;

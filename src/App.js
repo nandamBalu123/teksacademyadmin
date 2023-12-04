@@ -73,6 +73,11 @@ import CreateReport from "./components/pages/Reports/CreateReport";
 import FeeReceived from "./components/pages/student/fee/FeeReceived";
 import Webinar from "./components/pages/Leads/Website Leads/Webinar";
 import WhatsApp  from "./components/pages/Leads/Website Leads/Whatsapp";
+import DownloadSyllabus  from "./components/pages/Leads/Website Leads/DownloadSyllabus";
+import ViewCourse from "./components/pages/Leads/Website Leads/ViewCourse";
+import ContactUs from "./components/pages/Leads/Website Leads/ContactUs";
+import HlpEnquireLeads from "./components/pages/Leads/Website Leads/HlpEnquireLeads";
+import SlpEnquireLeads from "./components/pages/Leads/Website Leads/SlpEnquireLeads";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -493,6 +498,56 @@ function App() {
                   element={
                     user && user.profile == "admin" ? (
                       <WhatsApp />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                 <Route
+                  path="/downloadsyllabus"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <DownloadSyllabus />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                 <Route
+                  path="/viewcourse"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <ViewCourse />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/contactus"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <ContactUs />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                 <Route
+                  path="/hlpenquireleads"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <HlpEnquireLeads />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                    <Route
+                  path="/slpenquireleads"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <SlpEnquireLeads />
                     ) : (
                       <Dashboard />
                     )
