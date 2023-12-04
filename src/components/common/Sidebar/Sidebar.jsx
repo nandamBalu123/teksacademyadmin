@@ -438,6 +438,13 @@ const Sidebar = () => {
                       selected={selected}
                       setSelected={setSelected}
                     />
+                    <Item
+                      title="WhapsApp"
+                      to="/whatsapp"
+                      icon={<AirplayIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
                   </SubMenu>
                 </SubMenu>
               ) : undefined}

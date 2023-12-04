@@ -72,6 +72,7 @@ import Report from "./components/pages/Reports/Report";
 import CreateReport from "./components/pages/Reports/CreateReport";
 import FeeReceived from "./components/pages/student/fee/FeeReceived";
 import Webinar from "./components/pages/Leads/Website Leads/Webinar";
+import WhatsApp  from "./components/pages/Leads/Website Leads/Whatsapp";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -482,6 +483,16 @@ function App() {
                   element={
                     user && user.profile == "admin" ? (
                       <Webinar />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                 <Route
+                  path="/whatsapp"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <WhatsApp />
                     ) : (
                       <Dashboard />
                     )
