@@ -4,7 +4,7 @@ import * as React from "react";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-import { Link } from "react-router-dom";
+
 import Header from "../../common/Header/Header";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
@@ -40,7 +40,7 @@ const Dashboard = () => {
   const [DisplayData, setDisplayData] = useState({
     enrollments: false,
     fee: false,
-    feefollowup: false,
+    users: false,
     dueAndReceivedAmount: false,
   });
 
@@ -544,21 +544,17 @@ const Dashboard = () => {
     AllbranchesDueAmount = calculateDueAmountForCurrentMonth();
     AllbranchesreceivedAmount = calculatePaidAmountForCurrentMonth();
   }
-
-
-
   return (
     <div className="container main-dashboard">
       {/* Header */}
       <div>
-        <Box className="text-center  mt-4">
-          {user && <h4>{"Hi " + user.fullname}</h4>}
-          <h5>
-            {" "}
-            Welcome to{" "}
-            <span style={{ color: "#e96228", fontSize: "25px" }}>TEKS </span>
-            <span style={{ color: "#195489", fontSize: "25px" }}> ACADEMY</span>
-          </h5>
+        <Box className="text-center  mt-3">
+          {user && (
+            <Header
+              title={"Hi " + user.fullname}
+              subtitle={"Welcome to TEKS ACADEMY"}
+            />
+          )}{" "}
           {/* <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
               Filter
             </h6>
@@ -644,82 +640,7 @@ const Dashboard = () => {
 
       <div className="contianer Dashboard">
         <div className="row">
-          <div className="col-12 col-md-1 col-lg-1 col-xl-1 m-sm-3"> </div>
           <div
-            className="col-12 col-md-3 col-lg-3 col-xl-3 "
-            style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: true,
-                fee: false,
-                users: false,
-                dueAndReceivedAmount: false,
-              })
-            }
-          >
-            <Card
-              style={{
-                background: "#004493",
-                textAlign: "center",
-                borderRadius: "8px",
-                color: "white",
-                boxShadow: "3px 3px 6px  gray",
-              }}
-            >
-              <p className="text-center pt-3">Total Enrollments</p>
-            </Card>
-          </div>
-          <div
-            className="col-12 col-md-3 col-lg-3 col-xl-3 "
-            style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: true,
-                feefollowup: false,
-              })
-            }
-          >
-            <Card
-              style={{
-                background: "#ff9f24",
-                textAlign: "center",
-                borderRadius: "8px",
-                color: "white",
-                boxShadow: "3px 3px 6px  gray",
-              }}
-            >
-              <p className="text-center pt-3">Fee Details</p>
-            </Card>
-          </div>
-          <div
-            className="col-12 col-md-3 col-lg-3 col-xl-3 "
-            style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: false,
-                feefollowup: true,
-              })
-            }
-          >
-            <Link to="/feedetails">
-              <Card
-                style={{
-                  background: "#008959",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
-              >
-                <p className="text-center pt-3">Fee Followups</p>
-              </Card>
-            </Link>
-          </div>
-        </div>
-        <div className="row">
-          {/* <div
             className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
             style={{ cursor: "pointer" }}
             onClick={(e) =>
@@ -731,8 +652,6 @@ const Dashboard = () => {
               })
             }
           >
-
-
             <Card
               style={{ backgroundColor: "#d9e9e9" }}
               className="rounded rounded-3"
@@ -747,8 +666,8 @@ const Dashboard = () => {
                 </b>
               </p>
             </Card>
-          </div> */}
-          {/* <div
+          </div>
+          <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
             style={{ cursor: "pointer" }}
             onClick={(e) =>
@@ -759,9 +678,9 @@ const Dashboard = () => {
                 dueAndReceivedAmount: false,
               })
             }
-          > */}
-          {/* <Card
-              style={{ backgroundColor: '#09c3f7' }}
+          >
+            <Card
+              style={{ backgroundColor: "#b7e9da" }}
               className="rounded rounded-3"
             >
               <p className="pt-3">Total Fee</p>
@@ -771,13 +690,13 @@ const Dashboard = () => {
                   {Number(parseFloat(totalAmount).toFixed(2)).toLocaleString(
                     "en-IN"
                   )}
-                </b> */}
-          {/* <b>{sumDueAmount},</b>
+                </b>
+                {/* <b>{sumDueAmount},</b>
                 <b>{sumreceivedAmount},</b> */}
-          {/* </p>
-            </Card> */}
-          {/* </div> */}
-          {/* <div
+              </p>
+            </Card>
+          </div>
+          <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
             style={{ cursor: "pointer" }}
             onClick={(e) =>
@@ -790,7 +709,7 @@ const Dashboard = () => {
             }
           >
             <Card
-              style={{ backgroundColor: '#ffc574' }}
+              style={{ backgroundColor: "#b7e9da" }}
               className="rounded rounded-3"
             >
               <p className="pt-3">
@@ -801,7 +720,7 @@ const Dashboard = () => {
                     parseFloat(AllbranchesreceivedAmount).toFixed(2)
                   ).toLocaleString("en-IN")}
                 </b>
-               
+                {/* <b>{sumreceivedAmount},</b> */}
               </p>
               <p>
                 <b>
@@ -812,9 +731,9 @@ const Dashboard = () => {
                 </b>
               </p>
             </Card>
-          </div> */}
+          </div>
 
-          {/* {role === "admin" && (
+          {role === "admin" && (
             <div
               className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
               style={{ cursor: "pointer" }}
@@ -841,7 +760,7 @@ const Dashboard = () => {
                 </p>
               </Card>
             </div>
-          )} */}
+          )}
           {/* <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
             style={{ cursor: "pointer" }}
@@ -892,186 +811,6 @@ const Dashboard = () => {
 
       {/* This is for progress bar */}
 
-      {DisplayData.enrollments && (
-        <div className=" ">
-          <div className="d-flex justify-content-between">
-            <h4 className="text-center mt-3">
-              {" "}
-              Current Month Enrollment Details
-            </h4>
-            <div className=" tex-end">
-              <Button
-                id="demo-positioned-button"
-                aria-controls={open ? "demo-positioned-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-              >
-                <button
-                  className="btn btn-color"
-                  style={{ textTransform: "capitalize" }}
-                >
-                  {" "}
-                  Filter{" "}
-                </button>
-              </Button>
-              <Menu
-                className="mt-5"
-                id="demo-positioned-menu"
-                aria-labelledby="demo-positioned-button"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-              >
-                <div className="d-flex justify-content-between">
-                  <MenuItem> Filter</MenuItem>
-                  <MenuItem>
-                    {" "}
-                    <CloseIcon onClick={handleClose} />{" "}
-                  </MenuItem>
-                </div>
-                <hr />
-                <div className="row m-2">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label=" From:"
-                      type="date"
-                      variant="standard"
-                      className="  w-100"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="fromdate"
-                      value={filterCriteria.fromdate}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label=" To:"
-                      type="date"
-                      variant="standard"
-                      className="w-100"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="todate"
-                      value={filterCriteria.todate}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-
-                  {/* <div>
-                  <label> From: </label>
-                </div>
-                <div>
-                  <input
-                    type="date"
-                    className="w-100"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                </div> */}
-                </div>
-
-                <MenuItem className="text-end">
-                  {/* <button className="save"> Save</button> */}
-                  <button className="btn btn-color" onClick={filterreset}>
-                    {" "}
-                    Clear
-                  </button>
-                </MenuItem>
-              </Menu>
-            </div>
-          </div>
-          {/* <h4 className="text-center mt-3 ">  Current Month Enrollment Details </h4> */}
-          <div className="row ">
-            {/* <div className="col-12 col-md-2 col-xl-2 col-lg-2"> </div> */}
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card
-                style={{
-                  background: "#fd746e",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
-              >
-                <p className="text-center pt-3">
-                  No of Enrollments
-                  <p className="pt-1"> {Number(
-                    parseFloat(students.length).toFixed(2)
-                  ).toLocaleString("en-IN")}</p>
-                  {console.log("student data", getstudentData)}
-                </p>
-              </Card>
-            </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card
-                style={{
-                  background: "#7fa1e4",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
-              >
-                <p className="text-center pt-3">
-                  Booking Amount
-                  <p className="pt-1"> 40,000</p>{" "}
-                </p>
-              </Card>
-            </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card
-                style={{
-                  background: "#f4ae5b",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
-              >
-                <p className="text-center pt-3">
-                  Received Amount
-                  <p className="pt-1"> 10,000</p>{" "}
-                </p>
-              </Card>
-            </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card
-                style={{
-                  background: "#5ec394",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
-              >
-                <p className="text-center pt-3">
-                  DueAmount
-                  <p className="pt-1"> 0,000</p>{" "}
-                </p>
-              </Card>
-            </div>
-          </div>
-        </div>
-      )}
-      {/*old data
       {DisplayData.enrollments && (
         <div className="progreebar rounded rounded-5  pb-4 ">
           <div className="d-flex justify-content-between">
@@ -1145,9 +884,28 @@ const Dashboard = () => {
                       onChange={handleInputChange}
                     />
                   </div>
+
+                  {/* <div>
+                  <label> From: </label>
+                </div>
+                <div>
+                  <input
+                    type="date"
+                    className="w-100"
+                    style={{
+                      height: "45px",
+                      border: "1.5px solid black",
+                      borderRadius: "5px",
+                    }}
+                    name="fromdate"
+                    value={filterCriteria.fromdate}
+                    onChange={handleInputChange}
+                  />
+                </div> */}
                 </div>
 
                 <MenuItem className="text-end">
+                  {/* <button className="save"> Save</button> */}
                   <button className="clear " onClick={filterreset}>
                     {" "}
                     Clear
@@ -1210,13 +968,12 @@ const Dashboard = () => {
               )}
           </div>
         </div>
-      )} */}
-
+      )}
       {DisplayData.fee && (
-        <div className="">
+        <div className="progreebar rounded rounded-5  pb-4">
           <div className="d-flex justify-content-between">
-            <h4 className="text-center mt-3"> Current Month Fee Details</h4>
-            <div className=" tex-end">
+            <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
+            <div className="pt-2 pe-4">
               <Button
                 id="demo-positioned-button"
                 aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -1225,7 +982,7 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-color"
+                  className="btn btn-primary "
                   style={{ textTransform: "capitalize" }}
                 >
                   {" "}
@@ -1307,128 +1064,6 @@ const Dashboard = () => {
 
                 <MenuItem className="text-end">
                   {/* <button className="save"> Save</button> */}
-                  <button className="btn btn-color" onClick={filterreset}>
-                    {" "}
-                    Clear
-                  </button>
-                </MenuItem>
-              </Menu>
-            </div>
-          </div>
-
-          <div className="row  ">
-            <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card
-                style={{
-                  background: "#fd746e",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
-              >
-                <p className="text-center pt-3">
-                  Fee Received
-                  <p className="pt-1"> 1,40,000</p>{" "}
-                </p>
-              </Card>
-            </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card
-                style={{
-                  background: "#7fa1e4",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
-              >
-                <p className="text-center pt-3">
-                  Fee Yet To Received
-                  <p className="pt-1">2,40,000</p>{" "}
-                </p>
-              </Card>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* old data {DisplayData.fee && (
-        <div className="progreebar rounded rounded-5  pb-4">
-          <div className="d-flex justify-content-between">
-            <h4 className="pt-4 enrollment ps-4"> Total Fee</h4>
-            <div className="pt-2 pe-4">
-              <Button
-                id="demo-positioned-button"
-                aria-controls={open ? "demo-positioned-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-              >
-                <button
-                  className="btn btn-primary "
-                  style={{ textTransform: "capitalize" }}
-                >
-                  {" "}
-                  Filter{" "}
-                </button>
-              </Button>
-              <Menu
-                className="mt-5"
-                id="demo-positioned-menu"
-                aria-labelledby="demo-positioned-button"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-              >
-                <div className="d-flex justify-content-between">
-                  <MenuItem> Filter</MenuItem>
-                  <MenuItem>
-                    {" "}
-                    <CloseIcon onClick={handleClose} />{" "}
-                  </MenuItem>
-                </div>
-                <hr />
-                <div className="row m-2">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label=" From:"
-                      type="date"
-                      variant="standard"
-                      className="  w-100"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="fromdate"
-                      value={filterCriteria.fromdate}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label=" To:"
-                      type="date"
-                      variant="standard"
-                      className="w-100"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="todate"
-                      value={filterCriteria.todate}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </div>
-
-                <MenuItem className="text-end">
                   <button className="clear " onClick={filterreset}>
                     {" "}
                     Clear
@@ -1489,7 +1124,7 @@ const Dashboard = () => {
               )}
           </div>
         </div>
-      )} */}
+      )}
       {DisplayData.dueAndReceivedAmount && (
         <div className="progreebar rounded rounded-5  pb-4">
           <div className="d-flex justify-content-between">
@@ -1506,7 +1141,7 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-color"
+                  className="btn btn-primary "
                   style={{ textTransform: "capitalize" }}
                 >
                   {" "}
@@ -1589,7 +1224,7 @@ const Dashboard = () => {
                 <MenuItem className="text-end">
                   {/* <button className="save"> Save</button> */}
                   <button
-                    className="btn btn-color"
+                    className="clear "
                     onClick={filterDeuAndReceivedreset}
                   >
                     {" "}
@@ -1700,7 +1335,7 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-color "
+                  className="btn btn-primary "
                   style={{ textTransform: "capitalize" }}
                 >
                   {" "}
@@ -1782,7 +1417,7 @@ const Dashboard = () => {
 
                 <MenuItem className="text-end">
                   {/* <button className="save"> Save</button> */}
-                  <button className="btn btn-color" onClick={filterreset}>
+                  <button className="clear " onClick={filterreset}>
                     {" "}
                     Clear
                   </button>

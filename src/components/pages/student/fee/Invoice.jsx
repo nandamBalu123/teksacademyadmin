@@ -195,15 +195,15 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       )}
 
       <hr />
-      <div className="row">
+      <div className="row mt-5">
         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-          <h4>
+          <h4 className="mt-5">
             {" "}
             <strong> Kapil Knowledge Hub Private Limited</strong>
           </h4>
         </div>
         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-          <h3>
+          <h3 className="mt-5">
             <strong>
               {" "}
               <b>INVOICE NO:</b> {invoice}
