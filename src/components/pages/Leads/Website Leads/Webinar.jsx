@@ -355,7 +355,7 @@ const Webinar = () => {
             <div className="d-flex justify-content-around">
               <p className="pt-3">
                 {recordCount}/{initialDataCount}{" "}
-              </p>
+              </p> 
 
               <p>
                 <select onChange={handlerecorddata} className="mt-3">
