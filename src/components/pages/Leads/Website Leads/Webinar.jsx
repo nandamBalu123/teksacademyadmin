@@ -59,6 +59,7 @@ import { LastPage } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
+import { useCourseContext } from "../../../../hooks/useCourseContext";
 import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 import Switch from "@mui/material/Switch";
 import axios from "axios";
@@ -96,7 +97,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Webinar = () => {
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
+  const { getcourses } = useCourseContext();
   // const { students, dispatch } = useStudentsContext();
+
+
+  console.log("branches", branches);
+  console.log("courses", getcourses);
+
 
   const { users } = useUsersContext();
   const { leadsources } = useLeadSourceContext();
@@ -117,7 +124,7 @@ const Webinar = () => {
   };
 
   const [initialData, setData] = useState([{ name: "" }]);
-  
+
 
   let initialDataCount = initialData.length;
 
@@ -159,23 +166,23 @@ const Webinar = () => {
   }, [students]);
 
   useEffect(() => {
-    
+
     axios
-          .get(`https://demo.teksacademy.com:3000/webinardec`)
-          .then((response) => {
-            // Handle the successful response here
-            setWebinarForm(response.data); // Update the data state with the fetched data
-            
+      .get(`https://demo.teksacademy.com:3000/webinardec`)
+      .then((response) => {
+        // Handle the successful response here
+        setWebinarForm(response.data); // Update the data state with the fetched data
 
-            console.log("data", response.data);
-          })
-          .catch((error) => {
-            // Handle any errors that occur during the request
-            console.error("Error fetching data:", error);
-          });
-    
 
-  
+        console.log("data", response.data);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+
+
+
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -199,51 +206,57 @@ const Webinar = () => {
     const filteredResults = initialData.filter((item) => {
       const searchCondition = filterCriteria.search
         ? item.name
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.email
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.course
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.phone
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.date
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase())
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.email
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.course
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.phone
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.date
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase())
         : true;
 
       const dateCondition =
         filterCriteria.fromdate && filterCriteria.todate
           ? item.date >= filterCriteria.fromdate &&
-            item.date <= filterCriteria.todate
+          item.date <= filterCriteria.todate
           : true;
 
-      const branchCondition = filterCriteria.email
-        ? item.email === filterCriteria.email
+      // const branchCondition = filterCriteria.course
+      //   ? item.course === filterCriteria.course
+      //   : true;
+      const branchCondition = filterCriteria.course
+        ? item.course
+          .toLowerCase()
+          .includes(filterCriteria.course.toLowerCase())
         : true;
 
-      const sourceCondition = filterCriteria.course
-        ? item.course === filterCriteria.course
-        : true;
+      // const sourceCondition = filterCriteria.course
+      //   ? item.course === filterCriteria.course
+      //   : true;
 
-      const modeCondition = filterCriteria.phone
-        ? item.phone === filterCriteria.phone
-        : true;
+      // const modeCondition = filterCriteria.phone
+      //   ? item.phone === filterCriteria.phone
+      //   : true;
 
-      const counsellarCondition = filterCriteria.date
-        ? item.date === filterCriteria.date
-        : true;
+      // const counsellarCondition = filterCriteria.date
+      //   ? item.date === filterCriteria.date
+      //   : true;
 
       return (
         searchCondition &&
         dateCondition &&
-        branchCondition &&
-        sourceCondition &&
-        modeCondition &&
-        counsellarCondition
+        branchCondition
+        // &&
+        // sourceCondition &&
+        // modeCondition &&
+        // counsellarCondition
       );
     });
     setFilteredData(filteredResults);
@@ -305,26 +318,12 @@ const Webinar = () => {
     });
   };
 
-  
+
 
 
   return (
 
     <div className="container">
-      {/* <div>
-      {loading && <p>Loading files...</p>}
-      {error && <p>Error: {error}</p>}
-      {!loading && !error && (
-        <div>
-          {files.map((file, index) => (
-            <div key={index}>
-              <img src={file.s3_url} alt={file.filename} width={"100px"}/>
-            </div>
-          ))}
-        </div>
-      )}
-    </div> */}
-
       <div className="studetdetails   mt-3">
         <h5 className=" mt-3 text-center"> Webinar Leads </h5>
 
@@ -439,20 +438,21 @@ const Webinar = () => {
                   <div className="row m-2">
                     <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                       <FormControl variant="standard" className="w-100">
-                        <InputLabel>Branch</InputLabel>
+                        <InputLabel>Course</InputLabel>
                         <Select
-                          name="branch"
-                          value={filterCriteria.branch}
+                          name="course"
+                          value={filterCriteria.course}
                           onChange={handleInputChange}
                         >
-                          <MenuItem value="select"> ---select---</MenuItem>
-                          {branches &&
-                            branches.map((branch, index) => (
+                          {/* <MenuItem value="select"> ---select---</MenuItem> */}
+
+                          {getcourses &&
+                            getcourses.map((item, index) => (
                               <MenuItem
-                                key={branch.id}
-                                value={branch.branch_name}
+                                key={item.id}
+                                value={item.course_name}
                               >
-                                {branch.branch_name}
+                                {item.course_name}
                               </MenuItem>
                             ))}
                         </Select>
@@ -479,7 +479,7 @@ const Webinar = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="student-table">
           <Paper>
             <TableContainer sx={{ maxHeight: 440 }}>
@@ -490,7 +490,7 @@ const Webinar = () => {
                       SNo
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
-                      Name 
+                      Name
                     </StyledTableCell>
                     <StyledTableCell className="table-cell-heading">
                       Email
@@ -508,9 +508,9 @@ const Webinar = () => {
                       Date
                     </StyledTableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    {/* <StyledTableCell className="table-cell-heading">
                       Actions
-                    </StyledTableCell>
+                    </StyledTableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -537,9 +537,8 @@ const Webinar = () => {
                       ];
 
                       // Formatting the date
-                      date = `${day < 10 ? "0" : ""}${day}-${
-                        monthAbbreviations[monthIndex]
-                      }-${year}`;
+                      date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                        }-${year}`;
 
                       // Updating the state with the formatted date
 
@@ -584,7 +583,7 @@ const Webinar = () => {
 
                           <StyledTableCell className="Table-cell">
                             <span
-                            title={item.course}
+                              title={item.course}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
@@ -601,7 +600,7 @@ const Webinar = () => {
 
                           <StyledTableCell className="Table-cell">
                             <span
-                            title={item.phone}
+                              title={item.phone}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
@@ -617,7 +616,7 @@ const Webinar = () => {
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
                             <span
-                            title={item.date}
+                              title={item.date}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
@@ -631,9 +630,9 @@ const Webinar = () => {
                               {item.date}
                             </span>
                           </StyledTableCell>
-                          
 
-                          <StyledTableCell className="text-center d-flex mt-2">
+
+                          {/* <StyledTableCell className="text-center d-flex mt-2">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon
                                 style={{ width: "40px" }}
@@ -649,7 +648,7 @@ const Webinar = () => {
                             </NavLink>
                             
 
-                            {/* <div className="form-check form-switch ms-1">
+                            <div className="form-check form-switch ms-1">
                               <input
                                 className="form-check-input"
                                 type="checkbox"
@@ -684,8 +683,8 @@ const Webinar = () => {
                                   <Button onClick={handleok}>InActivate</Button>
                                 )}
                               </DialogActions>
-                            </Dialog> */}
-                          </StyledTableCell>
+                            </Dialog>
+                          </StyledTableCell> */}
                         </StyledTableRow>
                       );
                     })
