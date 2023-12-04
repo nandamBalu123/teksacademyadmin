@@ -665,7 +665,7 @@ export default function RegistrationForm() {
           type: "CREATE_STUDENT",
           payload: updateContext,
         });
-        navigate(`/addtofee/${id}`);
+        navigate(`/feeview/${id}`);
 
         // You can navigate to another page or perform other actions here.
       } catch (error) {
@@ -2394,7 +2394,7 @@ export default function RegistrationForm() {
                         src={pictureprofile}
                         alt="profile"
                       /> */}
-                        {imageUrl && <img src={imageUrl} alt="Selected" />}
+                        {imageUrl && <img src={imageUrl} alt="Selected"  style={{width:"60%"}}/>}
                         {/* {!studentdata.studentImg && (
                         <img src={profilePic} alt="photo" />
                       )}
