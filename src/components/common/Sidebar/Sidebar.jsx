@@ -438,6 +438,49 @@ const Sidebar = () => {
                       selected={selected}
                       setSelected={setSelected}
                     />
+                    <Item
+                      title="WhapsApp"
+                      to="/whatsapp"
+                      icon={<AirplayIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                    <Item
+                      title="Download Syllabus"
+                      to="/downloadsyllabus"
+                      icon={<AirplayIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                    <Item
+                      title="View Course"
+                      to="/viewcourse"
+                      icon={<AirplayIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                    <Item
+                      title="Contact Us"
+                      to="/contactus"
+                      icon={<AirplayIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                     <Item
+                      title="Hlp Enquire Leads"
+                      to="/hlpenquireleads"
+                      icon={<AirplayIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                    <Item
+                      title="Slp Enquire Leads"
+                      to="/slpenquireleads"
+                      icon={<AirplayIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                    
                   </SubMenu>
                 </SubMenu>
               ) : undefined}

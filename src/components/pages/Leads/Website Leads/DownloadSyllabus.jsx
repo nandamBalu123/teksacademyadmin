@@ -94,7 +94,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const Webinar = () => {
+const DownloadSyllabus = () => {
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
@@ -168,7 +168,7 @@ const Webinar = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/webinardec`)
+      .get(`https://demo.teksacademy.com:3000/dsleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
@@ -211,7 +211,7 @@ const Webinar = () => {
         item.email
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
-        item.course
+        item.city
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
         item.phone
@@ -231,10 +231,10 @@ const Webinar = () => {
       // const branchCondition = filterCriteria.course
       //   ? item.course === filterCriteria.course
       //   : true;
-      const branchCondition = filterCriteria.course
-        ? item.course
+      const branchCondition = filterCriteria.city
+        ? item.city
           .toLowerCase()
-          .includes(filterCriteria.course.toLowerCase())
+          .includes(filterCriteria.city.toLowerCase())
         : true;
 
       // const sourceCondition = filterCriteria.course
@@ -325,7 +325,7 @@ const Webinar = () => {
 
     <div className="container">
       <div className="studetdetails   mt-3">
-        <h5 className=" mt-3 text-center"> Webinar Leads </h5>
+        <h5 className=" mt-3 text-center"> Download Syllabus </h5>
 
         <div className="row mb-1 ps-1 ">
           <div className="col-12 col-md-7 col-lg-8 col-xl-8  input-field">
@@ -435,16 +435,16 @@ const Webinar = () => {
                     </div>
                   </div>
 
-                  <div className="row m-2">
+                  {/* <div className="row m-2">
                     <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                       <FormControl variant="standard" className="w-100">
                         <InputLabel>Course</InputLabel>
                         <Select
                           name="course"
-                          value={filterCriteria.course}
+                          value={filterCriteria.city}
                           onChange={handleInputChange}
                         >
-                          {/* <MenuItem value="select"> ---select---</MenuItem> */}
+                         
 
                           {getcourses &&
                             getcourses.map((item, index) => (
@@ -458,7 +458,7 @@ const Webinar = () => {
                         </Select>
                       </FormControl>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="text-end me-2 mt-4">
                     <button className="btn btn-color" onClick={filterreset}>
                       {" "}
@@ -497,7 +497,7 @@ const Webinar = () => {
                     </StyledTableCell>
 
                     <StyledTableCell className="table-cell-heading">
-                      Course
+                      City
                     </StyledTableCell>
 
                     <StyledTableCell className="table-cell-heading">
@@ -583,7 +583,7 @@ const Webinar = () => {
 
                           <StyledTableCell className="Table-cell">
                             <span
-                              title={item.course}
+                              title={item.city}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
@@ -594,7 +594,7 @@ const Webinar = () => {
                                 display: "block",
                               }}
                             >
-                              {item.course}
+                              {item.city}
                             </span>
                           </StyledTableCell>
 
@@ -716,4 +716,4 @@ const Webinar = () => {
   );
 };
 
-export default Webinar;
+export default DownloadSyllabus;

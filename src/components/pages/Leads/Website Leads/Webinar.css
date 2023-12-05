@@ -1,6 +1,186 @@
-.webinar {
+.studetdetails {
   border: 2px solid #f5f5f5;
   border-radius: 8px;
   margin: auto;
   overflow: hidden;
+}
+
+.icon {
+  border: 1px solid black;
+}
+.dropdown-menu {
+  min-width: 22rem;
+  position: absolute;
+  inset: 0px auto auto 0px;
+  margin: 0px;
+  transform: translate(0px, 40px);
+}
+.cell {
+  background-color: #f7fafd;
+}
+.search {
+  margin: 3px;
+  padding: 2px;
+}
+hr {
+  padding: 0px;
+  margin: 0px;
+}
+.prev,
+.next {
+  text-decoration: none;
+  color: rgb(112, 100, 100);
+  padding: 5px;
+  margin-top: 10px;
+}
+.num {
+  text-decoration: none;
+  color: black;
+}
+.num:hover {
+  background-color: #0070fc;
+  padding: 5px;
+  color: white;
+}
+
+/* .iconn:hover {
+  color: gray;
+  transition: 0.1s;
+} */
+.input-field:hover {
+  border: hidden;
+}
+.studetdetails {
+  overflow-x: hidden;
+}
+.student-table {
+  width: 100%;
+  margin: auto;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.studentdata-input {
+  position: relative;
+  margin: 10px 0;
+}
+.studentdata-input label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.studentdata-input input {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.studentdata-input input:focus ~ label,
+.studentdata-input input:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+.studentdata-select {
+  position: relative;
+  margin: 10px 0;
+}
+.studentdata-select label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.studentdata-select select {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.studentdata-select select:focus ~ label,
+.studentdata-select select:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+.input-input {
+  position: relative;
+  margin: 10px 0;
+}
+.input-input label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.input-input input {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.input-input input:focus ~ label,
+.input-input input:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+
+.input-select {
+  position: relative;
+  margin: 10px 0;
+}
+.input-select label {
+  position: absolute;
+  top: 2%;
+  left: 19%;
+  outline: none;
+  transform: translateY(-50%);
+  font-size: 15px;
+  padding: 0 5px;
+}
+.input-select select {
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
+  padding-left: 10px;
+  border: 1.9px solid black;
+}
+.input-select select:focus ~ label,
+.input-select select:valid ~ label {
+  top: 0;
+  background-color: #fff;
+  color: #0070fc;
+}
+
+.disabled-row {
+  background-color: #f0f0f0;
+  color: #888888;
+}
+.flex-container {
+  display: flex;
+  /* Adjust the gap according to your preference */
+  align-items: center; /* Align items vertically at the center */
+  justify-content: center;
+}
+.css-8bba1v-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: #4676a0 !important;
+  color: white !important;
 }
