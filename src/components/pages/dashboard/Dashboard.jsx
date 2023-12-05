@@ -2081,7 +2081,7 @@ const Dashboard = () => {
   <div className="d-flex justify-content-between">
                      <h5 className="pt-4 ps-4">
                        {" "}
-                       Current Month Counsellorwise Fee Yet To Recevied Data
+                       Current Month Counsellorwise Fee Yet To Recevied Data 
                      </h5>
                  
                    </div>
