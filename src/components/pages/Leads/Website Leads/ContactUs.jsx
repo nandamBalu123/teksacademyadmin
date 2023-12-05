@@ -94,7 +94,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const Webinar = () => {
+const ContactUs = () => {
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
@@ -168,7 +168,7 @@ const Webinar = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/webinardec`)
+      .get(`https://demo.teksacademy.com:3000/contactusleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
@@ -211,10 +211,13 @@ const Webinar = () => {
         item.email
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
-        item.course
+        item.city
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
-        item.phone
+        item.course
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+        item.number
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
         item.date
@@ -325,7 +328,7 @@ const Webinar = () => {
 
     <div className="container">
       <div className="studetdetails   mt-3">
-        <h5 className=" mt-3 text-center"> Webinar Leads </h5>
+        <h5 className=" mt-3 text-center"> Contact Us </h5>
 
         <div className="row mb-1 ps-1 ">
           <div className="col-12 col-md-7 col-lg-8 col-xl-8  input-field">
@@ -444,7 +447,7 @@ const Webinar = () => {
                           value={filterCriteria.course}
                           onChange={handleInputChange}
                         >
-                          {/* <MenuItem value="select"> ---select---</MenuItem> */}
+                         
 
                           {getcourses &&
                             getcourses.map((item, index) => (
@@ -495,9 +498,11 @@ const Webinar = () => {
                     <StyledTableCell className="table-cell-heading">
                       Email
                     </StyledTableCell>
-
                     <StyledTableCell className="table-cell-heading">
                       Course
+                    </StyledTableCell>
+                    <StyledTableCell className="table-cell-heading">
+                      City
                     </StyledTableCell>
 
                     <StyledTableCell className="table-cell-heading">
@@ -580,7 +585,6 @@ const Webinar = () => {
                               {item.email}
                             </span>
                           </StyledTableCell>
-
                           <StyledTableCell className="Table-cell">
                             <span
                               title={item.course}
@@ -588,7 +592,6 @@ const Webinar = () => {
                                 width: "6rem",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
-
                                 textOverflow: "ellipsis",
                                 fontSize: "15px",
                                 display: "block",
@@ -600,7 +603,7 @@ const Webinar = () => {
 
                           <StyledTableCell className="Table-cell">
                             <span
-                              title={item.phone}
+                              title={item.city}
                               style={{
                                 width: "6rem",
                                 whiteSpace: "nowrap",
@@ -611,7 +614,24 @@ const Webinar = () => {
                                 display: "block",
                               }}
                             >
-                              {item.phone}
+                              {item.city}
+                            </span>
+                          </StyledTableCell>
+
+                          <StyledTableCell className="Table-cell">
+                            <span
+                              title={item.number}
+                              style={{
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {item.number}
                             </span>
                           </StyledTableCell>
                           <StyledTableCell className="Table-cell">
@@ -716,4 +736,4 @@ const Webinar = () => {
   );
 };
 
-export default Webinar;
+export default ContactUs;

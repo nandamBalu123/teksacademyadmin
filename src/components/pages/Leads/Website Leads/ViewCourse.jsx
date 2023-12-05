@@ -94,7 +94,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const Webinar = () => {
+const ViewCourse = () => {
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
@@ -168,7 +168,7 @@ const Webinar = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/webinardec`)
+      .get(`https://demo.teksacademy.com:3000/viewcoursesideleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
@@ -325,7 +325,7 @@ const Webinar = () => {
 
     <div className="container">
       <div className="studetdetails   mt-3">
-        <h5 className=" mt-3 text-center"> Webinar Leads </h5>
+        <h5 className=" mt-3 text-center"> View Course </h5>
 
         <div className="row mb-1 ps-1 ">
           <div className="col-12 col-md-7 col-lg-8 col-xl-8  input-field">
@@ -716,4 +716,4 @@ const Webinar = () => {
   );
 };
 
-export default Webinar;
+export default ViewCourse;
