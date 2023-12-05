@@ -987,23 +987,6 @@ const Dashboard = () => {
                     />
                   </div>
 
-                  {/* <div>
-                  <label> From: </label>
-                </div>
-                <div>
-                  <input
-                    type="date"
-                    className="w-100"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                </div> */}
                 </div>
 
                 <MenuItem className="text-end">
@@ -1022,6 +1005,7 @@ const Dashboard = () => {
                 <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
                 <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
                   <Card
+                   
                     onClick={(e) =>
                       setBranchwise({
                         enrollments: true,
@@ -1035,6 +1019,7 @@ const Dashboard = () => {
                       background: "#fd746e",
                       textAlign: "center",
                       borderRadius: "8px",
+                      cursor:"pointer",
                       color: "white",
                       boxShadow: "3px 3px 6px  gray",
                     }}
@@ -1051,6 +1036,7 @@ const Dashboard = () => {
                 </div>
                 <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
                   <Card
+                   
                     onClick={(e) =>
                       setBranchwise({
                         enrollments: false,
@@ -1063,6 +1049,7 @@ const Dashboard = () => {
                     style={{
                       background: "#7fa1e4",
                       textAlign: "center",
+                      cursor: "pointer" ,
                       borderRadius: "8px",
                       color: "white",
                       boxShadow: "3px 3px 6px  gray",
@@ -1094,6 +1081,7 @@ const Dashboard = () => {
                       <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
                       <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
                         <Card
+                          
                           onClick={(e) =>
                             setBranchwise({
                               enrollments: true,
@@ -1109,6 +1097,7 @@ const Dashboard = () => {
                             borderRadius: "8px",
                             color: "white",
                             boxShadow: "3px 3px 6px  gray",
+                            cursor: "pointer" ,
                           }}
                         >
                           <p className="text-center pt-3">
@@ -1123,6 +1112,7 @@ const Dashboard = () => {
                       </div>
                       <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
                         <Card
+                         
                           onClick={(e) =>
                             setBranchwise({
                               enrollments: false,
@@ -1138,6 +1128,7 @@ const Dashboard = () => {
                             borderRadius: "8px",
                             color: "white",
                             boxShadow: "3px 3px 6px  gray",
+                            cursor: "pointer" ,
                           }}
                         >
                           <p className="text-center pt-3">
@@ -1616,6 +1607,7 @@ const Dashboard = () => {
             <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
+            
                 onClick={(e) =>
                   setBranchwise({
                     enrollments: false,
@@ -1631,6 +1623,7 @@ const Dashboard = () => {
                   borderRadius: "8px",
                   color: "white",
                   boxShadow: "3px 3px 6px  gray",
+                  cursor: "pointer" ,
                 }}
               >
                 <p className="text-center pt-3">
@@ -1646,6 +1639,7 @@ const Dashboard = () => {
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
+               
                 onClick={(e) =>
                   setBranchwise({
                     enrollments: false,
@@ -1661,6 +1655,7 @@ const Dashboard = () => {
                   borderRadius: "8px",
                   color: "white",
                   boxShadow: "3px 3px 6px  gray",
+                  cursor: "pointer",
                 }}
               >
                 <p className="text-center pt-3">
@@ -2525,6 +2520,7 @@ const Dashboard = () => {
             <div className="col-12 col-md-4 col-xl-4 col-lg-4"></div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
+             
                 onClick={(e) =>
                   setBranchwise({
                     enrollments: false,
@@ -2540,6 +2536,7 @@ const Dashboard = () => {
                   borderRadius: "8px",
                   color: "white",
                   boxShadow: "3px 3px 6px  gray",
+                  cursor: "pointer" ,
                 }}
               >
                 <p className="text-center pt-3">

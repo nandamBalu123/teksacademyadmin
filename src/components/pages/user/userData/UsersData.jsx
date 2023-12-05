@@ -178,25 +178,25 @@ const UsersData = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
+  // const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  //   [`&.${tableCellClasses.head}`]: {
+  //     backgroundColor: theme.palette.common.black,
+  //     color: theme.palette.common.white,
+  //   },
+  //   [`&.${tableCellClasses.body}`]: {
+  //     fontSize: 14,
+  //   },
+  // }));
 
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
+  // const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  //   "&:nth-of-type(odd)": {
+  //     backgroundColor: theme.palette.action.hover,
+  //   },
+   
+  //   "&:last-child td, &:last-child th": {
+  //     border: 0,
+  //   },
+  // }));
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -335,10 +335,14 @@ const UsersData = () => {
               </h6>
               <span className="mt-3">
                 <select onChange={handlerecorddata}>
-                  <option value="10">10</option>
+                <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
-                  <option value="75">75</option>
+                  <option value="100">100</option>
+                  <option value="250">250</option>
+                  <option value="500">500</option>
+                  <option value="750">750</option>
+                  <option value="1000">1000</option>
                 </select>
               </span>
               <div>
@@ -584,38 +588,41 @@ const UsersData = () => {
         </div>
         <div>
           <div className="usertable">
-            <Paper>
-              <TableContainer sx={{ maxHeight: 440 }}>
+          
+              <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell className=" table-cell-heading ">
+                    <TableCell className=" table-cell-heading ">
+                      S.No
+                      </TableCell>
+                      <TableCell className=" table-cell-heading ">
                         Name
-                      </StyledTableCell>
-                      <StyledTableCell className=" table-cell-heading ">
+                      </TableCell>
+                      <TableCell className=" table-cell-heading ">
                         Email
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Phone No
-                      </StyledTableCell>
-                      <StyledTableCell className=" table-cell-heading">
+                      </TableCell>
+                      <TableCell className=" table-cell-heading">
                         Designation
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Department
-                      </StyledTableCell>
-                      <StyledTableCell className=" table-cell-heading">
+                      </TableCell>
+                      <TableCell className=" table-cell-heading">
                         Report To
-                      </StyledTableCell>
-                      <StyledTableCell className=" table-cell-heading">
+                      </TableCell>
+                      <TableCell className=" table-cell-heading">
                         Profile
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Branch
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Action
-                      </StyledTableCell>
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -626,13 +633,16 @@ const UsersData = () => {
                             user.user_status == 0 ? "#e3dada" : "",
                         };
                         return (
-                          <StyledTableRow style={dynamicStyle}>
-                            <StyledTableCell className="Table-cell">
+                          <TableRow >
+                             <TableCell className="Table-cell">
+                             {((page-1)*itemsPerPage)+index + 1}
+                          </TableCell>
+                            <TableCell className="Table-cell">
                               <span
                                 title={user.fullname}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "7rem",
+                                  width: "6rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -642,13 +652,13 @@ const UsersData = () => {
                               >
                                 {user.fullname}
                               </span>
-                            </StyledTableCell>
-                            <StyledTableCell className="Table-cell">
+                            </TableCell>
+                            <TableCell className="Table-cell">
                               <span
                                 title={user.email}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "7rem",
+                                  width: "6rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -658,8 +668,8 @@ const UsersData = () => {
                               >
                                 {user.email}
                               </span>
-                            </StyledTableCell>
-                            <StyledTableCell className="Table-cell">
+                            </TableCell>
+                            <TableCell className="Table-cell">
                               <span
                                 title={user.phonenumber}
                                 style={{
@@ -674,8 +684,8 @@ const UsersData = () => {
                               >
                                 {user.phonenumber}
                               </span>
-                            </StyledTableCell>
-                            <StyledTableCell className="Table-cell">
+                            </TableCell>
+                            <TableCell className="Table-cell">
                               <span
                                 title={user.designation}
                                 style={{
@@ -690,13 +700,13 @@ const UsersData = () => {
                               >
                                 {user.designation}
                               </span>
-                            </StyledTableCell>
-                            <StyledTableCell className="Table-cell ">
+                            </TableCell>
+                            <TableCell className="Table-cell ">
                               <span
                                 title={user.department}
                                 style={{
                                   color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "7rem",
+                                  width: "6rem",
                                   whiteSpace: "nowrap",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
@@ -706,8 +716,8 @@ const UsersData = () => {
                               >
                                 {user.department}
                               </span>
-                            </StyledTableCell>
-                            <StyledTableCell className="Table-cell ">
+                            </TableCell>
+                            <TableCell className="Table-cell ">
                               <span
                                 title={user.reportto}
                                 style={{
@@ -722,8 +732,8 @@ const UsersData = () => {
                               >
                                 {user.reportto}
                               </span>
-                            </StyledTableCell>
-                            <StyledTableCell className="Table-cell ">
+                            </TableCell>
+                            <TableCell className="Table-cell ">
                               <span
                                 title={user.profile}
                                 style={{
@@ -738,8 +748,8 @@ const UsersData = () => {
                               >
                                 {user.profile}
                               </span>
-                            </StyledTableCell>
-                            <StyledTableCell className="Table-cell ">
+                            </TableCell>
+                            <TableCell className="Table-cell ">
                               <span
                                 title={user.branch}
                                 style={{
@@ -754,8 +764,8 @@ const UsersData = () => {
                               >
                                 {user.branch}
                               </span>
-                            </StyledTableCell>
-                            <StyledTableCell align="center" className="d-flex ">
+                            </TableCell>
+                            <TableCell align="center" className="d-flex ">
                               <Link to={`/userview/${user.id}`}>
                                 <VisibilityIcon className=" icon-color" />
                               </Link>
@@ -781,14 +791,14 @@ const UsersData = () => {
                                   />
                                 </div>
                               )}
-                            </StyledTableCell>
-                          </StyledTableRow>
+                            </TableCell>
+                          </TableRow>
                         );
                       })}
                   </TableBody>
                 </Table>
               </TableContainer>
-            </Paper>
+            
             <Dialog open={opening} onClose={handleClosed}>
               <DialogContent>
                 <DialogContentText>
