@@ -153,7 +153,7 @@ const ContactUs = () => {
 
     setFilterCriteria({ ...filterCriteria, [name]: value });
   };
-  const [getusers, setgetusers] = useState([]);
+  // const [getusers, setgetusers] = useState([]);
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   const role = localStorage.getItem("role");
   let userId = localStorage.getItem("id");
@@ -168,7 +168,7 @@ const ContactUs = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/contactusleads`)
+      .get(`${process.env.REACT_APP_API_URL}/contactusleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
@@ -183,22 +183,22 @@ const ContactUs = () => {
 
 
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/userdata`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setgetusers(data);
-      } catch (err) {
-        // setError(err);
-      }
-    };
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await fetch(
+    //       `${process.env.REACT_APP_API_URL}/userdata`
+    //     );
+    //     if (!response.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     const data = await response.json();
+    //     setgetusers(data);
+    //   } catch (err) {
+    //     // setError(err);
+    //   }
+    // };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   // search bar conditions start 
@@ -266,13 +266,13 @@ const ContactUs = () => {
   }, [filterCriteria, initialData]);
   // search bar conditions end
 
-  useEffect(() => {
-    const filteruser = getusers.filter((user) => {
-      const filtercounsellar = user.profile === "counsellor";
-      return filtercounsellar;
-    });
-    setfilteredcounsellor(filteruser);
-  }, [getusers]);
+  // useEffect(() => {
+  //   const filteruser = getusers.filter((user) => {
+  //     const filtercounsellar = user.profile === "counsellor";
+  //     return filtercounsellar;
+  //   });
+  //   setfilteredcounsellor(filteruser);
+  // }, [getusers]);
 
   const [itemsPerPage, setrecordsPerPage] = useState(10);
 

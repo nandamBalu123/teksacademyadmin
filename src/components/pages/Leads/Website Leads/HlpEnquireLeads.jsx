@@ -211,12 +211,12 @@ const HlpEnquireLeads = () => {
         item.email
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
-        item.city
-          .toLowerCase()
-          .includes(filterCriteria.search.toLowerCase()) ||
         item.course
             .toLowerCase()
             .includes(filterCriteria.search.toLowerCase()) ||
+        item.city
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
         item.phone
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
