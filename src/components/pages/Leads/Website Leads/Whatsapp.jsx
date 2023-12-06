@@ -72,27 +72,27 @@ import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 // import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 const label = { inputProps: { "aria-label": "Switch demo" } };
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.blue,
+// const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//   [`&.${tableCellClasses.head}`]: {
+//     backgroundColor: theme.palette.common.blue,
 
-    color: theme.palette.common.white,
-  },
+//     color: theme.palette.common.white,
+//   },
 
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+//   [`&.${tableCellClasses.body}`]: {
+//     fontSize: 14,
+//   },
+// }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
+// const StyledTableRow = styled(TableRow)(({ theme }) => ({
+//   "&:nth-of-type(odd)": {
+//     backgroundColor: theme.palette.action.hover,
+//   },
 
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+//   "&:last-child td, &:last-child th": {
+//     border: 0,
+//   },
+// }));
 
 const WhatsApp = () => {
   const [students, setWebinarForm] = useState([]);
@@ -357,10 +357,14 @@ const WhatsApp = () => {
 
               <p>
                 <select onChange={handlerecorddata} className="mt-3">
-                  <option value="10">10</option>
+                <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
-                  <option value="75">75</option>
+                  <option value="100">100</option>
+                  <option value="250">250</option>
+                  <option value="500">500</option>
+                  <option value="750">750</option>
+                  <option value="1000">1000</option>
                 </select>
               </p>
               <p>
@@ -479,36 +483,36 @@ const WhatsApp = () => {
         </div>
 
         <div className="student-table">
-          <Paper>
-            <TableContainer sx={{ maxHeight: 440 }}>
+
+            <TableContainer sx={{ maxHeight: 440 }} component={Paper}>
               <Table stickyHeader aria-label="sticky table " borderAxis="both">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       SNo
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Name
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Email
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Course
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Contact Number
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Date
-                    </StyledTableCell>
+                    </TableCell>
 
-                    {/* <StyledTableCell className="table-cell-heading">
+                    {/* <TableCell className="table-cell-heading">
                       Actions
-                    </StyledTableCell> */}
+                    </TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -541,12 +545,12 @@ const WhatsApp = () => {
                       // Updating the state with the formatted date
 
                       return (
-                        <StyledTableRow key={item.id}>
-                          <StyledTableCell className="Table-cell">
-                            {index + 1}
-                          </StyledTableCell>
+                        <TableRow key={item.id}>
+                          <TableCell className="Table-cell">
+                          {((page-1)*itemsPerPage)+index + 1}
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               title={item.name}
                               style={{
@@ -561,9 +565,9 @@ const WhatsApp = () => {
                             >
                               {item.name}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               title={item.email}
                               style={{
@@ -577,9 +581,9 @@ const WhatsApp = () => {
                             >
                               {item.email}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               title={item.course}
                               style={{
@@ -594,9 +598,9 @@ const WhatsApp = () => {
                             >
                               {item.course}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               title={item.phone}
                               style={{
@@ -611,8 +615,8 @@ const WhatsApp = () => {
                             >
                               {item.phone}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={item.Date}
                               style={{
@@ -627,10 +631,10 @@ const WhatsApp = () => {
                             >
                               {item.Date}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
 
-                          {/* <StyledTableCell className="text-center d-flex mt-2">
+                          {/* <TableCell className="text-center d-flex mt-2">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon
                                 style={{ width: "40px" }}
@@ -682,8 +686,8 @@ const WhatsApp = () => {
                                 )}
                               </DialogActions>
                             </Dialog>
-                          </StyledTableCell> */}
-                        </StyledTableRow>
+                          </TableCell> */}
+                        </TableRow>
                       );
                     })
                   ) : (
@@ -694,7 +698,7 @@ const WhatsApp = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Paper>
+        
         </div>
 
         <div
