@@ -186,10 +186,10 @@ export default function RegistrationForm() {
     ) {
       setleadsourceOptions(true);
       setCustomLeadSource({ source: selectedValue });
-      setLeadSource({ source: selectedValue });
+      setLeadSource([{ source: selectedValue }]);
     } else {
       setleadsourceOptions(false);
-      setLeadSource({ source: selectedValue });
+      setLeadSource([{ source: selectedValue }]);
     }
   };
   const handleFeecalculations = () => {
@@ -525,10 +525,10 @@ export default function RegistrationForm() {
       return;
     }
     if (
-      leadsource.source.toLowerCase() === "student referral" ||
-      leadsource.source.toLowerCase() === "employee referral"
+      leadsource[0].source.toLowerCase() === "student referral" ||
+      leadsource[0].source.toLowerCase() === "employee referral"
     ) {
-      setLeadSource(CustomLeadSource);
+      setLeadSource([CustomLeadSource]);
     }
 
     handleNext();
