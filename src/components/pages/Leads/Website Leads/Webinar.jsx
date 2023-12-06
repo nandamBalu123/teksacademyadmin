@@ -72,38 +72,13 @@ import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 // import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 const label = { inputProps: { "aria-label": "Switch demo" } };
-// const StyledTableCell = styled(TableCell)(({ theme }) => ({
-//   [`&.${tableCellClasses.head}`]: {
-//     backgroundColor: theme.palette.common.blue,
 
-//     color: theme.palette.common.white,
-//   },
-
-//   [`&.${tableCellClasses.body}`]: {
-//     fontSize: 14,
-//   },
-// }));
-
-// const StyledTableRow = styled(TableRow)(({ theme }) => ({
-//   "&:nth-of-type(odd)": {
-//     backgroundColor: theme.palette.action.hover,
-//   },
-
-//   "&:last-child td, &:last-child th": {
-//     border: 0,
-//   },
-// }));
 
 const Webinar = () => {
   const [students, setWebinarForm] = useState([]);
-  const { branches } = useBranchContext();
+  // const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
   // const { students, dispatch } = useStudentsContext();
-
-
-  console.log("branches", branches);
-  console.log("courses", getcourses);
-
 
   const { users } = useUsersContext();
   const { leadsources } = useLeadSourceContext();
@@ -166,9 +141,8 @@ const Webinar = () => {
   }, [students]);
 
   useEffect(() => {
-
     axios
-      .get(`https://demo.teksacademy.com:3000/webinardec`)
+      .get(`${process.env.REACT_APP_API_URL}/webinardec`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
@@ -262,6 +236,7 @@ const Webinar = () => {
     setFilteredData(filteredResults);
   }, [filterCriteria, initialData]);
   // search bar conditions end
+  
 
   useEffect(() => {
     const filteruser = getusers.filter((user) => {

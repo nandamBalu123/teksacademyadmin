@@ -168,7 +168,7 @@ const ViewCourse = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/viewcoursesideleads`)
+      .get(`${process.env.REACT_APP_API_URL}/viewcoursesideleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data

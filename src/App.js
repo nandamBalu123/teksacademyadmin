@@ -132,10 +132,7 @@ function App() {
                     user ? <RegistrationForm /> : <Navigate to="/login" />
                   }
                 />
-                {/* <Route
-                  path="/ZipCodeLookup"
-                  element={user ? <ZipCodeLookup /> : <Navigate to="/login" />}
-                /> */}
+                
                 <Route
                   path="/feedetails/:id"
                   element={user ? <FeeDetails /> : <Dashboard />}
@@ -493,7 +490,7 @@ function App() {
                 <Route
                   path="/webinar"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
                       <Webinar />
                     ) : (
                       <Dashboard />
@@ -503,7 +500,7 @@ function App() {
                 <Route
                   path="/whatsapp"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
                       <WhatsApp />
                     ) : (
                       <Dashboard />
@@ -513,7 +510,7 @@ function App() {
                 <Route
                   path="/downloadsyllabus"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
                       <DownloadSyllabus />
                     ) : (
                       <Dashboard />
@@ -523,7 +520,7 @@ function App() {
                 <Route
                   path="/viewcourse"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
                       <ViewCourse />
                     ) : (
                       <Dashboard />
@@ -533,7 +530,7 @@ function App() {
                 <Route
                   path="/contactus"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
                       <ContactUs />
                     ) : (
                       <Dashboard />
@@ -543,7 +540,7 @@ function App() {
                 <Route
                   path="/hlpenquireleads"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
                       <HlpEnquireLeads />
                     ) : (
                       <Dashboard />
@@ -553,7 +550,7 @@ function App() {
                 <Route
                   path="/slpenquireleads"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
                       <SlpEnquireLeads />
                     ) : (
                       <Dashboard />
