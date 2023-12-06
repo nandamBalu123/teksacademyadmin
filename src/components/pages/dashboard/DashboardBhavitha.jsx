@@ -66,7 +66,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const Dashboard = () => {
+const DashboardBhavitha = () => {
   const role = localStorage.getItem("role");
   const { user } = useAuthContext();
   const { students, dispatch } = useStudentsContext();
@@ -2594,4 +2594,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardBhavitha;
