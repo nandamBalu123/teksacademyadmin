@@ -857,72 +857,100 @@ export default function RegistrationForm() {
     setFeeDetails(updatedTasks);
   };
 
-  // // new
-  // const [selectedFile, setSelectedFilee] = useState(null);
+// pin code api
+  // const fetchData = async () => {
+  //   if (zipcode && zipcode.length > 2) {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://api.postalpincode.in/pincode/${zipcode}`
+  //       );
 
-  //   const handleFileChange = (e) => {
-  //     setSelectedFilee(e.target.files[0]);
-  //   };
+  //       if (response.data.length > 0) {
+  //         const postOffice = response.data[0]?.PostOffice[0];
 
-  //   const handleUpload = () => {
-  //     if (!selectedFile) {
-  //       alert('Please select a file to upload');
-  //       return;
+  //         if (postOffice) {
+  //           const { Region: city, State: state, Country: country, Block: area } = postOffice;
+
+  //           setCountry(country);
+  //           setState(state);
+  //           setArea(area || '');
+  //           setNative(city || '');
+  //         } else {
+  //           // Handle case when post office data is not available
+  //           // setCountry('');
+  //           // setState('');
+  //           // setArea('');
+  //           // setNative('');
+  //         }
+  //       } else {
+  //         // Handle case when no data is returned
+  //         // setCountry('');
+  //         // setState('');
+  //         // setArea('');
+  //         // setNative('');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching location information:', error);
+  //       // Handle error as needed
   //     }
+  //   }
+  // };
 
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(selectedFile);
-  //     reader.onload = () => {
-  //       const photoData = reader.result.split(',')[1];
 
-  //       axios.post('http://localhost:3030/upload', {
-  //         filename: selectedFile.name,
-  //         data: photoData,
-  //       })
-  //       .then(response => {
-  //         console.log('File uploaded successfully', response.data);
-  //       })
-  //       .catch(error => {
-  //         console.error('Error uploading file:', error);
-  //       });
-  //     };
-  //   };
+  // useEffect(() => {
+  //   fetchData();
+  // }, [zipcode]);
 
-  // const [zipCode, setZipCode] = useState('');
-  // const [locationInfo, setLocationInfo] = useState({});
+  const fetchData = async () => {
+    if (zipcode && zipcode.length > 2) {
+      try {
+        const response = await axios.get(
+          `https://api.postalpincode.in/pincode/${zipcode}`
+        );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (zipcode && zipcode.length > 2) {
-        try {
-          const response = await axios.get(
-            `https://api.opencagedata.com/geocode/v1/json?q=${zipcode}&key=baae7304601949019149fb9c0db270ab`
-          );
+        if (response.data.length > 0) {
+          const postOffice = response.data[0]?.PostOffice[0];
 
-          if (response.data.results.length > 0) {
-            const { city, state, country, suburb } =
-              response.data.results[0].components;
+          if (postOffice) {
+            const { Region: city, State: state, Country: country, Block: area } = postOffice;
 
             setCountry(country);
             setState(state);
-            setArea(suburb);
-            setNative(city);
-            // setLocationInfo({ city, state, country, areaName: suburb || 'Not found' });
+            setArea(area || '');
+            setNative(city || '');
           } else {
-            // setLocationInfo({ city: 'Not found', state: 'Not found', country: 'Not found', areaName: 'Not found' });
+            // Clear the state if no post office data is available
+            setCountry('');
+            setState('');
+            setArea('');
+            setNative('');
           }
-        } catch (error) {
-          console.error("Error fetching location information:", error);
+        } else {
+          // Clear the state if no data is returned
+          setCountry('');
+          setState('');
+          setArea('');
+          setNative('');
         }
+      } catch (error) {
+        console.error('Error fetching location information:', error);
+        // Handle error as needed
       }
-    };
+    } else {
+      // Clear the state if the pincode is not valid
+      setCountry('');
+      setState('');
+      setArea('');
+      setNative('');
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, [zipcode]);
 
-  // const handleZipCodeChange = (e) => {
-  //   setZipCode(e.target.value);
-  // };
+  // pin code end
+
 
   return (
     <div className="main-container container">
@@ -1179,7 +1207,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h6>Stdent Contact Details</h6>
+                <h6>Student Contact Details</h6>
               </Typography>
             </StepLabel>
             <StepContent>
@@ -1206,82 +1234,8 @@ export default function RegistrationForm() {
                       onChange={(e) => setCountry(e.target.value)}
                       value={country}
                     />
-                    {/* <FormControl variant="standard" className="w-75">
-                      <InputLabel>
-                        Country<span> *</span>
-                      </InputLabel>
-                      <Select
-                        name="country"
-                        required
-                        onChange={(e) => setCountry(e.target.value)}
-                        value={country}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        <MenuItem value="india">India</MenuItem>
-                      </Select>
-                    </FormControl> */}
+                    
                   </div>
-
-                  {/* <FormControl variant="standard" className="w-75">
-                      <InputLabel>
-                        State<span> *</span>
-                      </InputLabel>
-                      <Select
-                        name="state"
-                        required
-                        onChange={(e) => setState(e.target.value)}
-                        value={state}
-                      >
-                        <MenuItem value="">--select--</MenuItem>
-                        <MenuItem value="Telangana">Telangana </MenuItem>
-                        <MenuItem value="Andhra Pradesh">
-                          Andhra Pradesh
-                        </MenuItem>
-                        <MenuItem value="Arunachal Pradesh">
-                          Arunachal Pradesh
-                        </MenuItem>
-                        <MenuItem value="Assam">Assam</MenuItem>
-                        <MenuItem value="Bihar">Bihar</MenuItem>
-                        <MenuItem value="Chhattisgarh">Chhattisgarh</MenuItem>
-                        <MenuItem value="Goa">Goa</MenuItem>
-                        <MenuItem value="Gujarat">Gujarat</MenuItem>
-                        <MenuItem value="Haryana">Haryana</MenuItem>
-                        <MenuItem value="Himachal Pradesh">
-                          Himachal Pradesh
-                        </MenuItem>
-                        <MenuItem value="Jharkhand">Jharkhand</MenuItem>
-                        <MenuItem value="Karnataka">Karnataka</MenuItem>
-                        <MenuItem value="Kerala">Kerala</MenuItem>
-                        <MenuItem value="Madhya Pradesh">
-                          Madhya Pradesh
-                        </MenuItem>
-                        <MenuItem value="Maharashtra">Maharashtra</MenuItem>
-                        <MenuItem value="Manipur">Manipur</MenuItem>
-                        <MenuItem value="Meghalaya">Meghalaya</MenuItem>
-                        <MenuItem value="Mizoram">Mizoram</MenuItem>
-                        <MenuItem value="Nagaland">Nagaland</MenuItem>
-                        <MenuItem value="Odisha">Odisha</MenuItem>
-                        <MenuItem value="Punjab">Punjab</MenuItem>
-                        <MenuItem value="Rajasthan">Rajasthan</MenuItem>
-                        <MenuItem value="Sikkim">Sikkim</MenuItem>
-                        <MenuItem value="Tamil Nadu">Tamil Nadu</MenuItem>
-                        <MenuItem value="Tripura">Tripura</MenuItem>
-                        <MenuItem value="Uttar Pradesh">Uttar Pradesh</MenuItem>
-                        <MenuItem value="Uttarakhand">Uttarakhand</MenuItem>
-                        <MenuItem value="West Bengal">West Bengal</MenuItem>
-                        <MenuItem value="Andaman and NicobarIslands">
-                          Andaman and Nicobar Islands
-                        </MenuItem>
-                        <MenuItem value="Chandigarh">Chandigarh</MenuItem>
-                        <MenuItem value="Dadra and Nagar Haveli and Daman and Diu">
-                          Dadra and Nagar Haveli and Daman and Diu
-                        </MenuItem>
-                        <MenuItem value="Lakshadweep">Lakshadweep</MenuItem>
-                        <MenuItem value="Delhi">Delhi</MenuItem>
-                        <MenuItem value="Puducherry">Puducherry</MenuItem>
-                        <MenuItem value="others">Others</MenuItem>
-                      </Select>
-                    </FormControl> */}
                 </div>
 
                 <div className="row ">
@@ -1298,19 +1252,6 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label={<span className="label-family">Area</span>}
-                      type="text"
-                      variant="standard"
-                      className=" w-75"
-                      required
-                      onChange={(e) => setArea(e.target.value)}
-                      value={area}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                    <TextField
                       label={<span className="label-family">Native Place</span>}
                       type="text"
                       variant="standard"
@@ -1320,6 +1261,20 @@ export default function RegistrationForm() {
                       value={native}
                     />
                   </div>
+                </div>
+                <div className="row">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                    <TextField
+                      label={<span className="label-family">Area</span>}
+                      type="text"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setArea(e.target.value)}
+                      value={area}
+                    />
+                  </div>
+                  
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label={

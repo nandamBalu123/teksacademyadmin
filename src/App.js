@@ -66,7 +66,7 @@ import CreateCourse from "./components/pages/settings/courses/CreateCourse";
 import Requestedcertificates from "./components/pages/student/Certificate/Requestedcertificates";
 import Sidebar1 from "./components/common/Sidebar/Sidebar1";
 import Invoice from "./components/pages/student/fee/Invoice";
-import ZipCodeLookup from "./components/pages/student/studentRegistrationForm/Zipcode";
+
 import Reports from "./components/pages/Reports/Reports";
 import Report from "./components/pages/Reports/Report";
 import CreateReport from "./components/pages/Reports/CreateReport";
@@ -125,10 +125,7 @@ function App() {
                     user ? <RegistrationForm /> : <Navigate to="/login" />
                   }
                 />
-                {/* <Route
-                  path="/ZipCodeLookup"
-                  element={user ? <ZipCodeLookup /> : <Navigate to="/login" />}
-                /> */}
+                
                 <Route
                   path="/feedetails/:id"
                   element={user ? <FeeDetails /> : <Dashboard />}

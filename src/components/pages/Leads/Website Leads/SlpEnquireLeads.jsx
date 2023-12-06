@@ -168,7 +168,7 @@ const SlpEnquireLeads = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/slpefleads`)
+      .get(`${process.env.REACT_APP_API_URL}/slpefleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data

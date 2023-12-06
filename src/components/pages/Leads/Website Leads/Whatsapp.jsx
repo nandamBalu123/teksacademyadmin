@@ -166,7 +166,7 @@ const WhatsApp = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/whatsappleads`)
+      .get(`${process.env.REACT_APP_API_URL}/whatsappleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
