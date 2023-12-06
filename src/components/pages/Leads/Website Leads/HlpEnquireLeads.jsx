@@ -362,10 +362,14 @@ const HlpEnquireLeads = () => {
 
               <p>
                 <select onChange={handlerecorddata} className="mt-3">
-                  <option value="10">10</option>
+                <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
-                  <option value="75">75</option>
+                  <option value="100">100</option>
+                  <option value="250">250</option>
+                  <option value="500">500</option>
+                  <option value="750">750</option>
+                  <option value="1000">1000</option>
                 </select>
               </p>
               <p>
@@ -550,7 +554,7 @@ const HlpEnquireLeads = () => {
                       return (
                         <TableRow key={item.id}>
                           <TableCell className="Table-cell">
-                            {index + 1}
+                          {((page-1)*itemsPerPage)+index + 1}
                           </TableCell>
 
                           <TableCell className="Table-cell">
