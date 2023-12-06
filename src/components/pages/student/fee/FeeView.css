@@ -23,7 +23,7 @@
 .student-input label {
   position: absolute;
   top: 2%;
-  left: 15%;
+  left: 10%;
   transform: translateY(-50%);
   font-size: 14px;
   padding: 0 5px;
@@ -39,7 +39,7 @@
 .student-input input:focus ~ label,
 .student-input input:valid ~ label {
   top: 0;
-  background-color: #fff;
+  background-color: #fcfcfc;
   color: #4676a0;
 }
 .payment input,
@@ -79,7 +79,7 @@
 .mul-input select:focus ~ label,
 .mul-input select:valid ~ label {
   top: 0;
-  background-color: #fff;
+  background-color: #fcfcfc;
   color: #4676a0;
 }
 input::-webkit-outer-spin-button,

@@ -72,12 +72,14 @@ import Report from "./components/pages/Reports/Report";
 import CreateReport from "./components/pages/Reports/CreateReport";
 import FeeReceived from "./components/pages/student/fee/FeeReceived";
 import Webinar from "./components/pages/Leads/Website Leads/Webinar";
-import WhatsApp  from "./components/pages/Leads/Website Leads/Whatsapp";
-import DownloadSyllabus  from "./components/pages/Leads/Website Leads/DownloadSyllabus";
+import WhatsApp from "./components/pages/Leads/Website Leads/Whatsapp";
+import DownloadSyllabus from "./components/pages/Leads/Website Leads/DownloadSyllabus";
 import ViewCourse from "./components/pages/Leads/Website Leads/ViewCourse";
 import ContactUs from "./components/pages/Leads/Website Leads/ContactUs";
 import HlpEnquireLeads from "./components/pages/Leads/Website Leads/HlpEnquireLeads";
 import SlpEnquireLeads from "./components/pages/Leads/Website Leads/SlpEnquireLeads";
+import DashboardOld from "./components/pages/dashboard/DashboardOld";
+import DashboardBhavitha from "./components/pages/dashboard/DashboardBhavitha";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -114,6 +116,11 @@ function App() {
                 <Route
                   path="/"
                   element={user ? <Dashboard /> : <Navigate to="/login" />}
+                />
+                <Route path="/dashboardOld" element={<DashboardOld />} />
+                <Route
+                  path="/DashboardBhavitha"
+                  element={<DashboardBhavitha />}
                 />
                 <Route
                   path="/login"
@@ -490,7 +497,7 @@ function App() {
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/whatsapp"
                   element={
                     user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
@@ -500,7 +507,7 @@ function App() {
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/downloadsyllabus"
                   element={
                     user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
@@ -510,7 +517,7 @@ function App() {
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/viewcourse"
                   element={
                     user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
@@ -530,7 +537,7 @@ function App() {
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/hlpenquireleads"
                   element={
                     user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
@@ -540,7 +547,7 @@ function App() {
                     )
                   }
                 />
-                    <Route
+                <Route
                   path="/slpenquireleads"
                   element={
                     user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (

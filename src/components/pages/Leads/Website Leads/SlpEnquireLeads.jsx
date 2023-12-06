@@ -362,10 +362,14 @@ const SlpEnquireLeads = () => {
 
               <p>
                 <select onChange={handlerecorddata} className="mt-3">
-                  <option value="10">10</option>
+                <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
-                  <option value="75">75</option>
+                  <option value="100">100</option>
+                  <option value="250">250</option>
+                  <option value="500">500</option>
+                  <option value="750">750</option>
+                  <option value="1000">1000</option>
                 </select>
               </p>
               <p>
@@ -484,36 +488,36 @@ const SlpEnquireLeads = () => {
         </div>
 
         <div className="student-table">
-          <Paper>
-            <TableContainer sx={{ maxHeight: 440 }}>
+       
+            <TableContainer  component={Paper} sx={{ maxHeight: 440 }}>
               <Table stickyHeader aria-label="sticky table " borderAxis="both">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       SNo
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Name
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Email
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       City
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Contact Number
-                    </StyledTableCell>
+                    </TableCell>
 
-                    {/* <StyledTableCell className="table-cell-heading">
+                    {/* <TableCell className="table-cell-heading">
                       Date
-                    </StyledTableCell> */}
+                    </TableCell> */}
 
-                    {/* <StyledTableCell className="table-cell-heading">
+                    {/* <TableCell className="table-cell-heading">
                       Actions
-                    </StyledTableCell> */}
+                    </TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -546,12 +550,12 @@ const SlpEnquireLeads = () => {
                       // Updating the state with the formatted date
 
                       return (
-                        <StyledTableRow key={item.id}>
-                          <StyledTableCell className="Table-cell">
-                            {index + 1}
-                          </StyledTableCell>
+                        <TableRow key={item.id}>
+                          <TableCell className="Table-cell">
+                          {((page-1)*itemsPerPage)+index + 1}
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               title={item.name}
                               style={{
@@ -566,9 +570,9 @@ const SlpEnquireLeads = () => {
                             >
                               {item.name}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               title={item.email}
                               style={{
@@ -582,9 +586,9 @@ const SlpEnquireLeads = () => {
                             >
                               {item.email}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               title={item.city}
                               style={{
@@ -599,9 +603,9 @@ const SlpEnquireLeads = () => {
                             >
                               {item.city}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               title={item.phone}
                               style={{
@@ -616,26 +620,10 @@ const SlpEnquireLeads = () => {
                             >
                               {item.phone}
                             </span>
-                          </StyledTableCell>
-                          {/* <StyledTableCell className="Table-cell">
-                            <span
-                              title={item.date}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
+                          </TableCell>
+                        
 
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {item.date}
-                            </span>
-                          </StyledTableCell> */}
-
-
-                          {/* <StyledTableCell className="text-center d-flex mt-2">
+                          {/* <TableCell className="text-center d-flex mt-2">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon
                                 style={{ width: "40px" }}
@@ -687,8 +675,8 @@ const SlpEnquireLeads = () => {
                                 )}
                               </DialogActions>
                             </Dialog>
-                          </StyledTableCell> */}
-                        </StyledTableRow>
+                          </TableCell> */}
+                        </TableRow>
                       );
                     })
                   ) : (
@@ -699,7 +687,7 @@ const SlpEnquireLeads = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Paper>
+      
         </div>
 
         <div

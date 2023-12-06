@@ -119,13 +119,14 @@ export default function RegistrationForm() {
   const [duedatetype, setduedatetype] = useState("");
   const [addfee, setaddfee] = useState(false);
   const [installments, setinstallments] = useState([]);
-
+  const [leadsourceOptions, setleadsourceOptions] = useState(false);
+  const [CustomLeadSource, setCustomLeadSource] = useState("");
   const [feedetailsbilling, setfeedetailsbilling] = useState([]);
   const [materialfee, setmaterialfee] = useState(null);
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
   const [totalpaidamount, settotalpaidamount] = useState(0);
-  const [othersOption, setOthersOption] = useState(false);
+  const [educationOthersOption, setEducationOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
   const [student_status, setStudent_status] = useState([]);
   const [certificate_status, setcertificate_status] = useState([
@@ -166,15 +167,29 @@ export default function RegistrationForm() {
       setassets(assets.filter((asset) => asset !== assetName));
     }
   };
-  const handleSelectChange = (e) => {
+  const handleEducationSelectChange = (e) => {
     const selectedValue = e.target.value;
     if (selectedValue === "others") {
-      setOthersOption(true);
-      setCustomEducationType(""); // Clear the custom education type
+      setEducationOthersOption(true);
+      setCustomEducationType("");
       setEducationType(selectedValue);
     } else {
-      setOthersOption(false);
+      setEducationOthersOption(false);
       setEducationType(selectedValue);
+    }
+  };
+  const handleLeadSourceSelectChange = (e) => {
+    const selectedValue = e.target.value;
+    if (
+      selectedValue.toLowerCase() === "student referral" ||
+      selectedValue.toLowerCase() === "employee referral"
+    ) {
+      setleadsourceOptions(true);
+      setCustomLeadSource({ source: selectedValue });
+      setLeadSource({ source: selectedValue });
+    } else {
+      setleadsourceOptions(false);
+      setLeadSource({ source: selectedValue });
     }
   };
   const handleFeecalculations = () => {
@@ -470,6 +485,7 @@ export default function RegistrationForm() {
     if (educationtype === "others") {
       setEducationType(customEducationType);
     }
+
     handleNext();
   };
   const handlePhoto = () => {
@@ -508,10 +524,17 @@ export default function RegistrationForm() {
       alert("please enter leadsource");
       return;
     }
+    if (
+      leadsource.source.toLowerCase() === "student referral" ||
+      leadsource.source.toLowerCase() === "employee referral"
+    ) {
+      setLeadSource(CustomLeadSource);
+    }
 
     handleNext();
   };
   const handleAdmissiondetails = () => {
+    console.log("leadSource", leadsource, educationtype);
     if (!branch) {
       alert("please enter branch");
       return;
@@ -627,7 +650,7 @@ export default function RegistrationForm() {
         certificate_status,
         extra_discount,
       };
-
+      console.log("studentRegistrationdata", studentRegistrationdata);
       ///title case
       studentRegistrationdata = [studentRegistrationdata];
       const dataWithTitleCase = studentRegistrationdata.map((item) => {
@@ -1336,7 +1359,7 @@ export default function RegistrationForm() {
                         id="educationtype"
                         name="educationtype"
                         required
-                        onChange={handleSelectChange}
+                        onChange={handleEducationSelectChange}
                         value={educationtype}
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
@@ -1347,7 +1370,7 @@ export default function RegistrationForm() {
                         <MenuItem value="ssc">SSC</MenuItem>
                         <MenuItem value="others">Others</MenuItem>
                       </Select>
-                      {othersOption && (
+                      {educationOthersOption && (
                         <div className="mt-3">
                           <TextField
                             label={<span className="label-family">Others</span>}
@@ -1360,23 +1383,6 @@ export default function RegistrationForm() {
                             }
                             value={customEducationType}
                           />
-                          {/* <label className="col-12 col-md-2 label">
-                            Others
-                          </label>
-                          <input
-                            type="text"
-                            className="col-9 col-md-5"
-                            required
-                            style={{
-                              height: "35px",
-                              border: "1.5px solid black",
-                              borderRadius: "5px",
-                            }}
-                            onChange={(e) =>
-                              setCustomEducationType(e.target.value)
-                            }
-                            value={customEducationType}
-                          /> */}
                         </div>
                       )}
                     </FormControl>
@@ -1584,8 +1590,8 @@ export default function RegistrationForm() {
                         id="leadsource"
                         name="leadsource"
                         required
-                        onChange={(e) => setLeadSource(e.target.value)}
-                        value={leadsource}
+                        onChange={handleLeadSourceSelectChange}
+                        value={leadsource.source}
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
                         {leadsources &&
@@ -1595,6 +1601,42 @@ export default function RegistrationForm() {
                             </MenuItem>
                           ))}
                       </Select>
+                      {leadsourceOptions && (
+                        <div className="mt-3">
+                          <TextField
+                            label={<span className="label-family">Name</span>}
+                            type="text"
+                            variant="standard"
+                            className=" w-75"
+                            required
+                            onChange={(e) =>
+                              setCustomLeadSource((prev) => ({
+                                ...prev,
+                                name: e.target.value,
+                              }))
+                            }
+                            value={CustomLeadSource.name || ""}
+                          />
+                          <TextField
+                            label={
+                              <span className="label-family">
+                                Mobile Number
+                              </span>
+                            }
+                            type="text"
+                            variant="standard"
+                            className=" w-75"
+                            required
+                            onChange={(e) =>
+                              setCustomLeadSource((prev) => ({
+                                ...prev,
+                                mobileNumber: e.target.value,
+                              }))
+                            }
+                            value={CustomLeadSource.mobileNumber || ""}
+                          />
+                        </div>
+                      )}
                     </FormControl>
                   </div>
                 </div>
@@ -2349,7 +2391,13 @@ export default function RegistrationForm() {
                         src={pictureprofile}
                         alt="profile"
                       /> */}
-                        {imageUrl && <img src={imageUrl} alt="Selected"  style={{width:"60%"}}/>}
+                        {imageUrl && (
+                          <img
+                            src={imageUrl}
+                            alt="Selected"
+                            style={{ width: "60%" }}
+                          />
+                        )}
                         {/* {!studentdata.studentImg && (
                         <img src={profilePic} alt="photo" />
                       )}
@@ -2400,7 +2448,7 @@ export default function RegistrationForm() {
                         <p> Enquiry Date : {enquirydate}</p>
                         <p> Enquiry Taken By: {enquirytakenby}</p>
                         <p> Course Package: {coursepackage}</p>
-                        <p>Lead Source: {leadsource} </p>
+                        {/* <p>Lead Source: {leadsource} </p> */}
                         <p> Mode of Traning: {modeoftraining}</p>
                       </div>
                     </div>
