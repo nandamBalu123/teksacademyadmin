@@ -3,12 +3,13 @@
     margin: 0;
     padding: 0;
 }
-
-*{ 
-
-  margin: 0;
-  padding: 0;
+.Top-bar{ 
+    position:sticky;
+    top: 0;
+    z-index: 1;
+  
 }
+
 a{ 
     text-decoration: none;
 }

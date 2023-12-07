@@ -266,32 +266,59 @@ main {
 .icon-color {
   color: #4676a0;
 }
+.btn-filter{ 
+  padding: 0.2rem;
+  border: none;
+  border-radius: 8px;
+}
+.heading-hover{ 
+  position: relative;
+}
+.heading-hover:before{ 
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  height: 3px;
+  width: 0;
+  background: #4676a0 ;
+  border-radius: 50px;
 
-/* .blue {
-  background-color: #004493 !important;
+  transition: width 0.3s ease;
+}
+.heading-hover:hover::before{
+  width: 35%;
+}
+
+.cardcolor {
+  background-color: #4676a0 !important;
   color: #fff !important;
   border-radius: 8px !important;
+  border: 1px solid #4676a0;
+  cursor: pointer;
 }
-.orange {
-  background-color: #ff1e20 !important;
+.cardcolor:hover{ 
+  box-shadow: 5px 5px 10px #4676a0;
+}
+/* .orange {
+  background-color: #e96228 !important;
   color: #fff !important;
   border-radius: 8px !important;
-}
-.green {
+} */
+/* .green {
   background-color: #198754 !important;
   color: #fff !important;
   border-radius: 8px !important;
-}
-.sub-blue {
-  background-color: #d1dce7 !important;
-  color: #000 !important;
+} */
+/* .cardcolor {
+  background-color: #4676a0!important;
+  color: #fff !important;
   border-radius: 8px !important;
   text-align: center;
   padding-top: 9px;
-}
-.sub-orange {
-  background-color: #f4b095 !important;
-  color: #000 !important;
+} */
+/* .sub-orange {
+  background-color: #ed8155 !important;
+  color: #fff !important;
   border-radius: 8px !important;
   text-align: center;
   padding-top: 9px;
