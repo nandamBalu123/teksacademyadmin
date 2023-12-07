@@ -532,7 +532,7 @@ export default function RegistrationForm() {
     img.src = URL.createObjectURL(file);
 
     await new Promise((resolve) => {
-      img.onload = resolve;9
+      img.onload = resolve;
     });
 
     let width = img.width;
