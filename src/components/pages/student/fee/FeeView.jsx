@@ -40,7 +40,7 @@ const FeeView = () => {
 
   const [admissionFee, setAdmissionFee] = useState({
     initialamount: 0,
-    paiddate: "",
+    paiddate: new Date().toISOString().substr(0, 10),
     modeofpayment: "",
     transactionID: "",
     paymentdone: false,
@@ -183,8 +183,26 @@ const FeeView = () => {
         ...updatedInstallments[index],
         [name]: value,
       };
+      if (
+        updatedInstallments[index].paiddate == "" &&
+        updatedInstallments[index].paidamount > 0
+      ) {
+        updatedInstallments[index].paiddate = getCurrentDate();
+      }
       return updatedInstallments;
     });
+  };
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+
+    // Pad the month and day with leading zeros
+    month = month < 10 ? `0${month}` : month;
+    day = day < 10 ? `0${day}` : day;
+
+    return `${year}-${month}-${day}`;
   };
 
   const UpdateDueDateAndDueAmount = () => {
@@ -847,6 +865,7 @@ const FeeView = () => {
                       />
                       <label> Installment Amount</label>
                     </div>
+
                     {studentdata &&
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
@@ -863,7 +882,7 @@ const FeeView = () => {
                                 e.target.value
                               )
                             }
-                            value={installment.paiddate}
+                            value={installment.paiddate || getCurrentDate()}
                           />
                           <label> Paid Date</label>
                         </div>
