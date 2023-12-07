@@ -980,34 +980,85 @@ console.log("studentImage", studentImage)
   // const [zipCode, setZipCode] = useState('');
   // const [locationInfo, setLocationInfo] = useState({});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (zipcode && zipcode.length > 2) {
-        try {
-          const response = await axios.get(
-            `https://api.opencagedata.com/geocode/v1/json?q=${zipcode}&key=baae7304601949019149fb9c0db270ab`
-          );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (zipcode && zipcode.length > 2) {
+  //       try {
+  //         const response = await axios.get(
+  //           `https://api.opencagedata.com/geocode/v1/json?q=${zipcode}&key=baae7304601949019149fb9c0db270ab`
+  //         );
 
-          if (response.data.results.length > 0) {
-            const { city, state, country, suburb } =
-              response.data.results[0].components;
+  //         if (response.data.results.length > 0) {
+  //           const { city, state, country, suburb } =
+  //             response.data.results[0].components;
+
+  //           setCountry(country);
+  //           setState(state);
+  //           setArea(suburb);
+  //           setNative(city);
+  //           // setLocationInfo({ city, state, country, areaName: suburb || 'Not found' });
+  //         } else {
+  //           // setLocationInfo({ city: 'Not found', state: 'Not found', country: 'Not found', areaName: 'Not found' });
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching location information:", error);
+  //       }
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [zipcode]);
+
+
+  const fetchData = async () => {
+    if (zipcode && zipcode.length > 2) {
+      try {
+        const response = await axios.get(
+          `https://api.postalpincode.in/pincode/${zipcode}`
+        );
+
+        if (response.data.length > 0) {
+          const postOffice = response.data[0]?.PostOffice[0];
+
+          if (postOffice) {
+            const { Region: city, State: state, Country: country, Block: area } = postOffice;
 
             setCountry(country);
             setState(state);
-            setArea(suburb);
-            setNative(city);
-            // setLocationInfo({ city, state, country, areaName: suburb || 'Not found' });
+            setArea(area || '');
+            setNative(city || '');
           } else {
-            // setLocationInfo({ city: 'Not found', state: 'Not found', country: 'Not found', areaName: 'Not found' });
+            // Clear the state if no post office data is available
+            setCountry('');
+            setState('');
+            setArea('');
+            setNative('');
           }
-        } catch (error) {
-          console.error("Error fetching location information:", error);
+        } else {
+          // Clear the state if no data is returned
+          setCountry('');
+          setState('');
+          setArea('');
+          setNative('');
         }
+      } catch (error) {
+        console.error('Error fetching location information:', error);
+        // Handle error as needed
       }
-    };
+    } else {
+      // Clear the state if the pincode is not valid
+      setCountry('');
+      setState('');
+      setArea('');
+      setNative('');
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, [zipcode]);
+
+  // pin code end
 
   // const handleZipCodeChange = (e) => {
   //   setZipCode(e.target.value);
