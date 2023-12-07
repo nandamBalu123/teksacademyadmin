@@ -168,7 +168,7 @@ const HlpEnquireLeads = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/hlpefleads`)
+      .get(`${process.env.REACT_APP_API_URL}/hlpefleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
@@ -211,12 +211,12 @@ const HlpEnquireLeads = () => {
         item.email
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
-        item.city
-          .toLowerCase()
-          .includes(filterCriteria.search.toLowerCase()) ||
         item.course
             .toLowerCase()
             .includes(filterCriteria.search.toLowerCase()) ||
+        item.city
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
         item.phone
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||

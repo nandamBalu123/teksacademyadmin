@@ -204,7 +204,11 @@ const StudentDataView = () => {
             </p>
             <p>
               <b>Lead Source:</b>
-              {studentdata.leadsource}
+              {/* {studentdata.leadsource} */}
+              {studentdata.leadsource &&
+                studentdata.leadsource.map((source) => (
+                  <span>{source.source}</span>
+                ))}
             </p>
             <p>
               <b> Mode of Traning:</b>

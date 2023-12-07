@@ -133,9 +133,9 @@ const FeeDetails = () => {
         ? item.branch === filterCriteria.branch
         : true;
 
-      const sourceCondition = filterCriteria.leadsource
-        ? item.leadsource === filterCriteria.leadsource
-        : true;
+      // const sourceCondition = filterCriteria.leadsource
+      //   ? item.leadsource === filterCriteria.leadsource
+      //   : true;
 
       const modeCondition = filterCriteria.modeoftraining
         ? item.modeoftraining === filterCriteria.modeoftraining
@@ -149,7 +149,7 @@ const FeeDetails = () => {
         searchCondition &&
         dateCondition &&
         branchCondition &&
-        sourceCondition &&
+        // sourceCondition &&
         modeCondition &&
         counsellarCondition
       );

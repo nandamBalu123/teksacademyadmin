@@ -226,6 +226,8 @@ const Sidebar = () => {
             )} */}
 
             <Box paddingLeft={isCollapsed ? undefined : "1%"}>
+
+            {profile == "admin" || profile =="Regional Manager" || profile == "branch manager" || profile == "counsellor" ? (
               <Item
                 style={{
                   color: colors.grey[100],
@@ -239,6 +241,7 @@ const Sidebar = () => {
               >
                 {" "}
               </Item>
+            ) : undefined }
               <hr />
               {/* <Item
                 title="Dashboard"
@@ -283,35 +286,8 @@ const Sidebar = () => {
                   <hr title="Separator Tooltip" />
                 </div>
               ) : undefined}
-              {/* {profile == "admin" ? (
-                <SubMenu
-                  style={{
-                    color: colors.grey[100],
-                  }}
-                  icon={<GroupsIcon />}
-                  label={"User Details"}
-                  title={"User Management"}
-                >
-                  <Item
-                    title="Create User"
-                   
-                    to="/createuser"
-                    icon={<PersonAddIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                    // onClick= {()=> setActive({handleactive})}
-                  />
-                  <Item
-                    title="User Details"
-                    to="/usersdata"
-                    icon={<GroupIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                </SubMenu>
-              ) : undefined}
-              <hr /> */}
-
+              
+            {profile == "admin" || profile =="Regional Manager" || profile == "branch manager" || profile == "counsellor" ? (
               <SubMenu
                 style={{
                   color: colors.grey[100],
@@ -361,6 +337,7 @@ const Sidebar = () => {
                   />
                 )}
               </SubMenu>
+              ) : undefined}
               <hr />
               {/* start */}
               {profile == "admin" ? (
@@ -418,7 +395,7 @@ const Sidebar = () => {
               <hr />
               {/* end */}
               {/* leads start */}
-              {profile == "admin" ? (
+              {profile == "admin" || profile == "Sr. Associate" ? (
                 <SubMenu
                   style={{ color: "black" }}
                   icon={<Diversity2Icon />}
@@ -439,7 +416,7 @@ const Sidebar = () => {
                       setSelected={setSelected}
                     />
                     <Item
-                      title="WhapsApp"
+                      title="Whaps App"
                       to="/whatsapp"
                       icon={<AirplayIcon />}
                       selected={selected}

@@ -119,13 +119,14 @@ export default function RegistrationForm() {
   const [duedatetype, setduedatetype] = useState("");
   const [addfee, setaddfee] = useState(false);
   const [installments, setinstallments] = useState([]);
-
+  const [leadsourceOptions, setleadsourceOptions] = useState(false);
+  const [CustomLeadSource, setCustomLeadSource] = useState("");
   const [feedetailsbilling, setfeedetailsbilling] = useState([]);
   const [materialfee, setmaterialfee] = useState(null);
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
   const [totalpaidamount, settotalpaidamount] = useState(0);
-  const [othersOption, setOthersOption] = useState(false);
+  const [educationOthersOption, setEducationOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
   const [student_status, setStudent_status] = useState([]);
   const [certificate_status, setcertificate_status] = useState([
@@ -166,15 +167,29 @@ export default function RegistrationForm() {
       setassets(assets.filter((asset) => asset !== assetName));
     }
   };
-  const handleSelectChange = (e) => {
+  const handleEducationSelectChange = (e) => {
     const selectedValue = e.target.value;
     if (selectedValue === "others") {
-      setOthersOption(true);
-      setCustomEducationType(""); // Clear the custom education type
+      setEducationOthersOption(true);
+      setCustomEducationType("");
       setEducationType(selectedValue);
     } else {
-      setOthersOption(false);
+      setEducationOthersOption(false);
       setEducationType(selectedValue);
+    }
+  };
+  const handleLeadSourceSelectChange = (e) => {
+    const selectedValue = e.target.value;
+    if (
+      selectedValue.toLowerCase() === "student referral" ||
+      selectedValue.toLowerCase() === "employee referral"
+    ) {
+      setleadsourceOptions(true);
+      setCustomLeadSource({ source: selectedValue });
+      setLeadSource([{ source: selectedValue }]);
+    } else {
+      setleadsourceOptions(false);
+      setLeadSource([{ source: selectedValue }]);
     }
   };
   const handleFeecalculations = () => {
@@ -470,6 +485,7 @@ export default function RegistrationForm() {
     if (educationtype === "others") {
       setEducationType(customEducationType);
     }
+
     handleNext();
   };
   const handlePhoto = () => {
@@ -508,10 +524,17 @@ export default function RegistrationForm() {
       alert("please enter leadsource");
       return;
     }
+    if (
+      leadsource[0].source.toLowerCase() === "student referral" ||
+      leadsource[0].source.toLowerCase() === "employee referral"
+    ) {
+      setLeadSource([CustomLeadSource]);
+    }
 
     handleNext();
   };
   const handleAdmissiondetails = () => {
+    console.log("leadSource", leadsource, educationtype);
     if (!branch) {
       alert("please enter branch");
       return;
@@ -627,7 +650,7 @@ export default function RegistrationForm() {
         certificate_status,
         extra_discount,
       };
-
+      console.log("studentRegistrationdata", studentRegistrationdata);
       ///title case
       studentRegistrationdata = [studentRegistrationdata];
       const dataWithTitleCase = studentRegistrationdata.map((item) => {
@@ -857,72 +880,100 @@ export default function RegistrationForm() {
     setFeeDetails(updatedTasks);
   };
 
-  // // new
-  // const [selectedFile, setSelectedFilee] = useState(null);
+// pin code api
+  // const fetchData = async () => {
+  //   if (zipcode && zipcode.length > 2) {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://api.postalpincode.in/pincode/${zipcode}`
+  //       );
 
-  //   const handleFileChange = (e) => {
-  //     setSelectedFilee(e.target.files[0]);
-  //   };
+  //       if (response.data.length > 0) {
+  //         const postOffice = response.data[0]?.PostOffice[0];
 
-  //   const handleUpload = () => {
-  //     if (!selectedFile) {
-  //       alert('Please select a file to upload');
-  //       return;
+  //         if (postOffice) {
+  //           const { Region: city, State: state, Country: country, Block: area } = postOffice;
+
+  //           setCountry(country);
+  //           setState(state);
+  //           setArea(area || '');
+  //           setNative(city || '');
+  //         } else {
+  //           // Handle case when post office data is not available
+  //           // setCountry('');
+  //           // setState('');
+  //           // setArea('');
+  //           // setNative('');
+  //         }
+  //       } else {
+  //         // Handle case when no data is returned
+  //         // setCountry('');
+  //         // setState('');
+  //         // setArea('');
+  //         // setNative('');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching location information:', error);
+  //       // Handle error as needed
   //     }
+  //   }
+  // };
 
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(selectedFile);
-  //     reader.onload = () => {
-  //       const photoData = reader.result.split(',')[1];
 
-  //       axios.post('http://localhost:3030/upload', {
-  //         filename: selectedFile.name,
-  //         data: photoData,
-  //       })
-  //       .then(response => {
-  //         console.log('File uploaded successfully', response.data);
-  //       })
-  //       .catch(error => {
-  //         console.error('Error uploading file:', error);
-  //       });
-  //     };
-  //   };
+  // useEffect(() => {
+  //   fetchData();
+  // }, [zipcode]);
 
-  // const [zipCode, setZipCode] = useState('');
-  // const [locationInfo, setLocationInfo] = useState({});
+  const fetchData = async () => {
+    if (zipcode && zipcode.length > 2) {
+      try {
+        const response = await axios.get(
+          `https://api.postalpincode.in/pincode/${zipcode}`
+        );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (zipcode && zipcode.length > 2) {
-        try {
-          const response = await axios.get(
-            `https://api.opencagedata.com/geocode/v1/json?q=${zipcode}&key=baae7304601949019149fb9c0db270ab`
-          );
+        if (response.data.length > 0) {
+          const postOffice = response.data[0]?.PostOffice[0];
 
-          if (response.data.results.length > 0) {
-            const { city, state, country, suburb } =
-              response.data.results[0].components;
+          if (postOffice) {
+            const { Region: city, State: state, Country: country, Block: area } = postOffice;
 
             setCountry(country);
             setState(state);
-            setArea(suburb);
-            setNative(city);
-            // setLocationInfo({ city, state, country, areaName: suburb || 'Not found' });
+            setArea(area || '');
+            setNative(city || '');
           } else {
-            // setLocationInfo({ city: 'Not found', state: 'Not found', country: 'Not found', areaName: 'Not found' });
+            // Clear the state if no post office data is available
+            setCountry('');
+            setState('');
+            setArea('');
+            setNative('');
           }
-        } catch (error) {
-          console.error("Error fetching location information:", error);
+        } else {
+          // Clear the state if no data is returned
+          setCountry('');
+          setState('');
+          setArea('');
+          setNative('');
         }
+      } catch (error) {
+        console.error('Error fetching location information:', error);
+        // Handle error as needed
       }
-    };
+    } else {
+      // Clear the state if the pincode is not valid
+      setCountry('');
+      setState('');
+      setArea('');
+      setNative('');
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, [zipcode]);
 
-  // const handleZipCodeChange = (e) => {
-  //   setZipCode(e.target.value);
-  // };
+  // pin code end
+
 
   return (
     <div className="main-container container">
@@ -1179,7 +1230,7 @@ export default function RegistrationForm() {
           <Step>
             <StepLabel>
               <Typography>
-                <h6>Stdent Contact Details</h6>
+                <h6>Student Contact Details</h6>
               </Typography>
             </StepLabel>
             <StepContent>
@@ -1206,82 +1257,8 @@ export default function RegistrationForm() {
                       onChange={(e) => setCountry(e.target.value)}
                       value={country}
                     />
-                    {/* <FormControl variant="standard" className="w-75">
-                      <InputLabel>
-                        Country<span> *</span>
-                      </InputLabel>
-                      <Select
-                        name="country"
-                        required
-                        onChange={(e) => setCountry(e.target.value)}
-                        value={country}
-                      >
-                        <MenuItem value="select"> ---select---</MenuItem>
-                        <MenuItem value="india">India</MenuItem>
-                      </Select>
-                    </FormControl> */}
+                    
                   </div>
-
-                  {/* <FormControl variant="standard" className="w-75">
-                      <InputLabel>
-                        State<span> *</span>
-                      </InputLabel>
-                      <Select
-                        name="state"
-                        required
-                        onChange={(e) => setState(e.target.value)}
-                        value={state}
-                      >
-                        <MenuItem value="">--select--</MenuItem>
-                        <MenuItem value="Telangana">Telangana </MenuItem>
-                        <MenuItem value="Andhra Pradesh">
-                          Andhra Pradesh
-                        </MenuItem>
-                        <MenuItem value="Arunachal Pradesh">
-                          Arunachal Pradesh
-                        </MenuItem>
-                        <MenuItem value="Assam">Assam</MenuItem>
-                        <MenuItem value="Bihar">Bihar</MenuItem>
-                        <MenuItem value="Chhattisgarh">Chhattisgarh</MenuItem>
-                        <MenuItem value="Goa">Goa</MenuItem>
-                        <MenuItem value="Gujarat">Gujarat</MenuItem>
-                        <MenuItem value="Haryana">Haryana</MenuItem>
-                        <MenuItem value="Himachal Pradesh">
-                          Himachal Pradesh
-                        </MenuItem>
-                        <MenuItem value="Jharkhand">Jharkhand</MenuItem>
-                        <MenuItem value="Karnataka">Karnataka</MenuItem>
-                        <MenuItem value="Kerala">Kerala</MenuItem>
-                        <MenuItem value="Madhya Pradesh">
-                          Madhya Pradesh
-                        </MenuItem>
-                        <MenuItem value="Maharashtra">Maharashtra</MenuItem>
-                        <MenuItem value="Manipur">Manipur</MenuItem>
-                        <MenuItem value="Meghalaya">Meghalaya</MenuItem>
-                        <MenuItem value="Mizoram">Mizoram</MenuItem>
-                        <MenuItem value="Nagaland">Nagaland</MenuItem>
-                        <MenuItem value="Odisha">Odisha</MenuItem>
-                        <MenuItem value="Punjab">Punjab</MenuItem>
-                        <MenuItem value="Rajasthan">Rajasthan</MenuItem>
-                        <MenuItem value="Sikkim">Sikkim</MenuItem>
-                        <MenuItem value="Tamil Nadu">Tamil Nadu</MenuItem>
-                        <MenuItem value="Tripura">Tripura</MenuItem>
-                        <MenuItem value="Uttar Pradesh">Uttar Pradesh</MenuItem>
-                        <MenuItem value="Uttarakhand">Uttarakhand</MenuItem>
-                        <MenuItem value="West Bengal">West Bengal</MenuItem>
-                        <MenuItem value="Andaman and NicobarIslands">
-                          Andaman and Nicobar Islands
-                        </MenuItem>
-                        <MenuItem value="Chandigarh">Chandigarh</MenuItem>
-                        <MenuItem value="Dadra and Nagar Haveli and Daman and Diu">
-                          Dadra and Nagar Haveli and Daman and Diu
-                        </MenuItem>
-                        <MenuItem value="Lakshadweep">Lakshadweep</MenuItem>
-                        <MenuItem value="Delhi">Delhi</MenuItem>
-                        <MenuItem value="Puducherry">Puducherry</MenuItem>
-                        <MenuItem value="others">Others</MenuItem>
-                      </Select>
-                    </FormControl> */}
                 </div>
 
                 <div className="row ">
@@ -1298,19 +1275,6 @@ export default function RegistrationForm() {
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label={<span className="label-family">Area</span>}
-                      type="text"
-                      variant="standard"
-                      className=" w-75"
-                      required
-                      onChange={(e) => setArea(e.target.value)}
-                      value={area}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                    <TextField
                       label={<span className="label-family">Native Place</span>}
                       type="text"
                       variant="standard"
@@ -1320,6 +1284,20 @@ export default function RegistrationForm() {
                       value={native}
                     />
                   </div>
+                </div>
+                <div className="row">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                    <TextField
+                      label={<span className="label-family">Area</span>}
+                      type="text"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setArea(e.target.value)}
+                      value={area}
+                    />
+                  </div>
+                  
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label={
@@ -1381,7 +1359,7 @@ export default function RegistrationForm() {
                         id="educationtype"
                         name="educationtype"
                         required
-                        onChange={handleSelectChange}
+                        onChange={handleEducationSelectChange}
                         value={educationtype}
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
@@ -1392,7 +1370,7 @@ export default function RegistrationForm() {
                         <MenuItem value="ssc">SSC</MenuItem>
                         <MenuItem value="others">Others</MenuItem>
                       </Select>
-                      {othersOption && (
+                      {educationOthersOption && (
                         <div className="mt-3">
                           <TextField
                             label={<span className="label-family">Others</span>}
@@ -1405,23 +1383,6 @@ export default function RegistrationForm() {
                             }
                             value={customEducationType}
                           />
-                          {/* <label className="col-12 col-md-2 label">
-                            Others
-                          </label>
-                          <input
-                            type="text"
-                            className="col-9 col-md-5"
-                            required
-                            style={{
-                              height: "35px",
-                              border: "1.5px solid black",
-                              borderRadius: "5px",
-                            }}
-                            onChange={(e) =>
-                              setCustomEducationType(e.target.value)
-                            }
-                            value={customEducationType}
-                          /> */}
                         </div>
                       )}
                     </FormControl>
@@ -1629,8 +1590,8 @@ export default function RegistrationForm() {
                         id="leadsource"
                         name="leadsource"
                         required
-                        onChange={(e) => setLeadSource(e.target.value)}
-                        value={leadsource}
+                        onChange={handleLeadSourceSelectChange}
+                        value={leadsource.source}
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
                         {leadsources &&
@@ -1640,6 +1601,42 @@ export default function RegistrationForm() {
                             </MenuItem>
                           ))}
                       </Select>
+                      {leadsourceOptions && (
+                        <div className="mt-3">
+                          <TextField
+                            label={<span className="label-family">Name</span>}
+                            type="text"
+                            variant="standard"
+                            className=" w-75"
+                            required
+                            onChange={(e) =>
+                              setCustomLeadSource((prev) => ({
+                                ...prev,
+                                name: e.target.value,
+                              }))
+                            }
+                            value={CustomLeadSource.name || ""}
+                          />
+                          <TextField
+                            label={
+                              <span className="label-family">
+                                Mobile Number
+                              </span>
+                            }
+                            type="text"
+                            variant="standard"
+                            className=" w-75"
+                            required
+                            onChange={(e) =>
+                              setCustomLeadSource((prev) => ({
+                                ...prev,
+                                mobileNumber: e.target.value,
+                              }))
+                            }
+                            value={CustomLeadSource.mobileNumber || ""}
+                          />
+                        </div>
+                      )}
                     </FormControl>
                   </div>
                 </div>
@@ -2394,7 +2391,13 @@ export default function RegistrationForm() {
                         src={pictureprofile}
                         alt="profile"
                       /> */}
-                        {imageUrl && <img src={imageUrl} alt="Selected"  style={{width:"60%"}}/>}
+                        {imageUrl && (
+                          <img
+                            src={imageUrl}
+                            alt="Selected"
+                            style={{ width: "60%" }}
+                          />
+                        )}
                         {/* {!studentdata.studentImg && (
                         <img src={profilePic} alt="photo" />
                       )}
@@ -2445,7 +2448,7 @@ export default function RegistrationForm() {
                         <p> Enquiry Date : {enquirydate}</p>
                         <p> Enquiry Taken By: {enquirytakenby}</p>
                         <p> Course Package: {coursepackage}</p>
-                        <p>Lead Source: {leadsource} </p>
+                        {/* <p>Lead Source: {leadsource} </p> */}
                         <p> Mode of Traning: {modeoftraining}</p>
                       </div>
                     </div>

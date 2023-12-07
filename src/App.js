@@ -66,18 +66,20 @@ import CreateCourse from "./components/pages/settings/courses/CreateCourse";
 import Requestedcertificates from "./components/pages/student/Certificate/Requestedcertificates";
 import Sidebar1 from "./components/common/Sidebar/Sidebar1";
 import Invoice from "./components/pages/student/fee/Invoice";
-import ZipCodeLookup from "./components/pages/student/studentRegistrationForm/Zipcode";
+
 import Reports from "./components/pages/Reports/Reports";
 import Report from "./components/pages/Reports/Report";
 import CreateReport from "./components/pages/Reports/CreateReport";
 import FeeReceived from "./components/pages/student/fee/FeeReceived";
 import Webinar from "./components/pages/Leads/Website Leads/Webinar";
-import WhatsApp  from "./components/pages/Leads/Website Leads/Whatsapp";
-import DownloadSyllabus  from "./components/pages/Leads/Website Leads/DownloadSyllabus";
+import WhatsApp from "./components/pages/Leads/Website Leads/Whatsapp";
+import DownloadSyllabus from "./components/pages/Leads/Website Leads/DownloadSyllabus";
 import ViewCourse from "./components/pages/Leads/Website Leads/ViewCourse";
 import ContactUs from "./components/pages/Leads/Website Leads/ContactUs";
 import HlpEnquireLeads from "./components/pages/Leads/Website Leads/HlpEnquireLeads";
 import SlpEnquireLeads from "./components/pages/Leads/Website Leads/SlpEnquireLeads";
+import DashboardOld from "./components/pages/dashboard/DashboardOld";
+import DashboardBhavitha from "./components/pages/dashboard/DashboardBhavitha";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -115,6 +117,11 @@ function App() {
                   path="/"
                   element={user ? <Dashboard /> : <Navigate to="/login" />}
                 />
+                <Route path="/dashboardOld" element={<DashboardOld />} />
+                <Route
+                  path="/DashboardBhavitha"
+                  element={<DashboardBhavitha />}
+                />
                 <Route
                   path="/login"
                   element={!user ? <LoginPage /> : <Navigate to="/" />}
@@ -125,10 +132,7 @@ function App() {
                     user ? <RegistrationForm /> : <Navigate to="/login" />
                   }
                 />
-                {/* <Route
-                  path="/ZipCodeLookup"
-                  element={user ? <ZipCodeLookup /> : <Navigate to="/login" />}
-                /> */}
+                
                 <Route
                   path="/feedetails/:id"
                   element={user ? <FeeDetails /> : <Dashboard />}
@@ -486,37 +490,37 @@ function App() {
                 <Route
                   path="/webinar"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
                       <Webinar />
                     ) : (
                       <Dashboard />
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/whatsapp"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
                       <WhatsApp />
                     ) : (
                       <Dashboard />
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/downloadsyllabus"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
                       <DownloadSyllabus />
                     ) : (
                       <Dashboard />
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/viewcourse"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
                       <ViewCourse />
                     ) : (
                       <Dashboard />
@@ -526,27 +530,27 @@ function App() {
                 <Route
                   path="/contactus"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
                       <ContactUs />
                     ) : (
                       <Dashboard />
                     )
                   }
                 />
-                 <Route
+                <Route
                   path="/hlpenquireleads"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
                       <HlpEnquireLeads />
                     ) : (
                       <Dashboard />
                     )
                   }
                 />
-                    <Route
+                <Route
                   path="/slpenquireleads"
                   element={
-                    user && user.profile == "admin" ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
                       <SlpEnquireLeads />
                     ) : (
                       <Dashboard />

@@ -238,7 +238,10 @@ const FeeView = () => {
       });
   };
   const handleUpdateClick = async (index) => {
-    if (installments[index].paidamount > 0) {
+    if (
+      installments[index].paidamount > 0 &&
+      installments[index].paidamount <= parseInt(studentdata.dueamount)
+    ) {
       // Update state
       const updatedInstallments = await updateInstallments(index);
 
@@ -317,7 +320,13 @@ const FeeView = () => {
         // Handle errors here
       }
     } else {
-      alert("Paid should be greater than 0");
+      if (installments[index].paidamount > parseInt(studentdata.dueamount)) {
+        alert("Amount cannot be greater than Due Amount");
+      } else if (installments[index].paidamount === 0) {
+        alert("Paid should be greater than 0");
+      } else {
+        alert("error");
+      }
     }
   };
 
@@ -371,65 +380,69 @@ const FeeView = () => {
   /// extra discount
 
   const handleApplyDiscount = () => {
-    setOpen(false);
+    if (extraDiscount <= parseInt(studentdata.dueamount)) {
+      setOpen(false);
 
-    let dueamount;
-    if (extraDiscount) {
-      dueamount = parseInt(studentdata.dueamount) - parseInt(extraDiscount);
-    }
-    // let updatedInstallmentAmount =
-    //   dueamount / totalinstallments[0].totalinstallmentsleft;
-    // for (let i = 0; i < installments.length; i++) {
-    //   const updatedInstallments = [...installments];
-    //   if (updatedInstallments[i].paymentdone === false) {
-    //     updatedInstallments[i].dueamount = parseInt(updatedInstallmentAmount);
-    //   }
+      let dueamount;
+      if (extraDiscount) {
+        dueamount = parseInt(studentdata.dueamount) - parseInt(extraDiscount);
+      }
+      // let updatedInstallmentAmount =
+      //   dueamount / totalinstallments[0].totalinstallmentsleft;
+      // for (let i = 0; i < installments.length; i++) {
+      //   const updatedInstallments = [...installments];
+      //   if (updatedInstallments[i].paymentdone === false) {
+      //     updatedInstallments[i].dueamount = parseInt(updatedInstallmentAmount);
+      //   }
 
-    //   setInstallments(updatedInstallments);
-    // }
-    if (extraDiscount) {
-      let Extra_Discount_remarks_history = studentdata.extra_discount;
-      let newObject = {
-        Discount: parseInt(extraDiscount),
-        Discount_remarks: text,
-        date: new Date(),
-      };
-      Extra_Discount_remarks_history.push(newObject);
-      const updatedData = {
-        installments,
-        dueamount,
-        Extra_Discount_remarks_history,
-      };
-      const updateContext = {
-        installments,
-        dueamount,
-        Extra_Discount_remarks_history,
-        id: studentdata.id,
-      };
+      //   setInstallments(updatedInstallments);
+      // }
+      if (extraDiscount) {
+        let Extra_Discount_remarks_history = studentdata.extra_discount;
+        let newObject = {
+          Discount: parseInt(extraDiscount),
+          Discount_remarks: text,
+          date: new Date(),
+        };
+        Extra_Discount_remarks_history.push(newObject);
+        const updatedData = {
+          installments,
+          dueamount,
+          Extra_Discount_remarks_history,
+        };
+        const updateContext = {
+          installments,
+          dueamount,
+          Extra_Discount_remarks_history,
+          id: studentdata.id,
+        };
 
-      // let uploadcontext = { user_status, user_remarks_history, id };
+        // let uploadcontext = { user_status, user_remarks_history, id };
 
-      axios
-        .put(
-          `${process.env.REACT_APP_API_URL}/extra_discount/${id}`,
-          updatedData
-        )
-        .then((res) => {
-          if (res.data.updated) {
-            alert("Discount Applied");
-            dispatch({
-              type: "UPDATE_EXTRA_DISCOUNT",
-              payload: updateContext,
-            });
-            // window.location.reload();
-          } else {
-            alert("Error please Try Again");
-          }
-        });
-      // setcourseStartDate("");
-      setText("");
+        axios
+          .put(
+            `${process.env.REACT_APP_API_URL}/extra_discount/${id}`,
+            updatedData
+          )
+          .then((res) => {
+            if (res.data.updated) {
+              alert("Discount Applied");
+              dispatch({
+                type: "UPDATE_EXTRA_DISCOUNT",
+                payload: updateContext,
+              });
+              // window.location.reload();
+            } else {
+              alert("Error please Try Again");
+            }
+          });
+        // setcourseStartDate("");
+        setText("");
+      } else {
+        alert("enter Discount and remarks");
+      }
     } else {
-      alert("enter remarks");
+      alert("Discount cannot be greater than Due amount");
     }
   };
   let extra_discount_view = 0;
@@ -786,6 +799,7 @@ const FeeView = () => {
         {/* installments payment */}
         <div>
           {studentdata &&
+            studentdata.dueamount > 0 &&
             installments &&
             installments.map((installment, index) => {
               if (installment.paymentdone === true) {
