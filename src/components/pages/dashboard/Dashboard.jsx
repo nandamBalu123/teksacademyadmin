@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Header from "../../common/Header/Header";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { useEffect } from "react";
 import LinearProgress, {
   linearProgressClasses,
@@ -74,20 +75,34 @@ const Dashboard = () => {
   const [getUsersData, setUsersData] = useState([]);
   const [initialData, setinitialData] = useState([]);
   const [getstudentData, setStudentData] = useState([]);
-  const [DisplayData, setDisplayData] = useState({
+  const [Displaycards, setDisplaycards] = useState({
     enrollments: false,
     fee: false,
     feefollowup: false,
     users: false,
-    // dueAndReceivedAmount: false,
   });
-  const [Branchwise, setBranchwise] = useState({
+  const [DisplayTable, setDisplayTable] = useState({
     enrollments: false,
     bookingamount: false,
     feerecevied: false,
     feeyettorecevied: false,
     branchusers: false,
   });
+
+  // const [DisplayData, setDisplayData] = useState({
+  //   enrollments: false,
+  //   fee: false,
+  //   feefollowup: false,
+  //   users: false,
+  //   dueAndReceivedAmount: false,
+  // });
+  // const [Branchwise, setBranchwise] = useState({
+  //   enrollments: false,
+  //   bookingamount: false,
+  //   feerecevied: false,
+  //   feeyettorecevied: false,
+  //   branchusers: false,
+  // });
 
   const [filterCriteria, setFilterCriteria] = useState({
     fromdate: "",
@@ -600,114 +615,42 @@ const Dashboard = () => {
             Welcome to{" "}
             <span style={{ color: "#e96228", fontSize: "25px" }}>TEKS </span>
             <span style={{ color: "#195489", fontSize: "25px" }}> ACADEMY</span>
-          </h5>
-
-          {/* <h6 onClick={handleClick} style={{ cursor: "pointer" }}>
-              Filter
-            </h6>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-              style={{
-                width: "600px",
-                borderRadius: "25px",
-                marginTop: "20px",
-                cursor: "pointer",
-              }}
-            >
-              <div className="d-flex justify-content-between">
-                <MenuItem> Filter</MenuItem>
-                <MenuItem>
-                  {" "}
-                  <CloseIcon
-                    onClick={handleClose}
-                    style={{ cursor: "pointer" }}
-                  />
-                </MenuItem>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
-                  <MenuItem>
-                    <label> From: </label>
-                    <input
-                      type="date"
-                      className="w-100 ps-2"
-                      style={{
-                        height: "45px",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
-                      }}
-                      name="fromdate"
-                      value={filterCriteria.fromdate}
-                      onChange={handleInputChange}
-                    />
-                  </MenuItem>
-                </div>
-                <div className="col-6 col-md-6 col-lg-6 col-xl-6">
-                  <MenuItem>
-                    <label> To: </label>
-
-                    <input
-                      type="date"
-                      className="w-100 ps-2"
-                      style={{
-                        height: "45px",
-                        border: "1.5px solid black",
-                        borderRadius: "5px",
-                      }}
-                      name="todate"
-                      value={filterCriteria.todate}
-                      onChange={handleInputChange}
-                    />
-                  </MenuItem>
-                </div>
-              </div>
-
-              <MenuItem className="d-flex justify-content-between">
-               
-
-                <button
-                  className="clear"
-                  onClick={filterreset}
-                  style={{ cursor: "pointer" }}
-                >
-                  {" "}
-                  Clear
-                </button>
-              </MenuItem>
-            </Menu> */}
+          </h5>{" "}
         </Box>
       </div>
 
       <div className="contianer Dashboard">
-        <div className="row">
+        <div className="row p-3">
           <div
             className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
             style={{ cursor: "pointer" }}
+            // onClick={(e) =>
+            //   setDisplaycards({
+            //     enrollments: true,
+            //     fee: false,
+            //     feefollowup: false,
+            //     users: false,
+            //     // dueAndReceivedAmount: false,
+            //   })
+            // }
             onClick={(e) =>
-              setDisplayData({
-                enrollments: true,
+              setDisplaycards((prev) => ({
                 fee: false,
                 feefollowup: false,
                 users: false,
-                // dueAndReceivedAmount: false,
-              })
+                enrollments: !prev.enrollments,
+              }))
             }
           >
             <Card
-              style={{
-                background: "#004493",
-                textAlign: "center",
-                borderRadius: "8px",
-                color: "white",
-                boxShadow: "3px 3px 6px  gray",
-              }}
+            className ='cardcolor'
+              // style={{
+              //   background: "#004493",
+              //   textAlign: "center",
+              //   borderRadius: "8px",
+              //   color: "white",
+              //   boxShadow: "3px 3px 6px  gray",
+              // }}
             >
               <p className="pt-3">Total Enrollments</p>
               <p>
@@ -724,59 +667,42 @@ const Dashboard = () => {
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
             style={{ cursor: "pointer" }}
             onClick={(e) =>
-              setDisplayData({
+              setDisplaycards((prev) => ({
                 enrollments: false,
-                fee: true,
+                fee: !prev.fee,
                 feefollowup: false,
                 users: false,
-                // dueAndReceivedAmount: false,
-              })
+              }))
             }
           >
             <Card
-              style={{
-                background: "#ff9f24",
-                textAlign: "center",
-                borderRadius: "8px",
-                color: "white",
-                boxShadow: "3px 3px 6px  gray",
-              }}
+              className="cardcolor"
+              // style={{
+              //   background: "#ff9f24",
+              //   textAlign: "center",
+              //   borderRadius: "8px",
+              //   color: "white",
+              //   boxShadow: "3px 3px 6px  gray",
+              // }}
             >
               <p className="pt-3">Fee Details</p>
-              <p>
-                {/* <CurrencyRupeeIcon /> */}
-                <b>
-                  {/* {Number(parseFloat(totalAmount).toFixed(2)).toLocaleString(
-                    "en-IN"
-                  )} */}
-                </b>
-                {/* <b>{sumDueAmount},</b>
-                <b>{sumreceivedAmount},</b> */}
-              </p>
+            
             </Card>
           </div>
           <div
             className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
             style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: false,
-                feefollowup: true,
-                users: false,
-                // dueAndReceivedAmount: false,
-              })
-            }
           >
             <Link to="/feedetails">
               <Card
-                style={{
-                  background: "#008959",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#008959",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
               >
                 <p className="text-center pt-3">Fee Followups</p>
               </Card>
@@ -789,65 +715,24 @@ const Dashboard = () => {
                   ).toLocaleString("en-IN")}
                 </b> */}
           </div>
-          {/* <div
-            className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
-            style={{ cursor: "pointer" }}
-            onClick={(e) =>
-              setDisplayData({
-                enrollments: false,
-                fee: false,
-                users: false,
-                dueAndReceivedAmount: true,
-              })
-            }
-          >
-            <Card
-              style={{ cursor: "pointer" }}
-              onClick={(e) =>
-                setDisplayData({
-                  enrollments: false,
-                  fee: false,
-                  feefollowup: true,
-                })
-              }
-            >
-              <p className="pt-3">
-                <b>
-                  Received Amount :
-                  <CurrencyRupeeIcon />
-                  {Number(
-                    parseFloat(AllbranchesreceivedAmount).toFixed(2)
-                  ).toLocaleString("en-IN")}
-                </b>
-                <b>{sumreceivedAmount},</b>
-              </p>
-              <p>
-                <b>
-                  Pending Amount : <CurrencyRupeeIcon />
-                  {Number(
-                    parseFloat(AllbranchesDueAmount).toFixed(2)
-                  ).toLocaleString("en-IN")}
-                </b>
-              </p>
-            </Card>
-          </div> */}
+          
 
           {role === "admin" && (
             <div
               className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3 "
               style={{ cursor: "pointer" }}
               onClick={(e) =>
-                setDisplayData({
+                setDisplaycards((prev) => ({
                   enrollments: false,
                   fee: false,
-                  users: true,
-                  // dueAndReceivedAmount: false,
-                })
+                  feefollowup: false,
+                  users: !prev.users,
+                }))
               }
             >
               <Card
-                style={{ backgroundColor: "#e6acb4 " }}
-                className="rounded rounded-3"
+                // style={{ backgroundColor: "#e6acb4 " }}
+                className="cardcolor"
               >
                 <p className="pt-3">Total Users</p>
                 {/* <p>
@@ -882,8 +767,8 @@ const Dashboard = () => {
             </Card>
           </div> */}
         </div>
-        <div className="row">
-          {/* <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3">
+        {/* <div className="row">
+          <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3">
             <Card
               style={{ backgroundColor: "#d9e9e9" }}
               className="rounded rounded-3"
@@ -904,20 +789,25 @@ const Dashboard = () => {
                 <b>20</b>
               </p>
             </Card>
-          </div> */}
-        </div>
+          </div>
+        </div> */}
       </div>
 
-      {/* This is for progress bar */}
+      {/* {This is 1st step and 2nd steps} */}
 
-      {DisplayData.enrollments && (
+      {/* enrollments dashboard */}
+      {Displaycards.enrollments && (
         <div className="">
-          <div className="d-flex justify-content-between">
-            <h5 className="pt-4  enrollment ps-4">
-              {" "}
-              Current Month Enrollment Details
-            </h5>
-            <div className="pt-2 pe-4">
+          <div className="d-flex justify-content-between align-items-center">
+        
+            <h5 className=" text-center flex-grow-1 pt-4 ms-sm-5 underline"
+             
+             >
+             <span className="fw-bold fs-5"> Current Month</span> Enrollment Details
+             </h5>
+           
+            {/* for filter button */}
+            <div className="">
               <Button
                 id="demo-positioned-button"
                 aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -926,15 +816,15 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-color"
+                  className="btn-filter btn-color"
+                  title="Filter"
                   style={{ textTransform: "capitalize" }}
                 >
-                  {" "}
-                  Filter{" "}
+                 <FilterAltIcon/>
                 </button>
               </Button>
               <Menu
-                className="mt-5"
+                className=""
                 id="demo-positioned-menu"
                 aria-labelledby="demo-positioned-button"
                 anchorEl={anchorEl}
@@ -986,11 +876,9 @@ const Dashboard = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-
                 </div>
 
                 <MenuItem className="text-end">
-                  {/* <button className="save"> Save</button> */}
                   <button className="btn btn-color" onClick={filterreset}>
                     {" "}
                     Clear
@@ -998,269 +886,88 @@ const Dashboard = () => {
                 </MenuItem>
               </Menu>
             </div>
+            {/* filter end  */}
           </div>
-          {role === "branch manager" && (
-            <div>
-              <div className="row  ">
-                <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
-                <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-                  <Card
-                   
-                    onClick={(e) =>
-                      setBranchwise({
-                        enrollments: true,
-                        bookingamount: false,
-                        feerecevied: false,
-                        feeyettorecevied: false,
-                        branchusers: false,
-                      })
-                    }
-                    style={{
-                      background: "#fd746e",
-                      textAlign: "center",
-                      borderRadius: "8px",
-                      cursor:"pointer",
-                      color: "white",
-                      boxShadow: "3px 3px 6px  gray",
-                    }}
-                  >
-                    <p className="text-center pt-3">
-                      No. of Enrollments
-                      <p>
-                        {Number(
-                          parseFloat(getstudentData.length).toFixed(2)
-                        ).toLocaleString("en-IN")}{" "}
-                      </p>
-                    </p>
-                  </Card>
-                </div>
-                <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-                  <Card
-                   
-                    onClick={(e) =>
-                      setBranchwise({
-                        enrollments: false,
-                        bookingamount: true,
-                        feerecevied: false,
-                        feeyettorecevied: false,
-                        branchusers: false,
-                      })
-                    }
-                    style={{
-                      background: "#7fa1e4",
-                      textAlign: "center",
-                      cursor: "pointer" ,
-                      borderRadius: "8px",
-                      color: "white",
-                      boxShadow: "3px 3px 6px  gray",
-                    }}
-                  >
-                    <p className="text-center pt-3">
-                      Booking Amount
-                      <p>
-                        {Number(
-                          parseFloat(totalAmount).toFixed(2)
-                        ).toLocaleString("en-IN")}{" "}
-                      </p>
-                    </p>
-                  </Card>
-                </div>
-              </div>
+          {/* Enrollment cards Display */}
+          <div className="row">
+            <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3">
+              <Card
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: !prev.enrollments,
+                    bookingamount: false,
+                    feerecevied: false,
+                    feeyettorecevied: false,
+                    branchusers: false,
+                  }))
+                }
+                className="cardcolor"
+                // style={{
+                //   background: "#fd746e",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   cursor: "pointer",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
+              >
+                <p className="text-center pt-3">
+                  No. of Enrollments
+                  <p>
+                    {Number(
+                      parseFloat(getstudentData.length).toFixed(2)
+                    ).toLocaleString("en-IN")}{" "}
+                  </p>
+                </p>
+              </Card>
             </div>
-          )}
-
-          <div className="justify-content-around pt-4 row progreebar-show">
-            {role !== "branch manager" &&
-              Object.entries(branchStudentData).map(([branch, students]) => {
-                const enrollmentPercentage =
-                  (students.length / getstudentData.length) * 100;
-                const totalCount = students.length;
-                return (
-                  <div>
-                    <div className="row  ">
-                      <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
-                      <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-                        <Card
-                          
-                          onClick={(e) =>
-                            setBranchwise({
-                              enrollments: true,
-                              bookingamount: false,
-                              feerecevied: false,
-                              feeyettorecevied: false,
-                              branchusers: false,
-                            })
-                          }
-                          style={{
-                            background: "#fd746e",
-                            textAlign: "center",
-                            borderRadius: "8px",
-                            color: "white",
-                            boxShadow: "3px 3px 6px  gray",
-                            cursor: "pointer" ,
-                          }}
-                        >
-                          <p className="text-center pt-3">
-                            No. of Enrollments
-                            <p>
-                              {Number(
-                                parseFloat(getstudentData.length).toFixed(2)
-                              ).toLocaleString("en-IN")}{" "}
-                            </p>
-                          </p>
-                        </Card>
-                      </div>
-                      <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-                        <Card
-                         
-                          onClick={(e) =>
-                            setBranchwise({
-                              enrollments: false,
-                              bookingamount: true,
-                              feerecevied: false,
-                              feeyettorecevied: false,
-                              branchusers: false,
-                            })
-                          }
-                          style={{
-                            background: "#7fa1e4",
-                            textAlign: "center",
-                            borderRadius: "8px",
-                            color: "white",
-                            boxShadow: "3px 3px 6px  gray",
-                            cursor: "pointer" ,
-                          }}
-                        >
-                          <p className="text-center pt-3">
-                            Booking Amount
-                            <p>
-                              {Number(
-                                parseFloat(totalAmount).toFixed(2)
-                              ).toLocaleString("en-IN")}{" "}
-                            </p>
-                          </p>
-                        </Card>
-                      </div>
-                    </div>
-                    {/* <div
-                    key={`student-${branch}`}
-                    className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                  >
-
-                    
-                  
-                    <h6>{branch}</h6>
-                    <BorderLinearProgress
-                      variant="determinate"
-                      value={enrollmentPercentage}
-                    />
-                    <span>Total Count: </span>
-
-                    {Number(parseFloat(totalCount).toFixed(2)).toLocaleString(
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: false,
+                    bookingamount: !prev.bookingamount,
+                    feerecevied: false,
+                    feeyettorecevied: false,
+                    branchusers: false,
+                    // ...prev,bookingamount:!prev.bookingamount
+                  }))
+                }
+                className="cardcolor"
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   cursor: "pointer",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
+              >
+                <p className="text-center pt-3">
+                  Booking Amount
+                  <p>
+                    {Number(parseFloat(totalAmount).toFixed(2)).toLocaleString(
                       "en-IN"
-                    )}
-                    <span>({enrollmentPercentage.toFixed(2)}%)</span>
-                  </div> */}
-                  </div>
-                );
-              })}
-            {Branchwise.enrollments && (
+                    )}{" "}
+                  </p>
+                </p>
+              </Card>
+            </div>
+          </div>
+          {/* Enrollment cards display end */}
+
+          {/* Enrollment table display */}
+          <div>
+            {DisplayTable.enrollments && (
               <div className="">
                 {role !== "counsellor" && role !== "branch manager" && (
-                  <div className="d-flex justify-content-between">
-                    <h5 className="pt-4 ps-4">
-                      {" "}
-                      Current Month Branchwise Enrollment Data
-                    </h5>
-                    {/* <div className="pt-2 pe-4">
-                      <Button
-                        id="demo-positioned-button"
-                        aria-controls={
-                          open ? "demo-positioned-menu" : undefined
-                        }
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                        onClick={handleClick}
-                      >
-                        <button
-                          className="btn btn-color"
-                          style={{ textTransform: "capitalize" }}
-                        >
-                          {" "}
-                          Filter{" "}
-                        </button>
-                      </Button>
-                      <Menu
-                        className="mt-5"
-                        id="demo-positioned-menu"
-                        aria-labelledby="demo-positioned-button"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        anchorOrigin={{
-                          vertical: "top",
-                          horizontal: "left",
-                        }}
-                        transformOrigin={{
-                          vertical: "top",
-                          horizontal: "left",
-                        }}
-                      >
-                        <div className="d-flex justify-content-between">
-                          <MenuItem> Filter</MenuItem>
-                          <MenuItem>
-                            {" "}
-                            <CloseIcon onClick={handleClose} />{" "}
-                          </MenuItem>
-                        </div>
-                        <hr />
-                        <div className="row m-2">
-                          <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                            <TextField
-                              label=" From:"
-                              type="date"
-                              variant="standard"
-                              className="  w-100"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
-                              name="fromdate"
-                              value={filterCriteria.fromdate}
-                              onChange={handleInputChange}
-                            />
-                          </div>
-                          <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                            <TextField
-                              label=" To:"
-                              type="date"
-                              variant="standard"
-                              className="w-100"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
-                              name="todate"
-                              value={filterCriteria.todate}
-                              onChange={handleInputChange}
-                            />
-                          </div>
-                        </div>
-
-                        <MenuItem className="text-end">
-                         
-                          <button
-                            className="btn btn-color"
-                            onClick={filterreset}
-                          >
-                            {" "}
-                            Clear
-                          </button>
-                        </MenuItem>
-                      </Menu>
-                    </div> */}
-                  </div>
+                  <h5 className="pt-4 text-center underline">
+                    {" "}
+                    <span className="fw-bold fs-5">Current Month</span> Branch Wise Enrollment Data
+                  </h5>
                 )}
-
-                <div className="justify-content-around ">
+                <div className="justify-content-around pt-2 ">
                   {role !== "branch manager" && role !== "counsellor" && (
                     <Paper>
                       <TableContainer>
@@ -1305,58 +1012,62 @@ const Dashboard = () => {
                     </Paper>
                   )}
 
-                  {role !== "admin" &&  role !== "counsellor" && role !== "Regional Manager" &&
-                  <div className="justify-content-around">
-                  <div className="d-flex justify-content-between">
-                    <h5 className="pt-4  enrollment ps-4">
-                      {" "}
-                      Current Month Consellor Wise Enrollment Details
-                    </h5>
-                 
-                  </div>
-                  <Paper>
-                    <TableContainer>
-                      <Table>
-                        <TableHead>
-                          <TableRow>
-                            <StyledTableCell className="table-cell-heading">
-                              Counsellor Name
-                            </StyledTableCell>
-                            <StyledTableCell className="table-cell-heading">
-                              No. of Enrollments
-                            </StyledTableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {role === "branch manager" &&
-                            Object.entries(CounsellorwisestudentsData).map(
-                              ([counsellor, students]) => {
-                                const enrollmentPercentage =
-                                  (students.length / getstudentData.length) *
-                                  100;
-                                const totalCount = students.length;
-                                return (
-                                  <StyledTableRow
-                                    key={`student-${counsellor}`}
-                                  >
-                                    <StyledTableCell className="Table-cell">
-                                      {counsellor}{" "}
-                                    </StyledTableCell>
-                                    <StyledTableCell className="Table-cell">
-                                      {" "}
-                                      {Number(
-                                        parseFloat(totalCount).toFixed(2)
-                                      ).toLocaleString("en-IN")}
-                                    </StyledTableCell>
-                                  </StyledTableRow>
-                                );
-                              }
-                            )}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </Paper>
-                </div>}
+                  {role !== "admin" &&
+                    role !== "counsellor" &&
+                    role !== "Regional Manager" && (
+                      <div className="justify-content-around">
+                        <h5 className="pt-4 text-center underline">
+                       
+                         <span className="fw-bold fs-5">  Current Month</span> Consellor Wise Enrollment Details
+                        </h5>
+
+                      <div className="pt-2"> 
+                      <Paper>
+                          <TableContainer>
+                            <Table>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell className="table-cell-heading">
+                                    Counsellor Name
+                                  </StyledTableCell>
+                                  <StyledTableCell className="table-cell-heading">
+                                    No. of Enrollments
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {role === "branch manager" &&
+                                  Object.entries(
+                                    CounsellorwisestudentsData
+                                  ).map(([counsellor, students]) => {
+                                    const enrollmentPercentage =
+                                      (students.length /
+                                        getstudentData.length) *
+                                      100;
+                                    const totalCount = students.length;
+                                    return (
+                                      <StyledTableRow
+                                        key={`student-${counsellor}`}
+                                      >
+                                        <StyledTableCell className="Table-cell">
+                                          {counsellor}{" "}
+                                        </StyledTableCell>
+                                        <StyledTableCell className="Table-cell">
+                                          {" "}
+                                          {Number(
+                                            parseFloat(totalCount).toFixed(2)
+                                          ).toLocaleString("en-IN")}
+                                        </StyledTableCell>
+                                      </StyledTableRow>
+                                    );
+                                  })}
+                              </TableBody>
+                            </Table>
+                          </TableContainer>
+                        </Paper>
+                        </div>
+                      </div>
+                    )}
 
                   {/* {role === "branch manager" &&
                     Object.entries(CounsellorwisestudentsData).map(
@@ -1387,21 +1098,17 @@ const Dashboard = () => {
                 </div>
               </div>
             )}
-            {Branchwise.bookingamount && (
+            {DisplayTable.bookingamount && (
               <div>
-                {" "}
                 <div className="">
                   {role !== "counsellor" && role !== "branch manager" && (
-                    <div className="d-flex justify-content-between">
-                      <h5 className="pt-4 ps-4">
-                        {" "}
-                        Current Month Branchwise Booking Amount Data
-                      </h5>
-               
-                    </div>
+                    <h5 className="pt-4 text-center underline">
+                 
+                      <span className="fw-bold fs-5"> Current Month </span>Branch Wise Booking Amount Data
+                    </h5>
                   )}
 
-                  <div className="justify-content-around ">
+                  <div className="justify-content-around pt-2">
                     {role !== "branch manager" && role !== "counsellor" && (
                       <Paper>
                         <TableContainer>
@@ -1430,23 +1137,6 @@ const Dashboard = () => {
                                         ).toLocaleString("en-IN")}
                                       </StyledTableCell>
                                     </StyledTableRow>
-                                    // <div
-
-                                    //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                                    // >
-                                    //   <h6>{branch}</h6>
-                                    //   <BorderLinearProgress
-                                    //     variant="determinate"
-                                    //     value={percentage}
-                                    //   />
-                                    //   <div>
-                                    //     Total Amount:
-                                    //     {Number(
-                                    //       parseFloat(totalAmount).toFixed(2)
-                                    //     ).toLocaleString("en-IN")}
-                                    //     <span>({percentage.toFixed(2)}%)</span>
-                                    //   </div>
-                                    // </div>
                                   );
                                 }
                               )}
@@ -1457,58 +1147,58 @@ const Dashboard = () => {
                     )}
                     <div>
                       {role === "branch manager" && (
-                        <div className="d-flex justify-content-between">
-                          <h5 className="pt-4 ps-4">
-                            {" "}
-                            Current Month Counsellor Wise Booking Amount Data
-                          </h5>
-                       
-                        </div>
+                        <h5 className="pt-4 text-center underline">
+                          <span className="fw-bold fs-5"> Current Month</span> Counsellor Wise Booking Amount Data
+                        </h5>
                       )}
-                      {role === "branch manager" && 
-                        <Paper>
-                        <TableContainer>
-                          <Table>
-                            <TableHead>
-                              <TableRow>
-                                <StyledTableCell className="table-cell-heading">
-                                  Cousellor Name
-                                </StyledTableCell>
-                                <StyledTableCell className="table-cell-heading">
-                                  Booking AMount
-                                </StyledTableCell>
-                              </TableRow>
-                            </TableHead>
-                            <TableBody>
-                              {role === "branch manager" &&
-                                Object.entries(counsellorwisedataByBranch).map(
-                                  ([
-                                    counsellor,
-                                    { totalcount, percentage },
-                                  ]) => {
-                                    return (
-                                      <StyledTableRow
-                                        key={`student-${counsellor}`}
-                                      >
-                                        <StyledTableCell className="Table-cell">
-                                          {counsellor}
-                                        </StyledTableCell>
-                                        <StyledTableCell className="Table-cell">
-                                          {Number(
-                                            parseFloat(totalcount).toFixed(2)
-                                          ).toLocaleString("en-IN")}
-                                        </StyledTableCell>
-                                      </StyledTableRow>
-                                    );
-                                  }
-                                )}
-                            </TableBody>
-                          </Table>
-                        </TableContainer>
-                      </Paper>
-                      }
-                      
-                     
+                      <div className="pt-2">
+                        {role === "branch manager" && (
+                          <Paper>
+                            <TableContainer>
+                              <Table>
+                                <TableHead>
+                                  <TableRow>
+                                    <StyledTableCell className="table-cell-heading">
+                                      Cousellor Name
+                                    </StyledTableCell>
+                                    <StyledTableCell className="table-cell-heading">
+                                      Booking Amount
+                                    </StyledTableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {role === "branch manager" &&
+                                    Object.entries(
+                                      counsellorwisedataByBranch
+                                    ).map(
+                                      ([
+                                        counsellor,
+                                        { totalcount, percentage },
+                                      ]) => {
+                                        return (
+                                          <StyledTableRow
+                                            key={`student-${counsellor}`}
+                                          >
+                                            <StyledTableCell className="Table-cell">
+                                              {counsellor}
+                                            </StyledTableCell>
+                                            <StyledTableCell className="Table-cell">
+                                              {Number(
+                                                parseFloat(totalcount).toFixed(
+                                                  2
+                                                )
+                                              ).toLocaleString("en-IN")}
+                                            </StyledTableCell>
+                                          </StyledTableRow>
+                                        );
+                                      }
+                                    )}
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </Paper>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1517,12 +1207,14 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-
-      {DisplayData.fee && (
-        <div className=" rounded rounded-5  pb-4">
-          <div className="d-flex justify-content-between">
-            <h5 className="pt-4 ps-4"> Current Month Fee Details</h5>
-            <div className="pt-2 pe-4">
+     
+      {Displaycards.fee && (
+        <div className=" ">
+          <div className="d-flex justify-content-between align-items-center">
+            <h5 className=" text-center flex-grow-1 pt-4 mb-2 ms-sm-5 underline ">
+             <span className="fw-bold fs-5"> Current Month</span> Fee Details
+            </h5>
+            <div className="">
               <Button
                 id="demo-positioned-button"
                 aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -1531,15 +1223,15 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-color "
+                  className=" btn-filter btn-color"
+                  title="Filter"
                   style={{ textTransform: "capitalize" }}
                 >
-                  {" "}
-                  Filter{" "}
+                    <FilterAltIcon/>
                 </button>
               </Button>
               <Menu
-                className="mt-5"
+                className=""
                 id="demo-positioned-menu"
                 aria-labelledby="demo-positioned-button"
                 anchorEl={anchorEl}
@@ -1594,7 +1286,6 @@ const Dashboard = () => {
                 </div>
 
                 <MenuItem className="text-end">
-                  {/* <button className="save"> Save</button> */}
                   <button className="btn btn-color" onClick={filterreset}>
                     {" "}
                     Clear
@@ -1603,28 +1294,29 @@ const Dashboard = () => {
               </Menu>
             </div>
           </div>
+          {/* Fee Cards Display */}
           <div className="row  ">
             <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-            
-                onClick={(e) =>
-                  setBranchwise({
+                 onClick={(e) =>
+                  setDisplayTable((prev) => ({
                     enrollments: false,
                     bookingamount: false,
-                    feerecevied: true,
+                    feerecevied:!prev.feerecevied,
                     feeyettorecevied: false,
                     branchusers: false,
-                  })
+                  }))
                 }
-                style={{
-                  background: "#fd746e",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                  cursor: "pointer" ,
-                }}
+               className="cardcolor"
+                // style={{
+                //   background: "#fd746e",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                //   cursor: "pointer",
+                // }}
               >
                 <p className="text-center pt-3">
                   Fee Received
@@ -1639,24 +1331,24 @@ const Dashboard = () => {
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-               
-                onClick={(e) =>
-                  setBranchwise({
-                    enrollments: false,
-                    bookingamount: false,
-                    feerecevied: false,
-                    feeyettorecevied: true,
-                    branchusers: false,
-                  })
-                }
-                style={{
-                  background: "#7fa1e4",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                  cursor: "pointer",
-                }}
+               onClick={(e) =>
+                setDisplayTable((prev) => ({
+                  enrollments: false,
+                  bookingamount: false,
+                  feerecevied:false,
+                  feeyettorecevied: !prev.feeyettorecevied,
+                  branchusers: false,
+                }))
+              }
+                className="cardcolor"
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                //   cursor: "pointer",
+                // }}
               >
                 <p className="text-center pt-3">
                   Fee Yet To Received
@@ -1670,71 +1362,23 @@ const Dashboard = () => {
               </Card>
             </div>
           </div>
-          {/* <div className="  justify-content-around pt-4 row progreebar-show">
-            {role !== "branch manager" &&
-              Object.entries(finalTotalByBranch).map(
-                ([branch, { totalAmount, percentage }]) => {
-                  return (
-                    <div
-                      key={branch}
-                      className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                    >
-                      <h6>{branch}</h6>
-                      <BorderLinearProgress
-                        variant="determinate"
-                        value={percentage}
-                      />
-                      <div>
-                        Total Amount:
-                        {Number(
-                          parseFloat(totalAmount).toFixed(2)
-                        ).toLocaleString("en-IN")}
-                        <span>({percentage.toFixed(2)}%)</span>
-                      </div>
-                    </div>
-                  );
-                }
-              )}
+          {/* Fee Cards Display End */}
 
-            {role === "branch manager" &&
-              Object.entries(counsellorwisedataByBranch).map(
-                ([counsellor, { totalcount, percentage }]) => {
-                  return (
-                    <div
-                      key={counsellor}
-                      className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                    >
-                      <h6>{counsellor}</h6>
-                      <BorderLinearProgress
-                        variant="determinate"
-                        value={percentage}
-                      />
-                      <div>
-                        Total Amount:{" "}
-                        {Number(
-                          parseFloat(totalcount).toFixed(2)
-                        ).toLocaleString("en-IN")}
-                        <span>({percentage.toFixed(2)}%)</span>
-                      </div>
-                    </div>
-                  );
-                }
-              )}
-          </div> */}
-          {Branchwise.feerecevied && (
+          {/* Fee Details Table Display */}
+          <div> 
+          {DisplayTable.feerecevied && (
             <div>
               <div className="">
-                {role !== "counsellor" &&  role !== "branch manager" && (
-                  <div className="d-flex justify-content-between">
-                    <h5 className="pt-4 ps-4">
+                {role !== "counsellor" && role !== "branch manager" && (
+                
+                    <h5 className="pt-4 text-center underline">
                       {" "}
-                      Current Month Branchwise Recevied Amount Data
+                     <span className="fw-bold fs-5">  Current Month</span> Branch Wise Recevied Amount Data
                     </h5>
-                    
-                  </div>
+               
                 )}
 
-                <div className="  justify-content-around">
+                <div className="  justify-content-around pt-2">
                   {role !== "branch manager" && role !== "counsellor" && (
                     <Paper>
                       <TableContainer>
@@ -1813,99 +1457,100 @@ const Dashboard = () => {
                       </TableContainer>
                     </Paper>
                   )}
-                  <div>   
-                    {role === 'branch manager' && 
-                      <div> 
-                       <div className="d-flex justify-content-between">
-                     <h5 className="pt-4 ps-4">
-                       {" "}
-                       Current Month Counsellorwise Recevied Amount Data
-                     </h5>
-                
-                   </div>
-                   <Paper> 
-                        <TableContainer>
-                          <Table>
-                            <TableHead>
-                              <TableRow> 
-                              <StyledTableCell className="table-cell-heading">
+                  <div>
+                    {role === "branch manager" && (
+                      <div>
+                        <h5 className="pt-4 underline text-center">
+                        
+                          <span className="fw-bold fs-5"> Current Month</span> Counsellor Wise Recevied Amount Data
+                        </h5>
+
+                          <div className="pt-2"> 
+                          <Paper>
+                          <TableContainer>
+                            <Table>
+                              <TableHead>
+                                <TableRow>
+                                  <StyledTableCell className="table-cell-heading">
                                     Counsellor Name
-                                   </StyledTableCell>
-                                   <StyledTableCell className="table-cell-heading">
-                                  Receviced Amount
-                                   </StyledTableCell>
-                              </TableRow>
-                            </TableHead>
-                            <TableBody>
-                            {role === "branch manager" &&
-                    Object.entries(
-                      finalCounsellorWiseDueAndReceivedByBranch
-                    ).map(
-                      ([
-                        counsellor,
-                        { totalDueAmount, totalreceivedAmount },
-                      ]) => {
-                        const Receivedpercentage =
-                          (totalreceivedAmount / AllbranchesreceivedAmount) *
-                          100;
-                        const Pendingpercentage =
-                          (totalDueAmount / AllbranchesDueAmount) * 100;
-                        return (
-                          <StyledTableRow  key={counsellor}> 
-                           <StyledTableCell className="Table-cell"> 
-                           {counsellor}
-                             </StyledTableCell>
-                             <StyledTableCell className="Table-cell"> 
-                          
-                             {Number(
-                                parseFloat(totalreceivedAmount).toFixed(2)
-                              ).toLocaleString("en-IN")}
-                             </StyledTableCell></StyledTableRow>
-                          // <div
-                          //   key={counsellor}
-                          //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                          // >
-                          //   <h6>
-                          //     <b>{counsellor}</b>
-                          //   </h6>
-                          //   <BorderLinearProgress
-                          //     variant="determinate"
-                          //     value={Receivedpercentage}
-                          //   />
+                                  </StyledTableCell>
+                                  <StyledTableCell className="table-cell-heading">
+                                    Receviced Amount
+                                  </StyledTableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {role === "branch manager" &&
+                                  Object.entries(
+                                    finalCounsellorWiseDueAndReceivedByBranch
+                                  ).map(
+                                    ([
+                                      counsellor,
+                                      { totalDueAmount, totalreceivedAmount },
+                                    ]) => {
+                                      const Receivedpercentage =
+                                        (totalreceivedAmount /
+                                          AllbranchesreceivedAmount) *
+                                        100;
+                                      const Pendingpercentage =
+                                        (totalDueAmount /
+                                          AllbranchesDueAmount) *
+                                        100;
+                                      return (
+                                        <StyledTableRow key={counsellor}>
+                                          <StyledTableCell className="Table-cell">
+                                            {counsellor}
+                                          </StyledTableCell>
+                                          <StyledTableCell className="Table-cell">
+                                            {Number(
+                                              parseFloat(
+                                                totalreceivedAmount
+                                              ).toFixed(2)
+                                            ).toLocaleString("en-IN")}
+                                          </StyledTableCell>
+                                        </StyledTableRow>
+                                        // <div
+                                        //   key={counsellor}
+                                        //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                                        // >
+                                        //   <h6>
+                                        //     <b>{counsellor}</b>
+                                        //   </h6>
+                                        //   <BorderLinearProgress
+                                        //     variant="determinate"
+                                        //     value={Receivedpercentage}
+                                        //   />
 
-                          //   <div>
-                          //     Received : {}{" "}
-                          //     {Number(
-                          //       parseFloat(totalreceivedAmount).toFixed(2)
-                          //     ).toLocaleString("en-IN")}
-                          //     <span>({Receivedpercentage.toFixed(2)}%)</span>
-                          //   </div>
-                          //   <BorderLinearProgress
-                          //     variant="determinate"
-                          //     value={Pendingpercentage}
-                          //   />
-                          //   <div>
-                          //     Pending : {}{" "}
-                          //     {Number(
-                          //       parseFloat(totalDueAmount).toFixed(2)
-                          //     ).toLocaleString("en-IN")}
-                          //     <span>({Pendingpercentage.toFixed(2)}%)</span>
-                          //   </div>
-                          // </div>
-                        );
-                      }
-                    )}
-                            </TableBody>
-                          </Table>
-                        </TableContainer>
-                      </Paper>
-
+                                        //   <div>
+                                        //     Received : {}{" "}
+                                        //     {Number(
+                                        //       parseFloat(totalreceivedAmount).toFixed(2)
+                                        //     ).toLocaleString("en-IN")}
+                                        //     <span>({Receivedpercentage.toFixed(2)}%)</span>
+                                        //   </div>
+                                        //   <BorderLinearProgress
+                                        //     variant="determinate"
+                                        //     value={Pendingpercentage}
+                                        //   />
+                                        //   <div>
+                                        //     Pending : {}{" "}
+                                        //     {Number(
+                                        //       parseFloat(totalDueAmount).toFixed(2)
+                                        //     ).toLocaleString("en-IN")}
+                                        //     <span>({Pendingpercentage.toFixed(2)}%)</span>
+                                        //   </div>
+                                        // </div>
+                                      );
+                                    }
+                                  )}
+                              </TableBody>
+                            </Table>
+                          </TableContainer>
+                        </Paper>
                       </div>
-                    
-                     
-                    }
-                     </div>
-                 
+                      </div>
+                    )}
+                  </div>
                 </div>
                 {/* <div className="justify-content-around ">
                   <Paper>
@@ -1979,20 +1624,19 @@ const Dashboard = () => {
             </div>
           )}
 
-          {Branchwise.feeyettorecevied && (
+          {DisplayTable.feeyettorecevied && (
             <div>
               <div className="">
-                {role !== "counsellor" && role !== "branch manager"  && (
-                  <div className="d-flex justify-content-between">
-                    <h5 className="pt-4 ps-4">
-                      {" "}
-                      Current Month Branchwise Fee Yet to Recevied Amount Data
+                {role !== "counsellor" && role !== "branch manager" && (
+                 
+                    <h5 className="pt-4 underline text-center">
+                   
+                      <span className="fw-bold fs-5"> Current Month </span>Branch Wise Fee Yet to Recevied Amount Data
                     </h5>
-                
-                  </div>
+               
                 )}
 
-                <div className="  justify-content-around">
+                <div className="  justify-content-around pt-2">
                   {role !== "branch manager" && role !== "counsellor" && (
                     <Paper>
                       <TableContainer>
@@ -2071,188 +1715,108 @@ const Dashboard = () => {
                       </TableContainer>
                     </Paper>
                   )}
-                  {role === "branch manager" && 
-                  <div > 
-  <div className="d-flex justify-content-between">
-                     <h5 className="pt-4 ps-4">
-                       {" "}
-                       Current Month Counsellorwise Fee Yet To Recevied Data 
-                     </h5>
-                 
-                   </div>
-                   <Paper>
-                   <TableContainer>
-                     <Table>
-                       <TableHead>
-                         <TableRow>
-                         <StyledTableCell className="table-cell-heading">
-                                    Counsellor Name
-                                   </StyledTableCell>
-                                   <StyledTableCell className="table-cell-heading">
-                                    Fee Yet to Received
-                                   </StyledTableCell>
-                         </TableRow>
-                       </TableHead>
-                       <TableBody> 
-                       {role === "branch manager" &&
-                    Object.entries(
-                      finalCounsellorWiseDueAndReceivedByBranch
-                    ).map(
-                      ([
-                        counsellor,
-                        { totalDueAmount, totalreceivedAmount },
-                      ]) => {
-                        const Receivedpercentage =
-                          (totalreceivedAmount / AllbranchesreceivedAmount) *
-                          100;
-                        const Pendingpercentage =
-                          (totalDueAmount / AllbranchesDueAmount) * 100;
-                        return (
-<StyledTableRow      key={counsellor}> 
-                           <StyledTableCell className="Table-cell"> 
-                           {counsellor}
-                             </StyledTableCell>
-                             <StyledTableCell className="Table-cell"> 
-                             {Number(
-                                parseFloat(totalDueAmount).toFixed(2)
-                              ).toLocaleString("en-IN")} 
-                             </StyledTableCell></StyledTableRow>
+                  {role === "branch manager" && (
+                    <div>
+                      <h5 className="text-center pt-4 underline">
+                      
+                       <sapn className="fw-bold fs-5">  Current Month</sapn> Counsellor Wise Fee Yet To Recevied Data
+                      </h5>
 
-                          // <div
-                          //   key={counsellor}
-                          //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                          // >
-                          //   <h6>
-                          //     <b>{counsellor}</b>
-                          //   </h6>
-                          //   <BorderLinearProgress
-                          //     variant="determinate"
-                          //     value={Receivedpercentage}
-                          //   />
+                        <div className="pt-2">
+                        <Paper>
+                        <TableContainer>
+                          <Table>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell className="table-cell-heading">
+                                  Counsellor Name
+                                </StyledTableCell>
+                                <StyledTableCell className="table-cell-heading">
+                                  Fee Yet to Received
+                                </StyledTableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {role === "branch manager" &&
+                                Object.entries(
+                                  finalCounsellorWiseDueAndReceivedByBranch
+                                ).map(
+                                  ([
+                                    counsellor,
+                                    { totalDueAmount, totalreceivedAmount },
+                                  ]) => {
+                                    const Receivedpercentage =
+                                      (totalreceivedAmount /
+                                        AllbranchesreceivedAmount) *
+                                      100;
+                                    const Pendingpercentage =
+                                      (totalDueAmount / AllbranchesDueAmount) *
+                                      100;
+                                    return (
+                                      <StyledTableRow key={counsellor}>
+                                        <StyledTableCell className="Table-cell">
+                                          {counsellor}
+                                        </StyledTableCell>
+                                        <StyledTableCell className="Table-cell">
+                                          {Number(
+                                            parseFloat(totalDueAmount).toFixed(
+                                              2
+                                            )
+                                          ).toLocaleString("en-IN")}
+                                        </StyledTableCell>
+                                      </StyledTableRow>
 
-                          //   <div>
-                          //     Received : {}{" "}
-                          //     {Number(
-                          //       parseFloat(totalreceivedAmount).toFixed(2)
-                          //     ).toLocaleString("en-IN")}
-                          //     <span>({Receivedpercentage.toFixed(2)}%)</span>
-                          //   </div>
-                          //   <BorderLinearProgress
-                          //     variant="determinate"
-                          //     value={Pendingpercentage}
-                          //   />
-                          //   <div>
-                          //     Pending : {}{" "}
-                          //     {Number(
-                          //       parseFloat(totalDueAmount).toFixed(2)
-                          //     ).toLocaleString("en-IN")}
-                          //     <span>({Pendingpercentage.toFixed(2)}%)</span>
-                          //   </div>
-                          // </div>
-                        );
-                      }
-                    )}   
+                                      // <div
+                                      //   key={counsellor}
+                                      //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                                      // >
+                                      //   <h6>
+                                      //     <b>{counsellor}</b>
+                                      //   </h6>
+                                      //   <BorderLinearProgress
+                                      //     variant="determinate"
+                                      //     value={Receivedpercentage}
+                                      //   />
 
-
-                       </TableBody>
-                     </Table>
-                   </TableContainer>
-                 </Paper>
-
-                  </div>
-                   
-                  
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   }
-                   
+                                      //   <div>
+                                      //     Received : {}{" "}
+                                      //     {Number(
+                                      //       parseFloat(totalreceivedAmount).toFixed(2)
+                                      //     ).toLocaleString("en-IN")}
+                                      //     <span>({Receivedpercentage.toFixed(2)}%)</span>
+                                      //   </div>
+                                      //   <BorderLinearProgress
+                                      //     variant="determinate"
+                                      //     value={Pendingpercentage}
+                                      //   />
+                                      //   <div>
+                                      //     Pending : {}{" "}
+                                      //     {Number(
+                                      //       parseFloat(totalDueAmount).toFixed(2)
+                                      //     ).toLocaleString("en-IN")}
+                                      //     <span>({Pendingpercentage.toFixed(2)}%)</span>
+                                      //   </div>
+                                      // </div>
+                                    );
+                                  }
+                                )}
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                      </Paper>
+                        </div>
+                    </div>
+                  )}
                 </div>
-                {/* <div className="justify-content-around ">
-                 <Paper>
-                   <TableContainer>
-                     <Table>
-                       <TableHead>
-                         <TableRow>
-                           <StyledTableCell className="table-cell-heading">
-                             Branch
-                           </StyledTableCell>
-                           <StyledTableCell className="table-cell-heading">
-                            Recevied Amount
-                           </StyledTableCell>
-                         </TableRow>
-                       </TableHead>
-                       <TableBody>
-                         {role !== "branch manager" &&
-                           Object.entries(branchStudentData).map(
-                             ([branch, students]) => {
-                               const enrollmentPercentage =
-                                 (students.length / getstudentData.length) *
-                                 100;
-                               const totalCount = students.length;
-                               return (
-                                 <StyledTableRow key={`student-${branch}`}>
-                                   <StyledTableCell className="Table-cell">
-                                     {branch}
-                                   </StyledTableCell>
-
-                                   <StyledTableCell className="Table-cell">
-                                     {Number(
-                                       parseFloat(totalCount).toFixed(2)
-                                     ).toLocaleString("en-IN")}
-                                   </StyledTableCell>
-                                 </StyledTableRow>
-                               );
-                             }
-                           )}
-                       </TableBody>
-                     </Table>
-                   </TableContainer>
-                 </Paper>
-                 {role === "branch manager" &&
-                   Object.entries(CounsellorwisestudentsData).map(
-                     ([counsellor, students]) => {
-                       const enrollmentPercentage =
-                         (students.length / getstudentData.length) * 100;
-                       const totalCount = students.length;
-                       return (
-                         <div
-                           key={`student-${counsellor}`}
-                           className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                         >
-                           <h6>{counsellor}</h6>
-                           <BorderLinearProgress
-                             variant="determinate"
-                             value={enrollmentPercentage}
-                           />
-                           <span>Total Count: </span>
-                           {}{" "}
-                           {Number(
-                             parseFloat(totalCount).toFixed(2)
-                           ).toLocaleString("en-IN")}
-                           <span>({enrollmentPercentage.toFixed(2)}%)</span>
-                         </div>
-                       );
-                     }
-                   )}
-               </div> */}
+               
               </div>
             </div>
           )}
+          </div>
         </div>
       )}
-
-      {DisplayData.dueAndReceivedAmount && (
+     {/* Don't remove this////////// */}
+      {/* {Displaycards.dueAndReceivedAmount && (
         <div className="progreebar rounded rounded-5  pb-4">
           <div className="d-flex justify-content-between">
             <h4 className="pt-4 enrollment ps-4">
@@ -2331,7 +1895,7 @@ const Dashboard = () => {
                 </div>
 
                 <MenuItem className="text-end">
-                  {/* <button className="save"> Save</button> */}
+              
                   <button
                     className="btn btn-color"
                     onClick={filterDeuAndReceivedreset}
@@ -2430,12 +1994,17 @@ const Dashboard = () => {
               )}
           </div>
         </div>
-      )}
-      {DisplayData.users && (
-        <div className=" rounded rounded-5  pb-4">
-          <div className="d-flex justify-content-between">
-            <h5 className="pt-4   ps-4"> Current Month Total Users</h5>
-            <div className="pt-2 pe-4">
+      )} */}
+
+    
+      {Displaycards.users && (
+        <div className=" ">
+          <div >
+          <div className="d-flex justify-content-between align-items-center">
+            <h5 className=" text-center flex-grow-1 pt-4 underline ms-sm-5 ">
+              <span className="fw-bold fs-5">Current Month</span> Total Users Details
+            </h5>
+            <div className="">
               <Button
                 id="demo-positioned-button"
                 aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -2444,15 +2013,15 @@ const Dashboard = () => {
                 onClick={handleClick}
               >
                 <button
-                  className="btn btn-color"
+                    className="btn-filter btn-color"
+                    title="Filter"
                   style={{ textTransform: "capitalize" }}
                 >
-                  {" "}
-                  Filter{" "}
+                    <FilterAltIcon/>
                 </button>
               </Button>
               <Menu
-                className="mt-5"
+                className=""
                 id="demo-positioned-menu"
                 aria-labelledby="demo-positioned-button"
                 anchorEl={anchorEl}
@@ -2507,7 +2076,6 @@ const Dashboard = () => {
                 </div>
 
                 <MenuItem className="text-end">
-                  {/* <button className="save"> Save</button> */}
                   <button className="btn btn-color" onClick={filterreset}>
                     {" "}
                     Clear
@@ -2516,28 +2084,30 @@ const Dashboard = () => {
               </Menu>
             </div>
           </div>
+          </div>
+          {/* User Card Display */}
           <div className="row  ">
             <div className="col-12 col-md-4 col-xl-4 col-lg-4"></div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-             
-                onClick={(e) =>
-                  setBranchwise({
-                    enrollments: false,
-                    bookingamount: false,
-                    feerecevied: false,
-                    feeyettorecevied: false,
-                    branchusers: true,
-                  })
-                }
-                style={{
-                  background: "#fd746e",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                  cursor: "pointer" ,
-                }}
+               onClick={(e) =>
+                setDisplayTable((prev) => ({
+                  enrollments: false,
+                  bookingamount: false,
+                  feerecevied:false,
+                  feeyettorecevied:false,
+                  branchusers:!prev.branchusers,
+                }))
+              }
+                className="cardcolor"
+                // style={{
+                //   background: "#fd746e",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                //   cursor: "pointer",
+                // }}
               >
                 <p className="text-center pt-3">
                   No. of Users
@@ -2551,17 +2121,20 @@ const Dashboard = () => {
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2"></div>
           </div>
-          {Branchwise.branchusers && (
+          {/* User Card Display End */}
+
+          {/* user Table Display */}
+          {DisplayTable.branchusers && (
             <div className="justify-content-around ">
               {role === "admin" && (
                 <div>
-                  <div className="d-flex justify-content-between">
-                    <h5 className="pt-4 ps-4">
-                      {" "}
-                      Current Month Branchwise User Data
+               
+                    <h5 className="pt-4 text-center underline">
+                   
+                    <span className="fw-bold fs-5">Current Month</span> Branch Wise User Data
                     </h5>
-                    
-                  </div>
+              
+                  <div className="pt-2">
                   <Paper>
                     <TableContainer>
                       <Table>
@@ -2615,21 +2188,254 @@ const Dashboard = () => {
                       </Table>
                     </TableContainer>
                   </Paper>
+                  </div>
                 </div>
               )}
             </div>
           )}
+          {/* User Table Display End */}
         </div>
       )}
 
-      {/* for Counsellor dashboard start */}
+    {/* <div>
+          {role === "branch manager" && (
+        
+              <div className="row  ">
+                <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
+                <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+                  <Card
+                    onClick={(e) =>
+                      setBranchwise({
+                        enrollments: true,
+                        bookingamount: false,
+                        feerecevied: false,
+                        feeyettorecevied: false,
+                        branchusers: false,
+                      })
+                    }
+                    style={{
+                      background: "#fd746e",
+                      textAlign: "center",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      color: "white",
+                      boxShadow: "3px 3px 6px  gray",
+                    }}
+                  >
+                    <p className="text-center pt-3">
+                      No. of Enrollments
+                      <p>
+                        {Number(
+                          parseFloat(getstudentData.length).toFixed(2)
+                        ).toLocaleString("en-IN")}{" "}
+                      </p>
+                    </p>
+                  </Card>
+                </div>
+                <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+                  <Card
+                    onClick={(e) =>
+                      setBranchwise({
+                        enrollments: false,
+                        bookingamount: true,
+                        feerecevied: false,
+                        feeyettorecevied: false,
+                        branchusers: false,
+                      })
+                    }
+                    style={{
+                      background: "#7fa1e4",
+                      textAlign: "center",
+                      cursor: "pointer",
+                      borderRadius: "8px",
+                      color: "white",
+                      boxShadow: "3px 3px 6px  gray",
+                    }}
+                  >
+                    <p className="text-center pt-3">
+                      Booking Amount
+                      <p>
+                        {Number(
+                          parseFloat(totalAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}{" "}
+                      </p>
+                    </p>
+                  </Card>
+                </div>
+              </div>
+            
+          )}</div> */}
 
-      {/* {profile === "counsellor" &&( 
-        <div> 
+      {/* <div className=" pt-2">
+            {role !== "branch manager" &&
+             
+              <div>
+                <div className="row  ">
+                  <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
+                  <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+                    <Card
+                      onClick={(e) =>
+                        setBranchwise({
+                          enrollments: true,
+                          bookingamount: false,
+                          feerecevied: false,
+                          feeyettorecevied: false,
+                          branchusers: false,
+                        })
+                      }
+                      style={{
+                        background: "#fd746e",
+                        textAlign: "center",
+                        borderRadius: "8px",
+                        color: "white",
+                        boxShadow: "3px 3px 6px  gray",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <p className="text-center pt-3">
+                        No. of Enrollments
+                        <p>
+                          {Number(
+                            parseFloat(getstudentData.length).toFixed(2)
+                          ).toLocaleString("en-IN")}{" "}
+                        </p>
+                      </p>
+                    </Card>
+                  </div>
+                  <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+                    <Card
+                      onClick={(e) =>
+                        setBranchwise({
+                          enrollments: false,
+                          bookingamount: true,
+                          feerecevied: false,
+                          feeyettorecevied: false,
+                          branchusers: false,
+                        })
+                      }
+                      style={{
+                        background: "#7fa1e4",
+                        textAlign: "center",
+                        borderRadius: "8px",
+                        color: "white",
+                        boxShadow: "3px 3px 6px  gray",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <p className="text-center pt-3">
+                        Booking Amount
+                        <p>
+                          {Number(
+                            parseFloat(totalAmount).toFixed(2)
+                          ).toLocaleString("en-IN")}{" "}
+                        </p>
+                      </p>
+                    </Card>
+                  </div>
+                </div>
+                
+              </div>
+            }  </div> */}
+      
+
+      {/* <div
+            className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
+            style={{ cursor: "pointer" }}
+            onClick={(e) =>
+              setDisplayData({
+                enrollments: false,
+                fee: false,
+                users: false,
+                dueAndReceivedAmount: true,
+              })
+            }
+          >
+            <Card
+              style={{ cursor: "pointer" }}
+              onClick={(e) =>
+                setDisplayData({
+                  enrollments: false,
+                  fee: false,
+                  feefollowup: true,
+                })
+              }
+            >
+              <p className="pt-3">
+                <b>
+                  Received Amount :
+                  <CurrencyRupeeIcon />
+                  {Number(
+                    parseFloat(AllbranchesreceivedAmount).toFixed(2)
+                  ).toLocaleString("en-IN")}
+                </b>
+                <b>{sumreceivedAmount},</b>
+              </p>
+              <p>
+                <b>
+                  Pending Amount : <CurrencyRupeeIcon />
+                  {Number(
+                    parseFloat(AllbranchesDueAmount).toFixed(2)
+                  ).toLocaleString("en-IN")}
+                </b>
+              </p>
+            </Card>
+          </div> */}
+      
 
 
-        </div>
-      )} */}
+      
+          {/* <div className="  justify-content-around pt-4 row progreebar-show">
+            {role !== "branch manager" &&
+              Object.entries(finalTotalByBranch).map(
+                ([branch, { totalAmount, percentage }]) => {
+                  return (
+                    <div
+                      key={branch}
+                      className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                    >
+                      <h6>{branch}</h6>
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={percentage}
+                      />
+                      <div>
+                        Total Amount:
+                        {Number(
+                          parseFloat(totalAmount).toFixed(2)
+                        ).toLocaleString("en-IN")}
+                        <span>({percentage.toFixed(2)}%)</span>
+                      </div>
+                    </div>
+                  );
+                }
+              )}
+
+            {role === "branch manager" &&
+              Object.entries(counsellorwisedataByBranch).map(
+                ([counsellor, { totalcount, percentage }]) => {
+                  return (
+                    <div
+                      key={counsellor}
+                      className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                    >
+                      <h6>{counsellor}</h6>
+                      <BorderLinearProgress
+                        variant="determinate"
+                        value={percentage}
+                      />
+                      <div>
+                        Total Amount:{" "}
+                        {Number(
+                          parseFloat(totalcount).toFixed(2)
+                        ).toLocaleString("en-IN")}
+                        <span>({percentage.toFixed(2)}%)</span>
+                      </div>
+                    </div>
+                  );
+                }
+              )}
+          </div> */}
+
     </div>
   );
 };

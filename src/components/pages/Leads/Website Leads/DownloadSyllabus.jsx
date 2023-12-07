@@ -317,11 +317,7 @@ const DownloadSyllabus = () => {
       search: "",
     });
   };
-
-
-
-
-  return (
+return (
 
     <div className="container">
       <div className="studetdetails   mt-3">
