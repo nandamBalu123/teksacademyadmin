@@ -196,17 +196,18 @@ const FeeDetails = () => {
     <div className="container">
       <div className="main-feedetails  mt-3">
         <div>
-          <h5 className="mt-3 ms-2"> Fee Management</h5>
-          <div className="row p-2">
+          <h5 className="mt-3 ms-2 text-center"> Fee Management</h5>
+          <div className="row py-2 px-5">
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
               <Card
-                style={{
-                  background: "#195489",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#195489",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 onClick={studentFeeRecords}
               >
                 <p className="text-center pt-3">Fee Records</p>
@@ -217,13 +218,14 @@ const FeeDetails = () => {
             </div>
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2 ">
               <Card
-                style={{
-                  background: "#ff9f24",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#ff9f24",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 onClick={noDueRecords}
               >
                 <p className="text-center pt-3">No Due Records</p>
@@ -237,13 +239,14 @@ const FeeDetails = () => {
             </div>
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
               <Card
-                style={{
-                  background: "#008959",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#008959",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 onClick={() => navigator("/feefollowup")}
               >
                 <p className="text-center pt-3">Fee followups</p>
@@ -258,13 +261,14 @@ const FeeDetails = () => {
             </div>
             <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
               <Card
-                style={{
-                  background: "#195489",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#195489",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
               >
                 <p className="text-center pt-3">Fee Received</p>
               </Card>
@@ -507,43 +511,43 @@ const FeeDetails = () => {
               </div>
             </div>
           </div>
-          <Paper>
-            <TableContainer sx={{ maxHeight: 440 }}>
+       
+            <TableContainer sx={{ maxHeight: 440 }} component={Paper}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       S.NO
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Name
                       <br /> Branch <br />
                       Counsellor
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Contact
                       <br />
                       Email
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Course <br /> Date of Joining
                       <br /> Total Fee
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Paid Fee
                       <br /> Due Amount
                       <br /> Next Due Date
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Total <br />
                       Installments
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Paid <br /> Installments
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       View
-                    </StyledTableCell>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -586,16 +590,16 @@ const FeeDetails = () => {
                       }-${year}`;
 
                       return (
-                        <StyledTableRow
+                        <TableRow
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                           key={item.id}
                         >
-                          <StyledTableCell className="Table-cell ">
+                          <TableCell className="Table-cell ">
                             {index + 1}
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={item.name}
                               style={{
@@ -639,8 +643,8 @@ const FeeDetails = () => {
                             >
                               {item.enquirytakenby}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={item.mobilenumber}
                               style={{
@@ -667,8 +671,8 @@ const FeeDetails = () => {
                             >
                               {item.email}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={item.courses}
                               style={{
@@ -712,8 +716,8 @@ const FeeDetails = () => {
                                 parseFloat(item.finaltotal).toFixed(2)
                               ).toLocaleString("en-IN")}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={Number(
                                 parseFloat(item.totalpaidamount).toFixed(2)
@@ -761,8 +765,8 @@ const FeeDetails = () => {
                             >
                               {NextDueDate ? NextDueDate : "No NextDue Date"}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell ">
+                          </TableCell>
+                          <TableCell className="Table-cell ">
                             <span>
                               {item.totalinstallments &&
                                 item.totalinstallments.length > 0 &&
@@ -797,8 +801,8 @@ const FeeDetails = () => {
                                   }
                                 })}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             {item.totalinstallments &&
                               item.totalinstallments.length > 0 &&
                               item.totalinstallments.map((items, index) => {
@@ -831,13 +835,13 @@ const FeeDetails = () => {
                                   );
                                 }
                               })}
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <Link to={`/feeview/${item.id}`}>
                               <VisibilityIcon className="icon-color" />
                             </Link>
-                          </StyledTableCell>
-                        </StyledTableRow>
+                          </TableCell>
+                        </TableRow>
                       );
                     })
                   ) : (
@@ -850,7 +854,7 @@ const FeeDetails = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </Paper>
+          
           <div
             style={{ display: "flex", justifyContent: "center" }}
             className="mt-3"

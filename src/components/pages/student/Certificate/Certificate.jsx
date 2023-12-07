@@ -565,34 +565,34 @@ const Certificate = () => {
   </ul>
 </div> */}
 
-          <Paper>
-            <TableContainer sx={{ maxHeight: 440 }}>
+   
+          <TableContainer component={Paper}  sx={{ maxHeight: 440 }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       S. No
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Name
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Course
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Registration ID
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Course StartDate
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Course EndDate
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Certificate Status
-                    </StyledTableCell>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -610,11 +610,11 @@ const Certificate = () => {
                         .join(", ");
 
                       return (
-                        <StyledTableRow key={student.id}>
-                          <StyledTableCell className="Table-cell text-center">
+                        <TableRow key={student.id}>
+                          <TableCell className="Table-cell text-center">
                             {index + 1}
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={student.name}
                               style={{
@@ -629,8 +629,8 @@ const Certificate = () => {
                             >
                               {student.name}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={student.courses}
                               style={{
@@ -645,8 +645,8 @@ const Certificate = () => {
                             >
                               {student.courses}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell text-center">
+                          </TableCell>
+                          <TableCell className="Table-cell text-center">
                             <span
                               title={student.registrationnumber}
                               style={{
@@ -661,9 +661,9 @@ const Certificate = () => {
                             >
                               {student.registrationnumber}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -685,8 +685,8 @@ const Certificate = () => {
                                 }
                               />
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -707,8 +707,8 @@ const Certificate = () => {
                                 }
                               />
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             {certificateStatus === "" && (
                               <button
                                 className="btn btn-color text-center m-0 px-1"
@@ -730,14 +730,14 @@ const Certificate = () => {
                                 Certificate Issued
                               </button>
                             )}
-                          </StyledTableCell>
-                        </StyledTableRow>
+                          </TableCell>
+                        </TableRow>
                       );
                     })}
                 </TableBody>
               </Table>
             </TableContainer>
-          </Paper>
+  
           <div
             style={{ display: "flex", justifyContent: "center" }}
             className="mt-3"

@@ -466,48 +466,48 @@ const Feefollowup = () => {
             <strong> Sum of Due Amounts: </strong> {sumDueAmount}
           </p>
         </div>
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
+       
+          <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+            <Table  stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
                     {" "}
                     S.NO
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     Name
                     <br /> Branch <br /> Counsellor
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     {" "}
                     Contact
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     {" "}
                     Email
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     {" "}
                     Course
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     {" "}
                     Due Date
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     {" "}
                     Due Amount{" "}
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     {" "}
                     Paid Status
-                  </StyledTableCell>
+                  </TableCell>
 
-                  <StyledTableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
                     {" "}
                     View
-                  </StyledTableCell>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -540,42 +540,42 @@ const Feefollowup = () => {
                     }-${year}`;
 
                     return (
-                      <StyledTableRow
+                      <TableRow
                         sx={{
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <StyledTableCell
+                        <TableCell
                           component="th"
                           className="Table-cell text-center"
                         >
                           {index + 1}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           {item.name}
                           <br />
                           {item.branch}
                           <br />
                           {item.enquirytakenby}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           {item.mobilenumber}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           {item.email}
-                        </StyledTableCell>
+                        </TableCell>
                         <TableCell className="Table-cell text-center">
                           {item.courses}
                         </TableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        <TableCell className="Table-cell text-center">
                           {item.duedate}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           {Number(
                             parseFloat(item.dueamount).toFixed(2)
                           ).toLocaleString("en-IN")}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           {item.totalinstallments &&
                             item.totalinstallments.length > 0 &&
                             item.totalinstallments.map((items, index) => {
@@ -593,13 +593,13 @@ const Feefollowup = () => {
                                 );
                               }
                             })}
-                        </StyledTableCell>
-                        <StyledTableCell className="border border 1">
+                        </TableCell>
+                        <TableCell className="border border 1">
                           <Link to={`/feeview/${item.id}`}>
                             <VisibilityIcon className="icon-color" />
                           </Link>
-                        </StyledTableCell>
-                      </StyledTableRow>
+                        </TableCell>
+                      </TableRow>
                     );
                   })
                 ) : (
@@ -618,7 +618,7 @@ const Feefollowup = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </Paper>
+     
         {/* <table>
         <thead>
           <tr>
