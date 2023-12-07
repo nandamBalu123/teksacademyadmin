@@ -80,7 +80,7 @@ const Topbar = () => {
     email = user.email;
   }
   return (
-    <div className='container ' > 
+    <div className='container Top-bar' > 
     <AppBar position="static" className='bg-white'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -176,7 +176,8 @@ const Topbar = () => {
                 <img src={profilepic} alt=""  className='userpic'/>
               </IconButton>
             {/* </Tooltip> */}
-            <Menu
+              <Menu
+                style={{marginLeft:"6rem"}}
               sx={{ mt: '45px'  }}
               id="menu-appbar"
               anchorEl={anchorElUser}
@@ -193,19 +194,20 @@ const Topbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-               <div className='d-flex justify-content-between'> 
+               {/* <div className='d-flex justify-content-between'> 
                 <img src={profilepic} alt=""  className='dropdownuserimg'/>
              <span> 
              <MenuItem className='fs-5  ms-4 m-0 p-0 ' > {fullname}</MenuItem>
                <MenuItem className='fs-11 text-center'> {email}</MenuItem>
              </span>
-               </div><hr/>
-                <div className='d-flex justify-content-between'> 
+               </div><hr/> */}
+                <div > 
                 <MenuItem className='fs-6' onClick={handleProfile}><AccountCircleIcon className='fs-5'/> &nbsp;Profile </MenuItem>
                 <MenuItem  className='fs-6'onClick={handleLogout}><PowerSettingsNewIcon className='fs-5'/> &nbsp; Logout </MenuItem>
                 </div>
             </Menu>
-          </Box>
+            </Box>
+            <p style={{ color: "black", margin:"auto 5px" }} >{fullname }</p>
         </Toolbar>
       </Container>
     </AppBar> </div>
