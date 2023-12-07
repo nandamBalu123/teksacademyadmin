@@ -685,13 +685,16 @@ const StudentData = () => {
                 </Menu>
               </p>
               <p>
+                {role !== 'counsellor' && 
                 <CSVLink
-                  data={filteredData}
-                  filename={"studentsdata.csv"}
-                  target="_blank"
-                >
-                  <DownloadIcon className="icon-color mt-4"></DownloadIcon>
-                </CSVLink>
+                data={filteredData}
+                filename={"studentsdata.csv"}
+                target="_blank"
+              >
+                <DownloadIcon className="icon-color mt-4"></DownloadIcon>
+              </CSVLink>
+                }
+                
               </p>
             </div>
           </div>
