@@ -1,5 +1,5 @@
 // import * as React from "react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -84,7 +84,7 @@ export default function RegistrationForm() {
   const [educationtype, setEducationType] = useState("");
   const [marks, setMarks] = useState("");
   const [academicyear, setAcademicyear] = useState("");
-  const [studentImage, setSelectedFile] = useState(null);
+  // const [studentImage, setSelectedFile] = useState(null);
   // const [profilepic, setProfilePpic] = useState("");
   const [enquirydate, setEnquiryDate] = useState("");
   const [enquirytakenby, setEnquiryTakenBy] = useState("");
@@ -472,21 +472,110 @@ export default function RegistrationForm() {
     }
     handleNext();
   };
+
+  
+
+  const fileInputRef = useRef(null);
+  // const [resizedImage, setResizedImage] = useState(null);
+  
+  const [studentImage, setSelectedFile] = useState(null);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const targetSizeInBytes = 45 * 1024;
+        const resizedImage = await resizeImage(file, targetSizeInBytes);
+        const { width, height } = await getImageSize(resizedImage);
+        const sizeInKB = (resizedImage.size / 1024).toFixed(2);
+        console.log('Resized Image Dimensions:', { width, height });
+        console.log('Resized Image Size:', sizeInKB, 'KB');
+        setSelectedFile(resizedImage);
+
+      } catch (error) {
+        console.error('Error processing image:', error);
+      }
+    }
+  };
+
+  const getImageSize = (file) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+
+      img.onload = () => {
+        resolve({ width: img.width, height: img.height });
+      };
+
+      img.onerror = (error) => {
+        reject(error);
+      };
+
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        img.src = e.target.result;
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const resizeImage = async (file, targetSize) => {
+    const img = new Image();
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    img.src = URL.createObjectURL(file);
+
+    await new Promise((resolve) => {
+      img.onload = resolve;
+    });
+
+    let width = img.width;
+    let height = img.height;
+    let resizedFile = file;
+
+    while (resizedFile.size > targetSize) {
+      width *= 0.9; 
+      height *= 0.9; 
+
+      canvas.width = width;
+      canvas.height = height;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.drawImage(img, 0, 0, width, height);
+
+      const blob = await new Promise((resolve) => {
+        canvas.toBlob(resolve, 'image/jpeg', 0.85); 
+      });
+
+      resizedFile = new File([blob], file.name, { type: blob.type });
+    }
+
+    return resizedFile;
+  };
+
   const handlePhoto = () => {
     if (!studentImage) {
       alert("Please select an image to upload");
       return;
     }
 
-    const maxSizeInBytes = 45 * 1024; // 40 KB in bytes
-    if (studentImage.size > maxSizeInBytes) {
-      alert("Image size is too large. Maximum allowed size is 45 KB");
-      return;
-    }
+    // const maxSizeInBytes = 45 * 1024; // 40 KB in bytes
+    // if (studentImage.size > maxSizeInBytes) {
+    //   alert("Image size is too large. Maximum allowed size is 45 KB");
+    //   return;
+    // }
 
     // Image size is within the limit, proceed to the next step
     handleNext();
   };
+console.log("studentImage", studentImage)
+
   const handleEnquirydetails = () => {
     if (!enquirydate) {
       alert("please enter enquirydate");
@@ -926,6 +1015,19 @@ export default function RegistrationForm() {
 
   return (
     <div className="main-container container">
+      {/* <div>
+      <input type="file" ref={fileInputRef} onChange={handleFileChange} />
+      {resizedImage && (
+        <div style={{ marginTop: '10px' }}>
+          <strong>Resized Image Dimensions:</strong>{' '}
+          {`Width: ${resizedImage.width}px, Height: ${resizedImage.height}px`}
+          <br />
+          <strong>Resized Image Size:</strong> {`${(resizedImage.size / 1024).toFixed(2)} KB`}
+          <br />
+          <img src={URL.createObjectURL(resizedImage)} alt="Resized" />
+        </div>
+      )}
+    </div> */}
       {/* <div>
       <form>
         <label>
@@ -1487,12 +1589,22 @@ export default function RegistrationForm() {
             <StepContent>
               <form className="form">
                 <div className="row ">
-                  <input
+                  <input ref={fileInputRef}
                     type="file"
-                    onChange={(e) => {
-                      setSelectedFile(e.target.files[0]);
-                    }}
+                    onChange={handleFileChange}
                   />
+                  
+              {studentImage && (
+                <div style={{ marginTop: '10px' }}>
+                  {/* <strong>Resized Image Dimensions:</strong>{' '} */}
+                  {/* {`Width: ${studentImage.width}px, Height: ${studentImage.height}px`} */}
+                  <br />
+                  {/* <strong>Resized Image Size:</strong>  */}
+                  {/* {`${(studentImage.size / 1024).toFixed(2)} KB`} */}
+                  {/* <br /> */}
+                  <img src={URL.createObjectURL(studentImage)} alt="Resized" />
+                </div>
+              )}
                 </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
