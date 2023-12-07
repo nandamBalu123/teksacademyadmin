@@ -119,14 +119,13 @@ export default function RegistrationForm() {
   const [duedatetype, setduedatetype] = useState("");
   const [addfee, setaddfee] = useState(false);
   const [installments, setinstallments] = useState([]);
-  const [leadsourceOptions, setleadsourceOptions] = useState(false);
-  const [CustomLeadSource, setCustomLeadSource] = useState("");
+
   const [feedetailsbilling, setfeedetailsbilling] = useState([]);
   const [materialfee, setmaterialfee] = useState(null);
 
   const [totalfeewithouttax, settotalfeewithouttax] = useState(null);
   const [totalpaidamount, settotalpaidamount] = useState(0);
-  const [educationOthersOption, setEducationOthersOption] = useState(false);
+  const [othersOption, setOthersOption] = useState(false);
   const [customEducationType, setCustomEducationType] = useState("");
   const [student_status, setStudent_status] = useState([]);
   const [certificate_status, setcertificate_status] = useState([
@@ -167,29 +166,15 @@ export default function RegistrationForm() {
       setassets(assets.filter((asset) => asset !== assetName));
     }
   };
-  const handleEducationSelectChange = (e) => {
+  const handleSelectChange = (e) => {
     const selectedValue = e.target.value;
     if (selectedValue === "others") {
-      setEducationOthersOption(true);
-      setCustomEducationType("");
+      setOthersOption(true);
+      setCustomEducationType(""); // Clear the custom education type
       setEducationType(selectedValue);
     } else {
-      setEducationOthersOption(false);
+      setOthersOption(false);
       setEducationType(selectedValue);
-    }
-  };
-  const handleLeadSourceSelectChange = (e) => {
-    const selectedValue = e.target.value;
-    if (
-      selectedValue.toLowerCase() === "student referral" ||
-      selectedValue.toLowerCase() === "employee referral"
-    ) {
-      setleadsourceOptions(true);
-      setCustomLeadSource({ source: selectedValue });
-      setLeadSource([{ source: selectedValue }]);
-    } else {
-      setleadsourceOptions(false);
-      setLeadSource([{ source: selectedValue }]);
     }
   };
   const handleFeecalculations = () => {
@@ -485,7 +470,6 @@ export default function RegistrationForm() {
     if (educationtype === "others") {
       setEducationType(customEducationType);
     }
-
     handleNext();
   };
 
@@ -548,7 +532,7 @@ export default function RegistrationForm() {
     img.src = URL.createObjectURL(file);
 
     await new Promise((resolve) => {
-      img.onload = resolve;
+      img.onload = resolve;9
     });
 
     let width = img.width;
@@ -613,17 +597,10 @@ console.log("studentImage", studentImage)
       alert("please enter leadsource");
       return;
     }
-    if (
-      leadsource[0].source.toLowerCase() === "student referral" ||
-      leadsource[0].source.toLowerCase() === "employee referral"
-    ) {
-      setLeadSource([CustomLeadSource]);
-    }
 
     handleNext();
   };
   const handleAdmissiondetails = () => {
-    console.log("leadSource", leadsource, educationtype);
     if (!branch) {
       alert("please enter branch");
       return;
@@ -739,7 +716,7 @@ console.log("studentImage", studentImage)
         certificate_status,
         extra_discount,
       };
-      console.log("studentRegistrationdata", studentRegistrationdata);
+
       ///title case
       studentRegistrationdata = [studentRegistrationdata];
       const dataWithTitleCase = studentRegistrationdata.map((item) => {
@@ -969,100 +946,72 @@ console.log("studentImage", studentImage)
     setFeeDetails(updatedTasks);
   };
 
-// pin code api
-  // const fetchData = async () => {
-  //   if (zipcode && zipcode.length > 2) {
-  //     try {
-  //       const response = await axios.get(
-  //         `https://api.postalpincode.in/pincode/${zipcode}`
-  //       );
+  // // new
+  // const [selectedFile, setSelectedFilee] = useState(null);
 
-  //       if (response.data.length > 0) {
-  //         const postOffice = response.data[0]?.PostOffice[0];
+  //   const handleFileChange = (e) => {
+  //     setSelectedFilee(e.target.files[0]);
+  //   };
 
-  //         if (postOffice) {
-  //           const { Region: city, State: state, Country: country, Block: area } = postOffice;
-
-  //           setCountry(country);
-  //           setState(state);
-  //           setArea(area || '');
-  //           setNative(city || '');
-  //         } else {
-  //           // Handle case when post office data is not available
-  //           // setCountry('');
-  //           // setState('');
-  //           // setArea('');
-  //           // setNative('');
-  //         }
-  //       } else {
-  //         // Handle case when no data is returned
-  //         // setCountry('');
-  //         // setState('');
-  //         // setArea('');
-  //         // setNative('');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching location information:', error);
-  //       // Handle error as needed
+  //   const handleUpload = () => {
+  //     if (!selectedFile) {
+  //       alert('Please select a file to upload');
+  //       return;
   //     }
-  //   }
-  // };
 
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(selectedFile);
+  //     reader.onload = () => {
+  //       const photoData = reader.result.split(',')[1];
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, [zipcode]);
+  //       axios.post('http://localhost:3030/upload', {
+  //         filename: selectedFile.name,
+  //         data: photoData,
+  //       })
+  //       .then(response => {
+  //         console.log('File uploaded successfully', response.data);
+  //       })
+  //       .catch(error => {
+  //         console.error('Error uploading file:', error);
+  //       });
+  //     };
+  //   };
 
-  const fetchData = async () => {
-    if (zipcode && zipcode.length > 2) {
-      try {
-        const response = await axios.get(
-          `https://api.postalpincode.in/pincode/${zipcode}`
-        );
+  // const [zipCode, setZipCode] = useState('');
+  // const [locationInfo, setLocationInfo] = useState({});
 
-        if (response.data.length > 0) {
-          const postOffice = response.data[0]?.PostOffice[0];
+  useEffect(() => {
+    const fetchData = async () => {
+      if (zipcode && zipcode.length > 2) {
+        try {
+          const response = await axios.get(
+            `https://api.opencagedata.com/geocode/v1/json?q=${zipcode}&key=baae7304601949019149fb9c0db270ab`
+          );
 
-          if (postOffice) {
-            const { Region: city, State: state, Country: country, Block: area } = postOffice;
+          if (response.data.results.length > 0) {
+            const { city, state, country, suburb } =
+              response.data.results[0].components;
 
             setCountry(country);
             setState(state);
-            setArea(area || '');
-            setNative(city || '');
+            setArea(suburb);
+            setNative(city);
+            // setLocationInfo({ city, state, country, areaName: suburb || 'Not found' });
           } else {
-            // Clear the state if no post office data is available
-            setCountry('');
-            setState('');
-            setArea('');
-            setNative('');
+            // setLocationInfo({ city: 'Not found', state: 'Not found', country: 'Not found', areaName: 'Not found' });
           }
-        } else {
-          // Clear the state if no data is returned
-          setCountry('');
-          setState('');
-          setArea('');
-          setNative('');
+        } catch (error) {
+          console.error("Error fetching location information:", error);
         }
-      } catch (error) {
-        console.error('Error fetching location information:', error);
-        // Handle error as needed
       }
-    } else {
-      // Clear the state if the pincode is not valid
-      setCountry('');
-      setState('');
-      setArea('');
-      setNative('');
-    }
-  };
+    };
 
-  useEffect(() => {
     fetchData();
   }, [zipcode]);
 
-  // pin code end
-
+  // const handleZipCodeChange = (e) => {
+  //   setZipCode(e.target.value);
+  // };
 
   return (
     <div className="main-container container">
@@ -1332,7 +1281,7 @@ console.log("studentImage", studentImage)
           <Step>
             <StepLabel>
               <Typography>
-                <h6>Student Contact Details</h6>
+                <h6>Stdent Contact Details</h6>
               </Typography>
             </StepLabel>
             <StepContent>
@@ -1359,8 +1308,82 @@ console.log("studentImage", studentImage)
                       onChange={(e) => setCountry(e.target.value)}
                       value={country}
                     />
-                    
+                    {/* <FormControl variant="standard" className="w-75">
+                      <InputLabel>
+                        Country<span> *</span>
+                      </InputLabel>
+                      <Select
+                        name="country"
+                        required
+                        onChange={(e) => setCountry(e.target.value)}
+                        value={country}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="india">India</MenuItem>
+                      </Select>
+                    </FormControl> */}
                   </div>
+
+                  {/* <FormControl variant="standard" className="w-75">
+                      <InputLabel>
+                        State<span> *</span>
+                      </InputLabel>
+                      <Select
+                        name="state"
+                        required
+                        onChange={(e) => setState(e.target.value)}
+                        value={state}
+                      >
+                        <MenuItem value="">--select--</MenuItem>
+                        <MenuItem value="Telangana">Telangana </MenuItem>
+                        <MenuItem value="Andhra Pradesh">
+                          Andhra Pradesh
+                        </MenuItem>
+                        <MenuItem value="Arunachal Pradesh">
+                          Arunachal Pradesh
+                        </MenuItem>
+                        <MenuItem value="Assam">Assam</MenuItem>
+                        <MenuItem value="Bihar">Bihar</MenuItem>
+                        <MenuItem value="Chhattisgarh">Chhattisgarh</MenuItem>
+                        <MenuItem value="Goa">Goa</MenuItem>
+                        <MenuItem value="Gujarat">Gujarat</MenuItem>
+                        <MenuItem value="Haryana">Haryana</MenuItem>
+                        <MenuItem value="Himachal Pradesh">
+                          Himachal Pradesh
+                        </MenuItem>
+                        <MenuItem value="Jharkhand">Jharkhand</MenuItem>
+                        <MenuItem value="Karnataka">Karnataka</MenuItem>
+                        <MenuItem value="Kerala">Kerala</MenuItem>
+                        <MenuItem value="Madhya Pradesh">
+                          Madhya Pradesh
+                        </MenuItem>
+                        <MenuItem value="Maharashtra">Maharashtra</MenuItem>
+                        <MenuItem value="Manipur">Manipur</MenuItem>
+                        <MenuItem value="Meghalaya">Meghalaya</MenuItem>
+                        <MenuItem value="Mizoram">Mizoram</MenuItem>
+                        <MenuItem value="Nagaland">Nagaland</MenuItem>
+                        <MenuItem value="Odisha">Odisha</MenuItem>
+                        <MenuItem value="Punjab">Punjab</MenuItem>
+                        <MenuItem value="Rajasthan">Rajasthan</MenuItem>
+                        <MenuItem value="Sikkim">Sikkim</MenuItem>
+                        <MenuItem value="Tamil Nadu">Tamil Nadu</MenuItem>
+                        <MenuItem value="Tripura">Tripura</MenuItem>
+                        <MenuItem value="Uttar Pradesh">Uttar Pradesh</MenuItem>
+                        <MenuItem value="Uttarakhand">Uttarakhand</MenuItem>
+                        <MenuItem value="West Bengal">West Bengal</MenuItem>
+                        <MenuItem value="Andaman and NicobarIslands">
+                          Andaman and Nicobar Islands
+                        </MenuItem>
+                        <MenuItem value="Chandigarh">Chandigarh</MenuItem>
+                        <MenuItem value="Dadra and Nagar Haveli and Daman and Diu">
+                          Dadra and Nagar Haveli and Daman and Diu
+                        </MenuItem>
+                        <MenuItem value="Lakshadweep">Lakshadweep</MenuItem>
+                        <MenuItem value="Delhi">Delhi</MenuItem>
+                        <MenuItem value="Puducherry">Puducherry</MenuItem>
+                        <MenuItem value="others">Others</MenuItem>
+                      </Select>
+                    </FormControl> */}
                 </div>
 
                 <div className="row ">
@@ -1377,19 +1400,6 @@ console.log("studentImage", studentImage)
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
-                      label={<span className="label-family">Native Place</span>}
-                      type="text"
-                      variant="standard"
-                      className=" w-75"
-                      required
-                      onChange={(e) => setNative(e.target.value)}
-                      value={native}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                    <TextField
                       label={<span className="label-family">Area</span>}
                       type="text"
                       variant="standard"
@@ -1399,7 +1409,19 @@ console.log("studentImage", studentImage)
                       value={area}
                     />
                   </div>
-                  
+                </div>
+                <div className="row">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                    <TextField
+                      label={<span className="label-family">Native Place</span>}
+                      type="text"
+                      variant="standard"
+                      className=" w-75"
+                      required
+                      onChange={(e) => setNative(e.target.value)}
+                      value={native}
+                    />
+                  </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label={
@@ -1461,7 +1483,7 @@ console.log("studentImage", studentImage)
                         id="educationtype"
                         name="educationtype"
                         required
-                        onChange={handleEducationSelectChange}
+                        onChange={handleSelectChange}
                         value={educationtype}
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
@@ -1472,7 +1494,7 @@ console.log("studentImage", studentImage)
                         <MenuItem value="ssc">SSC</MenuItem>
                         <MenuItem value="others">Others</MenuItem>
                       </Select>
-                      {educationOthersOption && (
+                      {othersOption && (
                         <div className="mt-3">
                           <TextField
                             label={<span className="label-family">Others</span>}
@@ -1485,6 +1507,23 @@ console.log("studentImage", studentImage)
                             }
                             value={customEducationType}
                           />
+                          {/* <label className="col-12 col-md-2 label">
+                            Others
+                          </label>
+                          <input
+                            type="text"
+                            className="col-9 col-md-5"
+                            required
+                            style={{
+                              height: "35px",
+                              border: "1.5px solid black",
+                              borderRadius: "5px",
+                            }}
+                            onChange={(e) =>
+                              setCustomEducationType(e.target.value)
+                            }
+                            value={customEducationType}
+                          /> */}
                         </div>
                       )}
                     </FormControl>
@@ -1702,8 +1741,8 @@ console.log("studentImage", studentImage)
                         id="leadsource"
                         name="leadsource"
                         required
-                        onChange={handleLeadSourceSelectChange}
-                        value={leadsource.source}
+                        onChange={(e) => setLeadSource(e.target.value)}
+                        value={leadsource}
                       >
                         <MenuItem value="select"> ---select---</MenuItem>
                         {leadsources &&
@@ -1713,42 +1752,6 @@ console.log("studentImage", studentImage)
                             </MenuItem>
                           ))}
                       </Select>
-                      {leadsourceOptions && (
-                        <div className="mt-3">
-                          <TextField
-                            label={<span className="label-family">Name</span>}
-                            type="text"
-                            variant="standard"
-                            className=" w-75"
-                            required
-                            onChange={(e) =>
-                              setCustomLeadSource((prev) => ({
-                                ...prev,
-                                name: e.target.value,
-                              }))
-                            }
-                            value={CustomLeadSource.name || ""}
-                          />
-                          <TextField
-                            label={
-                              <span className="label-family">
-                                Mobile Number
-                              </span>
-                            }
-                            type="text"
-                            variant="standard"
-                            className=" w-75"
-                            required
-                            onChange={(e) =>
-                              setCustomLeadSource((prev) => ({
-                                ...prev,
-                                mobileNumber: e.target.value,
-                              }))
-                            }
-                            value={CustomLeadSource.mobileNumber || ""}
-                          />
-                        </div>
-                      )}
                     </FormControl>
                   </div>
                 </div>
@@ -2503,13 +2506,7 @@ console.log("studentImage", studentImage)
                         src={pictureprofile}
                         alt="profile"
                       /> */}
-                        {imageUrl && (
-                          <img
-                            src={imageUrl}
-                            alt="Selected"
-                            style={{ width: "60%" }}
-                          />
-                        )}
+                        {imageUrl && <img src={imageUrl} alt="Selected"  style={{width:"60%"}}/>}
                         {/* {!studentdata.studentImg && (
                         <img src={profilePic} alt="photo" />
                       )}
@@ -2560,7 +2557,7 @@ console.log("studentImage", studentImage)
                         <p> Enquiry Date : {enquirydate}</p>
                         <p> Enquiry Taken By: {enquirytakenby}</p>
                         <p> Course Package: {coursepackage}</p>
-                        {/* <p>Lead Source: {leadsource} </p> */}
+                        <p>Lead Source: {leadsource} </p>
                         <p> Mode of Traning: {modeoftraining}</p>
                       </div>
                     </div>
