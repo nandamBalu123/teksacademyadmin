@@ -589,6 +589,35 @@ const Dashboard = () => {
     AllbranchesDueAmount = calculateDueAmountForCurrentMonth();
     AllbranchesreceivedAmount = calculatePaidAmountForCurrentMonth();
   }
+
+  // enrollments total  received amount and due amount
+
+  const [enrollmentsTotalReceivedAmount, setEnrollmentsTotalReceivedAmount] =
+    useState();
+  const [enrollmentsTotalDueAmount, setEnrollmentsDueAmount] = useState();
+
+  useEffect(() => {
+    if (getstudentData) {
+      // Calculate total received amount
+      const totalReceivedAmount = getstudentData.reduce(
+        (totalAmount, student) =>
+          totalAmount + parseInt(student.totalpaidamount),
+        0
+      );
+
+      // Calculate total due amount
+      const totalDueAmount = getstudentData.reduce(
+        (totalAmount, student) => totalAmount + parseInt(student.dueamount),
+        0
+      );
+
+      setEnrollmentsTotalReceivedAmount(totalReceivedAmount);
+      setEnrollmentsDueAmount(totalDueAmount);
+    }
+  }, [getstudentData]);
+
+  //  enrollments total  received amount and due amount
+  // end
   return (
     <div className="container main-dashboard">
       {/* Header */}
@@ -1003,8 +1032,7 @@ const Dashboard = () => {
           )} */}
           <div>
             <div className="row  ">
-              <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
-              <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <div className="col-12 col-md-3 col-xl-3 col-lg-3">
                 <Card
                   onClick={(e) =>
                     setBranchwise({
@@ -1061,6 +1089,58 @@ const Dashboard = () => {
                         parseFloat(totalAmount).toFixed(2)
                       ).toLocaleString("en-IN")}{" "}
                     </p>
+                  </p>
+                </Card>
+              </div>
+              <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+                <Card
+                  onClick={(e) =>
+                    setBranchwise({
+                      enrollments: false,
+                      bookingamount: false,
+                      feerecevied: false,
+                      feeyettorecevied: false,
+                      branchusers: false,
+                    })
+                  }
+                  style={{
+                    background: "#7fa1e4",
+                    textAlign: "center",
+                    cursor: "pointer",
+                    borderRadius: "8px",
+                    color: "white",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
+                >
+                  <p className="text-center pt-3">
+                    Recieved Amount
+                    <p>{enrollmentsTotalReceivedAmount}</p>
+                  </p>
+                </Card>
+              </div>
+              <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+                <Card
+                  onClick={(e) =>
+                    setBranchwise({
+                      enrollments: false,
+                      bookingamount: false,
+                      feerecevied: false,
+                      feeyettorecevied: false,
+                      branchusers: false,
+                    })
+                  }
+                  style={{
+                    background: "#7fa1e4",
+                    textAlign: "center",
+                    cursor: "pointer",
+                    borderRadius: "8px",
+                    color: "white",
+                    boxShadow: "3px 3px 6px  gray",
+                  }}
+                >
+                  <p className="text-center pt-3">
+                    Due Amount
+                    <p>{enrollmentsTotalDueAmount}</p>
                   </p>
                 </Card>
               </div>
