@@ -594,34 +594,34 @@ const Requestedcertificates = () => {
               </div>
             </div>
           </div>
-          <Paper>
-            <TableContainer sx={{ maxHeight: 400 }}>
+      
+            <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
               <Table stickyHeader aria-label="sticky table" borderAxis="both">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell className="table-cell-heading text-center">
+                    <TableCell className="table-cell-heading text-center">
                       S. No
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Name
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Course
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Registration ID
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Course StartDate
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Course EndDate
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Certificate Status
-                    </StyledTableCell>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -681,11 +681,11 @@ const Requestedcertificates = () => {
                         monthAbbreviations[courseEndDatemonthIndex]
                       }-${courseEndDateyear}`;
                       return (
-                        <StyledTableRow>
-                          <StyledTableCell className="Table-cell text-center">
+                        <TableRow>
+                          <TableCell className="Table-cell text-center">
                             {index + 1}
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={student.name}
                               style={{
@@ -700,8 +700,8 @@ const Requestedcertificates = () => {
                             >
                               {student.name}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={student.courses}
                               style={{
@@ -716,8 +716,8 @@ const Requestedcertificates = () => {
                             >
                               {student.courses}
                             </span>
-                          </StyledTableCell>{" "}
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>{" "}
+                          <TableCell className="Table-cell">
                             <span
                               title={student.registrationnumber}
                               // style={{
@@ -732,8 +732,8 @@ const Requestedcertificates = () => {
                             >
                               {student.registrationnumber}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               title={formattedcourseStartDate}
                               // style={{
@@ -748,8 +748,8 @@ const Requestedcertificates = () => {
                             >
                               {formattedcourseStartDate}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell ">
+                          </TableCell>
+                          <TableCell className="Table-cell ">
                             <span
                               title={courseEndDate}
                               // style={{
@@ -764,8 +764,8 @@ const Requestedcertificates = () => {
                             >
                               {formattedcourseEndDate}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             {certificateStatus === "request Submitted" && (
                               <button
                                 className="btn btn-warning center m-0 px-1"
@@ -785,14 +785,14 @@ const Requestedcertificates = () => {
                                 Certificate Issued
                               </button>
                             )}
-                          </StyledTableCell>
-                        </StyledTableRow>
+                          </TableCell>
+                        </TableRow>
                       );
                     })}
                 </TableBody>
               </Table>
             </TableContainer>
-          </Paper>
+         
           <div
             style={{ display: "flex", justifyContent: "center" }}
             className="mt-3 mb-3"
