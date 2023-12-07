@@ -262,13 +262,15 @@ const Addassets = () => {
           <div className=" row px-2">
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
-                style={{
-                  background: "#195489",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                style={{cursor:"default"}}
+                // style={{
+                //   background: "#195489",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
               >
                 <p className="pt-3 text-center">
                   Total Laptops: {getLaptopCount()}
@@ -277,13 +279,15 @@ const Addassets = () => {
             </div>
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
-                style={{
-                  background: "#FF9F24",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                style={{cursor:"default"}}
+                // style={{
+                //   background: "#FF9F24",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
               >
                 <p className="pt-3 text-center">
                   Total T-Shirts:{getTshirtCount()}
@@ -309,13 +313,15 @@ const Addassets = () => {
           </div> */}
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
-                style={{
-                  background: "#008959",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                style={{cursor:"default"}}
+                // style={{
+                //   background: "#008959",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
               >
                 <p className="pt-3 text-center">
                   Total Shirt:{getShirtCount()}
@@ -324,13 +330,15 @@ const Addassets = () => {
             </div>
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1 ">
               <Card
-                style={{
-                  background: "#195489",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                style={{cursor:"default"}}
+                // style={{
+                //   background: "#195489",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
               >
                 <p className="pt-3 text-center">
                   Total Charger:{getChargerCount()}
@@ -339,13 +347,15 @@ const Addassets = () => {
             </div>
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
-                style={{
-                  background: "#FF9F24",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                style={{cursor:"default"}}
+                // style={{
+                //   background: "#FF9F24",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
               >
                 <p className="pt-3 text-center">
                   Total Mouse:{getMouseCount()}
@@ -354,13 +364,15 @@ const Addassets = () => {
             </div>
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
-                style={{
-                  background: "#008959",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                style={{cursor:"default"}}
+                // style={{
+                //   background: "#008959",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
               >
                 <p className="pt-3 text-center">
                   Total Bags:{getStudentsBags()}
@@ -505,42 +517,42 @@ const Addassets = () => {
                     </div> */}
 
             {/* <NavLink to="/addassetsform" className="btn btn-primary">Add Record</NavLink><br></br> */}
-            <Paper sx={{ width: "100%", overflow: "hidden" }}>
-              <TableContainer sx={{ maxHeight: 440 }}>
+            
+              <TableContainer sx={{ maxHeight: 440 }} component={Paper}>
                 <Table stickyHeader aria-label="sticky table" borderAxis="both">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell className="table-cell-heading">
+                      <TableCell className="table-cell-heading">
                         ID
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Vendor Name
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Asset Type
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Brand Name
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Asset Code
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Quantity
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Status
-                      </StyledTableCell>
-                      <StyledTableCell className="table-cell-heading">
+                      </TableCell>
+                      <TableCell className="table-cell-heading">
                         Action
-                      </StyledTableCell>
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {getuserdata.map((element, id) => (
                       <React.Fragment key={id}>
-                        <StyledTableRow>
-                          <StyledTableCell className="Table-cell ">
+                        <TableRow>
+                          <TableCell className="Table-cell ">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -549,9 +561,9 @@ const Addassets = () => {
                               {" "}
                               {id + 1}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
                           {/* <td>{element.name}</td> */}
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -559,10 +571,10 @@ const Addassets = () => {
                             >
                               {element.vendername}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
                           {/* <td>{element.designation}</td> */}
                           {/* <td>{element.branch}</td> */}
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -570,9 +582,9 @@ const Addassets = () => {
                             >
                               {element.assettype}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -580,10 +592,10 @@ const Addassets = () => {
                             >
                               {element.brandname}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
                           {/* <td>{element.remarks}</td> */}
                           {/* <td>{element.issueddate}</td> */}
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -591,8 +603,8 @@ const Addassets = () => {
                             >
                               {element.assetcode}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -600,8 +612,8 @@ const Addassets = () => {
                             >
                               {element.anonymity}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -609,8 +621,8 @@ const Addassets = () => {
                             >
                               {element.returndate}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell text-center">
+                          </TableCell>
+                          <TableCell className="Table-cell text-center">
                             <NavLink to={`view/${element.id}`}>
                               <RemoveRedEyeIcon
                                 style={{ width: "40px" }}
@@ -628,14 +640,14 @@ const Addassets = () => {
                               onClick={() => deleteuser(element.id)}
                               className="text-danger"
                             />
-                          </StyledTableCell>
-                        </StyledTableRow>
+                          </TableCell>
+                        </TableRow>
                       </React.Fragment>
                     ))}
                   </TableBody>
                 </Table>
               </TableContainer>
-            </Paper>
+    
           </div>
         </div>
       </div>

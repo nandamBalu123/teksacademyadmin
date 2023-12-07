@@ -55,36 +55,36 @@ const Branch = () => {
           <Table aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="table-cell-heading" align="center">
+                <TableCell className="table-cell-heading" align="center">
                   SI.NO
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading" align="center">
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Name
-                </StyledTableCell>
+                </TableCell>
 
-                {/* <StyledTableCell className='  bg-primary fs-6 Table-cell' align="center">Type</StyledTableCell> */}
+                {/* <TableCell className='  bg-primary fs-6 Table-cell' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
 
             {Array.isArray(branches) && branches.length > 0 ? (
               branches.map((item, index) => (
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell className="Table-cell text-center">
+                <TableRow key={item.id}>
+                  <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}> {index + 1}</span>
-                  </StyledTableCell>
-                  <StyledTableCell className="Table-cell text-center">
+                  </TableCell>
+                  <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}>
                       {" "}
                       {item.branch_name}{" "}
                     </span>
-                  </StyledTableCell>
+                  </TableCell>
 
-                  {/* <StyledTableCell className=" Table-cell text-center"> Custom</StyledTableCell> */}
-                </StyledTableRow>
+                  {/* <TableCell className=" Table-cell text-center"> Custom</TableCell> */}
+                </TableRow>
               ))
             ) : (
               <StyledTableRow>
-                <StyledTableCell colSpan={3}>No data available</StyledTableCell>
+                <TableCell colSpan={3}>No data available</TableCell>
               </StyledTableRow>
             )}
           </Table>

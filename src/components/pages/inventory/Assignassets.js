@@ -477,22 +477,23 @@ const Assignassets = () => {
           <div className="row px-2">
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
-                style={{
-                  background: "#195489",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#195489",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 onClick={(e) =>
-                  setDisplayassets({
-                    allbranches: true,
-                    secendrabad: false,
+                  setDisplayassets((prev)=>({
+                    allbranches: !prev.allbranches,
+                    secundrabad: false,
                     hitechcity: false,
                     ameerpet: false,
                     dilsukhnagar: false,
                     kukatpally: false,
-                  })
+                    }))
                 }
               >
                 <p className="text-center pt-3">All Branches</p>
@@ -500,22 +501,23 @@ const Assignassets = () => {
             </div>
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
-                style={{
-                  background: "#FF9F24",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#FF9F24",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 onClick={(e) =>
-                  setDisplayassets({
+                  setDisplayassets((prev)=>({
                     allbranches: false,
-                    secendrabad: true,
+                    secundrabad: !prev.secunderabad,
                     hitechcity: false,
                     ameerpet: false,
                     dilsukhnagar: false,
                     kukatpally: false,
-                  })
+                  }))
                 }
               >
                 <p className="text-center pt-3">Secunderabad</p>
@@ -524,46 +526,48 @@ const Assignassets = () => {
 
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
-                style={{
-                  background: "#008959",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#008959",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 onClick={(e) =>
-                  setDisplayassets({
+                  setDisplayassets((prev)=>({
                     allbranches: false,
-                    secendrabad: false,
-                    hitechcity: true,
+                    secundrabad: false,
+                    hitechcity: !prev.hitechcity,
                     ameerpet: false,
                     dilsukhnagar: false,
                     kukatpally: false,
-                  })
+                  }))
                 }
               >
-                <p className="text-center pt-3">Hi-tech City</p>
+                <p className="text-center pt-3 ">Hi-tech City</p>
               </Card>
             </div>
 
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
-                style={{
-                  background: "#195489",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#195489",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 onClick={(e) =>
-                  setDisplayassets({
+                  setDisplayassets((prev)=>({
                     allbranches: false,
-                    secendrabad: false,
+                    secundrabad: false,
                     hitechcity: false,
-                    ameerpet: true,
+                    ameerpet: !prev.ameerpet,
                     dilsukhnagar: false,
                     kukatpally: false,
-                  })
+                  }))
                 }
               >
                 <p className="text-center pt-3">Ameerpet</p>
@@ -571,22 +575,23 @@ const Assignassets = () => {
             </div>
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
-                style={{
-                  background: "#FF9F24",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
+                className="cardcolor"
+                // style={{
+                //   background: "#FF9F24",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 onClick={(e) =>
-                  setDisplayassets({
+                  setDisplayassets((prev)=>({
                     allbranches: false,
-                    secendrabad: false,
+                    secundrabad: false,
                     hitechcity: false,
                     ameerpet: false,
-                    dilsukhnagar: true,
+                    dilsukhnagar: !prev.dilsukhnagar,
                     kukatpally: false,
-                  })
+                  }))
                 }
               >
                 <p className="text-center pt-3">Dilsukhnagar</p>
@@ -594,21 +599,22 @@ const Assignassets = () => {
             </div>
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
               <Card
-                style={{
-                  background: "#008959",
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  color: "white",
-                  boxShadow: "3px 3px 6px  gray",
-                }}
-                // onClick={ (e)=> setDisplayassets({
-                // allbranches:false,
-                //   secendrabad:false,
-                //   hitechcity:false,
-                //   ameerpet:false,
-                //   dilsukhnagar:false,
-                //   kukatpally:true
-                //  })}
+                className="cardcolor"
+                // style={{
+                //   background: "#008959",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
+                onClick={ (e)=> setDisplayassets((prev)=>({
+                allbranches:false,
+                  secundrabad:false,
+                  hitechcity:false,
+                  ameerpet:false,
+                  dilsukhnagar:false,
+                  kukatpally:!prev.kukatpally
+                 }))}
               >
                 <p className="text-center pt-3">kukatpally</p>
               </Card>
@@ -616,16 +622,17 @@ const Assignassets = () => {
           </div>
           {Displayassets.allbranches && (
             <div className="row mb-3 px-3">
-              <h5> All Branches Data</h5>
+              <h5 className="underline text-center pt-3 mb-3"> All Branches Data</h5>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#fd746e",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#fd746e",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total Laptops: {getLaptopCount()}
@@ -634,13 +641,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#7fa1e4",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#7fa1e4",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total T-shirt: {getTshirtCount()}
@@ -649,13 +657,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#F4ae5b",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#F4ae5b",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total Shirt:{getShirtCount()}
@@ -664,13 +673,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#5ec394",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#5ec394",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total Charger:{getChargerCount()}
@@ -679,13 +689,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#f3a9b2",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                 className="sub-cardcolor"
+                  // style={{
+                  //   background: "#f3a9b2",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total Mouse:{getMouseCount()}
@@ -694,13 +705,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#a6ebdc",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#a6ebdc",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total Bags:{getStudentsBags()}
@@ -712,16 +724,17 @@ const Assignassets = () => {
 
           {Displayassets.hitechcity && (
             <div className="row mb-3 px-3">
-              <h5> Hi-Tech City Data</h5>
+              <h5 className="underline mb-3 pt-3 text-center"> Hi-Tech City Data</h5>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#fd746e",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                   className="sub-cardcolor"
+                  // style={{
+                  //   background: "#fd746e",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total laptops: {hcgetLaptopCount()}
@@ -730,13 +743,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#7fa1e4",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#7fa1e4",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total t-shirt: {hcgetTshirtCount()}
@@ -745,13 +759,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#F4ae5b",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                   className="sub-cardcolor"
+                  // style={{
+                  //   background: "#F4ae5b",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total shirt: {hcgetShirtCount()}
@@ -760,13 +775,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#5ec394",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#5ec394",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total charger: {hcgetChargerCount()}
@@ -775,13 +791,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#f3a9b2",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#f3a9b2",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total mouse: {hcgetMouseCount()}
@@ -790,13 +807,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#a6ebdc",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                className="sub-cardcolor"
+                  // style={{
+                  //   background: "#a6ebdc",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total bags: {hcgetStudentsBags()}
@@ -808,16 +826,17 @@ const Assignassets = () => {
 
           {Displayassets.ameerpet && (
             <div className="row mb-3 px-3">
-              <h5> Ameerpet Data</h5>
+              <h5 className="underline text-center pt-3 mb-3"> Ameerpet Data</h5>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#fd746e",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#7598b8",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#fff",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total laptops: {apgetLaptopCount()}
@@ -826,13 +845,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#7fa1e4",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#7fa1e4",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total t-shirt: {apgetTshirtCount()}
@@ -841,13 +861,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#F4ae5b",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#F4ae5b",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total shirt: {apgetShirtCount()}
@@ -856,13 +877,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#5ec394",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#5ec394",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total charger: {apgetChargerCount()}
@@ -871,13 +893,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#f3a9b2",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#f3a9b2",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total mouse: {apgetMouseCount()}
@@ -886,13 +909,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#a6ebdc",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#a6ebdc",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total bags: {apgetStudentsBags()}
@@ -904,16 +928,17 @@ const Assignassets = () => {
 
           {Displayassets.dilsukhnagar && (
             <div className="row mb-3 px-3">
-              <h5> Dilsukhnagar Data</h5>
+              <h5 className="underline text-center pt-3 mb-3"> Dilsukhnagar Data</h5>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#fd746e",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#fd746e",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total laptops: {dngetLaptopCount()}
@@ -922,13 +947,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#7fa1e4",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#7fa1e4",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total t-shirt: {dngetTshirtCount()}
@@ -937,13 +963,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#F4ae5b",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#F4ae5b",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total shirt: {dngetShirtCount()}
@@ -952,13 +979,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#5ec394",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#5ec394",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total charger: {dngetChargerCount()}
@@ -967,13 +995,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#f3a9b2",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#f3a9b2",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total mouse: {dngetMouseCount()}
@@ -982,13 +1011,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                  style={{
-                    background: "#a6ebdc",
-                    textAlign: "center",
-                    borderRadius: "8px",
-                    color: "#000",
-                    boxShadow: "3px 3px 6px  gray",
-                  }}
+                  className="sub-cardcolor"
+                  // style={{
+                  //   background: "#a6ebdc",
+                  //   textAlign: "center",
+                  //   borderRadius: "8px",
+                  //   color: "#000",
+                  //   boxShadow: "3px 3px 6px  gray",
+                  // }}
                 >
                   <p className="pt-3 text-center">
                     Total bags: {dngetStudentsBags()}
@@ -997,44 +1027,44 @@ const Assignassets = () => {
               </div>{" "}
             </div>
           )}
-          <Paper className="mt-3">
-            <TableContainer sx={{ maxHeight: 440 }}>
+          
+            <TableContainer sx={{ maxHeight: 440 }} component={Paper} className="mt-3">
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       ID{" "}
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Name{" "}
-                    </StyledTableCell>
-                    {/* <StyledTableCell className="table-cell-heading">Vender Name </StyledTableCell> */}
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    {/* <TableCell className="table-cell-heading">Vender Name </TableCell> */}
+                    <TableCell className="table-cell-heading">
                       {" "}
                       Branch
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       {" "}
                       Asset Type
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       {" "}
                       Brand Name{" "}
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Asset Code{" "}
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       Issue Date{" "}
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       {" "}
                       Quantity
-                    </StyledTableCell>
+                    </TableCell>
 
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Actions{" "}
-                    </StyledTableCell>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -1066,8 +1096,8 @@ const Assignassets = () => {
 
                     return (
                       <React.Fragment>
-                        <StyledTableRow key={id}>
-                          <StyledTableCell className="Table-cell">
+                        <TableRow key={id}>
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -1075,9 +1105,9 @@ const Assignassets = () => {
                             >
                               {id + 1}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
                           {/* <td>{element.name}</td> */}
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -1085,11 +1115,11 @@ const Assignassets = () => {
                             >
                               {element.name}
                             </span>
-                          </StyledTableCell>
-                          {/* <StyledTableCell  className="Table-cell">{element.vendername}</StyledTableCell> */}
+                          </TableCell>
+                          {/* <TableCell  className="Table-cell">{element.vendername}</TableCell> */}
                           {/* <td>{element.designation}</td> */}
                           {/* <td>{element.branch}</td> */}
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -1097,8 +1127,8 @@ const Assignassets = () => {
                             >
                               {element.branch}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -1106,8 +1136,8 @@ const Assignassets = () => {
                             >
                               {element.assettype}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -1115,10 +1145,10 @@ const Assignassets = () => {
                             >
                               {element.brandname}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
                           {/* <td>{element.remarks}</td> */}
                           {/* <td>{element.issueddate}</td> */}
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -1126,8 +1156,8 @@ const Assignassets = () => {
                             >
                               {element.assetcode}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -1135,8 +1165,8 @@ const Assignassets = () => {
                             >
                               {AssignDate}
                             </span>
-                          </StyledTableCell>
-                          <StyledTableCell className="Table-cell">
+                          </TableCell>
+                          <TableCell className="Table-cell">
                             <span
                               style={{
                                 fontSize: "15px",
@@ -1144,9 +1174,9 @@ const Assignassets = () => {
                             >
                               {element.anonymity}
                             </span>
-                          </StyledTableCell>
+                          </TableCell>
 
-                          <StyledTableCell className="Table-cell">
+                          <TableCell className="Table-cell">
                             <NavLink to={`view/${element.id}`}>
                               <RemoveRedEyeIcon className="icon-color" />
                             </NavLink>
@@ -1160,15 +1190,15 @@ const Assignassets = () => {
                               onClick={() => deleteuser(element.id)}
                               className="text-danger ms-2"
                             />
-                          </StyledTableCell>
-                        </StyledTableRow>
+                          </TableCell>
+                        </TableRow>
                       </React.Fragment>
                     );
                   })}
                 </TableBody>
               </Table>
             </TableContainer>
-          </Paper>
+    
           <div className="col-lg-12">
             {/* <div className="row">
                 <div className="col-lg-3">

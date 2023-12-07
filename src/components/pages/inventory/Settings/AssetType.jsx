@@ -189,29 +189,29 @@ export default function AssetType() {
           <Table stickyHeader aria-label="sticky table " borderAxis="both">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="table-cell-heading" align="center">
+                <TableCell className="table-cell-heading" align="center">
                   SI.NO
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading" align="center">
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Name
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading" align="center">
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Actions
-                </StyledTableCell>
-                {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
+                </TableCell>
+                {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
 
             {assettype &&
               assettype.map((element, index) => (
-                <StyledTableRow key={index}>
-                  <StyledTableCell className="Table-cell text-center">
+                <TableRow key={index}>
+                  <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}> {index + 1} </span>
-                  </StyledTableCell>
-                  <StyledTableCell className="Table-cell text-center">
+                  </TableCell>
+                  <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}>{element} </span>
-                  </StyledTableCell>
-                  <StyledTableCell className="Table-cell text-center">
+                  </TableCell>
+                  <TableCell className="Table-cell text-center">
                     <ModeEditIcon
                       onClick={(e) => handleEdit(index)}
                       className="icon-color"
@@ -221,8 +221,8 @@ export default function AssetType() {
                       className="text-danger ms-2"
                     />
                     {/* <button onClick={(e) => handleDelete(index)} >delete</button> */}
-                  </StyledTableCell>
-                </StyledTableRow>
+                  </TableCell>
+                </TableRow>
               ))}
           </Table>
         </TableContainer>

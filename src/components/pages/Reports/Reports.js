@@ -91,29 +91,29 @@ const Reports = () => {
           <Table aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="table-cell-heading" align="center">
+                <TableCell className="table-cell-heading" align="center">
                   S.No
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading" align="center">
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Report Name
-                </StyledTableCell>
+                </TableCell>
 
-                {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
+                {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
             {data &&
               data.map((report, index) => {
                 return (
-                  <StyledTableRow>
-                    <StyledTableCell className="Table-cell text-center">
+                  <TableRow>
+                    <TableCell className="Table-cell text-center">
                       <span style={{ fontSize: "15px" }}>{index + 1} </span>
-                    </StyledTableCell>
-                    <StyledTableCell className="Table-cell text-center">
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
                       <Link to={`/report/${index}`} style={{ width: "40px" }}>
                         {report.reportName}
                       </Link>
-                    </StyledTableCell>
-                  </StyledTableRow>
+                    </TableCell>
+                  </TableRow>
                 );
               })}
           </Table>

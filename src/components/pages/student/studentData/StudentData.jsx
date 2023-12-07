@@ -952,7 +952,8 @@ const StudentData = () => {
                           </span>
                         </TableCell>
 
-                        <TableCell className="text-center d-flex mt-2">
+                        <TableCell >
+                          <div className="d-flex"> 
                           <NavLink to={`/studentdataview/${item.id}`}>
                             <VisibilityIcon
                               style={{ width: "40px" }}
@@ -1026,6 +1027,7 @@ const StudentData = () => {
                               )}
                             </DialogActions>
                           </Dialog>
+                          </div>
                         </TableCell>
                       </TableRow>
                     );

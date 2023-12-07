@@ -33,7 +33,7 @@
 .Dashboard {
   overflow-x: hidden;
   margin: auto;
-  width: 96%;
+ 
 }
 .progreebar-show {
   width: 93%;
@@ -52,7 +52,7 @@
    
     
     position: relative;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
 }
 .underline::before{ 
   content: "";
