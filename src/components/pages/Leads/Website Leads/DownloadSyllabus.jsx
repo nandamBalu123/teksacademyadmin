@@ -168,7 +168,7 @@ const DownloadSyllabus = () => {
   useEffect(() => {
 
     axios
-      .get(`https://demo.teksacademy.com:3000/dsleads`)
+      .get(`${process.env.REACT_APP_API_URL}/dsleads`)
       .then((response) => {
         // Handle the successful response here
         setWebinarForm(response.data); // Update the data state with the fetched data
@@ -317,11 +317,7 @@ const DownloadSyllabus = () => {
       search: "",
     });
   };
-
-
-
-
-  return (
+return (
 
     <div className="container">
       <div className="studetdetails   mt-3">

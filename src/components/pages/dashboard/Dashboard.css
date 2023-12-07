@@ -45,6 +45,25 @@
 .css-17w9904-MuiTypography-root {
   font-size: 1rem !important;
 }
+.underline{ 
+ 
+   
+    text-transform: capitalize;
+   
+    
+    position: relative;
+    padding-bottom: 15px;
+}
+.underline::before{ 
+  content: "";
+  position: absolute;
+  display: block;
+  width: 150px;
+  height: 2px;
+  background: #e96228;
+  bottom: 2px;
+  left: calc(50% - 80px);
+}
 /* @media (min-width: 576px) { 
  .dashboardcard{ 
     margin-bottom: 20px;
