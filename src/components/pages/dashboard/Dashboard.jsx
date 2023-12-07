@@ -84,6 +84,8 @@ const Dashboard = () => {
   const [DisplayTable, setDisplayTable] = useState({
     enrollments: false,
     bookingamount: false,
+    enrollmentfeerecevied: false,
+    enrollmentfeeyettorecevied:false,
     feerecevied: false,
     feeyettorecevied: false,
     branchusers: false,
@@ -636,7 +638,7 @@ const Dashboard = () => {
   return (
     <div className="container main-dashboard">
       {/* Header */}
-      <div>
+      {/* <div>
         <Box className="text-center  mt-3">
           {user && <h4>{"Hi " + user.fullname}</h4>}
           <h5>
@@ -646,7 +648,7 @@ const Dashboard = () => {
             <span style={{ color: "#195489", fontSize: "25px" }}> ACADEMY</span>
           </h5>{" "}
         </Box>
-      </div>
+      </div> */}
 
       <div className="contianer Dashboard">
         <div className="row p-3">
@@ -829,9 +831,7 @@ const Dashboard = () => {
         <div className="">
           <div className="d-flex justify-content-between align-items-center">
         
-            <h5 className=" text-center flex-grow-1 pt-4 ms-sm-5 underline"
-             
-             >
+            <h5 className=" text-center flex-grow-1 pt-4 ms-sm-5 underline ">
              <span className="fw-bold fs-5"> Current Month</span> Enrollment Details
              </h5>
            
@@ -919,13 +919,14 @@ const Dashboard = () => {
           </div>
           {/* Enrollment cards Display */}
           <div className="row">
-            <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3">
-              <Card
+            <div className="col-12 col-md-3 col-xl-3 col-lg-3">
+            <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
                     enrollments: !prev.enrollments,
                     bookingamount: false,
+                    enrollmentfeerecevied: false,
+                    enrollmentfeeyettorecevied:false,
                     feerecevied: false,
                     feeyettorecevied: false,
                     branchusers: false,
@@ -951,12 +952,14 @@ const Dashboard = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
-              <Card
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3">
+            <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
                     enrollments: false,
                     bookingamount: !prev.bookingamount,
+                    enrollmentfeerecevied: false,
+                     enrollmentfeeyettorecevied:false,
                     feerecevied: false,
                     feeyettorecevied: false,
                     branchusers: false,
@@ -977,6 +980,74 @@ const Dashboard = () => {
                   Booking Amount
                   <p>
                     {Number(parseFloat(totalAmount).toFixed(2)).toLocaleString(
+                      "en-IN"
+                    )}{" "}
+                  </p>
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: false,
+                    bookingamount: false,
+                    enrollmentfeerecevied: !prev.enrollmentfeerecevied,
+                     enrollmentfeeyettorecevied:false,
+                    feerecevied: false,
+                    feeyettorecevied: false,
+                    branchusers: false,
+                    // ...prev,bookingamount:!prev.bookingamount
+                  }))
+                }
+                className="cardcolor"
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   cursor: "pointer",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
+              >
+                <p className="text-center pt-3">
+                  Fee Received
+                  <p>
+                    {Number(parseFloat(enrollmentsTotalReceivedAmount).toFixed(2)).toLocaleString(
+                      "en-IN"
+                    )}{" "}
+                  </p>
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: false,
+                    bookingamount: false,
+                    enrollmentfeerecevied:false,
+                     enrollmentfeeyettorecevied: !prev.enrollmentfeeyettorecevied,
+                    feerecevied: false,
+                    feeyettorecevied: false,
+                    branchusers: false,
+                    // ...prev,bookingamount:!prev.bookingamount
+                  }))
+                }
+                className="cardcolor"
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   cursor: "pointer",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
+              >
+                <p className="text-center pt-3">
+                  Fee Yet To Received
+                  <p>
+                    {Number(parseFloat(enrollmentsTotalDueAmount).toFixed(2)).toLocaleString(
                       "en-IN"
                     )}{" "}
                   </p>
@@ -1332,6 +1403,8 @@ const Dashboard = () => {
                   setDisplayTable((prev) => ({
                     enrollments: false,
                     bookingamount: false,
+                    enrollmentfeerecevied: false,
+                      enrollmentfeeyettorecevied:false,
                     feerecevied:!prev.feerecevied,
                     feeyettorecevied: false,
                     branchusers: false,
@@ -1364,6 +1437,8 @@ const Dashboard = () => {
                 setDisplayTable((prev) => ({
                   enrollments: false,
                   bookingamount: false,
+                  enrollmentfeerecevied: false,
+    enrollmentfeeyettorecevied:false,
                   feerecevied:false,
                   feeyettorecevied: !prev.feeyettorecevied,
                   branchusers: false,
@@ -2123,6 +2198,8 @@ const Dashboard = () => {
                 setDisplayTable((prev) => ({
                   enrollments: false,
                   bookingamount: false,
+                  enrollmentfeerecevied: false,
+    enrollmentfeeyettorecevied:false,
                   feerecevied:false,
                   feeyettorecevied:false,
                   branchusers:!prev.branchusers,
