@@ -1,27 +1,29 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import profilepic from '../../../images/img4.png';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
+import profilepic from "../../../images/img4.png";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { ColorModeContext, tokens } from "../../../theme";
-import {  useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { useContext } from "react";
-import './Topbar.css';
-
+import "./Topbar.css";
+import { useScroll } from "framer-motion";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Topbar = () => {
   const { user } = useAuthContext();
@@ -37,7 +39,6 @@ const Topbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("id");
 
-   
     // dispatch logout action
     dispatch({ type: "LOGOUT" });
     navigate("/login");
@@ -49,7 +50,6 @@ const Topbar = () => {
     //   .catch((err) => cFuseronsole.log(err));
     // window.location.reload();
   };
-  
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -73,37 +73,41 @@ const Topbar = () => {
     navigate("/userview/" + user.id);
     setAnchorElUser(null);
   };
-  let fullname;
+  const [fullname, setFullname] = useState();
   let email;
   if (user) {
-    fullname = user.fullname;
     email = user.email;
   }
+  useEffect(() => {
+    setFullname(user.fullname);
+  }, [user]);
+  useEffect(() => {
+    console.log("user", fullname);
+  });
   return (
-    <div className='container ' > 
-    <AppBar position="static" className='bg-white'>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-
-          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+    <div className="container ">
+      <AppBar position="static" className="bg-white">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              LOGO
+            </Typography>
+            {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -139,8 +143,8 @@ const Topbar = () => {
               ))}
             </Menu>
           </Box> */}
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          {/* <Typography
+            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+            {/* <Typography
             variant="h5"
             noWrap
             component="a"
@@ -158,7 +162,7 @@ const Topbar = () => {
           >
             LOGO
           </Typography> */}
-          {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -169,46 +173,55 @@ const Topbar = () => {
               </Button>
             ))}
           </Box> */}
+            <Box sx={{ flexGrow: 1, textAlign: "end" }}>
+              {/* <Tooltip title="Open settings"   > */}
 
-          <Box sx={{ flexGrow: 1 , textAlign:"end"}} >
-            {/* <Tooltip title="Open settings"   > */}
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <img src={profilepic} alt=""  className='userpic'/>
+                <img src={profilepic} alt="" className="userpic" />
               </IconButton>
-            {/* </Tooltip> */}
-            <Menu
-              sx={{ mt: '45px'  }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
 
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-               <div className='d-flex justify-content-between'> 
-                <img src={profilepic} alt=""  className='dropdownuserimg'/>
-             <span> 
-             <MenuItem className='fs-5  ms-4 m-0 p-0 ' > {fullname}</MenuItem>
-               <MenuItem className='fs-11 text-center'> {email}</MenuItem>
-             </span>
-               </div><hr/>
-                <div className='d-flex justify-content-between'> 
-                <MenuItem className='fs-6' onClick={handleProfile}><AccountCircleIcon className='fs-5'/> &nbsp;Profile </MenuItem>
-                <MenuItem  className='fs-6'onClick={handleLogout}><PowerSettingsNewIcon className='fs-5'/> &nbsp; Logout </MenuItem>
+              {/* </Tooltip> */}
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <div className="d-flex justify-content-between">
+                  <img src={profilepic} alt="" className="dropdownuserimg" />
+                  <span>
+                    <MenuItem className="fs-5  ms-4 m-0 p-0 ">
+                      {" "}
+                      {fullname}
+                    </MenuItem>
+                    <MenuItem className="fs-11 text-center"> {email}</MenuItem>
+                  </span>
                 </div>
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar> </div>
+                <hr />
+                <div className="d-flex justify-content-between">
+                  <MenuItem className="fs-6" onClick={handleProfile}>
+                    <AccountCircleIcon className="fs-5" /> &nbsp;Profile{" "}
+                  </MenuItem>
+                  <MenuItem className="fs-6" onClick={handleLogout}>
+                    <PowerSettingsNewIcon className="fs-5" /> &nbsp; Logout{" "}
+                  </MenuItem>
+                </div>
+              </Menu>
+            </Box>{" "}
+          </Toolbar>{" "}
+        </Container>
+      </AppBar>{" "}
+    </div>
     // <div
     // className="topbar"
     //   style={{
