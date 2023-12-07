@@ -55,29 +55,29 @@ const LeadSource = () => {
           <Table aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="table-cell-heading" align="center">
+                <TableCell className="table-cell-heading" align="center">
                   ID
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading" align="center">
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Name
-                </StyledTableCell>
+                </TableCell>
 
-                {/* <StyledTableCell className='  bg-primary fs-6 border border 1' align="center">Type</StyledTableCell> */}
+                {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
 
             {Array.isArray(leadsources) && leadsources.length > 0 ? (
               leadsources.map((item, index) => (
-                <StyledTableRow key={item.id}>
-                  <StyledTableCell className="Table-cell text-center">
+                <TableRow key={item.id}>
+                  <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}> {index + 1}</span>
-                  </StyledTableCell>
-                  <StyledTableCell className="Table-cell text-center">
+                  </TableCell>
+                  <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}> {item.leadsource}</span>
-                  </StyledTableCell>
+                  </TableCell>
 
-                  {/* <StyledTableCell className=" border border 1 text-center"> Custom</StyledTableCell> */}
-                </StyledTableRow>
+                  {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}
+                </TableRow>
               ))
             ) : (
               <TableRow>

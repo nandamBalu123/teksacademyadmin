@@ -9,3 +9,14 @@
     margin: auto;
     overflow: hidden;
 }
+.sub-cardcolor{ 
+    background: #7598b8 !important;
+    text-align: center;
+    border-radius: 8px !important;
+    color: #fff !important;
+ 
+                      
+  }
+  .sub-cardcolor:hover{ 
+    box-shadow: 3px 3px 6px  gray ;
+  }

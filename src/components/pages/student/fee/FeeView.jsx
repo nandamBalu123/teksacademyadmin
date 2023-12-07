@@ -552,30 +552,30 @@ const FeeView = () => {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
                     Total Amount
-                  </StyledTableCell>
+                  </TableCell>
 
-                  <StyledTableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
                     Paid Amount
-                  </StyledTableCell>
+                  </TableCell>
 
-                  <StyledTableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
                     Due Amount
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     Extra Discount
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     Paid Status
-                  </StyledTableCell>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                <StyledTableRow
+                <TableRow
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <StyledTableCell className="Table-cell text-center">
+                  <TableCell className="Table-cell text-center">
                     <span
                       title={Number(studentdata.finaltotal).toLocaleString(
                         "en-IN"
@@ -591,9 +591,9 @@ const FeeView = () => {
                     >
                       {Number(studentdata.finaltotal).toLocaleString("en-IN")}
                     </span>
-                  </StyledTableCell>
+                  </TableCell>
 
-                  <StyledTableCell className="Table-cell text-center">
+                  <TableCell className="Table-cell text-center">
                     <span
                       title={Number(studentdata.totalpaidamount).toLocaleString(
                         "en-IN"
@@ -611,9 +611,9 @@ const FeeView = () => {
                         "en-IN"
                       )}
                     </span>
-                  </StyledTableCell>
+                  </TableCell>
 
-                  <StyledTableCell className="Table-cell text-center">
+                  <TableCell className="Table-cell text-center">
                     <span
                       title={Number(studentdata.dueamount).toLocaleString(
                         "en-IN"
@@ -631,9 +631,9 @@ const FeeView = () => {
                     </span>
 
                     {/* {dueamount} */}
-                  </StyledTableCell>
+                  </TableCell>
 
-                  <StyledTableCell className="Table-cell text-center">
+                  <TableCell className="Table-cell text-center">
                     <span
                       title={studentdata.totalpaidamount}
                       style={{
@@ -651,9 +651,9 @@ const FeeView = () => {
                         </>
                       )}
                     </span>
-                  </StyledTableCell>
+                  </TableCell>
 
-                  <StyledTableCell className="Table-cell text-center">
+                  <TableCell className="Table-cell text-center">
                     {studentdata.totalinstallments &&
                       studentdata.totalinstallments.length > 0 &&
                       studentdata.totalinstallments.map((item, index) => {
@@ -677,8 +677,8 @@ const FeeView = () => {
                           );
                         }
                       })}
-                  </StyledTableCell>
-                </StyledTableRow>
+                  </TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
@@ -977,29 +977,29 @@ const FeeView = () => {
               <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       Admission Fee
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       {" "}
                       Paid Date
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       {" "}
                       Mode of Payment
-                    </StyledTableCell>
-                    <StyledTableCell className="table-cell-heading">
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
                       {" "}
                       Transition ID
-                    </StyledTableCell>
+                    </TableCell>
                     {/* <TableCell className="table-cell-heading">
                   {" "}
                   Admin Invoice
                 </TableCell> */}
-                    <StyledTableCell className="table-cell-heading">
+                    <TableCell className="table-cell-heading">
                       {" "}
                       Invoice
-                    </StyledTableCell>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 {studentdata.initialpayment &&
@@ -1031,23 +1031,23 @@ const FeeView = () => {
 
                     return (
                       <TableBody>
-                        <StyledTableRow
+                        <TableRow
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                         >
-                          <StyledTableCell className="border border 1 text-center">
+                          <TableCell className="border border 1 text-center">
                             {Number(item.initialamount).toLocaleString("en-IN")}
-                          </StyledTableCell>
-                          <StyledTableCell className="border border 1 text-center">
+                          </TableCell>
+                          <TableCell className="border border 1 text-center">
                             {paidDate}
-                          </StyledTableCell>
-                          <StyledTableCell className="border border 1 text-center">
+                          </TableCell>
+                          <TableCell className="border border 1 text-center">
                             {item.modeofpayment}
-                          </StyledTableCell>
-                          <StyledTableCell className="border border 1 text-center">
+                          </TableCell>
+                          <TableCell className="border border 1 text-center">
                             {item.transactionID}
-                          </StyledTableCell>
+                          </TableCell>
                           {/* <TableCell className="border border 1 text-center">
                       <Link
                         to={`/invoice/${id}/${index}/Admission Fee/admininvoice`}
@@ -1056,15 +1056,15 @@ const FeeView = () => {
                         <CreditScoreIcon className="iconn" />
                       </Link>
                     </TableCell> */}
-                          <StyledTableCell className="border border 1 text-center">
+                          <TableCell className="border border 1 text-center">
                             <Link
                               to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
                               style={{ width: "40px" }}
                             >
                               <CreditScoreIcon className="icon-color" />
                             </Link>
-                          </StyledTableCell>
-                        </StyledTableRow>
+                          </TableCell>
+                        </TableRow>
                       </TableBody>
                     );
                   })}
@@ -1078,34 +1078,34 @@ const FeeView = () => {
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
                     {" "}
                     Installment
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     Due Date
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     Due Amount
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     Paid Date
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     Paid Amount
-                  </StyledTableCell>
+                  </TableCell>
 
-                  <StyledTableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
                     Mode of Payment
-                  </StyledTableCell>
-                  <StyledTableCell className="table-cell-heading">
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
                     Transition ID
-                  </StyledTableCell>
+                  </TableCell>
 
-                  <StyledTableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
                     {" "}
                     Invoice
-                  </StyledTableCell>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               {installments &&
@@ -1147,40 +1147,40 @@ const FeeView = () => {
 
                   return (
                     <TableBody>
-                      <StyledTableRow
+                      <TableRow
                         sx={{
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <StyledTableCell className="Table-cell text-center">
+                        <TableCell className="Table-cell text-center">
                           Installment {item.installmentNumber}{" "}
                           {item.subInstallmentNumber != 0 && (
                             <>/ {item.subInstallmentNumber}</>
                           )}
-                        </StyledTableCell>
+                        </TableCell>
 
-                        <StyledTableCell className="Table-cell text-center">
+                        <TableCell className="Table-cell text-center">
                           {dueDate}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           {Number(
                             parseFloat(item.dueamount).toFixed(2)
                           ).toLocaleString("en-IN")}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           {paidDate}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           {Number(item.paidamount).toLocaleString("en-IN")}
-                        </StyledTableCell>
+                        </TableCell>
 
-                        <StyledTableCell className="Table-cell text-center">
+                        <TableCell className="Table-cell text-center">
                           {item.modeofpayment}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           {item.transactionid}
-                        </StyledTableCell>
-                        <StyledTableCell className="Table-cell text-center">
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
                           <Link
                             to={`/invoice/${id}/${index}/Installment/admininvoice`}
                             style={{ width: "40px", paddingRight: "15px" }}
@@ -1197,8 +1197,8 @@ const FeeView = () => {
                             <CreditScoreIcon className="icon-color" />
                             <div class="hover-text">Student</div>
                           </Link>
-                        </StyledTableCell>
-                      </StyledTableRow>
+                        </TableCell>
+                      </TableRow>
                     </TableBody>
                   );
                 })}

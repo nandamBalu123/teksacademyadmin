@@ -189,28 +189,28 @@ export default function Vendor() {
           <Table aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="table-cell-heading" align="center">
+                <TableCell className="table-cell-heading" align="center">
                   SI.NO
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading" align="center">
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Name
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading" align="center">
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Actions
-                </StyledTableCell>
+                </TableCell>
               </TableRow>
             </TableHead>
 
             {vendorName &&
               vendorName.map((element, index) => (
-                <StyledTableRow key={index}>
-                  <StyledTableCell className="Table-cell text-center">
+                <TableRow key={index}>
+                  <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}> {index + 1}</span>
-                  </StyledTableCell>
-                  <StyledTableCell className="Table-cell text-center">
+                  </TableCell>
+                  <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}> {element}</span>
-                  </StyledTableCell>
-                  <StyledTableCell
+                  </TableCell>
+                  <TableCell
                     className="Table-cell text-center"
                     style={{ fontSize: "15px" }}
                   >
@@ -222,8 +222,8 @@ export default function Vendor() {
                       onClick={(e) => handleDelete(index)}
                       className="text-danger ms-2"
                     />
-                  </StyledTableCell>
-                </StyledTableRow>
+                  </TableCell>
+                </TableRow>
               ))}
           </Table>
         </TableContainer>
