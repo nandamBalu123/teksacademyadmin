@@ -673,7 +673,7 @@ const Dashboard = () => {
       </div> */}
 
       <div className="contianer Dashboard">
-        <div className="row p-3">
+        <div className="row ">
           <div
             className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
             style={{ cursor: "pointer" }}

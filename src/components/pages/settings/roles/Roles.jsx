@@ -56,37 +56,37 @@ const Roles = () => {
           <Table aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="table-cell-heading" align="center">
+                <TableCell className="table-cell-heading" align="center">
                   SI.NO
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading" align="center">
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Name
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading" align="center">
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Description
-                </StyledTableCell>
-                {/* <StyledTableCell className='  bg-primary fs-6 Table-cell' align="center">Type</StyledTableCell> */}
+                </TableCell>
+                {/* <TableCell className='  bg-primary fs-6 Table-cell' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
 
             <TableBody className="Table-cell">
               {Array.isArray(roles) && roles.length > 0 ? (
                 roles.map((item, index) => (
-                  <StyledTableRow key={item.id}>
-                    <StyledTableCell className="Table-cell ">
+                  <TableRow key={item.id}>
+                    <TableCell className="Table-cell ">
                       <span style={{ fontSize: "15px" }}> {index + 1}</span>
-                    </StyledTableCell>
-                    <StyledTableCell className="Table-cell ">
+                    </TableCell>
+                    <TableCell className="Table-cell ">
                       <span style={{ fontSize: "15px" }}>{item.role} </span>
-                    </StyledTableCell>
-                    <StyledTableCell className="Table-cell ">
+                    </TableCell>
+                    <TableCell className="Table-cell ">
                       <span style={{ fontSize: "15px" }}>
                         {" "}
                         {item.description}{" "}
                       </span>
-                    </StyledTableCell>
-                    {/* <StyledTableCell className=" Table-cell text-center"> Custom</StyledTableCell> */}
-                  </StyledTableRow>
+                    </TableCell>
+                    {/* <TableCell className=" Table-cell text-center"> Custom</TableCell> */}
+                  </TableRow>
                 ))
               ) : (
                 <TableRow>
@@ -141,7 +141,7 @@ export default Roles;
 //     navigate("/createrole");
 //   };
 
-//   const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//   const TableCell = styled(TableCell)(({ theme }) => ({
 //     [`&.${tableCellClasses.head}`]: {
 //       backgroundColor: theme.palette.common.black,
 //       color: theme.palette.common.white,
@@ -173,10 +173,10 @@ export default Roles;
 //         <Table sx={{ minWidth: 1000 }} aria-label="customized table " >
 //           <TableHead  >
 //             <TableRow  >
-//               <StyledTableCell className=' bg-primary fs-6  Table-cell' align="center">id</StyledTableCell>
-//               <StyledTableCell className=' bg-primary fs-6  Table-cell' align="center">Name</StyledTableCell>
-//               <StyledTableCell className=' bg-primary fs-6 Table-cell' align="center">Description</StyledTableCell>
-//               {/* <StyledTableCell className='  bg-primary fs-6 Table-cell' align="center">Type</StyledTableCell> */}
+//               <TableCell className=' bg-primary fs-6  Table-cell' align="center">id</TableCell>
+//               <TableCell className=' bg-primary fs-6  Table-cell' align="center">Name</TableCell>
+//               <TableCell className=' bg-primary fs-6 Table-cell' align="center">Description</TableCell>
+//               {/* <TableCell className='  bg-primary fs-6 Table-cell' align="center">Type</TableCell> */}
 
 //             </TableRow>
 //           </TableHead>
@@ -184,10 +184,10 @@ export default Roles;
 //           <TableBody className="Table-cell">
 //             {getuserroles.map((item) => (
 //             <StyledTableRow>
-//               <StyledTableCell className=" Table-cell text-center">{item.id}</StyledTableCell>
-//               <StyledTableCell className=" Table-cell text-center">{item.role}</StyledTableCell>
-//               <StyledTableCell className=" Table-cell text-center">{item.description}</StyledTableCell>
-//               {/* <StyledTableCell className=" Table-cell text-center"> Custom</StyledTableCell> */}
+//               <TableCell className=" Table-cell text-center">{item.id}</TableCell>
+//               <TableCell className=" Table-cell text-center">{item.role}</TableCell>
+//               <TableCell className=" Table-cell text-center">{item.description}</TableCell>
+//               {/* <TableCell className=" Table-cell text-center"> Custom</TableCell> */}
 //             </StyledTableRow>
 //              ))}
 //           </TableBody>

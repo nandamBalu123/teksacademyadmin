@@ -221,51 +221,51 @@ const StudentDataView = () => {
           <Table aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className=" table-cell-heading">
+                <TableCell className=" table-cell-heading">
                   Fee Type
-                </StyledTableCell>
-                <StyledTableCell className=" table-cell-heading">
+                </TableCell>
+                <TableCell className=" table-cell-heading">
                   Amount
-                </StyledTableCell>
-                <StyledTableCell className=" table-cell-heading">
+                </TableCell>
+                <TableCell className=" table-cell-heading">
                   Discount
-                </StyledTableCell>
-                <StyledTableCell className=" table-cell-heading">
+                </TableCell>
+                <TableCell className=" table-cell-heading">
                   Tax Amount (Inclusive of GST)
-                </StyledTableCell>
-                <StyledTableCell className=" table-cell-heading">
+                </TableCell>
+                <TableCell className=" table-cell-heading">
                   Total Amount
-                </StyledTableCell>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {studentdata.feedetails &&
                 studentdata.feedetails.map((item, index) => (
-                  <StyledTableRow
+                  <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     key={index}
                   >
-                    <StyledTableCell className="Table-cell text-center">
+                    <TableCell className="Table-cell text-center">
                       {item.feetype}
-                    </StyledTableCell>
-                    <StyledTableCell className="Table-cell text-center">
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
                       {Number(
                         parseFloat(item.amount).toFixed(2)
                       ).toLocaleString("en-IN")}
-                    </StyledTableCell>
-                    <StyledTableCell className="Table-cell text-center">
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
                       {item.discount &&
                         Number(
                           parseFloat(item.discount).toFixed(2)
                         ).toLocaleString("en-IN")}
                       {!item.discount && <>0</>}
-                    </StyledTableCell>
-                    <StyledTableCell className="Table-cell text-center">
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
                       {Number(
                         parseFloat(item.taxamount).toFixed(2)
                       ).toLocaleString("en-IN")}
-                    </StyledTableCell>
-                    <StyledTableCell className="Table-cell text-center">
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
                       {Number(
                         parseFloat(item.totalamount).toFixed(2)
                       ).toLocaleString("en-IN")}
@@ -286,8 +286,8 @@ const StudentDataView = () => {
                       ) : (
                         <span></span>
                       )}
-                    </StyledTableCell>
-                  </StyledTableRow>
+                    </TableCell>
+                  </TableRow>
                 ))}
             </TableBody>
           </Table>
@@ -296,32 +296,32 @@ const StudentDataView = () => {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="table-cell-heading">
+                <TableCell className="table-cell-heading">
                   Installment
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
+                </TableCell>
+                <TableCell className="table-cell-heading">
                   Due Date
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
+                </TableCell>
+                <TableCell className="table-cell-heading">
                   Due Amount
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
+                </TableCell>
+                <TableCell className="table-cell-heading">
                   Paid Date
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
+                </TableCell>
+                <TableCell className="table-cell-heading">
                   Paid Amount
-                </StyledTableCell>
+                </TableCell>
 
-                <StyledTableCell className="table-cell-heading">
+                <TableCell className="table-cell-heading">
                   Mode of Payment
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
+                </TableCell>
+                <TableCell className="table-cell-heading">
                   Transition ID
-                </StyledTableCell>
+                </TableCell>
 
-                <StyledTableCell className="table-cell-heading">
+                <TableCell className="table-cell-heading">
                   Invoice
-                </StyledTableCell>
+                </TableCell>
               </TableRow>
             </TableHead>
             {studentdata.installments &&
@@ -363,33 +363,33 @@ const StudentDataView = () => {
 
                 return (
                   <TableBody>
-                    <StyledTableRow>
-                      <StyledTableCell className=" Table-cell text-center">
+                    <TableRow>
+                      <TableCell className=" Table-cell text-center">
                         Installment {index + 1}
-                      </StyledTableCell>
+                      </TableCell>
 
-                      <StyledTableCell className="Table-cell text-center">
+                      <TableCell className="Table-cell text-center">
                         {dueDate}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center">
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
                         {Number(
                           parseFloat(item.dueamount).toFixed(2)
                         ).toLocaleString("en-IN")}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center">
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
                         {paidDate}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center  ">
+                      </TableCell>
+                      <TableCell className="Table-cell text-center  ">
                         {Number(item.paidamount).toLocaleString("en-IN")}
-                      </StyledTableCell>
+                      </TableCell>
 
-                      <StyledTableCell className="Table-cell text-center">
+                      <TableCell className="Table-cell text-center">
                         {item.modeofpayment}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center">
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
                         {item.transactionid}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell text-center">
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
                         <Link
                           to={`/invoice/${id}/${index}/Installment/admininvoice`}
                           style={{ width: "40px", paddingRight: "15px" }}
@@ -406,8 +406,8 @@ const StudentDataView = () => {
                           <CreditScoreIcon className="icon-color" />
                           <div class="hover-text">Student</div>
                         </Link>
-                      </StyledTableCell>
-                    </StyledTableRow>
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 );
               })}
@@ -418,15 +418,15 @@ const StudentDataView = () => {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <StyledTableCell className="table-cell-heading">
+                <TableCell className="table-cell-heading">
                   Date
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
+                </TableCell>
+                <TableCell className="table-cell-heading">
                   Extra Discount
-                </StyledTableCell>
-                <StyledTableCell className="table-cell-heading">
+                </TableCell>
+                <TableCell className="table-cell-heading">
                   Remarks
-                </StyledTableCell>
+                </TableCell>
               </TableRow>
             </TableHead>
             {studentdata.extra_discount &&
@@ -458,20 +458,20 @@ const StudentDataView = () => {
 
                 return (
                   <TableBody>
-                    <StyledTableRow
+                    <TableRow
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <StyledTableCell className="Table-cell">
+                      <TableCell className="Table-cell">
                         {date}
-                      </StyledTableCell>
-                      <StyledTableCell className="Table-cell">
+                      </TableCell>
+                      <TableCell className="Table-cell">
                         {item.Discount}
-                      </StyledTableCell>
+                      </TableCell>
 
-                      <StyledTableCell className="Table-cell">
+                      <TableCell className="Table-cell">
                         {item.Discount_remarks}
-                      </StyledTableCell>
-                    </StyledTableRow>
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 );
               })}
