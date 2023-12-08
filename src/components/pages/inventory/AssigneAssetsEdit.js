@@ -160,7 +160,7 @@ const Edit = () => {
               /> */}
               </div>{" "}
             </div>
-            <div className="row">
+            <div className="row text-center">
               <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <TextField
                   label={<span className="label-family">Branch</span>}
@@ -182,7 +182,7 @@ const Edit = () => {
                 />
               </div>
             </div>
-            <div className="row">
+            <div className="row text-center">
               <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <TextField
                   label={<span className="label-family">Issue Date</span>}

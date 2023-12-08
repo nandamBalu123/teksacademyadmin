@@ -28,6 +28,8 @@ p {
   border-radius: 8px;
   margin: auto;
   overflow: hidden;
+  padding-left:10px;
+  padding-right: 10px;
 }
 /* .userviewing {
   width: 75%;

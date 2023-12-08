@@ -939,7 +939,7 @@ const Dashboard = () => {
           </div>
           {/* Enrollment cards Display */}
           <div className="row">
-            <div className="col-12 col-md-3 col-xl-3 col-lg-3">
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
@@ -972,7 +972,7 @@ const Dashboard = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3">
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
@@ -2438,7 +2438,7 @@ const Dashboard = () => {
           {/* User Card Display */}
           <div className="row  ">
             <div className="col-12 col-md-4 col-xl-4 col-lg-4"></div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+            <div className="col-12 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
@@ -2471,7 +2471,7 @@ const Dashboard = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2"></div>
+            <div className="col-12 col-md-3 col-xl-3 col-lg-3 mb-2"></div>
           </div>
           {/* User Card Display End */}
 

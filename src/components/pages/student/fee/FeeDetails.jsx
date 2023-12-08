@@ -198,7 +198,7 @@ const FeeDetails = () => {
         <div>
           <h5 className="mt-3 ms-2 text-center"> Fee Management</h5>
           <div className="row py-2 px-5">
-            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
+            <div className="col-12 col-md-6 col-lg-3 col-xl-3 mb-2">
               <Card
                 className="cardcolor"
                 // style={{
@@ -216,7 +216,7 @@ const FeeDetails = () => {
                 Fee Records
               </button> */}
             </div>
-            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2 ">
+            <div className="col-12 col-md-6 col-lg-3 col-xl-3 mb-2 ">
               <Card
                 className="cardcolor"
                 // style={{
@@ -237,7 +237,7 @@ const FeeDetails = () => {
                 No Due Records
               </button> */}
             </div>
-            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
+            <div className="col-12 col-md-6 col-lg-3 col-xl-3 mb-2">
               <Card
                 className="cardcolor"
                 // style={{
@@ -259,7 +259,7 @@ const FeeDetails = () => {
                 Fee FollowUps
               </button> */}
             </div>
-            <div className="col-12 col-md-3 col-lg-3 col-xl-3 mb-2">
+            <div className="col-12 col-md-6 col-lg-3 col-xl-3 mb-2">
               <Card
                 className="cardcolor"
                 // style={{
@@ -275,7 +275,7 @@ const FeeDetails = () => {
             </div>
           </div>
           <div className="row  pb-3">
-            <div className="col-12 col-md-8 col-lg-8 col-xl-8 ">
+            <div className="col-12 col-md-6 col-lg-8 col-xl-8 ">
               <input
                 type="text"
                 className="input-field ms-2 "
@@ -298,7 +298,7 @@ const FeeDetails = () => {
               />
               <hr className="w-75 ms-2" />
             </div>
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-1">
+            <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-1">
               <div className="d-flex justify-content-evenly">
                 <p className="mt-2">
                   {recordCount}/{initialDataCount}

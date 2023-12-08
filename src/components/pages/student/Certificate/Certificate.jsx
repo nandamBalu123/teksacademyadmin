@@ -232,9 +232,9 @@ const Certificate = () => {
     <div className="container">
       <div className=" main-certificate mt-3">
         <div className="certificate mt-2">
-          <h5 className="mx-2 mt-3 "> Certificate </h5>
+          <h5 className="mx-2 mt-3  text-center"> Certificate </h5>
           <div className="row pb-1">
-            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+            <div className="col-12 col-md-6 col-lg-8 col-xl-8">
               <input
                 type="text"
                 className="input-field ms-2"
@@ -256,7 +256,7 @@ const Certificate = () => {
               />
               <hr className="w-75 ms-2" />
             </div>
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-1">
+            <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-1">
               <div className="d-flex justify-content-evenly">
                 <p className="mt-2">
                   {recordCount}/{initialDataCount}
