@@ -205,9 +205,24 @@ const StudentDataView = () => {
             <p>
               <b>Lead Source:</b>
               {/* {studentdata.leadsource} */}
-              {studentdata.leadsource &&
+              {/* {studentdata.leadsource &&
                 studentdata.leadsource.map((source) => (
                   <span>{source.source}</span>
+                  {source.name &&   <span>{source.name}</span>}
+                
+                  {source.mobileNumber &&   <span>{source.mobileNumber}</span>}
+                
+
+                ))} */}
+              {studentdata.leadsource &&
+                studentdata.leadsource.map((source) => (
+                  <div key={source.id}>
+                    <span>{source.source}</span>
+                    {source.name && <div>Name :{source.name} </div>}
+                    {source.mobileNumber && (
+                      <div>Mobile NUmber:{source.mobileNumber} </div>
+                    )}
+                  </div>
                 ))}
             </p>
             <p>
@@ -221,15 +236,9 @@ const StudentDataView = () => {
           <Table aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <TableCell className=" table-cell-heading">
-                  Fee Type
-                </TableCell>
-                <TableCell className=" table-cell-heading">
-                  Amount
-                </TableCell>
-                <TableCell className=" table-cell-heading">
-                  Discount
-                </TableCell>
+                <TableCell className=" table-cell-heading">Fee Type</TableCell>
+                <TableCell className=" table-cell-heading">Amount</TableCell>
+                <TableCell className=" table-cell-heading">Discount</TableCell>
                 <TableCell className=" table-cell-heading">
                   Tax Amount (Inclusive of GST)
                 </TableCell>
@@ -299,15 +308,9 @@ const StudentDataView = () => {
                 <TableCell className="table-cell-heading">
                   Installment
                 </TableCell>
-                <TableCell className="table-cell-heading">
-                  Due Date
-                </TableCell>
-                <TableCell className="table-cell-heading">
-                  Due Amount
-                </TableCell>
-                <TableCell className="table-cell-heading">
-                  Paid Date
-                </TableCell>
+                <TableCell className="table-cell-heading">Due Date</TableCell>
+                <TableCell className="table-cell-heading">Due Amount</TableCell>
+                <TableCell className="table-cell-heading">Paid Date</TableCell>
                 <TableCell className="table-cell-heading">
                   Paid Amount
                 </TableCell>
@@ -319,9 +322,7 @@ const StudentDataView = () => {
                   Transition ID
                 </TableCell>
 
-                <TableCell className="table-cell-heading">
-                  Invoice
-                </TableCell>
+                <TableCell className="table-cell-heading">Invoice</TableCell>
               </TableRow>
             </TableHead>
             {studentdata.installments &&
@@ -418,15 +419,11 @@ const StudentDataView = () => {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className="table-cell-heading">
-                  Date
-                </TableCell>
+                <TableCell className="table-cell-heading">Date</TableCell>
                 <TableCell className="table-cell-heading">
                   Extra Discount
                 </TableCell>
-                <TableCell className="table-cell-heading">
-                  Remarks
-                </TableCell>
+                <TableCell className="table-cell-heading">Remarks</TableCell>
               </TableRow>
             </TableHead>
             {studentdata.extra_discount &&
@@ -461,9 +458,7 @@ const StudentDataView = () => {
                     <TableRow
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell className="Table-cell">
-                        {date}
-                      </TableCell>
+                      <TableCell className="Table-cell">{date}</TableCell>
                       <TableCell className="Table-cell">
                         {item.Discount}
                       </TableCell>
