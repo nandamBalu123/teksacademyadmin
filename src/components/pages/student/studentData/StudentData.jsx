@@ -522,8 +522,26 @@ const StudentData = () => {
                     </div>
                     <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                       <FormControl variant="standard" className="w-100">
+                        <InputLabel>Counsellors</InputLabel>
+                        <Select
+                          name="enquirytakenby"
+                          value={filterCriteria.enquirytakenby}
+                          onChange={handleInputChange}
+                        >
+                          {filteredcounsellor &&
+                            filteredcounsellor.map((user, index) => (
+                              <MenuItem value={user.fullname}>
+                                {" "}
+                                {user.fullname}
+                              </MenuItem>
+                            ))}
+                        </Select>
+                      </FormControl>
+                    </div>
+                    {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                      <FormControl variant="standard" className="w-100">
                         <InputLabel>Lead Source</InputLabel>
-                        {/* <Select
+                      <Select
                           name="leadsource"
                           value={filterCriteria.leadsource}
                           onChange={handleInputChange}
@@ -534,9 +552,9 @@ const StudentData = () => {
                                 {item.leadsource}
                               </MenuItem>
                             ))}
-                        </Select> */}
+                        </Select> 
                       </FormControl>
-                    </div>
+                    </div> */}
 
                     {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <MenuItem>
@@ -609,7 +627,7 @@ const StudentData = () => {
                       </FormControl>
                     </div>
 
-                    <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                    {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                       <FormControl variant="standard" className="w-100">
                         <InputLabel>Counsellors</InputLabel>
                         <Select
@@ -626,7 +644,7 @@ const StudentData = () => {
                             ))}
                         </Select>
                       </FormControl>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/*             
@@ -685,16 +703,15 @@ const StudentData = () => {
                 </Menu>
               </p>
               <p>
-                {role !== 'counsellor' && 
-                <CSVLink
-                data={filteredData}
-                filename={"studentsdata.csv"}
-                target="_blank"
-              >
-                <DownloadIcon className="icon-color mt-4"></DownloadIcon>
-              </CSVLink>
-                }
-                
+                {role !== "counsellor" && (
+                  <CSVLink
+                    data={filteredData}
+                    filename={"studentsdata.csv"}
+                    target="_blank"
+                  >
+                    <DownloadIcon className="icon-color mt-4"></DownloadIcon>
+                  </CSVLink>
+                )}
               </p>
             </div>
           </div>
@@ -952,28 +969,28 @@ const StudentData = () => {
                           </span>
                         </TableCell>
 
-                        <TableCell >
-                          <div className="d-flex"> 
-                          <NavLink to={`/studentdataview/${item.id}`}>
-                            <VisibilityIcon
-                              style={{ width: "40px" }}
-                              className="icon-color"
-                            />
-                          </NavLink>
+                        <TableCell>
+                          <div className="d-flex">
+                            <NavLink to={`/studentdataview/${item.id}`}>
+                              <VisibilityIcon
+                                style={{ width: "40px" }}
+                                className="icon-color"
+                              />
+                            </NavLink>
 
-                          <NavLink to={`/editstudent/${item.id}`}>
-                            <EditIcon
-                              style={{ width: "40px" }}
-                              className="icon-color"
-                            />
-                          </NavLink>
-                          <NavLink to={`/feeview/${item.id}`}>
-                            <CurrencyRupeeIcon
-                              style={{ width: "40px" }}
-                              className="icon-color"
-                            />
-                          </NavLink>
-                          {/* {item.addfee == 1 && (
+                            <NavLink to={`/editstudent/${item.id}`}>
+                              <EditIcon
+                                style={{ width: "40px" }}
+                                className="icon-color"
+                              />
+                            </NavLink>
+                            <NavLink to={`/feeview/${item.id}`}>
+                              <CurrencyRupeeIcon
+                                style={{ width: "40px" }}
+                                className="icon-color"
+                              />
+                            </NavLink>
+                            {/* {item.addfee == 1 && (
                               <NavLink to={`/feeview/${item.id}`}>
                                 <CurrencyRupeeIcon style={{ width: "40px" }} />
                               </NavLink>
@@ -984,49 +1001,49 @@ const StudentData = () => {
                               </NavLink>
                             )} */}
 
-                          <NavLink to={`/studentApplicationprint/${item.id}`}>
-                            <PrintIcon
-                              className="icon-color"
-                              style={{ width: "40px" }}
-                            />
-                          </NavLink>
+                            <NavLink to={`/studentApplicationprint/${item.id}`}>
+                              <PrintIcon
+                                className="icon-color"
+                                style={{ width: "40px" }}
+                              />
+                            </NavLink>
 
-                          <div className="form-check form-switch ms-1">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              role="switch"
-                              id="flexSwitchCheckChecked"
-                              checked={isChecked}
-                              onChange={handleClickOpen}
-                            />
-                          </div>
+                            <div className="form-check form-switch ms-1">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                role="switch"
+                                id="flexSwitchCheckChecked"
+                                checked={isChecked}
+                                onChange={handleClickOpen}
+                              />
+                            </div>
 
-                          <Dialog open={opening} onClose={handleClosed}>
-                            <DialogContent>
-                              <DialogContentText>
-                                <label> Enter Remarks :</label>
-                              </DialogContentText>
-                              <DialogContentText>
-                                <textarea
-                                  rows="4"
-                                  cols="50"
-                                  name="comment"
-                                  form="usrform"
-                                ></textarea>
-                              </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                              <Button onClick={handleClosed}>Cancel</Button>
-                              {!isChecked && (
-                                <Button onClick={handleok}>Activate</Button>
-                              )}
+                            <Dialog open={opening} onClose={handleClosed}>
+                              <DialogContent>
+                                <DialogContentText>
+                                  <label> Enter Remarks :</label>
+                                </DialogContentText>
+                                <DialogContentText>
+                                  <textarea
+                                    rows="4"
+                                    cols="50"
+                                    name="comment"
+                                    form="usrform"
+                                  ></textarea>
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions>
+                                <Button onClick={handleClosed}>Cancel</Button>
+                                {!isChecked && (
+                                  <Button onClick={handleok}>Activate</Button>
+                                )}
 
-                              {isChecked && (
-                                <Button onClick={handleok}>InActivate</Button>
-                              )}
-                            </DialogActions>
-                          </Dialog>
+                                {isChecked && (
+                                  <Button onClick={handleok}>InActivate</Button>
+                                )}
+                              </DialogActions>
+                            </Dialog>
                           </div>
                         </TableCell>
                       </TableRow>
