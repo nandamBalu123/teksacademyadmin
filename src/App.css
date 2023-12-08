@@ -267,26 +267,26 @@ main {
 .icon-color {
   color: #4676a0;
 }
-.btn-filter{ 
+.btn-filter {
   padding: 0.2rem;
   border: none;
   border-radius: 8px;
 }
-.heading-hover{ 
+.heading-hover {
   position: relative;
 }
-.heading-hover:before{ 
+.heading-hover:before {
   content: "";
   position: absolute;
   bottom: -2px;
   height: 3px;
   width: 0;
-  background: #4676a0 ;
+  background: #4676a0;
   border-radius: 50px;
 
   transition: width 0.3s ease;
 }
-.heading-hover:hover::before{
+.heading-hover:hover::before {
   width: 35%;
 }
 
@@ -297,7 +297,7 @@ main {
   border: 1px solid #4676a0;
   cursor: pointer;
 }
-.cardcolor:hover{ 
+.cardcolor:hover {
   box-shadow: 5px 5px 10px #4676a0;
 }
 /* .orange {

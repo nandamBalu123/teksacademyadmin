@@ -1101,9 +1101,7 @@ const FeeView = () => {
                     {" "}
                     Installment
                   </TableCell>
-                  <TableCell className="table-cell-heading">
-                    Due Date
-                  </TableCell>
+                  <TableCell className="table-cell-heading">Due Date</TableCell>
                   <TableCell className="table-cell-heading">
                     Due Amount
                   </TableCell>
@@ -1121,10 +1119,7 @@ const FeeView = () => {
                     Transition ID
                   </TableCell>
 
-                  <TableCell className="table-cell-heading">
-                    {" "}
-                    Invoice
-                  </TableCell>
+                  <TableCell className="table-cell-heading"> Invoice</TableCell>
                 </TableRow>
               </TableHead>
               {installments &&

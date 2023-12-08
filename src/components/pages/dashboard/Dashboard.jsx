@@ -1006,7 +1006,7 @@ const Dashboard = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
               <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
@@ -1040,7 +1040,7 @@ const Dashboard = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
               <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
