@@ -479,23 +479,7 @@ const StudentData = () => {
                       />
                     </div>
 
-                    {/* <div>
-                  <label> From: </label>
-                </div>
-                <div>
-                  <input
-                    type="date"
-                    className="w-100"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                </div> */}
+                    
                   </div>
 
                   <div className="row m-2">
