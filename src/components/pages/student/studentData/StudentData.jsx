@@ -1010,7 +1010,7 @@ const StudentData = () => {
                                 </DialogContentText>
                                 <DialogContentText>
                                   <textarea
-                                    rows="4"
+                                    rows="3"
                                     cols="50"
                                     name="comment"
                                     form="usrform"
