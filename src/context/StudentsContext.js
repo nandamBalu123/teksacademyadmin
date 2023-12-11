@@ -283,7 +283,7 @@ export const StudentsContextProvider = ({ children }) => {
         // response.data = dataWithTitleCase;
 
         if (response.data) {
-          if (role === "admin" || role === "Regional Manager") {
+          if (role === "admin" || role === "regional manager") {
             dispatch({ type: "SET_STUDENTS", payload: response.data });
           }
 

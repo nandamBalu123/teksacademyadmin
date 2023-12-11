@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Header from "../../common/Header/Header";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { useEffect } from "react";
 import LinearProgress, {
   linearProgressClasses,
@@ -85,26 +85,13 @@ const Dashboard = () => {
     enrollments: false,
     bookingamount: false,
     enrollmentfeerecevied: false,
-    enrollmentfeeyettorecevied:false,
+    enrollmentfeeyettorecevied: false,
     feerecevied: false,
     feeyettorecevied: false,
     branchusers: false,
   });
 
-  // const [DisplayData, setDisplayData] = useState({
-  //   enrollments: false,
-  //   fee: false,
-  //   feefollowup: false,
-  //   users: false,
-  //   dueAndReceivedAmount: false,
-  // });
-  // const [Branchwise, setBranchwise] = useState({
-  //   enrollments: false,
-  //   bookingamount: false,
-  //   feerecevied: false,
-  //   feeyettorecevied: false,
-  //   branchusers: false,
-  // });
+ 
 
   const [filterCriteria, setFilterCriteria] = useState({
     fromdate: "",
@@ -248,12 +235,21 @@ const Dashboard = () => {
 
   Object.keys(branchStudentData).forEach((branch) => {
     let branchTotalAmount = 0;
-
+    let branchTotalReceivedAmount = 0;
+    let branchTotalDueAmount = 0;
     // Calculate the total amount for each branch and handle NaN values
     branchStudentData[branch].forEach((student) => {
-      const amount = parseFloat(student.finaltotal);
-      if (!isNaN(amount)) {
-        branchTotalAmount += amount;
+      const totalamount = parseFloat(student.finaltotal);
+      if (!isNaN(totalamount)) {
+        branchTotalAmount += totalamount;
+      }
+      const receivedamount = parseFloat(student.totalpaidamount);
+      if (!isNaN(receivedamount)) {
+        branchTotalReceivedAmount += receivedamount;
+      }
+      const deuamount = parseFloat(student.dueamount);
+      if (!isNaN(deuamount)) {
+        branchTotalDueAmount += deuamount;
       }
     });
 
@@ -261,17 +257,28 @@ const Dashboard = () => {
 
     finalTotalByBranch[branch] = {
       totalAmount: branchTotalAmount,
+      totalReceivedAmount: branchTotalReceivedAmount,
+      totalDueAmount: branchTotalDueAmount,
       percentage: branchPercentage,
     };
   });
   Object.keys(CounsellorwisestudentsData).forEach((counsellor) => {
     let counsellorTotalCount = 0;
-
+    let counsellorReceivedAmount = 0;
+    let counsellorDueAmount = 0;
     // Calculate the total amount for each branch and handle NaN values
     CounsellorwisestudentsData[counsellor].forEach((student) => {
-      const amount = parseFloat(student.finaltotal);
-      if (!isNaN(amount)) {
-        counsellorTotalCount += amount;
+      const Totalamount = parseFloat(student.finaltotal);
+      if (!isNaN(Totalamount)) {
+        counsellorTotalCount += Totalamount;
+      }
+      const Receivedamount = parseFloat(student.totalpaidamount);
+      if (!isNaN(Receivedamount)) {
+        counsellorReceivedAmount += Receivedamount;
+      }
+      const Dueamount = parseFloat(student.dueamount);
+      if (!isNaN(Dueamount)) {
+        counsellorDueAmount += Dueamount;
       }
     });
 
@@ -279,6 +286,8 @@ const Dashboard = () => {
 
     counsellorwisedataByBranch[counsellor] = {
       totalcount: counsellorTotalCount,
+      totalReceived: counsellorReceivedAmount,
+      totalDueAmount: counsellorDueAmount,
       percentage: counsellorPercentage,
     };
   });
@@ -651,7 +660,7 @@ const Dashboard = () => {
       </div> */}
 
       <div className="contianer Dashboard">
-        <div className="row p-3">
+        <div className="row ">
           <div
             className="col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3   "
             style={{ cursor: "pointer" }}
@@ -674,7 +683,7 @@ const Dashboard = () => {
             }
           >
             <Card
-            className ='cardcolor'
+              className="cardcolor"
               // style={{
               //   background: "#004493",
               //   textAlign: "center",
@@ -717,7 +726,6 @@ const Dashboard = () => {
               // }}
             >
               <p className="pt-3">Fee Details</p>
-            
             </Card>
           </div>
           <div
@@ -746,7 +754,6 @@ const Dashboard = () => {
                   ).toLocaleString("en-IN")}
                 </b> */}
           </div>
-          
 
           {role === "admin" && (
             <div
@@ -830,11 +837,11 @@ const Dashboard = () => {
       {Displaycards.enrollments && (
         <div className="">
           <div className="d-flex justify-content-between align-items-center">
-        
             <h5 className=" text-center flex-grow-1 pt-4 ms-sm-5 underline ">
-             <span className="fw-bold fs-5"> Current Month</span> Enrollment Details
-             </h5>
-           
+              <span className="fw-bold fs-5"> Current Month</span> Enrollment
+              Details
+            </h5>
+
             {/* for filter button */}
             <div className="">
               <Button
@@ -849,7 +856,7 @@ const Dashboard = () => {
                   title="Filter"
                   style={{ textTransform: "capitalize" }}
                 >
-                 <FilterAltIcon/>
+                  <FilterAltIcon />
                 </button>
               </Button>
               <Menu
@@ -919,14 +926,14 @@ const Dashboard = () => {
           </div>
           {/* Enrollment cards Display */}
           <div className="row">
-            <div className="col-12 col-md-3 col-xl-3 col-lg-3">
-            <Card
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
+              <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
                     enrollments: !prev.enrollments,
                     bookingamount: false,
                     enrollmentfeerecevied: false,
-                    enrollmentfeeyettorecevied:false,
+                    enrollmentfeeyettorecevied: false,
                     feerecevied: false,
                     feeyettorecevied: false,
                     branchusers: false,
@@ -952,14 +959,14 @@ const Dashboard = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3">
-            <Card
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
+              <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
                     enrollments: false,
                     bookingamount: !prev.bookingamount,
                     enrollmentfeerecevied: false,
-                     enrollmentfeeyettorecevied:false,
+                    enrollmentfeeyettorecevied: false,
                     feerecevied: false,
                     feeyettorecevied: false,
                     branchusers: false,
@@ -986,14 +993,14 @@ const Dashboard = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
               <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
                     enrollments: false,
                     bookingamount: false,
                     enrollmentfeerecevied: !prev.enrollmentfeerecevied,
-                     enrollmentfeeyettorecevied:false,
+                    enrollmentfeeyettorecevied: false,
                     feerecevied: false,
                     feeyettorecevied: false,
                     branchusers: false,
@@ -1013,21 +1020,22 @@ const Dashboard = () => {
                 <p className="text-center pt-3">
                   Fee Received
                   <p>
-                    {Number(parseFloat(enrollmentsTotalReceivedAmount).toFixed(2)).toLocaleString(
-                      "en-IN"
-                    )}{" "}
+                    {Number(
+                      parseFloat(enrollmentsTotalReceivedAmount).toFixed(2)
+                    ).toLocaleString("en-IN")}{" "}
                   </p>
                 </p>
               </Card>
             </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
               <Card
                 onClick={(e) =>
                   setDisplayTable((prev) => ({
                     enrollments: false,
                     bookingamount: false,
-                    enrollmentfeerecevied:false,
-                     enrollmentfeeyettorecevied: !prev.enrollmentfeeyettorecevied,
+                    enrollmentfeerecevied: false,
+                    enrollmentfeeyettorecevied:
+                      !prev.enrollmentfeeyettorecevied,
                     feerecevied: false,
                     feeyettorecevied: false,
                     branchusers: false,
@@ -1047,9 +1055,9 @@ const Dashboard = () => {
                 <p className="text-center pt-3">
                   Fee Yet To Received
                   <p>
-                    {Number(parseFloat(enrollmentsTotalDueAmount).toFixed(2)).toLocaleString(
-                      "en-IN"
-                    )}{" "}
+                    {Number(
+                      parseFloat(enrollmentsTotalDueAmount).toFixed(2)
+                    ).toLocaleString("en-IN")}{" "}
                   </p>
                 </p>
               </Card>
@@ -1064,7 +1072,8 @@ const Dashboard = () => {
                 {role !== "counsellor" && role !== "branch manager" && (
                   <h5 className="pt-4 text-center underline">
                     {" "}
-                    <span className="fw-bold fs-5">Current Month</span> Branch Wise Enrollment Data
+                    <span className="fw-bold fs-5">Current Month</span> Branch
+                    Wise Enrollment Data
                   </h5>
                 )}
                 <div className="justify-content-around pt-2 ">
@@ -1114,57 +1123,57 @@ const Dashboard = () => {
 
                   {role !== "admin" &&
                     role !== "counsellor" &&
-                    role !== "Regional Manager" && (
+                    role !== "regional manager" && (
                       <div className="justify-content-around">
                         <h5 className="pt-4 text-center underline">
-                       
-                         <span className="fw-bold fs-5">  Current Month</span> Consellor Wise Enrollment Details
+                          <span className="fw-bold fs-5"> Current Month</span>{" "}
+                          Consellor Wise Enrollment Details
                         </h5>
 
-                      <div className="pt-2"> 
-                      <Paper>
-                          <TableContainer>
-                            <Table>
-                              <TableHead>
-                                <TableRow>
-                                  <StyledTableCell className="table-cell-heading">
-                                    Counsellor Name
-                                  </StyledTableCell>
-                                  <StyledTableCell className="table-cell-heading">
-                                    No. of Enrollments
-                                  </StyledTableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                {role === "branch manager" &&
-                                  Object.entries(
-                                    CounsellorwisestudentsData
-                                  ).map(([counsellor, students]) => {
-                                    const enrollmentPercentage =
-                                      (students.length /
-                                        getstudentData.length) *
-                                      100;
-                                    const totalCount = students.length;
-                                    return (
-                                      <StyledTableRow
-                                        key={`student-${counsellor}`}
-                                      >
-                                        <StyledTableCell className="Table-cell">
-                                          {counsellor}{" "}
-                                        </StyledTableCell>
-                                        <StyledTableCell className="Table-cell">
-                                          {" "}
-                                          {Number(
-                                            parseFloat(totalCount).toFixed(2)
-                                          ).toLocaleString("en-IN")}
-                                        </StyledTableCell>
-                                      </StyledTableRow>
-                                    );
-                                  })}
-                              </TableBody>
-                            </Table>
-                          </TableContainer>
-                        </Paper>
+                        <div className="pt-2">
+                          <Paper>
+                            <TableContainer>
+                              <Table>
+                                <TableHead>
+                                  <TableRow>
+                                    <StyledTableCell className="table-cell-heading">
+                                      Counsellor Name
+                                    </StyledTableCell>
+                                    <StyledTableCell className="table-cell-heading">
+                                      No. of Enrollments
+                                    </StyledTableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {role === "branch manager" &&
+                                    Object.entries(
+                                      CounsellorwisestudentsData
+                                    ).map(([counsellor, students]) => {
+                                      const enrollmentPercentage =
+                                        (students.length /
+                                          getstudentData.length) *
+                                        100;
+                                      const totalCount = students.length;
+                                      return (
+                                        <StyledTableRow
+                                          key={`student-${counsellor}`}
+                                        >
+                                          <StyledTableCell className="Table-cell">
+                                            {counsellor}{" "}
+                                          </StyledTableCell>
+                                          <StyledTableCell className="Table-cell">
+                                            {" "}
+                                            {Number(
+                                              parseFloat(totalCount).toFixed(2)
+                                            ).toLocaleString("en-IN")}
+                                          </StyledTableCell>
+                                        </StyledTableRow>
+                                      );
+                                    })}
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </Paper>
                         </div>
                       </div>
                     )}
@@ -1203,8 +1212,8 @@ const Dashboard = () => {
                 <div className="">
                   {role !== "counsellor" && role !== "branch manager" && (
                     <h5 className="pt-4 text-center underline">
-                 
-                      <span className="fw-bold fs-5"> Current Month </span>Branch Wise Booking Amount Data
+                      <span className="fw-bold fs-5"> Current Month </span>
+                      Branch Wise Booking Amount Data
                     </h5>
                   )}
 
@@ -1248,7 +1257,8 @@ const Dashboard = () => {
                     <div>
                       {role === "branch manager" && (
                         <h5 className="pt-4 text-center underline">
-                          <span className="fw-bold fs-5"> Current Month</span> Counsellor Wise Booking Amount Data
+                          <span className="fw-bold fs-5"> Current Month</span>{" "}
+                          Counsellor Wise Booking Amount Data
                         </h5>
                       )}
                       <div className="pt-2">
@@ -1304,15 +1314,235 @@ const Dashboard = () => {
                 </div>
               </div>
             )}
+            {DisplayTable.enrollmentfeerecevied && (
+              <div>
+                <div className="">
+                  {role !== "counsellor" && role !== "branch manager" && (
+                    <h5 className="pt-4 text-center underline">
+                      <span className="fw-bold fs-5"> Current Month </span>
+                      Branch Wise Enrollment Fee Received Data
+                    </h5>
+                  )}
+
+                  <div className="justify-content-around pt-2">
+                    {role !== "branch manager" && role !== "counsellor" && (
+                      <Paper>
+                        <TableContainer>
+                          <Table>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell className="table-cell-heading">
+                                  Branch
+                                </StyledTableCell>
+                                <StyledTableCell className="table-cell-heading">
+                                  Received Amount
+                                </StyledTableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {Object.entries(finalTotalByBranch).map(
+                                ([
+                                  branch,
+                                  { percentage, totalReceivedAmount },
+                                ]) => {
+                                  return (
+                                    <StyledTableRow key={branch}>
+                                      <StyledTableCell className="Table-cell">
+                                        {branch}
+                                      </StyledTableCell>
+                                      <StyledTableCell className="Table-cell">
+                                        {Number(
+                                          parseFloat(
+                                            totalReceivedAmount
+                                          ).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                      </StyledTableCell>
+                                    </StyledTableRow>
+                                  );
+                                }
+                              )}
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                      </Paper>
+                    )}
+                    <div>
+                      {role === "branch manager" && (
+                        <h5 className="pt-4 text-center underline">
+                          <span className="fw-bold fs-5"> Current Month</span>{" "}
+                          Counsellor Wise Enrollment Fee Received Data
+                        </h5>
+                      )}
+
+                      <div className="pt-2">
+                        {role === "branch manager" && (
+                          <Paper>
+                            <TableContainer>
+                              <Table>
+                                <TableHead>
+                                  <TableRow>
+                                    <StyledTableCell className="table-cell-heading">
+                                      Cousellor Name
+                                    </StyledTableCell>
+                                    <StyledTableCell className="table-cell-heading">
+                                      Booking Amount
+                                    </StyledTableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {role === "branch manager" &&
+                                    Object.entries(
+                                      counsellorwisedataByBranch
+                                    ).map(
+                                      ([
+                                        counsellor,
+                                        { totalReceived, percentage },
+                                      ]) => {
+                                        return (
+                                          <StyledTableRow
+                                            key={`student-${counsellor}`}
+                                          >
+                                            <StyledTableCell className="Table-cell">
+                                              {counsellor}
+                                            </StyledTableCell>
+                                            <StyledTableCell className="Table-cell">
+                                              {Number(
+                                                parseFloat(
+                                                  totalReceived
+                                                ).toFixed(2)
+                                              ).toLocaleString("en-IN")}
+                                            </StyledTableCell>
+                                          </StyledTableRow>
+                                        );
+                                      }
+                                    )}
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </Paper>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {DisplayTable.enrollmentfeeyettorecevied && (
+              <div>
+                <div className="">
+                  {role !== "counsellor" && role !== "branch manager" && (
+                    <h5 className="pt-4 text-center underline">
+                      <span className="fw-bold fs-5"> Current Month </span>
+                      Branch Wise Enrollment Fee Yet To Receive Data
+                    </h5>
+                  )}
+
+                  <div className="justify-content-around pt-2">
+                    {role !== "branch manager" && role !== "counsellor" && (
+                      <Paper>
+                        <TableContainer>
+                          <Table>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell className="table-cell-heading">
+                                  Branch
+                                </StyledTableCell>
+                                <StyledTableCell className="table-cell-heading">
+                                  Fee Yet To Receive Amount
+                                </StyledTableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {Object.entries(finalTotalByBranch).map(
+                                ([branch, { percentage, totalDueAmount }]) => {
+                                  return (
+                                    <StyledTableRow key={branch}>
+                                      <StyledTableCell className="Table-cell">
+                                        {branch}
+                                      </StyledTableCell>
+                                      <StyledTableCell className="Table-cell">
+                                        {Number(
+                                          parseFloat(totalDueAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                      </StyledTableCell>
+                                    </StyledTableRow>
+                                  );
+                                }
+                              )}
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                      </Paper>
+                    )}
+                    <div>
+                      {role === "branch manager" && (
+                        <h5 className="pt-4 text-center underline">
+                          <span className="fw-bold fs-5"> Current Month</span>{" "}
+                          Counsellor Wise Enrollment Fee Yet To Receive Data
+                        </h5>
+                      )}
+                      <div className="pt-2">
+                        {role === "branch manager" && (
+                          <Paper>
+                            <TableContainer>
+                              <Table>
+                                <TableHead>
+                                  <TableRow>
+                                    <StyledTableCell className="table-cell-heading">
+                                      Cousellor Name
+                                    </StyledTableCell>
+                                    <StyledTableCell className="table-cell-heading">
+                                      Booking Amount
+                                    </StyledTableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {role === "branch manager" &&
+                                    Object.entries(
+                                      counsellorwisedataByBranch
+                                    ).map(
+                                      ([
+                                        counsellor,
+                                        { totalDueAmount, percentage },
+                                      ]) => {
+                                        return (
+                                          <StyledTableRow
+                                            key={`student-${counsellor}`}
+                                          >
+                                            <StyledTableCell className="Table-cell">
+                                              {counsellor}
+                                            </StyledTableCell>
+                                            <StyledTableCell className="Table-cell">
+                                              {Number(
+                                                parseFloat(
+                                                  totalDueAmount
+                                                ).toFixed(2)
+                                              ).toLocaleString("en-IN")}
+                                            </StyledTableCell>
+                                          </StyledTableRow>
+                                        );
+                                      }
+                                    )}
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </Paper>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
-     
+
       {Displaycards.fee && (
         <div className=" ">
           <div className="d-flex justify-content-between align-items-center">
             <h5 className=" text-center flex-grow-1 pt-4 mb-2 ms-sm-5 underline ">
-             <span className="fw-bold fs-5"> Current Month</span> Fee Details
+              <span className="fw-bold fs-5"> Current Month</span> Fee Details
             </h5>
             <div className="">
               <Button
@@ -1327,7 +1557,7 @@ const Dashboard = () => {
                   title="Filter"
                   style={{ textTransform: "capitalize" }}
                 >
-                    <FilterAltIcon/>
+                  <FilterAltIcon />
                 </button>
               </Button>
               <Menu
@@ -1399,18 +1629,18 @@ const Dashboard = () => {
             <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-                 onClick={(e) =>
+                onClick={(e) =>
                   setDisplayTable((prev) => ({
                     enrollments: false,
                     bookingamount: false,
                     enrollmentfeerecevied: false,
-                      enrollmentfeeyettorecevied:false,
-                    feerecevied:!prev.feerecevied,
+                    enrollmentfeeyettorecevied: false,
+                    feerecevied: !prev.feerecevied,
                     feeyettorecevied: false,
                     branchusers: false,
                   }))
                 }
-               className="cardcolor"
+                className="cardcolor"
                 // style={{
                 //   background: "#fd746e",
                 //   textAlign: "center",
@@ -1433,17 +1663,17 @@ const Dashboard = () => {
             </div>
             <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-               onClick={(e) =>
-                setDisplayTable((prev) => ({
-                  enrollments: false,
-                  bookingamount: false,
-                  enrollmentfeerecevied: false,
-    enrollmentfeeyettorecevied:false,
-                  feerecevied:false,
-                  feeyettorecevied: !prev.feeyettorecevied,
-                  branchusers: false,
-                }))
-              }
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: false,
+                    bookingamount: false,
+                    enrollmentfeerecevied: false,
+                    enrollmentfeeyettorecevied: false,
+                    feerecevied: false,
+                    feeyettorecevied: !prev.feeyettorecevied,
+                    branchusers: false,
+                  }))
+                }
                 className="cardcolor"
                 // style={{
                 //   background: "#7fa1e4",
@@ -1469,194 +1699,197 @@ const Dashboard = () => {
           {/* Fee Cards Display End */}
 
           {/* Fee Details Table Display */}
-          <div> 
-          {DisplayTable.feerecevied && (
-            <div>
-              <div className="">
-                {role !== "counsellor" && role !== "branch manager" && (
-                
+          <div>
+            {DisplayTable.feerecevied && (
+              <div>
+                <div className="">
+                  {role !== "counsellor" && role !== "branch manager" && (
                     <h5 className="pt-4 text-center underline">
                       {" "}
-                     <span className="fw-bold fs-5">  Current Month</span> Branch Wise Recevied Amount Data
+                      <span className="fw-bold fs-5"> Current Month</span>{" "}
+                      Branch Wise Recevied Amount Data
                     </h5>
-               
-                )}
-
-                <div className="  justify-content-around pt-2">
-                  {role !== "branch manager" && role !== "counsellor" && (
-                    <Paper>
-                      <TableContainer>
-                        <Table>
-                          <TableHead>
-                            <TableRow>
-                              <StyledTableCell className="table-cell-heading">
-                                Branch
-                              </StyledTableCell>
-                              <StyledTableCell className="table-cell-heading">
-                                Recevied Amount
-                              </StyledTableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {Object.entries(finalDueAndReceivedByBranch).map(
-                              ([
-                                branch,
-                                { totalDueAmount, totalreceivedAmount },
-                              ]) => {
-                                const Receivedpercentage =
-                                  (totalreceivedAmount /
-                                    AllbranchesreceivedAmount) *
-                                  100;
-                                const Pendingpercentage =
-                                  (totalDueAmount / AllbranchesDueAmount) * 100;
-                                return (
-                                  <StyledTableRow key={branch}>
-                                    <StyledTableCell className="Table-cell">
-                                      {branch}
-                                    </StyledTableCell>
-                                    <StyledTableCell className="Table-cell">
-                                      {Number(
-                                        parseFloat(totalreceivedAmount).toFixed(
-                                          2
-                                        )
-                                      ).toLocaleString("en-IN")}
-                                    </StyledTableCell>
-                                  </StyledTableRow>
-                                  // <div
-
-                                  //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                                  // >
-                                  //   <h6>
-                                  //     <b>{branch}</b>
-                                  //   </h6>
-                                  //   <BorderLinearProgress
-                                  //     variant="determinate"
-                                  //     value={Receivedpercentage}
-                                  //   />
-
-                                  //   <div>
-                                  //     Received :{" "}
-                                  //     {Number(
-                                  //       parseFloat(totalreceivedAmount).toFixed(2)
-                                  //     ).toLocaleString("en-IN")}
-                                  //     <span>({Receivedpercentage.toFixed(2)}%)</span>
-                                  //   </div>
-                                  //   <BorderLinearProgress
-                                  //     variant="determinate"
-                                  //     value={Pendingpercentage}
-                                  //   />
-                                  //   <div>
-                                  //     Pending :{" "}
-                                  //     {Number(
-                                  //       parseFloat(totalDueAmount).toFixed(2)
-                                  //     ).toLocaleString("en-IN")}
-                                  //     <span>({Pendingpercentage.toFixed(2)}%)</span>
-                                  //   </div>
-                                  // </div>
-                                );
-                              }
-                            )}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </Paper>
                   )}
-                  <div>
-                    {role === "branch manager" && (
-                      <div>
-                        <h5 className="pt-4 underline text-center">
-                        
-                          <span className="fw-bold fs-5"> Current Month</span> Counsellor Wise Recevied Amount Data
-                        </h5>
 
-                          <div className="pt-2"> 
-                          <Paper>
-                          <TableContainer>
-                            <Table>
-                              <TableHead>
-                                <TableRow>
-                                  <StyledTableCell className="table-cell-heading">
-                                    Counsellor Name
-                                  </StyledTableCell>
-                                  <StyledTableCell className="table-cell-heading">
-                                    Receviced Amount
-                                  </StyledTableCell>
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                {role === "branch manager" &&
-                                  Object.entries(
-                                    finalCounsellorWiseDueAndReceivedByBranch
-                                  ).map(
-                                    ([
-                                      counsellor,
-                                      { totalDueAmount, totalreceivedAmount },
-                                    ]) => {
-                                      const Receivedpercentage =
-                                        (totalreceivedAmount /
-                                          AllbranchesreceivedAmount) *
-                                        100;
-                                      const Pendingpercentage =
-                                        (totalDueAmount /
-                                          AllbranchesDueAmount) *
-                                        100;
-                                      return (
-                                        <StyledTableRow key={counsellor}>
-                                          <StyledTableCell className="Table-cell">
-                                            {counsellor}
-                                          </StyledTableCell>
-                                          <StyledTableCell className="Table-cell">
-                                            {Number(
-                                              parseFloat(
-                                                totalreceivedAmount
-                                              ).toFixed(2)
-                                            ).toLocaleString("en-IN")}
-                                          </StyledTableCell>
-                                        </StyledTableRow>
-                                        // <div
-                                        //   key={counsellor}
-                                        //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                                        // >
-                                        //   <h6>
-                                        //     <b>{counsellor}</b>
-                                        //   </h6>
-                                        //   <BorderLinearProgress
-                                        //     variant="determinate"
-                                        //     value={Receivedpercentage}
-                                        //   />
+                  <div className="  justify-content-around pt-2">
+                    {role !== "branch manager" && role !== "counsellor" && (
+                      <Paper>
+                        <TableContainer>
+                          <Table>
+                            <TableHead>
+                              <TableRow>
+                                <StyledTableCell className="table-cell-heading">
+                                  Branch
+                                </StyledTableCell>
+                                <StyledTableCell className="table-cell-heading">
+                                  Recevied Amount
+                                </StyledTableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {Object.entries(finalDueAndReceivedByBranch).map(
+                                ([
+                                  branch,
+                                  { totalDueAmount, totalreceivedAmount },
+                                ]) => {
+                                  const Receivedpercentage =
+                                    (totalreceivedAmount /
+                                      AllbranchesreceivedAmount) *
+                                    100;
+                                  const Pendingpercentage =
+                                    (totalDueAmount / AllbranchesDueAmount) *
+                                    100;
+                                  return (
+                                    <StyledTableRow key={branch}>
+                                      <StyledTableCell className="Table-cell">
+                                        {branch}
+                                      </StyledTableCell>
+                                      <StyledTableCell className="Table-cell">
+                                        {Number(
+                                          parseFloat(
+                                            totalreceivedAmount
+                                          ).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                      </StyledTableCell>
+                                    </StyledTableRow>
+                                    // <div
 
-                                        //   <div>
-                                        //     Received : {}{" "}
-                                        //     {Number(
-                                        //       parseFloat(totalreceivedAmount).toFixed(2)
-                                        //     ).toLocaleString("en-IN")}
-                                        //     <span>({Receivedpercentage.toFixed(2)}%)</span>
-                                        //   </div>
-                                        //   <BorderLinearProgress
-                                        //     variant="determinate"
-                                        //     value={Pendingpercentage}
-                                        //   />
-                                        //   <div>
-                                        //     Pending : {}{" "}
-                                        //     {Number(
-                                        //       parseFloat(totalDueAmount).toFixed(2)
-                                        //     ).toLocaleString("en-IN")}
-                                        //     <span>({Pendingpercentage.toFixed(2)}%)</span>
-                                        //   </div>
-                                        // </div>
-                                      );
-                                    }
-                                  )}
-                              </TableBody>
-                            </Table>
-                          </TableContainer>
-                        </Paper>
-                      </div>
-                      </div>
+                                    //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                                    // >
+                                    //   <h6>
+                                    //     <b>{branch}</b>
+                                    //   </h6>
+                                    //   <BorderLinearProgress
+                                    //     variant="determinate"
+                                    //     value={Receivedpercentage}
+                                    //   />
+
+                                    //   <div>
+                                    //     Received :{" "}
+                                    //     {Number(
+                                    //       parseFloat(totalreceivedAmount).toFixed(2)
+                                    //     ).toLocaleString("en-IN")}
+                                    //     <span>({Receivedpercentage.toFixed(2)}%)</span>
+                                    //   </div>
+                                    //   <BorderLinearProgress
+                                    //     variant="determinate"
+                                    //     value={Pendingpercentage}
+                                    //   />
+                                    //   <div>
+                                    //     Pending :{" "}
+                                    //     {Number(
+                                    //       parseFloat(totalDueAmount).toFixed(2)
+                                    //     ).toLocaleString("en-IN")}
+                                    //     <span>({Pendingpercentage.toFixed(2)}%)</span>
+                                    //   </div>
+                                    // </div>
+                                  );
+                                }
+                              )}
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                      </Paper>
                     )}
+                    <div>
+                      {role === "branch manager" && (
+                        <div>
+                          <h5 className="pt-4 underline text-center">
+                            <span className="fw-bold fs-5"> Current Month</span>{" "}
+                            Counsellor Wise Recevied Amount Data
+                          </h5>
+
+                          <div className="pt-2">
+                            <Paper>
+                              <TableContainer>
+                                <Table>
+                                  <TableHead>
+                                    <TableRow>
+                                      <StyledTableCell className="table-cell-heading">
+                                        Counsellor Name
+                                      </StyledTableCell>
+                                      <StyledTableCell className="table-cell-heading">
+                                        Receviced Amount
+                                      </StyledTableCell>
+                                    </TableRow>
+                                  </TableHead>
+                                  <TableBody>
+                                    {role === "branch manager" &&
+                                      Object.entries(
+                                        finalCounsellorWiseDueAndReceivedByBranch
+                                      ).map(
+                                        ([
+                                          counsellor,
+                                          {
+                                            totalDueAmount,
+                                            totalreceivedAmount,
+                                          },
+                                        ]) => {
+                                          const Receivedpercentage =
+                                            (totalreceivedAmount /
+                                              AllbranchesreceivedAmount) *
+                                            100;
+                                          const Pendingpercentage =
+                                            (totalDueAmount /
+                                              AllbranchesDueAmount) *
+                                            100;
+                                          return (
+                                            <StyledTableRow key={counsellor}>
+                                              <StyledTableCell className="Table-cell">
+                                                {counsellor}
+                                              </StyledTableCell>
+                                              <StyledTableCell className="Table-cell">
+                                                {Number(
+                                                  parseFloat(
+                                                    totalreceivedAmount
+                                                  ).toFixed(2)
+                                                ).toLocaleString("en-IN")}
+                                              </StyledTableCell>
+                                            </StyledTableRow>
+                                            // <div
+                                            //   key={counsellor}
+                                            //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                                            // >
+                                            //   <h6>
+                                            //     <b>{counsellor}</b>
+                                            //   </h6>
+                                            //   <BorderLinearProgress
+                                            //     variant="determinate"
+                                            //     value={Receivedpercentage}
+                                            //   />
+
+                                            //   <div>
+                                            //     Received : {}{" "}
+                                            //     {Number(
+                                            //       parseFloat(totalreceivedAmount).toFixed(2)
+                                            //     ).toLocaleString("en-IN")}
+                                            //     <span>({Receivedpercentage.toFixed(2)}%)</span>
+                                            //   </div>
+                                            //   <BorderLinearProgress
+                                            //     variant="determinate"
+                                            //     value={Pendingpercentage}
+                                            //   />
+                                            //   <div>
+                                            //     Pending : {}{" "}
+                                            //     {Number(
+                                            //       parseFloat(totalDueAmount).toFixed(2)
+                                            //     ).toLocaleString("en-IN")}
+                                            //     <span>({Pendingpercentage.toFixed(2)}%)</span>
+                                            //   </div>
+                                            // </div>
+                                          );
+                                        }
+                                      )}
+                                  </TableBody>
+                                </Table>
+                              </TableContainer>
+                            </Paper>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-                {/* <div className="justify-content-around ">
+                  {/* <div className="justify-content-around ">
                   <Paper>
                     <TableContainer>
                       <Table>
@@ -1724,129 +1957,40 @@ const Dashboard = () => {
                       }
                     )}
                 </div> */}
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {DisplayTable.feeyettorecevied && (
-            <div>
-              <div className="">
-                {role !== "counsellor" && role !== "branch manager" && (
-                 
+            {DisplayTable.feeyettorecevied && (
+              <div>
+                <div className="">
+                  {role !== "counsellor" && role !== "branch manager" && (
                     <h5 className="pt-4 underline text-center">
-                   
-                      <span className="fw-bold fs-5"> Current Month </span>Branch Wise Fee Yet to Recevied Amount Data
+                      <span className="fw-bold fs-5"> Current Month </span>
+                      Branch Wise Fee Yet to Recevied Amount Data
                     </h5>
-               
-                )}
-
-                <div className="  justify-content-around pt-2">
-                  {role !== "branch manager" && role !== "counsellor" && (
-                    <Paper>
-                      <TableContainer>
-                        <Table>
-                          <TableHead>
-                            <TableRow>
-                              <StyledTableCell className="table-cell-heading">
-                                Branch
-                              </StyledTableCell>
-                              <StyledTableCell className="table-cell-heading">
-                                Pending Amount
-                              </StyledTableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {role !== "branch manager" &&
-                              Object.entries(finalDueAndReceivedByBranch).map(
-                                ([
-                                  branch,
-                                  { totalDueAmount, totalreceivedAmount },
-                                ]) => {
-                                  const Receivedpercentage =
-                                    (totalreceivedAmount /
-                                      AllbranchesreceivedAmount) *
-                                    100;
-                                  const Pendingpercentage =
-                                    (totalDueAmount / AllbranchesDueAmount) *
-                                    100;
-                                  return (
-                                    <StyledTableRow key={branch}>
-                                      <StyledTableCell className="Table-cell">
-                                        {branch}
-                                      </StyledTableCell>
-                                      <StyledTableCell className="Table-cell">
-                                        {Number(
-                                          parseFloat(totalDueAmount).toFixed(2)
-                                        ).toLocaleString("en-IN")}
-                                      </StyledTableCell>
-                                    </StyledTableRow>
-                                    // <div
-
-                                    //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                                    // >
-                                    //   <h6>
-                                    //     <b>{branch}</b>
-                                    //   </h6>
-                                    //   <BorderLinearProgress
-                                    //     variant="determinate"
-                                    //     value={Receivedpercentage}
-                                    //   />
-
-                                    //   <div>
-                                    //     Received :{" "}
-                                    //     {Number(
-                                    //       parseFloat(totalreceivedAmount).toFixed(2)
-                                    //     ).toLocaleString("en-IN")}
-                                    //     <span>({Receivedpercentage.toFixed(2)}%)</span>
-                                    //   </div>
-                                    //   <BorderLinearProgress
-                                    //     variant="determinate"
-                                    //     value={Pendingpercentage}
-                                    //   />
-                                    //   <div>
-                                    //     Pending :{" "}
-                                    //     {Number(
-                                    //       parseFloat(totalDueAmount).toFixed(2)
-                                    //     ).toLocaleString("en-IN")}
-                                    //     <span>({Pendingpercentage.toFixed(2)}%)</span>
-                                    //   </div>
-                                    // </div>
-                                  );
-                                }
-                              )}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </Paper>
                   )}
-                  {role === "branch manager" && (
-                    <div>
-                      <h5 className="text-center pt-4 underline">
-                      
-                       <sapn className="fw-bold fs-5">  Current Month</sapn> Counsellor Wise Fee Yet To Recevied Data
-                      </h5>
 
-                        <div className="pt-2">
-                        <Paper>
+                  <div className="  justify-content-around pt-2">
+                    {role !== "branch manager" && role !== "counsellor" && (
+                      <Paper>
                         <TableContainer>
                           <Table>
                             <TableHead>
                               <TableRow>
                                 <StyledTableCell className="table-cell-heading">
-                                  Counsellor Name
+                                  Branch
                                 </StyledTableCell>
                                 <StyledTableCell className="table-cell-heading">
-                                  Fee Yet to Received
+                                  Pending Amount
                                 </StyledTableCell>
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {role === "branch manager" &&
-                                Object.entries(
-                                  finalCounsellorWiseDueAndReceivedByBranch
-                                ).map(
+                              {role !== "branch manager" &&
+                                Object.entries(finalDueAndReceivedByBranch).map(
                                   ([
-                                    counsellor,
+                                    branch,
                                     { totalDueAmount, totalreceivedAmount },
                                   ]) => {
                                     const Receivedpercentage =
@@ -1857,9 +2001,9 @@ const Dashboard = () => {
                                       (totalDueAmount / AllbranchesDueAmount) *
                                       100;
                                     return (
-                                      <StyledTableRow key={counsellor}>
+                                      <StyledTableRow key={branch}>
                                         <StyledTableCell className="Table-cell">
-                                          {counsellor}
+                                          {branch}
                                         </StyledTableCell>
                                         <StyledTableCell className="Table-cell">
                                           {Number(
@@ -1869,13 +2013,12 @@ const Dashboard = () => {
                                           ).toLocaleString("en-IN")}
                                         </StyledTableCell>
                                       </StyledTableRow>
-
                                       // <div
-                                      //   key={counsellor}
+
                                       //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
                                       // >
                                       //   <h6>
-                                      //     <b>{counsellor}</b>
+                                      //     <b>{branch}</b>
                                       //   </h6>
                                       //   <BorderLinearProgress
                                       //     variant="determinate"
@@ -1883,7 +2026,7 @@ const Dashboard = () => {
                                       //   />
 
                                       //   <div>
-                                      //     Received : {}{" "}
+                                      //     Received :{" "}
                                       //     {Number(
                                       //       parseFloat(totalreceivedAmount).toFixed(2)
                                       //     ).toLocaleString("en-IN")}
@@ -1894,7 +2037,7 @@ const Dashboard = () => {
                                       //     value={Pendingpercentage}
                                       //   />
                                       //   <div>
-                                      //     Pending : {}{" "}
+                                      //     Pending :{" "}
                                       //     {Number(
                                       //       parseFloat(totalDueAmount).toFixed(2)
                                       //     ).toLocaleString("en-IN")}
@@ -1908,18 +2051,108 @@ const Dashboard = () => {
                           </Table>
                         </TableContainer>
                       </Paper>
+                    )}
+                    {role === "branch manager" && (
+                      <div>
+                        <h5 className="text-center pt-4 underline">
+                          <sapn className="fw-bold fs-5"> Current Month</sapn>{" "}
+                          Counsellor Wise Fee Yet To Recevied Data
+                        </h5>
+
+                        <div className="pt-2">
+                          <Paper>
+                            <TableContainer>
+                              <Table>
+                                <TableHead>
+                                  <TableRow>
+                                    <StyledTableCell className="table-cell-heading">
+                                      Counsellor Name
+                                    </StyledTableCell>
+                                    <StyledTableCell className="table-cell-heading">
+                                      Fee Yet to Received
+                                    </StyledTableCell>
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {role === "branch manager" &&
+                                    Object.entries(
+                                      finalCounsellorWiseDueAndReceivedByBranch
+                                    ).map(
+                                      ([
+                                        counsellor,
+                                        { totalDueAmount, totalreceivedAmount },
+                                      ]) => {
+                                        const Receivedpercentage =
+                                          (totalreceivedAmount /
+                                            AllbranchesreceivedAmount) *
+                                          100;
+                                        const Pendingpercentage =
+                                          (totalDueAmount /
+                                            AllbranchesDueAmount) *
+                                          100;
+                                        return (
+                                          <StyledTableRow key={counsellor}>
+                                            <StyledTableCell className="Table-cell">
+                                              {counsellor}
+                                            </StyledTableCell>
+                                            <StyledTableCell className="Table-cell">
+                                              {Number(
+                                                parseFloat(
+                                                  totalDueAmount
+                                                ).toFixed(2)
+                                              ).toLocaleString("en-IN")}
+                                            </StyledTableCell>
+                                          </StyledTableRow>
+
+                                          // <div
+                                          //   key={counsellor}
+                                          //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                                          // >
+                                          //   <h6>
+                                          //     <b>{counsellor}</b>
+                                          //   </h6>
+                                          //   <BorderLinearProgress
+                                          //     variant="determinate"
+                                          //     value={Receivedpercentage}
+                                          //   />
+
+                                          //   <div>
+                                          //     Received : {}{" "}
+                                          //     {Number(
+                                          //       parseFloat(totalreceivedAmount).toFixed(2)
+                                          //     ).toLocaleString("en-IN")}
+                                          //     <span>({Receivedpercentage.toFixed(2)}%)</span>
+                                          //   </div>
+                                          //   <BorderLinearProgress
+                                          //     variant="determinate"
+                                          //     value={Pendingpercentage}
+                                          //   />
+                                          //   <div>
+                                          //     Pending : {}{" "}
+                                          //     {Number(
+                                          //       parseFloat(totalDueAmount).toFixed(2)
+                                          //     ).toLocaleString("en-IN")}
+                                          //     <span>({Pendingpercentage.toFixed(2)}%)</span>
+                                          //   </div>
+                                          // </div>
+                                        );
+                                      }
+                                    )}
+                                </TableBody>
+                              </Table>
+                            </TableContainer>
+                          </Paper>
                         </div>
-                    </div>
-                  )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-               
               </div>
-            </div>
-          )}
+            )}
           </div>
         </div>
       )}
-     {/* Don't remove this////////// */}
+      {/* Don't remove this////////// */}
       {/* {Displaycards.dueAndReceivedAmount && (
         <div className="progreebar rounded rounded-5  pb-4">
           <div className="d-flex justify-content-between">
@@ -2100,111 +2333,111 @@ const Dashboard = () => {
         </div>
       )} */}
 
-    
       {Displaycards.users && (
         <div className=" ">
-          <div >
-          <div className="d-flex justify-content-between align-items-center">
-            <h5 className=" text-center flex-grow-1 pt-4 underline ms-sm-5 ">
-              <span className="fw-bold fs-5">Current Month</span> Total Users Details
-            </h5>
-            <div className="">
-              <Button
-                id="demo-positioned-button"
-                aria-controls={open ? "demo-positioned-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-              >
-                <button
+          <div>
+            <div className="d-flex justify-content-between align-items-center">
+              <h5 className=" text-center flex-grow-1 pt-4 underline ms-sm-5 ">
+                <span className="fw-bold fs-5">Current Month</span> Total Users
+                Details
+              </h5>
+              <div className="">
+                <Button
+                  id="demo-positioned-button"
+                  aria-controls={open ? "demo-positioned-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <button
                     className="btn-filter btn-color"
                     title="Filter"
-                  style={{ textTransform: "capitalize" }}
-                >
-                    <FilterAltIcon/>
-                </button>
-              </Button>
-              <Menu
-                className=""
-                id="demo-positioned-menu"
-                aria-labelledby="demo-positioned-button"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-              >
-                <div className="d-flex justify-content-between">
-                  <MenuItem> Filter</MenuItem>
-                  <MenuItem>
-                    {" "}
-                    <CloseIcon onClick={handleClose} />{" "}
-                  </MenuItem>
-                </div>
-                <hr />
-                <div className="row m-2">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label=" From:"
-                      type="date"
-                      variant="standard"
-                      className="  w-100"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="fromdate"
-                      value={filterCriteria.fromdate}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
-                    <TextField
-                      label=" To:"
-                      type="date"
-                      variant="standard"
-                      className="w-100"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      name="todate"
-                      value={filterCriteria.todate}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </div>
-
-                <MenuItem className="text-end">
-                  <button className="btn btn-color" onClick={filterreset}>
-                    {" "}
-                    Clear
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    <FilterAltIcon />
                   </button>
-                </MenuItem>
-              </Menu>
+                </Button>
+                <Menu
+                  className=""
+                  id="demo-positioned-menu"
+                  aria-labelledby="demo-positioned-button"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                >
+                  <div className="d-flex justify-content-between">
+                    <MenuItem> Filter</MenuItem>
+                    <MenuItem>
+                      {" "}
+                      <CloseIcon onClick={handleClose} />{" "}
+                    </MenuItem>
+                  </div>
+                  <hr />
+                  <div className="row m-2">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                      <TextField
+                        label=" From:"
+                        type="date"
+                        variant="standard"
+                        className="  w-100"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        name="fromdate"
+                        value={filterCriteria.fromdate}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
+                      <TextField
+                        label=" To:"
+                        type="date"
+                        variant="standard"
+                        className="w-100"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        name="todate"
+                        value={filterCriteria.todate}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </div>
+
+                  <MenuItem className="text-end">
+                    <button className="btn btn-color" onClick={filterreset}>
+                      {" "}
+                      Clear
+                    </button>
+                  </MenuItem>
+                </Menu>
+              </div>
             </div>
-          </div>
           </div>
           {/* User Card Display */}
           <div className="row  ">
             <div className="col-12 col-md-4 col-xl-4 col-lg-4"></div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+            <div className="col-12 col-md-3 col-xl-3 col-lg-3 mb-2">
               <Card
-               onClick={(e) =>
-                setDisplayTable((prev) => ({
-                  enrollments: false,
-                  bookingamount: false,
-                  enrollmentfeerecevied: false,
-    enrollmentfeeyettorecevied:false,
-                  feerecevied:false,
-                  feeyettorecevied:false,
-                  branchusers:!prev.branchusers,
-                }))
-              }
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: false,
+                    bookingamount: false,
+                    enrollmentfeerecevied: false,
+                    enrollmentfeeyettorecevied: false,
+                    feerecevied: false,
+                    feeyettorecevied: false,
+                    branchusers: !prev.branchusers,
+                  }))
+                }
                 className="cardcolor"
                 // style={{
                 //   background: "#fd746e",
@@ -2225,7 +2458,7 @@ const Dashboard = () => {
                 </p>
               </Card>
             </div>
-            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2"></div>
+            <div className="col-12 col-md-3 col-xl-3 col-lg-3 mb-2"></div>
           </div>
           {/* User Card Display End */}
 
@@ -2234,66 +2467,65 @@ const Dashboard = () => {
             <div className="justify-content-around ">
               {role === "admin" && (
                 <div>
-               
-                    <h5 className="pt-4 text-center underline">
-                   
-                    <span className="fw-bold fs-5">Current Month</span> Branch Wise User Data
-                    </h5>
-              
-                  <div className="pt-2">
-                  <Paper>
-                    <TableContainer>
-                      <Table>
-                        <TableHead>
-                          <TableRow>
-                            <StyledTableCell className="table-cell-heading">
-                              Branch
-                            </StyledTableCell>
-                            <StyledTableCell className="table-cell-heading">
-                              No. of Users
-                            </StyledTableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {Object.entries(branchUserData).map(
-                            ([branch, users]) => {
-                              const enrollmentPercentage =
-                                (users.length / getUsersData.length) * 100;
-                              const totalCount = users.length;
-                              return (
-                                <StyledTableRow key={`user-${branch}`}>
-                                  <StyledTableCell className="Table-cell">
-                                    {branch}{" "}
-                                  </StyledTableCell>
-                                  <StyledTableCell className="Table-cell">
-                                    {" "}
-                                    {Number(
-                                      parseFloat(totalCount).toFixed(2)
-                                    ).toLocaleString("en-IN")}{" "}
-                                  </StyledTableCell>
-                                </StyledTableRow>
-                                // <div
+                  <h5 className="pt-4 text-center underline">
+                    <span className="fw-bold fs-5">Current Month</span> Branch
+                    Wise User Data
+                  </h5>
 
-                                //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
-                                // >
-                                //   <h6></h6>
-                                //   <BorderLinearProgress
-                                //     variant="determinate"
-                                //     value={enrollmentPercentage}
-                                //   />
-                                //   <span>Total Count: </span>
-                                //   {Number(parseFloat(totalCount).toFixed(2)).toLocaleString(
-                                //     "en-IN"
-                                //   )}
-                                //   <span>({enrollmentPercentage.toFixed(2)}%)</span>
-                                // </div>
-                              );
-                            }
-                          )}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </Paper>
+                  <div className="pt-2">
+                    <Paper>
+                      <TableContainer>
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <StyledTableCell className="table-cell-heading">
+                                Branch
+                              </StyledTableCell>
+                              <StyledTableCell className="table-cell-heading">
+                                No. of Users
+                              </StyledTableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {Object.entries(branchUserData).map(
+                              ([branch, users]) => {
+                                const enrollmentPercentage =
+                                  (users.length / getUsersData.length) * 100;
+                                const totalCount = users.length;
+                                return (
+                                  <StyledTableRow key={`user-${branch}`}>
+                                    <StyledTableCell className="Table-cell">
+                                      {branch}{" "}
+                                    </StyledTableCell>
+                                    <StyledTableCell className="Table-cell">
+                                      {" "}
+                                      {Number(
+                                        parseFloat(totalCount).toFixed(2)
+                                      ).toLocaleString("en-IN")}{" "}
+                                    </StyledTableCell>
+                                  </StyledTableRow>
+                                  // <div
+
+                                  //   className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3"
+                                  // >
+                                  //   <h6></h6>
+                                  //   <BorderLinearProgress
+                                  //     variant="determinate"
+                                  //     value={enrollmentPercentage}
+                                  //   />
+                                  //   <span>Total Count: </span>
+                                  //   {Number(parseFloat(totalCount).toFixed(2)).toLocaleString(
+                                  //     "en-IN"
+                                  //   )}
+                                  //   <span>({enrollmentPercentage.toFixed(2)}%)</span>
+                                  // </div>
+                                );
+                              }
+                            )}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </Paper>
                   </div>
                 </div>
               )}
@@ -2303,7 +2535,7 @@ const Dashboard = () => {
         </div>
       )}
 
-    {/* <div>
+      {/* <div>
           {role === "branch manager" && (
         
               <div className="row  ">
@@ -2442,7 +2674,6 @@ const Dashboard = () => {
                 
               </div>
             }  </div> */}
-      
 
       {/* <div
             className="col-12 col-md-4 col-lg-4 col-xl-4 text-center mb-3"
@@ -2486,11 +2717,8 @@ const Dashboard = () => {
               </p>
             </Card>
           </div> */}
-      
 
-
-      
-          {/* <div className="  justify-content-around pt-4 row progreebar-show">
+      {/* <div className="  justify-content-around pt-4 row progreebar-show">
             {role !== "branch manager" &&
               Object.entries(finalTotalByBranch).map(
                 ([branch, { totalAmount, percentage }]) => {
@@ -2541,7 +2769,6 @@ const Dashboard = () => {
                 }
               )}
           </div> */}
-
     </div>
   );
 };

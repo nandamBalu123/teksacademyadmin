@@ -227,7 +227,7 @@ const Sidebar = () => {
 
             <Box paddingLeft={isCollapsed ? undefined : "1%"}>
 
-            {profile == "admin" || profile =="Regional Manager" || profile == "branch manager" || profile == "counsellor" ? (
+            {profile == "admin" || profile =="regional manager" || profile == "branch manager" || profile == "counsellor" ? (
               <Item
                 style={{
                   color: colors.grey[100],
@@ -287,7 +287,7 @@ const Sidebar = () => {
                 </div>
               ) : undefined}
               
-            {profile == "admin" || profile =="Regional Manager" || profile == "branch manager" || profile == "counsellor" ? (
+            {profile == "admin" || profile =="regional manager" || profile == "branch manager" || profile == "counsellor" ? (
               <SubMenu
                 style={{
                   color: colors.grey[100],

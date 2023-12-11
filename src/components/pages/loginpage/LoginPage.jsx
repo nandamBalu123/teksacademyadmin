@@ -61,18 +61,20 @@ const LoginPage = () => {
 
             const token = res.data.token;
 
-            const role = res.data.adminData.profile;
+            let role = res.data.adminData.profile;
+            role = role.toLowerCase();
             const reportto = res.data.adminData.reportto;
 
             console.log("Received Token:", token);
 
             console.log("role: ", role);
-
+            let user = res.data.adminData;
+            user.profile = user.profile.toLowerCase();
             localStorage.setItem("role", role);
             localStorage.setItem("id", id);
             localStorage.setItem("reportto", reportto);
             localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify(res.data.adminData));
+            localStorage.setItem("user", JSON.stringify(user));
 
             // Store token in a cookie
             document.cookie = `token=${token}; path=/`; // Set the token cookie
