@@ -71,7 +71,7 @@ const UserView = () => {
         <h5 className="my-3 text-center"> User View</h5>
 
         <div className="row">
-          <div className="col-12 col-md-3 col-lg-3 col-xl-3">
+          <div className="col-12 col-md-4 col-lg-3 col-xl-3">
             <img className="w-75" src={profilepic} alt="pic" />
             {/* {!studentdata.studentImg && <img src={profilePic} alt="photo" />}
             {studentdata.studentImg && (
@@ -82,7 +82,7 @@ const UserView = () => {
               />
             )} */}
           </div>
-          <div className="col-12 col-md-5 col-lg-5 col-xl-5">
+          <div className="col-12 col-md-4 col-lg-5 col-xl-5">
             <p>
               <b> User Name :</b>
               {singleUser.fullname}
@@ -98,7 +98,7 @@ const UserView = () => {
               <b> Designation:</b> {singleUser.designation}
             </p>
           </div>
-          <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
+          <div className="col-12 col-md-4 col-lg-4 col-xl-4 ">
             <p>
               <b> Department :</b> {singleUser.department}
             </p>

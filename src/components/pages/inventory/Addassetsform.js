@@ -184,7 +184,7 @@ export default function Addassetsform() {
                             <option value="dilsupnagar">Dilsupnagar</option>
                             </select>
                         </div> */}
-                <div className=" col-lg-6 col-xl-6 col-md-6 col-12 ps-4">
+                <div className=" col-lg-6 col-xl-6 col-md-6 col-12">
                   <FormControl variant="standard" className="w-75">
                     <InputLabel>
                       <span className="label-family">

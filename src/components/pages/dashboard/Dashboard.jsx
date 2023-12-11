@@ -1889,121 +1889,156 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  <MenuItem className="text-end">
-                    <button className="btn btn-color" onClick={filterreset}>
-                      {" "}
-                      Clear
-                    </button>
-                  </MenuItem>
-                </Menu>
-              </div>
-              {/* filter end  */}
+                <MenuItem className="text-end">
+                  <button className="btn btn-color" onClick={filterreset}>
+                    {" "}
+                    Clear
+                  </button>
+                </MenuItem>
+              </Menu>
             </div>
-            {/* Enrollment cards Display */}
-            <div className="row">
-              <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
-                <Card
-                  onClick={(e) =>
-                    setDisplayTable((prev) => ({
-                      enrollments: !prev.enrollments,
-                      bookingamount: false,
-                      enrollmentfeerecevied: false,
-                      enrollmentfeeyettorecevied: false,
-                      feerecevied: false,
-                      feeyettorecevied: false,
-                      branchusers: false,
-                    }))
-                  }
-                  className="cardcolor"
-                >
-                  <p className="text-center pt-3">
-                    No. of Enrollments
-                    <p>
-                      {Number(
-                        parseFloat(getstudentData.length).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
-                    </p>
+            {/* filter end  */}
+          </div>
+          {/* Enrollment cards Display */}
+          <div className="row">
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: !prev.enrollments,
+                    bookingamount: false,
+                    enrollmentfeerecevied: false,
+                    enrollmentfeeyettorecevied: false,
+                    feerecevied: false,
+                    feeyettorecevied: false,
+                    branchusers: false,
+                  }))
+                }
+                className="cardcolor"
+                // style={{
+                //   background: "#fd746e",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   cursor: "pointer",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
+              >
+                <p className="text-center pt-3">
+                  No. of Enrollments
+                  <p>
+                    {Number(
+                      parseFloat(getstudentData.length).toFixed(2)
+                    ).toLocaleString("en-IN")}{" "}
                   </p>
-                </Card>
-              </div>
-              <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
-                <Card
-                  onClick={(e) =>
-                    setDisplayTable((prev) => ({
-                      enrollments: false,
-                      bookingamount: !prev.bookingamount,
-                      enrollmentfeerecevied: false,
-                      enrollmentfeeyettorecevied: false,
-                      feerecevied: false,
-                      feeyettorecevied: false,
-                      branchusers: false,
-                    }))
-                  }
-                  className="cardcolor"
-                >
-                  <p className="text-center pt-3">
-                    Booking Amount
-                    <p>
-                      {Number(
-                        parseFloat(totalAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
-                    </p>
-                  </p>
-                </Card>
-              </div>
-              <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
-                <Card
-                  onClick={(e) =>
-                    setDisplayTable((prev) => ({
-                      enrollments: false,
-                      bookingamount: false,
-                      enrollmentfeerecevied: !prev.enrollmentfeerecevied,
-                      enrollmentfeeyettorecevied: false,
-                      feerecevied: false,
-                      feeyettorecevied: false,
-                      branchusers: false,
-                    }))
-                  }
-                  className="cardcolor"
-                >
-                  <p className="text-center pt-3">
-                    Fee Received
-                    <p>
-                      {Number(
-                        parseFloat(enrollmentsTotalReceivedAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
-                    </p>
-                  </p>
-                </Card>
-              </div>
-              <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
-                <Card
-                  onClick={(e) =>
-                    setDisplayTable((prev) => ({
-                      enrollments: false,
-                      bookingamount: false,
-                      enrollmentfeerecevied: false,
-                      enrollmentfeeyettorecevied:
-                        !prev.enrollmentfeeyettorecevied,
-                      feerecevied: false,
-                      feeyettorecevied: false,
-                      branchusers: false,
-                    }))
-                  }
-                  className="cardcolor"
-                >
-                  <p className="text-center pt-3">
-                    Fee Yet To Received
-                    <p>
-                      {Number(
-                        parseFloat(enrollmentsTotalDueAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
-                    </p>
-                  </p>
-                </Card>
-              </div>
+                </p>
+              </Card>
             </div>
-            {/* Enrollment cards display end */}
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+              <Card
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: false,
+                    bookingamount: !prev.bookingamount,
+                    enrollmentfeerecevied: false,
+                    enrollmentfeeyettorecevied: false,
+                    feerecevied: false,
+                    feeyettorecevied: false,
+                    branchusers: false,
+                    // ...prev,bookingamount:!prev.bookingamount
+                  }))
+                }
+                className="cardcolor"
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   cursor: "pointer",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
+              >
+                <p className="text-center pt-3">
+                  Booking Amount
+                  <p>
+                    {Number(parseFloat(totalAmount).toFixed(2)).toLocaleString(
+                      "en-IN"
+                    )}{" "}
+                  </p>
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
+              <Card
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: false,
+                    bookingamount: false,
+                    enrollmentfeerecevied: !prev.enrollmentfeerecevied,
+                    enrollmentfeeyettorecevied: false,
+                    feerecevied: false,
+                    feeyettorecevied: false,
+                    branchusers: false,
+                    // ...prev,bookingamount:!prev.bookingamount
+                  }))
+                }
+                className="cardcolor"
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   cursor: "pointer",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
+              >
+                <p className="text-center pt-3">
+                  Fee Received
+                  <p>
+                    {Number(
+                      parseFloat(enrollmentsTotalReceivedAmount).toFixed(2)
+                    ).toLocaleString("en-IN")}{" "}
+                  </p>
+                </p>
+              </Card>
+            </div>
+            <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
+              <Card
+                onClick={(e) =>
+                  setDisplayTable((prev) => ({
+                    enrollments: false,
+                    bookingamount: false,
+                    enrollmentfeerecevied: false,
+                    enrollmentfeeyettorecevied:
+                      !prev.enrollmentfeeyettorecevied,
+                    feerecevied: false,
+                    feeyettorecevied: false,
+                    branchusers: false,
+                    // ...prev,bookingamount:!prev.bookingamount
+                  }))
+                }
+                className="cardcolor"
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   cursor: "pointer",
+                //   borderRadius: "8px",
+                //   color: "white",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
+              >
+                <p className="text-center pt-3">
+                  Fee Yet To Received
+                  <p>
+                    {Number(
+                      parseFloat(enrollmentsTotalDueAmount).toFixed(2)
+                    ).toLocaleString("en-IN")}{" "}
+                  </p>
+                </p>
+              </Card>
+            </div>
+          </div>
+          {/* Enrollment cards display end */}
 
             {/* Enrollment table display */}
             <div>

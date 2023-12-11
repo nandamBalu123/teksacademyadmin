@@ -144,7 +144,7 @@ const Register = () => {
               <div className="row">
                 <div className=" col-lg-6 col-md-6 col-12">
                   <TextField
-                    label="Name"
+                      label={<span className="label-family ">Name</span>}
                     className=" mar w-75"
                     variant="standard"
                     name="name"
@@ -171,9 +171,9 @@ const Register = () => {
                             <label for="exampleInputEmail1" class="form-label">Vender Name*</label>
                             <input type="text" value={inpval.vendername} onChange={setdata} name="vendername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
                         </div> */}
-                <div className=" col-lg-6 col-md-6 col-12">
+                <div className="  col-xl-6 col-lg-6 col-md-6 col-12">
                   <TextField
-                    label="Designation"
+                     label={<span className="label-family ">Designation</span>}
                     className="mar w-75 "
                     variant="standard"
                     name="designation"
@@ -197,9 +197,33 @@ const Register = () => {
                 </div>
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                    <FormControl variant="standard" className="w-75">
+                  <FormControl variant="standard" className="w-75">
+                    <InputLabel>
+                      <span className="label-family">
+                        Branch<span>*</span>
+                      </span>
+                    </InputLabel>
+                    <Select
+                      className="mar "
+                      name="branch"
+                        id="branch"
+                        required
+                        selected={inpval.branch}
+                        onChange={setdata}
+                     
+                    >
+                      <MenuItem value="">Select Branch</MenuItem>
+                        <MenuItem value="Ameerpet">Ameerpet</MenuItem>
+                        <MenuItem value="hi-tech city">Hi-tech city</MenuItem>
+                        <MenuItem value="dilsupnagar">Dilsupnagar</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                    {/* <FormControl variant="standard" className="w-75">
                       <InputLabel>
+                        <span className="label-family">  
                         Branch<span> *</span>
+                        </span>
                       </InputLabel>
                       <Select
                         className="mar"
@@ -214,12 +238,12 @@ const Register = () => {
                         <MenuItem value="hi-tech city">Hi-tech city</MenuItem>
                         <MenuItem value="dilsupnagar">Dilsupnagar</MenuItem>
                       </Select>
-                    </FormControl>
+                    </FormControl> */}
                   </div>
                   <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                     <FormControl variant="standard" className="w-75 ms-sm-4">
                       <InputLabel>
-                        Asset Type<span> *</span>
+                      <span  className="label-family ">   Asset Type<span> *</span></span>
                       </InputLabel>
                       <Select
                         className=" mar  "
@@ -261,7 +285,7 @@ const Register = () => {
                       <div className="row">
                         <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                           <TextField
-                            label="Brand Name"
+                            label={<span className="label-family ">Brand Name</span>}
                             className=" mar w-75"
                             variant="standard"
                             name="brandname"
@@ -285,7 +309,7 @@ const Register = () => {
                         </div>
                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                           <TextField
-                            label="Remarks"
+                             label={<span className="label-family ">Remarks</span>}
                             className=" mar w-75"
                             variant="standard"
                             name="remarks"
@@ -315,7 +339,7 @@ const Register = () => {
                 <div className="row">
                   <div className="mb-3 col-lg-6 col-md-6 col-12">
                     <TextField
-                      label="Issue Date"
+                      label={<span className="label-family ">Issued Date</span>}
                       type="date"
                       name="issueddate"
                       variant="standard"
@@ -343,7 +367,7 @@ const Register = () => {
                   </div>
                   <div class="mb-3 col-lg-6 col-md-6 col-12">
                     <TextField
-                      label="Asset Code"
+                       label={<span className="label-family ">Asset Code</span>}
                       className=" mar w-75 ms-sm-4"
                       variant="standard"
                       name="assetcode"
@@ -358,7 +382,7 @@ const Register = () => {
 
                 <div class="mb-3 col-lg-6 col-md-6 col-12">
                   <TextField
-                    label="Quantity"
+                     label={<span className="label-family ">Quantity</span>}
                     className=" mar w-75 "
                     variant="standard"
                     name="anonymity"

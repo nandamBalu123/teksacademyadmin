@@ -247,14 +247,14 @@ const Requestedcertificates = () => {
               </h4>
             )}
             {issuedCertificates && (
-              <h4 className="col-12 col-md-8 col-lg-8 col-xl-8">
+              <h4 className="col-12 col-md-8 col-lg-8 col-xl-8 ms-2">
                 Issued Certificates
               </h4>
             )}
 
             {issuedCertificates && (
               <button
-                className="btn btn-color col-12 col-md-4 col-lg-4 col-xl-4"
+                className="btn btn-color col-12 col-md-3 col-lg-3 col-xl-3"
                 onClick={handleRequestedCertificates}
               >
                 Requested Certificates
@@ -271,7 +271,7 @@ const Requestedcertificates = () => {
           </div>
 
           <div className="row pb-3  ">
-            <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+            <div className="col-12 col-md-6 col-lg-8 col-xl-8">
               <input
                 type="text"
                 className="input-field ms-2 "
@@ -293,7 +293,7 @@ const Requestedcertificates = () => {
               />
               <hr className="w-75 ms-2" />
             </div>
-            <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-1">
+            <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
               <div className="d-flex justify-content-evenly">
                 <p className="mt-2">
                   {" "}
@@ -309,7 +309,7 @@ const Requestedcertificates = () => {
                 </p>
                 <span>
                   <button
-                    className="btn btn-color mr-20 ms-2 mb-2 mt-1"
+                    className="btn btn-color "
                     onClick={handleClick}
                     style={{ textTransform: "capitalize" }}
                   >
