@@ -33,7 +33,6 @@
 .Dashboard {
   overflow-x: hidden;
   margin: auto;
- 
 }
 .progreebar-show {
   width: 93%;
@@ -45,16 +44,13 @@
 .css-17w9904-MuiTypography-root {
   font-size: 1rem !important;
 }
-.underline{ 
- 
-   
-    text-transform: capitalize;
-   
-    
-    position: relative;
-    padding-bottom: 12px;
+.underline {
+  text-transform: capitalize;
+
+  position: relative;
+  padding-bottom: 12px;
 }
-.underline::before{ 
+.underline::before {
   content: "";
   position: absolute;
   display: block;
@@ -63,6 +59,9 @@
   background: #e96228;
   bottom: 2px;
   left: calc(50% - 80px);
+}
+.studentdata-animation {
+  transition: 0.5s ease-out;
 }
 /* @media (min-width: 576px) { 
  .dashboardcard{ 
