@@ -230,6 +230,8 @@ main {
   font-weight: 200 !important ;
   border: 1px solid #e3eee3 !important;
   text-align: center !important;
+  /* justify-content: center !important; */
+  
 }
 .label-family,
 .btn-style {

@@ -76,8 +76,8 @@ const Roles = () => {
                     <TableCell className="Table-cell ">
                       <span style={{ fontSize: "15px" }}> {index + 1}</span>
                     </TableCell>
-                    <TableCell className="Table-cell ">
-                      <span style={{ fontSize: "15px" }}>{item.role} </span>
+                    <TableCell className="Table-cell " >
+                      <span style={{ fontSize: "15px"}} >{item.role} </span>
                     </TableCell>
                     <TableCell className="Table-cell ">
                       <span style={{ fontSize: "15px" }}>

@@ -165,11 +165,7 @@ export default function AssetType() {
                   variant="standard"
                   value={newAssettype}
                   onChange={(e) => setNewAssettype(e.target.value)}
-                  // autoFocus
-                  // label="Vendor Name"
-                  // type="text"
-                  // fullWidth
-                  // variant="standard"
+                 
                 />
               </DialogContent>
               <DialogActions>

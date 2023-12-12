@@ -1,0 +1,89 @@
+.createreport {
+  border: 2px solid #f5f5f5;
+  border-radius: 8px;
+  margin: auto;
+  overflow-x: hidden;
+  position: sticky;
+
+}
+.side-line {
+  /* border-right: 2px solid black; */
+  overflow-y: auto; /* Add vertical scrollbar */
+  max-height: 60vh;
+}
+.report-form {
+  border: 2px solid #f5f5f5;
+  border-radius: 8px;
+  margin: auto;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.report-footer {
+  border: 2px solid #f5f5f5;
+  border-radius: 3px;
+ overflow: hidden;
+ 
+
+  position: sticky;
+ padding: 15px ;
+
+  bottom: 0;
+
+  background-color: #f9f9f9; /* Optional: Set a background color */
+}
+.report-headertable{ 
+  display: flex;
+
+    color: #fff;
+    border: 1px solid #E0E4F8;
+    background-color: #4676a0;
+    padding: 0.5rem 0;
+    border-radius: 0.2667rem 0.2667rem 0 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Media queries for different screen sizes */
+@media (min-width: 576px) {
+  textarea {
+    max-width: 400px; /* Adjust max-width for small screens */
+  }
+}
+
+@media (min-width: 768px) {
+  textarea {
+    max-width: 500px; /* Adjust max-width for medium screens */
+  }
+}
+
+@media (min-width: 992px) {
+  textarea {
+    max-width: 600px; /* Adjust max-width for large screens */
+  }
+}
+
+@media (min-width: 1200px) {
+  textarea {
+    max-width: 700px; /* Adjust max-width for extra-large screens */
+  }
+}
+.dimensions {
+  border: 2px solid #f5f5f5;
+  border-radius: 8px;
+  margin: auto;
+}
+.alldimensions {
+  background-color: #4676a0;
+  border: 1px solid #4676a0;
+  border-radius: 7px;
+  padding: 10px;
+  color: #fff;
+}

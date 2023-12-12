@@ -78,9 +78,11 @@ const Reports = () => {
           {/* <button onClick={handleCreateReport} className="me-3 btn btn-color">
             Create Report
           </button> */}
-          <Link to="/report/create" style={{ width: "40px" }}>
+          <button className="btn btn-color text-light me-3"> 
+          <Link to="/report/create" style={{color : "white"}} >
             Create Report
           </Link>
+          </button>
         </div>
 
         {/* <input

@@ -1,232 +1,251 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { useStudentsContext } from "../../../hooks/useStudentsContext";
-import { padding } from "@mui/system";
+import React, { useState } from "react";
+import "./CreateReports.css";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const CreateReport = () => {
-  const { students } = useStudentsContext();
-  const [dimension1, setDimension1] = useState("");
-  const [dimension2, setDimension2] = useState("");
-  const [dimension3, setDimension3] = useState("");
-  const [metrics, setMetrics] = useState("");
-  const [organizedData, setOrganizedData] = useState(null);
-
-  useEffect(() => {
-    if (students) {
-      const organizedData = students.reduce((acc, student) => {
-        const dim1 = student[dimension1] || "Unknown";
-        const dim2 = student[dimension2] || "Unknown";
-        const dim3 = student[dimension3] || "Unknown";
-
-        if (!acc[dim1]) {
-          acc[dim1] = {};
-        }
-        if (!acc[dim1][dim2]) {
-          acc[dim1][dim2] = {};
-        }
-        if (!acc[dim1][dim2][dim3]) {
-          acc[dim1][dim2][dim3] = [];
-        }
-
-        acc[dim1][dim2][dim3].push(student);
-        return acc;
-      }, {});
-      setOrganizedData(organizedData);
-    }
-  }, [students, dimension1, dimension2, dimension3]);
-  // useEffect(() => {
-  //   if (students) {
-  //     const organizedData = students.reduce((acc, student) => {
-  //       const dim1 = student[dimension1] || "Unknown";
-  //       const dim2 = student[dimension2] || "Unknown";
-  //       const dim3 = student[dimension3] || "Unknown";
-
-  //       if (!acc[dim1]) {
-  //         acc[dim1] = {};
-  //       }
-  //       if (!acc[dim1][dim2]) {
-  //         acc[dim1][dim2] = {};
-  //       }
-  //       if (!acc[dim1][dim2][dim3]) {
-  //         acc[dim1][dim2][dim3] = new Set(); // Use Set to store unique names
-  //       }
-
-  //       acc[dim1][dim2][dim3].add(student); // Add the name to the set
-  //       return acc;
-  //     }, {});
-
-  //     // Convert sets back to arrays for rendering
-  //     const formattedData = Object.entries(organizedData).map(
-  //       ([dim1, dim1Data]) => ({
-  //         dim1,
-  //         dim2Data: Object.entries(dim1Data).map(([dim2, dim2Data]) => ({
-  //           dim2,
-  //           dim3Data: Object.entries(dim2Data).map(([dim3, namesSet]) => ({
-  //             dim3,
-  //             names: Array.from(namesSet),
-  //           })),
-  //         })),
-  //       })
-  //     );
-
-  //     setOrganizedData(formattedData);
-  //   }
-  // }, [students, dimension1, dimension2, dimension3]);
-
-  useEffect(() => {
-    console.log("organizedData", organizedData);
-  });
+  const [onedimensional, setonedimensional] = useState(false);
   return (
-    <div>
-      <div>
-        <label>first dimension</label>
+    <div className="container mt-3">
+     
+        <h5 className="text-center my-2">Create Report</h5>
+        <form className="createreport">
+         
+        <div className="row m-0">
+        <h5 className="px-4 pt-3">  Basic Information</h5>
+            <div className="col-12 col-md-7 col-xl-7 col-lg-7 side-line">
+              <div className="row px-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <TextField
+                    label={<span className="label-family">Report's Name</span>}
+                    type="text"
+                    variant="standard"
+                    className="mar w-100"
+                    required
+                  />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>
+                      <span className="label-family">Report Type</span>
+                    </InputLabel>
+                    <Select name="datefilter">
+                      <MenuItem value="onedimensional"
+                        onClick={(e) => 
+                          setonedimensional(true)
+                        }>
+                        
+                        One Dimensional
+                      </MenuItem>
+                      <MenuItem value="multidimensional">
+                        
+                        Multi Dimensional
+                      </MenuItem>
+                      <MenuItem value="goalvsachievement">
+                        
+                        Goal VS Achievement
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
 
-        <select
-          value={dimension1}
-          onChange={(e) => setDimension1(e.target.value)}
-        >
-          <option value=""></option>
+              <div className="row px-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>
+                      <span className="label-family"> Date Filter</span>
+                    </InputLabel>
+                    <Select name="datefilter">
+                      <MenuItem value="convertat"> Convert At</MenuItem>
+                      <MenuItem value="createat"> Create At</MenuItem>
+                      <MenuItem value="updateat"> Update At</MenuItem>
+                      <MenuItem value="taskdueon"> Task Due On</MenuItem>
+                      <MenuItem value="latestactivityon">
+                        
+                        Latest Activity On
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>
+                      <span className="label-family"> Date Range</span>
+                    </InputLabel>
+                    <Select name="datefilter">
+                      <MenuItem value="today">Today</MenuItem>
+                      <MenuItem value="last7days">Last 7 Days</MenuItem>
+                      <MenuItem value="next7days"> Next 7 Days</MenuItem>
+                      <MenuItem value="last15days">Last 15 Days</MenuItem>
+                      <MenuItem value="next15days"> Next 15 Days</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+              <div className="row  px-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <TextField
+                    label={<span className="label-family">From:</span>}
+                    type="date"
+                    variant="standard"
+                    className="mar  w-100"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="fromdate"
+                  />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                  <TextField
+                    label={<span className="label-family">To:</span>}
+                    type="date"
+                    variant="standard"
+                    className="w-100 mar"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="todate"
+                  />
+                </div>
+              </div>
+              
+              <div className="row px-2 ">
+                <span className="label-family fw-light my-2">
+                  
+                  Report Description
+                </span>
+                <div class="d-lg-none col-12 col-md-12 col-xl-12 col-lg-12 text-center">
+                  <textarea
+                    style={{
+                      paddingLeft: "10px",
+                      fontFamily: "Poppins, sans-seri",
+                      fontweight: "300",
+                      fontsize: "0.9rem",
+                    }}
+                    placeholder="Enter Text ......"
+                    rows="3"
+                    cols={20}
+                    name="comment"
+                    form="usrform"
+                  ></textarea>
+                </div>
 
-          <option value="courses">course</option>
-          <option value="branch">branch</option>
+                <div className="col-6 col-md-12 col-xl-12 col-lg-12 text-center d-none d-lg-block ">
+                  <textarea
+                    style={{
+                      paddingLeft: "10px",
+                      fontFamily: "Poppins, sans-seri",
+                      fontweight: "300",
+                      fontsize: "0.9rem",
+                    }}
+                    rows="3"
+                    placeholder="Enter Text ......."
+                    name="comment"
+                    form="form-control"
+                  ></textarea>
+                </div>
+              </div>
 
-          <option value="enquirytakenby">counsellor</option>
-
-          <option value="coursepackage">course package</option>
-          <option value="modeoftraining">Mode of training</option>
-          <option value="state">State</option>
-          <option value="educationtype">Education Type</option>
-          <option value="academicyear">Academic year</option>
-          <option value="leadsource">Lead source</option>
-        </select>
-        <label>Second dimension</label>
-
-        <select
-          value={dimension2}
-          onChange={(e) => setDimension2(e.target.value)}
-        >
-          <option value=""></option>
-
-          <option value="courses">course</option>
-          <option value="branch">branch</option>
-
-          <option value="enquirytakenby">counsellor</option>
-
-          <option value="coursepackage">course package</option>
-          <option value="modeoftraining">Mode of training</option>
-          <option value="state">State</option>
-          <option value="educationtype">Education Type</option>
-          <option value="academicyear">Academic year</option>
-          <option value="leadsource">Lead source</option>
-        </select>
-        <label>Third dimension</label>
-
-        <select
-          value={dimension3}
-          onChange={(e) => setDimension3(e.target.value)}
-        >
-          <option value=""></option>
-
-          <option value="courses">course</option>
-          <option value="branch">branch</option>
-
-          <option value="enquirytakenby">counsellor</option>
-
-          <option value="coursepackage">course package</option>
-          <option value="modeoftraining">Mode of training</option>
-          <option value="state">State</option>
-          <option value="educationtype">Education Type</option>
-          <option value="academicyear">Academic year</option>
-          <option value="leadsource">Lead source</option>
-        </select>
-        <label>Metrics</label>
-
-        <select value={metrics} onChange={(e) => setMetrics(e.target.value)}>
-          <option value=""></option>
-
-          <option value="numberOfStudents">Number of Students</option>
-        </select>
-      </div>
-
-      {organizedData && (
-        <table>
-          <thead>
-            <tr>
-              <th>
-                <b>{dimension1}</b>
-              </th>
-              <th>
-                <b>{dimension2}</b>
-              </th>
-              <th>
-                <b>{dimension3}</b>
-              </th>
-              <th>Student Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(organizedData).map(([dim1, dim1Data]) => (
-              <>
-                {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
-                  <>
-                    {Object.entries(dim2Data).map(([dim3, students]) => (
-                      <>
-                        {students.map((student) => (
-                          <tr key={student.id}>
-                            <td>{dim1}</td>
-                            <td>{dim2}</td>
-                            <td>{dim3}</td>
-                            <td>{student.name}</td>
-                          </tr>
-                        ))}
-                      </>
-                    ))}
-                  </>
-                ))}
-              </>
-            ))}
-          </tbody>
-        </table>
-      )}
-      {/* {metrics && organizedData && (
-        <table>
-          <thead>
-            <tr>
-              <th>
-                <b>{dimension1}</b>
-              </th>
-              <th>
-                <b>{dimension2}</b>
-              </th><th>
-              <b>{dimension3}</b>
-              </th>
-              <th>Student Names</th>
-              <th>
-                <b>Number of Students</b>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {organizedData.map(({ dim1, dim2Data }) => (
-              <React.Fragment key={dim1}>
-                {dim2Data.map(({ dim2, dim3Data }) => (
-                  <React.Fragment key={dim2}>
-                    {dim3Data.map(({ dim3, names }) => (
-                      <tr key={`${dim1}-${dim2}-${dim3}`}>
-                        <td style={{ padding: "8px" }}>{dim1}</td>
-                        <td style={{ padding: "8px" }}>{dim2}</td>
-                        <td style={{ padding: "8px" }}>{dim3}</td>
-                        <td>{names.join(", ")}</td>
-                        <td>{names.length}</td>
-                      </tr>
-                    ))}
-                  </React.Fragment>
-                ))}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
-      )} */}
+              <div className="px-2 my-2"> 
+                <span className="label-family "> Dimensions</span>
+                <div className="dimensions mb-4">
+                  <h6 className="alldimensions"> All Dimensions</h6>
+                  <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>
+                      <span className="label-family">Choose</span>
+                    </InputLabel>
+                    <Select >
+                      <MenuItem value="branch">Branch</MenuItem>
+                      <MenuItem value="country"> Country</MenuItem>
+                     
+                    </Select>
+                  </FormControl></div>
+                </div>
+              </div>
+              <div className="px-2 my-2"> 
+                <span className="label-family">Metrics</span>
+                <div className="dimensions mb-4">
+                  <h6 className="alldimensions"> All Metrics</h6>
+                  <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>
+                      <span className="label-family">Choose</span>
+                    </InputLabel>
+                    <Select >
+                      <MenuItem value="enrollments">Number of Enrollments</MenuItem>
+                      <MenuItem value="annualrevenue"> Sum of Company Annual Revenue</MenuItem>
+                     
+                    </Select>
+                  </FormControl></div>
+                </div>
+              </div>
+              <div className="px-2 my-2"> 
+                <span className="label-family "> Filters</span>
+                <div className="dimensions">
+                  <h6 className="alldimensions"> Select Filters</h6>
+                  <div className="row px-3"> 
+                  <div className="col-12 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
+                  <FormControl variant="standard" className="w-100">
+                    <InputLabel>
+                      <span className="label-family "> Add a Filter</span>
+                    </InputLabel>
+                    <Select >
+                      <MenuItem value="branch">Branch</MenuItem>
+                      <MenuItem value="country"> Country</MenuItem>
+                     
+                    </Select>
+                    </FormControl></div>
+                  <div className="col-12 col-md-4 col-lg-4 col-xl-4 my-2 "> 
+                    <button className="btn btn-color"> 
+                      Add Filter
+                    </button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div className=" row report-footer ">
+               
+                <div  className="col-12 col-md-9 col-lg-9 col-lg-10"> <button className="btn btn-color mt-1"> Generate Preview </button></div>
+              <div className="col-12 col-md-2 col-lg-2 col-lg-2">  <button className="btn btn-color  mt-1 me-3"> Save</button> </div>
+              </div>
+              {onedimensional &&
+              <div> bhavitha</div>}
+          </div>
+          <div className="col-12 col-md-5 col-xl-5 col-lg-5">
+            <h5> Report Preview</h5>
+            <div className="px-2 my-2"> 
+              
+              <div className="dimensions mb-4">
+                <div className="report-headertable px-2">
+                  <span className="" > Company Name</span>
+                  <div className="d-flex flex-1">
+                  <span className="ms-md-5"> Sum of Company Annual Revenue(0) </span></div>
+                </div>
+                <div className="d-flex flex-column">
+                  <div className="d-flex ">
+                    <div className="p-2"> Teks Available</div>
+                    <div></div>
+                  </div>
+                  <div className="d-flex ">
+                    <div className="p-2"> Future Available</div>
+                    <div></div>
+                  </div>
+                </div>
+                
+                </div>
+              </div>
+          </div>
+           
+          </div>
+        </form>
+    
     </div>
   );
 };
