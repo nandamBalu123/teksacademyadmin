@@ -23,7 +23,7 @@ const RoleAccess = () => {
   }
     return (
         <div className='container'>
-            <h3 style={{ fontFamily: "italic" }}> Branch Manager</h3>
+            <h4 style={{ fontFamily: "italic" }}> Branch Manager</h4>
             <div className='access'>
                 <div className='flex' >
                     <h6> Active</h6>
@@ -42,8 +42,8 @@ const RoleAccess = () => {
         <TableHead>
           <TableRow>
 
-            <TableCell align="center" className='fs-5  w-25 bg-primary text-light border border1'> Name</TableCell>
-            <TableCell colSpan={4} align='center' className='fs-5 bg-primary text-light'>Access</TableCell>
+            <TableCell className="table-cell-heading w-25" align="center" > Name</TableCell>
+            <TableCell colSpan={4} className="table-cell-heading" align="center">Access</TableCell>
             
           </TableRow>
         </TableHead>
@@ -52,42 +52,42 @@ const RoleAccess = () => {
             <TableRow>
               
            
-              <TableCell  className='border border1' ></TableCell>
-              <TableCell className='fs-7' > Read</TableCell>
-              <TableCell  className='fs-7' >Update</TableCell>
-              <TableCell className='fs-7'> Delete</TableCell>
-              <TableCell  className='fs-7'> Create</TableCell>
+              <TableCell  className="Table-cell text-center" ></TableCell>
+              <TableCell className="Table-cell text-center"> Read</TableCell>
+              <TableCell  className="Table-cell text-center">Update</TableCell>
+              <TableCell className="Table-cell text-center"> Delete</TableCell>
+              <TableCell  className="Table-cell text-center"> Create</TableCell>
               
             </TableRow>
             <TableRow> 
-                <TableCell  onClick={handleusermanagement} className='border border1'> User Management</TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
+                <TableCell  onClick={handleusermanagement} className="Table-cell "> User Management</TableCell>
+                <TableCell ></TableCell>
+                <TableCell ></TableCell>
+                <TableCell ></TableCell>
+                <TableCell ></TableCell>
             </TableRow>
             {usermanagement && ( 
                 <> 
                 <TableRow colSpan={4}>
-                    <TableCell className='border border1'> Create User</TableCell>
-                    <TableCell>NA </TableCell>
-                    <TableCell>NA </TableCell>
-                    <TableCell> NA </TableCell>
-                    <TableCell> <Switch {...label} color="info" /> </TableCell>
+                    <TableCell className="Table-cell text-center"> Create User</TableCell>
+                    <TableCell className="Table-cell text-center">NA </TableCell>
+                    <TableCell className="Table-cell text-center">NA </TableCell>
+                    <TableCell className="Table-cell text-center"> NA </TableCell>
+                    <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
                     </TableRow> 
                     <TableRow colSpan={4}>
-                    <TableCell className='border border1'> User Details</TableCell>
-                    <TableCell> <Switch {...label} color="info" /> </TableCell>
-                    <TableCell><Switch {...label} color="info" /></TableCell>
-                    <TableCell><Switch {...label} color="info" /> </TableCell>
-                    <TableCell> NA </TableCell>
+                    <TableCell className="Table-cell text-center"> User Details</TableCell>
+                    <TableCell className="Table-cell text-center" ><Switch {...label} color="info" /> </TableCell>
+                    <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
+                    <TableCell className="Table-cell text-center"><Switch {...label} color="info" /> </TableCell>
+                    <TableCell className="Table-cell text-center"> NA </TableCell>
                     </TableRow> 
                     
                     
                     </>
             )}
             <TableRow> 
-                <TableCell  onClick={handlestudentmanagement} className='border border1'> Student Management</TableCell>
+                <TableCell  onClick={handlestudentmanagement} className="Table-cell "> Student Management</TableCell>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
                 <TableCell></TableCell>
@@ -96,34 +96,34 @@ const RoleAccess = () => {
             {studentmanagement && ( 
                 <> 
                 <TableRow colSpan={4}>
-                    <TableCell className='border border1'>Student Details</TableCell>
-                    <TableCell><Switch {...label} color="info" /></TableCell>
-                    <TableCell><Switch {...label} color="info" /></TableCell>
-                    <TableCell> <Switch {...label} color="info" /> </TableCell>
-                    <TableCell> NA </TableCell>
+                    <TableCell className="Table-cell text-center">Student Details</TableCell>
+                    <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
+                    <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
+                    <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
+                    <TableCell className="Table-cell text-center"> NA </TableCell>
                     
                     </TableRow> 
                     <TableRow colSpan={4}>
-                    <TableCell className='border border1'> Registration</TableCell>
-                    <TableCell> NA </TableCell>
-                    <TableCell>NA</TableCell>
-                    <TableCell> NA </TableCell>
-                    <TableCell><Switch {...label} color="info" /> </TableCell>
+                    <TableCell className="Table-cell text-center"> Registration</TableCell>
+                    <TableCell className="Table-cell text-center"> NA </TableCell>
+                    <TableCell className="Table-cell text-center">NA</TableCell>
+                    <TableCell className="Table-cell text-center"> NA </TableCell>
+                    <TableCell className="Table-cell text-center"><Switch {...label} color="info" /> </TableCell>
                    
                     </TableRow> 
                     <TableRow colSpan={4}>
-                    <TableCell className='border border1'>Fee Details</TableCell>
-                    <TableCell> <Switch {...label} color="info" /> </TableCell>
-                    <TableCell>NA</TableCell>
-                    <TableCell>NA</TableCell>
-                    <TableCell> NA </TableCell>
+                    <TableCell className="Table-cell text-center">Fee Details</TableCell>
+                    <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
+                    <TableCell className="Table-cell text-center" >NA</TableCell>
+                    <TableCell className="Table-cell text-center">NA</TableCell>
+                    <TableCell className="Table-cell text-center"> NA </TableCell>
                     </TableRow> 
                     <TableRow colSpan={4}>
-                    <TableCell className='border border1'>Certificate</TableCell>
-                    <TableCell> <Switch {...label} color="info" /> </TableCell>
-                    <TableCell><Switch {...label} color="info" /></TableCell>
-                    <TableCell> NA </TableCell>
-                    <TableCell><Switch {...label} color="info" /> </TableCell>
+                    <TableCell className="Table-cell text-center">Certificate</TableCell>
+                    <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
+                    <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
+                    <TableCell className="Table-cell text-center"> NA </TableCell>
+                    <TableCell className="Table-cell text-center"><Switch {...label} color="info" /> </TableCell>
                    
                     </TableRow> 
                     

@@ -80,6 +80,7 @@ import HlpEnquireLeads from "./components/pages/Leads/Website Leads/HlpEnquireLe
 import SlpEnquireLeads from "./components/pages/Leads/Website Leads/SlpEnquireLeads";
 import DashboardOld from "./components/pages/dashboard/DashboardOld";
 import DashboardBhavitha from "./components/pages/dashboard/DashboardBhavitha";
+import Permissions from "./components/pages/settings/roles/Permissions";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
 function App() {
@@ -211,6 +212,16 @@ function App() {
                   element={
                     user && user.profile == "admin" ? (
                       <RoleAccess />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/permissions"
+                  element={
+                    user && user.profile == "admin" ? (
+                      <Permissions/>
                     ) : (
                       <Dashboard />
                     )

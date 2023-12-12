@@ -24,6 +24,7 @@ import LaptopChromebookIcon from "@mui/icons-material/LaptopChromebook";
 import CollectionsBookmarkIcon from "@mui/icons-material/CollectionsBookmark";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import zaheer from "../../../images/zaheer.jpg";
+import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import CloseIcon from "@mui/icons-material/Close";
@@ -277,6 +278,15 @@ const Sidebar = () => {
                           title="User Details"
                           to="/usersdata"
                           icon={<GroupIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                      <div title="Role Access">
+                        <Item
+                          title="Role Access"
+                          to="/permissions"
+                          icon={<SwitchAccountIcon/>}
                           selected={selected}
                           setSelected={setSelected}
                         />

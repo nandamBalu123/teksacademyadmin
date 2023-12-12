@@ -19,7 +19,7 @@ const CreateReport = () => {
         <div className="row m-0">
         <h5 className="px-4 pt-3">  Basic Information</h5>
             <div className="col-12 col-md-7 col-xl-7 col-lg-7 side-line">
-              <div className="row px-5">
+              <div className="row px-2">
                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                   <TextField
                     label={<span className="label-family">Report's Name</span>}
@@ -55,7 +55,7 @@ const CreateReport = () => {
                 </div>
               </div>
 
-              <div className="row px-5">
+              <div className="row px-2">
                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                   <FormControl variant="standard" className="w-100">
                     <InputLabel>
@@ -88,7 +88,7 @@ const CreateReport = () => {
                   </FormControl>
                 </div>
               </div>
-              <div className="row  px-5">
+              <div className="row  px-2">
                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                   <TextField
                     label={<span className="label-family">From:</span>}
@@ -115,7 +115,7 @@ const CreateReport = () => {
                 </div>
               </div>
               
-              <div className="row px-5 ">
+              <div className="row px-2 ">
                 <span className="label-family fw-light my-2">
                   
                   Report Description
@@ -152,7 +152,7 @@ const CreateReport = () => {
                 </div>
               </div>
 
-              <div className="px-5 my-2"> 
+              <div className="px-2 my-2"> 
                 <span className="label-family "> Dimensions</span>
                 <div className="dimensions mb-4">
                   <h6 className="alldimensions"> All Dimensions</h6>
@@ -169,7 +169,7 @@ const CreateReport = () => {
                   </FormControl></div>
                 </div>
               </div>
-              <div className="px-5 my-2"> 
+              <div className="px-2 my-2"> 
                 <span className="label-family">Metrics</span>
                 <div className="dimensions mb-4">
                   <h6 className="alldimensions"> All Metrics</h6>
@@ -186,15 +186,15 @@ const CreateReport = () => {
                   </FormControl></div>
                 </div>
               </div>
-              <div className="px-5 my-2"> 
+              <div className="px-2 my-2"> 
                 <span className="label-family "> Filters</span>
-                <div className="dimensions mb-4">
+                <div className="dimensions">
                   <h6 className="alldimensions"> Select Filters</h6>
                   <div className="row px-3"> 
-                  <div className="col-12 col-md-8 col-lg-8 col-xl-8  pb-5">
+                  <div className="col-12 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
                   <FormControl variant="standard" className="w-100">
                     <InputLabel>
-                      <span className="label-family"> Add a Filter</span>
+                      <span className="label-family "> Add a Filter</span>
                     </InputLabel>
                     <Select >
                       <MenuItem value="branch">Branch</MenuItem>
@@ -202,7 +202,7 @@ const CreateReport = () => {
                      
                     </Select>
                     </FormControl></div>
-                  <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-2 "> 
+                  <div className="col-12 col-md-4 col-lg-4 col-xl-4 my-2 "> 
                     <button className="btn btn-color"> 
                       Add Filter
                     </button>
@@ -211,14 +211,14 @@ const CreateReport = () => {
                 </div>
               </div>
               <div className=" row report-footer ">
-                <div className="col-12 col-md-5 col-lg-5 col-lg-5"></div>
-                <div  className="col-12 col-md-5 col-lg-5 col-lg-5"> <button className="btn btn-color"> Generate Preview </button></div>
-              <div className="col-12 col-md-2 col-lg-2 col-lg-2">  <button className="btn btn-color ms-3"> Save</button> </div>
+               
+                <div  className="col-12 col-md-9 col-lg-9 col-lg-10"> <button className="btn btn-color mt-1"> Generate Preview </button></div>
+              <div className="col-12 col-md-2 col-lg-2 col-lg-2">  <button className="btn btn-color  mt-1 me-3"> Save</button> </div>
               </div>
               {onedimensional &&
               <div> bhavitha</div>}
           </div>
-          <div className="12 col-md-5 col-xl-5 col-lg-5">
+          <div className="col-12 col-md-5 col-xl-5 col-lg-5">
             <h5> Report Preview</h5>
             <div className="px-2 my-2"> 
               
@@ -226,38 +226,19 @@ const CreateReport = () => {
                 <div className="report-headertable px-2">
                   <span className="" > Company Name</span>
                   <div className="d-flex flex-1">
-                  <span className=""> Sum of Company Annual Revenue(0) </span></div>
+                  <span className="ms-md-5"> Sum of Company Annual Revenue(0) </span></div>
                 </div>
                 <div className="d-flex flex-column">
                   <div className="d-flex ">
-                    <div className=""> Teks Available</div>
+                    <div className="p-2"> Teks Available</div>
                     <div></div>
                   </div>
                   <div className="d-flex ">
-                    <div className=""> Future Available</div>
+                    <div className="p-2"> Future Available</div>
                     <div></div>
                   </div>
                 </div>
-                {/* <div className="d-flex justify-content-between px-2 pt-2 review table"> <h6 >Company Name</h6>
-                <h6 > Sum of Company Annual Revenue (0)</h6></div>
-                  <div className="row px-3"> 
-                  <div className="col-12 col-md-8 col-lg-8 col-xl-8  pb-5">
-                  <FormControl variant="standard" className="w-100">
-                    <InputLabel>
-                      <span className="label-family"> Add a Filter</span>
-                    </InputLabel>
-                    <Select >
-                      <MenuItem value="branch">Branch</MenuItem>
-                      <MenuItem value="country"> Country</MenuItem>
-                     
-                    </Select>
-                    </FormControl></div>
-                  <div className="col-12 col-md-4 col-lg-4 col-xl-4 mt-2 "> 
-                    <button className="btn btn-color"> 
-                      Add Filter
-                    </button>
-                  </div>
-                  </div> */}
+                
                 </div>
               </div>
           </div>
