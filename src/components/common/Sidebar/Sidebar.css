@@ -1,9 +1,10 @@
-.dashboard-item{ 
- 
+.dashboard-item {
+
   font-weight: 500;
 }
+
 .tekslogo {
- letter-spacing: 1px;
+  letter-spacing: 1px;
 }
 
 
@@ -16,25 +17,38 @@
   /* font-size: 18px !important; */
   line-height: 1rem !important;
 }
-.profilelogo{ 
+
+.profilelogo {
   width: 100%;
 }
-.pro-sidebar{ 
+
+.pro-sidebar {
   color: black !important;
   background-color: none;
 }
-.pro-sidebar .pro-menu a{
+
+.pro-sidebar .pro-menu a {
   color: black !important;
 
 }
-.pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu > .pro-inner-item:before{
+
+.pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu>.pro-inner-item:before {
   color: black !important;
 }
+
 .pro-sidebar .pro-menu a:hover {
-  color: black !important; }
-  
-    .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item:focus {
-    
-      color: black !important; }
+  color: black !important;
+}
 
-      
+.pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item:focus {
+
+  color: black !important;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu .pro-inner-list-item {
+  padding-left: 14px !important;
+}
+
+.css-havevq-MuiSvgIcon-root {
+  width: 0.9em !important;
+}

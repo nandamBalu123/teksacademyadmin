@@ -78,8 +78,8 @@ import ViewCourse from "./components/pages/Leads/Website Leads/ViewCourse";
 import ContactUs from "./components/pages/Leads/Website Leads/ContactUs";
 import HlpEnquireLeads from "./components/pages/Leads/Website Leads/HlpEnquireLeads";
 import SlpEnquireLeads from "./components/pages/Leads/Website Leads/SlpEnquireLeads";
-import DashboardOld from "./components/pages/dashboard/DashboardOld";
-import DashboardBhavitha from "./components/pages/dashboard/DashboardBhavitha";
+
+
 import Permissions from "./components/pages/settings/roles/Permissions";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
@@ -118,7 +118,7 @@ function App() {
                   path="/"
                   element={user ? <Dashboard /> : <Navigate to="/login" />}
                 />
-               
+
                 <Route
                   path="/login"
                   element={!user ? <LoginPage /> : <Navigate to="/" />}
@@ -129,7 +129,7 @@ function App() {
                     user ? <RegistrationForm /> : <Navigate to="/login" />
                   }
                 />
-                
+
                 <Route
                   path="/feedetails/:id"
                   element={user ? <FeeDetails /> : <Dashboard />}
@@ -183,7 +183,7 @@ function App() {
                       <Dashboard />
                     )
                   }
-                  // element={user ? <Requestedcertificates /> : <Dashboard />}
+                // element={user ? <Requestedcertificates /> : <Dashboard />}
                 />
                 <Route
                   path="/usersdata"
@@ -217,7 +217,7 @@ function App() {
                   path="/permissions"
                   element={
                     user && user.profile == "admin" ? (
-                      <Permissions/>
+                      <Permissions />
                     ) : (
                       <Dashboard />
                     )
@@ -497,7 +497,7 @@ function App() {
                 <Route
                   path="/webinar"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
                       <Webinar />
                     ) : (
                       <Dashboard />
@@ -507,7 +507,7 @@ function App() {
                 <Route
                   path="/whatsapp"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
                       <WhatsApp />
                     ) : (
                       <Dashboard />
@@ -517,7 +517,7 @@ function App() {
                 <Route
                   path="/downloadsyllabus"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
                       <DownloadSyllabus />
                     ) : (
                       <Dashboard />
@@ -527,7 +527,7 @@ function App() {
                 <Route
                   path="/viewcourse"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
                       <ViewCourse />
                     ) : (
                       <Dashboard />
@@ -537,7 +537,7 @@ function App() {
                 <Route
                   path="/contactus"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate" )  ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
                       <ContactUs />
                     ) : (
                       <Dashboard />
@@ -547,7 +547,7 @@ function App() {
                 <Route
                   path="/hlpenquireleads"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
                       <HlpEnquireLeads />
                     ) : (
                       <Dashboard />
@@ -557,7 +557,7 @@ function App() {
                 <Route
                   path="/slpenquireleads"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate" ) ? (
+                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
                       <SlpEnquireLeads />
                     ) : (
                       <Dashboard />
