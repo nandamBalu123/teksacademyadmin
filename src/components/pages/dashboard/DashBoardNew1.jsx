@@ -217,7 +217,201 @@ const Dashboard = () => {
       return result;
     }, {});
   };
+  const [expandedBranch, setExpandedBranch] = useState(null);
+  const [expandedCounselor, setExpandedCounselor] = useState(null);
+  let [
+    FilteredStudents_BranchWiseAndCounsellorWise,
+    setFilteredStudents_BranchWiseAndCounsellorWise,
+  ] = useState();
+  let [
+    AllStudents_BranchWiseAndCounsellorWise,
+    setAllStudents_BranchWiseAndCounsellorWise,
+  ] = useState();
+  let [
+    calculations_of_all_students_branchwise_counsellorwise,
+    setcalculations_of_all_students_branchwise_counsellorwise,
+  ] = useState();
+  let [
+    calculations_of_filtered_students_branchwise_counsellorwise,
+    setcalculations_of_filtered_students_branchwise_counsellorwise,
+  ] = useState();
+  // console.log(
+  //   FilteredStudents_BranchWiseAndCounsellorWise,
+  //   AllStudents_BranchWiseAndCounsellorWise,
+  //   calculations_of_all_students_branchwise_counsellorwise,
+  //   calculations_of_filtered_students_branchwise_counsellorwise
+  // );
+  useEffect(() => {
+    if (students) {
+      const groupByCustomFields = (data, groupByField1, groupByField2) => {
+        if (!Array.isArray(data)) {
+          return {}; // Return an empty object if data is not an array
+        }
 
+        const groupedStudents = data.reduce((acc, student) => {
+          if (
+            !student ||
+            !student.hasOwnProperty(groupByField1) ||
+            !student.hasOwnProperty(groupByField2)
+          ) {
+            throw new Error(
+              "Invalid student object: Missing required properties."
+            );
+          }
+
+          // Group by first custom field
+          acc[student[groupByField1]] = acc[student[groupByField1]] || {};
+
+          // Group by second custom field within each group of the first custom field
+          acc[student[groupByField1]][student[groupByField2]] =
+            acc[student[groupByField1]][student[groupByField2]] || [];
+          acc[student[groupByField1]][student[groupByField2]].push(student);
+
+          return acc;
+        }, {});
+
+        return groupedStudents;
+      };
+      const FilteredStudents_BranchWiseAndCounsellorWise = groupByCustomFields(
+        getstudentData,
+        "branch",
+        "enquirytakenby"
+      );
+      const AllStudents_BranchWiseAndCounsellorWise = groupByCustomFields(
+        students,
+        "branch",
+        "enquirytakenby"
+      );
+      setFilteredStudents_BranchWiseAndCounsellorWise(
+        FilteredStudents_BranchWiseAndCounsellorWise
+      );
+      setAllStudents_BranchWiseAndCounsellorWise(
+        AllStudents_BranchWiseAndCounsellorWise
+      );
+      const calculations_of_all_students_branchwise_counsellorwise = {};
+      Object.keys(AllStudents_BranchWiseAndCounsellorWise).forEach((branch) => {
+        let branchTotalAmount = 0;
+        let branchTotalReceivedAmount = 0;
+        let branchTotalDueAmount = 0;
+
+        // Counsellor-wise calculations
+        const counsellorWiseTotal = {};
+
+        if (AllStudents_BranchWiseAndCounsellorWise[branch]) {
+          Object.keys(AllStudents_BranchWiseAndCounsellorWise[branch]).forEach(
+            (counsellor) => {
+              counsellorWiseTotal[counsellor] = {
+                totalAmount: 0,
+                totalReceivedAmount: 0,
+                totalDueAmount: 0,
+              };
+
+              AllStudents_BranchWiseAndCounsellorWise[branch][
+                counsellor
+              ].forEach((student) => {
+                const totalamount = parseFloat(student.finaltotal);
+                if (!isNaN(totalamount)) {
+                  branchTotalAmount += totalamount;
+                  counsellorWiseTotal[counsellor].totalAmount += totalamount;
+                }
+                const receivedamount = parseFloat(student.totalpaidamount);
+                if (!isNaN(receivedamount)) {
+                  branchTotalReceivedAmount += receivedamount;
+                  counsellorWiseTotal[counsellor].totalReceivedAmount +=
+                    receivedamount;
+                }
+                const dueamount = parseFloat(student.dueamount);
+                if (!isNaN(dueamount)) {
+                  branchTotalDueAmount += dueamount;
+                  counsellorWiseTotal[counsellor].totalDueAmount += dueamount;
+                }
+              });
+            }
+          );
+        }
+
+        calculations_of_all_students_branchwise_counsellorwise[branch] = {
+          totalAmount: branchTotalAmount,
+          totalReceivedAmount: branchTotalReceivedAmount,
+          totalDueAmount: branchTotalDueAmount,
+          counsellorWiseTotal,
+        };
+      });
+      const calculations_of_filtered_students_branchwise_counsellorwise = {};
+      Object.keys(FilteredStudents_BranchWiseAndCounsellorWise).forEach(
+        (branch) => {
+          let branchTotalAmount = 0;
+          let branchTotalReceivedAmount = 0;
+          let branchTotalDueAmount = 0;
+
+          // Counsellor-wise calculations
+          const counsellorWiseTotal = {};
+
+          if (FilteredStudents_BranchWiseAndCounsellorWise[branch]) {
+            Object.keys(
+              FilteredStudents_BranchWiseAndCounsellorWise[branch]
+            ).forEach((counsellor) => {
+              counsellorWiseTotal[counsellor] = {
+                totalAmount: 0,
+                totalReceivedAmount: 0,
+                totalDueAmount: 0,
+              };
+
+              FilteredStudents_BranchWiseAndCounsellorWise[branch][
+                counsellor
+              ].forEach((student) => {
+                const totalamount = parseFloat(student.finaltotal);
+                if (!isNaN(totalamount)) {
+                  branchTotalAmount += totalamount;
+                  counsellorWiseTotal[counsellor].totalAmount += totalamount;
+                }
+                const receivedamount = parseFloat(student.totalpaidamount);
+                if (!isNaN(receivedamount)) {
+                  branchTotalReceivedAmount += receivedamount;
+                  counsellorWiseTotal[counsellor].totalReceivedAmount +=
+                    receivedamount;
+                }
+                const dueamount = parseFloat(student.dueamount);
+                if (!isNaN(dueamount)) {
+                  branchTotalDueAmount += dueamount;
+                  counsellorWiseTotal[counsellor].totalDueAmount += dueamount;
+                }
+              });
+            });
+          }
+
+          calculations_of_filtered_students_branchwise_counsellorwise[branch] =
+            {
+              totalAmount: branchTotalAmount,
+              totalReceivedAmount: branchTotalReceivedAmount,
+              totalDueAmount: branchTotalDueAmount,
+              counsellorWiseTotal,
+            };
+        }
+      );
+      setcalculations_of_all_students_branchwise_counsellorwise(
+        calculations_of_all_students_branchwise_counsellorwise
+      );
+      setcalculations_of_filtered_students_branchwise_counsellorwise(
+        calculations_of_filtered_students_branchwise_counsellorwise
+      );
+    }
+  }, [students, getstudentData]);
+  console.log(
+    FilteredStudents_BranchWiseAndCounsellorWise,
+    AllStudents_BranchWiseAndCounsellorWise,
+    calculations_of_all_students_branchwise_counsellorwise,
+    calculations_of_filtered_students_branchwise_counsellorwise
+  );
+  const handleBranchClick = (branch) => {
+    setExpandedBranch(expandedBranch === branch ? null : branch);
+    setExpandedCounselor(null); // Collapse counselor when branch is clicked
+  };
+
+  const handleCounselorClick = (counselor) => {
+    setExpandedCounselor(expandedCounselor === counselor ? null : counselor);
+  };
+  
   // BranchwiseAllstudentsData will give branch wise all students data
   const BranchwiseAllstudentsData = groupDataAndCalculatePercentage(
     students,
@@ -628,13 +822,13 @@ const Dashboard = () => {
   const [selectedBranch, setSelectedBranch] = useState(null);
 
   // Function to handle branch click
-  const handleBranchClick = (branch) => {
-    if (selectedBranch === branch) {
-      setSelectedBranch("");
-    } else {
-      setSelectedBranch(branch);
-    }
-  };
+  // const handleBranchClick = (branch) => {
+  //   if (selectedBranch === branch) {
+  //     setSelectedBranch("");
+  //   } else {
+  //     setSelectedBranch(branch);
+  //   }
+  // };
   const AdminDashboard = () => {
     return (
       <div className="container main-dashboard">
@@ -926,7 +1120,7 @@ const Dashboard = () => {
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {Object.entries(BranchwiseFilteredStudentsData).map(
+                            {/* {Object.entries(FilteredStudents_BranchWiseAndCounsellorWise).map(
                               ([branch, students]) => {
                                 const enrollmentPercentage =
                                   (students.length / getstudentData.length) *
@@ -961,7 +1155,41 @@ const Dashboard = () => {
                                   </StyledTableRow>
                                 );
                               }
-                            )}
+                            )} */}
+                            {Object.entries(
+                              FilteredStudents_BranchWiseAndCounsellorWise
+                            ).map(([branch, counselors]) => (
+                              <li
+                                key={branch}
+                                onClick={() => handleBranchClick(branch)}
+                              >
+                                {branch}
+                                {expandedBranch === branch && (
+                                  <ul>
+                                    {Object.entries(counselors).map(
+                                      ([counselor, students]) => (
+                                        <li
+                                          key={counselor}
+                                          onClick={() =>
+                                            handleCounselorClick(counselor)
+                                          }
+                                        >
+                                          {counselor} {students.length}
+
+                                          <ul>
+                                            {students.map((student) => (
+                                              <li key={student.name}>
+                                                {student.name}
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </li>
+                                      )
+                                    )}
+                                  </ul>
+                                )}
+                              </li>
+                            ))}
                           </TableBody>
                         </Table>
                       </TableContainer>

@@ -118,11 +118,7 @@ function App() {
                   path="/"
                   element={user ? <Dashboard /> : <Navigate to="/login" />}
                 />
-                <Route path="/dashboardOld" element={<DashboardOld />} />
-                <Route
-                  path="/DashboardBhavitha"
-                  element={<DashboardBhavitha />}
-                />
+               
                 <Route
                   path="/login"
                   element={!user ? <LoginPage /> : <Navigate to="/" />}
