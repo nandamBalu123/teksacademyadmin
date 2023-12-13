@@ -1,60 +1,76 @@
-*{ 
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.mini-reports{ 
+
+.mini-reports {
     border: 2px solid #f5f5f5;
     border-radius: 8px;
     margin: auto;
     overflow: hidden;
 }
-.btn-outline-color{ 
-    border: 1px solid #4676a0 ;
-    color: #4676a0 ;
+
+.btn-outline-color {
+    border: 1px solid #4676a0;
+    color: #4676a0;
 }
-.btn-outline-color:hover{ 
-    background-color:#4676a0  ;
+
+.btn-outline-color:hover {
+    background-color: #4676a0;
     color: #fff;
 }
-.btn-css{ 
-    border: 1px solid #4676a0 ;
-    color: #4676a0 ;
+
+.btn-css {
+    border: 1px solid #4676a0;
+    color: #4676a0;
     padding: 6px;
     background-color: #fff;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
-.btn-css:hover{ 
+
+.btn-css:hover {
     color: #fff;
-    
+
     background-color: #4676a0;
-   
+
 }
-.toggle-css{ 
-    border: 1px solid #4676a0 ;
-    color: #4676a0 ;
+
+.toggle-css {
+    border: 1px solid #4676a0;
+    color: #4676a0;
     padding: 6px;
     background-color: #fff;
     border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;  
+    border-bottom-right-radius: 6px;
 }
-.customazie-report{ 
+
+.customazie-report {
     border: 2px solid #f5f5f5;
     border-radius: 8px;
     margin: auto;
     overflow: hidden;
 }
-.accordion-button:not(.collapsed){ 
+
+.accordion-button:not(.collapsed) {
     background-color: #4676a0;
     color: #fff;
-  
+
 }
-.accordion-button:focus { 
+
+.accordion-button:focus {
     box-shadow: none;
-} 
-.side-lines{ 
-      /* border-right: 2px solid black; */
-  overflow-y: auto; /* Add vertical scrollbar */
-  max-height: 40vh;
+}
+
+.side-lines {
+    /* border-right: 2px solid black; */
+    overflow-y: auto;
+    /* Add vertical scrollbar */
+    max-height: 40vh;
+}
+
+.metrics-hr {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #E0E4F8;
 }

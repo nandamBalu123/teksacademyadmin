@@ -129,23 +129,23 @@ const UsersData = () => {
     const filteredResults = initialData.filter((item) => {
       const searchCondition = filterCriteria.search
         ? item.fullname
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.branch
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.designation
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.department
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.reportto
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.profile
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase())
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.branch
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.designation
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.department
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.reportto
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.profile
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase())
         : true;
 
       const branchCondition = filterCriteria.branch
@@ -192,7 +192,7 @@ const UsersData = () => {
   //   "&:nth-of-type(odd)": {
   //     backgroundColor: theme.palette.action.hover,
   //   },
-   
+
   //   "&:last-child td, &:last-child th": {
   //     border: 0,
   //   },
@@ -335,7 +335,7 @@ const UsersData = () => {
               </h6>
               <span className="mt-3">
                 <select onChange={handlerecorddata}>
-                <option value="10">10</option>
+                  <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
                   <option value="100">100</option>
@@ -588,217 +588,217 @@ const UsersData = () => {
         </div>
         <div>
           <div className="usertable">
-          
-              <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
-                  <TableHead>
-                    <TableRow>
+
+            <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
                     <TableCell className=" table-cell-heading ">
                       S.No
-                      </TableCell>
-                      <TableCell className=" table-cell-heading ">
-                        Name
-                      </TableCell>
-                      <TableCell className=" table-cell-heading ">
-                        Email
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Phone No
-                      </TableCell>
-                      <TableCell className=" table-cell-heading">
-                        Designation
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Department
-                      </TableCell>
-                      <TableCell className=" table-cell-heading">
-                        Report To
-                      </TableCell>
-                      <TableCell className=" table-cell-heading">
-                        Profile
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Branch
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Action
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {records &&
-                      records.map((user, index) => {
-                        const dynamicStyle = {
-                          backgroundColor:
-                            user.user_status == 0 ? "#e3dada" : "",
-                        };
-                        return (
-                          <TableRow >
-                             <TableCell className="Table-cell">
-                             {((page-1)*itemsPerPage)+index + 1}
+                    </TableCell>
+                    <TableCell className=" table-cell-heading ">
+                      Name
+                    </TableCell>
+                    <TableCell className=" table-cell-heading ">
+                      Email
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Phone No
+                    </TableCell>
+                    <TableCell className=" table-cell-heading">
+                      Designation
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Department
+                    </TableCell>
+                    <TableCell className=" table-cell-heading">
+                      Report To
+                    </TableCell>
+                    <TableCell className=" table-cell-heading">
+                      Profile
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Branch
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Action
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {records &&
+                    records.map((user, index) => {
+                      const dynamicStyle = {
+                        backgroundColor:
+                          user.user_status == 0 ? "#e3dada" : "",
+                      };
+                      return (
+                        <TableRow >
+                          <TableCell className="Table-cell">
+                            {((page - 1) * itemsPerPage) + index + 1}
                           </TableCell>
-                            <TableCell className="Table-cell">
-                              <span
-                                title={user.fullname}
-                                style={{
-                                  color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "6rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {user.fullname}
-                              </span>
-                            </TableCell>
-                            <TableCell className="Table-cell">
-                              <span
-                                title={user.email}
-                                style={{
-                                  color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "6rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {user.email}
-                              </span>
-                            </TableCell>
-                            <TableCell className="Table-cell">
-                              <span
-                                title={user.phonenumber}
-                                style={{
-                                  color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "6rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {user.phonenumber}
-                              </span>
-                            </TableCell>
-                            <TableCell className="Table-cell">
-                              <span
-                                title={user.designation}
-                                style={{
-                                  color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "6rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {user.designation}
-                              </span>
-                            </TableCell>
-                            <TableCell className="Table-cell ">
-                              <span
-                                title={user.department}
-                                style={{
-                                  color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "6rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {user.department}
-                              </span>
-                            </TableCell>
-                            <TableCell className="Table-cell ">
-                              <span
-                                title={user.reportto}
-                                style={{
-                                  color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "5rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {user.reportto}
-                              </span>
-                            </TableCell>
-                            <TableCell className="Table-cell ">
-                              <span
-                                title={user.profile}
-                                style={{
-                                  color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "6rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {user.profile}
-                              </span>
-                            </TableCell>
-                            <TableCell className="Table-cell ">
-                              <span
-                                title={user.branch}
-                                style={{
-                                  color: user.user_status == 0 ? "#b8b2b2" : "",
-                                  width: "5rem",
-                                  whiteSpace: "nowrap",
-                                  overflow: "hidden",
-                                  textOverflow: "ellipsis",
-                                  fontSize: "15px",
-                                  display: "block",
-                                }}
-                              >
-                                {user.branch}
-                              </span>
-                            </TableCell>
-                            <TableCell align="center" className="d-flex ">
-                              <Link to={`/userview/${user.id}`}>
-                                <VisibilityIcon className=" icon-color" />
-                              </Link>
-                              <Link to={`/edituser/${user.id}`}>
-                                <ModeEditIcon className="icon-color" />
-                              </Link>
-                              {user.user_status !== undefined && (
-                                <div class="form-check form-switch ">
-                                  <input
-                                    style={{ cursor: "pointer" }}
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    role="switch"
-                                    id="flexSwitchCheckChecked"
-                                    checked={user.user_status ? true : false}
-                                    onChange={(e) =>
-                                      handleClickOpen(
-                                        user.id,
-                                        user.user_status,
-                                        user.user_remarks_history
-                                      )
-                                    }
-                                  />
-                                </div>
-                              )}
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            
+                          <TableCell className="Table-cell">
+                            <span
+                              title={user.fullname}
+                              style={{
+                                color: user.user_status == 0 ? "#b8b2b2" : "",
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {user.fullname}
+                            </span>
+                          </TableCell>
+                          <TableCell className="Table-cell">
+                            <span
+                              title={user.email}
+                              style={{
+                                color: user.user_status == 0 ? "#b8b2b2" : "",
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {user.email}
+                            </span>
+                          </TableCell>
+                          <TableCell className="Table-cell">
+                            <span
+                              title={user.phonenumber}
+                              style={{
+                                color: user.user_status == 0 ? "#b8b2b2" : "",
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {user.phonenumber}
+                            </span>
+                          </TableCell>
+                          <TableCell className="Table-cell">
+                            <span
+                              title={user.designation}
+                              style={{
+                                color: user.user_status == 0 ? "#b8b2b2" : "",
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {user.designation}
+                            </span>
+                          </TableCell>
+                          <TableCell className="Table-cell ">
+                            <span
+                              title={user.department}
+                              style={{
+                                color: user.user_status == 0 ? "#b8b2b2" : "",
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {user.department}
+                            </span>
+                          </TableCell>
+                          <TableCell className="Table-cell ">
+                            <span
+                              title={user.reportto}
+                              style={{
+                                color: user.user_status == 0 ? "#b8b2b2" : "",
+                                width: "5rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {user.reportto}
+                            </span>
+                          </TableCell>
+                          <TableCell className="Table-cell ">
+                            <span
+                              title={user.profile}
+                              style={{
+                                color: user.user_status == 0 ? "#b8b2b2" : "",
+                                width: "6rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {user.profile}
+                            </span>
+                          </TableCell>
+                          <TableCell className="Table-cell ">
+                            <span
+                              title={user.branch}
+                              style={{
+                                color: user.user_status == 0 ? "#b8b2b2" : "",
+                                width: "5rem",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                fontSize: "15px",
+                                display: "block",
+                              }}
+                            >
+                              {user.branch}
+                            </span>
+                          </TableCell>
+                          <TableCell align="center" className="d-flex ">
+                            <Link to={`/userview/${user.id}`}>
+                              <VisibilityIcon className=" icon-color" />
+                            </Link>
+                            <Link to={`/edituser/${user.id}`}>
+                              <ModeEditIcon className="icon-color" />
+                            </Link>
+                            {user.user_status !== undefined && (
+                              <div class="form-check form-switch ">
+                                <input
+                                  style={{ cursor: "pointer" }}
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  role="switch"
+                                  id="flexSwitchCheckChecked"
+                                  checked={user.user_status ? true : false}
+                                  onChange={(e) =>
+                                    handleClickOpen(
+                                      user.id,
+                                      user.user_status,
+                                      user.user_remarks_history
+                                    )
+                                  }
+                                />
+                              </div>
+                            )}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+
             <Dialog open={opening} onClose={handleClosed}>
               <DialogContent>
                 <DialogContentText>
