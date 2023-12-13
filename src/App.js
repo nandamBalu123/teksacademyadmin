@@ -78,8 +78,7 @@ import ViewCourse from "./components/pages/Leads/Website Leads/ViewCourse";
 import ContactUs from "./components/pages/Leads/Website Leads/ContactUs";
 import HlpEnquireLeads from "./components/pages/Leads/Website Leads/HlpEnquireLeads";
 import SlpEnquireLeads from "./components/pages/Leads/Website Leads/SlpEnquireLeads";
-import DashboardOld from "./components/pages/dashboard/DashboardOld";
-import DashboardBhavitha from "./components/pages/dashboard/DashboardBhavitha";
+
 import Permissions from "./components/pages/settings/roles/Permissions";
 // import Formm from "./components/pages/user/createUserForm/Form";
 
