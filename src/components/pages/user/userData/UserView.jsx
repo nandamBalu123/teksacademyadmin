@@ -114,7 +114,7 @@ const UserView = () => {
             </p>
           </div>
         </div>
-        <TableContainer component={Paper} className="my-4">
+        <TableContainer component={Paper} className="my-4" style={{ overflow: "hidden" }}>
           <Table size="large" aria-label="a dense table">
             <TableHead>
               <TableRow>
@@ -163,9 +163,8 @@ const UserView = () => {
                   ];
 
                   // Formatting the date
-                  const Formatteddate = `${day < 10 ? "0" : ""}${day}-${
-                    monthAbbreviations[monthIndex]
-                  }-${year}`;
+                  const Formatteddate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                    }-${year}`;
 
                   return (
                     <StyledTableRow

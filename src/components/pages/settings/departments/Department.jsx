@@ -70,7 +70,7 @@ const Department = () => {
             <TableHead>
               <TableRow>
                 <TableCell className="table-cell-heading" align="center">
-                  ID
+                  SI.NO
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
                   Name

@@ -220,26 +220,26 @@ const StudentData = () => {
     const filteredResults = initialData.filter((item) => {
       const searchCondition = filterCriteria.search
         ? item.name
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.branch
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.registrationnumber
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.courses
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.enquirytakenby
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase())
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.branch
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.registrationnumber
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.courses
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.enquirytakenby
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase())
         : true;
 
       const dateCondition =
         filterCriteria.fromdate && filterCriteria.todate
           ? item.admissiondate >= filterCriteria.fromdate &&
-            item.admissiondate <= filterCriteria.todate
+          item.admissiondate <= filterCriteria.todate
           : true;
 
       const branchCondition = filterCriteria.branch
@@ -369,16 +369,15 @@ const StudentData = () => {
         <h5 className=" mt-3 text-center"> Student Data </h5>
 
         <div className="row mb-1 ps-1 ">
-          <div className="col-12 col-md-7 col-lg-8 col-xl-8  input-field">
+          <div className="col-12 col-md-6 col-lg-8 col-xl-8">
             <input
               type="text"
-              className="input-field ps-1"
+              className="input-field"
               placeholder="Search Here..."
               autoComplete="off"
               style={{
                 height: "45px",
                 width: "100%",
-
                 outline: "none",
                 borderTop: "none",
                 borderBottom: "1.5px solid black",
@@ -392,7 +391,7 @@ const StudentData = () => {
             />
             <hr />
           </div>
-          <div className="col-12 col-md-5 col-lg-4 col-xl-4">
+          <div className="col-12 col-md-6 col-lg-4 col-xl-4">
             <div className="d-flex justify-content-around">
               <p className="pt-3">
                 {recordCount}/{initialDataCount}{" "}
@@ -479,7 +478,7 @@ const StudentData = () => {
                       />
                     </div>
 
-                    
+
                   </div>
 
                   <div className="row m-2">
@@ -786,9 +785,8 @@ const StudentData = () => {
                     ];
 
                     // Formatting the date
-                    date = `${day < 10 ? "0" : ""}${day}-${
-                      monthAbbreviations[monthIndex]
-                    }-${year}`;
+                    date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                      }-${year}`;
 
                     // Updating the state with the formatted date
 

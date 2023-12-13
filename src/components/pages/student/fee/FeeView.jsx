@@ -13,6 +13,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import DialogTitle from "@mui/material/DialogTitle";
 import "./FeeView.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -708,9 +712,19 @@ const FeeView = () => {
           <div>
             <h4 className="my-3 ms-2"> Admission Fee</h4>
             <hr></hr>
-            <div className="row mb-3">
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup">
-                <input
+            <div className="row my-3 container">
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2">
+                <TextField
+                  label={<span className="label-family">Admission Fee</span>}
+                  type="number"
+                  name="initialamount"
+                  variant="standard"
+                  className=" w-100"
+                  required
+                  value={admissionFee.initialamount}
+                  onChange={handleInputChange}
+                />
+                {/* <input
                   type="number"
                   name="initialamount"
                   value={admissionFee.initialamount}
@@ -718,10 +732,25 @@ const FeeView = () => {
                 />
                 <label>
                   Admission Fee <span className="text-danger"> * </span>
-                </label>
+                </label> */}
               </div>
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup">
-                <input
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
+                <TextField
+                  label={
+                    <span className="label-family">Paid Date</span>
+                  }
+                  type="date"
+                  name="paiddate"
+                  variant="standard"
+                  className="w-100"
+                  required
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={admissionFee.paiddate}
+                  onChange={handleInputChange}
+                />
+                {/* <input
                   type="date"
                   name="paiddate"
                   value={admissionFee.paiddate}
@@ -729,10 +758,31 @@ const FeeView = () => {
                 />
                 <label>
                   Paid Date <span className="text-danger"> * </span>
-                </label>
+                </label> */}
               </div>
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup-select">
-                <select
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
+                <TextField
+
+                  select
+                  label="Mode of Payment"
+                  defaultValue="select"
+                  className="w-100"
+                  variant="standard"
+                  required
+                  name="modeofpayment"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={admissionFee.modeofpayment}
+                  onChange={handleInputChange}
+                >
+
+                  <MenuItem value="UPI">UPI</MenuItem>
+                  <MenuItem value="Cash">Cash</MenuItem>
+                  <MenuItem value="Bank Transfer">Bank Transfer</MenuItem>
+                  <MenuItem value="Cheque">Cheque</MenuItem>
+                </TextField>
+                {/* <select
                   name="modeofpayment"
                   value={admissionFee.modeofpayment}
                   onChange={handleInputChange}
@@ -745,10 +795,26 @@ const FeeView = () => {
                 </select>
                 <label>
                   Mode of Payments <span className="text-danger"> * </span>
-                </label>
+                </label> */}
               </div>
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2 inputgroup ms-3">
-                <input
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
+                <TextField
+                  label={
+                    <span className="label-family">Transation ID</span>
+                  }
+                  type="text"
+                  className="w-100"
+                  name="transactionID"
+                  value={admissionFee.transactionID}
+                  onChange={handleInputChange}
+                  variant="standard"
+
+                  required
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                {/* <input
                   type="text"
                   name="transactionID"
                   value={admissionFee.transactionID}
@@ -756,7 +822,7 @@ const FeeView = () => {
                 />
                 <label>
                   Transaction Id <span className="text-danger"> * </span>
-                </label>
+                </label> */}
               </div>
               <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-3">
                 <button
@@ -804,7 +870,7 @@ const FeeView = () => {
                   </div> */}
                 <div className="col-12 col-md-6 col-xl-6 col-lg-6">
                   <button
-                    className=" btn btn-primary "
+                    className=" btn btn-color"
                     onClick={handleNoOfInstallments}
                   >
                     Add No. of Installments
@@ -831,9 +897,30 @@ const FeeView = () => {
                       <>/ {installment.subInstallmentNumber}</>
                     )}
                   </h5>
-                  <div className="row">
-                    <div className="col-12 col-md-6 col-lg-4 col-xl-2 student-input">
-                      <input
+                  <div className="row container">
+                    <div className="col-12 col-md-6 col-lg-4 col-xl-2 mt-2">
+                      <TextField
+                        label={
+                          <span className="label-family">Installment Date</span>
+                        }
+                        type="date"
+                        variant="standard"
+                        name="Installment Date"
+                        className="w-100"
+                        required
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={(e) =>
+                          handleInstallmentUpdate(
+                            index,
+                            "duedate",
+                            e.target.value
+                          )
+                        }
+                        value={installment.duedate}
+                      />
+                      {/* <input
                         type="date"
                         name="Installment Date"
                         className="w-100"
@@ -846,11 +933,33 @@ const FeeView = () => {
                         }
                         value={installment.duedate}
                       />
-                      <label> Installment Date</label>
+                      <label> Installment Date</label> */}
                     </div>
 
-                    <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input">
-                      <input
+                    <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                      <TextField
+                        label={
+                          <span className="label-family">Installment Amount</span>
+                        }
+                        type="number"
+                        name="Installment Amount"
+                        className="w-100"
+                        variant="standard"
+
+                        required
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={(e) =>
+                          handleInstallmentUpdate(
+                            index,
+                            "dueamount",
+                            parseFloat(e.target.value)
+                          )
+                        }
+                        value={installment.dueamount}
+                      />
+                      {/* <input
                         type="number"
                         name="Installment Amount"
                         className="w-100"
@@ -863,15 +972,38 @@ const FeeView = () => {
                         }
                         value={installment.dueamount}
                       />
-                      <label> Installment Amount</label>
+                      <label> Installment Amount</label> */}
                     </div>
 
                     {studentdata &&
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input">
-                          <input
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                          <TextField
+                            label={
+                              <span className="label-family">Paid Date</span>
+                            }
+                            type="date"
+                            name="paiddate"
+                            className="w-100"
+
+                            variant="standard"
+
+                            required
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "paiddate",
+                                e.target.value
+                              )
+                            }
+                            value={installment.paiddate || getCurrentDate()}
+                          />
+                          {/* <input
                             type="date"
                             name="paiddate"
                             className="w-100"
@@ -884,15 +1016,37 @@ const FeeView = () => {
                             }
                             value={installment.paiddate || getCurrentDate()}
                           />
-                          <label> Paid Date</label>
+                          <label> Paid Date</label> */}
                         </div>
                       )}
                     {studentdata &&
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input">
-                          <input
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                          <TextField
+                            label={
+                              <span className="label-family">Paid Amount</span>
+                            }
+                            type="number"
+                            name="paidamount"
+                            className="w-100"
+                            variant="standard"
+
+                            required
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "paidamount",
+                                parseFloat(e.target.value)
+                              )
+                            }
+                            value={installment.paidamount}
+                          />
+                          {/* <input
                             type="number"
                             name="paidamount"
                             className="w-100"
@@ -905,15 +1059,73 @@ const FeeView = () => {
                             }
                             value={installment.paidamount}
                           />
-                          <label> Paid Amount</label>
+                          <label> Paid Amount</label> */}
                         </div>
                       )}
                     {studentdata &&
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mul-input">
-                          <select
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                          <TextField
+
+                            select
+                            label="Mode of Payment"
+                            defaultValue="select"
+                            className="w-100"
+                            variant="standard"
+                            required
+                            name="modeofpayment"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "modeofpayment",
+                                e.target.value
+                              )
+                            }
+                            value={installment.modeofpayment}
+                          >
+
+                            <MenuItem value="UPI">UPI</MenuItem>
+                            <MenuItem value="Cash">Cash</MenuItem>
+                            <MenuItem value="Bank Transfer">Bank Transfer</MenuItem>
+                            <MenuItem value="Cheque">Cheque</MenuItem>
+                          </TextField>
+                          {/* <FormControl variant="standard" className="w-100">
+                            <InputLabel>
+                              <span className="label-family">
+                                Mode of Payments<span>*</span>
+                              </span>
+                            </InputLabel>
+                            <Select
+                              name="modeofpayment"
+                              variant="standard"
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                              onChange={(e) =>
+                                handleInstallmentUpdate(
+                                  index,
+                                  "modeofpayment",
+                                  e.target.value
+                                )
+                              }
+                              value={installment.modeofpayment}
+
+                              required
+
+                            >
+
+                              <MenuItem value="UPI">UPI</MenuItem>
+                              <MenuItem value="Cash">Cash</MenuItem>
+                              <MenuItem value="Bank Transfer">Bank Transfer</MenuItem>
+                              <MenuItem value="Cheque">Cheque</MenuItem>
+                            </Select>
+                          </FormControl> */}
+                          {/* <select
                             className="w-100"
                             name="modeofpayment"
                             onChange={(e) =>
@@ -931,15 +1143,37 @@ const FeeView = () => {
                             <option value="Bank Transfer">Bank Transfer</option>
                             <option value="Cheque">Cheque</option>
                           </select>
-                          <label> Mode of Payments</label>
+                          <label> Mode of Payments</label> */}
                         </div>
                       )}
                     {studentdata &&
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input">
-                          <input
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                          <TextField
+                            label={
+                              <span className="label-family">Transation ID</span>
+                            }
+                            type="text"
+                            className="w-100"
+                            name="transactionid"
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "transactionid",
+                                e.target.value
+                              )
+                            }
+                            value={installment.transactionid}
+                            variant="standard"
+
+                            required
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                          {/* <input
                             type="text"
                             className="w-100"
                             name="transactionid"
@@ -952,7 +1186,7 @@ const FeeView = () => {
                             }
                             value={installment.transactionid}
                           />
-                          <label> Transaction Id</label>
+                          <label> Transaction Id</label> */}
                         </div>
                       )}
 
@@ -962,7 +1196,7 @@ const FeeView = () => {
                       studentdata.installments[index].dueamount && (
                         <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input ">
                           <button
-                            className="btn btn-color center"
+                            className="btn btn-color"
                             onClick={() => handleUpdateClick(index)}
                           >
                             Update
@@ -973,9 +1207,9 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       !studentdata.installments[index].duedate &&
                       !studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 student-input ">
+                        <div className="col-12 col-md-12 col-lg-3 col-xl-2 student-input">
                           <button
-                            className="btn btn-color center"
+                            className="btn btn-color"
                             onClick={UpdateDueDateAndDueAmount}
                           >
                             Update
@@ -1044,9 +1278,8 @@ const FeeView = () => {
                     ];
 
                     // Formatting the date
-                    paidDate = `${day < 10 ? "0" : ""}${day}-${
-                      monthAbbreviations[monthIndex]
-                    }-${year}`;
+                    paidDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                      }-${year}`;
 
                     return (
                       <TableBody>
@@ -1148,12 +1381,10 @@ const FeeView = () => {
                   ];
 
                   // Formatting the date
-                  paidDate = `${day < 10 ? "0" : ""}${day}-${
-                    monthAbbreviations[monthIndex]
-                  }-${year}`;
-                  dueDate = `${dueday < 10 ? "0" : ""}${dueday}-${
-                    monthAbbreviations[duemonthIndex]
-                  }-${dueyear}`;
+                  paidDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                    }-${year}`;
+                  dueDate = `${dueday < 10 ? "0" : ""}${dueday}-${monthAbbreviations[duemonthIndex]
+                    }-${dueyear}`;
 
                   if (item.paidamount < 1) {
                     return null; // Do not render anything

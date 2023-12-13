@@ -249,28 +249,34 @@ const Addassets = () => {
 
       <div className="container mt-3">
         <div className="addassets">
-          <div className="row mt-4 ">
-            <div className="col-12 col-md-10 col-lg-10 col-xl-10 ">
+          <div className="d-flex justify-content-between mt-4">
+            <h5 className="ms-2"> Add Assets</h5>
+            <NavLink to="/addassetsform" className="btn btn-color me-2">
+              Add Assets
+            </NavLink>
+          </div>
+          {/* <div className="row mt-4 ">
+            <div className="col-6 col-md-10 col-lg-10 col-xl-10 ">
               <h5 className=" ms-2">Add Assets </h5>
             </div>
-            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
+            <div className="col-6 col-md-2 col-lg-2 col-xl-2">
               <NavLink to="/addassetsform" className="btn btn-color me-2">
                 Add Assets
               </NavLink>
             </div>
-          </div>
+          </div> */}
           <div className=" row px-2">
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 className="cardcolor"
-                style={{cursor:"default"}}
-                // style={{
-                //   background: "#195489",
-                //   textAlign: "center",
-                //   borderRadius: "8px",
-                //   color: "white",
-                //   boxShadow: "3px 3px 6px  gray",
-                // }}
+                style={{ cursor: "default" }}
+              // style={{
+              //   background: "#195489",
+              //   textAlign: "center",
+              //   borderRadius: "8px",
+              //   color: "white",
+              //   boxShadow: "3px 3px 6px  gray",
+              // }}
               >
                 <p className="pt-3 text-center">
                   Total Laptops: {getLaptopCount()}
@@ -280,14 +286,14 @@ const Addassets = () => {
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 className="cardcolor"
-                style={{cursor:"default"}}
-                // style={{
-                //   background: "#FF9F24",
-                //   textAlign: "center",
-                //   borderRadius: "8px",
-                //   color: "white",
-                //   boxShadow: "3px 3px 6px  gray",
-                // }}
+                style={{ cursor: "default" }}
+              // style={{
+              //   background: "#FF9F24",
+              //   textAlign: "center",
+              //   borderRadius: "8px",
+              //   color: "white",
+              //   boxShadow: "3px 3px 6px  gray",
+              // }}
               >
                 <p className="pt-3 text-center">
                   Total T-Shirts:{getTshirtCount()}
@@ -314,14 +320,14 @@ const Addassets = () => {
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 className="cardcolor"
-                style={{cursor:"default"}}
-                // style={{
-                //   background: "#008959",
-                //   textAlign: "center",
-                //   borderRadius: "8px",
-                //   color: "white",
-                //   boxShadow: "3px 3px 6px  gray",
-                // }}
+                style={{ cursor: "default" }}
+              // style={{
+              //   background: "#008959",
+              //   textAlign: "center",
+              //   borderRadius: "8px",
+              //   color: "white",
+              //   boxShadow: "3px 3px 6px  gray",
+              // }}
               >
                 <p className="pt-3 text-center">
                   Total Shirt:{getShirtCount()}
@@ -331,14 +337,14 @@ const Addassets = () => {
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1 ">
               <Card
                 className="cardcolor"
-                style={{cursor:"default"}}
-                // style={{
-                //   background: "#195489",
-                //   textAlign: "center",
-                //   borderRadius: "8px",
-                //   color: "white",
-                //   boxShadow: "3px 3px 6px  gray",
-                // }}
+                style={{ cursor: "default" }}
+              // style={{
+              //   background: "#195489",
+              //   textAlign: "center",
+              //   borderRadius: "8px",
+              //   color: "white",
+              //   boxShadow: "3px 3px 6px  gray",
+              // }}
               >
                 <p className="pt-3 text-center">
                   Total Charger:{getChargerCount()}
@@ -348,14 +354,14 @@ const Addassets = () => {
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 className="cardcolor"
-                style={{cursor:"default"}}
-                // style={{
-                //   background: "#FF9F24",
-                //   textAlign: "center",
-                //   borderRadius: "8px",
-                //   color: "white",
-                //   boxShadow: "3px 3px 6px  gray",
-                // }}
+                style={{ cursor: "default" }}
+              // style={{
+              //   background: "#FF9F24",
+              //   textAlign: "center",
+              //   borderRadius: "8px",
+              //   color: "white",
+              //   boxShadow: "3px 3px 6px  gray",
+              // }}
               >
                 <p className="pt-3 text-center">
                   Total Mouse:{getMouseCount()}
@@ -365,14 +371,14 @@ const Addassets = () => {
             <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-1">
               <Card
                 className="cardcolor"
-                style={{cursor:"default"}}
-                // style={{
-                //   background: "#008959",
-                //   textAlign: "center",
-                //   borderRadius: "8px",
-                //   color: "white",
-                //   boxShadow: "3px 3px 6px  gray",
-                // }}
+                style={{ cursor: "default" }}
+              // style={{
+              //   background: "#008959",
+              //   textAlign: "center",
+              //   borderRadius: "8px",
+              //   color: "white",
+              //   boxShadow: "3px 3px 6px  gray",
+              // }}
               >
                 <p className="pt-3 text-center">
                   Total Bags:{getStudentsBags()}
@@ -517,137 +523,137 @@ const Addassets = () => {
                     </div> */}
 
             {/* <NavLink to="/addassetsform" className="btn btn-primary">Add Record</NavLink><br></br> */}
-            
-              <TableContainer sx={{ maxHeight: 440 }} component={Paper}>
-                <Table stickyHeader aria-label="sticky table" borderAxis="both">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell className="table-cell-heading">
-                        ID
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Vendor Name
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Asset Type
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Brand Name
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Asset Code
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Quantity
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Status
-                      </TableCell>
-                      <TableCell className="table-cell-heading">
-                        Action
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {getuserdata.map((element, id) => (
-                      <React.Fragment key={id}>
-                        <TableRow>
-                          <TableCell className="Table-cell ">
-                            <span
-                              style={{
-                                fontSize: "15px",
-                              }}
-                            >
-                              {" "}
-                              {id + 1}
-                            </span>
-                          </TableCell>
-                          {/* <td>{element.name}</td> */}
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "15px",
-                              }}
-                            >
-                              {element.vendername}
-                            </span>
-                          </TableCell>
-                          {/* <td>{element.designation}</td> */}
-                          {/* <td>{element.branch}</td> */}
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "15px",
-                              }}
-                            >
-                              {element.assettype}
-                            </span>
-                          </TableCell>
 
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "15px",
-                              }}
-                            >
-                              {element.brandname}
-                            </span>
-                          </TableCell>
-                          {/* <td>{element.remarks}</td> */}
-                          {/* <td>{element.issueddate}</td> */}
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "15px",
-                              }}
-                            >
-                              {element.assetcode}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "15px",
-                              }}
-                            >
-                              {element.anonymity}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "15px",
-                              }}
-                            >
-                              {element.returndate}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell text-center">
-                            <NavLink to={`view/${element.id}`}>
-                              <RemoveRedEyeIcon
-                                style={{ width: "40px" }}
-                                className="icon-color"
-                              />
-                            </NavLink>
-                            <NavLink to={`edit/${element.id}`}>
-                              <CreateIcon
-                                style={{ width: "40px" }}
-                                className="icon-color"
-                              />
-                            </NavLink>
-                            <DeleteOutlineIcon
+            <TableContainer sx={{ maxHeight: 440 }} component={Paper}>
+              <Table stickyHeader aria-label="sticky table" borderAxis="both">
+                <TableHead>
+                  <TableRow>
+                    <TableCell className="table-cell-heading">
+                      ID
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Vendor Name
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Asset Type
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Brand Name
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Asset Code
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Quantity
+                    </TableCell>
+                    <TableCell className="table-cell-heading">
+                      Status
+                    </TableCell>
+                    <TableCell className="table-cell-heading ">
+                      Action
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {getuserdata.map((element, id) => (
+                    <React.Fragment key={id}>
+                      <TableRow>
+                        <TableCell className="Table-cell ">
+                          <span
+                            style={{
+                              fontSize: "15px",
+                            }}
+                          >
+                            {" "}
+                            {id + 1}
+                          </span>
+                        </TableCell>
+                        {/* <td>{element.name}</td> */}
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "15px",
+                            }}
+                          >
+                            {element.vendername}
+                          </span>
+                        </TableCell>
+                        {/* <td>{element.designation}</td> */}
+                        {/* <td>{element.branch}</td> */}
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "15px",
+                            }}
+                          >
+                            {element.assettype}
+                          </span>
+                        </TableCell>
+
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "15px",
+                            }}
+                          >
+                            {element.brandname}
+                          </span>
+                        </TableCell>
+                        {/* <td>{element.remarks}</td> */}
+                        {/* <td>{element.issueddate}</td> */}
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "15px",
+                            }}
+                          >
+                            {element.assetcode}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "15px",
+                            }}
+                          >
+                            {element.anonymity}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "15px",
+                            }}
+                          >
+                            {element.returndate}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <NavLink to={`view/${element.id}`}>
+                            <RemoveRedEyeIcon
                               style={{ width: "40px" }}
-                              onClick={() => deleteuser(element.id)}
-                              className="text-danger"
+                              className="icon-color"
                             />
-                          </TableCell>
-                        </TableRow>
-                      </React.Fragment>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-    
+                          </NavLink>
+                          <NavLink to={`edit/${element.id}`}>
+                            <CreateIcon
+                              style={{ width: "40px" }}
+                              className="icon-color"
+                            />
+                          </NavLink>
+                          <DeleteOutlineIcon
+                            style={{ width: "40px" }}
+                            onClick={() => deleteuser(element.id)}
+                            className="text-danger"
+                          />
+                        </TableCell>
+                      </TableRow>
+                    </React.Fragment>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+
           </div>
         </div>
       </div>
