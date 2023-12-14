@@ -32,7 +32,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useStudentsContext } from "../../../hooks/useStudentsContext";
-
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {
   Button,
   Dialog,
@@ -368,6 +368,7 @@ const Dashboard = () => {
           let branchTotalAmount = 0;
           let branchTotalReceivedAmount = 0;
           let branchTotalDueAmount = 0;
+          let branchTotalStudents = 0; // Add a counter for total students in the branch
 
           // Counsellor-wise calculations
           const counsellorWiseTotal = {};
@@ -405,23 +406,29 @@ const Dashboard = () => {
                 }
                 counsellorWiseTotal[counsellor].students.push({
                   name: studentName,
+                  course: student.courses,
+                  admissionDate: student.admissiondate,
                   totalAmount: totalamount,
                   receivedamount: receivedamount,
                   dueamount: dueamount,
                 });
+
+                // Increment the total students counter
+                branchTotalStudents += 1;
               });
             });
           }
 
-          calculations_of_filtered_students_branchwise_counsellorwise[branch] =
-          {
+          calculations_of_filtered_students_branchwise_counsellorwise[branch] = {
             totalAmount: branchTotalAmount,
             totalReceivedAmount: branchTotalReceivedAmount,
             totalDueAmount: branchTotalDueAmount,
+            totalStudents: branchTotalStudents, // Add total students to the result
             counsellorWiseTotal,
           };
         }
       );
+
 
 
       setcalculations_of_filtered_students_branchwise_counsellorwise(
@@ -437,7 +444,7 @@ const Dashboard = () => {
 
         let branchTotalReceivedAmount = 0;
         let branchTotalDueAmount = 0;
-
+        let branchTotalStudents = 0;
         // Counsellor-wise calculations
         const counsellorWiseTotal = {};
 
@@ -452,7 +459,7 @@ const Dashboard = () => {
 
               AllStudents_BranchWiseAndCounsellorWise[branch][counsellor].forEach(
                 (student) => {
-                  const studentName = student.name;
+                  const studentName = student.name; branchTotalStudents += 1;
                   student.installments.forEach((installment) => {
                     let dueamount = 0
                     let receivedamount = 0
@@ -516,6 +523,8 @@ const Dashboard = () => {
 
                     counsellorWiseTotal[counsellor].students.push({
                       name: studentName,
+                      course: student.courses,
+                      admissionDate: student.admissiondate,
                       receivedamount: receivedamount,
                       dueamount: dueamount,
                     });
@@ -554,6 +563,8 @@ const Dashboard = () => {
 
                     counsellorWiseTotal[counsellor].students.push({
                       name: studentName,
+                      course: student.courses,
+                      admissionDate: student.admissiondate,
                       receivedamount: receivedamount,
 
                     });
@@ -567,6 +578,7 @@ const Dashboard = () => {
         calculations_of_all_students_branchwise_counsellorwise[branch] = {
           totalReceivedAmount: branchTotalReceivedAmount,
           totalDueAmount: branchTotalDueAmount,
+          totalStudents: branchTotalStudents, // Include total students in the result
           counsellorWiseTotal,
         };
       });
@@ -953,16 +965,20 @@ const Dashboard = () => {
   const [selectedCounsellor, setSelectedCounsellor] = useState(null);
 
   const handleBranchClick = (branch) => {
-    setSelectedBranch(branch);
-    setSelectedCounsellor(null); // Reset selected counsellor when a branch is clicked
+
+    setSelectedBranch(selectedBranch === branch ? null : branch);
+    // setSelectedCounsellor(null); // Reset selected counsellor when a branch is clicked
+  };
+  const handleCounsellorClick = (counsellor) => {
+
+    setSelectedCounsellor(selectedCounsellor === counsellor ? null : counsellor);
   };
 
-  const handleCounsellorClick = (counsellor) => {
-    setSelectedCounsellor(counsellor);
-  };
+
+
   useEffect(() => {
     console.log("selectedBranch", selectedBranch, "selectedCounsellor", selectedCounsellor)
-  }, [selectedCounsellor, selectedBranch])
+  }, [selectedCounsellor])
   const AdminDashboard = () => {
     return (
       <div className="container main-dashboard">
@@ -1127,7 +1143,7 @@ const Dashboard = () => {
             <div className="row">
               <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
                 <Card
-                  onClick={(e) =>
+                  onClick={(e) => {
                     setDisplayTable((prev) => ({
                       enrollments: !prev.enrollments,
                       bookingamount: false,
@@ -1136,8 +1152,12 @@ const Dashboard = () => {
                       feerecevied: false,
                       feeyettorecevied: false,
                       branchusers: false,
-                    }))
-                  }
+                    }));
+
+                    setSelectedBranch(null);
+                    setSelectedCounsellor(null);
+                  }}
+
                   className="cardcolor"
                 >
                   <p className="text-center pt-3">
@@ -1152,7 +1172,8 @@ const Dashboard = () => {
               </div>
               <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
                 <Card
-                  onClick={(e) =>
+
+                  onClick={(e) => {
                     setDisplayTable((prev) => ({
                       enrollments: false,
                       bookingamount: !prev.bookingamount,
@@ -1161,8 +1182,11 @@ const Dashboard = () => {
                       feerecevied: false,
                       feeyettorecevied: false,
                       branchusers: false,
-                    }))
-                  }
+                    }));
+
+                    setSelectedBranch(null);
+                    setSelectedCounsellor(null);
+                  }}
                   className="cardcolor"
                 >
                   <p className="text-center pt-3">
@@ -1177,7 +1201,8 @@ const Dashboard = () => {
               </div>
               <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
                 <Card
-                  onClick={(e) =>
+
+                  onClick={(e) => {
                     setDisplayTable((prev) => ({
                       enrollments: false,
                       bookingamount: false,
@@ -1186,8 +1211,12 @@ const Dashboard = () => {
                       feerecevied: false,
                       feeyettorecevied: false,
                       branchusers: false,
-                    }))
-                  }
+                    }));
+
+                    setSelectedBranch(null);
+                    setSelectedCounsellor(null);
+                  }}
+
                   className="cardcolor"
                 >
                   <p className="text-center pt-3">
@@ -1202,7 +1231,8 @@ const Dashboard = () => {
               </div>
               <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-1">
                 <Card
-                  onClick={(e) =>
+
+                  onClick={(e) => {
                     setDisplayTable((prev) => ({
                       enrollments: false,
                       bookingamount: false,
@@ -1212,8 +1242,11 @@ const Dashboard = () => {
                       feerecevied: false,
                       feeyettorecevied: false,
                       branchusers: false,
-                    }))
-                  }
+                    }));
+
+                    setSelectedBranch(null);
+                    setSelectedCounsellor(null);
+                  }}
                   className="cardcolor"
                 >
                   <p className="text-center pt-3">
@@ -1256,72 +1289,83 @@ const Dashboard = () => {
                           </TableHead>
                           <TableBody>
 
-                            {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => (
-                              <StyledTableRow >
-                                <StyledTableCell className="Table-cell" onClick={() => handleBranchClick(branch)}>
-                                  {branch}
+                            {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
 
-                                  {selectedBranch === branch &&
-                                    <TableContainer component={Paper}>
-                                      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                        <TableHead>
-                                          <TableRow>
-                                            <TableCell><b>Counsellor Name</b></TableCell>
-                                            <TableCell >Count</TableCell>
 
-                                          </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                          {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                            (counsellor) => (
+                              return (
+                                <StyledTableRow >
+                                  <StyledTableCell className="Table-cell">
+                                    {branch} <ArrowDropDownIcon onClick={() => handleBranchClick(branch)} />
 
-                                              <TableRow
-                                                key={counsellor}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                              >
-                                                <StyledTableCell className="Table-cell" onClick={() => handleCounsellorClick(counsellor)} >
-                                                  {counsellor}
-                                                  {/* {selectedCounsellor && */}
-                                                  <TableContainer component={Paper}>
-                                                    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                                      <TableHead>
-                                                        <TableRow>
-                                                          <TableCell><b>Student Name</b></TableCell>
-                                                        </TableRow>
-                                                      </TableHead>
-                                                      <TableBody>
-                                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch]
-                                                          .counsellorWiseTotal[counsellor].students.map((student, index) => (
-                                                            <TableRow key={index}>
-                                                              <TableCell>{student.name}</TableCell>
+                                    {selectedBranch === branch &&
+                                      <TableContainer component={Paper}>
+                                        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                          <TableHead>
+                                            <TableRow>
+                                              <TableCell><b>Counsellor Name</b></TableCell>
+                                              <TableCell >Count</TableCell>
+
+                                            </TableRow>
+                                          </TableHead>
+                                          <TableBody>
+                                            {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                              (counsellor) => (
+
+                                                <TableRow
+                                                  key={counsellor}
+                                                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                >
+                                                  <StyledTableCell className="Table-cell"  >
+                                                    {counsellor} <ArrowDropDownIcon onClick={() => handleCounsellorClick(counsellor)} />
+                                                    {selectedCounsellor === counsellor &&
+                                                      <TableContainer component={Paper}>
+                                                        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                                          <TableHead>
+                                                            <TableRow>
+                                                              <TableCell><b>Name</b></TableCell>
+                                                              <TableCell><b>Course</b></TableCell>
+                                                              <TableCell><b>Admission Date</b></TableCell>
+
                                                             </TableRow>
-                                                          ))}
-                                                      </TableBody>
-                                                    </Table>
-                                                  </TableContainer>
-                                                  {/* } */}
+                                                          </TableHead>
+                                                          <TableBody>
+                                                            {calculations_of_filtered_students_branchwise_counsellorwise[branch]
+                                                              .counsellorWiseTotal[counsellor].students.map((student, index) => (
+                                                                <TableRow key={index}>
+                                                                  <TableCell>{student.name}</TableCell>
+                                                                  <TableCell>{student.course}</TableCell>
+                                                                  <TableCell>{student.admissionDate}</TableCell>
+
+                                                                </TableRow>
+                                                              ))}
+                                                          </TableBody>
+                                                        </Table>
+                                                      </TableContainer>
+                                                    }
 
 
-                                                </StyledTableCell>
-                                                <StyledTableCell >
-                                                  {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].students).length}
-                                                </StyledTableCell>
+                                                  </StyledTableCell>
+                                                  <StyledTableCell >
+                                                    {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].students).length}
+                                                  </StyledTableCell>
 
 
-                                              </TableRow>
-                                            )
-                                          )}
+                                                </TableRow>
+                                              )
+                                            )}
 
 
-                                        </TableBody>
-                                      </Table>
-                                    </TableContainer>}
-                                </StyledTableCell>
-                                <StyledTableCell className="Table-cell">
-                                  {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).length}
-                                </StyledTableCell>
-                              </StyledTableRow>
-                            ))}
+                                          </TableBody>
+                                        </Table>
+                                      </TableContainer>}
+                                  </StyledTableCell>
+                                  <StyledTableCell className="Table-cell">
+                                    {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalStudents}
+                                  </StyledTableCell>
+                                </StyledTableRow>
+                              )
+
+                            })}
 
                           </TableBody>
                         </Table>
@@ -1354,75 +1398,88 @@ const Dashboard = () => {
                             </TableHead>
                             <TableBody>
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => (
-                                <StyledTableRow >
-                                  <StyledTableCell className="Table-cell" onClick={() => handleBranchClick(branch)}>
-                                    {branch}
+                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
 
-                                    {selectedBranch === branch &&
-                                      <TableContainer component={Paper}>
-                                        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                          <TableHead>
-                                            <TableRow>
-                                              <TableCell><b>Counsellor Name</b></TableCell>
-                                              <TableCell >Amount</TableCell>
 
-                                            </TableRow>
-                                          </TableHead>
-                                          <TableBody>
-                                            {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                              (counsellor) => (
+                                return (
+                                  <StyledTableRow >
+                                    <StyledTableCell className="Table-cell">
+                                      {branch} <ArrowDropDownIcon onClick={() => handleBranchClick(branch)} />
 
-                                                <TableRow
-                                                  key={counsellor}
-                                                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                >
-                                                  <StyledTableCell className="Table-cell" onClick={() => handleCounsellorClick(counsellor)} >
-                                                    {counsellor}
+                                      {selectedBranch === branch &&
+                                        <TableContainer component={Paper}>
+                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                            <TableHead>
+                                              <TableRow>
+                                                <TableCell><b>Counsellor Name</b></TableCell>
+                                                <TableCell >Count</TableCell>
 
-                                                    <TableContainer component={Paper}>
-                                                      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                                        <TableHead>
-                                                          <TableRow>
-                                                            <TableCell><b>Student Name</b></TableCell>
-                                                            <TableCell><b>Amount</b></TableCell>
+                                              </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                                (counsellor) => (
 
-                                                          </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                          {calculations_of_filtered_students_branchwise_counsellorwise[branch]
-                                                            .counsellorWiseTotal[counsellor].students.map((student, index) => (
-                                                              <TableRow key={index}>
-                                                                <TableCell>{student.name}</TableCell>
-                                                                <TableCell>{student.totalAmount}</TableCell>
-
+                                                  <TableRow
+                                                    key={counsellor}
+                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                  >
+                                                    <StyledTableCell className="Table-cell"  >
+                                                      {counsellor} <ArrowDropDownIcon onClick={() => handleCounsellorClick(counsellor)} />
+                                                      {selectedCounsellor === counsellor &&
+                                                        <TableContainer component={Paper}>
+                                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                                            <TableHead>
+                                                              <TableRow>
+                                                                <TableCell><b>Name</b></TableCell>
+                                                                <TableCell><b>Course</b></TableCell>
+                                                                <TableCell><b>Admission Date</b></TableCell>
+                                                                <TableCell><b> Booking Amount</b></TableCell>
                                                               </TableRow>
-                                                            ))}
-                                                        </TableBody>
-                                                      </Table>
-                                                    </TableContainer>
+                                                            </TableHead>
+                                                            <TableBody>
+                                                              {calculations_of_filtered_students_branchwise_counsellorwise[branch]
+                                                                .counsellorWiseTotal[counsellor].students.map((student, index) => (
+                                                                  <TableRow key={index}>
+                                                                    <TableCell>{student.name}</TableCell>
+                                                                    <TableCell>{student.course}</TableCell>
+                                                                    <TableCell>{student.admissionDate}</TableCell>
+
+                                                                    <TableCell>{student.totalAmount}</TableCell>
+                                                                  </TableRow>
+                                                                ))}
+                                                            </TableBody>
+                                                          </Table>
+                                                        </TableContainer>
+                                                      }
 
 
-                                                  </StyledTableCell>
-                                                  <StyledTableCell >
-                                                    {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalAmount}
-                                                  </StyledTableCell>
+                                                    </StyledTableCell>
+                                                    <StyledTableCell >
+                                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalAmount}
+                                                    </StyledTableCell>
 
 
-                                                </TableRow>
-                                              )
-                                            )}
+                                                  </TableRow>
+                                                )
+                                              )}
 
 
-                                          </TableBody>
-                                        </Table>
-                                      </TableContainer>}
-                                  </StyledTableCell>
-                                  <StyledTableCell className="Table-cell">
-                                    {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
-                                  </StyledTableCell>
-                                </StyledTableRow>
-                              ))}
+                                            </TableBody>
+                                          </Table>
+                                        </TableContainer>}
+                                    </StyledTableCell>
+                                    <StyledTableCell className="Table-cell">
+                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
+                                    </StyledTableCell>
+                                  </StyledTableRow>
+                                )
+
+                              })}
+
+
+
+
 
                             </TableBody>
                           </Table>
@@ -1455,76 +1512,88 @@ const Dashboard = () => {
                               </TableRow>
                             </TableHead>
                             <TableBody>
+                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => (
-                                <StyledTableRow >
-                                  <StyledTableCell className="Table-cell" onClick={() => handleBranchClick(branch)}>
-                                    {branch}
 
-                                    {selectedBranch === branch &&
-                                      <TableContainer component={Paper}>
-                                        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                          <TableHead>
-                                            <TableRow>
-                                              <TableCell><b>Counsellor Name</b></TableCell>
-                                              <TableCell >Amount</TableCell>
+                                return (
+                                  <StyledTableRow >
+                                    <StyledTableCell className="Table-cell">
+                                      {branch} <ArrowDropDownIcon onClick={() => handleBranchClick(branch)} />
 
-                                            </TableRow>
-                                          </TableHead>
-                                          <TableBody>
-                                            {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                              (counsellor) => (
+                                      {selectedBranch === branch &&
+                                        <TableContainer component={Paper}>
+                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                            <TableHead>
+                                              <TableRow>
+                                                <TableCell><b>Counsellor Name</b></TableCell>
+                                                <TableCell >Count</TableCell>
 
-                                                <TableRow
-                                                  key={counsellor}
-                                                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                >
-                                                  <StyledTableCell className="Table-cell" onClick={() => handleCounsellorClick(counsellor)} >
-                                                    {counsellor}
+                                              </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                                (counsellor) => (
 
-                                                    <TableContainer component={Paper}>
-                                                      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                                        <TableHead>
-                                                          <TableRow>
-                                                            <TableCell><b>Student Name</b></TableCell>
-                                                            <TableCell><b>Amount</b></TableCell>
-
-                                                          </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                          {calculations_of_filtered_students_branchwise_counsellorwise[branch]
-                                                            .counsellorWiseTotal[counsellor].students.map((student, index) => (
-                                                              <TableRow key={index}>
-                                                                <TableCell>{student.name}</TableCell>
-                                                                <TableCell>{student.receivedamount}</TableCell>
-
+                                                  <TableRow
+                                                    key={counsellor}
+                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                  >
+                                                    <StyledTableCell className="Table-cell"  >
+                                                      {counsellor} <ArrowDropDownIcon onClick={() => handleCounsellorClick(counsellor)} />
+                                                      {selectedCounsellor === counsellor &&
+                                                        <TableContainer component={Paper}>
+                                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                                            <TableHead>
+                                                              <TableRow>
+                                                                <TableCell><b>Name</b></TableCell>
+                                                                <TableCell><b>Course</b></TableCell>
+                                                                <TableCell><b>Admission Date</b></TableCell>
+                                                                <TableCell><b> Received  Amount</b></TableCell>
                                                               </TableRow>
-                                                            ))}
-                                                        </TableBody>
-                                                      </Table>
-                                                    </TableContainer>
+                                                            </TableHead>
+                                                            <TableBody>
+                                                              {calculations_of_filtered_students_branchwise_counsellorwise[branch]
+                                                                .counsellorWiseTotal[counsellor].students.map((student, index) => (
+                                                                  <TableRow key={index}>
+                                                                    <TableCell>{student.name}</TableCell>
+                                                                    <TableCell>{student.course}</TableCell>
+                                                                    <TableCell>{student.admissionDate}</TableCell>
+
+                                                                    <TableCell>{student.receivedamount}</TableCell>
+                                                                  </TableRow>
+                                                                ))}
+                                                            </TableBody>
+                                                          </Table>
+                                                        </TableContainer>
+                                                      }
 
 
-                                                  </StyledTableCell>
-                                                  <StyledTableCell >
-                                                    {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount}
-                                                  </StyledTableCell>
+                                                    </StyledTableCell>
+                                                    <StyledTableCell >
+                                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount}
+                                                    </StyledTableCell>
 
 
-                                                </TableRow>
-                                              )
-                                            )}
+                                                  </TableRow>
+                                                )
+                                              )}
 
 
-                                          </TableBody>
-                                        </Table>
-                                      </TableContainer>}
-                                  </StyledTableCell>
-                                  <StyledTableCell className="Table-cell">
-                                    {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
-                                  </StyledTableCell>
-                                </StyledTableRow>
-                              ))}
+                                            </TableBody>
+                                          </Table>
+                                        </TableContainer>}
+                                    </StyledTableCell>
+                                    <StyledTableCell className="Table-cell">
+                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                    </StyledTableCell>
+                                  </StyledTableRow>
+                                )
+
+                              })}
+
+
+
+
 
                             </TableBody>
                           </Table>
@@ -1557,76 +1626,85 @@ const Dashboard = () => {
                               </TableRow>
                             </TableHead>
                             <TableBody>
+                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => (
-                                <StyledTableRow >
-                                  <StyledTableCell className="Table-cell" onClick={() => handleBranchClick(branch)}>
-                                    {branch}
 
-                                    {selectedBranch === branch &&
-                                      <TableContainer component={Paper}>
-                                        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                          <TableHead>
-                                            <TableRow>
-                                              <TableCell><b>Counsellor Name</b></TableCell>
-                                              <TableCell >Amount</TableCell>
+                                return (
+                                  <StyledTableRow >
+                                    <StyledTableCell className="Table-cell">
+                                      {branch} <ArrowDropDownIcon onClick={() => handleBranchClick(branch)} />
 
-                                            </TableRow>
-                                          </TableHead>
-                                          <TableBody>
-                                            {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                              (counsellor) => (
+                                      {selectedBranch === branch &&
+                                        <TableContainer component={Paper}>
+                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                            <TableHead>
+                                              <TableRow>
+                                                <TableCell><b>Counsellor Name</b></TableCell>
+                                                <TableCell >Count</TableCell>
 
-                                                <TableRow
-                                                  key={counsellor}
-                                                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                >
-                                                  <StyledTableCell className="Table-cell" onClick={() => handleCounsellorClick(counsellor)} >
-                                                    {counsellor}
+                                              </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                                (counsellor) => (
 
-                                                    <TableContainer component={Paper}>
-                                                      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                                        <TableHead>
-                                                          <TableRow>
-                                                            <TableCell><b>Student Name</b></TableCell>
-                                                            <TableCell><b>Amount</b></TableCell>
-
-                                                          </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                          {calculations_of_filtered_students_branchwise_counsellorwise[branch]
-                                                            .counsellorWiseTotal[counsellor].students.map((student, index) => (
-                                                              <TableRow key={index}>
-                                                                <TableCell>{student.name}</TableCell>
-                                                                <TableCell>{student.dueamount}</TableCell>
-
+                                                  <TableRow
+                                                    key={counsellor}
+                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                  >
+                                                    <StyledTableCell className="Table-cell"  >
+                                                      {counsellor} <ArrowDropDownIcon onClick={() => handleCounsellorClick(counsellor)} />
+                                                      {selectedCounsellor === counsellor &&
+                                                        <TableContainer component={Paper}>
+                                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                                            <TableHead>
+                                                              <TableRow>
+                                                                <TableCell><b>Name</b></TableCell>
+                                                                <TableCell><b>Course</b></TableCell>
+                                                                <TableCell><b>Admission Date</b></TableCell>
+                                                                <TableCell><b> Fee Yet To Receive</b></TableCell>
                                                               </TableRow>
-                                                            ))}
-                                                        </TableBody>
-                                                      </Table>
-                                                    </TableContainer>
+                                                            </TableHead>
+                                                            <TableBody>
+                                                              {calculations_of_filtered_students_branchwise_counsellorwise[branch]
+                                                                .counsellorWiseTotal[counsellor].students.map((student, index) => (
+                                                                  <TableRow key={index}>
+                                                                    <TableCell>{student.name}</TableCell>
+                                                                    <TableCell>{student.course}</TableCell>
+                                                                    <TableCell>{student.admissionDate}</TableCell>
+
+                                                                    <TableCell>{student.dueamount}</TableCell>
+                                                                  </TableRow>
+                                                                ))}
+                                                            </TableBody>
+                                                          </Table>
+                                                        </TableContainer>
+                                                      }
 
 
-                                                  </StyledTableCell>
-                                                  <StyledTableCell >
-                                                    {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount}
-                                                  </StyledTableCell>
+                                                    </StyledTableCell>
+                                                    <StyledTableCell >
+                                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount}
+                                                    </StyledTableCell>
 
 
-                                                </TableRow>
-                                              )
-                                            )}
+                                                  </TableRow>
+                                                )
+                                              )}
 
 
-                                          </TableBody>
-                                        </Table>
-                                      </TableContainer>}
-                                  </StyledTableCell>
-                                  <StyledTableCell className="Table-cell">
-                                    {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
-                                  </StyledTableCell>
-                                </StyledTableRow>
-                              ))}
+                                            </TableBody>
+                                          </Table>
+                                        </TableContainer>}
+                                    </StyledTableCell>
+                                    <StyledTableCell className="Table-cell">
+                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                    </StyledTableCell>
+                                  </StyledTableRow>
+                                )
+
+                              })}
+
 
                             </TableBody>
                           </Table>
@@ -1731,7 +1809,10 @@ const Dashboard = () => {
               <div className="col-12 col-md-3 col-xl-3 col-lg-3"></div>
               <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
                 <Card
-                  onClick={(e) =>
+
+
+
+                  onClick={(e) => {
                     setDisplayTable((prev) => ({
                       enrollments: false,
                       bookingamount: false,
@@ -1740,8 +1821,12 @@ const Dashboard = () => {
                       feerecevied: !prev.feerecevied,
                       feeyettorecevied: false,
                       branchusers: false,
-                    }))
-                  }
+                    }));
+
+                    setSelectedBranch(null);
+                    setSelectedCounsellor(null);
+                  }}
+
                   className="cardcolor"
                 >
                   <p className="text-center pt-3">
@@ -1757,7 +1842,9 @@ const Dashboard = () => {
               </div>
               <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
                 <Card
-                  onClick={(e) =>
+
+
+                  onClick={(e) => {
                     setDisplayTable((prev) => ({
                       enrollments: false,
                       bookingamount: false,
@@ -1766,8 +1853,11 @@ const Dashboard = () => {
                       feerecevied: false,
                       feeyettorecevied: !prev.feeyettorecevied,
                       branchusers: false,
-                    }))
-                  }
+                    }));
+
+                    setSelectedBranch(null);
+                    setSelectedCounsellor(null);
+                  }}
                   className="cardcolor"
                 >
                   <p className="text-center pt-3">
@@ -1811,83 +1901,93 @@ const Dashboard = () => {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-
-                              {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => (
-                                <StyledTableRow >
-                                  <StyledTableCell className="Table-cell" onClick={() => handleBranchClick(branch)}>
-                                    {branch}
-
-                                    {selectedBranch === branch &&
-                                      <TableContainer component={Paper}>
-                                        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                          <TableHead>
-                                            <TableRow>
-                                              <TableCell><b>Counsellor Name</b></TableCell>
-                                              <TableCell >Amount</TableCell>
-
-                                            </TableRow>
-                                          </TableHead>
-                                          <TableBody>
-                                            {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                              (counsellor) => (
-
-                                                <TableRow
-                                                  key={counsellor}
-                                                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                >
-                                                  <StyledTableCell className="Table-cell" onClick={() => handleCounsellorClick(counsellor)} >
-                                                    {counsellor}
-
-                                                    <TableContainer component={Paper}>
-                                                      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                                        <TableHead>
-                                                          <TableRow>
-                                                            <TableCell><b>Student Name</b></TableCell>
-                                                            <TableCell><b>Amount</b></TableCell>
-
-                                                          </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                          {calculations_of_all_students_branchwise_counsellorwise[branch]
-                                                            .counsellorWiseTotal[counsellor].students.map((student, index) => {
-                                                              if (student.receivedamount === 0) {
-                                                                return null
-                                                              } else {
-                                                                return (
-                                                                  <TableRow key={index}>
-                                                                    <TableCell>{student.name}</TableCell>
-                                                                    <TableCell>{student.receivedamount}</TableCell>
-
-                                                                  </TableRow>
-                                                                )
-                                                              }
-
-                                                            })}
-                                                        </TableBody>
-                                                      </Table>
-                                                    </TableContainer>
+                              {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
 
 
-                                                  </StyledTableCell>
-                                                  <StyledTableCell >
-                                                    {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount}
-                                                  </StyledTableCell>
+                                return (
+                                  <StyledTableRow >
+                                    <StyledTableCell className="Table-cell">
+                                      {branch} <ArrowDropDownIcon onClick={() => handleBranchClick(branch)} />
+
+                                      {selectedBranch === branch &&
+                                        <TableContainer component={Paper}>
+                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                            <TableHead>
+                                              <TableRow>
+                                                <TableCell><b>Counsellor Name</b></TableCell>
+                                                <TableCell >Count</TableCell>
+
+                                              </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                              {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                                (counsellor) => (
+
+                                                  <TableRow
+                                                    key={counsellor}
+                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                  >
+                                                    <StyledTableCell className="Table-cell"  >
+                                                      {counsellor} <ArrowDropDownIcon onClick={() => handleCounsellorClick(counsellor)} />
+                                                      {selectedCounsellor === counsellor &&
+                                                        <TableContainer component={Paper}>
+                                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                                            <TableHead>
+                                                              <TableRow>
+                                                                <TableCell><b>Name</b></TableCell>
+                                                                <TableCell><b>Course</b></TableCell>
+                                                                <TableCell><b>Admission Date</b></TableCell>
+                                                                <TableCell><b>  Received Amount</b></TableCell>
+                                                              </TableRow>
+                                                            </TableHead>
+                                                            <TableBody>
+
+                                                              {calculations_of_all_students_branchwise_counsellorwise[branch]
+                                                                .counsellorWiseTotal[counsellor].students.map((student, index) => {
+                                                                  if (student.receivedamount === 0) {
+                                                                    return null
+                                                                  } else {
+                                                                    return (
+                                                                      <TableRow key={index}>
+                                                                        <TableCell>{student.name}</TableCell>
+                                                                        <TableCell>{student.course}</TableCell>
+                                                                        <TableCell>{student.admissionDate}</TableCell>
+                                                                        <TableCell>{student.receivedamount}</TableCell>
+
+                                                                      </TableRow>
+                                                                    )
+                                                                  }
+
+                                                                })}
+                                                            </TableBody>
+                                                          </Table>
+                                                        </TableContainer>
+                                                      }
 
 
-                                                </TableRow>
-                                              )
-                                            )}
+                                                    </StyledTableCell>
+                                                    <StyledTableCell >
+                                                      {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount}
+                                                    </StyledTableCell>
 
 
-                                          </TableBody>
-                                        </Table>
-                                      </TableContainer>}
-                                  </StyledTableCell>
-                                  <StyledTableCell className="Table-cell">
-                                    {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
-                                  </StyledTableCell>
-                                </StyledTableRow>
-                              ))}
+                                                  </TableRow>
+                                                )
+                                              )}
+
+
+                                            </TableBody>
+                                          </Table>
+                                        </TableContainer>}
+                                    </StyledTableCell>
+                                    <StyledTableCell className="Table-cell">
+                                      {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                    </StyledTableCell>
+                                  </StyledTableRow>
+                                )
+
+                              })}
+
 
                             </TableBody>
                           </Table>
@@ -1916,88 +2016,98 @@ const Dashboard = () => {
                                   Branch
                                 </StyledTableCell>
                                 <StyledTableCell className="table-cell-heading">
-                                  Fee Yet To Amount
+                                  Fee Yet To Receive
                                 </StyledTableCell>
                               </TableRow>
                             </TableHead>
                             <TableBody>
-
-                              {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => (
-                                <StyledTableRow >
-                                  <StyledTableCell className="Table-cell" onClick={() => handleBranchClick(branch)}>
-                                    {branch}
-
-                                    {selectedBranch === branch &&
-                                      <TableContainer component={Paper}>
-                                        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                          <TableHead>
-                                            <TableRow>
-                                              <TableCell><b>Counsellor Name</b></TableCell>
-                                              <TableCell >Amount</TableCell>
-
-                                            </TableRow>
-                                          </TableHead>
-                                          <TableBody>
-                                            {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                              (counsellor) => (
-
-                                                <TableRow
-                                                  key={counsellor}
-                                                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                >
-                                                  <StyledTableCell className="Table-cell" onClick={() => handleCounsellorClick(counsellor)} >
-                                                    {counsellor}
-
-                                                    <TableContainer component={Paper}>
-                                                      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                                                        <TableHead>
-                                                          <TableRow>
-                                                            <TableCell><b>Student Name</b></TableCell>
-                                                            <TableCell><b>Amount</b></TableCell>
-
-                                                          </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                          {calculations_of_all_students_branchwise_counsellorwise[branch]
-                                                            .counsellorWiseTotal[counsellor].students.map((student, index) => {
-                                                              if (student.dueamount === 0) {
-                                                                return null
-                                                              } else if (student.dueamount) {
-                                                                return (
-                                                                  <TableRow key={index}>
-                                                                    <TableCell>{student.name}</TableCell>
-                                                                    <TableCell>{student.dueamount}</TableCell>
-
-                                                                  </TableRow>
-                                                                )
-                                                              }
-
-                                                            })}
-                                                        </TableBody>
-                                                      </Table>
-                                                    </TableContainer>
+                              {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
 
 
-                                                  </StyledTableCell>
-                                                  <StyledTableCell >
-                                                    {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount}
-                                                  </StyledTableCell>
+                                return (
+                                  <StyledTableRow >
+                                    <StyledTableCell className="Table-cell">
+                                      {branch} <ArrowDropDownIcon onClick={() => handleBranchClick(branch)} />
+
+                                      {selectedBranch === branch &&
+                                        <TableContainer component={Paper}>
+                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                            <TableHead>
+                                              <TableRow>
+                                                <TableCell><b>Counsellor Name</b></TableCell>
+                                                <TableCell >Fee Yet To Receive</TableCell>
+
+                                              </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                              {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                                (counsellor) => (
+
+                                                  <TableRow
+                                                    key={counsellor}
+                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                  >
+                                                    <StyledTableCell className="Table-cell"  >
+                                                      {counsellor} <ArrowDropDownIcon onClick={() => handleCounsellorClick(counsellor)} />
+                                                      {selectedCounsellor === counsellor &&
+                                                        <TableContainer component={Paper}>
+                                                          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                                            <TableHead>
+                                                              <TableRow>
+                                                                <TableCell><b>Name</b></TableCell>
+                                                                <TableCell><b>Course</b></TableCell>
+                                                                <TableCell><b>Admission Date</b></TableCell>
+                                                                <TableCell><b> Fee Yet To Receive</b></TableCell>
+                                                              </TableRow>
+                                                            </TableHead>
+                                                            <TableBody>
+
+                                                              {calculations_of_all_students_branchwise_counsellorwise[branch]
+                                                                .counsellorWiseTotal[counsellor].students.map((student, index) => {
+                                                                  if (student.dueamount === 0) {
+                                                                    return null
+                                                                  } else if (student.dueamount) {
+                                                                    return (
+                                                                      <TableRow key={index}>
+                                                                        <TableCell>{student.name}</TableCell>
+                                                                        <TableCell>{student.course}</TableCell>
+                                                                        <TableCell>{student.admissionDate}</TableCell>
+                                                                        <TableCell>{student.dueamount}</TableCell>
+
+                                                                      </TableRow>
+                                                                    )
+                                                                  }
+
+                                                                })}
+                                                            </TableBody>
+                                                          </Table>
+                                                        </TableContainer>
+                                                      }
 
 
-                                                </TableRow>
-                                              )
-                                            )}
+                                                    </StyledTableCell>
+                                                    <StyledTableCell >
+                                                      {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount}
+                                                    </StyledTableCell>
 
 
-                                          </TableBody>
-                                        </Table>
-                                      </TableContainer>}
-                                  </StyledTableCell>
-                                  <StyledTableCell className="Table-cell">
-                                    {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
-                                  </StyledTableCell>
-                                </StyledTableRow>
-                              ))}
+                                                  </TableRow>
+                                                )
+                                              )}
+
+
+                                            </TableBody>
+                                          </Table>
+                                        </TableContainer>}
+                                    </StyledTableCell>
+                                    <StyledTableCell className="Table-cell">
+                                      {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                    </StyledTableCell>
+                                  </StyledTableRow>
+                                )
+
+                              })}
+
 
                             </TableBody>
                           </Table>
