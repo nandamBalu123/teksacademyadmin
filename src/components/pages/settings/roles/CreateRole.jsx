@@ -31,13 +31,12 @@ const CreateRole = () => {
   const navigate = useNavigate();
   const [role, setRoleName] = useState("");
   const [description, setDescription] = useState("");
+  const [checked, setChecked] = React.useState();
 
-  const [BasicAccess, setBasicAccess] = useState({
-    Read: false,
-    Update: false,
-    Delete: false,
-    Create: false,
-  });
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
 
   const handleSubmit = async (e) => {
 
@@ -120,15 +119,6 @@ const CreateRole = () => {
                   value={role}
                   onChange={(e) => setRoleName(e.target.value)}
                 />
-                {/* <input
-                  className="form-control"
-                  placeholder="Role Name"
-                  type="text"
-                  value={role}
-                  onChange={(e) => setRoleName(e.target.value)}
-                  style={{ padding: "15px" }}
-                /> */}
-                {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
               </div>
               <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                 <TextField
@@ -140,44 +130,19 @@ const CreateRole = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 />
 
-                {/* <input
-                  className="form-control"
-                  placeholder="Role Description"
-                  type="text"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  style={{ padding: "15px" }}
-                /> */}
-                {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
               </div>
             </div>
-            <div className="mb-3 me-4 text-end ">
-              <button
-                type="submit"
-                class="btn btn-color"
-                onClick={handleSubmit}
-              >
-                Submit
-              </button>
-            </div>
+
 
           </Box>
-          {/* <label>Role Description :</label>
-          <input
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-            className="col-12 col-md-6 col-lg-6"
-          />
-         */}
         </form>
 
         <div >
-          <h4 className="ps-3"> Branch Manager</h4>
+
           <div className='access'>
 
 
-            <h5 className='my-4'> Modele & Object Permissions</h5>
+            <h5 className='my-1'> Modele & Object Permissions</h5>
 
             <TableContainer component={Paper}>
               <Table aria-label="simple table">
@@ -203,10 +168,34 @@ const CreateRole = () => {
                   </TableRow>
                   <TableRow>
                     <TableCell onClick={handleusermanagement} className="Table-cell "> User Management</TableCell>
-                    <TableCell ></TableCell>
-                    <TableCell ></TableCell>
-                    <TableCell ></TableCell>
-                    <TableCell ></TableCell>
+                    <TableCell >
+                      <Switch
+                        checked={checked}
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'controlled' }} color="info"
+                      />
+                    </TableCell>
+                    <TableCell >
+                      <Switch
+                        checked={checked}
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'controlled' }} color="info"
+                      />
+                    </TableCell>
+                    <TableCell >
+                      <Switch
+                        checked={checked}
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'controlled' }} color="info"
+                      />
+                    </TableCell>
+                    <TableCell >
+                      <Switch
+                        checked={checked}
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'controlled' }} color="info"
+                      />
+                    </TableCell>
                   </TableRow>
                   {usermanagement && (
                     <>
@@ -230,10 +219,34 @@ const CreateRole = () => {
                   )}
                   <TableRow>
                     <TableCell onClick={handlestudentmanagement} className="Table-cell "> Student Management</TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
+                    <TableCell>
+                      <Switch
+                        checked={checked}
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'controlled' }} color="info"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Switch
+                        checked={checked}
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'controlled' }} color="info"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Switch
+                        checked={checked}
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'controlled' }} color="info"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Switch
+                        checked={checked}
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'controlled' }} color="info"
+                      />
+                    </TableCell>
                   </TableRow>
                   {studentmanagement && (
                     <>
@@ -282,7 +295,15 @@ const CreateRole = () => {
 
         </div>
 
-
+        <div className="mb-3 me-4 text-end ">
+          <button
+            type="submit"
+            class="btn btn-color"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
       </div>
 
       {/* <div>

@@ -269,13 +269,27 @@ const FeeView = () => {
 
       // Now that state is updated, proceed with other actions
       let nextduedate;
+      let totalinstallmentspaid = 0
       for (let i = 0; i < updatedInstallments.length; i++) {
+
+        if (updatedInstallments[i].dueamount && updatedInstallments[i].paidamount) {
+          if (parseInt(updatedInstallments[i].dueamount) === parseInt(updatedInstallments[i].paidamount)) {
+            totalinstallmentspaid = totalinstallmentspaid + 1
+          }
+        }
         if (updatedInstallments[i].paidamount < 1) {
           nextduedate = updatedInstallments[i].duedate;
           break;
         }
       }
 
+      let updatedtotalinstallments = [
+        {
+          totalinstallments: parseInt(totalinstallments[0].totalinstallments),
+          totalinstallmentspaid: parseInt(totalinstallmentspaid),
+          totalinstallmentsleft: parseInt(totalinstallments[0].totalinstallments) - parseInt(totalinstallmentspaid),
+        },
+      ];
       // let totalpaidamount = 0;
       // totalpaidamount = totalpaidamount + parseInt(admissionFee.admissionfee);
       // for (let i = 0; i < updatedInstallments.length; i++) {
@@ -298,7 +312,7 @@ const FeeView = () => {
       }
       const updatedData = {
         installments: updatedInstallments,
-        totalinstallments,
+        totalinstallments: updatedtotalinstallments,
         dueamount,
         totalpaidamount,
         nextduedate,
@@ -311,7 +325,7 @@ const FeeView = () => {
 
       const updateContext = {
         installments: updatedInstallments,
-        totalinstallments,
+        totalinstallments: updatedtotalinstallments,
         dueamount,
         totalpaidamount,
         nextduedate,

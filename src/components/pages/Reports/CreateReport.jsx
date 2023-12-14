@@ -16,13 +16,13 @@ const CreateReport = () => {
     setMultidimensional(!multidimensional);
 
   };
-  const [customMonth, setCustomMonth] = useState(false);
+  const [customDates, setCustomDates] = useState(false);
 
   const handleDateFilterChange = (event) => {
     const selectedValue = event.target.value;
 
     // Update customMonth state based on the selected value
-    setCustomMonth(selectedValue === 'custommonth');
+    setCustomDates(selectedValue === 'customDates');
   };
   return (
     <div className="container mt-3">
@@ -72,14 +72,10 @@ const CreateReport = () => {
                     <span className="label-family"> Date Filter</span>
                   </InputLabel>
                   <Select name="datefilter">
-                    <MenuItem value="convertat"> Convert At</MenuItem>
-                    <MenuItem value="createat"> Create At</MenuItem>
-                    <MenuItem value="updateat"> Update At</MenuItem>
-                    <MenuItem value="taskdueon"> Task Due On</MenuItem>
-                    <MenuItem value="latestactivityon">
 
-                      Latest Activity On
-                    </MenuItem>
+                    <MenuItem value="createat">Create At</MenuItem>
+                    <MenuItem value="updateat">Update At</MenuItem>
+
                   </Select>
                 </FormControl>
               </div>
@@ -92,13 +88,13 @@ const CreateReport = () => {
                     onChange={handleDateFilterChange}>
                     <MenuItem value="lastmonth">Last Month</MenuItem>
                     <MenuItem value="currentmonth">Current Month</MenuItem>
-                    <MenuItem value="custommonth" >Custom Month</MenuItem>
+                    <MenuItem value="customDates" >Custom Dates</MenuItem>
 
                   </Select>
                 </FormControl>
               </div>
             </div>
-            {customMonth &&
+            {customDates &&
               <div className="row  px-2">
                 <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                   <TextField
