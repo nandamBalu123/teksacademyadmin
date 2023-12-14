@@ -4,3 +4,16 @@
   margin: auto;
   overflow: hidden;
 }
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.access {
+  border: 3px solid whitesmoke;
+  background-color: rgb(255, 253, 253);
+
+
+}

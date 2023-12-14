@@ -7,11 +7,7 @@ p {
   letter-spacing: 0.5px;
 } */
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+
 
 .container .backimg {
   background-image: url("https://4.bp.blogspot.com/-csAekMs5mjk/TjqRjjPYv4I/AAAAAAAAA9s/G4fBWXh_AdY/s1600/cool-wallpaper-12.jpg");
@@ -23,14 +19,16 @@ p {
   border-radius: 0.7rem;
   position: relative;
 }
+
 .userviewing {
   border: 2px solid #f5f5f5;
   border-radius: 8px;
   margin: auto;
   overflow: hidden;
-  padding-left:10px;
+  padding-left: 10px;
   padding-right: 10px;
 }
+
 /* .userviewing {
   width: 75%;
   margin: auto;
@@ -44,6 +42,7 @@ p {
   left: 39%;
   top: 38%;
 }
+
 /* .userviewing h5 {
   display: flex;
   justify-content: center;

@@ -228,21 +228,21 @@ const Sidebar = () => {
 
             <Box paddingLeft={isCollapsed ? undefined : "1%"}>
 
-            {profile == "admin" || profile =="regional manager" || profile == "branch manager" || profile == "counsellor" ? (
-              <Item
-                style={{
-                  color: colors.grey[100],
-                }}
-                icon={<SpaceDashboardIcon />}
-                label={"Dashboard"}
-                title="Dashboard"
-                to="/"
-                selected={selected}
-                setSelected={setSelected}
-              >
-                {" "}
-              </Item>
-            ) : undefined }
+              {profile == "admin" || profile == "regional manager" || profile == "branch manager" || profile == "counsellor" ? (
+                <Item
+                  style={{
+                    color: colors.grey[100],
+                  }}
+                  icon={<SpaceDashboardIcon />}
+                  label={"Dashboard"}
+                  title="Dashboard"
+                  to="/"
+                  selected={selected}
+                  setSelected={setSelected}
+                >
+                  {" "}
+                </Item>
+              ) : undefined}
               <hr />
               {/* <Item
                 title="Dashboard"
@@ -286,7 +286,7 @@ const Sidebar = () => {
                         <Item
                           title="Role Access"
                           to="/permissions"
-                          icon={<SwitchAccountIcon/>}
+                          icon={<SwitchAccountIcon />}
                           selected={selected}
                           setSelected={setSelected}
                         />
@@ -296,57 +296,57 @@ const Sidebar = () => {
                   <hr title="Separator Tooltip" />
                 </div>
               ) : undefined}
-              
-            {profile == "admin" || profile =="regional manager" || profile == "branch manager" || profile == "counsellor" ? (
-              <SubMenu
-                style={{
-                  color: colors.grey[100],
-                }}
-                icon={<Diversity3Icon />}
-                label={"Student Management"}
-                title={"Student Managem..."}
-              >
-                <Item
-                  title="Registration Form"
-                  to="/registrationform"
-                  icon={<FeedIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  className="dashboard-item"
-                  title="Enrolled Students"
-                  to="/studentdata"
-                  icon={<PeopleOutlineIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
 
-                <Item
-                  title="Fee Details"
-                  to="/feedetails"
-                  icon={<CurrencyRupeeIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-
-                <Item
-                  title="Certificate"
-                  to="/certificate"
-                  icon={<WorkspacePremiumIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                {profile == "admin" && (
+              {profile == "admin" || profile == "regional manager" || profile == "branch manager" || profile == "counsellor" ? (
+                <SubMenu
+                  style={{
+                    color: colors.grey[100],
+                  }}
+                  icon={<Diversity3Icon />}
+                  label={"Student Management"}
+                  title={"Student Managem..."}
+                >
                   <Item
-                    title="Requested Certificates"
-                    to="/requestedcertificates"
-                    icon={<ImportContactsIcon />}
+                    title="Registration Form"
+                    to="/registrationform"
+                    icon={<FeedIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
-                )}
-              </SubMenu>
+                  <Item
+                    className="dashboard-item"
+                    title="Enrolled Students"
+                    to="/studentdata"
+                    icon={<PeopleOutlineIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+
+                  <Item
+                    title="Fee Details"
+                    to="/feedetails"
+                    icon={<CurrencyRupeeIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+
+                  <Item
+                    title="Certificate"
+                    to="/certificate"
+                    icon={<WorkspacePremiumIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  {profile == "admin" && (
+                    <Item
+                      title="Requested Certificates"
+                      to="/requestedcertificates"
+                      icon={<ImportContactsIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  )}
+                </SubMenu>
               ) : undefined}
               <hr />
               {/* start */}
@@ -453,7 +453,7 @@ const Sidebar = () => {
                       selected={selected}
                       setSelected={setSelected}
                     />
-                     <Item
+                    <Item
                       title="Hlp Enquire Leads"
                       to="/hlpenquireleads"
                       icon={<AirplayIcon />}
@@ -467,7 +467,7 @@ const Sidebar = () => {
                       selected={selected}
                       setSelected={setSelected}
                     />
-                    
+
                   </SubMenu>
                 </SubMenu>
               ) : undefined}

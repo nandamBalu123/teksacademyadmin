@@ -6,11 +6,32 @@ import { Update } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+import Switch from '@mui/material/Switch';
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const CreateRole = () => {
+  const [usermanagement, setUsermanagement] = useState(false);
+  const handleusermanagement = () => {
+    setUsermanagement((e) => !e);
+  }
+
+  const [studentmanagement, setStudentmanagement] = useState(false);
+  const handlestudentmanagement = () => {
+    setStudentmanagement((e) => !e);
+  }
   const { dispatch } = useRoleContext();
   const navigate = useNavigate();
   const [role, setRoleName] = useState("");
   const [description, setDescription] = useState("");
+
   const [BasicAccess, setBasicAccess] = useState({
     Read: false,
     Update: false,
@@ -19,7 +40,9 @@ const CreateRole = () => {
   });
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+
     let user = {
       role,
       description,
@@ -70,19 +93,21 @@ const CreateRole = () => {
     // handleCheckboxChange();
     console.log(role, description);
     navigate("/roles");
+
   };
   return (
     <div className="container mt-3">
-      <form>
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <div className=" createrole mt-3">
+      <div className=" createrole mt-3">
+        <form>
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+
             <h5 className="text-center mt-3">CreateRole</h5>
             <div className="row text-center">
               <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
@@ -135,9 +160,9 @@ const CreateRole = () => {
                 Submit
               </button>
             </div>
-          </div>
-        </Box>
-        {/* <label>Role Description :</label>
+
+          </Box>
+          {/* <label>Role Description :</label>
           <input
             type="text"
             onChange={(e) => setDescription(e.target.value)}
@@ -145,7 +170,120 @@ const CreateRole = () => {
             className="col-12 col-md-6 col-lg-6"
           />
          */}
-      </form>
+        </form>
+
+        <div >
+          <h4 className="ps-3"> Branch Manager</h4>
+          <div className='access'>
+
+
+            <h5 className='my-4'> Modele & Object Permissions</h5>
+
+            <TableContainer component={Paper}>
+              <Table aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+
+                    <TableCell className="table-cell-heading w-25" align="center" > Name</TableCell>
+                    <TableCell colSpan={4} className="table-cell-heading" align="center">Access</TableCell>
+
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+
+                  <TableRow>
+
+
+                    <TableCell className="Table-cell text-center" ></TableCell>
+                    <TableCell className="Table-cell text-center"> Read</TableCell>
+                    <TableCell className="Table-cell text-center">Update</TableCell>
+                    <TableCell className="Table-cell text-center"> Delete</TableCell>
+                    <TableCell className="Table-cell text-center"> Create</TableCell>
+
+                  </TableRow>
+                  <TableRow>
+                    <TableCell onClick={handleusermanagement} className="Table-cell "> User Management</TableCell>
+                    <TableCell ></TableCell>
+                    <TableCell ></TableCell>
+                    <TableCell ></TableCell>
+                    <TableCell ></TableCell>
+                  </TableRow>
+                  {usermanagement && (
+                    <>
+                      <TableRow colSpan={4}>
+                        <TableCell className="Table-cell text-center"> Create User</TableCell>
+                        <TableCell className="Table-cell text-center">NA </TableCell>
+                        <TableCell className="Table-cell text-center">NA </TableCell>
+                        <TableCell className="Table-cell text-center"> NA </TableCell>
+                        <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
+                      </TableRow>
+                      <TableRow colSpan={4}>
+                        <TableCell className="Table-cell text-center"> User Details</TableCell>
+                        <TableCell className="Table-cell text-center" ><Switch {...label} color="info" /> </TableCell>
+                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
+                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /> </TableCell>
+                        <TableCell className="Table-cell text-center"> NA </TableCell>
+                      </TableRow>
+
+
+                    </>
+                  )}
+                  <TableRow>
+                    <TableCell onClick={handlestudentmanagement} className="Table-cell "> Student Management</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                  {studentmanagement && (
+                    <>
+                      <TableRow colSpan={4}>
+                        <TableCell className="Table-cell text-center">Student Details</TableCell>
+                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
+                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
+                        <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
+                        <TableCell className="Table-cell text-center"> NA </TableCell>
+
+                      </TableRow>
+                      <TableRow colSpan={4}>
+                        <TableCell className="Table-cell text-center"> Registration</TableCell>
+                        <TableCell className="Table-cell text-center"> NA </TableCell>
+                        <TableCell className="Table-cell text-center">NA</TableCell>
+                        <TableCell className="Table-cell text-center"> NA </TableCell>
+                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /> </TableCell>
+
+                      </TableRow>
+                      <TableRow colSpan={4}>
+                        <TableCell className="Table-cell text-center">Fee Details</TableCell>
+                        <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
+                        <TableCell className="Table-cell text-center" >NA</TableCell>
+                        <TableCell className="Table-cell text-center">NA</TableCell>
+                        <TableCell className="Table-cell text-center"> NA </TableCell>
+                      </TableRow>
+                      <TableRow colSpan={4}>
+                        <TableCell className="Table-cell text-center">Certificate</TableCell>
+                        <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
+                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
+                        <TableCell className="Table-cell text-center"> NA </TableCell>
+                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /> </TableCell>
+
+                      </TableRow>
+
+
+                    </>
+                  )}
+
+                </TableBody>
+              </Table>
+            </TableContainer>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
 
       {/* <div>
           <h2>Module & Object Permissions</h2>
@@ -275,6 +413,14 @@ const CreateRole = () => {
             </tbody>
           </table>
         </div> */}
+
+
+
+
+
+
+
+
     </div>
   );
 };
