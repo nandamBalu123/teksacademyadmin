@@ -10,6 +10,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Link } from "react-router-dom";
 import Report from "./Report";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from "axios";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -78,17 +81,15 @@ const Reports = () => {
           {/* <button onClick={handleCreateReport} className="me-3 btn btn-color">
             Create Report
           </button> */}
-          <button className="btn btn-color text-light me-3"> 
-          <Link to="/report/create" style={{color : "white"}} >
-            Create Report
-          </Link>
+          <button className="btn btn-color text-light me-3">
+            <Link to="/report/create" style={{ color: "white" }} >
+              Create Report
+            </Link>
           </button>
         </div>
 
-        {/* <input
-          value={newReportName}
-          onChange={(e) => setNewReportName(e.target.value)}
-        /> */}
+
+
         <TableContainer component={Paper} className="mt-4">
           <Table aria-label="customized table">
             <TableHead>
@@ -98,6 +99,16 @@ const Reports = () => {
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
                   Report Name
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+
+                  Created By
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+                  Created At
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+                  Actions
                 </TableCell>
 
                 {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
@@ -114,6 +125,19 @@ const Reports = () => {
                       <Link to={`/report/${index}`} style={{ width: "40px" }}>
                         {report.reportName}
                       </Link>
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
+                      <span style={{ fontSize: "15px" }}>Bhavitha</span>
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
+                      <span style={{ fontSize: "15px" }}>14-12-2023</span>
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
+                      <VisibilityIcon className="icon-color" />
+                      <EditIcon className="icon-color" />
+                      <DeleteIcon className="text-danger" />
+
+
                     </TableCell>
                   </TableRow>
                 );

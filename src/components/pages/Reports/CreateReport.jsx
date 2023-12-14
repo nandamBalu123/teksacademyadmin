@@ -9,10 +9,20 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 const CreateReport = () => {
+
   const [multidimensional, setMultidimensional] = useState(false);
   const handleParagraphClick = () => {
     // Toggle the state when you select multidimention
     setMultidimensional(!multidimensional);
+
+  };
+  const [customMonth, setCustomMonth] = useState(false);
+
+  const handleDateFilterChange = (event) => {
+    const selectedValue = event.target.value;
+
+    // Update customMonth state based on the selected value
+    setCustomMonth(selectedValue === 'custommonth');
   };
   return (
     <div className="container mt-3">
@@ -36,7 +46,7 @@ const CreateReport = () => {
               <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <FormControl variant="standard" className="w-100">
                   <InputLabel>
-                    <span className="label-family">Report Type</span>
+                    <span className="label-family">Report Type<span>*</span></span>
                   </InputLabel>
                   <Select name="datefilter">
                     <MenuItem value="onedimensional"
@@ -49,10 +59,7 @@ const CreateReport = () => {
 
                       Multi Dimensional
                     </MenuItem>
-                    <MenuItem value="goalvsachievement">
 
-                      Goal VS Achievement
-                    </MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -81,42 +88,45 @@ const CreateReport = () => {
                   <InputLabel>
                     <span className="label-family"> Date Range</span>
                   </InputLabel>
-                  <Select name="datefilter">
-                    <MenuItem value="today">Today</MenuItem>
-                    <MenuItem value="last7days">Last 7 Days</MenuItem>
-                    <MenuItem value="next7days"> Next 7 Days</MenuItem>
-                    <MenuItem value="last15days">Last 15 Days</MenuItem>
-                    <MenuItem value="next15days"> Next 15 Days</MenuItem>
+                  <Select name="datefilter"
+                    onChange={handleDateFilterChange}>
+                    <MenuItem value="lastmonth">Last Month</MenuItem>
+                    <MenuItem value="currentmonth">Current Month</MenuItem>
+                    <MenuItem value="custommonth" >Custom Month</MenuItem>
+
                   </Select>
                 </FormControl>
               </div>
             </div>
-            <div className="row  px-2">
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                <TextField
-                  label={<span className="label-family">From:</span>}
-                  type="date"
-                  variant="standard"
-                  className="mar  w-100"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="fromdate"
-                />
+            {customMonth &&
+              <div className="row  px-2">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <TextField
+                    label={<span className="label-family">From:</span>}
+                    type="date"
+                    variant="standard"
+                    className="mar  w-100"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="fromdate"
+                  />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                  <TextField
+                    label={<span className="label-family">To:</span>}
+                    type="date"
+                    variant="standard"
+                    className="w-100 mar"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="todate"
+                  />
+                </div>
               </div>
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                <TextField
-                  label={<span className="label-family">To:</span>}
-                  type="date"
-                  variant="standard"
-                  className="w-100 mar"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="todate"
-                />
-              </div>
-            </div>
+            }
+
 
             <div className="row px-2 ">
               <span className="label-family fw-light my-2">

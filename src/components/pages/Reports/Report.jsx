@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Menu from "@mui/material/Menu";
+
 import MenuItem from "@mui/material/MenuItem";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,11 +17,25 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
+import { Dropdown } from '@mui/base/Dropdown';
+import { Menu } from '@mui/base/Menu';
+import { MenuButton } from '@mui/base/MenuButton';
+import ShareIcon from '@mui/icons-material/Share';
+import { styled } from '@mui/system';
 import axios from "axios";
+import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { AddBusinessTwoTone } from "@mui/icons-material";
 const Report = () => {
+  const [customMonth, setCustomMonth] = useState(false);
+
+  const handleDateFilterChange = (event) => {
+    const selectedValue = event.target.value;
+
+    // Update customMonth state based on the selected value
+    setCustomMonth(selectedValue === 'custommonth');
+  };
   const { id } = useParams();
   const [metrics, setMetrics] = useState(
     [{
@@ -90,54 +104,63 @@ const Report = () => {
               <InputLabel>
                 <span className="label-family"> Date Range</span>
               </InputLabel>
-              <Select name="datefilter">
-                <MenuItem value="today">Today</MenuItem>
-                <MenuItem value="last7days">Last 7 Days</MenuItem>
-                <MenuItem value="next7days"> Next 7 Days</MenuItem>
-                <MenuItem value="last15days">Last 15 Days</MenuItem>
-                <MenuItem value="next15days"> Next 15 Days</MenuItem>
+              <Select name="datefilter"
+                onChange={handleDateFilterChange}>
+                <MenuItem value="lastmonth">Last Month</MenuItem>
+                <MenuItem value="currentmonth">Current Month</MenuItem>
+                <MenuItem value="custommonth" >Custom Month</MenuItem>
+
               </Select>
             </FormControl>
           </div>
-          <div className="col-6 col-md-4 col-lg-2 col-xl-2">
-            <TextField
-              label=" From:"
-              type="date"
-              variant="standard"
-              className="  w-100"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              name="fromdate"
-            />
-          </div>
-          <div className="col-6 col-md-4 col-lg-2 col-xl-2">
-            <TextField
-              label=" To:"
-              type="date"
-              variant="standard"
-              className="w-100"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              name="todate"
-            />
-          </div>
+
+          {customMonth &&
+            <div>
+              <div className="col-6 col-md-4 col-lg-2 col-xl-2">
+                <TextField
+                  label=" From:"
+                  type="date"
+                  variant="standard"
+                  className="  w-100"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="fromdate"
+                />
+              </div>
+              <div className="col-6 col-md-4 col-lg-2 col-xl-2">
+                <TextField
+                  label=" To:"
+                  type="date"
+                  variant="standard"
+                  className="w-100"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="todate"
+                />
+              </div>
+            </div>
+
+          }
+
           <div className="col-6 col-md-3 col-lg-1 col-xl-2 mt-2">
-            <button className="btn btn-outline-color"> Apply </button>
+            <button className="btn btn-outline-color"> Apply</button>
           </div>
           <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
           <div className="col-6 col-md-4 col-lg-2 col-xl-2 d-flex">
-            <button type="button" className="btn-css btn-outline-color mt-2">
-              Action
-            </button>
-            <button
-              type="button"
-              className=" toggle-css btn-outline-color dropdown-toggle dropdown-toggle-split mt-2"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            ></button>
+            <Dropdown>
+              <MenuButton className=" btn btn-outline-color mt-2" >Action  &nbsp;&nbsp; <KeyboardArrowDownIcon /></MenuButton>
+              <Menu className="dropdown-css">
+                <MenuItem ><ShareIcon /> &nbsp;&nbsp;Share</MenuItem>
+                <MenuItem >
+                  <DownloadIcon />&nbsp; &nbsp;  Download
+                </MenuItem>
+
+              </Menu>
+            </Dropdown>
+
+
 
 
           </div>
