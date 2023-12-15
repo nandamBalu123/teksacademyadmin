@@ -151,7 +151,7 @@ const CreateRole = () => {
                 {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
               </div>
             </div>
-            <div className="mb-3 me-4 text-end ">
+            {/* <div className="mb-3 me-4 text-end ">
               <button
                 type="submit"
                 class="btn btn-color"
@@ -159,7 +159,7 @@ const CreateRole = () => {
               >
                 Submit
               </button>
-            </div>
+            </div> */}
 
           </Box>
           {/* <label>Role Description :</label>
@@ -173,11 +173,11 @@ const CreateRole = () => {
         </form>
 
         <div >
-          <h4 className="ps-3"> Branch Manager</h4>
-          <div className='access'>
 
+          <div className='access my-2'>
 
-            <h5 className='my-4'> Modele & Object Permissions</h5>
+            <h5 > Branch Manager</h5>
+            <h6 className='my-4'> Modele & Object Permissions</h6>
 
             <TableContainer component={Paper}>
               <Table aria-label="simple table">
@@ -279,6 +279,7 @@ const CreateRole = () => {
 
 
           </div>
+          <div className="d-flex justify-content-end m-3"> <button className="btn btn-color " onClick={handleSubmit}>Submit</button></div>
 
         </div>
 
