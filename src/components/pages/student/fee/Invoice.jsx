@@ -121,33 +121,33 @@ const PrintableComponent = React.forwardRef((props, ref) => {
     if (name === "Admission Fee" && studentdata.initialpayment) {
       setinvoice(
         "TA" +
-          firstbranch +
-          paiddate[8] +
-          paiddate[9] +
-          paiddate[5] +
-          paiddate[6] +
-          paiddate[2] +
-          paiddate[3] +
-          regnumber +
-          "-" +
-          regnumber +
-          `/${parseInt(index) + 1}`
+        firstbranch +
+        paiddate[8] +
+        paiddate[9] +
+        paiddate[5] +
+        paiddate[6] +
+        paiddate[2] +
+        paiddate[3] +
+        regnumber +
+        "-" +
+        regnumber +
+        `/${parseInt(index) + 1}`
       );
     }
     if (name === "Installment" && studentdata.installments) {
       setinvoice(
         "TA" +
-          firstbranch +
-          paiddate[8] +
-          paiddate[9] +
-          paiddate[5] +
-          paiddate[6] +
-          paiddate[2] +
-          paiddate[3] +
-          regnumber +
-          "-" +
-          regnumber +
-          `/${parseInt(index) + 2}`
+        firstbranch +
+        paiddate[8] +
+        paiddate[9] +
+        paiddate[5] +
+        paiddate[6] +
+        paiddate[2] +
+        paiddate[3] +
+        regnumber +
+        "-" +
+        regnumber +
+        `/${parseInt(index) + 2}`
       );
     }
   }, [studentdata]);
@@ -181,7 +181,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
     }
   }, [students, id, dispatch]);
   return (
-    <div className="container invoice" ref={ref}>
+    <div className="container invoice" ref={ref} style={{ margin: "0px" }}>
       <img
         className="logo-picture center mt-4"
         src={teksacademylogo}
@@ -196,13 +196,13 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
       <hr />
       <div className="row mt-5">
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+        <div className="col-6 ">
           <h4 className="mt-5">
             {" "}
             <strong> Kapil Knowledge Hub Private Limited</strong>
           </h4>
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+        <div className="col-6 ">
           <h3 className="mt-5">
             <strong>
               {" "}
@@ -212,15 +212,15 @@ const PrintableComponent = React.forwardRef((props, ref) => {
         </div>
       </div>
       <div className="row m-0 p-0">
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+        <div className="col-6 ">
           <p>CIN: U80100TG2018PTC123853</p>
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+        <div className="col-6 ">
           <p>
             {name === "Admission Fee" &&
-            studentdata &&
-            studentdata.initialpayment &&
-            studentdata.initialpayment.length > 0 ? (
+              studentdata &&
+              studentdata.initialpayment &&
+              studentdata.initialpayment.length > 0 ? (
               studentdata.initialpayment.map((student) => {
                 let paidDate = new Date(student.paiddate);
                 const day = paidDate.getUTCDate();
@@ -243,9 +243,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                 ];
 
                 // Formatting the date
-                paidDate = `${day < 10 ? "0" : ""}${day}-${
-                  monthAbbreviations[monthIndex]
-                }-${year}`;
+                paidDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                  }-${year}`;
                 return (
                   <span key={student.id}>
                     <b>DATE:</b> {paidDate}
@@ -256,9 +255,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <p>No initial payment data available</p>
             ) : null}
             {studentdata &&
-            name === "Installment" &&
-            studentdata.installments &&
-            studentdata.installments.length > 0 ? (
+              name === "Installment" &&
+              studentdata.installments &&
+              studentdata.installments.length > 0 ? (
               studentdata.installments.map((student, indx) => {
                 const originalDate = new Date(student.paiddate);
                 const day = String(originalDate.getDate()).padStart(2, "0");
@@ -396,9 +395,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           </thead>
           <tbody>
             {name === "Admission Fee" &&
-            studentdata &&
-            studentdata.initialpayment &&
-            studentdata.initialpayment.length > 0 ? (
+              studentdata &&
+              studentdata.initialpayment &&
+              studentdata.initialpayment.length > 0 ? (
               studentdata.initialpayment.map((student) => (
                 <tr>
                   <td className=" text-center border border 1">
@@ -432,9 +431,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <p>No initial payment data available</p>
             ) : null}
             {studentdata &&
-            name === "Installment" &&
-            studentdata.installments &&
-            studentdata.installments.length > 0 ? (
+              name === "Installment" &&
+              studentdata.installments &&
+              studentdata.installments.length > 0 ? (
               studentdata.installments.map((student, indx) => {
                 if (indx === parseInt(index)) {
                   return (
@@ -531,10 +530,10 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <p>No payment date available</p>
             ) : null}
             {studentdata &&
-            nametype === "admininvoice" &&
-            name === "Installment" &&
-            studentdata.installments &&
-            studentdata.installments.length > 0 ? (
+              nametype === "admininvoice" &&
+              name === "Installment" &&
+              studentdata.installments &&
+              studentdata.installments.length > 0 ? (
               studentdata.installments.map((student, indx) => {
                 if (indx === parseInt(index)) {
                   return (
@@ -562,9 +561,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             ) : null}
 
             {name === "Admission Fee" &&
-            studentdata &&
-            studentdata.initialpayment &&
-            studentdata.initialpayment.length > 0 ? (
+              studentdata &&
+              studentdata.initialpayment &&
+              studentdata.initialpayment.length > 0 ? (
               studentdata.initialpayment.map((student) => (
                 <tr>
                   <td className="border border 1 text-center">
@@ -590,9 +589,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <p>No initial payment data available</p>
             ) : null}
             {studentdata &&
-            name === "Installment" &&
-            studentdata.installments &&
-            studentdata.installments.length > 0 ? (
+              name === "Installment" &&
+              studentdata.installments &&
+              studentdata.installments.length > 0 ? (
               studentdata.installments.map((student, indx) => {
                 if (indx === parseInt(index)) {
                   return (
@@ -941,7 +940,7 @@ function Invoice() {
       });
   }, []);
   return (
-    <div>
+    <div style={{}}>
       <div className="mt-3 text-end me-3 ">
         <button onClick={handlePrint} className="btn btn-primary mb-3  end">
           {" "}

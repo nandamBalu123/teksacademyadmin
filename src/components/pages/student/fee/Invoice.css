@@ -13,9 +13,4 @@
   border: 5px solid black;
 }
 
-@page {
-  size: A4;
-  margin: 5px;
-  padding: 10px;
-
-}
+@page {}

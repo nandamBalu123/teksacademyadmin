@@ -221,43 +221,56 @@ const FeeView = () => {
       }
       // nextduedate.push(installments[i].duedate);
     }
-
-    const updatedData = {
-      installments,
-      // totalinstallments,
-      // dueamount,
-      // totalpaidamount,
-      nextduedate,
-    };
-
-    const updateContext = {
-      installments,
-      // totalinstallments,
-      // dueamount,
-      // totalpaidamount,
-      nextduedate,
-      id: studentdata.id,
-    };
-    console.log("updatedData", updatedData, updateContext);
-    axios
-      .put(
-        `${process.env.REACT_APP_API_URL}/updateduedateanddueamount/${id}`,
-        updatedData
-      )
-
-      .then((res) => {
-        if (res.data.updated) {
-          alert("Date and Amount Added");
-          dispatch({
-            type: "UPDATE_DUE_DATE_DUE_AMOUNT",
-            payload: updateContext,
-          });
-          // navigator(`/feeview/${id}`);
-          // window.location.reload();
-        } else {
-          alert("Try Again");
+    let validateUpdatedDueDateAndDueAmount = true
+    for (let i = 0; i < installments.length; i++) {
+      if (installments[i].duedate) {
+        if (!installments[i].dueamount) {
+          validateUpdatedDueDateAndDueAmount = false
         }
-      });
+      }
+    }
+    if (validateUpdatedDueDateAndDueAmount) {
+      const updatedData = {
+        installments,
+        // totalinstallments,
+        // dueamount,
+        // totalpaidamount,
+        nextduedate,
+      };
+
+      const updateContext = {
+        installments,
+        // totalinstallments,
+        // dueamount,
+        // totalpaidamount,
+        nextduedate,
+        id: studentdata.id,
+      };
+      console.log("updatedData", updatedData, updateContext);
+      axios
+        .put(
+          `${process.env.REACT_APP_API_URL}/updateduedateanddueamount/${id}`,
+          updatedData
+        )
+
+        .then((res) => {
+          if (res.data.updated) {
+            alert("Date and Amount Added");
+            dispatch({
+              type: "UPDATE_DUE_DATE_DUE_AMOUNT",
+              payload: updateContext,
+            });
+            // navigator(`/feeview/${id}`);
+            // window.location.reload();
+          } else {
+            alert("Try Again");
+          }
+        });
+    } else {
+      alert("Add Due Date and Due Amount")
+    }
+
+
   };
   const handleUpdateClick = async (index) => {
     if (
@@ -305,11 +318,24 @@ const FeeView = () => {
         totalpaidamount = totalpaidamount + updatedInstallments[i].paidamount;
         // console.log("updatedInstallments", updatedInstallments[i].paidamount);
       }
+
+      //start
       let dueamount = parseInt(studentdata.finaltotal);
       dueamount = dueamount - studentdata.initialpayment[0].initialamount;
       for (let i = 0; i < updatedInstallments.length; i++) {
         dueamount = dueamount - updatedInstallments[i].paidamount;
       }
+      let totalExtraDiscount = 0
+      if (studentdata.extra_discount) {
+
+        for (let i = 0; i < studentdata.extra_discount.length; i++) {
+          totalExtraDiscount = totalExtraDiscount + parseInt(studentdata.extra_discount[i].Discount)
+        }
+      }
+      dueamount = dueamount - totalExtraDiscount
+
+
+      //end
       const updatedData = {
         installments: updatedInstallments,
         totalinstallments: updatedtotalinstallments,
@@ -416,70 +442,80 @@ const FeeView = () => {
   /// extra discount
 
   const handleApplyDiscount = () => {
-    if (extraDiscount <= parseInt(studentdata.dueamount)) {
-      setOpen(false);
-
-      let dueamount;
-      if (extraDiscount) {
-        dueamount = parseInt(studentdata.dueamount) - parseInt(extraDiscount);
+    let validateUpdatedDueDateAndDueAmount = true
+    for (let i = 0; i < installments.length; i++) {
+      if (installments[i].duedate) {
+        if (!installments[i].dueamount) {
+          validateUpdatedDueDateAndDueAmount = false
+        }
       }
-      // let updatedInstallmentAmount =
-      //   dueamount / totalinstallments[0].totalinstallmentsleft;
-      // for (let i = 0; i < installments.length; i++) {
-      //   const updatedInstallments = [...installments];
-      //   if (updatedInstallments[i].paymentdone === false) {
-      //     updatedInstallments[i].dueamount = parseInt(updatedInstallmentAmount);
-      //   }
+    } if (validateUpdatedDueDateAndDueAmount) {
+      if (extraDiscount <= parseInt(studentdata.dueamount)) {
+        setOpen(false);
 
-      //   setInstallments(updatedInstallments);
-      // }
-      if (extraDiscount) {
-        let Extra_Discount_remarks_history = studentdata.extra_discount;
-        let newObject = {
-          Discount: parseInt(extraDiscount),
-          Discount_remarks: text,
-          date: new Date(),
-        };
-        Extra_Discount_remarks_history.push(newObject);
-        const updatedData = {
-          installments,
-          dueamount,
-          Extra_Discount_remarks_history,
-        };
-        const updateContext = {
-          installments,
-          dueamount,
-          Extra_Discount_remarks_history,
-          id: studentdata.id,
-        };
+        let dueamount;
+        if (extraDiscount) {
+          dueamount = parseInt(studentdata.dueamount) - parseInt(extraDiscount);
+        }
+        // let updatedInstallmentAmount =
+        //   dueamount / totalinstallments[0].totalinstallmentsleft;
+        // for (let i = 0; i < installments.length; i++) {
+        //   const updatedInstallments = [...installments];
+        //   if (updatedInstallments[i].paymentdone === false) {
+        //     updatedInstallments[i].dueamount = parseInt(updatedInstallmentAmount);
+        //   }
 
-        // let uploadcontext = { user_status, user_remarks_history, id };
+        //   setInstallments(updatedInstallments);
+        // }
+        if (extraDiscount) {
+          let Extra_Discount_remarks_history = studentdata.extra_discount;
+          let newObject = {
+            Discount: parseInt(extraDiscount),
+            Discount_remarks: text,
+            date: new Date(),
+          };
+          Extra_Discount_remarks_history.push(newObject);
+          const updatedData = {
+            installments,
+            dueamount,
+            Extra_Discount_remarks_history,
+          };
+          const updateContext = {
+            installments,
+            dueamount,
+            Extra_Discount_remarks_history,
+            id: studentdata.id,
+          };
 
-        axios
-          .put(
-            `${process.env.REACT_APP_API_URL}/extra_discount/${id}`,
-            updatedData
-          )
-          .then((res) => {
-            if (res.data.updated) {
-              alert("Discount Applied");
-              dispatch({
-                type: "UPDATE_EXTRA_DISCOUNT",
-                payload: updateContext,
-              });
-              // window.location.reload();
-            } else {
-              alert("Error please Try Again");
-            }
-          });
-        // setcourseStartDate("");
-        setText("");
+          // let uploadcontext = { user_status, user_remarks_history, id };
+
+          axios
+            .put(
+              `${process.env.REACT_APP_API_URL}/extra_discount/${id}`,
+              updatedData
+            )
+            .then((res) => {
+              if (res.data.updated) {
+                alert("Discount Applied");
+                dispatch({
+                  type: "UPDATE_EXTRA_DISCOUNT",
+                  payload: updateContext,
+                });
+                // window.location.reload();
+              } else {
+                alert("Error please Try Again");
+              }
+            });
+          // setcourseStartDate("");
+          setText("");
+        } else {
+          alert("enter Discount and remarks");
+        }
       } else {
-        alert("enter Discount and remarks");
+        alert("Discount cannot be greater than Due amount");
       }
-    } else {
-      alert("Discount cannot be greater than Due amount");
-    }
+    } else { alert("Add Due Date and Due Amount") }
+
   };
   let extra_discount_view = 0;
   if (studentdata.extra_discount) {
