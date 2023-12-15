@@ -7,7 +7,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-
+import axios from "axios";
 const CreateReport = () => {
 
 
@@ -106,11 +106,32 @@ const CreateReport = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     let reports = []
     reports.push(reportForm)
     console.log('Form submitted:', reports);
+    try {
+      const res = await axios.put(
+        `${process.env.REACT_APP_API_URL}/createreport`,
+        reports
+      );
+
+      if (res.data.updated) {
+        alert("Fee Added");
+        // dispatch({
+        //   type: "UPDATE_INSTALLMENTS",
+        //   payload: updateContext,
+        // });
+        // navigator(`/feeview/${id}`);
+        // window.location.reload();
+      } else {
+        alert("Try Again");
+      }
+    } catch (error) {
+      console.error("Error updating data:", error);
+      // Handle errors here
+    }
   };
   return (
     <div className="container mt-3">
