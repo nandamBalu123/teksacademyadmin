@@ -416,7 +416,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </Table>
             </TableContainer>
           </div>
-          <div style={{ borderTop: "1.5px solid black", borderBottom: "1.5px solid black", padding: "8px" }}><b>Amount (In Words):</b>  dndjjfngjfngjj</div>
+          {/* dont remove this line It's imp */}
+          {/* <div style={{ borderTop: "1.5px solid black", borderBottom: "1.5px solid black", padding: "8px" }}><b> Due Amount:</b> 0000</div> */}
           <div>
             <TableContainer component={Paper} className="mt-4">
               <Table aria-label="customized table">
@@ -480,7 +481,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </TableContainer>
 
           </div>
-          <div style={{ borderTop: "1.5px solid black", borderBottom: "1.5px solid black", padding: "8px" }}><b>Amount (In Words):</b>  dndjjfngjfngjj</div>
+          {/* Dont remove this line It's imp */}
+          {/* <div style={{ borderTop: "1.5px solid black", borderBottom: "1.5px solid black", padding: "8px" }}><b> Tax Amount (In Words):</b>  dndjjfngjfngjj</div> */}
 
 
 
