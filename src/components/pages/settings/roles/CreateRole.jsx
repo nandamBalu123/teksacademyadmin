@@ -132,17 +132,25 @@ const CreateRole = () => {
 
               </div>
             </div>
-
+            {/* <div className="mb-3 me-4 text-end ">
+              <button
+                type="submit"
+                class="btn btn-color"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            </div> */}
 
           </Box>
         </form>
 
         <div >
 
-          <div className='access'>
+          <div className='access my-2'>
 
-
-            <h5 className='my-1'> Modele & Object Permissions</h5>
+            <h5 > Branch Manager</h5>
+            <h6 className='my-4'> Modele & Object Permissions</h6>
 
             <TableContainer component={Paper}>
               <Table aria-label="simple table">
@@ -292,6 +300,7 @@ const CreateRole = () => {
 
 
           </div>
+          <div className="d-flex justify-content-end m-3"> <button className="btn btn-color " onClick={handleSubmit}>Submit</button></div>
 
         </div>
 

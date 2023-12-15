@@ -19,6 +19,7 @@
   margin: auto;
   background-color: white;
 }
+
 .dashboard-enrollments,
 .dashboard-fee {
   width: 99%;
@@ -27,29 +28,36 @@
   margin: auto;
   overflow: hidden;
 }
+
 .enrollment {
   width: 92%;
 }
+
 .Dashboard {
   overflow-x: hidden;
   margin: auto;
 }
+
 .progreebar-show {
   width: 93%;
   margin: auto;
 }
+
 .main-dashboard {
   overflow: hidden;
 }
+
 .css-17w9904-MuiTypography-root {
   font-size: 1rem !important;
 }
+
 .underline {
   text-transform: capitalize;
 
   position: relative;
   padding-bottom: 12px;
 }
+
 .underline::before {
   content: "";
   position: absolute;
@@ -60,9 +68,24 @@
   bottom: 2px;
   left: calc(50% - 80px);
 }
+
 .studentdata-animation {
   transition: 0.5s ease-out;
 }
+
+
+.css-11xur9t-MuiPaper-root-MuiTableContainer-root,
+.css-1uzl8r8-MuiPaper-root-MuiTableContainer-root {
+  box-shadow: none !important;
+}
+
+.table-text {
+  font-size: 0.8rem;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.3rem;
+  font-weight: 200;
+}
+
 /* @media (min-width: 576px) { 
  .dashboardcard{ 
     margin-bottom: 20px;

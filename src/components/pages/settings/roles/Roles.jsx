@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import "./Roles.css";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
 const Roles = () => {
@@ -65,6 +68,15 @@ const Roles = () => {
                 <TableCell className="table-cell-heading" align="center">
                   Description
                 </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+                  Create By
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+                  Create At
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+                  Actions
+                </TableCell>
                 {/* <TableCell className='  bg-primary fs-6 Table-cell' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
@@ -84,6 +96,21 @@ const Roles = () => {
                         {" "}
                         {item.description}{" "}
                       </span>
+                    </TableCell>
+                    <TableCell className="Table-cell ">
+                      <span style={{ fontSize: "15px" }}>
+                        Bhavitha
+                      </span>
+                    </TableCell>
+                    <TableCell className="Table-cell ">
+                      <span style={{ fontSize: "15px" }}>
+                        15-12-2023
+                      </span>
+                    </TableCell>
+                    <TableCell className="Table-cell ">
+                      <VisibilityIcon className="icon-color" />
+                      <EditIcon className="icon-color" />
+                      <DeleteIcon className="text-danger" />
                     </TableCell>
                     {/* <TableCell className=" Table-cell text-center"> Custom</TableCell> */}
                   </TableRow>

@@ -225,7 +225,7 @@ main {
 }
 
 .Table-cell {
-  padding: 0.5rem 0 0.5rem 0.5rem !important;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
   margin: 0 !important;
   font-size: 0.8rem !important;
   font-family: "Poppins", sans-serif !important;
