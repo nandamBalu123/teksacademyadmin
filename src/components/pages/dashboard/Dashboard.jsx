@@ -43,6 +43,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
+import { Diversity1Rounded } from "@mui/icons-material";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -1387,7 +1388,7 @@ const Dashboard = () => {
                     </h5>
 
                     <div className="justify-content-around pt-2">
-
+                      {/* 
                       <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
                         <Table stickyHeader aria-label="sticky table">
                           <TableHead>
@@ -1488,7 +1489,168 @@ const Dashboard = () => {
 
                           </TableBody>
                         </Table>
+                      </TableContainer> */}
+/////////////////////////////////////////////////////////////////////////////////////  branch
+                      <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+                        <Table stickyHeader aria-label="sticky table">
+                          <TableHead>
+                            <TableRow>
+                              <TableCell className="table-cell-heading">
+                                Branch
+                              </TableCell>
+                              <TableCell className="table-cell-heading">
+                                Booking Amount
+                              </TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+
+                            {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+
+
+                              return (
+                                <TableRow >
+                                  <TableCell className="Table-cell" style={{ width: "80%" }}>
+                                    <span className="d-flex justify-content-between table-text">      {branch} {selectedBranch === branch ? <KeyboardArrowUpIcon onClick={() => handleBranchClick(branch)} /> : <KeyboardArrowDownIcon onClick={() => handleBranchClick(branch)} />}
+                                    </span>
+
+
+                                  </TableCell>
+                                  <TableCell className="Table-cell">
+                                    {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
+                                  </TableCell>
+                                </TableRow>
+                              )
+
+                            })}
+
+
+
+
+
+                          </TableBody>
+                        </Table>
                       </TableContainer>
+                      ////////////////// counsellor
+
+
+                      {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+
+
+                        return (
+
+
+                          <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+                            {selectedBranch === branch &&
+                              <Table stickyHeader aria-label="sticky table">
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell className="table-cell-heading">Counsellor Name</TableCell>
+                                    <TableCell className="table-cell-heading">Booking Amount</TableCell>
+
+                                  </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                  {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                    (counsellor) => (
+
+                                      <TableRow className="Table-cell"
+                                        key={counsellor}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                      >
+                                        <TableCell className="Table-cell"  >
+                                          <span className="d-flex justify-content-between table-text">    {counsellor}  {selectedCounsellor == counsellor ? <KeyboardArrowUpIcon onClick={() => handleCounsellorClick(counsellor)} /> : <KeyboardArrowDownIcon onClick={() => handleCounsellorClick(counsellor)} />} </span>
+
+
+
+                                        </TableCell>
+                                        <TableCell className="Table-cell" >
+                                          {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalAmount}
+                                        </TableCell>
+
+
+                                      </TableRow>
+                                    )
+                                  )}
+
+
+                                </TableBody>
+                              </Table>}
+                          </TableContainer>
+
+                        )
+
+                      })}
+
+////////////////////////student
+
+
+                      {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+
+
+                        return (
+
+
+
+
+                          <div stickyHeader aria-label="sticky table">
+                            {selectedBranch === branch &&
+                              <TableBody>
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                  (counsellor) => (
+
+                                    <TableRow className="Table-cell"
+                                      key={counsellor}
+                                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+
+                                      {selectedCounsellor === counsellor &&
+                                        <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+                                          <Table stickyHeader aria-label="sticky table">
+                                            <TableHead>
+                                              <TableRow>
+                                                <TableCell className="table-cell-heading">Name</TableCell>
+                                                <TableCell className="table-cell-heading">Course</TableCell>
+                                                <TableCell className="table-cell-heading">Admission Date</TableCell>
+                                                <TableCell className="table-cell-heading">Booking Amount</TableCell>
+                                              </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                              {calculations_of_filtered_students_branchwise_counsellorwise[branch]
+                                                .counsellorWiseTotal[counsellor].students.map((student, index) => (
+                                                  <TableRow key={index}>
+                                                    <TableCell className="Table-cell" >{student.name}</TableCell>
+                                                    <TableCell className="Table-cell" >{student.course}</TableCell>
+                                                    <TableCell className="Table-cell" >{student.admissionDate}</TableCell>
+
+                                                    <TableCell className="Table-cell">{student.totalAmount}</TableCell>
+                                                  </TableRow>
+                                                ))}
+                                            </TableBody>
+                                          </Table>
+                                        </TableContainer>
+                                      }
+
+
+
+
+
+
+                                    </TableRow>
+                                  )
+                                )}
+
+
+                              </TableBody>}
+                          </div>
+
+
+                        )
+
+                      })}
+
+
+
 
                     </div>
                   </div>
