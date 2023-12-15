@@ -3,14 +3,28 @@
 }
 
 .invoice {
-  width: 100%;
+  border: 1.5px solid black;
+
+  margin: auto;
   overflow: hidden;
-  /* border: 1.5px solid black; */
-  border-radius: 10px;
+
+}
+
+.invoice-sideborder {
+  border-left: 1.5px solid black;
+}
+
+.invoice-border {
+  border-bottom: 1.5px solid black;
+  /* border-top: 1.5px solid black; */
 }
 
 .bold-row {
   border: 5px solid black;
+}
+
+.no-rowmargin {
+  margin-top: 0;
 }
 
 @page {
