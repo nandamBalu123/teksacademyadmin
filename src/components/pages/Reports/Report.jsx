@@ -99,7 +99,7 @@ const Report = () => {
           {data[parseInt(id)].reportName}{" "}
         </h5>
         <div className="row px-3">
-          <div className="col-6 col-md-4 col-lg-2 col-xl-2">
+          <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-2">
             <FormControl variant="standard" className="w-100">
               <InputLabel>
                 <span className="label-family"> Date Range</span>
@@ -113,44 +113,48 @@ const Report = () => {
               </Select>
             </FormControl>
           </div>
-
-          {customMonth &&
-            <div>
-              <div className="col-6 col-md-4 col-lg-2 col-xl-2">
-                <TextField
-                  label=" From:"
-                  type="date"
-                  variant="standard"
-                  className="  w-100"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="fromdate"
-                />
+          <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+            {customMonth &&
+              <div className="row">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <TextField
+                    label=" From:"
+                    type="date"
+                    variant="standard"
+                    className="  w-100"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="fromdate"
+                  />
+                </div>
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <TextField
+                    label=" To:"
+                    type="date"
+                    variant="standard"
+                    className="w-100"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="todate"
+                  />
+                </div>
               </div>
-              <div className="col-6 col-md-4 col-lg-2 col-xl-2">
-                <TextField
-                  label=" To:"
-                  type="date"
-                  variant="standard"
-                  className="w-100"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="todate"
-                />
-              </div>
-            </div>
 
-          }
+            }
 
-          <div className="col-6 col-md-3 col-lg-1 col-xl-2 mt-2">
+
+          </div>
+
+
+          <div className="col-6 col-md-4 col-lg-2 col-xl-2 mt-2">
             <button className="btn btn-outline-color"> Apply</button>
           </div>
-          <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div>
-          <div className="col-6 col-md-4 col-lg-2 col-xl-2 d-flex">
+          {/* <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div> */}
+          <div className="col-6 col-md-4 col-lg-2 col-xl-2 ">
             <Dropdown>
-              <MenuButton className=" btn btn-outline-color mt-2" >Action  &nbsp;&nbsp; <KeyboardArrowDownIcon /></MenuButton>
+              <MenuButton className=" btn btn-outline-color mt-2" >Action  </MenuButton>
               <Menu className="dropdown-css">
                 <MenuItem ><ShareIcon /> &nbsp;&nbsp;Share</MenuItem>
                 <MenuItem >
@@ -164,7 +168,7 @@ const Report = () => {
 
 
           </div>
-          <div className="col-6 col-md-4 col-lg-1 col-xl-1 mt-2">
+          <div className="col-6 col-md-3 col-lg-1 col-xl-1 mt-2">
             <button className="btn btn-outline-color">Save</button>
           </div>
         </div>
@@ -294,7 +298,7 @@ const Report = () => {
                               </FormControl>
                             </div>
                             <div className="col-3 col-md-2 col-xl-2 col-lg-2 mt-3">
-                              <DeleteIcon />
+                              {/* <DeleteIcon style={{ cursor: "pointer" }} /> */}
                             </div>
                           </div>
                         ))}

@@ -148,11 +148,11 @@ export default function Vendor() {
                   variant="standard"
                   value={newVendorName}
                   onChange={(e) => setNewVendorName(e.target.value)}
-                  // autoFocus
-                  // label="Vendor Name"
-                  // type="text"
-                  // fullWidth
-                  // variant="standard"
+                // autoFocus
+                // label="Vendor Name"
+                // type="text"
+                // fullWidth
+                // variant="standard"
                 />
               </DialogContent>
               <DialogActions>
@@ -171,11 +171,11 @@ export default function Vendor() {
                   variant="standard"
                   value={newVendorName}
                   onChange={(e) => setNewVendorName(e.target.value)}
-                  // autoFocus
-                  // label="Vendor Name"
-                  // type="text"
-                  // fullWidth
-                  // variant="standard"
+                // autoFocus
+                // label="Vendor Name"
+                // type="text"
+                // fullWidth
+                // variant="standard"
                 />
               </DialogContent>
               <DialogActions>
@@ -214,11 +214,11 @@ export default function Vendor() {
                     className="Table-cell text-center"
                     style={{ fontSize: "15px" }}
                   >
-                    <ModeEditIcon
+                    <ModeEditIcon style={{ cursor: "pointer" }}
                       onClick={(e) => handleEdit(index)}
                       className="icon-color"
                     />
-                    <DeleteOutlineIcon
+                    <DeleteOutlineIcon style={{ cursor: "pointer" }}
                       onClick={(e) => handleDelete(index)}
                       className="text-danger ms-2"
                     />

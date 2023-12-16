@@ -1533,7 +1533,7 @@ const Dashboard = () => {
                                                 <TableCell className="table-cell-heading">Booking Amount</TableCell>
                                               </TableRow>
                                             </TableHead>
-                                            <TableBody sx={{ overflowY: 'auto' }}>
+                                            <TableBody >
                                               {calculations_of_filtered_students_branchwise_counsellorwise[branch]
                                                 .counsellorWiseTotal[counsellor].students.map((student, index) => (
                                                   <TableRow key={index}>
