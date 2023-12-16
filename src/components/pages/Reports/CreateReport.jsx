@@ -105,34 +105,43 @@ const CreateReport = () => {
       }
     }
   };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let reports = []
     reports.push(reportForm)
     console.log('Form submitted:', reports);
-    try {
-      const res = await axios.put(
-        `${process.env.REACT_APP_API_URL}/createreport`,
-        reports
-      );
-
-      if (res.data.updated) {
-        alert("Fee Added");
-        // dispatch({
-        //   type: "UPDATE_INSTALLMENTS",
-        //   payload: updateContext,
-        // });
-        // navigator(`/feeview/${id}`);
-        // window.location.reload();
-      } else {
-        alert("Try Again");
-      }
-    } catch (error) {
-      console.error("Error updating data:", error);
-      // Handle errors here
+    let updatedData = {
+      reports
     }
+
+
+
+    const updateContext = {
+      reports
+
+
+    };
+
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL}/createreport`,
+        updatedData
+      )
+
+      .then((res) => {
+        if (res.data.updated) {
+          alert("Report Added");
+          // dispatch({
+          //   type: "UPDATE_NO_OF_INSTALLMENTS",
+          //   payload: updateContext,
+          // });
+          // navigator(`/feeview/${id}`);
+        } else {
+          alert("Try Again");
+        }
+      });
   };
+
   return (
     <div className="container mt-3">
 
@@ -226,8 +235,8 @@ const CreateReport = () => {
                     value={reportForm.dateFilter}
                     onChange={handleInputChange}>
 
-                    <MenuItem value="createdat">Created At</MenuItem>
-                    <MenuItem value="updatedat">Updated At</MenuItem>
+                    <MenuItem value="createdAt">Created At</MenuItem>
+                    <MenuItem value="updatedAt">Updated At</MenuItem>
 
                   </Select>
                 </FormControl>
