@@ -86,6 +86,13 @@
   font-weight: 200;
 }
 
+.scroller {
+  overflow-y: auto;
+  max-height: 20vh;
+}
+
+
+
 /* @media (min-width: 576px) { 
  .dashboardcard{ 
     margin-bottom: 20px;
