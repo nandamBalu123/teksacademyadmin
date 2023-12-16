@@ -77,19 +77,19 @@ const Report = () => {
     { reportName: "CourseWise Data" },
     { reportName: "CounsellorWise Data" },
   ]);
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/getreports`)
-      .then((response) => {
-        if (response.data) {
-          // setData(response.data);
-          console.log("response.data", response.data);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/getreports`)
+  //     .then((response) => {
+  //       if (response.data) {
+  //         // setData(response.data);
+  //         console.log("response.data", response.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
 
   return (
 

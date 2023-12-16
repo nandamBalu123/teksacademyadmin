@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateRole.css";
 import { useState } from "react";
@@ -31,11 +31,134 @@ const CreateRole = () => {
   const navigate = useNavigate();
   const [role, setRoleName] = useState("");
   const [description, setDescription] = useState("");
-  const [checked, setChecked] = React.useState();
+  const [permissions, setPermissions] = useState([
+    {
+      "feature": "User Management",
+      "read": true,
+      "update": true,
+      "delete": false,
+      "create": true,
+      "submenus": [
+        {
+          "subfeature": "Create User",
+          "read": true,
+          "update": false,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "User Details",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "feature": "Student Management",
+      "read": true,
+      "update": true,
+      "delete": true,
+      "create": true,
+      "submenus": [
+        {
+          "subfeature": "Create Student",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Student Details",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        }
+      ]
+    },
+  ]);
+  // const handleChange = (index, type) => {
+  //   setPermissions(prevPermissions => {
+  //     const updatedPermissions = [...prevPermissions];
+  //     const permission = { ...updatedPermissions[index] };
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
+  //     // Toggle the specified permission type
+  //     permission[type] = !permission[type];
+
+  //     updatedPermissions[index] = permission;
+
+  //     return updatedPermissions;
+  //   });
+  // };
+  const handleChange = (index, subIndex, action) => {
+    setPermissions(prevPermissions => {
+      const newPermissions = [...prevPermissions];
+
+      // Check if the main permission exists at the specified index
+      if (newPermissions[index]) {
+        const permission = newPermissions[index];
+
+        // Check if dealing with a submenu and if the submenu exists
+        if (typeof subIndex !== 'undefined' && permission.submenus && permission.submenus[subIndex]) {
+          const submenu = permission.submenus[subIndex];
+
+          // Check if the action property exists in the submenu
+          if (submenu.hasOwnProperty(action)) {
+            submenu[action] = !submenu[action];
+          }
+        } else {
+          // Check if the action property exists in the main permission
+          if (permission.hasOwnProperty(action)) {
+            permission[action] = !permission[action];
+          }
+        }
+      }
+
+      return newPermissions;
+    });
   };
+
+
+  useEffect(() => { console.log("permissions", permissions) })
+  // const [checked, setChecked] = React.useState();
+
+  // const handleChange = (event) => {
+  //   setChecked(event.target.checked);
+  // };
 
 
   const handleSubmit = async (e) => {
@@ -45,6 +168,8 @@ const CreateRole = () => {
     let user = {
       role,
       description,
+
+
     };
     user = [user];
     const dataWithTitleCase = user.map((item) => {
@@ -65,8 +190,8 @@ const CreateRole = () => {
 
       return newItem;
     });
-    user = dataWithTitleCase[0];
-    console.log("User Data:", user); // Log the user data being sent
+    user = dataWithTitleCase;
+    console.log("User Datagg:", user); // Log the user data being sent
 
     const response = await fetch(`${process.env.REACT_APP_API_URL}/userroles`, {
       method: "POST",
@@ -161,9 +286,6 @@ const CreateRole = () => {
                     <TableCell colSpan={4} className="table-cell-heading" align="center">Access</TableCell>
 
                   </TableRow>
-                </TableHead>
-                <TableBody>
-
                   <TableRow>
 
 
@@ -174,127 +296,208 @@ const CreateRole = () => {
                     <TableCell className="Table-cell text-center"> Create</TableCell>
 
                   </TableRow>
-                  <TableRow>
-                    <TableCell onClick={handleusermanagement} className="Table-cell "> User Management</TableCell>
-                    <TableCell >
-                      <Switch
-                        checked={checked}
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'controlled' }} color="info"
-                      />
-                    </TableCell>
-                    <TableCell >
-                      <Switch
-                        checked={checked}
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'controlled' }} color="info"
-                      />
-                    </TableCell>
-                    <TableCell >
-                      <Switch
-                        checked={checked}
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'controlled' }} color="info"
-                      />
-                    </TableCell>
-                    <TableCell >
-                      <Switch
-                        checked={checked}
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'controlled' }} color="info"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  {usermanagement && (
-                    <>
-                      <TableRow colSpan={4}>
-                        <TableCell className="Table-cell text-center"> Create User</TableCell>
-                        <TableCell className="Table-cell text-center">NA </TableCell>
-                        <TableCell className="Table-cell text-center">NA </TableCell>
-                        <TableCell className="Table-cell text-center"> NA </TableCell>
-                        <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
+                </TableHead>
+                <TableBody>
+                  {permissions.map((permission, index) => (
+                    <React.Fragment key={index}>
+                      <TableRow>
+                        <TableCell className="Table-cell">{permission.feature}</TableCell>
+                        <TableCell>
+                          <Switch
+                            checked={permission.read}
+                            onChange={() => handleChange(index, null, 'read')}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                            color="info"
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Switch
+                            checked={permission.update}
+                            onChange={() => handleChange(index, null, 'update')}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                            color="info"
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Switch
+                            checked={permission.delete}
+                            onChange={() => handleChange(index, null, 'delete')}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                            color="info"
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Switch
+                            checked={permission.create}
+                            onChange={() => handleChange(index, null, 'create')}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                            color="info"
+                          />
+                        </TableCell>
                       </TableRow>
-                      <TableRow colSpan={4}>
-                        <TableCell className="Table-cell text-center"> User Details</TableCell>
-                        <TableCell className="Table-cell text-center" ><Switch {...label} color="info" /> </TableCell>
-                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
-                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /> </TableCell>
-                        <TableCell className="Table-cell text-center"> NA </TableCell>
-                      </TableRow>
-
-
-                    </>
-                  )}
-                  <TableRow>
-                    <TableCell onClick={handlestudentmanagement} className="Table-cell "> Student Management</TableCell>
-                    <TableCell>
-                      <Switch
-                        checked={checked}
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'controlled' }} color="info"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Switch
-                        checked={checked}
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'controlled' }} color="info"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Switch
-                        checked={checked}
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'controlled' }} color="info"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Switch
-                        checked={checked}
-                        onChange={handleChange}
-                        inputProps={{ 'aria-label': 'controlled' }} color="info"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  {studentmanagement && (
-                    <>
-                      <TableRow colSpan={4}>
-                        <TableCell className="Table-cell text-center">Student Details</TableCell>
-                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
-                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
-                        <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
-                        <TableCell className="Table-cell text-center"> NA </TableCell>
-
-                      </TableRow>
-                      <TableRow colSpan={4}>
-                        <TableCell className="Table-cell text-center"> Registration</TableCell>
-                        <TableCell className="Table-cell text-center"> NA </TableCell>
-                        <TableCell className="Table-cell text-center">NA</TableCell>
-                        <TableCell className="Table-cell text-center"> NA </TableCell>
-                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /> </TableCell>
-
-                      </TableRow>
-                      <TableRow colSpan={4}>
-                        <TableCell className="Table-cell text-center">Fee Details</TableCell>
-                        <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
-                        <TableCell className="Table-cell text-center" >NA</TableCell>
-                        <TableCell className="Table-cell text-center">NA</TableCell>
-                        <TableCell className="Table-cell text-center"> NA </TableCell>
-                      </TableRow>
-                      <TableRow colSpan={4}>
-                        <TableCell className="Table-cell text-center">Certificate</TableCell>
-                        <TableCell className="Table-cell text-center"> <Switch {...label} color="info" /> </TableCell>
-                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /></TableCell>
-                        <TableCell className="Table-cell text-center"> NA </TableCell>
-                        <TableCell className="Table-cell text-center"><Switch {...label} color="info" /> </TableCell>
-
-                      </TableRow>
-
-
-                    </>
-                  )}
-
+                      {permission.submenus.map((submenu, subIndex) => (
+                        <TableRow key={subIndex}>
+                          <TableCell className="Table-cell">{submenu.subfeature}</TableCell>
+                          <TableCell>
+                            <Switch
+                              checked={submenu.read}
+                              onChange={() => handleChange(index, subIndex, 'read')}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                              color="info"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Switch
+                              checked={submenu.update}
+                              onChange={() => handleChange(index, subIndex, 'update')}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                              color="info"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Switch
+                              checked={submenu.delete}
+                              onChange={() => handleChange(index, subIndex, 'delete')}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                              color="info"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Switch
+                              checked={submenu.create}
+                              onChange={() => handleChange(index, subIndex, 'create')}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                              color="info"
+                            />
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </React.Fragment>
+                  ))}
                 </TableBody>
+
+
+
+
+                {/* {permissions && permissions.map((permission, index) => {
+                    return (
+                      <TableRow key={index}>
+
+                        <TableCell className="Table-cell "> {permission.feature}</TableCell>
+                        <TableCell >
+                          <Switch
+                            checked={permission.read}
+                            onChange={handleChange}
+                            inputProps={{ 'aria-label': 'controlled' }} color="info"
+                          />
+                        </TableCell>
+                        <TableCell >
+                          <Switch
+                            checked={permission.update}
+                            onChange={handleChange}
+                            inputProps={{ 'aria-label': 'controlled' }} color="info"
+                          />
+                        </TableCell>
+                        <TableCell >
+                          <Switch
+                            checked={permission.delete}
+                            onChange={handleChange}
+                            inputProps={{ 'aria-label': 'controlled' }} color="info"
+                          />
+                        </TableCell>
+                        <TableCell >
+                          <Switch
+                            checked={permission.create}
+                            onChange={handleChange}
+                            inputProps={{ 'aria-label': 'controlled' }} color="info"
+                          />
+                        </TableCell>
+                      </TableRow>
+
+                    );
+                  })} */}
+
+                {/* {permissions && permissions.map((permission, index) => (
+                  <TableBody>
+                    <TableRow key={index}>
+                      <TableCell className="Table-cell">{permission.feature}</TableCell>
+                      <TableCell>
+                        <Switch
+                          checked={permission.read}
+                          onChange={() => handleChange(index, 'read')}
+                          inputProps={{ 'aria-label': 'controlled' }}
+                          color="info"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Switch
+                          checked={permission.update}
+                          onChange={() => handleChange(index, 'update')}
+                          inputProps={{ 'aria-label': 'controlled' }}
+                          color="info"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Switch
+                          checked={permission.delete}
+                          onChange={() => handleChange(index, 'delete')}
+                          inputProps={{ 'aria-label': 'controlled' }}
+                          color="info"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Switch
+                          checked={permission.create}
+                          onChange={() => handleChange(index, 'create')}
+                          inputProps={{ 'aria-label': 'controlled' }}
+                          color="info"
+                        />
+                      </TableCell>
+                    </TableRow>
+                    {permission.submenus.map((submenu, index) => {
+                      return (
+                        <TableRow key={index}>
+                          <TableCell className="Table-cell">{submenu.subfeature}</TableCell>
+                          <TableCell>
+                            <Switch
+                              checked={submenu.read}
+                              onChange={() => handleChange(index, 'read')}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                              color="info"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Switch
+                              checked={submenu.update}
+                              onChange={() => handleChange(index, 'update')}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                              color="info"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Switch
+                              checked={submenu.delete}
+                              onChange={() => handleChange(index, 'delete')}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                              color="info"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Switch
+                              checked={submenu.create}
+                              onChange={() => handleChange(index, 'create')}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                              color="info"
+                            />
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })}
+                  </TableBody>
+                ))} */}
+
+
+
               </Table>
             </TableContainer>
 
@@ -304,15 +507,7 @@ const CreateRole = () => {
 
         </div>
 
-        <div className="mb-3 me-4 text-end ">
-          <button
-            type="submit"
-            class="btn btn-color"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
+
       </div>
 
       {/* <div>
