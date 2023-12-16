@@ -14,8 +14,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import axios from 'axios';
 import Switch from '@mui/material/Switch';
+
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const CreateRole = () => {
   const [usermanagement, setUsermanagement] = useState(false);
@@ -111,19 +112,7 @@ const CreateRole = () => {
       ]
     },
   ]);
-  // const handleChange = (index, type) => {
-  //   setPermissions(prevPermissions => {
-  //     const updatedPermissions = [...prevPermissions];
-  //     const permission = { ...updatedPermissions[index] };
 
-  //     // Toggle the specified permission type
-  //     permission[type] = !permission[type];
-
-  //     updatedPermissions[index] = permission;
-
-  //     return updatedPermissions;
-  //   });
-  // };
   const handleChange = (index, subIndex, action) => {
     setPermissions(prevPermissions => {
       const newPermissions = [...prevPermissions];
@@ -168,9 +157,15 @@ const CreateRole = () => {
     let user = {
       role,
       description,
-
+      permissions
 
     };
+
+    // if (!user.permissions || user.permissions.length === 0) {
+    //   console.error('Permissions cannot be empty.');
+    //   // Handle the error or notify the user
+    //   return;
+    // }
     user = [user];
     const dataWithTitleCase = user.map((item) => {
       const newItem = {};
@@ -190,33 +185,37 @@ const CreateRole = () => {
 
       return newItem;
     });
-    user = dataWithTitleCase;
+    user = dataWithTitleCase[0];
     console.log("User Datagg:", user); // Log the user data being sent
-
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/userroles`, {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log("Response:", response); // Log the response from the server
-
-    const json = await response.json();
-
-    console.log("JSON Response:", json); // Log the parsed JSON response
-
-    if (response.ok) {
-      console.log("User created successfully.");
-      dispatch({ type: "CREATE_ROLE", payload: json });
-      // Reset the form fields
-      setRoleName("");
-      setDescription("");
-      navigate("/roles");
+    console.log("permissions Datagg:", permissions);
+    
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/userroles`,
+        user,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+  
+      console.log('Response:', response.data); // Log the response from the server
+  
+      if (response.status === 200) {
+        console.log('User created successfully.');
+        dispatch({ type: 'CREATE_ROLE', payload: response.data });
+        // Reset the form fields
+        setRoleName('');
+        setDescription('');
+        setPermissions([]);
+        navigate('/roles');
+      }
+  
+    } catch (error) {
+      console.error('Error creating user role:', error);
+      // Handle error scenarios here
     }
-    // handleCheckboxChange();
-    console.log(role, description);
-    navigate("/roles");
 
   };
   return (

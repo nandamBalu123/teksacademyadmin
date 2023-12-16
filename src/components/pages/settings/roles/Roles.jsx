@@ -99,12 +99,12 @@ const Roles = () => {
                     </TableCell>
                     <TableCell className="Table-cell ">
                       <span style={{ fontSize: "15px" }}>
-                        Bhavitha
+                        {item.createdby}
                       </span>
                     </TableCell>
                     <TableCell className="Table-cell ">
                       <span style={{ fontSize: "15px" }}>
-                        15-12-2023
+                      {new Date(item.date).toLocaleDateString("en-GB")}
                       </span>
                     </TableCell>
                     <TableCell className="Table-cell ">
