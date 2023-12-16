@@ -151,13 +151,13 @@ const Feefollowup = () => {
         return (
           new Date(installment.duedate) < today &&
           new Date(installment.duedate).toDateString() !==
-            today.toDateString() &&
+          today.toDateString() &&
           !isPaymentDone
         );
       } else if (filterType === "today") {
         return (
           new Date(installment.duedate).toDateString() ===
-            today.toDateString() && !isPaymentDone
+          today.toDateString() && !isPaymentDone
         );
       } else if (filterType === "upcoming") {
         return new Date(installment.duedate) > today && !isPaymentDone;
@@ -207,6 +207,7 @@ const Feefollowup = () => {
                 borderRadius: "8px",
                 color: "white",
                 boxShadow: "3px 3px 6px  gray",
+                cursor: "pointer",
                 // boxShadow: "5px 7px 7px  gray",
                 paddingTop: "10px",
               }}
@@ -225,6 +226,7 @@ const Feefollowup = () => {
                 textAlign: "center",
                 borderRadius: "8px",
                 color: "white",
+                cursor: "pointer",
                 boxShadow: "3px 3px 6px  gray",
                 // boxShadow: "5px 7px 7px  gray",
                 paddingTop: "10px",
@@ -243,6 +245,7 @@ const Feefollowup = () => {
                 background: "#69757d",
                 textAlign: "center",
                 borderRadius: "8px",
+                cursor: "pointer",
                 color: "white",
                 boxShadow: "3px 3px 6px  gray",
                 // boxShadow: "5px 7px 7px  gray",
@@ -466,148 +469,147 @@ const Feefollowup = () => {
             <strong> Sum of Due Amounts: </strong> {sumDueAmount}
           </p>
         </div>
-       
-          <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
-            <Table  stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  <TableCell className="table-cell-heading">
-                    {" "}
-                    S.NO
-                  </TableCell>
-                  <TableCell className="table-cell-heading">
-                    Name
-                    <br /> Branch <br /> Counsellor
-                  </TableCell>
-                  <TableCell className="table-cell-heading">
-                    {" "}
-                    Contact
-                  </TableCell>
-                  <TableCell className="table-cell-heading">
-                    {" "}
-                    Email
-                  </TableCell>
-                  <TableCell className="table-cell-heading">
-                    {" "}
-                    Course
-                  </TableCell>
-                  <TableCell className="table-cell-heading">
-                    {" "}
-                    Due Date
-                  </TableCell>
-                  <TableCell className="table-cell-heading">
-                    {" "}
-                    Due Amount{" "}
-                  </TableCell>
-                  <TableCell className="table-cell-heading">
-                    {" "}
-                    Paid Status
-                  </TableCell>
 
-                  <TableCell className="table-cell-heading">
-                    {" "}
-                    View
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Array.isArray(filteredInstallments) &&
+        <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell className="table-cell-heading">
+                  {" "}
+                  S.NO
+                </TableCell>
+                <TableCell className="table-cell-heading">
+                  Name
+                  <br /> Branch <br /> Counsellor
+                </TableCell>
+                <TableCell className="table-cell-heading">
+                  {" "}
+                  Contact
+                </TableCell>
+                <TableCell className="table-cell-heading">
+                  {" "}
+                  Email
+                </TableCell>
+                <TableCell className="table-cell-heading">
+                  {" "}
+                  Course
+                </TableCell>
+                <TableCell className="table-cell-heading">
+                  {" "}
+                  Due Date
+                </TableCell>
+                <TableCell className="table-cell-heading">
+                  {" "}
+                  Due Amount{" "}
+                </TableCell>
+                <TableCell className="table-cell-heading">
+                  {" "}
+                  Paid Status
+                </TableCell>
+
+                <TableCell className="table-cell-heading">
+                  {" "}
+                  View
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {Array.isArray(filteredInstallments) &&
                 filteredInstallments.length > 0 ? (
-                  filteredInstallments.map((item, index) => {
-                    let NextDueDate = new Date(item.nextduedate);
-                    const day = NextDueDate.getUTCDate();
-                    const monthIndex = NextDueDate.getUTCMonth();
-                    const year = NextDueDate.getUTCFullYear();
+                filteredInstallments.map((item, index) => {
+                  let NextDueDate = new Date(item.nextduedate);
+                  const day = NextDueDate.getUTCDate();
+                  const monthIndex = NextDueDate.getUTCMonth();
+                  const year = NextDueDate.getUTCFullYear();
 
-                    const monthAbbreviations = [
-                      "Jan",
-                      "Feb",
-                      "Mar",
-                      "Apr",
-                      "May",
-                      "Jun",
-                      "Jul",
-                      "Aug",
-                      "Sep",
-                      "Oct",
-                      "Nov",
-                      "Dec",
-                    ];
+                  const monthAbbreviations = [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                  ];
 
-                    // Formatting the date
-                    NextDueDate = `${day < 10 ? "0" : ""}${day}-${
-                      monthAbbreviations[monthIndex]
+                  // Formatting the date
+                  NextDueDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
                     }-${year}`;
 
-                    return (
-                      <TableRow
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
+                  return (
+                    <TableRow
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
+                      <TableCell
+                        component="th"
+                        className="Table-cell text-center"
                       >
-                        <TableCell
-                          component="th"
-                          className="Table-cell text-center"
-                        >
-                          {index + 1}
-                        </TableCell>
-                        <TableCell className="Table-cell text-center">
-                          {item.name}
-                          <br />
-                          {item.branch}
-                          <br />
-                          {item.enquirytakenby}
-                        </TableCell>
-                        <TableCell className="Table-cell text-center">
-                          {item.mobilenumber}
-                        </TableCell>
-                        <TableCell className="Table-cell text-center">
-                          {item.email}
-                        </TableCell>
-                        <TableCell className="Table-cell text-center">
-                          {item.courses}
-                        </TableCell>
-                        <TableCell className="Table-cell text-center">
-                          {item.duedate}
-                        </TableCell>
-                        <TableCell className="Table-cell text-center">
-                          {Number(
-                            parseFloat(item.dueamount).toFixed(2)
-                          ).toLocaleString("en-IN")}
-                        </TableCell>
-                        <TableCell className="Table-cell text-center">
-                          {item.totalinstallments &&
-                            item.totalinstallments.length > 0 &&
-                            item.totalinstallments.map((items, index) => {
-                              if (true) {
-                                return (
-                                  <div style={{ display: "flex" }}>
-                                    <span style={dynamicStyle}>
-                                      {items.totalinstallmentspaid} /
-                                      {items.totalinstallments}
-                                    </span>
-                                    <span style={dynamicStyle}>
-                                      <CheckCircleIcon style={IconStyle} />
-                                    </span>
-                                  </div>
-                                );
-                              }
-                            })}
-                        </TableCell>
-                        <TableCell className="border border 1">
-                          <Link to={`/feeview/${item.id}`}>
-                            <VisibilityIcon className="icon-color" />
-                          </Link>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={3}>No data available</TableCell>
-                  </TableRow>
-                )}
-                {/* {filteredInstallments.map((installment) => (
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {item.name}
+                        <br />
+                        {item.branch}
+                        <br />
+                        {item.enquirytakenby}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {item.mobilenumber}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {item.email}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {item.courses}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {item.duedate}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {Number(
+                          parseFloat(item.dueamount).toFixed(2)
+                        ).toLocaleString("en-IN")}
+                      </TableCell>
+                      <TableCell className="Table-cell text-center">
+                        {item.totalinstallments &&
+                          item.totalinstallments.length > 0 &&
+                          item.totalinstallments.map((items, index) => {
+                            if (true) {
+                              return (
+                                <div style={{ display: "flex" }}>
+                                  <span style={dynamicStyle}>
+                                    {items.totalinstallmentspaid} /
+                                    {items.totalinstallments}
+                                  </span>
+                                  <span style={dynamicStyle}>
+                                    <CheckCircleIcon style={IconStyle} />
+                                  </span>
+                                </div>
+                              );
+                            }
+                          })}
+                      </TableCell>
+                      <TableCell className="border border 1">
+                        <Link to={`/feeview/${item.id}`}>
+                          <VisibilityIcon className="icon-color" />
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={3}>No data available</TableCell>
+                </TableRow>
+              )}
+              {/* {filteredInstallments.map((installment) => (
                 <tr key={installment.id}>
                   <td>{installment.name}</td>
                   <td>{installment.installmentNumber}</td>
@@ -615,10 +617,10 @@ const Feefollowup = () => {
                   <td>{installment.dueamount}</td>
                 </tr>
               ))} */}
-              </TableBody>
-            </Table>
-          </TableContainer>
-     
+            </TableBody>
+          </Table>
+        </TableContainer>
+
         {/* <table>
         <thead>
           <tr>

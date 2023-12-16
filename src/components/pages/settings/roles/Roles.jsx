@@ -108,9 +108,9 @@ const Roles = () => {
                       </span>
                     </TableCell>
                     <TableCell className="Table-cell ">
-                      <VisibilityIcon className="icon-color" />
-                      <EditIcon className="icon-color" />
-                      <DeleteIcon className="text-danger" />
+                      <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
                     </TableCell>
                     {/* <TableCell className=" Table-cell text-center"> Custom</TableCell> */}
                   </TableRow>

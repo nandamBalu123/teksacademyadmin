@@ -133,9 +133,9 @@ const Reports = () => {
                       <span style={{ fontSize: "15px" }}>14-12-2023</span>
                     </TableCell>
                     <TableCell className="Table-cell text-center">
-                      <VisibilityIcon className="icon-color" />
-                      <EditIcon className="icon-color" />
-                      <DeleteIcon className="text-danger" />
+                      <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
 
 
                     </TableCell>

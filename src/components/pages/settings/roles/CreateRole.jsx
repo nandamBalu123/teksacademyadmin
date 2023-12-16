@@ -117,20 +117,20 @@ const CreateRole = () => {
     setPermissions(prevPermissions => {
       const newPermissions = [...prevPermissions];
 
-      // Check if the main permission exists at the specified index
+
       if (newPermissions[index]) {
         const permission = newPermissions[index];
 
-        // Check if dealing with a submenu and if the submenu exists
+
         if (typeof subIndex !== 'undefined' && permission.submenus && permission.submenus[subIndex]) {
           const submenu = permission.submenus[subIndex];
 
-          // Check if the action property exists in the submenu
+
           if (submenu.hasOwnProperty(action)) {
             submenu[action] = !submenu[action];
           }
         } else {
-          // Check if the action property exists in the main permission
+
           if (permission.hasOwnProperty(action)) {
             permission[action] = !permission[action];
           }
@@ -140,14 +140,14 @@ const CreateRole = () => {
       return newPermissions;
     });
   };
+  const [selectedPermission, setSelectedPermission] = useState(null);
+  const handlePermissionClick = (permission) => {
 
+    setSelectedPermission(selectedPermission === permission ? null : permission);
+    // setSelectedCounsellor(null); // Reset selected counsellor when a branch is clicked
+  };
 
   useEffect(() => { console.log("permissions", permissions) })
-  // const [checked, setChecked] = React.useState();
-
-  // const handleChange = (event) => {
-  //   setChecked(event.target.checked);
-  // };
 
 
   const handleSubmit = async (e) => {
@@ -300,7 +300,7 @@ const CreateRole = () => {
                   {permissions.map((permission, index) => (
                     <React.Fragment key={index}>
                       <TableRow>
-                        <TableCell className="Table-cell">{permission.feature}</TableCell>
+                        <TableCell className="Table-cell" onClick={() => handlePermissionClick(permission.feature)}>{permission.feature}</TableCell>
                         <TableCell>
                           <Switch
                             checked={permission.read}
@@ -334,7 +334,7 @@ const CreateRole = () => {
                           />
                         </TableCell>
                       </TableRow>
-                      {permission.submenus.map((submenu, subIndex) => (
+                      {selectedPermission === permission.feature && permission.submenus.map((submenu, subIndex) => (
                         <TableRow key={subIndex}>
                           <TableCell className="Table-cell">{submenu.subfeature}</TableCell>
                           <TableCell>

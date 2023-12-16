@@ -165,7 +165,7 @@ export default function AssetType() {
                   variant="standard"
                   value={newAssettype}
                   onChange={(e) => setNewAssettype(e.target.value)}
-                 
+
                 />
               </DialogContent>
               <DialogActions>
@@ -208,11 +208,11 @@ export default function AssetType() {
                     <span style={{ fontSize: "15px" }}>{element} </span>
                   </TableCell>
                   <TableCell className="Table-cell text-center">
-                    <ModeEditIcon
+                    <ModeEditIcon style={{ cursor: "pointer" }}
                       onClick={(e) => handleEdit(index)}
                       className="icon-color"
                     />
-                    <DeleteOutlineIcon
+                    <DeleteOutlineIcon style={{ cursor: "pointer" }}
                       onClick={(e) => handleDelete(index)}
                       className="text-danger ms-2"
                     />
