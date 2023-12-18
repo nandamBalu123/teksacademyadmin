@@ -2,29 +2,21 @@ import React, { useState } from "react";
 import "./CreateReports.css";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 const CreateReport = () => {
-
-
   const [customDates, setCustomDates] = useState(false);
-
   const handleDateFilterChange = (event) => {
     const selectedValue = event.target.value;
-
     // Update customMonth state based on the selected value
     setCustomDates(selectedValue === 'customDates');
   };
   const [reportForm, setReportForm] = useState(
-    { reportName: "", reportType: "", description: "", dateFilter: "", dateRangeType: "", dateRange: { fromDate: "", toDate: "" }, dimensions: { dimension1: "", dimension2: "", dimension3: "" }, metrics: "" }
+    { reportName: "", reportType: "", description: "", dateFilter: "", dateRangeType: "", dateRange: { fromDate: "", toDate: "" }, dimensions: { dimension1: "", dimension2: "", dimension3: "" }, metrics: "" ,createdBy:""}
   )
-
-
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name.includes('.')) {
@@ -113,21 +105,14 @@ const CreateReport = () => {
     let updatedData = {
       reports
     }
-
-
-
     const updateContext = {
       reports
-
-
     };
-
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/createreport`,
         updatedData
       )
-
       .then((res) => {
         if (res.data.updated) {
           alert("Report Added");
@@ -141,19 +126,15 @@ const CreateReport = () => {
         }
       });
   };
-
   return (
     <div className="container mt-3">
-
       <h5 className="text-center my-2">Create Report</h5>
       <form className="createreport">
-
         <div className="row m-0">
           <h5 className="px-4 pt-3">  Basic Information</h5>
           <div className="col-12 col-md-7 col-xl-7 col-lg-7 side-line">
             <div className="row px-2">
               <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-
                 <TextField
                   label={<span className="label-family">Report's Name</span>}
                   type="text"
@@ -170,7 +151,6 @@ const CreateReport = () => {
                   <InputLabel>
                     <span className="label-family">Report Type<span>*</span></span>
                   </InputLabel>
-
                   <Select
                     name="reportType"
                     value={reportForm.reportType}
@@ -187,7 +167,6 @@ const CreateReport = () => {
             </div>
             <div className="row px-2 ">
               <span className="label-family fw-light my-2">
-
                 Report Description
               </span>
               <div class="d-lg-none col-12 col-md-12 col-xl-12 col-lg-12 text-center">
@@ -205,7 +184,6 @@ const CreateReport = () => {
                   form="usrform"
                 ></textarea> */}
               </div>
-
               <div className="col-6 col-md-12 col-xl-12 col-lg-12 text-center ">
                 <textarea
                   style={{
@@ -253,7 +231,6 @@ const CreateReport = () => {
                     <MenuItem value="lastmonth">Last Month</MenuItem>
                     <MenuItem value="currentmonth">Current Month</MenuItem>
                     <MenuItem value="customDates" >Custom Dates</MenuItem>
-
                   </Select>
                 </FormControl>
               </div>
@@ -290,16 +267,11 @@ const CreateReport = () => {
                 </div>
               </div>
             }
-
-
-
-
             <div className="px-2 my-2">
               <span className="label-family "> Dimensions</span>
               <div className="dimensions mb-4">
                 <div className="d-flex justify-content-between alldimensions">
                   <h6 className="pt-2"> All Dimensions</h6>
-
                 </div>
                 {reportForm.reportType === "onedimensional" &&
                   <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
@@ -312,7 +284,6 @@ const CreateReport = () => {
                         onChange={handleInputChange}>
                         <MenuItem value="branch">Branch</MenuItem>
                         <MenuItem value="country"> Country</MenuItem>
-
                       </Select>
                     </FormControl></div>}
                 {reportForm.reportType === "twodimensional" &&
@@ -326,7 +297,6 @@ const CreateReport = () => {
                         onChange={handleInputChange}>
                         <MenuItem value="branch">Branch</MenuItem>
                         <MenuItem value="country"> Country</MenuItem>
-
                       </Select>
                     </FormControl>
                     <FormControl variant="standard" className="w-100">
@@ -338,7 +308,6 @@ const CreateReport = () => {
                         onChange={handleInputChange} >
                         <MenuItem value="branch">Branch</MenuItem>
                         <MenuItem value="country"> Country</MenuItem>
-
                       </Select>
                     </FormControl></div>
                 }
@@ -353,7 +322,6 @@ const CreateReport = () => {
                         onChange={handleInputChange} >
                         <MenuItem value="branch">Branch</MenuItem>
                         <MenuItem value="country"> Country</MenuItem>
-
                       </Select>
                     </FormControl>
                     <FormControl variant="standard" className="w-100">
@@ -365,10 +333,8 @@ const CreateReport = () => {
                         onChange={handleInputChange} >
                         <MenuItem value="branch">Branch</MenuItem>
                         <MenuItem value="country"> Country</MenuItem>
-
                       </Select>
                     </FormControl>
-
                     <FormControl variant="standard" className="w-100">
                       <InputLabel>
                         <span className="label-family">Choose</span>
@@ -378,11 +344,8 @@ const CreateReport = () => {
                         onChange={handleInputChange} >
                         <MenuItem value="branch">Branch</MenuItem>
                         <MenuItem value="country"> Country</MenuItem>
-
                       </Select>
                     </FormControl></div>}
-
-
               </div>
             </div>
             <div className="px-2 my-2">
@@ -398,8 +361,6 @@ const CreateReport = () => {
                       value={reportForm.metrics}
                       onChange={handleInputChange} >
                       <MenuItem value="noOfEnrollments">Number of Enrollments</MenuItem>
-
-
                     </Select>
                   </FormControl></div>
               </div>
@@ -417,7 +378,6 @@ const CreateReport = () => {
                       <Select >
                         <MenuItem value="branch">Branch</MenuItem>
                         <MenuItem value="country"> Country</MenuItem>
-
                       </Select>
                     </FormControl></div>
                   <div className="col-12 col-md-4 col-lg-4 col-xl-4 my-2 ">
@@ -429,16 +389,13 @@ const CreateReport = () => {
               </div>
             </div>
             <div className=" row report-footer ">
-
               <div className="col-12 col-md-9 col-lg-9 col-lg-10"> <button className="btn btn-color mt-1"> Generate Preview </button></div>
               <div className="col-12 col-md-2 col-lg-2 col-lg-2">  <button type="submit" onClick={handleSubmit} className="btn btn-color  mt-1 me-3"> Save</button> </div>
             </div>
-
           </div>
           <div className="col-12 col-md-5 col-xl-5 col-lg-5">
             <h5> Report Preview</h5>
             <div className="px-2 my-2">
-
               <div className="dimensions mb-4">
                 <div className="report-headertable px-2">
                   <span className="" > Company Name</span>
@@ -455,14 +412,11 @@ const CreateReport = () => {
                     <div></div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
-
         </div>
       </form>
-
     </div>
   );
 };
