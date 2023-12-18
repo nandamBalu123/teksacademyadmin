@@ -788,9 +788,11 @@ const Dashboard = () => {
         {Displaycards.enrollments && (
           <div className="">
             <div className="d-flex justify-content-between align-items-center">
+
+
               <h5 className=" text-center flex-grow-1 pt-4 ms-sm-5 underline ">
                 <span className="fw-bold fs-5">{!filterCriteria.fromdate && !filterCriteria.todate && <>Current Month</>}  </span> Enrollment
-                Details {filterCriteria.fromdate && filterCriteria.todate && <>{filterCriteria.fromdate} to {filterCriteria.todate}</>}
+                Details
               </h5>
 
               {/* for filter button */}
@@ -829,8 +831,8 @@ const Dashboard = () => {
                   <div className="d-flex justify-content-between">
                     <MenuItem> Filter</MenuItem>
                     <MenuItem>
-                      {" "}
-                      <CloseIcon onClick={handleClose} />{" "}
+
+                      <CloseIcon onClick={handleClose} />
                     </MenuItem>
                   </div>
                   <hr />
@@ -867,7 +869,7 @@ const Dashboard = () => {
 
                   <MenuItem className="text-end">
                     <button className="btn btn-color" onClick={filterreset}>
-                      {" "}
+
                       Clear
                     </button>
                   </MenuItem>
@@ -901,7 +903,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(getstudentData.length).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -930,7 +932,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(totalAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -960,7 +962,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(enrollmentsTotalReceivedAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -990,7 +992,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(enrollmentsTotalDueAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -1004,8 +1006,8 @@ const Dashboard = () => {
                 <div>
                   <div className="">
                     <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5"> Current Month </span>
-                      Branch Wise Enrollment Data
+                      <span className="fw-bold fs-5">{!filterCriteria.fromdate && !filterCriteria.today && <> Current Month</>}</span>
+                      &nbsp;  Branch Wise Enrollments
                     </h5>
 
 
@@ -1020,7 +1022,7 @@ const Dashboard = () => {
                                   Branch
                                 </TableCell>
                                 <TableCell className="table-cell-heading">
-                                  Total Count
+                                  Enrollments
                                 </TableCell>
                               </TableRow>
                             </TableHead>
@@ -1103,7 +1105,7 @@ const Dashboard = () => {
                                   <TableHead>
                                     <TableRow>
                                       <TableCell className="table-cell-heading">Counsellor Name</TableCell>
-                                      <TableCell className="table-cell-heading">Count</TableCell>
+                                      <TableCell className="table-cell-heading">  Enrollments</TableCell>
 
                                     </TableRow>
                                   </TableHead>
@@ -1248,8 +1250,8 @@ const Dashboard = () => {
                 <div>
                   <div className="">
                     <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5"> Current Month </span>
-                      Branch Wise Booking Amount Data
+                      <span className="fw-bold fs-5"> {!filterCriteria.fromdate && !filterCriteria.today && <> Current Month</>}</span>
+                      &nbsp;Branch Wise Booking Amount
                     </h5>
 
 
@@ -1283,7 +1285,10 @@ const Dashboard = () => {
 
                                       </TableCell>
                                       <TableCell className="Table-cell">
-                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
+                                        {Number(
+                                          parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                        {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount} */}
                                       </TableCell>
                                     </TableRow>
                                   )
@@ -1322,7 +1327,10 @@ const Dashboard = () => {
 
                                       </TableCell>
                                       <TableCell className="Table-cell">
-                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
+                                        {Number(
+                                          parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                        {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount} */}
                                       </TableCell>
                                     </TableRow>
                                   )
@@ -1368,7 +1376,10 @@ const Dashboard = () => {
                                           </TableCell>
 
                                           <TableCell className="Table-cell" >
-                                            {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalAmount}
+                                            {Number(
+                                              parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalAmount).toFixed(2)
+                                            ).toLocaleString("en-IN")}
+                                            {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalAmount} */}
                                           </TableCell>
 
 
@@ -1454,7 +1465,11 @@ const Dashboard = () => {
                                                       <TableCell className="Table-cell" >{student.course}</TableCell>
                                                       <TableCell className="Table-cell" >{admissionDate}</TableCell>
 
-                                                      <TableCell className="Table-cell">{student.totalAmount}</TableCell>
+                                                      <TableCell className="Table-cell">{Number(
+                                                        parseFloat(student.totalAmount).toFixed(2)
+                                                      ).toLocaleString("en-IN")}
+                                                        {/* {student.totalAmount} */}
+                                                      </TableCell>
                                                     </TableRow>
                                                   )
 
@@ -1462,37 +1477,16 @@ const Dashboard = () => {
                                             </TableBody>
                                           </Table>
                                         </TableContainer>
-                                      }
-
-
-
-
-
-
-                                    </div>
+                                      } </div>
                                   )
                                 )}
-
-
                               </div>}
                           </div>
-
-
                         )
 
                       })}
 
                     </div>
-
-
-
-
-
-
-
-
-
-
                   </div>
                 </div>
               )}
@@ -1500,8 +1494,8 @@ const Dashboard = () => {
                 <div>
                   <div className="">
                     <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5"> Current Month </span>
-                      Branch Wise Enrollment Fee Received Data
+                      <span className="fw-bold fs-5"> {!filterCriteria.fromdate && !filterCriteria.today && <> Current Month</>}</span>
+                      &nbsp; Branch Wise  Fee Received
                     </h5>
 
 
@@ -1535,7 +1529,10 @@ const Dashboard = () => {
 
                                       </TableCell>
                                       <TableCell className="Table-cell">
-                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                        {Number(
+                                          parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                        {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount} */}
                                       </TableCell>
                                     </TableRow>
                                   )
@@ -1574,7 +1571,9 @@ const Dashboard = () => {
 
                                       </TableCell>
                                       <TableCell className="Table-cell">
-                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                        {Number(
+                                          parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
                                       </TableCell>
                                     </TableRow>
                                   )
@@ -1620,7 +1619,10 @@ const Dashboard = () => {
                                           </TableCell>
 
                                           <TableCell className="Table-cell" >
-                                            {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount}
+                                            {Number(
+                                              parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount).toFixed(2)
+                                            ).toLocaleString("en-IN")}
+                                            {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount} */}
                                           </TableCell>
 
 
@@ -1705,7 +1707,12 @@ const Dashboard = () => {
                                                       <TableCell className="Table-cell" >{student.course}</TableCell>
                                                       <TableCell className="Table-cell" >{admissionDate}</TableCell>
 
-                                                      <TableCell className="Table-cell">{student.receivedamount}</TableCell>
+                                                      <TableCell className="Table-cell">
+                                                        {Number(
+                                                          parseFloat(student.receivedamount).toFixed(2)
+                                                        ).toLocaleString("en-IN")}
+                                                        {/* {student.receivedamount} */}
+                                                      </TableCell>
                                                     </TableRow>
                                                   )
 
@@ -1751,11 +1758,9 @@ const Dashboard = () => {
                 <div>
                   <div className="">
                     <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5"> Current Month </span>
-                      Branch Wise Enrollment Fee Yet To Receive
+                      <span className="fw-bold fs-5">  {!filterCriteria.fromdate && !filterCriteria.today && <> Current Month</>}</span>
+                      &nbsp; Branch Wise  Fee Yet To Received
                     </h5>
-
-
                     <div className="row">
                       {!selectedBranch &&
                         <div className="">
@@ -1767,7 +1772,7 @@ const Dashboard = () => {
                                     Branch
                                   </TableCell>
                                   <TableCell className="table-cell-heading">
-                                    Fee Yet To Receive
+                                    Fee Yet To Received
                                   </TableCell>
                                 </TableRow>
                               </TableHead>
@@ -1787,7 +1792,10 @@ const Dashboard = () => {
 
                                       </TableCell>
                                       <TableCell className="Table-cell">
-                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                        {Number(
+                                          parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                        {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount} */}
                                       </TableCell>
                                     </TableRow>
                                   )
@@ -1807,7 +1815,7 @@ const Dashboard = () => {
                                     Branch
                                   </TableCell>
                                   <TableCell className="table-cell-heading">
-                                    Fee Yet To Receive
+                                    Fee Yet To Received
                                   </TableCell>
                                 </TableRow>
                               </TableHead>
@@ -1827,7 +1835,10 @@ const Dashboard = () => {
 
                                       </TableCell>
                                       <TableCell className="Table-cell">
-                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                        {Number(
+                                          parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                        {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount} */}
                                       </TableCell>
                                     </TableRow>
                                   )
@@ -1851,7 +1862,7 @@ const Dashboard = () => {
                                   <TableHead>
                                     <TableRow>
                                       <TableCell className="table-cell-heading">Counsellor Name</TableCell>
-                                      <TableCell className="table-cell-heading">Booking Amount</TableCell>
+                                      <TableCell className="table-cell-heading">Fee Yet To Received</TableCell>
 
                                     </TableRow>
                                   </TableHead>
@@ -1873,7 +1884,10 @@ const Dashboard = () => {
                                           </TableCell>
 
                                           <TableCell className="Table-cell" >
-                                            {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount}
+                                            {Number(
+                                              parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount).toFixed(2)
+                                            ).toLocaleString("en-IN")}
+                                            {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount} */}
                                           </TableCell>
 
 
@@ -1922,7 +1936,7 @@ const Dashboard = () => {
                                                 <TableCell className="table-cell-heading">Name</TableCell>
                                                 <TableCell className="table-cell-heading">Course</TableCell>
                                                 <TableCell className="table-cell-heading">Admission Date</TableCell>
-                                                <TableCell className="table-cell-heading"> Fee Yet To Receive</TableCell>
+                                                <TableCell className="table-cell-heading"> Fee Yet To Received</TableCell>
                                               </TableRow>
                                             </TableHead>
                                             <TableBody sx={{ overflowY: 'auto' }}>
@@ -1959,7 +1973,12 @@ const Dashboard = () => {
                                                       <TableCell className="Table-cell" >{student.course}</TableCell>
                                                       <TableCell className="Table-cell" >{admissionDate}</TableCell>
 
-                                                      <TableCell className="Table-cell">{student.dueamount}</TableCell>
+                                                      <TableCell className="Table-cell">
+                                                        {Number(
+                                                          parseFloat(student.dueamount).toFixed(2)
+                                                        ).toLocaleString("en-IN")}
+                                                        {/* {student.dueamount} */}
+                                                      </TableCell>
                                                     </TableRow>
                                                   )
 
@@ -2011,7 +2030,7 @@ const Dashboard = () => {
             <div className=" ">
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className=" text-center flex-grow-1 pt-4 mb-2 ms-sm-5 underline ">
-                  <span className="fw-bold fs-5"> Current Month</span> Fee Details
+                  <span className="fw-bold fs-5">{!filterDeuAndReceived.fromdate && !filterDeuAndReceived.today && <> Current Month</>}</span> Fee Details
                 </h5>
                 <div className="">
                   <Button
@@ -2048,8 +2067,8 @@ const Dashboard = () => {
                     <div className="d-flex justify-content-between">
                       <MenuItem> Filter</MenuItem>
                       <MenuItem>
-                        {" "}
-                        <CloseIcon onClick={handleClose} />{" "}
+
+                        <CloseIcon onClick={handleClose} />
                       </MenuItem>
                     </div>
                     <hr />
@@ -2086,7 +2105,7 @@ const Dashboard = () => {
 
                     <MenuItem className="text-end">
                       <button className="btn btn-color" onClick={filterDeuAndReceivedreset}>
-                        {" "}
+
                         Clear
                       </button>
                     </MenuItem>
@@ -2121,7 +2140,7 @@ const Dashboard = () => {
                     <p className="text-center pt-3">
                       Fee Received
                       <p>
-                        {" "}
+
                         {Number(
                           parseFloat(AllbranchesreceivedAmount).toFixed(2)
                         ).toLocaleString("en-IN")}
@@ -2152,10 +2171,10 @@ const Dashboard = () => {
                     <p className="text-center pt-3">
                       Fee Yet To Received
                       <p>
-                        {" "}
+
                         {Number(
                           parseFloat(AllbranchesDueAmount).toFixed(2)
-                        ).toLocaleString("en-IN")}{" "}
+                        ).toLocaleString("en-IN")}
                       </p>
                     </p>
                   </Card>
@@ -2169,8 +2188,8 @@ const Dashboard = () => {
                   <div>
                     <div className="">
                       <h5 className="pt-4 text-center underline">
-                        <span className="fw-bold fs-5"> Current Month </span>
-                        Branch Wise Received Amount Data
+                        <span className="fw-bold fs-5">{!filterDeuAndReceived.fromdate && !filterDeuAndReceived.today && <> Current Month</>}</span>
+                        &nbsp; Branch Wise Fee Received
                       </h5>
 
 
@@ -2185,7 +2204,7 @@ const Dashboard = () => {
                                       Branch
                                     </TableCell>
                                     <TableCell className="table-cell-heading">
-                                      Received Amount
+                                      Fee Received
                                     </TableCell>
                                   </TableRow>
                                 </TableHead>
@@ -2204,7 +2223,10 @@ const Dashboard = () => {
 
                                         </TableCell>
                                         <TableCell className="Table-cell">
-                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                          {Number(
+                                            parseFloat(calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount).toFixed(2)
+                                          ).toLocaleString("en-IN")}
+                                          {/* {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount} */}
                                         </TableCell>
                                       </TableRow>
                                     )
@@ -2224,7 +2246,7 @@ const Dashboard = () => {
                                       Branch
                                     </TableCell>
                                     <TableCell className="table-cell-heading">
-                                      Received Amount
+                                      Fee Received
                                     </TableCell>
                                   </TableRow>
                                 </TableHead>
@@ -2243,7 +2265,9 @@ const Dashboard = () => {
 
                                         </TableCell>
                                         <TableCell className="Table-cell">
-                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                          {Number(
+                                            parseFloat(calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount).toFixed(2)
+                                          ).toLocaleString("en-IN")}
                                         </TableCell>
                                       </TableRow>
                                     )
@@ -2267,7 +2291,7 @@ const Dashboard = () => {
                                     <TableHead>
                                       <TableRow>
                                         <TableCell className="table-cell-heading">Counsellor Name</TableCell>
-                                        <TableCell className="table-cell-heading">Received Amount</TableCell>
+                                        <TableCell className="table-cell-heading"> Fee Received </TableCell>
 
                                       </TableRow>
                                     </TableHead>
@@ -2289,7 +2313,10 @@ const Dashboard = () => {
                                             </TableCell>
 
                                             <TableCell className="Table-cell" >
-                                              {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount}
+                                              {Number(
+                                                parseFloat(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount).toFixed(2)
+                                              ).toLocaleString("en-IN")}
+                                              {/* {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount} */}
                                             </TableCell>
 
 
@@ -2338,7 +2365,7 @@ const Dashboard = () => {
                                                   <TableCell className="table-cell-heading">Name</TableCell>
                                                   <TableCell className="table-cell-heading">Course</TableCell>
                                                   <TableCell className="table-cell-heading">Admission Date</TableCell>
-                                                  <TableCell className="table-cell-heading">Received Amount</TableCell>
+                                                  <TableCell className="table-cell-heading"> Fee Received </TableCell>
                                                 </TableRow>
                                               </TableHead>
                                               <TableBody sx={{ overflowY: 'auto' }}>
@@ -2377,7 +2404,12 @@ const Dashboard = () => {
                                                           <TableCell className="Table-cell" >{student.course}</TableCell>
                                                           <TableCell className="Table-cell" >{admissionDate}</TableCell>
 
-                                                          <TableCell className="Table-cell">{student.receivedamount}</TableCell>
+                                                          <TableCell className="Table-cell">
+                                                            {Number(
+                                                              parseFloat(student.receivedamount).toFixed(2)
+                                                            ).toLocaleString("en-IN")}
+                                                            {/* {student.receivedamount} */}
+                                                          </TableCell>
                                                         </TableRow>
                                                       )
                                                     }
@@ -2405,8 +2437,8 @@ const Dashboard = () => {
                   <div>
                     <div className="">
                       <h5 className="pt-4 text-center underline">
-                        <span className="fw-bold fs-5"> Current Month </span>
-                        Branch Wise Fee Yet to Received Amount
+                        <span className="fw-bold fs-5">{!filterDeuAndReceived.fromdate && !filterDeuAndReceived.today && <> Current Month</>}</span>
+                        &nbsp; Branch Wise Fee Yet to Received
                       </h5>
 
 
@@ -2421,7 +2453,7 @@ const Dashboard = () => {
                                       Branch
                                     </TableCell>
                                     <TableCell className="table-cell-heading">
-                                      Fee Yet To Receive
+                                      Fee Yet To Received
                                     </TableCell>
                                   </TableRow>
                                 </TableHead>
@@ -2440,7 +2472,10 @@ const Dashboard = () => {
 
                                         </TableCell>
                                         <TableCell className="Table-cell">
-                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                          {Number(
+                                            parseFloat(calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount).toFixed(2)
+                                          ).toLocaleString("en-IN")}
+                                          {/* {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount} */}
                                         </TableCell>
                                       </TableRow>
                                     )
@@ -2460,7 +2495,7 @@ const Dashboard = () => {
                                       Branch
                                     </TableCell>
                                     <TableCell className="table-cell-heading">
-                                      Fee Yet To Receive
+                                      Fee Yet To Received
                                     </TableCell>
                                   </TableRow>
                                 </TableHead>
@@ -2479,7 +2514,9 @@ const Dashboard = () => {
 
                                         </TableCell>
                                         <TableCell className="Table-cell">
-                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                          {Number(
+                                            parseFloat(calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount).toFixed(2)
+                                          ).toLocaleString("en-IN")}
                                         </TableCell>
                                       </TableRow>
                                     )
@@ -2503,7 +2540,7 @@ const Dashboard = () => {
                                     <TableHead>
                                       <TableRow>
                                         <TableCell className="table-cell-heading">Counsellor Name</TableCell>
-                                        <TableCell className="table-cell-heading">Fee Yet To Receive</TableCell>
+                                        <TableCell className="table-cell-heading">Fee Yet To Received</TableCell>
 
                                       </TableRow>
                                     </TableHead>
@@ -2525,7 +2562,10 @@ const Dashboard = () => {
                                             </TableCell>
 
                                             <TableCell className="Table-cell" >
-                                              {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount}
+                                              {Number(
+                                                parseFloat(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount).toFixed(2)
+                                              ).toLocaleString("en-IN")}
+                                              {/* {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount} */}
                                             </TableCell>
 
 
@@ -2574,7 +2614,7 @@ const Dashboard = () => {
                                                   <TableCell className="table-cell-heading">Name</TableCell>
                                                   <TableCell className="table-cell-heading">Course</TableCell>
                                                   <TableCell className="table-cell-heading">Admission Date</TableCell>
-                                                  <TableCell className="table-cell-heading">Fee Yet to Receive</TableCell>
+                                                  <TableCell className="table-cell-heading">Fee Yet to Received</TableCell>
                                                 </TableRow>
                                               </TableHead>
                                               <TableBody sx={{ overflowY: 'auto' }}>
@@ -2613,7 +2653,12 @@ const Dashboard = () => {
                                                           <TableCell className="Table-cell" >{student.course}</TableCell>
                                                           <TableCell className="Table-cell" >{admissionDate}</TableCell>
 
-                                                          <TableCell className="Table-cell">{student.dueamount}</TableCell>
+                                                          <TableCell className="Table-cell">
+                                                            {Number(
+                                                              parseFloat(student.dueamount).toFixed(2)
+                                                            ).toLocaleString("en-IN")}
+                                                            {/* {student.dueamount} */}
+                                                          </TableCell>
                                                         </TableRow>
                                                       )
                                                     }
@@ -2687,8 +2732,8 @@ const Dashboard = () => {
                       <div className="d-flex justify-content-between">
                         <MenuItem> Filter</MenuItem>
                         <MenuItem>
-                          {" "}
-                          <CloseIcon onClick={handleClose} />{" "}
+
+                          <CloseIcon onClick={handleClose} />
                         </MenuItem>
                       </div>
                       <hr />
@@ -2725,7 +2770,7 @@ const Dashboard = () => {
 
                       <MenuItem className="text-end">
                         <button className="btn btn-color" onClick={filterreset}>
-                          {" "}
+
                           Clear
                         </button>
                       </MenuItem>
@@ -2797,13 +2842,13 @@ const Dashboard = () => {
                                 return (
                                   <TableRow key={`user-${branch}`}>
                                     <TableCell className="Table-cell" >
-                                      {branch}{" "}
+                                      {branch}
                                     </TableCell>
                                     <TableCell className="Table-cell">
-                                      {" "}
+
                                       {Number(
                                         parseFloat(totalCount).toFixed(2)
-                                      ).toLocaleString("en-IN")}{" "}
+                                      ).toLocaleString("en-IN")}
                                     </TableCell>
                                   </TableRow>
                                 );
@@ -2898,7 +2943,7 @@ const Dashboard = () => {
           <div className="">
             <div className="d-flex justify-content-between align-items-center">
               <h5 className=" text-center flex-grow-1 pt-4 ms-sm-5 underline ">
-                <span className="fw-bold fs-5"> Current Month</span> Enrollment
+                <span className="fw-bold fs-5"> {!filterDeuAndReceived.fromdate && !filterDeuAndReceived.today && <> Current Month</>}</span> Enrollment
                 Details
               </h5>
 
@@ -2938,8 +2983,8 @@ const Dashboard = () => {
                   <div className="d-flex justify-content-between">
                     <MenuItem> Filter</MenuItem>
                     <MenuItem>
-                      {" "}
-                      <CloseIcon onClick={handleClose} />{" "}
+
+                      <CloseIcon onClick={handleClose} />
                     </MenuItem>
                   </div>
                   <hr />
@@ -2954,7 +2999,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="fromdate"
-                        value={filterCriteria.fromdate}
+                        value={filterDeuAndReceived.fromdate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -2968,7 +3013,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="todate"
-                        value={filterCriteria.todate}
+                        value={filterDeuAndReceived.todate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -2976,7 +3021,7 @@ const Dashboard = () => {
 
                   <MenuItem className="text-end">
                     <button className="btn btn-color" onClick={filterreset}>
-                      {" "}
+
                       Clear
                     </button>
                   </MenuItem>
@@ -3010,7 +3055,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(getstudentData.length).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -3039,7 +3084,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(totalAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -3069,7 +3114,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(enrollmentsTotalReceivedAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -3099,7 +3144,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(enrollmentsTotalDueAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -3113,8 +3158,8 @@ const Dashboard = () => {
                 <div>
                   <div className="">
                     <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5"> Current Month </span>
-                      Branch Wise Enrollment Data
+                      <span className="fw-bold fs-5">{!filterCriteria.fromdate && !filterCriteria.today && <> Current Month</>}</span>
+                      &nbsp;  Branch Wise Enrollments
                     </h5>
 
 
@@ -3134,7 +3179,7 @@ const Dashboard = () => {
                               <TableHead>
                                 <TableRow>
                                   <TableCell className="table-cell-heading">Counsellor Name</TableCell>
-                                  <TableCell className="table-cell-heading">Count</TableCell>
+                                  <TableCell className="table-cell-heading">Enrollments</TableCell>
 
                                 </TableRow>
                               </TableHead>
@@ -3279,8 +3324,8 @@ const Dashboard = () => {
                 <div>
                   <div className="">
                     <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5"> Current Month </span>
-                      Branch Wise Booking Amount Data
+                      <span className="fw-bold fs-5">{!filterCriteria.fromdate && !filterCriteria.today && <> Current Month</>}</span>
+                      &nbsp;  Branch Wise Booking Amount
                     </h5>
 
 
@@ -3322,7 +3367,10 @@ const Dashboard = () => {
                                       </TableCell>
 
                                       <TableCell className="Table-cell" >
-                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalAmount}
+                                        {Number(
+                                          parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                        {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalAmount} */}
                                       </TableCell>
 
 
@@ -3408,7 +3456,12 @@ const Dashboard = () => {
                                                     <TableCell className="Table-cell" >{student.course}</TableCell>
                                                     <TableCell className="Table-cell" >{admissionDate}</TableCell>
 
-                                                    <TableCell className="Table-cell">{student.totalAmount}</TableCell>
+                                                    <TableCell className="Table-cell">
+                                                      {Number(
+                                                        parseFloat(student.totalAmount).toFixed(2)
+                                                      ).toLocaleString("en-IN")}
+                                                      {/* {student.totalAmount} */}
+                                                    </TableCell>
                                                   </TableRow>
                                                 )
 
@@ -3454,8 +3507,8 @@ const Dashboard = () => {
                 <div>
                   <div className="">
                     <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5"> Current Month </span>
-                      Branch Wise Enrollment Fee Received Data
+                      <span className="fw-bold fs-5"> {!filterCriteria.fromdate && !filterCriteria.today && <> Current Month</>}</span>
+                      &nbsp; Branch Wise Fee Received
                     </h5>
 
 
@@ -3497,7 +3550,10 @@ const Dashboard = () => {
                                       </TableCell>
 
                                       <TableCell className="Table-cell" >
-                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount}
+                                        {Number(
+                                          parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                        {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount} */}
                                       </TableCell>
 
 
@@ -3582,7 +3638,12 @@ const Dashboard = () => {
                                                     <TableCell className="Table-cell" >{student.course}</TableCell>
                                                     <TableCell className="Table-cell" >{admissionDate}</TableCell>
 
-                                                    <TableCell className="Table-cell">{student.receivedamount}</TableCell>
+                                                    <TableCell className="Table-cell">
+                                                      {Number(
+                                                        parseFloat(student.receivedamount).toFixed(2)
+                                                      ).toLocaleString("en-IN")}
+                                                      {/* {student.receivedamount} */}
+                                                    </TableCell>
                                                   </TableRow>
                                                 )
 
@@ -3628,8 +3689,8 @@ const Dashboard = () => {
                 <div>
                   <div className="">
                     <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5"> Current Month </span>
-                      Branch Wise Enrollment Fee Yet To Receive
+                      <span className="fw-bold fs-5">{!filterCriteria.fromdate && !filterCriteria.today && <> Current Month</>}</span>
+                      &nbsp; Branch Wise  Fee Yet To Received
                     </h5>
 
 
@@ -3671,7 +3732,10 @@ const Dashboard = () => {
                                       </TableCell>
 
                                       <TableCell className="Table-cell" >
-                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount}
+                                        {Number(
+                                          parseFloat(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount).toFixed(2)
+                                        ).toLocaleString("en-IN")}
+                                        {/* {calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount} */}
                                       </TableCell>
 
 
@@ -3757,7 +3821,12 @@ const Dashboard = () => {
                                                     <TableCell className="Table-cell" >{student.course}</TableCell>
                                                     <TableCell className="Table-cell" >{admissionDate}</TableCell>
 
-                                                    <TableCell className="Table-cell">{student.dueamount}</TableCell>
+                                                    <TableCell className="Table-cell">
+                                                      {Number(
+                                                        parseFloat(student.dueamount).toFixed(2)
+                                                      ).toLocaleString("en-IN")}
+                                                      {/* {student.dueamount} */}
+                                                    </TableCell>
                                                   </TableRow>
                                                 )
 
@@ -3809,7 +3878,7 @@ const Dashboard = () => {
             <div className=" ">
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className=" text-center flex-grow-1 pt-4 mb-2 ms-sm-5 underline ">
-                  <span className="fw-bold fs-5"> Current Month</span> Fee Details
+                  <span className="fw-bold fs-5"> {!filterDeuAndReceived.fromdate && !filterDeuAndReceived.today && <> Current Month</>}</span> Fee Details
                 </h5>
                 <div className="">
                   <Button
@@ -3846,8 +3915,8 @@ const Dashboard = () => {
                     <div className="d-flex justify-content-between">
                       <MenuItem> Filter</MenuItem>
                       <MenuItem>
-                        {" "}
-                        <CloseIcon onClick={handleClose} />{" "}
+
+                        <CloseIcon onClick={handleClose} />
                       </MenuItem>
                     </div>
                     <hr />
@@ -3884,7 +3953,7 @@ const Dashboard = () => {
 
                     <MenuItem className="text-end">
                       <button className="btn btn-color" onClick={filterreset}>
-                        {" "}
+
                         Clear
                       </button>
                     </MenuItem>
@@ -3919,7 +3988,7 @@ const Dashboard = () => {
                     <p className="text-center pt-3">
                       Fee Received
                       <p>
-                        {" "}
+
                         {Number(
                           parseFloat(AllbranchesreceivedAmount).toFixed(2)
                         ).toLocaleString("en-IN")}
@@ -3950,10 +4019,10 @@ const Dashboard = () => {
                     <p className="text-center pt-3">
                       Fee Yet To Received
                       <p>
-                        {" "}
+
                         {Number(
                           parseFloat(AllbranchesDueAmount).toFixed(2)
-                        ).toLocaleString("en-IN")}{" "}
+                        ).toLocaleString("en-IN")}
                       </p>
                     </p>
                   </Card>
@@ -4331,8 +4400,8 @@ const Dashboard = () => {
                       <div className="d-flex justify-content-between">
                         <MenuItem> Filter</MenuItem>
                         <MenuItem>
-                          {" "}
-                          <CloseIcon onClick={handleClose} />{" "}
+
+                          <CloseIcon onClick={handleClose} />
                         </MenuItem>
                       </div>
                       <hr />
@@ -4369,7 +4438,7 @@ const Dashboard = () => {
 
                       <MenuItem className="text-end">
                         <button className="btn btn-color" onClick={filterreset}>
-                          {" "}
+
                           Clear
                         </button>
                       </MenuItem>
@@ -4441,13 +4510,13 @@ const Dashboard = () => {
                                 return (
                                   <TableRow key={`user-${branch}`}>
                                     <TableCell className="Table-cell" style={{ width: "80%" }}>
-                                      {branch}{" "}
+                                      {branch}
                                     </TableCell>
                                     <TableCell className="Table-cell">
-                                      {" "}
+
                                       {Number(
                                         parseFloat(totalCount).toFixed(2)
-                                      ).toLocaleString("en-IN")}{" "}
+                                      ).toLocaleString("en-IN")}
                                     </TableCell>
                                   </TableRow>
                                 );
@@ -4567,8 +4636,8 @@ const Dashboard = () => {
                   <div className="d-flex justify-content-between">
                     <MenuItem> Filter</MenuItem>
                     <MenuItem>
-                      {" "}
-                      <CloseIcon onClick={handleClose} />{" "}
+
+                      <CloseIcon onClick={handleClose} />
                     </MenuItem>
                   </div>
                   <hr />
@@ -4605,7 +4674,7 @@ const Dashboard = () => {
 
                   <MenuItem className="text-end">
                     <button className="btn btn-color" onClick={filterreset}>
-                      {" "}
+
                       Clear
                     </button>
                   </MenuItem>
@@ -4639,7 +4708,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(getstudentData.length).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -4668,7 +4737,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(totalAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -4698,7 +4767,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(enrollmentsTotalReceivedAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -4728,7 +4797,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(enrollmentsTotalDueAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -5250,8 +5319,8 @@ const Dashboard = () => {
                     <div className="d-flex justify-content-between">
                       <MenuItem> Filter</MenuItem>
                       <MenuItem>
-                        {" "}
-                        <CloseIcon onClick={handleClose} />{" "}
+
+                        <CloseIcon onClick={handleClose} />
                       </MenuItem>
                     </div>
                     <hr />
@@ -5288,7 +5357,7 @@ const Dashboard = () => {
 
                     <MenuItem className="text-end">
                       <button className="btn btn-color" onClick={filterreset}>
-                        {" "}
+
                         Clear
                       </button>
                     </MenuItem>
@@ -5323,7 +5392,7 @@ const Dashboard = () => {
                     <p className="text-center pt-3">
                       Fee Received
                       <p>
-                        {" "}
+
                         {Number(
                           parseFloat(AllbranchesreceivedAmount).toFixed(2)
                         ).toLocaleString("en-IN")}
@@ -5354,10 +5423,10 @@ const Dashboard = () => {
                     <p className="text-center pt-3">
                       Fee Yet To Received
                       <p>
-                        {" "}
+
                         {Number(
                           parseFloat(AllbranchesDueAmount).toFixed(2)
-                        ).toLocaleString("en-IN")}{" "}
+                        ).toLocaleString("en-IN")}
                       </p>
                     </p>
                   </Card>
@@ -5696,8 +5765,8 @@ const Dashboard = () => {
                   <div className="d-flex justify-content-between">
                     <MenuItem> Filter</MenuItem>
                     <MenuItem>
-                      {" "}
-                      <CloseIcon onClick={handleClose} />{" "}
+
+                      <CloseIcon onClick={handleClose} />
                     </MenuItem>
                   </div>
                   <hr />
@@ -5734,7 +5803,7 @@ const Dashboard = () => {
 
                   <MenuItem className="text-end">
                     <button className="btn btn-color" onClick={filterreset}>
-                      {" "}
+
                       Clear
                     </button>
                   </MenuItem>
@@ -5768,7 +5837,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(getstudentData.length).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -5797,7 +5866,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(totalAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -5827,7 +5896,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(enrollmentsTotalReceivedAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -5857,7 +5926,7 @@ const Dashboard = () => {
                     <p>
                       {Number(
                         parseFloat(enrollmentsTotalDueAmount).toFixed(2)
-                      ).toLocaleString("en-IN")}{" "}
+                      ).toLocaleString("en-IN")}
                     </p>
                   </p>
                 </Card>
@@ -6914,8 +6983,8 @@ const Dashboard = () => {
                     <div className="d-flex justify-content-between">
                       <MenuItem> Filter</MenuItem>
                       <MenuItem>
-                        {" "}
-                        <CloseIcon onClick={handleClose} />{" "}
+
+                        <CloseIcon onClick={handleClose} />
                       </MenuItem>
                     </div>
                     <hr />
@@ -6952,7 +7021,7 @@ const Dashboard = () => {
 
                     <MenuItem className="text-end">
                       <button className="btn btn-color" onClick={filterreset}>
-                        {" "}
+
                         Clear
                       </button>
                     </MenuItem>
@@ -6987,7 +7056,7 @@ const Dashboard = () => {
                     <p className="text-center pt-3">
                       Fee Received
                       <p>
-                        {" "}
+
                         {Number(
                           parseFloat(AllbranchesreceivedAmount).toFixed(2)
                         ).toLocaleString("en-IN")}
@@ -7018,10 +7087,10 @@ const Dashboard = () => {
                     <p className="text-center pt-3">
                       Fee Yet To Received
                       <p>
-                        {" "}
+
                         {Number(
                           parseFloat(AllbranchesDueAmount).toFixed(2)
-                        ).toLocaleString("en-IN")}{" "}
+                        ).toLocaleString("en-IN")}
                       </p>
                     </p>
                   </Card>
@@ -7553,8 +7622,8 @@ const Dashboard = () => {
                       <div className="d-flex justify-content-between">
                         <MenuItem> Filter</MenuItem>
                         <MenuItem>
-                          {" "}
-                          <CloseIcon onClick={handleClose} />{" "}
+
+                          <CloseIcon onClick={handleClose} />
                         </MenuItem>
                       </div>
                       <hr />
@@ -7591,7 +7660,7 @@ const Dashboard = () => {
 
                       <MenuItem className="text-end">
                         <button className="btn btn-color" onClick={filterreset}>
-                          {" "}
+
                           Clear
                         </button>
                       </MenuItem>
@@ -7663,13 +7732,13 @@ const Dashboard = () => {
                                 return (
                                   <TableRow key={`user-${branch}`}>
                                     <TableCell className="Table-cell" style={{ width: "80%" }}>
-                                      {branch}{" "}
+                                      {branch}
                                     </TableCell>
                                     <TableCell className="Table-cell">
-                                      {" "}
+
                                       {Number(
                                         parseFloat(totalCount).toFixed(2)
-                                      ).toLocaleString("en-IN")}{" "}
+                                      ).toLocaleString("en-IN")}
                                     </TableCell>
                                   </TableRow>
                                 );
