@@ -1254,44 +1254,84 @@ const Dashboard = () => {
 
 
                     <div className="row">
-                      <div className="col-12 col-md-6">
-                        <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                          <Table stickyHeader aria-label="sticky table " >
-                            <TableHead>
-                              <TableRow>
-                                <TableCell className="table-cell-heading">
-                                  Branch
-                                </TableCell>
-                                <TableCell className="table-cell-heading">
-                                  Booking Amount
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
+                      {!selectedBranch &&
+                        <div className="">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Booking Amount
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
 
-                            <TableBody sx={{ overflowY: 'auto' }}>
+                              <TableBody sx={{ overflowY: 'auto' }}>
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
-                                return (
-                                  <TableRow >
-                                    <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                      <span className=" table-text "
-                                        style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                        onClick={() => handleBranchClick(branch)}>      {branch}
-                                      </span>
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
 
 
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
-                                    </TableCell>
-                                  </TableRow>
-                                )
-                              })}
-                            </TableBody>
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
 
-                          </Table>
-                        </TableContainer>
-                      </div>
+                            </Table>
+                          </TableContainer>
+                        </div>}
+                      {selectedBranch &&
+                        <div className="col-12 col-md-6">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Booking Amount
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
+
+                              <TableBody sx={{ overflowY: 'auto' }}>
+
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
+
+
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
+
+                            </Table>
+                          </TableContainer>
+                        </div>}
                       <div className="col-12 col-md-6">
 
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
@@ -1466,44 +1506,84 @@ const Dashboard = () => {
 
 
                     <div className="row">
-                      <div className="col-12 col-md-6">
-                        <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                          <Table stickyHeader aria-label="sticky table " >
-                            <TableHead>
-                              <TableRow>
-                                <TableCell className="table-cell-heading">
-                                  Branch
-                                </TableCell>
-                                <TableCell className="table-cell-heading">
-                                  Fee Received
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
+                      {!selectedBranch &&
+                        <div className="">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Fee Received
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
 
-                            <TableBody sx={{ overflowY: 'auto' }}>
+                              <TableBody sx={{ overflowY: 'auto' }}>
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
-                                return (
-                                  <TableRow >
-                                    <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                      <span className=" table-text "
-                                        style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                        onClick={() => handleBranchClick(branch)}>      {branch}
-                                      </span>
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
 
 
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
-                                    </TableCell>
-                                  </TableRow>
-                                )
-                              })}
-                            </TableBody>
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
 
-                          </Table>
-                        </TableContainer>
-                      </div>
+                            </Table>
+                          </TableContainer>
+                        </div>}
+                      {selectedBranch &&
+                        <div className="col-12 col-md-6">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Fee Received
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
+
+                              <TableBody sx={{ overflowY: 'auto' }}>
+
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
+
+
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
+
+                            </Table>
+                          </TableContainer>
+                        </div>}
                       <div className="col-12 col-md-6">
 
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
@@ -1677,45 +1757,86 @@ const Dashboard = () => {
 
 
                     <div className="row">
-                      <div className="col-12 col-md-6">
-                        <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                          <Table stickyHeader aria-label="sticky table " >
-                            <TableHead>
-                              <TableRow>
-                                <TableCell className="table-cell-heading">
-                                  Branch
-                                </TableCell>
-                                <TableCell className="table-cell-heading">
-                                  Fee Yet To Receive
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
+                      {!selectedBranch &&
+                        <div className="">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Fee Yet To Receive
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
 
-                            <TableBody sx={{ overflowY: 'auto' }}>
+                              <TableBody sx={{ overflowY: 'auto' }}>
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch, index) => {
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch, index) => {
 
-                                return (
-                                  <TableRow >
-                                    <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                      <span className=" table-text "
-                                        style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                      >      {branch}
-                                      </span>
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                        >      {branch}
+                                        </span>
 
 
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
-                                    </TableCell>
-                                  </TableRow>
-                                )
-                              })}
-                            </TableBody>
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
 
-                          </Table>
-                        </TableContainer>
-                      </div>
+                            </Table>
+                          </TableContainer>
+                        </div>}
+                      {selectedBranch &&
+                        <div className="col-12 col-md-6">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Fee Yet To Receive
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
+
+                              <TableBody sx={{ overflowY: 'auto' }}>
+
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch, index) => {
+
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                        >      {branch}
+                                        </span>
+
+
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
+
+                            </Table>
+                          </TableContainer>
+                        </div>}
                       <div className="col-12 col-md-6">
 
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
@@ -2054,44 +2175,84 @@ const Dashboard = () => {
 
 
                       <div className="row">
-                        <div className="col-12 col-md-6">
-                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                            <Table stickyHeader aria-label="sticky table " >
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell className="table-cell-heading">
-                                    Branch
-                                  </TableCell>
-                                  <TableCell className="table-cell-heading">
-                                    Received Amount
-                                  </TableCell>
-                                </TableRow>
-                              </TableHead>
+                        {!selectedBranch &&
+                          <div className="">
+                            <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                              <Table stickyHeader aria-label="sticky table " >
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell className="table-cell-heading">
+                                      Branch
+                                    </TableCell>
+                                    <TableCell className="table-cell-heading">
+                                      Received Amount
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
 
-                              <TableBody sx={{ overflowY: 'auto' }}>
+                                <TableBody sx={{ overflowY: 'auto' }}>
 
-                                {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
-                                  return (
-                                    <TableRow >
-                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                        <span className=" table-text "
-                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                          onClick={() => handleBranchClick(branch)}>      {branch}
-                                        </span>
+                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
+                                    return (
+                                      <TableRow >
+                                        <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                          <span className=" table-text "
+                                            style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                            onClick={() => handleBranchClick(branch)}>      {branch}
+                                          </span>
 
 
-                                      </TableCell>
-                                      <TableCell className="Table-cell">
-                                        {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
-                                      </TableCell>
-                                    </TableRow>
-                                  )
-                                })}
-                              </TableBody>
+                                        </TableCell>
+                                        <TableCell className="Table-cell">
+                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  })}
+                                </TableBody>
 
-                            </Table>
-                          </TableContainer>
-                        </div>
+                              </Table>
+                            </TableContainer>
+                          </div>}
+                        {selectedBranch &&
+                          <div className="col-12 col-md-6">
+                            <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                              <Table stickyHeader aria-label="sticky table " >
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell className="table-cell-heading">
+                                      Branch
+                                    </TableCell>
+                                    <TableCell className="table-cell-heading">
+                                      Received Amount
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
+
+                                <TableBody sx={{ overflowY: 'auto' }}>
+
+                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
+                                    return (
+                                      <TableRow >
+                                        <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                          <span className=" table-text "
+                                            style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                            onClick={() => handleBranchClick(branch)}>      {branch}
+                                          </span>
+
+
+                                        </TableCell>
+                                        <TableCell className="Table-cell">
+                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  })}
+                                </TableBody>
+
+                              </Table>
+                            </TableContainer>
+                          </div>}
                         <div className="col-12 col-md-6">
 
                           {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
@@ -2250,44 +2411,84 @@ const Dashboard = () => {
 
 
                       <div className="row">
-                        <div className="col-12 col-md-6">
-                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                            <Table stickyHeader aria-label="sticky table " >
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell className="table-cell-heading">
-                                    Branch
-                                  </TableCell>
-                                  <TableCell className="table-cell-heading">
-                                    Fee Yet To Receive
-                                  </TableCell>
-                                </TableRow>
-                              </TableHead>
+                        {!selectedBranch &&
+                          <div className="">
+                            <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                              <Table stickyHeader aria-label="sticky table " >
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell className="table-cell-heading">
+                                      Branch
+                                    </TableCell>
+                                    <TableCell className="table-cell-heading">
+                                      Fee Yet To Receive
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
 
-                              <TableBody sx={{ overflowY: 'auto' }}>
+                                <TableBody sx={{ overflowY: 'auto' }}>
 
-                                {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
-                                  return (
-                                    <TableRow >
-                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                        <span className=" table-text "
-                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                          onClick={() => handleBranchClick(branch)}>      {branch}
-                                        </span>
+                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
+                                    return (
+                                      <TableRow >
+                                        <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                          <span className=" table-text "
+                                            style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                            onClick={() => handleBranchClick(branch)}>      {branch}
+                                          </span>
 
 
-                                      </TableCell>
-                                      <TableCell className="Table-cell">
-                                        {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
-                                      </TableCell>
-                                    </TableRow>
-                                  )
-                                })}
-                              </TableBody>
+                                        </TableCell>
+                                        <TableCell className="Table-cell">
+                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  })}
+                                </TableBody>
 
-                            </Table>
-                          </TableContainer>
-                        </div>
+                              </Table>
+                            </TableContainer>
+                          </div>}
+                        {selectedBranch &&
+                          <div className="">
+                            <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                              <Table stickyHeader aria-label="sticky table " >
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell className="table-cell-heading">
+                                      Branch
+                                    </TableCell>
+                                    <TableCell className="table-cell-heading">
+                                      Fee Yet To Receive
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
+
+                                <TableBody sx={{ overflowY: 'auto' }}>
+
+                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
+                                    return (
+                                      <TableRow >
+                                        <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                          <span className=" table-text "
+                                            style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                            onClick={() => handleBranchClick(branch)}>      {branch}
+                                          </span>
+
+
+                                        </TableCell>
+                                        <TableCell className="Table-cell">
+                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  })}
+                                </TableBody>
+
+                              </Table>
+                            </TableContainer>
+                          </div>}
                         <div className="col-12 col-md-6">
 
                           {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
@@ -2595,7 +2796,7 @@ const Dashboard = () => {
                                 const totalCount = users.length;
                                 return (
                                   <TableRow key={`user-${branch}`}>
-                                    <TableCell className="Table-cell" style={{ width: "80%" }}>
+                                    <TableCell className="Table-cell" >
                                       {branch}{" "}
                                     </TableCell>
                                     <TableCell className="Table-cell">
@@ -5863,44 +6064,84 @@ const Dashboard = () => {
 
 
                     <div className="row">
-                      <div className="col-12 col-md-6">
-                        <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                          <Table stickyHeader aria-label="sticky table " >
-                            <TableHead>
-                              <TableRow>
-                                <TableCell className="table-cell-heading">
-                                  Branch
-                                </TableCell>
-                                <TableCell className="table-cell-heading">
-                                  Total Count
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
+                      {!selectedBranch &&
+                        <div className="">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Total Count
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
 
-                            <TableBody sx={{ overflowY: 'auto' }}>
+                              <TableBody sx={{ overflowY: 'auto' }}>
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
-                                return (
-                                  <TableRow >
-                                    <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                      <span className=" table-text "
-                                        style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                        onClick={() => handleBranchClick(branch)}>      {branch}
-                                      </span>
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
 
 
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalStudents}
-                                    </TableCell>
-                                  </TableRow>
-                                )
-                              })}
-                            </TableBody>
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalStudents}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
 
-                          </Table>
-                        </TableContainer>
-                      </div>
+                            </Table>
+                          </TableContainer>
+                        </div>}
+                      {selectedBranch &&
+                        <div className="col-12 col-md-6">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Total Count
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
+
+                              <TableBody sx={{ overflowY: 'auto' }}>
+
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
+
+
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalStudents}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
+
+                            </Table>
+                          </TableContainer>
+                        </div>}
                       <div className="col-12 col-md-6">
 
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
@@ -6066,44 +6307,84 @@ const Dashboard = () => {
 
 
                     <div className="row">
-                      <div className="col-12 col-md-6">
-                        <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                          <Table stickyHeader aria-label="sticky table " >
-                            <TableHead>
-                              <TableRow>
-                                <TableCell className="table-cell-heading">
-                                  Branch
-                                </TableCell>
-                                <TableCell className="table-cell-heading">
-                                  Booking Amount
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
+                      {!selectedBranch &&
+                        <div className="">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Booking Amount
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
 
-                            <TableBody sx={{ overflowY: 'auto' }}>
+                              <TableBody sx={{ overflowY: 'auto' }}>
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
-                                return (
-                                  <TableRow >
-                                    <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                      <span className=" table-text "
-                                        style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                        onClick={() => handleBranchClick(branch)}>      {branch}
-                                      </span>
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
 
 
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
-                                    </TableCell>
-                                  </TableRow>
-                                )
-                              })}
-                            </TableBody>
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
 
-                          </Table>
-                        </TableContainer>
-                      </div>
+                            </Table>
+                          </TableContainer>
+                        </div>}
+                      {selectedBranch &&
+                        <div className="col-12 col-md-6">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Booking Amount
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
+
+                              <TableBody sx={{ overflowY: 'auto' }}>
+
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
+
+
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
+
+                            </Table>
+                          </TableContainer>
+                        </div>}
                       <div className="col-12 col-md-6">
 
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
@@ -6278,44 +6559,84 @@ const Dashboard = () => {
 
 
                     <div className="row">
-                      <div className="col-12 col-md-6">
-                        <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                          <Table stickyHeader aria-label="sticky table " >
-                            <TableHead>
-                              <TableRow>
-                                <TableCell className="table-cell-heading">
-                                  Branch
-                                </TableCell>
-                                <TableCell className="table-cell-heading">
-                                  Fee Received
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
+                      {!selectedBranch &&
+                        <div className="">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Fee Received
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
 
-                            <TableBody sx={{ overflowY: 'auto' }}>
+                              <TableBody sx={{ overflowY: 'auto' }}>
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
-                                return (
-                                  <TableRow >
-                                    <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                      <span className=" table-text "
-                                        style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                        onClick={() => handleBranchClick(branch)}>      {branch}
-                                      </span>
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
 
 
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
-                                    </TableCell>
-                                  </TableRow>
-                                )
-                              })}
-                            </TableBody>
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
 
-                          </Table>
-                        </TableContainer>
-                      </div>
+                            </Table>
+                          </TableContainer>
+                        </div>}
+                      {selectedBranch &&
+                        <div className="col-12 col-md-6">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Fee Received
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
+
+                              <TableBody sx={{ overflowY: 'auto' }}>
+
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                          onClick={() => handleBranchClick(branch)}>      {branch}
+                                        </span>
+
+
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
+
+                            </Table>
+                          </TableContainer>
+                        </div>}
                       <div className="col-12 col-md-6">
 
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
@@ -6489,45 +6810,86 @@ const Dashboard = () => {
 
 
                     <div className="row">
-                      <div className="col-12 col-md-6">
-                        <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                          <Table stickyHeader aria-label="sticky table " >
-                            <TableHead>
-                              <TableRow>
-                                <TableCell className="table-cell-heading">
-                                  Branch
-                                </TableCell>
-                                <TableCell className="table-cell-heading">
-                                  Fee Yet To Receive
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
+                      {!selectedBranch &&
+                        <div className="">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Fee Yet To Receive
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
 
-                            <TableBody sx={{ overflowY: 'auto' }}>
+                              <TableBody sx={{ overflowY: 'auto' }}>
 
-                              {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch, index) => {
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch, index) => {
 
-                                return (
-                                  <TableRow >
-                                    <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                      <span className=" table-text "
-                                        style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                      >      {branch}
-                                      </span>
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                        >      {branch}
+                                        </span>
 
 
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-                                      {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
-                                    </TableCell>
-                                  </TableRow>
-                                )
-                              })}
-                            </TableBody>
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
 
-                          </Table>
-                        </TableContainer>
-                      </div>
+                            </Table>
+                          </TableContainer>
+                        </div>}
+                      {selectedBranch &&
+                        <div className="col-12 col-md-6">
+                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                            <Table stickyHeader aria-label="sticky table " >
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">
+                                    Branch
+                                  </TableCell>
+                                  <TableCell className="table-cell-heading">
+                                    Fee Yet To Receive
+                                  </TableCell>
+                                </TableRow>
+                              </TableHead>
+
+                              <TableBody sx={{ overflowY: 'auto' }}>
+
+                                {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch, index) => {
+
+                                  return (
+                                    <TableRow >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                        <span className=" table-text "
+                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                        >      {branch}
+                                        </span>
+
+
+                                      </TableCell>
+                                      <TableCell className="Table-cell">
+                                        {calculations_of_filtered_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                      </TableCell>
+                                    </TableRow>
+                                  )
+                                })}
+                              </TableBody>
+
+                            </Table>
+                          </TableContainer>
+                        </div>}
                       <div className="col-12 col-md-6">
 
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
@@ -6866,44 +7228,84 @@ const Dashboard = () => {
 
 
                       <div className="row">
-                        <div className="col-12 col-md-6">
-                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                            <Table stickyHeader aria-label="sticky table " >
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell className="table-cell-heading">
-                                    Branch
-                                  </TableCell>
-                                  <TableCell className="table-cell-heading">
-                                    Received Amount
-                                  </TableCell>
-                                </TableRow>
-                              </TableHead>
+                        {!selectedBranch &&
+                          <div className="">
+                            <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                              <Table stickyHeader aria-label="sticky table " >
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell className="table-cell-heading">
+                                      Branch
+                                    </TableCell>
+                                    <TableCell className="table-cell-heading">
+                                      Received Amount
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
 
-                              <TableBody sx={{ overflowY: 'auto' }}>
+                                <TableBody sx={{ overflowY: 'auto' }}>
 
-                                {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
-                                  return (
-                                    <TableRow >
-                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                        <span className=" table-text "
-                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                          onClick={() => handleBranchClick(branch)}>      {branch}
-                                        </span>
+                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
+                                    return (
+                                      <TableRow >
+                                        <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                          <span className=" table-text "
+                                            style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                            onClick={() => handleBranchClick(branch)}>      {branch}
+                                          </span>
 
 
-                                      </TableCell>
-                                      <TableCell className="Table-cell">
-                                        {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
-                                      </TableCell>
-                                    </TableRow>
-                                  )
-                                })}
-                              </TableBody>
+                                        </TableCell>
+                                        <TableCell className="Table-cell">
+                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  })}
+                                </TableBody>
 
-                            </Table>
-                          </TableContainer>
-                        </div>
+                              </Table>
+                            </TableContainer>
+                          </div>}
+                        {selectedBranch &&
+                          <div className="col-12 col-md-6">
+                            <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                              <Table stickyHeader aria-label="sticky table " >
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell className="table-cell-heading">
+                                      Branch
+                                    </TableCell>
+                                    <TableCell className="table-cell-heading">
+                                      Received Amount
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
+
+                                <TableBody sx={{ overflowY: 'auto' }}>
+
+                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
+                                    return (
+                                      <TableRow >
+                                        <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                          <span className=" table-text "
+                                            style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                            onClick={() => handleBranchClick(branch)}>      {branch}
+                                          </span>
+
+
+                                        </TableCell>
+                                        <TableCell className="Table-cell">
+                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  })}
+                                </TableBody>
+
+                              </Table>
+                            </TableContainer>
+                          </div>}
                         <div className="col-12 col-md-6">
 
                           {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
@@ -7062,44 +7464,84 @@ const Dashboard = () => {
 
 
                       <div className="row">
-                        <div className="col-12 col-md-6">
-                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                            <Table stickyHeader aria-label="sticky table " >
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell className="table-cell-heading">
-                                    Branch
-                                  </TableCell>
-                                  <TableCell className="table-cell-heading">
-                                    Fee Yet To Receive
-                                  </TableCell>
-                                </TableRow>
-                              </TableHead>
+                        {!selectedBranch &&
+                          <div className="">
+                            <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                              <Table stickyHeader aria-label="sticky table " >
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell className="table-cell-heading">
+                                      Branch
+                                    </TableCell>
+                                    <TableCell className="table-cell-heading">
+                                      Fee Yet To Receive
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
 
-                              <TableBody sx={{ overflowY: 'auto' }}>
+                                <TableBody sx={{ overflowY: 'auto' }}>
 
-                                {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
-                                  return (
-                                    <TableRow >
-                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                        <span className=" table-text "
-                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                          onClick={() => handleBranchClick(branch)}>      {branch}
-                                        </span>
+                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
+                                    return (
+                                      <TableRow >
+                                        <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                          <span className=" table-text "
+                                            style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                            onClick={() => handleBranchClick(branch)}>      {branch}
+                                          </span>
 
 
-                                      </TableCell>
-                                      <TableCell className="Table-cell">
-                                        {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
-                                      </TableCell>
-                                    </TableRow>
-                                  )
-                                })}
-                              </TableBody>
+                                        </TableCell>
+                                        <TableCell className="Table-cell">
+                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  })}
+                                </TableBody>
 
-                            </Table>
-                          </TableContainer>
-                        </div>
+                              </Table>
+                            </TableContainer>
+                          </div>}
+                        {selectedBranch &&
+                          <div className="col-12 col-md-6">
+                            <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                              <Table stickyHeader aria-label="sticky table " >
+                                <TableHead>
+                                  <TableRow>
+                                    <TableCell className="table-cell-heading">
+                                      Branch
+                                    </TableCell>
+                                    <TableCell className="table-cell-heading">
+                                      Fee Yet To Receive
+                                    </TableCell>
+                                  </TableRow>
+                                </TableHead>
+
+                                <TableBody sx={{ overflowY: 'auto' }}>
+
+                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
+                                    return (
+                                      <TableRow >
+                                        <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                          <span className=" table-text "
+                                            style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                            onClick={() => handleBranchClick(branch)}>      {branch}
+                                          </span>
+
+
+                                        </TableCell>
+                                        <TableCell className="Table-cell">
+                                          {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
+                                        </TableCell>
+                                      </TableRow>
+                                    )
+                                  })}
+                                </TableBody>
+
+                              </Table>
+                            </TableContainer>
+                          </div>}
                         <div className="col-12 col-md-6">
 
                           {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
