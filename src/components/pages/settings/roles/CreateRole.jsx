@@ -35,15 +35,16 @@ const CreateRole = () => {
   const [permissions, setPermissions] = useState([
     {
       "feature": "User Management",
+      "all": true,
       "read": true,
       "update": true,
-      "delete": false,
+      "delete": true,
       "create": true,
       "submenus": [
         {
           "subfeature": "Create User",
           "read": true,
-          "update": false,
+          "update": true,
           "delete": true,
           "create": true,
           "actions": [
@@ -74,6 +75,7 @@ const CreateRole = () => {
     },
     {
       "feature": "Student Management",
+      "all": true,
       "read": true,
       "update": true,
       "delete": true,
@@ -282,6 +284,7 @@ const CreateRole = () => {
                   <TableRow>
 
                     <TableCell className="table-cell-heading w-25" align="center" > Name</TableCell>
+                    <TableCell className="table-cell-heading" align="center">ALL</TableCell>
                     <TableCell colSpan={4} className="table-cell-heading" align="center">Access</TableCell>
 
                   </TableRow>
@@ -289,6 +292,7 @@ const CreateRole = () => {
 
 
                     <TableCell className="Table-cell text-center" ></TableCell>
+                    <TableCell className="Table-cell text-center" >ALL</TableCell>
                     <TableCell className="Table-cell text-center"> Read</TableCell>
                     <TableCell className="Table-cell text-center">Update</TableCell>
                     <TableCell className="Table-cell text-center"> Delete</TableCell>
@@ -296,11 +300,108 @@ const CreateRole = () => {
 
                   </TableRow>
                 </TableHead>
+
                 <TableBody>
                   {permissions.map((permission, index) => (
                     <React.Fragment key={index}>
                       <TableRow>
+                        <TableCell className="Table-cell" onClick={() => handlePermissionClick(permission.feature)}>
+                          {permission.feature}
+                        </TableCell>
+                        <TableCell>
+                          <Switch
+                            checked={permission.all}
+                            onChange={() => handleChange(index, null, 'all')}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                            color="info"
+                          />
+                        </TableCell>
+                        {/* <TableCell>
+                          <Switch
+                            checked={permission.read}
+                            onChange={() => handleChange(index, null, 'read')}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                            color="info"
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Switch
+                            checked={permission.update}
+                            onChange={() => handleChange(index, null, 'update')}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                            color="info"
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Switch
+                            checked={permission.delete}
+                            onChange={() => handleChange(index, null, 'delete')}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                            color="info"
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Switch
+                            checked={permission.create}
+                            onChange={() => handleChange(index, null, 'create')}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                            color="info"
+                          />
+                        </TableCell> */}
+                      </TableRow>
+                      {selectedPermission === permission.feature &&
+                        permission.submenus.map((submenu, subIndex) => (
+                          <TableRow key={subIndex}>
+                            <TableCell className="Table-cell">{submenu.subfeature}</TableCell>
+                            <TableCell>
+                              
+                            </TableCell>
+                            <TableCell>
+                              <Switch
+                                checked={submenu.read || permission.all}  // Updated line here
+                                onChange={() => handleChange(index, subIndex, 'read')}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                                color="info"
+                              />
+                            </TableCell>
+                            <TableCell>
+                              <Switch
+                                checked={submenu.update || permission.all}
+                                onChange={() => handleChange(index, subIndex, 'update')}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                                color="info"
+                              />
+                            </TableCell>
+                            <TableCell>
+                              <Switch
+                                checked={submenu.delete || permission.all}
+                                onChange={() => handleChange(index, subIndex, 'delete')}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                                color="info"
+                              />
+                            </TableCell>
+                            <TableCell>
+                              <Switch
+                                checked={submenu.create || permission.all}
+                                onChange={() => handleChange(index, subIndex, 'create')}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                                color="info"
+                              />
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </React.Fragment>
+                  ))}
+                </TableBody>
+
+                
+                {/* <TableBody>
+                  {permissions.map((permission, index) => (
+                    <React.Fragment key={index}>
+                      <TableRow>
+                      
                         <TableCell className="Table-cell" onClick={() => handlePermissionClick(permission.feature)}>{permission.feature}</TableCell>
+                        
                         <TableCell>
                           <Switch
                             checked={permission.read}
@@ -373,7 +474,7 @@ const CreateRole = () => {
                       ))}
                     </React.Fragment>
                   ))}
-                </TableBody>
+                </TableBody> */}
 
 
 
