@@ -109,7 +109,7 @@ const CreateReport = () => {
       reports
     };
     axios
-      .put(
+      .post(
         `${process.env.REACT_APP_API_URL}/createreport`,
         updatedData
       )
