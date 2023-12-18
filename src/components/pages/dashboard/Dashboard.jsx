@@ -2451,7 +2451,7 @@ const Dashboard = () => {
                             </TableContainer>
                           </div>}
                         {selectedBranch &&
-                          <div className="">
+                          <div className="col-12 col-md-6">
                             <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                               <Table stickyHeader aria-label="sticky table " >
                                 <TableHead>
@@ -5376,100 +5376,7 @@ const Dashboard = () => {
                       </h5>
 
 
-                      <div className="row">
-                        <div className="col-12 col-md-6">
-                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                            <Table stickyHeader aria-label="sticky table " >
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell className="table-cell-heading">
-                                    Branch
-                                  </TableCell>
-                                  <TableCell className="table-cell-heading">
-                                    Received Amount
-                                  </TableCell>
-                                </TableRow>
-                              </TableHead>
 
-                              <TableBody sx={{ overflowY: 'auto' }}>
-
-                                {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
-                                  return (
-                                    <TableRow >
-                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                        <span className=" table-text "
-                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                          onClick={() => handleBranchClick(branch)}>      {branch}
-                                        </span>
-
-
-                                      </TableCell>
-                                      <TableCell className="Table-cell">
-                                        {calculations_of_all_students_branchwise_counsellorwise[branch].totalReceivedAmount}
-                                      </TableCell>
-                                    </TableRow>
-                                  )
-                                })}
-                              </TableBody>
-
-                            </Table>
-                          </TableContainer>
-                        </div>
-                        <div className="col-12 col-md-6">
-
-                          {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
-
-
-                            return (
-
-
-                              <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
-                                {selectedBranch === branch &&
-                                  <Table stickyHeader aria-label="sticky table">
-                                    <TableHead>
-                                      <TableRow>
-                                        <TableCell className="table-cell-heading">Counsellor Name</TableCell>
-                                        <TableCell className="table-cell-heading">Received Amount</TableCell>
-
-                                      </TableRow>
-                                    </TableHead>
-                                    <TableBody sx={{ overflowY: 'auto' }}>
-                                      {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                        (counsellor) => (
-
-                                          <TableRow
-                                            key={counsellor}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                          >
-                                            <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleCounsellorClick(counsellor)}>
-                                              <span className=" table-text"
-                                                style={{ color: selectedCounsellor === counsellor ? "#0d6efd" : "black" }}
-                                                onClick={() => handleCounsellorClick(counsellor)}>      {counsellor}
-                                              </span>
-
-
-                                            </TableCell>
-
-                                            <TableCell className="Table-cell" >
-                                              {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalReceivedAmount}
-                                            </TableCell>
-
-
-                                          </TableRow>
-                                        )
-                                      )}
-
-
-                                    </TableBody>
-                                  </Table>}
-                              </TableContainer>
-
-                            )
-
-                          })}
-
-                        </div>
-                      </div>
 
                       <div>
 
@@ -5482,79 +5389,78 @@ const Dashboard = () => {
 
 
                             <div className="my-4">
-                              {selectedBranch === branch &&
-                                <div>
-                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                    (counsellor) => (
 
-                                      <div
-                                        key={counsellor}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                      >
+                              <div>
+                                {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                  (counsellor) => (
 
-                                        {selectedCounsellor === counsellor &&
-                                          <TableContainer component={Paper} sx={{ maxHeight: 250 }}>
-                                            <Table stickyHeader aria-label="sticky table">
-                                              <TableHead>
-                                                <TableRow>
-                                                  <TableCell className="table-cell-heading">Name</TableCell>
-                                                  <TableCell className="table-cell-heading">Course</TableCell>
-                                                  <TableCell className="table-cell-heading">Admission Date</TableCell>
-                                                  <TableCell className="table-cell-heading">Received Amount</TableCell>
-                                                </TableRow>
-                                              </TableHead>
-                                              <TableBody sx={{ overflowY: 'auto' }}>
-                                                {calculations_of_all_students_branchwise_counsellorwise[branch]
-                                                  .counsellorWiseTotal[counsellor].students.map((student, index) => {
-                                                    let admissionDate = new Date(student.admissionDate);
-                                                    const day = admissionDate.getUTCDate();
-                                                    const monthIndex = admissionDate.getUTCMonth();
-                                                    const year = admissionDate.getUTCFullYear();
-
-                                                    const monthAbbreviations = [
-                                                      "Jan",
-                                                      "Feb",
-                                                      "Mar",
-                                                      "Apr",
-                                                      "May",
-                                                      "Jun",
-                                                      "Jul",
-                                                      "Aug",
-                                                      "Sep",
-                                                      "Oct",
-                                                      "Nov",
-                                                      "Dec",
-                                                    ];
-
-                                                    // Formatting the date
-                                                    admissionDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
-                                                      }-${year}`;
-
-                                                    if (student.receivedamount === 0) {
-                                                      return null
-                                                    } else {
-                                                      return (
-                                                        <TableRow key={index}>
-                                                          <TableCell className="Table-cell" >{student.name}</TableCell>
-                                                          <TableCell className="Table-cell" >{student.course}</TableCell>
-                                                          <TableCell className="Table-cell" >{admissionDate}</TableCell>
-
-                                                          <TableCell className="Table-cell">{student.receivedamount}</TableCell>
-                                                        </TableRow>
-                                                      )
-                                                    }
+                                    <div
+                                      key={counsellor}
+                                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
 
 
-                                                  })}
-                                              </TableBody>
-                                            </Table>
-                                          </TableContainer>
-                                        }
+                                      <TableContainer component={Paper} sx={{ maxHeight: 250 }}>
+                                        <Table stickyHeader aria-label="sticky table">
+                                          <TableHead>
+                                            <TableRow>
+                                              <TableCell className="table-cell-heading">Name</TableCell>
+                                              <TableCell className="table-cell-heading">Course</TableCell>
+                                              <TableCell className="table-cell-heading">Admission Date</TableCell>
+                                              <TableCell className="table-cell-heading">Received Amount</TableCell>
+                                            </TableRow>
+                                          </TableHead>
+                                          <TableBody sx={{ overflowY: 'auto' }}>
+                                            {calculations_of_all_students_branchwise_counsellorwise[branch]
+                                              .counsellorWiseTotal[counsellor].students.map((student, index) => {
+                                                let admissionDate = new Date(student.admissionDate);
+                                                const day = admissionDate.getUTCDate();
+                                                const monthIndex = admissionDate.getUTCMonth();
+                                                const year = admissionDate.getUTCFullYear();
 
-                                      </div>
-                                    )
-                                  )}
-                                </div>}
+                                                const monthAbbreviations = [
+                                                  "Jan",
+                                                  "Feb",
+                                                  "Mar",
+                                                  "Apr",
+                                                  "May",
+                                                  "Jun",
+                                                  "Jul",
+                                                  "Aug",
+                                                  "Sep",
+                                                  "Oct",
+                                                  "Nov",
+                                                  "Dec",
+                                                ];
+
+                                                // Formatting the date
+                                                admissionDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                                                  }-${year}`;
+
+                                                if (student.receivedamount === 0) {
+                                                  return null
+                                                } else {
+                                                  return (
+                                                    <TableRow key={index}>
+                                                      <TableCell className="Table-cell" >{student.name}</TableCell>
+                                                      <TableCell className="Table-cell" >{student.course}</TableCell>
+                                                      <TableCell className="Table-cell" >{admissionDate}</TableCell>
+
+                                                      <TableCell className="Table-cell">{student.receivedamount}</TableCell>
+                                                    </TableRow>
+                                                  )
+                                                }
+
+
+                                              })}
+                                          </TableBody>
+                                        </Table>
+                                      </TableContainer>
+
+                                    </div>
+                                  )
+                                )}
+                              </div>
                             </div>
                           )
                         })}
@@ -5572,100 +5478,7 @@ const Dashboard = () => {
                       </h5>
 
 
-                      <div className="row">
-                        <div className="col-12 col-md-6">
-                          <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
-                            <Table stickyHeader aria-label="sticky table " >
-                              <TableHead>
-                                <TableRow>
-                                  <TableCell className="table-cell-heading">
-                                    Branch
-                                  </TableCell>
-                                  <TableCell className="table-cell-heading">
-                                    Fee Yet To Receive
-                                  </TableCell>
-                                </TableRow>
-                              </TableHead>
 
-                              <TableBody sx={{ overflowY: 'auto' }}>
-
-                                {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
-                                  return (
-                                    <TableRow >
-                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
-                                        <span className=" table-text "
-                                          style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
-                                          onClick={() => handleBranchClick(branch)}>      {branch}
-                                        </span>
-
-
-                                      </TableCell>
-                                      <TableCell className="Table-cell">
-                                        {calculations_of_all_students_branchwise_counsellorwise[branch].totalDueAmount}
-                                      </TableCell>
-                                    </TableRow>
-                                  )
-                                })}
-                              </TableBody>
-
-                            </Table>
-                          </TableContainer>
-                        </div>
-                        <div className="col-12 col-md-6">
-
-                          {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
-
-
-                            return (
-
-
-                              <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
-                                {selectedBranch === branch &&
-                                  <Table stickyHeader aria-label="sticky table">
-                                    <TableHead>
-                                      <TableRow>
-                                        <TableCell className="table-cell-heading">Counsellor Name</TableCell>
-                                        <TableCell className="table-cell-heading">Fee Yet To Receive</TableCell>
-
-                                      </TableRow>
-                                    </TableHead>
-                                    <TableBody sx={{ overflowY: 'auto' }}>
-                                      {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                        (counsellor) => (
-
-                                          <TableRow
-                                            key={counsellor}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                          >
-                                            <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleCounsellorClick(counsellor)}>
-                                              <span className=" table-text"
-                                                style={{ color: selectedCounsellor === counsellor ? "#0d6efd" : "black" }}
-                                                onClick={() => handleCounsellorClick(counsellor)}>      {counsellor}
-                                              </span>
-
-
-                                            </TableCell>
-
-                                            <TableCell className="Table-cell" >
-                                              {calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal[counsellor].totalDueAmount}
-                                            </TableCell>
-
-
-                                          </TableRow>
-                                        )
-                                      )}
-
-
-                                    </TableBody>
-                                  </Table>}
-                              </TableContainer>
-
-                            )
-
-                          })}
-
-                        </div>
-                      </div>
 
                       <div>
 
@@ -5678,79 +5491,79 @@ const Dashboard = () => {
 
 
                             <div className="my-4">
-                              {selectedBranch === branch &&
-                                <div>
-                                  {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
-                                    (counsellor) => (
 
-                                      <div
-                                        key={counsellor}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                      >
+                              <div>
+                                {Object.keys(calculations_of_all_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
+                                  (counsellor) => (
 
-                                        {selectedCounsellor === counsellor &&
-                                          <TableContainer component={Paper} sx={{ maxHeight: 250 }}>
-                                            <Table stickyHeader aria-label="sticky table">
-                                              <TableHead>
-                                                <TableRow>
-                                                  <TableCell className="table-cell-heading">Name</TableCell>
-                                                  <TableCell className="table-cell-heading">Course</TableCell>
-                                                  <TableCell className="table-cell-heading">Admission Date</TableCell>
-                                                  <TableCell className="table-cell-heading">Fee Yet to Receive</TableCell>
-                                                </TableRow>
-                                              </TableHead>
-                                              <TableBody sx={{ overflowY: 'auto' }}>
-                                                {calculations_of_all_students_branchwise_counsellorwise[branch]
-                                                  .counsellorWiseTotal[counsellor].students.map((student, index) => {
-                                                    let admissionDate = new Date(student.admissionDate);
-                                                    const day = admissionDate.getUTCDate();
-                                                    const monthIndex = admissionDate.getUTCMonth();
-                                                    const year = admissionDate.getUTCFullYear();
-
-                                                    const monthAbbreviations = [
-                                                      "Jan",
-                                                      "Feb",
-                                                      "Mar",
-                                                      "Apr",
-                                                      "May",
-                                                      "Jun",
-                                                      "Jul",
-                                                      "Aug",
-                                                      "Sep",
-                                                      "Oct",
-                                                      "Nov",
-                                                      "Dec",
-                                                    ];
-
-                                                    // Formatting the date
-                                                    admissionDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
-                                                      }-${year}`;
-
-                                                    if (student.dueamount === 0) {
-                                                      return null
-                                                    } else if (student.dueamount) {
-                                                      return (
-                                                        <TableRow key={index}>
-                                                          <TableCell className="Table-cell" >{student.name}</TableCell>
-                                                          <TableCell className="Table-cell" >{student.course}</TableCell>
-                                                          <TableCell className="Table-cell" >{admissionDate}</TableCell>
-
-                                                          <TableCell className="Table-cell">{student.dueamount}</TableCell>
-                                                        </TableRow>
-                                                      )
-                                                    }
+                                    <div
+                                      key={counsellor}
+                                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
 
 
-                                                  })}
-                                              </TableBody>
-                                            </Table>
-                                          </TableContainer>
-                                        }
+                                      <TableContainer component={Paper} sx={{ maxHeight: 250 }}>
+                                        <Table stickyHeader aria-label="sticky table">
+                                          <TableHead>
+                                            <TableRow>
+                                              <TableCell className="table-cell-heading">Name</TableCell>
+                                              <TableCell className="table-cell-heading">Course</TableCell>
+                                              <TableCell className="table-cell-heading">Admission Date</TableCell>
+                                              <TableCell className="table-cell-heading">Fee Yet to Receive</TableCell>
+                                            </TableRow>
+                                          </TableHead>
+                                          <TableBody sx={{ overflowY: 'auto' }}>
+                                            {calculations_of_all_students_branchwise_counsellorwise[branch]
+                                              .counsellorWiseTotal[counsellor].students.map((student, index) => {
+                                                let admissionDate = new Date(student.admissionDate);
+                                                const day = admissionDate.getUTCDate();
+                                                const monthIndex = admissionDate.getUTCMonth();
+                                                const year = admissionDate.getUTCFullYear();
 
-                                      </div>
-                                    )
-                                  )}
-                                </div>}
+                                                const monthAbbreviations = [
+                                                  "Jan",
+                                                  "Feb",
+                                                  "Mar",
+                                                  "Apr",
+                                                  "May",
+                                                  "Jun",
+                                                  "Jul",
+                                                  "Aug",
+                                                  "Sep",
+                                                  "Oct",
+                                                  "Nov",
+                                                  "Dec",
+                                                ];
+
+                                                // Formatting the date
+                                                admissionDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                                                  }-${year}`;
+
+                                                if (student.dueamount === 0) {
+                                                  return null
+                                                } else if (student.dueamount) {
+                                                  return (
+                                                    <TableRow key={index}>
+                                                      <TableCell className="Table-cell" >{student.name}</TableCell>
+                                                      <TableCell className="Table-cell" >{student.course}</TableCell>
+                                                      <TableCell className="Table-cell" >{admissionDate}</TableCell>
+
+                                                      <TableCell className="Table-cell">{student.dueamount}</TableCell>
+                                                    </TableRow>
+                                                  )
+                                                }
+
+
+                                              })}
+                                          </TableBody>
+                                        </Table>
+                                      </TableContainer>
+
+
+                                    </div>
+                                  )
+                                )}
+                              </div>
                             </div>
                           )
                         })}
