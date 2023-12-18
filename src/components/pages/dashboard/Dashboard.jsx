@@ -73,6 +73,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Dashboard = () => {
   const role = localStorage.getItem("role");
   const { user } = useAuthContext();
+  let userBranch = user.branch
+  useEffect(() => {
+    console.log("userBranch", userBranch)
+  })
   const { students, dispatch } = useStudentsContext();
 
   const [getUsersData, setUsersData] = useState([]);
@@ -243,7 +247,10 @@ const Dashboard = () => {
   });
 
   // end
-
+  let [
+    AllUsers_BranchWise,
+    setAllUsers_BranchWise,
+  ] = useState();
   let [
     FilteredStudents_BranchWiseAndCounsellorWise,
     setFilteredStudents_BranchWiseAndCounsellorWise,
@@ -281,8 +288,55 @@ const Dashboard = () => {
 
 
     );
-  })
+    console.log(
+      "AllUsers_BranchWise", AllUsers_BranchWise
 
+
+    );
+  })
+  useEffect(() => {
+    if (getUsersData) {
+      const groupByCustomFields = (data, groupByField1, groupByField2) => {
+        if (!Array.isArray(data)) {
+          return {}; // Return an empty object if data is not an array
+        }
+
+        const groupedStudents = data.reduce((acc, student) => {
+          if (
+            !student ||
+            !student.hasOwnProperty(groupByField1) ||
+            !student.hasOwnProperty(groupByField2)
+          ) {
+            throw new Error(
+              "Invalid student object: Missing required properties."
+            );
+          }
+
+          // Group by first custom field
+          acc[student[groupByField1]] = acc[student[groupByField1]] || {};
+
+          // Group by second custom field within each group of the first custom field
+          acc[student[groupByField1]][student[groupByField2]] =
+            acc[student[groupByField1]][student[groupByField2]] || [];
+          acc[student[groupByField1]][student[groupByField2]].push(student);
+
+          return acc;
+        }, {});
+
+        return groupedStudents;
+      };
+      const AllUsers_BranchWise
+        = groupByCustomFields(
+          getUsersData,
+          "branch",
+          "fullname"
+        );
+      setAllUsers_BranchWise(
+        AllUsers_BranchWise
+      );
+    }
+
+  }, [getUsersData])
   useEffect(() => {
     if (students) {
       const groupByCustomFields = (data, groupByField1, groupByField2) => {
@@ -2783,7 +2837,8 @@ const Dashboard = () => {
                 <div className="col-12 col-md-4 col-xl-4 col-lg-4"></div>
                 <div className="col-12 col-md-3 col-xl-3 col-lg-3 mb-2">
                   <Card
-                    onClick={(e) =>
+
+                    onClick={(e) => {
                       setDisplayTable((prev) => ({
                         enrollments: false,
                         bookingamount: false,
@@ -2792,8 +2847,11 @@ const Dashboard = () => {
                         feerecevied: false,
                         feeyettorecevied: false,
                         branchusers: !prev.branchusers,
-                      }))
-                    }
+                      }));
+
+                      setSelectedBranch(null);
+                      setSelectedCounsellor(null);
+                    }}
                     className="cardcolor"
                   >
                     <p className="text-center pt-3">
@@ -2811,56 +2869,108 @@ const Dashboard = () => {
               {/* User Card Display End */}
 
               {/* user Table Display */}
+
               {DisplayTable.branchusers && (
-                <div className="justify-content-around ">
-                  <div>
-                    <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5">Current Month</span> Branch
-                      Wise User Data
-                    </h5>
+                <div>
 
-                    <div className="pt-2">
+                  <div className="col-12 col-md-6">
+                    <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                      <Table stickyHeader aria-label="sticky table " >
+                        <TableHead>
+                          <TableRow>
+                            <TableCell className="table-cell-heading">
+                              Branch
+                            </TableCell>
+                            <TableCell className="table-cell-heading">
+                              Count
+                            </TableCell>
+                          </TableRow>
+                        </TableHead>
 
-                      <TableContainer component={Paper} >
-                        <Table stickyHeader aria-label="sticky table">
-                          <TableHead>
-                            <TableRow>
-                              <TableCell className="table-cell-heading">
-                                Branch
-                              </TableCell>
-                              <TableCell className="table-cell-heading">
-                                No. of Users
-                              </TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {Object.entries(BranchwiseUsersData).map(
-                              ([branch, users]) => {
-                                const enrollmentPercentage =
-                                  (users.length / getUsersData.length) * 100;
-                                const totalCount = users.length;
-                                return (
-                                  <TableRow key={`user-${branch}`}>
-                                    <TableCell className="Table-cell" >
-                                      {branch}
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
+                        <TableBody sx={{ overflowY: 'auto' }}>
 
-                                      {Number(
-                                        parseFloat(totalCount).toFixed(2)
-                                      ).toLocaleString("en-IN")}
-                                    </TableCell>
-                                  </TableRow>
-                                );
-                              }
-                            )}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
+                          {Object.keys(AllUsers_BranchWise).map((branch) => {
+                            return (
+                              <TableRow >
+                                <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                  <span className=" table-text "
+                                    style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                    onClick={() => handleBranchClick(branch)}>      {branch}
+                                  </span>
 
-                    </div>
+
+                                </TableCell>
+                                <TableCell className="Table-cell">
+                                  {Object.keys(AllUsers_BranchWise[branch]).length}
+                                </TableCell>
+                              </TableRow>
+                            )
+                          })}
+                        </TableBody>
+
+                      </Table>
+                    </TableContainer>
+                  </div>
+                  <div className="col-12 col-md-6">
+
+                    {Object.keys(AllUsers_BranchWise).map((branch) => {
+
+
+                      return (
+
+
+                        <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
+                          {selectedBranch === branch &&
+                            <Table stickyHeader aria-label="sticky table">
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">Users Name</TableCell>
+                                  <TableCell className="table-cell-heading">Profile</TableCell>
+
+                                </TableRow>
+                              </TableHead>
+                              <TableBody sx={{ overflowY: 'auto' }}>
+                                {Object.keys(AllUsers_BranchWise[branch]).map(
+                                  (user) => (
+
+                                    <TableRow
+                                      key={user}
+                                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} >
+                                        <span className=" table-text"
+                                          style={{ color: "black" }}
+                                        >      {user}
+                                        </span>
+
+
+                                      </TableCell>
+
+
+                                      {AllUsers_BranchWise[branch][user].map((item, index) => (
+                                        <TableCell className="Table-cell" >
+                                          {item.profile}
+                                        </TableCell>
+                                      ))}
+
+
+
+                                    </TableRow>
+                                  )
+                                )}
+
+
+                              </TableBody>
+                            </Table>}
+                        </TableContainer>
+
+                      )
+
+                    })}
+
                   </div>
                 </div>
+
               )}
               {/* User Table Display End */}
             </div>
@@ -4480,55 +4590,62 @@ const Dashboard = () => {
 
               {/* user Table Display */}
               {DisplayTable.branchusers && (
-                <div className="justify-content-around ">
-                  <div>
-                    <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5">Current Month</span> Branch
-                      Wise User Data
-                    </h5>
+                <div>
 
-                    <div className="pt-2">
 
-                      <TableContainer component={Paper} >
-                        <Table stickyHeader aria-label="sticky table">
-                          <TableHead>
-                            <TableRow>
-                              <TableCell className="table-cell-heading">
-                                Branch
-                              </TableCell>
-                              <TableCell className="table-cell-heading">
-                                No. of Users
-                              </TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {Object.entries(BranchwiseUsersData).map(
-                              ([branch, users]) => {
-                                const enrollmentPercentage =
-                                  (users.length / getUsersData.length) * 100;
-                                const totalCount = users.length;
-                                return (
-                                  <TableRow key={`user-${branch}`}>
-                                    <TableCell className="Table-cell" style={{ width: "80%" }}>
-                                      {branch}
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
+                  <div className="col-12 col-md-6">
 
-                                      {Number(
-                                        parseFloat(totalCount).toFixed(2)
-                                      ).toLocaleString("en-IN")}
-                                    </TableCell>
-                                  </TableRow>
-                                );
-                              }
-                            )}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
 
-                    </div>
+                    <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
+
+                      <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell className="table-cell-heading">Users Name</TableCell>
+                            <TableCell className="table-cell-heading">Profile</TableCell>
+
+                          </TableRow>
+                        </TableHead>
+                        <TableBody sx={{ overflowY: 'auto' }}>
+                          {Object.keys(AllUsers_BranchWise[userBranch]).map(
+                            (user) => (
+
+                              <TableRow
+                                key={user}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                              >
+                                <TableCell className="Table-cell " style={{ cursor: "pointer" }} >
+                                  <span className=" table-text"
+                                    style={{ color: "black" }}
+                                  >      {user}
+                                  </span>
+
+
+                                </TableCell>
+
+
+                                {AllUsers_BranchWise[userBranch][user].map((item, index) => (
+                                  <TableCell className="Table-cell" >
+                                    {item.profile}
+                                  </TableCell>
+                                ))}
+
+
+
+                              </TableRow>
+                            )
+                          )}
+
+
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+
+
+
                   </div>
                 </div>
+
               )}
               {/* User Table Display End */}
             </div>
@@ -7702,55 +7819,106 @@ const Dashboard = () => {
 
               {/* user Table Display */}
               {DisplayTable.branchusers && (
-                <div className="justify-content-around ">
-                  <div>
-                    <h5 className="pt-4 text-center underline">
-                      <span className="fw-bold fs-5">Current Month</span> Branch
-                      Wise User Data
-                    </h5>
+                <div>
 
-                    <div className="pt-2">
+                  <div className="col-12 col-md-6">
+                    <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
+                      <Table stickyHeader aria-label="sticky table " >
+                        <TableHead>
+                          <TableRow>
+                            <TableCell className="table-cell-heading">
+                              Branch
+                            </TableCell>
+                            <TableCell className="table-cell-heading">
+                              Count
+                            </TableCell>
+                          </TableRow>
+                        </TableHead>
 
-                      <TableContainer component={Paper} >
-                        <Table stickyHeader aria-label="sticky table">
-                          <TableHead>
-                            <TableRow>
-                              <TableCell className="table-cell-heading">
-                                Branch
-                              </TableCell>
-                              <TableCell className="table-cell-heading">
-                                No. of Users
-                              </TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {Object.entries(BranchwiseUsersData).map(
-                              ([branch, users]) => {
-                                const enrollmentPercentage =
-                                  (users.length / getUsersData.length) * 100;
-                                const totalCount = users.length;
-                                return (
-                                  <TableRow key={`user-${branch}`}>
-                                    <TableCell className="Table-cell" style={{ width: "80%" }}>
-                                      {branch}
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
+                        <TableBody sx={{ overflowY: 'auto' }}>
 
-                                      {Number(
-                                        parseFloat(totalCount).toFixed(2)
-                                      ).toLocaleString("en-IN")}
-                                    </TableCell>
-                                  </TableRow>
-                                );
-                              }
-                            )}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
+                          {Object.keys(AllUsers_BranchWise).map((branch) => {
+                            return (
+                              <TableRow >
+                                <TableCell className="Table-cell " style={{ cursor: "pointer" }} onClick={() => handleBranchClick(branch)}>
+                                  <span className=" table-text "
+                                    style={{ color: selectedBranch === branch ? "#0d6efd" : "black" }}
+                                    onClick={() => handleBranchClick(branch)}>      {branch}
+                                  </span>
 
-                    </div>
+
+                                </TableCell>
+                                <TableCell className="Table-cell">
+                                  {Object.keys(AllUsers_BranchWise[branch]).length}
+                                </TableCell>
+                              </TableRow>
+                            )
+                          })}
+                        </TableBody>
+
+                      </Table>
+                    </TableContainer>
+                  </div>
+                  <div className="col-12 col-md-6">
+
+                    {Object.keys(AllUsers_BranchWise).map((branch) => {
+
+
+                      return (
+
+
+                        <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
+                          {selectedBranch === branch &&
+                            <Table stickyHeader aria-label="sticky table">
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell className="table-cell-heading">Users Name</TableCell>
+                                  <TableCell className="table-cell-heading">Profile</TableCell>
+
+                                </TableRow>
+                              </TableHead>
+                              <TableBody sx={{ overflowY: 'auto' }}>
+                                {Object.keys(AllUsers_BranchWise[branch]).map(
+                                  (user) => (
+
+                                    <TableRow
+                                      key={user}
+                                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                      <TableCell className="Table-cell " style={{ cursor: "pointer" }} >
+                                        <span className=" table-text"
+                                          style={{ color: "black" }}
+                                        >      {user}
+                                        </span>
+
+
+                                      </TableCell>
+
+
+                                      {AllUsers_BranchWise[branch][user].map((item, index) => (
+                                        <TableCell className="Table-cell" >
+                                          {item.profile}
+                                        </TableCell>
+                                      ))}
+
+
+
+                                    </TableRow>
+                                  )
+                                )}
+
+
+                              </TableBody>
+                            </Table>}
+                        </TableContainer>
+
+                      )
+
+                    })}
+
                   </div>
                 </div>
+
               )}
               {/* User Table Display End */}
             </div>

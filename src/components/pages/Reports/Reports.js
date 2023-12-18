@@ -34,19 +34,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 const Reports = () => {
-  const [newReportName, setNewReportName] = useState();
 
-  const [data, setData] = useState([
-    { reportName: "BranchWise Data" },
-    { reportName: "CourseWise Data" },
-    { reportName: "CounsellorWise Data" },
-  ]);
+  const [reports, setreports] = useState()
+  useEffect(() => { console.log("reports", reports) })
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/getreports`)
       .then((response) => {
         if (response.data) {
-          // setData(response.data);
+          setreports(response.data);
           console.log("response.data", response.data);
         }
       })
@@ -54,25 +50,8 @@ const Reports = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  const handleCreateReport = () => {
-    let newReport = { reportName: newReportName };
-    let updatedData = [...data];
-    updatedData.push(newReport);
-    setData(updatedData);
-    axios
-      .put(`${process.env.REACT_APP_API_URL}/addnewreport`, data)
-      .then((res) => {
-        if (res.data.updated) {
-          alert("Report Added");
-        } else {
-          alert("not Added");
-        }
-      });
-  };
-  useEffect(() => {
-    console.log("data", data);
-    console.log("newReportName", newReportName);
-  });
+
+
   return (
     <div className="container mt-3">
       <div className="reports">
@@ -114,10 +93,10 @@ const Reports = () => {
                 {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
-            {data &&
-              data.map((report, index) => {
+            {reports &&
+              reports.map((report, index) => {
                 return (
-                  <TableRow>
+                  <TableRow key={report.id}>
                     <TableCell className="Table-cell text-center">
                       <span style={{ fontSize: "15px" }}>{index + 1} </span>
                     </TableCell>
@@ -142,6 +121,19 @@ const Reports = () => {
                   </TableRow>
                 );
               })}
+            {/* {data.map(item => (
+          <tr key={item.id}>
+            <td>{item.id}</td>
+            {item.reports.map(report => (
+              <React.Fragment key={report.reportName}>
+                <td>{report.reportName}</td>
+                <td>{report.reportType}</td>
+                <td>{report.description}</td>
+           
+              </React.Fragment>
+            ))}
+          </tr>
+        ))} */}
           </Table>
         </TableContainer>
       </div>
