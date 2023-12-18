@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import "./LeadSource.css";
 import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 const LeadSource = () => {
@@ -61,7 +64,18 @@ const LeadSource = () => {
                 <TableCell className="table-cell-heading" align="center">
                   Name
                 </TableCell>
-
+                <TableCell className="table-cell-heading" align="center">
+                  Description
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+                  Create By
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+                  Create At
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+                  Actions
+                </TableCell>
                 {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
@@ -75,7 +89,26 @@ const LeadSource = () => {
                   <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}> {item.leadsource}</span>
                   </TableCell>
-
+                  <TableCell className="Table-cell text-center">
+                    <span style={{ fontSize: "15px" }}>
+                      description
+                    </span>
+                  </TableCell>
+                  <TableCell className="Table-cell ">
+                    <span style={{ fontSize: "15px" }}>
+                      Bhavitha
+                    </span>
+                  </TableCell>
+                  <TableCell className="Table-cell ">
+                    <span style={{ fontSize: "15px" }}>
+                      15-12-2023
+                    </span>
+                  </TableCell>
+                  <TableCell className="Table-cell ">
+                    <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
+                    <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                    <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
+                  </TableCell>
                   {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}
                 </TableRow>
               ))
