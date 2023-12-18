@@ -16,6 +16,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import axios from "axios";
 import "./Vendor.css";
 
@@ -122,6 +124,17 @@ export default function Vendor() {
         }
       });
   };
+  const dataCount = vendorName.length;
+  const [filteredData, setFilteredData] = useState(vendorName);
+
+  let recordCount = filteredData.length;
+  const [search, setSearch] = useState('');
+  const VendorNames = vendorName.filter((element) =>
+    element.toLowerCase().includes(search.toLowerCase())
+  );
+
+
+
   return (
     <div className="container mt-3">
       <div className="vendor">
@@ -185,6 +198,36 @@ export default function Vendor() {
             </Dialog>
           </React.Fragment>
         </div>
+        <div className="row mb-1 ps-1 ">
+          <div className="col-12 col-md-6 col-lg-8 col-xl-8">
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Search Here..."
+              autoComplete="off"
+              style={{
+                height: "45px",
+                width: "100%",
+                outline: "none",
+                borderTop: "none",
+                borderBottom: "1.5px solid black",
+                background: "none",
+                border: "hidden",
+                borderRadius: "5px",
+              }}
+              name="search"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <hr />
+          </div>
+          <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+            <div className="d-flex justify-content-around">
+
+
+            </div>
+          </div>
+
+        </div>
         <TableContainer component={Paper} className="mb-3">
           <Table aria-label="customized table">
             <TableHead>
@@ -201,8 +244,8 @@ export default function Vendor() {
               </TableRow>
             </TableHead>
 
-            {vendorName &&
-              vendorName.map((element, index) => (
+            {VendorNames &&
+              VendorNames.map((element, index) => (
                 <TableRow key={index}>
                   <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "15px" }}> {index + 1}</span>
@@ -224,9 +267,12 @@ export default function Vendor() {
                     />
                   </TableCell>
                 </TableRow>
+
               ))}
+
           </Table>
         </TableContainer>
+
       </div>
     </div>
   );
