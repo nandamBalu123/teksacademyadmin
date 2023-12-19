@@ -73,10 +73,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Dashboard = () => {
   const role = localStorage.getItem("role");
   const { user } = useAuthContext();
-  let userBranch = user.branch
-  useEffect(() => {
-    console.log("userBranch", userBranch)
-  })
+  let userBranch
+  if (user) {
+    userBranch = user.branch
+  }
   const { students, dispatch } = useStudentsContext();
 
   const [getUsersData, setUsersData] = useState([]);
@@ -6716,7 +6716,6 @@ const Dashboard = () => {
                             </TableCell>
                           </TableRow>
                         </TableHead>
-
                         <TableBody sx={{ overflowY: 'auto' }}>
                           {Object.keys(AllUsers_BranchWise).map((branch) => {
                             return (

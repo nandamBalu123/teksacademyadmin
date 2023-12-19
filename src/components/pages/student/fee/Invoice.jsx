@@ -120,35 +120,44 @@ const PrintableComponent = React.forwardRef((props, ref) => {
     }
     if (name === "Admission Fee" && studentdata.initialpayment) {
       setinvoice(
-        "TA" +
+        "IN-TA" +
         firstbranch +
-        paiddate[8] +
-        paiddate[9] +
+
         paiddate[5] +
-        paiddate[6] +
+        paiddate[6] + `-` +
         paiddate[2] +
         paiddate[3] +
-        regnumber +
+
         "-" +
         regnumber +
         `/${parseInt(index) + 1}`
       );
     }
     if (name === "Installment" && studentdata.installments) {
-      setinvoice(
-        "TA" +
-        firstbranch +
-        paiddate[8] +
-        paiddate[9] +
-        paiddate[5] +
-        paiddate[6] +
-        paiddate[2] +
-        paiddate[3] +
-        regnumber +
-        "-" +
-        regnumber +
-        `/${parseInt(index) + 2}`
-      );
+      if (nametype === "studentinvoice") {
+        setinvoice(
+          "R-TA" +
+          firstbranch +
+          paiddate[5] +
+          paiddate[6] + `-` +
+          paiddate[2] +
+          paiddate[3] + "-" + regnumber +
+          `/${parseInt(index) + 2}`
+        );
+      }
+      if (nametype === "admininvoice") {
+        setinvoice(
+          "IN-TA" + firstbranch +
+          paiddate[5] +
+          paiddate[6] + `-` +
+          paiddate[2] +
+          paiddate[3] + "-" + regnumber +
+          `/${parseInt(index) + 2}`
+        );
+      }
+
+
+
     }
   }, [studentdata]);
   // useEffect(() => {
@@ -207,12 +216,12 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </div>
               <div className="col-6 invoice-sideborder pt-2">
                 {nametype === "studentinvoice" && (
-                  <b> Receipt No.</b>
+                  <b> Receipt No: </b>
                 )}
                 {nametype === "admininvoice" && (
-                  <b> Invoice NO:</b>
+                  <b> Invoice NO: </b>
                 )}
-                {invoice}
+                <b> {invoice}</b>
                 <p>
                   {name === "Admission Fee" &&
                     studentdata &&
@@ -297,19 +306,22 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               </p>
             </div>
             <div className="col-6 invoice-sideborder py-2">
-              <p className="fw-bold">BILLING To:</p>
+              <p className="">BILL TO:</p>
               <p><b>{studentdata && studentdata.name}</b></p>
               <p><b>Contact No:</b> {studentdata && studentdata.mobilenumber}</p>
               <p><b>Email :</b> {studentdata && studentdata.email}</p>
+              <p>
+                <b>Address :</b>{" "}
+                {studentdata && (
+                  <span>
+                    {studentdata.area},&nbsp;{studentdata.native},&nbsp;
+                    {studentdata.state}, &nbsp;{studentdata.zipcode},&nbsp;
+                    {studentdata.country}
+                  </span>
+                )}
+              </p>
+
               <p><b>Course:</b> {studentdata && studentdata.courses}</p>
-              <b>Address :</b>{" "}
-              {studentdata && (
-                <span>
-                  {studentdata.area},&nbsp;{studentdata.native},&nbsp;
-                  {studentdata.state}, &nbsp;{studentdata.zipcode},&nbsp;
-                  {studentdata.country}
-                </span>
-              )}
             </div>
 
           </div>
@@ -345,72 +357,300 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
                   </TableRow>
                 </TableHead>
+                <TableBody>
+                  {name === "Admission Fee" &&
+                    studentdata &&
+                    studentdata.initialpayment &&
+                    studentdata.initialpayment.length > 0 ? (
+                    studentdata.initialpayment.map((student) => (
+                      <TableRow>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}>   Admission Fee</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}>  {studentdata.modeoftraining}</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> 99843</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> {Number(
+                            parseFloat(student.initialamount / 1.18).toFixed(2)
+                          ).toLocaleString("en-IN")}</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> 18%</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> {Number(
+                            (
+                              parseFloat(student.initialamount).toFixed(2) -
+                              parseFloat(student.initialamount / 1.18).toFixed(2)
+                            ).toFixed(2)
+                          ).toLocaleString("en-IN")}</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}>         {Number(student.initialamount).toLocaleString("en-IN")}</span>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : name === "Admission Fee" ? (
+                    <p>No initial payment data available</p>
+                  ) : null}
+                  {studentdata &&
+                    name === "Installment" &&
+                    studentdata.installments &&
+                    studentdata.installments.length > 0 ? (
+                    studentdata.installments.map((student, indx) => {
+                      if (indx === parseInt(index)) {
+                        return (
+                          <tr>
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">Fee</td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                              
+                            )} */}
+                            <td className=" text-center border border 1">
+                              Course Fee
+                            </td>
+                            <td className=" text-center border border 1">
+                              {studentdata.modeoftraining}
+                            </td>
+                            <TableCell className="Table-cell text-center">
+                              <span style={{ fontSize: "15px" }}> 99843</span>
+                            </TableCell>
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">
+                                {Number(
+                                  parseFloat(student.paidamount / 1.18).toFixed(2)
+                                ).toLocaleString("en-IN")}
+                              </td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                             
+                            )} */}
+                            <td className=" text-center border border 1">
+                              {Number(
+                                parseFloat(
+                                  (student.paidamount * 0.65) / 1.18
+                                ).toFixed(2)
+                              ).toLocaleString("en-IN")}
+                            </td>
+                            {/* <td className=" text-center border border 1">
+                  {parseFloat((student.paidamount * 0.65) / 1.18).toFixed(
+                    2
+                  )}
+                </td> */}<TableCell className="Table-cell text-center">
+                              <span style={{ fontSize: "15px" }}> 18%</span>
+                            </TableCell>
 
-                <TableRow>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> admision(static)</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>  {studentdata.modeoftraining}</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> 99843</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>{studentdata.finaltotal}</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> 18%</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> peding</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> 00000000</span>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> admision(static)</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}></span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> </span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>00000</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> </span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> </span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> 00000000</span>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="Table-cell text-center" colspan="3">
-                    <span style={{ fontSize: "15px" }}><b>Total</b></span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>0000</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> </span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>00000</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>0000 </span>
-                  </TableCell>
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">
+                                {Number(
+                                  (
+                                    parseFloat(student.paidamount).toFixed(2) -
+                                    parseFloat(student.paidamount / 1.18).toFixed(2)
+                                  ).toFixed(2)
+                                ).toLocaleString("en-IN")}
+                              </td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                             
+                            )} */}
+                            <td className=" text-center border border 1">
+                              {Number(
+                                (
+                                  parseFloat(student.paidamount * 0.65).toFixed(2) -
+                                  parseFloat(
+                                    (student.paidamount * 0.65) / 1.18
+                                  ).toFixed(2)
+                                ).toFixed(2)
+                              ).toLocaleString("en-IN")}
+                            </td>
+                            {/* <td className=" text-center border border 1">
+                  {(
+                    parseFloat(student.paidamount * 0.65).toFixed(2) -
+                    parseFloat(
+                      (student.paidamount * 0.65) / 1.18
+                    ).toFixed(2)
+                  ).toFixed(2)}
+                </td> */}
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">
+                                {Number(parseInt(student.paidamount)).toLocaleString(
+                                  "en-IN"
+                                )}
+                              </td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                              
+                            )} */}
+                            <td className=" text-center border border 1">
+                              {Number(
+                                parseInt(student.paidamount * 0.65)
+                              ).toLocaleString("en-IN")}
+                            </td>
+                            {/* <td className=" text-center border border 1">
+                  {parseInt(student.paidamount * 0.65)}
+                </td> */}
+                          </tr>
+                        );
+                      }
+                      return null; // If the condition is not met, return null
+                    })
+                  ) : name === "Installment" ? (
+                    <p>No payment date available</p>
+                  ) : null}
+
+                  {studentdata &&
+                    // nametype === "admininvoice" &&
+                    name === "Installment" &&
+                    studentdata.installments &&
+                    studentdata.installments.length > 0 ? (
+                    studentdata.installments.map((student, indx) => {
+                      if (indx === parseInt(index)) {
+                        return (
+                          <tr>
+                            <td className="border border 1 text-center">
+                              Material Fee
+                            </td>
+
+                            <td className="border border 1 text-center"></td>
+                            <td className="border border 1 text-center"></td>
+                            <td className="border border 1 text-center">
+                              {Number(
+                                parseInt(student.paidamount * 0.35)
+                              ).toLocaleString("en-IN")}
+                            </td>
+                            <td className="border border 1 text-center"></td>
+                            <td className="border border 1 text-center"></td>
+                            <td className="border border 1 text-center">
+                              {Number(
+                                parseInt(student.paidamount * 0.35)
+                              ).toLocaleString("en-IN")}
+                            </td>
+                          </tr>
+                        );
+                      }
+                      return null; // If the condition is not met, return null
+                    })
+                  ) : name === "Installment" && nametype === "admininvoice" ? (
+                    <p>No payment date available</p>
+                  ) : null}
+
+                  {name === "Admission Fee" &&
+                    studentdata &&
+                    studentdata.initialpayment &&
+                    studentdata.initialpayment.length > 0 ? (
+                    studentdata.initialpayment.map((student) => (
+                      <tr>
+
+                        <TableCell className="Table-cell text-center" colspan="3">
+                          <span style={{ fontSize: "15px" }}><b>Total</b></span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> {Number(
+                            parseFloat(student.initialamount / 1.18).toFixed(2)
+                          ).toLocaleString("en-IN")}</span>
+                        </TableCell>
+                        <td className="border border 1 text-center"></td>
+
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> {Number(
+                            (
+                              parseFloat(student.initialamount).toFixed(2) -
+                              parseFloat(student.initialamount / 1.18).toFixed(2)
+                            ).toFixed(2)
+                          ).toLocaleString("en-IN")}</span>
+                        </TableCell>
+                        <td className="border border 1 text-center">
+                          <strong>
+                            {" "}
+                            {Number(parseInt(student.initialamount)).toLocaleString(
+                              "en-IN"
+                            )}
+                          </strong>
+                        </td>
+                      </tr>
+                    ))
+                  ) : name === "Admission Fee" ? (
+                    <p>No initial payment data available</p>
+                  ) : null}
+
+                  {studentdata &&
+                    name === "Installment" &&
+                    studentdata.installments &&
+                    studentdata.installments.length > 0 ? (
+                    studentdata.installments.map((student, indx) => {
+                      if (indx === parseInt(index)) {
+                        return (
+                          <tr>
+                            <TableCell className="Table-cell text-center" colspan="3">
+                              <span style={{ fontSize: "15px" }}><b>Total</b></span>
+                            </TableCell>
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">
+                                {Number(
+                                  parseFloat(student.paidamount / 1.18).toFixed(2)
+                                ).toLocaleString("en-IN")}
+                              </td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                              
+                            )} */}
+                            <td className=" text-center border border 1">
+                              {Number(
+                                parseFloat(
+                                  ((student.paidamount * 0.65) / 1.18) + (student.paidamount * 0.35)
+                                ).toFixed(2)
+                              ).toLocaleString("en-IN")}
+                            </td>
+
+                            <td className="border border-1 text-center"></td>
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">
+                                {Number(
+                                  (
+                                    parseFloat(student.paidamount).toFixed(2) -
+                                    parseFloat(student.paidamount / 1.18).toFixed(2)
+                                  ).toFixed(2)
+                                ).toLocaleString("en-IN")}
+                              </td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                             
+                            )} */}
+                            <td className=" text-center border border 1">
+                              {Number(
+                                (
+                                  parseFloat(student.paidamount * 0.65).toFixed(2) -
+                                  parseFloat(student.paidamount * 0.65 / 1.18).toFixed(2)
+                                ).toFixed(2)
+                              ).toLocaleString("en-IN")}
+                            </td>
 
 
-                </TableRow>
+
+                            <td className="border border-1 text-center">
+                              <strong>
+
+                                {Number(parseInt(student.paidamount)).toLocaleString(
+                                  "en-IN"
+                                )}
+                              </strong>
+                            </td>
+                          </tr>
+                        );
+                      }
+                      return null; // If the condition is not met, return null
+                    })
+                  ) : name === "Installment" ? (
+                    <p>No payment date available</p>
+                  ) : null}
+
+                </TableBody>
+
 
 
               </Table>
@@ -453,29 +693,201 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   </TableRow>
                 </TableHead>
 
-                <TableRow>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>{studentdata.modeoftraining}</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>  ggff</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>9% </span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}></span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>9% </span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> </span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> </span>
-                  </TableCell>
-                </TableRow>
+                <TableBody>
+                  {name === "Admission Fee" &&
+                    studentdata &&
+                    studentdata.initialpayment &&
+                    studentdata.initialpayment.length > 0 ? (
+                    studentdata.initialpayment.map((student) => (
+                      <TableRow>
+
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}>  {studentdata.modeoftraining}</span>
+                        </TableCell>
+
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> {Number(
+                            parseFloat(student.initialamount / 1.18).toFixed(2)
+                          ).toLocaleString("en-IN")}</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> 9%</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> {Number(
+                            (
+                              (parseFloat(student.initialamount).toFixed(2) -
+                                parseFloat(student.initialamount / 1.18).toFixed(2)) / 2
+                            ).toFixed(2)
+                          ).toLocaleString("en-IN")}</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> 9%</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> {Number(
+                            (
+                              (parseFloat(student.initialamount).toFixed(2) -
+                                parseFloat(student.initialamount / 1.18).toFixed(2)) / 2
+                            ).toFixed(2)
+                          ).toLocaleString("en-IN")}</span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span style={{ fontSize: "15px" }}> {Number(
+                            (
+                              (parseFloat(student.initialamount).toFixed(2) -
+                                parseFloat(student.initialamount / 1.18).toFixed(2))
+                            ).toFixed(2)
+                          ).toLocaleString("en-IN")}</span>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : name === "Admission Fee" ? (
+                    <p>No initial payment data available</p>
+                  ) : null}
+                  {studentdata &&
+                    name === "Installment" &&
+                    studentdata.installments &&
+                    studentdata.installments.length > 0 ? (
+                    studentdata.installments.map((student, indx) => {
+                      if (indx === parseInt(index)) {
+                        return (
+                          <tr>
+
+
+                            <td className=" text-center border border 1">
+                              {studentdata.modeoftraining}
+                            </td>
+
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">
+                                {Number(
+                                  parseFloat(student.paidamount / 1.18).toFixed(2)
+                                ).toLocaleString("en-IN")}
+                              </td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                             
+                            )} */}
+                            <td className=" text-center border border 1">
+                              {Number(
+                                parseFloat(
+                                  (student.paidamount * 0.65) / 1.18
+                                ).toFixed(2)
+                              ).toLocaleString("en-IN")}
+                            </td>
+
+                            <TableCell className="Table-cell text-center">
+                              <span style={{ fontSize: "15px" }}> 9%</span>
+                            </TableCell>
+
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">
+                                {Number(
+                                  ((
+                                    parseFloat(student.paidamount).toFixed(2) -
+                                    parseFloat(student.paidamount / 1.18).toFixed(2)
+                                  ) / 2
+
+                                  ).toFixed(2)
+                                ).toLocaleString("en-IN")}
+                              </td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                             
+                            )} */}
+                            <td className=" text-center border border 1">
+                              {Number(
+                                ((
+                                  parseFloat(student.paidamount * 0.65).toFixed(2) -
+                                  parseFloat(
+                                    (student.paidamount * 0.65) / 1.18
+                                  ).toFixed(2)
+                                ) / 2
+
+                                ).toFixed(2)
+                              ).toLocaleString("en-IN")}
+                            </td>
+
+
+
+                            <TableCell className="Table-cell text-center">
+                              <span style={{ fontSize: "15px" }}> 9%</span>
+                            </TableCell>
+
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">
+                                {Number(
+                                  ((
+                                    parseFloat(student.paidamount).toFixed(2) -
+                                    parseFloat(student.paidamount / 1.18).toFixed(2)
+                                  ) / 2
+
+                                  ).toFixed(2)
+                                ).toLocaleString("en-IN")}
+                              </td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                           
+                            )} */}
+                            <td className=" text-center border border 1">
+                              {Number(
+                                ((
+                                  parseFloat(student.paidamount * 0.65).toFixed(2) -
+                                  parseFloat(
+                                    (student.paidamount * 0.65) / 1.18
+                                  ).toFixed(2)
+                                ) / 2
+
+                                ).toFixed(2)
+                              ).toLocaleString("en-IN")}
+                            </td>
+                            {/* {nametype === "studentinvoice" && (
+                              <td className=" text-center border border 1">
+                                {Number(
+                                  ((
+                                    parseFloat(student.paidamount).toFixed(2) -
+                                    parseFloat(student.paidamount / 1.18).toFixed(2)
+                                  )
+
+                                  ).toFixed(2)
+                                ).toLocaleString("en-IN")}
+                              </td>
+                            )} */}
+                            {/* {nametype === "admininvoice" && (
+                             
+                            )} */}
+                            <td className=" text-center border border 1">
+                              {Number(
+                                ((
+                                  parseFloat(student.paidamount * 0.65).toFixed(2) -
+                                  parseFloat(
+                                    (student.paidamount * 0.65) / 1.18
+                                  ).toFixed(2)
+                                )
+
+                                ).toFixed(2)
+                              ).toLocaleString("en-IN")}
+                            </td>
+                          </tr>
+                        );
+                      }
+                      return null; // If the condition is not met, return null
+                    })
+                  ) : name === "Installment" ? (
+                    <p>No payment date available</p>
+                  ) : null}
+
+
+
+
+
+
+                </TableBody>
+
+
+
+
 
               </Table>
             </TableContainer>
@@ -500,679 +912,6 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </div>
 
           </div></div>
-
-
-        {/* old code */}
-
-
-
-        <div className="row invoice-border">
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <h4 className="">
-              {" "}
-              <strong> Kapil Knowledge Hub Private Limited</strong>
-            </h4>
-          </div>
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <h3 className="mt-5">
-              <strong>
-                {" "}
-                <b>INVOICE NO:</b> {invoice}
-              </strong>
-            </h3>
-          </div>
-        </div>
-        <div className="row m-0 p-0">
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <p>CIN: U80100TG2018PTC123853</p>
-          </div>
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <p>
-              {name === "Admission Fee" &&
-                studentdata &&
-                studentdata.initialpayment &&
-                studentdata.initialpayment.length > 0 ? (
-                studentdata.initialpayment.map((student) => {
-                  let paidDate = new Date(student.paiddate);
-                  const day = paidDate.getUTCDate();
-                  const monthIndex = paidDate.getUTCMonth();
-                  const year = paidDate.getUTCFullYear();
-
-                  const monthAbbreviations = [
-                    "Jan",
-                    "Feb",
-                    "Mar",
-                    "Apr",
-                    "May",
-                    "Jun",
-                    "Jul",
-                    "Aug",
-                    "Sep",
-                    "Oct",
-                    "Nov",
-                    "Dec",
-                  ];
-
-                  // Formatting the date
-                  paidDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
-                    }-${year}`;
-                  return (
-                    <span key={student.id}>
-                      <b>DATE:</b> {paidDate}
-                    </span>
-                  );
-                })
-              ) : name === "Admission Fee" ? (
-                <p>No initial payment data available</p>
-              ) : null}
-              {studentdata &&
-                name === "Installment" &&
-                studentdata.installments &&
-                studentdata.installments.length > 0 ? (
-                studentdata.installments.map((student, indx) => {
-                  const originalDate = new Date(student.paiddate);
-                  const day = String(originalDate.getDate()).padStart(2, "0");
-                  const month = String(originalDate.getMonth() + 1).padStart(
-                    2,
-                    "0"
-                  ); // Month is zero-based, so we add 1.
-                  const year = originalDate.getFullYear();
-
-                  const formattedDate = `${day}-${month}-${year}`;
-
-                  console.log(formattedDate);
-                  if (indx === parseInt(index)) {
-                    return (
-                      <span key={student.id}>
-                        <b>DATE:</b> {formattedDate}
-                      </span>
-                    );
-                  }
-                  return null; // If the condition is not met, return null
-                })
-              ) : name === "Installment" ? (
-                <p>No payment date available</p>
-              ) : null}
-            </p>
-          </div>
-        </div>
-        <div className="row m-0 p-0">
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <p>GSTIN: 36AAHCK0599C1ZI </p>
-          </div>
-          <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-            <p>
-              <b>Branch:</b> {studentdata.branch}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-2 ">
-          <p>
-            <b> BILLING TO</b>
-          </p>
-          <hr className="w-25" />
-          <div className="row ">
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <b>Name :</b> {studentdata && studentdata.name}
-            </div>
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <b>Registration No:</b>
-              {studentdata && studentdata.registrationnumber}
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <b>Email :</b> {studentdata && studentdata.email}
-            </div>
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <b>Address :</b>{" "}
-              {studentdata && (
-                <span>
-                  {studentdata.area},&nbsp;{studentdata.native},&nbsp;
-                  {studentdata.state}, &nbsp;{studentdata.zipcode},&nbsp;
-                  {studentdata.country}
-                </span>
-              )}
-            </div>
-            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <b>Course:</b> {studentdata && studentdata.courses}
-            </div>
-          </div>
-        </div>
-        <div className="mt-3 ">
-          <p>
-            <b> BILLING TO</b>{" "}
-          </p>
-          <hr className="w-25" />
-          <div className="d-flex justify-content-space">
-            <div>
-              <p className="mt-3">
-                <b>Name :</b> {studentdata && studentdata.name}
-              </p>
-              <p className="mt-3">
-                <b>Email :</b> {studentdata && studentdata.email}
-              </p>
-              <p className="mt-3">
-                <b>Address :</b>{" "}
-                {studentdata && (
-                  <span>
-                    {studentdata.area},&nbsp;{studentdata.native},&nbsp;
-                    {studentdata.state}, &nbsp;{studentdata.zipcode},&nbsp;
-                    {studentdata.country}
-                  </span>
-                )}
-              </p>
-            </div>
-            <div>
-              <p className="mt-3">
-                <b>Registration No:</b>{" "}
-                {studentdata && studentdata.registrationnumber}
-              </p>
-              <p className="mt-3">
-                <b>Contact No:</b> {studentdata && studentdata.mobilenumber}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="table-responsive" style={{ overflow: "hidden" }}>
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <td className="text-center bg-primary text-light border border 1">
-                  {" "}
-                  Description
-                </td>
-                <td className="text-center bg-primary text-light border border 1">
-                  {" "}
-                  Payment Mode
-                </td>
-                <td className="text-center bg-primary text-light border border 1">
-                  Fee Excl. Tax
-                </td>{" "}
-                <td className="text-center bg-primary text-light border border 1">
-                  {" "}
-                  Tax
-                </td>
-                <td className="text-center bg-primary text-light border border 1">
-                  Total
-                </td>
-              </tr>
-            </thead>
-            <tbody>
-              {name === "Admission Fee" &&
-                studentdata &&
-                studentdata.initialpayment &&
-                studentdata.initialpayment.length > 0 ? (
-                studentdata.initialpayment.map((student) => (
-                  <tr>
-                    <td className=" text-center border border 1">
-                      Admission Fee
-                    </td>
-                    <td className=" text-center border border 1">
-                      {student.modeofpayment}
-                    </td>
-                    <td className=" text-center border border 1">
-                      {/* parseFloat(169.49152542372883.toFixed(2)); */}
-
-                      {Number(
-                        parseFloat(student.initialamount / 1.18).toFixed(2)
-                      ).toLocaleString("en-IN")}
-                      {/* {parseInt(student.initialamount) / 1.18} */}
-                    </td>
-                    <td className=" text-center border border 1">
-                      {Number(
-                        (
-                          parseFloat(student.initialamount).toFixed(2) -
-                          parseFloat(student.initialamount / 1.18).toFixed(2)
-                        ).toFixed(2)
-                      ).toLocaleString("en-IN")}
-                    </td>
-                    <td className=" text-center border border 1">
-                      {Number(student.initialamount).toLocaleString("en-IN")}
-                    </td>
-                  </tr>
-                ))
-              ) : name === "Admission Fee" ? (
-                <p>No initial payment data available</p>
-              ) : null}
-              {studentdata &&
-                name === "Installment" &&
-                studentdata.installments &&
-                studentdata.installments.length > 0 ? (
-                studentdata.installments.map((student, indx) => {
-                  if (indx === parseInt(index)) {
-                    return (
-                      <tr>
-                        {nametype === "studentinvoice" && (
-                          <td className=" text-center border border 1">Fee</td>
-                        )}
-                        {nametype === "admininvoice" && (
-                          <td className=" text-center border border 1">
-                            Course Fee
-                          </td>
-                        )}
-
-                        <td className=" text-center border border 1">
-                          {student.modeofpayment}
-                        </td>
-
-                        {nametype === "studentinvoice" && (
-                          <td className=" text-center border border 1">
-                            {Number(
-                              parseFloat(student.paidamount / 1.18).toFixed(2)
-                            ).toLocaleString("en-IN")}
-                          </td>
-                        )}
-                        {nametype === "admininvoice" && (
-                          <td className=" text-center border border 1">
-                            {Number(
-                              parseFloat(
-                                (student.paidamount * 0.65) / 1.18
-                              ).toFixed(2)
-                            ).toLocaleString("en-IN")}
-                          </td>
-                        )}
-
-                        {/* <td className=" text-center border border 1">
-                        {parseFloat((student.paidamount * 0.65) / 1.18).toFixed(
-                          2
-                        )}
-                      </td> */}
-
-                        {nametype === "studentinvoice" && (
-                          <td className=" text-center border border 1">
-                            {Number(
-                              (
-                                parseFloat(student.paidamount).toFixed(2) -
-                                parseFloat(student.paidamount / 1.18).toFixed(2)
-                              ).toFixed(2)
-                            ).toLocaleString("en-IN")}
-                          </td>
-                        )}
-                        {nametype === "admininvoice" && (
-                          <td className=" text-center border border 1">
-                            {Number(
-                              (
-                                parseFloat(student.paidamount * 0.65).toFixed(2) -
-                                parseFloat(
-                                  (student.paidamount * 0.65) / 1.18
-                                ).toFixed(2)
-                              ).toFixed(2)
-                            ).toLocaleString("en-IN")}
-                          </td>
-                        )}
-                        {/* <td className=" text-center border border 1">
-                        {(
-                          parseFloat(student.paidamount * 0.65).toFixed(2) -
-                          parseFloat(
-                            (student.paidamount * 0.65) / 1.18
-                          ).toFixed(2)
-                        ).toFixed(2)}
-                      </td> */}
-                        {nametype === "studentinvoice" && (
-                          <td className=" text-center border border 1">
-                            {Number(parseInt(student.paidamount)).toLocaleString(
-                              "en-IN"
-                            )}
-                          </td>
-                        )}
-                        {nametype === "admininvoice" && (
-                          <td className=" text-center border border 1">
-                            {Number(
-                              parseInt(student.paidamount * 0.65)
-                            ).toLocaleString("en-IN")}
-                          </td>
-                        )}
-                        {/* <td className=" text-center border border 1">
-                        {parseInt(student.paidamount * 0.65)}
-                      </td> */}
-                      </tr>
-                    );
-                  }
-                  return null; // If the condition is not met, return null
-                })
-              ) : name === "Installment" ? (
-                <p>No payment date available</p>
-              ) : null}
-              {studentdata &&
-                nametype === "admininvoice" &&
-                name === "Installment" &&
-                studentdata.installments &&
-                studentdata.installments.length > 0 ? (
-                studentdata.installments.map((student, indx) => {
-                  if (indx === parseInt(index)) {
-                    return (
-                      <tr>
-                        <td className="border border 1 text-center">
-                          Material Fee
-                        </td>
-                        <td className=" text-center border border 1">
-                          {student.modeofpayment}
-                        </td>
-                        <td className="border border 1 text-center"></td>
-                        <td className="border border 1 text-center"></td>
-                        <td className="border border 1 text-center">
-                          {Number(
-                            parseInt(student.paidamount * 0.35)
-                          ).toLocaleString("en-IN")}
-                        </td>
-                      </tr>
-                    );
-                  }
-                  return null; // If the condition is not met, return null
-                })
-              ) : name === "Installment" && nametype === "admininvoice" ? (
-                <p>No payment date available</p>
-              ) : null}
-
-              {name === "Admission Fee" &&
-                studentdata &&
-                studentdata.initialpayment &&
-                studentdata.initialpayment.length > 0 ? (
-                studentdata.initialpayment.map((student) => (
-                  <tr>
-                    <td className="border border 1 text-center">
-                      {" "}
-                      <strong>Grand Total</strong>
-                    </td>
-
-                    <td className="border border 1 text-center"></td>
-                    <td className="border border 1 text-center"></td>
-
-                    <td className="border border 1 text-center"></td>
-                    <td className="border border 1 text-center">
-                      <strong>
-                        {" "}
-                        {Number(parseInt(student.initialamount)).toLocaleString(
-                          "en-IN"
-                        )}
-                      </strong>
-                    </td>
-                  </tr>
-                ))
-              ) : name === "Admission Fee" ? (
-                <p>No initial payment data available</p>
-              ) : null}
-              {studentdata &&
-                name === "Installment" &&
-                studentdata.installments &&
-                studentdata.installments.length > 0 ? (
-                studentdata.installments.map((student, indx) => {
-                  if (indx === parseInt(index)) {
-                    return (
-                      <tr>
-                        <td className="border border-1 text-center">
-                          <strong>Grand Total</strong>
-                        </td>
-                        <td className="border border-1 text-center"></td>
-                        <td className="border border-1 text-center"></td>
-                        <td className="border border-1 text-center"></td>
-                        <td className="border border-1 text-center">
-                          <strong>
-                            {" "}
-                            {Number(parseInt(student.paidamount)).toLocaleString(
-                              "en-IN"
-                            )}
-                          </strong>
-                        </td>
-                      </tr>
-                    );
-                  }
-                  return null; // If the condition is not met, return null
-                })
-              ) : name === "Installment" ? (
-                <p>No payment date available</p>
-              ) : null}
-            </tbody>
-          </table>
-          <div className="row">
-            {/* {studentdata && (
-            <h6 className="fs-6">
-              Total Amount (in words): {words} Rupees only
-            </h6>
-          )} */}
-          </div>
-          <div className="row">
-            {studentdata && (
-              <h6 className="fs-6 fw-bold">
-                *Note: Total Due Amount: INR {studentdata.dueamount}
-              </h6>
-            )}
-          </div>
-          <p style={{ marginTop: "135px", padding: "0px", marginBottom: "5px" }}>
-            *This bill has been automatically generated and doesn't need a
-            signature.
-          </p>
-          <hr />
-          <div
-            className="d-flex align-items-end justify-content-between"
-            style={{ overflow: "hidden" }}
-          >
-            <span>
-              <EmailIcon />
-              support@teksacademy.com{" "}
-            </span>
-
-            <span>
-              <LocalPhoneIcon />
-              1800-120-4748
-            </span>
-
-            <span>
-              <LanguageIcon /> www.teksacademy.com{" "}
-            </span>
-          </div>
-        </div>
-
-        {/* <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <TableCell
-                className="bg-primary text-light fs-6  border border 1"
-                align="center"
-              >
-                SI.NO
-              </TableCell>
-              <TableCell
-                className="bg-primary text-light fs-6  border border 1"
-                rowSpan={2}
-                align="center"
-              >
-                Description
-              </TableCell>
-
-              <TableCell
-                className="bg-primary text-light fs-6  border border 1"
-                align="center"
-              >
-                Fee excl tax
-              </TableCell>
-              <TableCell
-                className="bg-primary text-light fs-6  border border 1"
-                align="center"
-              >
-                tax
-              </TableCell>
-              <TableCell
-                className="bg-primary text-light fs-6  border border 1"
-                align="center"
-              >
-                Total
-              </TableCell>
-
-         
-            </TableRow>
-          </TableHead>
-
-          <TableBody className="border border 1">
-            {name === "Admission Fee" &&
-            studentdata &&
-            studentdata.initialpayment &&
-            studentdata.initialpayment.length > 0 ? (
-              studentdata.initialpayment.map((student) => (
-                <TableRow>
-                  <TableCell className="border border 1 text-center">
-                    1
-                  </TableCell>
-                  <TableCell className="border border 1 text-center">
-                    Admission Fee
-                  </TableCell>
-
-                  <TableCell className="border border 1 text-center">
-                  
-                    {parseFloat(student.initialamount / 1.18).toFixed(3)}
-           
-                  </TableCell>
-                  <TableCell className="border border 1 text-center">
-                    {(
-                      parseFloat(student.initialamount).toFixed(3) -
-                      parseFloat(student.initialamount / 1.18).toFixed(3)
-                    ).toFixed(3)}
-                  </TableCell>
-                  <TableCell className="border border 1 text-center">
-                    {student.initialamount}
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : name === "Admission Fee" ? (
-              <p>No initial payment data available</p>
-            ) : null}
-            {studentdata &&
-            name === "Installment" &&
-            studentdata.installments &&
-            studentdata.installments.length > 0 ? (
-              studentdata.installments.map((student, indx) => {
-                if (indx === parseInt(index)) {
-                  return (
-                    <TableRow>
-                      <TableCell className="border border 1 text-center">
-                        1
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        Course Fee
-                      </TableCell>
-
-                      <TableCell className="border border 1 text-center">
-                        {parseFloat((student.paidamount * 0.65) / 1.18).toFixed(
-                          3
-                        )}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {(
-                          parseFloat(student.paidamount * 0.65).toFixed(3) -
-                          parseFloat(
-                            (student.paidamount * 0.65) / 1.18
-                          ).toFixed(3)
-                        ).toFixed(3)}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {parseFloat(student.paidamount * 0.65).toFixed(3)}
-                      </TableCell>
-                    </TableRow>
-                  );
-                }
-                return null; // If the condition is not met, return null
-              })
-            ) : name === "Installment" ? (
-              <p>No payment date available</p>
-            ) : null}
-            {studentdata &&
-            name === "Installment" &&
-            studentdata.installments &&
-            studentdata.installments.length > 0 ? (
-              studentdata.installments.map((student, indx) => {
-                if (indx === parseInt(index)) {
-                  return (
-                    <TableRow>
-                      <TableCell className="border border 1 text-center">
-                        2
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        Material Fee
-                      </TableCell>
-
-                      <TableCell className="border border 1 text-center">
-                        {parseFloat((student.paidamount * 0.35) / 1.18).toFixed(
-                          3
-                        )}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {(
-                          parseFloat(student.paidamount * 0.35).toFixed(3) -
-                          parseFloat(
-                            (student.paidamount * 0.35) / 1.18
-                          ).toFixed(3)
-                        ).toFixed(3)}
-                      </TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {parseFloat(student.paidamount * 0.35).toFixed(3)}
-                      </TableCell>
-                    </TableRow>
-                  );
-                }
-                return null; // If the condition is not met, return null
-              })
-            ) : name === "Installment" ? (
-              <p>No payment date available</p>
-            ) : null}
-
-            {name === "Admission Fee" &&
-            studentdata &&
-            studentdata.initialpayment &&
-            studentdata.initialpayment.length > 0 ? (
-              studentdata.initialpayment.map((student) => (
-                <TableRow>
-                  <TableCell className="border border 1 text-center"></TableCell>
-                  <TableCell className="border border 1 text-center">
-                    Grand Total
-                  </TableCell>
-
-                  <TableCell className="border border 1 text-center"></TableCell>
-                  <TableCell className="border border 1 text-center"></TableCell>
-                  <TableCell className="border border 1 text-center">
-                    {student.initialamount}
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : name === "Admission Fee" ? (
-              <p>No initial payment data available</p>
-            ) : null}
-            {studentdata &&
-            name === "Installment" &&
-            studentdata.installments &&
-            studentdata.installments.length > 0 ? (
-              studentdata.installments.map((student, indx) => {
-                if (indx === parseInt(index)) {
-                  return (
-                    <TableRow>
-                      <TableCell className="border border 1 text-center"></TableCell>
-                      <TableCell className="border border 1 text-center"></TableCell>
-
-                      <TableCell className="border border 1 text-center">
-                        Grand Total
-                      </TableCell>
-                      <TableCell className="border border 1 text-center"></TableCell>
-                      <TableCell className="border border 1 text-center">
-                        {student.paidamount}
-                      </TableCell>
-                    </TableRow>
-                  );
-                }
-                return null; // If the condition is not met, return null
-              })
-            ) : name === "Installment" ? (
-              <p>No payment date available</p>
-            ) : null}
-          </TableBody>
-        </Table>
-      </TableContainer> */}
       </div>
     </div>
   );
@@ -1240,14 +979,12 @@ function Invoice() {
     axios
       .get(`${process.env.REACT_APP_API_URL}/viewstudentdata/${id}`)
       .then((response) => {
-        // Handle the successful response here
-        // response.data[0].feedetails = JSON.parse(response.data[0].feedetails);
-        setstudentdata(response.data[0]); // Update the data state with the fetched data
-        // setstudentdata()
-        // console.log("studentdata", response.data[0].feedetails);
+
+        setstudentdata(response.data[0]);
+
       })
       .catch((error) => {
-        // Handle any errors that occur during the request
+
         console.error("Error fetching data:", error);
       });
   }, []);
