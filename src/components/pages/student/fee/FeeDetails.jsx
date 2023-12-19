@@ -109,24 +109,24 @@ const FeeDetails = () => {
     const filteredResults = getstudentData.filter((item) => {
       const searchCondition = filterCriteria.search
         ? item.name
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.branch
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.registrationnumber.includes(filterCriteria.search) ||
-          item.courses
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase()) ||
-          item.enquirytakenby
-            .toLowerCase()
-            .includes(filterCriteria.search.toLowerCase())
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.branch
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.registrationnumber.includes(filterCriteria.search) ||
+        item.courses
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.enquirytakenby
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase())
         : true;
 
       const dateCondition =
         filterCriteria.fromdate && filterCriteria.todate
           ? item.admissiondate >= filterCriteria.fromdate &&
-            item.admissiondate <= filterCriteria.todate
+          item.admissiondate <= filterCriteria.todate
           : true;
 
       const branchCondition = filterCriteria.branch
@@ -262,13 +262,13 @@ const FeeDetails = () => {
             <div className="col-12 col-md-6 col-lg-3 col-xl-3 mb-2">
               <Card
                 className="cardcolor"
-                // style={{
-                //   background: "#195489",
-                //   textAlign: "center",
-                //   borderRadius: "8px",
-                //   color: "white",
-                //   boxShadow: "3px 3px 6px  gray",
-                // }}
+              // style={{
+              //   background: "#195489",
+              //   textAlign: "center",
+              //   borderRadius: "8px",
+              //   color: "white",
+              //   boxShadow: "3px 3px 6px  gray",
+              // }}
               >
                 <p className="text-center pt-3">Fee Received</p>
               </Card>
@@ -511,298 +511,260 @@ const FeeDetails = () => {
               </div>
             </div>
           </div>
-       
-            <TableContainer sx={{ maxHeight: 440 }} component={Paper}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="table-cell-heading">
-                      S.NO
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Name
-                      <br /> Branch <br />
-                      Counsellor
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Contact
-                      <br />
-                      Email
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Course <br /> Date of Joining
-                      <br /> Total Fee
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Paid Fee
-                      <br /> Due Amount
-                      <br /> Next Due Date
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Total <br />
-                      Installments
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Paid <br /> Installments
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      View
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {Array.isArray(records) && records.length > 0 ? (
-                    records.map((item, index) => {
-                      let AdmissionDate = new Date(item.admissiondate);
-                      const day = AdmissionDate.getUTCDate();
-                      const monthIndex = AdmissionDate.getUTCMonth();
-                      const year = AdmissionDate.getUTCFullYear();
-                      const monthAbbreviations = [
-                        "Jan",
-                        "Feb",
-                        "Mar",
-                        "Apr",
-                        "May",
-                        "Jun",
-                        "Jul",
-                        "Aug",
-                        "Sep",
-                        "Oct",
-                        "Nov",
-                        "Dec",
-                      ];
-                      let NextDueDate;
-                      if (item.nextduedate) {
-                        NextDueDate = new Date(item.nextduedate);
-                        const NextDueday = NextDueDate.getUTCDate();
-                        const NextDuemonthIndex = NextDueDate.getUTCMonth();
-                        const NextDueyear = NextDueDate.getUTCFullYear();
-                        NextDueDate = `${
-                          NextDueday < 10 ? "0" : ""
-                        }${NextDueday}-${
-                          monthAbbreviations[NextDuemonthIndex]
-                        }-${NextDueyear}`;
-                      }
 
-                      // Formatting the date
-                      AdmissionDate = `${day < 10 ? "0" : ""}${day}-${
-                        monthAbbreviations[monthIndex]
+          <TableContainer sx={{ maxHeight: 440 }} component={Paper}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="table-cell-heading">
+                    S.NO
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Name
+                    <br /> Branch <br />
+                    Counsellor
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Contact
+                    <br />
+                    Email
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Course <br /> Date of Joining
+                    <br /> Total Fee
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Paid Fee
+                    <br /> Due Amount
+                    <br /> Next Due Date
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Total <br />
+                    Installments
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Paid <br /> Installments
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    View
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Array.isArray(records) && records.length > 0 ? (
+                  records.map((item, index) => {
+                    let AdmissionDate = new Date(item.admissiondate);
+                    const day = AdmissionDate.getUTCDate();
+                    const monthIndex = AdmissionDate.getUTCMonth();
+                    const year = AdmissionDate.getUTCFullYear();
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
+                    let NextDueDate;
+                    if (item.nextduedate) {
+                      NextDueDate = new Date(item.nextduedate);
+                      const NextDueday = NextDueDate.getUTCDate();
+                      const NextDuemonthIndex = NextDueDate.getUTCMonth();
+                      const NextDueyear = NextDueDate.getUTCFullYear();
+                      NextDueDate = `${NextDueday < 10 ? "0" : ""
+                        }${NextDueday}-${monthAbbreviations[NextDuemonthIndex]
+                        }-${NextDueyear}`;
+                    }
+
+                    // Formatting the date
+                    AdmissionDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
                       }-${year}`;
 
-                      return (
-                        <TableRow
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                          key={item.id}
-                        >
-                          <TableCell className="Table-cell ">
-                            {index + 1}
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.name}
-                              style={{
-                                width: "9rem",
+                    return (
+                      <TableRow
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                        key={item.id}
+                      >
+                        <TableCell className="Table-cell ">
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.name}
+                            style={{
+                              width: "9rem",
 
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {item.name}
-                            </span>
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.name}
+                          </span>
 
-                            <span
-                              title={item.branch}
-                              style={{
-                                width: "9rem",
+                          <span
+                            title={item.branch}
+                            style={{
+                              width: "9rem",
 
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {item.branch}
-                            </span>
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.branch}
+                          </span>
 
-                            <span
-                              title={item.enquirytakenby}
-                              style={{
-                                width: "9rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {item.enquirytakenby}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.mobilenumber}
-                              style={{
-                                width: "8rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {item.mobilenumber}
-                            </span>
-                            <span
-                              title={item.email}
-                              style={{
-                                width: "8rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {item.email}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.courses}
-                              style={{
-                                width: "8rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {item.courses}
-                            </span>
-                            <span
-                              title={AdmissionDate}
-                              style={{
-                                width: "8rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {AdmissionDate}
-                            </span>
-                            <span
-                              title={Number(
-                                parseFloat(item.finaltotal).toFixed(2)
-                              ).toLocaleString("en-IN")}
-                              style={{
-                                width: "8rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {Number(
-                                parseFloat(item.finaltotal).toFixed(2)
-                              ).toLocaleString("en-IN")}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={Number(
-                                parseFloat(item.totalpaidamount).toFixed(2)
-                              ).toLocaleString("en-IN")}
-                              style={{
-                                width: "8rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {Number(
-                                parseFloat(item.totalpaidamount).toFixed(2)
-                              ).toLocaleString("en-IN")}
-                            </span>
-                            <span
-                              title={Number(
-                                parseFloat(item.dueamount).toFixed(2)
-                              ).toLocaleString("en-IN")}
-                              style={{
-                                width: "8rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {Number(
-                                parseFloat(item.dueamount).toFixed(2)
-                              ).toLocaleString("en-IN")}
-                            </span>
-                            <span
-                              title={NextDueDate}
-                              style={{
-                                width: "8rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "15px",
-                                display: "block",
-                              }}
-                            >
-                              {NextDueDate ? NextDueDate : "No NextDue Date"}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell ">
-                            <span>
-                              {item.totalinstallments &&
-                                item.totalinstallments.length > 0 &&
-                                item.totalinstallments.map((items, index) => {
-                                  const dynamicStyle = {
-                                    color: item.dueamount < 1 ? "green" : "red",
-                                    fontSize:
-                                      item.dueamount < 1 ? "20px" : "16px",
-                                    fontWeight:
-                                      item.dueamount < 1 ? "900" : "900",
-                                  };
-                                  const IconStyle = {
-                                    display: item.dueamount < 1 ? true : "none",
-                                    marginLeft: "10px",
-                                  };
-                                  if (true) {
-                                    // settotalleft(item.totalinstallmentsleft);
-                                    // totalleft = item.totalinstallmentsleft;
-                                    return (
-                                      <div>
-                                        <span style={dynamicStyle}>
-                                          {items.totalinstallments}
-                                        </span>
-                                        <span style={dynamicStyle}>
-                                          <CheckCircleIcon
-                                            style={IconStyle}
-                                            className="icon-color"
-                                          />
-                                        </span>
-                                      </div>
-                                    );
-                                  }
-                                })}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
+                          <span
+                            title={item.enquirytakenby}
+                            style={{
+                              width: "9rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.enquirytakenby}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.mobilenumber}
+                            style={{
+                              width: "8rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.mobilenumber}
+                          </span>
+                          <span
+                            title={item.email}
+                            style={{
+                              width: "8rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.email}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.courses}
+                            style={{
+                              width: "8rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.courses}
+                          </span>
+                          <span
+                            title={AdmissionDate}
+                            style={{
+                              width: "8rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {AdmissionDate}
+                          </span>
+                          <span
+                            title={Number(
+                              parseFloat(item.finaltotal).toFixed(2)
+                            ).toLocaleString("en-IN")}
+                            style={{
+                              width: "8rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {Number(
+                              parseFloat(item.finaltotal).toFixed(2)
+                            ).toLocaleString("en-IN")}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={Number(
+                              parseFloat(item.totalpaidamount).toFixed(2)
+                            ).toLocaleString("en-IN")}
+                            style={{
+                              width: "8rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {Number(
+                              parseFloat(item.totalpaidamount).toFixed(2)
+                            ).toLocaleString("en-IN")}
+                          </span>
+                          <span
+                            title={Number(
+                              parseFloat(item.dueamount).toFixed(2)
+                            ).toLocaleString("en-IN")}
+                            style={{
+                              width: "8rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {Number(
+                              parseFloat(item.dueamount).toFixed(2)
+                            ).toLocaleString("en-IN")}
+                          </span>
+                          <span
+                            title={NextDueDate}
+                            style={{
+                              width: "8rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {NextDueDate ? NextDueDate : "No NextDue Date"}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell ">
+                          <span>
                             {item.totalinstallments &&
                               item.totalinstallments.length > 0 &&
                               item.totalinstallments.map((items, index) => {
@@ -823,7 +785,7 @@ const FeeDetails = () => {
                                   return (
                                     <div>
                                       <span style={dynamicStyle}>
-                                        {items.totalinstallmentspaid}
+                                        {items.totalinstallments}
                                       </span>
                                       <span style={dynamicStyle}>
                                         <CheckCircleIcon
@@ -835,26 +797,61 @@ const FeeDetails = () => {
                                   );
                                 }
                               })}
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <Link to={`/feeview/${item.id}`}>
-                              <VisibilityIcon className="icon-color" />
-                            </Link>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })
-                  ) : (
-                    <TableRow>
-                      <TableCell className="Table-cell">
-                        No data available
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          {item.totalinstallments &&
+                            item.totalinstallments.length > 0 &&
+                            item.totalinstallments.map((items, index) => {
+                              const dynamicStyle = {
+                                color: item.dueamount < 1 ? "green" : "red",
+                                fontSize:
+                                  item.dueamount < 1 ? "20px" : "16px",
+                                fontWeight:
+                                  item.dueamount < 1 ? "900" : "900",
+                              };
+                              const IconStyle = {
+                                display: item.dueamount < 1 ? true : "none",
+                                marginLeft: "10px",
+                              };
+                              if (true) {
+                                // settotalleft(item.totalinstallmentsleft);
+                                // totalleft = item.totalinstallmentsleft;
+                                return (
+                                  <div>
+                                    <span style={dynamicStyle}>
+                                      {items.totalinstallmentspaid}
+                                    </span>
+                                    <span style={dynamicStyle}>
+                                      <CheckCircleIcon
+                                        style={IconStyle}
+                                        className="icon-color"
+                                      />
+                                    </span>
+                                  </div>
+                                );
+                              }
+                            })}
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <Link to={`/feeview/${item.id}`}>
+                            <VisibilityIcon className="icon-color" />
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+                ) : (
+                  <TableRow>
+                    <TableCell className="Table-cell">
+                      No data available
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
           <div
             style={{ display: "flex", justifyContent: "center" }}
             className="mt-3"

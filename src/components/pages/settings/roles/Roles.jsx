@@ -86,25 +86,25 @@ const Roles = () => {
                 roles.map((item, index) => (
                   <TableRow key={item.id}>
                     <TableCell className="Table-cell ">
-                      <span style={{ fontSize: "15px" }}> {index + 1}</span>
+                      <span style={{ fontSize: "0.8rem" }}> {index + 1}</span>
                     </TableCell>
                     <TableCell className="Table-cell " >
-                      <span style={{ fontSize: "15px" }} >{item.role} </span>
+                      <span style={{ fontSize: "0.8rem" }} >{item.role} </span>
                     </TableCell>
                     <TableCell className="Table-cell ">
-                      <span style={{ fontSize: "15px" }}>
+                      <span style={{ fontSize: "0.8rem" }}>
                         {" "}
                         {item.description}{" "}
                       </span>
                     </TableCell>
                     <TableCell className="Table-cell ">
-                      <span style={{ fontSize: "15px" }}>
+                      <span style={{ fontSize: "0.8rem" }}>
                         {item.createdby}
                       </span>
                     </TableCell>
                     <TableCell className="Table-cell ">
-                      <span style={{ fontSize: "15px" }}>
-                      {new Date(item.date).toLocaleDateString("en-GB")}
+                      <span style={{ fontSize: "0.8rem" }}>
+                        {new Date(item.date).toLocaleDateString("en-GB")}
                       </span>
                     </TableCell>
                     <TableCell className="Table-cell ">

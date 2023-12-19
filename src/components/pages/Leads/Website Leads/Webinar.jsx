@@ -536,7 +536,7 @@ const Webinar = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -552,7 +552,7 @@ const Webinar = () => {
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -569,7 +569,7 @@ const Webinar = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -586,7 +586,7 @@ const Webinar = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -602,7 +602,7 @@ const Webinar = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >

@@ -98,7 +98,7 @@ const Reports = () => {
                 return (
                   <TableRow key={report.id}>
                     <TableCell className="Table-cell text-center">
-                      <span style={{ fontSize: "15px" }}>{index + 1} </span>
+                      <span style={{ fontSize: "0.8rem" }}>{index + 1} </span>
                     </TableCell>
                     <TableCell className="Table-cell text-center">
                       <Link to={`/report/${index}`} style={{ width: "40px" }}>
@@ -106,10 +106,10 @@ const Reports = () => {
                       </Link>
                     </TableCell>
                     <TableCell className="Table-cell text-center">
-                      <span style={{ fontSize: "15px" }}>Bhavitha</span>
+                      <span style={{ fontSize: "0.8rem" }}>Bhavitha</span>
                     </TableCell>
                     <TableCell className="Table-cell text-center">
-                      <span style={{ fontSize: "15px" }}>14-12-2023</span>
+                      <span style={{ fontSize: "0.8rem" }}>14-12-2023</span>
                     </TableCell>
                     <TableCell className="Table-cell text-center">
                       <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />

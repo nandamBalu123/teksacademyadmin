@@ -202,10 +202,10 @@ export default function AssetType() {
               assettype.map((element, index) => (
                 <TableRow key={index}>
                   <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> {index + 1} </span>
+                    <span style={{ fontSize: "0.8rem" }}> {index + 1} </span>
                   </TableCell>
                   <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>{element} </span>
+                    <span style={{ fontSize: "0.8rem" }}>{element} </span>
                   </TableCell>
                   <TableCell className="Table-cell text-center">
                     <ModeEditIcon style={{ cursor: "pointer" }}
