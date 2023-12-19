@@ -104,6 +104,7 @@ function App() {
           <div className="app">
             {user ? <Sidebar /> : undefined}
             {/* {user ? <Sidebar1 /> : undefined} */}
+            {/* {user ? <Sidebar1 /> : undefined} */}
             {/* <Sidebar /> */}
 
             <div
@@ -122,6 +123,7 @@ function App() {
                   path="/login"
                   element={!user ? <LoginPage /> : <Navigate to="/" />}
                 />
+
                 <Route
                   path="/registrationform"
                   element={
