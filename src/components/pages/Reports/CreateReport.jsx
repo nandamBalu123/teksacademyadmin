@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CreateReports.css";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -15,8 +15,17 @@ const CreateReport = () => {
     setCustomDates(selectedValue === 'customDates');
   };
   const [reportForm, setReportForm] = useState(
-    { reportName: "", reportType: "", description: "", dateFilter: "", dateRangeType: "", dateRange: { fromDate: "", toDate: "" }, dimensions: { dimension1: "", dimension2: "", dimension3: "" }, metrics: "" ,createdBy:""}
+    { reportName: "", reportType: "", description: "", dateFilter: "", dateRangeType: "", dateRange: { fromDate: "", toDate: "" }, dimensions: { dimension1: "", dimension2: "", dimension3: "" }, metrics: "", createdBy: "", createdAt: new Date() }
   )
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user)
+  let userName;
+  if (user) {
+    userName = user.fullname
+  }
+  useEffect(() => {
+    setReportForm((prevForm) => ({ ...prevForm, createdBy: userName }));
+  }, [user])
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name.includes('.')) {
@@ -282,8 +291,21 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension1"
                         value={reportForm.dimensions.dimension1}
                         onChange={handleInputChange}>
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+
+
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl></div>}
                 {reportForm.reportType === "twodimensional" &&
@@ -295,8 +317,19 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension1"
                         value={reportForm.dimensions.dimension1}
                         onChange={handleInputChange}>
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl variant="standard" className="w-100">
@@ -306,8 +339,19 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension2"
                         value={reportForm.dimensions.dimension2}
                         onChange={handleInputChange} >
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl></div>
                 }
@@ -320,8 +364,19 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension1"
                         value={reportForm.dimensions.dimension1}
                         onChange={handleInputChange} >
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl variant="standard" className="w-100">
@@ -331,8 +386,17 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension2"
                         value={reportForm.dimensions.dimension2}
                         onChange={handleInputChange} >
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl variant="standard" className="w-100">
@@ -342,8 +406,19 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension3"
                         value={reportForm.dimensions.dimension3}
                         onChange={handleInputChange} >
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl></div>}
               </div>
@@ -375,10 +450,10 @@ const CreateReport = () => {
                       <InputLabel>
                         <span className="label-family "> Add a Filter</span>
                       </InputLabel>
-                      <Select >
+                      {/* <Select >
                         <MenuItem value="branch">Branch</MenuItem>
                         <MenuItem value="country"> Country</MenuItem>
-                      </Select>
+                      </Select> */}
                     </FormControl></div>
                   <div className="col-12 col-md-4 col-lg-4 col-xl-4 my-2 ">
                     <button className="btn btn-color">

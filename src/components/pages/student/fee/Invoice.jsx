@@ -124,7 +124,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
         firstbranch +
 
         paiddate[5] +
-        paiddate[6] + `-` +
+        paiddate[6] +
         paiddate[2] +
         paiddate[3] +
 
@@ -139,7 +139,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
           "R-TA" +
           firstbranch +
           paiddate[5] +
-          paiddate[6] + `-` +
+          paiddate[6] +
           paiddate[2] +
           paiddate[3] + "-" + regnumber +
           `/${parseInt(index) + 2}`
@@ -149,7 +149,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
         setinvoice(
           "IN-TA" + firstbranch +
           paiddate[5] +
-          paiddate[6] + `-` +
+          paiddate[6] +
           paiddate[2] +
           paiddate[3] + "-" + regnumber +
           `/${parseInt(index) + 2}`

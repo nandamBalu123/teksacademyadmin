@@ -1,0 +1,18 @@
+.div1 {
+    width: 240px;
+    height: 75px;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: #F5F5F5;
+}
+
+p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.gfg {
+    font-size: 40px;
+    color: #009900;
+    font-weight: bold;
+}

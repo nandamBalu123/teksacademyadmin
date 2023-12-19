@@ -27,7 +27,101 @@ import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { AddBusinessTwoTone } from "@mui/icons-material";
+import { useStudentsContext } from "../../../hooks/useStudentsContext";
+
 const Report = () => {
+  const { id } = useParams();
+  const { students } = useStudentsContext();
+  const [reports, setReports] = useState();
+  const [dimension1, setDimension1] = useState("");
+  const [dimension2, setDimension2] = useState("");
+  const [dimension3, setDimension3] = useState("");
+  const [metrics, setMetrics] = useState("");
+  const [organizedData, setOrganizedData] = useState(null);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/getreports`)
+      .then((response) => {
+        if (response.data) {
+          const filtered = response.data.filter(item => item.id === parseInt(id));
+          setReports(filtered[0]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+
+  useEffect(() => {
+    if (reports) {
+      setDimension1(reports.reports[0].dimensions.dimension1)
+      setDimension2(reports.reports[0].dimensions.dimension2)
+      setDimension3(reports.reports[0].dimensions.dimension3)
+    }
+
+    console.log("reports", reports)
+  }, [reports])
+  useEffect(() => {
+    if (students) {
+      let organizedData;
+      if (reports) {
+        if (reports.reports[0].reportType === "threedimensional") {
+          organizedData = students.reduce((acc, student) => {
+            const dim1 = student[dimension1] || "Unknown";
+            const dim2 = student[dimension2] || "Unknown";
+            const dim3 = student[dimension3] || "Unknown";
+
+            if (!acc[dim1]) {
+              acc[dim1] = {};
+            }
+            if (!acc[dim1][dim2]) {
+              acc[dim1][dim2] = {};
+            }
+            if (!acc[dim1][dim2][dim3]) {
+              acc[dim1][dim2][dim3] = [];
+            }
+
+            acc[dim1][dim2][dim3].push(student);
+            return acc;
+          }, {});
+        }
+        if (reports.reports[0].reportType === "twodimensional") {
+          organizedData = students.reduce((acc, student) => {
+            const dim1 = student[dimension1] || "Unknown";
+            const dim2 = student[dimension2] || "Unknown";
+
+            if (!acc[dim1]) {
+              acc[dim1] = {};
+            }
+
+            if (!acc[dim1][dim2]) {
+              acc[dim1][dim2] = [];
+            }
+
+            acc[dim1][dim2].push(student);
+            return acc;
+          }, {});
+        }
+        if (reports.reports[0].reportType === "onedimensional") {
+          organizedData = students.reduce((acc, student) => {
+            const dim1 = student[dimension1] || "Unknown";
+
+            if (!acc[dim1]) {
+              acc[dim1] = [];
+            }
+
+            acc[dim1].push(student);
+            return acc;
+          }, {});
+        }
+        setOrganizedData(organizedData);
+      }
+
+    }
+  }, [students, dimension1, dimension2, dimension3]);
+  ////  Dates 
+  ///   start
   const [customMonth, setCustomMonth] = useState(false);
 
   const handleDateFilterChange = (event) => {
@@ -36,16 +130,16 @@ const Report = () => {
     // Update customMonth state based on the selected value
     setCustomMonth(selectedValue === 'custommonth');
   };
-  const { id } = useParams();
-  const [metrics, setMetrics] = useState(
-    [{
 
-      metricsvalue: ["Number of Enrollments", "Sume of Annual Revenue"]
-    }
+  /// end
 
+  // const [metrics, setMetrics] = useState(
+  //   [{
 
-    ]
-  );
+  //     metricsvalue: ["Number of Enrollments", "Sume of Annual Revenue"]
+  //   }
+  //   ]
+  // );
   // const addnew = () => {
   //   setMetrics(prevMetrics => [
   //     ...prevMetrics,
@@ -54,49 +148,22 @@ const Report = () => {
   //     }
   //   ]);
   // };
-  const addnew = () => {
-    let oldmetrics = [...metrics]
-    oldmetrics.push({
-      metricsvalue: ["Number of Enrollments", "Sume of Annual Revenue"]
-    })
-    setMetrics(oldmetrics);
-    console.log("data", oldmetrics);
-  }
-  useEffect(
-    () => {
-      console.log("data", metrics);
-    }
-  )
+  // const addnew = () => {
+  //   let oldmetrics = [...metrics]
+  //   oldmetrics.push({
+  //     metricsvalue: ["Number of Enrollments", "Sume of Annual Revenue"]
+  //   })
+  //   setMetrics(oldmetrics);
+  //   console.log("data", oldmetrics);
+  // }
 
-  // const newmetrics = metrics.push({
-  //   metricsvalue: ["Number of Enrollments", "Sume of Annual Revenue"]
-  // })
-
-  const [data, setData] = useState([
-    { reportName: "BranchWise Data" },
-    { reportName: "CourseWise Data" },
-    { reportName: "CounsellorWise Data" },
-  ]);
-  // useEffect(() => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_API_URL}/getreports`)
-  //     .then((response) => {
-  //       if (response.data) {
-  //         // setData(response.data);
-  //         console.log("response.data", response.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }, []);
 
   return (
 
     <div className="container mt-3">
       <div className="mini-reports mt-3">
-        <h5 className="text-center my-3">
-          {data[parseInt(id)].reportName}{" "}
+        <h5 className="px-2 my-3">
+          {reports && reports.reports[0].reportName}
         </h5>
         <div className="row px-3">
           <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-2">
@@ -175,9 +242,77 @@ const Report = () => {
         <hr className="my-3" />
         <div className="row">
           <div className="col-12 col-md-7 col-lg-7 col-xl-7">
-
+            {/* dimensions data start */}
 
             <div className="px-2 my-2">
+              {organizedData && (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>
+                        <b>{dimension1}</b>
+                      </th>
+                      {dimension2 && <th>
+                        <b>{dimension2}</b>
+                      </th>}
+                      {dimension3 && <th>
+                        <b>{dimension3}</b>
+                      </th>}
+
+                      <th>Student Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {dimension1 && !dimension2 && !dimension3 &&
+                      Object.entries(organizedData).map(([dim1, students]) =>
+                        students.map((student) => (
+                          <tr key={student.id}>
+                            <td>{dim1}</td>
+                            <td>{student.name}</td>
+                          </tr>
+                        ))
+                      )}
+
+                    {dimension1 && dimension2 && !dimension3 &&
+                      Object.entries(organizedData).map(([dim1, dim1Data]) =>
+                        Object.entries(dim1Data).map(([dim2, students]) =>
+
+                          students.map((student) => (
+                            <tr key={student.id}>
+                              <td>{dim1}</td>
+                              <td>{dim2}</td>
+                              <td>{student.name}</td>
+                            </tr>
+                          ))
+                        )
+                      )}
+
+                    {dimension1 && dimension2 && dimension3 &&
+                      Object.entries(organizedData).map(([dim1, dim1Data]) =>
+                        Object.entries(dim1Data).map(([dim2, dim2Data]) =>
+                          Object.entries(dim2Data).map(([dim3, students]) =>
+                            students.map((student) => (
+                              <tr key={student.id}>
+                                <td>{dim1}</td>
+                                <td>{dim2}</td>
+                                <td>{dim3}</td>
+                                <td>{student.name}</td>
+                              </tr>
+                            ))
+                          )
+                        )
+                      )}
+                  </tbody>
+                </table>
+              )}
+
+
+
+
+
+
+
 
               <div className="dimensions mb-4">
                 <div className="report-headertable px-2">
@@ -199,7 +334,13 @@ const Report = () => {
               </div>
             </div>
 
+
+
+
+
           </div>
+
+          {/* customazie start  */}
           <div className="col-12 col-md-5 col-lg-5 col-xl-5 ">
             <div className="customazie-report p-2 my-2">
               <h5 className="p-2">Customize Report</h5>
@@ -273,12 +414,12 @@ const Report = () => {
                           <h6 > All Metrics</h6>
 
                           <button className="btn btn-outline-color"
-                            onClick={addnew}
+                          // onClick={addnew}
 
                           > Add New</button>
                         </div>
 
-
+                        {/* 
                         {metrics && metrics.map((metric, index) => (
                           <div className="row m-0   metrics-hr ">
                             <div className="col-9 col-md-10 col-lg-10 col-xl-10">
@@ -298,10 +439,10 @@ const Report = () => {
                               </FormControl>
                             </div>
                             <div className="col-3 col-md-2 col-xl-2 col-lg-2 mt-3">
-                              {/* <DeleteIcon style={{ cursor: "pointer" }} /> */}
+                          
                             </div>
                           </div>
-                        ))}
+                        ))} */}
 
 
 
@@ -319,6 +460,7 @@ const Report = () => {
               </div>
             </div>
           </div>
+          {/* customazie end  */}
         </div>
 
 
