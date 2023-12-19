@@ -399,7 +399,7 @@ const Addassets = () => {
                   className="p-2"
                   style={{
                     backgroundColor: "#d9e9e9",
-                    fontSize: "15px",
+                    fontSize: "0.8rem",
                     textAlign: "center",
                   }}
                 >
@@ -561,7 +561,7 @@ const Addassets = () => {
                         <TableCell className="Table-cell ">
                           <span
                             style={{
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                             }}
                           >
                             {" "}
@@ -572,7 +572,7 @@ const Addassets = () => {
                         <TableCell className="Table-cell">
                           <span
                             style={{
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                             }}
                           >
                             {element.vendername}
@@ -583,7 +583,7 @@ const Addassets = () => {
                         <TableCell className="Table-cell">
                           <span
                             style={{
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                             }}
                           >
                             {element.assettype}
@@ -593,7 +593,7 @@ const Addassets = () => {
                         <TableCell className="Table-cell">
                           <span
                             style={{
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                             }}
                           >
                             {element.brandname}
@@ -604,7 +604,7 @@ const Addassets = () => {
                         <TableCell className="Table-cell">
                           <span
                             style={{
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                             }}
                           >
                             {element.assetcode}
@@ -613,7 +613,7 @@ const Addassets = () => {
                         <TableCell className="Table-cell">
                           <span
                             style={{
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                             }}
                           >
                             {element.anonymity}
@@ -622,7 +622,7 @@ const Addassets = () => {
                         <TableCell className="Table-cell">
                           <span
                             style={{
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                             }}
                           >
                             {element.returndate}

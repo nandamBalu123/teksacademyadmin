@@ -623,7 +623,7 @@ const Certificate = () => {
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -639,7 +639,7 @@ const Certificate = () => {
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -655,7 +655,7 @@ const Certificate = () => {
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -666,7 +666,7 @@ const Certificate = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 background: "none",
                               }}
                             >
@@ -689,7 +689,7 @@ const Certificate = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                               }}
                             >
                               <input

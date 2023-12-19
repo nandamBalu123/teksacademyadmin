@@ -248,14 +248,14 @@ export default function Vendor() {
               VendorNames.map((element, index) => (
                 <TableRow key={index}>
                   <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> {index + 1}</span>
+                    <span style={{ fontSize: "0.8rem" }}> {index + 1}</span>
                   </TableCell>
                   <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> {element}</span>
+                    <span style={{ fontSize: "0.8rem" }}> {element}</span>
                   </TableCell>
                   <TableCell
                     className="Table-cell text-center"
-                    style={{ fontSize: "15px" }}
+                    style={{ fontSize: "0.8rem" }}
                   >
                     <ModeEditIcon style={{ cursor: "pointer" }}
                       onClick={(e) => handleEdit(index)}
