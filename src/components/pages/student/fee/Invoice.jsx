@@ -119,39 +119,57 @@ const PrintableComponent = React.forwardRef((props, ref) => {
       setinvoice("");
     }
     if (name === "Admission Fee" && studentdata.initialpayment) {
-      setinvoice(
-        "IN-TA" +
-        firstbranch +
+      if (nametype === "studentinvoice") {
+        setinvoice(
+          "R-TA" +
+          firstbranch + "-" +
 
-        paiddate[5] +
-        paiddate[6] +
-        paiddate[2] +
-        paiddate[3] +
+          paiddate[5] +
+          paiddate[6] + "-" +
+          paiddate[2] +
+          paiddate[3] +
 
-        "-" +
-        regnumber +
-        `/${parseInt(index) + 1}`
-      );
+          "/" +
+          regnumber +
+          `/${parseInt(index) + 1}`
+        );
+      }
+      if (nametype === "admininvoice") {
+        setinvoice(
+          "IN-TA" +
+          firstbranch + "-" +
+
+          paiddate[5] +
+          paiddate[6] + "-" +
+          paiddate[2] +
+          paiddate[3] +
+
+          "/" +
+          regnumber +
+          `/${parseInt(index) + 1}`
+        );
+      }
+
     }
     if (name === "Installment" && studentdata.installments) {
       if (nametype === "studentinvoice") {
         setinvoice(
           "R-TA" +
-          firstbranch +
+          firstbranch + "-" +
           paiddate[5] +
-          paiddate[6] +
+          paiddate[6] + "-" +
           paiddate[2] +
-          paiddate[3] + "-" + regnumber +
+          paiddate[3] + "/" + regnumber +
           `/${parseInt(index) + 2}`
         );
       }
       if (nametype === "admininvoice") {
         setinvoice(
-          "IN-TA" + firstbranch +
+          "IN-TA" + firstbranch + "-" +
           paiddate[5] +
-          paiddate[6] +
+          paiddate[6] + "-" +
           paiddate[2] +
-          paiddate[3] + "-" + regnumber +
+          paiddate[3] + "/" + regnumber +
           `/${parseInt(index) + 2}`
         );
       }
