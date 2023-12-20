@@ -1371,7 +1371,7 @@ const FeeView = () => {
                               style={{ width: "40px" }} className=" hover-container"
                             >
                               <CreditScoreIcon className="icon-color" />
-                              <div class="hover-text">admin</div>
+                              <div class="hover-text">student</div>
                             </Link>
                           </TableCell>
                           {/* <TableCell className="Table-cell text-center">
