@@ -212,23 +212,8 @@ const CreateReport = () => {
               </div>
             </div>
             <div className="row px-2">
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                <FormControl variant="standard" className="w-100">
-                  <InputLabel>
-                    <span className="label-family"> Date Filter</span>
-                  </InputLabel>
-                  <Select
-                    name="dateFilter"
-                    value={reportForm.dateFilter}
-                    onChange={handleInputChange}>
 
-                    <MenuItem value="createdAt">Created At</MenuItem>
-                    <MenuItem value="updatedAt">Updated At</MenuItem>
-
-                  </Select>
-                </FormControl>
-              </div>
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <div className="col-12 col-md-4 col-lg-4 col-xl-4">
                 <FormControl variant="standard" className="w-100">
                   <InputLabel>
                     <span className="label-family"> Date Range</span>
@@ -243,39 +228,64 @@ const CreateReport = () => {
                   </Select>
                 </FormControl>
               </div>
+              <div className="col-12 col-md-4 col-lg-4 col-xl-4">  <TextField
+                label={<span className="label-family">From:</span>}
+                type="date"
+                variant="standard"
+                className="mar  w-100"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="dateRange.fromDate"
+                value={reportForm.dateRange.fromDate}
+                onChange={handleInputChange}
+              /></div>
+              <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                <TextField
+                  label={<span className="label-family">To:</span>}
+                  type="date"
+                  variant="standard"
+                  className="w-100 mar"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="dateRange.toDate"
+                  value={reportForm.dateRange.toDate}
+                  onChange={handleInputChange}
+                /></div>
             </div>
-            {reportForm.dateRangeType === "customDates" &&
-              <div className="row  px-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <TextField
-                    label={<span className="label-family">From:</span>}
-                    type="date"
-                    variant="standard"
-                    className="mar  w-100"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    name="dateRange.fromDate"
-                    value={reportForm.dateRange.fromDate}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                  <TextField
-                    label={<span className="label-family">To:</span>}
-                    type="date"
-                    variant="standard"
-                    className="w-100 mar"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    name="dateRange.toDate"
-                    value={reportForm.dateRange.toDate}
-                    onChange={handleInputChange}
-                  />
-                </div>
+
+            {/* <div className="row  px-2">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">From:</span>}
+                  type="date"
+                  variant="standard"
+                  className="mar  w-100"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="dateRange.fromDate"
+                  value={reportForm.dateRange.fromDate}
+                  onChange={handleInputChange}
+                />
               </div>
-            }
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                <TextField
+                  label={<span className="label-family">To:</span>}
+                  type="date"
+                  variant="standard"
+                  className="w-100 mar"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="dateRange.toDate"
+                  value={reportForm.dateRange.toDate}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div> */}
+
             <div className="px-2 my-2">
               <span className="label-family "> Dimensions</span>
               <div className="dimensions mb-4">

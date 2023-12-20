@@ -89,8 +89,8 @@ const Branch = () => {
                   </TableCell>
                   <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "0.8rem" }}>
-                      {" "}
-                      {item.branch_name}{" "}
+                    
+                      {item.branch_name}
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell text-center">

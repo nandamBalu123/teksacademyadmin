@@ -44,13 +44,14 @@
 }
 
 .report-headertable {
-  display: flex;
+
 
   color: #fff;
-  border: 1px solid #E0E4F8;
+  /* border: 1px solid #E0E4F8; */
   background-color: #4676a0;
   padding: 0.5rem 0;
-  border-radius: 0.2667rem 0.2667rem 0 0;
+  /* border-radius: 0.2667rem 0.2667rem 0 0; */
+  border-radius: 30px;
 }
 
 .text-center {
