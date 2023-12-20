@@ -14,6 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import "./Roles.css";
 import { useRoleContext } from "../../../../hooks/useRoleContext";
+import { Link } from "react-router-dom";
 const Roles = () => {
   const { roles } = useRoleContext();
 
@@ -84,7 +85,8 @@ const Roles = () => {
             <TableBody className="Table-cell">
               {Array.isArray(roles) && roles.length > 0 ? (
                 roles.map((item, index) => (
-                  <TableRow key={item.id}>
+                  
+                  <TableRow key={item.id}  >
                     <TableCell className="Table-cell ">
                       <span style={{ fontSize: "15px" }}> {index + 1}</span>
                     </TableCell>
@@ -108,12 +110,16 @@ const Roles = () => {
                       </span>
                     </TableCell>
                     <TableCell className="Table-cell ">
-                      <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      <Link to={`/roleaccess/${item.id}`}>
                       <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                            </Link>
+                      {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
+                      {/* <EditIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                       <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
                     </TableCell>
                     {/* <TableCell className=" Table-cell text-center"> Custom</TableCell> */}
                   </TableRow>
+                  
                 ))
               ) : (
                 <TableRow>
