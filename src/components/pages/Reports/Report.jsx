@@ -240,8 +240,8 @@ const Report = () => {
           </div>
         </div>
         <hr className="my-3" />
-        <div className="row px-2">
-          <div className="col-12 col-md-8 col-lg-8 col-xl-8 ">
+        <div className="row px-2 ">
+          <div className="col-12 col-md-8 col-lg-8 col-xl-8 mt-2">
             {/* dimensions data start */}
             {organizedData && (
               <TableContainer component={Paper} className="mb-3">
@@ -251,12 +251,13 @@ const Report = () => {
                       <TableCell className="table-cell-heading" align="center">
                         {dimension1}
                       </TableCell>
-                      <TableCell className="table-cell-heading" align="center">
+                      {dimension2 && <TableCell className="table-cell-heading" align="center">
                         {dimension2}
-                      </TableCell>
-                      <TableCell className="table-cell-heading" align="center">
-                        {dimension3}
-                      </TableCell>
+                      </TableCell>}
+                      {dimension3 &&
+                        <TableCell className="table-cell-heading" align="center">
+                          {dimension3}
+                        </TableCell>}
                       <TableCell className="table-cell-heading" align="center">
                         Student Name
                       </TableCell>
@@ -265,96 +266,71 @@ const Report = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    <TableCell>
-                      {dimension1 && !dimension2 && !dimension3 &&
-                        Object.entries(organizedData).map(([dim1, students]) =>
+
+                    {dimension1 && !dimension2 && !dimension3 &&
+                      Object.entries(organizedData).map(([dim1, students]) =>
+
+                        students.map((student) => (
+                          <TableRow key={student.id}>
+                            <TableCell className="Table-cell text-center">
+                              <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
+                            </TableCell>
+                            <TableCell className="Table-cell text-center">
+                              <span style={{ fontSize: "0.8rem" }}>{student.name}</span>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      )}
+
+                    {dimension1 && dimension2 && !dimension3 &&
+                      Object.entries(organizedData).map(([dim1, dim1Data]) =>
+                        Object.entries(dim1Data).map(([dim2, students]) =>
                           students.map((student) => (
                             <TableRow key={student.id}>
                               <TableCell className="Table-cell text-center">
                                 <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
                               </TableCell>
                               <TableCell className="Table-cell text-center">
+                                <span style={{ fontSize: "0.8rem" }}>{dim2}</span>
+                              </TableCell>
+                              <TableCell className="Table-cell text-center">
                                 <span style={{ fontSize: "0.8rem" }}>{student.name}</span>
                               </TableCell>
                             </TableRow>
-                          ))
-                        )}</TableCell>
-                    <TableCell className="Table-cell text-center">
-                      <span style={{ fontSize: "0.8rem" }}> </span>
-                    </TableCell>
-                    <TableCell className="Table-cell text-center">
-                      <span style={{ fontSize: "0.8rem" }}> </span>
-                    </TableCell>
-                    <TableCell className="Table-cell text-center">
-                      <span style={{ fontSize: "0.8rem" }}> </span>
-                    </TableCell>
-                  </TableBody>
+                          )))
+                      )}
+                    {dimension1 && dimension2 && dimension3 &&
+                      Object.entries(organizedData).map(([dim1, dim1Data]) =>
+                        Object.entries(dim1Data).map(([dim2, dim2Data]) =>
+                          Object.entries(dim2Data).map(([dim3, students]) =>
+                            students.map((student) => (
+                              <TableRow key={student.id}>
+                                <TableCell className="Table-cell text-center">
+                                  <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
+                                </TableCell>
+                                <TableCell className="Table-cell text-center">
+                                  <span style={{ fontSize: "0.8rem" }}>{dim2}</span>
+                                </TableCell>
+                                <TableCell className="Table-cell text-center">
+                                  <span style={{ fontSize: "0.8rem" }}>{dim3}</span>
+                                </TableCell>
+                                <TableCell className="Table-cell text-center">
+                                  <span style={{ fontSize: "0.8rem" }}>{student.name}</span>
+                                </TableCell>
+                              </TableRow>
 
+                            ))
+                          )
+                        )
+                      )}
+
+
+                  </TableBody>
                 </Table>
               </TableContainer>
             )}
 
-            {organizedData && (
-              <table className="w-100 ">
-                <thead className="report-headertable ">
-                  <tr >
-                    <th style={{ borderTopLeftRadius: "8px", borderBottomLeftRadius: "8px" }}>
-                      {dimension1}
-                    </th>
-                    {dimension2 && <th >
-                      {dimension2}
-                    </th>}
-                    {dimension3 && <th >
-                      {dimension3}
-                    </th>}
 
-                    <th style={{ borderTopRightRadius: "8px", borderBottomRightRadius: "8px" }}>Student Name</th>
-                  </tr>
-                </thead>
-                <tbody className="">
-
-                  {dimension1 && !dimension2 && !dimension3 &&
-                    Object.entries(organizedData).map(([dim1, students]) =>
-                      students.map((student) => (
-                        <tr key={student.id}>
-                          <td>{dim1}</td>
-                          <td>{student.name}</td>
-                        </tr>
-                      ))
-                    )}
-
-                  {dimension1 && dimension2 && !dimension3 &&
-                    Object.entries(organizedData).map(([dim1, dim1Data]) =>
-                      Object.entries(dim1Data).map(([dim2, students]) =>
-
-                        students.map((student) => (
-                          <tr key={student.id}>
-                            <td>{dim1}</td>
-                            <td>{dim2}</td>
-                            <td>{student.name}</td>
-                          </tr>
-                        ))
-                      )
-                    )}
-
-                  {dimension1 && dimension2 && dimension3 &&
-                    Object.entries(organizedData).map(([dim1, dim1Data]) =>
-                      Object.entries(dim1Data).map(([dim2, dim2Data]) =>
-                        Object.entries(dim2Data).map(([dim3, students]) =>
-                          students.map((student) => (
-                            <tr key={student.id}>
-                              <td>{dim1}</td>
-                              <td>{dim2}</td>
-                              <td>{dim3}</td>
-                              <td>{student.name}</td>
-                            </tr>
-                          ))
-                        )
-                      )
-                    )}
-                </tbody>
-              </table>
-            )}
           </div>
 
           {/* customazie start  */}
