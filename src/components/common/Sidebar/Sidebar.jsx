@@ -44,9 +44,11 @@ import axios from "axios";
 
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { hover } from "@testing-library/user-event/dist/hover";
+import { useRoleContext } from "../../../hooks/useRoleContext";
 // let role = localStorage.getItem(role);
 
 const Item = ({ title, to, icon, selected, setSelected, tooltip }) => {
+  
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -82,6 +84,57 @@ const Sidebar = () => {
     profile = user.profile;
     console.log("fulname", fullname, profile);
   }
+  
+
+  const {roles} = useRoleContext();
+  
+
+//   let filteredroles;
+//   useEffect(() => {
+//     console.log("profile",profile)
+//     if(roles){
+
+//       for(let i=0;i<roles.length;i++){
+        
+//         if(roles[i].role==profile){
+//           console.log("roles",roles[i].role)
+
+//           filteredroles=roles[i]
+//         }
+//       }
+    
+//     }
+// }, [roles, profile])
+// useEffect(()=>{
+//   console.log("filteredroles", filteredroles.id)
+
+// })
+
+const [filteredroles, setfilteredroles] = useState();
+
+  useEffect(() => {
+    console.log("profile", profile);
+
+    if (roles) {
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].role === profile) {
+          console.log("roles", roles[i].role);
+          setfilteredroles(roles[i]);
+        }
+      }
+    }
+  }, [roles]);
+  {filteredroles && console.log("test1", filteredroles)}
+  // useEffect(() => {
+  //   if (filteredroles) {
+  //     console.log("filteredroles", filteredroles.id);
+  //   }
+  // }, [filteredroles]);
+  if (filteredroles) {
+    console.log("filteredroles", filteredroles);
+  }
+
+  
   // let role;
   // let user;
   // let username;
@@ -227,7 +280,21 @@ const Sidebar = () => {
             )} */}
 
             <Box paddingLeft={isCollapsed ? undefined : "1%"}>
-
+              {/* {profile == "admin" ? (
+                <Item
+                  style={{
+                    color: colors.grey[100],
+                  }}
+                  icon={<SpaceDashboardIcon />}
+                  label={"Dashboard"}
+                  title="Dashboard"
+                  to="/"
+                  selected={selected}
+                  setSelected={setSelected}
+                >
+                  {" "}
+                </Item>
+              ) : undefined} */}
               {profile == "admin" || profile == "regional manager" || profile == "branch manager" || profile == "counsellor" ? (
                 <Item
                   style={{
@@ -253,7 +320,9 @@ const Sidebar = () => {
                 style={{ color: "black" }}
               /> */}
 
-              {profile === "admin" ? (
+              
+              {/* user management start */}
+              {filteredroles && profile == filteredroles.role && filteredroles.permissions[0].all == true ? (
                 <div>
                   <div title="User Management">
                     <SubMenu
@@ -264,6 +333,7 @@ const Sidebar = () => {
                       label={"User Details"}
                       title={"User Management"}
                     >
+                      {filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].create == true ? (
                       <div title="Create user">
                         <Item
                           title="Create User"
@@ -273,6 +343,8 @@ const Sidebar = () => {
                           setSelected={setSelected}
                         />
                       </div>
+                      ) : undefined}
+                      {filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[1].read == true ? (
                       <div title="User Details">
                         <Item
                           title="User Details"
@@ -282,7 +354,8 @@ const Sidebar = () => {
                           setSelected={setSelected}
                         />
                       </div>
-                      <div title="Role Access">
+                      ) : undefined}
+                      {/* <div title="Role Access">
                         <Item
                           title="Role Access"
                           to="/permissions"
@@ -290,14 +363,17 @@ const Sidebar = () => {
                           selected={selected}
                           setSelected={setSelected}
                         />
-                      </div>
+                      </div> */}
                     </SubMenu>
                   </div>
                   <hr title="Separator Tooltip" />
                 </div>
               ) : undefined}
+              {/* user management end */}
 
-              {profile == "admin" || profile == "regional manager" || profile == "branch manager" || profile == "counsellor" ? (
+
+            {/* student management start */}
+              {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].all == true ? (
                 <SubMenu
                   style={{
                     color: colors.grey[100],
@@ -306,6 +382,7 @@ const Sidebar = () => {
                   label={"Student Management"}
                   title={"Student Managem..."}
                 >
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[0].create == true ? (
                   <Item
                     title="Registration Form"
                     to="/registrationform"
@@ -313,6 +390,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined}
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[1].read == true ? (
                   <Item
                     className="dashboard-item"
                     title="Enrolled Students"
@@ -321,7 +400,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[2].read == true ? (
                   <Item
                     title="Fee Details"
                     to="/feedetails"
@@ -329,7 +409,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
                   <Item
                     title="Certificate"
                     to="/certificate"
@@ -337,7 +418,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                  {profile == "admin" && (
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[4].read == true ? (
                     <Item
                       title="Requested Certificates"
                       to="/requestedcertificates"
@@ -345,12 +427,14 @@ const Sidebar = () => {
                       selected={selected}
                       setSelected={setSelected}
                     />
-                  )}
+                    ) : undefined }
                 </SubMenu>
               ) : undefined}
+            {/* student management end */}
+
               <hr />
-              {/* start */}
-              {profile == "admin" ? (
+              {/* inventory start */}
+              {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].all == true ? (
                 <SubMenu
                   style={{
                     // color: colors.grey[100],
@@ -361,6 +445,7 @@ const Sidebar = () => {
                   label={"Inventory"}
                   title={"Inventory"}
                 >
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[0].create == true ? (
                   <Item
                     title="Add Assets"
                     to="/addassets"
@@ -368,6 +453,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[1].create == true ? (
                   <Item
                     title="Assign Assets"
                     to="/assignassets"
@@ -375,6 +462,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[2].create == true ? (
                   <SubMenu
                     style={{
                       // color: colors.grey[100],
@@ -399,13 +488,14 @@ const Sidebar = () => {
                       setSelected={setSelected}
                     />
                   </SubMenu>
+                  ) : undefined }
                 </SubMenu>
               ) : undefined}
-
+              {/* inventory start */}
               <hr />
-              {/* end */}
+              
               {/* leads start */}
-              {profile == "admin" || profile == "Sr. Associate" ? (
+              {filteredroles && profile == filteredroles.role && filteredroles.permissions[3].all == true ? (
                 <SubMenu
                   style={{ color: "black" }}
                   icon={<Diversity2Icon />}
@@ -474,7 +564,7 @@ const Sidebar = () => {
               <hr />
               {/* end webinar */}
               {/* reports start */}
-              {profile == "admin" ? (
+              {filteredroles && profile == filteredroles.role && filteredroles.permissions[4].all == true ? (
                 <SubMenu
                   style={{
                     // color: colors.grey[100],
@@ -484,6 +574,7 @@ const Sidebar = () => {
                   label={"Reports"}
                   title={"Reports"}
                 >
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
                   <Item
                     title="Reports Data"
                     to="/reports"
@@ -491,11 +582,12 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined }
                 </SubMenu>
               ) : undefined}
               <hr />
               {/* Settings start */}
-              {profile == "admin" ? (
+              {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].all == true ? (
                 <SubMenu
                   style={{
                     // color: colors.grey[100],
@@ -505,6 +597,7 @@ const Sidebar = () => {
                   label={"Settings"}
                   title={"Settings"}
                 >
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
                   <Item
                     title="Roles"
                     to="/roles"
@@ -512,6 +605,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
                   <Item
                     title="Branch"
                     to="/branch"
@@ -519,6 +614,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
                   <Item
                     title="Departments"
                     to="/departments"
@@ -526,6 +623,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
                   <Item
                     title="Lead Source"
                     to="/leadsource"
@@ -533,6 +632,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
                   <Item
                     title="Courses"
                     to="/courses"
@@ -540,6 +641,8 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined }
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
                   <Item
                     title="Course Package"
                     to="/coursepackage"
@@ -547,24 +650,7 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
-                  <SubMenu
-                    style={{
-                      // color: colors.grey[100],
-                      color: "black",
-                    }}
-                    icon={<SettingsIcon />}
-                    label={"Custom Forms"}
-                    title={"Custom Forms"}
-                  >
-                    <Item
-                      title="Custom Form"
-                      to="/customform"
-                      icon={<InventoryIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-
-                  </SubMenu>
+                  ) : undefined }
                 </SubMenu>
               ) : undefined}
               <hr />

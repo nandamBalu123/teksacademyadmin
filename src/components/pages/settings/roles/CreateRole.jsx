@@ -32,6 +32,8 @@ const CreateRole = () => {
   const navigate = useNavigate();
   const [role, setRoleName] = useState("");
   const [description, setDescription] = useState("");
+  
+
   const [permissions, setPermissions] = useState([
     {
       "feature": "User Management",
@@ -82,7 +84,7 @@ const CreateRole = () => {
       "create": true,
       "submenus": [
         {
-          "subfeature": "Create Student",
+          "subfeature": "Registration Form",
           "read": true,
           "update": true,
           "delete": true,
@@ -97,7 +99,257 @@ const CreateRole = () => {
           ]
         },
         {
-          "subfeature": "Student Details",
+          "subfeature": "Enrolled Students",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Fee Details",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Certificate",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Requested Certificates",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "feature": "Inventory",
+      "all": true,
+      "read": true,
+      "update": true,
+      "delete": true,
+      "create": true,
+      "submenus": [
+        {
+          "subfeature": "Add Assets",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Assign Assets",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Settings",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "feature": "Leads",
+      "all": true,
+      "read": true,
+      "update": true,
+      "delete": true,
+      "create": true,
+      "submenus": [
+        {
+          "subfeature": "Website Leads",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "feature": "Reports",
+      "all": true,
+      "read": true,
+      "update": true,
+      "delete": true,
+      "create": true,
+      "submenus": [
+        {
+          "subfeature": "Reports Data",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "feature": "Settings",
+      "all": true,
+      "read": true,
+      "update": true,
+      "delete": true,
+      "create": true,
+      "submenus": [
+        {
+          "subfeature": "Roles",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Branch",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Departments",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Leads Source",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Courses",
+          "read": true,
+          "update": true,
+          "delete": true,
+          "create": true,
+          "actions": [
+            {
+              "view": true,
+              "edit": true,
+              "delete": true,
+              "create": true
+            }
+          ]
+        },
+        {
+          "subfeature": "Course Package",
           "read": true,
           "update": true,
           "delete": true,
@@ -114,6 +366,7 @@ const CreateRole = () => {
       ]
     },
   ]);
+  
 
   const handleChange = (index, subIndex, action) => {
     setPermissions(prevPermissions => {
@@ -203,15 +456,15 @@ const CreateRole = () => {
       );
   
       console.log('Response:', response.data); // Log the response from the server
-  
+      navigate('/roles');
       if (response.status === 200) {
         console.log('User created successfully.');
         dispatch({ type: 'CREATE_ROLE', payload: response.data });
         // Reset the form fields
-        setRoleName('');
-        setDescription('');
-        setPermissions([]);
-        navigate('/roles');
+        // setRoleName('');
+        // setDescription('');
+        // setPermissions([]);
+        // navigate('/roles');
       }
   
     } catch (error) {
