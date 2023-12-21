@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Login from "./components/pages/logins/adminlogins/Login";
-
 import "./App.css";
-
 // inventory start
 // import Signup from "../src/components/pages/inventory/Signup";
 import Register from "../src/components/pages/inventory/Register";
 import AssigneAssetsEdit from "./components/pages/inventory/AssigneAssetsEdit";
 import Details from "../src/components/pages/inventory/Details";
-
 import Assignassets from "../src/components/pages/inventory/Assignassets";
 import Addassets from "../src/components/pages/inventory/Addassets";
 import Addassetsform from "../src/components/pages/inventory/Addassetsform";
@@ -26,24 +22,19 @@ import Addassetsedit from "./components/pages/inventory/Addassetsedit";
 import Dashboard from "./components/pages/dashboard/Dashboard";
 import Sidebar from "./components/common/Sidebar/Sidebar";
 import Topbar from "./components/common/Topbar/Topbar";
-
 import RegistrationForm from "./components/pages/student/studentRegistrationForm/RegistrationForm";
 import StudentData from "./components/pages/student/studentData/StudentData";
 import CreateUserForm from "./components/pages/user/createUserForm/CreateUserForm";
-
 import UsersData from "./components/pages/user/userData/UsersData";
 import LoginPage from "./components/pages/loginpage/LoginPage";
 import { Box } from "@mui/material";
 import CreateRole from "./components/pages/settings/roles/CreateRole";
-
 import Roles from "./components/pages/settings/roles/Roles";
 import UserView from "./components/pages/user/userData/UserView";
-
 // import UserViewCopy from "./components/pages/user/userData/UserViewCopy";
 import Edit from "./components/pages/user/userData/EditUser";
 import RoleAccess from "./components/pages/settings/roles/RoleAccess";
 import StudentDataView from "./components/pages/student/studentData/StudentDataView";
-
 import StudentApplicationPrint from "./components/pages/student/studentData/StudentApplicationPrint";
 import FeeDetails from "./components/pages/student/fee/FeeDetails";
 import Feefollowup from "./components/pages/student/fee/Feefollowup";
@@ -51,6 +42,7 @@ import FeeView from "./components/pages/student/fee/FeeView";
 import Addtofee from "./components/pages/student/fee/Addtofee";
 import EditStudentForm from "./components/pages/student/studentData/EditStudentForm";
 import { useAuthContext } from "./hooks/useAuthContext";
+import { useRoleContext } from "./hooks/useRoleContext";
 import { useEffect } from "react";
 import Branch from "./components/pages/settings/branch/Branch";
 import CreateBranch from "./components/pages/settings/branch/CreateBranch";
@@ -66,7 +58,6 @@ import CreateCourse from "./components/pages/settings/courses/CreateCourse";
 import Requestedcertificates from "./components/pages/student/Certificate/Requestedcertificates";
 import Sidebar1 from "./components/common/Sidebar/Sidebar1";
 import Invoice from "./components/pages/student/fee/Invoice";
-
 import Reports from "./components/pages/Reports/Reports";
 import Report from "./components/pages/Reports/Report";
 import CreateReport from "./components/pages/Reports/CreateReport";
@@ -78,12 +69,47 @@ import ViewCourse from "./components/pages/Leads/Website Leads/ViewCourse";
 import ContactUs from "./components/pages/Leads/Website Leads/ContactUs";
 import HlpEnquireLeads from "./components/pages/Leads/Website Leads/HlpEnquireLeads";
 import SlpEnquireLeads from "./components/pages/Leads/Website Leads/SlpEnquireLeads";
-
 import Permissions from "./components/pages/settings/roles/Permissions";
+import Settings from "./components/pages/Setting/Settings";
+import Forms from "./components/pages/settings/Form/Forms";
 // import Formm from "./components/pages/user/createUserForm/Form";
-
 function App() {
   const { user } = useAuthContext();
+
+  let fullname;
+  let profile;
+  if (user) {
+    fullname = user.fullname;
+    profile = user.profile;
+  }
+  // start roles
+  const { roles } = useRoleContext();
+
+  const [filteredroles, setfilteredroles] = useState();
+
+  useEffect(() => {
+
+
+    if (roles) {
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].role === profile) {
+          console.log("roles", roles[i].role);
+          setfilteredroles(roles[i]);
+        }
+      }
+    }
+  }, [roles]);
+  { filteredroles && console.log("test1", filteredroles) }
+  // useEffect(() => {
+  //   if (filteredroles) {
+  //     console.log("filteredroles", filteredroles.id);
+  //   }
+  // }, [filteredroles]);
+  if (filteredroles) {
+    console.log("filteredroles", filteredroles);
+  }
+
+  // end roles
 
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -92,10 +118,8 @@ function App() {
     role = localStorage.getItem("role");
     console.log("role", role);
   }, [user]);
-
   // let user = localStorage.getItem("user"); //admin-all Counseller-!user and !roles manager-!user and !roles regionalmanager- !user and !roles
   // let token = localStorage.getItem("token");
-
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -106,7 +130,6 @@ function App() {
             {/* {user ? <Sidebar1 /> : undefined} */}
             {/* {user ? <Sidebar1 /> : undefined} */}
             {/* <Sidebar /> */}
-
             <div
               style={{ marginBottom: "50px", backgroundColor: "white" }}
             ></div>
@@ -118,27 +141,109 @@ function App() {
                   path="/"
                   element={user ? <Dashboard /> : <Navigate to="/login" />}
                 />
-
                 <Route
                   path="/login"
                   element={!user ? <LoginPage /> : <Navigate to="/" />}
                 />
 
+
+
+                {/* user route start*/}
+                <Route
+                  path="/createuser"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].create == true ? (
+                      <CreateUserForm />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/usersdata"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[1].create == true ? (
+                      <UsersData />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/userview/:id"
+                  element={user ? <UserView /> : <Dashboard />}
+
+                />
+                <Route
+                  path="/edituser/:id"
+                  element={
+                    user && user.profile == "admin" ? <Edit /> : <Dashboard />
+                  }
+                />
+                {/* user route end*/}
+
+                {/* student route start */}
                 <Route
                   path="/registrationform"
                   element={
-                    user ? <RegistrationForm /> : <Navigate to="/login" />
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[0].create == true ? (
+                      <RegistrationForm />
+                    ) : (
+                      <Dashboard />
+                    )
+
+                  }
+                />
+                <Route path="/studentdata" element={
+                  filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[1].read == true ? (
+                    <StudentData />
+                  ) : (
+                    <Dashboard />
+                  )
+                } />
+                <Route
+                  path="/feedetails"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[2].read == true ? (
+                      <FeeDetails />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/certificate"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
+                      <Certificate />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/requestedcertificates"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[4].read == true ? (
+                      <Requestedcertificates />
+                    ) : (
+                      <Dashboard />
+                    )
                   }
                 />
 
+                {/* inside */}
                 <Route
                   path="/feedetails/:id"
-                  element={user ? <FeeDetails /> : <Dashboard />}
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].create == true ? (
+                      <FeeDetails />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
                 />
-                <Route
-                  path="/feedetails"
-                  element={user ? <FeeDetails /> : <Dashboard />}
-                />
+
                 <Route
                   path="/feefollowup"
                   element={user ? <Feefollowup /> : <Dashboard />}
@@ -159,204 +264,83 @@ function App() {
                   path="/addtofee"
                   element={user ? <Addtofee /> : <Dashboard />}
                 />
-                <Route path="/studentdata" element={<StudentData />} />
+
                 <Route
                   path="/studentdataview/:id"
                   element={user ? <StudentDataView /> : <Dashboard />}
                 />
-                <Route path="/certificate" element={<Certificate />} />
-                <Route
-                  path="/createuser"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <CreateUserForm />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
-                <Route
-                  path="/requestedcertificates"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <Requestedcertificates />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                // element={user ? <Requestedcertificates /> : <Dashboard />}
-                />
-                <Route
-                  path="/usersdata"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <UsersData />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
-                <Route
-                  path="/userview/:id"
-                  element={user ? <UserView /> : <Dashboard />}
-                />
+
+
                 <Route
                   path="/studentApplicationprint/:id"
                   element={user ? <StudentApplicationPrint /> : <Dashboard />}
                 />
                 <Route
-                  path="/roleaccess/:id"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <RoleAccess />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
-                <Route
-                  path="/permissions"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <Permissions />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
-                <Route
-                  path="/edituser/:id"
-                  element={
-                    user && user.profile == "admin" ? <Edit /> : <Dashboard />
-                  }
-                />
-                <Route
                   path="/editstudent/:id"
                   element={user ? <EditStudentForm /> : <Dashboard />}
                 />
+                {/* student route end */}
+
+                {/* inventory start*/}
                 <Route
-                  path="/roles"
-                  element={
-                    user && user.profile == "admin" ? <Roles /> : <Dashboard />
-                  }
-                />
-                <Route
-                  path="/createrole"
+                  path="/inventory"
                   element={
                     user && user.profile == "admin" ? (
-                      <CreateRole />
+                      <Inventoryhome />
                     ) : (
                       <Dashboard />
                     )
                   }
-                />
+                ></Route>
                 <Route
-                  path="/branch"
-                  element={
-                    user && user.profile == "admin" ? <Branch /> : <Dashboard />
-                  }
-                />
-                <Route
-                  path="/createbranch"
+                  path="/assignassets/returnassets/:id"
                   element={
                     user && user.profile == "admin" ? (
-                      <CreateBranch />
+                      <ReturnAssetsForm />
                     ) : (
                       <Dashboard />
                     )
                   }
-                />
+                ></Route>
+                {/* inventory settings */}
                 <Route
-                  path="/leadsource"
+                  path="/addassets"
                   element={
-                    user && user.profile == "admin" ? (
-                      <LeadSource />
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[0].create == true ? (
+                      <Addassets />
                     ) : (
-                      <Dashboard />
+                      <Addassets />
                     )
                   }
-                />
-                <Route
-                  path="/createleadsource"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <CreateLeadSource />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
-                <Route
-                  path="/departments"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <Department />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />{" "}
-                <Route
-                  path="/createdepartment"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <CreateDepartment />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
-                <Route
-                  path="/courses"
-                  element={
-                    user && user.profile == "admin" ? <Course /> : <Dashboard />
-                  }
-                />{" "}
-                <Route
-                  path="/createcourse"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <CreateCourse />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
-                <Route
-                  path="/coursepackage"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <CoursePackage />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />{" "}
-                <Route
-                  path="/createcoursepackage"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <CreateCoursePackage />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
-                {/* <Route path="/inn" element={<Login />}></Route> */}
-                {/* <Route
-                path="/feedetails"
-                element={role=='admin'? <Feedetails/> :<Dashboard/>}/> */}
-                {/* <Route path="/formm" element={<Formm />}></Route> */}
+                ></Route>
                 <Route
                   path="/assignassets"
                   element={
-                    user && user.profile == "admin" ? (
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[1].create == true ? (
                       <Assignassets />
                     ) : (
                       <Dashboard />
                     )
                   }
                 />
+                <Route
+                  path="/assettype"
+                  element={
+                    user ? (
+                      <AssetType />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                ></Route>
+                <Route
+                  path="/vendor"
+                  element={
+                    user ? <Vendor /> : <Dashboard />
+                  }
+                ></Route>
+
+
                 <Route
                   path="/addassets/view/:id"
                   element={
@@ -387,7 +371,7 @@ function App() {
                       <Dashboard />
                     )
                   }
-                />{" "}
+                />
                 <Route
                   exact
                   path="/assignassets/edit/:id"
@@ -410,16 +394,7 @@ function App() {
                     )
                   }
                 />
-                <Route
-                  path="/addassets"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <Addassets />
-                    ) : (
-                      <Addassets />
-                    )
-                  }
-                ></Route>
+
                 <Route
                   path="/addassetsform"
                   element={
@@ -430,75 +405,14 @@ function App() {
                     )
                   }
                 ></Route>
-                <Route
-                  path="/inventory"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <Inventoryhome />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                ></Route>
-                <Route
-                  path="/assignassets/returnassets/:id"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <ReturnAssetsForm />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                ></Route>
-                {/* inventory settings */}
-                <Route
-                  path="/assettype"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <AssetType />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                ></Route>
-                <Route
-                  path="/vendor"
-                  element={
-                    user && user.profile == "admin" ? <Vendor /> : <Dashboard />
-                  }
-                ></Route>
-                {/* Reports */}
-                <Route
-                  path="/reports"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <Reports />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                ></Route>
-                <Route
-                  path="/report/:id"
-                  element={
-                    user && user.profile == "admin" ? <Report /> : <Dashboard />
-                  }
-                ></Route>
-                <Route
-                  path="/report/create"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <CreateReport />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                ></Route>
-                {/* Leads sstart */}
+                {/* inventory end */}
+
+                {/* leads start */}
+
                 <Route
                   path="/webinar"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <Webinar />
                     ) : (
                       <Dashboard />
@@ -508,7 +422,7 @@ function App() {
                 <Route
                   path="/whatsapp"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <WhatsApp />
                     ) : (
                       <Dashboard />
@@ -518,7 +432,7 @@ function App() {
                 <Route
                   path="/downloadsyllabus"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <DownloadSyllabus />
                     ) : (
                       <Dashboard />
@@ -528,7 +442,7 @@ function App() {
                 <Route
                   path="/viewcourse"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <ViewCourse />
                     ) : (
                       <Dashboard />
@@ -538,7 +452,7 @@ function App() {
                 <Route
                   path="/contactus"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <ContactUs />
                     ) : (
                       <Dashboard />
@@ -548,7 +462,7 @@ function App() {
                 <Route
                   path="/hlpenquireleads"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <HlpEnquireLeads />
                     ) : (
                       <Dashboard />
@@ -558,14 +472,184 @@ function App() {
                 <Route
                   path="/slpenquireleads"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <SlpEnquireLeads />
                     ) : (
                       <Dashboard />
                     )
                   }
                 />
+                {/* leads end */}
+                {/* Reports start*/}
+                <Route
+                  path="/reports"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
+                      <Reports />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                ></Route>
+                <Route
+                  path="/report/:id"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
+                      <Report />
+                    ) : (<Dashboard />)
+                  }
+                ></Route>
+                <Route
+                  path="/report/create"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
+                      <CreateReport />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                ></Route>
+                {/* reports end */}
+
+
+                {/* settings start */}
+                <Route
+                  path="/roles"
+                  element={
+                    user && user.profile == "admin" ? <Roles /> : <Dashboard />
+                  }
+                />
+                <Route
+                  path="/roleaccess/:id"
+                  element={
+                    user ? (
+                      <RoleAccess />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/permissions"
+                  element={
+                    user ? (
+                      <Permissions />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/createrole"
+                  element={
+                    user ? (
+                      <CreateRole />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/branch"
+                  element={
+                    user ? <Branch /> : <Dashboard />
+                  }
+                />
+                <Route
+                  path="/createbranch"
+                  element={
+                    user ? (
+                      <CreateBranch />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/leadsource"
+                  element={
+                    user ? (
+                      <LeadSource />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/createleadsource"
+                  element={
+                    user ? (
+                      <CreateLeadSource />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/departments"
+                  element={
+                    user ? (
+                      <Department />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />{" "}
+                <Route
+                  path="/createdepartment"
+                  element={
+                    user ? (
+                      <CreateDepartment />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/courses"
+                  element={
+                    user ? <Course /> : <Dashboard />
+                  }
+                />{" "}
+                <Route
+                  path="/createcourse"
+                  element={
+                    user ? (
+                      <CreateCourse />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
+                  path="/coursepackage"
+                  element={
+                    user ? (
+                      <CoursePackage />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />{" "}
+                <Route
+                  path="/createcoursepackage"
+                  element={
+                    user ? (
+                      <CreateCoursePackage />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                {/* settings end */}
+
+                <Route
+                  path="/setting"
+                  element={
+                    user && user.profile == "admin" ? <Settings /> : <Dashboard />
+                  } />
               </Routes>
+
             </main>
           </div>
         </BrowserRouter>

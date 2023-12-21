@@ -221,10 +221,10 @@ const CreateReport = () => {
             <div className="row px-2">
               <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <TextField
-                  label={<span className="label-family">Report's Name</span>}
+                  label={<span className="label-family pb-1">Report's Name</span>}
                   type="text"
                   variant="standard"
-                  className="mar w-100"
+                  className="mar mt-1 w-100"
                   required
                   name="reportName"
                   value={reportForm.reportName}
@@ -309,7 +309,7 @@ const CreateReport = () => {
                 label={<span className="label-family">From:</span>}
                 type="date"
                 variant="standard"
-                className="mar  w-100"
+                className="mar mt-1 w-100"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -322,7 +322,7 @@ const CreateReport = () => {
                   label={<span className="label-family">To:</span>}
                   type="date"
                   variant="standard"
-                  className="w-100 mar"
+                  className="w-100 mt-1 mar"
                   InputLabelProps={{
                     shrink: true,
                   }}

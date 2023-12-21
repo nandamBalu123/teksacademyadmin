@@ -888,7 +888,7 @@ const StudentData = () => {
                             {/* {item.leadsource[0].source} */}
                             {item.leadsource &&
                               item.leadsource.map((source) => (
-                                <p>{source.source}</p>
+                                <p style={{ fontSize: "0.8rem" }}>{source.source}</p>
                               ))}
                           </span>
                         </TableCell>
