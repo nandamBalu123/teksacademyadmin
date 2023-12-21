@@ -13,7 +13,8 @@
 }
 
 .page-break {
-  page-break-before: always; /* Insert a page break before this element */
+  page-break-before: always;
+  /* Insert a page break before this element */
 }
 
 .application {
@@ -25,9 +26,11 @@
 
   overflow: hidden;
 }
+
 th {
   padding: 5px 10px !important;
 }
+
 .admform-sd img {
   height: 210px;
   margin-left: 7px;
@@ -41,6 +44,7 @@ th {
   margin: 0;
   font-weight: bold;
 }
+
 .borderleft {
   border: 2px solid #454545;
   border-left: 1.5px solid #454545;
@@ -52,32 +56,40 @@ th {
 .table-bordered th {
   border: 2px solid #454545;
 }
+
 .page .container .admform-scd .td {
   border-right: none !important;
   border-left: none !important;
 }
+
 .admform-scd td {
   border-right: 1.5px solid #454545;
 }
+
 .admform-scd th {
   border-left: none !important;
 }
+
 .admform-sd th {
   border-left: none !important;
 }
+
 .main-tc {
   width: 100%;
   padding-top: 20px;
 }
+
 .tc {
   border: 2px solid #000;
 }
+
 .tclogo {
   background-color: #00619d;
   text-align: center;
   color: white;
   border: 2px solid #000;
 }
+
 .tc .info {
   padding-left: 25px;
   padding-top: 40px;
@@ -91,18 +103,21 @@ th {
 .sign {
   display: flex;
   justify-content: space-between;
-  padding-top: 80px;
-  padding-bottom: 30px;
+  /* padding-top: 15px; */
+  padding-bottom: 10px;
 }
+
 .caption {
   background-color: #4676a0;
   color: #fff;
 }
+
 .print {
   border: none;
   background: none;
   margin-right: 10px;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
