@@ -37,6 +37,7 @@ const Report = () => {
 
 
   const [organizedData, setOrganizedData] = useState(null);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/getreports`)
@@ -50,8 +51,41 @@ const Report = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let reports = []
+    reports.push(reportForm)
+    console.log('Form submitted:', reports);
+    let updatedData = {
+      reports
+    }
+    const updateContext = {
+      reports
+    };
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL}/updatereport/${id}`,
+        updatedData
+      )
+      .then((res) => {
+        if (res.data.updated) {
+          alert("Report Added");
+          // dispatch({
+          //   type: "UPDATE_NO_OF_INSTALLMENTS",
+          //   payload: updateContext,
+          // });
+
+          // navigate(`/reports`);
+
+        } else {
+          alert("Try Again");
+        }
+      });
+  };
   useEffect(() => {
     console.log("reportForm", reportForm)
+    console.log("organizedData", organizedData)
+
 
   })
   const handleInputChange = (event) => {
@@ -283,7 +317,8 @@ const Report = () => {
             </Dropdown>
           </div>
           <div className="col-6 col-md-3 col-lg-1 col-xl-1 mt-2">
-            <button className="btn btn-outline-color">Save</button>
+            <button onClick={handleSubmit} className="btn btn-outline-color">Save</button>
+
           </div>
         </div>
         <hr className="my-3" />
