@@ -526,7 +526,7 @@ const CreateRole = () => {
 
         <div >
 
-          <div className='access my-2'>
+          <div className='access mt-2'>
 
             <h5 className="ms-2"> Branch Manager</h5>
             <h6 className='my-4 ms-2'> Modele & Object Permissions</h6>

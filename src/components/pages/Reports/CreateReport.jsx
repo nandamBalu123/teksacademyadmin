@@ -7,6 +7,9 @@ import Select from "@mui/material/Select";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { useNavigate } from "react-router-dom";
 
 const CreateReport = () => {
@@ -26,7 +29,7 @@ const CreateReport = () => {
   };
   const [reportForm, setReportForm] = useState(
     {
-      reportName: "", reportType: "", description: "", dateFilter: "", dateRangeType: "",
+      reportName: "", reportType: "One Dimensional", description: "", dateFilter: "", dateRangeType: "",
       dateRange: { fromDate: "", toDate: "" },
       dimensions: { dimension1: "" },
       metrics: "", createdBy: userName, createdAt: new Date()
@@ -212,7 +215,7 @@ const CreateReport = () => {
   };
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-1">
       <h5 className="text-center my-2">Create Report</h5>
       <form className="createreport">
         <div className="row m-0">
@@ -238,6 +241,7 @@ const CreateReport = () => {
                   </InputLabel>
                   <Select
                     name="reportType"
+                    // defaultValue="One Dimensional"
                     value={reportForm.reportType}
                     onChange={handleInputChange}
                   >
@@ -369,77 +373,82 @@ const CreateReport = () => {
                 <div className="d-flex justify-content-between alldimensions">
                   <h6 className="pt-2"> All Dimensions</h6>
                   {reportForm.reportType === "Multi Dimensional" && Object.keys(reportForm.dimensions).length < 3 &&
-                    <button type="button" onClick={handleAddDimension}>
+                    <button type="button" className="btn btn-color" style={{ border: "1px solid white" }} onClick={handleAddDimension}>
                       Add Dimension
                     </button>}
 
                 </div>
-                {reportForm.reportType === "One Dimensional" &&
-                  <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
-                    <FormControl variant="standard" className="w-100">
-                      <InputLabel>
-                        <span className="label-family">Choose</span>
-                      </InputLabel>
-                      <Select name="dimensions.dimension1"
-                        value={reportForm.dimensions.dimension1}
-                        onChange={handleInputChange}>
-                        <MenuItem value=""></MenuItem>
-                        <MenuItem value="courses">Course</MenuItem>
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="enquirytakenby">Counsellor</MenuItem>
-                        <MenuItem value="coursepackage">Course Package</MenuItem>
-                        <MenuItem value="modeoftraining">Mode of Training</MenuItem>
-                        <MenuItem value="state">State</MenuItem>
-                        <MenuItem value="educationtype">Education Type</MenuItem>
-                        <MenuItem value="academicyear">Academic Year</MenuItem>
-                        <MenuItem value="leadsource">Lead Source</MenuItem>
-                      </Select>
-                    </FormControl></div>}
-                {reportForm.reportType === "Multi Dimensional" &&
-                  <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
-                    {Object.keys(reportForm.dimensions).map((dimension, index) => (
-                      <div key={dimension}>
-                        <FormControl variant="standard" className="w-100">
-                          <InputLabel>
-                            <span className="label-family">Choose</span>
-                          </InputLabel>
-                          <Select name={`dimensions.${dimension}`}
-                            value={reportForm.dimensions[dimension]}
-                            onChange={handleInputChange}>
-                            <MenuItem value=""></MenuItem>
-                            <MenuItem value="courses">course</MenuItem>
-                            <MenuItem value="branch">branch</MenuItem>
-                            <MenuItem value="enquirytakenby">counsellor</MenuItem>
-                            <MenuItem value="coursepackage">course package</MenuItem>
-                            <MenuItem value="modeoftraining">Mode of training</MenuItem>
-                            <MenuItem value="state">State</MenuItem>
-                            <MenuItem value="educationtype">Education Type</MenuItem>
-                            <MenuItem value="academicyear">Academic year</MenuItem>
-                            <MenuItem value="leadsource">Lead source</MenuItem>
-                          </Select>
-                        </FormControl>
-                        {Object.keys(reportForm.dimensions).length > 1 &&
-                          <div>
-                            <button type="button" onClick={() => handleMoveDimension(dimension, 'up')}>
-                              Move Up
-                            </button>
-                            <button type="button" onClick={() => handleMoveDimension(dimension, 'down')}>
-                              Move Down
-                            </button>
-                            <button type="button" onClick={() => handleDeleteDimension(dimension)}>
-                              Delete
-                            </button>
+                <div className="px-3" >
+                  {reportForm.reportType === "One Dimensional" &&
+                    <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
+                      <FormControl variant="standard" className="w-100">
+                        <InputLabel>
+                          <span className="label-family">Choose</span>
+                        </InputLabel>
+                        <Select name="dimensions.dimension1"
+                          value={reportForm.dimensions.dimension1}
+                          onChange={handleInputChange}>
+                          <MenuItem value=""></MenuItem>
+                          <MenuItem value="courses">Course</MenuItem>
+                          <MenuItem value="branch">Branch</MenuItem>
+                          <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                          <MenuItem value="coursepackage">Course Package</MenuItem>
+                          <MenuItem value="modeoftraining">Mode of Training</MenuItem>
+                          <MenuItem value="state">State</MenuItem>
+                          <MenuItem value="educationtype">Education Type</MenuItem>
+                          <MenuItem value="academicyear">Academic Year</MenuItem>
+                          <MenuItem value="leadsource">Lead Source</MenuItem>
+                        </Select>
+                      </FormControl></div>}
+                  {reportForm.reportType === "Multi Dimensional" &&
+                    <div >
+                      {Object.keys(reportForm.dimensions).map((dimension, index) => (
+                        <div className="row">
+                          <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
+
+
+                            <div key={dimension}>
+                              <FormControl variant="standard" className="w-100">
+                                <InputLabel>
+                                  <span className="label-family">Choose</span>
+                                </InputLabel>
+                                <Select name={`dimensions.${dimension}`}
+                                  value={reportForm.dimensions[dimension]}
+                                  onChange={handleInputChange}>
+                                  <MenuItem value=""></MenuItem>
+                                  <MenuItem value="courses">course</MenuItem>
+                                  <MenuItem value="branch">branch</MenuItem>
+                                  <MenuItem value="enquirytakenby">counsellor</MenuItem>
+                                  <MenuItem value="coursepackage">course package</MenuItem>
+                                  <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                                  <MenuItem value="state">State</MenuItem>
+                                  <MenuItem value="educationtype">Education Type</MenuItem>
+                                  <MenuItem value="academicyear">Academic year</MenuItem>
+                                  <MenuItem value="leadsource">Lead source</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </div>
                           </div>
-                        }
-
-                      </div>
-
-
-                    ))}
-
-
-                  </div>
-                }
+                          <div className="col-4">
+                            {Object.keys(reportForm.dimensions).length > 1 &&
+                              <div className="d-flex justify-content-evenly">
+                                <button type="button" onClick={() => handleMoveDimension(dimension, 'up')} className="btn btn-color">
+                                  <ArrowUpwardIcon />
+                                </button>
+                                <button type="button" onClick={() => handleMoveDimension(dimension, 'down')} className="btn btn-color">
+                                  <ArrowDownwardIcon />
+                                </button>
+                                <button type="button" onClick={() => handleDeleteDimension(dimension)} className="btn btn-color">
+                                  <DeleteIcon />
+                                </button>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  }
+                </div>
                 {/* {reportForm.reportType === "Three Dimensional" &&
                   <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
                     <FormControl variant="standard" className="w-100">
@@ -555,7 +564,7 @@ const CreateReport = () => {
           </div>
           <div className="col-12 col-md-5 col-xl-5 col-lg-5">
             <h5> Report Preview</h5>
-            <div className="px-2 my-2">
+            {/* <div className="px-2 my-2">
               <div className="dimensions mb-4">
                 <div className="report-headertable px-2">
                   <span className="" > Company Name</span>
@@ -573,7 +582,7 @@ const CreateReport = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </form>
