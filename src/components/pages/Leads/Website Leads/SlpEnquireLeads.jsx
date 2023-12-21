@@ -564,7 +564,7 @@ const SlpEnquireLeads = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -580,7 +580,7 @@ const SlpEnquireLeads = () => {
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -597,7 +597,7 @@ const SlpEnquireLeads = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -614,7 +614,7 @@ const SlpEnquireLeads = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >

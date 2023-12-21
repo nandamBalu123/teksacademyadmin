@@ -7,6 +7,7 @@ import logo from "../../../../images/Teks-Logo-with-Trade.png";
 import profilePic from "../../../../images/img4-11.png";
 
 import "./StudentApplication.css";
+
 import studentimg from "../../../../images/img4.png";
 import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import { useParams } from "react-router-dom";
@@ -181,8 +182,8 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     <tbody>
                       <tr>
                         <td
-                          style={{ background: "#e4ecff" }}
-                          // className="w-25 borderleft "s
+                          style={{ background: "#e4ecff", width: "35%" }}
+                        // className="w-25 borderleft "s
                         >
                           <b> Student Name</b>
                         </td>
@@ -252,14 +253,14 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   <tr>
                     <td
                       className="borderright"
-                      style={{ background: "#e4ecff" }}
+                      style={{ background: "#e4ecff", width: "18%" }}
                     >
                       Country
                     </td>
                     <td className=" borderleft ">{studentdata.country} </td>
                     <td
                       className="borderright"
-                      style={{ background: "#e4ecff" }}
+                      style={{ background: "#e4ecff", width: "18%" }}
                     >
                       Native Place
                     </td>
@@ -430,13 +431,13 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               <tbody>
                 <br />
                 <tr>
-                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                  <td className="borderright" style={{ background: "#e4ecff", width: "18%" }}>
                     Enquiry Date
                   </td>
                   <td className=" borderleft  ">
                     {EnquiryDate ? EnquiryDate : "No Date"}
                   </td>
-                  <td className="borderright" style={{ background: "#e4ecff" }}>
+                  <td className="borderright" style={{ background: "#e4ecff", width: "18%" }}>
                     {" "}
                     Reg Number
                   </td>
@@ -456,7 +457,11 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     {" "}
                     Lead Source{" "}
                   </td>
-                  <td className="borderleft ">{studentdata.leadsource}</td>
+                  {/* <td className="borderleft ">{studentdata.leadsource}</td> */}
+                  {studentdata.leadsource &&
+                    studentdata.leadsource.map((source) => (
+                      <td className="borderleft ">{source.source}</td>
+                    ))}
                 </tr>
                 <tr>
                   <td className="borderright" style={{ background: "#e4ecff" }}>

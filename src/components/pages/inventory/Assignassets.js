@@ -1100,7 +1100,7 @@ const Assignassets = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                               }}
                             >
                               {id + 1}
@@ -1110,7 +1110,7 @@ const Assignassets = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                               }}
                             >
                               {element.name}
@@ -1122,7 +1122,7 @@ const Assignassets = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                               }}
                             >
                               {element.branch}
@@ -1131,7 +1131,7 @@ const Assignassets = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                               }}
                             >
                               {element.assettype}
@@ -1140,7 +1140,7 @@ const Assignassets = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                               }}
                             >
                               {element.brandname}
@@ -1151,7 +1151,7 @@ const Assignassets = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                               }}
                             >
                               {element.assetcode}
@@ -1160,7 +1160,7 @@ const Assignassets = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                               }}
                             >
                               {AssignDate}
@@ -1169,7 +1169,7 @@ const Assignassets = () => {
                           <TableCell className="Table-cell">
                             <span
                               style={{
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                               }}
                             >
                               {element.anonymity}

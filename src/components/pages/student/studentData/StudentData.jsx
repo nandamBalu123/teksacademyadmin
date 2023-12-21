@@ -805,7 +805,7 @@ const StudentData = () => {
                               overflow: "hidden",
 
                               textOverflow: "ellipsis",
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                               display: "block",
                             }}
                           >
@@ -818,7 +818,7 @@ const StudentData = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -836,7 +836,7 @@ const StudentData = () => {
                               whiteSpace: "nowrap",
                               overflow: "hidden",
                               textOverflow: "ellipsis",
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                               display: "block",
                             }}
                           >
@@ -851,7 +851,7 @@ const StudentData = () => {
                               overflow: "hidden",
 
                               textOverflow: "ellipsis",
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                               display: "block",
                             }}
                           >
@@ -868,7 +868,7 @@ const StudentData = () => {
                               overflow: "hidden",
 
                               textOverflow: "ellipsis",
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                               display: "block",
                             }}
                           >
@@ -881,7 +881,7 @@ const StudentData = () => {
                               overflow: "hidden",
 
                               textOverflow: "ellipsis",
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                               display: "block",
                             }}
                           >
@@ -901,7 +901,7 @@ const StudentData = () => {
                               overflow: "hidden",
 
                               textOverflow: "ellipsis",
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                               display: "block",
                             }}
                           >
@@ -915,7 +915,7 @@ const StudentData = () => {
                               overflow: "hidden",
 
                               textOverflow: "ellipsis",
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                               display: "block",
                             }}
                           >
@@ -930,7 +930,7 @@ const StudentData = () => {
                               whiteSpace: "nowrap",
                               overflow: "hidden",
                               textOverflow: "ellipsis",
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                               display: "block",
                             }}
                           >
@@ -943,7 +943,7 @@ const StudentData = () => {
                               whiteSpace: "nowrap",
                               overflow: "hidden",
                               textOverflow: "ellipsis",
-                              fontSize: "15px",
+                              fontSize: "0.8rem",
                               display: "block",
                             }}
                           >

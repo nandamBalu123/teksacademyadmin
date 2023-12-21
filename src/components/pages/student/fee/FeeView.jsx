@@ -1360,12 +1360,38 @@ const FeeView = () => {
                     </TableCell> */}
                           <TableCell className="border border 1 text-center">
                             <Link
-                              to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
-                              style={{ width: "40px" }}
+                              to={`/invoice/${id}/${index}/Admission Fee/admininvoice`}
+                              style={{ width: "40px", paddingRight: "15px" }} className=" hover-container"
                             >
                               <CreditScoreIcon className="icon-color" />
+                              <div class="hover-text">admin</div>
+                            </Link>
+                            <Link
+                              to={`/invoice/${id}/${index}/Admission Fee/studentinvoice`}
+                              style={{ width: "40px" }} className=" hover-container"
+                            >
+                              <CreditScoreIcon className="icon-color" />
+                              <div class="hover-text">student</div>
                             </Link>
                           </TableCell>
+                          {/* <TableCell className="Table-cell text-center">
+                            <Link
+                              to={`/invoice/${id}/${index}/Installment/admininvoice`}
+                              style={{ width: "40px", paddingRight: "15px" }}
+                              className=" hover-container"
+                            >
+                              <CreditScoreIcon className="icon-color" />
+                              <div class="hover-text">admin</div>
+                            </Link>
+                            <Link
+                              to={`/invoice/${id}/${index}/Installment/studentinvoice`}
+                              style={{ width: "40px" }}
+                              className=" hover-container"
+                            >
+                              <CreditScoreIcon className="icon-color" />
+                              <div class="hover-text">Student</div>
+                            </Link>
+                          </TableCell> */}
                         </TableRow>
                       </TableBody>
                     );

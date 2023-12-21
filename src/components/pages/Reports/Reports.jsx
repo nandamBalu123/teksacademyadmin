@@ -34,19 +34,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 const Reports = () => {
-  const [newReportName, setNewReportName] = useState();
 
-  const [data, setData] = useState([
-    { reportName: "BranchWise Data" },
-    { reportName: "CourseWise Data" },
-    { reportName: "CounsellorWise Data" },
-  ]);
+  const [reports, setreports] = useState()
+  useEffect(() => { console.log("reports", reports) })
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/getreports`)
       .then((response) => {
         if (response.data) {
-          // setData(response.data);
+          setreports(response.data);
           console.log("response.data", response.data);
         }
       })
@@ -54,25 +50,8 @@ const Reports = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  const handleCreateReport = () => {
-    let newReport = { reportName: newReportName };
-    let updatedData = [...data];
-    updatedData.push(newReport);
-    setData(updatedData);
-    axios
-      .put(`${process.env.REACT_APP_API_URL}/addnewreport`, data)
-      .then((res) => {
-        if (res.data.updated) {
-          alert("Report Added");
-        } else {
-          alert("not Added");
-        }
-      });
-  };
-  useEffect(() => {
-    console.log("data", data);
-    console.log("newReportName", newReportName);
-  });
+
+
   return (
     <div className="container mt-3">
       <div className="reports">
@@ -114,31 +93,60 @@ const Reports = () => {
                 {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
-            {data &&
-              data.map((report, index) => {
+            {reports &&
+              reports.map((item, index) => {
                 return (
-                  <TableRow>
+                  <TableRow key={item.id}>
                     <TableCell className="Table-cell text-center">
-                      <span style={{ fontSize: "15px" }}>{index + 1} </span>
-                    </TableCell>
-                    <TableCell className="Table-cell text-center">
-                      <Link to={`/report/${index}`} style={{ width: "40px" }}>
-                        {report.reportName}
-                      </Link>
-                    </TableCell>
-                    <TableCell className="Table-cell text-center">
-                      <span style={{ fontSize: "15px" }}>Bhavitha</span>
-                    </TableCell>
-                    <TableCell className="Table-cell text-center">
-                      <span style={{ fontSize: "15px" }}>14-12-2023</span>
-                    </TableCell>
-                    <TableCell className="Table-cell text-center">
-                      <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
-                      <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
-                      <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
+                      <span style={{ fontSize: "0.8rem" }}>{index + 1} </span></TableCell>
+                    {item.reports.map(report => {
+                      let createdAt = report.createdAt.split("T")
+                      createdAt = new Date(createdAt);
+                      const day = createdAt.getUTCDate();
+                      const monthIndex = createdAt.getUTCMonth();
+                      const year = createdAt.getUTCFullYear();
 
+                      const monthAbbreviations = [
+                        "Jan",
+                        "Feb",
+                        "Mar",
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec",
+                      ];
 
-                    </TableCell>
+                      // Formatting the date
+                      createdAt = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                        }-${year}`;
+
+                      return (
+                        <React.Fragment key={report.reportName}>
+                          <TableCell className="Table-cell text-center">
+                            <Link to={`/report/${item.id}`} style={{ width: "40px" }}>
+                              {report.reportName}
+                            </Link>
+                          </TableCell>
+                          <TableCell className="Table-cell text-center">
+                            <span style={{ fontSize: "0.8rem" }}>{report.createdBy}</span>
+                          </TableCell>
+                          <TableCell className="Table-cell text-center">
+                            <span style={{ fontSize: "0.8rem" }}>{createdAt}</span>
+                          </TableCell>
+                          <TableCell className="Table-cell text-center">
+                            <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
+                            <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                            <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
+                          </TableCell>
+                        </React.Fragment>
+                      )
+
+                    })}
                   </TableRow>
                 );
               })}

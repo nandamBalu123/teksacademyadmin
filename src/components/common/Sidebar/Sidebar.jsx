@@ -574,7 +574,7 @@ const [filteredroles, setfilteredroles] = useState();
                   label={"Reports"}
                   title={"Reports"}
                 >
-                  
+                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
                   <Item
                     title="Reports Data"
                     to="/reports"
@@ -582,6 +582,7 @@ const [filteredroles, setfilteredroles] = useState();
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  ) : undefined }
                 </SubMenu>
               ) : undefined}
               <hr />

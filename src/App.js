@@ -140,6 +140,7 @@ function App() {
           <div className="app">
             {user ? <Sidebar /> : undefined}
             {/* {user ? <Sidebar1 /> : undefined} */}
+            {/* {user ? <Sidebar1 /> : undefined} */}
             {/* <Sidebar /> */}
 
             <div
@@ -199,7 +200,7 @@ function App() {
                 <Route
                   path="/registrationform"
                   element={
-                    filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].create == true ? (
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[0].create == true ? (
                        <RegistrationForm /> 
                        ) : (
                        <Dashboard />
@@ -208,7 +209,7 @@ function App() {
                   }
                 />
                 <Route path="/studentdata" element={
-                  filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].read == true ? (
+                  filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[1].read == true ? (
                 <StudentData />
                   ) : ( 
                   <Dashboard />
@@ -217,7 +218,7 @@ function App() {
                 <Route
                   path="/feedetails"
                   element={
-                    filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].read == true ? (
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[2].read == true ? (
                     <FeeDetails /> 
                     ) : (
                     <Dashboard />
@@ -227,7 +228,7 @@ function App() {
                 <Route 
                 path="/certificate" 
                 element={
-                    filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].create == true ? (
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
                   <Certificate />
                   ) : (
                   <Dashboard />
@@ -237,7 +238,7 @@ function App() {
                 <Route
                   path="/requestedcertificates"
                   element={
-                    filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].read == true ? (
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[4].read == true ? (
                       <Requestedcertificates />
                     ) : (
                       <Dashboard />
@@ -317,9 +318,29 @@ function App() {
                 ></Route>
                 {/* inventory settings */}
                 <Route
+                  path="/addassets"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[0].create == true ? (
+                      <Addassets />
+                    ) : (
+                      <Addassets />
+                    )
+                  }
+                ></Route>
+                <Route
+                  path="/assignassets"
+                  element={
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[1].create == true ? (
+                      <Assignassets />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route
                   path="/assettype"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <AssetType />
                     ) : (
                       <Dashboard />
@@ -329,20 +350,11 @@ function App() {
                 <Route
                   path="/vendor"
                   element={
-                    user && user.profile == "admin" ? <Vendor /> : <Dashboard />
+                    user ? <Vendor /> : <Dashboard />
                   }
                 ></Route>
                 
-                <Route
-                  path="/assignassets"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <Assignassets />
-                    ) : (
-                      <Dashboard />
-                    )
-                  }
-                />
+                
                 <Route
                   path="/addassets/view/:id"
                   element={
@@ -396,16 +408,7 @@ function App() {
                     )
                   }
                 />
-                <Route
-                  path="/addassets"
-                  element={
-                    user && user.profile == "admin" ? (
-                      <Addassets />
-                    ) : (
-                      <Addassets />
-                    )
-                  }
-                ></Route>
+                
                 <Route
                   path="/addassetsform"
                   element={
@@ -423,7 +426,7 @@ function App() {
                 <Route
                   path="/webinar"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <Webinar />
                     ) : (
                       <Dashboard />
@@ -433,7 +436,7 @@ function App() {
                 <Route
                   path="/whatsapp"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <WhatsApp />
                     ) : (
                       <Dashboard />
@@ -443,7 +446,7 @@ function App() {
                 <Route
                   path="/downloadsyllabus"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <DownloadSyllabus />
                     ) : (
                       <Dashboard />
@@ -453,7 +456,7 @@ function App() {
                 <Route
                   path="/viewcourse"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <ViewCourse />
                     ) : (
                       <Dashboard />
@@ -463,7 +466,7 @@ function App() {
                 <Route
                   path="/contactus"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <ContactUs />
                     ) : (
                       <Dashboard />
@@ -473,7 +476,7 @@ function App() {
                 <Route
                   path="/hlpenquireleads"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <HlpEnquireLeads />
                     ) : (
                       <Dashboard />
@@ -483,7 +486,7 @@ function App() {
                 <Route
                   path="/slpenquireleads"
                   element={
-                    user && (user.profile == "admin" || user.profile == "Sr. Associate") ? (
+                    user ? (
                       <SlpEnquireLeads />
                     ) : (
                       <Dashboard />
@@ -495,7 +498,7 @@ function App() {
                 <Route
                   path="/reports"
                   element={
-                    user && user.profile == "admin" ? (
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
                       <Reports />
                     ) : (
                       <Dashboard />
@@ -505,13 +508,15 @@ function App() {
                 <Route
                   path="/report/:id"
                   element={
-                    user && user.profile == "admin" ? <Report /> : <Dashboard />
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
+                    <Report />
+                    ) : (<Dashboard />)
                   }
                 ></Route>
                 <Route
                   path="/report/create"
                   element={
-                    user && user.profile == "admin" ? (
+                    filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
                       <CreateReport />
                     ) : (
                       <Dashboard />
@@ -531,7 +536,7 @@ function App() {
                 <Route
                   path="/roleaccess/:id"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <RoleAccess />
                     ) : (
                       <Dashboard />
@@ -541,7 +546,7 @@ function App() {
                 <Route
                   path="/permissions"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <Permissions />
                     ) : (
                       <Dashboard />
@@ -551,7 +556,7 @@ function App() {
                 <Route
                   path="/createrole"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <CreateRole />
                     ) : (
                       <Dashboard />
@@ -561,13 +566,13 @@ function App() {
                 <Route
                   path="/branch"
                   element={
-                    user && user.profile == "admin" ? <Branch /> : <Dashboard />
+                    user ? <Branch /> : <Dashboard />
                   }
                 />
                 <Route
                   path="/createbranch"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <CreateBranch />
                     ) : (
                       <Dashboard />
@@ -577,7 +582,7 @@ function App() {
                 <Route
                   path="/leadsource"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <LeadSource />
                     ) : (
                       <Dashboard />
@@ -587,7 +592,7 @@ function App() {
                 <Route
                   path="/createleadsource"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <CreateLeadSource />
                     ) : (
                       <Dashboard />
@@ -597,7 +602,7 @@ function App() {
                 <Route
                   path="/departments"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <Department />
                     ) : (
                       <Dashboard />
@@ -607,7 +612,7 @@ function App() {
                 <Route
                   path="/createdepartment"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <CreateDepartment />
                     ) : (
                       <Dashboard />
@@ -617,13 +622,13 @@ function App() {
                 <Route
                   path="/courses"
                   element={
-                    user && user.profile == "admin" ? <Course /> : <Dashboard />
+                    user ? <Course /> : <Dashboard />
                   }
                 />{" "}
                 <Route
                   path="/createcourse"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <CreateCourse />
                     ) : (
                       <Dashboard />
@@ -633,7 +638,7 @@ function App() {
                 <Route
                   path="/coursepackage"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <CoursePackage />
                     ) : (
                       <Dashboard />
@@ -643,7 +648,7 @@ function App() {
                 <Route
                   path="/createcoursepackage"
                   element={
-                    user && user.profile == "admin" ? (
+                    user ? (
                       <CreateCoursePackage />
                     ) : (
                       <Dashboard />

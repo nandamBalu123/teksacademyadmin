@@ -559,7 +559,7 @@ const WhatsApp = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -575,7 +575,7 @@ const WhatsApp = () => {
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -592,7 +592,7 @@ const WhatsApp = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -609,7 +609,7 @@ const WhatsApp = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >
@@ -625,7 +625,7 @@ const WhatsApp = () => {
                                 overflow: "hidden",
 
                                 textOverflow: "ellipsis",
-                                fontSize: "15px",
+                                fontSize: "0.8rem",
                                 display: "block",
                               }}
                             >

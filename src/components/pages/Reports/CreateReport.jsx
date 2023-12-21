@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CreateReports.css";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -15,8 +15,17 @@ const CreateReport = () => {
     setCustomDates(selectedValue === 'customDates');
   };
   const [reportForm, setReportForm] = useState(
-    { reportName: "", reportType: "", description: "", dateFilter: "", dateRangeType: "", dateRange: { fromDate: "", toDate: "" }, dimensions: { dimension1: "", dimension2: "", dimension3: "" }, metrics: "" ,createdBy:""}
+    { reportName: "", reportType: "", description: "", dateFilter: "", dateRangeType: "", dateRange: { fromDate: "", toDate: "" }, dimensions: { dimension1: "", dimension2: "", dimension3: "" }, metrics: "", createdBy: "", createdAt: new Date() }
   )
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user)
+  let userName;
+  if (user) {
+    userName = user.fullname
+  }
+  useEffect(() => {
+    setReportForm((prevForm) => ({ ...prevForm, createdBy: userName }));
+  }, [user])
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name.includes('.')) {
@@ -203,23 +212,8 @@ const CreateReport = () => {
               </div>
             </div>
             <div className="row px-2">
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                <FormControl variant="standard" className="w-100">
-                  <InputLabel>
-                    <span className="label-family"> Date Filter</span>
-                  </InputLabel>
-                  <Select
-                    name="dateFilter"
-                    value={reportForm.dateFilter}
-                    onChange={handleInputChange}>
 
-                    <MenuItem value="createdAt">Created At</MenuItem>
-                    <MenuItem value="updatedAt">Updated At</MenuItem>
-
-                  </Select>
-                </FormControl>
-              </div>
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+              <div className="col-12 col-md-4 col-lg-4 col-xl-4">
                 <FormControl variant="standard" className="w-100">
                   <InputLabel>
                     <span className="label-family"> Date Range</span>
@@ -234,39 +228,64 @@ const CreateReport = () => {
                   </Select>
                 </FormControl>
               </div>
+              <div className="col-12 col-md-4 col-lg-4 col-xl-4">  <TextField
+                label={<span className="label-family">From:</span>}
+                type="date"
+                variant="standard"
+                className="mar  w-100"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="dateRange.fromDate"
+                value={reportForm.dateRange.fromDate}
+                onChange={handleInputChange}
+              /></div>
+              <div className="col-12 col-md-4 col-lg-4 col-xl-4">
+                <TextField
+                  label={<span className="label-family">To:</span>}
+                  type="date"
+                  variant="standard"
+                  className="w-100 mar"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="dateRange.toDate"
+                  value={reportForm.dateRange.toDate}
+                  onChange={handleInputChange}
+                /></div>
             </div>
-            {reportForm.dateRangeType === "customDates" &&
-              <div className="row  px-2">
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <TextField
-                    label={<span className="label-family">From:</span>}
-                    type="date"
-                    variant="standard"
-                    className="mar  w-100"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    name="dateRange.fromDate"
-                    value={reportForm.dateRange.fromDate}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                  <TextField
-                    label={<span className="label-family">To:</span>}
-                    type="date"
-                    variant="standard"
-                    className="w-100 mar"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    name="dateRange.toDate"
-                    value={reportForm.dateRange.toDate}
-                    onChange={handleInputChange}
-                  />
-                </div>
+
+            {/* <div className="row  px-2">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                <TextField
+                  label={<span className="label-family">From:</span>}
+                  type="date"
+                  variant="standard"
+                  className="mar  w-100"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="dateRange.fromDate"
+                  value={reportForm.dateRange.fromDate}
+                  onChange={handleInputChange}
+                />
               </div>
-            }
+              <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                <TextField
+                  label={<span className="label-family">To:</span>}
+                  type="date"
+                  variant="standard"
+                  className="w-100 mar"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="dateRange.toDate"
+                  value={reportForm.dateRange.toDate}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div> */}
+
             <div className="px-2 my-2">
               <span className="label-family "> Dimensions</span>
               <div className="dimensions mb-4">
@@ -282,8 +301,21 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension1"
                         value={reportForm.dimensions.dimension1}
                         onChange={handleInputChange}>
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+
+
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl></div>}
                 {reportForm.reportType === "twodimensional" &&
@@ -295,8 +327,19 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension1"
                         value={reportForm.dimensions.dimension1}
                         onChange={handleInputChange}>
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl variant="standard" className="w-100">
@@ -306,8 +349,19 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension2"
                         value={reportForm.dimensions.dimension2}
                         onChange={handleInputChange} >
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl></div>
                 }
@@ -320,8 +374,19 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension1"
                         value={reportForm.dimensions.dimension1}
                         onChange={handleInputChange} >
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl variant="standard" className="w-100">
@@ -331,8 +396,17 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension2"
                         value={reportForm.dimensions.dimension2}
                         onChange={handleInputChange} >
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl>
                     <FormControl variant="standard" className="w-100">
@@ -342,8 +416,19 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension3"
                         value={reportForm.dimensions.dimension3}
                         onChange={handleInputChange} >
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
+                        <MenuItem value=""></MenuItem>
+
+                        <MenuItem value="courses">course</MenuItem>
+                        <MenuItem value="branch">branch</MenuItem>
+
+                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
+
+                        <MenuItem value="coursepackage">course package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="state">State</MenuItem>
+                        <MenuItem value="educationtype">Education Type</MenuItem>
+                        <MenuItem value="academicyear">Academic year</MenuItem>
+                        <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
                     </FormControl></div>}
               </div>
@@ -375,10 +460,10 @@ const CreateReport = () => {
                       <InputLabel>
                         <span className="label-family "> Add a Filter</span>
                       </InputLabel>
-                      <Select >
+                      {/* <Select >
                         <MenuItem value="branch">Branch</MenuItem>
                         <MenuItem value="country"> Country</MenuItem>
-                      </Select>
+                      </Select> */}
                     </FormControl></div>
                   <div className="col-12 col-md-4 col-lg-4 col-xl-4 my-2 ">
                     <button className="btn btn-color">

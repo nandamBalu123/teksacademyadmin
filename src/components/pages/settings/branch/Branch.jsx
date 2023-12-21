@@ -85,26 +85,26 @@ const Branch = () => {
               branches.map((item, index) => (
                 <TableRow key={item.id}>
                   <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}> {index + 1}</span>
+                    <span style={{ fontSize: "0.8rem" }}> {index + 1}</span>
                   </TableCell>
                   <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>
-                      {" "}
-                      {item.branch_name}{" "}
+                    <span style={{ fontSize: "0.8rem" }}>
+                    
+                      {item.branch_name}
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "15px" }}>
+                    <span style={{ fontSize: "0.8rem" }}>
                       description
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell ">
-                    <span style={{ fontSize: "15px" }}>
+                    <span style={{ fontSize: "0.8rem" }}>
                       Bhavitha
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell ">
-                    <span style={{ fontSize: "15px" }}>
+                    <span style={{ fontSize: "0.8rem" }}>
                       15-12-2023
                     </span>
                   </TableCell>
