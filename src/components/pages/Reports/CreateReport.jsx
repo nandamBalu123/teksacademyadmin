@@ -407,15 +407,15 @@ const CreateReport = () => {
                             value={reportForm.dimensions[dimension]}
                             onChange={handleInputChange}>
                             <MenuItem value=""></MenuItem>
-                            <MenuItem value="courses">course</MenuItem>
-                            <MenuItem value="branch">branch</MenuItem>
-                            <MenuItem value="enquirytakenby">counsellor</MenuItem>
-                            <MenuItem value="coursepackage">course package</MenuItem>
-                            <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                            <MenuItem value="courses">Course</MenuItem>
+                            <MenuItem value="branch">Branch</MenuItem>
+                            <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                            <MenuItem value="coursepackage">Course Package</MenuItem>
+                            <MenuItem value="modeoftraining">Mode Of Training</MenuItem>
                             <MenuItem value="state">State</MenuItem>
                             <MenuItem value="educationtype">Education Type</MenuItem>
-                            <MenuItem value="academicyear">Academic year</MenuItem>
-                            <MenuItem value="leadsource">Lead source</MenuItem>
+                            <MenuItem value="academicyear">Academic Year</MenuItem>
+                            <MenuItem value="leadsource">Lead Source</MenuItem>
                           </Select>
                         </FormControl>
                         {Object.keys(reportForm.dimensions).length > 1 &&
@@ -440,72 +440,7 @@ const CreateReport = () => {
 
                   </div>
                 }
-                {/* {reportForm.reportType === "Three Dimensional" &&
-                  <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
-                    <FormControl variant="standard" className="w-100">
-                      <InputLabel>
-                        <span className="label-family">Choose</span>
-                      </InputLabel>
-                      <Select name="dimensions.dimension1"
-                        value={reportForm.dimensions.dimension1}
-                        onChange={handleInputChange} >
-                        <MenuItem value=""></MenuItem>
 
-                        <MenuItem value="courses">course</MenuItem>
-                        <MenuItem value="branch">branch</MenuItem>
-
-                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
-
-                        <MenuItem value="coursepackage">course package</MenuItem>
-                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
-                        <MenuItem value="state">State</MenuItem>
-                        <MenuItem value="educationtype">Education Type</MenuItem>
-                        <MenuItem value="academicyear">Academic year</MenuItem>
-                        <MenuItem value="leadsource">Lead source</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <FormControl variant="standard" className="w-100">
-                      <InputLabel>
-                        <span className="label-family">Choose</span>
-                      </InputLabel>
-                      <Select name="dimensions.dimension2"
-                        value={reportForm.dimensions.dimension2}
-                        onChange={handleInputChange} >
-                        <MenuItem value=""></MenuItem>
-
-                        <MenuItem value="courses">course</MenuItem>
-                        <MenuItem value="branch">branch</MenuItem>
-                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
-                        <MenuItem value="coursepackage">course package</MenuItem>
-                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
-                        <MenuItem value="state">State</MenuItem>
-                        <MenuItem value="educationtype">Education Type</MenuItem>
-                        <MenuItem value="academicyear">Academic year</MenuItem>
-                        <MenuItem value="leadsource">Lead source</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <FormControl variant="standard" className="w-100">
-                      <InputLabel>
-                        <span className="label-family">Choose</span>
-                      </InputLabel>
-                      <Select name="dimensions.dimension3"
-                        value={reportForm.dimensions.dimension3}
-                        onChange={handleInputChange} >
-                        <MenuItem value=""></MenuItem>
-
-                        <MenuItem value="courses">course</MenuItem>
-                        <MenuItem value="branch">branch</MenuItem>
-
-                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
-
-                        <MenuItem value="coursepackage">course package</MenuItem>
-                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
-                        <MenuItem value="state">State</MenuItem>
-                        <MenuItem value="educationtype">Education Type</MenuItem>
-                        <MenuItem value="academicyear">Academic year</MenuItem>
-                        <MenuItem value="leadsource">Lead source</MenuItem>
-                      </Select>
-                    </FormControl></div>} */}
               </div>
             </div>
             <div className="px-2 my-2">
@@ -521,6 +456,7 @@ const CreateReport = () => {
                       value={reportForm.metrics}
                       onChange={handleInputChange} >
                       <MenuItem value="noOfEnrollments">Number of Enrollments</MenuItem>
+
                     </Select>
                   </FormControl></div>
               </div>
@@ -550,6 +486,7 @@ const CreateReport = () => {
             </div>
             <div className=" row report-footer ">
               <div className="col-12 col-md-9 col-lg-9 col-lg-10"> <button className="btn btn-color mt-1"> Generate Preview </button></div>
+              
               <div className="col-12 col-md-2 col-lg-2 col-lg-2">  <button type="submit" onClick={handleSubmit} className="btn btn-color  mt-1 me-3"> Save</button> </div>
             </div>
           </div>
