@@ -80,7 +80,9 @@ const Reports = () => {
                   Report Name
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
-
+                  Report Type
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Created By
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
@@ -131,6 +133,9 @@ const Reports = () => {
                             <Link to={`/report/${item.id}`} style={{ width: "40px" }}>
                               {report.reportName}
                             </Link>
+                          </TableCell>
+                          <TableCell className="Table-cell text-center">
+                            <span style={{ fontSize: "0.8rem" }}>{report.reportType}</span>
                           </TableCell>
                           <TableCell className="Table-cell text-center">
                             <span style={{ fontSize: "0.8rem" }}>{report.createdBy}</span>

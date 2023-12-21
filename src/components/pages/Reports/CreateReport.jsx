@@ -7,7 +7,17 @@ import Select from "@mui/material/Select";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const CreateReport = () => {
+  const navigate = useNavigate();
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user)
+  let userName;
+  if (user) {
+    userName = user.fullname
+  }
+
   const [customDates, setCustomDates] = useState(false);
   const handleDateFilterChange = (event) => {
     const selectedValue = event.target.value;
@@ -15,21 +25,21 @@ const CreateReport = () => {
     setCustomDates(selectedValue === 'customDates');
   };
   const [reportForm, setReportForm] = useState(
-    { reportName: "", reportType: "", description: "", dateFilter: "", dateRangeType: "", dateRange: { fromDate: "", toDate: "" }, dimensions: { dimension1: "", dimension2: "", dimension3: "" }, metrics: "", createdBy: "", createdAt: new Date() }
+    {
+      reportName: "", reportType: "", description: "", dateFilter: "", dateRangeType: "",
+      dateRange: { fromDate: "", toDate: "" },
+      dimensions: { dimension1: "" },
+      metrics: "", createdBy: userName, createdAt: new Date()
+    }
+
   )
-  let user = localStorage.getItem("user");
-  user = JSON.parse(user)
-  let userName;
-  if (user) {
-    userName = user.fullname
-  }
+
   useEffect(() => {
-    setReportForm((prevForm) => ({ ...prevForm, createdBy: userName }));
-  }, [user])
+    console.log("reportForm", reportForm)
+  })
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name.includes('.')) {
-
       let [parentProperty, nestedProperty] = name.split('.');
       setReportForm((prevForm) => ({
         ...prevForm,
@@ -38,15 +48,12 @@ const CreateReport = () => {
           [nestedProperty]: value,
         },
       }));
-
-
-
     } else {
       if (name === 'reportType') {
         setReportForm((prevForm) => ({
           ...prevForm,
           dimensions: {
-            dimension1: "", dimension2: "", dimension3: ""
+            dimension1: "",
           },
         }));
       }
@@ -129,12 +136,81 @@ const CreateReport = () => {
           //   type: "UPDATE_NO_OF_INSTALLMENTS",
           //   payload: updateContext,
           // });
-          // navigator(`/feeview/${id}`);
+
+          navigate(`/reports`);
+
         } else {
           alert("Try Again");
         }
       });
   };
+  const handleAddDimension = () => {
+    const dimensionsLength = reportForm.dimensions ? Object.keys(reportForm.dimensions).length : 0;
+    if (dimensionsLength < 3) {
+
+      const dimensionKey = `dimension${Object.keys(reportForm.dimensions).length + 1}`;
+      setReportForm((prevForm) => ({
+        ...prevForm,
+        dimensions: {
+          ...prevForm.dimensions,
+          [dimensionKey]: '',
+        },
+      }));
+    }
+    else {
+      alert("More Than 3 Dimensions are not allowed")
+    }
+
+  };
+
+  const handleDeleteDimension = (dimension) => {
+    const newDimensions = { ...reportForm.dimensions };
+    delete newDimensions[dimension];
+
+    const originalObject = newDimensions
+    const transformedObject = {};
+    Object.entries(originalObject).forEach(([key, value], index) => {
+      console.log(key, value, index);
+      let newDimensionName = `dimension${index + 1}`
+      transformedObject[newDimensionName] = value
+    });
+
+
+    setReportForm((prevForm) => ({
+      ...prevForm,
+      dimensions: transformedObject
+    }));
+  };
+  const handleMoveDimension = (dimension, direction) => {
+    const dimensionsArray = Object.keys(reportForm.dimensions);
+    const index = dimensionsArray.indexOf(dimension);
+    const newIndex = direction === 'up' ? index - 1 : index + 1;
+
+    if (newIndex >= 0 && newIndex < dimensionsArray.length) {
+      const newDimensionsArray = [...dimensionsArray];
+      // Swap the dimensions
+      [newDimensionsArray[index], newDimensionsArray[newIndex]] = [newDimensionsArray[newIndex], newDimensionsArray[index]];
+
+      const newInputValues = {};
+      newDimensionsArray.forEach(dimensionKey => {
+        newInputValues[dimensionKey] = reportForm.dimensions[dimensionKey];
+      });
+      const originalObject = newInputValues
+      const transformedObject = {};
+      Object.entries(originalObject).forEach(([key, value], index) => {
+        console.log(key, value, index);
+        let newDimensionName = `dimension${index + 1}`
+        transformedObject[newDimensionName] = value
+      });
+
+
+      setReportForm((prevForm) => ({
+        ...prevForm,
+        dimensions: transformedObject,
+      }));
+    }
+  };
+
   return (
     <div className="container mt-3">
       <h5 className="text-center my-2">Create Report</h5>
@@ -165,12 +241,13 @@ const CreateReport = () => {
                     value={reportForm.reportType}
                     onChange={handleInputChange}
                   >
-                    <MenuItem value="onedimensional">One Dimensional</MenuItem>
-                    <MenuItem value="twodimensional">
-                      Two Dimensional</MenuItem>
-                    <MenuItem value="threedimensional">
-                      Three Dimensional</MenuItem>
+                    <MenuItem value="One Dimensional">One Dimensional</MenuItem>
+
+                    <MenuItem value="Multi Dimensional">
+                      Multi Dimensional</MenuItem>
+
                   </Select>
+
                 </FormControl>
               </div>
             </div>
@@ -289,10 +366,15 @@ const CreateReport = () => {
             <div className="px-2 my-2">
               <span className="label-family "> Dimensions</span>
               <div className="dimensions mb-4">
+                <div className="d-flex justify-content-between alldimensions">
+                  <h6 className="pt-2"> All Dimensions</h6>
+                  {reportForm.reportType === "Multi Dimensional" && Object.keys(reportForm.dimensions).length < 3 &&
+                    <button type="button" onClick={handleAddDimension}>
+                      Add Dimension
+                    </button>}
 
-                <h6 className="alldimensions"> All Dimensions</h6>
-
-                {reportForm.reportType === "onedimensional" &&
+                </div>
+                {reportForm.reportType === "One Dimensional" &&
                   <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
                     <FormControl variant="standard" className="w-100">
                       <InputLabel>
@@ -301,71 +383,64 @@ const CreateReport = () => {
                       <Select name="dimensions.dimension1"
                         value={reportForm.dimensions.dimension1}
                         onChange={handleInputChange}>
-
-
                         <MenuItem value=""></MenuItem>
-
-                        <MenuItem value="courses">course</MenuItem>
-                        <MenuItem value="branch">branch</MenuItem>
-
-                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
-
-                        <MenuItem value="coursepackage">course package</MenuItem>
-                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                        <MenuItem value="courses">Course</MenuItem>
+                        <MenuItem value="branch">Branch</MenuItem>
+                        <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                        <MenuItem value="coursepackage">Course Package</MenuItem>
+                        <MenuItem value="modeoftraining">Mode of Training</MenuItem>
                         <MenuItem value="state">State</MenuItem>
                         <MenuItem value="educationtype">Education Type</MenuItem>
-                        <MenuItem value="academicyear">Academic year</MenuItem>
-                        <MenuItem value="leadsource">Lead source</MenuItem>
+                        <MenuItem value="academicyear">Academic Year</MenuItem>
+                        <MenuItem value="leadsource">Lead Source</MenuItem>
                       </Select>
                     </FormControl></div>}
-                {reportForm.reportType === "twodimensional" &&
+                {reportForm.reportType === "Multi Dimensional" &&
                   <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
-                    <FormControl variant="standard" className="w-100">
-                      <InputLabel>
-                        <span className="label-family">Choose</span>
-                      </InputLabel>
-                      <Select name="dimensions.dimension1"
-                        value={reportForm.dimensions.dimension1}
-                        onChange={handleInputChange}>
-                        <MenuItem value=""></MenuItem>
+                    {Object.keys(reportForm.dimensions).map((dimension, index) => (
+                      <div key={dimension}>
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>
+                            <span className="label-family">Choose</span>
+                          </InputLabel>
+                          <Select name={`dimensions.${dimension}`}
+                            value={reportForm.dimensions[dimension]}
+                            onChange={handleInputChange}>
+                            <MenuItem value=""></MenuItem>
+                            <MenuItem value="courses">course</MenuItem>
+                            <MenuItem value="branch">branch</MenuItem>
+                            <MenuItem value="enquirytakenby">counsellor</MenuItem>
+                            <MenuItem value="coursepackage">course package</MenuItem>
+                            <MenuItem value="modeoftraining">Mode of training</MenuItem>
+                            <MenuItem value="state">State</MenuItem>
+                            <MenuItem value="educationtype">Education Type</MenuItem>
+                            <MenuItem value="academicyear">Academic year</MenuItem>
+                            <MenuItem value="leadsource">Lead source</MenuItem>
+                          </Select>
+                        </FormControl>
+                        {Object.keys(reportForm.dimensions).length > 1 &&
+                          <div>
+                            <button type="button" onClick={() => handleMoveDimension(dimension, 'up')}>
+                              Move Up
+                            </button>
+                            <button type="button" onClick={() => handleMoveDimension(dimension, 'down')}>
+                              Move Down
+                            </button>
+                            <button type="button" onClick={() => handleDeleteDimension(dimension)}>
+                              Delete
+                            </button>
+                          </div>
+                        }
 
-                        <MenuItem value="courses">course</MenuItem>
-                        <MenuItem value="branch">branch</MenuItem>
+                      </div>
 
-                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
 
-                        <MenuItem value="coursepackage">course package</MenuItem>
-                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
-                        <MenuItem value="state">State</MenuItem>
-                        <MenuItem value="educationtype">Education Type</MenuItem>
-                        <MenuItem value="academicyear">Academic year</MenuItem>
-                        <MenuItem value="leadsource">Lead source</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <FormControl variant="standard" className="w-100">
-                      <InputLabel>
-                        <span className="label-family">Choose</span>
-                      </InputLabel>
-                      <Select name="dimensions.dimension2"
-                        value={reportForm.dimensions.dimension2}
-                        onChange={handleInputChange} >
-                        <MenuItem value=""></MenuItem>
+                    ))}
 
-                        <MenuItem value="courses">course</MenuItem>
-                        <MenuItem value="branch">branch</MenuItem>
 
-                        <MenuItem value="enquirytakenby">counsellor</MenuItem>
-
-                        <MenuItem value="coursepackage">course package</MenuItem>
-                        <MenuItem value="modeoftraining">Mode of training</MenuItem>
-                        <MenuItem value="state">State</MenuItem>
-                        <MenuItem value="educationtype">Education Type</MenuItem>
-                        <MenuItem value="academicyear">Academic year</MenuItem>
-                        <MenuItem value="leadsource">Lead source</MenuItem>
-                      </Select>
-                    </FormControl></div>
+                  </div>
                 }
-                {reportForm.reportType === "threedimensional" &&
+                {/* {reportForm.reportType === "Three Dimensional" &&
                   <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
                     <FormControl variant="standard" className="w-100">
                       <InputLabel>
@@ -430,7 +505,7 @@ const CreateReport = () => {
                         <MenuItem value="academicyear">Academic year</MenuItem>
                         <MenuItem value="leadsource">Lead source</MenuItem>
                       </Select>
-                    </FormControl></div>}
+                    </FormControl></div>} */}
               </div>
             </div>
             <div className="px-2 my-2">
@@ -507,3 +582,111 @@ const CreateReport = () => {
 };
 
 export default CreateReport;
+
+
+// import React, { useEffect, useState } from 'react';
+
+// const CreateReport = () => {
+//   const [selectedOption, setSelectedOption] = useState('');
+//   const [inputValues, setInputValues] = useState({});
+
+//   useEffect(() => {
+//     console.log('inputValues', inputValues);
+//   }, [inputValues]);
+
+//   const handleSelectChange = (event) => {
+//     setSelectedOption(event.target.value);
+//   };
+
+//   const handleInputChange = (dimension, event) => {
+//     setInputValues((prevInputValues) => ({
+//       ...prevInputValues,
+//       [dimension]: event.target.value,
+//     }));
+//   };
+
+//   const handleAddDimension = () => {
+//     const dimensionKey = `dimension${Object.keys(inputValues).length + 1}`;
+//     setInputValues((prevInputValues) => ({
+//       ...prevInputValues,
+//       [dimensionKey]: '',
+//     }));
+//   };
+
+//   const handleDeleteDimension = (dimension) => {
+//     const newInputValues = { ...inputValues };
+//     delete newInputValues[dimension];
+//     setInputValues(newInputValues);
+//   };
+
+//   const handleMoveDimension = (dimension, direction) => {
+//     const dimensionsArray = Object.keys(inputValues);
+//     const index = dimensionsArray.indexOf(dimension);
+//     const newIndex = direction === 'up' ? index - 1 : index + 1;
+
+//     if (newIndex >= 0 && newIndex < dimensionsArray.length) {
+//       const newInputValues = { ...inputValues };
+//       // Swap the dimensions
+//       [dimensionsArray[index], dimensionsArray[newIndex]] = [dimensionsArray[newIndex], dimensionsArray[index]];
+//       setInputValues(newInputValues);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <label htmlFor="dimensionSelect">Select Dimension:</label>
+//       <select id="dimensionSelect" value={selectedOption} onChange={handleSelectChange}>
+//         <option value="">Select Dimension</option>
+//         <option value="oneDimensional">One Dimensional</option>
+//         <option value="multiDimensional">Multi Dimensional</option>
+//       </select>
+
+//       {selectedOption === 'oneDimensional' && (
+//         <div>
+//           <label htmlFor="oneDimensionalInput">Enter One Dimensional Value:</label>
+//           <input
+//             type="text"
+//             id="oneDimensionalInput"
+//             value={inputValues.dimension1 || ''}
+//             onChange={(event) => handleInputChange('dimension1', event)}
+//           />
+//         </div>
+//       )}
+
+//       {selectedOption === 'multiDimensional' && (
+//         <div>
+//           <p>Multi Dimensional Inputs:</p>
+//           {Object.keys(inputValues).map((dimension, index) => (
+//             <div key={dimension}>
+//               <label htmlFor={`multiDimensionalInput${index}`}>{`Dimension ${index + 1}:`}</label>
+//               <input
+//                 type="text"
+//                 id={`multiDimensionalInput${index}`}
+//                 value={inputValues[dimension]}
+//                 onChange={(event) => handleInputChange(dimension, event)}
+//               />
+//               <button type="button" onClick={() => handleDeleteDimension(dimension)}>
+//                 Delete
+//               </button>
+//               <button type="button" onClick={() => handleMoveDimension(dimension, 'up')}>
+//                 Move Up
+//               </button>
+//               <button type="button" onClick={() => handleMoveDimension(dimension, 'down')}>
+//                 Move Down
+//               </button>
+//             </div>
+//           ))}
+//           <button type="button" onClick={handleAddDimension}>
+//             Add Dimension
+//           </button>
+//         </div>
+//       )}
+
+//       {selectedOption && (
+//         <p>You selected: {selectedOption === 'oneDimensional' ? 'One Dimensional' : 'Multi Dimensional'}</p>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default CreateReport;

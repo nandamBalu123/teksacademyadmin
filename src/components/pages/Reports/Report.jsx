@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
+import NativeSelect from '@mui/material/NativeSelect';
 import MenuItem from "@mui/material/MenuItem";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -32,11 +32,10 @@ import { useStudentsContext } from "../../../hooks/useStudentsContext";
 const Report = () => {
   const { id } = useParams();
   const { students } = useStudentsContext();
-  const [reports, setReports] = useState();
-  const [dimension1, setDimension1] = useState("");
-  const [dimension2, setDimension2] = useState("");
-  const [dimension3, setDimension3] = useState("");
-  const [metrics, setMetrics] = useState("");
+  // const [reports, setReports] = useState();
+  const [reportForm, setReportForm] = useState()
+
+
   const [organizedData, setOrganizedData] = useState(null);
   useEffect(() => {
     axios
@@ -44,33 +43,122 @@ const Report = () => {
       .then((response) => {
         if (response.data) {
           const filtered = response.data.filter(item => item.id === parseInt(id));
-          setReports(filtered[0]);
+          setReportForm(filtered[0].reports[0]);
         }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   }, []);
-
-
   useEffect(() => {
-    if (reports) {
-      setDimension1(reports.reports[0].dimensions.dimension1)
-      setDimension2(reports.reports[0].dimensions.dimension2)
-      setDimension3(reports.reports[0].dimensions.dimension3)
+    console.log("reportForm", reportForm)
+
+  })
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name.includes('.')) {
+
+      let [parentProperty, nestedProperty] = name.split('.');
+      setReportForm((prevForm) => ({
+        ...prevForm,
+        [parentProperty]: {
+          ...prevForm[parentProperty],
+          [nestedProperty]: value,
+        },
+      }));
+
+
+
+    } else {
+      if (name === 'reportType') {
+        setReportForm((prevForm) => ({
+          ...prevForm,
+          dimensions: {
+            dimension1: "", dimension2: "", dimension3: ""
+          },
+        }));
+      }
+      if (name === 'dateRangeType') {
+
+        let currentDate = new Date();
+        let fromDate = '';
+        let toDate = '';
+
+        if (value === 'lastmonth') {
+
+          currentDate = new Date();
+          currentDate.setMonth(currentDate.getMonth() - 1);
+          currentDate.setDate(1)
+          fromDate = currentDate
+            .toISOString()
+            .split('T')[0];
+          currentDate = new Date();
+          currentDate.setDate(0);
+
+          toDate = currentDate
+            .toISOString()
+            .split('T')[0];
+        } else if (value === 'currentmonth') {
+          currentDate = new Date();
+
+          currentDate.setDate(1);
+
+
+
+          fromDate = currentDate
+            .toISOString()
+            .split('T')[0];
+          currentDate.setMonth(currentDate.getMonth() + 1);
+          currentDate.setDate(0);
+
+          toDate = currentDate
+            .toISOString()
+            .split('T')[0];
+        } else {
+
+          fromDate = '';
+          toDate = '';
+        }
+
+        setReportForm((prevForm) => ({
+          ...prevForm,
+          dateRange: {
+            fromDate,
+            toDate,
+          },
+          [name]: value,
+        }));
+      } else {
+
+        setReportForm((prevForm) => ({ ...prevForm, [name]: value }));
+      }
     }
-
-    console.log("reports", reports)
-  }, [reports])
+  };
+  const [filteredStudents, setFilteredStudents] = useState()
   useEffect(() => {
-    if (students) {
+    if (students && reportForm && reportForm.dateRange.fromDate && reportForm.dateRange.toDate) {
+      const filteredResults = students.filter((item) => {
+        const dateCondition =
+          reportForm.dateRange.fromDate && reportForm.dateRange.toDate
+            ? item.admissiondate >= reportForm.dateRange.fromDate &&
+            item.admissiondate <= reportForm.dateRange.toDate
+            : true;
+        return (
+          dateCondition
+        );
+      });
+      setFilteredStudents(filteredResults);
+    }
+  }, [students, reportForm]);
+  useEffect(() => {
+    if (filteredStudents) {
       let organizedData;
-      if (reports) {
-        if (reports.reports[0].reportType === "threedimensional") {
-          organizedData = students.reduce((acc, student) => {
-            const dim1 = student[dimension1] || "Unknown";
-            const dim2 = student[dimension2] || "Unknown";
-            const dim3 = student[dimension3] || "Unknown";
+      if (reportForm) {
+        if (reportForm.reportType === "Three Dimensional") {
+          organizedData = filteredStudents.reduce((acc, student) => {
+            const dim1 = student[reportForm.dimensions.dimension1] || "Unknown";
+            const dim2 = student[reportForm.dimensions.dimension2] || "Unknown";
+            const dim3 = student[reportForm.dimensions.dimension3] || "Unknown";
 
             if (!acc[dim1]) {
               acc[dim1] = {};
@@ -86,10 +174,10 @@ const Report = () => {
             return acc;
           }, {});
         }
-        if (reports.reports[0].reportType === "twodimensional") {
-          organizedData = students.reduce((acc, student) => {
-            const dim1 = student[dimension1] || "Unknown";
-            const dim2 = student[dimension2] || "Unknown";
+        if (reportForm.reportType === "Two Dimensional") {
+          organizedData = filteredStudents.reduce((acc, student) => {
+            const dim1 = student[reportForm.dimensions.dimension1] || "Unknown";
+            const dim2 = student[reportForm.dimensions.dimension2] || "Unknown";
 
             if (!acc[dim1]) {
               acc[dim1] = {};
@@ -103,9 +191,9 @@ const Report = () => {
             return acc;
           }, {});
         }
-        if (reports.reports[0].reportType === "onedimensional") {
-          organizedData = students.reduce((acc, student) => {
-            const dim1 = student[dimension1] || "Unknown";
+        if (reportForm.reportType === "One Dimensional") {
+          organizedData = filteredStudents.reduce((acc, student) => {
+            const dim1 = student[reportForm.dimensions.dimension1] || "Unknown";
 
             if (!acc[dim1]) {
               acc[dim1] = [];
@@ -119,70 +207,38 @@ const Report = () => {
       }
 
     }
-  }, [students, dimension1, dimension2, dimension3]);
-  ////  Dates 
-  ///   start
-  const [customMonth, setCustomMonth] = useState(false);
+  }, [filteredStudents, reportForm]);
+  // // filter
+  // const [dateRangeType, setDateRangeType] = useState()
+  // const handleDateRangeType = () => {
 
-  const handleDateFilterChange = (event) => {
-    const selectedValue = event.target.value;
-
-    // Update customMonth state based on the selected value
-    setCustomMonth(selectedValue === 'custommonth');
-  };
-
-  /// end
-
-  // const [metrics, setMetrics] = useState(
-  //   [{
-
-  //     metricsvalue: ["Number of Enrollments", "Sume of Annual Revenue"]
-  //   }
-  //   ]
-  // );
-  // const addnew = () => {
-  //   setMetrics(prevMetrics => [
-  //     ...prevMetrics,
-  //     {
-  //       metricsvalue: ["Number of Enrollments", "Sum of Annual Revenue"]
-  //     }
-  //   ]);
-  // };
-  // const addnew = () => {
-  //   let oldmetrics = [...metrics]
-  //   oldmetrics.push({
-  //     metricsvalue: ["Number of Enrollments", "Sume of Annual Revenue"]
-  //   })
-  //   setMetrics(oldmetrics);
-  //   console.log("data", oldmetrics);
   // }
-
 
   return (
 
     <div className="container mt-3">
-      <div className="mini-reports mt-3">
+      {reportForm && <div className="mini-reports mt-3">
         <h5 className="px-2 my-3">
-          {reports && reports.reports[0].reportName}
+          {reportForm && reportForm.reportName}
         </h5>
         <div className="row px-3">
           <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
+
+
             <FormControl variant="standard" className="w-100">
               <InputLabel>
                 <span className="label-family"> Date Range</span>
               </InputLabel>
-              <Select name="datefilter"
-                onChange={handleDateFilterChange}>
+              <Select
+                name="dateRangeType"
+                value={reportForm.dateRangeType}
+                onChange={handleInputChange}>
                 <MenuItem value="lastmonth">Last Month</MenuItem>
                 <MenuItem value="currentmonth">Current Month</MenuItem>
-                <MenuItem value="custommonth" >Custom Month</MenuItem>
-
+                <MenuItem value="customDates" >Custom Dates</MenuItem>
               </Select>
             </FormControl>
           </div>
-
-
-
           <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1">
             <TextField
               label=" From:"
@@ -192,7 +248,9 @@ const Report = () => {
               InputLabelProps={{
                 shrink: true,
               }}
-              name="fromdate"
+              name="dateRange.fromDate"
+              value={reportForm && reportForm.dateRange.fromDate}
+              onChange={handleInputChange}
             />
           </div>
           <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1">
@@ -204,17 +262,11 @@ const Report = () => {
               InputLabelProps={{
                 shrink: true,
               }}
-              name="todate"
+              name="dateRange.toDate"
+              value={reportForm.dateRange.toDate}
+              onChange={handleInputChange}
             />
           </div>
-
-
-
-
-
-
-
-
           <div className="col-6 col-md-4 col-lg-2 col-xl-2 mt-2">
             <button className="btn btn-outline-color"> Apply</button>
           </div>
@@ -227,13 +279,8 @@ const Report = () => {
                 <MenuItem >
                   <DownloadIcon />&nbsp; &nbsp;  Download
                 </MenuItem>
-
               </Menu>
             </Dropdown>
-
-
-
-
           </div>
           <div className="col-6 col-md-3 col-lg-1 col-xl-1 mt-2">
             <button className="btn btn-outline-color">Save</button>
@@ -249,14 +296,14 @@ const Report = () => {
                   <TableHead>
                     <TableRow>
                       <TableCell className="table-cell-heading" align="center">
-                        {dimension1}
+                        {reportForm.dimensions.dimension1}
                       </TableCell>
-                      {dimension2 && <TableCell className="table-cell-heading" align="center">
-                        {dimension2}
+                      {reportForm.dimensions.dimension2 && <TableCell className="table-cell-heading" align="center">
+                        {reportForm.dimensions.dimension2}
                       </TableCell>}
-                      {dimension3 &&
+                      {reportForm.dimensions.dimension3 &&
                         <TableCell className="table-cell-heading" align="center">
-                          {dimension3}
+                          {reportForm.dimensions.dimension3}
                         </TableCell>}
                       <TableCell className="table-cell-heading" align="center">
                         Student Name
@@ -267,7 +314,7 @@ const Report = () => {
                   </TableHead>
                   <TableBody>
 
-                    {dimension1 && !dimension2 && !dimension3 &&
+                    {organizedData && reportForm.dimensions.dimension1 && !reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
                       Object.entries(organizedData).map(([dim1, students]) =>
 
                         students.map((student) => (
@@ -282,7 +329,7 @@ const Report = () => {
                         ))
                       )}
 
-                    {dimension1 && dimension2 && !dimension3 &&
+                    {reportForm.dimensions.dimension1 && reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
                       Object.entries(organizedData).map(([dim1, dim1Data]) =>
                         Object.entries(dim1Data).map(([dim2, students]) =>
                           students.map((student) => (
@@ -299,7 +346,7 @@ const Report = () => {
                             </TableRow>
                           )))
                       )}
-                    {dimension1 && dimension2 && dimension3 &&
+                    {reportForm.dimensions.dimension1 && reportForm.dimensions.dimension2 && reportForm.dimensions.dimension3 &&
                       Object.entries(organizedData).map(([dim1, dim1Data]) =>
                         Object.entries(dim1Data).map(([dim2, dim2Data]) =>
                           Object.entries(dim2Data).map(([dim3, students]) =>
@@ -332,7 +379,6 @@ const Report = () => {
 
 
           </div>
-
           {/* customazie start  */}
           <div className="col-12 col-md-4 col-lg-4 col-xl-4 p-0 m-0 ">
             <div className="customazie-report p-2 my-2">
@@ -341,7 +387,6 @@ const Report = () => {
                 <div className="d-flex justify-content-between">
                   <p> Average of Company Annual Revenue</p>
                   <p> INR 0</p>
-
                 </div><hr />
                 <div className="accordion mt-3" id="accordionExample" >
                   <div class="accordion-item">
@@ -352,8 +397,6 @@ const Report = () => {
                     </h3>
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-
-
                         <FormControl variant="standard" className="w-100">
                           <InputLabel>
                             <span className="label-family ">Choose</span>
@@ -361,11 +404,8 @@ const Report = () => {
                           <Select >
                             <MenuItem value="branch">Branch</MenuItem>
                             <MenuItem value="country"> Country</MenuItem>
-
                           </Select>
                         </FormControl>
-
-
                       </div>
                     </div>
                   </div>
@@ -435,15 +475,8 @@ const Report = () => {
                           
                             </div>
                           </div>
-                        ))} */}
-
-
-
-
-
-
-
-
+                        ))} */
+                        }
                       </div>
                     </div>
                     <hr className="py-2" />
@@ -458,7 +491,8 @@ const Report = () => {
 
 
 
-      </div>
+      </div>}
+
     </div >
   );
 };
