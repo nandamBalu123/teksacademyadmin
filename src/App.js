@@ -78,17 +78,17 @@ function App() {
 
   let fullname;
   let profile;
-  if(user){
+  if (user) {
     fullname = user.fullname;
     profile = user.profile;
   }
   // start roles
-  const {roles} = useRoleContext();
-  
+  const { roles } = useRoleContext();
+
   const [filteredroles, setfilteredroles] = useState();
 
   useEffect(() => {
-    
+
 
     if (roles) {
       for (let i = 0; i < roles.length; i++) {
@@ -99,7 +99,7 @@ function App() {
       }
     }
   }, [roles]);
-  {filteredroles && console.log("test1", filteredroles)}
+  { filteredroles && console.log("test1", filteredroles) }
   // useEffect(() => {
   //   if (filteredroles) {
   //     console.log("filteredroles", filteredroles.id);
@@ -145,9 +145,9 @@ function App() {
                   path="/login"
                   element={!user ? <LoginPage /> : <Navigate to="/" />}
                 />
-                
 
-                
+
+
                 {/* user route start*/}
                 <Route
                   path="/createuser"
@@ -172,7 +172,7 @@ function App() {
                 <Route
                   path="/userview/:id"
                   element={user ? <UserView /> : <Dashboard />}
-                  
+
                 />
                 <Route
                   path="/edituser/:id"
@@ -187,39 +187,39 @@ function App() {
                   path="/registrationform"
                   element={
                     filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[0].create == true ? (
-                       <RegistrationForm /> 
-                       ) : (
-                       <Dashboard />
-                       )
+                      <RegistrationForm />
+                    ) : (
+                      <Dashboard />
+                    )
 
                   }
                 />
                 <Route path="/studentdata" element={
                   filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[1].read == true ? (
-                <StudentData />
-                  ) : ( 
-                  <Dashboard />
+                    <StudentData />
+                  ) : (
+                    <Dashboard />
                   )
                 } />
                 <Route
                   path="/feedetails"
                   element={
                     filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[2].read == true ? (
-                    <FeeDetails /> 
+                      <FeeDetails />
                     ) : (
-                    <Dashboard />
+                      <Dashboard />
                     )
                   }
                 />
-                <Route 
-                path="/certificate" 
-                element={
+                <Route
+                  path="/certificate"
+                  element={
                     filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
-                  <Certificate />
-                  ) : (
-                  <Dashboard />
-                  )
-                }
+                      <Certificate />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
                 />
                 <Route
                   path="/requestedcertificates"
@@ -237,13 +237,13 @@ function App() {
                   path="/feedetails/:id"
                   element={
                     filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].create == true ? (
-                    <FeeDetails /> 
+                      <FeeDetails />
                     ) : (
-                       <Dashboard />
+                      <Dashboard />
                     )
                   }
                 />
-                
+
                 <Route
                   path="/feefollowup"
                   element={user ? <Feefollowup /> : <Dashboard />}
@@ -264,13 +264,13 @@ function App() {
                   path="/addtofee"
                   element={user ? <Addtofee /> : <Dashboard />}
                 />
-                
+
                 <Route
                   path="/studentdataview/:id"
                   element={user ? <StudentDataView /> : <Dashboard />}
                 />
-                
-                
+
+
                 <Route
                   path="/studentApplicationprint/:id"
                   element={user ? <StudentApplicationPrint /> : <Dashboard />}
@@ -339,8 +339,8 @@ function App() {
                     user ? <Vendor /> : <Dashboard />
                   }
                 ></Route>
-                
-                
+
+
                 <Route
                   path="/addassets/view/:id"
                   element={
@@ -394,7 +394,7 @@ function App() {
                     )
                   }
                 />
-                
+
                 <Route
                   path="/addassetsform"
                   element={
@@ -408,7 +408,7 @@ function App() {
                 {/* inventory end */}
 
                 {/* leads start */}
-                
+
                 <Route
                   path="/webinar"
                   element={
@@ -495,7 +495,7 @@ function App() {
                   path="/report/:id"
                   element={
                     filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
-                    <Report />
+                      <Report />
                     ) : (<Dashboard />)
                   }
                 ></Route>
@@ -510,8 +510,8 @@ function App() {
                   }
                 ></Route>
                 {/* reports end */}
-                
-                
+
+
                 {/* settings start */}
                 <Route
                   path="/roles"
@@ -642,7 +642,14 @@ function App() {
                   }
                 />
                 {/* settings end */}
+
+                <Route
+                  path="/setting"
+                  element={
+                    user && user.profile == "admin" ? <Settings /> : <Dashboard />
+                  } />
               </Routes>
+
             </main>
           </div>
         </BrowserRouter>
