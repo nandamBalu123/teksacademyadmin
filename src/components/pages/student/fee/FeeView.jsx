@@ -956,7 +956,7 @@ const FeeView = () => {
                         type="date"
                         variant="standard"
                         name="Installment Date"
-                        className="w-100"
+                        className="w-100 "
                         required
                         InputLabelProps={{
                           shrink: true,
@@ -993,7 +993,7 @@ const FeeView = () => {
                         }
                         type="number"
                         name="Installment Amount"
-                        className="w-100"
+                        className="w-100 "
                         variant="standard"
 
                         required
@@ -1036,7 +1036,7 @@ const FeeView = () => {
                             }
                             type="date"
                             name="paiddate"
-                            className="w-100"
+                            className="w-100 "
 
                             variant="standard"
 
@@ -1080,7 +1080,7 @@ const FeeView = () => {
                             }
                             type="number"
                             name="paidamount"
-                            className="w-100"
+                            className="w-100 "
                             variant="standard"
 
                             required
@@ -1116,12 +1116,12 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 ">
                           <TextField
 
                             select
                             label="Mode of Payment"
-                            defaultValue="select"
+
                             className="w-100"
                             variant="standard"
                             required
@@ -1200,13 +1200,13 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2">
                           <TextField
                             label={
                               <span className="label-family">Transation ID</span>
                             }
                             type="text"
-                            className="w-100"
+                            className="w-100 "
                             name="transactionid"
                             onChange={(e) =>
                               handleInstallmentUpdate(

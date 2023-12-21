@@ -547,9 +547,36 @@ const Sidebar = () => {
                     selected={selected}
                     setSelected={setSelected}
                   />
+                  <SubMenu
+                    style={{
+                      // color: colors.grey[100],
+                      color: "black",
+                    }}
+                    icon={<SettingsIcon />}
+                    label={"Custom Forms"}
+                    title={"Custom Forms"}
+                  >
+                    <Item
+                      title="Custom Form"
+                      to="/customform"
+                      icon={<InventoryIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+
+                  </SubMenu>
                 </SubMenu>
               ) : undefined}
               <hr />
+              {profile == "admin" ? (
+                <Item
+                  title="Settings"
+                  to="/setting"
+                  icon={<SettingsIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              ) : undefined}
             </Box>
           </Menu>
         </ProSidebar>

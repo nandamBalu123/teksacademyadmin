@@ -145,10 +145,10 @@ const CreateReport = () => {
             <div className="row px-2">
               <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <TextField
-                  label={<span className="label-family">Report's Name</span>}
+                  label={<span className="label-family pb-1">Report's Name</span>}
                   type="text"
                   variant="standard"
-                  className="mar w-100"
+                  className="mar mt-1 w-100"
                   required
                   name="reportName"
                   value={reportForm.reportName}
@@ -232,7 +232,7 @@ const CreateReport = () => {
                 label={<span className="label-family">From:</span>}
                 type="date"
                 variant="standard"
-                className="mar  w-100"
+                className="mar mt-1 w-100"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -245,7 +245,7 @@ const CreateReport = () => {
                   label={<span className="label-family">To:</span>}
                   type="date"
                   variant="standard"
-                  className="w-100 mar"
+                  className="w-100 mt-1 mar"
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -289,9 +289,9 @@ const CreateReport = () => {
             <div className="px-2 my-2">
               <span className="label-family "> Dimensions</span>
               <div className="dimensions mb-4">
-                <div className="d-flex justify-content-between alldimensions">
-                  <h6 className="pt-2"> All Dimensions</h6>
-                </div>
+
+                <h6 className="alldimensions"> All Dimensions</h6>
+
                 {reportForm.reportType === "onedimensional" &&
                   <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
                     <FormControl variant="standard" className="w-100">
