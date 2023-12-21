@@ -394,7 +394,8 @@ const CreateReport = () => {
                         <MenuItem value="academicyear">Academic Year</MenuItem>
                         <MenuItem value="leadsource">Lead Source</MenuItem>
                       </Select>
-                    </FormControl></div>}
+                    </FormControl>
+                    </div>}
                 {reportForm.reportType === "Multi Dimensional" &&
                   <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
                     {Object.keys(reportForm.dimensions).map((dimension, index) => (
@@ -486,7 +487,7 @@ const CreateReport = () => {
             </div>
             <div className=" row report-footer ">
               <div className="col-12 col-md-9 col-lg-9 col-lg-10"> <button className="btn btn-color mt-1"> Generate Preview </button></div>
-              
+
               <div className="col-12 col-md-2 col-lg-2 col-lg-2">  <button type="submit" onClick={handleSubmit} className="btn btn-color  mt-1 me-3"> Save</button> </div>
             </div>
           </div>
