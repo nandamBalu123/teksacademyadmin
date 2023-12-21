@@ -30,16 +30,16 @@ const RoleAccess = () => {
   console.log(id);
 
   const [role, setrole] = useState();
-  
- const [permissions, setPermissions] = useState();
-if(role){
- console.log("lksdjflkjdf", role.role)
-}
- useEffect(() => {
-  if(role){
-  setPermissions(role.permissions);
-}
- }, [role])
+
+  const [permissions, setPermissions] = useState();
+  if (role) {
+    console.log("lksdjflkjdf", role.role)
+  }
+  useEffect(() => {
+    if (role) {
+      setPermissions(role.permissions);
+    }
+  }, [role])
   const setdata = (e) => {
     console.log(e.target.value);
     const { name, value } = e.target;
@@ -53,8 +53,8 @@ if(role){
 
   // get method from usecontext
   const { roles } = useRoleContext();
- 
-  
+
+
   useEffect(() => {
     if (roles && id) {
       const filteredResults = roles.filter((item) => {
@@ -73,15 +73,15 @@ if(role){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     let user = {
       permissions
     };
-  
+
     user = [user];
     const dataWithTitleCase = user.map((item) => {
       const newItem = {};
-  
+
       for (const key in item) {
         if (Object.prototype.hasOwnProperty.call(item, key)) {
           if (typeof item[key] === "string" && key !== "email") {
@@ -94,12 +94,12 @@ if(role){
           }
         }
       }
-  
+
       return newItem;
     });
     user = dataWithTitleCase[0];
     console.log("User Data:", user);
-  
+
     try {
       const userId = id; // Replace with the actual user ID
       const response = await axios.put(
@@ -112,22 +112,22 @@ if(role){
         }
       );
       navigate('/roles');
-  
+
       console.log('Response:', response.data);
       if (response.status === 200) {
         console.log('User roles and permissions updated successfully.');
         // Handle success scenarios here
       }
-  
+
     } catch (error) {
       console.error('Error updating user roles and permissions:', error);
       // Handle error scenarios here
     }
   };
-  
-//   useEffect(() => {
-// console.log("filteredResults1", filteredResults)
-// }, [roles])
+
+  //   useEffect(() => {
+  // console.log("filteredResults1", filteredResults)
+  // }, [roles])
 
   const [selectedPermission, setSelectedPermission] = useState(null);
   const handlePermissionClick = (permission) => {
@@ -136,7 +136,7 @@ if(role){
     // setSelectedCounsellor(null); // Reset selected counsellor when a branch is clicked
   };
 
-  
+
   const handleChange = (index, subIndex, action) => {
     setPermissions(prevPermissions => {
       const newPermissions = [...prevPermissions];
@@ -178,7 +178,7 @@ if(role){
               <TableRow>
 
                 <TableCell className="table-cell-heading w-25" align="center" > Name</TableCell>
-                <TableCell className="table-cell-heading" align="center">ALL</TableCell>
+                <TableCell className="table-cell-heading" style={{ width: "15%" }} align="center">ALL</TableCell>
                 <TableCell colSpan={4} className="table-cell-heading" align="center">Access</TableCell>
 
               </TableRow>
@@ -199,7 +199,7 @@ if(role){
               {permissions && permissions.map((permission, index) => (
                 <React.Fragment key={index}>
                   <TableRow>
-                    <TableCell className="Table-cell" onClick={() => handlePermissionClick(permission.feature)}>
+                    <TableCell style={{ cursor: "pointer" }} className="Table-cell" onClick={() => handlePermissionClick(permission.feature)}>
                       {permission.feature}
                     </TableCell>
                     <TableCell>

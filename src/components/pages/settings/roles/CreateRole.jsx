@@ -32,7 +32,7 @@ const CreateRole = () => {
   const navigate = useNavigate();
   const [role, setRoleName] = useState("");
   const [description, setDescription] = useState("");
-  
+
 
   const [permissions, setPermissions] = useState([
     {
@@ -366,7 +366,7 @@ const CreateRole = () => {
       ]
     },
   ]);
-  
+
 
   const handleChange = (index, subIndex, action) => {
     setPermissions(prevPermissions => {
@@ -443,7 +443,7 @@ const CreateRole = () => {
     user = dataWithTitleCase[0];
     console.log("User Datagg:", user); // Log the user data being sent
     console.log("permissions Datagg:", permissions);
-    
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/userroles`,
@@ -454,7 +454,7 @@ const CreateRole = () => {
           },
         }
       );
-  
+
       console.log('Response:', response.data); // Log the response from the server
       navigate('/roles');
       if (response.status === 200) {
@@ -466,7 +466,7 @@ const CreateRole = () => {
         // setPermissions([]);
         // navigate('/roles');
       }
-  
+
     } catch (error) {
       console.error('Error creating user role:', error);
       // Handle error scenarios here
@@ -528,8 +528,8 @@ const CreateRole = () => {
 
           <div className='access my-2'>
 
-            <h5 > Branch Manager</h5>
-            <h6 className='my-4'> Modele & Object Permissions</h6>
+            <h5 className="ms-2"> Branch Manager</h5>
+            <h6 className='my-4 ms-2'> Modele & Object Permissions</h6>
 
             <TableContainer component={Paper}>
               <Table aria-label="simple table">
@@ -537,7 +537,7 @@ const CreateRole = () => {
                   <TableRow>
 
                     <TableCell className="table-cell-heading w-25" align="center" > Name</TableCell>
-                    <TableCell className="table-cell-heading" align="center">ALL</TableCell>
+                    <TableCell className="table-cell-heading" align="center" style={{ width: "10rem" }}>ALL</TableCell>
                     <TableCell colSpan={4} className="table-cell-heading" align="center">Access</TableCell>
 
                   </TableRow>
@@ -558,17 +558,23 @@ const CreateRole = () => {
                   {permissions.map((permission, index) => (
                     <React.Fragment key={index}>
                       <TableRow>
-                        <TableCell className="Table-cell" onClick={() => handlePermissionClick(permission.feature)}>
+                        <TableCell className="Table-cell" style={{ color: selectedPermission === permission.feature ? "#4676a0" : "black", cursor: "pointer" }} onClick={() => handlePermissionClick(permission.feature)}>
                           {permission.feature}
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="text-center">
                           <Switch
                             checked={permission.all}
+                            className="text-center"
                             onChange={() => handleChange(index, null, 'all')}
                             inputProps={{ 'aria-label': 'controlled' }}
                             color="info"
                           />
                         </TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell style={{ borderRight: "1px solid #e3eee3" }}></TableCell>
+
                         {/* <TableCell>
                           <Switch
                             checked={permission.read}
@@ -605,20 +611,22 @@ const CreateRole = () => {
                       {selectedPermission === permission.feature &&
                         permission.submenus.map((submenu, subIndex) => (
                           <TableRow key={subIndex}>
-                            <TableCell className="Table-cell">{submenu.subfeature}</TableCell>
+                            <TableCell className="Table-cell text-center" >{submenu.subfeature}</TableCell>
                             <TableCell>
-                              
+
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="text-center">
                               <Switch
+                                className="text-center"
                                 checked={submenu.read || permission.all}  // Updated line here
                                 onChange={() => handleChange(index, subIndex, 'read')}
                                 inputProps={{ 'aria-label': 'controlled' }}
                                 color="info"
                               />
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="text-center">
                               <Switch
+                                className="text-center"
                                 checked={submenu.update || permission.all}
                                 onChange={() => handleChange(index, subIndex, 'update')}
                                 inputProps={{ 'aria-label': 'controlled' }}
@@ -647,7 +655,7 @@ const CreateRole = () => {
                   ))}
                 </TableBody>
 
-                
+
                 {/* <TableBody>
                   {permissions.map((permission, index) => (
                     <React.Fragment key={index}>
