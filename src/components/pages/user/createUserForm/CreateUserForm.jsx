@@ -13,7 +13,14 @@ import Select from "@mui/material/Select";
 import CheckIcon from "@mui/icons-material/Check";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import axios from "axios";
+import $ from 'jquery';
 const CreateUserForm = () => {
+  // for number scrolling disable
+  $('input[type=number]').on('mousewheel', function (e) {
+    $(e.target).blur();
+  });
+  // 
+
   const { users, dispatch } = useUsersContext();
   const { departments } = useDepartmentContext();
   const { roles } = useRoleContext();

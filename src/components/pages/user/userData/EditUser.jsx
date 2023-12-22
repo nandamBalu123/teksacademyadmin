@@ -10,8 +10,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./EditUser.css";
 import axios from "axios";
+import $ from 'jquery';
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 const EditUser = () => {
+  // for number scrolling disable
+  $('input[type=number]').on('mousewheel', function (e) {
+    $(e.target).blur();
+  });
+  // 
   const navigate = useNavigate("");
   const [profiles, setProfiles] = useState([]);
   const { departments } = useDepartmentContext();

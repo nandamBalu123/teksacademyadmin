@@ -199,7 +199,7 @@ const Sidebar = () => {
             backgroundColor: "transparent !important",
           },
           "& .pro-inner-item": {
-            padding: "5px 14px 5px 20px !important",
+            padding: "5px 14px 5px 22px !important",
             fontSize: "14px !important",
             fontWeight: "400 !important",
           },
@@ -296,19 +296,21 @@ const Sidebar = () => {
                 </Item>
               ) : undefined} */}
               {profile == "admin" || profile == "regional manager" || profile == "branch manager" || profile == "counsellor" ? (
-                <Item
-                  style={{
-                    color: colors.grey[100],
-                  }}
-                  icon={<SpaceDashboardIcon />}
-                  label={"Dashboard"}
-                  title="Dashboard"
-                  to="/"
-                  selected={selected}
-                  setSelected={setSelected}
-                >
-                  {" "}
-                </Item>
+                <div title="Dashboard">
+                  <Item
+                    style={{
+                      color: colors.grey[100],
+                    }}
+                    icon={<SpaceDashboardIcon />}
+                    label={"Dashboard"}
+                    title="Dashboard"
+                    to="/"
+                    selected={selected}
+                    setSelected={setSelected}
+                  >
+                    {" "}
+                  </Item>
+                </div>
               ) : undefined}
               <hr />
               {/* <Item
@@ -374,220 +376,255 @@ const Sidebar = () => {
 
               {/* student management start */}
               {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].all == true ? (
-                <SubMenu
-                  style={{
-                    color: colors.grey[100],
-                  }}
-                  icon={<Diversity3Icon />}
-                  label={"Student Management"}
-                  title={"Student Managem..."}
-                >
-                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[0].create == true ? (
-                    <Item
-                      title="Registration Form"
-                      to="/registrationform"
-                      icon={<FeedIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  ) : undefined}
-                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[1].read == true ? (
-                    <Item
-                      className="dashboard-item"
-                      title="Enrolled Students"
-                      to="/studentdata"
-                      icon={<PeopleOutlineIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  ) : undefined}
-                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[2].read == true ? (
-                    <Item
-                      title="Fee Details"
-                      to="/feedetails"
-                      icon={<CurrencyRupeeIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  ) : undefined}
-                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
-                    <Item
-                      title="Certificate"
-                      to="/certificate"
-                      icon={<WorkspacePremiumIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  ) : undefined}
-                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[4].read == true ? (
-                    <Item
-                      title="Requested Certificates"
-                      to="/requestedcertificates"
-                      icon={<ImportContactsIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  ) : undefined}
-                </SubMenu>
+                <div title="Student Management">
+                  <SubMenu
+                    style={{
+                      color: colors.grey[100],
+                    }}
+                    icon={<Diversity3Icon />}
+                    label={"Student Management"}
+                    title={"Student Managem..."}
+                  >
+                    {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[0].create == true ? (
+                      <div title="Registration Form">
+                        <Item
+                          title="Registration Form"
+                          to="/registrationform"
+                          icon={<FeedIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                    ) : undefined}
+                    {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[1].read == true ? (
+                      <div title="Enrolled Students">
+                        <Item
+                          className="dashboard-item"
+                          title="Enrolled Students"
+                          to="/studentdata"
+                          icon={<PeopleOutlineIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                    ) : undefined}
+                    {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[2].read == true ? (
+                      <div title="Fee Details">
+                        <Item
+                          title="Fee Details"
+                          to="/feedetails"
+                          icon={<CurrencyRupeeIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                    ) : undefined}
+                    {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
+                      <div title="Certificate">
+                        <Item
+                          title="Certificate"
+                          to="/certificate"
+                          icon={<WorkspacePremiumIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                    ) : undefined}
+                    {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[4].read == true ? (
+                      <div title="Requested Certificates">
+                        <Item
+                          title="Requested Certificates"
+                          to="/requestedcertificates"
+                          icon={<ImportContactsIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                    ) : undefined}
+                  </SubMenu>
+                </div>
               ) : undefined}
               {/* student management end */}
 
               <hr />
               {/* inventory start */}
               {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].all == true ? (
-                <SubMenu
-                  style={{
-                    // color: colors.grey[100],
+                <div title="Inventory">
+                  <SubMenu
+                    style={{
+                      // color: colors.grey[100],
 
-                    color: "black",
-                  }}
-                  icon={<StorageIcon />}
-                  label={"Inventory"}
-                  title={"Inventory"}
-                >
-                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[0].create == true ? (
-                    <Item
-                      title="Add Assets"
-                      to="/addassets"
-                      icon={<InventoryIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  ) : undefined}
-                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[1].create == true ? (
-                    <Item
-                      title="Assign Assets"
-                      to="/assignassets"
-                      icon={<AssignmentTurnedInIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  ) : undefined}
-                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[2].create == true ? (
-                    <SubMenu
-                      style={{
-                        // color: colors.grey[100],
-                        color: "black",
-                      }}
-                      icon={<SettingsIcon />}
-                      label={"Settings"}
-                      title={"Settings"}
-                    >
-                      <Item
-                        title="Add Assets Type"
-                        to="/assettype"
-                        icon={<InventoryIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                      <Item
-                        title="Add Vendor"
-                        to="/vendor"
-                        icon={<InventoryIcon />}
-                        selected={selected}
-                        setSelected={setSelected}
-                      />
-                    </SubMenu>
-                  ) : undefined}
-                </SubMenu>
+                      color: "black",
+                    }}
+                    icon={<StorageIcon />}
+                    label={"Inventory"}
+                    title={"Inventory"}
+                  >
+                    {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[0].create == true ? (
+                      <div title="Add Assets">
+                        <Item
+                          title="Add Assets"
+                          to="/addassets"
+                          icon={<InventoryIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        /> </div>
+                    ) : undefined}
+                    {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[1].create == true ? (
+                      <div title="Assign Assets">
+                        <Item
+                          title="Assign Assets"
+                          to="/assignassets"
+                          icon={<AssignmentTurnedInIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                    ) : undefined}
+                    {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[2].create == true ? (
+                      <SubMenu
+                        style={{
+                          // color: colors.grey[100],
+                          color: "black",
+                        }}
+                        icon={<SettingsIcon />}
+                        label={"Settings"}
+                        title={"Settings"}
+                      >
+                        <Item
+                          title="Add Assets Type"
+                          to="/assettype"
+                          icon={<InventoryIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                        <Item
+                          title="Add Vendor"
+                          to="/vendor"
+                          icon={<InventoryIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </SubMenu>
+                    ) : undefined}
+                  </SubMenu>
+                </div>
               ) : undefined}
               {/* inventory start */}
               <hr />
 
               {/* leads start */}
               {filteredroles && profile == filteredroles.role && filteredroles.permissions[3].all == true ? (
-                <SubMenu
-                  style={{ color: "black" }}
-                  icon={<Diversity2Icon />}
-                  label={"Leads"}
-                  title={"Leads"}
-                >
+                <div title="Leads">
                   <SubMenu
                     style={{ color: "black" }}
-                    icon={<LeaderboardIcon />}
-                    label={"Website Leads"}
-                    title={"Website Leads"}
+                    icon={<Diversity2Icon />}
+                    label={"Leads"}
+                    title={"Leads"}
                   >
-                    <Item
-                      title="Webinar"
-                      to="/webinar"
-                      icon={<AirplayIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                    <Item
-                      title="Whaps App"
-                      to="/whatsapp"
-                      icon={<AirplayIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                    <Item
-                      title="Download Syllabus"
-                      to="/downloadsyllabus"
-                      icon={<AirplayIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                    <Item
-                      title="View Course"
-                      to="/viewcourse"
-                      icon={<AirplayIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                    <Item
-                      title="Contact Us"
-                      to="/contactus"
-                      icon={<AirplayIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                    <Item
-                      title="Hlp Enquire Leads"
-                      to="/hlpenquireleads"
-                      icon={<AirplayIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                    <Item
-                      title="Slp Enquire Leads"
-                      to="/slpenquireleads"
-                      icon={<AirplayIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
+                    <div title="Website Leads">
+                      <SubMenu
+                        style={{ color: "black" }}
+                        icon={<LeaderboardIcon />}
+                        label={"Website Leads"}
+                        title={"Website Leads"}
+                      >
+                        <div title="Webinar">
+                          <Item
+                            title="Webinar"
+                            to="/webinar"
+                            icon={<AirplayIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          />
+                        </div>
+                        <div title="WhatsApp">
+                          <Item
+                            title="WhatsApp"
+                            to="/whatsapp"
+                            icon={<AirplayIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          /> </div>
+                        <div title="Download Syllabus">
+                          <Item
+                            title="Download Syllabus"
+                            to="/downloadsyllabus"
+                            icon={<AirplayIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          />
+                        </div>
+                        <div title="View Course">
+                          <Item
+                            title="View Course"
+                            to="/viewcourse"
+                            icon={<AirplayIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          /> </div>
+                        <div title="Contact Us">
+                          <Item
+                            title="Contact Us"
+                            to="/contactus"
+                            icon={<AirplayIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          />
+                        </div>
+                        <div title="Hlp Enquire Leads">
+                          <Item
+                            title="Hlp Enquire Leads"
+                            to="/hlpenquireleads"
+                            icon={<AirplayIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          />
+                        </div>
+                        <div title="Slp Enquire Leads">
+                          <Item
+                            title="Slp Enquire Leads"
+                            to="/slpenquireleads"
+                            icon={<AirplayIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          />
+                        </div>
 
-                  </SubMenu>
-                </SubMenu>
+                      </SubMenu> </div>
+                  </SubMenu> </div>
               ) : undefined}
               <hr />
               {/* end webinar */}
               {/* reports start */}
               {filteredroles && profile == filteredroles.role && filteredroles.permissions[4].all == true ? (
-                <SubMenu
-                  style={{
-                    // color: colors.grey[100],
-                    color: "black",
-                  }}
-                  icon={<AssessmentIcon />}
-                  label={"Reports"}
-                  title={"Reports"}
-                >
-                  {filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
-                    <Item
-                      title="Reports Data"
-                      to="/reports"
-                      icon={<StackedBarChartIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  ) : undefined}
-                </SubMenu>
+                <div title="Reports">
+                  <SubMenu
+                    style={{
+                      // color: colors.grey[100],
+                      color: "black",
+                    }}
+                    icon={<AssessmentIcon />}
+                    label={"Reports"}
+                    title={"Reports"}
+                  >
+                    {filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
+                      <div title="Reports Data">
+                        <Item
+                          title="Reports Data"
+                          to="/reports"
+                          icon={<StackedBarChartIcon />}
+                          selected={selected}
+                          setSelected={setSelected}
+                        />
+                      </div>
+                    ) : undefined}
+                  </SubMenu>
+                </div>
               ) : undefined}
               <hr />
               {/* Settings start */}
-              {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].all == true ? (
+              {/* {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].all == true ? (
                 <SubMenu
                   style={{
                     // color: colors.grey[100],
@@ -653,7 +690,7 @@ const Sidebar = () => {
                   ) : undefined}
                 </SubMenu>
               ) : undefined}
-              <hr />
+              <hr /> */}
               {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].all == true ? (
                 <Item
                   title="Settings"

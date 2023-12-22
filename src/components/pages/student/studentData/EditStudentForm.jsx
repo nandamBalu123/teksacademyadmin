@@ -30,8 +30,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
 import Paper from "@mui/material/Paper";
+import $ from 'jquery';
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 const EditStudentForm = () => {
+  // for number scrolling disable
+  $('input[type=number]').on('mousewheel', function (e) {
+    $(e.target).blur();
+  });
+  // 
   // const [name, setName] = useState("");
   //   const [email, setEmail] = useState("");
   //   const [mobileNumber, setMobileNumber] = useState("");
@@ -806,7 +812,7 @@ const EditStudentForm = () => {
                     class="image-input"
                     onChange={setdata}
                     name="studentImg"
-                    // value={user.studentImg}
+                  // value={user.studentImg}
                   />
                   {/* <input
                     accept=".jpg, .jpeg, .png"

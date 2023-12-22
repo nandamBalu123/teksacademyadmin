@@ -39,6 +39,7 @@ import { useCourseContext } from "../../../../hooks/useCourseContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 import { DateField } from "@mui/x-date-pickers/DateField";
+import $ from 'jquery';
 const Popup = ({ show, onClose, children }) => {
   return (
     <div className={`popup ${show ? "show" : ""}`}>
@@ -52,6 +53,12 @@ const Popup = ({ show, onClose, children }) => {
   );
 };
 export default function RegistrationForm() {
+  // for number scrolling disable
+  $('input[type=number]').on('mousewheel', function (e) {
+    $(e.target).blur();
+  });
+  // 
+
   const { dispatch } = useStudentsContext();
   const [isPopupOpen, setPopupOpen] = useState(false);
   let select = "select";
@@ -313,6 +320,7 @@ export default function RegistrationForm() {
 
     setFeeDetails([
       ...feedetails,
+      
       {
         id: Date.now(),
         feetype: feetype,
@@ -488,107 +496,107 @@ export default function RegistrationForm() {
 
     handleNext();
   };
-// -----photo start--------------------------------------
-const fileInputRef = useRef(null);
-// const [resizedImage, setResizedImage] = useState(null);
+  // -----photo start--------------------------------------
+  const fileInputRef = useRef(null);
+  // const [resizedImage, setResizedImage] = useState(null);
 
-const [studentImage, setSelectedFile] = useState(null);
+  const [studentImage, setSelectedFile] = useState(null);
 
-const handleFileChange = async (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    try {
-      const targetSizeInBytes = 45 * 1024;
-      const resizedImage = await resizeImage(file, targetSizeInBytes);
-      const { width, height } = await getImageSize(resizedImage);
-      const sizeInKB = (resizedImage.size / 1024).toFixed(2);
-      console.log('Resized Image Dimensions:', { width, height });
-      console.log('Resized Image Size:', sizeInKB, 'KB');
-      setSelectedFile(resizedImage);
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const targetSizeInBytes = 45 * 1024;
+        const resizedImage = await resizeImage(file, targetSizeInBytes);
+        const { width, height } = await getImageSize(resizedImage);
+        const sizeInKB = (resizedImage.size / 1024).toFixed(2);
+        console.log('Resized Image Dimensions:', { width, height });
+        console.log('Resized Image Size:', sizeInKB, 'KB');
+        setSelectedFile(resizedImage);
 
-    } catch (error) {
-      console.error('Error processing image:', error);
+      } catch (error) {
+        console.error('Error processing image:', error);
+      }
     }
-  }
-};
+  };
 
-const getImageSize = (file) => {
-  return new Promise((resolve, reject) => {
+  const getImageSize = (file) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+
+      img.onload = () => {
+        resolve({ width: img.width, height: img.height });
+      };
+
+      img.onerror = (error) => {
+        reject(error);
+      };
+
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        img.src = e.target.result;
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const resizeImage = async (file, targetSize) => {
     const img = new Image();
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
-    img.onload = () => {
-      resolve({ width: img.width, height: img.height });
-    };
+    img.src = URL.createObjectURL(file);
 
-    img.onerror = (error) => {
-      reject(error);
-    };
-
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      img.src = e.target.result;
-    };
-
-    reader.onerror = (error) => {
-      reject(error);
-    };
-
-    reader.readAsDataURL(file);
-  });
-};
-
-const resizeImage = async (file, targetSize) => {
-  const img = new Image();
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-
-  img.src = URL.createObjectURL(file);
-
-  await new Promise((resolve) => {
-    img.onload = resolve;
-  });
-
-  let width = img.width;
-  let height = img.height;
-  let resizedFile = file;
-
-  while (resizedFile.size > targetSize) {
-    width *= 0.9; 
-    height *= 0.9; 
-
-    canvas.width = width;
-    canvas.height = height;
-
-    ctx.clearRect(0, 0, width, height);
-    ctx.drawImage(img, 0, 0, width, height);
-
-    const blob = await new Promise((resolve) => {
-      canvas.toBlob(resolve, 'image/jpeg', 0.85); 
+    await new Promise((resolve) => {
+      img.onload = resolve;
     });
 
-    resizedFile = new File([blob], file.name, { type: blob.type });
-  }
+    let width = img.width;
+    let height = img.height;
+    let resizedFile = file;
 
-  return resizedFile;
-};
+    while (resizedFile.size > targetSize) {
+      width *= 0.9;
+      height *= 0.9;
 
-const handlePhoto = () => {
-  if (!studentImage) {
-    alert("Please select an image to upload");
-    return;
-  }
+      canvas.width = width;
+      canvas.height = height;
 
-  // const maxSizeInBytes = 45 * 1024; // 40 KB in bytes
-  // if (studentImage.size > maxSizeInBytes) {
-  //   alert("Image size is too large. Maximum allowed size is 45 KB");
-  //   return;
-  // }
+      ctx.clearRect(0, 0, width, height);
+      ctx.drawImage(img, 0, 0, width, height);
 
-  // Image size is within the limit, proceed to the next step
-  handleNext();
-};
-console.log("studentImage", studentImage)
+      const blob = await new Promise((resolve) => {
+        canvas.toBlob(resolve, 'image/jpeg', 0.85);
+      });
+
+      resizedFile = new File([blob], file.name, { type: blob.type });
+    }
+
+    return resizedFile;
+  };
+
+  const handlePhoto = () => {
+    if (!studentImage) {
+      alert("Please select an image to upload");
+      return;
+    }
+
+    // const maxSizeInBytes = 45 * 1024; // 40 KB in bytes
+    // if (studentImage.size > maxSizeInBytes) {
+    //   alert("Image size is too large. Maximum allowed size is 45 KB");
+    //   return;
+    // }
+
+    // Image size is within the limit, proceed to the next step
+    handleNext();
+  };
+  console.log("studentImage", studentImage)
 
   // ----photo end--------------------------------------------
   const handleEnquirydetails = () => {
@@ -1542,18 +1550,18 @@ console.log("studentImage", studentImage)
                     type="file"
                     onChange={handleFileChange}
                   />
-                  
-              {studentImage && (
-                <div style={{ marginTop: '10px' }}>
-                  {/* <strong>Resized Image Dimensions:</strong>{' '} */}
-                  {/* {`Width: ${studentImage.width}px, Height: ${studentImage.height}px`} */}
-                  <br />
-                  {/* <strong>Resized Image Size:</strong>  */}
-                  {/* {`${(studentImage.size / 1024).toFixed(2)} KB`} */}
-                  {/* <br /> */}
-                  <img src={URL.createObjectURL(studentImage)} alt="Resized" />
-                </div>
-              )}
+
+                  {studentImage && (
+                    <div style={{ marginTop: '10px' }}>
+                      {/* <strong>Resized Image Dimensions:</strong>{' '} */}
+                      {/* {`Width: ${studentImage.width}px, Height: ${studentImage.height}px`} */}
+                      <br />
+                      {/* <strong>Resized Image Size:</strong>  */}
+                      {/* {`${(studentImage.size / 1024).toFixed(2)} KB`} */}
+                      {/* <br /> */}
+                      <img src={URL.createObjectURL(studentImage)} alt="Resized" />
+                    </div>
+                  )}
                 </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>

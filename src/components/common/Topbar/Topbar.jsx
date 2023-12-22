@@ -69,7 +69,7 @@ const Topbar = () => {
     setAnchorElUser(null);
   };
   const handleProfile = () => {
-    navigate("");
+
     navigate("/userview/" + user.id);
     setAnchorElUser(null);
   };
@@ -85,30 +85,30 @@ const Topbar = () => {
     console.log("user", fullname);
   });
   return (
-    <div className='container Top-bar' > 
-    <AppBar position="static" className='bg-white'>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
+    <div className='container Top-bar' >
+      <AppBar position="static" className='bg-white'>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              LOGO
+            </Typography>
 
-          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -180,42 +180,42 @@ const Topbar = () => {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <img src={profilepic} alt="" className="userpic" />
               </IconButton>
-            {/* </Tooltip> */}
+              {/* </Tooltip> */}
               <Menu
-                style={{marginLeft:"6rem"}}
-              sx={{ mt: '45px'  }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+                style={{ marginLeft: "6rem" }}
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
 
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-               {/* <div className='d-flex justify-content-between'> 
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {/* <div className='d-flex justify-content-between'> 
                 <img src={profilepic} alt=""  className='dropdownuserimg'/>
              <span> 
              <MenuItem className='fs-5  ms-4 m-0 p-0 ' > {fullname}</MenuItem>
                <MenuItem className='fs-11 text-center'> {email}</MenuItem>
              </span>
                </div><hr/> */}
-                <div > 
-                <MenuItem className='fs-6' onClick={handleProfile}><AccountCircleIcon className='fs-5'/> &nbsp;Profile </MenuItem>
-                <MenuItem  className='fs-6'onClick={handleLogout}><PowerSettingsNewIcon className='fs-5'/> &nbsp; Logout </MenuItem>
+                <div >
+                  <MenuItem className='fs-6' onClick={handleProfile}><AccountCircleIcon className='fs-5' /> &nbsp;Profile </MenuItem>
+                  <MenuItem className='fs-6' onClick={handleLogout}><PowerSettingsNewIcon className='fs-5' /> &nbsp; Logout </MenuItem>
                 </div>
-            </Menu>
+              </Menu>
             </Box>
-            <p style={{ color: "black", margin:"auto 5px" }} >{fullname }</p>
-        </Toolbar>
-      </Container>
-    </AppBar> </div>
+            <p style={{ color: "black", margin: "auto 5px" }} >{fullname}</p>
+          </Toolbar>
+        </Container>
+      </AppBar> </div>
     // <div
     // className="topbar"
     //   style={{

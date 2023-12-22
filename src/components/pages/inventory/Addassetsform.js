@@ -10,10 +10,16 @@ import "./Addassetsform.css";
 // import Navbaar from './Navbaar';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import $ from 'jquery';
 // import SideBar from '../Sidebar/SideBar';
 
 // import Navbaar from '../Navbar/Navbaar';
 export default function Addassetsform() {
+  // for number scrolling disable
+  $('input[type=number]').on('mousewheel', function (e) {
+    $(e.target).blur();
+  });
+  // 
   // var apiUrl = 'https://demo.teksacademy.com:3000';
   // var apiUrl = "http://localhost:3003";
   // datepicker
@@ -198,8 +204,8 @@ export default function Addassetsform() {
                       value={inpval.assettype} // Use 'value' instead of 'selected' for select input
                       id="profile"
                       required
-                      // onChange={(e) => setprofile(e.target.value)}
-                      // value={profile}
+                    // onChange={(e) => setprofile(e.target.value)}
+                    // value={profile}
                     >
                       <MenuItem value="shirt">Shirt</MenuItem>
                       <MenuItem value="t-shirt">T-Shirt</MenuItem>

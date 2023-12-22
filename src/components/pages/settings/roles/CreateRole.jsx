@@ -473,6 +473,8 @@ const CreateRole = () => {
     }
 
   };
+
+
   return (
     <div className="container mt-3">
       <div className=" createrole mt-3">
@@ -633,16 +635,18 @@ const CreateRole = () => {
                                 color="info"
                               />
                             </TableCell>
-                            <TableCell>
+                            <TableCell className='text-center'>
                               <Switch
+                              className='text-center'
                                 checked={submenu.delete || permission.all}
                                 onChange={() => handleChange(index, subIndex, 'delete')}
                                 inputProps={{ 'aria-label': 'controlled' }}
                                 color="info"
                               />
                             </TableCell>
-                            <TableCell>
+                            <TableCell className='text-center'>
                               <Switch
+                                className='text-center'
                                 checked={submenu.create || permission.all}
                                 onChange={() => handleChange(index, subIndex, 'create')}
                                 inputProps={{ 'aria-label': 'controlled' }}

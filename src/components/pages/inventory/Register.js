@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./Register.css";
+import $ from 'jquery';
 // import Navbaar from './Navbaar';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,6 +15,11 @@ import "react-datepicker/dist/react-datepicker.css";
 
 // import Navbaar from '../Navbar/Navbaar';
 const Register = () => {
+  // for number scrolling disable
+  $('input[type=number]').on('mousewheel', function (e) {
+    $(e.target).blur();
+  });
+  // 
   // var apiUrl = "https://demo.teksacademy.com:3000";
   // var apiUrl = 'http://localhost:3003/';
 
@@ -144,7 +150,7 @@ const Register = () => {
               <div className="row">
                 <div className=" col-lg-6 col-md-6 col-12">
                   <TextField
-                      label={<span className="label-family ">Name</span>}
+                    label={<span className="label-family ">Name</span>}
                     className=" mar w-75"
                     variant="standard"
                     name="name"
@@ -173,7 +179,7 @@ const Register = () => {
                         </div> */}
                 <div className="  col-xl-6 col-lg-6 col-md-6 col-12">
                   <TextField
-                     label={<span className="label-family ">Designation</span>}
+                    label={<span className="label-family ">Designation</span>}
                     className="mar w-75 "
                     variant="standard"
                     name="designation"
@@ -197,27 +203,27 @@ const Register = () => {
                 </div>
                 <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                  <FormControl variant="standard" className="w-75">
-                    <InputLabel>
-                      <span className="label-family">
-                        Branch<span>*</span>
-                      </span>
-                    </InputLabel>
-                    <Select
-                      className="mar "
-                      name="branch"
+                    <FormControl variant="standard" className="w-75">
+                      <InputLabel>
+                        <span className="label-family">
+                          Branch<span>*</span>
+                        </span>
+                      </InputLabel>
+                      <Select
+                        className="mar "
+                        name="branch"
                         id="branch"
                         required
                         selected={inpval.branch}
                         onChange={setdata}
-                     
-                    >
-                      <MenuItem value="">Select Branch</MenuItem>
+
+                      >
+                        <MenuItem value="">Select Branch</MenuItem>
                         <MenuItem value="Ameerpet">Ameerpet</MenuItem>
                         <MenuItem value="hi-tech city">Hi-tech city</MenuItem>
                         <MenuItem value="dilsupnagar">Dilsupnagar</MenuItem>
-                    </Select>
-                  </FormControl>
+                      </Select>
+                    </FormControl>
 
                     {/* <FormControl variant="standard" className="w-75">
                       <InputLabel>
@@ -243,7 +249,7 @@ const Register = () => {
                   <div className="col-xl-6 col-lg-6 col-md-6 col-12">
                     <FormControl variant="standard" className="w-75 ms-sm-4">
                       <InputLabel>
-                      <span  className="label-family ">   Asset Type<span> *</span></span>
+                        <span className="label-family ">   Asset Type<span> *</span></span>
                       </InputLabel>
                       <Select
                         className=" mar  "
@@ -309,7 +315,7 @@ const Register = () => {
                         </div>
                         <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                           <TextField
-                             label={<span className="label-family ">Remarks</span>}
+                            label={<span className="label-family ">Remarks</span>}
                             className=" mar w-75"
                             variant="standard"
                             name="remarks"
@@ -367,7 +373,7 @@ const Register = () => {
                   </div>
                   <div class="mb-3 col-lg-6 col-md-6 col-12">
                     <TextField
-                       label={<span className="label-family ">Asset Code</span>}
+                      label={<span className="label-family ">Asset Code</span>}
                       className=" mar w-75 ms-sm-4"
                       variant="standard"
                       name="assetcode"
@@ -382,7 +388,7 @@ const Register = () => {
 
                 <div class="mb-3 col-lg-6 col-md-6 col-12">
                   <TextField
-                     label={<span className="label-family ">Quantity</span>}
+                    label={<span className="label-family ">Quantity</span>}
                     className=" mar w-75 "
                     variant="standard"
                     name="anonymity"
