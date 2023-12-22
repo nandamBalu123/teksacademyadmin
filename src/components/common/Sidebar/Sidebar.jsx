@@ -296,7 +296,9 @@ const Sidebar = () => {
                 </Item>
               ) : undefined} */}
               {profile == "admin" || profile == "regional manager" || profile == "branch manager" || profile == "counsellor" ? (
-                <div title="Dashboard">
+                <div title="Dashboard"
+
+                >
                   <Item
                     style={{
                       color: colors.grey[100],
@@ -433,7 +435,7 @@ const Sidebar = () => {
                     {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[4].read == true ? (
                       <div title="Requested Certificates">
                         <Item
-                          title="Requested Certificates"
+                          title="Requested Certifica..."
                           to="/requestedcertificates"
                           icon={<ImportContactsIcon />}
                           selected={selected}
@@ -482,30 +484,36 @@ const Sidebar = () => {
                       </div>
                     ) : undefined}
                     {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[2].create == true ? (
-                      <SubMenu
-                        style={{
-                          // color: colors.grey[100],
-                          color: "black",
-                        }}
-                        icon={<SettingsIcon />}
-                        label={"Settings"}
-                        title={"Settings"}
-                      >
-                        <Item
-                          title="Add Assets Type"
-                          to="/assettype"
-                          icon={<InventoryIcon />}
-                          selected={selected}
-                          setSelected={setSelected}
-                        />
-                        <Item
-                          title="Add Vendor"
-                          to="/vendor"
-                          icon={<InventoryIcon />}
-                          selected={selected}
-                          setSelected={setSelected}
-                        />
-                      </SubMenu>
+                      <div title="Settings">
+                        <SubMenu
+                          style={{
+                            // color: colors.grey[100],
+                            color: "black",
+                          }}
+                          icon={<SettingsIcon />}
+                          label={"Settings"}
+                          title={"Settings"}
+                        >
+                          <div title="Add Assets Type">
+                            <Item
+                              title="Add Assets Type"
+                              to="/assettype"
+                              icon={<InventoryIcon />}
+                              selected={selected}
+                              setSelected={setSelected}
+                            />
+                          </div>
+                          <div title="Add Vendor">
+                            <Item
+                              title="Add Vendor"
+                              to="/vendor"
+                              icon={<InventoryIcon />}
+                              selected={selected}
+                              setSelected={setSelected}
+                            />
+                          </div>
+                        </SubMenu>
+                      </div>
                     ) : undefined}
                   </SubMenu>
                 </div>

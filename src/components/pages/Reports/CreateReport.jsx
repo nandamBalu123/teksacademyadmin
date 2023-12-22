@@ -227,7 +227,7 @@ const CreateReport = () => {
                   label={<span className="label-family pb-1">Report's Name</span>}
                   type="text"
                   variant="standard"
-                  className="mar mt-1 w-100"
+                  className="mar w-100"
                   required
                   name="reportName"
                   value={reportForm.reportName}
