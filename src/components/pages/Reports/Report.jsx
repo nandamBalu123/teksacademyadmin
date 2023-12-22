@@ -188,7 +188,7 @@ const Report = () => {
     if (filteredStudents) {
       let organizedData;
       if (reportForm) {
-        if (reportForm.reportType === "Three Dimensional") {
+        if (Object.keys(reportForm.dimensions).length == 3) {
           organizedData = filteredStudents.reduce((acc, student) => {
             const dim1 = student[reportForm.dimensions.dimension1] || "Unknown";
             const dim2 = student[reportForm.dimensions.dimension2] || "Unknown";
@@ -208,7 +208,7 @@ const Report = () => {
             return acc;
           }, {});
         }
-        if (reportForm.reportType === "Two Dimensional") {
+        if (Object.keys(reportForm.dimensions).length == 2) {
           organizedData = filteredStudents.reduce((acc, student) => {
             const dim1 = student[reportForm.dimensions.dimension1] || "Unknown";
             const dim2 = student[reportForm.dimensions.dimension2] || "Unknown";
@@ -225,14 +225,12 @@ const Report = () => {
             return acc;
           }, {});
         }
-        if (reportForm.reportType === "One Dimensional") {
+        if (Object.keys(reportForm.dimensions).length == 1) {
           organizedData = filteredStudents.reduce((acc, student) => {
             const dim1 = student[reportForm.dimensions.dimension1] || "Unknown";
-
             if (!acc[dim1]) {
               acc[dim1] = [];
             }
-
             acc[dim1].push(student);
             return acc;
           }, {});
@@ -242,12 +240,116 @@ const Report = () => {
 
     }
   }, [filteredStudents, reportForm]);
-  // // filter
-  // const [dateRangeType, setDateRangeType] = useState()
-  // const handleDateRangeType = () => {
 
-  // }
+  let [
+    calculations_of_filtered_students,
+    setcalculations_of_filtered_students,
+  ] = useState();
 
+  useEffect(() => {
+
+    if (organizedData) {
+      const calculations_of_filtered_students = {};
+
+
+      Object.entries(organizedData).map(([dim1, students]) => {
+        let noOfEnrollments = students.length
+
+        calculations_of_filtered_students[dim1] = {
+          noOfEnrollments: noOfEnrollments
+        }
+      })
+
+
+
+      setcalculations_of_filtered_students(
+        calculations_of_filtered_students
+      );
+    }
+
+
+
+
+  }, [organizedData])
+
+
+
+
+
+  useEffect(() => {
+    console.log("calculations_of_filtered_students", calculations_of_filtered_students)
+  })
+
+
+
+
+
+  const handleAddDimension = () => {
+    const dimensionsLength = reportForm.dimensions ? Object.keys(reportForm.dimensions).length : 0;
+    if (dimensionsLength < 3) {
+
+      const dimensionKey = `dimension${Object.keys(reportForm.dimensions).length + 1}`;
+      setReportForm((prevForm) => ({
+        ...prevForm,
+        dimensions: {
+          ...prevForm.dimensions,
+          [dimensionKey]: '',
+        },
+      }));
+    }
+    else {
+      alert("More Than 3 Dimensions are not allowed")
+    }
+
+  };
+
+  const handleDeleteDimension = (dimension) => {
+    const newDimensions = { ...reportForm.dimensions };
+    delete newDimensions[dimension];
+
+    const originalObject = newDimensions
+    const transformedObject = {};
+    Object.entries(originalObject).forEach(([key, value], index) => {
+      console.log(key, value, index);
+      let newDimensionName = `dimension${index + 1}`
+      transformedObject[newDimensionName] = value
+    });
+
+
+    setReportForm((prevForm) => ({
+      ...prevForm,
+      dimensions: transformedObject
+    }));
+  };
+  const handleMoveDimension = (dimension, direction) => {
+    const dimensionsArray = Object.keys(reportForm.dimensions);
+    const index = dimensionsArray.indexOf(dimension);
+    const newIndex = direction === 'up' ? index - 1 : index + 1;
+
+    if (newIndex >= 0 && newIndex < dimensionsArray.length) {
+      const newDimensionsArray = [...dimensionsArray];
+      // Swap the dimensions
+      [newDimensionsArray[index], newDimensionsArray[newIndex]] = [newDimensionsArray[newIndex], newDimensionsArray[index]];
+
+      const newInputValues = {};
+      newDimensionsArray.forEach(dimensionKey => {
+        newInputValues[dimensionKey] = reportForm.dimensions[dimensionKey];
+      });
+      const originalObject = newInputValues
+      const transformedObject = {};
+      Object.entries(originalObject).forEach(([key, value], index) => {
+        console.log(key, value, index);
+        let newDimensionName = `dimension${index + 1}`
+        transformedObject[newDimensionName] = value
+      });
+
+
+      setReportForm((prevForm) => ({
+        ...prevForm,
+        dimensions: transformedObject,
+      }));
+    }
+  };
   return (
 
     <div className="container mt-3">
@@ -341,7 +443,7 @@ const Report = () => {
                           {reportForm.dimensions.dimension3}
                         </TableCell>}
                       <TableCell className="table-cell-heading" align="center">
-                        Student Name
+
                       </TableCell>
 
                       {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
@@ -349,7 +451,50 @@ const Report = () => {
                   </TableHead>
                   <TableBody>
 
-                    {organizedData && reportForm.dimensions.dimension1 && !reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
+
+
+
+
+
+                    {
+                      organizedData && reportForm.dimensions.dimension1 && !reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
+                      Object.entries(organizedData).map(([dim1, students]) => {
+                        let studentsCount = students.length
+                        return (
+                          <TableRow key={dim1}>
+                            <TableCell className="Table-cell text-center">
+                              <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
+                            </TableCell>
+                            <TableCell className="Table-cell text-center">
+                              <span style={{ fontSize: "0.8rem" }}>{studentsCount}</span>
+                            </TableCell>
+                          </TableRow>
+                        )
+                      }
+                      )
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    {/* {organizedData && reportForm.dimensions.dimension1 && !reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
                       Object.entries(organizedData).map(([dim1, students]) =>
 
                         students.map((student) => (
@@ -362,7 +507,7 @@ const Report = () => {
                             </TableCell>
                           </TableRow>
                         ))
-                      )}
+                      )} */}
 
                     {reportForm.dimensions.dimension1 && reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
                       Object.entries(organizedData).map(([dim1, dim1Data]) =>
@@ -429,54 +574,92 @@ const Report = () => {
                       <button className="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" >
                         Dimensions
                       </button>
+
                     </h3>
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <FormControl variant="standard" className="w-100">
-                          <InputLabel>
-                            <span className="label-family ">Choose</span>
-                          </InputLabel>
-                          <Select >
-                            <MenuItem value="branch">Branch</MenuItem>
-                            <MenuItem value="country"> Country</MenuItem>
-                          </Select>
-                        </FormControl>
+                        {reportForm.reportType === "Multi Dimensional" && Object.keys(reportForm.dimensions).length < 3 &&
+                          <button type="button" onClick={handleAddDimension}>
+                            Add Dimension
+                          </button>}
+                        {reportForm.reportType === "One Dimensional" &&
+                          <div>
+                            <FormControl variant="standard" className="w-100">
+                              <InputLabel>
+                                <span className="label-family">Choose</span>
+                              </InputLabel>
+                              <Select name="dimensions.dimension1"
+                                value={reportForm.dimensions.dimension1}
+                                onChange={handleInputChange}>
+                                <MenuItem value=""></MenuItem>
+                                <MenuItem value="courses">Course</MenuItem>
+                                <MenuItem value="branch">Branch</MenuItem>
+                                <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                                <MenuItem value="coursepackage">Course Package</MenuItem>
+                                <MenuItem value="modeoftraining">Mode of Training</MenuItem>
+                                <MenuItem value="state">State</MenuItem>
+                                <MenuItem value="educationtype">Education Type</MenuItem>
+                                <MenuItem value="academicyear">Academic Year</MenuItem>
+                                <MenuItem value="leadsource">Lead Source</MenuItem>
+                              </Select>
+                            </FormControl>
+                          </div>}
+                        {reportForm.reportType === "Multi Dimensional" &&
+                          <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
+                            {Object.keys(reportForm.dimensions).map((dimension, index) => (
+                              <div key={dimension}>
+                                <FormControl variant="standard" className="w-100">
+                                  <InputLabel>
+                                    <span className="label-family">Choose</span>
+                                  </InputLabel>
+                                  <Select name={`dimensions.${dimension}`}
+                                    value={reportForm.dimensions[dimension]}
+                                    onChange={handleInputChange}>
+                                    <MenuItem value=""></MenuItem>
+                                    <MenuItem value="courses">Course</MenuItem>
+                                    <MenuItem value="branch">Branch</MenuItem>
+                                    <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                                    <MenuItem value="coursepackage">Course Package</MenuItem>
+                                    <MenuItem value="modeoftraining">Mode Of Training</MenuItem>
+                                    <MenuItem value="state">State</MenuItem>
+                                    <MenuItem value="educationtype">Education Type</MenuItem>
+                                    <MenuItem value="academicyear">Academic Year</MenuItem>
+                                    <MenuItem value="leadsource">Lead Source</MenuItem>
+                                  </Select>
+                                </FormControl>
+                                {Object.keys(reportForm.dimensions).length > 1 &&
+                                  <div>
+                                    <button type="button" onClick={() => handleMoveDimension(dimension, 'up')}>
+                                      Move Up
+                                    </button>
+                                    <button type="button" onClick={() => handleMoveDimension(dimension, 'down')}>
+                                      Move Down
+                                    </button>
+                                    <button type="button" onClick={() => handleDeleteDimension(dimension)}>
+                                      Delete
+                                    </button>
+                                  </div>
+                                }
+
+                              </div>
+
+
+                            ))}
+
+
+                          </div>
+                        }
                       </div>
                     </div>
                   </div>
+
                   <div class="accordion-item">
-                    <h3 class="accordion-header" id="headingTwo">
+                    <h2 class="accordion-header" id=" headingTwo">
                       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Filters
-                      </button>
-                    </h3>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                      <div class="accordion-body">
-                        <h6 > Select Filters</h6>
-
-
-                        <FormControl variant="standard" className="w-100">
-                          <InputLabel>
-                            <span className="label-family "> Add a Filter</span>
-                          </InputLabel>
-                          <Select >
-                            <MenuItem value="branch">Branch</MenuItem>
-                            <MenuItem value="country"> Country</MenuItem>
-
-                          </Select>
-                        </FormControl>
-
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                         Metrics
                       </button>
                     </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         <div className="d-flex justify-content-between">
                           <h6 > All Metrics</h6>
@@ -514,9 +697,37 @@ const Report = () => {
                         }
                       </div>
                     </div>
-                    <hr className="py-2" />
-                    <div className="text-end  pb-3 mx-2"> <button className=" btn btn-outline-color "> Apply Changes</button></div>
+
+
                   </div>
+                  <div class="accordion-item">
+                    <h3 class="accordion-header" id="headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Filters
+                      </button>
+                    </h3>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <h6 > Select Filters</h6>
+
+
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>
+                            <span className="label-family "> Add a Filter</span>
+                          </InputLabel>
+                          <Select >
+                            <MenuItem value="branch">Branch</MenuItem>
+                            <MenuItem value="country"> Country</MenuItem>
+
+                          </Select>
+                        </FormControl>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <hr className="py-2" />
+                  <div className="text-end  pb-3 mx-2"> <button className=" btn btn-outline-color "> Apply Changes</button></div>
                 </div>
               </div>
             </div>
