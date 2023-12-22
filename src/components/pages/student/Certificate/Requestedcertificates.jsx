@@ -97,26 +97,26 @@ const Requestedcertificates = () => {
       const filteredResults = students.filter((item) => {
         const searchCondition = filterCriteria.search
           ? item.name
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.branch
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.registrationnumber
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.courses
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.enquirytakenby
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase())
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.branch
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.registrationnumber
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.courses
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.enquirytakenby
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase())
           : true;
 
         const dateCondition =
           filterCriteria.fromdate && filterCriteria.todate
             ? item.admissiondate >= filterCriteria.fromdate &&
-              item.admissiondate <= filterCriteria.todate
+            item.admissiondate <= filterCriteria.todate
             : true;
 
         const branchCondition = filterCriteria.branch
@@ -132,7 +132,7 @@ const Requestedcertificates = () => {
           : true;
         const certificate_status_condition = filterCriteria.certificate_Status
           ? item.certificate_status[0].certificateStatus ===
-            filterCriteria.certificate_Status
+          filterCriteria.certificate_Status
           : true;
         return (
           searchCondition &&
@@ -594,205 +594,201 @@ const Requestedcertificates = () => {
               </div>
             </div>
           </div>
-      
-            <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
-              <Table stickyHeader aria-label="sticky table" borderAxis="both">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="table-cell-heading text-center">
-                      S. No
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Name
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Course
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Registration ID
-                    </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Course StartDate
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Course EndDate
-                    </TableCell>
+          <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
+            <Table stickyHeader aria-label="sticky table" borderAxis="both">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="table-cell-heading text-center">
+                    S. No
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Name
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Course
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Registration ID
+                  </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Certificate Status
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {records &&
-                    records.map((student, index) => {
-                      const certificate_Status = student.certificate_status;
-                      let courseStartDate = certificate_Status
-                        .map((item) => item.courseStartDate)
-                        .join(", ");
-                      let courseEndDate = certificate_Status
-                        .map((item) => item.courseEndDate)
-                        .join(", ");
-                      const certificateStatus = certificate_Status
-                        .map((item) => item.certificateStatus)
-                        .join(", ");
+                  <TableCell className="table-cell-heading">
+                    Course StartDate
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Course EndDate
+                  </TableCell>
 
-                      let formattedcourseStartDate = new Date(courseStartDate);
-                      const courseStartDateday =
-                        formattedcourseStartDate.getUTCDate();
-                      const courseStartDatemonthIndex =
-                        formattedcourseStartDate.getUTCMonth();
-                      const courseStartDateyear =
-                        formattedcourseStartDate.getUTCFullYear();
-                      //courseEndDate
-                      let formattedcourseEndDate = new Date(courseEndDate);
-                      const courseEndDateday =
-                        formattedcourseEndDate.getUTCDate();
-                      const courseEndDatemonthIndex =
-                        formattedcourseEndDate.getUTCMonth();
-                      const courseEndDateyear =
-                        formattedcourseEndDate.getUTCFullYear();
-                      const monthAbbreviations = [
-                        "Jan",
-                        "Feb",
-                        "Mar",
-                        "Apr",
-                        "May",
-                        "Jun",
-                        "Jul",
-                        "Aug",
-                        "Sep",
-                        "Oct",
-                        "Nov",
-                        "Dec",
-                      ];
+                  <TableCell className="table-cell-heading">
+                    Certificate Status
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {records &&
+                  records.map((student, index) => {
+                    const certificate_Status = student.certificate_status;
+                    let courseStartDate = certificate_Status
+                      .map((item) => item.courseStartDate)
+                      .join(", ");
+                    let courseEndDate = certificate_Status
+                      .map((item) => item.courseEndDate)
+                      .join(", ");
+                    const certificateStatus = certificate_Status
+                      .map((item) => item.certificateStatus)
+                      .join(", ");
 
-                      // Formatting the date
-                      formattedcourseStartDate = `${
-                        courseStartDateday < 10 ? "0" : ""
-                      }${courseStartDateday}-${
-                        monthAbbreviations[courseStartDatemonthIndex]
+                    let formattedcourseStartDate = new Date(courseStartDate);
+                    const courseStartDateday =
+                      formattedcourseStartDate.getUTCDate();
+                    const courseStartDatemonthIndex =
+                      formattedcourseStartDate.getUTCMonth();
+                    const courseStartDateyear =
+                      formattedcourseStartDate.getUTCFullYear();
+                    //courseEndDate
+                    let formattedcourseEndDate = new Date(courseEndDate);
+                    const courseEndDateday =
+                      formattedcourseEndDate.getUTCDate();
+                    const courseEndDatemonthIndex =
+                      formattedcourseEndDate.getUTCMonth();
+                    const courseEndDateyear =
+                      formattedcourseEndDate.getUTCFullYear();
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
+
+                    // Formatting the date
+                    formattedcourseStartDate = `${courseStartDateday < 10 ? "0" : ""
+                      }${courseStartDateday}-${monthAbbreviations[courseStartDatemonthIndex]
                       }-${courseStartDateyear}`;
 
-                      formattedcourseEndDate = `${
-                        courseEndDateday < 10 ? "0" : ""
-                      }${courseEndDateday}-${
-                        monthAbbreviations[courseEndDatemonthIndex]
+                    formattedcourseEndDate = `${courseEndDateday < 10 ? "0" : ""
+                      }${courseEndDateday}-${monthAbbreviations[courseEndDatemonthIndex]
                       }-${courseEndDateyear}`;
-                      return (
-                        <TableRow>
-                          <TableCell className="Table-cell text-center">
-                            {index + 1}
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={student.name}
-                              style={{
-                                width: "5rem",
+                    return (
+                      <TableRow>
+                        <TableCell className="Table-cell text-center">
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={student.name}
+                            style={{
+                              width: "5rem",
 
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {student.name}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={student.courses}
-                              style={{
-                                width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {student.name}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={student.courses}
+                            style={{
+                              width: "6rem",
 
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {student.courses}
-                            </span>
-                          </TableCell>{" "}
-                          <TableCell className="Table-cell">
-                            <span
-                              title={student.registrationnumber}
-                              // style={{
-                              //   width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {student.courses}
+                          </span>
+                        </TableCell>{" "}
+                        <TableCell className="Table-cell">
+                          <span
+                            title={student.registrationnumber}
+                            style={{
+                              width: "6rem",
 
-                              //   whiteSpace: "nowrap",
-                              //   overflow: "hidden",
-                              //   textOverflow: "ellipsis",
-                              //   fontSize: "0.8rem",
-                              //   display: "block",
-                              // }}
-                            >
-                              {student.registrationnumber}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={formattedcourseStartDate}
-                              // style={{
-                              //   width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {student.registrationnumber}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={formattedcourseStartDate}
+                            style={{
+                              width: "6rem",
 
-                              //   whiteSpace: "nowrap",
-                              //   overflow: "hidden",
-                              //   textOverflow: "ellipsis",
-                              //   fontSize: "0.8rem",
-                              //   display: "block",
-                              // }}
-                            >
-                              {formattedcourseStartDate}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell ">
-                            <span
-                              title={courseEndDate}
-                              // style={{
-                              //   width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {formattedcourseStartDate}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell ">
+                          <span
+                            title={courseEndDate}
+                            style={{
+                              width: "6rem",
 
-                              //   whiteSpace: "nowrap",
-                              //   overflow: "hidden",
-                              //   textOverflow: "ellipsis",
-                              //   fontSize: "0.8rem",
-                              //   display: "block",
-                              // }}
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {formattedcourseEndDate}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          {certificateStatus === "request Submitted" && (
+                            <button
+                              className="btn btn-warning center m-0 px-1"
+                              onClick={(e) =>
+                                handleRequest(
+                                  student.id,
+                                  courseStartDate,
+                                  courseEndDate
+                                )
+                              }
                             >
-                              {formattedcourseEndDate}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            {certificateStatus === "request Submitted" && (
-                              <button
-                                className="btn btn-warning center m-0 px-1"
-                                onClick={(e) =>
-                                  handleRequest(
-                                    student.id,
-                                    courseStartDate,
-                                    courseEndDate
-                                  )
-                                }
-                              >
-                                Issue Certificate
-                              </button>
-                            )}
-                            {certificateStatus === "issued" && (
-                              <button className="btn  btn-success center m-0 px-1">
-                                Certificate Issued
-                              </button>
-                            )}
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-         
+                              Issue Certificate
+                            </button>
+                          )}
+                          {certificateStatus === "issued" && (
+                            <button className="btn  btn-success center m-0 px-1">
+                              Certificate Issued
+                            </button>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
           <div
             style={{ display: "flex", justifyContent: "center" }}
             className="mt-3 mb-3"

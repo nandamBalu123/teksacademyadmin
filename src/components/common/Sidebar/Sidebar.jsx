@@ -48,7 +48,7 @@ import { useRoleContext } from "../../../hooks/useRoleContext";
 // let role = localStorage.getItem(role);
 
 const Item = ({ title, to, icon, selected, setSelected, tooltip }) => {
-  
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -84,33 +84,33 @@ const Sidebar = () => {
     profile = user.profile;
     console.log("fulname", fullname, profile);
   }
-  
 
-  const {roles} = useRoleContext();
-  
 
-//   let filteredroles;
-//   useEffect(() => {
-//     console.log("profile",profile)
-//     if(roles){
+  const { roles } = useRoleContext();
 
-//       for(let i=0;i<roles.length;i++){
-        
-//         if(roles[i].role==profile){
-//           console.log("roles",roles[i].role)
 
-//           filteredroles=roles[i]
-//         }
-//       }
-    
-//     }
-// }, [roles, profile])
-// useEffect(()=>{
-//   console.log("filteredroles", filteredroles.id)
+  //   let filteredroles;
+  //   useEffect(() => {
+  //     console.log("profile",profile)
+  //     if(roles){
 
-// })
+  //       for(let i=0;i<roles.length;i++){
 
-const [filteredroles, setfilteredroles] = useState();
+  //         if(roles[i].role==profile){
+  //           console.log("roles",roles[i].role)
+
+  //           filteredroles=roles[i]
+  //         }
+  //       }
+
+  //     }
+  // }, [roles, profile])
+  // useEffect(()=>{
+  //   console.log("filteredroles", filteredroles.id)
+
+  // })
+
+  const [filteredroles, setfilteredroles] = useState();
 
   useEffect(() => {
     console.log("profile", profile);
@@ -124,7 +124,7 @@ const [filteredroles, setfilteredroles] = useState();
       }
     }
   }, [roles]);
-  {filteredroles && console.log("test1", filteredroles)}
+  { filteredroles && console.log("test1", filteredroles) }
   // useEffect(() => {
   //   if (filteredroles) {
   //     console.log("filteredroles", filteredroles.id);
@@ -134,7 +134,7 @@ const [filteredroles, setfilteredroles] = useState();
     console.log("filteredroles", filteredroles);
   }
 
-  
+
   // let role;
   // let user;
   // let username;
@@ -320,7 +320,7 @@ const [filteredroles, setfilteredroles] = useState();
                 style={{ color: "black" }}
               /> */}
 
-              
+
               {/* user management start */}
               {filteredroles && profile == filteredroles.role && filteredroles.permissions[0].all == true ? (
                 <div>
@@ -334,26 +334,26 @@ const [filteredroles, setfilteredroles] = useState();
                       title={"User Management"}
                     >
                       {filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[0].create == true ? (
-                      <div title="Create user">
-                        <Item
-                          title="Create User"
-                          to="/createuser"
-                          icon={<PersonAddIcon />}
-                          selected={selected}
-                          setSelected={setSelected}
-                        />
-                      </div>
+                        <div title="Create user">
+                          <Item
+                            title="Create User"
+                            to="/createuser"
+                            icon={<PersonAddIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          />
+                        </div>
                       ) : undefined}
                       {filteredroles && profile == filteredroles.role && filteredroles.permissions[0].submenus[1].read == true ? (
-                      <div title="User Details">
-                        <Item
-                          title="User Details"
-                          to="/usersdata"
-                          icon={<GroupIcon />}
-                          selected={selected}
-                          setSelected={setSelected}
-                        />
-                      </div>
+                        <div title="User Details">
+                          <Item
+                            title="User Details"
+                            to="/usersdata"
+                            icon={<GroupIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          />
+                        </div>
                       ) : undefined}
                       {/* <div title="Role Access">
                         <Item
@@ -372,7 +372,7 @@ const [filteredroles, setfilteredroles] = useState();
               {/* user management end */}
 
 
-            {/* student management start */}
+              {/* student management start */}
               {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].all == true ? (
                 <SubMenu
                   style={{
@@ -383,42 +383,42 @@ const [filteredroles, setfilteredroles] = useState();
                   title={"Student Managem..."}
                 >
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[0].create == true ? (
-                  <Item
-                    title="Registration Form"
-                    to="/registrationform"
-                    icon={<FeedIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
+                    <Item
+                      title="Registration Form"
+                      to="/registrationform"
+                      icon={<FeedIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
                   ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[1].read == true ? (
-                  <Item
-                    className="dashboard-item"
-                    title="Enrolled Students"
-                    to="/studentdata"
-                    icon={<PeopleOutlineIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      className="dashboard-item"
+                      title="Enrolled Students"
+                      to="/studentdata"
+                      icon={<PeopleOutlineIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[2].read == true ? (
-                  <Item
-                    title="Fee Details"
-                    to="/feedetails"
-                    icon={<CurrencyRupeeIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Fee Details"
+                      to="/feedetails"
+                      icon={<CurrencyRupeeIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
-                  <Item
-                    title="Certificate"
-                    to="/certificate"
-                    icon={<WorkspacePremiumIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Certificate"
+                      to="/certificate"
+                      icon={<WorkspacePremiumIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[4].read == true ? (
                     <Item
                       title="Requested Certificates"
@@ -427,10 +427,10 @@ const [filteredroles, setfilteredroles] = useState();
                       selected={selected}
                       setSelected={setSelected}
                     />
-                    ) : undefined }
+                  ) : undefined}
                 </SubMenu>
               ) : undefined}
-            {/* student management end */}
+              {/* student management end */}
 
               <hr />
               {/* inventory start */}
@@ -446,54 +446,54 @@ const [filteredroles, setfilteredroles] = useState();
                   title={"Inventory"}
                 >
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[0].create == true ? (
-                  <Item
-                    title="Add Assets"
-                    to="/addassets"
-                    icon={<InventoryIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Add Assets"
+                      to="/addassets"
+                      icon={<InventoryIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[1].create == true ? (
-                  <Item
-                    title="Assign Assets"
-                    to="/assignassets"
-                    icon={<AssignmentTurnedInIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Assign Assets"
+                      to="/assignassets"
+                      icon={<AssignmentTurnedInIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[2].create == true ? (
-                  <SubMenu
-                    style={{
-                      // color: colors.grey[100],
-                      color: "black",
-                    }}
-                    icon={<SettingsIcon />}
-                    label={"Settings"}
-                    title={"Settings"}
-                  >
-                    <Item
-                      title="Add Assets Type"
-                      to="/assettype"
-                      icon={<InventoryIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                    <Item
-                      title="Add Vendor"
-                      to="/vendor"
-                      icon={<InventoryIcon />}
-                      selected={selected}
-                      setSelected={setSelected}
-                    />
-                  </SubMenu>
-                  ) : undefined }
+                    <SubMenu
+                      style={{
+                        // color: colors.grey[100],
+                        color: "black",
+                      }}
+                      icon={<SettingsIcon />}
+                      label={"Settings"}
+                      title={"Settings"}
+                    >
+                      <Item
+                        title="Add Assets Type"
+                        to="/assettype"
+                        icon={<InventoryIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                      <Item
+                        title="Add Vendor"
+                        to="/vendor"
+                        icon={<InventoryIcon />}
+                        selected={selected}
+                        setSelected={setSelected}
+                      />
+                    </SubMenu>
+                  ) : undefined}
                 </SubMenu>
               ) : undefined}
               {/* inventory start */}
               <hr />
-              
+
               {/* leads start */}
               {filteredroles && profile == filteredroles.role && filteredroles.permissions[3].all == true ? (
                 <SubMenu
@@ -575,14 +575,14 @@ const [filteredroles, setfilteredroles] = useState();
                   title={"Reports"}
                 >
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[4].submenus[0].create == true ? (
-                  <Item
-                    title="Reports Data"
-                    to="/reports"
-                    icon={<StackedBarChartIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Reports Data"
+                      to="/reports"
+                      icon={<StackedBarChartIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                 </SubMenu>
               ) : undefined}
               <hr />
@@ -598,62 +598,71 @@ const [filteredroles, setfilteredroles] = useState();
                   title={"Settings"}
                 >
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
-                  <Item
-                    title="Roles"
-                    to="/roles"
-                    icon={<ManageAccountsIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Roles"
+                      to="/roles"
+                      icon={<ManageAccountsIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
-                  <Item
-                    title="Branch"
-                    to="/branch"
-                    icon={<PlaceIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Branch"
+                      to="/branch"
+                      icon={<PlaceIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
-                  <Item
-                    title="Departments"
-                    to="/departments"
-                    icon={<SafetyDividerIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Departments"
+                      to="/departments"
+                      icon={<SafetyDividerIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
-                  <Item
-                    title="Lead Source"
-                    to="/leadsource"
-                    icon={<SourceIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Lead Source"
+                      to="/leadsource"
+                      icon={<SourceIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
-                  <Item
-                    title="Courses"
-                    to="/courses"
-                    icon={<LaptopChromebookIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Courses"
+                      to="/courses"
+                      icon={<LaptopChromebookIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                   {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].submenus[1].create == true ? (
-                  <Item
-                    title="Course Package"
-                    to="/coursepackage"
-                    icon={<CollectionsBookmarkIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  ) : undefined }
+                    <Item
+                      title="Course Package"
+                      to="/coursepackage"
+                      icon={<CollectionsBookmarkIcon />}
+                      selected={selected}
+                      setSelected={setSelected}
+                    />
+                  ) : undefined}
                 </SubMenu>
               ) : undefined}
               <hr />
+              {filteredroles && profile == filteredroles.role && filteredroles.permissions[5].all == true ? (
+                <Item
+                  title="Settings"
+                  to="/setting"
+                  icon={<SettingsIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              ) : undefined}
             </Box>
           </Menu>
         </ProSidebar>
