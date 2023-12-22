@@ -2,8 +2,11 @@ import React from 'react'
 import './Settings.css';
 import Card from "@mui/material/Card";
 import { NavLink, Navigate } from "react-router-dom";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 
 const Settings = () => {
+    const { user } = useAuthContext();
+
     return (
         <div className='contianer mt-3'>
             <div className='allsettings py-3'>
@@ -19,18 +22,18 @@ const Settings = () => {
                             </NavLink>
                         </Card>
                     </div>
-                    {/* <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
+                    <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
                         <Card
                             className="cardcolor"
 
                         >
-                            <NavLink to="" className="text-center pt-3">
+                            <NavLink to={`/userview/${user.id}`} className="text-center pt-3">
                                 <p className="text-center pt-3 text-light" >
                                     Profile
                                 </p>
                             </NavLink>
                         </Card>
-                    </div> */}
+                    </div>
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
                         <Card
                             className="cardcolor"

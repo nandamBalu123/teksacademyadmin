@@ -170,7 +170,7 @@ const RoleAccess = () => {
       <div className='access'>
 
 
-        <h5 className='my-4'> Permissions</h5>
+        <h5 className='my-4 ms-2'> Permissions</h5>
 
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
@@ -202,49 +202,57 @@ const RoleAccess = () => {
                     <TableCell style={{ cursor: "pointer" }} className="Table-cell" onClick={() => handlePermissionClick(permission.feature)}>
                       {permission.feature}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className='text-center'>
                       <Switch
                         checked={permission.all}
+                        className='text-center'
                         onChange={() => handleChange(index, null, 'all')}
                         inputProps={{ 'aria-label': 'controlled' }}
                         color="info"
                       />
                     </TableCell>
-
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell style={{ borderRight: "1px solid #e3eee3" }}></TableCell>
                   </TableRow>
                   {selectedPermission === permission.feature &&
                     permission.submenus.map((submenu, subIndex) => (
                       <TableRow key={subIndex}>
-                        <TableCell className="Table-cell">{submenu.subfeature}</TableCell>
+                        <TableCell className="Table-cell text-center">{submenu.subfeature}</TableCell>
                         <TableCell>
 
                         </TableCell>
-                        <TableCell>
+                        <TableCell className='text-center'>
                           <Switch
+                            className='text-center'
                             checked={submenu.read || permission.all}  // Updated line here
                             onChange={() => handleChange(index, subIndex, 'read')}
                             inputProps={{ 'aria-label': 'controlled' }}
                             color="info"
                           />
                         </TableCell>
-                        <TableCell>
+                        <TableCell className='text-center'>
                           <Switch
+                            className='text-center'
                             checked={submenu.update || permission.all}
                             onChange={() => handleChange(index, subIndex, 'update')}
                             inputProps={{ 'aria-label': 'controlled' }}
                             color="info"
                           />
                         </TableCell>
-                        <TableCell>
+                        <TableCell className='text-center'>
                           <Switch
+                            className='text-center'
                             checked={submenu.delete || permission.all}
                             onChange={() => handleChange(index, subIndex, 'delete')}
                             inputProps={{ 'aria-label': 'controlled' }}
                             color="info"
                           />
                         </TableCell>
-                        <TableCell>
+                        <TableCell className='text-center'>
                           <Switch
+                            className='text-center'
                             checked={submenu.create || permission.all}
                             onChange={() => handleChange(index, subIndex, 'create')}
                             inputProps={{ 'aria-label': 'controlled' }}

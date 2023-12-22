@@ -199,7 +199,7 @@ const Sidebar = () => {
             backgroundColor: "transparent !important",
           },
           "& .pro-inner-item": {
-            padding: "5px 14px 5px 20px !important",
+            padding: "5px 14px 5px 22px !important",
             fontSize: "14px !important",
             fontWeight: "400 !important",
           },
