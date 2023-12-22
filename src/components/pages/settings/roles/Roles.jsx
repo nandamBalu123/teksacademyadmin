@@ -24,25 +24,77 @@ const Roles = () => {
     navigate("/createrole");
   };
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
+  // const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  //   [`&.${tableCellClasses.head}`]: {
+  //     backgroundColor: theme.palette.common.black,
+  //     color: theme.palette.common.white,
+  //   },
+  //   [`&.${tableCellClasses.body}`]: {
+  //     fontSize: 14,
+  //   },
+  // }));
 
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
+  // const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  //   "&:nth-of-type(odd)": {
+  //     backgroundColor: theme.palette.action.hover,
+  //   },
+  //   // hide last border
+  //   "&:last-child td, &:last-child th": {
+  //     border: 0,
+  //   },
+  // }));
+
+
+  // for filters
+
+  const [filteredData, setFilteredData] = useState(roles);
+  const [filterCriteria, setFilterCriteria] = useState({
+    role: "",
+    description: "",
+    search: "", // Add the search property
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFilterCriteria({ ...filterCriteria, [name]: value })
+  }
+
+  useEffect(() => {
+    const filteredResults = roles.filter((item) => {
+      const searchCondition = filterCriteria.search
+        ? item.role.toLowerCase().includes(filterCriteria.search.toLowerCase()) ||
+        item.description.toLowerCase().includes(filterCriteria.search.toLowerCase())
+        : true;
+
+      return (
+        searchCondition
+      );
+    });
+    setFilteredData(filteredResults);
+  }, [filterCriteria, roles]);
+  // useEffect(() => {
+  //   const filteredResults = roles.filter((item) => {
+  //     const searchCondition = filterCriteria.search
+  //       ? item.role
+  //         .toLowerCase()
+  //         .includes(filterCriteria.search.toLowerCase()) ||
+  //       item.description
+  //         .toLowerCase()
+  //         .includes(filterCriteria.search.toLowerCase())
+  //       : true;
+  //     return (
+  //       searchCondition
+  //     );
+  //   });
+  //   setFilteredData(filteredResults);
+  // }, [filterCriteria, roles]);
+
+  // const filterreset = () => {
+  //   setFilterCriteria({
+  //     name: "",
+  //     description: ""
+  //   })
+  // }
   return (
     <div className="container mt-3">
       <div className="roles">
@@ -56,6 +108,26 @@ const Roles = () => {
             Add Role
           </button>
         </div>
+        <input
+          type="text"
+          className="input-field"
+          placeholder="Search Here..."
+          autoComplete="off"
+          style={{
+            height: "45px",
+            width: "100%",
+            outline: "none",
+            borderTop: "none",
+            borderBottom: "1.5px solid black",
+            background: "none",
+            border: "hidden",
+            borderRadius: "5px",
+          }}
+          name="search"
+          value={filterCriteria.search}
+          onChange={handleInputChange}
+        />
+        <hr />
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead>
@@ -85,7 +157,7 @@ const Roles = () => {
             <TableBody className="Table-cell">
               {Array.isArray(roles) && roles.length > 0 ? (
                 roles.map((item, index) => (
-                  
+
                   <TableRow key={item.id}  >
                     <TableCell className="Table-cell ">
                       <span style={{ fontSize: "0.8rem" }}> {index + 1}</span>
@@ -111,15 +183,15 @@ const Roles = () => {
                     </TableCell>
                     <TableCell className="Table-cell ">
                       <Link to={`/roleaccess/${item.id}`}>
-                      <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
-                            </Link>
+                        <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      </Link>
                       {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                       {/* <EditIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                       <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
                     </TableCell>
                     {/* <TableCell className=" Table-cell text-center"> Custom</TableCell> */}
                   </TableRow>
-                  
+
                 ))
               ) : (
                 <TableRow>

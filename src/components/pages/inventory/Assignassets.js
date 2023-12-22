@@ -17,8 +17,10 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Card from "@mui/material/Card";
+import $ from 'jquery';
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
+
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.blue,
 
@@ -40,6 +42,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 const Assignassets = () => {
+  // for number scrolling disable
+  $('input[type=number]').on('mousewheel', function (e) {
+    $(e.target).blur();
+  });
+  // 
   // var apiUrl = "https://demo.teksacademy.com:3000";
   // var apiUrl = 'http://localhost:3003/';
 
@@ -486,14 +493,14 @@ const Assignassets = () => {
                 //   boxShadow: "3px 3px 6px  gray",
                 // }}
                 onClick={(e) =>
-                  setDisplayassets((prev)=>({
+                  setDisplayassets((prev) => ({
                     allbranches: !prev.allbranches,
                     secundrabad: false,
                     hitechcity: false,
                     ameerpet: false,
                     dilsukhnagar: false,
                     kukatpally: false,
-                    }))
+                  }))
                 }
               >
                 <p className="text-center pt-3">All Branches</p>
@@ -510,7 +517,7 @@ const Assignassets = () => {
                 //   boxShadow: "3px 3px 6px  gray",
                 // }}
                 onClick={(e) =>
-                  setDisplayassets((prev)=>({
+                  setDisplayassets((prev) => ({
                     allbranches: false,
                     secundrabad: !prev.secunderabad,
                     hitechcity: false,
@@ -535,7 +542,7 @@ const Assignassets = () => {
                 //   boxShadow: "3px 3px 6px  gray",
                 // }}
                 onClick={(e) =>
-                  setDisplayassets((prev)=>({
+                  setDisplayassets((prev) => ({
                     allbranches: false,
                     secundrabad: false,
                     hitechcity: !prev.hitechcity,
@@ -560,7 +567,7 @@ const Assignassets = () => {
                 //   boxShadow: "3px 3px 6px  gray",
                 // }}
                 onClick={(e) =>
-                  setDisplayassets((prev)=>({
+                  setDisplayassets((prev) => ({
                     allbranches: false,
                     secundrabad: false,
                     hitechcity: false,
@@ -584,7 +591,7 @@ const Assignassets = () => {
                 //   boxShadow: "3px 3px 6px  gray",
                 // }}
                 onClick={(e) =>
-                  setDisplayassets((prev)=>({
+                  setDisplayassets((prev) => ({
                     allbranches: false,
                     secundrabad: false,
                     hitechcity: false,
@@ -607,14 +614,14 @@ const Assignassets = () => {
                 //   color: "white",
                 //   boxShadow: "3px 3px 6px  gray",
                 // }}
-                onClick={ (e)=> setDisplayassets((prev)=>({
-                allbranches:false,
-                  secundrabad:false,
-                  hitechcity:false,
-                  ameerpet:false,
-                  dilsukhnagar:false,
-                  kukatpally:!prev.kukatpally
-                 }))}
+                onClick={(e) => setDisplayassets((prev) => ({
+                  allbranches: false,
+                  secundrabad: false,
+                  hitechcity: false,
+                  ameerpet: false,
+                  dilsukhnagar: false,
+                  kukatpally: !prev.kukatpally
+                }))}
               >
                 <p className="text-center pt-3">kukatpally</p>
               </Card>
@@ -626,13 +633,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#fd746e",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#fd746e",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total Laptops: {getLaptopCount()}
@@ -642,13 +649,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#7fa1e4",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total T-shirt: {getTshirtCount()}
@@ -658,13 +665,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#F4ae5b",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#F4ae5b",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total Shirt:{getShirtCount()}
@@ -674,13 +681,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#5ec394",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#5ec394",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total Charger:{getChargerCount()}
@@ -689,14 +696,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                 className="sub-cardcolor"
-                  // style={{
-                  //   background: "#f3a9b2",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                  className="sub-cardcolor"
+                // style={{
+                //   background: "#f3a9b2",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total Mouse:{getMouseCount()}
@@ -706,13 +713,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#a6ebdc",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#a6ebdc",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total Bags:{getStudentsBags()}
@@ -727,14 +734,14 @@ const Assignassets = () => {
               <h5 className="underline mb-3 pt-3 text-center"> Hi-Tech City Data</h5>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#fd746e",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                  className="sub-cardcolor"
+                // style={{
+                //   background: "#fd746e",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total laptops: {hcgetLaptopCount()}
@@ -744,13 +751,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#7fa1e4",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total t-shirt: {hcgetTshirtCount()}
@@ -759,14 +766,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#F4ae5b",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                  className="sub-cardcolor"
+                // style={{
+                //   background: "#F4ae5b",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total shirt: {hcgetShirtCount()}
@@ -776,13 +783,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#5ec394",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#5ec394",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total charger: {hcgetChargerCount()}
@@ -792,13 +799,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#f3a9b2",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#f3a9b2",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total mouse: {hcgetMouseCount()}
@@ -807,14 +814,14 @@ const Assignassets = () => {
               </div>
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
-                className="sub-cardcolor"
-                  // style={{
-                  //   background: "#a6ebdc",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                  className="sub-cardcolor"
+                // style={{
+                //   background: "#a6ebdc",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total bags: {hcgetStudentsBags()}
@@ -830,13 +837,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#7598b8",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#fff",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#7598b8",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#fff",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total laptops: {apgetLaptopCount()}
@@ -846,13 +853,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#7fa1e4",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total t-shirt: {apgetTshirtCount()}
@@ -862,13 +869,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#F4ae5b",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#F4ae5b",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total shirt: {apgetShirtCount()}
@@ -878,13 +885,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#5ec394",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#5ec394",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total charger: {apgetChargerCount()}
@@ -894,13 +901,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#f3a9b2",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#f3a9b2",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total mouse: {apgetMouseCount()}
@@ -910,13 +917,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#a6ebdc",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#a6ebdc",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total bags: {apgetStudentsBags()}
@@ -932,13 +939,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#fd746e",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#fd746e",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total laptops: {dngetLaptopCount()}
@@ -948,13 +955,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#7fa1e4",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#7fa1e4",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total t-shirt: {dngetTshirtCount()}
@@ -964,13 +971,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#F4ae5b",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#F4ae5b",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total shirt: {dngetShirtCount()}
@@ -980,13 +987,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#5ec394",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#5ec394",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total charger: {dngetChargerCount()}
@@ -996,13 +1003,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#f3a9b2",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#f3a9b2",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total mouse: {dngetMouseCount()}
@@ -1012,13 +1019,13 @@ const Assignassets = () => {
               <div className="col-12 col-md-4 col-lg-2 col-xl-2 mb-2">
                 <Card
                   className="sub-cardcolor"
-                  // style={{
-                  //   background: "#a6ebdc",
-                  //   textAlign: "center",
-                  //   borderRadius: "8px",
-                  //   color: "#000",
-                  //   boxShadow: "3px 3px 6px  gray",
-                  // }}
+                // style={{
+                //   background: "#a6ebdc",
+                //   textAlign: "center",
+                //   borderRadius: "8px",
+                //   color: "#000",
+                //   boxShadow: "3px 3px 6px  gray",
+                // }}
                 >
                   <p className="pt-3 text-center">
                     Total bags: {dngetStudentsBags()}
@@ -1027,178 +1034,177 @@ const Assignassets = () => {
               </div>{" "}
             </div>
           )}
-          
-            <TableContainer sx={{ maxHeight: 440 }} component={Paper} className="mt-3">
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="table-cell-heading">
-                      ID{" "}
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Name{" "}
-                    </TableCell>
-                    {/* <TableCell className="table-cell-heading">Vender Name </TableCell> */}
-                    <TableCell className="table-cell-heading">
-                      {" "}
-                      Branch
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      {" "}
-                      Asset Type
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      {" "}
-                      Brand Name{" "}
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Asset Code{" "}
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Issue Date{" "}
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      {" "}
-                      Quantity
-                    </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Actions{" "}
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {getassigndata.map((element, id) => {
-                    let AssignDate = new Date(element.issueddate);
-                    const day = AssignDate.getUTCDate();
-                    const monthIndex = AssignDate.getUTCMonth();
-                    const year = AssignDate.getUTCFullYear();
+          <TableContainer sx={{ maxHeight: 440 }} component={Paper} className="mt-3">
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="table-cell-heading">
+                    ID{" "}
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Name{" "}
+                  </TableCell>
+                  {/* <TableCell className="table-cell-heading">Vender Name </TableCell> */}
+                  <TableCell className="table-cell-heading">
+                    {" "}
+                    Branch
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    {" "}
+                    Asset Type
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    {" "}
+                    Brand Name{" "}
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Asset Code{" "}
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Issue Date{" "}
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    {" "}
+                    Quantity
+                  </TableCell>
 
-                    const monthAbbreviations = [
-                      "Jan",
-                      "Feb",
-                      "Mar",
-                      "Apr",
-                      "May",
-                      "Jun",
-                      "Jul",
-                      "Aug",
-                      "Sep",
-                      "Oct",
-                      "Nov",
-                      "Dec",
-                    ];
+                  <TableCell className="table-cell-heading">
+                    Actions{" "}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {getassigndata.map((element, id) => {
+                  let AssignDate = new Date(element.issueddate);
+                  const day = AssignDate.getUTCDate();
+                  const monthIndex = AssignDate.getUTCMonth();
+                  const year = AssignDate.getUTCFullYear();
 
-                    // Formatting the date
-                    AssignDate = `${day < 10 ? "0" : ""}${day}-${
-                      monthAbbreviations[monthIndex]
+                  const monthAbbreviations = [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                  ];
+
+                  // Formatting the date
+                  AssignDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
                     }-${year}`;
 
-                    return (
-                      <React.Fragment>
-                        <TableRow key={id}>
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              {id + 1}
-                            </span>
-                          </TableCell>
-                          {/* <td>{element.name}</td> */}
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              {element.name}
-                            </span>
-                          </TableCell>
-                          {/* <TableCell  className="Table-cell">{element.vendername}</TableCell> */}
-                          {/* <td>{element.designation}</td> */}
-                          {/* <td>{element.branch}</td> */}
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              {element.branch}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              {element.assettype}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              {element.brandname}
-                            </span>
-                          </TableCell>
-                          {/* <td>{element.remarks}</td> */}
-                          {/* <td>{element.issueddate}</td> */}
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              {element.assetcode}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              {AssignDate}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              {element.anonymity}
-                            </span>
-                          </TableCell>
+                  return (
+                    <React.Fragment>
+                      <TableRow key={id}>
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            {id + 1}
+                          </span>
+                        </TableCell>
+                        {/* <td>{element.name}</td> */}
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            {element.name}
+                          </span>
+                        </TableCell>
+                        {/* <TableCell  className="Table-cell">{element.vendername}</TableCell> */}
+                        {/* <td>{element.designation}</td> */}
+                        {/* <td>{element.branch}</td> */}
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            {element.branch}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            {element.assettype}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            {element.brandname}
+                          </span>
+                        </TableCell>
+                        {/* <td>{element.remarks}</td> */}
+                        {/* <td>{element.issueddate}</td> */}
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            {element.assetcode}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            {AssignDate}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            {element.anonymity}
+                          </span>
+                        </TableCell>
 
-                          <TableCell className="Table-cell">
-                            <NavLink to={`view/${element.id}`}>
-                              <RemoveRedEyeIcon className="icon-color" />
-                            </NavLink>
-                            <NavLink to={`returnassets/${element.id}`}>
-                              <ArrowDownwardIcon className="icon-color" />
-                            </NavLink>
-                            <NavLink to={`edit/${element.id}`}>
-                              <CreateIcon className="icon-color" />
-                            </NavLink>
-                            <DeleteOutlineIcon
-                              onClick={() => deleteuser(element.id)}
-                              className="text-danger ms-2"
-                            />
-                          </TableCell>
-                        </TableRow>
-                      </React.Fragment>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-    
+                        <TableCell className="Table-cell">
+                          <NavLink to={`view/${element.id}`}>
+                            <RemoveRedEyeIcon className="icon-color" />
+                          </NavLink>
+                          <NavLink to={`returnassets/${element.id}`}>
+                            <ArrowDownwardIcon className="icon-color" />
+                          </NavLink>
+                          <NavLink to={`edit/${element.id}`}>
+                            <CreateIcon className="icon-color" />
+                          </NavLink>
+                          <DeleteOutlineIcon
+                            onClick={() => deleteuser(element.id)}
+                            className="text-danger ms-2"
+                          />
+                        </TableCell>
+                      </TableRow>
+                    </React.Fragment>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
           <div className="col-lg-12">
             {/* <div className="row">
                 <div className="col-lg-3">

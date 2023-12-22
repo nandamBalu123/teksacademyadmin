@@ -14,11 +14,23 @@ const Settings = () => {
                         >
                             <NavLink to="/customform" className="text-center pt-3">
                                 <p className="text-center pt-3 text-light" >
-                                    Custom Forms
+                                    Forms
                                 </p>
                             </NavLink>
                         </Card>
                     </div>
+                    {/* <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
+                        <Card
+                            className="cardcolor"
+
+                        >
+                            <NavLink to="" className="text-center pt-3">
+                                <p className="text-center pt-3 text-light" >
+                                    Profile
+                                </p>
+                            </NavLink>
+                        </Card>
+                    </div> */}
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
                         <Card
                             className="cardcolor"
@@ -42,6 +54,9 @@ const Settings = () => {
                             </NavLink>
                         </Card>
                     </div>
+
+                </div>
+                <div className='row px-2'>
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
                         <Card
                             className="cardcolor"
@@ -53,8 +68,6 @@ const Settings = () => {
                             </NavLink>
                         </Card>
                     </div>
-                </div>
-                <div className='row px-2'>
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
                         <Card
                             className="cardcolor"
@@ -87,6 +100,32 @@ const Settings = () => {
                             <NavLink to="/coursepackage" className="text-center pt-3">
                                 <p className="text-center pt-3 text-light" >
                                     Course Package
+                                </p>
+                            </NavLink>
+                        </Card>
+                    </div>
+
+
+                </div>
+                <div className='row px-2'>
+                    <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
+                        <Card
+                            className="cardcolor"
+                        >
+                            <NavLink to="/assettype" className="text-center pt-3">
+                                <p className="text-center pt-3 text-light" >
+                                    Add Assets Type
+                                </p>
+                            </NavLink>
+                        </Card>
+                    </div>
+                    <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
+                        <Card
+                            className="cardcolor"
+                        >
+                            <NavLink to="/vendor" className="text-center pt-3">
+                                <p className="text-center pt-3 text-light" >
+                                    Add Vendor
                                 </p>
                             </NavLink>
                         </Card>
