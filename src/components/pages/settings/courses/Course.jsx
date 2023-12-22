@@ -66,7 +66,7 @@ const Course = () => {
                   Name
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
-                  Description
+                  Fee
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
                   Create By
@@ -96,17 +96,18 @@ const Course = () => {
                   </TableCell>
                   <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "0.8rem" }}>
-                      description
+                      {item.fee}
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell ">
                     <span style={{ fontSize: "0.8rem" }}>
-                      Bhavitha
+                      {item.createdby}
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell ">
                     <span style={{ fontSize: "0.8rem" }}>
-                      15-12-2023
+                    
+                    {new Date(item.date).toLocaleDateString("en-GB")}
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell ">
