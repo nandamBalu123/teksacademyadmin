@@ -429,18 +429,18 @@ const CreateReport = () => {
                               </FormControl>
                             </div>
                           </div>
-                          <div className="col-4">
+                          <div className="col-4 m-auto">
                             {Object.keys(reportForm.dimensions).length > 1 &&
                               <div className="d-flex justify-content-evenly">
-                                <button type="button" onClick={() => handleMoveDimension(dimension, 'up')} className="btn btn-color">
-                                  <ArrowUpwardIcon />
-                                </button>
-                                <button type="button" onClick={() => handleMoveDimension(dimension, 'down')} className="btn btn-color">
-                                  <ArrowDownwardIcon />
-                                </button>
-                                <button type="button" onClick={() => handleDeleteDimension(dimension)} className="btn btn-color">
-                                  <DeleteIcon />
-                                </button>
+
+                                <ArrowUpwardIcon onClick={() => handleMoveDimension(dimension, 'up')} style={{cursor:"pointer"}}/>
+
+
+                                <ArrowDownwardIcon onClick={() => handleMoveDimension(dimension, 'down')} style={{cursor:"pointer"}}/>
+
+
+                                <DeleteIcon onClick={() => handleDeleteDimension(dimension)} style={{cursor:"pointer"}}/>
+
                               </div>
                             }
                           </div>
