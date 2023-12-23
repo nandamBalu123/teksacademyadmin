@@ -131,16 +131,21 @@ const UsersData = () => {
         ? item.fullname
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
+        item.phonenumber
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.email
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
         item.branch
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.reportto
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
         item.designation
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
         item.department
-          .toLowerCase()
-          .includes(filterCriteria.search.toLowerCase()) ||
-        item.reportto
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
         item.profile
@@ -330,7 +335,7 @@ const UsersData = () => {
           </div>
           <div className="col-12 col-md-4 col-xl-4 col-lg-4">
             <div className="d-flex justify-content-evenly">
-              <h6 className="mt-3">
+              <h6 className="mt-4">
                 {recordCount}/{initialDataCount}
               </h6>
               <span className="mt-3">
