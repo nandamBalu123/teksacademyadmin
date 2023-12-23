@@ -1063,7 +1063,7 @@ const Dashboard = () => {
                       <span className="fw-bold fs-5">{!filterCriteria.fromdate && !filterCriteria.today && <> Current Month</>}</span>
                       &nbsp;  Branch Wise Enrollments
                     </h5>
-                    <div className="row">
+                    <div className="row mt-2">
                       {!selectedBranch && <div className="">
                         <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                           <Table stickyHeader aria-label="sticky table " >
@@ -1099,7 +1099,7 @@ const Dashboard = () => {
                         </TableContainer>
                       </div>}
                       {
-                        selectedBranch && <div className="col-12 col-md-6">
+                        selectedBranch && <div className="col-12 col-md-6 mt-2">
                           <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                             <Table stickyHeader aria-label="sticky table " >
                               <TableHead>
@@ -1135,7 +1135,7 @@ const Dashboard = () => {
                           </TableContainer>
                         </div>
                       }
-                      <div className="col-12 col-md-6">
+                      <div className="col-12 col-md-6 mt-2" >
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
                           return (
                             <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
@@ -1179,7 +1179,7 @@ const Dashboard = () => {
 
                       {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
                         return (
-                          <div className="my-4">
+                          <div className="my-4" >
                             {selectedBranch === branch &&
                               <div>
                                 {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise[branch].counsellorWiseTotal).map(
@@ -1191,7 +1191,7 @@ const Dashboard = () => {
                                     >
 
                                       {selectedCounsellor === counsellor &&
-                                        <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
+                                        <TableContainer component={Paper} sx={{ maxHeight: 200 }} style={{ overflow: "hidden" }}>
                                           <Table stickyHeader aria-label="sticky table">
                                             <TableHead>
                                               <TableRow>
@@ -1264,7 +1264,7 @@ const Dashboard = () => {
                     </h5>
                     <div className="row">
                       {!selectedBranch &&
-                        <div className="">
+                        <div className=" mt-2">
                           <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                             <Table stickyHeader aria-label="sticky table " >
                               <TableHead>
@@ -1302,7 +1302,7 @@ const Dashboard = () => {
                           </TableContainer>
                         </div>}
                       {selectedBranch &&
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 mt-2">
                           <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                             <Table stickyHeader aria-label="sticky table " >
                               <TableHead>
@@ -1341,7 +1341,7 @@ const Dashboard = () => {
                             </Table>
                           </TableContainer>
                         </div>}
-                      <div className="col-12 col-md-6">
+                      <div className="col-12 col-md-6 mt-2">
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
                           return (
                             <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
@@ -1472,7 +1472,7 @@ const Dashboard = () => {
                     </h5>
                     <div className="row">
                       {!selectedBranch &&
-                        <div className="">
+                        <div className="mt-2">
                           <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                             <Table stickyHeader aria-label="sticky table " >
                               <TableHead>
@@ -1510,7 +1510,7 @@ const Dashboard = () => {
                           </TableContainer>
                         </div>}
                       {selectedBranch &&
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 mt-2">
                           <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                             <Table stickyHeader aria-label="sticky table " >
                               <TableHead>
@@ -1545,7 +1545,7 @@ const Dashboard = () => {
                             </Table>
                           </TableContainer>
                         </div>}
-                      <div className="col-12 col-md-6">
+                      <div className="col-12 col-md-6 mt-2">
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
                           return (
                             <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
@@ -1673,7 +1673,7 @@ const Dashboard = () => {
                     </h5>
                     <div className="row">
                       {!selectedBranch &&
-                        <div className="">
+                        <div className="mt-2">
                           <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                             <Table stickyHeader aria-label="sticky table " >
                               <TableHead>
@@ -1711,7 +1711,7 @@ const Dashboard = () => {
                           </TableContainer>
                         </div>}
                       {selectedBranch &&
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 mt-2">
                           <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                             <Table stickyHeader aria-label="sticky table " >
                               <TableHead>
@@ -1747,7 +1747,7 @@ const Dashboard = () => {
                             </Table>
                           </TableContainer>
                         </div>}
-                      <div className="col-12 col-md-6">
+                      <div className="col-12 col-md-6 mt-2">
                         {Object.keys(calculations_of_filtered_students_branchwise_counsellorwise).map((branch) => {
                           return (
                             <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
@@ -2036,7 +2036,7 @@ const Dashboard = () => {
                       </h5>
                       <div className="row">
                         {!selectedBranch &&
-                          <div className="">
+                          <div className="mt-2">
                             <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                               <Table stickyHeader aria-label="sticky table " >
                                 <TableHead>
@@ -2073,7 +2073,7 @@ const Dashboard = () => {
                             </TableContainer>
                           </div>}
                         {selectedBranch &&
-                          <div className="col-12 col-md-6">
+                          <div className="col-12 col-md-6 mt-2">
                             <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                               <Table stickyHeader aria-label="sticky table " >
                                 <TableHead>
@@ -2109,7 +2109,7 @@ const Dashboard = () => {
                               </Table>
                             </TableContainer>
                           </div>}
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 mt-2">
                           {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
                             return (
                               <TableContainer component={Paper} sx={{ maxHeight: 200 }}>
@@ -2243,7 +2243,7 @@ const Dashboard = () => {
                       </h5>
                       <div className="row">
                         {!selectedBranch &&
-                          <div className="">
+                          <div className="mt-2">
                             <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                               <Table stickyHeader aria-label="sticky table " >
                                 <TableHead>
@@ -2281,7 +2281,7 @@ const Dashboard = () => {
                             </TableContainer>
                           </div>}
                         {selectedBranch &&
-                          <div className="col-12 col-md-6">
+                          <div className="col-12 col-md-6 mt-2">
                             <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                               <Table stickyHeader aria-label="sticky table " >
                                 <TableHead>
@@ -2316,7 +2316,7 @@ const Dashboard = () => {
                               </Table>
                             </TableContainer>
                           </div>}
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 mt-2">
 
                           {Object.keys(calculations_of_all_students_branchwise_counsellorwise).map((branch) => {
                             return (
@@ -2500,7 +2500,7 @@ const Dashboard = () => {
               {DisplayTable.branchusers && (
                 <div>
 
-                  <div className="">
+                  <div className="mt-2">
                     <TableContainer component={Paper} sx={{ maxHeight: 200 }} >
                       <Table stickyHeader aria-label="sticky table " >
                         <TableHead>

@@ -222,6 +222,11 @@ const StudentData = () => {
         ? item.name
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
+        item.mobilenumber
+          .includes(filterCriteria.search) ||
+        item.email
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
         item.branch
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
@@ -229,6 +234,15 @@ const StudentData = () => {
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
         item.courses
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.coursepackage
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.state
+          .toLowerCase()
+          .includes(filterCriteria.search.toLowerCase()) ||
+        item.modeoftraining
           .toLowerCase()
           .includes(filterCriteria.search.toLowerCase()) ||
         item.enquirytakenby

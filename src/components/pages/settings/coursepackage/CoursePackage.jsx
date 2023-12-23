@@ -110,7 +110,7 @@ const CoursePackage = () => {
                       </span>
                     </TableCell>
                     <TableCell className="Table-cell ">
-                      <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                       <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
                       <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
                     </TableCell>

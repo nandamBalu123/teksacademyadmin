@@ -106,12 +106,12 @@ const Course = () => {
                   </TableCell>
                   <TableCell className="Table-cell ">
                     <span style={{ fontSize: "0.8rem" }}>
-                    
-                    {new Date(item.date).toLocaleDateString("en-GB")}
+
+                      {new Date(item.date).toLocaleDateString("en-GB")}
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell ">
-                    <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
+                    {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                     <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
                     <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
                   </TableCell>
