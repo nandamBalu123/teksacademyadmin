@@ -197,8 +197,8 @@ const Feefollowup = () => {
     <div className=" container mt-3">
       <div className="feedetails">
         <h5 className=" ms-2 mt-3 mb-2"> Fee Followups</h5>
-        <div className="row">
-          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+        <div className="row px-2">
+          <div className="col-12 col-md-3 col-xl-3 col-lg-3 mb-2">
             <Card
               // style={{ background:"#ff3741"}}
               style={{
@@ -218,7 +218,7 @@ const Feefollowup = () => {
               </p>
             </Card>
           </div>
-          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+          <div className="col-12 col-md-3 col-xl-3 col-lg-3 mb-2">
             <Card
               // style={{ background:"#ff3741"}}
               style={{
@@ -238,7 +238,7 @@ const Feefollowup = () => {
               </p>
             </Card>
           </div>
-          <div className="col-6 col-md-3 col-xl-3 col-lg-3 mb-2">
+          <div className="col-12 col-md-3 col-xl-3 col-lg-3 mb-2">
             <Card
               // style={{ background:"#ff3741"}}
               style={{
