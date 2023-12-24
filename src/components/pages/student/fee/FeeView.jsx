@@ -28,7 +28,11 @@ import { Link } from "react-router-dom";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 import useFormattedDate from "../../../../hooks/useFormattedDate";
 
+import $ from 'jquery';
 const FeeView = () => {
+  $('input[type=number]').on('mousewheel', function (e) {
+    $(e.target).blur();
+  });
   const { students, dispatch } = useStudentsContext();
   const [studentdata, setstudentdata] = useState("");
   const { id } = useParams();
@@ -49,6 +53,7 @@ const FeeView = () => {
     transactionID: "",
     paymentdone: false,
   });
+
   useEffect(() => {
     if (students && id) {
       const filteredResults = students.filter((item) => {
@@ -202,17 +207,25 @@ const FeeView = () => {
     let month = today.getMonth() + 1;
     let day = today.getDate();
 
-    // Pad the month and day with leading zeros
     month = month < 10 ? `0${month}` : month;
     day = day < 10 ? `0${day}` : day;
 
     return `${year}-${month}-${day}`;
   };
+  let DisplayUpdateDueamountAndInstallmentButton = false;
+  if (studentdata.installments && studentdata.installments.length > 0) {
+    for (let i = 0; i < studentdata.installments.length; i++) {
+      if (!studentdata.installments[i].duedate && !studentdata.installments[i].dueamount) {
+        DisplayUpdateDueamountAndInstallmentButton = true
+      }
+    }
+  }
 
-  const UpdateDueDateAndDueAmount = () => {
-    // e.preventDefault();
-
+  const UpdateDueDateAndDueAmount = (e) => {
+    e.preventDefault();
+    console.log("installments", installments)
     // let nextduedate = [];
+
     let nextduedate;
     for (let i = 0; i < installments.length; i++) {
       if (installments[i].paidamount < 1) {
@@ -221,15 +234,17 @@ const FeeView = () => {
       }
       // nextduedate.push(installments[i].duedate);
     }
+    let totalInstallmentAmountUpdated = 0
     let validateUpdatedDueDateAndDueAmount = true
+    // validations for due date and due amount
     for (let i = 0; i < installments.length; i++) {
-      if (installments[i].duedate) {
-        if (!installments[i].dueamount) {
-          validateUpdatedDueDateAndDueAmount = false
-        }
+      if (!installments[i].duedate || !installments[i].dueamount) {
+        validateUpdatedDueDateAndDueAmount = false
       }
+      totalInstallmentAmountUpdated = totalInstallmentAmountUpdated + parseFloat(installments[i].dueamount)
+
     }
-    if (validateUpdatedDueDateAndDueAmount) {
+    if (validateUpdatedDueDateAndDueAmount && studentdata.dueamount === totalInstallmentAmountUpdated) {
       const updatedData = {
         installments,
         // totalinstallments,
@@ -266,8 +281,11 @@ const FeeView = () => {
             alert("Try Again");
           }
         });
-    } else {
+    } else if (studentdata.dueamount != totalInstallmentAmountUpdated) {
+      alert("Sum of all installment amount Should be equal to due amount")
+    } else if (!validateUpdatedDueDateAndDueAmount) {
       alert("Add Due Date and Due Amount")
+
     }
 
 
@@ -284,12 +302,19 @@ const FeeView = () => {
       let nextduedate;
       let totalinstallmentspaid = 0
       for (let i = 0; i < updatedInstallments.length; i++) {
-
-        if (updatedInstallments[i].dueamount && updatedInstallments[i].paidamount) {
-          if (parseInt(updatedInstallments[i].dueamount) === parseInt(updatedInstallments[i].paidamount)) {
-            totalinstallmentspaid = totalinstallmentspaid + 1
+        if (updatedInstallments[i + 1]) {
+          if (updatedInstallments[i].installmentNumber != updatedInstallments[i + 1].installmentNumber && updatedInstallments[i].paymentdone === true) {
+            totalinstallmentspaid += 1
+          }
+        } else {
+          if (updatedInstallments[i].paymentdone) {
+            totalinstallmentspaid += 1
           }
         }
+
+
+
+
         if (updatedInstallments[i].paidamount < 1) {
           nextduedate = updatedInstallments[i].duedate;
           break;
@@ -311,6 +336,7 @@ const FeeView = () => {
       //       totalpaidamount + parseInt(updateInstallments[i].paidamount);
       //   }
       // }
+
       let totalpaidamount = 0;
       totalpaidamount =
         totalpaidamount + studentdata.initialpayment[0].initialamount;
@@ -318,7 +344,6 @@ const FeeView = () => {
         totalpaidamount = totalpaidamount + updatedInstallments[i].paidamount;
         // console.log("updatedInstallments", updatedInstallments[i].paidamount);
       }
-
       //start
       let dueamount = parseInt(studentdata.finaltotal);
       dueamount = dueamount - studentdata.initialpayment[0].initialamount;
@@ -327,7 +352,6 @@ const FeeView = () => {
       }
       let totalExtraDiscount = 0
       if (studentdata.extra_discount) {
-
         for (let i = 0; i < studentdata.extra_discount.length; i++) {
           totalExtraDiscount = totalExtraDiscount + parseInt(studentdata.extra_discount[i].Discount)
         }
@@ -433,6 +457,46 @@ const FeeView = () => {
           // Insert the new installment after the current one
           updatedInstallments.splice(index + 1, 0, newInstallment);
         }
+        if (updatedInstallments[index].paidamount > updatedInstallments[index].dueamount) {
+          let extraPaidAmount = updatedInstallments[index].paidamount - updatedInstallments[index].dueamount;
+          let nextIndex = index + 1;
+
+          // Iterate through next installments to subtract extraPaidAmount
+          while (extraPaidAmount > 0 && nextIndex < updatedInstallments.length) {
+            if (extraPaidAmount >= updatedInstallments[nextIndex].dueamount) {
+              // Subtract dueamount from extraPaidAmount
+              extraPaidAmount -= updatedInstallments[nextIndex].dueamount;
+              // Mark the installment as paid
+              updatedInstallments[nextIndex].dueamount = 0;
+              updatedInstallments[nextIndex].paymentdone = true;
+            } else {
+              // Subtract remaining extraPaidAmount from the current installment
+              updatedInstallments[nextIndex].dueamount -= extraPaidAmount;
+              extraPaidAmount = 0;
+            }
+
+            nextIndex++;
+          }
+        }
+        // if (updatedInstallments[index].paidamount > updatedInstallments[index].dueamount) {
+
+        //   let extraPaidAmount = updatedInstallments[index].paidamount - updatedInstallments[index].dueamount;
+        //   if (updatedInstallments[index + 1].dueamount) {
+        //     if (extraPaidAmount <= updatedInstallments[index + 1].dueamount) {
+        //       updatedInstallments[index + 1].dueamount = updatedInstallments[index + 1].dueamount - extraPaidAmount
+        //     }
+        //     if (extraPaidAmount > updatedInstallments[index + 1].dueamount) {
+        //       let remainingextraPaidAmount = extraPaidAmount - updatedInstallments[index + 1].dueamount
+        //       updatedInstallments[index + 1].dueamount = 0
+        //       updatedInstallments[index + 1].paymentdone = true
+        //       if (updatedInstallments[index + 2].dueamount) {
+        //         updatedInstallments[index + 2].dueamount = updatedInstallments[index + 2].dueamount - remainingextraPaidAmount
+        //       }
+        //     }
+        //   }
+
+        // }
+
         resolve(updatedInstallments);
         return updatedInstallments;
       });
@@ -444,12 +508,13 @@ const FeeView = () => {
   const handleApplyDiscount = () => {
     let validateUpdatedDueDateAndDueAmount = true
     for (let i = 0; i < installments.length; i++) {
-      if (installments[i].duedate) {
-        if (!installments[i].dueamount) {
-          validateUpdatedDueDateAndDueAmount = false
-        }
+      if (!installments[i].duedate) {
+        // if (!installments[i].dueamount) {
+        validateUpdatedDueDateAndDueAmount = false
+        // }
       }
-    } if (validateUpdatedDueDateAndDueAmount) {
+    }
+    if (validateUpdatedDueDateAndDueAmount) {
       if (extraDiscount <= parseInt(studentdata.dueamount)) {
         setOpen(false);
 
@@ -468,6 +533,63 @@ const FeeView = () => {
         //   setInstallments(updatedInstallments);
         // }
         if (extraDiscount) {
+          let updatedInstallments = [...installments]
+          let remainingDiscount = extraDiscount;
+          // console.log("ddddupdatedInstallments", updatedInstallments)
+          let totalinstallmentspaid = 0
+
+          for (let i = 0; i < updatedInstallments.length; i++) {
+            if (!updatedInstallments[i].paymentdone && remainingDiscount > 0) {
+              if (remainingDiscount >= updatedInstallments[i].dueamount) {
+                remainingDiscount -= updatedInstallments[i].dueamount;
+                updatedInstallments[i].paidamount = 0
+                updatedInstallments[i].dueamount = 0
+                updatedInstallments[i].paymentdone = true
+                updatedInstallments[i].paiddate = getCurrentDate();
+
+              } else {
+                const newDueAmount = updatedInstallments[i].dueamount - remainingDiscount;
+                remainingDiscount = 0;
+                updatedInstallments[i].dueamount = newDueAmount
+              }
+
+
+            }
+
+            if (updatedInstallments[i + 1]) {
+              if (updatedInstallments[i].installmentNumber != updatedInstallments[i + 1].installmentNumber && updatedInstallments[i].paymentdone === true) {
+                totalinstallmentspaid += 1
+              }
+            } else {
+              if (updatedInstallments[i].paymentdone) {
+                totalinstallmentspaid += 1
+              }
+            }
+
+
+          }
+          // const updatedInstallments = installments.map(installment => {
+          //   if (!installment.paymentdone && remainingDiscount > 0) {
+          //     if (remainingDiscount >= installment.dueamount) {
+          //       // If discount is more than the due amount, subtract from the due amount and update remainingDiscount
+          //       remainingDiscount -= installment.dueamount;
+          //       return { ...installment, dueamount: 0, paymentdone: true, paidamount: installment.dueamount };
+          //     } else {
+          //       // If discount is less than the due amount, subtract from the discount and update dueamount
+          //       const newDueAmount = installment.dueamount - remainingDiscount;
+          //       remainingDiscount = 0;
+          //       return { ...installment, dueamount: newDueAmount };
+          //     }
+          //   }
+          //   return installment;
+          // });
+          let updatedtotalinstallments = [
+            {
+              totalinstallments: parseInt(totalinstallments[0].totalinstallments),
+              totalinstallmentspaid: parseInt(totalinstallmentspaid),
+              totalinstallmentsleft: parseInt(totalinstallments[0].totalinstallments) - parseInt(totalinstallmentspaid),
+            },
+          ];
           let Extra_Discount_remarks_history = studentdata.extra_discount;
           let newObject = {
             Discount: parseInt(extraDiscount),
@@ -476,12 +598,15 @@ const FeeView = () => {
           };
           Extra_Discount_remarks_history.push(newObject);
           const updatedData = {
-            installments,
+            installments: updatedInstallments,
+            totalinstallments: updatedtotalinstallments,
             dueamount,
             Extra_Discount_remarks_history,
           };
           const updateContext = {
-            installments,
+            installments: updatedInstallments,
+            totalinstallments: updatedtotalinstallments,
+
             dueamount,
             Extra_Discount_remarks_history,
             id: studentdata.id,
@@ -763,7 +888,7 @@ const FeeView = () => {
             <h4 className="my-3 ms-2"> Admission Fee</h4>
             <hr></hr>
             <div className="row my-3 container">
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2">
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1">
                 <TextField
                   label={<span className="label-family">Admission Fee</span>}
                   type="number"
@@ -784,7 +909,7 @@ const FeeView = () => {
                   Admission Fee <span className="text-danger"> * </span>
                 </label> */}
               </div>
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1 ">
                 <TextField
                   label={
                     <span className="label-family">Paid Date</span>
@@ -847,7 +972,7 @@ const FeeView = () => {
                   Mode of Payments <span className="text-danger"> * </span>
                 </label> */}
               </div>
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1 ">
                 <TextField
                   label={
                     <span className="label-family">Transation ID</span>
@@ -948,8 +1073,9 @@ const FeeView = () => {
                     )}
                   </h5>
                   <div className="row container">
-                    <div className="col-12 col-md-6 col-lg-4 col-xl-2 mt-2">
+                    <div className="col-12 col-md-6 col-lg-4 col-xl-2 mt-1">
                       <TextField
+                        disabled={studentdata && studentdata.installments && studentdata.installments[index] && studentdata.installments[index].duedate}
                         label={
                           <span className="label-family">Installment Date</span>
                         }
@@ -986,8 +1112,10 @@ const FeeView = () => {
                       <label> Installment Date</label> */}
                     </div>
 
-                    <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                    <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-1">
                       <TextField
+                        disabled={
+                          studentdata && studentdata.installments && studentdata.installments[index] && studentdata.installments[index].dueamount}
                         label={
                           <span className="label-family">Installment Amount</span>
                         }
@@ -1008,6 +1136,7 @@ const FeeView = () => {
                           )
                         }
                         value={installment.dueamount}
+
                       />
                       {/* <input
                         type="number"
@@ -1029,7 +1158,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-1">
                           <TextField
                             label={
                               <span className="label-family">Paid Date</span>
@@ -1073,7 +1202,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-2">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-1">
                           <TextField
                             label={
                               <span className="label-family">Paid Amount</span>
@@ -1200,7 +1329,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-1">
                           <TextField
                             label={
                               <span className="label-family">Transation ID</span>
@@ -1253,7 +1382,7 @@ const FeeView = () => {
                           </button>
                         </div>
                       )}
-                    {studentdata &&
+                    {/* {studentdata &&
                       studentdata.installments[index] &&
                       !studentdata.installments[index].duedate &&
                       !studentdata.installments[index].dueamount && (
@@ -1265,12 +1394,24 @@ const FeeView = () => {
                             Update
                           </button>
                         </div>
-                      )}
+                      )} */}
                   </div>
                 </div>
               );
             })}
         </div>
+
+
+        {DisplayUpdateDueamountAndInstallmentButton &&
+          <div className="col-12 col-md-12 col-lg-3 col-xl-2 student-input">
+            <button
+              className="btn btn-color"
+              onClick={UpdateDueDateAndDueAmount}
+            >
+              Update
+            </button>
+          </div>}
+
         {/* Display admission fee payment table*/}
 
         {studentdata &&

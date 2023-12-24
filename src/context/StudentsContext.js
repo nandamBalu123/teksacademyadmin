@@ -82,6 +82,8 @@ export const StudentsReducer = (state, action) => {
         action.payload.dueamount;
       updatedExtraDiscount[updatedExtraDiscountStudentIndex].extra_discount =
         action.payload.Extra_Discount_remarks_history;
+      updatedExtraDiscount[updatedExtraDiscountStudentIndex].totalinstallments =
+        action.payload.totalinstallments;
 
       return {
         students: updatedExtraDiscount,
