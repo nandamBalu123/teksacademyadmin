@@ -89,7 +89,7 @@ const Branch = () => {
                   </TableCell>
                   <TableCell className="Table-cell text-center">
                     <span style={{ fontSize: "0.8rem" }}>
-                    
+
                       {item.branch_name}
                     </span>
                   </TableCell>
@@ -109,7 +109,7 @@ const Branch = () => {
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell ">
-                    <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
+                    {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                     <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
                     <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
                   </TableCell>

@@ -320,7 +320,7 @@ export default function RegistrationForm() {
 
     setFeeDetails([
       ...feedetails,
-      
+
       {
         id: Date.now(),
         feetype: feetype,
@@ -1485,7 +1485,7 @@ export default function RegistrationForm() {
                       )}
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-1 ">
                     <TextField
                       label={<span className="label-family">Percentage</span>}
                       type="number"
@@ -1496,7 +1496,7 @@ export default function RegistrationForm() {
                       value={marks}
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-1">
                     <TextField
                       label={
                         <span className="label-family">Academic Year</span>
@@ -2066,38 +2066,38 @@ export default function RegistrationForm() {
                   <Table aria-label="spanning table">
                     <TableHead>
                       <TableCell
-                        className="registration-tablehead"
+                        className="table-cell-heading "
                         align="center"
                       >
                         Fee Type
                       </TableCell>
                       <TableCell
                         align="center"
-                        className="registration-tablehead"
+                        className="table-cell-heading "
                       >
                         Amount
                       </TableCell>
                       <TableCell
                         align="center"
-                        className="registration-tablehead"
+                        className="table-cell-heading "
                       >
                         Discount
                       </TableCell>
                       <TableCell
                         align="center"
-                        className="registration-tablehead"
+                        className="table-cell-heading "
                       >
                         Tax Amount
                       </TableCell>
                       <TableCell
                         align="center"
-                        className="registration-tablehead"
+                        className="table-cell-heading "
                       >
                         Total Amount
                       </TableCell>
                       <TableCell
                         align="center "
-                        className="registration-tablehead"
+                        className="table-cell-heading "
                       >
                         Action
                       </TableCell>
@@ -2108,31 +2108,31 @@ export default function RegistrationForm() {
                           <TableRow key={item.id}>
                             <TableCell
                               align="center"
-                              className="registration-tablebody"
+                              className="Table-cell "
                             >
                               {item.feetype}
                             </TableCell>
                             <TableCell
                               align="center"
-                              className="registration-tablebody"
+                              className="Table-cell "
                             >
                               {item.amount}
                             </TableCell>
                             <TableCell
                               align="center"
-                              className="registration-tablebody"
+                              className="Table-cell "
                             >
                               {item.discount}
                             </TableCell>
                             <TableCell
                               align="center"
-                              className="registration-tablebody"
+                              className="Table-cell "
                             >
                               {parseFloat(item.taxamount.toFixed(2))}
                             </TableCell>
                             <TableCell
                               align="center"
-                              className="registration-tablebody"
+                              className="Table-cell "
                             >
                               {item.totalamount}
                             </TableCell>
@@ -2179,23 +2179,23 @@ export default function RegistrationForm() {
 
             <StepContent>
               <form className="form ">
-                <TableContainer component={Paper} className="billingtable ">
+                <TableContainer component={Paper} className="billingtable px-4">
                   <Table aria-label="spanning table">
                     <TableHead>
                       <TableCell
-                        className="registration-tablehead"
+                        className="table-cell-heading"
                         align="center"
                       >
                         Gross Total
                       </TableCell>
                       <TableCell
-                        className="registration-tablehead"
+                        className="table-cell-heading"
                         align="center"
                       >
                         Total Discount
                       </TableCell>
                       <TableCell
-                        className="registration-tablehead"
+                        className="table-cell-heading"
                         align="center"
                       >
                         Total Amount
@@ -2204,50 +2204,50 @@ export default function RegistrationForm() {
                     <TableBody>
                       <TableCell
                         align="center"
-                        className="registration-tablebody"
+                        className="Table-cell"
                       >
                         {grosstotal}
                       </TableCell>
                       <TableCell
                         align="center"
-                        className="registration-tablebody"
+                        className="Table-cell "
                       >
                         {totaldiscount}
                       </TableCell>
                       <TableCell
                         align="center"
-                        className="registration-tablebody"
+                        className="Table-cell "
                       >
                         {finaltotal}
                       </TableCell>
                     </TableBody>
                   </Table>
                 </TableContainer>
-                <TableContainer component={Paper} className="billingtable mt-4">
+                <TableContainer component={Paper} className="billingtable mt-4 px-4">
                   <Table aria-label="spanning table">
                     <TableHead>
                       <TableRow className="border border1">
                         <TableCell
                           align="center"
-                          className="registration-tablehead"
+                          className="table-cell-heading"
                         >
                           Fee Type
                         </TableCell>
                         <TableCell
                           align="center"
-                          className="registration-tablehead"
+                          className="table-cell-heading"
                         >
                           Fee (Excl of GST)
                         </TableCell>
                         <TableCell
                           align="center"
-                          className="registration-tablehead"
+                          className="table-cell-heading"
                         >
                           Tax
                         </TableCell>
                         <TableCell
                           align="center"
-                          className="registration-tablehead"
+                          className="table-cell-heading"
                         >
                           Fee (Incl of GST)
                         </TableCell>
@@ -2261,25 +2261,25 @@ export default function RegistrationForm() {
                               <TableRow key={item.id}>
                                 <TableCell
                                   align="center"
-                                  className="registration-tablebody"
+                                  className="Table-cell "
                                 >
                                   {item.feetype}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  className="registration-tablebody"
+                                  className="Table-cell "
                                 >
                                   {parseFloat(item.feewithouttax.toFixed(2))}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  className="registration-tablebody"
+                                  className="Table-cell "
                                 >
                                   {parseFloat(item.feetax.toFixed(2))}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  className="registration-tablebody"
+                                  className="Table-cell "
                                 >
                                   {parseFloat(item.feewithtax.toFixed(2))}
                                 </TableCell>
@@ -2291,25 +2291,25 @@ export default function RegistrationForm() {
                         <TableRow className="border border1">
                           <TableCell
                             align="center"
-                            className="registration-tablebody"
+                            className="Table-cell "
                           >
                             Sub Total
                           </TableCell>
                           <TableCell
                             align="center"
-                            className="registration-tablebody"
+                            className="Table-cell "
                           >
                             {parseFloat(totalfeewithouttax.toFixed(2))}
                           </TableCell>
                           <TableCell
                             align="center"
-                            className="registration-tablebody"
+                            className="Table-cell "
                           >
                             {parseFloat(totaltax.toFixed(2))}
                           </TableCell>
                           <TableCell
                             align="center"
-                            className="registration-tablebody"
+                            className="Table-cell "
                           >
                             {parseFloat(grandtotal.toFixed(2))}
                           </TableCell>
@@ -2321,13 +2321,13 @@ export default function RegistrationForm() {
                         <TableCell rowSpan={3} />
                         <TableCell
                           align="center"
-                          className="registration-tablehead"
+                          className="Table-cell "
                         >
                           Material Fee
                         </TableCell>
                         <TableCell
                           align="center"
-                          className="registration-tablebody"
+                          className="Table-cell "
                         >
                           {materialfee}
                         </TableCell>
@@ -2335,13 +2335,13 @@ export default function RegistrationForm() {
                       <TableRow className="border border1">
                         <TableCell
                           align="center"
-                          className="registration-tablehead"
+                          className="Table-cell "
                         >
                           <strong> Grand Total</strong>
                         </TableCell>
                         <TableCell
                           align="center"
-                          className="registration-tablebody"
+                          className="Table-cell  vy"
                         >
                           {finaltotal}
                         </TableCell>

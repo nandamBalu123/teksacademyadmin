@@ -175,7 +175,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               Student Details
             </h5>
             <div className="row ">
-              <div className="col-12 col-md-8 col-lg-8 col-xl-8">
+              <div className="col-12 col-md-7 col-lg-8 col-xl-8">
                 <div className="table-responsive">
                   <table className="table table-bordered">
                     <thead> </thead>
@@ -226,7 +226,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                   </table>
                 </div>
               </div>
-              <div className=" col-12 col-md-4 col-lg-4 col-xl-4 mt-4">
+              <div className=" col-12 col-md-5 col-lg-4 col-xl-4 mt-4">
                 {/* <img src={studentimg} /> */}
                 {!studentdata.studentImg && (
                   <img src={profilePic} alt="photo" />
