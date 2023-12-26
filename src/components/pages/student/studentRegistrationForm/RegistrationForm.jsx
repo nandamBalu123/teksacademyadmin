@@ -29,6 +29,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import pictureprofile from "../../../../images/profilepicture.jpg";
 import NativeSelect from "@mui/material/NativeSelect";
+import DatePicker from 'react-datepicker';
 // import { blue } from "@mui/material/colors";
 // import { useDropzone } from 'react-dropzone';
 import { useAuthContext } from "../../../../hooks/useAuthContext";
@@ -38,6 +39,8 @@ import { useCoursePackageContext } from "../../../../hooks/useCoursePackageConte
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+import moment from 'moment';
+
 import { DateField } from "@mui/x-date-pickers/DateField";
 import $ from 'jquery';
 const Popup = ({ show, onClose, children }) => {
@@ -146,6 +149,7 @@ export default function RegistrationForm() {
   //   userName = LoggedInuser.fullname;
   //   setEnquiryTakenBy(userName);
   // }
+
   const [imageUrl, setImageUrl] = useState(null);
   const displayImage = (file) => {
     const reader = new FileReader();
@@ -937,8 +941,21 @@ export default function RegistrationForm() {
 
   //     }
   // }
+
+  // this is for date DD-MM-YYY
+
+  // $("input").on("change", function () {
+  //   this.setAttribute(
+  //     "data-date",
+  //     moment(this.value, "yy-MM-DD")
+  //       .format(this.getAttribute("data-date-format"))
+  //   )
+  // }).trigger("change")
+
+
   const { users } = useUsersContext();
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
+
 
   useEffect(() => {
     if (users) {
@@ -1175,6 +1192,9 @@ export default function RegistrationForm() {
                       type="date"
                       variant="standard"
                       className="w-75"
+
+                      // data-date-format="DD­/MM/YYYY"
+
                       required
                       InputLabelProps={{
                         shrink: true,
@@ -1183,6 +1203,16 @@ export default function RegistrationForm() {
                       value={birthdate}
                     />
                   </div>
+                  {/* <div>
+                    <label htmlFor="datePicker">Date:</label>
+                    <DatePicker
+                      id="datePicker"
+
+                      onChange={(e) => setBirthDate(e.target.value)}
+                      dateFormat="dd/MM/yyyy"
+                      placeholderText="dd/mm/yyyy"
+                    />
+                  </div> */}
                 </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>

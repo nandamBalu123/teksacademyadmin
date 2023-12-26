@@ -3,41 +3,49 @@
   width: 100%;
   position: relative;
 }
+
 .main-sub-container {
   width: 100%;
   /* padding-left: 30px; */
   /* background-color: aqua; */
 }
+
 @media (max-width: 1320px) {
   .main-sub-container {
     margin-left: 3em;
   }
 }
+
 @media (max-width: 1140px) {
   .main-sub-container {
     margin-left: 1em;
   }
 }
+
 @media (max-width: 960px) {
   .main-sub-container {
     margin-left: 1em;
   }
 }
+
 @media (max-width: 720px) {
   .main-sub-container {
     margin-left: 1em;
   }
 }
+
 @media (max-width: 540px) {
   .main-sub-container {
     margin-left: 1em;
   }
 }
+
 @media (max-width: 400px) {
   .main-sub-container {
     margin-left: 1em;
   }
 }
+
 label {
   margin-bottom: 7px;
   font-size: large;
@@ -47,22 +55,31 @@ label {
 StepLabel {
   font-size: xx-large;
 }
+
 .image-input {
-  width: 300px; /* Adjust the width as needed */
-  height: 70px; /* Adjust the height as needed */
-  border: none; /* Remove the default border */
-  background-color: transparent; /* Make the background transparent */
-  cursor: pointer; /* Change cursor on hover */
+  width: 300px;
+  /* Adjust the width as needed */
+  height: 70px;
+  /* Adjust the height as needed */
+  border: none;
+  /* Remove the default border */
+  background-color: transparent;
+  /* Make the background transparent */
+  cursor: pointer;
+  /* Change cursor on hover */
 }
 
 /* Add styles for hover and active states (optional) */
 .image-input:hover {
-  opacity: 0.8; /* Reduce opacity on hover */
+  opacity: 0.8;
+  /* Reduce opacity on hover */
 }
 
 .image-input:active {
-  transform: scale(0.95); /* Shrink the image when clicked */
+  transform: scale(0.95);
+  /* Shrink the image when clicked */
 }
+
 .form {
   width: 100%;
   background-color: white;
@@ -79,6 +96,7 @@ StepLabel {
 .table {
   border-radius: 5px;
 }
+
 /* .materialfee, .finaltotal{ 
   margin-left: 67%;
   margin-left: 400px;
@@ -86,17 +104,21 @@ StepLabel {
 .billing {
   width: 95%;
 }
+
 .empty {
   border: none;
 }
+
 .multiselect {
   width: 30%;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 /* input::-webkit-datetime-edit-text{ 
   -webkit-appearance: none;
   display: none;
@@ -136,6 +158,35 @@ input::-webkit-inner-spin-button {
   border: none;
   background: none;
 }
+
 .pop-img {
   width: 75%;
 }
+
+/* input[type="date"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  color: #fff;
+  position: relative;
+}
+
+input[type="date"]::-webkit-datetime-edit-year-field {
+  position: absolute !important;
+  color: #000;
+  left: 50px;
+  hyphens: auto !important;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field {
+  position: absolute !important;
+  color: #000;
+  left: 26px;
+}
+
+
+input[type="date"]::-webkit-datetime-edit-day-field {
+  position: absolute !important;
+  color: #000;
+  left: 4px;
+
+} */
