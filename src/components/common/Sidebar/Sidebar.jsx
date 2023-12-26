@@ -475,6 +475,7 @@ const Sidebar = () => {
                     {filteredroles && profile == filteredroles.role && filteredroles.permissions[2].submenus[1].create == true ? (
                       <div title="Assign Assets">
                         <Item
+
                           title="Assign Assets"
                           to="/assignassets"
                           icon={<AssignmentTurnedInIcon />}

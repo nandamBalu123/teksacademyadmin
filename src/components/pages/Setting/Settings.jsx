@@ -89,6 +89,17 @@ const Settings = () => {
                         <Card
                             className="cardcolor"
                         >
+                            <NavLink to="/admissionfee" className="text-center pt-3">
+                                <p className="text-center pt-3 text-light" >
+                                    Admission Fee
+                                </p>
+                            </NavLink>
+                        </Card>
+                    </div>
+                    <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
+                        <Card
+                            className="cardcolor"
+                        >
                             <NavLink to="/courses" className="text-center pt-3">
                                 <p className="text-center pt-3 text-light" >
                                     Courses
@@ -96,6 +107,11 @@ const Settings = () => {
                             </NavLink>
                         </Card>
                     </div>
+
+
+
+                </div>
+                <div className='row px-2'>
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
                         <Card
                             className="cardcolor"
@@ -107,10 +123,6 @@ const Settings = () => {
                             </NavLink>
                         </Card>
                     </div>
-
-
-                </div>
-                <div className='row px-2'>
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
                         <Card
                             className="cardcolor"

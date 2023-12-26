@@ -317,7 +317,7 @@ const DownloadSyllabus = () => {
       search: "",
     });
   };
-return (
+  return (
 
     <div className="container">
       <div className="studetdetails   mt-3">
@@ -351,11 +351,11 @@ return (
             <div className="d-flex justify-content-around">
               <p className="pt-3">
                 {recordCount}/{initialDataCount}{" "}
-              </p> 
+              </p>
 
               <p>
                 <select onChange={handlerecorddata} className="mt-3">
-                <option value="10">10</option>
+                  <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
                   <option value="100">100</option>
@@ -481,158 +481,159 @@ return (
         </div>
 
         <div className="student-table">
-         
-            <TableContainer sx={{ maxHeight: 440 }} component={Paper}>
-              <Table stickyHeader aria-label="sticky table " borderAxis="both">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="table-cell-heading">
-                      SNo
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Name
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Email
-                    </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      City
-                    </TableCell>
+          <TableContainer sx={{ maxHeight: 440 }} component={Paper}>
+            <Table stickyHeader aria-label="sticky table " borderAxis="both">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="table-cell-heading">
+                    SNo
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Name
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Email
+                  </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Contact Number
-                    </TableCell>
+                  <TableCell className="table-cell-heading">
+                    City
+                  </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Date
-                    </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Contact Number
+                  </TableCell>
 
-                    {/* <TableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
+                    Date
+                  </TableCell>
+
+                  {/* <TableCell className="table-cell-heading">
                       Actions
                     </TableCell> */}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {Array.isArray(records) && records.length > 0 ? (
-                    records.map((item, index) => {
-                      let date = new Date(item.admissiondate);
-                      const day = date.getUTCDate();
-                      const monthIndex = date.getUTCMonth();
-                      const year = date.getUTCFullYear();
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Array.isArray(records) && records.length > 0 ? (
+                  records.map((item, index) => {
+                    let date = new Date(item.admissiondate);
+                    const day = date.getUTCDate();
+                    const monthIndex = date.getUTCMonth();
+                    const year = date.getUTCFullYear();
 
-                      const monthAbbreviations = [
-                        "Jan",
-                        "Feb",
-                        "Mar",
-                        "Apr",
-                        "May",
-                        "Jun",
-                        "Jul",
-                        "Aug",
-                        "Sep",
-                        "Oct",
-                        "Nov",
-                        "Dec",
-                      ];
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
 
-                      // Formatting the date
-                      date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
-                        }-${year}`;
+                    // Formatting the date
+                    date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                      }-${year}`;
 
-                      // Updating the state with the formatted date
+                    // Updating the state with the formatted date
 
-                      return (
-                        <TableRow key={item.id}>
-                          <TableCell className="Table-cell">
-                          {((page-1)*itemsPerPage)+index + 1}
-                          </TableCell>
+                    return (
 
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.name}
-                              style={{
-                                width: "9rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
+                      <TableRow key={item.id}>
+                        <TableCell className="Table-cell">
+                          {((page - 1) * itemsPerPage) + index + 1}
+                        </TableCell>
 
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.name}
-                            </span>
-                          </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.name}
+                            style={{
+                              width: "9rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
 
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.email}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.email}
-                            </span>
-                          </TableCell>
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.name}
+                          </span>
+                        </TableCell>
 
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.city}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.email}
+                            style={{
+                              width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.email}
+                          </span>
+                        </TableCell>
 
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.city}
-                            </span>
-                          </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.city}
+                            style={{
+                              width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
 
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.phone}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.city}
+                          </span>
+                        </TableCell>
 
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.phone}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.date}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.phone}
+                            style={{
+                              width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
 
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.date}
-                            </span>
-                          </TableCell>
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.phone}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.date}
+                            style={{
+                              width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.date}
+                          </span>
+                        </TableCell>
 
 
-                          {/* <TableCell className="text-center d-flex mt-2">
+                        {/* <TableCell className="text-center d-flex mt-2">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon
                                 style={{ width: "40px" }}
@@ -685,18 +686,18 @@ return (
                               </DialogActions>
                             </Dialog>
                           </TableCell> */}
-                        </TableRow>
-                      );
-                    })
-                  ) : (
-                    <TableRow>
-                      <TableCell colSpan={3}>No data available</TableCell>
-                    </TableRow>
-                  )}{" "}
-                </TableBody>
-              </Table>
-            </TableContainer>
-     
+                      </TableRow>
+                    );
+                  })
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={3}>No data available</TableCell>
+                  </TableRow>
+                )}{" "}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
         </div>
 
         <div

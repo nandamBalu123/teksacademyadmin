@@ -72,6 +72,8 @@ import SlpEnquireLeads from "./components/pages/Leads/Website Leads/SlpEnquireLe
 import Permissions from "./components/pages/settings/roles/Permissions";
 import Settings from "./components/pages/Setting/Settings";
 import Forms from "./components/pages/settings/Form/Forms";
+import AdmissionFee from "./components/pages/settings/Admission Fee/AdmissionFee";
+import CreateAdmissionFee from "./components/pages/settings/Admission Fee/CreateAdmissionFee";
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
   const { user } = useAuthContext();
@@ -605,6 +607,7 @@ function App() {
                     )
                   }
                 />
+
                 <Route
                   path="/courses"
                   element={
@@ -641,6 +644,28 @@ function App() {
                     )
                   }
                 />
+                <Route
+                  path="/admissionfee"
+                  element={
+                    user ? (
+                      <AdmissionFee />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                <Route 
+                path="/createadmissionfee"
+                element={
+                  user ? (
+                    <CreateAdmissionFee/>
+                  
+                  ):(
+                    <Dashboard/>
+                  )
+                }
+                />
+
                 {/* settings end */}
 
                 <Route

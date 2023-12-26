@@ -72,3 +72,7 @@
 .css-havevq-MuiSvgIcon-root {
   width: 0.9em !important;
 }
+
+.pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item>.pro-item-content {
+  padding-bottom: 2px;
+}
