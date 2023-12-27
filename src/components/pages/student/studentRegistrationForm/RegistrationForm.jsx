@@ -39,7 +39,6 @@ import { useCoursePackageContext } from "../../../../hooks/useCoursePackageConte
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
-import moment from 'moment';
 
 import { DateField } from "@mui/x-date-pickers/DateField";
 import $ from 'jquery';
@@ -319,6 +318,20 @@ export default function RegistrationForm() {
 
     setTaxamount(totalamount - actualfee);
   });
+
+  // fee binding as per course selected
+
+  useEffect(() => {
+    if (feetype === "Admission Fee") {
+      setAmount(499)
+    }
+    if (feetype === "fee") {
+      let coursefee;
+      let course = getcourses.filter((course) => course.course_name === courses)
+      console.log("course fee", course)
+      setAmount(course[0].fee)
+    }
+  }, [feetype])
   const handleFeeDetails = (e) => {
     e.preventDefault();
 
@@ -633,8 +646,20 @@ export default function RegistrationForm() {
 
     handleNext();
   };
+
+  useEffect(() => {
+    const today = new Date(validitystartdate);
+    const futureDate = new Date(today.getFullYear(), today.getMonth() + 10, today.getDate());
+
+    // Format the future date as a string (e.g., "YYYY-MM-DD")
+    const formattedFutureDate = `${futureDate.getFullYear()}-${(futureDate.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${futureDate.getDate().toString().padStart(2, '0')}`;
+    setValidityEndDate(formattedFutureDate)
+
+  }, [validitystartdate])
   const handleAdmissiondetails = () => {
-    console.log("leadSource", leadsource, educationtype);
+
     if (!branch) {
       alert("please enter branch");
       return;
@@ -2015,6 +2040,9 @@ export default function RegistrationForm() {
                       type="number"
                       variant="standard"
                       className="w-75"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
                       required
                       onChange={(e) => setAmount(e.target.value)}
                       value={amount}

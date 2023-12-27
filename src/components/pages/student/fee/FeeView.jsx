@@ -14,7 +14,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import InputLabel from "@mui/material/InputLabel";
+
 import MenuItem from "@mui/material/MenuItem";
+
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -45,7 +47,21 @@ const FeeView = () => {
   const [extraDiscount, setExtraDiscount] = useState();
   const [Discountremarkshistory, setDiscount_remarks_history] = useState("");
   const [text, setText] = useState("");
+  let getAdmissionFee
+  useEffect(() => {
+    if (studentdata) {
+      let feedetails = studentdata.feedetails
+      let admissionFee = feedetails.filter((item) => item.feetype === "Admission Fee")
+      console.log("admissionFee", admissionFee[0].amount)
+      getAdmissionFee = admissionFee[0].amount
+      setAdmissionFee({
+        ...admissionFee,
+        initialamount: getAdmissionFee,
+        // You can update other properties as needed
+      });
+    }
 
+  }, [studentdata])
   const [admissionFee, setAdmissionFee] = useState({
     initialamount: 0,
     paiddate: new Date().toISOString().substr(0, 10),
@@ -62,6 +78,7 @@ const FeeView = () => {
         return singlestudentCondition;
       });
       setstudentdata(filteredResults[0]);
+      console.log("filteredResults[0]", filteredResults[0])
     }
   }, [students, id, dispatch]);
   useEffect(() => {
