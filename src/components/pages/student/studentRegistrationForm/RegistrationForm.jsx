@@ -39,7 +39,6 @@ import { useCoursePackageContext } from "../../../../hooks/useCoursePackageConte
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
-import moment from 'moment';
 
 import { DateField } from "@mui/x-date-pickers/DateField";
 import $ from 'jquery';

@@ -37,9 +37,48 @@ const CreateReport = () => {
     }
 
   )
+  let [filters, setFilters] = useState([])
+  useEffect(() => {
+    setReportForm((prevForm) => ({
+      ...prevForm,
+      filter: filters
+    }));
+  }, [filters])
+  const handleFilterChange = (event, index) => {
+    const { name, value } = event.target;
 
+    // Create a copy of the filters array
+    const updatedFilters = [...filters];
+
+    // Update the specific filter object with the new value
+    updatedFilters[index] = {
+      ...updatedFilters[index],
+      [name]: value,
+    };
+
+    // Update the state with the modified filters array
+    setFilters(updatedFilters);
+  };
+
+  const handleFilterDelete = (index) => {
+    // Create a copy of the filters array
+    const updatedFilters = [...filters];
+
+    // Remove the filter object at the specified index
+    updatedFilters.splice(index, 1);
+
+    // Update the state with the modified filters array
+    setFilters(updatedFilters);
+  };
+  const handleAddFilter = () => {
+
+    setFilters([...filters, { filter: "", operator: "", subFilter: "" }])
+
+  };
   useEffect(() => {
     console.log("reportForm", reportForm)
+    console.log("filters", filters)
+
   })
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -52,7 +91,8 @@ const CreateReport = () => {
           [nestedProperty]: value,
         },
       }));
-    } else {
+    }
+    else {
       if (name === 'reportType') {
         setReportForm((prevForm) => ({
           ...prevForm,
@@ -477,60 +517,76 @@ const CreateReport = () => {
                 <div className="d-flex justify-content-between alldimensions">
                   <h6 className="pt-2"> Filters</h6>
 
-                  <button type="button" className="btn btn-color" style={{ border: "1px solid white" }}>
+                  <button type="button" onClick={handleAddFilter} className="btn btn-color" style={{ border: "1px solid white" }}>
                     Add Filter
                   </button>
 
                 </div>
 
-                <div className="row px-3">
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3 pb-3">
-                    <FormControl variant="standard" className="w-100">
-                      <InputLabel>
-                        <span className="label-family "> Filter</span>
-                      </InputLabel>
-                      <Select>
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="enquirytakenby">Counsellor</MenuItem>
-                        <MenuItem value="branch manager">Branch Manager</MenuItem>
-                        <MenuItem value="coursepackage">Course Package</MenuItem>
-                        <MenuItem value="courses">Courses</MenuItem>
-                        <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
-                      </Select>
-                    </FormControl></div>
-                  <div className="col-12 col-md-6 col-lg-3 col-xl-3 ">
-                    {/* <FormControl variant="standard" className="w-100">
-                      <InputLabel>
-                        <span className="label-family "> Comparision</span>
-                      </InputLabel>
-                      <Select>
-                        <MenuItem value="equal">Equal</MenuItem>
-                        <MenuItem value="notequal">Not Equal</MenuItem>
 
-                      </Select>
-                    </FormControl> */}
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-3 col-xl-3">
-                    {/* <FormControl variant="standard" className="w-100">
-                      <InputLabel>
-                        <span className="label-family "> Sub-Filter</span>
-                      </InputLabel>
-                      <Select>
-                        <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="enquirytakenby">Counsellor</MenuItem>
-                        <MenuItem value="branch manager">Branch Manager</MenuItem>
-                        <MenuItem value="coursepackage">Course Package</MenuItem>
-                        <MenuItem value="courses">Courses</MenuItem>
-                        <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
-                      </Select>
-                    </FormControl> */}
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 my-2 text-end ">
-                    <button className="btn btn-color">
-                      Add
-                    </button>
-                  </div>
-                </div>
+                {filters && filters.map((filter, index) => {
+                  return (
+                    <div className="row px-3">
+                      <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3 pb-3">
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>
+                            <span className="label-family "> Filter</span>
+                          </InputLabel>
+                          <Select name="filter"
+                            value={filter.filter}
+                            onChange={(event) => handleFilterChange(event, index)}>
+                            <MenuItem value="branch">Branch</MenuItem>
+                            <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                            <MenuItem value="branch manager">Branch Manager</MenuItem>
+                            <MenuItem value="coursepackage">Course Package</MenuItem>
+                            <MenuItem value="courses">Courses</MenuItem>
+                            <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
+                          </Select>
+                        </FormControl></div>
+                      {filter.filter && <div className="col-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>
+                            <span className="label-family "> Comparision</span>
+                          </InputLabel>
+                          <Select name="operator"
+                            value={filter.operator}
+                            onChange={(event) => handleFilterChange(event, index)}>
+                            <MenuItem value="equal">Equal</MenuItem>
+                            <MenuItem value="notequal">Not Equal</MenuItem>
+
+                          </Select>
+                        </FormControl>
+                      </div>}
+                      {filter.operator && <div className="col-12 col-md-6 col-lg-3 col-xl-3">
+                        <FormControl variant="standard" className="w-100">
+                          <InputLabel>
+                            <span className="label-family "> Sub-Filter</span>
+                          </InputLabel>
+                          <Select name="subFilter"
+                            value={filter.subFilter}
+                            onChange={(event) => handleFilterChange(event, index)}>
+                            <MenuItem value="branch">Branch</MenuItem>
+                            <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                            <MenuItem value="branch manager">Branch Manager</MenuItem>
+                            <MenuItem value="coursepackage">Course Package</MenuItem>
+                            <MenuItem value="courses">Courses</MenuItem>
+                            <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </div>
+                      }
+
+                      <div className="col-12 col-md-6 col-lg-2 col-xl-2 my-2 text-end ">
+                        <DeleteIcon
+                          onClick={() => handleFilterDelete(index)}
+                          style={{ cursor: "pointer" }} />
+
+                      </div>
+                    </div>
+                  )
+                })}
+
+
               </div>
             </div>
             <div className=" row report-footer ">
