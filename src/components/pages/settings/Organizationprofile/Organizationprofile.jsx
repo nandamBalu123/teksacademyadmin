@@ -111,36 +111,56 @@ const Organizationprofile = () => {
                     </div>
                     <div class="tab-pane fade" id="nav-edit" role="tabpanel" aria-labelledby="nav-edit-tab">
 
-                        <h5 style={{ backgroundColor: "#ececec", padding: "10px 0px 10px 10px", margin: "15px 0px 10px 0px" }}> Organization Details </h5>
+                        <h5 style={{ backgroundColor: "#ececec", padding: "10px 0px 10px 10px", margin: "15px 0px 15px 0px" }}> Organization Details </h5>
 
-                        <div className="form-group row text-center">
-                            <label htmlFor="inputPassword" className="col-sm-3 col-form-label">Password</label>
-                            <div className="col-sm-7">
-                                <input type="text" className="w-75" id="inputPassword" placeholder="Password" style={{ paddingLeft: "10px" }} />
+                        <div className="form-group row ">
+                            <label htmlFor="inputPassword" className="col-sm-4 col-form-label" style={{ padding: "3px 0px 0px 45px" }}>Organization Name <span className='text-danger'> *</span></label>
+                            <div className="col-sm-7 text-center">
+                                <input type="text" className="w-75" style={{ padding: "5px 0px 5px 10px" }} />
                             </div></div>
 
-                        <div class="table-responsive m-3">
-                            <table class="table  table-hover">
+                        <div className="form-group row ">
+                            <label htmlFor="inputPassword" className="col-sm-4 col-form-label" style={{ padding: "3px 0px 0px 45px" }}>Institute Type<span className='text-danger'> *</span></label>
+                            <div className="col-sm-7 text-center">
+                                <input type="text" className="w-75" style={{ padding: "5px 0px 5px 10px" }} />
+                            </div></div>
+                        <div className="form-group row ">
+                            <label htmlFor="inputPassword" className="col-sm-4 col-form-label" style={{ padding: "3px 0px 0px 45px" }}>Office Address<span className='text-danger'> *</span></label>
+                            <div className="col-sm-7 text-center">
+                                <input type="text" className="w-75" style={{ padding: "5px 0px 5px 10px" }} />
+                            </div></div>
+                        <div className="form-group row ">
+                            <label htmlFor="inputPassword" className="col-sm-4 col-form-label" style={{ padding: "3px 0px 0px 45px" }}>Whatsapp Number</label>
+                            <div className="col-sm-7 text-center">
+                                <input type="number" className="w-75" style={{ padding: "5px 0px 5px 10px" }} />
+                            </div></div>
+                        <div className="form-group row ">
+                            <label htmlFor="inputPassword" className="col-sm-4 col-form-label" style={{ padding: "3px 0px 0px 45px" }}>Office Landline Number</label>
+                            <div className="col-sm-7 text-center">
+                                <input type="text" className="w-75" style={{ padding: "5px 0px 5px 10px" }} />
+                            </div></div>
+                        <div className="form-group row ">
+                            <label htmlFor="inputPassword" className="col-sm-4 col-form-label" style={{ padding: "3px 0px 0px 45px" }}>Office Email ID</label>
+                            <div className="col-sm-7 text-center">
+                                <input type="text" className="w-75" style={{ padding: "5px 0px 5px 10px" }} />
+                            </div></div><hr style={{ margin: "25px 0px" }} />
+                        <h5 style={{ backgroundColor: "#ececec", padding: "10px 0px 10px 10px", margin: "15px 0px 15px 0px" }}> Organization Settings</h5>
+                        <div className='row'>
 
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">Organization Name</th>
-                                        <td>Teks Academy</td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Institute Type</th>
-                                        <td>Computer/Dance/Music Training Institute</td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Office Address</th>
-                                        <td >501, 5th floor, green house building, Ameerp</td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
+                        <div class="input-group ">
+                            <label htmlFor="inputPassword" className="col-sm-4 col-form-label" style={{ padding: "3px 0px 0px 45px" }}>select Branding Type</label>
+                            <div className="col-sm-7 text-center">
+                                <select className="custom-select w-75" id="inputGroupSelect01">
+                                    <option selected>Choose...</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+
+                        </div>
+
                     </div>
                     <div class="tab-pane fade" id="nav-subscription" role="tabpanel" aria-labelledby="nav-subscription-tab">
 
