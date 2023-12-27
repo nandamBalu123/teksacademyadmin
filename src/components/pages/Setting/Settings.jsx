@@ -14,6 +14,21 @@ const Settings = () => {
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
                         <Card
                             className="cardcolor"
+
+                        >
+                            <NavLink
+                                to="/organizationprofile"
+                                //  to={`/userview/${user.id}`} 
+                                className="text-center pt-3">
+                                <p className="text-center pt-3 text-light" >
+                                    Organization Profile
+                                </p>
+                            </NavLink>
+                        </Card>
+                    </div>
+                    <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
+                        <Card
+                            className="cardcolor"
                         >
                             <NavLink to="/customform" className="text-center pt-3">
                                 <p className="text-center pt-3 text-light" >
@@ -22,18 +37,7 @@ const Settings = () => {
                             </NavLink>
                         </Card>
                     </div>
-                    <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
-                        <Card
-                            className="cardcolor"
 
-                        >
-                            <NavLink to={`/userview/${user.id}`} className="text-center pt-3">
-                                <p className="text-center pt-3 text-light" >
-                                    Profile
-                                </p>
-                            </NavLink>
-                        </Card>
-                    </div>
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
                         <Card
                             className="cardcolor"

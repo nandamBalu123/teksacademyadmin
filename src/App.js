@@ -74,6 +74,7 @@ import Settings from "./components/pages/Setting/Settings";
 import Forms from "./components/pages/settings/Form/Forms";
 import AdmissionFee from "./components/pages/settings/Admission Fee/AdmissionFee";
 import CreateAdmissionFee from "./components/pages/settings/Admission Fee/CreateAdmissionFee";
+import Organizationprofile from "./components/pages/settings/Organizationprofile/Organizationprofile";
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
   const { user } = useAuthContext();
@@ -654,17 +655,29 @@ function App() {
                     )
                   }
                 />
-                <Route 
-                path="/createadmissionfee"
-                element={
-                  user ? (
-                    <CreateAdmissionFee/>
-                  
-                  ):(
-                    <Dashboard/>
-                  )
-                }
+                <Route
+                  path="/createadmissionfee"
+                  element={
+                    user ? (
+                      <CreateAdmissionFee />
+
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
                 />
+                <Route
+                  path="/organizationprofile"
+                  element={
+                    user ? (
+                      <Organizationprofile />
+
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+
 
                 {/* settings end */}
 
