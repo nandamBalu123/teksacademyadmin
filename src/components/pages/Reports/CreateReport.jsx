@@ -527,7 +527,7 @@ const CreateReport = () => {
                 {filters && filters.map((filter, index) => {
                   return (
                     <div className="row px-3">
-                      <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3 pb-3">
+                      <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3">
                         <FormControl variant="standard" className="w-100">
                           <InputLabel>
                             <span className="label-family "> Filter</span>
@@ -543,8 +543,8 @@ const CreateReport = () => {
                             <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
                           </Select>
                         </FormControl></div>
-                      {filter.filter && <div className="col-12 col-md-6 col-lg-3 col-xl-3 ">
-                        <FormControl variant="standard" className="w-100">
+                      <div className="col-12 col-md-6 col-lg-3 col-xl-3 ">
+                        {filter.filter && <FormControl variant="standard" className="w-100">
                           <InputLabel>
                             <span className="label-family "> Comparision</span>
                           </InputLabel>
@@ -555,10 +555,10 @@ const CreateReport = () => {
                             <MenuItem value="notequal">Not Equal</MenuItem>
 
                           </Select>
-                        </FormControl>
-                      </div>}
-                      {filter.operator && <div className="col-12 col-md-6 col-lg-3 col-xl-3">
-                        <FormControl variant="standard" className="w-100">
+                        </FormControl>}
+                      </div>
+                      <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+                        {filter.operator && <FormControl variant="standard" className="w-100">
                           <InputLabel>
                             <span className="label-family "> Sub-Filter</span>
                           </InputLabel>
@@ -572,14 +572,14 @@ const CreateReport = () => {
                             <MenuItem value="courses">Courses</MenuItem>
                             <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
                           </Select>
-                        </FormControl>
+                        </FormControl>}
                       </div>
-                      }
 
-                      <div className="col-12 col-md-6 col-lg-2 col-xl-2 my-2 text-end ">
+
+                      <div className="col-12 col-md-6 col-lg-1 col-xl-1 my-2 text-end ">
                         <DeleteIcon
                           onClick={() => handleFilterDelete(index)}
-                          style={{ cursor: "pointer" }} />
+                          style={{ cursor: "pointer", margin: "10px 0px 0px 0px" }} />
 
                       </div>
                     </div>
