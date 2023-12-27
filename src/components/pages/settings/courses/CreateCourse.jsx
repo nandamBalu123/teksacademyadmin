@@ -18,14 +18,14 @@ const CreateCourse = () => {
     Delete: false,
     Create: false,
   });
-  
-  
-  
+
+
+
   let user = localStorage.getItem("user");
   let userObject = JSON.parse(user);
   let username = userObject.fullname;
 
-console.log("username", userObject.fullname)
+  console.log("username", userObject.fullname)
 
   // let userFullname;
   // console.log("userFullname", userFullname)
@@ -72,11 +72,11 @@ console.log("username", userObject.fullname)
         },
       }
     );
-    console.log("Response:", response); 
+    console.log("Response:", response);
 
     const json = await response.json();
 
-    console.log("JSON Response:", json); 
+    console.log("JSON Response:", json);
 
     if (response.ok) {
       console.log("cousre created successfully.", json);
@@ -94,77 +94,49 @@ console.log("username", userObject.fullname)
   return (
     <div className="container mt-3">
       <form>
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <div className="container createcourse">
-            <h5 className="text-center mt-3">Create Course</h5>
-            <div className="row">
-              <div className="col-12 col-md-6 col-lg-6 ">
-                <TextField
-                  label={<span className="label-family">Course Name</span>}
-                  className=" mar w-75"
-                  variant="standard"
-                  name="coursename"
-                  type="text"
-                  value={course_name}
-                  onChange={(e) => setcourse(e.target.value)}
-                />
-                <TextField
-                  label={<span className="label-family">Fee</span>}
-                  className=" mar w-75"
-                  variant="standard"
-                  name="fee"
-                  type="number"
-                  value={fee}
-                  onChange={(e) => setFee(e.target.value)}
-                />
-                {/* <input
-                  className="form-control"
-                  placeholder="Course Name"
-                  type="text"
-                  value={course_name}
-                  onChange={(e) => setcourse(e.target.value)}
-                  style={{ padding: "15px" }}
-                /> */}
-                {/* <TextField id="outlined-search" label="Role Name" type="text" value={role} onChange={(e) => setRoleName(e.target.value)} className="w-100" /> */}
-              </div>
-              <div className="col-12 col-md-6 col-lg-4 ">
-                {/* <input
-                  className="form-control"
-                  placeholder="Role Description"
-                  type="text"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  style={{ padding: "15px" }}
-                /> */}
-                {/* <TextField id="outlined-search" label="Role Description" type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="w-100"  /> */}
-              </div>
+
+        <div className="container createcourse">
+          <h5 className="text-center mt-3">Create Course</h5>
+          <div className="row">
+            <div className="col-12 col-md-6 col-lg-6 ">
+              <TextField
+                label={<span className="label-family">Course Name</span>}
+                className=" mar w-75"
+                variant="standard"
+                name="coursename"
+                type="text"
+                value={course_name}
+                onChange={(e) => setcourse(e.target.value)}
+              /></div>
+            <div className="col-12 col-md-6">
+
+              <TextField
+                label={<span className="label-family">Fee</span>}
+                className=" mar w-75"
+                variant="standard"
+                name="fee"
+                type="number"
+                value={fee}
+                onChange={(e) => setFee(e.target.value)}
+              />
             </div>
-            <div className="container ">
-              <button
-                type="submit"
-                class="btn btn-color my-4 "
-                onClick={handleSubmit}
-              >
-                Submit
-              </button>
-            </div>
+
+
+
+
           </div>
-        </Box>
-        {/* <label>Role Description :</label>
-          <input
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-            className="col-12 col-md-6 col-lg-6"
-          />
-         */}
+          <div className="text-end">
+            <button
+              type="submit"
+              class="btn btn-color my-4 mx-5"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+
+
       </form>
     </div>
   );

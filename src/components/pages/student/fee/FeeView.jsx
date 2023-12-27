@@ -1035,14 +1035,14 @@ const FeeView = () => {
           !studentdata.totalinstallments[0] && (
             // !studentdata.totalinstallments[0] &&
             <div>
-              <h4 className="mt-3"> Fee Installments</h4>
+              <h4 className="mt-3 mx-3"> Fee Installments</h4>
               <hr className="mt-1 mb-3" />
               <div className="row m-0 p-0">
-                <div className="col-3 col-md-3 col-lg-3 col-xl-3 pt-2">
+                <div className="col-6 col-md-4 col-lg-4 col-xl-4 pt-2">
                   Enter No.of Installments :-
                 </div>
 
-                <span className="col-2 col-md-2 col-lg-2 col-xl-2">
+                <span className="col-6 col-md-2 col-lg-2 col-xl-2">
                   <TextField
                     type="number"
                     variant="standard"
@@ -1099,7 +1099,7 @@ const FeeView = () => {
                         type="date"
                         variant="standard"
                         name="Installment Date"
-                        className="w-100 "
+                        className="w-100"
                         required
                         InputLabelProps={{
                           shrink: true,
@@ -1129,7 +1129,7 @@ const FeeView = () => {
                       <label> Installment Date</label> */}
                     </div>
 
-                    <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-1">
+                    <div className="col-12 col-md-6 col-lg-4 col-xl-2 mt-1">
                       <TextField
                         disabled={
                           studentdata && studentdata.installments && studentdata.installments[index] && studentdata.installments[index].dueamount}
@@ -1138,7 +1138,7 @@ const FeeView = () => {
                         }
                         type="number"
                         name="Installment Amount"
-                        className="w-100 "
+                        className="w-100"
                         variant="standard"
 
                         required
@@ -1262,7 +1262,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 ">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2  ">
                           <TextField
 
                             select

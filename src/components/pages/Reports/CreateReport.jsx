@@ -32,7 +32,8 @@ const CreateReport = () => {
       reportName: "", reportType: "One Dimensional", description: "", dateFilter: "", dateRangeType: "",
       dateRange: { fromDate: "", toDate: "" },
       dimensions: { dimension1: "" },
-      metrics: "", createdBy: userName, createdAt: new Date()
+      metrics: "", createdBy: userName, createdAt: new Date(),
+      filter: [],
     }
 
   )
@@ -433,13 +434,13 @@ const CreateReport = () => {
                             {Object.keys(reportForm.dimensions).length > 1 &&
                               <div className="d-flex justify-content-evenly">
 
-                                <ArrowUpwardIcon onClick={() => handleMoveDimension(dimension, 'up')} style={{cursor:"pointer"}}/>
+                                <ArrowUpwardIcon onClick={() => handleMoveDimension(dimension, 'up')} style={{ cursor: "pointer" }} />
 
 
-                                <ArrowDownwardIcon onClick={() => handleMoveDimension(dimension, 'down')} style={{cursor:"pointer"}}/>
+                                <ArrowDownwardIcon onClick={() => handleMoveDimension(dimension, 'down')} style={{ cursor: "pointer" }} />
 
 
-                                <DeleteIcon onClick={() => handleDeleteDimension(dimension)} style={{cursor:"pointer"}}/>
+                                <DeleteIcon onClick={() => handleDeleteDimension(dimension)} style={{ cursor: "pointer" }} />
 
                               </div>
                             }
@@ -473,21 +474,60 @@ const CreateReport = () => {
             <div className="px-2 my-2">
               <span className="label-family "> Filters</span>
               <div className="dimensions">
-                <h6 className="alldimensions"> Select Filters</h6>
+                <div className="d-flex justify-content-between alldimensions">
+                  <h6 className="pt-2"> Filters</h6>
+
+                  <button type="button" className="btn btn-color" style={{ border: "1px solid white" }}>
+                    Add Filter
+                  </button>
+
+                </div>
+
                 <div className="row px-3">
-                  <div className="col-12 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3 pb-3">
                     <FormControl variant="standard" className="w-100">
                       <InputLabel>
-                        <span className="label-family "> Add a Filter</span>
+                        <span className="label-family "> Filter</span>
                       </InputLabel>
-                      {/* <Select >
+                      <Select>
                         <MenuItem value="branch">Branch</MenuItem>
-                        <MenuItem value="country"> Country</MenuItem>
-                      </Select> */}
+                        <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                        <MenuItem value="branch manager">Branch Manager</MenuItem>
+                        <MenuItem value="coursepackage">Course Package</MenuItem>
+                        <MenuItem value="courses">Courses</MenuItem>
+                        <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
+                      </Select>
                     </FormControl></div>
-                  <div className="col-12 col-md-4 col-lg-4 col-xl-4 my-2 ">
+                  <div className="col-12 col-md-6 col-lg-3 col-xl-3 ">
+                    {/* <FormControl variant="standard" className="w-100">
+                      <InputLabel>
+                        <span className="label-family "> Comparision</span>
+                      </InputLabel>
+                      <Select>
+                        <MenuItem value="equal">Equal</MenuItem>
+                        <MenuItem value="notequal">Not Equal</MenuItem>
+
+                      </Select>
+                    </FormControl> */}
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-3 col-xl-3">
+                    {/* <FormControl variant="standard" className="w-100">
+                      <InputLabel>
+                        <span className="label-family "> Sub-Filter</span>
+                      </InputLabel>
+                      <Select>
+                        <MenuItem value="branch">Branch</MenuItem>
+                        <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                        <MenuItem value="branch manager">Branch Manager</MenuItem>
+                        <MenuItem value="coursepackage">Course Package</MenuItem>
+                        <MenuItem value="courses">Courses</MenuItem>
+                        <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
+                      </Select>
+                    </FormControl> */}
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-2 col-xl-2 my-2 text-end ">
                     <button className="btn btn-color">
-                      Add Filter
+                      Add
                     </button>
                   </div>
                 </div>
