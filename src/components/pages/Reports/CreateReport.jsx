@@ -527,7 +527,7 @@ const CreateReport = () => {
                 {filters && filters.map((filter, index) => {
                   return (
                     <div className="row px-3">
-                      <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3">
+                      <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3 pb-3">
                         <FormControl variant="standard" className="w-100">
                           <InputLabel>
                             <span className="label-family "> Filter</span>

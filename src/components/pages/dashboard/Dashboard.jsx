@@ -921,10 +921,14 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  <MenuItem className="text-end">
+                  <MenuItem className="d-flex justify-content-between">
                     <button className="btn btn-color" onClick={filterreset}>
 
                       Clear
+                    </button>
+                    <button className="btn btn-color" >
+
+                      Save
                     </button>
                   </MenuItem>
                 </Menu>
@@ -1952,10 +1956,14 @@ const Dashboard = () => {
                         />
                       </div>
                     </div>
-                    <MenuItem className="text-end">
+                    <MenuItem className="d-flex justify-content-between">
                       <button className="btn btn-color" onClick={filterDeuAndReceivedreset}>
 
                         Clear
+                      </button>
+                      <button className="btn btn-color" >
+
+                        Save
                       </button>
                     </MenuItem>
                   </Menu>
@@ -2720,8 +2728,8 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="fromdate"
-                        value={filterDeuAndReceived.fromdate}
-                        onChange={handleDeuAndReceivedInputChange}
+                        value={filterCriteria.fromdate}
+                        onChange={handleInputChange}
                       />
                     </div>
                     <div className="col-12 col-md-6 col-lg-6 col-xl-6 mt-2">
@@ -2734,16 +2742,19 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="todate"
-                        value={filterDeuAndReceived.todate}
-                        onChange={handleDeuAndReceivedInputChange}
+                        value={filterCriteria.todate}
+                        onChange={handleInputChange}
                       />
                     </div>
                   </div>
 
-                  <MenuItem className="text-end">
+                  <MenuItem className="d-flex justify-content-between">
                     <button className="btn btn-color" onClick={filterreset}>
 
                       Clear
+                    </button>
+                    <button className="btn btn-color" >
+                      Save
                     </button>
                   </MenuItem>
                 </Menu>
@@ -3442,10 +3453,14 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                    <MenuItem className="text-end">
+                    <MenuItem className="d-flex justify-content-between">
                       <button className="btn btn-color" onClick={filterDeuAndReceivedreset}>
 
                         Clear
+                      </button>
+                      <button className="btn btn-color" >
+
+                        Save
                       </button>
                     </MenuItem>
                   </Menu>
@@ -4020,10 +4035,14 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  <MenuItem className="text-end">
+                  <MenuItem className="d-felx justify-content-between">
                     <button className="btn btn-color" onClick={filterreset}>
 
                       Clear
+                    </button>
+                    <button className="btn btn-color" >
+
+                      Save
                     </button>
                   </MenuItem>
                 </Menu>
@@ -4570,10 +4589,14 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                    <MenuItem className="text-end">
+                    <MenuItem className="d-flex justify-content-between">
                       <button className="btn btn-color" onClick={filterDeuAndReceivedreset}>
 
                         Clear
+                      </button>
+                      <button className="btn btn-color" >
+
+                        Save
                       </button>
                     </MenuItem>
                   </Menu>
@@ -4993,10 +5016,14 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  <MenuItem className="text-end">
+                  <MenuItem className="d-flex justify-content-between">
                     <button className="btn btn-color" onClick={filterreset}>
 
                       Clear
+                    </button>
+                    <button className="btn btn-color" >
+
+                      Save
                     </button>
                   </MenuItem>
                 </Menu>
@@ -6080,10 +6107,14 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                    <MenuItem className="text-end">
+                    <MenuItem className="d-flex justify-content-between">
                       <button className="btn btn-color" onClick={filterDeuAndReceivedreset}>
 
                         Clear
+                      </button>
+                      <button className="btn btn-color" >
+
+                        Save
                       </button>
                     </MenuItem>
                   </Menu>

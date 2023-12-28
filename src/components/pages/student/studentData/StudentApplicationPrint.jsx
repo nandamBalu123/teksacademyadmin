@@ -201,7 +201,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                           <b>Date of Birth</b>
                         </td>
                         <td colspan="4">
-                          {BirthDate ? BirthDate.substring(0, 10) : "No Date"}
+                          {BirthDate ? BirthDate : "No Date"}
                         </td>
                       </tr>
                       <tr>
