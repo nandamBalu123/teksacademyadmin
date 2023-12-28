@@ -51,6 +51,14 @@ const Report = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+
+  let [filters, setFilters] = useState()
+  useEffect(() => {
+    if (reportForm) {
+      setFilters(reportForm.filter)
+
+    }
+  }, [reportForm])
   const handleSubmit = (e) => {
     e.preventDefault();
     let reports = []
@@ -85,7 +93,7 @@ const Report = () => {
   useEffect(() => {
     console.log("reportForm", reportForm)
     console.log("organizedData", organizedData)
-
+    console.log("filters", filters)
 
   })
   const handleInputChange = (event) => {
@@ -170,17 +178,33 @@ const Report = () => {
   };
   const [filteredStudents, setFilteredStudents] = useState()
   useEffect(() => {
-    if (students && reportForm && reportForm.dateRange.fromDate && reportForm.dateRange.toDate) {
+    if (students && reportForm && reportForm.filter) {
       const filteredResults = students.filter((item) => {
+
+        let allConditionsMet = true;
+        reportForm.filter.forEach((filter) => {
+          let conditionMet = false;
+
+
+          if (item.hasOwnProperty(filter.filter)) {
+
+            conditionMet = item[filter.filter] === filter.subFilter;
+          } else {
+
+            conditionMet = true;
+          }
+          allConditionsMet = allConditionsMet && conditionMet;
+        });
+
         const dateCondition =
           reportForm.dateRange.fromDate && reportForm.dateRange.toDate
             ? item.admissiondate >= reportForm.dateRange.fromDate &&
             item.admissiondate <= reportForm.dateRange.toDate
             : true;
-        return (
-          dateCondition
-        );
+
+        return allConditionsMet && dateCondition;
       });
+
       setFilteredStudents(filteredResults);
     }
   }, [students, reportForm]);
@@ -241,44 +265,116 @@ const Report = () => {
     }
   }, [filteredStudents, reportForm]);
 
-  let [
-    calculations_of_filtered_students,
-    setcalculations_of_filtered_students,
-  ] = useState();
+  // let [
+  //   calculations_of_filtered_students,
+  //   setcalculations_of_filtered_students,
+  // ] = useState();
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   console.log("studentsss:", students);
+  //   console.log("organizedData:", organizedData);
+  //   if (Array.isArray(students) && organizedData) {
+  //     const calculations_of_filtered_students = {};
+  //     if (reportForm.dimensions.dimension1 && !reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3) {
 
-    if (organizedData) {
-      const calculations_of_filtered_students = {};
+  //       Object.entries(organizedData).map(([dim1, students]) => {
+  //         let noOfEnrollments = students.length
+  //         let receivedAmount = 0
+  //         let dueamount = 0
+  //         let totalamount = 0
+  //         if (Array.isArray(students)) {
+  //           students.forEach((student) => {
+  //             receivedAmount += student.totalpaidamount;
+  //             dueamount += student.dueamount;
+  //             totalamount += student.finaltotal;
+  //           });
+  //         }
 
-
-      Object.entries(organizedData).map(([dim1, students]) => {
-        let noOfEnrollments = students.length
-
-        calculations_of_filtered_students[dim1] = {
-          noOfEnrollments: noOfEnrollments
-        }
-      })
-
-
-
-      setcalculations_of_filtered_students(
-        calculations_of_filtered_students
-      );
-    }
-
-
-
-
-  }, [organizedData])
-
-
+  //         calculations_of_filtered_students[dim1] = {
+  //           noOfEnrollments: noOfEnrollments,
+  //           receivedAmount: receivedAmount,
+  //           dueamount: dueamount,
+  //           totalamount: totalamount
+  //         }
+  //       })
+  //     }
+  //     if (reportForm.dimensions.dimension1 && reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3) {
 
 
 
-  useEffect(() => {
-    console.log("calculations_of_filtered_students", calculations_of_filtered_students)
-  })
+  //       Object.keys(organizedData).forEach((dim1) => {
+  //         let dim1TotalAmount = 0;
+  //         let dim1TotalReceivedAmount = 0;
+  //         let dim1TotalDueAmount = 0;
+  //         let dim1TotalStudents = 0;
+
+  //         // Counsellor-wise calculations
+  //         const counsellorWiseTotal = {};
+
+  //         if (organizedData[dim1]) {
+  //           Object.keys(organizedData[dim1]).forEach((dim2) => {
+  //             // Initialize counsellorWiseTotal[dim2] outside the loop
+  //             counsellorWiseTotal[dim2] = {
+  //               totalAmount: 0,
+  //               totalReceivedAmount: 0,
+  //               totalDueAmount: 0,
+  //               students: [],
+  //             };
+
+  //             organizedData[dim1][dim2].forEach((student) => {
+  //               const studentName = student.name;
+  //               const totalamount = parseFloat(student.finaltotal);
+  //               if (!isNaN(totalamount)) {
+  //                 dim1TotalAmount += totalamount;
+  //                 counsellorWiseTotal[dim2].totalAmount += totalamount;
+  //               }
+  //               // ... (similar updates for receivedamount and dueamount)
+
+  //               counsellorWiseTotal[dim2].students.push({
+  //                 name: studentName,
+  //                 course: student.courses,
+  //                 admissionDate: student.admissiondate,
+  //                 totalAmount: totalamount,
+  //                 receivedamount: receivedamount,
+  //                 dueamount: dueamount,
+  //               });
+
+  //               dim1TotalStudents += 1;
+  //             });
+  //           });
+  //         }
+
+  //         calculations_of_filtered_students[dim1] = {
+  //           totalAmount: dim1TotalAmount,
+  //           totalReceivedAmount: dim1TotalReceivedAmount,
+  //           totalDueAmount: dim1TotalDueAmount,
+  //           totalStudents: dim1TotalStudents,
+  //           counsellorWiseTotal,
+  //         };
+  //       });
+
+
+
+
+  //     }
+  //     if (reportForm.dimensions.dimension1 && reportForm.dimensions.dimension2 && reportForm.dimensions.dimension3) {
+
+  //       // Object.keys(organizedData).forEach((dim1))
+  //     }
+  //     setcalculations_of_filtered_students(
+  //       calculations_of_filtered_students
+  //     );
+  //   }
+
+  // }, [organizedData, students])
+
+
+
+
+
+  // useEffect(() => {
+  //   console.log("calculations_of_filtered_students", calculations_of_filtered_students)
+  // })
 
 
 
@@ -350,6 +446,36 @@ const Report = () => {
       }));
     }
   };
+  useEffect(() => {
+    setReportForm((prevForm) => ({
+      ...prevForm,
+      filter: filters
+    }));
+  }, [filters])
+  const handleFilterChange = (event, index) => {
+    const { name, value } = event.target;
+    const updatedFilters = [...filters];
+    updatedFilters[index] = {
+      ...updatedFilters[index],
+      [name]: value,
+    };
+    setFilters(updatedFilters);
+    // if (name === "operator") {
+    //   let filterName = filters[index].filter
+
+    // }
+  };
+
+  const handleFilterDelete = (index) => {
+    const updatedFilters = [...filters];
+    updatedFilters.splice(index, 1);
+    setFilters(updatedFilters);
+  };
+  const handleAddFilter = () => {
+
+    setFilters([...filters, { filter: "", operator: "", subFilter: "" }])
+
+  };
   return (
 
     <div className="container mt-3">
@@ -385,7 +511,7 @@ const Report = () => {
                 shrink: true,
               }}
               name="dateRange.fromDate"
-              value={reportForm && reportForm.dateRange.fromDate}
+              value={reportForm && reportForm.dateRange && reportForm.dateRange.fromDate}
               onChange={handleInputChange}
             />
           </div>
@@ -399,7 +525,7 @@ const Report = () => {
                 shrink: true,
               }}
               name="dateRange.toDate"
-              value={reportForm.dateRange.toDate}
+              value={reportForm && reportForm.dateRange && reportForm.dateRange.toDate}
               onChange={handleInputChange}
             />
           </div>
@@ -443,7 +569,7 @@ const Report = () => {
                           {reportForm.dimensions.dimension3}
                         </TableCell>}
                       <TableCell className="table-cell-heading" align="center">
-
+                        {reportForm.metrics}
                       </TableCell>
 
                       {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
@@ -459,14 +585,38 @@ const Report = () => {
                     {
                       organizedData && reportForm.dimensions.dimension1 && !reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
                       Object.entries(organizedData).map(([dim1, students]) => {
-                        let studentsCount = students.length
+                        let metrics = 0;
+                        if (reportForm.metrics === "Number Of Enrollments") {
+                          metrics = students.length
+                        }
+                        if (reportForm.metrics === "Fee Received Amount") {
+                          if (Array.isArray(students)) {
+                            students.forEach((student) => {
+                              metrics += student.totalpaidamount
+                            })
+                          }
+                        }
+                        if (reportForm.metrics === "Fee Yet To Receive") {
+                          if (Array.isArray(students)) {
+                            students.forEach((student) => {
+                              metrics += student.dueamount;
+                            });
+                          }
+                        }
+                        if (reportForm.metrics === "Total Booking Amount") {
+                          if (Array.isArray(students)) {
+                            students.forEach((student) => {
+                              metrics += student.finaltotal
+                            })
+                          }
+                        }
                         return (
                           <TableRow key={dim1}>
                             <TableCell className="Table-cell text-center">
                               <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
                             </TableCell>
                             <TableCell className="Table-cell text-center">
-                              <span style={{ fontSize: "0.8rem" }}>{studentsCount}</span>
+                              <span style={{ fontSize: "0.8rem" }}>{metrics}</span>
                             </TableCell>
                           </TableRow>
                         )
@@ -477,79 +627,149 @@ const Report = () => {
 
 
 
+                    {reportForm.dimensions.dimension1 &&
+                      reportForm.dimensions.dimension2 &&
+                      !reportForm.dimensions.dimension3 &&
+                      Object.entries(organizedData).map(([dim1, dim1Data]) => (
+                        <TableRow key={dim1}>
+                          <TableCell className="Table-cell text-center">
+                            <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
+                          </TableCell>
+                          <TableCell className="Table-cell text-center">
+
+                            {Object.entries(dim1Data).map(([dim2, students]) => (
+                              <React.Fragment key={dim2}>
+
+                                <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
+                                <hr />
+                              </React.Fragment>
+                            ))}
+                          </TableCell>
+
+                          <TableCell className="Table-cell text-center">
+
+                            {Object.entries(dim1Data).map(([dim2, students]) => {
+
+                              let metrics = 0;
+                              if (reportForm.metrics === "Number Of Enrollments") {
+                                metrics = students.length
+                              }
+                              if (reportForm.metrics === "Fee Received Amount") {
+                                if (Array.isArray(students)) {
+                                  students.forEach((student) => {
+                                    metrics += student.totalpaidamount
+                                  })
+                                }
+
+                              }
+                              if (reportForm.metrics === "Fee Yet To Receive") {
+
+                                if (Array.isArray(students)) {
+                                  students.forEach((student) => {
+                                    metrics += student.dueamount;
+                                  });
+                                }
+                              }
+                              if (reportForm.metrics === "Total Booking Amount") {
+
+                                if (Array.isArray(students)) {
+                                  students.forEach((student) => {
+                                    metrics += student.finaltotal
+                                  })
+                                }
+                              }
+                              return (
+                                <React.Fragment key={dim2}>
+                                  <div style={{ fontSize: "0.8rem" }}>{metrics}</div>
+                                </React.Fragment>
+                              )
+                            })}
+                          </TableCell>
+                        </TableRow>
+                      ))}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {/* {organizedData && reportForm.dimensions.dimension1 && !reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
-                      Object.entries(organizedData).map(([dim1, students]) =>
-
-                        students.map((student) => (
-                          <TableRow key={student.id}>
+                    {reportForm.dimensions.dimension1 &&
+                      reportForm.dimensions.dimension2 &&
+                      reportForm.dimensions.dimension3 &&
+                      Object.entries(organizedData).map(([dim1, dim1Data]) => (
+                        <React.Fragment key={dim1}>
+                          <TableRow>
                             <TableCell className="Table-cell text-center">
                               <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
                             </TableCell>
                             <TableCell className="Table-cell text-center">
-                              <span style={{ fontSize: "0.8rem" }}>{student.name}</span>
+                              {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
+                                <React.Fragment key={dim2}>
+
+                                  <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
+                                  <hr />
+
+
+                                </React.Fragment>
+                              ))}
+
+                            </TableCell>
+                            <TableCell className="Table-cell text-center">
+
+
+                              {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
+                                Object.entries(dim2Data).map(([dim3, students]) => (
+                                  <React.Fragment key={dim3}>
+                                    <div style={{ fontSize: "0.8rem" }} >{dim3}</div>
+                                  </React.Fragment>
+                                ))
+                              ))}
+
+                            </TableCell>
+                            <TableCell className="Table-cell text-center">
+
+
+                              {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
+                                Object.entries(dim2Data).map(([dim3, students]) => {
+                                  let metrics = 0;
+                                  if (reportForm.metrics === "Number Of Enrollments") {
+                                    metrics = students.length
+                                  }
+                                  if (reportForm.metrics === "Fee Received Amount") {
+                                    if (Array.isArray(students)) {
+                                      students.forEach((student) => {
+                                        metrics += student.totalpaidamount
+                                      })
+                                    }
+
+                                  }
+                                  if (reportForm.metrics === "Fee Yet To Receive") {
+
+                                    if (Array.isArray(students)) {
+                                      students.forEach((student) => {
+                                        metrics += student.dueamount;
+                                      });
+                                    }
+                                  }
+                                  if (reportForm.metrics === "Total Booking Amount") {
+
+                                    if (Array.isArray(students)) {
+                                      students.forEach((student) => {
+                                        metrics += student.finaltotal
+                                      })
+                                    }
+                                  }
+                                  return (
+                                    <React.Fragment key={dim3}>
+                                      <div style={{ fontSize: "0.8rem" }}>{metrics}</div>
+                                    </React.Fragment>
+                                  )
+
+                                })
+                              ))}
+
                             </TableCell>
                           </TableRow>
-                        ))
-                      )} */}
-
-                    {reportForm.dimensions.dimension1 && reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
-                      Object.entries(organizedData).map(([dim1, dim1Data]) =>
-                        Object.entries(dim1Data).map(([dim2, students]) =>
-                          students.map((student) => (
-                            <TableRow key={student.id}>
-                              <TableCell className="Table-cell text-center">
-                                <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
-                              </TableCell>
-                              <TableCell className="Table-cell text-center">
-                                <span style={{ fontSize: "0.8rem" }}>{dim2}</span>
-                              </TableCell>
-                              <TableCell className="Table-cell text-center">
-                                <span style={{ fontSize: "0.8rem" }}>{student.name}</span>
-                              </TableCell>
-                            </TableRow>
-                          )))
-                      )}
-                    {reportForm.dimensions.dimension1 && reportForm.dimensions.dimension2 && reportForm.dimensions.dimension3 &&
-                      Object.entries(organizedData).map(([dim1, dim1Data]) =>
-                        Object.entries(dim1Data).map(([dim2, dim2Data]) =>
-                          Object.entries(dim2Data).map(([dim3, students]) =>
-                            students.map((student) => (
-                              <TableRow key={student.id}>
-                                <TableCell className="Table-cell text-center">
-                                  <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
-                                </TableCell>
-                                <TableCell className="Table-cell text-center">
-                                  <span style={{ fontSize: "0.8rem" }}>{dim2}</span>
-                                </TableCell>
-                                <TableCell className="Table-cell text-center">
-                                  <span style={{ fontSize: "0.8rem" }}>{dim3}</span>
-                                </TableCell>
-                                <TableCell className="Table-cell text-center">
-                                  <span style={{ fontSize: "0.8rem" }}>{student.name}</span>
-                                </TableCell>
-                              </TableRow>
-
-                            ))
-                          )
-                        )
-                      )}
+                        </React.Fragment>
+                      ))}
 
 
                   </TableBody>
@@ -564,10 +784,12 @@ const Report = () => {
             <div className="customazie-report p-2 my-2">
               <h5 className="p-2">Customize Report</h5>
               <div className="side-lines px-2">
-                <div className="d-flex justify-content-between">
+                {/* <div className="d-flex justify-content-between">
                   <p> Average of Company Annual Revenue</p>
+
                   <p> INR 0</p>
-                </div><hr />
+                </div>*/}
+                <hr />
                 <div className="accordion mt-3" id="accordionExample" >
                   <div class="accordion-item">
                     <h3 className="accordion-header" id="headingOne">
@@ -662,12 +884,20 @@ const Report = () => {
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         <div className="d-flex justify-content-between">
-                          <h6 > All Metrics</h6>
+                          <FormControl variant="standard" className="w-100">
+                            <InputLabel>
+                              <span className="label-family">Choose</span>
+                            </InputLabel>
+                            <Select name="metrics"
+                              value={reportForm && reportForm.metrics}
+                              onChange={handleInputChange} >
+                              <MenuItem value="Number Of Enrollments">Number of Enrollments</MenuItem>
+                              <MenuItem value="Fee Received Amount">Fee Received Amount</MenuItem>
+                              <MenuItem value="Fee Yet To Receive">Fee Yet To Receive</MenuItem>
+                              <MenuItem value="Total Booking Amount">Total Booking Amount</MenuItem>
 
-                          <button className="btn btn-outline-color"
-                          // onClick={addnew}
-
-                          > Add New</button>
+                            </Select>
+                          </FormControl>
                         </div>
 
                         {/* 
@@ -708,26 +938,106 @@ const Report = () => {
                     </h3>
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
-                        <h6 > Select Filters</h6>
 
+                        <button type="button" onClick={handleAddFilter} className="btn btn-color" style={{ border: "1px solid white" }}>
+                          Add Filter
+                        </button>
+                        {filters && filters.map((filter, index) => {
+                          let filterName = filters[index].filter;
 
-                        <FormControl variant="standard" className="w-100">
-                          <InputLabel>
-                            <span className="label-family "> Add a Filter</span>
-                          </InputLabel>
-                          <Select >
-                            <MenuItem value="branch">Branch</MenuItem>
-                            <MenuItem value="country"> Country</MenuItem>
+                          const groupDataAndCalculatePercentage = (data, key) => {
+                            if (!Array.isArray(data)) {
+                              return {};
+                            }
 
-                          </Select>
-                        </FormControl>
+                            return data.reduce((result, item) => {
+                              const value = item[key];
 
+                              if (!result.includes(value)) {
+                                result.push(value);
+                              }
 
+                              return result;
+                            }, []);
+                          };
+
+                          let subFilterOptions = groupDataAndCalculatePercentage(
+                            students,
+                            filterName
+                          );
+
+                          return (
+                            <div className="row px-3" key={index}>
+                              <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3">
+                                <FormControl variant="standard" className="w-100">
+                                  <InputLabel>
+                                    <span className="label-family "> Filter</span>
+                                  </InputLabel>
+                                  <Select
+                                    name="filter"
+                                    value={filter.filter}
+                                    onChange={(event) => handleFilterChange(event, index)}
+                                  >
+                                    <MenuItem value="branch">Branch</MenuItem>
+                                    <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                                    <MenuItem value="coursepackage">Course Package</MenuItem>
+                                    <MenuItem value="courses">Courses</MenuItem>
+                                    <MenuItem value="modeoftraining">Mode of Training</MenuItem>
+                                  </Select>
+                                </FormControl>
+                              </div>
+                              <div className="col-12 col-md-6 col-lg-3 col-xl-3 ">
+                                {filter.filter && (
+                                  <FormControl variant="standard" className="w-100">
+                                    <InputLabel>
+                                      <span className="label-family "> Comparison</span>
+                                    </InputLabel>
+                                    <Select
+                                      name="operator"
+                                      value={filter.operator}
+                                      onChange={(event) => handleFilterChange(event, index)}
+                                    >
+                                      <MenuItem value="equalto">Equal To</MenuItem>
+                                      {/* <MenuItem value="notequalto">Not Equal To</MenuItem> */}
+                                    </Select>
+                                  </FormControl>
+                                )}
+                              </div>
+                              <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+                                {filter.operator && (
+                                  <FormControl variant="standard" className="w-100">
+                                    <InputLabel>
+                                      <span className="label-family "> Sub-Filter</span>
+                                    </InputLabel>
+                                    <Select
+                                      name="subFilter"
+                                      value={filter.subFilter}
+                                      onChange={(event) => handleFilterChange(event, index)}
+                                    >
+                                      {subFilterOptions &&
+                                        subFilterOptions.map((subFilter, subIndex) => (
+                                          <MenuItem key={subIndex} value={subFilter}>
+                                            {subFilter}
+                                          </MenuItem>
+                                        ))}
+                                    </Select>
+                                  </FormControl>
+                                )}
+                              </div>
+                              <div className="col-12 col-md-6 col-lg-1 col-xl-1 my-2 text-end ">
+                                <DeleteIcon
+                                  onClick={() => handleFilterDelete(index)}
+                                  style={{ cursor: "pointer", margin: "10px 0px 0px 0px" }}
+                                />
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
                   <hr className="py-2" />
-                  <div className="text-end  pb-3 mx-2"> <button className=" btn btn-outline-color "> Apply Changes</button></div>
+                  {/* <div className="text-end  pb-3 mx-2"> <button className=" btn btn-outline-color "> Apply Changes</button></div> */}
                 </div>
               </div>
             </div>
