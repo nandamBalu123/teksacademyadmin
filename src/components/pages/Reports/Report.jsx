@@ -476,6 +476,40 @@ const Report = () => {
     setFilters([...filters, { filter: "", operator: "", subFilter: "" }])
 
   };
+  let [metricsValue, setMetricsValue] = useState(0);
+  useEffect(() => {
+    if (reportForm) {
+      switch (reportForm.metrics) {
+        case "Number Of Enrollments":
+          setMetricsValue(filteredStudents.length);
+          break;
+        case "Fee Received Amount":
+          if (Array.isArray(filteredStudents)) {
+            setMetricsValue(
+              filteredStudents.reduce((total, student) => total + student.totalpaidamount, 0)
+            );
+          }
+          break;
+        case "Fee Yet To Receive":
+          if (Array.isArray(filteredStudents)) {
+            setMetricsValue(
+              filteredStudents.reduce((total, student) => total + student.dueamount, 0)
+            );
+          }
+          break;
+        case "Total Booking Amount":
+          if (Array.isArray(filteredStudents)) {
+            setMetricsValue(
+              filteredStudents.reduce((total, student) => total + student.finaltotal, 0)
+            );
+          }
+          break;
+        default:
+          break;
+      }
+    }
+  }, [reportForm, filteredStudents]);
+
   return (
 
     <div className="container mt-3">
@@ -623,10 +657,6 @@ const Report = () => {
                       }
                       )
                     }
-
-
-
-
                     {reportForm.dimensions.dimension1 &&
                       reportForm.dimensions.dimension2 &&
                       !reportForm.dimensions.dimension3 &&
@@ -636,20 +666,15 @@ const Report = () => {
                             <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
                           </TableCell>
                           <TableCell className="Table-cell text-center">
-
                             {Object.entries(dim1Data).map(([dim2, students]) => (
                               <React.Fragment key={dim2}>
-
                                 <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
-                                <hr />
+
                               </React.Fragment>
                             ))}
                           </TableCell>
-
                           <TableCell className="Table-cell text-center">
-
                             {Object.entries(dim1Data).map(([dim2, students]) => {
-
                               let metrics = 0;
                               if (reportForm.metrics === "Number Of Enrollments") {
                                 metrics = students.length
@@ -660,7 +685,6 @@ const Report = () => {
                                     metrics += student.totalpaidamount
                                   })
                                 }
-
                               }
                               if (reportForm.metrics === "Fee Yet To Receive") {
 
@@ -687,10 +711,6 @@ const Report = () => {
                           </TableCell>
                         </TableRow>
                       ))}
-
-
-
-
                     {reportForm.dimensions.dimension1 &&
                       reportForm.dimensions.dimension2 &&
                       reportForm.dimensions.dimension3 &&
@@ -703,18 +723,12 @@ const Report = () => {
                             <TableCell className="Table-cell text-center">
                               {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
                                 <React.Fragment key={dim2}>
-
                                   <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
-                                  <hr />
-
-
+                              
                                 </React.Fragment>
                               ))}
-
                             </TableCell>
                             <TableCell className="Table-cell text-center">
-
-
                               {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
                                 Object.entries(dim2Data).map(([dim3, students]) => (
                                   <React.Fragment key={dim3}>
@@ -722,11 +736,8 @@ const Report = () => {
                                   </React.Fragment>
                                 ))
                               ))}
-
                             </TableCell>
                             <TableCell className="Table-cell text-center">
-
-
                               {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
                                 Object.entries(dim2Data).map(([dim3, students]) => {
                                   let metrics = 0;
@@ -742,7 +753,6 @@ const Report = () => {
 
                                   }
                                   if (reportForm.metrics === "Fee Yet To Receive") {
-
                                     if (Array.isArray(students)) {
                                       students.forEach((student) => {
                                         metrics += student.dueamount;
@@ -750,7 +760,6 @@ const Report = () => {
                                     }
                                   }
                                   if (reportForm.metrics === "Total Booking Amount") {
-
                                     if (Array.isArray(students)) {
                                       students.forEach((student) => {
                                         metrics += student.finaltotal
@@ -762,33 +771,27 @@ const Report = () => {
                                       <div style={{ fontSize: "0.8rem" }}>{metrics}</div>
                                     </React.Fragment>
                                   )
-
                                 })
                               ))}
-
                             </TableCell>
                           </TableRow>
                         </React.Fragment>
                       ))}
-
-
                   </TableBody>
                 </Table>
               </TableContainer>
             )}
-
-
           </div>
           {/* customazie start  */}
           <div className="col-12 col-md-4 col-lg-4 col-xl-4 p-0 m-0 ">
             <div className="customazie-report p-2 my-2">
               <h5 className="p-2">Customize Report</h5>
               <div className="side-lines px-2">
-                {/* <div className="d-flex justify-content-between">
-                  <p> Average of Company Annual Revenue</p>
+                <div className="d-flex justify-content-between">
+                  <p>{reportForm && reportForm.metrics}</p>
 
-                  <p> INR 0</p>
-                </div>*/}
+                  <p> {metricsValue}</p>
+                </div>
                 <hr />
                 <div className="accordion mt-3" id="accordionExample" >
                   <div class="accordion-item">
