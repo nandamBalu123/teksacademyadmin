@@ -85,3 +85,7 @@
     padding-left: 1rem !important;
     padding-top: 0.5rem !important;
 } */
+.addingfilter {
+    border: 1px solid #eee;
+    padding: 15px 0px;
+}

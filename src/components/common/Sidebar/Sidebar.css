@@ -32,7 +32,7 @@
 
 }
 
-.title-tip[title]:hover {
+/* .title-tip[title]:hover {
   position: relative;
 }
 
@@ -50,7 +50,7 @@
   margin-top: -0.125em;
   border: 0.25em dashed transparent;
   border-right: 0.25em solid #222;
-}
+} */
 
 .pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu>.pro-inner-item:before {
   color: black !important;

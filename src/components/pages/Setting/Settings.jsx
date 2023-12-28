@@ -8,7 +8,7 @@ const Settings = () => {
     const { user } = useAuthContext();
 
     return (
-        <div className='contianer mt-3'>
+        <div className='container mt-3'>
             <div className='allsettings py-3'>
                 <div className='row px-2'>
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>
