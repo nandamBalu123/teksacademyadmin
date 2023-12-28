@@ -24,9 +24,13 @@ import ShareIcon from '@mui/icons-material/Share';
 import { styled } from '@mui/system';
 import axios from "axios";
 import DownloadIcon from '@mui/icons-material/Download';
+import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { AddBusinessTwoTone } from "@mui/icons-material";
+// import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { useStudentsContext } from "../../../hooks/useStudentsContext";
 
 const Report = () => {
@@ -801,76 +805,80 @@ const Report = () => {
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         {reportForm.reportType === "Multi Dimensional" && Object.keys(reportForm.dimensions).length < 3 &&
-                          <button type="button" onClick={handleAddDimension}>
-                            Add Dimension
-                          </button>}
-                        {reportForm.reportType === "One Dimensional" &&
-                          <div>
-                            <FormControl variant="standard" className="w-100">
-                              <InputLabel>
-                                <span className="label-family">Choose</span>
-                              </InputLabel>
-                              <Select name="dimensions.dimension1"
-                                value={reportForm.dimensions.dimension1}
-                                onChange={handleInputChange}>
-                                <MenuItem value=""></MenuItem>
-                                <MenuItem value="courses">Course</MenuItem>
-                                <MenuItem value="branch">Branch</MenuItem>
-                                <MenuItem value="enquirytakenby">Counsellor</MenuItem>
-                                <MenuItem value="coursepackage">Course Package</MenuItem>
-                                <MenuItem value="modeoftraining">Mode of Training</MenuItem>
-                                <MenuItem value="state">State</MenuItem>
-                                <MenuItem value="educationtype">Education Type</MenuItem>
-                                <MenuItem value="academicyear">Academic Year</MenuItem>
-                                <MenuItem value="leadsource">Lead Source</MenuItem>
-                              </Select>
-                            </FormControl>
-                          </div>}
-                        {reportForm.reportType === "Multi Dimensional" &&
-                          <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
-                            {Object.keys(reportForm.dimensions).map((dimension, index) => (
-                              <div key={dimension}>
-                                <FormControl variant="standard" className="w-100">
-                                  <InputLabel>
-                                    <span className="label-family">Choose</span>
-                                  </InputLabel>
-                                  <Select name={`dimensions.${dimension}`}
-                                    value={reportForm.dimensions[dimension]}
-                                    onChange={handleInputChange}>
-                                    <MenuItem value=""></MenuItem>
-                                    <MenuItem value="courses">Course</MenuItem>
-                                    <MenuItem value="branch">Branch</MenuItem>
-                                    <MenuItem value="enquirytakenby">Counsellor</MenuItem>
-                                    <MenuItem value="coursepackage">Course Package</MenuItem>
-                                    <MenuItem value="modeoftraining">Mode Of Training</MenuItem>
-                                    <MenuItem value="state">State</MenuItem>
-                                    <MenuItem value="educationtype">Education Type</MenuItem>
-                                    <MenuItem value="academicyear">Academic Year</MenuItem>
-                                    <MenuItem value="leadsource">Lead Source</MenuItem>
-                                  </Select>
-                                </FormControl>
-                                {Object.keys(reportForm.dimensions).length > 1 &&
-                                  <div>
-                                    <button type="button" onClick={() => handleMoveDimension(dimension, 'up')}>
-                                      Move Up
-                                    </button>
-                                    <button type="button" onClick={() => handleMoveDimension(dimension, 'down')}>
-                                      Move Down
-                                    </button>
-                                    <button type="button" onClick={() => handleDeleteDimension(dimension)}>
-                                      Delete
-                                    </button>
-                                  </div>
-                                }
 
-                              </div>
+                          <div className="text-end">
+                            <span onClick={handleAddDimension} className="btn btn-color">
+                              Add Dimension
 
-
-                            ))}
-
-
+                            </span>
                           </div>
                         }
+                        <div>
+
+                          {reportForm.reportType === "One Dimensional" &&
+                            <div>
+                              <FormControl variant="standard" className="w-100">
+                                <InputLabel>
+                                  <span className="label-family">Choose</span>
+                                </InputLabel>
+                                <Select name="dimensions.dimension1"
+                                  value={reportForm.dimensions.dimension1}
+                                  onChange={handleInputChange}>
+                                  <MenuItem value=""></MenuItem>
+                                  <MenuItem value="courses">Course</MenuItem>
+                                  <MenuItem value="branch">Branch</MenuItem>
+                                  <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                                  <MenuItem value="coursepackage">Course Package</MenuItem>
+                                  <MenuItem value="modeoftraining">Mode of Training</MenuItem>
+                                  <MenuItem value="state">State</MenuItem>
+                                  <MenuItem value="educationtype">Education Type</MenuItem>
+                                  <MenuItem value="academicyear">Academic Year</MenuItem>
+                                  <MenuItem value="leadsource">Lead Source</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </div>}
+                          {reportForm.reportType === "Multi Dimensional" &&
+                            <div >
+                              {Object.keys(reportForm.dimensions).map((dimension, index) => (
+                                <div className="row">
+
+                                  <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 ">
+                                    <div key={dimension}>
+                                      <FormControl variant="standard" className="w-100">
+                                        <InputLabel>
+                                          <span className="label-family">Choose</span>
+                                        </InputLabel>
+                                        <Select name={`dimensions.${dimension}`}
+                                          value={reportForm.dimensions[dimension]}
+                                          onChange={handleInputChange}>
+                                          <MenuItem value=""></MenuItem>
+                                          <MenuItem value="courses">Course</MenuItem>
+                                          <MenuItem value="branch">Branch</MenuItem>
+                                          <MenuItem value="enquirytakenby">Counsellor</MenuItem>
+                                          <MenuItem value="coursepackage">Course Package</MenuItem>
+                                          <MenuItem value="modeoftraining">Mode Of Training</MenuItem>
+                                          <MenuItem value="state">State</MenuItem>
+                                          <MenuItem value="educationtype">Education Type</MenuItem>
+                                          <MenuItem value="academicyear">Academic Year</MenuItem>
+                                          <MenuItem value="leadsource">Lead Source</MenuItem>
+                                        </Select>
+                                      </FormControl>
+                                    </div>
+                                  </div>
+                                  <div className="col-4 m-auto">
+                                    {Object.keys(reportForm.dimensions).length > 1 &&
+                                      <div className="d-flex justify-content-evenly" >
+                                        <ArrowUpwardIcon onClick={() => handleMoveDimension(dimension, 'up')} style={{ cursor: "pointer" }} />
+                                        <ArrowDownwardIcon onClick={() => handleMoveDimension(dimension, 'down')} style={{ cursor: "pointer" }} />
+                                        <DeleteIcon onClick={() => handleDeleteDimension(dimension)} style={{ cursor: "pointer" }} />
+                                      </div>
+                                    }
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          }
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -939,9 +947,12 @@ const Report = () => {
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                       <div class="accordion-body">
 
-                        <button type="button" onClick={handleAddFilter} className="btn btn-color" style={{ border: "1px solid white" }}>
-                          Add Filter
-                        </button>
+                        <div className="text-end">
+                          <button type="button" onClick={handleAddFilter} className="btn btn-color" style={{ border: "1px solid white" }}>
+                            Add Filter
+                          </button>
+
+                        </div>
                         {filters && filters.map((filter, index) => {
                           let filterName = filters[index].filter;
 
@@ -967,9 +978,10 @@ const Report = () => {
                           );
 
                           return (
-                            <div className="row px-3" key={index}>
-                              <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3">
-                                <FormControl variant="standard" className="w-100">
+                            <div>
+                              <div className="row px-3 addingfilter" key={index}>
+
+                                <FormControl variant="standard" className="w-100 pb-1">
                                   <InputLabel>
                                     <span className="label-family "> Filter</span>
                                   </InputLabel>
@@ -985,10 +997,9 @@ const Report = () => {
                                     <MenuItem value="modeoftraining">Mode of Training</MenuItem>
                                   </Select>
                                 </FormControl>
-                              </div>
-                              <div className="col-12 col-md-6 col-lg-3 col-xl-3 ">
+
                                 {filter.filter && (
-                                  <FormControl variant="standard" className="w-100">
+                                  <FormControl variant="standard" className="w-100 pb-1">
                                     <InputLabel>
                                       <span className="label-family "> Comparison</span>
                                     </InputLabel>
@@ -1002,10 +1013,11 @@ const Report = () => {
                                     </Select>
                                   </FormControl>
                                 )}
-                              </div>
-                              <div className="col-12 col-md-6 col-lg-4 col-xl-4">
+
+
                                 {filter.operator && (
-                                  <FormControl variant="standard" className="w-100">
+
+                                  <FormControl variant="standard" className="w-100 pb-1">
                                     <InputLabel>
                                       <span className="label-family "> Sub-Filter</span>
                                     </InputLabel>
@@ -1022,15 +1034,16 @@ const Report = () => {
                                         ))}
                                     </Select>
                                   </FormControl>
+
                                 )}
-                              </div>
-                              <div className="col-12 col-md-6 col-lg-1 col-xl-1 my-2 text-end ">
-                                <DeleteIcon
-                                  onClick={() => handleFilterDelete(index)}
-                                  style={{ cursor: "pointer", margin: "10px 0px 0px 0px" }}
-                                />
-                              </div>
-                            </div>
+
+                                <div className="text-end ">
+                                  <DeleteIcon
+                                    onClick={() => handleFilterDelete(index)}
+                                    style={{ cursor: "pointer", margin: "10px 0px 0px 0px" }}
+                                  />
+                                </div>
+                              </div> </div>
                           );
                         })}
                       </div>
