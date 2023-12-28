@@ -11,6 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { useNavigate } from "react-router-dom";
+import { useStudentsContext } from "../../../hooks/useStudentsContext";
 
 const CreateReport = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const CreateReport = () => {
   if (user) {
     userName = user.fullname
   }
+  const { students, dispatch } = useStudentsContext();
 
   const [customDates, setCustomDates] = useState(false);
   const handleDateFilterChange = (event) => {
@@ -44,30 +46,26 @@ const CreateReport = () => {
       filter: filters
     }));
   }, [filters])
+  // let [subFilterOptions, setSubFilterOptions] = useState()
+  
+
   const handleFilterChange = (event, index) => {
     const { name, value } = event.target;
-
-    // Create a copy of the filters array
     const updatedFilters = [...filters];
-
-    // Update the specific filter object with the new value
     updatedFilters[index] = {
       ...updatedFilters[index],
       [name]: value,
     };
-
-    // Update the state with the modified filters array
     setFilters(updatedFilters);
+    // if (name === "operator") {
+    //   let filterName = filters[index].filter
+
+    // }
   };
 
   const handleFilterDelete = (index) => {
-    // Create a copy of the filters array
     const updatedFilters = [...filters];
-
-    // Remove the filter object at the specified index
     updatedFilters.splice(index, 1);
-
-    // Update the state with the modified filters array
     setFilters(updatedFilters);
   };
   const handleAddFilter = () => {
@@ -78,7 +76,7 @@ const CreateReport = () => {
   useEffect(() => {
     console.log("reportForm", reportForm)
     console.log("filters", filters)
-
+    // console.log("subFilterOptions", subFilterOptions)
   })
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -505,7 +503,10 @@ const CreateReport = () => {
                     <Select name="metrics"
                       value={reportForm.metrics}
                       onChange={handleInputChange} >
-                      <MenuItem value="noOfEnrollments">Number of Enrollments</MenuItem>
+                      <MenuItem value="Number Of Enrollments">Number of Enrollments</MenuItem>
+                      <MenuItem value="Fee Received Amount">Fee Received Amount</MenuItem>
+                      <MenuItem value="Fee Yet To Receive">Fee Yet To Receive</MenuItem>
+                      <MenuItem value="Total Booking Amount">Total Booking Amount</MenuItem>
 
                     </Select>
                   </FormControl></div>
@@ -520,72 +521,99 @@ const CreateReport = () => {
                   <button type="button" onClick={handleAddFilter} className="btn btn-color" style={{ border: "1px solid white" }}>
                     Add Filter
                   </button>
-
                 </div>
 
-
                 {filters && filters.map((filter, index) => {
+                  let filterName = filters[index].filter;
+
+                  const groupDataAndCalculatePercentage = (data, key) => {
+                    if (!Array.isArray(data)) {
+                      return {};
+                    }
+
+                    return data.reduce((result, item) => {
+                      const value = item[key];
+
+                      if (!result.includes(value)) {
+                        result.push(value);
+                      }
+
+                      return result;
+                    }, []);
+                  };
+
+                  let subFilterOptions = groupDataAndCalculatePercentage(
+                    students,
+                    filterName
+                  );
+
                   return (
-                    <div className="row px-3">
-                      <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3 pb-3">
+                    <div className="row px-3" key={index}>
+                      <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3">
                         <FormControl variant="standard" className="w-100">
                           <InputLabel>
                             <span className="label-family "> Filter</span>
                           </InputLabel>
-                          <Select name="filter"
+                          <Select
+                            name="filter"
                             value={filter.filter}
-                            onChange={(event) => handleFilterChange(event, index)}>
+                            onChange={(event) => handleFilterChange(event, index)}
+                          >
                             <MenuItem value="branch">Branch</MenuItem>
                             <MenuItem value="enquirytakenby">Counsellor</MenuItem>
-                            <MenuItem value="branch manager">Branch Manager</MenuItem>
                             <MenuItem value="coursepackage">Course Package</MenuItem>
                             <MenuItem value="courses">Courses</MenuItem>
-                            <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
+                            <MenuItem value="modeoftraining">Mode of Training</MenuItem>
                           </Select>
-                        </FormControl></div>
+                        </FormControl>
+                      </div>
                       <div className="col-12 col-md-6 col-lg-3 col-xl-3 ">
-                        {filter.filter && <FormControl variant="standard" className="w-100">
-                          <InputLabel>
-                            <span className="label-family "> Comparision</span>
-                          </InputLabel>
-                          <Select name="operator"
-                            value={filter.operator}
-                            onChange={(event) => handleFilterChange(event, index)}>
-                            <MenuItem value="equal">Equal</MenuItem>
-                            <MenuItem value="notequal">Not Equal</MenuItem>
-
-                          </Select>
-                        </FormControl>}
+                        {filter.filter && (
+                          <FormControl variant="standard" className="w-100">
+                            <InputLabel>
+                              <span className="label-family "> Comparison</span>
+                            </InputLabel>
+                            <Select
+                              name="operator"
+                              value={filter.operator}
+                              onChange={(event) => handleFilterChange(event, index)}
+                            >
+                              <MenuItem value="equalto">Equal To</MenuItem>
+                              {/* <MenuItem value="notequalto">Not Equal To</MenuItem> */}
+                            </Select>
+                          </FormControl>
+                        )}
                       </div>
                       <div className="col-12 col-md-6 col-lg-4 col-xl-4">
-                        {filter.operator && <FormControl variant="standard" className="w-100">
-                          <InputLabel>
-                            <span className="label-family "> Sub-Filter</span>
-                          </InputLabel>
-                          <Select name="subFilter"
-                            value={filter.subFilter}
-                            onChange={(event) => handleFilterChange(event, index)}>
-                            <MenuItem value="branch">Branch</MenuItem>
-                            <MenuItem value="enquirytakenby">Counsellor</MenuItem>
-                            <MenuItem value="branch manager">Branch Manager</MenuItem>
-                            <MenuItem value="coursepackage">Course Package</MenuItem>
-                            <MenuItem value="courses">Courses</MenuItem>
-                            <MenuItem value="modeoftraning">Mode of Traning</MenuItem>
-                          </Select>
-                        </FormControl>}
+                        {filter.operator && (
+                          <FormControl variant="standard" className="w-100">
+                            <InputLabel>
+                              <span className="label-family "> Sub-Filter</span>
+                            </InputLabel>
+                            <Select
+                              name="subFilter"
+                              value={filter.subFilter}
+                              onChange={(event) => handleFilterChange(event, index)}
+                            >
+                              {subFilterOptions &&
+                                subFilterOptions.map((subFilter, subIndex) => (
+                                  <MenuItem key={subIndex} value={subFilter}>
+                                    {subFilter}
+                                  </MenuItem>
+                                ))}
+                            </Select>
+                          </FormControl>
+                        )}
                       </div>
-
-
                       <div className="col-12 col-md-6 col-lg-1 col-xl-1 my-2 text-end ">
                         <DeleteIcon
                           onClick={() => handleFilterDelete(index)}
-                          style={{ cursor: "pointer", margin: "10px 0px 0px 0px" }} />
-
+                          style={{ cursor: "pointer", margin: "10px 0px 0px 0px" }}
+                        />
                       </div>
                     </div>
-                  )
+                  );
                 })}
-
 
               </div>
             </div>
