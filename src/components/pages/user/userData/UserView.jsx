@@ -12,6 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Link } from "react-router-dom";
 
 import { styled } from "@mui/material/styles";
 import useFormattedDate from "../../../../hooks/useFormattedDate";
@@ -112,6 +113,9 @@ const UserView = () => {
             <p>
               <b> Branch:</b> {singleUser.branch}
             </p>
+            <Link to={`/resetpassword/${id}`}>
+              Change Password
+            </Link>
           </div>
         </div>
         <TableContainer component={Paper} className="my-4" style={{ overflow: "hidden" }}>

@@ -77,6 +77,9 @@ import CreateAdmissionFee from "./components/pages/settings/Admission Fee/Create
 import Organizationprofile from "./components/pages/settings/Organizationprofile/Organizationprofile";
 import CustomStudentForm from "./components/pages/settings/Form/StudentForm/CustomStudentForm";
 import CustomUserForm from "./components/pages/settings/Form/UserForm/CustomUserForm";
+import ResetPassword from "./components/pages/user/userData/ResetPassword";
+import OTPValidation from "./components/pages/user/userData/OTPValidation";
+
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
   const { user } = useAuthContext();
@@ -177,6 +180,17 @@ function App() {
                 <Route
                   path="/userview/:id"
                   element={user ? <UserView /> : <Dashboard />}
+
+                />
+                <Route
+                  path="/resetpassword/:id"
+                  element={user ? <ResetPassword /> : <Dashboard />}
+
+                />
+                <Route
+                  path="/otpvalidation/:id"
+                  element={user ? <OTPValidation
+                  /> : <Dashboard />}
 
                 />
                 <Route
