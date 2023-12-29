@@ -46,25 +46,25 @@ const Organizationprofile = () => {
             <div className='organizationprofile mt-3'>
                 <h5 className=" mt-3 text-center mb-3"> Organization</h5>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
+                    <li className="nav-item  tab-animation" role="presentation" >
+                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true" >Overview</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item  tab-animation" role="presentation">
                         <button class="nav-link " id="log-tab" data-bs-toggle="tab" data-bs-target="#logo" type="button" role="tab" aria-controls="logo" aria-selected="true">Organization Logo</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item tab-animation" role="presentation">
                         <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button" role="tab" aria-controls="edit" aria-selected="false">Edit</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item  tab-animation" role="presentation">
                         <button class="nav-link" id="subscription-tab" data-bs-toggle="tab" data-bs-target="#subscription" type="button" role="tab" aria-controls="subscription" aria-selected="false">Subscription</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item  tab-animation" role="presentation">
                         <button class="nav-link " id="paymenthistory-tab" data-bs-toggle="tab" data-bs-target="#paymenthistory" type="button" role="tab" aria-controls="paymenthistory" aria-selected="true">Payment History</button>
                     </li>
                     {/* <li class="nav-item" role="presentation">
                         <button class="nav-link " id="recentactivities-tab" data-bs-toggle="tab" data-bs-target="#recentactivities" type="button" role="tab" aria-controls="recentactivities" aria-selected="true">Recent Activities</button>
                     </li> */}
-                    <li class="nav-item" role="presentation">
+                    <li className="nav-item  tab-animation" role="presentation">
                         <button class="nav-link " id="viewloginhistory-tab" data-bs-toggle="tab" data-bs-target="#viewloginhistory" type="button" role="tab" aria-controls="viewloginhistory" aria-selected="true">View Login History</button>
                     </li>
                 </ul>
