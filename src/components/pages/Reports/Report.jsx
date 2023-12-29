@@ -81,7 +81,7 @@ const Report = () => {
       )
       .then((res) => {
         if (res.data.updated) {
-          alert("Report Added");
+          alert("Report Updated");
           // dispatch({
           //   type: "UPDATE_NO_OF_INSTALLMENTS",
           //   payload: updateContext,
@@ -525,19 +525,19 @@ const Report = () => {
           <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
 
 
-            <FormControl variant="standard" className="w-100">
+            {reportForm && reportForm.dateRangeType && <FormControl variant="standard" className="w-100">
               <InputLabel>
                 <span className="label-family"> Date Range</span>
               </InputLabel>
               <Select
                 name="dateRangeType"
-                value={reportForm.dateRangeType}
+                value={reportForm && reportForm.dateRangeType}
                 onChange={handleInputChange}>
                 <MenuItem value="lastmonth">Last Month</MenuItem>
                 <MenuItem value="currentmonth">Current Month</MenuItem>
                 <MenuItem value="customDates" >Custom Dates</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl>}
           </div>
           <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1">
             <TextField
@@ -568,11 +568,11 @@ const Report = () => {
             />
           </div>
           <div className="col-6 col-md-4 col-lg-2 col-xl-2 mt-2">
-            <button className="btn btn-outline-color"> Apply</button>
+            {/* <button className="btn btn-outline-color"> Apply</button> */}
           </div>
           {/* <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div> */}
           <div className="col-6 col-md-4 col-lg-2 col-xl-2 ">
-            <Dropdown>
+            {/* <Dropdown>
               <MenuButton className=" btn btn-outline-color mt-2" >Action  </MenuButton>
               <Menu className="dropdown-css">
                 <MenuItem ><ShareIcon /> &nbsp;&nbsp;Share</MenuItem>
@@ -580,7 +580,7 @@ const Report = () => {
                   <DownloadIcon />&nbsp; &nbsp;  Download
                 </MenuItem>
               </Menu>
-            </Dropdown>
+            </Dropdown> */}
           </div>
           <div className="col-6 col-md-3 col-lg-1 col-xl-1 mt-2">
             <button onClick={handleSubmit} className="btn btn-outline-color">Save</button>
@@ -728,7 +728,7 @@ const Report = () => {
                               {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
                                 <React.Fragment key={dim2}>
                                   <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
-                              
+
                                 </React.Fragment>
                               ))}
                             </TableCell>
