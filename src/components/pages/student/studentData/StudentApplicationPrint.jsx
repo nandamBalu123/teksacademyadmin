@@ -250,7 +250,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </h5>
             <div className="row">
               <div className="table-responsive">
-                <table className="table">
+                <table className="table table-bordered">
                   <tbody>
 
                     <tr>
@@ -324,9 +324,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       >
                         Email Id
                       </td>
-                      <td className="borderleft  ">{studentdata.email} </td>
-                      <td className="borderright"></td>
-                      <td className="borderleft "></td>
+                      <td className="borderleft " colSpan={3}>{studentdata.email} </td>
+
+
                       {/* <td className="borderright"></td>
                     <td className="w-25 borderleft "></td> */}
                     </tr>
@@ -344,7 +344,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
               Education Details
             </h5>
             <div className="table-responsive">
-              <table className="table">
+              <table className="table table-bordered">
                 <tbody>
 
 
@@ -432,7 +432,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
             </h5>
           </div>
           <div classNamen="table-responsive my-3">
-            <table className="table ">
+            <table className="table table-bordered">
               <tbody>
 
                 <tr>
