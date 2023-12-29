@@ -77,6 +77,10 @@ import CreateAdmissionFee from "./components/pages/settings/Admission Fee/Create
 import Organizationprofile from "./components/pages/settings/Organizationprofile/Organizationprofile";
 import CustomStudentForm from "./components/pages/settings/Form/StudentForm/CustomStudentForm";
 import CustomUserForm from "./components/pages/settings/Form/UserForm/CustomUserForm";
+import Whatsapp from "./components/pages/settings/Communication/Whatsapp";
+
+import Communication from "./components/pages/settings/Communication/Communication";
+import EmailCommunication from "./components/pages/settings/Communication/EmailCommunication";
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
   const { user } = useAuthContext();
@@ -708,6 +712,39 @@ function App() {
                   element={
                     user ? (
                       <CustomStudentForm />
+                    ) :
+                      (
+                        <Dashboard />
+                      )
+                  }
+                />
+                <Route
+                  path="/communication"
+                  element={
+                    user ? (
+                      <Communication />
+                    ) :
+                      (
+                        <Dashboard />
+                      )
+                  }
+                />
+                <Route
+                  path="/whatsappcommunication"
+                  element={
+                    user ? (
+                      <Whatsapp />
+                    ) :
+                      (
+                        <Dashboard />
+                      )
+                  }
+                />
+                <Route
+                  path="/emailcommunication"
+                  element={
+                    user ? (
+                      <EmailCommunication />
                     ) :
                       (
                         <Dashboard />
