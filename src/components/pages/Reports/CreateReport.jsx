@@ -375,7 +375,7 @@ const CreateReport = () => {
         <div className="row m-0">
           <h5 className="px-4 pt-3">  Basic Information</h5>
           <div className="col-12 col-md-7 col-xl-7 col-lg-7 side-line">
-            <div className="row px-2">
+            <div className="row px-1">
               <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                 <TextField
                   label={<span className="label-family pb-1">Report's Name</span>}
@@ -467,7 +467,7 @@ const CreateReport = () => {
                 label={<span className="label-family">From:</span>}
                 type="date"
                 variant="standard"
-                className="mar mt-1 w-100"
+                className="mar  w-100"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -480,7 +480,7 @@ const CreateReport = () => {
                   label={<span className="label-family">To:</span>}
                   type="date"
                   variant="standard"
-                  className="w-100 mt-1 mar"
+                  className="w-100  mar"
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -490,40 +490,11 @@ const CreateReport = () => {
                 /></div>
             </div>
 
-            {/* <div className="row  px-2">
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                <TextField
-                  label={<span className="label-family">From:</span>}
-                  type="date"
-                  variant="standard"
-                  className="mar  w-100"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="dateRange.fromDate"
-                  value={reportForm.dateRange.fromDate}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                <TextField
-                  label={<span className="label-family">To:</span>}
-                  type="date"
-                  variant="standard"
-                  className="w-100 mar"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="dateRange.toDate"
-                  value={reportForm.dateRange.toDate}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div> */}
+
 
             <div className="px-2 my-2">
               <span className="label-family "> Dimensions</span>
-              <div className="dimensions mb-4">
+              <div className="dimensions mb-3">
                 <div className="d-flex justify-content-between alldimensions">
                   <h6 className="pt-2"> All Dimensions</h6>
                   {reportForm.reportType === "Multi Dimensional" && Object.keys(reportForm.dimensions).length < 3 &&
@@ -534,7 +505,7 @@ const CreateReport = () => {
                 </div>
                 <div className="px-3" >
                   {reportForm.reportType === "One Dimensional" &&
-                    <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
+                    <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-1">
                       <FormControl variant="standard" className="w-100">
                         <InputLabel>
                           <span className="label-family">Choose</span>
@@ -558,7 +529,7 @@ const CreateReport = () => {
                     <div >
                       {Object.keys(reportForm.dimensions).map((dimension, index) => (
                         <div className="row">
-                          <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
+                          <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-1">
 
 
                             <div key={dimension}>
@@ -608,7 +579,7 @@ const CreateReport = () => {
             </div>
             <div className="px-2 my-2">
               <span className="label-family">Metrics</span>
-              <div className="dimensions mb-4">
+              <div className="dimensions mb-3">
                 <h6 className="alldimensions"> All Metrics</h6>
                 <div className="col-8 col-md-8 col-lg-8 col-xl-8 px-3 pb-3">
                   <FormControl variant="standard" className="w-100">
@@ -664,7 +635,7 @@ const CreateReport = () => {
 
                   return (
                     <div className="row px-3" key={index}>
-                      <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3">
+                      <div className="col-12 col-md-6 col-lg-4 col-xl-4 px-3 mb-2">
                         <FormControl variant="standard" className="w-100">
                           <InputLabel>
                             <span className="label-family "> Filter</span>
@@ -738,90 +709,145 @@ const CreateReport = () => {
               <div className="col-12 col-md-2 col-lg-2 col-lg-2">  <button type="submit" onClick={handleSubmit} className="btn btn-color  mt-1 me-3"> Save</button> </div>
             </div>
           </div>
-          <div className="col-12 col-md-5 col-xl-5 col-lg-5">
-            <h5> Report Preview</h5>
-            <div className="col-12 col-md-8 col-lg-8 col-xl-8 mt-2">
-              {/* dimensions data start */}
-              {organizedData && reportForm.dimensions.dimension1 && (
-                <TableContainer component={Paper} className="mb-3">
-                  <Table stickyHeader aria-label="sticky table " borderAxis="both">
-                    <TableHead>
-                      <TableRow>
+          <div className="col-12 col-md-5 col-xl-5 col-lg-5 m-0 p-0">
+            <h5 className="ps-3"> Report Preview</h5>
+
+            {/* dimensions data start */}
+            {organizedData && reportForm.dimensions.dimension1 && (
+              <TableContainer component={Paper} style={{ overflow: "hidden" }}>
+                <Table stickyHeader aria-label="sticky table " borderAxis="both">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell className="table-cell-heading" align="center">
+                        {reportForm.dimensions.dimension1}
+                      </TableCell>
+                      {reportForm.dimensions.dimension2 && <TableCell className="table-cell-heading" align="center">
+                        {reportForm.dimensions.dimension2}
+                      </TableCell>}
+                      {reportForm.dimensions.dimension3 &&
                         <TableCell className="table-cell-heading" align="center">
-                          {reportForm.dimensions.dimension1}
-                        </TableCell>
-                        {reportForm.dimensions.dimension2 && <TableCell className="table-cell-heading" align="center">
-                          {reportForm.dimensions.dimension2}
+                          {reportForm.dimensions.dimension3}
                         </TableCell>}
-                        {reportForm.dimensions.dimension3 &&
-                          <TableCell className="table-cell-heading" align="center">
-                            {reportForm.dimensions.dimension3}
-                          </TableCell>}
-                        <TableCell className="table-cell-heading" align="center">
-                          {reportForm.metrics}
-                        </TableCell>
+                      <TableCell className="table-cell-heading" align="center">
+                        {reportForm.metrics}
+                      </TableCell>
 
-                        {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
+                      {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
 
 
 
 
 
 
-                      {
-                        organizedData && reportForm.dimensions.dimension1 && !reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
-                        Object.entries(organizedData).map(([dim1, students]) => {
-                          let metrics = 0;
-                          if (reportForm.metrics === "Number Of Enrollments") {
-                            metrics = students.length
-                          }
-                          if (reportForm.metrics === "Fee Received Amount") {
-                            if (Array.isArray(students)) {
-                              students.forEach((student) => {
-                                metrics += student.totalpaidamount
-                              })
-                            }
-                          }
-                          if (reportForm.metrics === "Fee Yet To Receive") {
-                            if (Array.isArray(students)) {
-                              students.forEach((student) => {
-                                metrics += student.dueamount;
-                              });
-                            }
-                          }
-                          if (reportForm.metrics === "Total Booking Amount") {
-                            if (Array.isArray(students)) {
-                              students.forEach((student) => {
-                                metrics += student.finaltotal
-                              })
-                            }
-                          }
-                          return (
-                            <TableRow key={dim1}>
-                              <TableCell className="Table-cell text-center">
-                                <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
-                              </TableCell>
-                              <TableCell className="Table-cell text-center">
-                                <span style={{ fontSize: "0.8rem" }}>{metrics}</span>
-                              </TableCell>
-                            </TableRow>
-                          )
+                    {
+                      organizedData && reportForm.dimensions.dimension1 && !reportForm.dimensions.dimension2 && !reportForm.dimensions.dimension3 &&
+                      Object.entries(organizedData).map(([dim1, students]) => {
+                        let metrics = 0;
+                        if (reportForm.metrics === "Number Of Enrollments") {
+                          metrics = students.length
                         }
-                        )
-                      }
-                      {reportForm.dimensions.dimension1 &&
-                        reportForm.dimensions.dimension2 &&
-                        !reportForm.dimensions.dimension3 &&
-                        Object.entries(organizedData).map(([dim1, dim1Data]) => (
+                        if (reportForm.metrics === "Fee Received Amount") {
+                          if (Array.isArray(students)) {
+                            students.forEach((student) => {
+                              metrics += student.totalpaidamount
+                            })
+                          }
+                        }
+                        if (reportForm.metrics === "Fee Yet To Receive") {
+                          if (Array.isArray(students)) {
+                            students.forEach((student) => {
+                              metrics += student.dueamount;
+                            });
+                          }
+                        }
+                        if (reportForm.metrics === "Total Booking Amount") {
+                          if (Array.isArray(students)) {
+                            students.forEach((student) => {
+                              metrics += student.finaltotal
+                            })
+                          }
+                        }
+                        return (
                           <TableRow key={dim1}>
                             <TableCell className="Table-cell text-center">
                               <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
                             </TableCell>
                             <TableCell className="Table-cell text-center">
-                              {Object.entries(dim1Data).map(([dim2, students]) => (
+                              <span style={{ fontSize: "0.8rem" }}>{metrics}</span>
+                            </TableCell>
+                          </TableRow>
+                        )
+                      }
+                      )
+                    }
+                    {reportForm.dimensions.dimension1 &&
+                      reportForm.dimensions.dimension2 &&
+                      !reportForm.dimensions.dimension3 &&
+                      Object.entries(organizedData).map(([dim1, dim1Data]) => (
+                        <TableRow key={dim1}>
+                          <TableCell className="Table-cell text-center">
+                            <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
+                          </TableCell>
+                          <TableCell className="Table-cell text-center">
+                            {Object.entries(dim1Data).map(([dim2, students]) => (
+                              <React.Fragment key={dim2}>
+                                <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
+
+                              </React.Fragment>
+                            ))}
+                          </TableCell>
+                          <TableCell className="Table-cell text-center">
+                            {Object.entries(dim1Data).map(([dim2, students]) => {
+                              let metrics = 0;
+                              if (reportForm.metrics === "Number Of Enrollments") {
+                                metrics = students.length
+                              }
+                              if (reportForm.metrics === "Fee Received Amount") {
+                                if (Array.isArray(students)) {
+                                  students.forEach((student) => {
+                                    metrics += student.totalpaidamount
+                                  })
+                                }
+                              }
+                              if (reportForm.metrics === "Fee Yet To Receive") {
+
+                                if (Array.isArray(students)) {
+                                  students.forEach((student) => {
+                                    metrics += student.dueamount;
+                                  });
+                                }
+                              }
+                              if (reportForm.metrics === "Total Booking Amount") {
+
+                                if (Array.isArray(students)) {
+                                  students.forEach((student) => {
+                                    metrics += student.finaltotal
+                                  })
+                                }
+                              }
+                              return (
+                                <React.Fragment key={dim2}>
+                                  <div style={{ fontSize: "0.8rem" }}>{metrics}</div>
+                                </React.Fragment>
+                              )
+                            })}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    {reportForm.dimensions.dimension1 &&
+                      reportForm.dimensions.dimension2 &&
+                      reportForm.dimensions.dimension3 &&
+                      Object.entries(organizedData).map(([dim1, dim1Data]) => (
+                        <React.Fragment key={dim1}>
+                          <TableRow>
+                            <TableCell className="Table-cell text-center">
+                              <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
+                            </TableCell>
+                            <TableCell className="Table-cell text-center">
+                              {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
                                 <React.Fragment key={dim2}>
                                   <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
 
@@ -829,114 +855,59 @@ const CreateReport = () => {
                               ))}
                             </TableCell>
                             <TableCell className="Table-cell text-center">
-                              {Object.entries(dim1Data).map(([dim2, students]) => {
-                                let metrics = 0;
-                                if (reportForm.metrics === "Number Of Enrollments") {
-                                  metrics = students.length
-                                }
-                                if (reportForm.metrics === "Fee Received Amount") {
-                                  if (Array.isArray(students)) {
-                                    students.forEach((student) => {
-                                      metrics += student.totalpaidamount
-                                    })
-                                  }
-                                }
-                                if (reportForm.metrics === "Fee Yet To Receive") {
-
-                                  if (Array.isArray(students)) {
-                                    students.forEach((student) => {
-                                      metrics += student.dueamount;
-                                    });
-                                  }
-                                }
-                                if (reportForm.metrics === "Total Booking Amount") {
-
-                                  if (Array.isArray(students)) {
-                                    students.forEach((student) => {
-                                      metrics += student.finaltotal
-                                    })
-                                  }
-                                }
-                                return (
-                                  <React.Fragment key={dim2}>
-                                    <div style={{ fontSize: "0.8rem" }}>{metrics}</div>
+                              {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
+                                Object.entries(dim2Data).map(([dim3, students]) => (
+                                  <React.Fragment key={dim3}>
+                                    <div style={{ fontSize: "0.8rem" }} >{dim3}</div>
                                   </React.Fragment>
-                                )
-                              })}
+                                ))
+                              ))}
+                            </TableCell>
+                            <TableCell className="Table-cell text-center">
+                              {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
+                                Object.entries(dim2Data).map(([dim3, students]) => {
+                                  let metrics = 0;
+                                  if (reportForm.metrics === "Number Of Enrollments") {
+                                    metrics = students.length
+                                  }
+                                  if (reportForm.metrics === "Fee Received Amount") {
+                                    if (Array.isArray(students)) {
+                                      students.forEach((student) => {
+                                        metrics += student.totalpaidamount
+                                      })
+                                    }
+
+                                  }
+                                  if (reportForm.metrics === "Fee Yet To Receive") {
+                                    if (Array.isArray(students)) {
+                                      students.forEach((student) => {
+                                        metrics += student.dueamount;
+                                      });
+                                    }
+                                  }
+                                  if (reportForm.metrics === "Total Booking Amount") {
+                                    if (Array.isArray(students)) {
+                                      students.forEach((student) => {
+                                        metrics += student.finaltotal
+                                      })
+                                    }
+                                  }
+                                  return (
+                                    <React.Fragment key={dim3}>
+                                      <div style={{ fontSize: "0.8rem" }}>{metrics}</div>
+                                    </React.Fragment>
+                                  )
+                                })
+                              ))}
                             </TableCell>
                           </TableRow>
-                        ))}
-                      {reportForm.dimensions.dimension1 &&
-                        reportForm.dimensions.dimension2 &&
-                        reportForm.dimensions.dimension3 &&
-                        Object.entries(organizedData).map(([dim1, dim1Data]) => (
-                          <React.Fragment key={dim1}>
-                            <TableRow>
-                              <TableCell className="Table-cell text-center">
-                                <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
-                              </TableCell>
-                              <TableCell className="Table-cell text-center">
-                                {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
-                                  <React.Fragment key={dim2}>
-                                    <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
+                        </React.Fragment>
+                      ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
 
-                                  </React.Fragment>
-                                ))}
-                              </TableCell>
-                              <TableCell className="Table-cell text-center">
-                                {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
-                                  Object.entries(dim2Data).map(([dim3, students]) => (
-                                    <React.Fragment key={dim3}>
-                                      <div style={{ fontSize: "0.8rem" }} >{dim3}</div>
-                                    </React.Fragment>
-                                  ))
-                                ))}
-                              </TableCell>
-                              <TableCell className="Table-cell text-center">
-                                {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
-                                  Object.entries(dim2Data).map(([dim3, students]) => {
-                                    let metrics = 0;
-                                    if (reportForm.metrics === "Number Of Enrollments") {
-                                      metrics = students.length
-                                    }
-                                    if (reportForm.metrics === "Fee Received Amount") {
-                                      if (Array.isArray(students)) {
-                                        students.forEach((student) => {
-                                          metrics += student.totalpaidamount
-                                        })
-                                      }
-
-                                    }
-                                    if (reportForm.metrics === "Fee Yet To Receive") {
-                                      if (Array.isArray(students)) {
-                                        students.forEach((student) => {
-                                          metrics += student.dueamount;
-                                        });
-                                      }
-                                    }
-                                    if (reportForm.metrics === "Total Booking Amount") {
-                                      if (Array.isArray(students)) {
-                                        students.forEach((student) => {
-                                          metrics += student.finaltotal
-                                        })
-                                      }
-                                    }
-                                    return (
-                                      <React.Fragment key={dim3}>
-                                        <div style={{ fontSize: "0.8rem" }}>{metrics}</div>
-                                      </React.Fragment>
-                                    )
-                                  })
-                                ))}
-                              </TableCell>
-                            </TableRow>
-                          </React.Fragment>
-                        ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              )}
-            </div>
           </div>
         </div>
       </form>

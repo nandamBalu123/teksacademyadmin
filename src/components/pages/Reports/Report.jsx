@@ -539,7 +539,7 @@ const Report = () => {
               </Select>
             </FormControl>}
           </div>
-          <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1">
+          <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
             <TextField
               label=" From:"
               type="date"
@@ -553,7 +553,7 @@ const Report = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1">
+          <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
             <TextField
               label=" To:"
               type="date"
