@@ -38,7 +38,16 @@ const CreateUserForm = () => {
   const [user_status, setUser_status] = useState(true);
   const [user_remarks_history, setuser_remarks_history] = useState([]);
   const profilee = [];
-
+  const [reportToDropDown, setreportToDropDown] = useState()
+  useEffect(() => {
+    if (users) {
+      const filtered = users.filter(user => user.profile.toLowerCase() !== 'counsellor');
+      setreportToDropDown(filtered);
+    }
+  }, [users])
+  useEffect(() => {
+    console.log("reportToDropDown", reportToDropDown)
+  })
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -189,23 +198,7 @@ const CreateUserForm = () => {
                 value={fullname}
                 id="fullname"
               />
-              {/* <label className="mar userlabel " htmlFor="fullname">
-                Full Name<span className="star"> *</span>:
-              </label> */}
-              {/* <input
-                className="mar w-50 "
-                name="fullname"
-                type="text"
-                onChange={(e) => setfullname(e.target.value)}
-                value={fullname}
-                id="fullname"
-              /> */}
-              {/* <div className="w-100  error">
-                {" "}
-                {errors.fullname && (
-                  <span className="error">{errors.fullname}</span>
-                )}
-              </div> */}
+             
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
@@ -219,21 +212,7 @@ const CreateUserForm = () => {
                 id="email"
                 required
               />
-              {/* <label className="mar userlabel" htmlFor="email">
-                Email ID<span className="star"> *</span>:
-              </label>
-              <input
-                className=" mar w-50"
-                name="email"
-                type="email"
-                onChange={(e) => setemail(e.target.value)}
-                value={email}
-                id="email"
-                required
-              /> */}
-              {/* <div className="w-100   error">
-                {errors.email && <span className="error">{errors.email}</span>}{" "}
-              </div> */}
+             
             </div>
           </div>
           <div className="row ">
@@ -250,41 +229,10 @@ const CreateUserForm = () => {
                 required
               />
 
-              {/* <label className="mar userlabel" htmlFor="phonenumber">
-                Phone No. <span className="star"> *</span>:
-              </label>
-              <input
-                className=" mar w-50"
-                name="phonenum"
-                type="number"
-                onChange={(e) => setphonenum(e.target.value)}
-                value={phonenumber}
-                id="phonenumber"
-                required
-              /> */}
-              {/* <div className="w-100  error">
-                {errors.phonenum && (
-                  <span className="error">{errors.phonenum}</span>
-                )}
-              </div> */}
+              
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              {/* <FormControl variant="standard" className="w-75">
-                <InputLabel>Designation <span>*</span></InputLabel>
-                <Select
-                  className=" mar  "
-                  name="designation"
-                  type="text"
-                  onChange={(e) => setdesignation(e.target.value)}
-                  value={designation}
-                  id="designation"
-                  required
-                >
-                  <MenuItem> ---select---</MenuItem>
-                  <MenuItem value="sr.counsellor">Sr. Counsellor </MenuItem>
-                  <MenuItem value="branchmanager">Branch Manager</MenuItem>
-                </Select>
-              </FormControl> */}
+              
               <TextField
                 label={<span className="label-family">Designation</span>}
                 className=" mar w-75"
@@ -297,29 +245,6 @@ const CreateUserForm = () => {
                 required
               />
 
-              {/* <label className="mar userlabel" htmlFor="designation">
-                Designation<span className="star"> *</span> :
-              </label>
-
-              <select
-                className=" mar w-50 ms-2"
-                name="designation"
-                type="text"
-                onChange={(e) => setdesignation(e.target.value)}
-                value={designation}
-                id="designation"
-                required
-              >
-                <option> ---select--- </option>
-                <option> Sr. Counsellor </option>
-                <option> Branch Manager </option>
-              </select> */}
-              {/* <div className=" w-100  error">
-                {" "}
-                {errors.designation && (
-                  <span className="error">{errors.designation}</span>
-                )}
-              </div> */}
             </div>
           </div>
           <div className="row">
@@ -331,7 +256,7 @@ const CreateUserForm = () => {
                       Department <span>*</span>
                     </span>
                   }
-                  {/* Department<span> *</span> */}
+              
                 </InputLabel>
                 <Select
                   className="mar"
@@ -351,71 +276,36 @@ const CreateUserForm = () => {
                 </Select>
               </FormControl>
 
-              {/* <label className="mar userlabel" htmlFor="department">
-                Department<span className="star"> *</span>:
-              </label>
-
-              <select
-                // className="col-9 col-md-5"
-                className=" mar "
-                name="department"
-                id="department"
-                required
-                style={{
-                  height: "35px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                onChange={(e) => setdepartment(e.target.value)}
-                value={department}
-              >
-                <option value="">--select--</option>
-
-                {departments &&
-                  departments.map((item, index) => (
-                    <option key={item.id} value={item.department_name}>
-                      {item.department_name}
-                    </option>
-                  ))}
-              </select> */}
-
-              {/* <div className="w-100  error">
-                {" "}
-                {errors.department && (
-                  <span className="error">{errors.department}</span>
-                )}
-              </div> */}
+             
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              <TextField
-                label={<span className="label-family">Report To</span>}
-                variant="standard"
-                className=" mar w-75"
-                name="reportto"
-                type="text"
-                onChange={(e) => setreportto(e.target.value)}
-                value={reportto}
-                id="reportto"
-                required
-              />
+              <FormControl variant="standard" className="w-75">
+                <InputLabel>
+                  <span className="label-family">
+                    Report To <span>*</span>
+                  </span>
 
-              {/* <label className="mar userlabel" htmlFor="reportto">
-                Report to <span className="star"> *</span> :
-              </label> */}
-              {/* <input
-                className=" mar w-50"
-                name="reportto"
-                type="text"
-                onChange={(e) => setreportto(e.target.value)}
-                value={reportto}
-                id="reportto"
-                required
-              /> */}
-              {/* <div className="w-100  error">
-                {errors.reportto && (
-                  <span className="error">{errors.reportto}</span>
-                )}
-              </div> */}
+                </InputLabel>
+                <Select
+                  className="mar "
+                  name="reportto"
+                  id="reportto"
+                  required
+                  onChange={(e) => setreportto(e.target.value)}
+                  value={reportto}
+                >
+                  <MenuItem> ---select---</MenuItem>
+                  {reportToDropDown &&
+                    reportToDropDown.map((item, index) => (
+                      <MenuItem key={item.id} value={item.fullname}>
+                        {item.fullname}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+        
+
+           
             </div>
           </div>
           <div className="row ">
@@ -426,7 +316,7 @@ const CreateUserForm = () => {
                     Role <span>*</span>
                   </span>
 
-                  {/* Role <span> *</span> */}
+         
                 </InputLabel>
                 <Select
                   className="mar "
@@ -446,39 +336,7 @@ const CreateUserForm = () => {
                 </Select>
               </FormControl>
 
-              {/* <label className="mar userlabel" htmlFor="profile">
-                Role <span className="star"> *</span>:
-              </label>
-              <select
-                // className="col-9 col-md-5"
-                className="mar w-50 ms-2"
-                name="profile"
-                id="profile"
-                required
-                style={{
-                  height: "35px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                onChange={(e) => setprofile(e.target.value)}
-                value={profile}
-              >
-                <option value="">--select--</option>
-
-                {roles &&
-                  roles.map((item, index) => (
-                    <option key={item.id} value={item.role}>
-                      {item.role}
-                    </option>
-                  ))}
-              </select> */}
-              {/* 
-              <div className="w-100 error">
-                {" "}
-                {errors.profile && (
-                  <span className="error">{errors.profile}</span>
-                )}
-              </div> */}
+             
             </div>{" "}
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
@@ -487,7 +345,6 @@ const CreateUserForm = () => {
                     Branch <span>*</span>
                   </span>
 
-                  {/* Branch<span> *</span> */}
                 </InputLabel>
                 <Select
                   className=" mar"
@@ -506,38 +363,7 @@ const CreateUserForm = () => {
                     ))}
                 </Select>
               </FormControl>
-              {/* <label className="mar userlabel" htmlFor="branch">
-                Branch <span className="star"> *</span>:
-              </label>
-              <select
-                className=" mar w-50 ms-2"
-                id="branch"
-                name="branch"
-                required
-                style={{
-                  height: "35px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                onChange={(e) => setbranch(e.target.value)}
-                value={branch}
-              >
-                <option value="">--select--</option>
-
-                {branches &&
-                  branches.map((item, index) => (
-                    <option key={item.id} value={item.branch_name}>
-                      {item.branch_name}
-                    </option>
-                  ))}
-              </select> */}
-              {/* 
-              <div className="w-100  error">
-                {" "}
-                {errors.branch && (
-                  <span className="error">{errors.branch}</span>
-                )}
-              </div> */}
+             
             </div>
           </div>
 

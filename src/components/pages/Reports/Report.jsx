@@ -81,7 +81,7 @@ const Report = () => {
       )
       .then((res) => {
         if (res.data.updated) {
-          alert("Report Added");
+          alert("Report Updated");
           // dispatch({
           //   type: "UPDATE_NO_OF_INSTALLMENTS",
           //   payload: updateContext,
@@ -480,6 +480,40 @@ const Report = () => {
     setFilters([...filters, { filter: "", operator: "", subFilter: "" }])
 
   };
+  let [metricsValue, setMetricsValue] = useState(0);
+  useEffect(() => {
+    if (reportForm) {
+      switch (reportForm.metrics) {
+        case "Number Of Enrollments":
+          setMetricsValue(filteredStudents.length);
+          break;
+        case "Fee Received Amount":
+          if (Array.isArray(filteredStudents)) {
+            setMetricsValue(
+              filteredStudents.reduce((total, student) => total + student.totalpaidamount, 0)
+            );
+          }
+          break;
+        case "Fee Yet To Receive":
+          if (Array.isArray(filteredStudents)) {
+            setMetricsValue(
+              filteredStudents.reduce((total, student) => total + student.dueamount, 0)
+            );
+          }
+          break;
+        case "Total Booking Amount":
+          if (Array.isArray(filteredStudents)) {
+            setMetricsValue(
+              filteredStudents.reduce((total, student) => total + student.finaltotal, 0)
+            );
+          }
+          break;
+        default:
+          break;
+      }
+    }
+  }, [reportForm, filteredStudents]);
+
   return (
 
     <div className="container mt-3">
@@ -491,19 +525,19 @@ const Report = () => {
           <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
 
 
-            <FormControl variant="standard" className="w-100">
+            {reportForm && reportForm.dateRangeType && <FormControl variant="standard" className="w-100">
               <InputLabel>
                 <span className="label-family"> Date Range</span>
               </InputLabel>
               <Select
                 name="dateRangeType"
-                value={reportForm.dateRangeType}
+                value={reportForm && reportForm.dateRangeType}
                 onChange={handleInputChange}>
                 <MenuItem value="lastmonth">Last Month</MenuItem>
                 <MenuItem value="currentmonth">Current Month</MenuItem>
                 <MenuItem value="customDates" >Custom Dates</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl>}
           </div>
           <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1">
             <TextField
@@ -534,11 +568,11 @@ const Report = () => {
             />
           </div>
           <div className="col-6 col-md-4 col-lg-2 col-xl-2 mt-2">
-            <button className="btn btn-outline-color"> Apply</button>
+            {/* <button className="btn btn-outline-color"> Apply</button> */}
           </div>
           {/* <div className="col-12 col-md-1 col-lg-1 col-xl-1"></div> */}
           <div className="col-6 col-md-4 col-lg-2 col-xl-2 ">
-            <Dropdown>
+            {/* <Dropdown>
               <MenuButton className=" btn btn-outline-color mt-2" >Action  </MenuButton>
               <Menu className="dropdown-css">
                 <MenuItem ><ShareIcon /> &nbsp;&nbsp;Share</MenuItem>
@@ -546,7 +580,7 @@ const Report = () => {
                   <DownloadIcon />&nbsp; &nbsp;  Download
                 </MenuItem>
               </Menu>
-            </Dropdown>
+            </Dropdown> */}
           </div>
           <div className="col-6 col-md-3 col-lg-1 col-xl-1 mt-2">
             <button onClick={handleSubmit} className="btn btn-outline-color">Save</button>
@@ -627,10 +661,6 @@ const Report = () => {
                       }
                       )
                     }
-
-
-
-
                     {reportForm.dimensions.dimension1 &&
                       reportForm.dimensions.dimension2 &&
                       !reportForm.dimensions.dimension3 &&
@@ -640,20 +670,15 @@ const Report = () => {
                             <span style={{ fontSize: "0.8rem" }}>{dim1}</span>
                           </TableCell>
                           <TableCell className="Table-cell text-center">
-
                             {Object.entries(dim1Data).map(([dim2, students]) => (
                               <React.Fragment key={dim2}>
-
                                 <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
-                                <hr />
+
                               </React.Fragment>
                             ))}
                           </TableCell>
-
                           <TableCell className="Table-cell text-center">
-
                             {Object.entries(dim1Data).map(([dim2, students]) => {
-
                               let metrics = 0;
                               if (reportForm.metrics === "Number Of Enrollments") {
                                 metrics = students.length
@@ -664,7 +689,6 @@ const Report = () => {
                                     metrics += student.totalpaidamount
                                   })
                                 }
-
                               }
                               if (reportForm.metrics === "Fee Yet To Receive") {
 
@@ -691,10 +715,6 @@ const Report = () => {
                           </TableCell>
                         </TableRow>
                       ))}
-
-
-
-
                     {reportForm.dimensions.dimension1 &&
                       reportForm.dimensions.dimension2 &&
                       reportForm.dimensions.dimension3 &&
@@ -707,18 +727,12 @@ const Report = () => {
                             <TableCell className="Table-cell text-center">
                               {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
                                 <React.Fragment key={dim2}>
-
                                   <div style={{ fontSize: "0.8rem" }}>{dim2}</div>
-                                  <hr />
-
 
                                 </React.Fragment>
                               ))}
-
                             </TableCell>
                             <TableCell className="Table-cell text-center">
-
-
                               {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
                                 Object.entries(dim2Data).map(([dim3, students]) => (
                                   <React.Fragment key={dim3}>
@@ -726,11 +740,8 @@ const Report = () => {
                                   </React.Fragment>
                                 ))
                               ))}
-
                             </TableCell>
                             <TableCell className="Table-cell text-center">
-
-
                               {Object.entries(dim1Data).map(([dim2, dim2Data]) => (
                                 Object.entries(dim2Data).map(([dim3, students]) => {
                                   let metrics = 0;
@@ -746,7 +757,6 @@ const Report = () => {
 
                                   }
                                   if (reportForm.metrics === "Fee Yet To Receive") {
-
                                     if (Array.isArray(students)) {
                                       students.forEach((student) => {
                                         metrics += student.dueamount;
@@ -754,7 +764,6 @@ const Report = () => {
                                     }
                                   }
                                   if (reportForm.metrics === "Total Booking Amount") {
-
                                     if (Array.isArray(students)) {
                                       students.forEach((student) => {
                                         metrics += student.finaltotal
@@ -766,33 +775,27 @@ const Report = () => {
                                       <div style={{ fontSize: "0.8rem" }}>{metrics}</div>
                                     </React.Fragment>
                                   )
-
                                 })
                               ))}
-
                             </TableCell>
                           </TableRow>
                         </React.Fragment>
                       ))}
-
-
                   </TableBody>
                 </Table>
               </TableContainer>
             )}
-
-
           </div>
           {/* customazie start  */}
           <div className="col-12 col-md-4 col-lg-4 col-xl-4 p-0 m-0 ">
             <div className="customazie-report p-2 my-2">
               <h5 className="p-2">Customize Report</h5>
               <div className="side-lines px-2">
-                {/* <div className="d-flex justify-content-between">
-                  <p> Average of Company Annual Revenue</p>
+                <div className="d-flex justify-content-between">
+                  <p>{reportForm && reportForm.metrics}</p>
 
-                  <p> INR 0</p>
-                </div>*/}
+                  <p> {metricsValue}</p>
+                </div>
                 <hr />
                 <div className="accordion mt-3" id="accordionExample" >
                   <div class="accordion-item">

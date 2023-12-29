@@ -144,8 +144,8 @@ const Reports = () => {
                             <span style={{ fontSize: "0.8rem" }}>{createdAt}</span>
                           </TableCell>
                           <TableCell className="Table-cell text-center">
-                            <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
-                            <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                            {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} />
+                            <EditIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                             <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
                           </TableCell>
                         </React.Fragment>
