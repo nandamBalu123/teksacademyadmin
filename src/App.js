@@ -81,6 +81,9 @@ import Whatsapp from "./components/pages/settings/Communication/Whatsapp";
 
 import Communication from "./components/pages/settings/Communication/Communication";
 import EmailCommunication from "./components/pages/settings/Communication/EmailCommunication";
+import ResetPassword from "./components/pages/user/userData/ResetPassword";
+import OTPValidation from "./components/pages/user/userData/OTPValidation";
+
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
   const { user } = useAuthContext();
@@ -181,6 +184,17 @@ function App() {
                 <Route
                   path="/userview/:id"
                   element={user ? <UserView /> : <Dashboard />}
+
+                />
+                <Route
+                  path="/resetpassword/:id"
+                  element={user ? <ResetPassword /> : <Dashboard />}
+
+                />
+                <Route
+                  path="/otpvalidation/:id"
+                  element={user ? <OTPValidation
+                  /> : <Dashboard />}
 
                 />
                 <Route
