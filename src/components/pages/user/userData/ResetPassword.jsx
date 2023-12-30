@@ -144,56 +144,51 @@ const ResetPassword = () => {
         <div className='container mt-3'>
             <div className='resetpassword mt-3'>
                 <h5 className='text-center my-2'>Reset Password</h5>
-
-                {/* <p>{checkvalidations.specialCharacter ? <DoneIcon /> : <CloseIcon />} Special Character</p> */}
-
-                <div className='row'>
-                    <div style={{ display: "flex", justifyContent: "center" }}>
-                        <div style={{ border: "1px solid #eee", width: "50%", padding: "20px 0px", margin: "20px 0px 10px 0px" }}>
-                            <form className='text-center'>
-                                <div className=' row '>
-                                    <label for="inputPassword" className="col-form-label col-sm-5 text-end "> New Password :</label>
-                                    <FormControl sx={{ width: '25ch' }} variant="standard" className='col-sm-7'>
-                                        {/* <InputLabel htmlFor="standard-adornment-password ms-2">Password</InputLabel> */}
-                                        <Input
-                                            id="standard-adornment-password"
-                                            type={showPassword ? 'text' : 'password'}
-                                            placeholder="Enter New Password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton
+                <div className='row' style={{ display: "flex", justifyContent: "center" }}>
+                    <div className='col-12  col-xl-7 col-lg-7' style={{ border: "1px solid #eee", marginBottom: "24px", padding: "15px 0px" }}>
+                        <form>
+                            <div className='row'>
+                                <label for="inputPassword" className="col-form-label col-12 col-md-5 col-lg-5 col-xl-5 password-label"> New Password :</label>
+                                <FormControl sx={{ width: '22ch' }} variant="standard" className='col-12 col-md-6 col-lg-7 col-xl-7 password-input ps-4'>
+                                    {/* <InputLabel htmlFor="standard-adornment-password ms-2">Password</InputLabel> */}
+                                    <Input
+                                        id="standard-adornment-password"
+                                        type={showPassword ? 'text' : 'password'}
+                                        placeholder="Enter New Password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        endAdornment={
+                                            <InputAdornment >
+                                                <IconButton
 
 
-                                                    >
-                                                        <span onClick={toggleShowPassword} style={{ cursor: 'pointer' }} className='col-sm-1'>
-                                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                                        </span>
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
-                                        /> <FormHelperText id="standard-weight-helper-text">Don't Share Your Password</FormHelperText>
-                                    </FormControl>
-                                </div>
-                                <div className='row mt-2'>
-                                    <label for="inputPassword" className="col-form-label col-sm-5 text-end "> Confirm Password :</label>
-                                    <FormControl variant="standard" sx={{ width: '25ch' }} className='col-sm-7 '>
-                                        <Input
-                                            type={showPassword ? 'text' : 'password'}
-                                            placeholder="Confirm New Password"
-                                            value={confirmPassword}
-                                            onChange={(e) => setConfirmPassword(e.target.value)}
-                                        />
-                                        {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
-                                    </FormControl>
-                                </div>
+                                                >
+                                                    <span onClick={toggleShowPassword} style={{ cursor: 'pointer' }} >
+                                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                    </span>
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                    /> <FormHelperText id="standard-weight-helper-text">Don't Share Your Password</FormHelperText>
+                                </FormControl>
+                            </div>
+                            <div className='row'>
+                                <label for="inputPassword" className="col-form-label col-12 col-md-5 col-lg-5 col-xl-5 password-label">Confirm Password :</label>
+                                <FormControl variant="standard" sx={{ width: '22ch' }} className='col-12 col-md-6 col-lg-7 col-xl-7 password-input ps-4'>
+                                    <Input
+                                        type={showPassword ? 'text' : 'password'}
+                                        placeholder="Confirm New Password"
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                    />
+                                    {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
+                                </FormControl>
 
-                            </form>
-                            <div className='ms-sm-3 row' >
-                                <div className='col-sm-4'></div>
-                                <div className='col-sm-8'>
-                                    <span style={{ color: checkvalidations.capitalLetter ? "green" : "red", fontSize: "10px", lineHeight: "" }}>
+                            </div>
+                            <div className='row'>
+                                <div className='col-12 col-md-5 col-lg-5 col-xl-5'></div>
+                                <div className='col-12 col-md-6 col-lg-7 col-xl-7 pe-2'>
+                                    <span style={{ color: checkvalidations.capitalLetter ? "green" : "red", fontSize: "10px" }}>
                                         {checkvalidations.capitalLetter ? <DoneIcon /> : < FiberManualRecordIcon style={{ fontSize: "10px" }} />}
                                         &nbsp;Password should contain at least one capital letter</span><br />
                                     <span style={{ color: checkvalidations.lowerLetter ? "green" : "red", fontSize: "10px" }}>
@@ -208,35 +203,23 @@ const ResetPassword = () => {
                                     <span style={{ color: checkvalidations.specialChar ? "green" : "red", fontSize: "10px" }}>
                                         {checkvalidations.specialChar ? <DoneIcon /> : < FiberManualRecordIcon style={{ fontSize: "10px" }} />}
                                         &nbsp; Password should contain at least one special character</span>
+
                                 </div>
-
-
-
                             </div>
                             <div className='row'>
                                 <div className='col-sm-4'></div>
                                 <div className='col-sm-8 text-center'>
                                     <button onClick={handleResetPassword} className='btn btn-color'>Change Password</button>
                                 </div>
-
-
-
                             </div>
-                        </div>
-                        <form >
-                            {/* <input
-                                type={showPassword ? 'text' : 'password'}
-                                placeholder="Confirm New Password"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                            /> */}
-                            {/* {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>} */}
-
 
                         </form>
-
                     </div>
                 </div>
+
+                {/* <p>{checkvalidations.specialCharacter ? <DoneIcon /> : <CloseIcon />} Special Character</p> */}
+
+
 
 
 
