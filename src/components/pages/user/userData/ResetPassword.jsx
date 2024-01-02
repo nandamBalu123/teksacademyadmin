@@ -17,7 +17,8 @@ import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Input as BaseInput } from '@mui/base/Input';
-
+import { useAuthContext } from '../../../../hooks/useAuthContext';
+import { useNavigate } from "react-router-dom";
 const ResetPassword = () => {
     const [showPassword, setShowPassword] = React.useState(false);
 
@@ -134,11 +135,33 @@ const ResetPassword = () => {
 
             if (res.data.updated) {
                 alert('Password changed successfully');
+                handleLogout();
             } else {
                 alert('Try Again');
             }
         });
     };
+
+    const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
+    const handleLogout = () => {
+
+        localStorage.removeItem("user");
+        localStorage.removeItem("role");
+        localStorage.removeItem("token");
+        localStorage.removeItem("id");
+    
+        // dispatch logout action
+        dispatch({ type: "LOGOUT" });
+        navigate("/login");
+        // axios
+        //   .get("http://localhost:3030/logout")
+        //   .then((res) => {
+        //     navigate("/login");
+        //   })
+        //   .catch((err) => cFuseronsole.log(err));
+        // window.location.reload();
+      };
 
     return (
         <div className='container mt-3'>

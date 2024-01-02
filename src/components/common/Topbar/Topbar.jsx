@@ -33,7 +33,9 @@ import { Navigation } from "@mui/icons-material";
 
 const Topbar = () => {
   const { id } = useParams("");
+  
   const [singleUser, setUser] = useState("");
+  
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -49,6 +51,7 @@ const Topbar = () => {
       });
   }, [id]);
   const { user } = useAuthContext();
+  
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -232,7 +235,7 @@ const Topbar = () => {
                </div><hr/> */}
                 <div >
                   <MenuItem className='fs-6' onClick={handleProfile}><PermIdentityIcon className='fs-5' /> &nbsp;Profile </MenuItem>
-                  <MenuItem className='fs-6'><LockResetIcon className='fs-5' /> &nbsp; <Link to={`/resetpassword/${id}`} className="text-dark">
+                  <MenuItem className='fs-6'><LockResetIcon className='fs-5' /> &nbsp; <Link to={`/resetpassword/${user.id}`} className="text-dark">
                     Change Password
                   </Link></MenuItem>
 
