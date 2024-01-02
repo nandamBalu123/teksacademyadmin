@@ -20,18 +20,11 @@ import { Input as BaseInput } from '@mui/base/Input';
 
 const ResetPassword = () => {
     const [showPassword, setShowPassword] = React.useState(false);
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
     const { id } = useParams('');
-
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    // const [showPassword, setShowPassword] = useState(false);
     const [checkvalidations, setcheckValidations] = useState({
         specialChar: false,
         passwordlength: false,
@@ -85,29 +78,24 @@ const ResetPassword = () => {
 
         }
     }, [password])
-    useEffect(() => {
-        console.log("check", checkvalidations)
-    })
+
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
-    const toggleHidePassword = () => {
-        setShowPassword(showPassword);
+    const toggleShowConfirmPassword = () => {
+        setShowConfirmPassword(!showConfirmPassword);
     };
     const handleResetPassword = (e) => {
         e.preventDefault();
-
         // Password validations
         if (password.length < 8) {
             setPasswordError('Password should be at least 8 characters long');
             return;
         }
-
         if (!/(?=.*[A-Z])/.test(password)) {
             setPasswordError('Password should contain at least one capital letter');
             return;
         }
-
         if (!/(?=.*[a-z])/.test(password)) {
             setPasswordError('Password should contain at least one lowercase letter');
             return;
@@ -166,45 +154,73 @@ const ResetPassword = () => {
 
 
                                                 >
-                                                    <span onClick={toggleShowPassword} style={{ cursor: 'pointer' }} >
+                                                    <span onMouseDown={toggleShowPassword} onMouseUp={toggleShowPassword} style={{ cursor: 'pointer' }} >
                                                         {showPassword ? <Visibility /> : <VisibilityOff />}
                                                     </span>
                                                 </IconButton>
                                             </InputAdornment>
                                         }
-                                    /> <FormHelperText id="standard-weight-helper-text">Don't Share Your Password</FormHelperText>
+                                    />
+                                    {/* <FormHelperText id="standard-weight-helper-text">Don't Share Your Password</FormHelperText> */}
                                 </FormControl>
                             </div>
                             <div className='row'>
                                 <label for="inputPassword" className="col-form-label col-12 col-md-5 col-lg-5 col-xl-5 password-label">Confirm Password :</label>
                                 <FormControl variant="standard" sx={{ width: '22ch' }} className='col-12 col-md-6 col-lg-7 col-xl-7 password-input ps-4'>
                                     <Input
-                                        type={showPassword ? 'text' : 'password'}
+                                        type={showConfirmPassword ? 'text' : 'password'}
                                         placeholder="Confirm New Password"
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
+                                        endAdornment={
+                                            <InputAdornment >
+                                                <IconButton
+
+
+                                                >
+                                                    <span onMouseDown={toggleShowConfirmPassword} onMouseUp={toggleShowConfirmPassword} style={{ cursor: 'pointer' }} >
+                                                        {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                                                    </span>
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
                                     />
-                                    {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
+                                    {/* {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>} */}
                                 </FormControl>
 
                             </div>
                             <div className='row'>
                                 <div className='col-12 col-md-5 col-lg-5 col-xl-5'></div>
                                 <div className='col-12 col-md-6 col-lg-7 col-xl-7 pe-2'>
-                                    <span style={{ color: checkvalidations.capitalLetter ? "green" : "red", fontSize: "10px" }}>
-                                        {checkvalidations.capitalLetter ? <DoneIcon /> : < FiberManualRecordIcon style={{ fontSize: "10px" }} />}
+                                    <span style={{
+                                        // color: checkvalidations.capitalLetter ? "green" : "red", 
+                                        fontSize: "10px"
+                                    }}>
+                                        {checkvalidations.capitalLetter ? <DoneIcon style={{ color: "green" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
                                         &nbsp;Password should contain at least one capital letter</span><br />
-                                    <span style={{ color: checkvalidations.lowerLetter ? "green" : "red", fontSize: "10px" }}>
-                                        {checkvalidations.lowerLetter ? <DoneIcon /> : < FiberManualRecordIcon style={{ fontSize: "10px" }} />}
+                                    <span style={{
+                                        // color: checkvalidations.lowerLetter ? "green" : "red", 
+                                        fontSize: "10px"
+                                    }}>
+                                        {checkvalidations.lowerLetter ? <DoneIcon  style={{ color: "green" }} /> : < CloseIcon  style={{ color: "red", fontSize: "15px" }} />}
                                         &nbsp;Password should contain at least one lowercase letter</span><br />
-                                    <span style={{ color: checkvalidations.oneNumber ? "green" : "red", fontSize: "10px" }}>
-                                        {checkvalidations.oneNumber ? <DoneIcon /> : < FiberManualRecordIcon style={{ fontSize: "10px" }} />}
+                                    <span style={{
+                                        // color: checkvalidations.oneNumber ? "green" : "red", 
+                                        fontSize: "10px"
+                                    }}>
+                                        {checkvalidations.oneNumber ? <DoneIcon  style={{ color: "green" }}/> : < CloseIcon  style={{ color: "red", fontSize: "15px" }}/>}
                                         &nbsp;Password should contain at least one number</span><br />
-                                    <span style={{ color: checkvalidations.passwordlength ? "green" : "red", fontSize: "10px" }}>
-                                        {checkvalidations.passwordlength ? <DoneIcon /> : < FiberManualRecordIcon style={{ fontSize: "10px" }} />}
+                                    <span style={{
+                                        //  color: checkvalidations.passwordlength ? "green" : "red",
+                                        fontSize: "10px"
+                                    }}>
+                                        {checkvalidations.passwordlength ? <DoneIcon  style={{ color: "green" }} /> : < CloseIcon  style={{ color: "red", fontSize: "15px" }} />}
                                         &nbsp; Password should be more than 8 characters long</span><br />
-                                    <span style={{ color: checkvalidations.specialChar ? "green" : "red", fontSize: "10px" }}>
-                                        {checkvalidations.specialChar ? <DoneIcon /> : < FiberManualRecordIcon style={{ fontSize: "10px" }} />}
+                                    <span style={{
+                                        //  color: checkvalidations.specialChar ? "green" : "red",
+                                        fontSize: "10px"
+                                    }}>
+                                        {checkvalidations.specialChar ? <DoneIcon  style={{ color: "green" }} /> : < CloseIcon  style={{ color: "red", fontSize: "15px" }} />}
                                         &nbsp; Password should contain at least one special character</span>
 
                                 </div>
