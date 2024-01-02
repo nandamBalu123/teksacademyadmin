@@ -32,7 +32,7 @@ import { useEffect } from "react";
 import { Navigation } from "@mui/icons-material";
 
 const Topbar = () => {
-  const { id } = useParams("");
+  const { id } = useParams();
   const [singleUser, setUser] = useState("");
   useEffect(() => {
     // Make a GET request to your backend API endpoint
