@@ -91,6 +91,9 @@ const ResetPassword = () => {
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
+    const toggleHidePassword = () => {
+        setShowPassword(showPassword);
+    };
     const handleResetPassword = (e) => {
         e.preventDefault();
 
