@@ -13,6 +13,9 @@ const ResetPassword = () => {
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
+    const toggleHidePassword = () => {
+        setShowPassword(showPassword);
+    };
     const handleResetPassword = (e) => {
         e.preventDefault();
 
@@ -70,7 +73,7 @@ const ResetPassword = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <span onClick={toggleShowPassword} style={{ cursor: 'pointer', marginLeft: '5px' }}>
+            <span onMouseDown={toggleShowPassword} onMouseUp={toggleHidePassword} style={{ cursor: 'pointer', marginLeft: '5px' }}>
                 {showPassword ? '👁️' : '👁️‍🗨️'}
             </span>
             <br />
