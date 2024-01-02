@@ -103,18 +103,35 @@ const Dashboard = () => {
     todate: "",
     monthdataCondition: true,
   });
+  const [dummyFilterCriteria, setDummyFilterCriteria] = useState(
+    {
+      fromdate: "",
+      todate: "",
+      monthdataCondition: true,
+    }
+  )
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({
-      ...filterCriteria,
+    setDummyFilterCriteria({
+      ...dummyFilterCriteria,
       monthdataCondition: false,
       [name]: value,
     });
   };
+  const handleSave = (e) => {
+
+
+    setFilterCriteria(dummyFilterCriteria);
+  };
   //// reset filters
   const filterreset = () => {
     setFilterCriteria({
+      fromdate: "",
+      todate: "",
+      monthdataCondition: true,
+    });
+    setDummyFilterCriteria({
       fromdate: "",
       todate: "",
       monthdataCondition: true,
@@ -901,7 +918,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="fromdate"
-                        value={filterCriteria.fromdate}
+                        value={dummyFilterCriteria.fromdate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -915,7 +932,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="todate"
-                        value={filterCriteria.todate}
+                        value={dummyFilterCriteria.todate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -926,7 +943,7 @@ const Dashboard = () => {
 
                       Clear
                     </button>
-                    <button className="btn btn-color" >
+                    <button onClick={handleSave} className="btn btn-color" >
 
                       Save
                     </button>
