@@ -21,11 +21,33 @@ import { ColorModeContext, tokens } from "../../../theme";
 import { useTheme } from "@mui/material";
 import { useContext } from "react";
 import "./Topbar.css";
+import axios from "axios";
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import LockResetIcon from '@mui/icons-material/LockReset';
+import { Link } from "react-router-dom";
 import { useScroll } from "framer-motion";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Navigation } from "@mui/icons-material";
 
 const Topbar = () => {
+  const { id } = useParams("");
+  const [singleUser, setUser] = useState("");
+  useEffect(() => {
+    // Make a GET request to your backend API endpoint
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/viewuser/${id}`)
+      .then((response) => {
+        // Handle the successful response here
+        setUser(response.data[0]); // Update the data state with the fetched data
+        console.log("studentdata---", response.data[0]);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the request
+        console.error("Error fetching data:", error);
+      });
+  }, [id]);
   const { user } = useAuthContext();
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
@@ -34,6 +56,7 @@ const Topbar = () => {
   const colorMode = useContext(ColorModeContext);
 
   const handleLogout = () => {
+
     localStorage.removeItem("user");
     localStorage.removeItem("role");
     localStorage.removeItem("token");
@@ -73,6 +96,7 @@ const Topbar = () => {
     navigate("/userview/" + user.id);
     setAnchorElUser(null);
   };
+
   const [fullname, setFullname] = useState();
   let email;
   if (user) {
@@ -207,7 +231,11 @@ const Topbar = () => {
              </span>
                </div><hr/> */}
                 <div >
-                  <MenuItem className='fs-6' onClick={handleProfile}><AccountCircleIcon className='fs-5' /> &nbsp;Profile </MenuItem>
+                  <MenuItem className='fs-6' onClick={handleProfile}><PermIdentityIcon className='fs-5' /> &nbsp;Profile </MenuItem>
+                  <MenuItem className='fs-6'><LockResetIcon className='fs-5' /> &nbsp; <Link to={`/resetpassword/${id}`} className="text-dark">
+                    Change Password
+                  </Link></MenuItem>
+
                   <MenuItem className='fs-6' onClick={handleLogout}><PowerSettingsNewIcon className='fs-5' /> &nbsp; Logout </MenuItem>
                 </div>
               </Menu>

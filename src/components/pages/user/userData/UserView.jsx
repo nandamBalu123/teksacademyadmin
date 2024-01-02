@@ -113,9 +113,9 @@ const UserView = () => {
             <p>
               <b> Branch:</b> {singleUser.branch}
             </p>
-            <Link to={`/resetpassword/${id}`}>
+            {/* <Link to={`/resetpassword/${id}`}>
               Change Password
-            </Link>
+            </Link> */}
           </div>
         </div>
         <TableContainer component={Paper} className="my-4" style={{ overflow: "hidden" }}>
