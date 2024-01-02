@@ -25,7 +25,7 @@ const LoginPage = () => {
   const handleInput = (event) => {
     setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -83,38 +83,38 @@ const LoginPage = () => {
 
   // const handleSubmit = async (event) => {
   //   event.preventDefault();
-  
+
   //   // Move the error check after setting errors in state to ensure they are updated
   //   setErrors(validation(values));
-  
+
   //   // Check if there are errors after setting them
   //   if (!errors.email && !errors.password) {
   //     try {
   //       const response = await axios.post(`${process.env.REACT_APP_API_URL}/adminlogin`, values);
   //       const data = response.data;
-  
+
   //       console.log("API Response:", data);
-  
+
   //       if (data.Status === "Success") {
   //         const { id, token, adminData } = data;
   //         const { profile, reportto } = adminData;
-  
+
   //         // Ensure consistent case for role and store user data in localStorage
   //         const role = profile.toLowerCase();
   //         const user = { ...adminData, profile: role };
-  
+
   //         localStorage.setItem("role", role);
   //         localStorage.setItem("id", id);
   //         localStorage.setItem("reportto", reportto);
   //         localStorage.setItem("token", token);
   //         localStorage.setItem("user", JSON.stringify(user));
-  
+
   //         // Store token in a cookie
   //         document.cookie = `token=${token}; path=/`;
-  
+
   //         // Update your Redux state or context with the user data
   //         dispatch({ type: "LOGIN", payload: user });
-  
+
   //         console.log("res.data", data);
   //         navigate("/");
   //         window.location.reload();
@@ -127,7 +127,7 @@ const LoginPage = () => {
   //     }
   //   }
   // };
-  
+
 
   // let quotes = [
   //   "Your commitment to excellence is an inspiration to us all. Keep up the great work!",
@@ -153,8 +153,9 @@ const LoginPage = () => {
     <div className="login">
       <div className="containers ">
         <form className="login-section  ">
-          <div className="form-box ">
+          <div className="form-box">
             <h2> Welcome Back</h2>
+
             <div className="input-box">
               <input
                 type="email"
@@ -162,11 +163,14 @@ const LoginPage = () => {
                 required
                 onChange={handleInput}
               />
-              {errors.email && (
-                <span className="text-danger">{errors.email}</span>
-              )}
+
               <label htmlFor=""> Enter Email</label>
+
             </div>
+            {errors.email && (
+              <span className="text-danger text-start">{errors.email}</span>
+            )}
+
             <div className="input-box col-12 col-md-6 col-md-6">
               <input
                 type="password"
@@ -174,20 +178,19 @@ const LoginPage = () => {
                 required
                 onChange={handleInput}
               />
-
-              {errors.password && (
-                <span className="text-danger">{errors.password}</span>
-              )}
               <label htmlFor=""> Enter Password</label>
             </div>
+            {errors.password && (
+              <span className="text-danger">{errors.password}</span>
+            )}
             <button
-              className="btn btn-primary input-box btnbrder"
+              className="btn btn-color input-box btnbrder"
               onClick={handleSubmit}
             >
-              {" "}
+
               Login
-            </button>{" "}
-          </div>{" "}
+            </button>
+          </div>
         </form>
         <div className="img">
           <img className="img w-100" src={loginimg1} alt="img" />

@@ -232,7 +232,7 @@ const Topbar = () => {
                </div><hr/> */}
                 <div >
                   <MenuItem className='fs-6' onClick={handleProfile}><PermIdentityIcon className='fs-5' /> &nbsp;Profile </MenuItem>
-                  <MenuItem className='fs-6'><LockResetIcon className='fs-5' /> &nbsp; <Link to={`/resetpassword/${id}`} className="text-dark">
+                  <MenuItem className='fs-6'><LockResetIcon className='fs-5' /> &nbsp; <Link to={`/resetpassword/${id}`} className="text-dark" style={{ fontSize: "15px" }}>
                     Change Password
                   </Link></MenuItem>
 
