@@ -159,11 +159,38 @@ const StudentData = () => {
     search: "",
   });
 
+  const [dummyFilterCriteria, setDummyFilterCriteria] = useState({
+
+    fromdate: "",
+    todate: "",
+    branch: "",
+
+    leadsource: "",
+
+    modeoftraining: "",
+
+    enquirytakenby: "",
+
+    search: "",
+  })
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({ ...filterCriteria, [name]: value });
+    setDummyFilterCriteria({
+      ...dummyFilterCriteria, [name]: value
+    });
+    if (name === "search") {
+      setFilterCriteria({
+        ...filterCriteria, [name]: value
+      });
+    }
   };
+
+  const handleSave = (e) => {
+    setFilterCriteria(dummyFilterCriteria);
+  };
+
   const [getusers, setgetusers] = useState([]);
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   const role = localStorage.getItem("role");
@@ -337,6 +364,22 @@ const StudentData = () => {
 
       search: "",
     });
+    setDummyFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+
+      branch: "",
+
+      leadsource: "",
+
+      modeoftraining: "",
+
+      enquirytakenby: "",
+
+      search: "",
+
+    })
   };
 
   // img
@@ -473,7 +516,7 @@ const StudentData = () => {
                           shrink: true,
                         }}
                         name="fromdate"
-                        value={filterCriteria.fromdate}
+                        value={dummyFilterCriteria.fromdate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -487,7 +530,7 @@ const StudentData = () => {
                           shrink: true,
                         }}
                         name="todate"
-                        value={filterCriteria.todate}
+                        value={dummyFilterCriteria.todate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -501,7 +544,7 @@ const StudentData = () => {
                         <InputLabel>Branch</InputLabel>
                         <Select
                           name="branch"
-                          value={filterCriteria.branch}
+                          value={dummyFilterCriteria.branch}
                           onChange={handleInputChange}
                         >
                           <MenuItem value="select"> ---select---</MenuItem>
@@ -522,7 +565,7 @@ const StudentData = () => {
                         <InputLabel>Counsellors</InputLabel>
                         <Select
                           name="enquirytakenby"
-                          value={filterCriteria.enquirytakenby}
+                          value={dummyFilterCriteria.enquirytakenby}
                           onChange={handleInputChange}
                         >
                           {filteredcounsellor &&
@@ -615,7 +658,7 @@ const StudentData = () => {
                         <InputLabel>Mode of Traning</InputLabel>
                         <Select
                           name="modeoftraining"
-                          value={filterCriteria.modeoftraining}
+                          value={dummyFilterCriteria.modeoftraining}
                           onChange={handleInputChange}
                         >
                           <MenuItem value="online"> Online</MenuItem>
@@ -691,12 +734,16 @@ const StudentData = () => {
                   </select>
                 </MenuItem>{" "}
               </div> */}
-                  <div className="text-end me-2 mt-4">
+                  <MenuItem className="d-flex justify-content-between">
                     <button className="btn btn-color" onClick={filterreset}>
-                      {" "}
+
                       Clear
                     </button>
-                  </div>
+                    <button onClick={handleSave} className="btn btn-color" >
+
+                      Save
+                    </button>
+                  </MenuItem>
                 </Menu>
               </p>
               <p>

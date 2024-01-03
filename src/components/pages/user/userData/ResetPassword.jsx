@@ -196,31 +196,31 @@ const ResetPassword = () => {
                                         // color: checkvalidations.capitalLetter ? "green" : "red", 
                                         fontSize: "10px"
                                     }}>
-                                        {checkvalidations.capitalLetter ? <DoneIcon style={{ color: "green" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
+                                        {checkvalidations.capitalLetter ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
                                         &nbsp;Password should contain at least one capital letter</span><br />
                                     <span style={{
                                         // color: checkvalidations.lowerLetter ? "green" : "red", 
                                         fontSize: "10px"
                                     }}>
-                                        {checkvalidations.lowerLetter ? <DoneIcon  style={{ color: "green" }} /> : < CloseIcon  style={{ color: "red", fontSize: "15px" }} />}
+                                        {checkvalidations.lowerLetter ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
                                         &nbsp;Password should contain at least one lowercase letter</span><br />
                                     <span style={{
                                         // color: checkvalidations.oneNumber ? "green" : "red", 
                                         fontSize: "10px"
                                     }}>
-                                        {checkvalidations.oneNumber ? <DoneIcon  style={{ color: "green" }}/> : < CloseIcon  style={{ color: "red", fontSize: "15px" }}/>}
+                                        {checkvalidations.oneNumber ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
                                         &nbsp;Password should contain at least one number</span><br />
                                     <span style={{
                                         //  color: checkvalidations.passwordlength ? "green" : "red",
                                         fontSize: "10px"
                                     }}>
-                                        {checkvalidations.passwordlength ? <DoneIcon  style={{ color: "green" }} /> : < CloseIcon  style={{ color: "red", fontSize: "15px" }} />}
+                                        {checkvalidations.passwordlength ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
                                         &nbsp; Password should be more than 8 characters long</span><br />
                                     <span style={{
                                         //  color: checkvalidations.specialChar ? "green" : "red",
                                         fontSize: "10px"
                                     }}>
-                                        {checkvalidations.specialChar ? <DoneIcon  style={{ color: "green" }} /> : < CloseIcon  style={{ color: "red", fontSize: "15px" }} />}
+                                        {checkvalidations.specialChar ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
                                         &nbsp; Password should contain at least one special character</span>
 
                                 </div>

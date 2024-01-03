@@ -123,7 +123,9 @@ const Dashboard = () => {
 
 
     setFilterCriteria(dummyFilterCriteria);
+
   };
+
   //// reset filters
   const filterreset = () => {
     setFilterCriteria({
@@ -194,11 +196,17 @@ const Dashboard = () => {
 
     monthdataCondition: true,
   });
+
+  const [dummyfilterDeuAndReceived, setdummyfilterDeuAndReceived] = useState({
+    fromdate: "",
+    todate: "",
+    monthdataCondition: true,
+  })
   const handleDeuAndReceivedInputChange = (e) => {
     const { name, value } = e.target;
 
-    setfilterDeuAndReceived({
-      ...filterDeuAndReceived,
+    setdummyfilterDeuAndReceived({
+      ...dummyfilterDeuAndReceived,
       monthdataCondition: false,
       [name]: value,
     });
@@ -210,7 +218,16 @@ const Dashboard = () => {
       todate: "",
       monthdataCondition: true,
     });
+    setdummyfilterDeuAndReceived({
+      fromdate: "",
+      todate: "",
+      monthdataCondition: true,
+    })
   };
+
+  const handleDeuAndReceivedSave = (e) => {
+    setfilterDeuAndReceived(dummyfilterDeuAndReceived);
+  }
   <Box
     component="span"
     sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
@@ -1954,7 +1971,7 @@ const Dashboard = () => {
                             shrink: true,
                           }}
                           name="fromdate"
-                          value={filterDeuAndReceived.fromdate}
+                          value={dummyfilterDeuAndReceived.fromdate}
                           onChange={handleDeuAndReceivedInputChange}
                         />
                       </div>
@@ -1968,7 +1985,7 @@ const Dashboard = () => {
                             shrink: true,
                           }}
                           name="todate"
-                          value={filterDeuAndReceived.todate}
+                          value={dummyfilterDeuAndReceived.todate}
                           onChange={handleDeuAndReceivedInputChange}
                         />
                       </div>
@@ -1978,7 +1995,7 @@ const Dashboard = () => {
 
                         Clear
                       </button>
-                      <button className="btn btn-color" >
+                      <button className="btn btn-color" onClick={handleDeuAndReceivedSave} >
 
                         Save
                       </button>
@@ -2745,7 +2762,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="fromdate"
-                        value={filterCriteria.fromdate}
+                        value={dummyFilterCriteria.fromdate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -2759,7 +2776,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="todate"
-                        value={filterCriteria.todate}
+                        value={dummyFilterCriteria.todate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -2770,7 +2787,7 @@ const Dashboard = () => {
 
                       Clear
                     </button>
-                    <button className="btn btn-color" >
+                    <button className="btn btn-color" onClick={handleSave}>
                       Save
                     </button>
                   </MenuItem>
@@ -3450,7 +3467,7 @@ const Dashboard = () => {
                             shrink: true,
                           }}
                           name="fromdate"
-                          value={filterDeuAndReceived.fromdate}
+                          value={dummyfilterDeuAndReceived.fromdate}
                           onChange={handleDeuAndReceivedInputChange}
                         />
                       </div>
@@ -3464,7 +3481,7 @@ const Dashboard = () => {
                             shrink: true,
                           }}
                           name="todate"
-                          value={filterDeuAndReceived.todate}
+                          value={dummyfilterDeuAndReceived.todate}
                           onChange={handleDeuAndReceivedInputChange}
                         />
                       </div>
@@ -3475,7 +3492,7 @@ const Dashboard = () => {
 
                         Clear
                       </button>
-                      <button className="btn btn-color" >
+                      <button className="btn btn-color" onClick={handleDeuAndReceivedSave}>
 
                         Save
                       </button>
@@ -4032,7 +4049,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="fromdate"
-                        value={filterCriteria.fromdate}
+                        value={dummyFilterCriteria.fromdate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -4046,7 +4063,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="todate"
-                        value={filterCriteria.todate}
+                        value={dummyFilterCriteria.todate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -4057,7 +4074,7 @@ const Dashboard = () => {
 
                       Clear
                     </button>
-                    <button className="btn btn-color" >
+                    <button className="btn btn-color" onClick={handleSave}>
 
                       Save
                     </button>
@@ -4586,7 +4603,7 @@ const Dashboard = () => {
                             shrink: true,
                           }}
                           name="fromdate"
-                          value={filterDeuAndReceived.fromdate}
+                          value={dummyfilterDeuAndReceived.fromdate}
                           onChange={handleDeuAndReceivedInputChange}
                         />
                       </div>
@@ -4600,7 +4617,7 @@ const Dashboard = () => {
                             shrink: true,
                           }}
                           name="todate"
-                          value={filterDeuAndReceived.todate}
+                          value={dummyfilterDeuAndReceived.todate}
                           onChange={handleDeuAndReceivedInputChange}
                         />
                       </div>
@@ -4611,7 +4628,7 @@ const Dashboard = () => {
 
                         Clear
                       </button>
-                      <button className="btn btn-color" >
+                      <button className="btn btn-color" onClick={handleDeuAndReceivedSave}>
 
                         Save
                       </button>
@@ -5013,7 +5030,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="fromdate"
-                        value={filterCriteria.fromdate}
+                        value={dummyFilterCriteria.fromdate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -5027,7 +5044,7 @@ const Dashboard = () => {
                           shrink: true,
                         }}
                         name="todate"
-                        value={filterCriteria.todate}
+                        value={dummyFilterCriteria.todate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -5038,7 +5055,7 @@ const Dashboard = () => {
 
                       Clear
                     </button>
-                    <button className="btn btn-color" >
+                    <button className="btn btn-color" onClick={handleSave}>
 
                       Save
                     </button>
@@ -6104,7 +6121,7 @@ const Dashboard = () => {
                             shrink: true,
                           }}
                           name="fromdate"
-                          value={filterDeuAndReceived.fromdate}
+                          value={dummyfilterDeuAndReceived.fromdate}
                           onChange={handleDeuAndReceivedInputChange}
                         />
                       </div>
@@ -6118,7 +6135,7 @@ const Dashboard = () => {
                             shrink: true,
                           }}
                           name="todate"
-                          value={filterDeuAndReceived.todate}
+                          value={dummyfilterDeuAndReceived.todate}
                           onChange={handleDeuAndReceivedInputChange}
                         />
                       </div>
@@ -6129,7 +6146,7 @@ const Dashboard = () => {
 
                         Clear
                       </button>
-                      <button className="btn btn-color" >
+                      <button className="btn btn-color" onClick={handleDeuAndReceivedSave}>
 
                         Save
                       </button>

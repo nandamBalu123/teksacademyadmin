@@ -119,6 +119,10 @@ const UsersData = () => {
     reportto: "",
   });
 
+  const [dummyFilterCriteria , setDummyFilterCriteria]= useState({ 
+    
+  })
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -581,11 +585,21 @@ const UsersData = () => {
                     </FormControl>
                </div> */}
                   </div>
-                  <div className="text-end me-2 mt-4">
+
+                  <div className="d-flex justify-content-between px-3">
                     <button className="btn btn-color" onClick={filterreset}>
                       Clear
                     </button>
+                    <button className="btn btn-color" >
+
+                      Save
+                    </button>
                   </div>
+                  {/* <div className="text-end me-2 mt-4">
+                    <button className="btn btn-color" onClick={filterreset}>
+                      Clear
+                    </button>
+                  </div> */}
                 </Menu>
               </div>{" "}
             </div>
