@@ -32,10 +32,10 @@ import { useEffect } from "react";
 import { Navigation } from "@mui/icons-material";
 
 const Topbar = () => {
-  const { id } = useParams("");
-  
+  const { id } = useParams();
+
   const [singleUser, setUser] = useState("");
-  
+
   useEffect(() => {
     // Make a GET request to your backend API endpoint
     axios
@@ -51,7 +51,7 @@ const Topbar = () => {
       });
   }, [id]);
   const { user } = useAuthContext();
-  
+
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -234,9 +234,9 @@ const Topbar = () => {
              </span>
                </div><hr/> */}
                 <div >
-                  <MenuItem className='fs-6' onClick={handleProfile}><PermIdentityIcon className='fs-5' /> &nbsp;Profile </MenuItem>
-                  <MenuItem className='fs-6'><LockResetIcon className='fs-5' /> &nbsp; <Link to={`/resetpassword/${user.id}`} className="text-dark">
-                    Change Password
+                  <MenuItem className='fs-6' onClick={handleProfile}><PermIdentityIcon className='fs-5' /> &nbsp; Profile </MenuItem>
+                  <MenuItem className='fs-6'><LockResetIcon className='fs-5' />  <Link to={`/resetpassword/${user.id}`} className="text-dark" style={{ fontSize: "15px" }}>
+                    &nbsp; Change Password
                   </Link></MenuItem>
 
                   <MenuItem className='fs-6' onClick={handleLogout}><PowerSettingsNewIcon className='fs-5' /> &nbsp; Logout </MenuItem>

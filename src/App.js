@@ -83,6 +83,7 @@ import Communication from "./components/pages/settings/Communication/Communicati
 import EmailCommunication from "./components/pages/settings/Communication/EmailCommunication";
 import ResetPassword from "./components/pages/user/userData/ResetPassword";
 import OTPValidation from "./components/pages/user/userData/OTPValidation";
+import Refund from "./components/pages/student/refund/Refund";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
@@ -301,6 +302,10 @@ function App() {
                 <Route
                   path="/editstudent/:id"
                   element={user ? <EditStudentForm /> : <Dashboard />}
+                />
+                <Route
+                  path="/refund"
+                  element={user ? <Refund /> : <Dashboard />}
                 />
                 {/* student route end */}
 
