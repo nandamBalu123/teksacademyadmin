@@ -1540,7 +1540,7 @@ export default function RegistrationForm() {
                       )}
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-1 ">
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4  ">
                     <TextField
                       label={<span className="label-family">Percentage</span>}
                       type="number"
@@ -1551,7 +1551,7 @@ export default function RegistrationForm() {
                       value={marks}
                     />
                   </div>
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-1">
+                  <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
                     <TextField
                       label={
                         <span className="label-family">Academic Year</span>

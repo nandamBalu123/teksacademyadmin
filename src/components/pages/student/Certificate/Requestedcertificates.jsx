@@ -27,6 +27,7 @@ import { useCourseContext } from "../../../../hooks/useCourseContext";
 import axios from "axios";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
+import { values } from "pdf-lib";
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -87,10 +88,30 @@ const Requestedcertificates = () => {
     certificate_Status: "request Submitted",
   });
 
+  const [dummyFilterCriteria, setDummyFilterCriteria] = useState({
+    fromdate: "",
+
+    todate: "",
+
+    branch: "",
+
+    course: "",
+
+    enquirytakenby: "",
+
+    search: "",
+    certificate_Status: "request Submitted",
+  });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({ ...filterCriteria, [name]: value });
+    setDummyFilterCriteria({ ...dummyFilterCriteria, [name]: value });
+    if (name == "search") {
+      setFilterCriteria({
+        ...filterCriteria, [name]: value
+      });
+    }
   };
   useEffect(() => {
     if (students) {
@@ -147,6 +168,10 @@ const Requestedcertificates = () => {
       setFilteredData(filteredResults);
     }
   }, [students, filterCriteria]);
+
+  const handleSave = (e) => {
+    setFilterCriteria(dummyFilterCriteria);
+  };
   const filterreset = () => {
     setFilterCriteria({
       fromdate: "",
@@ -162,6 +187,20 @@ const Requestedcertificates = () => {
       search: "",
       certificate_Status: "request Submitted",
     });
+    setDummyFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+
+      branch: "",
+
+      course: "",
+
+      enquirytakenby: "",
+
+      search: "",
+      certificate_Status: "request Submitted",
+    })
   };
   const [page, setPage] = useState(1);
 
@@ -350,7 +389,7 @@ const Requestedcertificates = () => {
                             shrink: true,
                           }}
                           name="fromdate"
-                          value={filterCriteria.fromdate}
+                          value={dummyFilterCriteria.fromdate}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -364,73 +403,18 @@ const Requestedcertificates = () => {
                             shrink: true,
                           }}
                           name="todate"
-                          value={filterCriteria.todate}
+                          value={dummyFilterCriteria.todate}
                           onChange={handleInputChange}
                         />
                       </div>
-
-                      {/* <div>
-                  <label> From: </label>
-                </div>
-                <div>
-                  <input
-                    type="date"
-                    className="w-100"
-                    style={{
-                      height: "45px",
-                      border: "1.5px solid black",
-                      borderRadius: "5px",
-                    }}
-                    name="fromdate"
-                    value={filterCriteria.fromdate}
-                    onChange={handleInputChange}
-                  />
-                </div> */}
                     </div>
-                    {/* <div className="row m-2 ">
-              <div>
-                <label> From: </label>
-              </div>
-              <div>
-                <input
-                  type="date"
-                  className="w-100"
-                  style={{
-                    height: "45px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="fromdate"
-                  value={filterCriteria.fromdate}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            <MenuItem className="pt-3 ">
-              <label className="ms-"> To: </label>
-
-              <div>
-                <input
-                  type="date"
-                  className="w-100"
-                  style={{
-                    height: "45px",
-                    border: "1.5px solid black",
-                    borderRadius: "5px",
-                  }}
-                  name="todate"
-                  value={filterCriteria.todate}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </MenuItem> */}
                     <div className="row m-2">
                       <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                         <FormControl variant="standard" className="w-100">
                           <InputLabel>Course</InputLabel>
                           <Select
                             name="course"
-                            value={filterCriteria.course}
+                            value={dummyFilterCriteria.course}
                             onChange={handleInputChange}
                           >
                             <MenuItem value="select"> ---select---</MenuItem>
@@ -451,7 +435,7 @@ const Requestedcertificates = () => {
                           <InputLabel>Branch</InputLabel>
                           <Select
                             name="branch"
-                            value={filterCriteria.branch}
+                            value={dummyFilterCriteria.branch}
                             onChange={handleInputChange}
                           >
                             <MenuItem value="select"> ---select---</MenuItem>
@@ -468,13 +452,13 @@ const Requestedcertificates = () => {
                         </FormControl>
                       </div>
                     </div>
-                    <div className="row m-2">
+                    {/* <div className="row m-2">
                       <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                         <FormControl variant="standard" className="w-100">
                           <InputLabel>Counsellor</InputLabel>
                           <Select
                             name="enquirytakenby"
-                            value={filterCriteria.enquirytakenby}
+                            value={dummyFilterCriteria.enquirytakenby}
                             onChange={handleInputChange}
                           >
                             {filteredcounsellor &&
@@ -487,108 +471,19 @@ const Requestedcertificates = () => {
                           </Select>
                         </FormControl>
                       </div>
-                    </div>
-                    {/* 
-            <MenuItem>
-              <select
-                className="mt-3"
-                id=""
-                required
-                style={{
-                  height: "45px",
-                  paddingRight: "145px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                name="course"
-                value={filterCriteria.course}
-                onChange={handleInputChange}
-              >
-                <option>Course</option>
-                {getcourses &&
-                  getcourses.map((item, index) => (
-                    <option key={item.id} value={item.course_name}>
-                      {item.course_name}
-                    </option>
-                  ))}
-              </select>
-            </MenuItem> */}
-                    {/* <MenuItem>
-              <select
-                className="mt-3"
-                id=""
-                required
-                style={{
-                  height: "45px",
+                    </div> */}
 
-                  paddingRight: "50px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                name="branch"
-                value={filterCriteria.branch}
-                onChange={handleInputChange}
-              >
-                <option value="">Branch</option>
-                {branches &&
-                  branches.map((branch, index) => (
-                    <option key={branch.id} value={branch.branch_name}>
-                      {branch.branch_name}
-                    </option>
-                  ))}
-              </select>
-            </MenuItem> */}
-                    {/* <MenuItem>
-              <select
-                className="mt-3"
-                id=""
-                required
-                style={{
-                  height: "45px",
 
-                  paddingRight: "50px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                name="enquirytakenby"
-                value={filterCriteria.enquirytakenby}
-                onChange={handleInputChange}
-              >
-                <option value="">Counsellor</option>
-                {filteredcounsellor &&
-                  filteredcounsellor.map((user, index) => (
-                    <option value={user.fullname}> {user.fullname}</option>
-                  ))}
-              </select>
-            </MenuItem> */}
-                    {/* <MenuItem>
-              <select
-                className="mt-3"
-                id=""
-                required
-                style={{
-                  height: "45px",
-
-                  paddingRight: "50px",
-                  border: "1.5px solid black",
-                  borderRadius: "5px",
-                }}
-                name="status"
-                value={filterCriteria.status}
-                onChange={handleInputChange}
-              >
-                <option value="">---Status---</option>
-                <option value="">Request Submitted</option>
-                <option value="issued">Issued</option>
-                <option value="">Pending</option>
-              </select>
-            </MenuItem> */}
-                    <div className="text-end me-2 my-2">
+                    <MenuItem className="d-flex justify-content-between">
                       <button className="btn btn-color" onClick={filterreset}>
-                        {" "}
+
                         Clear
                       </button>
-                    </div>
+                      <button onClick={handleSave} className="btn btn-color" >
+
+                        Save
+                      </button>
+                    </MenuItem>
                   </Menu>
                 </span>
               </div>

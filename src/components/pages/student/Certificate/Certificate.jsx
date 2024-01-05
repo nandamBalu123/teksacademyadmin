@@ -85,37 +85,62 @@ const Certificate = () => {
     search: "",
     certificate_Status: "",
   });
+  const [dummyFilterCriteria, setDummyFilterCriteria] = useState({
+    fromdate: "",
+
+    todate: "",
+
+    branch: "",
+
+    course: "",
+
+    enquirytakenby: "",
+
+    search: "",
+    certificate_Status: "",
+  })
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({ ...filterCriteria, [name]: value });
+    setDummyFilterCriteria({
+      ...dummyFilterCriteria, [name]: value
+    });
+    if (name == "search") {
+      setFilterCriteria({
+        ...filterCriteria, [name]: value
+      });
+    }
+  };
+  const handleSave = (e) => {
+
+
+    setFilterCriteria(dummyFilterCriteria);
+
   };
   useEffect(() => {
     if (students) {
       const filteredResults = students.filter((item) => {
         const searchCondition = filterCriteria.search
           ? item.name
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.branch
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.registrationnumber
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.courses
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase()) ||
-            item.enquirytakenby
-              .toLowerCase()
-              .includes(filterCriteria.search.toLowerCase())
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.branch
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.registrationnumber
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase()) ||
+          item.courses
+            .toLowerCase()
+            .includes(filterCriteria.search.toLowerCase())
+
           : true;
 
         const dateCondition =
           filterCriteria.fromdate && filterCriteria.todate
             ? item.admissiondate >= filterCriteria.fromdate &&
-              item.admissiondate <= filterCriteria.todate
+            item.admissiondate <= filterCriteria.todate
             : true;
 
         const branchCondition = filterCriteria.branch
@@ -131,7 +156,7 @@ const Certificate = () => {
           : true;
         const certificate_status_condition = filterCriteria.certificate_Status
           ? item.certificate_status[0].certificateStatus ===
-            filterCriteria.certificate_Status
+          filterCriteria.certificate_Status
           : true;
 
         return (
@@ -149,6 +174,20 @@ const Certificate = () => {
   }, [students, filterCriteria]);
   const filterreset = () => {
     setFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+
+      branch: "",
+
+      course: "",
+
+      enquirytakenby: "",
+
+      search: "",
+      certificate_Status: "",
+    });
+    setDummyFilterCriteria({
       fromdate: "",
 
       todate: "",
@@ -312,7 +351,7 @@ const Certificate = () => {
                             shrink: true,
                           }}
                           name="fromdate"
-                          value={filterCriteria.fromdate}
+                          value={dummyFilterCriteria.fromdate}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -326,7 +365,7 @@ const Certificate = () => {
                             shrink: true,
                           }}
                           name="todate"
-                          value={filterCriteria.todate}
+                          value={dummyFilterCriteria.todate}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -373,7 +412,7 @@ const Certificate = () => {
                           <InputLabel>Course</InputLabel>
                           <Select
                             name="course"
-                            value={filterCriteria.course}
+                            value={dummyFilterCriteria.course}
                             onChange={handleInputChange}
                           >
                             <MenuItem value="select"> ---select---</MenuItem>
@@ -417,7 +456,7 @@ const Certificate = () => {
                           <InputLabel>Branch</InputLabel>
                           <Select
                             name="branch"
-                            value={filterCriteria.branch}
+                            value={dummyFilterCriteria.branch}
                             onChange={handleInputChange}
                           >
                             <MenuItem value="select"> ---select---</MenuItem>
@@ -440,7 +479,7 @@ const Certificate = () => {
                           <InputLabel>Counsellor</InputLabel>
                           <Select
                             name="enquirytakenby"
-                            value={filterCriteria.enquirytakenby}
+                            value={dummyFilterCriteria.enquirytakenby}
                             onChange={handleInputChange}
                           >
                             {filteredcounsellor &&
@@ -458,7 +497,7 @@ const Certificate = () => {
                           <InputLabel>Certificate Status</InputLabel>
                           <Select
                             name="enquirytakenby"
-                            value={filterCriteria.enquirytakenby}
+                            value={dummyFilterCriteria.enquirytakenby}
                             onChange={handleInputChange}
                           >
                             <MenuItem value="request Submitted">
@@ -541,12 +580,16 @@ const Certificate = () => {
                   <option value="">Pending</option>
                 </select>
               </MenuItem> */}
-                    <div className="text-end me-2 mt-4">
+                    <MenuItem className="d-flex justify-content-between">
                       <button className="btn btn-color" onClick={filterreset}>
-                        {" "}
+
                         Clear
                       </button>
-                    </div>
+                      <button onClick={handleSave} className="btn btn-color" >
+
+                        Save
+                      </button>
+                    </MenuItem>
                   </Menu>
                 </span>
               </div>
@@ -565,179 +608,179 @@ const Certificate = () => {
   </ul>
 </div> */}
 
-   
-          <TableContainer component={Paper}  sx={{ maxHeight: 440 }}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="table-cell-heading">
-                      S. No
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Name
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Course
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Registration ID
-                    </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Course StartDate
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Course EndDate
-                    </TableCell>
+          <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="table-cell-heading">
+                    S. No
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Name
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Course
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Registration ID
+                  </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Certificate Status
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {records &&
-                    records.map((student, index) => {
-                      const certificate_Status = student.certificate_status;
-                      const courseStartDate = certificate_Status
-                        .map((item) => item.courseStartDate)
-                        .join(", ");
-                      const courseEndDate = certificate_Status
-                        .map((item) => item.courseEndDate)
-                        .join(", ");
-                      const certificateStatus = certificate_Status
-                        .map((item) => item.certificateStatus)
-                        .join(", ");
+                  <TableCell className="table-cell-heading">
+                    Course StartDate
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Course EndDate
+                  </TableCell>
 
-                      return (
-                        <TableRow key={student.id}>
-                          <TableCell className="Table-cell text-center">
-                            {index + 1}
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={student.name}
-                              style={{
-                                width: "5rem",
+                  <TableCell className="table-cell-heading">
+                    Certificate Status
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {records &&
+                  records.map((student, index) => {
+                    const certificate_Status = student.certificate_status;
+                    const courseStartDate = certificate_Status
+                      .map((item) => item.courseStartDate)
+                      .join(", ");
+                    const courseEndDate = certificate_Status
+                      .map((item) => item.courseEndDate)
+                      .join(", ");
+                    const certificateStatus = certificate_Status
+                      .map((item) => item.certificateStatus)
+                      .join(", ");
 
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
+                    return (
+                      <TableRow key={student.id}>
+                        <TableCell className="Table-cell text-center">
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={student.name}
+                            style={{
+                              width: "5rem",
+
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {student.name}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={student.courses}
+                            style={{
+                              width: "4rem",
+
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {student.courses}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell text-center">
+                          <span
+                            title={student.registrationnumber}
+                            style={{
+                              width: "8rem",
+
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {student.registrationnumber}
+                          </span>
+                        </TableCell>
+
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                              background: "none",
+                            }}
+                          >
+                            <input
+                              type="date"
+                              name="startdate"
+                              style={{ background: "transparent" }}
+                              className="startdate"
+                              onChange={(e) =>
+                                setcourseStartDate(e.target.value)
+                              }
+                              value={
+                                courseStartDate !== ""
+                                  ? courseStartDate
+                                  : undefined
+                              }
+                            />
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                          >
+                            <input
+                              style={{ background: "transparent" }}
+                              type="date"
+                              name="enddate"
+                              className="enddate"
+                              onChange={(e) =>
+                                setcourseEndDate(e.target.value)
+                              }
+                              value={
+                                courseEndDate !== ""
+                                  ? courseEndDate
+                                  : undefined
+                              }
+                            />
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          {certificateStatus === "" && (
+                            <button
+                              className="btn btn-color text-center m-0 px-1"
+                              onClick={(e) => handleRequest(student.id)}
                             >
-                              {student.name}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={student.courses}
-                              style={{
-                                width: "4rem",
+                              Request Certificate
+                            </button>
+                          )}
+                          {certificateStatus === "request Submitted" && (
+                            <button
+                              className="btn btn-warning center  m-0 px-1"
+                            // onClick={(e) => handleRequest(student.id)}
+                            >
+                              Request Submitted
+                            </button>
+                          )}
+                          {certificateStatus === "issued" && (
+                            <button className="btn  btn-success center  m-0 px-1">
+                              Certificate Issued
+                            </button>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
 
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {student.courses}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell text-center">
-                            <span
-                              title={student.registrationnumber}
-                              style={{
-                                width: "8rem",
-
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {student.registrationnumber}
-                            </span>
-                          </TableCell>
-
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                                background: "none",
-                              }}
-                            >
-                              <input
-                                type="date"
-                                name="startdate"
-                                style={{ background: "transparent" }}
-                                className="startdate"
-                                onChange={(e) =>
-                                  setcourseStartDate(e.target.value)
-                                }
-                                value={
-                                  courseStartDate !== ""
-                                    ? courseStartDate
-                                    : undefined
-                                }
-                              />
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              style={{
-                                fontSize: "0.8rem",
-                              }}
-                            >
-                              <input
-                                style={{ background: "transparent" }}
-                                type="date"
-                                name="enddate"
-                                className="enddate"
-                                onChange={(e) =>
-                                  setcourseEndDate(e.target.value)
-                                }
-                                value={
-                                  courseEndDate !== ""
-                                    ? courseEndDate
-                                    : undefined
-                                }
-                              />
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            {certificateStatus === "" && (
-                              <button
-                                className="btn btn-color text-center m-0 px-1"
-                                onClick={(e) => handleRequest(student.id)}
-                              >
-                                Request Certificate
-                              </button>
-                            )}
-                            {certificateStatus === "request Submitted" && (
-                              <button
-                                className="btn btn-warning center  m-0 px-1"
-                                // onClick={(e) => handleRequest(student.id)}
-                              >
-                                Request Submitted
-                              </button>
-                            )}
-                            {certificateStatus === "issued" && (
-                              <button className="btn  btn-success center  m-0 px-1">
-                                Certificate Issued
-                              </button>
-                            )}
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-  
           <div
             style={{ display: "flex", justifyContent: "center" }}
             className="mt-3"
