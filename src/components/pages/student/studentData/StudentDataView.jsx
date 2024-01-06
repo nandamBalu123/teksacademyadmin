@@ -95,44 +95,44 @@ const StudentDataView = () => {
           </div>
           <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
             <p>
-              <b> Name :</b>
+              <b> Name : </b>
               {studentdata.name}
             </p>
             <p>
-              <b>EMail: </b>
+              <b>EMail : </b>
               {studentdata.email}
             </p>
             <p>
-              <b>Mobile Number:</b>
+              <b>Mobile Number : </b>
               {studentdata.mobilenumber}
             </p>
             <p>
-              <b> Registration No:</b>
+              <b> Registration No : </b>
               {studentdata.registrationnumber}
             </p>
             <p>
-              <b>Whatsapp Number:</b> {studentdata.whatsappno}
+              <b>Whatsapp Number : </b> {studentdata.whatsappno}
             </p>
           </div>
           <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
             <p>
-              <b> Admission Date:</b>
+              <b> Admission Date : </b>
               {AdmissionDate}
             </p>
             <p>
-              <b> Course:</b>
+              <b> Course : </b>
               {studentdata.courses}
             </p>
             <p>
-              <b> Branch :</b>
+              <b> Branch : </b>
               {studentdata.branch}
             </p>
             <p>
-              <b> Validity Start Date:</b>
+              <b> Validity Start Date : </b>
               {ValidityStart}
             </p>
             <p>
-              <b>Validity End Date :</b>
+              <b>Validity End Date : </b>
               {ValidityEnd}
             </p>
           </div>
@@ -144,48 +144,48 @@ const StudentDataView = () => {
               {studentdata.country}
             </p>
             <p>
-              <b> State:</b>
+              <b> State : </b>
               {studentdata.state}
             </p>
             <p>
-              <b> Area:</b>
+              <b> Area : </b>
               {studentdata.area}
             </p>
             <p>
-              <b>Native Place:</b>
+              <b>Native Place : </b>
               {studentdata.native}
             </p>
             <p>
-              <b>Zipcode:</b>
+              <b>Zipcode : </b>
               {studentdata.zipcode}
             </p>
             <p>
-              <b> Admission Remarks:</b>
+              <b> Admission Remarks : </b>
               {studentdata.admissionremarks}
             </p>
           </div>
           <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2 ">
             <p>
-              <b>Parent's Name :</b>
+              <b>Parent's Name : </b>
               {studentdata.parentsname}
             </p>
             <p>
-              <b>Birth Date:</b> {BirthDate}
+              <b>Birth Date : </b> {BirthDate}
             </p>
             <p>
               <p>
-                <b>Gender:</b> {studentdata.gender}
+                <b>Gender : </b> {studentdata.gender}
               </p>
             </p>
             <p>
-              <b>College:</b>
+              <b>College : </b>
               {studentdata.college}
             </p>
             <p>
-              <b>Education Type:</b> {studentdata.educationtype}
+              <b>Education Type : </b> {studentdata.educationtype}
             </p>
             <p>
-              <b> Assets:</b>
+              <b> Assets : </b>
               {studentdata.assets}
             </p>
           </div>
@@ -195,38 +195,29 @@ const StudentDataView = () => {
               {EnquiryDate}
             </p>
             <p>
-              <b> Enquiry Taken By:</b>
+              <b> Enquiry Taken By : </b>
               {studentdata.enquirytakenby}
             </p>
             <p>
-              <b>Course Package:</b>
+              <b>Course Package : </b>
               {studentdata.coursepackage}
             </p>
             <p>
-              <b>Lead Source:</b>
-              {/* {studentdata.leadsource} */}
-              {/* {studentdata.leadsource &&
-                studentdata.leadsource.map((source) => (
-                  <span>{source.source}</span>
-                  {source.name &&   <span>{source.name}</span>}
-                
-                  {source.mobileNumber &&   <span>{source.mobileNumber}</span>}
-                
+              <b>Lead Source : </b>
 
-                ))} */}
               {studentdata.leadsource &&
                 studentdata.leadsource.map((source) => (
-                  <div key={source.id}>
+                  <span key={source.id}>
                     <span>{source.source}</span>
                     {source.name && <div>Name :{source.name} </div>}
                     {source.mobileNumber && (
-                      <div>Mobile NUmber:{source.mobileNumber} </div>
+                      <div>Mobile Number:{source.mobileNumber} </div>
                     )}
-                  </div>
+                  </span>
                 ))}
             </p>
             <p>
-              <b> Mode of Traning:</b>
+              <b> Mode of Traning : </b>
               {studentdata.modeoftraining}
             </p>
           </div>
@@ -351,12 +342,10 @@ const StudentDataView = () => {
                 ];
 
                 // Formatting the date
-                paidDate = `${day < 10 ? "0" : ""}${day}-${
-                  monthAbbreviations[monthIndex]
-                }-${year}`;
-                dueDate = `${dueday < 10 ? "0" : ""}${dueday}-${
-                  monthAbbreviations[duemonthIndex]
-                }-${dueyear}`;
+                paidDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                  }-${year}`;
+                dueDate = `${dueday < 10 ? "0" : ""}${dueday}-${monthAbbreviations[duemonthIndex]
+                  }-${dueyear}`;
 
                 if (item.paidamount < 1) {
                   return null; // Do not render anything
@@ -449,9 +438,8 @@ const StudentDataView = () => {
                 ];
 
                 // Formatting the date
-                date = `${day < 10 ? "0" : ""}${day}-${
-                  monthAbbreviations[monthIndex]
-                }-${year}`;
+                date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                  }-${year}`;
 
                 return (
                   <TableBody>

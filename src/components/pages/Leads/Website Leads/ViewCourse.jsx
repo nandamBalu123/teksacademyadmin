@@ -136,23 +136,28 @@ const ViewCourse = () => {
     fromdate: "",
 
     todate: "",
+    search: "",
 
-    branch: "",
+  });
 
-    leadsource: "",
+  const [dummyFilterCriteria, setDummyFilterCriteria] = useState({
+    fromdate: "",
 
-    modeoftraining: "",
-
-    enquirytakenby: "",
-
+    todate: "",
     search: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({ ...filterCriteria, [name]: value });
+    setDummyFilterCriteria({ ...dummyFilterCriteria, [name]: value });
+    if (name == "search") {
+      setFilterCriteria({
+        ...filterCriteria, [name]: value
+      })
+    }
   };
+
   const [getusers, setgetusers] = useState([]);
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   const role = localStorage.getItem("role");
@@ -262,6 +267,9 @@ const ViewCourse = () => {
     setFilteredData(filteredResults);
   }, [filterCriteria, initialData]);
   // search bar conditions end
+  const handleSave = (e) => {
+    setFilterCriteria(dummyFilterCriteria);
+  };
 
   useEffect(() => {
     const filteruser = getusers.filter((user) => {
@@ -307,15 +315,16 @@ const ViewCourse = () => {
       todate: "",
 
       branch: "",
-
-      leadsource: "",
-
-      modeoftraining: "",
-
-      enquirytakenby: "",
-
       search: "",
     });
+    setDummyFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+
+      branch: "",
+      search: "",
+    })
   };
 
 
@@ -355,11 +364,11 @@ const ViewCourse = () => {
             <div className="d-flex justify-content-around">
               <p className="pt-3">
                 {recordCount}/{initialDataCount}{" "}
-              </p> 
+              </p>
 
               <p>
                 <select onChange={handlerecorddata} className="mt-3">
-                <option value="10">10</option>
+                  <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
                   <option value="100">100</option>
@@ -419,7 +428,7 @@ const ViewCourse = () => {
                           shrink: true,
                         }}
                         name="fromdate"
-                        value={filterCriteria.fromdate}
+                        value={dummyFilterCriteria.fromdate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -433,7 +442,7 @@ const ViewCourse = () => {
                           shrink: true,
                         }}
                         name="todate"
-                        value={filterCriteria.todate}
+                        value={dummyFilterCriteria.todate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -445,7 +454,7 @@ const ViewCourse = () => {
                         <InputLabel>Course</InputLabel>
                         <Select
                           name="course"
-                          value={filterCriteria.course}
+                          value={dummyFilterCriteria.course}
                           onChange={handleInputChange}
                         >
                           {/* <MenuItem value="select"> ---select---</MenuItem> */}
@@ -463,12 +472,16 @@ const ViewCourse = () => {
                       </FormControl>
                     </div>
                   </div>
-                  <div className="text-end me-2 mt-4">
+                  <MenuItem className="d-flex justify-content-between">
                     <button className="btn btn-color" onClick={filterreset}>
-                      {" "}
+
                       Clear
                     </button>
-                  </div>
+                    <button onClick={handleSave} className="btn btn-color" >
+
+                      Save
+                    </button>
+                  </MenuItem>
                 </Menu>
               </p>
               <p>
@@ -485,158 +498,159 @@ const ViewCourse = () => {
         </div>
 
         <div className="student-table">
-         
-            <TableContainer sx={{ maxHeight: 440 }} component={Paper} >
-              <Table stickyHeader aria-label="sticky table " borderAxis="both">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="table-cell-heading">
-                      SNo
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Name
-                    </TableCell>
-                    <TableCell className="table-cell-heading">
-                      Email
-                    </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Course
-                    </TableCell>
+          <TableContainer sx={{ maxHeight: 440 }} component={Paper} >
+            <Table stickyHeader aria-label="sticky table " borderAxis="both">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="table-cell-heading">
+                    SNo
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Name
+                  </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Email
+                  </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Contact Number
-                    </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Course
+                  </TableCell>
 
-                    <TableCell className="table-cell-heading">
-                      Date
-                    </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Contact Number
+                  </TableCell>
 
-                    {/* <TableCell className="table-cell-heading">
+                  <TableCell className="table-cell-heading">
+                    Date
+                  </TableCell>
+
+                  {/* <TableCell className="table-cell-heading">
                       Actions
                     </TableCell> */}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {Array.isArray(records) && records.length > 0 ? (
-                    records.map((item, index) => {
-                      let date = new Date(item.admissiondate);
-                      const day = date.getUTCDate();
-                      const monthIndex = date.getUTCMonth();
-                      const year = date.getUTCFullYear();
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Array.isArray(records) && records.length > 0 ? (
+                  records.map((item, index) => {
 
-                      const monthAbbreviations = [
-                        "Jan",
-                        "Feb",
-                        "Mar",
-                        "Apr",
-                        "May",
-                        "Jun",
-                        "Jul",
-                        "Aug",
-                        "Sep",
-                        "Oct",
-                        "Nov",
-                        "Dec",
-                      ];
+                    let date = new Date(item.date);
+                    const day = date.getUTCDate();
+                    const monthIndex = date.getUTCMonth();
+                    const year = date.getUTCFullYear();
 
-                      // Formatting the date
-                      date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
-                        }-${year}`;
+                    const monthAbbreviations = [
+                      "Jan",
+                      "Feb",
+                      "Mar",
+                      "Apr",
+                      "May",
+                      "Jun",
+                      "Jul",
+                      "Aug",
+                      "Sep",
+                      "Oct",
+                      "Nov",
+                      "Dec",
+                    ];
 
-                      // Updating the state with the formatted date
+                    // Formatting the date
+                    date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                      }-${year}`;
 
-                      return (
-                        <TableRow key={item.id}>
-                          <TableCell className="Table-cell">
-                          {((page-1)*itemsPerPage)+index + 1}
-                          </TableCell>
+                    // Updating the state with the formatted date
 
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.name}
-                              style={{
-                                width: "9rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
+                    return (
+                      <TableRow key={item.id}>
+                        <TableCell className="Table-cell">
+                          {((page - 1) * itemsPerPage) + index + 1}
+                        </TableCell>
 
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.name}
-                            </span>
-                          </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.name}
+                            style={{
+                              width: "9rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
 
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.email}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.email}
-                            </span>
-                          </TableCell>
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.name}
+                          </span>
+                        </TableCell>
 
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.course}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.email}
+                            style={{
+                              width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.email}
+                          </span>
+                        </TableCell>
 
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.course}
-                            </span>
-                          </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.course}
+                            style={{
+                              width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
 
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.phone}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.course}
+                          </span>
+                        </TableCell>
 
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.phone}
-                            </span>
-                          </TableCell>
-                          <TableCell className="Table-cell">
-                            <span
-                              title={item.date}
-                              style={{
-                                width: "6rem",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
+                        <TableCell className="Table-cell">
+                          <span
+                            title={item.phone}
+                            style={{
+                              width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
 
-                                textOverflow: "ellipsis",
-                                fontSize: "0.8rem",
-                                display: "block",
-                              }}
-                            >
-                              {item.date}
-                            </span>
-                          </TableCell>
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {item.phone}
+                          </span>
+                        </TableCell>
+                        <TableCell className="Table-cell">
+                          <span
+                            title={date}
+                            style={{
+                              width: "6rem",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+
+                              textOverflow: "ellipsis",
+                              fontSize: "0.8rem",
+                              display: "block",
+                            }}
+                          >
+                            {date}
+                          </span>
+                        </TableCell>
 
 
-                          {/* <TableCell className="text-center d-flex mt-2">
+                        {/* <TableCell className="text-center d-flex mt-2">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon
                                 style={{ width: "40px" }}
@@ -689,18 +703,18 @@ const ViewCourse = () => {
                               </DialogActions>
                             </Dialog>
                           </TableCell> */}
-                        </TableRow>
-                      );
-                    })
-                  ) : (
-                    <TableRow>
-                      <TableCell colSpan={3}>No data available</TableCell>
-                    </TableRow>
-                  )}{" "}
-                </TableBody>
-              </Table>
-            </TableContainer>
-        
+                      </TableRow>
+                    );
+                  })
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={3}>No data available</TableCell>
+                  </TableRow>
+                )}{" "}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
         </div>
 
         <div

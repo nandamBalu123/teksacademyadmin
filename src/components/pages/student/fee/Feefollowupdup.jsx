@@ -80,6 +80,8 @@ const Feefollowup = () => {
     upcomingdate: "",
     pendingdate: "",
   });
+
+
   const today = new Date();
   const todayFormatted = today.toISOString().split("T")[0];
 
@@ -484,9 +486,8 @@ const Feefollowup = () => {
                   ];
 
                   // Formatting the date
-                  NextDueDate = `${day < 10 ? "0" : ""}${day}-${
-                    monthAbbreviations[monthIndex]
-                  }-${year}`;
+                  NextDueDate = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                    }-${year}`;
                   let Dueamount = item.dueamount;
 
                   if (item.installments) {

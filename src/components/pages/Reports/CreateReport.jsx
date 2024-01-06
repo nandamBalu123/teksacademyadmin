@@ -593,7 +593,6 @@ const CreateReport = () => {
                       <MenuItem value="Fee Received Amount">Fee Received Amount</MenuItem>
                       <MenuItem value="Fee Yet To Receive">Fee Yet To Receive</MenuItem>
                       <MenuItem value="Total Booking Amount">Total Booking Amount</MenuItem>
-
                     </Select>
                   </FormControl></div>
               </div>
@@ -719,14 +718,41 @@ const CreateReport = () => {
                   <TableHead>
                     <TableRow>
                       <TableCell className="table-cell-heading" align="center">
-                        {reportForm.dimensions.dimension1}
+                        {reportForm.dimensions.dimension1 === "" && <span></span>}
+                        {reportForm.dimensions.dimension1 === "courses" && <span>Course</span>}
+                        {reportForm.dimensions.dimension1 === "branch" && <span>Branch</span>}
+                        {reportForm.dimensions.dimension1 === "enquirytakenby" && <span>Counsellor</span>}
+                        {reportForm.dimensions.dimension1 === "coursepackage" && <span>Course Package</span>}
+                        {reportForm.dimensions.dimension1 === "modeoftraining" && <span>Mode Of Training</span>}
+                        {reportForm.dimensions.dimension1 === "state" && <span>State</span>}
+                        {reportForm.dimensions.dimension1 === "educationtype" && <span>Education Type</span>}
+                        {reportForm.dimensions.dimension1 === "academicyear" && <span>Academic Year</span>}
+                        {reportForm.dimensions.dimension1 === "leadsource" && <span>Lead Source</span>}
                       </TableCell>
                       {reportForm.dimensions.dimension2 && <TableCell className="table-cell-heading" align="center">
-                        {reportForm.dimensions.dimension2}
+                        {reportForm.dimensions.dimension2 === "" && <span></span>}
+                        {reportForm.dimensions.dimension2 === "courses" && <span>Course</span>}
+                        {reportForm.dimensions.dimension2 === "branch" && <span>Branch</span>}
+                        {reportForm.dimensions.dimension2 === "enquirytakenby" && <span>Counsellor</span>}
+                        {reportForm.dimensions.dimension2 === "coursepackage" && <span>Course Package</span>}
+                        {reportForm.dimensions.dimension2 === "modeoftraining" && <span>Mode Of Training</span>}
+                        {reportForm.dimensions.dimension2 === "state" && <span>State</span>}
+                        {reportForm.dimensions.dimension2 === "educationtype" && <span>Education Type</span>}
+                        {reportForm.dimensions.dimension2 === "academicyear" && <span>Academic Year</span>}
+                        {reportForm.dimensions.dimension2 === "leadsource" && <span>Lead Source</span>}
                       </TableCell>}
                       {reportForm.dimensions.dimension3 &&
                         <TableCell className="table-cell-heading" align="center">
-                          {reportForm.dimensions.dimension3}
+                          {reportForm.dimensions.dimension3 === "" && <span></span>}
+                          {reportForm.dimensions.dimension3 === "courses" && <span>Course</span>}
+                          {reportForm.dimensions.dimension3 === "branch" && <span>Branch</span>}
+                          {reportForm.dimensions.dimension3 === "enquirytakenby" && <span>Counsellor</span>}
+                          {reportForm.dimensions.dimension3 === "coursepackage" && <span>Course Package</span>}
+                          {reportForm.dimensions.dimension3 === "modeoftraining" && <span>Mode Of Training</span>}
+                          {reportForm.dimensions.dimension3 === "state" && <span>State</span>}
+                          {reportForm.dimensions.dimension3 === "educationtype" && <span>Education Type</span>}
+                          {reportForm.dimensions.dimension3 === "academicyear" && <span>Academic Year</span>}
+                          {reportForm.dimensions.dimension3 === "leadsource" && <span>Lead Source</span>}
                         </TableCell>}
                       <TableCell className="table-cell-heading" align="center">
                         {reportForm.metrics}

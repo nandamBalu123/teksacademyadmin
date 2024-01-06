@@ -147,11 +147,31 @@ const DownloadSyllabus = () => {
 
     search: "",
   });
+  const [dummyFilterCriteria, setDummyFilterCriteria] = useState({
+    fromdate: "",
+
+    todate: "",
+
+    branch: "",
+
+    leadsource: "",
+
+    modeoftraining: "",
+
+    enquirytakenby: "",
+
+    search: "",
+  })
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({ ...filterCriteria, [name]: value });
+    setDummyFilterCriteria({ ...dummyFilterCriteria, [name]: value });
+    if (name == "search") {
+      setFilterCriteria({
+        ...filterCriteria, [name]: value
+      })
+    }
   };
   const [getusers, setgetusers] = useState([]);
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
@@ -262,7 +282,9 @@ const DownloadSyllabus = () => {
     setFilteredData(filteredResults);
   }, [filterCriteria, initialData]);
   // search bar conditions end
-
+  const handleSave = (e) => {
+    setFilterCriteria(dummyFilterCriteria)
+  };
   useEffect(() => {
     const filteruser = getusers.filter((user) => {
       const filtercounsellar = user.profile === "counsellor";
@@ -306,16 +328,15 @@ const DownloadSyllabus = () => {
 
       todate: "",
 
-      branch: "",
 
-      leadsource: "",
-
-      modeoftraining: "",
-
-      enquirytakenby: "",
-
-      search: "",
     });
+    setDummyFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+
+
+    })
   };
   return (
 
@@ -415,7 +436,7 @@ const DownloadSyllabus = () => {
                           shrink: true,
                         }}
                         name="fromdate"
-                        value={filterCriteria.fromdate}
+                        value={dummyFilterCriteria.fromdate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -429,7 +450,7 @@ const DownloadSyllabus = () => {
                           shrink: true,
                         }}
                         name="todate"
-                        value={filterCriteria.todate}
+                        value={dummyFilterCriteria.todate}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -459,12 +480,16 @@ const DownloadSyllabus = () => {
                       </FormControl>
                     </div>
                   </div> */}
-                  <div className="text-end me-2 mt-4">
+                  <MenuItem className="d-flex justify-content-between">
                     <button className="btn btn-color" onClick={filterreset}>
-                      {" "}
+
                       Clear
                     </button>
-                  </div>
+                    <button onClick={handleSave} className="btn btn-color" >
+
+                      Save
+                    </button>
+                  </MenuItem>
                 </Menu>
               </p>
               <p>
@@ -516,7 +541,7 @@ const DownloadSyllabus = () => {
               <TableBody>
                 {Array.isArray(records) && records.length > 0 ? (
                   records.map((item, index) => {
-                    let date = new Date(item.admissiondate);
+                    let date = new Date(item.date);
                     const day = date.getUTCDate();
                     const monthIndex = date.getUTCMonth();
                     const year = date.getUTCFullYear();
@@ -617,22 +642,19 @@ const DownloadSyllabus = () => {
                         </TableCell>
                         <TableCell className="Table-cell">
                           <span
-                            title={item.date}
+                            title={date}
                             style={{
                               width: "6rem",
                               whiteSpace: "nowrap",
                               overflow: "hidden",
-
                               textOverflow: "ellipsis",
                               fontSize: "0.8rem",
                               display: "block",
                             }}
                           >
-                            {item.date}
+                            {date}
                           </span>
                         </TableCell>
-
-
                         {/* <TableCell className="text-center d-flex mt-2">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon
@@ -647,8 +669,6 @@ const DownloadSyllabus = () => {
                                 className="icon-color"
                               />
                             </NavLink>
-                            
-
                             <div className="form-check form-switch ms-1">
                               <input
                                 className="form-check-input"

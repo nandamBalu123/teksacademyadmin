@@ -99,10 +99,29 @@ const FeeDetails = () => {
     search: "",
     modeoftraining: "",
   });
+
+  const [dummyFilterCriteria, setDummyFilterCriteria] = useState({
+    fromdate: "",
+    todate: "",
+    branch: "",
+    search: "",
+    modeoftraining: "",
+  })
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({ ...filterCriteria, [name]: value });
+    setDummyFilterCriteria({
+      ...dummyFilterCriteria, [name]: value
+    });
+    if (name === "search") {
+      setFilterCriteria({
+        ...filterCriteria, [name]: value
+      });
+    }
+  };
+
+  const handleSave = (e) => {
+    setFilterCriteria(dummyFilterCriteria);
   };
 
   useEffect(() => {
@@ -167,6 +186,16 @@ const FeeDetails = () => {
       search: "",
       modeoftraining: "",
     });
+    setDummyFilterCriteria({
+      fromdate: "",
+
+      todate: "",
+
+      branch: "",
+
+      search: "",
+      modeoftraining: "",
+    })
   };
   const noDueRecords = () => {
     const filteredResults = getstudentData.filter((item) => {
@@ -293,7 +322,7 @@ const FeeDetails = () => {
                   borderRadius: "5px",
                 }}
                 name="search"
-                value={filterCriteria.search}
+                value={dummyFilterCriteria.search}
                 onChange={handleInputChange}
               />
               <hr className="w-75 ms-2" />
@@ -353,7 +382,7 @@ const FeeDetails = () => {
                             shrink: true,
                           }}
                           name="fromdate"
-                          value={filterCriteria.fromdate}
+                          value={dummyFilterCriteria.fromdate}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -367,7 +396,7 @@ const FeeDetails = () => {
                             shrink: true,
                           }}
                           name="todate"
-                          value={filterCriteria.todate}
+                          value={dummyFilterCriteria.todate}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -426,7 +455,7 @@ const FeeDetails = () => {
                           <InputLabel>Branch</InputLabel>
                           <Select
                             name="branch"
-                            value={filterCriteria.branch}
+                            value={dummyFilterCriteria.branch}
                             onChange={handleInputChange}
                           >
                             <MenuItem value="select"> ---select---</MenuItem>
@@ -447,7 +476,7 @@ const FeeDetails = () => {
                           <InputLabel>Mode of Traning</InputLabel>
                           <Select
                             name="modeoftraining"
-                            value={filterCriteria.modeoftraining}
+                            value={dummyFilterCriteria.modeoftraining}
                             onChange={handleInputChange}
                           >
                             <MenuItem value="online"> Online</MenuItem>
@@ -501,11 +530,16 @@ const FeeDetails = () => {
                     </select>
               </MenuItem>
                 </div> */}
-                    <div className="text-end me-2 mt-4">
+                    <MenuItem className="d-flex justify-content-between">
                       <button className="btn btn-color" onClick={filterreset}>
+
                         Clear
                       </button>
-                    </div>
+                      <button onClick={handleSave} className="btn btn-color" >
+
+                        Save
+                      </button>
+                    </MenuItem>
                   </Menu>
                 </span>
               </div>

@@ -905,7 +905,7 @@ const FeeView = () => {
             <h4 className="my-3 ms-2"> Admission Fee</h4>
             <hr></hr>
             <div className="row my-3 container">
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1">
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
                 <TextField
                   label={<span className="label-family">Admission Fee</span>}
                   type="number"
@@ -926,7 +926,7 @@ const FeeView = () => {
                   Admission Fee <span className="text-danger"> * </span>
                 </label> */}
               </div>
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1 ">
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2 ">
                 <TextField
                   label={
                     <span className="label-family">Paid Date</span>
@@ -989,7 +989,7 @@ const FeeView = () => {
                   Mode of Payments <span className="text-danger"> * </span>
                 </label> */}
               </div>
-              <div className="col-12 col-md-6 col-lg-2 col-xl-2 mt-1 ">
+              <div className="col-12 col-md-6 col-lg-2 col-xl-2  ">
                 <TextField
                   label={
                     <span className="label-family">Transation ID</span>
@@ -1175,7 +1175,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-1">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2">
                           <TextField
                             label={
                               <span className="label-family">Paid Date</span>
@@ -1219,7 +1219,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-1">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 ">
                           <TextField
                             label={
                               <span className="label-family">Paid Amount</span>
@@ -1346,7 +1346,7 @@ const FeeView = () => {
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
-                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 mt-1">
+                        <div className="col-12 col-md-6 col-lg-3 col-xl-2 ">
                           <TextField
                             label={
                               <span className="label-family">Transation ID</span>
