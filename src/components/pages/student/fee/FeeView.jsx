@@ -51,9 +51,9 @@ const FeeView = () => {
   useEffect(() => {
     if (studentdata) {
       let feedetails = studentdata.feedetails
-      let admissionFee = feedetails.filter((item) => item.feetype === "Admission Fee")
-      console.log("admissionFee", admissionFee[0].amount)
-      getAdmissionFee = admissionFee[0].amount
+      let admissiondetails = feedetails.filter((item) => item.feetype === "Admission Fee")
+      console.log("admissionFee", admissiondetails[0].amount)
+      getAdmissionFee = admissiondetails[0].amount
       setAdmissionFee({
         ...admissionFee,
         initialamount: getAdmissionFee,
@@ -120,7 +120,7 @@ const FeeView = () => {
       totalpaidamount,
       id: studentdata.id,
     };
-
+    console.log("updatedData", updatedData)
     axios
       .put(`${process.env.REACT_APP_API_URL}/admissionfee/${id}`, updatedData)
 
