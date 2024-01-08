@@ -229,15 +229,15 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
             <div className="row no-rowmargin">
               <div className="col-6 pt-2 ">
-                <b className="ps-2">Registration No:</b>
+                <b className="ps-2">Registration No : </b>
                 {studentdata && studentdata.registrationnumber}
               </div>
               <div className="col-6 invoice-sideborder pt-2">
                 {nametype === "studentinvoice" && (
-                  <b> Receipt No: </b>
+                  <b> Receipt No : </b>
                 )}
                 {nametype === "admininvoice" && (
-                  <b> Invoice NO: </b>
+                  <b> Invoice NO : </b>
                 )}
                 <b> {invoice}</b>
                 <p>
@@ -297,7 +297,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                       if (indx === parseInt(index)) {
                         return (
                           <span key={student.id}>
-                            <b>Date:</b> {formattedDate}
+                            <b>Date : </b> {formattedDate}
                           </span>
                         );
                       }
@@ -317,19 +317,19 @@ const PrintableComponent = React.forwardRef((props, ref) => {
 
                 <strong className="ps-2"> KAPIL KNOWLEDGE HUB PVT LTD</strong>
               </p>
-              <p><b className="ps-2">CIN: </b>U80100TG2018PTC123853</p>
-              <p><b className="ps-2">GSTIN:</b> 36AAHCK0599C1ZI </p>
-              <p className="ps-2">
-                <b>Branch:</b> Teks-{studentdata.branch}
-              </p>
+              <span><b className="ps-2">CIN : </b>U80100TG2018PTC123853</span><br />
+              <span><b className="ps-2">GSTIN : </b> 36AAHCK0599C1ZI </span><br />
+              <span className="ps-2">
+                <b>Branch : </b> Teks-{studentdata.branch}
+              </span>
             </div>
             <div className="col-6 invoice-sideborder py-2">
-              <p className="">BILL TO:</p>
-              <p><b>{studentdata && studentdata.name}</b></p>
-              <p><b>Contact No:</b> {studentdata && studentdata.mobilenumber}</p>
-              <p><b>Email :</b> {studentdata && studentdata.email}</p>
-              <p>
-                <b>Address :</b>{" "}
+              <p className="">BILL TO : </p>
+              <span><b>Name : </b>{studentdata && studentdata.name}</span><br />
+              <span><b>Contact No : </b> {studentdata && studentdata.mobilenumber}</span><br />
+              <span><b>Email : </b> {studentdata && studentdata.email}</span><br />
+              <span>
+                <b>Address : </b>{" "}
                 {studentdata && (
                   <span>
                     {studentdata.area},&nbsp;{studentdata.native},&nbsp;
@@ -337,9 +337,9 @@ const PrintableComponent = React.forwardRef((props, ref) => {
                     {studentdata.country}
                   </span>
                 )}
-              </p>
+              </span><br />
 
-              <p><b>Course:</b> {studentdata && studentdata.courses}</p>
+              <span><b>Course : </b> {studentdata && studentdata.courses}</span>
             </div>
 
           </div>
@@ -949,7 +949,7 @@ function Invoice() {
       html2canvas(content, {
         scale: 2, // Increase the scale for higher resolution
         logging: true, // Enable logging to console for debugging
-        width: content.scrollWidth, // Set the width to the full content width
+        width: content.fullWidth, // Set the width to the full content width
         height: content.scrollHeight, // Set the height to the full content height
         windowWidth: document.documentElement.offsetWidth, // Set the window width for responsive designs
         windowHeight: document.documentElement.offsetHeight, // Set the window height for responsive designs
@@ -1010,11 +1010,10 @@ function Invoice() {
     <div style={{}}>
       <div className="mt-3 text-end me-3 ">
         <button onClick={handlePrint} className="btn btn-primary mb-3  end">
-          {" "}
+
           Print
         </button>
         <button onClick={handleSavePdf} className="btn btn-primary mb-3  end">
-          {" "}
           Save as PDF
         </button>
       </div>
