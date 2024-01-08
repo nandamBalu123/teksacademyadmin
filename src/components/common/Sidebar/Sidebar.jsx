@@ -463,6 +463,13 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                           />
+                          <Item
+                            title="Refund Status"
+                            to="/refundstatus"
+                            icon={<Diversity3Icon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                          />
                         </SubMenu>
                       </div>
                     ) : undefined}

@@ -86,6 +86,7 @@ import OTPValidation from "./components/pages/user/userData/OTPValidation";
 import Comment from "./components/pages/student/refund/Comments";
 import RefundForm from "./components/pages/student/refund/RefundForm";
 import RefundData from "./components/pages/student/refund/RefundData";
+import RefundStatus from "./components/pages/student/refund/RefundStatus";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
@@ -276,6 +277,12 @@ function App() {
                   path="/refunddata"
                   element={user ? <RefundData /> : <Dashboard />}
                 />
+
+                <Route
+                  path="/refundstatus"
+                  element={user ? <RefundStatus /> : <Dashboard />}
+                />
+
 
                 <Route
                   path="/feefollowup"
