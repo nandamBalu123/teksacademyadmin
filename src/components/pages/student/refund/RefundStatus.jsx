@@ -165,17 +165,15 @@ const RefundStatus = () => {
                                 name="department"
                             >
                                 <MenuItem >
-                                    Veritification-In-Progress
+                                    Refund Initiated
                                 </MenuItem>
                                 <MenuItem >
                                     To-Do
                                 </MenuItem>
                                 <MenuItem >
-                                    Declined
+                                    Refund Completed
                                 </MenuItem>
-                                <MenuItem >
-                                    Approved
-                                </MenuItem>
+
 
                             </Select>
                         </FormControl>
