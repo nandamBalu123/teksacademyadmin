@@ -134,14 +134,14 @@ const ResetPassword = () => {
     };
 
     const { dispatch } = useAuthContext();
-  const navigate = useNavigate();
+    const navigate = useNavigate();
     const handleLogout = () => {
 
         localStorage.removeItem("user");
         localStorage.removeItem("role");
         localStorage.removeItem("token");
         localStorage.removeItem("id");
-    
+
         // dispatch logout action
         dispatch({ type: "LOGOUT" });
         navigate("/login");
@@ -152,7 +152,7 @@ const ResetPassword = () => {
         //   })
         //   .catch((err) => cFuseronsole.log(err));
         // window.location.reload();
-      };
+    };
 
     return (
         <div className='container mt-3'>
