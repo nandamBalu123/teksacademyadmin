@@ -1013,9 +1013,9 @@ function Invoice() {
 
           Print
         </button>
-        <button onClick={handleSavePdf} className="btn btn-primary mb-3  end">
+        {/* <button onClick={handleSavePdf} className="btn btn-primary mb-3  end">
           Save as PDF
-        </button>
+        </button> */}
       </div>
       <PrintableComponent ref={componentRef} />
     </div>
