@@ -11,51 +11,69 @@ const RefundForm = () => {
 
 
     const [passwordError, setPasswordError] = useState('');
-    const [formData, setFormData] = useState({
-        registrationnumber: "",
-        name: "",
-        mobilenumber: "",
-        email: "",
-        courses: "",
-        branch: "",
-        batchtimings: "",
-        enquirytakenby: "",
-        trainername: "",
-        admissiondate: "",
-        finaltotal: "",
-        totalpaidamount: "",
-        dueamount: "",
-        comment: ""
-    });
+    const [formData, setFormData] = useState(
+        {
+            registrationnumber: "",
+            name: "",
+            mobilenumber: "",
+            email: "",
+            courses: "",
+            branch: "",
+            batchtimings: "",
+            enquirytakenby: "",
+            trainername: "",
+            admissiondate: "",
+            finaltotal: "",
+            totalpaidamount: "",
+            dueamount: "",
+            comment: ""
+        }
+    );
     useEffect(() => {
-        if (students) {
-            const filteredResults = students.filter((item) => {
-                const registrationnumberCondition = formData.registrationnumber
-                    ? item.registrationnumber
-                        .includes(formData.registrationnumber) : true
-                return (
-                    registrationnumberCondition
-                )
-            });
-            // console.log(filteredResults);
-            let filterstudentwithregistrationid = filteredResults[0]
-            setFormData((prev) => ({
-                ...prev,
-                name: filterstudentwithregistrationid.name,
+        if (students && formData.registrationnumber) {
+            const filteredResults = students.filter((item) =>
+                item.registrationnumber.toLowerCase() === formData.registrationnumber.toLowerCase()
+            );
+            console.log("filteredResults", filteredResults)
 
-                mobilenumber: filterstudentwithregistrationid.mobilenumber,
-                email: filterstudentwithregistrationid.email,
-                courses: filterstudentwithregistrationid.courses,
-                branch: filterstudentwithregistrationid.branch,
-
-                enquirytakenby: filterstudentwithregistrationid.enquirytakenby,
-
-                admissiondate: filterstudentwithregistrationid.admissiondate,
-                finaltotal: filterstudentwithregistrationid.finaltotal,
-                totalpaidamount: filterstudentwithregistrationid.totalpaidamount,
-                dueamount: filterstudentwithregistrationid.dueamount,
-                comment: filterstudentwithregistrationid.comment
-            }));
+            if (filteredResults && filteredResults.length > 0) {
+                let filterstudentwithregistrationid = filteredResults[0]
+                setFormData((prev) => ({
+                    ...prev,
+                    name: filterstudentwithregistrationid.name,
+                    mobilenumber: filterstudentwithregistrationid.mobilenumber,
+                    email: filterstudentwithregistrationid.email,
+                    courses: filterstudentwithregistrationid.courses,
+                    branch: filterstudentwithregistrationid.branch,
+                    enquirytakenby: filterstudentwithregistrationid.enquirytakenby,
+                    admissiondate: filterstudentwithregistrationid.admissiondate,
+                    finaltotal: filterstudentwithregistrationid.finaltotal,
+                    totalpaidamount: filterstudentwithregistrationid.totalpaidamount,
+                    dueamount: filterstudentwithregistrationid.dueamount,
+                    comment: filterstudentwithregistrationid.comment
+                }));
+            }
+            if (filteredResults && filteredResults.length < 1) {
+                let filterstudentwithregistrationid = filteredResults[0]
+                setFormData((prev) => (
+                    {
+                        ...prev,
+                        name: "",
+                        mobilenumber: "",
+                        email: "",
+                        courses: "",
+                        branch: "",
+                        batchtimings: "",
+                        enquirytakenby: "",
+                        trainername: "",
+                        admissiondate: "",
+                        finaltotal: "",
+                        totalpaidamount: "",
+                        dueamount: "",
+                        comment: ""
+                    }
+                ));
+            }
 
         }
     }, [formData.registrationnumber]);
@@ -157,18 +175,7 @@ const RefundForm = () => {
             });
             return;
         }
-        if (!formData.batchtimings) {
-            toast.error("Please Enter Batch Timings ", {
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
-            return;
-        }
+
         if (!formData.enquirytakenby) {
             toast.error("Please Enter Counsellor Name", {
                 autoClose: 5000,
@@ -181,18 +188,7 @@ const RefundForm = () => {
             });
             return;
         }
-        if (!formData.trainername) {
-            toast.error("Please Enter Trainer Name", {
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
-            return;
-        }
+
         if (!formData.admissiondate) {
             toast.error("Please Enter Admission Date", {
                 autoClose: 5000,
@@ -231,6 +227,30 @@ const RefundForm = () => {
         }
         if (!formData.dueamount) {
             toast.error("Please Enter Due Amount", {
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            return;
+        }
+        if (!formData.batchtimings) {
+            toast.error("Please Enter Batch Timings ", {
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            return;
+        }
+        if (!formData.trainername) {
+            toast.error("Please Enter Trainer Name", {
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -352,19 +372,7 @@ const RefundForm = () => {
                             </div>
                         </div>
                         <div className="row ">
-                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                <TextField
-                                    label={<span className="label-family">Batch Timings</span>}
-                                    className=" mar w-75"
-                                    variant="standard"
-                                    name="batchtimings"
-                                    type="text"
-                                    id="batchtimings"
-                                    onChange={handleFormData}
-                                    value={formData.batchtimings}
-                                    required
-                                />
-                            </div>
+
                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                 <TextField
                                     label={<span className="label-family">Counsellor Name</span>}
@@ -378,21 +386,6 @@ const RefundForm = () => {
                                     required
                                 />
 
-                            </div>
-                        </div>
-                        <div className="row ">
-                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-                                <TextField
-                                    label={<span className="label-family">Trainer Name</span>}
-                                    className=" mar w-75"
-                                    variant="standard"
-                                    name="trainername"
-                                    type="timing"
-                                    id="trainername"
-                                    onChange={handleFormData}
-                                    value={formData.trainername}
-                                    required
-                                />
                             </div>
                             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                                 <TextField
@@ -411,6 +404,11 @@ const RefundForm = () => {
                                 />
 
                             </div>
+
+                        </div>
+                        <div className="row ">
+
+
                         </div>
 
                         <div className="row ">
@@ -453,6 +451,34 @@ const RefundForm = () => {
                                     id="dueamount"
                                     onChange={handleFormData}
                                     value={formData.dueamount}
+                                    required
+                                />
+                            </div>
+                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                <TextField
+                                    label={<span className="label-family">Batch Timings</span>}
+                                    className=" mar w-75"
+                                    variant="standard"
+                                    name="batchtimings"
+                                    type="text"
+                                    id="batchtimings"
+                                    onChange={handleFormData}
+                                    value={formData.batchtimings}
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                                <TextField
+                                    label={<span className="label-family">Trainer Name</span>}
+                                    className=" mar w-75"
+                                    variant="standard"
+                                    name="trainername"
+                                    type="timing"
+                                    id="trainername"
+                                    onChange={handleFormData}
+                                    value={formData.trainername}
                                     required
                                 />
                             </div>
