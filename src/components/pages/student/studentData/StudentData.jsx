@@ -313,7 +313,7 @@ const StudentData = () => {
 
   useEffect(() => {
     const filteruser = getusers.filter((user) => {
-      const filtercounsellar = user.profile === "counsellor";
+      const filtercounsellar = user.profile.toLowerCase() === "counsellor";
       return filtercounsellar;
     });
     setfilteredcounsellor(filteruser);
