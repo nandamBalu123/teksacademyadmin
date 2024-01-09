@@ -35,10 +35,12 @@ const CreateCourse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let maxdiscount = 20
     let user = {
       course_name,
       fee,
-      username
+      username,
+      maxdiscount
     };
     user = [user];
     const dataWithTitleCase = user.map((item) => {
@@ -120,10 +122,6 @@ const CreateCourse = () => {
                 onChange={(e) => setFee(e.target.value)}
               />
             </div>
-
-
-
-
           </div>
           <div className="text-end">
             <button
