@@ -83,7 +83,10 @@ import Communication from "./components/pages/settings/Communication/Communicati
 import EmailCommunication from "./components/pages/settings/Communication/EmailCommunication";
 import ResetPassword from "./components/pages/user/userData/ResetPassword";
 import OTPValidation from "./components/pages/user/userData/OTPValidation";
-import Refund from "./components/pages/student/refund/Refund";
+import Comment from "./components/pages/student/refund/Comments";
+import RefundForm from "./components/pages/student/refund/RefundForm";
+import RefundData from "./components/pages/student/refund/RefundData";
+import RefundStatus from "./components/pages/student/refund/RefundStatus";
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
@@ -144,8 +147,7 @@ function App() {
             {/* {user ? <Sidebar1 /> : undefined} */}
             {/* <Sidebar /> */}
             <div
-              style={{ marginBottom: "50px", backgroundColor: "white" }}
-            ></div>
+              style={{ marginBottom: "50px", backgroundColor: "white" }}></div>
             <main className="content" style={{ overflow: "auto" }}>
               {user ? <Topbar /> : undefined}
               {/* <Topbar /> */}
@@ -267,6 +269,20 @@ function App() {
                     )
                   }
                 />
+                <Route
+                  path="/refundform"
+                  element={user ? <RefundForm /> : <Dashboard />}
+                />
+                <Route
+                  path="/refunddata"
+                  element={user ? <RefundData /> : <Dashboard />}
+                />
+
+                <Route
+                  path="/refundstatus"
+                  element={user ? <RefundStatus /> : <Dashboard />}
+                />
+
 
                 <Route
                   path="/feefollowup"
@@ -304,8 +320,8 @@ function App() {
                   element={user ? <EditStudentForm /> : <Dashboard />}
                 />
                 <Route
-                  path="/refund"
-                  element={user ? <Refund /> : <Dashboard />}
+                  path="/comment"
+                  element={user ? <Comment /> : <Dashboard />}
                 />
                 {/* student route end */}
 

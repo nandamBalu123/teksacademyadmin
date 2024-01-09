@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-const Refund = () => {
+const Comment = () => {
 
     let user = localStorage.getItem("user")
     user = JSON.parse(user)
@@ -71,7 +71,7 @@ const Refund = () => {
     );
 };
 
-export default Refund;
+export default Comment;
 
 
 

@@ -16,6 +16,7 @@ import { CoursePackageContextProvider } from "./context/CoursePackageContext";
 import { CourseContextProvider } from "./context/CourseContext";
 import { StudentsContextProvider } from "./context/StudentsContext";
 import { StudentContextProvider } from "./context/StudentContext";
+import { ToastContainer } from "react-toastify";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -30,6 +31,7 @@ root.render(
                     <CoursePackageContextProvider>
                       <UsersContextProvider>
                         <App />
+                        <ToastContainer />
                       </UsersContextProvider>
                     </CoursePackageContextProvider>
                   </CourseContextProvider>
