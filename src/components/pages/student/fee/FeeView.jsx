@@ -307,131 +307,145 @@ const FeeView = () => {
 
 
   };
+  
+
   const handleUpdateClick = async (index) => {
-    if (
-      installments[index].paidamount > 0 &&
-      installments[index].paidamount <= parseInt(studentdata.dueamount)
-    ) {
-      // Update state
-      const updatedInstallments = await updateInstallments(index);
-
-      // Now that state is updated, proceed with other actions
-      let nextduedate;
-      let totalinstallmentspaid = 0
-      for (let i = 0; i < updatedInstallments.length; i++) {
-        if (updatedInstallments[i + 1]) {
-          if (updatedInstallments[i].installmentNumber != updatedInstallments[i + 1].installmentNumber && updatedInstallments[i].paymentdone === true) {
-            totalinstallmentspaid += 1
+    if (installments[index].paidamount > 0 && installments[index].paiddate && installments[index].modeofpayment) {
+      if (
+        installments[index].paidamount > 0 &&
+        installments[index].paidamount <= parseInt(studentdata.dueamount)
+      ) {
+        // Update state
+        const updatedInstallments = await updateInstallments(index);
+        // Now that state is updated, proceed with other actions
+        let nextduedate;
+        let totalinstallmentspaid = 0
+        for (let i = 0; i < updatedInstallments.length; i++) {
+          if (updatedInstallments[i + 1]) {
+            if (updatedInstallments[i].installmentNumber != updatedInstallments[i + 1].installmentNumber && updatedInstallments[i].paymentdone === true) {
+              totalinstallmentspaid += 1
+            }
+          } else {
+            if (updatedInstallments[i].paymentdone) {
+              totalinstallmentspaid += 1
+            }
           }
-        } else {
-          if (updatedInstallments[i].paymentdone) {
-            totalinstallmentspaid += 1
+ 
+          if (updatedInstallments[i].paidamount < 1) {
+            nextduedate = updatedInstallments[i].duedate;
+            break;
           }
         }
-
-
-
-
-        if (updatedInstallments[i].paidamount < 1) {
-          nextduedate = updatedInstallments[i].duedate;
-          break;
+ 
+        let updatedtotalinstallments = [
+          {
+            totalinstallments: parseInt(totalinstallments[0].totalinstallments),
+            totalinstallmentspaid: parseInt(totalinstallmentspaid),
+            totalinstallmentsleft: parseInt(totalinstallments[0].totalinstallments) - parseInt(totalinstallmentspaid),
+          },
+        ];
+        // let totalpaidamount = 0;
+        // totalpaidamount = totalpaidamount + parseInt(admissionFee.admissionfee);
+        // for (let i = 0; i < updatedInstallments.length; i++) {
+        //   if (updateInstallments[i].paidamount) {
+        //     totalpaidamount =
+        //       totalpaidamount + parseInt(updateInstallments[i].paidamount);
+        //   }
+        // }
+ 
+        let totalpaidamount = 0;
+        totalpaidamount =
+          totalpaidamount + studentdata.initialpayment[0].initialamount;
+        for (let i = 0; i < updatedInstallments.length; i++) {
+          totalpaidamount = totalpaidamount + updatedInstallments[i].paidamount;
+          // console.log("updatedInstallments", updatedInstallments[i].paidamount);
         }
-      }
-
-      let updatedtotalinstallments = [
-        {
-          totalinstallments: parseInt(totalinstallments[0].totalinstallments),
-          totalinstallmentspaid: parseInt(totalinstallmentspaid),
-          totalinstallmentsleft: parseInt(totalinstallments[0].totalinstallments) - parseInt(totalinstallmentspaid),
-        },
-      ];
-      // let totalpaidamount = 0;
-      // totalpaidamount = totalpaidamount + parseInt(admissionFee.admissionfee);
-      // for (let i = 0; i < updatedInstallments.length; i++) {
-      //   if (updateInstallments[i].paidamount) {
-      //     totalpaidamount =
-      //       totalpaidamount + parseInt(updateInstallments[i].paidamount);
-      //   }
-      // }
-
-      let totalpaidamount = 0;
-      totalpaidamount =
-        totalpaidamount + studentdata.initialpayment[0].initialamount;
-      for (let i = 0; i < updatedInstallments.length; i++) {
-        totalpaidamount = totalpaidamount + updatedInstallments[i].paidamount;
-        // console.log("updatedInstallments", updatedInstallments[i].paidamount);
-      }
-      //start
-      let dueamount = parseInt(studentdata.finaltotal);
-      dueamount = dueamount - studentdata.initialpayment[0].initialamount;
-      for (let i = 0; i < updatedInstallments.length; i++) {
-        dueamount = dueamount - updatedInstallments[i].paidamount;
-      }
-      let totalExtraDiscount = 0
-      if (studentdata.extra_discount) {
-        for (let i = 0; i < studentdata.extra_discount.length; i++) {
-          totalExtraDiscount = totalExtraDiscount + parseInt(studentdata.extra_discount[i].Discount)
+        //start
+        let dueamount = parseInt(studentdata.finaltotal);
+        dueamount = dueamount - studentdata.initialpayment[0].initialamount;
+        for (let i = 0; i < updatedInstallments.length; i++) {
+          dueamount = dueamount - updatedInstallments[i].paidamount;
         }
-      }
-      dueamount = dueamount - totalExtraDiscount
-
-
-      //end
-      const updatedData = {
-        installments: updatedInstallments,
-        totalinstallments: updatedtotalinstallments,
-        dueamount,
-        totalpaidamount,
-        nextduedate,
-      };
-      console.log(
-        "studentdata.initialpayment[0].initialamount",
-        studentdata.initialpayment[0].initialamount
-      );
-      // console.log("updatedDataa", updatedData, updateContext);
-
-      const updateContext = {
-        installments: updatedInstallments,
-        totalinstallments: updatedtotalinstallments,
-        dueamount,
-        totalpaidamount,
-        nextduedate,
-        id: studentdata.id,
-      };
-
-      console.log("updatedDataaa", updatedData, updateContext);
-
-      try {
-        const res = await axios.put(
-          `${process.env.REACT_APP_API_URL}/feeinstallments/${id}`,
-          updatedData
+        let totalExtraDiscount = 0
+        if (studentdata.extra_discount) {
+          for (let i = 0; i < studentdata.extra_discount.length; i++) {
+            totalExtraDiscount = totalExtraDiscount + parseInt(studentdata.extra_discount[i].Discount)
+          }
+        }
+        dueamount = dueamount - totalExtraDiscount
+ 
+ 
+        //end
+        const updatedData = {
+          installments: updatedInstallments,
+          totalinstallments: updatedtotalinstallments,
+          dueamount,
+          totalpaidamount,
+          nextduedate,
+        };
+        console.log(
+          "studentdata.initialpayment[0].initialamount",
+          studentdata.initialpayment[0].initialamount
         );
-
-        if (res.data.updated) {
-          alert("Fee Added");
-          dispatch({
-            type: "UPDATE_INSTALLMENTS",
-            payload: updateContext,
-          });
-          // navigator(`/feeview/${id}`);
-          // window.location.reload();
-        } else {
-          alert("Try Again");
+        // console.log("updatedDataa", updatedData, updateContext);
+ 
+        const updateContext = {
+          installments: updatedInstallments,
+          totalinstallments: updatedtotalinstallments,
+          dueamount,
+          totalpaidamount,
+          nextduedate,
+          id: studentdata.id,
+        };
+ 
+        console.log("updatedDataaa", updatedData, updateContext);
+ 
+        try {
+          const res = await axios.put(
+            `${process.env.REACT_APP_API_URL}/feeinstallments/${id}`,
+            updatedData
+          );
+ 
+          if (res.data.updated) {
+            alert("Fee Added");
+            dispatch({
+              type: "UPDATE_INSTALLMENTS",
+              payload: updateContext,
+            });
+            // navigator(`/feeview/${id}`);
+            // window.location.reload();
+          } else {
+            alert("Try Again");
+          }
+        } catch (error) {
+          console.error("Error updating data:", error);
+          // Handle errors here
         }
-      } catch (error) {
-        console.error("Error updating data:", error);
-        // Handle errors here
-      }
-    } else {
-      if (installments[index].paidamount > parseInt(studentdata.dueamount)) {
-        alert("Amount cannot be greater than Due Amount");
-      } else if (installments[index].paidamount === 0) {
-        alert("Paid should be greater than 0");
       } else {
-        alert("error");
+        if (installments[index].paidamount > parseInt(studentdata.dueamount)) {
+          alert("Amount cannot be greater than Due Amount");
+        } else if (installments[index].paidamount === 0) {
+          alert("Paid should be greater than 0");
+        } else {
+          alert("error");
+        }
       }
     }
+    else {
+      if (!installments[index].paidamount) {
+        alert("enter paid amount")
+      }
+      else if (!installments[index].paiddate) {
+        alert("enter paid date")
+      }
+      else if (!installments[index].modeofpayment) {
+        alert("enter mode of payment")
+ 
+      }
+    }
+ 
   };
+ 
 
   const updateInstallments = (index) => {
     return new Promise((resolve) => {
