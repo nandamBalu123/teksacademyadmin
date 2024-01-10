@@ -23,9 +23,9 @@ const CreateCourse = () => {
 
   let user = localStorage.getItem("user");
   let userObject = JSON.parse(user);
-  let username = userObject.fullname;
+  let createdby = userObject.fullname;
 
-  console.log("username", userObject.fullname)
+  console.log("createdby", userObject.fullname)
 
   // let userFullname;
   // console.log("userFullname", userFullname)
@@ -35,12 +35,13 @@ const CreateCourse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let maxdiscount = 20
+    let max_discount = 20
     let user = {
       course_name,
       fee,
-      username,
-      maxdiscount
+      createdby,
+      max_discount,
+
     };
     user = [user];
     const dataWithTitleCase = user.map((item) => {
@@ -82,7 +83,6 @@ const CreateCourse = () => {
 
     if (response.ok) {
       console.log("cousre created successfully.", json);
-
       dispatch({ type: "CREATE_COURSE", payload: json });
       // Reset the form fields
       // setbranch("");
