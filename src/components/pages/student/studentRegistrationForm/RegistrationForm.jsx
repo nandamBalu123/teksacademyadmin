@@ -904,6 +904,11 @@ export default function RegistrationForm() {
 
         // Handle the response as needed
         console.log("Response:", response.data);
+        if (response.data.Status == "exists") {
+            alert(response.data.field + " already " + response.data.Status)
+            return false;
+          }
+        
         const id = response.data.insertId;
         let updateContext = studentRegistrationdata;
         updateContext.id = response.data.insertId;
@@ -911,7 +916,7 @@ export default function RegistrationForm() {
           type: "CREATE_STUDENT",
           payload: updateContext,
         });
-        // navigate(`/feeview/${id}`);
+        navigate(`/feeview/${id}`);
 
         // You can navigate to another page or perform other actions here.
       } catch (error) {

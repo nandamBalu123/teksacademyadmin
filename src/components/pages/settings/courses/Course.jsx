@@ -16,13 +16,31 @@ import axios from "axios";
 import "./Course.css";
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 const Course = () => {
-  const { getcourses } = useCourseContext();
+  const { getcourses, dispatch } = useCourseContext();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     navigate("/createcourse");
   };
 
+
+  const handleDeleteCourse = (id) => {
+    let courseID={id:id}
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/deletecourse/${id}`)
+
+      .then((response) => {
+        dispatch({
+          type: "DELETE_COURSE",
+          payload: courseID,
+          
+        });
+        alert("deleted")
+      })
+      .catch((error) => {
+        alert("Error")
+      });
+  };
 
   return (
     <div className="container mt-3">
@@ -101,7 +119,7 @@ const Course = () => {
                   <TableCell className="Table-cell ">
                     {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                     <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
-                    <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
+                    <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} onClick={e => handleDeleteCourse(item.id)}/>
                   </TableCell>
                   {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}
                 </TableRow>
