@@ -23,7 +23,7 @@ const Course = () => {
     navigate("/createcourse");
   };
 
- 
+
   return (
     <div className="container mt-3">
       <div className="course">
@@ -45,17 +45,18 @@ const Course = () => {
                   SI.NO
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
-                  Name
+                  Course Name
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
                   Fee
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
-                  Create By
+                  Max Discount
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
-                  Create At
+                  Create By
                 </TableCell>
+
                 <TableCell className="table-cell-heading" align="center">
                   Actions
                 </TableCell>
@@ -83,15 +84,20 @@ const Course = () => {
                   </TableCell>
                   <TableCell className="Table-cell ">
                     <span style={{ fontSize: "0.8rem" }}>
-                      {item.createdby}
+                      {item.max_discount}
                     </span>
                   </TableCell>
                   <TableCell className="Table-cell ">
                     <span style={{ fontSize: "0.8rem" }}>
+                      {item.createdby}
+                    </span>
+                  </TableCell>
+                  {/* <TableCell className="Table-cell ">
+                    <span style={{ fontSize: "0.8rem" }}>
 
                       {new Date(item.date).toLocaleDateString("en-GB")}
                     </span>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell className="Table-cell ">
                     {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                     <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
