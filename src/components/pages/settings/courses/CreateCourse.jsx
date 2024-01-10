@@ -5,12 +5,22 @@ import { useState } from "react";
 import { Update } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { useCoursePackageContext } from "../../../../hooks/useCoursePackageContext";
+
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 const CreateCourse = () => {
   const { dispatch } = useCourseContext();
+  const { coursepackages } = useCoursePackageContext();
+
   const navigate = useNavigate();
   const [course_name, setcourse] = useState("");
+  const [coursepackage, setCoursepakage] = useState("");
   const [fee, setFee] = useState();
+  const [max_discount, setmaxDiscount] = useState(0)
   //   const [description, setDescription] = useState("");
   const [BasicAccess, setBasicAccess] = useState({
     Read: false,
@@ -35,13 +45,14 @@ const CreateCourse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let max_discount = 20
+
     let user = {
       course_name,
+      course_package: coursepackage,
       fee,
       createdby,
       max_discount,
-
+      date: new Date(),
     };
     user = [user];
     const dataWithTitleCase = user.map((item) => {
@@ -110,6 +121,36 @@ const CreateCourse = () => {
                 value={course_name}
                 onChange={(e) => setcourse(e.target.value)}
               /></div>
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+              <FormControl variant="standard" className="w-75">
+                <InputLabel>
+                  <span className="label-family">
+                    Course Package<span>*</span>
+                  </span>
+                </InputLabel>
+                <Select
+                  id="coursepackage"
+                  name="coursepackage"
+                  required
+                  onChange={(e) => setCoursepakage(e.target.value)}
+                  value={coursepackage}
+                >
+                  <MenuItem value="select"> ---select---</MenuItem>
+                  {coursepackages &&
+                    coursepackages.map((item, index) => (
+                      <MenuItem
+                        key={item.id}
+                        value={item.coursepackages_name}
+                      >
+                        {item.coursepackages_name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </div>
+
+          </div>
+          <div className="row">
             <div className="col-12 col-md-6">
 
               <TextField
@@ -122,6 +163,19 @@ const CreateCourse = () => {
                 onChange={(e) => setFee(e.target.value)}
               />
             </div>
+            <div className="col-12 col-md-6">
+
+              <TextField
+                label={<span className="label-family">Max-Discount</span>}
+                className=" mar w-75"
+                variant="standard"
+                name="maxdiscount"
+                type="number"
+                value={max_discount}
+                onChange={(e) => setmaxDiscount(e.target.value)}
+              />
+            </div>
+
           </div>
           <div className="text-end">
             <button

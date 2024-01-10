@@ -66,64 +66,102 @@ const Course = () => {
                   Course Name
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
+                  Course Package
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
                   Fee
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
                   Max Discount
                 </TableCell>
-                <TableCell className="table-cell-heading" align="center">
+                {/* <TableCell className="table-cell-heading" align="center">
                   Create By
+                </TableCell> */}
+                <TableCell className="table-cell-heading" align="center">
+                  Create At
                 </TableCell>
-
                 <TableCell className="table-cell-heading" align="center">
                   Actions
                 </TableCell>
-
+ 
                 {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
-
+ 
             {Array.isArray(getcourses) && getcourses.length > 0 ? (
-              getcourses.map((item, index) => (
-                <TableRow key={item.id}>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "0.8rem" }}> {index + 1}</span>
-                  </TableCell>
-                  <TableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "0.8rem" }}
-                  >
-                    <span style={{ fontSize: "0.8rem" }}>{item.course_name}</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "0.8rem" }}>
-                      {item.fee}
-                    </span>
-                  </TableCell>
-                  <TableCell className="Table-cell ">
-                    <span style={{ fontSize: "0.8rem" }}>
-                      {item.max_discount}
-                    </span>
-                  </TableCell>
-                  <TableCell className="Table-cell ">
+              getcourses.map((item, index) => {
+                let date = new Date(item.date);
+                const day = date.getUTCDate();
+                const monthIndex = date.getUTCMonth();
+                const year = date.getUTCFullYear();
+ 
+                const monthAbbreviations = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+ 
+                // Formatting the date
+                date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                  }-${year}`;
+ 
+                return (
+                  <TableRow key={item.id}>
+                    <TableCell className="Table-cell text-center">
+                      <span style={{ fontSize: "0.8rem" }}> {index + 1}</span>
+                    </TableCell>
+                    <TableCell
+                      className="Table-cell text-center"
+                      style={{ fontSize: "0.8rem" }}
+                    >
+                      <span style={{ fontSize: "0.8rem" }}>{item.course_name}</span>
+                    </TableCell>
+                    <TableCell
+                      className="Table-cell text-center"
+                      style={{ fontSize: "0.8rem" }}
+                    >
+                      <span style={{ fontSize: "0.8rem" }}>{item.course_package}</span>
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
+                      <span style={{ fontSize: "0.8rem" }}>
+                        {item.fee}
+                      </span>
+                    </TableCell>
+                    <TableCell className="Table-cell ">
+                      <span style={{ fontSize: "0.8rem" }}>
+                        {item.max_discount}
+                      </span>
+                    </TableCell>
+                    {/* <TableCell className="Table-cell ">
                     <span style={{ fontSize: "0.8rem" }}>
                       {item.createdby}
                     </span>
-                  </TableCell>
-                  {/* <TableCell className="Table-cell ">
-                    <span style={{ fontSize: "0.8rem" }}>
-
-                      {new Date(item.date).toLocaleDateString("en-GB")}
-                    </span>
                   </TableCell> */}
-                  <TableCell className="Table-cell ">
-                    {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
-                    <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
-                    <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} onClick={e => handleDeleteCourse(item.id)}/>
-                  </TableCell>
-                  {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}
-                </TableRow>
-              ))
+                    <TableCell className="Table-cell ">
+                      <span style={{ fontSize: "0.8rem" }}>
+                        {date}
+                        {/* {new Date(item.date).toLocaleDateString("en-GB")} */}
+                      </span>
+                    </TableCell>
+                    <TableCell className="Table-cell ">
+                      {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
+                      <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} onClick={e => handleDeleteCourse(item.id)}/>
+                    </TableCell>
+                    {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}
+                  </TableRow>
+                )
+ 
+              })
             ) : (
               <TableRow>
                 <TableCell colSpan={3}>No data available</TableCell>
