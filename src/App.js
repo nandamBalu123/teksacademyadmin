@@ -87,7 +87,7 @@ import Comment from "./components/pages/student/refund/Comments";
 import RefundForm from "./components/pages/student/refund/RefundForm";
 import RefundData from "./components/pages/student/refund/RefundData";
 import RefundStatus from "./components/pages/student/refund/RefundStatus";
-import Chat from "./components/pages/chatbox/Chat";
+
 
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
@@ -324,10 +324,7 @@ function App() {
                   path="/comment"
                   element={user ? <Comment /> : <Dashboard />}
                 />
-                <Route
-                  path="/chat"
-                  element={user ? <Chat /> : <Dashboard />}
-                />
+
                 {/* student route end */}
 
                 {/* inventory start*/}

@@ -6,7 +6,6 @@ import './Message.css'
 const ChatBox = () => {
     const [messages, setMessages] = useState([]);
     const [inputText, setInputText] = useState('');
-
     const handleInputChange = (e) => {
         setInputText(e.target.value);
     };
