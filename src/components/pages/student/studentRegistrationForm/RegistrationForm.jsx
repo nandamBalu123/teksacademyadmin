@@ -191,120 +191,143 @@ export default function RegistrationForm() {
   const handleLeadSourceSelectChange = (e) => {
     const selectedValue = e.target.value;
     if (
-      selectedValue.toLowerCase() === "student referral" ||
-      selectedValue.toLowerCase() === "employee referral"
+      selectedValue.toLowerCase().split(' ').filter(Boolean).join(' ') === "student referral" ||
+      selectedValue.toLowerCase().split(' ').filter(Boolean).join(' ') === "employee referral"
     ) {
       setleadsourceOptions(true);
       setCustomLeadSource({ source: selectedValue });
       setLeadSource([{ source: selectedValue }]);
     } else {
       setleadsourceOptions(false);
+      setCustomLeadSource({ source: selectedValue });
+
       setLeadSource([{ source: selectedValue }]);
     }
   };
   const handleFeecalculations = () => {
-    let grosstotall = 0;
-    let totaldiscountt = 0;
-    let totalfeewithouttaxx = 0;
-    let totaltaxx = 0;
-    let grandtotall = 0;
-    let materialfeee = 0;
-    const array = [];
-    for (let i = 0; i < feedetails.length; i++) {
-      if (feedetails[i].feetype === "Admission Fee") {
-        let admissionobject = {
-          id: "",
-          feetype: "",
-          feewithtax: 0,
-          feewithouttax: 0,
-          feetax: 0,
-        };
-        admissionobject.id = feedetails[i].id;
-        admissionobject.feetype = "Admission Fee";
-        admissionobject.feewithtax = feedetails[i].totalamount;
-        admissionobject.feewithouttax = admissionobject.feewithtax / 1.18;
-        admissionobject.feetax =
-          admissionobject.feewithtax - admissionobject.feewithouttax;
-        grosstotall = grosstotall + parseInt(feedetails[i].amount);
-        // totaldiscountt = totaldiscountt + parseInt(feedetails[i].discount);
-        totaldiscountt = 0;
-        totalfeewithouttaxx =
-          totalfeewithouttaxx + admissionobject.feewithouttax;
-        totaltaxx = totaltaxx + admissionobject.feetax;
-        grandtotall = grandtotall + admissionobject.feewithtax;
+    // console.log("feedeatisl", feedetails)
+    function validateFeedetails(feedetails) {
+      const admissionFeeExists = feedetails.some((item) => item.feetype === "Admission Fee");
+      const feeExists = feedetails.some((item) => item.feetype === "fee");
 
-        array.push(admissionobject);
+      if (!admissionFeeExists || !feeExists) {
+        // Validation failed
+
+        return false;
       }
-      if (feedetails[i].feetype === "fee") {
-        let coursefeeobject = {
-          id: "",
-          feetype: "",
-          feewithtax: 0,
-          feewithouttax: 0,
-          feetax: 0,
-        };
-        coursefeeobject.id = feedetails[i].id;
-        coursefeeobject.feetype = "Course Fee";
-        coursefeeobject.feewithtax = feedetails[i].totalamount * 0.65;
-        coursefeeobject.feewithouttax = coursefeeobject.feewithtax / 1.18;
-        coursefeeobject.feetax =
-          coursefeeobject.feewithtax - coursefeeobject.feewithouttax;
-        // settotalfeewithouttax((value) => value + coursefeeobject.feewithouttax);
-        // settotaltax((value) => value + coursefeeobject.feetax);
-        // setGrandtotal((value) => value + coursefeeobject.feewithtax);
-        grosstotall = grosstotall + Math.round(feedetails[i].amount * 0.65);
-        totaldiscountt =
-          totaldiscountt + parseInt(feedetails[i].discount * 0.65);
 
-        totalfeewithouttaxx =
-          totalfeewithouttaxx + coursefeeobject.feewithouttax;
-        totaltaxx = totaltaxx + coursefeeobject.feetax;
-        grandtotall = grandtotall + coursefeeobject.feewithtax;
-        array.push(coursefeeobject);
-        let materialfeeobject = {
-          id: "",
-          feetype: "",
-          feewithtax: 0,
-          feewithouttax: 0,
-          feetax: 0,
-        };
-        materialfeeobject.id = feedetails[i].id;
-        materialfeeobject.feetype = "Material Fee";
-        materialfeeobject.feewithtax = Math.round(
-          feedetails[i].totalamount * 0.35
-        );
-        materialfeeobject.feewithouttax = materialfeeobject.feewithtax;
-        materialfeeobject.feetax = 0;
+      // Validation passed
+      return true;
+    }
 
-        // settotalfeewithouttax(
-        //   (value) => value + materialfeeobject.feewithouttax
-        // );
-        // settotaltax((value) => value + materialfeeobject.feetax);
-        // setGrandtotal((value) => value + materialfeeobject.feewithtax);
-        grosstotall = grosstotall + parseInt(feedetails[i].amount * 0.35);
-        totaldiscountt =
-          totaldiscountt + parseInt(feedetails[i].discount * 0.35);
-        materialfeee =
-          materialfeee + Math.round(feedetails[i].totalamount * 0.35);
-        // totalfeewithouttaxx =
-        //   totalfeewithouttaxx + materialfeeobject.feewithouttax;
-        totaltaxx = totaltaxx + materialfeeobject.feetax;
-        // grandtotall = grandtotall + materialfeeobject.feewithtax;
-        array.push(materialfeeobject);
+    if (validateFeedetails(feedetails)) {
+
+      let grosstotall = 0;
+      let totaldiscountt = 0;
+      let totalfeewithouttaxx = 0;
+      let totaltaxx = 0;
+      let grandtotall = 0;
+      let materialfeee = 0;
+      const array = [];
+      for (let i = 0; i < feedetails.length; i++) {
+        if (feedetails[i].feetype === "Admission Fee") {
+          let admissionobject = {
+            id: "",
+            feetype: "",
+            feewithtax: 0,
+            feewithouttax: 0,
+            feetax: 0,
+          };
+          admissionobject.id = feedetails[i].id;
+          admissionobject.feetype = "Admission Fee";
+          admissionobject.feewithtax = feedetails[i].totalamount;
+          admissionobject.feewithouttax = admissionobject.feewithtax / 1.18;
+          admissionobject.feetax =
+            admissionobject.feewithtax - admissionobject.feewithouttax;
+          grosstotall = grosstotall + parseInt(feedetails[i].amount);
+          // totaldiscountt = totaldiscountt + parseInt(feedetails[i].discount);
+          totaldiscountt = 0;
+          totalfeewithouttaxx =
+            totalfeewithouttaxx + admissionobject.feewithouttax;
+          totaltaxx = totaltaxx + admissionobject.feetax;
+          grandtotall = grandtotall + admissionobject.feewithtax;
+
+          array.push(admissionobject);
+        }
+        if (feedetails[i].feetype === "fee") {
+          let coursefeeobject = {
+            id: "",
+            feetype: "",
+            feewithtax: 0,
+            feewithouttax: 0,
+            feetax: 0,
+          };
+          coursefeeobject.id = feedetails[i].id;
+          coursefeeobject.feetype = "Course Fee";
+          coursefeeobject.feewithtax = feedetails[i].totalamount * 0.65;
+          coursefeeobject.feewithouttax = coursefeeobject.feewithtax / 1.18;
+          coursefeeobject.feetax =
+            coursefeeobject.feewithtax - coursefeeobject.feewithouttax;
+          // settotalfeewithouttax((value) => value + coursefeeobject.feewithouttax);
+          // settotaltax((value) => value + coursefeeobject.feetax);
+          // setGrandtotal((value) => value + coursefeeobject.feewithtax);
+          grosstotall = grosstotall + Math.round(feedetails[i].amount * 0.65);
+          totaldiscountt =
+            totaldiscountt + parseInt(feedetails[i].discount * 0.65);
+
+          totalfeewithouttaxx =
+            totalfeewithouttaxx + coursefeeobject.feewithouttax;
+          totaltaxx = totaltaxx + coursefeeobject.feetax;
+          grandtotall = grandtotall + coursefeeobject.feewithtax;
+          array.push(coursefeeobject);
+          let materialfeeobject = {
+            id: "",
+            feetype: "",
+            feewithtax: 0,
+            feewithouttax: 0,
+            feetax: 0,
+          };
+          materialfeeobject.id = feedetails[i].id;
+          materialfeeobject.feetype = "Material Fee";
+          materialfeeobject.feewithtax = Math.round(
+            feedetails[i].totalamount * 0.35
+          );
+          materialfeeobject.feewithouttax = materialfeeobject.feewithtax;
+          materialfeeobject.feetax = 0;
+
+          // settotalfeewithouttax(
+          //   (value) => value + materialfeeobject.feewithouttax
+          // );
+          // settotaltax((value) => value + materialfeeobject.feetax);
+          // setGrandtotal((value) => value + materialfeeobject.feewithtax);
+          grosstotall = grosstotall + parseInt(feedetails[i].amount * 0.35);
+          totaldiscountt =
+            totaldiscountt + parseInt(feedetails[i].discount * 0.35);
+          materialfeee =
+            materialfeee + Math.round(feedetails[i].totalamount * 0.35);
+          // totalfeewithouttaxx =
+          //   totalfeewithouttaxx + materialfeeobject.feewithouttax;
+          totaltaxx = totaltaxx + materialfeeobject.feetax;
+          // grandtotall = grandtotall + materialfeeobject.feewithtax;
+          array.push(materialfeeobject);
+        }
       }
+      setTotalDiscount(totaldiscountt);
+      setGrosstotal(grosstotall);
+      settotalfeewithouttax(totalfeewithouttaxx);
+      settotaltax(totaltaxx);
+      setGrandtotal(grandtotall);
+      setfeedetailsbilling(array);
+      setmaterialfee(materialfeee);
+      if (feedetails.length === 0) {
+        alert("please enter feedetails");
+        return;
+      }
+      handleNext();
     }
-    setTotalDiscount(totaldiscountt);
-    setGrosstotal(grosstotall);
-    settotalfeewithouttax(totalfeewithouttaxx);
-    settotaltax(totaltaxx);
-    setGrandtotal(grandtotall);
-    setfeedetailsbilling(array);
-    setmaterialfee(materialfeee);
-    if (feedetails.length === 0) {
-      alert("please enter feedetails");
-      return;
+    else {
+      alert("The fee should contain both 'Admission Fee' and 'fee'.");
     }
-    handleNext();
   };
   useEffect(() => {
     setfinaltotal(grandtotal + materialfee);
@@ -326,75 +349,94 @@ export default function RegistrationForm() {
       setAmount(499)
     }
     if (feetype === "fee") {
-      let coursefee;
-      let course = getcourses.filter((course) => course.course_name === courses)
+
+      let course = getcourses.filter((course) => course.course_name === courses && course.course_package === coursepackage)
       console.log("course fee", course)
-      setAmount(course[0].fee)
+      if (course.length > 0) {
+        setAmount(course[0].fee)
+      } else {
+        setAmount("")
+
+      }
+
+
+
     }
   }, [feetype])
   const handleFeeDetails = (e) => {
     e.preventDefault();
+    let save = true;
+    if (feetype === "fee") {
+      let course = getcourses.filter((course) => course.course_name === courses && course.course_package === coursepackage)
 
-    setFeeDetails([
-      ...feedetails,
+      if (course.length > 0 && discount > course[0].max_discount) {
+        save = false
+        alert(`Discount cannot be greater than ${course[0].max_discount}`)
+      }
+    }
+    if (save) {
+      setFeeDetails([
+        ...feedetails,
+        {
+          id: Date.now(),
+          feetype: feetype,
+          amount: amount,
+          discount: discount,
+          taxamount: taxamount,
+          totalamount: totalamount,
+        },
+      ]);
+      setfeetype("");
+      setAmount("");
+      setDiscount("");
+      setTaxamount(0);
 
-      {
-        id: Date.now(),
-        feetype: feetype,
-        amount: amount,
-        discount: discount,
-        taxamount: taxamount,
-        totalamount: totalamount,
-      },
-    ]);
-    setfeetype("");
-    setAmount("");
-    setDiscount("");
-    setTaxamount(0);
+      setTotalamount(0);
+    }
 
-    setTotalamount(0);
+
   };
+  //////////////old code for registration number
+  // useEffect(() => {
+  //   const filterbranch = studentData.filter((item) => item.branch === branch);
+  //   const branchCount = filterbranch.length;
 
-  useEffect(() => {
-    const filterbranch = studentData.filter((item) => item.branch === branch);
-    const branchCount = filterbranch.length;
+  //   let date = toString(admissiondate);
+  //   let DD = admissiondate[8] + admissiondate[9];
+  //   let month = admissiondate[5] + admissiondate[6];
+  //   let year = admissiondate[2] + admissiondate[3];
+  //   let firstbranch;
+  //   if (branch) {
+  //     firstbranch = branch[0].toUpperCase();
+  //   }
+  //   let serialno;
+  //   if (branch) {
+  //     serialno = branchCount + 1;
+  //   }
 
-    let date = toString(admissiondate);
-    let DD = admissiondate[8] + admissiondate[9];
-    let month = admissiondate[5] + admissiondate[6];
-    let year = admissiondate[2] + admissiondate[3];
-    let firstbranch;
-    if (branch) {
-      firstbranch = branch[0].toUpperCase();
-    }
-    let serialno;
-    if (branch) {
-      serialno = branchCount + 1;
-    }
+  //   if (serialno) {
+  //     serialno = serialno + 500;
+  //     serialno = serialno.toString();
+  //     if (serialno.length === 3) {
+  //       serialno = "0" + serialno;
+  //     }
+  //     if (serialno.length === 2) {
+  //       serialno = "00" + serialno;
+  //     }
+  //     if (serialno.length === 1) {
+  //       serialno = "000" + serialno;
+  //     }
+  //   }
 
-    if (serialno) {
-      serialno = serialno + 500;
-      serialno = serialno.toString();
-      if (serialno.length === 3) {
-        serialno = "0" + serialno;
-      }
-      if (serialno.length === 2) {
-        serialno = "00" + serialno;
-      }
-      if (serialno.length === 1) {
-        serialno = "000" + serialno;
-      }
-    }
-
-    if (!admissiondate) {
-      setRegistrationNumber("");
-    }
-    if (admissiondate) {
-      setRegistrationNumber("TA" + firstbranch + DD + month + year + serialno);
-      // do{}
-      // while()
-    }
-  }, [admissiondate, branch]);
+  //   if (!admissiondate) {
+  //     setRegistrationNumber("");
+  //   }
+  //   if (admissiondate) {
+  //     setRegistrationNumber("TA" + firstbranch + DD + month + year + serialno);
+  //     // do{}
+  //     // while()
+  //   }
+  // }, [admissiondate, branch]);
 
   const [activeStep, setActiveStep] = React.useState(0);
   /////////////------------------validations-------------------------------
@@ -638,8 +680,8 @@ export default function RegistrationForm() {
       return;
     }
     if (
-      leadsource[0].source.toLowerCase() === "student referral" ||
-      leadsource[0].source.toLowerCase() === "employee referral"
+      leadsource[0].source.toLowerCase().split(' ').filter(Boolean).join(' ') == "student referral" ||
+      leadsource[0].source.toLowerCase().split(' ').filter(Boolean).join(' ') == "employee referral"
     ) {
       setLeadSource([CustomLeadSource]);
     }
@@ -703,6 +745,81 @@ export default function RegistrationForm() {
   }, [user]);
 
   const handleSubmit = async () => {
+    ///////////registration number start
+    let registrationnumber
+    // let filterbranch
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/getstudent_data`);
+    const filterbranch = response.data.filter((item) => item.branch === branch);
+
+    const branchCount = filterbranch.length;
+    let last_serial_num = 0;
+    if (filterbranch.length > 0) {
+      let last_Reg_num_of_that_branch = filterbranch[0].registrationnumber
+      last_serial_num = last_Reg_num_of_that_branch.slice(-4)
+      last_serial_num = parseInt(last_serial_num)
+    }
+    let date = toString(admissiondate);
+    let DD = admissiondate[8] + admissiondate[9];
+    let month = admissiondate[5] + admissiondate[6];
+    let year = admissiondate[2] + admissiondate[3];
+    let firstbranch;
+    if (branch) {
+      firstbranch = branch[0].toUpperCase();
+    }
+
+    let serialno;
+    if (branch) {
+      serialno = last_serial_num + 1;
+    }
+    if (serialno) {
+      // serialno = serialno + 500;
+      serialno = serialno.toString();
+      if (serialno.length === 3) {
+        serialno = "0" + serialno;
+      }
+      if (serialno.length === 2) {
+        serialno = "00" + serialno;
+      }
+      if (serialno.length === 1) {
+        serialno = "000" + serialno;
+      }
+    }
+
+    // if (!admissiondate) {
+    //   // setRegistrationNumber("");
+    //   registrationnumber = ""
+    // }
+    // if (admissiondate) {
+    // setRegistrationNumber("TA" + firstbranch + DD + month + year + serialno);
+
+    registrationnumber = `TA${firstbranch}${DD}${month}${year}${serialno}`
+
+    // let checkreg = response.data.filter((item) => item.registrationnumber === registrationnumber);
+    // while (checkreg.length > 0) {
+    //   let updatedserialno = parseInt(serialno)
+    //   updatedserialno++;
+    //   if (updatedserialno) {
+
+    //     updatedserialno = updatedserialno.toString();
+    //     if (updatedserialno.length === 3) {
+    //       updatedserialno = "0" + updatedserialno;
+    //     }
+    //     if (updatedserialno.length === 2) {
+    //       updatedserialno = "00" + updatedserialno;
+    //     }
+    //     if (updatedserialno.length === 1) {
+    //       updatedserialno = "000" + updatedserialno;
+    //     }
+    //   }
+    //   // updatedserialno = updatedserialno.toString().padStart(4, '0');
+    //   registrationnumber = `TA${firstbranch}${DD}${month}${year}${updatedserialno}`
+
+    //   checkreg = response.data.filter((item) => item.registrationnumber === registrationnumber);
+    // }
+
+
+    // }
+    ////////////registration number end
     const reader = new FileReader();
 
     reader.onload = async () => {
@@ -806,6 +923,11 @@ export default function RegistrationForm() {
 
         // Handle the response as needed
         console.log("Response:", response.data);
+        if (response.data.Status == "exists") {
+          alert(response.data.field + " already " + response.data.Status)
+          return false;
+        }
+
         const id = response.data.insertId;
         let updateContext = studentRegistrationdata;
         updateContext.id = response.data.insertId;
@@ -1921,21 +2043,6 @@ export default function RegistrationForm() {
                     <TextField
                       label={
                         <span className="label-family">
-                          Registration Number
-                        </span>
-                      }
-                      variant="standard"
-                      className="w-75"
-                      required
-                      value={registrationnumber}
-                    />
-                  </div>
-                </div>
-                <div className="row ">
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
-                    <TextField
-                      label={
-                        <span className="label-family">
                           Validity Start Date
                         </span>
                       }
@@ -1950,6 +2057,22 @@ export default function RegistrationForm() {
                       value={validitystartdate}
                     />
                   </div>
+                  {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
+                    <TextField
+                      label={
+                        <span className="label-family">
+                          Registration Number
+                        </span>
+                      }
+                      variant="standard"
+                      className="w-75"
+                      required
+                      value={registrationnumber}
+                    />
+                  </div> */}
+                </div>
+                <div className="row ">
+
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label={
@@ -2028,9 +2151,9 @@ export default function RegistrationForm() {
                         onChange={(e) => setfeetype(e.target.value)}
                         value={feetype}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="select">---select---</MenuItem>
                         <MenuItem value="Admission Fee">Admission Fee</MenuItem>
-                        <MenuItem value="fee"> Fee</MenuItem>
+                        <MenuItem value="fee">Fee</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
@@ -2578,7 +2701,7 @@ export default function RegistrationForm() {
                         <p> Name :{name}</p>
                         <p> EMail: {email}</p>
                         <p> Mobile Number: {mobilenumber}</p>
-                        <p> Registration No: {registrationnumber}</p>
+                        {/* <p> Registration No: {registrationnumber}</p> */}
                         <p> Whatsapp Number: {whatsappno}</p>
                       </div>
                       <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
@@ -2724,6 +2847,7 @@ export default function RegistrationForm() {
                   >
                     Preview
                   </Button>
+
                 </Box>
               </form>
             </StepContent>

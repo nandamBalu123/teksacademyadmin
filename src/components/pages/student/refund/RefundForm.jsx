@@ -5,11 +5,9 @@ import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CommentsDisabledRounded } from '@mui/icons-material';
-
+import axios from "axios";
 const RefundForm = () => {
     const { students, dispatch } = useStudentsContext();
-
-
     const [passwordError, setPasswordError] = useState('');
     const [formData, setFormData] = useState(
         {
@@ -26,7 +24,12 @@ const RefundForm = () => {
             finaltotal: "",
             totalpaidamount: "",
             dueamount: "",
-            comment: ""
+            comment: "",
+            status: {
+                level1: { status: "", remarks: "", statusSubmitted: false },
+                level2: { status: "", remarks: "", statusSubmitted: false },
+                level3: { status: "", remarks: "", statusSubmitted: false }
+            }
         }
     );
     useEffect(() => {
@@ -70,7 +73,12 @@ const RefundForm = () => {
                         finaltotal: "",
                         totalpaidamount: "",
                         dueamount: "",
-                        comment: ""
+                        comment: "",
+                        status: {
+                            level1: { status: "", remarks: "", statusSubmitted: false },
+                            level2: { status: "", remarks: "", statusSubmitted: false },
+                            level3: { status: "", remarks: "", statusSubmitted: false }
+                        }
                     }
                 ));
             }
@@ -85,7 +93,7 @@ const RefundForm = () => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.registrationnumber) {
 
@@ -273,7 +281,21 @@ const RefundForm = () => {
             });
             return;
         }
-        console.log(formData);
+
+        let refund = { refund: [formData] }
+        axios.post(
+            `${process.env.REACT_APP_API_URL}/studentfeerefund`,
+            refund
+        )
+            .then(response => {
+                // Handle the response here
+                console.log(response);
+            })
+            .catch(error => {
+                // Handle errors here
+                console.error(error);
+            });
+        console.log("refund", refund);
     }
 
 

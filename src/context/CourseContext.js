@@ -2,6 +2,25 @@ import { createContext, useReducer, useEffect } from "react";
 import axios from "axios";
 export const CourseContext = createContext();
 
+// export const CourseReducer = (state, action) => {
+//   switch (action.type) {
+//     case "SET_COURSES":
+//       return {
+//         getcourses: action.payload,
+//       };
+//     case "CREATE_COURSE":
+//       return {
+//         getcourses: [...state.getcourses, action.payload],
+//       };
+//     case "DELETE_COURSE":
+//       return {
+//         getcourses: [...state.getcourses, action.payload],
+//       };      
+//     default:
+//       return state;
+//   }
+// };
+
 export const CourseReducer = (state, action) => {
   switch (action.type) {
     case "SET_COURSES":
@@ -12,10 +31,19 @@ export const CourseReducer = (state, action) => {
       return {
         getcourses: [...state.getcourses, action.payload],
       };
+    case "DELETE_COURSE":
+      let id = action.payload.id;
+        id = parseInt(id);
+        console.log("balu", action.payload.id)
+      return {
+        
+        getcourses: state.getcourses.filter(course => course.id !== id),
+      };      
     default:
       return state;
   }
 };
+
 
 export const CourseContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CourseReducer, {
@@ -35,7 +63,7 @@ export const CourseContextProvider = ({ children }) => {
       });
   }, []);
 
-  console.log("BranchContext state:", state);
+  console.log("CourseContext state:", state);
 
   return (
     <CourseContext.Provider value={{ ...state, dispatch }}>

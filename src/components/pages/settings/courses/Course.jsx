@@ -16,14 +16,32 @@ import axios from "axios";
 import "./Course.css";
 import { useCourseContext } from "../../../../hooks/useCourseContext";
 const Course = () => {
-  const { getcourses } = useCourseContext();
+  const { getcourses, dispatch } = useCourseContext();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     navigate("/createcourse");
   };
 
- 
+
+  const handleDeleteCourse = (id) => {
+    let courseID = { id: id }
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/deletecourse/${id}`)
+
+      .then((response) => {
+        dispatch({
+          type: "DELETE_COURSE",
+          payload: courseID,
+
+        });
+        alert("deleted")
+      })
+      .catch((error) => {
+        alert("Error")
+      });
+  };
+
   return (
     <div className="container mt-3">
       <div className="course">
@@ -45,14 +63,20 @@ const Course = () => {
                   SI.NO
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
-                  Name
+                  Course Name
+                </TableCell>
+                <TableCell className="table-cell-heading" align="center">
+                  Course Package
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
                   Fee
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
-                  Create By
+                  Max Discount
                 </TableCell>
+                {/* <TableCell className="table-cell-heading" align="center">
+                  Create By
+                </TableCell> */}
                 <TableCell className="table-cell-heading" align="center">
                   Create At
                 </TableCell>
@@ -65,41 +89,66 @@ const Course = () => {
             </TableHead>
 
             {Array.isArray(getcourses) && getcourses.length > 0 ? (
-              getcourses.map((item, index) => (
-                <TableRow key={item.id}>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "0.8rem" }}> {index + 1}</span>
-                  </TableCell>
-                  <TableCell
-                    className="Table-cell text-center"
-                    style={{ fontSize: "0.8rem" }}
-                  >
-                    <span style={{ fontSize: "0.8rem" }}>{item.course_name}</span>
-                  </TableCell>
-                  <TableCell className="Table-cell text-center">
-                    <span style={{ fontSize: "0.8rem" }}>
-                      {item.fee}
-                    </span>
-                  </TableCell>
-                  <TableCell className="Table-cell ">
+              getcourses.map((item, index) => {
+                let date = new Date(item.date);
+                const day = date.getUTCDate();
+                const monthIndex = date.getUTCMonth();
+                const year = date.getUTCFullYear();
+
+                const monthAbbreviations = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+                // Formatting the date
+                date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                  }-${year}`;
+
+                return (
+                  <TableRow key={item.id}>
+                    <TableCell className="Table-cell text-center">
+                      <span style={{ fontSize: "0.8rem" }}> {index + 1}</span>
+                    </TableCell>
+                    <TableCell
+                      className="Table-cell text-center"
+                      style={{ fontSize: "0.8rem" }}
+                    >
+                      <span style={{ fontSize: "0.8rem" }}>{item.course_name}</span>
+                    </TableCell>
+                    <TableCell
+                      className="Table-cell text-center"
+                      style={{ fontSize: "0.8rem" }}
+                    >
+                      <span style={{ fontSize: "0.8rem" }}>{item.course_package}</span>
+                    </TableCell>
+                    <TableCell className="Table-cell text-center">
+                      <span style={{ fontSize: "0.8rem" }}>
+                        {item.fee}
+                      </span>
+                    </TableCell>
+                    <TableCell className="Table-cell ">
+                      <span style={{ fontSize: "0.8rem" }}>
+                        {item.max_discount}
+                      </span>
+                    </TableCell>
+                    {/* <TableCell className="Table-cell ">
                     <span style={{ fontSize: "0.8rem" }}>
                       {item.createdby}
                     </span>
-                  </TableCell>
-                  <TableCell className="Table-cell ">
-                    <span style={{ fontSize: "0.8rem" }}>
+                  </TableCell> */}
+                    <TableCell className="Table-cell ">
+                      <span style={{ fontSize: "0.8rem" }}>
+                        {date}
+                        {/* {new Date(item.date).toLocaleDateString("en-GB")} */}
+                      </span>
+                    </TableCell>
+                    <TableCell className="Table-cell ">
+                      {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
+                      <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} onClick={e => handleDeleteCourse(item.id)} />
+                    </TableCell>
+                    {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}
+                  </TableRow>
+                )
 
-                      {new Date(item.date).toLocaleDateString("en-GB")}
-                    </span>
-                  </TableCell>
-                  <TableCell className="Table-cell ">
-                    {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
-                    <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
-                    <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
-                  </TableCell>
-                  {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}
-                </TableRow>
-              ))
+              })
             ) : (
               <TableRow>
                 <TableCell colSpan={3}>No data available</TableCell>
