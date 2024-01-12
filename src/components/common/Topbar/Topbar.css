@@ -1,33 +1,38 @@
-*{ 
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-.Top-bar{ 
-    position:sticky;
+
+.Top-bar {
+    position: sticky;
     top: 0;
     z-index: 1;
-  
+
 }
 
-a{ 
+a {
     text-decoration: none;
 }
-ul{ 
+
+ul {
     list-style: none;
 }
-.userpic{ 
+
+.userpic {
     width: 2rem;
     background: transparent;
-    
+
 }
-.dropdownuserimg{ 
+
+.dropdownuserimg {
     width: 3rem;
     height: 3rem;
-    padding-left:10px ;
- 
+    padding-left: 10px;
+
 }
-.profilelogout{ 
-  padding-left: 5rem;
-  
+
+.profilelogout {
+    padding-left: 5rem;
+
 }
