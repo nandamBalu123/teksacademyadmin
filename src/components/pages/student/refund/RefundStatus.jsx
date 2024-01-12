@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import ChatBox from '../../../pages/chatbox/ChatBox';
 
 const RefundStatus = () => {
     let role = "accounts"
@@ -76,8 +77,8 @@ const RefundStatus = () => {
                     <div className='col-12 col-md-4 col-lg-4 col-xl-4'>
                         <div className='row'>
                             <div className='col-6'>
-                                <p> <b> Registration ID </b></p>
-                                <p> <b>Student Name  </b></p>
+                                <p> <b> Student Name</b></p>
+                                <p> <b>Counsellor Name  </b></p>
                                 <p> <b> Phone No  </b></p>
                                 <p><b>Email ID  </b></p>
                                 <p> <b>Enrolled Course </b></p>
@@ -96,18 +97,22 @@ const RefundStatus = () => {
                     <div className='col-12 col-md-4 col-lg-4 col-xl-4'>
                         <div className='row'>
                             <div className='col-6'>
-                                <p>  <b>Branch  </b></p>
-                                <p> <b>Branch Timing  </b></p>
                                 <p> <b> Registration ID  </b></p>
+                                <p>  <b>Branch  </b></p>
                                 <p><b>Trainer Name  </b></p>
+                                <p> <b>Branch Timing  </b></p>
+
+
                                 <p> <b>Admission Date </b></p>
 
                             </div>
                             <div className='col-6'>
-                                <p> : {refund[0].branch}</p>
-                                <p> : {refund[0].batchtimings}</p>
                                 <p> : {refund[0].registrationnumber}</p>
+                                <p> : {refund[0].branch}</p>
                                 <p> : {refund[0].trainername}</p>
+                                <p> : {refund[0].batchtimings}</p>
+
+
                                 <p> : {refund[0].admissiondate}</p>
 
 
@@ -130,6 +135,51 @@ const RefundStatus = () => {
                             </div>
                         </div></div>
                 </div>
+                <div className='row '>
+                    <div className='col-7 mt-3'>
+                        <div className='row'>
+
+                            <div className=' d-flex justify-content-evenly'>
+                                <h6 className=' mt-1 col-3 text-end'>Support : </h6>
+                                <button className='btn btn-color'>In-Progress</button>
+                                <button className='btn btn-color'>To-Do</button>
+                                <button className='btn btn-color'>Declined</button>
+                                <button className='btn btn-color'>Approved</button>
+                            </div>
+
+                        </div>
+                        <div className='row'>
+
+
+                            <div className='d-flex justify-content-evenly'>
+                                <h6 className=' mt-1 col-3 text-end'>Regional Manager : </h6>
+                                <button className='btn btn-color'>In-Progress</button>
+                                <button className='btn btn-color'>To-Do</button>
+                                <button className='btn btn-color'>Declined</button>
+                                <button className='btn btn-color'>Approved</button>
+                            </div>
+
+                        </div>
+                        <div className='row'>
+
+                            <div className='d-flex justify-content-evenly'>
+                                <h6 className=' mt-1 col-3 text-end'>Accounts : </h6>
+                                <button className='btn btn-color'>In-Progress</button>
+                                <button className='btn btn-color'>To-Do</button>
+                                <button className='btn btn-color'>Declined</button>
+                                <button className='btn btn-color'>Approved</button>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div className='col-5'> <ChatBox /></div>
+                </div>
+
+
+
                 <div className={`row px-3 ${role === 'support' ? '' : 'disabled'}`}>
                     <div className='col-12 col-md-4 col-lg-2 col-xl-2 mt-4 '> Support :</div>
                     <div className='col-12 col-md-8 col-lg-4 col-xl-4 '>

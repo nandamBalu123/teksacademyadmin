@@ -32,8 +32,8 @@ const ChatBox = () => {
                     <Message key={message.id} text={message.text} sender={message.sender} />
                 ))}
             </div>
-            <div>
-                <input type="text" value={inputText} onChange={handleInputChange} />
+            <div className='d-flex'>
+                <input type="text" value={inputText} onChange={handleInputChange} className='mt-3' style={{ borderRadius: "5px" }} />
                 <button onClick={handleSendMessage}>Send</button>
             </div>
         </div>
