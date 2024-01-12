@@ -72,52 +72,63 @@ const RefundStatus = () => {
 
 
                 <div className='row  px-3'>
-                    <div className='col-12 col-md-6 col-lg-6 col-xl-6'>
-                        <p>
-                            <b>Student Name : </b> {refund[0].name}
-                        </p>
-                        <p>
-                            <b>Counsellor Name :</b> {refund[0].enquirytakenby}
-                        </p>
-                        <p>
-                            <b>Phone No : </b> {refund[0].mobilenumber}
-                        </p>
-                        <p>
-                            <b>Email ID : </b> {refund[0].email}
-                        </p>
-                        <p>
-                            <b>Enrolled Course: </b> {refund[0].courses}
-                        </p>
-                        <p>
-                            <b>Branch : </b> {refund[0].branch}
-                        </p>
-                        <p>
-                            <b>Branch Timing : </b> {refund[0].batchtimings}
-                        </p>
+
+                    <div className='col-12 col-md-4 col-lg-4 col-xl-4'>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <p> <b> Registration ID </b></p>
+                                <p> <b>Student Name  </b></p>
+                                <p> <b> Phone No  </b></p>
+                                <p><b>Email ID  </b></p>
+                                <p> <b>Enrolled Course </b></p>
+
+                            </div>
+                            <div className='col-6'>
+                                <p> : {refund[0].name}</p>
+                                <p> : {refund[0].enquirytakenby}</p>
+                                <p> : {refund[0].mobilenumber}</p>
+                                <p> : {refund[0].email}</p>
+                                <p> : {refund[0].courses}</p>
+
+                            </div>
+                        </div>
                     </div>
-                    <div className='col-12 col-md-6 col-lg-6 col-xl-6'>
-                        <p>
-                            <b>Registration ID :</b> {refund[0].registrationnumber}
-                        </p>
-                        <p>
-                            <b>Trainer Name : </b> {refund[0].trainername}
-                        </p>
-                        <p>
-                            <b>Admission Date : </b> {refund[0].admissiondate}
-                        </p>
-                        <p>
-                            <b>Total Course Fee : </b> {refund[0].finaltotal}
-                        </p>
-                        <p>
-                            <b>Fee Paid : </b> {refund[0].totalpaidamount}
-                        </p>
-                        <p>
-                            <b>Due Amount : </b> {refund[0].dueamount}
-                        </p>
-                        <p>
-                            <b>Reason for Refund : </b> {refund[0].comment}
-                        </p>
+                    <div className='col-12 col-md-4 col-lg-4 col-xl-4'>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <p>  <b>Branch  </b></p>
+                                <p> <b>Branch Timing  </b></p>
+                                <p> <b> Registration ID  </b></p>
+                                <p><b>Trainer Name  </b></p>
+                                <p> <b>Admission Date </b></p>
+
+                            </div>
+                            <div className='col-6'>
+                                <p> : {refund[0].branch}</p>
+                                <p> : {refund[0].batchtimings}</p>
+                                <p> : {refund[0].registrationnumber}</p>
+                                <p> : {refund[0].trainername}</p>
+                                <p> : {refund[0].admissiondate}</p>
+
+
+                            </div>
+                        </div>
                     </div>
+                    <div className='col-12 col-md-4 col-lg-4 col-xl-4'>
+                        <div className='row'>
+                            <div className='col-6'>
+                                <p>  <b>Total Course Fee</b></p>
+                                <p> <b>Fee Paid  </b></p>
+                                <p> <b> Due Amount </b></p>
+                                <p><b>Reason for Refund  </b></p>
+                            </div>
+                            <div className='col-6'>
+                                <p> : {refund[0].finaltotal}</p>
+                                <p> : {refund[0].totalpaidamount}</p>
+                                <p> : {refund[0].dueamount}</p>
+                                <p> : {refund[0].comment}</p>
+                            </div>
+                        </div></div>
                 </div>
                 <div className={`row px-3 ${role === 'support' ? '' : 'disabled'}`}>
                     <div className='col-12 col-md-4 col-lg-2 col-xl-2 mt-4 '> Support :</div>
