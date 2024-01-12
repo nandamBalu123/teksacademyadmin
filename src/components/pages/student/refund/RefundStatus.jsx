@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './RefundStatus.css';
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,6 +7,64 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 
 const RefundStatus = () => {
+    let role = "accounts"
+
+    const [refund, setRefund] = useState([
+        {
+            registrationnumber: "TAH1901240003",
+            name: "Dsada",
+            mobilenumber: "1234123412",
+            email: "gfhfd@gmail.com",
+            courses: "AWS + Devops",
+            branch: "Hitech City",
+            batchtimings: "dsdsa",
+            enquirytakenby: "Mohammad Irshad",
+            trainername: "dasd",
+            admissiondate: "2024-01-19",
+            finaltotal: 423922,
+            totalpaidamount: "02323",
+            dueamount: 423922,
+            comment: "fdscs",
+            status: {
+                level1: {
+                    status: "",
+                    remarks: "",
+                    statusSubmitted: false
+                },
+                level2: {
+                    status: "",
+                    remarks: "",
+                    statusSubmitted: false
+                },
+                level3: {
+                    status: "",
+                    remarks: "",
+                    statusSubmitted: false
+                }
+            }
+        }
+    ]);
+    const handleStatusChange = (level, status) => {
+        const updatedRefund = { ...refund[0] };
+        updatedRefund.status[level].status = status;
+        setRefund([updatedRefund]);
+    };
+
+    const handleRemarksChange = (level, remarks) => {
+        const updatedRefund = { ...refund[0] };
+        updatedRefund.status[level].remarks = remarks;
+        setRefund([updatedRefund]);
+    };
+
+    const handleSubmit = (level) => {
+        const updatedRefund = { ...refund[0] };
+        updatedRefund.status[level].statusSubmitted = true;
+        setRefund([updatedRefund]);
+        // Add logic to submit the form data or perform any other actions
+    };
+    useEffect(() => {
+        console.log("refund", refund)
+    })
     return (
         <div className='container mt-3'>
             <div className='refundstatus mt-3'>
@@ -16,58 +74,52 @@ const RefundStatus = () => {
                 <div className='row  px-3'>
                     <div className='col-12 col-md-6 col-lg-6 col-xl-6'>
                         <p>
-                            <b> Registration ID :</b> 1231432543
-
+                            <b>Student Name : </b> {refund[0].name}
                         </p>
                         <p>
-                            <b>Student Name : </b> bhavitha
-
+                            <b>Counsellor Name :</b> {refund[0].enquirytakenby}
                         </p>
                         <p>
-                            <b> Phone No : </b>dsgsdfgf
+                            <b>Phone No : </b> {refund[0].mobilenumber}
                         </p>
                         <p>
-                            <b>Email ID : </b>  bhavitha@2001
+                            <b>Email ID : </b> {refund[0].email}
                         </p>
                         <p>
-                            <b>Enrolled Course: </b>  bhavitha@2001
+                            <b>Enrolled Course: </b> {refund[0].courses}
                         </p>
                         <p>
-                            <b>Branch : </b>  bhavitha@2001
+                            <b>Branch : </b> {refund[0].branch}
                         </p>
                         <p>
-                            <b>Branch Timing : </b>  bhavitha@2001
+                            <b>Branch Timing : </b> {refund[0].batchtimings}
                         </p>
-
                     </div>
                     <div className='col-12 col-md-6 col-lg-6 col-xl-6'>
                         <p>
-                            <b> Counsellor Name :</b> 1231432543
-
+                            <b>Registration ID :</b> {refund[0].registrationnumber}
                         </p>
                         <p>
-                            <b>Trainer Name : </b> bhavitha
-
+                            <b>Trainer Name : </b> {refund[0].trainername}
                         </p>
                         <p>
-                            <b> Admission Date : </b>dsgsdfgf
+                            <b>Admission Date : </b> {refund[0].admissiondate}
                         </p>
                         <p>
-                            <b>Total Course Fee : </b>  bhavitha@2001
+                            <b>Total Course Fee : </b> {refund[0].finaltotal}
                         </p>
                         <p>
-                            <b>Fee Paid : </b>  bhavitha@2001
+                            <b>Fee Paid : </b> {refund[0].totalpaidamount}
                         </p>
                         <p>
-                            <b>Due Amount : </b>  bhavitha@2001
+                            <b>Due Amount : </b> {refund[0].dueamount}
                         </p>
                         <p>
-                            <b>Reason for Refund : </b>  bhavitha@2001
+                            <b>Reason for Refund : </b> {refund[0].comment}
                         </p>
-
                     </div>
                 </div>
-                <div className='row px-3'>
+                <div className={`row px-3 ${role === 'support' ? '' : 'disabled'}`}>
                     <div className='col-12 col-md-4 col-lg-2 col-xl-2 mt-4 '> Support :</div>
                     <div className='col-12 col-md-8 col-lg-4 col-xl-4 '>
                         <FormControl variant="standard" className="w-75">
@@ -76,42 +128,49 @@ const RefundStatus = () => {
                             </InputLabel>
                             <Select
                                 className="mar"
-                                name="department"
+                                value={refund[0].status.level1.status}
+                                onChange={(e) => handleStatusChange('level1', e.target.value)}
+                                label="Status"
+                                disabled={role !== 'support'}
                             >
-                                <MenuItem >
-                                    Veritification-In-Progress
+                                <MenuItem value="Verification-In-Progress">
+                                    Verification-In-Progress
                                 </MenuItem>
-                                <MenuItem >
+                                <MenuItem value="To-Do">
                                     To-Do
                                 </MenuItem>
-                                <MenuItem >
+                                <MenuItem value="Declined">
                                     Declined
                                 </MenuItem>
-                                <MenuItem >
+                                <MenuItem value="Approved">
                                     Approved
                                 </MenuItem>
-
                             </Select>
                         </FormControl>
                     </div>
                     <div className='col-12 col-md-8 col-lg-4 col-xl-4 mt-1 '>
                         <TextField
                             label={<span className="label-family">Comment here..</span>}
-                            className=" mar w-75"
+                            className="mar w-75"
                             variant="standard"
-                            name="trainername"
-                            type="timing"
-                            id="trainername"
-
-
+                            value={refund[0].status.level1.remarks}
+                            onChange={(e) => handleRemarksChange('level1', e.target.value)}
+                            disabled={role !== 'support'}
                         />
                     </div>
                     <div className='col-12 col-md-4 col-lg-2 col-xl-2  text-sm-center mt-2'>
-                        <button className='btn btn-color'> Submit</button>
+                        <button
+                            className='btn btn-color'
+                            onClick={() => handleSubmit('level1')}
+                            disabled={role !== 'support'}
+                        >
+                            Submit
+                        </button>
                     </div>
                 </div>
-                <div className='row px-3'>
-                    <div className='col-12 col-md-4 col-lg-2 col-xl-2 mt-4 '> RM :</div>
+
+                <div className={`row px-3 ${role === 'rm' ? '' : 'disabled'}`}>
+                    <div className='col-12 col-md-4 col-lg-2 col-xl-2 mt-4 '> Regional Manager :</div>
                     <div className='col-12 col-md-8 col-lg-4 col-xl-4 '>
                         <FormControl variant="standard" className="w-75">
                             <InputLabel>
@@ -119,41 +178,48 @@ const RefundStatus = () => {
                             </InputLabel>
                             <Select
                                 className="mar"
-                                name="department"
+                                value={refund[0].status.level2.status}
+                                onChange={(e) => handleStatusChange('level2', e.target.value)}
+                                label="Status"
+                                disabled={role !== 'rm'}
                             >
-                                <MenuItem >
-                                    Veritification-In-Progress
+                                <MenuItem value="Verification-In-Progress">
+                                    Verification-In-Progress
                                 </MenuItem>
-                                <MenuItem >
+                                <MenuItem value="To-Do">
                                     To-Do
                                 </MenuItem>
-                                <MenuItem >
+                                <MenuItem value="Declined">
                                     Declined
                                 </MenuItem>
-                                <MenuItem >
+                                <MenuItem value="Approved">
                                     Approved
                                 </MenuItem>
-
                             </Select>
                         </FormControl>
                     </div>
                     <div className='col-12 col-md-8 col-lg-4 col-xl-4 mt-1 '>
                         <TextField
                             label={<span className="label-family">Comment here..</span>}
-                            className=" mar w-75"
+                            className="mar w-75"
                             variant="standard"
-                            name="trainername"
-                            type="timing"
-                            id="trainername"
-
-
+                            value={refund[0].status.level2.remarks}
+                            onChange={(e) => handleRemarksChange('level2', e.target.value)}
+                            disabled={role !== 'rm'}
                         />
                     </div>
                     <div className='col-12 col-md-4 col-lg-2 col-xl-2  text-sm-center mt-2'>
-                        <button className='btn btn-color'> Submit</button>
+                        <button
+                            className='btn btn-color'
+                            onClick={() => handleSubmit('level2')}
+                            disabled={role !== 'rm'}
+                        >
+                            Submit
+                        </button>
                     </div>
                 </div>
-                <div className='row px-3'>
+
+                <div className={`row px-3 ${role === 'accounts' ? '' : 'disabled'}`}>
                     <div className='col-12 col-md-4 col-lg-2 col-xl-2 mt-4 '> Accounts :</div>
                     <div className='col-12 col-md-8 col-lg-4 col-xl-4 '>
                         <FormControl variant="standard" className="w-75">
@@ -162,36 +228,44 @@ const RefundStatus = () => {
                             </InputLabel>
                             <Select
                                 className="mar"
-                                name="department"
+                                value={refund[0].status.level3.status}
+                                onChange={(e) => handleStatusChange('level3', e.target.value)}
+                                label="Status"
+                                disabled={role !== 'accounts'}
                             >
-                                <MenuItem >
-                                    Refund Initiated
+                                <MenuItem value="Verification-In-Progress">
+                                    Verification-In-Progress
                                 </MenuItem>
-                                <MenuItem >
+                                <MenuItem value="To-Do">
                                     To-Do
                                 </MenuItem>
-                                <MenuItem >
-                                    Refund Completed
+                                <MenuItem value="Declined">
+                                    Declined
                                 </MenuItem>
-
-
+                                <MenuItem value="Approved">
+                                    Approved
+                                </MenuItem>
                             </Select>
                         </FormControl>
                     </div>
                     <div className='col-12 col-md-8 col-lg-4 col-xl-4 mt-1 '>
                         <TextField
                             label={<span className="label-family">Comment here..</span>}
-                            className=" mar w-75"
+                            className="mar w-75"
                             variant="standard"
-                            name="trainername"
-                            type="timing"
-                            id="trainername"
-
-
+                            value={refund[0].status.level3.remarks}
+                            onChange={(e) => handleRemarksChange('level3', e.target.value)}
+                            disabled={role !== 'accounts'}
                         />
                     </div>
                     <div className='col-12 col-md-4 col-lg-2 col-xl-2  text-sm-center mt-2'>
-                        <button className='btn btn-color'> Submit</button>
+                        <button
+                            className='btn btn-color'
+                            onClick={() => handleSubmit('level3')}
+                            disabled={role !== 'accounts'}
+                        >
+                            Submit
+                        </button>
                     </div>
                 </div>
 

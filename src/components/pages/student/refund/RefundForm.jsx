@@ -282,11 +282,19 @@ const RefundForm = () => {
             return;
         }
 
-        let refund = { "refund": [formData] }
+        let refund = { refund: [formData] }
         axios.post(
             `${process.env.REACT_APP_API_URL}/studentfeerefund`,
             refund
-        );
+        )
+            .then(response => {
+                // Handle the response here
+                console.log(response);
+            })
+            .catch(error => {
+                // Handle errors here
+                console.error(error);
+            });
         console.log("refund", refund);
     }
 

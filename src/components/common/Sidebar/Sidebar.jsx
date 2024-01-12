@@ -441,7 +441,7 @@ const Sidebar = () => {
                           selected={selected}
                           setSelected={setSelected}
                         />
-                        {/* <SubMenu
+                        <SubMenu
                           style={{
                             color: colors.grey[100],
                           }}
@@ -470,7 +470,7 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                           />
-                        </SubMenu> */}
+                        </SubMenu>
                       </div>
                     ) : undefined}
                   </SubMenu>
