@@ -280,7 +280,7 @@ function App() {
                 />
 
                 <Route
-                  path="/refundstatus"
+                  path="/refundstatus/:registrationnumber"
                   element={user ? <RefundStatus /> : <Dashboard />}
                 />
 

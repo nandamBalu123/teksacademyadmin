@@ -1,7 +1,16 @@
 // Message.js
 import React from 'react';
 import './Message.css'
-const Message = ({ text, sender }) => {
+const Message = ({ text, sender, role, date }) => {
+    let LoggedInuser = JSON.parse(localStorage.getItem("user"));
+    let userName = LoggedInuser.fullname;
+    const formatDateTime = (messageDate) => {
+        const options = { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+        return new Date(messageDate).toLocaleString('en-US', options);
+    };
+
+
+
     return (
 
         <div>
@@ -20,23 +29,24 @@ const Message = ({ text, sender }) => {
                                 <div class="chatbox">
                                     <div class="modal-dialog-scrollable">
                                         <div class="modal-content">
-                                            <div class="modal-body">
-                                                <div class="msg-body" style={{ textAlign: sender === 'user' ? 'left' : 'right' }}>
-                                                    <ul>
-                                                        <span class="bhavi">{sender === 'user' ? 'You' : 'Bot'}:</span>
-                                                        <li class="sender">
-                                                            <p> {text} </p>
-                                                            <span class="time">10:06 am</span>
-                                                        </li>
 
-                                                        <li class="repaly">
+                                            <div class="msg-body" style={{ textAlign: sender === userName ? 'right' : 'left' }}>
+                                                <ul>
+                                                    <li class="sender">
+                                                        <span class="bhavi">{sender && `${sender} (${role && role.charAt(0).toUpperCase() + role.slice(1)})`}:</span>
+
+                                                        <p>  {text} </p>
+                                                        <span class="time">  {date && ` ${formatDateTime(date)}`}</span>
+                                                    </li>
+
+                                                    {/* <li class="repaly">
                                                             <p>yes!</p>
                                                             <span class="time">10:20 am</span>
-                                                        </li>
+                                                        </li> */}
 
-                                                    </ul>
-                                                </div>
+                                                </ul>
                                             </div>
+
 
                                         </div>
                                     </div>

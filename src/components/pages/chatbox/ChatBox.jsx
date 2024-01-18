@@ -1,15 +1,22 @@
 // ChatBox.js
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import Message from './Message';
 import SendIcon from '@mui/icons-material/Send';
 import './Message.css'
-const ChatBox = () => {
+const ChatBox = ({ setRefund, registrationnumber, chat }) => {
+    let role = localStorage.getItem("role")
+    let LoggedInuser = JSON.parse(localStorage.getItem("user"));
+    let userName = LoggedInuser.fullname;
     const [messages, setMessages] = useState([]);
+    useEffect(() => {
+        setMessages(chat)
+    }, [chat])
+
     const [inputText, setInputText] = useState('');
     const handleInputChange = (e) => {
         setInputText(e.target.value);
     };
-
     const handleSendMessage = () => {
         if (inputText.trim() === '') {
             return;
@@ -18,20 +25,57 @@ const ChatBox = () => {
         const newMessage = {
             id: messages.length + 1,
             text: inputText,
-            sender: 'user', // You can set different senders for user and system messages
+            sender: userName,
+            role: role,
+            date: new Date()
         };
+
+        setRefund(prevRefund => {
+            const updatedChat = Array.isArray(prevRefund[0]?.chat)
+                ? [...prevRefund[0].chat, newMessage]
+                : [newMessage];
+
+            return [{
+                ...prevRefund[0],
+                chat: updatedChat
+            }];
+        });
+
 
         setMessages([...messages, newMessage]);
         setInputText('');
+
+        scrollToBottom();
     };
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    useEffect(() => {
+        setMessages(chat);
+        scrollToBottom(); // Scroll to the bottom when messages change
+    }, [chat]);
+
 
     return (
         <div>
             <div style={{ height: '300px', backgroundColor: 'white', overflowY: 'scroll', border: '1px solid #ccc' }}>
-                {messages.map((message) => (
-                    <Message key={message.id} text={message.text} sender={message.sender} />
+                {messages && messages.length > 0 && messages.map((message) => (
+                    <Message key={message.id} text={message.text} sender={message.sender} role={message.role}
+                        date={message.date} />
                 ))}
+                <div ref={messagesEndRef} /> {/* Empty div for scrolling to the bottom */}
             </div>
+            {/* <div style={{ height: '300px', backgroundColor: 'white', overflowY: 'scroll', border: '1px solid #ccc' }}>
+                {messages && messages.length > 0 && messages.map((message) => (
+                    <Message key={message.id} text={message.text} sender={message.sender} role={message.role}
+                        date={message.date} />
+                ))}
+            </div> */}
             {/* <div className='d-flex justify-content-between'>
                 <input type="text" value={inputText} onChange={handleInputChange} className='mt-3' placeholder='Type here....' style={{ borderRadius: "5px", borderColor: "#4676a0" }} />
                 <button onClick={handleSendMessage} className='mt-3 border-none btn btn-color' ><SendIcon /></button>

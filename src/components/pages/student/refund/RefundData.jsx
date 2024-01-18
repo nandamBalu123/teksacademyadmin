@@ -73,7 +73,7 @@ const RefundData = () => {
 
     return (
         <div className='container mt-3'>
-            <div className='refunddata mt-3'>
+           <div className='refunddata mt-3'>
                 <h5 className="mt-4  text-center">Refund Data</h5>
                 <div className="row mb-1 ps-1 ">
                     <div className="col-12 col-md-6 col-lg-8 col-xl-8">
@@ -206,10 +206,14 @@ const RefundData = () => {
                                     <TableCell className="table-cell-heading">Branch</TableCell>
 
 
-                                    <TableCell className="table-cell-heading">Course</TableCell>
                                     <TableCell className="table-cell-heading">Counsellor</TableCell>
                                     {/* <TableCell className="table-cell-heading">Email</TableCell> */}
                                     {/* <TableCell className="table-cell-heading">Training Mode</TableCell> */}
+                                    <TableCell className="table-cell-heading">Support Status</TableCell>
+                                    <TableCell className="table-cell-heading">RM Status</TableCell>
+                                    <TableCell className="table-cell-heading">Accounts Status</TableCell>
+
+
                                     <TableCell className="table-cell-heading">Actions</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -221,13 +225,16 @@ const RefundData = () => {
                                         <TableCell className="Table-cell">{item.refund[0].registrationnumber}</TableCell>
                                         <TableCell className="Table-cell">{item.refund[0].branch}</TableCell>
 
-                                        <TableCell className="Table-cell">{item.refund[0].courses}</TableCell>
                                         <TableCell className="Table-cell">{item.refund[0].enquirytakenby}</TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].status.level1.status}</TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].status.level2.status}</TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].status.level3.status}</TableCell>
+
                                         {/* <TableCell className="Table-cell">{item.refund[0].email}</TableCell> */}
                                         {/* <TableCell className="Table-cell">Add Training Mode value</TableCell> */}
                                         <TableCell>
                                             <div className="d-flex justify-content-center">
-                                                <NavLink to={`/refundview/${item.refund[0].registrationnumber}`}>
+                                                <NavLink to={`/refundstatus/${item.refund[0].registrationnumber}`}>
                                                     <VisibilityIcon
                                                         style={{ width: "40px" }}
                                                         className="icon-color"
@@ -243,92 +250,7 @@ const RefundData = () => {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    {/* <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
-                        <Table stickyHeader aria-label="sticky table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell className="table-cell-heading">SNo</TableCell>
-                                    <TableCell className="table-cell-heading">
-                                        Student Name
-                                    </TableCell>
-                                    <TableCell className="table-cell-heading">
-
-                                        Course
-                                    </TableCell>
-
-                                    <TableCell className="table-cell-heading">
-                                        Counsellor
-
-                                    </TableCell>
-
-                                    <TableCell className="table-cell-heading">
-
-                                        Email
-                                    </TableCell>
-
-                                    <TableCell className="table-cell-heading">
-
-                                        Training Mode
-                                    </TableCell>
-
-                                    <TableCell className="table-cell-heading">Actions</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-
-                                <TableRow >
-                                    <TableCell className="Table-cell">
-                                        1
-                                    </TableCell>
-
-                                    <TableCell className="Table-cell">
-                                        tyhty
-                                    </TableCell>
-
-                                    <TableCell className="Table-cell">
-
-                                        dgtxdrr
-
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-
-                                        dgtxdrr
-
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-
-                                        dgtxdrr
-
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-
-                                        dgtxdrr
-
-                                    </TableCell>
-
-                                    <TableCell >
-                                        <div className="d-flex justify-content-center">
-                                            <NavLink to="#">
-                                                <VisibilityIcon
-                                                    style={{ width: "40px" }}
-                                                    className="icon-color"
-                                                />
-                                            </NavLink>
-
-                                            <NavLink to="#">
-                                                <EditIcon
-                                                    style={{ width: "40px" }}
-                                                    className="icon-color"
-                                                />
-                                            </NavLink>
-
-                                        </div>
-                                    </TableCell>
-                                </TableRow>
-
-                            </TableBody>
-                        </Table>
-                    </TableContainer> */}
+                   
                 </div>
 
                 <div
