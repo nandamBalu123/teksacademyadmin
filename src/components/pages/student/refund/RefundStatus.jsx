@@ -69,16 +69,16 @@ const RefundStatus = () => {
             {refund && refund.length > 0 && <div className='refundstatus mt-3'>
                 <h5 className="mt-4  text-center">Refund Status</h5>
                 <div className='row  px-3'>
-                    <div className='col-12 col-md-4 col-lg-4 col-xl-4'>
+                    <div className='col-12 col-md-5 col-lg-5 col-xl-5'>
                         <div className='row'>
-                            <div className='col-6'>
+                            <div className='col-4'>
                                 <p> <b> Student Name</b></p>
                                 <p> <b>Counsellor Name  </b></p>
                                 <p> <b> Phone No  </b></p>
                                 <p><b>Email ID  </b></p>
                                 <p> <b>Enrolled Course </b></p>
                             </div>
-                            <div className='col-6'>
+                            <div className='col-8'>
                                 <p> : {refund[0].name}</p>
                                 <p> : {refund[0].enquirytakenby}</p>
                                 <p> : {refund[0].mobilenumber}</p>
@@ -89,14 +89,14 @@ const RefundStatus = () => {
                     </div>
                     <div className='col-12 col-md-4 col-lg-4 col-xl-4'>
                         <div className='row'>
-                            <div className='col-6'>
+                            <div className='col-4'>
                                 <p> <b> Registration ID  </b></p>
                                 <p>  <b>Branch  </b></p>
                                 <p><b>Trainer Name  </b></p>
                                 <p> <b>Branch Timing  </b></p>
                                 <p> <b>Admission Date </b></p>
                             </div>
-                            <div className='col-6'>
+                            <div className='col-8'>
                                 <p> : {refund[0].registrationnumber}</p>
                                 <p> : {refund[0].branch}</p>
                                 <p> : {refund[0].trainername}</p>
@@ -105,7 +105,7 @@ const RefundStatus = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-12 col-md-4 col-lg-4 col-xl-4'>
+                    <div className='col-12 col-md-3 col-lg-3 col-xl-3'>
                         <div className='row'>
                             <div className='col-6'>
                                 <p>  <b>Total Course Fee</b></p>
@@ -125,7 +125,7 @@ const RefundStatus = () => {
                     <div className='col-7 mt-3'>
                         {role && role === "support" && < div className='row'>
                             <div className='d-flex justify-content-evenly'>
-                                <h6 className='mt-1 col-3 text-end'>Support : </h6>
+                                <h6 className='mt-2 col-3 text-end'>Support : </h6>
                                 <button
                                     className={`btn ${refund[0].status.level1.status === "To-Do" ? 'btn-info text-white' : 'bg-light'} `}
                                     onClick={() => handleStatusChange('level1', 'To-Do')}
@@ -190,7 +190,7 @@ const RefundStatus = () => {
 
                         {role && role != "rm" && refund[0].status.level1.status === "Approved" && < div className='row'>
                             <div className='d-flex justify-content-evenly'>
-                                <h6 className='mt-1 col-3 text-end'>Regional Manager : {refund[0].status.level2.status}</h6>
+                                <h6 className='mt-1  '>Regional Manager : {refund[0].status.level2.status}</h6>
                             </div>
                         </div>}
                         {role && role === "accounts" && refund[0].status.level1.status === "Approved" && refund[0].status.level2.status === "Approved" && < div className='row'>

@@ -7,14 +7,17 @@
   letter-spacing: 1px;
 }
 
+.css-1914nh .pro-inner-item {
+  padding: 6px 9px 5px 13px !important;
+  font-weight: 400 !important;
+}
 
 .css-17w9904-MuiTypography-root {
   margin: 0;
   font-family: inherit !important;
-  /* font-size: 35px; */
+
   font-weight: 500 !important;
-  /* font-size: 1rem !important; */
-  /* font-size: 18px !important; */
+
   line-height: 1rem !important;
 }
 
@@ -32,25 +35,9 @@
 
 }
 
-/* .title-tip[title]:hover {
-  position: relative;
+.pro-sidebar .pro-menu .pro-menu-item {
+  font-size: 1rem !important;
 }
-
-.title-tip-right[title]:hover:before {
-  top: auto;
-  left: 100%;
-  margin-top: 0;
-  margin-left: 0.5em;
-}
-
-.title-tip-right[title]:hover:after {
-  top: 50%;
-  left: 100%;
-  margin-left: 0;
-  margin-top: -0.125em;
-  border: 0.25em dashed transparent;
-  border-right: 0.25em solid #222;
-} */
 
 .pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu>.pro-inner-item:before {
   color: black !important;
