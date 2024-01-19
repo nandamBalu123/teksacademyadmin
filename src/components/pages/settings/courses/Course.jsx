@@ -25,7 +25,7 @@ const Course = () => {
 
 
   const handleDeleteCourse = (id) => {
-    let courseID={id:id}
+    let courseID = { id: id }
     axios
       .delete(`${process.env.REACT_APP_API_URL}/deletecourse/${id}`)
 
@@ -33,7 +33,7 @@ const Course = () => {
         dispatch({
           type: "DELETE_COURSE",
           payload: courseID,
-          
+
         });
         alert("deleted")
       })
@@ -83,37 +83,24 @@ const Course = () => {
                 <TableCell className="table-cell-heading" align="center">
                   Actions
                 </TableCell>
- 
+
                 {/* <TableCell className='  bg-primary fs-6 border border 1' align="center">Type</TableCell> */}
               </TableRow>
             </TableHead>
- 
+
             {Array.isArray(getcourses) && getcourses.length > 0 ? (
               getcourses.map((item, index) => {
                 let date = new Date(item.date);
                 const day = date.getUTCDate();
                 const monthIndex = date.getUTCMonth();
                 const year = date.getUTCFullYear();
- 
-                const monthAbbreviations = [
-                  "Jan",
-                  "Feb",
-                  "Mar",
-                  "Apr",
-                  "May",
-                  "Jun",
-                  "Jul",
-                  "Aug",
-                  "Sep",
-                  "Oct",
-                  "Nov",
-                  "Dec",
-                ];
- 
+
+                const monthAbbreviations = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
                 // Formatting the date
                 date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
                   }-${year}`;
- 
+
                 return (
                   <TableRow key={item.id}>
                     <TableCell className="Table-cell text-center">
@@ -155,12 +142,12 @@ const Course = () => {
                     <TableCell className="Table-cell ">
                       {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
                       <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
-                      <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} onClick={e => handleDeleteCourse(item.id)}/>
+                      <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} onClick={e => handleDeleteCourse(item.id)} />
                     </TableCell>
                     {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}
                   </TableRow>
                 )
- 
+
               })
             ) : (
               <TableRow>

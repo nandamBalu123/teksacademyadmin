@@ -6,7 +6,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CommentsDisabledRounded } from '@mui/icons-material';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 const RefundForm = () => {
+    const navigate = useNavigate();
+
     const { students, dispatch } = useStudentsContext();
     const [passwordError, setPasswordError] = useState('');
     const [formData, setFormData] = useState(
@@ -26,10 +29,12 @@ const RefundForm = () => {
             dueamount: "",
             comment: "",
             status: {
-                level1: { status: "", remarks: "", statusSubmitted: false },
-                level2: { status: "", remarks: "", statusSubmitted: false },
-                level3: { status: "", remarks: "", statusSubmitted: false }
-            }
+                level1: { status: "To-Do" },
+                level2: { status: "To-Do" },
+                level3: { status: "To-Do" }
+            },
+            chat: [],
+            date: new Date()
         }
     );
     useEffect(() => {
@@ -53,11 +58,11 @@ const RefundForm = () => {
                     finaltotal: filterstudentwithregistrationid.finaltotal,
                     totalpaidamount: filterstudentwithregistrationid.totalpaidamount,
                     dueamount: filterstudentwithregistrationid.dueamount,
-                    comment: filterstudentwithregistrationid.comment
+
                 }));
             }
             if (filteredResults && filteredResults.length < 1) {
-                let filterstudentwithregistrationid = filteredResults[0]
+                // let filterstudentwithregistrationid = filteredResults[0]
                 setFormData((prev) => (
                     {
                         ...prev,
@@ -75,10 +80,10 @@ const RefundForm = () => {
                         dueamount: "",
                         comment: "",
                         status: {
-                            level1: { status: "", remarks: "", statusSubmitted: false },
-                            level2: { status: "", remarks: "", statusSubmitted: false },
-                            level3: { status: "", remarks: "", statusSubmitted: false }
-                        }
+                            level1: { status: "To-Do" },
+                            level2: { status: "To-Do" },
+                            level3: { status: "To-Do" }
+                        },
                     }
                 ));
             }
@@ -282,11 +287,20 @@ const RefundForm = () => {
             return;
         }
 
-        let refund = { "refund": [formData] }
+        let refund = { refund: [formData], registrationnumber: formData.registrationnumber }
         axios.post(
             `${process.env.REACT_APP_API_URL}/studentfeerefund`,
             refund
-        );
+        )
+            .then(response => {
+                // Handle the response here
+                navigate("/refunddata")
+                console.log(response);
+            })
+            .catch(error => {
+                // Handle errors here
+                console.error(error);
+            });
         console.log("refund", refund);
     }
 

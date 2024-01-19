@@ -200,7 +200,7 @@ const Sidebar = () => {
           },
           "& .pro-inner-item": {
             padding: "5px 14px 5px 22px !important",
-            fontSize: "14px !important",
+
             fontWeight: "400 !important",
           },
           "& .pro-inner-item:hover": {
@@ -441,7 +441,7 @@ const Sidebar = () => {
                           selected={selected}
                           setSelected={setSelected}
                         />
-                        {/* <SubMenu
+                        <SubMenu
                           style={{
                             color: colors.grey[100],
                           }}
@@ -463,14 +463,14 @@ const Sidebar = () => {
                             selected={selected}
                             setSelected={setSelected}
                           />
-                          <Item
+                          {/* <Item
                             title="Refund Status"
                             to="/refundstatus"
                             icon={<Diversity3Icon />}
                             selected={selected}
                             setSelected={setSelected}
-                          />
-                        </SubMenu> */}
+                          /> */}
+                        </SubMenu>
                       </div>
                     ) : undefined}
                   </SubMenu>

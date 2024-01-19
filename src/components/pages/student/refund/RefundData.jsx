@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './RefundData.css';
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
@@ -27,12 +27,28 @@ import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
-
+import axios from "axios"
 const RefundData = () => {
     const [isChecked, setIsChecked] = useState(false);
     // for open and close the filters
     const [opening, setOpening] = React.useState(false);
-
+    const [refunds, setRefunds] = useState()
+    useEffect(() => {
+        axios
+            .get(`${process.env.REACT_APP_API_URL}/studentrefundsfromrefunds`)
+            .then((response) => {
+                if (response.data) {
+                    setRefunds(response.data)
+                    // dispatch({ type: "SET_LEADSOURCES", payload: response.data });
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+            });
+    }, [])
+    useEffect(() => {
+        console.log("refunds", refunds)
+    })
     const handleClickOpen = () => {
         setOpening(true);
     };
@@ -54,9 +70,10 @@ const RefundData = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     return (
         <div className='container mt-3'>
-            <div className='refunddata mt-3'>
+           <div className='refunddata mt-3'>
                 <h5 className="mt-4  text-center">Refund Data</h5>
                 <div className="row mb-1 ps-1 ">
                     <div className="col-12 col-md-6 col-lg-8 col-xl-8">
@@ -183,88 +200,57 @@ const RefundData = () => {
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell className="table-cell-heading">SNo</TableCell>
-                                    <TableCell className="table-cell-heading">
-                                        Student Name
-                                    </TableCell>
-                                    <TableCell className="table-cell-heading">
+                                    <TableCell className="table-cell-heading">S:No</TableCell>
+                                    <TableCell className="table-cell-heading">Student Name</TableCell>
+                                    <TableCell className="table-cell-heading">Registration Number</TableCell>
+                                    <TableCell className="table-cell-heading">Branch</TableCell>
 
-                                        Course
-                                    </TableCell>
 
-                                    <TableCell className="table-cell-heading">
-                                        Counsellor
+                                    <TableCell className="table-cell-heading">Counsellor</TableCell>
+                                    {/* <TableCell className="table-cell-heading">Email</TableCell> */}
+                                    {/* <TableCell className="table-cell-heading">Training Mode</TableCell> */}
+                                    <TableCell className="table-cell-heading">Support Status</TableCell>
+                                    <TableCell className="table-cell-heading">RM Status</TableCell>
+                                    <TableCell className="table-cell-heading">Accounts Status</TableCell>
 
-                                    </TableCell>
-
-                                    <TableCell className="table-cell-heading">
-
-                                        Email
-                                    </TableCell>
-
-                                    <TableCell className="table-cell-heading">
-
-                                        Training Mode
-                                    </TableCell>
 
                                     <TableCell className="table-cell-heading">Actions</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
+                                {refunds && refunds.length > 0 && refunds.map((item, index) => (
+                                    <TableRow key={index}>
+                                        <TableCell className="Table-cell">{index + 1}</TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].name}</TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].registrationnumber}</TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].branch}</TableCell>
 
-                                <TableRow >
-                                    <TableCell className="Table-cell">
-                                        1
-                                    </TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].enquirytakenby}</TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].status.level1.status}</TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].status.level2.status}</TableCell>
+                                        <TableCell className="Table-cell">{item.refund[0].status.level3.status}</TableCell>
 
-                                    <TableCell className="Table-cell">
-                                        tyhty
-                                    </TableCell>
-
-                                    <TableCell className="Table-cell">
-
-                                        dgtxdrr
-
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-
-                                        dgtxdrr
-
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-
-                                        dgtxdrr
-
-                                    </TableCell>
-                                    <TableCell className="Table-cell">
-
-                                        dgtxdrr
-
-                                    </TableCell>
-
-                                    <TableCell >
-                                        <div className="d-flex justify-content-center">
-                                            <NavLink to="#">
-                                                <VisibilityIcon
-                                                    style={{ width: "40px" }}
-                                                    className="icon-color"
-                                                />
-                                            </NavLink>
-
-                                            <NavLink to="#">
-                                                <EditIcon
-                                                    style={{ width: "40px" }}
-                                                    className="icon-color"
-                                                />
-                                            </NavLink>
-
-                                        </div>
-                                    </TableCell>
-                                </TableRow>
-
+                                        {/* <TableCell className="Table-cell">{item.refund[0].email}</TableCell> */}
+                                        {/* <TableCell className="Table-cell">Add Training Mode value</TableCell> */}
+                                        <TableCell>
+                                            <div className="d-flex justify-content-center">
+                                                <NavLink to={`/refundstatus/${item.refund[0].registrationnumber}`}>
+                                                    <VisibilityIcon
+                                                        style={{ width: "40px" }}
+                                                        className="icon-color"
+                                                    />
+                                                </NavLink>
+                                                {/* <NavLink to="#">
+                    <EditIcon style={{ width: "40px" }} className="icon-color" />
+                  </NavLink> */}
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
+                   
                 </div>
 
                 <div

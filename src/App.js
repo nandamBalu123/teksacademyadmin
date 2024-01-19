@@ -88,6 +88,7 @@ import RefundForm from "./components/pages/student/refund/RefundForm";
 import RefundData from "./components/pages/student/refund/RefundData";
 import RefundStatus from "./components/pages/student/refund/RefundStatus";
 
+
 // import Formm from "./components/pages/user/createUserForm/Form";
 function App() {
   const { user } = useAuthContext();
@@ -279,7 +280,7 @@ function App() {
                 />
 
                 <Route
-                  path="/refundstatus"
+                  path="/refundstatus/:registrationnumber"
                   element={user ? <RefundStatus /> : <Dashboard />}
                 />
 
@@ -323,6 +324,7 @@ function App() {
                   path="/comment"
                   element={user ? <Comment /> : <Dashboard />}
                 />
+
                 {/* student route end */}
 
                 {/* inventory start*/}

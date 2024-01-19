@@ -209,123 +209,123 @@ export default function RegistrationForm() {
     function validateFeedetails(feedetails) {
       const admissionFeeExists = feedetails.some((item) => item.feetype === "Admission Fee");
       const feeExists = feedetails.some((item) => item.feetype === "fee");
-    
+
       if (!admissionFeeExists || !feeExists) {
         // Validation failed
-      
+
         return false;
       }
-    
+
       // Validation passed
       return true;
     }
 
-    if(validateFeedetails(feedetails)){
-      
-    let grosstotall = 0;
-    let totaldiscountt = 0;
-    let totalfeewithouttaxx = 0;
-    let totaltaxx = 0;
-    let grandtotall = 0;
-    let materialfeee = 0;
-    const array = [];
-    for (let i = 0; i < feedetails.length; i++) {
-      if (feedetails[i].feetype === "Admission Fee") {
-        let admissionobject = {
-          id: "",
-          feetype: "",
-          feewithtax: 0,
-          feewithouttax: 0,
-          feetax: 0,
-        };
-        admissionobject.id = feedetails[i].id;
-        admissionobject.feetype = "Admission Fee";
-        admissionobject.feewithtax = feedetails[i].totalamount;
-        admissionobject.feewithouttax = admissionobject.feewithtax / 1.18;
-        admissionobject.feetax =
-          admissionobject.feewithtax - admissionobject.feewithouttax;
-        grosstotall = grosstotall + parseInt(feedetails[i].amount);
-        // totaldiscountt = totaldiscountt + parseInt(feedetails[i].discount);
-        totaldiscountt = 0;
-        totalfeewithouttaxx =
-          totalfeewithouttaxx + admissionobject.feewithouttax;
-        totaltaxx = totaltaxx + admissionobject.feetax;
-        grandtotall = grandtotall + admissionobject.feewithtax;
+    if (validateFeedetails(feedetails)) {
 
-        array.push(admissionobject);
+      let grosstotall = 0;
+      let totaldiscountt = 0;
+      let totalfeewithouttaxx = 0;
+      let totaltaxx = 0;
+      let grandtotall = 0;
+      let materialfeee = 0;
+      const array = [];
+      for (let i = 0; i < feedetails.length; i++) {
+        if (feedetails[i].feetype === "Admission Fee") {
+          let admissionobject = {
+            id: "",
+            feetype: "",
+            feewithtax: 0,
+            feewithouttax: 0,
+            feetax: 0,
+          };
+          admissionobject.id = feedetails[i].id;
+          admissionobject.feetype = "Admission Fee";
+          admissionobject.feewithtax = feedetails[i].totalamount;
+          admissionobject.feewithouttax = admissionobject.feewithtax / 1.18;
+          admissionobject.feetax =
+            admissionobject.feewithtax - admissionobject.feewithouttax;
+          grosstotall = grosstotall + parseInt(feedetails[i].amount);
+          // totaldiscountt = totaldiscountt + parseInt(feedetails[i].discount);
+          totaldiscountt = 0;
+          totalfeewithouttaxx =
+            totalfeewithouttaxx + admissionobject.feewithouttax;
+          totaltaxx = totaltaxx + admissionobject.feetax;
+          grandtotall = grandtotall + admissionobject.feewithtax;
+
+          array.push(admissionobject);
+        }
+        if (feedetails[i].feetype === "fee") {
+          let coursefeeobject = {
+            id: "",
+            feetype: "",
+            feewithtax: 0,
+            feewithouttax: 0,
+            feetax: 0,
+          };
+          coursefeeobject.id = feedetails[i].id;
+          coursefeeobject.feetype = "Course Fee";
+          coursefeeobject.feewithtax = feedetails[i].totalamount * 0.65;
+          coursefeeobject.feewithouttax = coursefeeobject.feewithtax / 1.18;
+          coursefeeobject.feetax =
+            coursefeeobject.feewithtax - coursefeeobject.feewithouttax;
+          // settotalfeewithouttax((value) => value + coursefeeobject.feewithouttax);
+          // settotaltax((value) => value + coursefeeobject.feetax);
+          // setGrandtotal((value) => value + coursefeeobject.feewithtax);
+          grosstotall = grosstotall + Math.round(feedetails[i].amount * 0.65);
+          totaldiscountt =
+            totaldiscountt + parseInt(feedetails[i].discount * 0.65);
+
+          totalfeewithouttaxx =
+            totalfeewithouttaxx + coursefeeobject.feewithouttax;
+          totaltaxx = totaltaxx + coursefeeobject.feetax;
+          grandtotall = grandtotall + coursefeeobject.feewithtax;
+          array.push(coursefeeobject);
+          let materialfeeobject = {
+            id: "",
+            feetype: "",
+            feewithtax: 0,
+            feewithouttax: 0,
+            feetax: 0,
+          };
+          materialfeeobject.id = feedetails[i].id;
+          materialfeeobject.feetype = "Material Fee";
+          materialfeeobject.feewithtax = Math.round(
+            feedetails[i].totalamount * 0.35
+          );
+          materialfeeobject.feewithouttax = materialfeeobject.feewithtax;
+          materialfeeobject.feetax = 0;
+
+          // settotalfeewithouttax(
+          //   (value) => value + materialfeeobject.feewithouttax
+          // );
+          // settotaltax((value) => value + materialfeeobject.feetax);
+          // setGrandtotal((value) => value + materialfeeobject.feewithtax);
+          grosstotall = grosstotall + parseInt(feedetails[i].amount * 0.35);
+          totaldiscountt =
+            totaldiscountt + parseInt(feedetails[i].discount * 0.35);
+          materialfeee =
+            materialfeee + Math.round(feedetails[i].totalamount * 0.35);
+          // totalfeewithouttaxx =
+          //   totalfeewithouttaxx + materialfeeobject.feewithouttax;
+          totaltaxx = totaltaxx + materialfeeobject.feetax;
+          // grandtotall = grandtotall + materialfeeobject.feewithtax;
+          array.push(materialfeeobject);
+        }
       }
-      if (feedetails[i].feetype === "fee") {
-        let coursefeeobject = {
-          id: "",
-          feetype: "",
-          feewithtax: 0,
-          feewithouttax: 0,
-          feetax: 0,
-        };
-        coursefeeobject.id = feedetails[i].id;
-        coursefeeobject.feetype = "Course Fee";
-        coursefeeobject.feewithtax = feedetails[i].totalamount * 0.65;
-        coursefeeobject.feewithouttax = coursefeeobject.feewithtax / 1.18;
-        coursefeeobject.feetax =
-          coursefeeobject.feewithtax - coursefeeobject.feewithouttax;
-        // settotalfeewithouttax((value) => value + coursefeeobject.feewithouttax);
-        // settotaltax((value) => value + coursefeeobject.feetax);
-        // setGrandtotal((value) => value + coursefeeobject.feewithtax);
-        grosstotall = grosstotall + Math.round(feedetails[i].amount * 0.65);
-        totaldiscountt =
-          totaldiscountt + parseInt(feedetails[i].discount * 0.65);
-
-        totalfeewithouttaxx =
-          totalfeewithouttaxx + coursefeeobject.feewithouttax;
-        totaltaxx = totaltaxx + coursefeeobject.feetax;
-        grandtotall = grandtotall + coursefeeobject.feewithtax;
-        array.push(coursefeeobject);
-        let materialfeeobject = {
-          id: "",
-          feetype: "",
-          feewithtax: 0,
-          feewithouttax: 0,
-          feetax: 0,
-        };
-        materialfeeobject.id = feedetails[i].id;
-        materialfeeobject.feetype = "Material Fee";
-        materialfeeobject.feewithtax = Math.round(
-          feedetails[i].totalamount * 0.35
-        );
-        materialfeeobject.feewithouttax = materialfeeobject.feewithtax;
-        materialfeeobject.feetax = 0;
-
-        // settotalfeewithouttax(
-        //   (value) => value + materialfeeobject.feewithouttax
-        // );
-        // settotaltax((value) => value + materialfeeobject.feetax);
-        // setGrandtotal((value) => value + materialfeeobject.feewithtax);
-        grosstotall = grosstotall + parseInt(feedetails[i].amount * 0.35);
-        totaldiscountt =
-          totaldiscountt + parseInt(feedetails[i].discount * 0.35);
-        materialfeee =
-          materialfeee + Math.round(feedetails[i].totalamount * 0.35);
-        // totalfeewithouttaxx =
-        //   totalfeewithouttaxx + materialfeeobject.feewithouttax;
-        totaltaxx = totaltaxx + materialfeeobject.feetax;
-        // grandtotall = grandtotall + materialfeeobject.feewithtax;
-        array.push(materialfeeobject);
+      setTotalDiscount(totaldiscountt);
+      setGrosstotal(grosstotall);
+      settotalfeewithouttax(totalfeewithouttaxx);
+      settotaltax(totaltaxx);
+      setGrandtotal(grandtotall);
+      setfeedetailsbilling(array);
+      setmaterialfee(materialfeee);
+      if (feedetails.length === 0) {
+        alert("please enter feedetails");
+        return;
       }
+      handleNext();
     }
-    setTotalDiscount(totaldiscountt);
-    setGrosstotal(grosstotall);
-    settotalfeewithouttax(totalfeewithouttaxx);
-    settotaltax(totaltaxx);
-    setGrandtotal(grandtotall);
-    setfeedetailsbilling(array);
-    setmaterialfee(materialfeee);
-    if (feedetails.length === 0) {
-      alert("please enter feedetails");
-      return;
-    }
-    handleNext();
-    }
-    else{
+    else {
       alert("The fee should contain both 'Admission Fee' and 'fee'.");
     }
   };
@@ -349,33 +349,52 @@ export default function RegistrationForm() {
       setAmount(499)
     }
     if (feetype === "fee") {
-      let coursefee;
-      let course = getcourses.filter((course) => course.course_name === courses)
+
+      let course = getcourses.filter((course) => course.course_name === courses && course.course_package === coursepackage)
       console.log("course fee", course)
-      setAmount(course[0].fee)
+      if (course.length > 0) {
+        setAmount(course[0].fee)
+      } else {
+        setAmount("")
+
+      }
+
+
+
     }
   }, [feetype])
   const handleFeeDetails = (e) => {
     e.preventDefault();
+    let save = true;
+    if (feetype === "fee") {
+      let course = getcourses.filter((course) => course.course_name === courses && course.course_package === coursepackage)
 
-    setFeeDetails([
-      ...feedetails,
+      if (course.length > 0 && discount > course[0].max_discount) {
+        save = false
+        alert(`Discount cannot be greater than ${course[0].max_discount}`)
+      }
+    }
+    if (save) {
+      setFeeDetails([
+        ...feedetails,
+        {
+          id: Date.now(),
+          feetype: feetype,
+          amount: amount,
+          discount: discount,
+          taxamount: taxamount,
+          totalamount: totalamount,
+        },
+      ]);
+      setfeetype("");
+      setAmount("");
+      setDiscount("");
+      setTaxamount(0);
 
-      {
-        id: Date.now(),
-        feetype: feetype,
-        amount: amount,
-        discount: discount,
-        taxamount: taxamount,
-        totalamount: totalamount,
-      },
-    ]);
-    setfeetype("");
-    setAmount("");
-    setDiscount("");
-    setTaxamount(0);
+      setTotalamount(0);
+    }
 
-    setTotalamount(0);
+
   };
   //////////////old code for registration number
   // useEffect(() => {
@@ -905,10 +924,10 @@ export default function RegistrationForm() {
         // Handle the response as needed
         console.log("Response:", response.data);
         if (response.data.Status == "exists") {
-            alert(response.data.field + " already " + response.data.Status)
-            return false;
-          }
-        
+          alert(response.data.field + " already " + response.data.Status)
+          return false;
+        }
+
         const id = response.data.insertId;
         let updateContext = studentRegistrationdata;
         updateContext.id = response.data.insertId;
@@ -2132,9 +2151,9 @@ export default function RegistrationForm() {
                         onChange={(e) => setfeetype(e.target.value)}
                         value={feetype}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="select">---select---</MenuItem>
                         <MenuItem value="Admission Fee">Admission Fee</MenuItem>
-                        <MenuItem value="fee"> Fee</MenuItem>
+                        <MenuItem value="fee">Fee</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
