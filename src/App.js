@@ -87,6 +87,7 @@ import Comment from "./components/pages/student/refund/Comments";
 import RefundForm from "./components/pages/student/refund/RefundForm";
 import RefundData from "./components/pages/student/refund/RefundData";
 import RefundStatus from "./components/pages/student/refund/RefundStatus";
+import FinalSearch from "./components/pages/student/search/FinalSearch";
 
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -324,7 +325,10 @@ function App() {
                   path="/comment"
                   element={user ? <Comment /> : <Dashboard />}
                 />
-
+                <Route
+                  path="/search"
+                  element={user ? <FinalSearch /> : <Dashboard />}
+                />
                 {/* student route end */}
 
                 {/* inventory start*/}

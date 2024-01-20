@@ -79,11 +79,7 @@ const RefundForm = () => {
                         totalpaidamount: "",
                         dueamount: "",
                         comment: "",
-                        status: {
-                            level1: { status: "To-Do" },
-                            level2: { status: "To-Do" },
-                            level3: { status: "To-Do" }
-                        },
+
                     }
                 ));
             }
