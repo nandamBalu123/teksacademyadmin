@@ -4,8 +4,9 @@ import axios from 'axios';
 import Message from './Message';
 import SendIcon from '@mui/icons-material/Send';
 import './Message.css'
-const ChatBox = ({ setRefund, registrationnumber, chat }) => {
+const ChatBox = ({ setRefund,  chat }) => {
     let role = localStorage.getItem("role")
+
     let LoggedInuser = JSON.parse(localStorage.getItem("user"));
     let userName = LoggedInuser.fullname;
     const [messages, setMessages] = useState([]);
@@ -22,7 +23,7 @@ const ChatBox = ({ setRefund, registrationnumber, chat }) => {
             return;
         }
 
-        const newMessage = {
+        const newMessage = { 
             id: messages.length + 1,
             text: inputText,
             sender: userName,

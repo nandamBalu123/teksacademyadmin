@@ -8,62 +8,58 @@ import TextField from "@mui/material/TextField";
 import ChatBox from '../../../pages/chatbox/ChatBox';
 import axios
     from 'axios';
-import { useFetcher, useParams } from "react-router-dom";
-
+import {  useParams } from "react-router-dom";
 const RefundStatus = () => {
-
-    let role = "support" // support  rm accounts
-    const [refund, setRefund] = useState(
-    );
-    const handleStatusChange = (level, newStatus) => {
-        const updatedRefund = [...refund];
-        updatedRefund[0].status[level].status = newStatus;
-        setRefund(updatedRefund);
-    };
+    let role = localStorage.getItem("role")// support  rm accounts
+    // let role = "accounts"
     const { registrationnumber } = useParams();
-    useEffect(() => {
-        console.log("refundrefund", refund)
-    }, [refund])
+    const [refund, setRefund] = useState([]
+    );
+    const [pendingChanges, setPendingChanges] = useState([]);
     useEffect(() => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/singlerefundview/${registrationnumber}`)
             .then((response) => {
                 if (response.data) {
                     setRefund(response.data[0].refund)
-
+                    setPendingChanges(response.data[0].refund)
                 }
             })
             .catch((error) => {
                 console.error("Error fetching data:", error);
             });
-    }, [])
+    }, [registrationnumber])
+    const handleStatusChange = (level, newStatus) => {
+        // const updatedRefund = [...pendingChanges];
+        const updatedRefund = JSON.parse(JSON.stringify(pendingChanges));
+        updatedRefund[0].status[level].status = newStatus;
+        if (newStatus === "Approved" || newStatus === "Refund-Completed") {
+            updatedRefund[0].status[level].statusApproved = true;
+        }
+        setPendingChanges(updatedRefund);
+    };
 
+    const handleSubmit = () => {
+        setRefund(pendingChanges)
+    }
     useEffect(() => {
-
         let updatedrefund = { refund: refund }
         if (refund && refund.length > 0) {
             if (refund && refund.length > 0) {
                 updatedrefund.registrationnumber = refund[0].registrationnumber
             }
-            console.log("refundrefund", updatedrefund)
-
             axios.put(
                 `${process.env.REACT_APP_API_URL}/refundpermissions/${registrationnumber}`,
                 updatedrefund
             )
                 .then(response => {
-                    // Handle the response here
-                    // navigate("/refunddata")
                     console.log(response);
                 })
                 .catch(error => {
-                    // Handle errors here
                     console.error(error);
                 });
         }
-
     }, [refund])
-
     return (
         <div className='container mt-3'>
             {refund && refund.length > 0 && <div className='refundstatus mt-3'>
@@ -121,124 +117,181 @@ const RefundStatus = () => {
                             </div>
                         </div></div>
                 </div>
-                <div className='row '>
+                <div className='row px-5'>
                     <div className='col-7 mt-3'>
-                        {role && role === "support" && < div className='row'>
-                            <div className='d-flex justify-content-evenly'>
-                                <h6 className='mt-2 col-3 text-end'>Support : </h6>
-                                <button
-                                    className={`btn ${refund[0].status.level1.status === "To-Do" ? 'btn-info text-white' : 'bg-light'} `}
-                                    onClick={() => handleStatusChange('level1', 'To-Do')}
-                                >
-                                    To-Do
-                                </button>
-                                <button
-                                    className={`btn ${refund[0].status.level1.status === "In-Progress" ? 'btn-primary' : 'bg-light'}`}
-                                    onClick={() => handleStatusChange('level1', 'In-Progress')}
-                                >
-                                    In-Progress
-                                </button>
-                                <button
-                                    className={`btn ${refund[0].status.level1.status === "Approved" ? 'btn-success' : 'bg-light'}`}
-                                    onClick={() => handleStatusChange('level1', 'Approved')}
-                                >
-                                    Approved
-                                </button>
-                                <button
-                                    className={`btn ${refund[0].status.level1.status === "Declined" ? 'btn-danger' : 'bg-light'}`}
-                                    onClick={() => handleStatusChange('level1', 'Declined')}
-                                >
-                                    Declined
-                                </button>
+                        <div className='row '>
+                            <div className='col-4'>
+                                {role && role === "support" && refund[0].status.level1.statusApproved === false &&
+                                    <div >
+                                        <FormControl variant="standard" className="w-100">
+                                            <InputLabel>
+                                                <span className="label-family">
+                                                    Support
+                                                </span>
+                                            </InputLabel>
+                                            <Select
+                                                className="mar"
+                                                name=""
+                                                id=""
+                                                required
+                                                onChange={(e) => handleStatusChange('level1', e.target.value)}
+
+                                                value={pendingChanges && pendingChanges[0].status.level1.status}
+                                            >
+                                                <MenuItem value="To-Do">
+                                                    To-Do
+                                                </MenuItem>
+                                                <MenuItem value="In-Progress">
+                                                    In-Progress
+                                                </MenuItem>  <MenuItem value="Approved">
+                                                    Approved
+                                                </MenuItem>  <MenuItem value="Declined">
+                                                    Declined
+                                                </MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        <button onClick={handleSubmit}>submit</button>
+                                    </div>
+
+                                }
+                                {role && role === "support" && refund[0].status.level1.statusApproved === true &&
+                                    <div >
+                                        <TextField id="standard-basic"
+                                            className='w-100'
+                                            label="Standard"
+                                            variant="standard"
+                                            value={refund && refund[0].status.level1.status} />
+                                    </div>
+
+                                }
+                                {role && role != "support" &&
+                                    <div >
+                                        <TextField id="standard-basic"
+                                            className='w-100'
+                                            label="Standard"
+                                            variant="standard"
+                                            value={refund && refund[0].status.level1.status} />
+                                    </div>
+                                }
+                            </div>
+                            <div className='col-4'>
+                                {role && role === "rm" && refund[0].status.level1.status === "Approved" && refund[0].status.level2.statusApproved === false &&
+                                    <div >
+                                        <FormControl variant="standard" className="w-100">
+                                            <InputLabel>
+                                                <span className="label-family">
+                                                    Regional Manager
+                                                </span>
+                                            </InputLabel>
+                                            <Select
+                                                className="mar"
+                                                name=""
+                                                id=""
+                                                required
+                                                onChange={(e) => handleStatusChange('level2', e.target.value)}
+
+                                                value={pendingChanges && pendingChanges[0].status.level2.status}
+                                            >
+
+                                                <MenuItem value="To-Do">
+                                                    To-Do
+                                                </MenuItem>
+                                                <MenuItem value="In-Progress">
+                                                    In-Progress
+                                                </MenuItem>  <MenuItem value="Approved">
+                                                    Approved
+                                                </MenuItem>  <MenuItem value="Declined">
+                                                    Declined
+                                                </MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        <button onClick={handleSubmit}>submit</button>
+
+                                    </div>
+                                }
+                                {role && role === "rm" && refund[0].status.level1.status === "Approved" && refund[0].status.level2.statusApproved === true &&
+                                    <div >
+                                        <TextField id="standard-basic"
+                                            className='w-100'
+                                            label="Standard"
+                                            variant="standard"
+                                            value={refund && refund[0].status.level2.status} />
+
+                                    </div>
+                                }
+                                {role && role != "rm" && refund[0].status.level1.status === "Approved" &&
+                                    <div >
+                                        {/* <h6 className='mt-1  '>Regional Manager : {refund[0].status.level2.status}</h6> */}
+                                        <TextField id="standard-basic"
+                                            className='w-100'
+                                            label="Standard"
+                                            variant="standard"
+                                            value={refund && refund[0].status.level2.status} />
+
+                                    </div>
+                                }
 
                             </div>
-                        </div>}
-                        {role && role != "support" && < div className='row'>
-                            <div className='d-flex justify-content-evenly'>
-                                <h6 className='mt-1 col-3 text-end'>Support : {refund[0].status.level1.status}</h6>
-                            </div>
-                        </div>}
-                        {role && role === "rm" && refund[0].status.level1.status === "Approved" && < div className='row'>
-                            <div className='d-flex justify-content-evenly'>
-                                <h6 className='mt-1 col-3 text-end'>Regional Manager : </h6>
-                                <button
-                                    className={`btn ${refund[0].status.level2.status === "To-Do" ? 'btn-info text-white' : 'bg-light'} `}
-                                    onClick={() => handleStatusChange('level2', 'To-Do')}
-                                >
-                                    To-Do
-                                </button>
-                                <button
-                                    className={`btn ${refund[0].status.level2.status === "In-Progress" ? 'btn-primary' : 'bg-light'}`}
-                                    onClick={() => handleStatusChange('level2', 'In-Progress')}
-                                >
-                                    In-Progress
-                                </button>
-                                <button
-                                    className={`btn ${refund[0].status.level2.status === "Approved" ? 'btn-success' : 'bg-light'}`}
-                                    onClick={() => handleStatusChange('level2', 'Approved')}
-                                >
-                                    Approved
-                                </button>
-                                <button
-                                    className={`btn ${refund[0].status.level2.status === "Declined" ? 'btn-danger' : 'bg-light'}`}
-                                    onClick={() => handleStatusChange('level2', 'Declined')}
-                                >
-                                    Declined
-                                </button>
-                            </div>
-                        </div>}
 
-                        {role && role != "rm" && refund[0].status.level1.status === "Approved" && < div className='row'>
-                            <div className='d-flex justify-content-evenly'>
-                                <h6 className='mt-1  '>Regional Manager : {refund[0].status.level2.status}</h6>
-                            </div>
-                        </div>}
-                        {role && role === "accounts" && refund[0].status.level1.status === "Approved" && refund[0].status.level2.status === "Approved" && < div className='row'>
-                            <div className='d-flex justify-content-evenly'>
-                                <h6 className='mt-1 col-3 text-end'>Accounts : </h6>
-                                <button
-                                    className={`btn ${refund[0].status.level3.status === "To-Do" ? 'btn-info text-white' : 'bg-light'} `}
-                                    onClick={() => handleStatusChange('level3', 'To-Do')}
-                                >
-                                    To-Do
-                                </button>
-                                <button
-                                    className={`btn ${refund[0].status.level3.status === "Refund-Initiated" ? 'btn-primary' : 'bg-light'}`}
-                                    onClick={() => handleStatusChange('level3', 'Refund-Initiated')}
-                                >
-                                    Refund-Initiated
-                                </button>
-                                <button
-                                    className={`btn ${refund[0].status.level3.status === "Refund-Completed" ? 'btn-success' : 'bg-light'}`}
-                                    onClick={() => handleStatusChange('level3', 'Refund-Completed')}
-                                >
-                                    Refund-Completed
-                                </button>
-                                {/* <button
-                                    className={`btn ${refund[0].status.level3.status === "Declined" ? 'btn-danger' : 'bg-light'}`}
-                                    onClick={() => handleStatusChange('level3', 'Declined')}
-                                >
-                                    Declined
-                                </button> */}
+                            <div className='col-4'>
+                                {role && role === "accounts" && refund[0].status.level1.status === "Approved" && refund[0].status.level2.status === "Approved" && refund[0].status.level3.statusApproved === false &&
+                                    <div className=''>
+                                        <FormControl variant="standard" className="w-100">
+                                            <InputLabel>
+                                                <span className="label-family">
+                                                    Accounts
+                                                </span>
+                                            </InputLabel>
+                                            <Select
+                                                className="mar"
+                                                name=""
+                                                id=""
+                                                required
+                                                onChange={(e) => handleStatusChange('level3', e.target.value)}
 
+                                                value={pendingChanges && pendingChanges[0].status.level3.status}
+                                            >
+                                                <MenuItem value="To-Do">
+                                                    To-Do
+                                                </MenuItem>
+                                                <MenuItem value="Refund-Initiated">
+                                                    Refund-Initiated
+
+                                                </MenuItem>    <MenuItem value="Refund-Completed">
+                                                    Refund-Completed
+                                                </MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        <button onClick={handleSubmit}>submit</button>
+                                    </div>
+                                }
+                                {role && role === "accounts" && refund[0].status.level1.status === "Approved" && refund[0].status.level2.status === "Approved" && refund[0].status.level3.statusApproved === true &&
+                                    <div className=''>
+
+                                        <TextField id="standard-basic"
+                                            className='w-100'
+                                            label="Standard"
+                                            variant="standard"
+                                            value={refund && refund[0].status.level3.status} />
+
+                                    </div>
+                                }
+                                {role && role != "accounts" && refund[0].status.level1.status === "Approved" && refund[0].status.level2.status === "Approved" &&
+                                    <div className=''>
+                                        <TextField id="standard-basic"
+                                            className='w-100'
+                                            label="Standard"
+                                            variant="standard"
+                                            value={refund && refund[0].status.level3.status} />
+                                    </div>
+                                }
                             </div>
-                        </div>}
-                        {role && role != "accounts" && refund[0].status.level1.status === "Approved" && refund[0].status.level2.status === "Approved" && < div className='row'>
-                            <div className='d-flex justify-content-evenly'>
-                                <h6 className='mt-1 col-3 text-end'>Accounts : {refund[0].status.level3.status}</h6>
-                            </div>
-                        </div>}
+                        </div>
                     </div>
-                    <div className='col-5'> <ChatBox setRefund={setRefund} registrationnumber={registrationnumber} chat={refund[0].chat} /></div>
+                    <div className='col-5'> <ChatBox setRefund={setRefund} chat={refund[0].chat} /></div>
                 </div>
-
-
-
-
-
-
             </div>}
-        </div>
+        </div >
     )
 }
 

@@ -29,9 +29,9 @@ const RefundForm = () => {
             dueamount: "",
             comment: "",
             status: {
-                level1: { status: "To-Do" },
-                level2: { status: "To-Do" },
-                level3: { status: "To-Do" }
+                level1: { status: "To-Do", statusApproved: false },
+                level2: { status: "To-Do", statusApproved: false },
+                level3: { status: "To-Do", statusApproved: false }
             },
             chat: [],
             date: new Date()
