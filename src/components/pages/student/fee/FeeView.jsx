@@ -716,8 +716,108 @@ const FeeView = () => {
     },
   }));
 
+// new
+
+const [formData, setFormData] = useState({
+  name: '',
+  amount: 1,
+  description: '',
+});
+
+const handleFormSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    // Perform the form submission or API call here to create the order
+    // Replace the following line with your actual endpoint
+    const response = await fetch('http://localhost:3030/createOrder', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(formData),
+    });
+
+    const res = await response.json();
+
+    if (res.success) {
+      const options = {
+        key: res.key_id,
+        amount: res.amount,
+        currency: 'INR',
+        name: res.product_name,
+        description: res.description,
+        image: 'https://dummyimage.com/600x400/000/fff',
+        order_id: res.order_id,
+        handler: function (response) {
+          alert('Payment Succeeded');
+          // Handle success behavior as needed
+        },
+        prefill: {
+          contact: res.contact,
+          name: res.name,
+          email: res.email,
+        },
+        notes: {
+          description: res.description,
+        },
+        theme: {
+          color: '#2300a3',
+        },
+      };
+
+      const razorpayObject = new window.Razorpay(options);
+      razorpayObject.on('payment.failed', function (response) {
+        alert('Payment Failed');
+        // Handle failure behavior as needed
+      });
+      razorpayObject.open();
+    } else {
+      alert(res.msg);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    // Handle errors as needed
+  }
+};
+
+// new
+
   return (
     <div className="container mt-3">
+      {/* new */}
+      <div>
+      <hr />
+      <div style={{ display: 'inline-block' }}>
+        <p>
+          <b>Amount:- Rs. {formData.amount}</b>
+        </p>
+        <form className="pay-form" onSubmit={handleFormSubmit}>
+          <input
+            type="hidden"
+            name="name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          />
+          <input
+            type="hidden"
+            name="amount"
+            value={formData.amount}
+            onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+          />
+          <input
+            type="hidden"
+            name="description"
+            value={formData.description}
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          />
+          <input type="submit" value="Pay Now" />
+        </form>
+      </div>
+    </div>
+
+      {/* new */}
+
       <div className="feeview">
         <div className="d-flex justify-content-between my-2 ms-2">
           {studentdata && (
