@@ -64,7 +64,7 @@ const ChatBox = ({ setRefund,  chat }) => {
 
     return (
         <div>
-            <div style={{ height: '300px', backgroundColor: 'white', overflowY: 'scroll', border: '1px solid #ccc' }}>
+            <div style={{ height: '300px', backgroundColor: 'white', overflowY: 'scroll', border: '1px solid #ccc', boxShadow:'0 3px 10px rgb(0 0 0 / 0.2)' }}>
                 {messages && messages.length > 0 && messages.map((message) => (
                     <Message key={message.id} text={message.text} sender={message.sender} role={message.role}
                         date={message.date} />

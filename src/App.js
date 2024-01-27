@@ -321,10 +321,10 @@ function App() {
                   path="/comment"
                   element={user ? <Comment /> : <Dashboard />}
                 />
-                <Route
+                {/* <Route
                   path="/search"
                   element={user ? <FinalSearch /> : <Dashboard />}
-                />
+                /> */}
                 {/* student route end */}
 
                 {/* inventory start*/}
