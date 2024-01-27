@@ -6,12 +6,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import ChatBox from '../../../pages/chatbox/ChatBox';
-import axios
-    from 'axios';
+import axios from 'axios';
 import { useParams } from "react-router-dom";
 const RefundStatus = () => {
-    let role = localStorage.getItem("role")// support  rm accounts
-    // let role = "accounts"
+    // let role = localStorage.getItem("role")// support  rm accounts
+    let role = "support"
     const { registrationnumber } = useParams();
     const [refund, setRefund] = useState([]
     );

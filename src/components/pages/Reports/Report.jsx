@@ -485,7 +485,12 @@ const Report = () => {
     if (reportForm) {
       switch (reportForm.metrics) {
         case "Number Of Enrollments":
-          setMetricsValue(filteredStudents.length);
+          if (filteredStudents && filteredStudents.length !== undefined) {
+            setMetricsValue(filteredStudents.length);
+          } else {
+           
+            console.error("filteredStudents is undefined or null");
+          }
           break;
         case "Fee Received Amount":
           if (Array.isArray(filteredStudents)) {
@@ -609,7 +614,7 @@ const Report = () => {
                         {reportForm.dimensions.dimension1 === "leadsource" && <span>Lead Source</span>}
                       </TableCell>
                       {reportForm.dimensions.dimension2 && <TableCell className="table-cell-heading" align="center">
-                      {reportForm.dimensions.dimension2 === "" && <span></span>}
+                        {reportForm.dimensions.dimension2 === "" && <span></span>}
                         {reportForm.dimensions.dimension2 === "courses" && <span>Course</span>}
                         {reportForm.dimensions.dimension2 === "branch" && <span>Branch</span>}
                         {reportForm.dimensions.dimension2 === "enquirytakenby" && <span>Counsellor</span>}
@@ -622,16 +627,16 @@ const Report = () => {
                       </TableCell>}
                       {reportForm.dimensions.dimension3 &&
                         <TableCell className="table-cell-heading" align="center">
-                        {reportForm.dimensions.dimension3 === "" && <span></span>}
-                        {reportForm.dimensions.dimension3 === "courses" && <span>Course</span>}
-                        {reportForm.dimensions.dimension3 === "branch" && <span>Branch</span>}
-                        {reportForm.dimensions.dimension3 === "enquirytakenby" && <span>Counsellor</span>}
-                        {reportForm.dimensions.dimension3 === "coursepackage" && <span>Course Package</span>}
-                        {reportForm.dimensions.dimension3 === "modeoftraining" && <span>Mode Of Training</span>}
-                        {reportForm.dimensions.dimension3 === "state" && <span>State</span>}
-                        {reportForm.dimensions.dimension3 === "educationtype" && <span>Education Type</span>}
-                        {reportForm.dimensions.dimension3 === "academicyear" && <span>Academic Year</span>}
-                        {reportForm.dimensions.dimension3 === "leadsource" && <span>Lead Source</span>}
+                          {reportForm.dimensions.dimension3 === "" && <span></span>}
+                          {reportForm.dimensions.dimension3 === "courses" && <span>Course</span>}
+                          {reportForm.dimensions.dimension3 === "branch" && <span>Branch</span>}
+                          {reportForm.dimensions.dimension3 === "enquirytakenby" && <span>Counsellor</span>}
+                          {reportForm.dimensions.dimension3 === "coursepackage" && <span>Course Package</span>}
+                          {reportForm.dimensions.dimension3 === "modeoftraining" && <span>Mode Of Training</span>}
+                          {reportForm.dimensions.dimension3 === "state" && <span>State</span>}
+                          {reportForm.dimensions.dimension3 === "educationtype" && <span>Education Type</span>}
+                          {reportForm.dimensions.dimension3 === "academicyear" && <span>Academic Year</span>}
+                          {reportForm.dimensions.dimension3 === "leadsource" && <span>Lead Source</span>}
                         </TableCell>}
                       <TableCell className="table-cell-heading" align="center">
                         {reportForm.metrics}

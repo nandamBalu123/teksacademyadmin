@@ -11,6 +11,7 @@ import { styled } from "@mui/material/styles";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Link, NavLink } from "react-router-dom";
 
 import axios from "axios";
 import "./Course.css";
@@ -22,8 +23,6 @@ const Course = () => {
     e.preventDefault();
     navigate("/createcourse");
   };
-
-
   const handleDeleteCourse = (id) => {
     let courseID = { id: id }
     axios
@@ -78,7 +77,7 @@ const Course = () => {
                   Create By
                 </TableCell> */}
                 <TableCell className="table-cell-heading" align="center">
-                  Create At
+                  Created At
                 </TableCell>
                 <TableCell className="table-cell-heading" align="center">
                   Actions
@@ -141,7 +140,10 @@ const Course = () => {
                     </TableCell>
                     <TableCell className="Table-cell ">
                       {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
-                      <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      <NavLink to={`/updatecourse/${item.id}`}>
+                        <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      </NavLink>
+
                       <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} onClick={e => handleDeleteCourse(item.id)} />
                     </TableCell>
                     {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}

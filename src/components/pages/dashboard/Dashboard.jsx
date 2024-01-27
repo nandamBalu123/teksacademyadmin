@@ -766,18 +766,38 @@ const Dashboard = () => {
   useEffect(() => {
     if (getstudentData) {
       // Calculate total received amount
+      // const totalReceivedAmount = getstudentData.reduce(
+      //   (totalAmount, student) =>
+      //     totalAmount + parseInt(student.totalpaidamount),
+      //   0
+      // );
       const totalReceivedAmount = getstudentData.reduce(
-        (totalAmount, student) =>
-          totalAmount + parseInt(student.totalpaidamount),
+        (totalAmount, student) => {
+          const paidAmount = parseInt(student.totalpaidamount);
+          // Check if paidAmount is a valid number (not NaN or null)
+          if (!isNaN(paidAmount) && paidAmount !== null) {
+            return totalAmount + paidAmount;
+          }
+          return totalAmount; // Skip invalid values
+        },
         0
       );
-
       // Calculate total due amount
+      // const totalDueAmount = getstudentData.reduce(
+      //   (totalAmount, student) => totalAmount + parseInt(student.dueamount),
+      //   0
+      // );
       const totalDueAmount = getstudentData.reduce(
-        (totalAmount, student) => totalAmount + parseInt(student.dueamount),
+        (totalAmount, student) => {
+          const dueAmount = parseInt(student.dueamount);
+          // Check if dueAmount is a valid number (not NaN or null)
+          if (!isNaN(dueAmount) && dueAmount !== null) {
+            return totalAmount + dueAmount;
+          }
+          return totalAmount; // Skip invalid values
+        },
         0
       );
-
       setEnrollmentsTotalReceivedAmount(totalReceivedAmount);
       setEnrollmentsDueAmount(totalDueAmount);
     }
