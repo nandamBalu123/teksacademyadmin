@@ -87,7 +87,8 @@ import Comment from "./components/pages/student/refund/Comments";
 import RefundForm from "./components/pages/student/refund/RefundForm";
 import RefundData from "./components/pages/student/refund/RefundData";
 import RefundStatus from "./components/pages/student/refund/RefundStatus";
-// import FinalSearch from "./components/pages/student/search/FinalSearch";
+import FinalSearch from "./components/pages/student/search/FinalSearch";
+import CustomForm from "./components/pages/settings/CustomForm";
 
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -200,8 +201,8 @@ function App() {
                   path="/otpvalidation/:id"
                   element={user ? <OTPValidation
                   /> : <Dashboard />}
-
                 />
+
                 <Route
                   path="/edituser/:id"
                   element={
@@ -284,8 +285,6 @@ function App() {
                   path="/refundstatus/:registrationnumber"
                   element={user ? <RefundStatus /> : <Dashboard />}
                 />
-
-
                 <Route
                   path="/feefollowup"
                   element={user ? <Feefollowup /> : <Dashboard />}
@@ -306,13 +305,10 @@ function App() {
                   path="/addtofee"
                   element={user ? <Addtofee /> : <Dashboard />}
                 />
-
                 <Route
                   path="/studentdataview/:id"
                   element={user ? <StudentDataView /> : <Dashboard />}
                 />
-
-
                 <Route
                   path="/studentApplicationprint/:id"
                   element={user ? <StudentApplicationPrint /> : <Dashboard />}
@@ -673,6 +669,17 @@ function App() {
                   }
                 />
                 <Route
+                  path="/updatecourse/:courseId"
+                  element={
+                    user ? (
+                      <CreateCourse />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+
+                <Route
                   path="/coursepackage"
                   element={
                     user ? (
@@ -786,6 +793,17 @@ function App() {
                   element={
                     user ? (
                       <EmailCommunication />
+                    ) :
+                      (
+                        <Dashboard />
+                      )
+                  }
+                />
+                <Route
+                  path="/customforms"
+                  element={
+                    user ? (
+                      <CustomForm />
                     ) :
                       (
                         <Dashboard />

@@ -31,14 +31,34 @@ export const CourseReducer = (state, action) => {
       return {
         getcourses: [...state.getcourses, action.payload],
       };
+    case "EDIT_COURSE":
+      // Find the index of the user to be updated in the current state
+      let updatedInstallmentStudentIndex = state.getcourses.findIndex(
+        (course) => course.id == action.payload.id
+      );
+
+      if (updatedInstallmentStudentIndex === -1) {
+        // User not found, no update needed
+        return state;
+      }
+
+      // Create a copy of the users array with the updated user
+
+      let updatedInstallment = [...state.getcourses];
+      updatedInstallment[updatedInstallmentStudentIndex] =
+        action.payload.updatedData;
+
+      return {
+        getcourses: updatedInstallment,
+      };
     case "DELETE_COURSE":
       let id = action.payload.id;
-        id = parseInt(id);
-        console.log("balu", action.payload.id)
+      id = parseInt(id);
+      console.log("balu", action.payload.id)
       return {
-        
+
         getcourses: state.getcourses.filter(course => course.id !== id),
-      };      
+      };
     default:
       return state;
   }

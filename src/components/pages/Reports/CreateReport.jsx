@@ -702,12 +702,12 @@ const CreateReport = () => {
 
               </div>
             </div>
-            <div className=" row report-footer ">
-              <div className="col-12 col-md-9 col-lg-9 col-lg-10"> <button className="btn btn-color mt-1"> Generate Preview </button></div>
+            {/* <div className=" row "> */}
+            {/* <div className="col-12 col-md-9 col-lg-9 col-lg-10"> <button className="btn btn-color mt-1"> Generate Preview </button></div> */}
 
-              <div className="col-12 col-md-2 col-lg-2 col-lg-2">  <button type="submit" onClick={handleSubmit} className="btn btn-color  mt-1 me-3"> Save</button> </div>
-            </div>
+            <div className=" text-end report-footer">  <button type="submit" onClick={handleSubmit} className="btn btn-color  mt-1 me-3"> Save</button> </div>
           </div>
+          {/* </div> */}
           <div className="col-12 col-md-5 col-xl-5 col-lg-5 m-0 p-0">
             <h5 className="ps-3"> Report Preview</h5>
 

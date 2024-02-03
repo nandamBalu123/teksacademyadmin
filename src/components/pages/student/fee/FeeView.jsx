@@ -305,7 +305,10 @@ const FeeView = () => {
 
 
   };
+  useEffect(() => {
+    console.log("installmentsssssssssssss", installments)
 
+  }, [installments])
   const handleUpdateClick = async (index) => {
     if (!validateInputs(index)) {
       return;
@@ -313,6 +316,12 @@ const FeeView = () => {
 
     const formData = {
       amount: installments[index].paidamount,
+      name: "irshad",
+      contact: "8186831441",
+      email: "wd.irshad@gmail.com"
+      // name: studentdata.name,
+      // contact: studentdata.mobilenumber,
+      // email: studentdata.email
     };
     if (installments[index].paidamount > 0 && installments[index].paiddate && installments[index].modeofpayment === "Online Payment") {
       try {
@@ -459,7 +468,20 @@ const FeeView = () => {
 
   const validateInputs = (index) => {
     const installment = installments[index];
-
+    for (let i = 0; i < installments.length; i++) {
+      if (isNaN(installments[i].dueamount)) {
+        installments[i].dueamount = 0
+      }
+      if (isNaN(installments[i].paidamount)) {
+        installments[i].paidamount = 0
+      }
+      if (installments[i].dueamount == null) {
+        installments[i].dueamount = 0
+      }
+      if (installments[i].paidamount == null) {
+        installments[i].paidamount = 0
+      }
+    }
     if (!installment.paidamount) {
       alert('Enter paid amount');
       return false;
