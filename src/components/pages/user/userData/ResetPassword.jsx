@@ -216,36 +216,38 @@ const ResetPassword = () => {
                             <div className='row'>
                                 <div className='col-12 col-md-5 col-lg-5 col-xl-5'></div>
                                 <div className='col-12 col-md-6 col-lg-7 col-xl-7 pe-2'>
+                                    <span className='fontSize: "13px"'> New password must contain :</span><br />
                                     <span style={{
                                         // color: checkvalidations.capitalLetter ? "green" : "red", 
                                         fontSize: "10px"
                                     }}>
+                                        <span style={{
+                                            //  color: checkvalidations.passwordlength ? "green" : "red",
+                                            fontSize: "10px"
+                                        }}>
+                                            {checkvalidations.passwordlength ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
+                                            &nbsp; At least 8 characters</span><br />
                                         {checkvalidations.capitalLetter ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
-                                        &nbsp;Password should contain at least one capital letter</span><br />
+                                        &nbsp;At least one uppercase character</span><br />
                                     <span style={{
                                         // color: checkvalidations.lowerLetter ? "green" : "red", 
                                         fontSize: "10px"
                                     }}>
                                         {checkvalidations.lowerLetter ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
-                                        &nbsp;Password should contain at least one lowercase letter</span><br />
+                                        &nbsp;At least one lowercase character</span><br />
                                     <span style={{
                                         // color: checkvalidations.oneNumber ? "green" : "red", 
                                         fontSize: "10px"
                                     }}>
                                         {checkvalidations.oneNumber ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
-                                        &nbsp;Password should contain at least one number</span><br />
-                                    <span style={{
-                                        //  color: checkvalidations.passwordlength ? "green" : "red",
-                                        fontSize: "10px"
-                                    }}>
-                                        {checkvalidations.passwordlength ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
-                                        &nbsp; Password should be more than 8 characters long</span><br />
+                                        &nbsp;At least one number</span><br />
+
                                     <span style={{
                                         //  color: checkvalidations.specialChar ? "green" : "red",
                                         fontSize: "10px"
                                     }}>
                                         {checkvalidations.specialChar ? <DoneIcon style={{ color: "green", fontSize: "15px" }} /> : < CloseIcon style={{ color: "red", fontSize: "15px" }} />}
-                                        &nbsp; Password should contain at least one special character</span>
+                                        &nbsp; At least one special character</span>
 
                                 </div>
                             </div>
