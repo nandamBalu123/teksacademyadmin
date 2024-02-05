@@ -81,6 +81,7 @@ export default function RegistrationForm() {
   const [parentsname, setParentsName] = useState("");
   const [parentsnumber, SetParentsNumber] = useState("");
   const [birthdate, setBirthDate] = useState("");
+  const [relation,setRelation] = useState("");
   const [gender, setGender] = useState("");
   const [maritalstatus, setMaritalStatus] = useState("");
   const [college, setCollege] = useState("");
@@ -122,6 +123,7 @@ export default function RegistrationForm() {
   const [finaltotal, setfinaltotal] = useState(null);
   const [admissionremarks, setadmissionremarks] = useState("");
   const [assets, setassets] = useState([]);
+  const [follow, setFollow] = useState([])
   const [initialpayment, setinitialamount] = useState([]);
   const [dueamount, setdueamount] = useState(null);
   const [totalinstallments, settotalinstallments] = useState(0);
@@ -175,6 +177,16 @@ export default function RegistrationForm() {
     } else {
       // Remove the asset from the array if it's unchecked
       setassets(assets.filter((asset) => asset !== assetName));
+    }
+  };
+  const handleFollowChange = (event) =>{
+    const followName = event.target.name;
+    if(event.target.checked){
+      //add the social media app to array
+      setFollow([...follow, followName]);
+    } else{
+      // remove the social media app to array if it's unchecked
+      setFollow(follow.filter((follow) => follow !== followName));
     }
   };
   const handleEducationSelectChange = (e) => {
@@ -487,7 +499,10 @@ export default function RegistrationForm() {
         return;
       }
     }
-
+    if (!relation) {
+      alert("please enter relation");
+      return;
+    }
     if (!gender) {
       alert("please enter gender");
       return;
@@ -835,7 +850,10 @@ export default function RegistrationForm() {
         alert("Please enter assets");
         return;
       }
-
+       if (!follow){
+        alert("Please Follow for More");
+        return;
+       }
       // Create the data object with the form fields
       let studentRegistrationdata = {
         name,
@@ -844,6 +862,7 @@ export default function RegistrationForm() {
         parentsname,
         parentsnumber,
         birthdate,
+        relation,
         gender,
         maritalstatus,
         college,
@@ -1420,6 +1439,29 @@ export default function RegistrationForm() {
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         <span className="label-family">
+                          Relation<span>*</span>
+                        </span>
+                      </InputLabel>
+                      <Select
+                        id="relation"
+                        name="relation"
+                        required
+                        onChange={(e) => setRelation(e.target.value)}
+                        value={relation}
+                      >
+                        <MenuItem value="select"> ---select---</MenuItem>
+                        <MenuItem value="Father">Father</MenuItem>
+                        <MenuItem value="Mother">Mother</MenuItem>
+                        <MenuItem value="Brother">Brother</MenuItem>
+                        <MenuItem value="Brother">Sister</MenuItem>
+                        <MenuItem value="Brother">Others</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
+                    <FormControl variant="standard" className="w-75">
+                      <InputLabel>
+                        <span className="label-family">
                           Gender<span>*</span>
                         </span>
                       </InputLabel>
@@ -1437,7 +1479,10 @@ export default function RegistrationForm() {
                       </Select>
                     </FormControl>
                   </div>
-                  <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                </div>
+
+              <div className="row">
+                <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         <span className="label-family">
@@ -1450,16 +1495,13 @@ export default function RegistrationForm() {
                         required
                         onChange={(e) => setMaritalStatus(e.target.value)}
                         value={maritalstatus}
-                      >
+                        >
                         <MenuItem value="select"> ---select---</MenuItem>
                         <MenuItem value="single">Single</MenuItem>
                         <MenuItem value="married">Married</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
-                </div>
-
-                <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label={
@@ -1475,7 +1517,7 @@ export default function RegistrationForm() {
                       variant="standard"
                     />
                   </div>
-                </div>
+              </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
@@ -2644,6 +2686,43 @@ export default function RegistrationForm() {
                     label="Course Material"
                   />
                 </div>
+                <label className="col-12 col-md-2 label">
+                  Follow us <span className="text-danger"> *</span>&nbsp;:
+                </label>
+                &nbsp;&nbsp;&nbsp;
+                <div className="col-9 col-md-5">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="Facebook"
+                        checked={follow.includes("Facebook")}
+                        onChange={handleFollowChange}
+                      />
+                    }
+                    label="Facebook"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="Instagram"
+                        checked={follow.includes("Instagram")}
+                        onChange={handleFollowChange}
+                      />
+                    }
+                    label="Instagram"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="Twitter"
+                        checked={follow.includes("Twitter")}
+                        onChange={handleFollowChange}
+                      />
+                    }
+                    label="Twitter"
+                  />
+                  
+                </div>
                 {/* <select
                     className="col-9 col-md-5"
                     id=""
@@ -2816,7 +2895,12 @@ export default function RegistrationForm() {
                       <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                         Assets: {assets}
                       </div>
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        Follow: {follow}
+                      </div>
+                   
                     </div>
+                   
 
                     <div className="col-12 text-end ">
                       <Button

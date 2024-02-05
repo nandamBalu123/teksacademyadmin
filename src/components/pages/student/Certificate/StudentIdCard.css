@@ -1,0 +1,91 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.studentidcard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-con{
+   display: flex;
+   
+
+   height: 640px;
+   width: 440px;
+   justify-content: space-between;
+   padding: 15px;
+
+}
+.certificate-con{
+    height: 300px ;
+    width: 190px;
+    background-image: url(./Logos/idfront.png);
+    background-repeat:no-repeat;
+ background-size: contain;
+ text-align: center;
+
+}
+.stuid span{
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: #28609d;
+    position: relative;
+   top:50px;
+}
+.stuinfo span{
+    font-size: 12px;
+    font-weight: bold;
+}
+.name span{
+    position: relative;
+    top:45px;
+   
+}
+.stdcourse span{
+    
+        position: relative;
+        top:25px;
+    
+}
+.stdidno span{
+    position: relative;
+   top:25px;
+  border-bottom: 1px solid rgb(207, 203, 203);
+}
+.stuimg img{
+  height: 125px;
+  width: 100px;
+  position: relative;
+  top:52px;
+  border: none;
+  border-radius: 17px;
+
+}
+.idback{
+    height: 300px ;
+    width: 190px;
+    background-image: url(./Logos/idbackhitech.png);
+    background-repeat:no-repeat;
+ background-size: contain;
+ text-align: center;
+
+}
+.idback span{
+    color:#28609d;
+    font-size: 10px;
+    font-weight: bold;
+    position:relative;
+    top:65px;
+ right: 50px;
+
+}
+/* 
+@media (min-width: 320px) ,(max-width:475){
+.main-con{
+    display: flex;
+    flex-direction: column;
+}
+} */

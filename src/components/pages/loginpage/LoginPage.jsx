@@ -154,9 +154,10 @@ const LoginPage = () => {
       <div className="containers ">
         <form className="login-section  ">
           <div className="form-box">
-            <h2> Welcome Back</h2>
-
+            <h2> Welcome Back!</h2>
+              <p>Enter your Details</p>
             <div className="input-box">
+            <label htmlFor=""> Enter Email</label>
               <input
                 type="email"
                 name="email"
@@ -164,7 +165,7 @@ const LoginPage = () => {
                 onChange={handleInput}
               />
 
-              <label htmlFor=""> Enter Email</label>
+             
 
             </div>
             {errors.email && (
@@ -172,13 +173,14 @@ const LoginPage = () => {
             )}
 
             <div className="input-box col-12 col-md-6 col-md-6">
+            <label htmlFor=""> Enter Password</label>
               <input
                 type="password"
                 name="password"
                 required
                 onChange={handleInput}
               />
-              <label htmlFor=""> Enter Password</label>
+             
             </div>
             {errors.password && (
               <span className="text-danger">{errors.password}</span>
