@@ -9,6 +9,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: static;
+
 }
 .outerborder{
   display: flex;
@@ -18,6 +20,10 @@
   border: 8px double #2a619d;
   height: 1020px;
   width: 750px;
+  position: static;
+  background: url(../../../../images/img_files/Student-Certificate-New_3-Layers.png);
+background-size: cover;
+  background-repeat: no-repeat;
   /* background-color: rgb(249, 250, 252); */
  
 }
@@ -31,33 +37,7 @@
   /* z-index: 0; */
 
 }
-.background img{
-position :absolute;
-opacity:20%;
-transform: translate(-50%,17%);
-width: 700px;
-height: 700px;
-z-index:  5;
-}
-.background2 img{
-  position :absolute;
-/* filter: brightness(100%); */
-transform: translate(-50%,1%);
-opacity: 40%;
-width: 760px;
-height: 1050px;
-z-index: 10;
 
-}
-.background3 img{
-  position :absolute;
-opacity: 45%;
- /* filter: brightness(100%); */
-transform: translate(-50%,-2%);
-width: 830px;
-height: 1130px;
-/* z-index: 80; */
-}
 .logo{
   display: flex;
   flex-direction: column;
@@ -71,15 +51,15 @@ display: flex;
 justify-content: center;
 margin-bottom: 35px;
 margin-top: 35px;
-z-index: 40;
+/* z-index: 40; */
 }
-header{
+.header{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 20px;
-  z-index: 40;
+  /* z-index: 40; */
 }
 header h1{
   font-size: 70px;
@@ -88,7 +68,7 @@ header h1{
   margin-bottom: 25px;
   letter-spacing: 0.1cm;
 }
-header p{
+ .header p{
   font-size: 32px;
   color:#2a619d;
   font-weight: 700;
@@ -105,7 +85,7 @@ header span{
   flex-direction: column;
   justify-content: space-around;
 
-  z-index: 30;
+  /* z-index: 30; */
 
 }
 .certificate-info p{
@@ -151,7 +131,7 @@ margin-bottom: 30px;
   }
   .id{
      
-    z-index: 40;
+    /* z-index: 40; */
   }
   .id h5{
     font-weight: 700;
@@ -195,7 +175,7 @@ flex-direction: row;
   height: 150px;
   width: 700px;
   font-size: 18px;
-  z-index: 40;
+  /* z-index: 40; */
 
   
 }
@@ -239,7 +219,7 @@ bottom: 50px;
   display: flex;
   flex-direction:row;
   justify-content: center;
-  z-index: 40;
+  /* z-index: 40; */
 }
 .cname img{
   height: 140px;
@@ -285,32 +265,7 @@ top: 10px;
     width:56%;
     height: auto;
   }
-  .background img{
-    position :absolute;
-    opacity:20%;
-    transform: translate(-50%,0%);
-    width: 700px;
-    height: 700px;
-    z-index:  5;
-    }
-    .background2 img{
-      position :absolute;
-    /* filter: brightness(100%); */
-    transform: translate(-50%,0%);
-    width: 740px;
-    height: 1000px;
-    z-index: 30;
-    
-    }
-    .background3 img{
-      position :absolute;
-      opacity: 0.1;
-     /* filter: brightness(100%); */
-    transform: translate(-50%,-5%);
-    width: 790px;
-    height: 1090px;
-    z-index: 6;
-    }
+  
     header h1{
       letter-spacing: 0;
     }
@@ -340,19 +295,7 @@ top: -8px;
     width: 66%;
     height: auto;
   }
-  .background2 img{
-    width: 600px;
-    height: 900px;
-  }
-  .background3 img{
-    position :absolute;
-    opacity: 0.5;
-   /* filter: brightness(100%); */
-  transform: translate(-50%,-2%);
-  width: 740px;
-  height: 920px;
-  z-index: 60;
-  }
+ 
   .logo img{
     height: 70px;
     width: 300px;
@@ -364,7 +307,7 @@ top: -8px;
   header span{
     font-size: 65px;
   }
-  header p{
+  .header p{
     font-size: 25px;
   }
   .certificate-info h4{
@@ -377,7 +320,7 @@ top: -8px;
   .name p{
     margin-bottom: 30px;
   }
-  header p{
+  .header p{
     margin-bottom: 0;
   }
   .name{
@@ -422,25 +365,7 @@ top: -8px;
     width: 550px;
   }
 
-  .background img {
-    width: 500px;
-    height: auto;
-  }
-
-  .background2 img {
-    width: 500px;
-    height: 720px;
-  }
-
-  .background3 img {
-    width: 600px;
-    height: 780px;
-    opacity: 0.5;
-
-
-
-
-  }
+  
 
   .logo img {
     width: 250px;
@@ -454,7 +379,7 @@ top: -8px;
     margin-bottom: 15px;
   }
 
-  header p {
+  .header p {
     font-size: 25px;
     margin-bottom: 15px;
     letter-spacing: 0;
@@ -533,17 +458,7 @@ top: -8px;
   .outerborder {
     width: 80%;
   }
-  .background img {
-    width: 400px;
-    height: 400px;
-  }
-  .background2 img {
-    width: 250px;
-    height: 480px;
-  }
-  .background3 img{
-    opacity: 0.5;
-  }
+  
   .logo img {
     width: 250px;
     height: 50px;
@@ -555,7 +470,7 @@ top: -8px;
   header span {
     font-size: 40px;
   }
-  header p {
+  .header p {
     font-size: 14px;
   }
   .certificate-info h4{
@@ -570,23 +485,12 @@ top: -8px;
   .outerborder {
     width: 95%;
     height: 570px;
+   
+    background: url(../../../../images/img_files/Student-Certificate-New_3-Layers.png);
+    background-size: cover;
+    background-repeat: no-repeat;
   }
-  .background img {
-    width: 250px;
-    height: 250px;
-    transform: translate(-50%,27%);
-
-  }
-  .background2 img {
-    width: 300px;
-    height: 500px;
-  }
-  .background3 img{
-    height: 500px;
-    width: 350px;
-    opacity: 0.5;
-
-  }
+  
   .logo img {
     width: 200px;
     height: 40px;
@@ -601,7 +505,7 @@ top: -8px;
   header span {
     font-size: 40px;
   }
-  header p {
+  .header p {
     font-size: 15px;
     margin: 0;
   }
@@ -724,21 +628,7 @@ bottom: 18px;
     border:#2a619d 4px double ;
     height: 500px;
   }
-  .background img {
-    width: 250px;
-    height: 250px;
-  }
-  .background2 img {
-    width: 250px;
-    height: 400px;
-  }
-  .background3 img{
-    height: 450px;
-    width: 300px;
-    opacity: 0.5;
  
-
-  }
   .logo img {
     width: 180px;
     height: 35px;
@@ -754,7 +644,7 @@ bottom: 18px;
     font-size: 37px;
     margin-bottom: -10px;
   }
-  header p {
+  .header p {
     font-size: 14px;
     margin-bottom: 0;
     
@@ -842,24 +732,7 @@ bottom: 18px;
     width: 90%;
     height: 390px;
   }
-  .background img {
-    width: 250px;
-    height: 250px;
-    transform: translate(-50%,7%);
-    
-  }
-  .background2 img {
-    width: 200px;
-    height: 350px;
-    z-index: 30;
-  }
-  .background3 img{
-    height: 450px;
-    width: 300px;
-    opacity: 0.5;
-   
-  }
-  
+ 
   .logo img {
     width: 150px;
     height: 30px;
@@ -875,33 +748,33 @@ bottom: 18px;
 
   }
   .info{
-    margin-bottom:2px;
+    margin-bottom:-20px;
     }
   .info h4{
     width: 200px;
   }
-  header{
+  .header{
     display: flex;
     flex-direction: column;
     margin-bottom: 0px;
     align-items: center;
   }
-  header h1 {
+  .header h1 {
     font-size: 20px;
     margin:0;
     letter-spacing: 0;
   }
-  header span {
+  .header span {
     font-size: 28px;
   }
 .name{
-  margin-bottom: -20px;
+  margin-top: 10px;
 }
 .period{
  position: relative;
- bottom: 13px;
+ bottom: 10px;
 }
-  header p {
+  .header p {
     font-size: 12px;
     margin: 0;
   }

@@ -66,21 +66,11 @@ const CertificatePrint = React.forwardRef((props, ref) => {
                 {CertificatePrint && (
                     <div className='section'>
 
-                        <div className='background'>
-                            <img src={bgimg} alt="" />
-                        </div>
-                        <div className='background2'>
-                            <img src={bgimg2} alt="" />
-
-                        </div>
-                        <div className='background3'>
-                            <img src={bgimg3} alt="" />
-                            
-                        </div>
+                       
                         <div className='logo'>
                             <img src={tekslogo} alt="" />
                         </div>
-                        <header>
+                        <header className='header'>
                             <h1><span>C</span>ERTIFICATE</h1>
                             <p>This Is  To Certify  that</p>
                         </header>
