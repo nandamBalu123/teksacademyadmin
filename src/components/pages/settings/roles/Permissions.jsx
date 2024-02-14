@@ -8,10 +8,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Permissions = () => {
+  const navigate = useNavigate();
   return (
       <div className='container mt-3'>
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
           <div className='permissions mt-3'>
               <h5 className='text-center mt-3'> Permissions</h5>
               <TableContainer component={Paper} className="mt-4">

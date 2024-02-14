@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react'
 import { useStudentsContext } from '../../../../hooks/useStudentsContext'
 
 
-
+import { useNavigate } from 'react-router-dom'
 
 
 
 
 
 export default function StudentIdCard() {
+  const navigate = useNavigate ();
 
   const [StudentIdCard, setStudentidcard] = useState("");
   const { id } = useParams();
@@ -35,7 +36,10 @@ export default function StudentIdCard() {
 
   }, [students, id, dispatch]);
   return (
+    <>
+  
     <div className='studentidcard'>
+    <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
 
       <div className="main-con">
         <div className='certificate-con'>
@@ -74,7 +78,7 @@ export default function StudentIdCard() {
     </div>
 
 
-
+</>
 
 
   )

@@ -43,6 +43,7 @@ const Department = () => {
   }));
   return (
     <div className="container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="department">
         <div className="row mb-3">
           <div className="col-12 col-md-8 col-lg-9 col-xl-9">

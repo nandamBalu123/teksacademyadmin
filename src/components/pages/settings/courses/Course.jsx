@@ -43,6 +43,7 @@ const Course = () => {
 
   return (
     <div className="container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="course">
         <div className="flex my-3">
           <h5 className=" ms-3">Courses</h5>

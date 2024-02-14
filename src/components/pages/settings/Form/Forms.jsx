@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Forms.css';
 import Card from "@mui/material/Card";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -18,6 +18,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Pagination from "@mui/material/Pagination";
+
 import Stack from "@mui/material/Stack";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -39,6 +40,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 const Forms = () => {
+    const navigate = useNavigate();
     // const [open, setOpen] = useState(false);
     // const [inputName, setInputName] = useState('');
     // const [inputField, setInputField] = useState('');
@@ -71,6 +73,7 @@ const Forms = () => {
 
     return (
         <div className='container mt-3'>
+            <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
             <div className='customform py-3'>
                 <div className='row px-2'>
                     <div className='col-6 col-md-6 col-lg-3 col-xl-3'>

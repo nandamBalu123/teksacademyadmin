@@ -43,6 +43,7 @@ const Branch = () => {
   }));
   return (
     <div className="container mt-2">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="branch">
         <div className="flex mt-3">
           <h5 className=" ms-3">Branches</h5>

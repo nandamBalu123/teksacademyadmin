@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import logo from '../../../../images/Teks-Logo-with-Trade.png';
+import { useNavigate } from 'react-router-dom';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -35,6 +36,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 const Organizationprofile = () => {
+    const navigate =useNavigate();
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageChange = (e) => {
@@ -43,6 +45,7 @@ const Organizationprofile = () => {
     };
     return (
         <div className='container mt-3'>
+            <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
             <div className='organizationprofile mt-3'>
                 <h5 className=" mt-3 text-center mb-3"> Organization</h5>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
