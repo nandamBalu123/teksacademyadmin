@@ -1,9 +1,12 @@
 import React from 'react'
 import './CustomStudentForm.css';
+import { useNavigate } from 'react-router-dom';
 
 const CustomStudentForm = () => {
+    const navigate = useNavigate();
     return (
         <div className='container mt-3'>
+            <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
             <div className='customstudentform mt-3'>
                 <h5 className=" mt-3 text-center mb-3"> Organization</h5>
                 <ul className="nav nav-tabs mt-3" id="myTab" role="tablist">

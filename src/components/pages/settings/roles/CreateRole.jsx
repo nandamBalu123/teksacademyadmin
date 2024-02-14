@@ -477,6 +477,7 @@ const CreateRole = () => {
 
   return (
     <div className="container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className=" createrole mt-3">
         <form>
           <Box

@@ -27,8 +27,10 @@ import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios"
 const RefundData = () => {
+    const navigate = useNavigate();
     const [isChecked, setIsChecked] = useState(false);
     // for open and close the filters
     const [opening, setOpening] = React.useState(false);
@@ -73,6 +75,7 @@ const RefundData = () => {
 
     return (
         <div className='container mt-3'>
+             <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
            <div className='refunddata mt-3'>
                 <h5 className="mt-4  text-center">Refund Data</h5>
                 <div className="row mb-1 ps-1 ">

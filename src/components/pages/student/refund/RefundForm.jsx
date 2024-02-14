@@ -303,7 +303,7 @@ const RefundForm = () => {
 
     return (
         <div className='container mt-3'>
-
+ <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
             <div className='refundform mt-3'>
                 <h5 className="mt-4  text-center">Refund Form</h5>
                 <div className="sub-refunfform-container text-center ">

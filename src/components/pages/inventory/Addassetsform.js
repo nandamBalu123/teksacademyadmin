@@ -138,6 +138,7 @@ export default function Addassetsform() {
     <div>
       <div>
         <div className="container">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
           <div className="addassetsform mt-4  ">
             <h5 className="mt-4 text-center"> Add Asset Form</h5>
             <form>

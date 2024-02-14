@@ -13,25 +13,26 @@ import { useReactToPrint } from "react-to-print";
 
 
 
+
 const StudentIdCard = React.forwardRef((props, ref) => {
   const [StudentIdCard, setStudentIdCard] = useState("");
   const { id } = useParams("");
   const { students, dispatch } = useStudentsContext();
-  
-  useEffect(()=>{
-    if (students && id)
-{
-  const filteredResults = students.filter((item) => {
-    const singlestudentCondition = id? item.id === parseInt(id) : true;
-    
-    return singlestudentCondition;
-  });
-  if (filteredResults) {
-    console.log("filteredResults[0]", filteredResults[0]);
-  }
-    setStudentIdCard(filteredResults[0]);
-  
-}  },[students, id, dispatch]) ;
+
+  useEffect(() => {
+    if (students && id) {
+      const filteredResults = students.filter((item) => {
+        const singlestudentCondition = id ? item.id === parseInt(id) : true;
+
+        return singlestudentCondition;
+      });
+      if (filteredResults) {
+        console.log("filteredResults[0]", filteredResults[0]);
+      }
+      setStudentIdCard(filteredResults[0]);
+
+    }
+  }, [students, id, dispatch]);
 
   return (
     <div className='studentidcard' ref={ref}>

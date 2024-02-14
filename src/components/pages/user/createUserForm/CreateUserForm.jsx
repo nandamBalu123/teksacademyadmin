@@ -182,6 +182,7 @@ const CreateUserForm = () => {
 
   return (
     <div className="main-user-container container my-4">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <h5 className="mt-4  text-center">User Creation Form</h5>
       <div className="sub-user-container text-center ">
         <form onSubmit={handleSubmit} className="needs-validation " noValidate>

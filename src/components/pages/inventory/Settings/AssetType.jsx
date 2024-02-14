@@ -124,6 +124,7 @@ export default function AssetType() {
   };
   return (
     <div className="container">
+       <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="Assettype mt-3">
         <div className="flex my-3">
           <h5 className="ms-3"> Asset Type</h5>

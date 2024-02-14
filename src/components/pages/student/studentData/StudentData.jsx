@@ -54,7 +54,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 // import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { CSVLink } from "react-csv";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { LastPage } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
@@ -95,6 +95,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
+  const navigate = useNavigate();
   const { branches } = useBranchContext();
   const { students, dispatch } = useStudentsContext();
 
@@ -427,6 +428,7 @@ const StudentData = () => {
     </div> */}
 
       <div className="studetdetails   mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
         <h5 className=" mt-3 text-center"> Student Data </h5>
 
         <div className="row mb-1 ps-1 ">
@@ -455,7 +457,14 @@ const StudentData = () => {
           <div className="col-12 col-md-6 col-lg-4 col-xl-4">
             <div className="d-flex justify-content-around">
               <p className="pt-3">
-                {recordCount}/{initialDataCount}{" "}
+
+              {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
+                    <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                  ) : (
+                    <p>{recordCount}/{initialDataCount}{" "}</p>
+                    
+                  )}
+                {/* {recordCount}/{initialDataCount}{" "} */}
               </p>
 
               <p>

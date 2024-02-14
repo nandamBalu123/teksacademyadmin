@@ -144,6 +144,7 @@ const Register = () => {
     <div>
       <div>
         <div className="container mt-3">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
           <div className="register">
             <h5 className="mt-3 text-center"> Assign Assets Form</h5>
             <form className="text-center">

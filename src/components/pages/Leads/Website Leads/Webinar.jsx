@@ -33,6 +33,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
 import "./Webinar.css";
 
@@ -75,6 +76,7 @@ const label = { inputProps: { "aria-label": "Switch demo" } };
 
 
 const Webinar = () => {
+  const navigate = useNavigate();
   const [students, setWebinarForm] = useState([]);
   // const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
@@ -332,6 +334,7 @@ const Webinar = () => {
   };
   return (
     <div className="container">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="studetdetails   mt-3">
         <h5 className=" mt-3 text-center"> Webinar Leads </h5>
 
@@ -362,7 +365,13 @@ const Webinar = () => {
           <div className="col-12 col-md-5 col-lg-4 col-xl-4">
             <div className="d-flex justify-content-around">
               <p className="pt-3">
-                {recordCount}/{initialDataCount}{" "}
+              {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
+                    <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                  ) : (
+                    <p>{recordCount}/{initialDataCount}{" "}</p>
+                    
+                  )}
+                {/* {recordCount}/{initialDataCount}{" "} */}
               </p>
 
               <p>

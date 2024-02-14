@@ -11,7 +11,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 
 import TableHead from "@mui/material/TableHead";
-
+import { useNavigate } from "react-router-dom";
 import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -95,6 +95,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const SlpEnquireLeads = () => {
+  const navigate = useNavigate();
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
@@ -339,6 +340,7 @@ const SlpEnquireLeads = () => {
   return (
 
     <div className="container">
+       <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="studetdetails   mt-3">
         <h5 className=" mt-3 text-center"> SLP Enquire Leads </h5>
 
@@ -369,7 +371,13 @@ const SlpEnquireLeads = () => {
           <div className="col-12 col-md-5 col-lg-4 col-xl-4">
             <div className="d-flex justify-content-around">
               <p className="pt-3">
-                {recordCount}/{initialDataCount}{" "}
+              {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
+                    <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                  ) : (
+                    <p>{recordCount}/{initialDataCount}{" "}</p>
+                    
+                  )}
+                {/* {recordCount}/{initialDataCount}{" "} */}
               </p>
 
               <p>

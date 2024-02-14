@@ -1,9 +1,12 @@
 import React from 'react'
 import './EmailCommunication.css';
+import { useNavigate } from 'react-router-dom';
 
 const EmailCommunication = () => {
+    const navigate =useNavigate();
     return (
         <div className='container mt-3'>
+            <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
             <div className='emailcommunication mt-3'>
                 <ul className="nav nav-tabs my-3" id="myTab" role="tablist">
                     <li class="nav-item tab-animation" role="presentation">

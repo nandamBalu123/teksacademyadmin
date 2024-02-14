@@ -25,7 +25,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 
@@ -95,6 +95,7 @@ const label = { inputProps: { "aria-label": "Switch demo" } };
 // }));
 
 const DownloadSyllabus = () => {
+  const navigate = useNavigate();
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
@@ -341,6 +342,7 @@ const DownloadSyllabus = () => {
   return (
 
     <div className="container">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="studetdetails   mt-3">
         <h5 className=" mt-3 text-center"> Download Syllabus </h5>
 
@@ -371,7 +373,13 @@ const DownloadSyllabus = () => {
           <div className="col-12 col-md-5 col-lg-4 col-xl-4">
             <div className="d-flex justify-content-around">
               <p className="pt-3">
-                {recordCount}/{initialDataCount}{" "}
+              {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
+                    <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                  ) : (
+                    <p>{recordCount}/{initialDataCount}{" "}</p>
+                    
+                  )}
+                {/* {recordCount}/{initialDataCount}{" "} */}
               </p>
 
               <p>

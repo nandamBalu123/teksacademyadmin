@@ -11,10 +11,11 @@ import tekslogo from "../../../../images/img_files/Tesks_Logo.png"
 import bgimg from "../../../../images/img_files/Teks_Shape_01.png"  
 import bgimg2 from "../../../../images/img_files/Student-Certificate-New_teks_pattern.png"
 import bgimg3 from "../../../../images/img_files/Student-Certificate-New_teks_pattern2.png"
+
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 
 import { useReactToPrint } from "react-to-print";
@@ -162,10 +163,11 @@ function StudentCertificatePrint() {
     });
 
     console.log(`Print ${componentRefff.current}`)
+    const navigate = useNavigate();
 
     return (
         <div>
-
+<button onClick={() => navigate(-1)} className="btn btn-color btn-sm ml-4">Go Back</button>
             <div className="mt-3  text-end me-5 mb-4 ">
                 <button onClick={handlePrint} className="btn btn-outline-color ">Download pdf</button>
             </div>

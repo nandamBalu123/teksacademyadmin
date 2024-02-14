@@ -370,6 +370,7 @@ const CreateReport = () => {
 
   return (
     <div className="container mt-1">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <h5 className="text-center my-2">Create Report</h5>
       <form className="createreport">
         <div className="row m-0">

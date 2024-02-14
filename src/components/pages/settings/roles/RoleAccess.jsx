@@ -166,6 +166,7 @@ const RoleAccess = () => {
   };
   return (
     <div className='container'>
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <h3 style={{ fontFamily: "italic" }}> {role && role.role}</h3>
       <div className='access'>
 

@@ -34,6 +34,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { useStudentsContext } from "../../../hooks/useStudentsContext";
 
 const Report = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { students } = useStudentsContext();
   // const [reports, setReports] = useState();
@@ -522,6 +523,7 @@ const Report = () => {
   return (
 
     <div className="container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       {reportForm && <div className="mini-reports mt-3">
         <h5 className="px-2 my-3">
           {reportForm && reportForm.reportName}

@@ -36,7 +36,7 @@ const FeeView = () => {
   const { students, dispatch } = useStudentsContext();
   const [studentdata, setstudentdata] = useState("");
   const { id } = useParams();
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const [dueamount, setdueamount] = useState();
   const [totalpaidamount, settotalpaidamount] = useState();
   const [noOfinstallments, setNoOfinstallments] = useState();
@@ -193,7 +193,7 @@ const FeeView = () => {
             type: "UPDATE_NO_OF_INSTALLMENTS",
             payload: updateContext,
           });
-          navigator(`/feeview/${id}`);
+          navigate(`/feeview/${id}`);
         } else {
           alert("Try Again");
         }
@@ -889,6 +889,7 @@ const FeeView = () => {
 
   return (
     <div className="container mt-3">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       {/* new */}
       {/* <div>
         <hr />

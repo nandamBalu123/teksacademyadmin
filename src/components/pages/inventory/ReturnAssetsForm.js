@@ -131,6 +131,7 @@ export default function ReturnAssets() {
 
   return (
     <div className="container mt-3">
+       <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="return-assets">
         <h5 className="text-center my-3"> Retun Assets</h5>
         <form className="mt-4">
