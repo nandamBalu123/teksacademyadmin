@@ -64,7 +64,7 @@ import { useLeadSourceContext } from "../../../../hooks/useLeadSourceContext";
 import Switch from "@mui/material/Switch";
 import axios from "axios";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
-
+import { useNavigate } from "react-router-dom";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 // import { CSVLink } from "react-csv";
 // import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -95,6 +95,7 @@ const label = { inputProps: { "aria-label": "Switch demo" } };
 // }));
 
 const ViewCourse = () => {
+  const navigate =useNavigate();
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
@@ -333,6 +334,7 @@ const ViewCourse = () => {
   return (
 
     <div className="container">
+       <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="studetdetails   mt-3">
         <h5 className=" mt-3 text-center"> View Course </h5>
 

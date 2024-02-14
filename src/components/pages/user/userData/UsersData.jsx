@@ -311,6 +311,7 @@ const UsersData = () => {
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="userlist mt-3">
         <h5 className=" mt-3 ms-3 text-center">Users List</h5>
 

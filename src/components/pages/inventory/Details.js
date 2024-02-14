@@ -72,6 +72,7 @@ const Details = () => {
 
   return (
     <div className="container mt-3">
+       <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="assignassets-view">
         <h5 className="text-center my-3">Assign Assets View </h5>
         <div className="d-flex justify-content-evenly">

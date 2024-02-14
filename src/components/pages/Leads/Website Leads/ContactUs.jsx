@@ -28,7 +28,7 @@ import Slide from "@mui/material/Slide";
 
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
-
+import { useNavigate } from "react-router-dom";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Menu from "@mui/material/Menu";
@@ -95,6 +95,7 @@ const label = { inputProps: { "aria-label": "Switch demo" } };
 // }));
 
 const ContactUs = () => {
+  const navigate = useNavigate();
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
@@ -349,6 +350,7 @@ const ContactUs = () => {
   return (
 
     <div className="container">
+       <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="studetdetails   mt-3">
         <h5 className=" mt-3 text-center"> Contact Us </h5>
 

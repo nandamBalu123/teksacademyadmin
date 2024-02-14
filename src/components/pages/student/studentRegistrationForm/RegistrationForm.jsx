@@ -1259,6 +1259,7 @@ export default function RegistrationForm() {
 
   return (
     <div className="main-container container">
+      
       {/* <div>
       <form>
         <label>
@@ -1278,6 +1279,7 @@ export default function RegistrationForm() {
       <button onClick={handleUpload}>Upload</button>
     </div> */}
       <div className="main-sub-container ">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
         <Typography>
           <h5 className="mt-3"> Registration form</h5>
         </Typography>

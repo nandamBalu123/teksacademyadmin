@@ -4,7 +4,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate} from "react-router-dom";
 import { adddata, deldata } from "./context/ContextProvider";
 import { updatedata } from "./context/ContextProvider";
 import Paper from "@mui/material/Paper";
@@ -42,6 +42,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 const Assignassets = () => {
+
+  const navigate =useNavigate();
   // for number scrolling disable
   $('input[type=number]').on('mousewheel', function (e) {
     $(e.target).blur();
@@ -416,6 +418,7 @@ const Assignassets = () => {
   //   dilsupnagar end
   return (
     <>
+     <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       {udata ? (
         <>
           <div

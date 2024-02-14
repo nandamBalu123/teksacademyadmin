@@ -140,6 +140,7 @@ const EditUser = () => {
 
   return (
     <div className="container main-edituser-container my-4 ">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <h5 className="my-3 text-center"> Edit User Form</h5>
       <div className="sub-edituser-container text-center">
         <form action="">

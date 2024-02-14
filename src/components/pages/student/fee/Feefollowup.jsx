@@ -26,6 +26,7 @@ import { useCourseContext } from "../../../../hooks/useCourseContext";
 import "./Feefolloup.css";
 import axios from "axios";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+import { useNavigate } from "react-router-dom";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -51,6 +52,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const Feefollowup = () => {
+  const navigate=useNavigate();
   const { students } = useStudentsContext();
   const [studentData, setStudentData] = useState(null);
   const [filterType, setFilterType] = useState("today");
@@ -195,6 +197,7 @@ const Feefollowup = () => {
   };
   return (
     <div className=" container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="feedetails">
         <h5 className=" ms-2 mt-3 mb-2"> Fee Followups</h5>
         <div className="row px-2">

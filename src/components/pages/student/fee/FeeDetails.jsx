@@ -51,7 +51,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const FeeDetails = () => {
   const { branches } = useBranchContext();
   const { students, dispatch } = useStudentsContext();
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
   const [getstudentData, setData] = useState([{ name: "" }]);
   const [studentFeeRecordss, setFeerecords] = useState(getstudentData);
@@ -223,6 +223,7 @@ const FeeDetails = () => {
   let recordCount = studentFeeRecordss.length;
   return (
     <div className="container">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="main-feedetails  mt-3">
         <div>
           <h5 className="mt-3 ms-2 text-center"> Fee Management</h5>
@@ -276,7 +277,7 @@ const FeeDetails = () => {
                 //   color: "white",
                 //   boxShadow: "3px 3px 6px  gray",
                 // }}
-                onClick={() => navigator("/feefollowup")}
+                onClick={() => navigate("/feefollowup")}
               >
                 <p className="text-center pt-3">Fee followups</p>
               </Card>

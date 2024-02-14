@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink, Navigate,useNavigate } from "react-router-dom";
 import { adddata, deldata } from "./context/ContextProvider";
 import { updatedata } from "./context/ContextProvider";
 import { CardActionArea } from "@mui/material";
@@ -55,7 +55,7 @@ const Addassets = () => {
   // var apiUrl = "http://localhost:3003";
 
   // start
-
+ const navigate =useNavigate();
   const [getuserdata, setUserdata] = useState([]);
   console.log(getuserdata);
 
@@ -248,6 +248,7 @@ const Addassets = () => {
       )}
 
       <div className="container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
         <div className="addassets">
           <div className="d-flex justify-content-between mt-4">
             <h5 className="ms-2"> Add Assets</h5>
