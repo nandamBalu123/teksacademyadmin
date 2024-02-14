@@ -155,7 +155,7 @@ const LoginPage = () => {
         <form className="login-section  ">
           <div className="form-box">
             <h2> Welcome Back!</h2>
-              <p>Enter your Details</p>
+               {/* <p>Enter your Details</p>  */}
             <div className="input-box">
             <label htmlFor=""> Enter Email</label>
               <input

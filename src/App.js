@@ -91,7 +91,7 @@ import FinalSearch from "./components/pages/student/search/FinalSearch";
 import CustomForm from "./components/pages/settings/CustomForm";
 import CertificatePrint from "./components/pages/student/Certificate/CertificatePrint";
 import StudentIdCard from "./components/pages/student/Certificate/StudentIdCard";
-// import Certificate from "./components/pages/student/Certificate/Certificate";
+import Certificate from "./components/pages/student/Certificate/Certificate";
 
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -243,7 +243,7 @@ function App() {
                     )
                   }
                 />
-                {/* <Route
+                <Route
                   path="/certificate"
                   element={
                     filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
@@ -252,9 +252,9 @@ function App() {
                       <Dashboard />
                     )
                   }
-                />  */}
+                /> 
                 <Route
-                  path="/certificateprint"
+                  path="/certificateprint/:id"
                   element={
                     // user && user.profile == "admin" ? <CertificatePrint /> : <Dashboard />
                     <CertificatePrint />
@@ -263,7 +263,9 @@ function App() {
                 <Route
                   path="/studentidcard"
                   element={
-                    user && user.profile == "admin" ? <StudentIdCard /> : <Dashboard />
+                    // user && user.profile == "admin" ? <StudentIdCard /> : <Dashboard />
+                    <StudentIdCard />
+
                   }
                 />
                 <Route

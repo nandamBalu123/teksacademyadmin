@@ -2,6 +2,7 @@
     margin:0;
     padding: 0;
     box-sizing: border-box;
+  
 }
 .studentidcard{
     display: flex;
@@ -21,7 +22,7 @@
 .certificate-con{
     height: 300px ;
     width: 190px;
-    background-image: url(./Logos/idfront.png);
+    background-image: url(../../../../images/img_files/idfront.png);
     background-repeat:no-repeat;
  background-size: contain;
  text-align: center;
@@ -47,12 +48,12 @@
 .stdcourse span{
     
         position: relative;
-        top:25px;
+        top:55px;
     
 }
 .stdidno span{
     position: relative;
-   top:25px;
+   top:58px;
   border-bottom: 1px solid rgb(207, 203, 203);
 }
 .stuimg img{
@@ -67,7 +68,7 @@
 .idback{
     height: 300px ;
     width: 190px;
-    background-image: url(./Logos/idbackhitech.png);
+    background-image: url(../../../../images/img_files/idbackhitech.png);
     background-repeat:no-repeat;
  background-size: contain;
  text-align: center;
@@ -82,10 +83,12 @@
  right: 50px;
 
 }
-/* 
-@media (min-width: 320px) ,(max-width:475){
+ 
+@media (max-width:675px){
 .main-con{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-} */
+} 

@@ -26,6 +26,8 @@ import axios from "axios";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { GolfCourseSharp } from "@mui/icons-material";
+import { FaRegFilePdf } from "react-icons/fa6";
+import { NavLink } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.blue,
@@ -134,6 +136,7 @@ const Certificate = () => {
           item.courses
             .toLowerCase()
             .includes(filterCriteria.search.toLowerCase())
+          
 
           : true;
 
@@ -636,6 +639,10 @@ const Certificate = () => {
                   <TableCell className="table-cell-heading">
                     Certificate Status
                   </TableCell>
+                  <TableCell className="table-cell-heading">
+                    Pdf
+                  </TableCell>
+                  
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -774,6 +781,13 @@ const Certificate = () => {
                             </button>
                           )}
                         </TableCell>
+                        <TableCell className="Table-cell">
+                          <NavLink to={`/certificateprint/${student.id}`}>
+                          <span style={{fontSize:"18px", cursor:"pointer"}}> <FaRegFilePdf /></span >
+                          </NavLink>
+                          </TableCell>
+                         
+                          
                       </TableRow>
                     );
                   })}

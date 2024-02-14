@@ -829,7 +829,7 @@ const StudentData = () => {
                     const day = date.getUTCDate();
                     const monthIndex = date.getUTCMonth();
                     const year = date.getUTCFullYear();
-
+ 
                     const monthAbbreviations = [
                       "Jan",
                       "Feb",
@@ -844,9 +844,10 @@ const StudentData = () => {
                       "Nov",
                       "Dec",
                     ];
-
+ 
                     // Formatting the date
-                    date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
+                 
+                      date = `${monthAbbreviations[monthIndex]
                       }-${year}`;
 
                     // Updating the state with the formatted date

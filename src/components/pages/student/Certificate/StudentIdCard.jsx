@@ -1,44 +1,81 @@
 import React from 'react'
 import "./StudentIdCard.css"
-import stdphoto from "./Logos/stdphoto.png"
+import stdphoto from "../../../../images/img_files/stdphoto.png"
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useStudentsContext } from '../../../../hooks/useStudentsContext'
+
+
+
+
 
 
 
 
 export default function StudentIdCard() {
+
+  const [StudentIdCard, setStudentidcard] = useState("");
+  const { id } = useParams();
+  const { students, dispatch } = useStudentsContext();
+
+  useEffect(() => {
+    if (students && id) {
+
+      const filteredResults = students.filter((item) => {
+        const singlestudentCondition = id ? item.id === parseInt(id) : true;
+
+        return singlestudentCondition;
+      });
+      if (filteredResults) {
+        console.log("filteredResults[0]", filteredResults[0]);
+      }
+
+      setStudentidcard(filteredResults[0]);
+    }
+
+  }, [students, id, dispatch]);
   return (
     <div className='studentidcard'>
 
       <div className="main-con">
         <div className='certificate-con'>
-           <div className="stuid">
+          <div className="stuid">
             <span>STUDENT ID</span></div>
-           <div className='stuimg'>
+          <div className='stuimg'>
             <img src={stdphoto} alt="">
-                </img></div>
-                <div className='stuinfo'>
-                <div className='name'>
-                    <span> ARCHANA P</span> </div>
-                    <div className="stdcourse" >
-                                <span > DATA ANALYTICS</span>
-                            </div>
-                            <div class="stdidno" >
-                                <span > ID: 1234</span>
-                                
-                    </div>
-                    </div>
-                    </div>
-           
-                    <div  className='idback'>
-                        <div className='stunum'>
-                        <span >1234567890</span>
-                        </div>
-                        </div>        
+            </img></div>
+          <div className='stuinfo'>
+            <div className='name'>
+              <span> xyz{}</span> </div>
+            <div className="stdcourse" >
+              <span > DATA ANALYTICS</span>
+            </div>
+            <div class="stdidno" >
+              <span > ID: 1234</span>
 
+            </div>
+          </div>
+        </div>
 
+        <div className='idback'>
+          <div className='stunum'>
+            <span >1234567890</span>
+          </div>
+        </div>
+       
       </div>
-   
-                
-  </div>
+
+      <div className="downloadbtn">
+          <button className="btn btn-primary">Download</button>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
   )
 }

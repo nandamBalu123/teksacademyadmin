@@ -54,6 +54,29 @@ const Course = () => {
             Add Course
           </button>
         </div>
+        {/* <div className="col-12 col-md-6 col-lg-8 col-xl-8">
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Search Here..."
+              autoComplete="off"
+              style={{
+                height: "45px",
+                width: "100%",
+                outline: "none",
+                borderTop: "none",
+                borderBottom: "1.5px solid black",
+                background: "none",
+                border: "hidden",
+                borderRadius: "5px",
+              }}
+              name="search"
+              // value={filterCriteria.search}
+              // onChange={handleInputChange}
+            />
+            <hr />
+          </div> */}
+
         <TableContainer component={Paper}>
           <Table aria-label="customized table">
             <TableHead>

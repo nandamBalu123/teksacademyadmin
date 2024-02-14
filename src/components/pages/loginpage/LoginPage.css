@@ -106,6 +106,11 @@ top: -60px;
 .input-box input:valid ~ label{ 
   top: -6px;
 } */
+button{
+  display: flex;
+  align-items: center;
+
+}
 .input-box .btn {
   background-color: #7a86ac;
   width: 100%;
@@ -117,6 +122,7 @@ top: -60px;
   font-size: 16px;
   border-radius: 4px;
   box-shadow: none;
+
 }
 
 @media (max-width: 576px) {
