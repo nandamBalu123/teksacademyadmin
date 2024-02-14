@@ -11,6 +11,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 
 import TableHead from "@mui/material/TableHead";
+import { FaRegIdCard } from "react-icons/fa";
 
 import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
@@ -337,12 +338,15 @@ const StudentData = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-  ////////////
+  ////////////  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -467,6 +471,9 @@ const StudentData = () => {
                 </select>
               </p>
               <p>
+
+
+           
                 <Button
                   id="demo-positioned-button"
                   aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -481,7 +488,13 @@ const StudentData = () => {
                     Filter
                   </button>
                 </Button>
-                <Menu
+
+
+
+
+
+
+                   <Menu
                   id="demo-positioned-menu"
                   aria-labelledby="demo-positioned-button"
                   anchorEl={anchorEl}
@@ -820,6 +833,7 @@ const StudentData = () => {
                   </TableCell>
 
                   <TableCell className="table-cell-heading">Actions</TableCell>
+                  <TableCell className="table-cell-heading" style={{width:"40px"}}>STUDENIDCARD</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -829,7 +843,7 @@ const StudentData = () => {
                     const day = date.getUTCDate();
                     const monthIndex = date.getUTCMonth();
                     const year = date.getUTCFullYear();
- 
+
                     const monthAbbreviations = [
                       "Jan",
                       "Feb",
@@ -844,10 +858,9 @@ const StudentData = () => {
                       "Nov",
                       "Dec",
                     ];
- 
+
                     // Formatting the date
-                 
-                      date = `${monthAbbreviations[monthIndex]
+                    date = `${day < 10 ? "0" : ""}${day}-${monthAbbreviations[monthIndex]
                       }-${year}`;
 
                     // Updating the state with the formatted date
@@ -1052,6 +1065,8 @@ const StudentData = () => {
                               />
                             </NavLink>
 
+                            
+
                             <div className="form-check form-switch ms-1">
                               <input
                                 className="form-check-input"
@@ -1089,6 +1104,14 @@ const StudentData = () => {
                               </DialogActions>
                             </Dialog>
                           </div>
+                        </TableCell>
+                        <TableCell>
+                        <NavLink to={`/getstudentidcard/${item.id}`}>
+                        <div style={{fontSize:"25px", color:"#2a619d", cursor:"pointer", display:"flex", justifyContent:"center"}}>
+                        <FaRegIdCard />
+                        </div>
+                            </NavLink>
+                         
                         </TableCell>
                       </TableRow>
                     );

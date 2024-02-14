@@ -90,8 +90,8 @@ import RefundStatus from "./components/pages/student/refund/RefundStatus";
 import FinalSearch from "./components/pages/student/search/FinalSearch";
 import CustomForm from "./components/pages/settings/CustomForm";
 import CertificatePrint from "./components/pages/student/Certificate/CertificatePrint";
-import StudentIdCard from "./components/pages/student/Certificate/StudentIdCard";
-import Certificate from "./components/pages/student/Certificate/Certificate";
+import StudentIdCard from "./components/pages/student/Certificate/StudentIdCard"
+ import Certificate from "./components/pages/student/Certificate/Certificate";
 
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -243,7 +243,7 @@ function App() {
                     )
                   }
                 />
-                <Route
+                {<Route
                   path="/certificate"
                   element={
                     filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
@@ -252,9 +252,16 @@ function App() {
                       <Dashboard />
                     )
                   }
-                /> 
+                />  }
                 <Route
-                  path="/certificateprint/:id"
+                  path="/certificateprint"
+                  element={
+                    // user && user.profile == "admin" ? <CertificatePrint /> : <Dashboard />
+                    <CertificatePrint />
+                  }
+                />
+                  <Route
+                  path="/getcertificate/:id"
                   element={
                     // user && user.profile == "admin" ? <CertificatePrint /> : <Dashboard />
                     <CertificatePrint />
@@ -263,9 +270,13 @@ function App() {
                 <Route
                   path="/studentidcard"
                   element={
-                    // user && user.profile == "admin" ? <StudentIdCard /> : <Dashboard />
-                    <StudentIdCard />
-
+                    user && user.profile == "admin" ? <StudentIdCard /> : <Dashboard />
+                  }
+                />
+                  <Route
+                  path="/getstudentidcard/:id"
+                  element={
+                    user && user.profile == "admin" ? <StudentIdCard /> : <Dashboard />
                   }
                 />
                 <Route
@@ -709,6 +720,16 @@ function App() {
                 />{" "}
                 <Route
                   path="/createcoursepackage"
+                  element={
+                    user ? (
+                      <CreateCoursePackage />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
+                 <Route
+                  path="/updatecoursepackage/:id"
                   element={
                     user ? (
                       <CreateCoursePackage />

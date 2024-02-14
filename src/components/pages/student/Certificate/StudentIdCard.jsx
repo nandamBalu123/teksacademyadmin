@@ -5,77 +5,106 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useStudentsContext } from '../../../../hooks/useStudentsContext'
 
+import tekslogo from "../../../../images/img_files/Tesks_Logo.png"
+import { useReactToPrint } from "react-to-print";
 
 
 
 
 
 
-
-export default function StudentIdCard() {
-
-  const [StudentIdCard, setStudentidcard] = useState("");
-  const { id } = useParams();
+const StudentIdCard = React.forwardRef((props, ref) => {
+  const [StudentIdCard, setStudentIdCard] = useState("");
+  const { id } = useParams("");
   const { students, dispatch } = useStudentsContext();
+  
+  useEffect(()=>{
+    if (students && id)
+{
+  const filteredResults = students.filter((item) => {
+    const singlestudentCondition = id? item.id === parseInt(id) : true;
+    
+    return singlestudentCondition;
+  });
+  if (filteredResults) {
+    console.log("filteredResults[0]", filteredResults[0]);
+  }
+    setStudentIdCard(filteredResults[0]);
+  
+}  },[students, id, dispatch]) ;
 
-  useEffect(() => {
-    if (students && id) {
-
-      const filteredResults = students.filter((item) => {
-        const singlestudentCondition = id ? item.id === parseInt(id) : true;
-
-        return singlestudentCondition;
-      });
-      if (filteredResults) {
-        console.log("filteredResults[0]", filteredResults[0]);
-      }
-
-      setStudentidcard(filteredResults[0]);
-    }
-
-  }, [students, id, dispatch]);
   return (
-    <div className='studentidcard'>
+    <div className='studentidcard' ref={ref}>
 
       <div className="main-con">
         <div className='certificate-con'>
           <div className="stuid">
             <span>STUDENT ID</span></div>
           <div className='stuimg'>
-            <img src={stdphoto} alt="">
-            </img></div>
+            {!StudentIdCard.studentImg && <img src={stdphoto} alt="photo" />}
+            {StudentIdCard.studentImg && (
+              <img
+                className=" w-75"
+                src={`https://teksacademyimages.s3.amazonaws.com/${StudentIdCard.studentImg}`}
+                alt="photo"
+              />
+            )}</div>
           <div className='stuinfo'>
             <div className='name'>
-              <span> xyz{}</span> </div>
+              <span> {StudentIdCard.name}</span> </div>
             <div className="stdcourse" >
-              <span > DATA ANALYTICS</span>
+              <span >{StudentIdCard.courses}</span>
             </div>
             <div class="stdidno" >
-              <span > ID: 1234</span>
+              <span > ID: {StudentIdCard.registrationnumber}</span>
 
             </div>
           </div>
         </div>
 
         <div className='idback'>
+
           <div className='stunum'>
-            <span >1234567890</span>
+            <img src={tekslogo} alt="" />
+            <p>Student Contact</p>
+            <span>{StudentIdCard.mobilenumber}</span>
+            <p>Address</p>
+            <span>{StudentIdCard.branch} </span>
+            <h5>www.teksacademy.com</h5>
+
           </div>
+
         </div>
-       
+
       </div>
-
-      <div className="downloadbtn">
-          <button className="btn btn-primary">Download</button>
-        </div>
-
 
 
     </div>
-
-
-
-
-
   )
+});
+
+function StudentIdPrint() {
+  const componentRef = React.useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+  return (
+    <div>
+      {/* <h1>Your React App</h1> */}
+      <div className="mt-3  text-end me-5 mb-4 ">
+        <button
+          onClick={handlePrint}
+          // style={{ margin: "30px" }}
+          class="btn btn-outline-primary"
+        >
+          {/* <LocalPrintshopIcon /> */}
+          Download PDF
+        </button>
+      </div>
+      <StudentIdCard ref={componentRef} />
+    </div>
+  );
 }
+
+export default StudentIdPrint;
