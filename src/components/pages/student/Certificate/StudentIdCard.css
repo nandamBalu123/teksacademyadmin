@@ -1,87 +1,133 @@
-*{
-    margin:0;
+* {
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.studentidcard{
+
+.studentidcard {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.main-con{
-   display: flex;
-   
 
-   height: 640px;
-   width: 440px;
-   justify-content: space-between;
-   padding: 15px;
+.main-con {
+    display: flex;
+
+
+    height: 640px;
+    width: 440px;
+    justify-content: space-between;
+    padding: 15px;
 
 }
-.certificate-con{
-    height: 300px ;
+
+.outer {
+    border-bottom: 5px solid rgb(0, 110, 255);
+}
+
+.certificate-con {
+    height: 300px;
     width: 190px;
     background-image: url(./Logos/idfront.png);
-    background-repeat:no-repeat;
- background-size: contain;
- text-align: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-align: center;
 
 }
-.stuid span{
+
+.stuid span {
     font-family: "Lato", sans-serif;
     font-weight: bold;
     font-size: 15px;
     color: #28609d;
     position: relative;
-   top:50px;
+    top: 50px;
 }
-.stuinfo span{
+
+.stuinfo span {
     font-size: 12px;
     font-weight: bold;
 }
-.name span{
+
+.stunum img {
+    width: 160px;
+}
+
+.name span {
     position: relative;
-    top:45px;
-   
-}
-.stdcourse span{
-    
-        position: relative;
-        top:25px;
-    
-}
-.stdidno span{
-    position: relative;
-   top:25px;
-  border-bottom: 1px solid rgb(207, 203, 203);
-}
-.stuimg img{
-  height: 125px;
-  width: 100px;
-  position: relative;
-  top:52px;
-  border: none;
-  border-radius: 17px;
+    top: 45px;
 
 }
-.idback{
-    height: 300px ;
+
+.stdcourse span {
+
+    position: relative;
+    top: 55px;
+
+}
+
+.stdidno span {
+    position: relative;
+    top: 58px;
+    border-bottom: 1px solid rgb(207, 203, 203);
+}
+
+.stuimg img {
+    height: 125px;
+    width: 100px;
+    position: relative;
+    top: 52px;
+    border: none;
+    border-radius: 17px;
+
+}
+
+
+
+
+.stunum {
+    border-bottom: 5px solid #29609c;
+    height: 234px;
+    margin-top: 10px;
+}
+
+.stunum p {
+    margin-top: 10px;
+    height:9px;
+    color: #e96228;
+    text-align: left;
+}
+.stunum h5{
+    margin-top: 60px;
+    font-size: 13px;
+    text-align: center;
+    color:white;
+}
+
+.idback {
+
+    height: 280px;
     width: 190px;
-    background-image: url(./Logos/idbackhitech.png);
-    background-repeat:no-repeat;
- background-size: contain;
- text-align: center;
-
+     border-bottom: 30px solid #e96228;
 }
-.idback span{
-    color:#28609d;
+
+
+
+.idback span {
+    color: #28609d;
     font-size: 10px;
     font-weight: bold;
-    position:relative;
-    top:65px;
- right: 50px;
+    text-align: left;
+
 
 }
+
+.dwnld {
+    position: absolute;
+    top: 100px;
+    right: 250px;
+}
+
 /* 
 @media (min-width: 320px) ,(max-width:475){
 .main-con{

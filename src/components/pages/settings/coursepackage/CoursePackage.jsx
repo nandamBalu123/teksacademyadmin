@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import EditIcon from '@mui/icons-material/Edit';
+import { NavLink } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from "axios";
@@ -111,7 +112,10 @@ const CoursePackage = () => {
                     </TableCell>
                     <TableCell className="Table-cell ">
                       {/* <VisibilityIcon className="icon-color" style={{ cursor: "pointer" }} /> */}
+                      <NavLink to={`/updatecoursepackage/${item.id}`}>
                       <EditIcon className="icon-color" style={{ cursor: "pointer" }} />
+                      </NavLink>
+
                       <DeleteIcon className="text-danger" style={{ cursor: "pointer" }} />
                     </TableCell>
                     {/* <TableCell className=" border border 1 text-center"> Custom</TableCell> */}

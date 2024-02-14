@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./CertificatePrint.css"
 import logo1 from "../Certificate/Logos/Hologram-Sticker-removebg-preview.png"
 import sign from "../Certificate/Logos/MD_Signature.png"
@@ -9,7 +9,30 @@ import img4 from "../Certificate/Logos/Skill_india.png"
 import img5 from "../Certificate/Logos/MSME_logo.png"
 import tekslogo from "../Certificate/Logos/Tesks_Logo.png"
 import bgimg from "../Certificate/Logos/Teks_Shape_01.png"
-export default function CertificatePrint() {
+import  { useEffect } from "react";
+import { useParams } from 'react-router-dom'
+import { useStudentsContext } from "../../../../hooks/useStudentsContext";
+const CertificatePrint=()=> {
+    const[CertificatePrint, setCertificatePrint]=useState("");
+    const {id}=useParams("");
+    const {students,dispatch}= useStudentsContext();
+  
+
+    useEffect(() => {
+        if (students && id) {
+          const filteredResults = students.filter((item) => {
+            const singlestudentCondition = id ? item.id === parseInt(id) : true;
+    
+            return singlestudentCondition;
+          });
+          if (filteredResults) {
+            console.log("filteredResults[0]", filteredResults[0]);
+          }
+          setCertificatePrint(filteredResults[0]);
+        }
+      }, [students, id, dispatch]);
+
+
     return (
         <>
             <div className='outerborder'>
@@ -33,21 +56,21 @@ export default function CertificatePrint() {
                             <p className='mr-mrs'>Mr./Mrs</p>
                             <div className='stuname'>
                                 <h4 className='studname'>
-                                    ENADI PREM SAI</h4>
+                                  {CertificatePrint.name}  </h4>
                             </div>
                         </div>
                         <div className='info'>
                             <p class="para">Has Succesfully completed Real Time Training on
                             </p>
-                            <h4 className='graphic'>GRAPHIC DESIGNING</h4>
+                            <h4 className='graphic'>{CertificatePrint.courses}</h4>
 
                         </div>
                         <div className='period'>
                             <p className='period1'>During the period of </p>
-                            <h4 className='from'>DEC 2017  </h4>
+                            <h4 className='from'>{CertificatePrint.courseStartDate}</h4>
 
                             <p className='till'>to </p>
-                            <h4 className='to'>  FEB 2018       </h4>
+                            <h4 className='to'>  {CertificatePrint.courseEndDate}    </h4>
                         </div>
                         <div className='grade '>
                             <p className='grade-start' >with</p>
@@ -59,7 +82,7 @@ export default function CertificatePrint() {
 
                     </div>
                     <div className='id'>
-                        <h5>ID:CC231048</h5>
+                        <h5>ID:{CertificatePrint.registrationnumber}</h5>
                     </div>
                     <div className='sign-date'>
                         <div className='date-left'>
@@ -88,3 +111,4 @@ export default function CertificatePrint() {
         </>
     )
 }
+export default  CertificatePrint;
