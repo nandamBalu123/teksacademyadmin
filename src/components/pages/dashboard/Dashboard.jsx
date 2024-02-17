@@ -15,11 +15,8 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import "./Dashboard.css";
 import Paper from "@mui/material/Paper";
-
 import Table from "@mui/material/Table";
-
 import TableBody from "@mui/material/TableBody";
-
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 
 import TableContainer from "@mui/material/TableContainer";
@@ -78,7 +75,9 @@ const Dashboard = () => {
     userBranch = user.branch
   }
   const { students, dispatch } = useStudentsContext();
-
+  useEffect(() => {
+    console.log("studentsssssss", students)
+  }, [students])
   const [getUsersData, setUsersData] = useState([]);
 
   const [getstudentData, setStudentData] = useState([]);
@@ -120,10 +119,7 @@ const Dashboard = () => {
     });
   };
   const handleSave = (e) => {
-
-
     setFilterCriteria(dummyFilterCriteria);
-
   };
 
   //// reset filters
@@ -314,18 +310,12 @@ const Dashboard = () => {
     );
     console.log(
       "calculations_of_filtered_students_branchwise_counsellorwise", calculations_of_filtered_students_branchwise_counsellorwise
-
-
     );
     console.log(
       "calculations_of_all_students_branchwise_counsellorwise", calculations_of_all_students_branchwise_counsellorwise
-
-
     );
     console.log(
       "AllUsers_BranchWise", AllUsers_BranchWise
-
-
     );
   })
   useEffect(() => {
@@ -427,6 +417,11 @@ const Dashboard = () => {
           let branchTotalReceivedAmount = 0;
           let branchTotalDueAmount = 0;
           let branchTotalStudents = 0; // Add a counter for total students in the branch
+          // let branchTotalFilteredDatesTotalAmount = 0
+          let branchTotalFilteredDatesTotalReceivedAmount = 0
+          let branchTotalFilteredDatesTotalDueAmount = 0
+
+
 
           // Counsellor-wise calculations
           const counsellorWiseTotal = {};
@@ -439,6 +434,9 @@ const Dashboard = () => {
                 totalAmount: 0,
                 totalReceivedAmount: 0,
                 totalDueAmount: 0,
+                // totalFilteredDatesTotalAmount: 0,
+                totalFilteredDatesTotalReceivedAmount: 0,
+                totalFilteredDatesTotalDueAmount: 0,
                 students: [], // Initialize an empty array for students
               };
 
@@ -462,12 +460,55 @@ const Dashboard = () => {
                   branchTotalDueAmount += dueamount;
                   counsellorWiseTotal[counsellor].totalDueAmount += dueamount;
                 }
+                // start
+                let FilteredDatesReceivedAmount = 0;
+                let FilteredDatesDueAmount = 0;
+
+                student.initialpayment.map((item, index) => {
+                  if (item.paymentdone) {
+                    if (item.paiddate && item.paiddate >= filterCriteria.fromdate && item.paiddate <= filterCriteria.todate) {
+                      const initialamount = parseFloat(item.initialamount);
+                      if (!isNaN(initialamount)) {
+                        FilteredDatesReceivedAmount += initialamount
+                        branchTotalFilteredDatesTotalReceivedAmount += initialamount;
+                        counsellorWiseTotal[counsellor].totalFilteredDatesTotalReceivedAmount += initialamount;
+                      }
+                    }
+                  }
+                })
+                student.installments.map((item, index) => {
+                  if (item.paymentdone) {
+                    if (item.paiddate && item.paiddate >= filterCriteria.fromdate && item.paiddate <= filterCriteria.todate) {
+                      const paidamount = parseFloat(item.paidamount);
+                      if (!isNaN(paidamount)) {
+                        FilteredDatesReceivedAmount += paidamount
+                        branchTotalFilteredDatesTotalReceivedAmount += paidamount;
+                        counsellorWiseTotal[counsellor].totalFilteredDatesTotalReceivedAmount += paidamount;
+                      }
+                    }
+                  }
+                  if (!item.paymentdone) {
+                    if (item.duedate && item.duedate >= filterCriteria.fromdate && item.duedate <= filterCriteria.todate) {
+                      const dueamount = parseFloat(item.dueamount);
+                      if (!isNaN(dueamount)) {
+                        FilteredDatesDueAmount += dueamount
+                        branchTotalFilteredDatesTotalDueAmount += dueamount;
+                        counsellorWiseTotal[counsellor].totalFilteredDatesTotalDueAmount += dueamount;
+                      }
+                    }
+                  }
+                })
+
+
+                // end
                 counsellorWiseTotal[counsellor].students.push({
                   name: studentName,
                   course: student.courses,
                   admissionDate: student.admissiondate,
                   totalAmount: totalamount,
                   receivedamount: receivedamount,
+                  filteredDatesReceivedAmount: FilteredDatesReceivedAmount,
+                  filteredDatesDueAmount: FilteredDatesDueAmount,
                   dueamount: dueamount,
                 });
 
@@ -481,6 +522,8 @@ const Dashboard = () => {
             totalAmount: branchTotalAmount,
             totalReceivedAmount: branchTotalReceivedAmount,
             totalDueAmount: branchTotalDueAmount,
+            totalFilteredDatesTotalDueAmount: branchTotalFilteredDatesTotalDueAmount,
+            totalFilteredDatesTotalReceivedAmount: branchTotalFilteredDatesTotalReceivedAmount,
             totalStudents: branchTotalStudents, // Add total students to the result
             counsellorWiseTotal,
           };

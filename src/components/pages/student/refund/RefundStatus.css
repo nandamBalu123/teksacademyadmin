@@ -8,3 +8,10 @@
 .css-1ut4n5d-MuiTableCell-root {
     padding: 7px !important;
 }
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    /* You can adjust the opacity to visually indicate the disabled state */
+    /* Add any other styling to visually indicate the disabled state */
+}

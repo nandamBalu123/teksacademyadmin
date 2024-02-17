@@ -405,7 +405,31 @@ const StudentData = () => {
   //       setLoading(false); // Set loading to false on error
   //     });
   // }, []);
+  let [excelData, setExcelData] = useState()
 
+  useEffect(() => {
+    const modifiedData = filteredData.map(item => {
+      const { imgData, studentImg, ...rest } = item;
+      return rest;
+    });
+
+    let excelData = [];
+
+    // Check if modifiedData is an array of objects
+    if (modifiedData.every(item => typeof item === 'object' && !Array.isArray(item))) {
+      excelData = modifiedData;
+    } else {
+      // If not, wrap it in an array
+      excelData.push(modifiedData);
+    }
+
+    setExcelData(excelData);
+  }, [filteredData]);
+
+
+  useEffect(() => {
+    console.log("excelData", excelData)
+  }, [excelData])
   return (
     <div className="container">
       {/* <div>
@@ -747,9 +771,9 @@ const StudentData = () => {
                 </Menu>
               </p>
               <p>
-                {role !== "counsellor" && (
+                {Array.isArray(excelData) && role !== "counsellor" && (
                   <CSVLink
-                    data={filteredData}
+                    data={excelData}
                     filename={"studentsdata.csv"}
                     target="_blank"
                   >
@@ -1013,7 +1037,7 @@ const StudentData = () => {
                         </TableCell>
 
                         <TableCell>
-                          <div className="d-flex">
+                          <div className="d-flex justify-content-evenly">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon
                                 style={{ width: "40px" }}
@@ -1050,7 +1074,7 @@ const StudentData = () => {
                                 style={{ width: "40px" }}
                               />
                             </NavLink>
-
+                            {/* 
                             <div className="form-check form-switch ms-1">
                               <input
                                 className="form-check-input"
@@ -1060,7 +1084,7 @@ const StudentData = () => {
                                 checked={isChecked}
                                 onChange={handleClickOpen}
                               />
-                            </div>
+                            </div> */}
 
                             <Dialog open={opening} onClose={handleClosed}>
                               <DialogContent>
