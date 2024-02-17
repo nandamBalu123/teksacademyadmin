@@ -80,7 +80,7 @@ const CertificatePrint = React.forwardRef((props, ref) => {
                         <div className='logo'>
                             <img src={tekslogo} alt="" />
                         </div>
-                        <header>
+                        <header className='header'>
                             <h1><span>C</span>ERTIFICATE</h1>
                             <p>This Is  To Certify  that</p>
                         </header>

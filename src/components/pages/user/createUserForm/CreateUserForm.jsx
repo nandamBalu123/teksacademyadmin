@@ -19,7 +19,7 @@ const CreateUserForm = () => {
   $('input[type=number]').on('mousewheel', function (e) {
     $(e.target).blur();
   });
-  // 
+  //
 
   const { users, dispatch } = useUsersContext();
   const { departments } = useDepartmentContext();
@@ -39,6 +39,16 @@ const CreateUserForm = () => {
   const [user_remarks_history, setuser_remarks_history] = useState([]);
   const profilee = [];
   const [reportToDropDown, setreportToDropDown] = useState()
+  const [errors, setErrors] = useState({
+    fullname: "",
+    email: "",
+    phonenumber: "",
+    designation: "",
+    department: "",
+    reportto: "",
+    profile: "",
+    branch: "",
+  });
   useEffect(() => {
     if (users) {
       const filtered = users.filter(user => user.profile.toLowerCase() !== 'counsellor');
@@ -53,50 +63,35 @@ const CreateUserForm = () => {
     const newErrors = {};
 
     if (!fullname) {
-      alert("please enter the name");
-      return;
+      newErrors.fullname = "Please enter the name";
     }
-    if (!email) {
-      alert("please  enter email id");
-      return;
+    else if (fullname.length < 3) {
+      newErrors.fullname = "Please enter minimum 3 letters"
+    }
+    else if (!email) {
+      newErrors.email = "Please enter email id";
     } else {
       const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!emailPattern.test(email)) {
-        alert("Invalid Email Address");
-        return;
-        // errors.email = 'Invalid email address';
+        newErrors.email = "Invalid Email Address";
+      } else if (!phonenumber) {
+        newErrors.phonenumber = "Please enter mobile number";
+      } else if (phonenumber.length !== 10) {
+        newErrors.phonenumber = "Incorrect mobile number";
+      } else if (!designation) {
+        newErrors.designation = "Please enter the designation";
+      } else if (!department) {
+        newErrors.department = "Please enter the department";
+      } else if (!reportto) {
+        newErrors.reportto = "Please enter the reportto";
+      } else if (!profile) {
+        newErrors.profile = "Please enter the profile";
+      } else if (!branch) {
+        newErrors.branch = "Please enter the branch";
       }
     }
-    if (!phonenumber) {
-      alert("please enter mobilenumber");
-      return;
-    } else {
-      if (phonenumber.length != 10) {
-        alert("incorrect mobile number");
-        return;
-      }
-    }
-    if (!designation) {
-      alert("please enter the designation");
-      return;
-    }
-    if (!department) {
-      alert("please enter the department");
-      return;
-    }
-    if (!reportto) {
-      alert("please enter the reportto");
-      return;
-    }
-    if (!profile) {
-      alert("please enter the profile");
-      return;
-    }
-    if (!branch) {
-      alert("please enter the branch");
-      return;
-    }
-
+    // Update the state with the new error messages
+    setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       let user = {
         fullname,
@@ -182,9 +177,9 @@ const CreateUserForm = () => {
 
   return (
     <div className="main-user-container container my-4">
-        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <h5 className="mt-4  text-center">User Creation Form</h5>
-      <div className="sub-user-container text-center ">
+      <div className="sub-user-container text-start ">
         <form onSubmit={handleSubmit} className="needs-validation " noValidate>
           <div className="row">
             <div className=" col-12 col-md-6 col-lg-6 col-xl-6">
@@ -199,7 +194,9 @@ const CreateUserForm = () => {
                 value={fullname}
                 id="fullname"
               />
-             
+              {errors.fullname && (
+                <div className="error-message" style={{ color: "red" }}>{errors.fullname}</div>
+              )}
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <TextField
@@ -213,7 +210,9 @@ const CreateUserForm = () => {
                 id="email"
                 required
               />
-             
+              {errors.email && (
+                <div className="error-message" style={{ color: "red" }}>{errors.email}</div>
+              )}
             </div>
           </div>
           <div className="row ">
@@ -229,11 +228,13 @@ const CreateUserForm = () => {
                 id="phonenumber"
                 required
               />
+              {errors.phonenumber && (
+                <div className="error-message" style={{ color: "red" }}>{errors.phonenumber}</div>
+              )}
 
-              
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
-              
+
               <TextField
                 label={<span className="label-family">Designation</span>}
                 className=" mar w-75"
@@ -245,7 +246,9 @@ const CreateUserForm = () => {
                 id="designation"
                 required
               />
-
+              {errors.designation && (
+                <div className="error-message" style={{ color: "red" }}>{errors.designation}</div>
+              )}
             </div>
           </div>
           <div className="row">
@@ -257,7 +260,7 @@ const CreateUserForm = () => {
                       Department <span>*</span>
                     </span>
                   }
-              
+
                 </InputLabel>
                 <Select
                   className="mar"
@@ -266,8 +269,9 @@ const CreateUserForm = () => {
                   required
                   onChange={(e) => setdepartment(e.target.value)}
                   value={department}
+
                 >
-                  <MenuItem> ---select---</MenuItem>\{" "}
+                  <MenuItem disabled> ---select---</MenuItem>\{" "}
                   {departments &&
                     departments.map((item, index) => (
                       <MenuItem key={item.id} value={item.department_name}>
@@ -277,7 +281,9 @@ const CreateUserForm = () => {
                 </Select>
               </FormControl>
 
-             
+              {errors.department && (
+                <div className="error-message" style={{ color: "red", marginRight: "300px" }}>{errors.department}</div>
+              )}
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
@@ -295,7 +301,7 @@ const CreateUserForm = () => {
                   onChange={(e) => setreportto(e.target.value)}
                   value={reportto}
                 >
-                  <MenuItem> ---select---</MenuItem>
+                  <MenuItem disabled> ---select---</MenuItem>
                   {reportToDropDown &&
                     reportToDropDown.map((item, index) => (
                       <MenuItem key={item.id} value={item.fullname}>
@@ -304,9 +310,11 @@ const CreateUserForm = () => {
                     ))}
                 </Select>
               </FormControl>
-        
 
-           
+              {errors.reportto && (
+                <div className="error-message" style={{ color: "red", marginRight: "300px" }}>{errors.reportto}</div>
+              )}
+
             </div>
           </div>
           <div className="row ">
@@ -317,7 +325,7 @@ const CreateUserForm = () => {
                     Role <span>*</span>
                   </span>
 
-         
+
                 </InputLabel>
                 <Select
                   className="mar "
@@ -327,7 +335,7 @@ const CreateUserForm = () => {
                   onChange={(e) => setprofile(e.target.value)}
                   value={profile}
                 >
-                  <MenuItem> ---select---</MenuItem>
+                  <MenuItem disabled> ---select---</MenuItem>
                   {roles &&
                     roles.map((item, index) => (
                       <MenuItem key={item.id} value={item.role}>
@@ -337,7 +345,11 @@ const CreateUserForm = () => {
                 </Select>
               </FormControl>
 
-             
+              {errors.role && (
+                <div className="error-message" style={{ color: "red", marginRight: "300px" }}>{errors.role}</div>
+              )}
+
+
             </div>{" "}
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <FormControl variant="standard" className="w-75">
@@ -355,7 +367,7 @@ const CreateUserForm = () => {
                   onChange={(e) => setbranch(e.target.value)}
                   value={branch}
                 >
-                  <MenuItem> ---select---</MenuItem>
+                  <MenuItem disabled> ---select---</MenuItem>
                   {branches &&
                     branches.map((item, index) => (
                       <MenuItem key={item.id} value={item.branch_name}>
@@ -364,7 +376,9 @@ const CreateUserForm = () => {
                     ))}
                 </Select>
               </FormControl>
-             
+              {errors.branch && (
+                <div className="error-message" style={{ color: "red", marginRight: "300px" }}>{errors.branch}</div>
+              )}
             </div>
           </div>
 
@@ -383,3 +397,4 @@ const CreateUserForm = () => {
   );
 };
 export default CreateUserForm;
+

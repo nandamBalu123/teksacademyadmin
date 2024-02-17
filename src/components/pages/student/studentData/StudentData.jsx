@@ -340,7 +340,7 @@ const StudentData = () => {
     setPage(value);
   };
   ////////////  
-  const [anchorEl, setAnchorEl] = React.useState(null);
+   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -756,7 +756,8 @@ const StudentData = () => {
                   </select>
                 </MenuItem>{" "}
               </div> */}
-                  <MenuItem className="d-flex justify-content-between">
+                  <div className="d-flex justify-content-between px-3
+                  ">
                     <button className="btn btn-color" onClick={filterreset}>
 
                       Clear
@@ -765,7 +766,7 @@ const StudentData = () => {
 
                       Save
                     </button>
-                  </MenuItem>
+                  </div>
                 </Menu>
               </p>
               <p>
@@ -1039,6 +1040,7 @@ const StudentData = () => {
                           <div className="d-flex">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon
+                            titleAccess="view"
                                 style={{ width: "40px" }}
                                 className="icon-color"
                               />
@@ -1046,12 +1048,14 @@ const StudentData = () => {
 
                             <NavLink to={`/editstudent/${item.id}`}>
                               <EditIcon
+                              titleAccess="Edit"
                                 style={{ width: "40px" }}
                                 className="icon-color"
                               />
                             </NavLink>
                             <NavLink to={`/feeview/${item.id}`}>
                               <CurrencyRupeeIcon
+                              titleAccess="Fee"
                                 style={{ width: "40px" }}
                                 className="icon-color"
                               />
@@ -1069,6 +1073,7 @@ const StudentData = () => {
 
                             <NavLink to={`/studentApplicationprint/${item.id}`}>
                               <PrintIcon
+                              titleAccess="print"
                                 className="icon-color"
                                 style={{ width: "40px" }}
                               />

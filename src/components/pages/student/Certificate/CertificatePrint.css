@@ -88,7 +88,7 @@ header h1{
   margin-bottom: 25px;
   letter-spacing: 0.1cm;
 }
-header p{
+.header p{
   font-size: 32px;
   color:#2a619d;
   font-weight: 700;
