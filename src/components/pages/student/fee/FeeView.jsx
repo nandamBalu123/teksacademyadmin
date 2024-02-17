@@ -14,7 +14,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import InputLabel from "@mui/material/InputLabel";
+
 import MenuItem from "@mui/material/MenuItem";
+
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -36,7 +38,7 @@ const FeeView = () => {
   const { students, dispatch } = useStudentsContext();
   const [studentdata, setstudentdata] = useState("");
   const { id } = useParams();
-  const navigate = useNavigate();
+  const navigator = useNavigate();
   const [dueamount, setdueamount] = useState();
   const [totalpaidamount, settotalpaidamount] = useState();
   const [noOfinstallments, setNoOfinstallments] = useState();
@@ -193,7 +195,7 @@ const FeeView = () => {
             type: "UPDATE_NO_OF_INSTALLMENTS",
             payload: updateContext,
           });
-          navigate(`/feeview/${id}`);
+          navigator(`/feeview/${id}`);
         } else {
           alert("Try Again");
         }
@@ -305,248 +307,143 @@ const FeeView = () => {
 
 
   };
-  useEffect(() => {
-    console.log("installmentsssssssssssss", installments)
 
-  }, [installments])
+
   const handleUpdateClick = async (index) => {
-    if (!validateInputs(index)) {
-      return;
-    }
-
-    const formData = {
-      amount: installments[index].paidamount,
-      name: "irshad",
-      contact: "8186831441",
-      email: "wd.irshad@gmail.com"
-      // name: studentdata.name,
-      // contact: studentdata.mobilenumber,
-      // email: studentdata.email
-    };
-    if (installments[index].paidamount > 0 && installments[index].paiddate && installments[index].modeofpayment === "Online Payment") {
-      try {
-        const response = await createOrder(formData);
-        const res = await response.json();
-
-        if (res.success) {
-
-          handleRazorpayPayment(res, index);
-        } else {
-          alert(res.msg);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-    if (installments[index].paidamount > 0 && installments[index].paiddate && installments[index].modeofpayment === "Cash") {
-      updateInstallmentData(installments, studentdata, index, id, dispatch);
-    }
-
-  };
-  async function updateInstallmentData(installments, studentdata, index, id, dispatch) {
-    if (
-      installments[index].paidamount > 0 &&
-      installments[index].paidamount <= parseInt(studentdata.dueamount)
-    ) {
-      // Update state
-      const updatedInstallments = await updateInstallments(index);
-      // Now that state is updated, proceed with other actions
-      let nextduedate;
-      let totalinstallmentspaid = 0
-      for (let i = 0; i < updatedInstallments.length; i++) {
-        if (updatedInstallments[i + 1]) {
-          if (updatedInstallments[i].installmentNumber != updatedInstallments[i + 1].installmentNumber && updatedInstallments[i].paymentdone === true) {
-            totalinstallmentspaid += 1
+    if (installments[index].paidamount > 0 && installments[index].paiddate && installments[index].modeofpayment) {
+      if (
+        installments[index].paidamount > 0 &&
+        installments[index].paidamount <= parseInt(studentdata.dueamount)
+      ) {
+        // Update state
+        const updatedInstallments = await updateInstallments(index);
+        // Now that state is updated, proceed with other actions
+        let nextduedate;
+        let totalinstallmentspaid = 0
+        for (let i = 0; i < updatedInstallments.length; i++) {
+          if (updatedInstallments[i + 1]) {
+            if (updatedInstallments[i].installmentNumber != updatedInstallments[i + 1].installmentNumber && updatedInstallments[i].paymentdone === true) {
+              totalinstallmentspaid += 1
+            }
+          } else {
+            if (updatedInstallments[i].paymentdone) {
+              totalinstallmentspaid += 1
+            }
           }
-        } else {
-          if (updatedInstallments[i].paymentdone) {
-            totalinstallmentspaid += 1
+
+          if (updatedInstallments[i].paidamount < 1) {
+            nextduedate = updatedInstallments[i].duedate;
+            break;
           }
         }
 
-        if (updatedInstallments[i].paidamount < 1) {
-          nextduedate = updatedInstallments[i].duedate;
-          break;
+        let updatedtotalinstallments = [
+          {
+            totalinstallments: parseInt(totalinstallments[0].totalinstallments),
+            totalinstallmentspaid: parseInt(totalinstallmentspaid),
+            totalinstallmentsleft: parseInt(totalinstallments[0].totalinstallments) - parseInt(totalinstallmentspaid),
+          },
+        ];
+        // let totalpaidamount = 0;
+        // totalpaidamount = totalpaidamount + parseInt(admissionFee.admissionfee);
+        // for (let i = 0; i < updatedInstallments.length; i++) {
+        //   if (updateInstallments[i].paidamount) {
+        //     totalpaidamount =
+        //       totalpaidamount + parseInt(updateInstallments[i].paidamount);
+        //   }
+        // }
+
+        let totalpaidamount = 0;
+        totalpaidamount =
+          totalpaidamount + studentdata.initialpayment[0].initialamount;
+        for (let i = 0; i < updatedInstallments.length; i++) {
+          totalpaidamount = totalpaidamount + updatedInstallments[i].paidamount;
+          // console.log("updatedInstallments", updatedInstallments[i].paidamount);
         }
-      }
-
-      let updatedtotalinstallments = [
-        {
-          totalinstallments: parseInt(totalinstallments[0].totalinstallments),
-          totalinstallmentspaid: parseInt(totalinstallmentspaid),
-          totalinstallmentsleft: parseInt(totalinstallments[0].totalinstallments) - parseInt(totalinstallmentspaid),
-        },
-      ];
-      // let totalpaidamount = 0;
-      // totalpaidamount = totalpaidamount + parseInt(admissionFee.admissionfee);
-      // for (let i = 0; i < updatedInstallments.length; i++) {
-      //   if (updateInstallments[i].paidamount) {
-      //     totalpaidamount =
-      //       totalpaidamount + parseInt(updateInstallments[i].paidamount);
-      //   }
-      // }
-
-      let totalpaidamount = 0;
-      totalpaidamount =
-        totalpaidamount + studentdata.initialpayment[0].initialamount;
-      for (let i = 0; i < updatedInstallments.length; i++) {
-        totalpaidamount = totalpaidamount + updatedInstallments[i].paidamount;
-        // console.log("updatedInstallments", updatedInstallments[i].paidamount);
-      }
-      //start
-      let dueamount = parseInt(studentdata.finaltotal);
-      dueamount = dueamount - studentdata.initialpayment[0].initialamount;
-      for (let i = 0; i < updatedInstallments.length; i++) {
-        dueamount = dueamount - updatedInstallments[i].paidamount;
-      }
-      let totalExtraDiscount = 0
-      if (studentdata.extra_discount) {
-        for (let i = 0; i < studentdata.extra_discount.length; i++) {
-          totalExtraDiscount = totalExtraDiscount + parseInt(studentdata.extra_discount[i].Discount)
+        //start
+        let dueamount = parseInt(studentdata.finaltotal);
+        dueamount = dueamount - studentdata.initialpayment[0].initialamount;
+        for (let i = 0; i < updatedInstallments.length; i++) {
+          dueamount = dueamount - updatedInstallments[i].paidamount;
         }
-      }
-      dueamount = dueamount - totalExtraDiscount
+        let totalExtraDiscount = 0
+        if (studentdata.extra_discount) {
+          for (let i = 0; i < studentdata.extra_discount.length; i++) {
+            totalExtraDiscount = totalExtraDiscount + parseInt(studentdata.extra_discount[i].Discount)
+          }
+        }
+        dueamount = dueamount - totalExtraDiscount
 
 
-      //end
-      const updatedData = {
-        installments: updatedInstallments,
-        totalinstallments: updatedtotalinstallments,
-        dueamount,
-        totalpaidamount,
-        nextduedate,
-      };
-      console.log(
-        "studentdata.initialpayment[0].initialamount",
-        studentdata.initialpayment[0].initialamount
-      );
-      // console.log("updatedDataa", updatedData, updateContext);
-
-      const updateContext = {
-        installments: updatedInstallments,
-        totalinstallments: updatedtotalinstallments,
-        dueamount,
-        totalpaidamount,
-        nextduedate,
-        id: studentdata.id,
-      };
-
-      console.log("updatedDataaa", updatedData, updateContext);
-
-      try {
-        const res = await axios.put(
-          `${process.env.REACT_APP_API_URL}/feeinstallments/${id}`,
-          updatedData
+        //end
+        const updatedData = {
+          installments: updatedInstallments,
+          totalinstallments: updatedtotalinstallments,
+          dueamount,
+          totalpaidamount,
+          nextduedate,
+        };
+        console.log(
+          "studentdata.initialpayment[0].initialamount",
+          studentdata.initialpayment[0].initialamount
         );
+        // console.log("updatedDataa", updatedData, updateContext);
 
-        if (res.data.updated) {
-          alert("Fee Added");
-          dispatch({
-            type: "UPDATE_INSTALLMENTS",
-            payload: updateContext,
-          });
-          // navigator(`/feeview/${id}`);
-          // window.location.reload();
-        } else {
-          alert("Try Again");
+        const updateContext = {
+          installments: updatedInstallments,
+          totalinstallments: updatedtotalinstallments,
+          dueamount,
+          totalpaidamount,
+          nextduedate,
+          id: studentdata.id,
+        };
+
+        console.log("updatedDataaa", updatedData, updateContext);
+
+        try {
+          const res = await axios.put(
+            `${process.env.REACT_APP_API_URL}/feeinstallments/${id}`,
+            updatedData
+          );
+
+          if (res.data.updated) {
+            alert("Fee Added");
+            dispatch({
+              type: "UPDATE_INSTALLMENTS",
+              payload: updateContext,
+            });
+            // navigator(`/feeview/${id}`);
+            // window.location.reload();
+          } else {
+            alert("Try Again");
+          }
+        } catch (error) {
+          console.error("Error updating data:", error);
+          // Handle errors here
         }
-      } catch (error) {
-        console.error("Error updating data:", error);
-        // Handle errors here
-      }
-    } else {
-      if (installments[index].paidamount > parseInt(studentdata.dueamount)) {
-        alert("Amount cannot be greater than Due Amount");
-      } else if (installments[index].paidamount === 0) {
-        alert("Paid should be greater than 0");
       } else {
-        alert("error");
-      }
-    }
-  }
-
-
-  const validateInputs = (index) => {
-    const installment = installments[index];
-    for (let i = 0; i < installments.length; i++) {
-      if (isNaN(installments[i].dueamount)) {
-        installments[i].dueamount = 0
-      }
-      if (isNaN(installments[i].paidamount)) {
-        installments[i].paidamount = 0
-      }
-      if (installments[i].dueamount == null) {
-        installments[i].dueamount = 0
-      }
-      if (installments[i].paidamount == null) {
-        installments[i].paidamount = 0
-      }
-    }
-    if (!installment.paidamount) {
-      alert('Enter paid amount');
-      return false;
-    }
-
-    if (!installment.paiddate) {
-      alert('Enter paid date');
-      return false;
-    }
-
-    if (!installment.modeofpayment) {
-      alert('Enter mode of payment');
-      return false;
-    }
-
-    return true;
-  };
-
-  const createOrder = async (formData) => {
-    return await fetch('http://localhost:3030/createOrder', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(formData),
-    });
-  };
-
-  const handleRazorpayPayment = (res, index) => {
-    const options = {
-      key: res.key_id,
-      amount: res.amount,
-      currency: 'INR',
-      name: res.product_name,
-      description: res.description,
-      image: 'https://dummyimage.com/600x400/000/fff',
-      order_id: res.order_id,
-      handler: async function (response) {
-        alert('Payment Succeeded');
-
-        if (installments[index].paidamount > 0 && installments[index].paiddate && installments[index].modeofpayment === "Online Payment") {
-          updateInstallmentData(installments, studentdata, index, id, dispatch);
+        if (installments[index].paidamount > parseInt(studentdata.dueamount)) {
+          alert("Amount cannot be greater than Due Amount");
+        } else if (installments[index].paidamount === 0) {
+          alert("Paid should be greater than 0");
+        } else {
+          alert("error");
         }
-        // Handle success behavior as needed
-      },
-      prefill: {
-        contact: res.contact,
-        name: res.name,
-        email: res.email,
-      },
-      notes: {
-        description: res.description,
-      },
-      theme: {
-        color: '#2300a3',
-      },
-    };
-    const razorpayObject = new window.Razorpay(options);
+      }
+    }
+    else {
+      if (!installments[index].paidamount) {
+        alert("enter paid amount")
+      }
+      else if (!installments[index].paiddate) {
+        alert("enter paid date")
+      }
+      else if (!installments[index].modeofpayment) {
+        alert("enter mode of payment")
 
-    razorpayObject.on('payment.failed', function (response) {
-      alert('Payment Failed');
-      // Handle failure behavior as needed
-    });
+      }
+    }
 
-    razorpayObject.open();
   };
 
 
@@ -821,108 +718,8 @@ const FeeView = () => {
     },
   }));
 
-  // new
-
-  // const [formData, setFormData] = useState({
-  //   name: '',
-  //   amount: 1,
-  //   description: '',  /// branch name, counsellor name , counsellor id, paid amount, student name
-  // });
-
-  // const handleFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Perform the form submission or API call here to create the order
-  //     // Replace the following line with your actual endpoint
-  //     const response = await fetch('http://localhost:3030/createOrder', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //       body: new URLSearchParams(formData),
-  //     });
-
-  //     const res = await response.json();
-
-  //     if (res.success) {
-  //       const options = {
-  //         key: res.key_id,
-  //         amount: res.amount,
-  //         currency: 'INR',
-  //         name: res.product_name,
-  //         description: res.description,
-  //         image: 'https://dummyimage.com/600x400/000/fff',
-  //         order_id: res.order_id,
-  //         handler: function (response) {
-  //           alert('Payment Succeeded');
-  //           // Handle success behavior as needed
-  //         },
-  //         prefill: {
-  //           contact: res.contact,
-  //           name: res.name,
-  //           email: res.email,
-  //         },
-  //         notes: {
-  //           description: res.description,
-  //         },
-  //         theme: {
-  //           color: '#2300a3',
-  //         },
-  //       };
-
-  //       const razorpayObject = new window.Razorpay(options);
-  //       razorpayObject.on('payment.failed', function (response) {
-  //         alert('Payment Failed');
-  //         // Handle failure behavior as needed
-  //       });
-  //       razorpayObject.open();
-  //     } else {
-  //       alert(res.msg);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     // Handle errors as needed
-  //   }
-  // };
-
-  // new
-
   return (
     <div className="container mt-3">
-        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
-      {/* new */}
-      {/* <div>
-        <hr />
-        <div style={{ display: 'inline-block' }}>
-          <p>
-            <b>Amount:- Rs. {formData.amount}</b>
-          </p>
-          <form className="pay-form" onSubmit={handleFormSubmit}>
-            <input
-              type="hidden"
-              name="name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            />
-            <input
-              type="hidden"
-              name="amount"
-              value={formData.amount}
-              onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-            />
-            <input
-              type="hidden"
-              name="description"
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            />
-            <input type="submit" value="Pay Now" />
-          </form>
-        </div>
-      </div> */}
-
-      {/* new */}
-
       <div className="feeview">
         <div className="d-flex justify-content-between my-2 ms-2">
           {studentdata && (
@@ -1502,14 +1299,64 @@ const FeeView = () => {
                             value={installment.modeofpayment}
                           >
 
-                            <MenuItem value="Online Payment">Online Payment</MenuItem>
+                            <MenuItem value="UPI">UPI</MenuItem>
                             <MenuItem value="Cash">Cash</MenuItem>
-
+                            <MenuItem value="Bank Transfer">Bank Transfer</MenuItem>
+                            <MenuItem value="Cheque">Cheque</MenuItem>
                           </TextField>
+                          {/* <FormControl variant="standard" className="w-100">
+                            <InputLabel>
+                              <span className="label-family">
+                                Mode of Payments<span>*</span>
+                              </span>
+                            </InputLabel>
+                            <Select
+                              name="modeofpayment"
+                              variant="standard"
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                              onChange={(e) =>
+                                handleInstallmentUpdate(
+                                  index,
+                                  "modeofpayment",
+                                  e.target.value
+                                )
+                              }
+                              value={installment.modeofpayment}
 
+                              required
+
+                            >
+
+                              <MenuItem value="UPI">UPI</MenuItem>
+                              <MenuItem value="Cash">Cash</MenuItem>
+                              <MenuItem value="Bank Transfer">Bank Transfer</MenuItem>
+                              <MenuItem value="Cheque">Cheque</MenuItem>
+                            </Select>
+                          </FormControl> */}
+                          {/* <select
+                            className="w-100"
+                            name="modeofpayment"
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "modeofpayment",
+                                e.target.value
+                              )
+                            }
+                            value={installment.modeofpayment}
+                          >
+                            <option value="">---select---</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Cheque">Cheque</option>
+                          </select>
+                          <label> Mode of Payments</label> */}
                         </div>
                       )}
-                    {/* {studentdata &&
+                    {studentdata &&
                       studentdata.installments[index] &&
                       studentdata.installments[index].duedate &&
                       studentdata.installments[index].dueamount && (
@@ -1536,9 +1383,22 @@ const FeeView = () => {
                               shrink: true,
                             }}
                           />
-                        
+                          {/* <input
+                            type="text"
+                            className="w-100"
+                            name="transactionid"
+                            onChange={(e) =>
+                              handleInstallmentUpdate(
+                                index,
+                                "transactionid",
+                                e.target.value
+                              )
+                            }
+                            value={installment.transactionid}
+                          />
+                          <label> Transaction Id</label> */}
                         </div>
-                      )} */}
+                      )}
 
                     {studentdata &&
                       studentdata.installments[index] &&
