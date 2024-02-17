@@ -63,6 +63,9 @@ const Feefollowup = () => {
   const [getstudentData, setData] = useState([{ name: "" }]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
+
+
+
   const [itemsPerPage, setrecordsPerPage] = useState(10);
 
   const handleClick = (event) => {
@@ -175,6 +178,8 @@ const Feefollowup = () => {
       return filterType === "overdue" ? dateB - dateA : dateA - dateB;
     });
   };
+
+  
 
   const sumDueAmount = filteredInstallments.reduce(
     (sum, installment) => sum + installment.dueamount,
@@ -292,7 +297,18 @@ const Feefollowup = () => {
           <div className="col-12 col-md-4 col-lg-4 col-xl-4 ">
             <div className="d-flex justify-content-evenly">
               <h6 className="mt-4 me-2">
-                {recordCount}/{initialDataCount}
+                
+              {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
+                    <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                  ) : (
+                    <p>{recordCount}/{initialDataCount}{" "}</p>
+                    
+                  )}
+
+
+
+
+                {/* {recordCount}/{initialDataCount} */}
               </h6>
               <span className="mt-3">
                 <select onChange={handlerecorddata}>
