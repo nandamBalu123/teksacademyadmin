@@ -50,7 +50,7 @@ import LeadSource from "./components/pages/settings/leadsource/LeadSource";
 import CreateLeadSource from "./components/pages/settings/leadsource/CreateLeadSource";
 import Department from "./components/pages/settings/departments/Department";
 import CreateDepartment from "./components/pages/settings/departments/CreateDepartment";
-import Certificate from "./components/pages/student/Certificate/Certificate";
+
 import CoursePackage from "./components/pages/settings/coursepackage/CoursePackage";
 import CreateCoursePackage from "./components/pages/settings/coursepackage/CreateCoursePackage";
 import Course from "./components/pages/settings/courses/Course";
@@ -89,6 +89,9 @@ import RefundData from "./components/pages/student/refund/RefundData";
 import RefundStatus from "./components/pages/student/refund/RefundStatus";
 import FinalSearch from "./components/pages/student/search/FinalSearch";
 import CustomForm from "./components/pages/settings/CustomForm";
+import CertificatePrint from "./components/pages/student/Certificate/CertificatePrint";
+import StudentIdCard from "./components/pages/student/Certificate/StudentIdCard"
+ import Certificate from "./components/pages/student/Certificate/Certificate";
 
 
 // import Formm from "./components/pages/user/createUserForm/Form";
@@ -240,7 +243,7 @@ function App() {
                     )
                   }
                 />
-                <Route
+                {<Route
                   path="/certificate"
                   element={
                     filteredroles && profile == filteredroles.role && filteredroles.permissions[1].submenus[3].create == true ? (
@@ -248,6 +251,32 @@ function App() {
                     ) : (
                       <Dashboard />
                     )
+                  }
+                />  }
+                <Route
+                  path="/certificateprint"
+                  element={
+                    // user && user.profile == "admin" ? <CertificatePrint /> : <Dashboard />
+                    <CertificatePrint />
+                  }
+                />
+                  <Route
+                  path="/getcertificate/:id"
+                  element={
+                    // user && user.profile == "admin" ? <CertificatePrint /> : <Dashboard />
+                    <CertificatePrint />
+                  }
+                />
+                <Route
+                  path="/studentidcard"
+                  element={
+                    user && user.profile == "admin" ? <StudentIdCard /> : <Dashboard />
+                  }
+                />
+                  <Route
+                  path="/getstudentidcard/:id"
+                  element={
+                    user && user.profile == "admin" ? <StudentIdCard /> : <Dashboard />
                   }
                 />
                 <Route
@@ -699,6 +728,16 @@ function App() {
                     )
                   }
                 />
+                 <Route
+                  path="/updatecoursepackage/:id"
+                  element={
+                    user ? (
+                      <CreateCoursePackage />
+                    ) : (
+                      <Dashboard />
+                    )
+                  }
+                />
                 <Route
                   path="/admissionfee"
                   element={
@@ -819,6 +858,7 @@ function App() {
                     user && user.profile == "admin" ? <Settings /> : <Dashboard />
                   } />
               </Routes>
+
 
             </main>
           </div>

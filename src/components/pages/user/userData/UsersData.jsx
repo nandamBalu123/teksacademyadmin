@@ -120,14 +120,40 @@ const UsersData = () => {
   });
 
   const [dummyFilterCriteria , setDummyFilterCriteria]= useState({ 
-    
+     search: "",
+     branch: "",
+     profile: "",
+     department: "",
+     reportto: "",
   })
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFilterCriteria({ ...filterCriteria, [name]: value });
+    setDummyFilterCriteria({
+      ...dummyFilterCriteria, [name]: value
+    });
+    if (name === "search") {
+      setFilterCriteria({
+        ...filterCriteria, [name]: value
+      });
+    }
+    // setFilterCriteria({ ...filterCriteria, [name]: value });
   };
+  const handleSave = (e) => {
+    setFilterCriteria(dummyFilterCriteria);
+    //handleClose();
+  };
+
+
+
+  const [getusers, setgetusers] = useState([]);
+  const [filteredcounsellor, setfilteredcounsellor] = useState([]);
+  const role = localStorage.getItem("role");
+  let userId = localStorage.getItem("id");
+  userId = parseInt(userId);
+
+
 
   useEffect(() => {
     const filteredResults = initialData.filter((item) => {
@@ -182,6 +208,14 @@ const UsersData = () => {
 
     setFilteredData(filteredResults);
   }, [filterCriteria, initialData]);
+  
+  useEffect(() => {
+    const filteruser = getusers.filter((user) => {
+      const filtercounsellar = user.profile.toLowerCase() === "counsellor";
+      return filtercounsellar;
+    });
+    setfilteredcounsellor(filteruser);
+  }, [getusers]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -223,6 +257,11 @@ const UsersData = () => {
       department: "",
       reportto: "",
     });
+    setDummyFilterCriteria({search: "",
+    branch: "",
+    profile: "",
+    department: "",
+    reportto: "",});
   };
   let initialDataCount = initialData.length;
   let recordCount = filteredData.length;
@@ -311,6 +350,7 @@ const UsersData = () => {
   return (
     // style={{ margin: "30px 0px 0px 20px" }}
     <div className="container">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="userlist mt-3">
         <h5 className=" mt-3 ms-3 text-center">Users List</h5>
 
@@ -340,7 +380,13 @@ const UsersData = () => {
           <div className="col-12 col-md-4 col-xl-4 col-lg-4">
             <div className="d-flex justify-content-evenly">
               <h6 className="mt-4">
-                {recordCount}/{initialDataCount}
+                 {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
+                    <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                  ) : (
+                    <p>{recordCount}/{initialDataCount}{" "}</p>
+                    
+                  )}
+                {/* {recordCount}/{initialDataCount} */}
               </h6>
               <span className="mt-3">
                 <select onChange={handlerecorddata}>
@@ -513,7 +559,7 @@ const UsersData = () => {
                           style={{ background: "none" }}
                           className="pe-4 "
                           name="profile"
-                          value={filterCriteria.profile}
+                          value={dummyFilterCriteria.profile}
                           onChange={handleInputChange}
                         >
                           {roles &&
@@ -531,7 +577,7 @@ const UsersData = () => {
                         <Select
                           className="pe-3 "
                           name="branch"
-                          value={filterCriteria.branch}
+                          value={dummyFilterCriteria.branch}
                           onChange={handleInputChange}
                         >
                           {branches &&
@@ -551,7 +597,7 @@ const UsersData = () => {
                         <Select
                           className="pe-4"
                           name="department"
-                          value={filterCriteria.department}
+                          value={dummyFilterCriteria.department}
                           onChange={handleInputChange}
                         >
                           {departments &&
@@ -590,11 +636,19 @@ const UsersData = () => {
                     <button className="btn btn-color" onClick={filterreset}>
                       Clear
                     </button>
-                    <button className="btn btn-color" >
+                    <button className="btn btn-color" onClick={handleSave} >
 
                       Save
                     </button>
                   </div>
+
+
+
+                 
+
+
+
+
                   {/* <div className="text-end me-2 mt-4">
                     <button className="btn btn-color" onClick={filterreset}>
                       Clear

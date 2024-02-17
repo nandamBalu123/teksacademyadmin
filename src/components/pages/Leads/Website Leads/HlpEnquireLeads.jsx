@@ -7,7 +7,7 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-
+import { useNavigate } from "react-router-dom";
 import TableContainer from "@mui/material/TableContainer";
 
 import TableHead from "@mui/material/TableHead";
@@ -95,6 +95,7 @@ const label = { inputProps: { "aria-label": "Switch demo" } };
 // }));
 
 const HlpEnquireLeads = () => {
+  const navigate = useNavigate();
   const [students, setWebinarForm] = useState([]);
   const { branches } = useBranchContext();
   const { getcourses } = useCourseContext();
@@ -325,6 +326,7 @@ const HlpEnquireLeads = () => {
   return (
 
     <div className="container">
+       <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="studetdetails   mt-3">
         <h5 className=" mt-3 text-center"> HLP Enquire Leads </h5>
 
@@ -355,7 +357,13 @@ const HlpEnquireLeads = () => {
           <div className="col-12 col-md-5 col-lg-4 col-xl-4">
             <div className="d-flex justify-content-around">
               <p className="pt-3">
-                {recordCount}/{initialDataCount}{" "}
+                {/* {recordCount}/{initialDataCount}{" "} */}
+                {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
+                    <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                  ) : (
+                    <p>{recordCount}/{initialDataCount}{" "}</p>
+                    
+                  )}
               </p>
 
               <p>

@@ -8,7 +8,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Report from "./Report";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -34,6 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 const Reports = () => {
+  const navigate =useNavigate();
 
   const [reports, setreports] = useState()
   useEffect(() => { console.log("reports", reports) })
@@ -54,6 +55,7 @@ const Reports = () => {
 
   return (
     <div className="container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="reports">
         <div className="d-flex justify-content-between mt-3">
           <h4 className="ms-3">Reports</h4>

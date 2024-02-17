@@ -72,6 +72,7 @@ const CreateBranch = () => {
   };
   return (
     <div className="container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <form>
         <Box
           component="form"

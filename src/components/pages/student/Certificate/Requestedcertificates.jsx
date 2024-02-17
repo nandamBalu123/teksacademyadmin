@@ -28,6 +28,7 @@ import axios from "axios";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { values } from "pdf-lib";
+import { useNavigate } from "react-router-dom";
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -51,6 +52,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 const Requestedcertificates = () => {
+  const navigate =useNavigate();
   const { students, dispatch } = useStudentsContext();
 
   const { getcourses } = useCourseContext();
@@ -275,8 +277,10 @@ const Requestedcertificates = () => {
       certificate_Status: "issued",
     });
   };
+  
   return (
     <div className="container">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className=" req-main-certificate mt-3">
         <div className="req-certificate mt-2">
           <div className="row ">
@@ -335,8 +339,15 @@ const Requestedcertificates = () => {
             <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-2">
               <div className="d-flex justify-content-evenly">
                 <p className="mt-2">
+
+                {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
+                    <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                  ) : (
+                    <p>{recordCount}/{initialDataCount}{" "}</p>
+                    
+                  )}
                   {" "}
-                  {recordCount}/{initialDataCount}{" "}
+                  {/* {recordCount}/{initialDataCount}{" "} */}
                 </p>
                 <p className="mt-2">
                   <select onChange={handlerecorddata}>

@@ -13,6 +13,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { styled } from "@mui/material/styles";
 import useFormattedDate from "../../../../hooks/useFormattedDate";
@@ -40,6 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 const UserView = () => {
+  const navigate = useNavigate();
   const [singleUser, setUser] = useState("");
 
   // const { user } = useAuthContext();
@@ -68,6 +70,7 @@ const UserView = () => {
 
   return (
     <div className="container mt-3">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="userviewing">
         <h5 className="my-3 text-center"> User View</h5>
 

@@ -64,7 +64,7 @@ export default function RegistrationForm() {
   const { dispatch } = useStudentsContext();
   const [isPopupOpen, setPopupOpen] = useState(false);
   let select = "select";
-  const openPopup = () => setPopupOpen(true);
+  // const openPopup = () => setPopupOpen(true);
   const closePopup = () => setPopupOpen(false);
   const { user } = useAuthContext();
   const { branches } = useBranchContext();
@@ -81,6 +81,7 @@ export default function RegistrationForm() {
   const [parentsname, setParentsName] = useState("");
   const [parentsnumber, SetParentsNumber] = useState("");
   const [birthdate, setBirthDate] = useState("");
+  const [relation, setRelation] = useState("");
   const [gender, setGender] = useState("");
   const [maritalstatus, setMaritalStatus] = useState("");
   const [college, setCollege] = useState("");
@@ -122,6 +123,7 @@ export default function RegistrationForm() {
   const [finaltotal, setfinaltotal] = useState(null);
   const [admissionremarks, setadmissionremarks] = useState("");
   const [assets, setassets] = useState([]);
+  const [follow, setFollow] = useState([])
   const [initialpayment, setinitialamount] = useState([]);
   const [dueamount, setdueamount] = useState(null);
   const [totalinstallments, settotalinstallments] = useState(0);
@@ -149,6 +151,64 @@ export default function RegistrationForm() {
   //   setEnquiryTakenBy(userName);
   // }
 
+  // --------------PREVIEW----------------
+
+  const openPopup = () => {
+
+    if(!admissionremarks){
+      seterrorsState((prev)=>({...prev,admissionremarks:"Please enter the Remarks" }))
+    }
+    else if(admissionremarks.length <3){
+      seterrorsState((prev)=>({...prev,admissionremarks:"Remarks atleat 3 charaters" }))
+    }
+    if(admissionremarks>3){
+      setPopupOpen(true);
+    }
+   
+  }
+  
+
+ 
+  // ------------------------valid date-------------Date selection-----------
+ 
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (`0${currentDate.getMonth() + 1}`).slice(-2);
+    const day = (`0${currentDate.getDate()}`).slice(-2);
+    return `${year}-${month}-${day}`;
+  };
+
+
+  const getAdmissionBlocker = () => {
+    
+    // const currentDate = new Date();
+    // console.log("hello ram",admissiondate, "wip",currentDate)
+    // const year = currentDate.getFullYear();
+    // const month = (`0${currentDate.getMonth() + 1}`).slice(-2);
+    // const day = (`0${currentDate.getDate()}`).slice(-2);
+    // return `${year}-${month}-${day}`;
+    return admissiondate;
+  };
+
+
+
+    
+
+  const handleAcademicYearChange = (inputValue) => {
+    // Check if the input value is a valid number and has at most 4 digits
+    const isValidInput = /^\d{0,4}$/.test(inputValue);
+  
+    if (isValidInput) {
+      // Update the state if the input is valid
+      setAcademicyear(inputValue);
+    } 
+  };
+  
+
+
+
+
   const [imageUrl, setImageUrl] = useState(null);
   const displayImage = (file) => {
     const reader = new FileReader();
@@ -175,6 +235,16 @@ export default function RegistrationForm() {
     } else {
       // Remove the asset from the array if it's unchecked
       setassets(assets.filter((asset) => asset !== assetName));
+    }
+  };
+  const handleFollowChange = (event) => {
+    const followName = event.target.name;
+    if (event.target.checked) {
+      //add the social media app to array
+      setFollow([...follow, followName]);
+    } else {
+      // remove the social media app to array if it's unchecked
+      setFollow(follow.filter((follow) => follow !== followName));
     }
   };
   const handleEducationSelectChange = (e) => {
@@ -205,6 +275,7 @@ export default function RegistrationForm() {
     }
   };
   const handleFeecalculations = () => {
+
     // console.log("feedeatisl", feedetails)
     function validateFeedetails(feedetails) {
       const admissionFeeExists = feedetails.some((item) => item.feetype === "Admission Fee");
@@ -238,6 +309,7 @@ export default function RegistrationForm() {
             feewithouttax: 0,
             feetax: 0,
           };
+
           admissionobject.id = feedetails[i].id;
           admissionobject.feetype = "Admission Fee";
           admissionobject.feewithtax = feedetails[i].totalamount;
@@ -326,7 +398,10 @@ export default function RegistrationForm() {
       handleNext();
     }
     else {
+
+
       alert("The fee should contain both 'Admission Fee' and 'fee'.");
+
     }
   };
   useEffect(() => {
@@ -358,13 +433,28 @@ export default function RegistrationForm() {
         setAmount("")
 
       }
-
-
-
     }
   }, [feetype])
   const handleFeeDetails = (e) => {
+
+
+    if (!feetype) {
+      seterrorsState((prev) => ({ ...prev, feetype: "please select a feetype" }))
+      return false;
+    }
+    if (!amount) {
+      seterrorsState((prev) => ({ ...prev, amount: "please enter a amount" }))
+      return false;
+    }
+
+    if (!discount) {
+      seterrorsState((prev) => ({ ...prev, discount: "please enter  a discount" }))
+      return false;
+    }
+
+
     e.preventDefault();
+
     let save = true;
     if (feetype === "fee") {
       let course = getcourses.filter((course) => course.course_name === courses && course.course_package === coursepackage)
@@ -438,105 +528,690 @@ export default function RegistrationForm() {
   //   }
   // }, [admissiondate, branch]);
 
+  // Date functionality------------------------------------------------------------------------
+
+
+
+
+
+
+
+
   const [activeStep, setActiveStep] = React.useState(0);
   /////////////------------------validations-------------------------------
-  const handleBasicDetails = () => {
-    if (!name) {
-      alert("please enter the name");
-      return;
-    }
 
-    if (!email) {
-      alert("please  enter email id");
-      return;
-    } else {
-      const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-      if (!emailPattern.test(email)) {
-        alert("Invalid Email Address");
-        return;
-        // errors.email = 'Invalid email address';
+
+  const [errorsState, seterrorsState] = useState({})
+
+
+
+  const currentDate = new Date().toISOString().split('T')[0];
+
+
+  console.log("name should", errorsState);
+
+
+  useEffect(() => {
+
+
+    if (name && name.length >= 3) {
+      seterrorsState((prev) => ({
+        ...prev,
+        name: ""
+      }))
+    }
+    if (email) {
+      const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+      if (emailPattern.test(email)) {
+        seterrorsState((prev) => ({
+          ...prev,
+          email: ""
+        }))
       }
     }
+    if (mobilenumber && mobilenumber.length == 10) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          mobilenumber: ""
+        }
+      ))
+    }
+
+    if (birthdate) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          birthdate: ""
+        }
+      ))
+    }
+
+    if (parentsname && parentsname.length >= 3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          parentsname: ""
+        }
+      ))
+    }
+    if (parentsnumber && parentsnumber.length == 10) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          parentsnumber: ""
+        }
+      ))
+
+    }
+    if (relation) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          relation: ""
+        }
+      ))
+
+
+    }
+    if (gender) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          gender: ""
+        }
+      ))
+
+    }
+    if (maritalstatus) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          maritalstatus: ""
+        }
+      ))
+    }
+
+    if (college && college.length >= 3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          college: ""
+        }));
+
+    }
+
+    if (zipcode && zipcode.length == 6) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          zipcode: ""
+        }
+      ))
+    }
+
+    if (country && country.length >= 3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          country: ""
+        }
+      ))
+
+    }
+
+    if (state && state.length >= 3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          state: ""
+        }
+      ))
+
+    }
+    if (native && native.length >= 3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          native: ""
+        }
+      ))
+
+    }
+
+    if (area && area.length >= 3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          area: ""
+        }
+      ))
+
+    }
+
+
+    if (whatsappno && whatsappno.length == 10) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          whatsappno: ""
+        }
+      ))
+
+    }
+
+    if (educationtype) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          educationtype: ""
+        }
+      ))
+    }
+
+    if (marks && marks.length == 2) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          marks: ""
+        }
+      ))
+
+    }
+
+    if (academicyear && academicyear.length == 4) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          academicyear: ""
+        }
+      ))
+    }
+
+    if (enquirydate) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          enquirydate: ""
+        }
+      ))
+    }
+
+    if (enquirytakenby && enquirytakenby.length >= 3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          enquirytakenby: ""
+        }
+      ))
+    }
+
+    if (coursepackage) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          coursepackage: ""
+        }
+      ))
+    }
+    if (courses) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          courses: ""
+        }
+      ))
+    }
+
+    if (leadsource) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          leadsource: ""
+        }
+      ))
+    }
+
+    if (branch) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          branch: ""
+        }
+      ))
+    }
+    if (modeoftraining) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          modeoftraining: ""
+        }
+      ))
+    }
+    if (admissiondate) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          admissiondate: ""
+        }
+      ))
+    }
+
+    if (validitystartdate) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          validitystartdate: ""
+        }
+      ))
+    }
+
+    if (validityenddate) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          validityenddate: ""
+        }
+      ))
+    }
+
+
+    if (feetype) {
+      seterrorsState((prev) => ({ ...prev, feetype: "" }))
+    }
+
+    if (amount) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          amount: ""
+        }
+      ))
+    }
+    if (discount) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          discount: ""
+        }
+      ))
+    }
+
+    if (admissionremarks && admissionremarks.length >3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          admissionremarks: ""
+        }
+      ))
+      
+    }
+
+
+    // if(studentImage){
+    //   const maxSizeInBytes = 45 * 1024; 
+    //   if(studentImage.size < maxSizeInBytes){
+    //     seterrorsState((prev) => (
+    //       {
+    //      ...prev,
+    //         studentImage: ""
+    //       }
+    //     ))
+    //   }
+    // }
+
+    // if(studentImage){
+    //   seterrorsState((prev) => ({
+    //     ...prev,
+    //     studentImage:"",
+    //   }))
+    // }
+
+
+
+  }, [name, email, mobilenumber, birthdate, parentsname, parentsnumber, relation, gender, college,
+    maritalstatus, zipcode, country, state, native, area, whatsappno, educationtype, marks, academicyear,
+    enquirydate, enquirytakenby, coursepackage, courses, leadsource, branch, modeoftraining, admissiondate, validitystartdate,
+    validityenddate, feetype, amount, discount,admissionremarks,])
+
+
+
+    
+
+  const handleBasicDetails = () => {
+ 
+    // if (!regex.test(user.fullname)) {
+    //   alert("Please enter a valid full name ");
+    //   return;
+    // }
+
+    if (!name) {
+      seterrorsState((prev) => ({ ...prev, name: "Full Name required" }))
+      return false;
+    }
+   
+    else if (name.length < 3) {
+      seterrorsState((prev) => ({ ...prev, name: "Name should be at least 3 characters" }))
+      return false;
+    }
+
+    else if(name.length>0){
+      const regex = /^[A-Za-z\s]+$/;
+      if(!regex.test(name)){
+        seterrorsState((prev) => ({...prev, name: "Please enter a valid full name" }))
+         return false;
+      }
+    }
+    
+
+    if (!email) {
+      seterrorsState((prev) => ({ ...prev, email: "Email required" }))
+      return false;
+    }
+
+    else {
+      const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+      if (!emailPattern.test(email)) {
+        seterrorsState((prev) => ({ ...prev, email: "Invalid email" }))
+        return false;
+      }
+    }
+
     if (!mobilenumber) {
-      alert("please enter mobilenumber");
-      return;
-    } else {
+      seterrorsState((prev) => ({ ...prev, mobilenumber: "Please enter moblie number" }))
+      return false;
+    }
+    else {
       if (mobilenumber.length != 10) {
-        alert("incorrect mobile number");
-        return;
+        seterrorsState((prev) => ({ ...prev, mobilenumber: "Enter vaild moblie number" }))
+        return false;
       }
     }
     if (!birthdate) {
-      alert("please  enter Date of birth");
-      return;
-    }
-    handleNext();
-  };
-  const handleStudentDetails = () => {
-    if (!parentsname) {
-      alert("please enter parent's name");
-      return;
+      seterrorsState((prev) => ({ ...prev, birthdate: "Birthdate required" }))
+      return false;
     }
 
-    if (!parentsnumber) {
-      alert("please enter parent's mobilenumber");
-      return;
-    } else {
-      if (parentsnumber.length != 10) {
-        alert("incorrect  parent's mobile number");
-        return;
+    handleNext();
+
+  };
+
+
+
+  const handleStudentDetails = () => {
+
+   
+
+
+    if (!parentsname) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          parentsname: "Enter the Parent name"
+        }
+      ))
+      return false;
+    }
+  
+    else if (parentsname.length < 3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          parentsname: "Parent name must be at least 3 characters"
+        }
+      ))
+      return false;
+    }
+    else if(parentsname.length>0){
+      const regex = /^[A-Za-z\s]+$/;
+      if(!regex.test(parentsname)){
+        seterrorsState((prev) => ({...prev, parentsname: "Please enter a valid parentsname" }))
+         return false;
       }
     }
 
-    if (!gender) {
-      alert("please enter gender");
-      return;
+    if (!parentsnumber) {
+      seterrorsState((prev) => (
+        {
+        ...prev,
+          parentsnumber: "Enter the Parent number"
+        }
+      ))
+      return false;
     }
-    if (!maritalstatus) {
-      alert("please enter marital status");
-      return;
+    else if (parentsnumber.length!= 10) {
+      seterrorsState((prev) => (
+        {
+      ...prev,
+          parentsnumber: "Parent number must be 10 digits"
+        }
+      ))
+      return false;
     }
-    if (!college) {
-      alert("please enter college name");
-      return;
+    if(!relation){
+      seterrorsState((prev) => (
+        {
+      ...prev,
+      relation: "Please select a relation parent"
+        }
+      ))
+      return false;
+
     }
+
+    if(!gender){
+      seterrorsState((prev) => (
+        {
+      ...prev,
+      gender: "Please Select the gender"
+        }
+      ))
+      return false;
+
+    }
+
+    if(!maritalstatus){
+      seterrorsState((prev) => (
+        {
+      ...prev,
+      maritalstatus: "Please Select the maritalstatus"
+        }
+      ))
+      return false;
+
+    }
+
+    
+    if(!college){
+      seterrorsState((prev) => (
+        {
+    ...prev,
+    college:"College name is required."
+          })); 
+          return false;
+    }
+
+
+    else if(college.length<3){
+      seterrorsState((prev) => (
+        {
+    ...prev,
+    college:"College name must be 3 charaters."
+          })); 
+          return false;
+    }
+    else if(college.length>0){
+      const regex = /^[A-Za-z\s]+$/;
+      if(!regex.test(college)){
+        seterrorsState((prev) => ({...prev, college: "Please enter a valid college" }))
+         return false;
+      }
+    }
+
+
+
+
     handleNext();
   };
 
   const handleStudentContactDetails = () => {
-    if (!country) {
-      alert("please enter country");
-      return;
-    }
-    if (!state) {
-      alert("please  enter State");
-      return;
-    }
-    if (!area) {
-      alert("please enter area");
-      return;
-    }
-    if (!native) {
-      alert("please enter Native place");
-      return;
-    }
+
     if (!zipcode) {
-      alert("please enter zipcode");
-      return;
+      seterrorsState((prev) => ({ ...prev, zipcode: "Enter the Zipcode" }))
+      return false;
+    }
+    else if (zipcode.length != 6) {
+      seterrorsState((prev) => ({ ...prev, zipcode: "Zipcode must be 6 numbers" }))
+      return false;
+    }
+
+
+    if (!country) {
+      seterrorsState((prev) => ({ ...prev, country: "Enter the Country" }))
+      return false;
+    } 
+    else if (country.length < 3) {
+      seterrorsState((prev) => ({ ...prev, country: "Country name must be 3 Charaters" }))
+      return false;
+    }
+    else if(country.length>0){
+      const regex = /^[A-Za-z\s]+$/;
+      if(!regex.test(country)){
+        seterrorsState((prev) => ({...prev, country: "Please enter a valid country name" }))
+         return false;
+      }
+    }
+    
+
+
+    if (!state) {
+      seterrorsState((prev) => ({ ...prev, state: "Enter the state name" }))
+      return false;
+    }
+    else if (state.length < 3) {
+      seterrorsState((prev) => ({ ...prev, state: "State name must be 3 Charaters" }))
+      return false;
+    }
+    else if(state.length>0){
+      const regex = /^[A-Za-z\s]+$/;
+      if(!regex.test(state)){
+        seterrorsState((prev) => ({...prev, state: "Please enter a valid state" }))
+         return false;
+      }
+    }
+
+
+    if (!native) {
+      seterrorsState((prev) => ({ ...prev, native: "please enter Native place" }))
+      return false;
+    }
+    else if (native.length < 3) {
+      seterrorsState((prev) => ({ ...prev, native: " Native place must be 3 Charaters" }))
+      return false;
+    }
+    else if(native.length>0){
+      const regex = /^[A-Za-z\s]+$/;
+      if(!regex.test(native)){
+        seterrorsState((prev) => ({...prev, native: "Please enter a valid native place" }))
+         return false;
+      }
+    }
+
+
+
+    if (!area) {
+      seterrorsState((prev) => ({ ...prev, area: "please enter area name" }))
+      return false;
+    }
+    else if (area.length < 3) {
+      seterrorsState((prev) => ({ ...prev, area: " area name must be 3 Charaters" }))
+      return false;
+    }
+    else if(area.length>0){
+      const regex = /^[A-Za-z\s]+$/;
+      if(!regex.test(area)){
+        seterrorsState((prev) => ({...prev, area: "*Please enter a valid area" }))
+         return false;
+      }
     }
 
     if (!whatsappno) {
-      alert("please enter whatsappno");
-      return;
-    } else {
-      if (whatsappno.length != 10) {
-        alert("incorrect whatsappno ");
-        return;
-      }
+      seterrorsState((prev) => ({ ...prev, whatsappno: "please enter whatsapp number" }))
+      return false;
     }
+    else if (whatsappno.length != 10) {
+      seterrorsState((prev) => ({ ...prev, whatsappno: "whatsapp number must be 10 numbers" }))
+      return false;
+    }
+
+
     handleNext();
   };
   const handleEducationDetails = () => {
+
+    if (!educationtype) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          educationtype: "Please Select the educationtype"
+        }
+      ))
+      return false;
+    }
+
+    if (educationtype === "others") {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          educationtype: "Please Enter your educationtype  in the following field",
+        }
+      ))
+      return false;
+    }
+
+    if (!marks) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          marks: "Please enter the percentage"
+        }
+      ))
+      return false;
+    }
+    else if (marks.length !=2) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          marks: "Percentage should be between 0 to 100"
+        }
+      ))
+      return false;
+    }
+
+    if (!academicyear) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          academicyear: "Please enter the academicyear"
+        }
+      ))
+      return false;
+    }
+    else if (academicyear.length !=4) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          academicyear: "academicyear length should be 4 numbers"
+        }
+      ))
+      return false;
+    }
+
+
+
+
+
+
     if (!educationtype) {
       alert("please enter educationtype");
       return;
@@ -570,7 +1245,7 @@ export default function RegistrationForm() {
         const { width, height } = await getImageSize(resizedImage);
         const sizeInKB = (resizedImage.size / 1024).toFixed(2);
         console.log('Resized Image Dimensions:', { width, height });
-        console.log('Resized Image Size:', sizeInKB, 'KB');
+        console.log('Resized Image Size:', sizeInKB, 'KB');                                        
         setSelectedFile(resizedImage);
 
       } catch (error) {
@@ -641,13 +1316,26 @@ export default function RegistrationForm() {
   };
 
   const handlePhoto = () => {
-    if (!studentImage) {
-      alert("Please select an image to upload");
-      return;
-    }
 
-    // const maxSizeInBytes = 45 * 1024; // 40 KB in bytes
-    // if (studentImage.size > maxSizeInBytes) {
+
+    const maxSizeInBytes = 45 * 1024; // 40 KB in bytes
+    if(!studentImage?.size){
+      // alert("there is no image to upload")
+
+      seterrorsState((prev)=>({
+        ...prev,
+        studentImage:"There is no Image to Upload"
+      }))
+      return false;
+    }
+    else if(studentImage?.size > maxSizeInBytes){
+      seterrorsState((prev)=>({
+     ...prev,
+        studentImage:"Image size should be less than 45KB"
+      }))
+      return false;
+    }
+    // if (studentImage?.size > maxSizeInBytes) {
     //   alert("Image size is too large. Maximum allowed size is 45 KB");
     //   return;
     // }
@@ -658,33 +1346,95 @@ export default function RegistrationForm() {
   console.log("studentImage", studentImage)
 
   // ----photo end--------------------------------------------
+
   const handleEnquirydetails = () => {
+
     if (!enquirydate) {
-      alert("please enter enquirydate");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          enquirydate: "Please select enquirydate"
+        }
+      ))
+      return false;
     }
+
     if (!enquirytakenby) {
-      alert("please  enter enquirytakenby");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          enquirytakenby: "Please Enter the name of enquirytakenby"
+        }
+      ))
+      return false;
     }
+    if (enquirytakenby.length < 3) {
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          enquirytakenby: " name of enquirytakenby atleast 3 characters "
+        }
+      ))
+      return false;
+    }
+
     if (!coursepackage) {
-      alert("please enter coursepackage");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          coursepackage: "Please Select a coursepackage"
+        }
+      ))
+      return false;
     }
+
+
     if (!courses) {
-      alert("please enter courses");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          courses: "Please Select a courses"
+        }
+      ))
+      return false;
     }
+
     if (!leadsource) {
-      alert("please enter leadsource");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          leadsource: "Please Select a leadsource"
+        }
+      ))
+      return false;
     }
-    if (
-      leadsource[0].source.toLowerCase().split(' ').filter(Boolean).join(' ') == "student referral" ||
-      leadsource[0].source.toLowerCase().split(' ').filter(Boolean).join(' ') == "employee referral"
-    ) {
-      setLeadSource([CustomLeadSource]);
-    }
+
+    // if (!enquirydate) {
+    //   alert("please enter enquirydate");
+    //   return;
+    // }
+    // if (!enquirytakenby) {
+    //   alert("please  enter enquirytakenby");
+    //   return;
+    // }
+    // if (!coursepackage) {
+    //   alert("please enter coursepackage");
+    //   return;
+    // }
+    // if (!courses) {
+    //   alert("please enter courses");
+    //   return;
+    // }
+    // if (!leadsource) {
+    //   alert("please enter leadsource");
+    //   return;
+    // }
+    // if (
+    //   leadsource[0].source.toLowerCase().split(' ').filter(Boolean).join(' ') == "student referral" ||
+    //   leadsource[0].source.toLowerCase().split(' ').filter(Boolean).join(' ') == "employee referral"
+    // ) {
+    //   setLeadSource([CustomLeadSource]);
+    // }
 
     handleNext();
   };
@@ -700,32 +1450,61 @@ export default function RegistrationForm() {
     setValidityEndDate(formattedFutureDate)
 
   }, [validitystartdate])
+
+
+
   const handleAdmissiondetails = () => {
 
     if (!branch) {
-      alert("please enter branch");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          branch: "Please select a branch"
+        }
+      ))
+      return false;
     }
+
     if (!modeoftraining) {
-      alert("please  enter modeoftraining");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          modeoftraining: "Please select a mode of training"
+        }
+      ))
+      return false;
     }
-    // if (!admissionstatus) {
-    //   alert("please enter admissionstatus");
-    //   return;
-    // }
+
     if (!admissiondate) {
-      alert("please enter Native place");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          admissiondate: "Please select a admission date"
+        }
+      ))
+      return false;
     }
+
     if (!validitystartdate) {
-      alert("please enter validitystartdate");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          validitystartdate: "Please select a validity start date"
+        }
+      ))
+      return false;
     }
+
     if (!validityenddate) {
-      alert("please enter validityenddate ");
-      return;
+      seterrorsState((prev) => (
+        {
+          ...prev,
+          validityenddate: "Please select a validity end date"
+        }
+      ))
+      return false;
     }
+
     handleNext();
   };
 
@@ -740,6 +1519,8 @@ export default function RegistrationForm() {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+
   useEffect(() => {
     setuserid(user.id);
   }, [user]);
@@ -835,7 +1616,10 @@ export default function RegistrationForm() {
         alert("Please enter assets");
         return;
       }
-
+      if (!follow) {
+        alert("Please Follow for More");
+        return;
+      }
       // Create the data object with the form fields
       let studentRegistrationdata = {
         name,
@@ -844,6 +1628,7 @@ export default function RegistrationForm() {
         parentsname,
         parentsnumber,
         birthdate,
+        relation,
         gender,
         maritalstatus,
         college,
@@ -1240,6 +2025,7 @@ export default function RegistrationForm() {
 
   return (
     <div className="main-container container">
+
       {/* <div>
       <form>
         <label>
@@ -1259,6 +2045,7 @@ export default function RegistrationForm() {
       <button onClick={handleUpload}>Upload</button>
     </div> */}
       <div className="main-sub-container ">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
         <Typography>
           <h5 className="mt-3"> Registration form</h5>
         </Typography>
@@ -1306,6 +2093,10 @@ export default function RegistrationForm() {
                       value={name}
                       variant="standard"
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.name && <div>{errorsState.name}</div>}
+                    </div>
+
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
@@ -1317,6 +2108,10 @@ export default function RegistrationForm() {
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.email && <div>{errorsState.email}</div>}
+                    </div>
+
                   </div>
                 </div>
                 <div className="row">
@@ -1330,6 +2125,9 @@ export default function RegistrationForm() {
                       onChange={(e) => setMobileNumber(e.target.value)}
                       value={mobilenumber}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.mobilenumber && <div>{errorsState.mobilenumber}</div>}
+                    </div>
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
@@ -1346,9 +2144,19 @@ export default function RegistrationForm() {
                       InputLabelProps={{
                         shrink: true,
                       }}
+
+                      inputProps={{
+                        max: getCurrentDate(), // Set the max attribute to the current date
+                      }}
+
+
                       onChange={(e) => setBirthDate(e.target.value)}
                       value={birthdate}
+                    
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.birthdate && <div>{errorsState.birthdate}</div>}
+                    </div>
                   </div>
                   {/* <div>
                     <label htmlFor="datePicker">Date:</label>
@@ -1400,6 +2208,10 @@ export default function RegistrationForm() {
                       onChange={(e) => setParentsName(e.target.value)}
                       value={parentsname}
                     />
+
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.parentsname && <div>{errorsState.parentsname}</div>}
+                    </div>
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
                     <TextField
@@ -1413,9 +2225,38 @@ export default function RegistrationForm() {
                       onChange={(e) => SetParentsNumber(e.target.value)}
                       value={parentsnumber}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.parentsnumber && <div>{errorsState.parentsnumber}</div>}
+                    </div>
                   </div>
                 </div>
                 <div className="row">
+                  <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
+                    <FormControl variant="standard" className="w-75">
+                      <InputLabel>
+                        <span className="label-family">
+                          Relation<span>*</span>
+                        </span>
+                      </InputLabel>
+                      <Select
+                        id="relation"
+                        name="relation"
+                        required
+                        onChange={(e) => setRelation(e.target.value)}
+                        value={relation}
+                      >
+                        {/* <MenuItem value="select"> ---select---</MenuItem> */}
+                        <MenuItem value="Father">Father</MenuItem>
+                        <MenuItem value="Mother">Mother</MenuItem>
+                        <MenuItem value="Brother">Brother</MenuItem>
+                        <MenuItem value="Brother">Sister</MenuItem>
+                        <MenuItem value="Brother">Others</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.relation && <div>{errorsState.relation}</div>}
+                    </div>
+                  </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6  ">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
@@ -1430,13 +2271,19 @@ export default function RegistrationForm() {
                         onChange={(e) => setGender(e.target.value)}
                         value={gender}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+                        {/* <MenuItem value="select"> ---select---</MenuItem> */}
                         <MenuItem value="male">Male</MenuItem>
                         <MenuItem value="female">Female</MenuItem>
                         <MenuItem value="others">Others</MenuItem>
                       </Select>
+                      <div style={{ color: 'red' }}>
+                        {errorsState && errorsState.gender && <div>{errorsState.gender}</div>}
+                      </div>
                     </FormControl>
                   </div>
+                </div>
+
+                <div className="row">
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
                       <InputLabel>
@@ -1451,15 +2298,17 @@ export default function RegistrationForm() {
                         onChange={(e) => setMaritalStatus(e.target.value)}
                         value={maritalstatus}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+                        {/* <MenuItem value="select"> ---select---</MenuItem> */}
                         <MenuItem value="single">Single</MenuItem>
                         <MenuItem value="married">Married</MenuItem>
                       </Select>
                     </FormControl>
-                  </div>
-                </div>
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.maritalstatus && <div>{errorsState.maritalstatus}</div>}
+                    </div>
 
-                <div className="row">
+
+                  </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
                       label={
@@ -1474,6 +2323,11 @@ export default function RegistrationForm() {
                       value={college}
                       variant="standard"
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.college && <div>{errorsState.college}</div>}
+                    </div>
+
+
                   </div>
                 </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
@@ -1515,13 +2369,16 @@ export default function RegistrationForm() {
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
                       label={<span className="label-family">Pin Code</span>}
-                      type="text"
+                      type="number"
                       variant="standard"
                       className=" w-75"
                       required
                       onChange={(e) => setZipcode(e.target.value)}
                       value={zipcode}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.zipcode && <div>{errorsState.zipcode}</div>}
+                    </div>
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <TextField
@@ -1533,6 +2390,9 @@ export default function RegistrationForm() {
                       onChange={(e) => setCountry(e.target.value)}
                       value={country}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.country && <div>{errorsState.country}</div>}
+                    </div>
                   </div>
                 </div>
 
@@ -1547,6 +2407,9 @@ export default function RegistrationForm() {
                       onChange={(e) => setState(e.target.value)}
                       value={state}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.state && <div>{errorsState.state}</div>}
+                    </div>
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
@@ -1558,6 +2421,9 @@ export default function RegistrationForm() {
                       onChange={(e) => setNative(e.target.value)}
                       value={native}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.native && <div>{errorsState.native}</div>}
+                    </div>
                   </div>
                 </div>
                 <div className="row">
@@ -1571,6 +2437,9 @@ export default function RegistrationForm() {
                       onChange={(e) => setArea(e.target.value)}
                       value={area}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.area && <div>{errorsState.area}</div>}
+                    </div>
                   </div>
 
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
@@ -1585,6 +2454,9 @@ export default function RegistrationForm() {
                       onChange={(e) => setWhatsAppNo(e.target.value)}
                       value={whatsappno}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.whatsappno && <div>{errorsState.whatsappno}</div>}
+                    </div>
                   </div>
                 </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
@@ -1637,7 +2509,7 @@ export default function RegistrationForm() {
                         onChange={handleEducationSelectChange}
                         value={educationtype}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+                        {/* <MenuItem value="select"> ---select---</MenuItem> */}
 
                         <MenuItem value="btech">B.Tech</MenuItem>
                         <MenuItem value="degree">Degree</MenuItem>
@@ -1645,6 +2517,10 @@ export default function RegistrationForm() {
                         <MenuItem value="ssc">SSC</MenuItem>
                         <MenuItem value="others">Others</MenuItem>
                       </Select>
+
+                      <div style={{ color: 'red' }}>
+                        {errorsState && errorsState.educationtype && <div>{errorsState.educationtype}</div>}
+                      </div>
                       {educationOthersOption && (
                         <div className="mt-3">
                           <TextField
@@ -1672,6 +2548,10 @@ export default function RegistrationForm() {
                       onChange={(e) => setMarks(e.target.value)}
                       value={marks}
                     />
+
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.marks && <div>{errorsState.marks}</div>}
+                    </div>
                   </div>
                   <div className="col-12 col-md-6 col-lg-4 col-xl-4 ">
                     <TextField
@@ -1682,9 +2562,16 @@ export default function RegistrationForm() {
                       variant="standard"
                       className="mar w-75"
                       required
-                      onChange={(e) => setAcademicyear(e.target.value)}
+                      // onChange={(e) => setAcademicyear(e.target.value)}
+
+                      onChange={(e) => handleAcademicYearChange(e.target.value)}
                       value={academicyear}
                     />
+
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.academicyear && <div>{errorsState.academicyear}</div>}
+                    </div>
+
                   </div>
                 </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
@@ -1727,6 +2614,7 @@ export default function RegistrationForm() {
                     type="file"
                     onChange={handleFileChange}
                   />
+                  
 
                   {studentImage && (
                     <div style={{ marginTop: '10px' }}>
@@ -1740,6 +2628,12 @@ export default function RegistrationForm() {
                     </div>
                   )}
                 </div>
+
+                <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.studentImage && <div>{errorsState.studentImage}</div>}
+                </div>
+                
+
                 <Box sx={{ mb: 2, mt: 2 }}>
                   <div>
                     <Button
@@ -1760,6 +2654,7 @@ export default function RegistrationForm() {
                     >
                       Continue
                     </Button>
+                    
                   </div>
                 </Box>
               </form>
@@ -1785,9 +2680,15 @@ export default function RegistrationForm() {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      inputProps={{
+                        max: getCurrentDate(), // Set the max attribute to the current date
+                      }}
                       onChange={(e) => setEnquiryDate(e.target.value)}
                       value={enquirydate}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.enquirydate && <div>{errorsState.enquirydate}</div>}
+                    </div>
                   </div>
 
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
@@ -1806,8 +2707,14 @@ export default function RegistrationForm() {
                           variant="standard"
                           required
                         />
+
                       )}
+                      <div style={{ color: 'red' }}>
+                        {errorsState && errorsState.enquirytakenby && <div>{errorsState.enquirytakenby}</div>}
+                      </div>
                     </FormControl>
+
+
                   </div>
                 </div>
                 <div className="row ">
@@ -1825,7 +2732,10 @@ export default function RegistrationForm() {
                         onChange={(e) => setCoursepakage(e.target.value)}
                         value={coursepackage}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+
+
+
+                        {/* <MenuItem value="select"> ---select---</MenuItem> */}
                         {coursepackages &&
                           coursepackages.map((item, index) => (
                             <MenuItem
@@ -1836,7 +2746,11 @@ export default function RegistrationForm() {
                             </MenuItem>
                           ))}
                       </Select>
+                      <div style={{ color: 'red' }}>
+                        {errorsState && errorsState.coursepackage && <div>{errorsState.coursepackage}</div>}
+                      </div>
                     </FormControl>
+
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <FormControl variant="standard" className="w-75">
@@ -1852,7 +2766,8 @@ export default function RegistrationForm() {
                         onChange={(e) => setCourses(e.target.value)}
                         value={courses}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+
+                        {/* <MenuItem value="select"> ---select---</MenuItem> */}
                         {getcourses &&
                           getcourses.map((item, index) => (
                             <MenuItem key={item.id} value={item.course_name}>
@@ -1860,7 +2775,11 @@ export default function RegistrationForm() {
                             </MenuItem>
                           ))}
                       </Select>
+                      <div style={{ color: 'red' }}>
+                        {errorsState && errorsState.courses && <div>{errorsState.courses}</div>}
+                      </div>
                     </FormControl>
+
                   </div>
                 </div>
                 <div className="row ">
@@ -1878,7 +2797,7 @@ export default function RegistrationForm() {
                         onChange={handleLeadSourceSelectChange}
                         value={leadsource.source}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+                        {/* <MenuItem value="select"> ---select---</MenuItem> */}
                         {leadsources &&
                           leadsources.map((item, index) => (
                             <MenuItem key={item.id} value={item.leadsource}>
@@ -1923,6 +2842,10 @@ export default function RegistrationForm() {
                         </div>
                       )}
                     </FormControl>
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.leadsource && <div>{errorsState.leadsource}</div>}
+                    </div>
+
                   </div>
                 </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
@@ -1975,7 +2898,7 @@ export default function RegistrationForm() {
                         onChange={(e) => setBranch(e.target.value)}
                         value={branch}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+                        {/* <MenuItem value="select"> ---select---</MenuItem> */}
                         {branches &&
                           branches.map((item, index) => (
                             <MenuItem key={item.id} value={item.branch_name}>
@@ -1984,6 +2907,9 @@ export default function RegistrationForm() {
                           ))}
                       </Select>
                     </FormControl>
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.branch && <div>{errorsState.branch}</div>}
+                    </div>
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                     <FormControl variant="standard" className="w-75">
@@ -1999,11 +2925,16 @@ export default function RegistrationForm() {
                         onChange={(e) => setModeOfTraining(e.target.value)}
                         value={modeoftraining}
                       >
-                        <MenuItem value="select"> ---select---</MenuItem>
+                        {/* <MenuItem value="select"> ---select---</MenuItem> */}
                         <MenuItem value="online">Online</MenuItem>
                         <MenuItem value="offline"> Offline</MenuItem>
                       </Select>
                     </FormControl>
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.modeoftraining && <div>{errorsState.modeoftraining}</div>}
+                    </div>
+
+
                   </div>
                 </div>
                 <div className="row">
@@ -2019,9 +2950,16 @@ export default function RegistrationForm() {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      inputProps={{
+                        max: getCurrentDate(), // Set the max attribute to the current date
+                      }}
                       onChange={(e) => setAdmissionDate(e.target.value)}
                       value={admissiondate}
                     />
+
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.admissiondate && <div>{errorsState.admissiondate}</div>}
+                    </div>
                     {/* <FormControl variant="standard" className="w-75">
                       <InputLabel>
                         Admission Status<span> *</span>
@@ -2053,9 +2991,16 @@ export default function RegistrationForm() {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      inputProps={{
+                        min: getAdmissionBlocker(), // Set the max attribute to the current date
+                      }}
                       onChange={(e) => setValidityStartDate(e.target.value)}
                       value={validitystartdate}
                     />
+
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.validitystartdate && <div>{errorsState.validitystartdate}</div>}
+                    </div>
                   </div>
                   {/* <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
@@ -2085,9 +3030,16 @@ export default function RegistrationForm() {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      inputProps={{
+                        min: getCurrentDate(), // Set the max attribute to the current date
+                      }}
                       onChange={(e) => setValidityEndDate(e.target.value)}
                       value={validityenddate}
                     />
+
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.validityenddate && <div>{errorsState.validityenddate}</div>}
+                    </div>
                   </div>
                 </div>
                 <Box sx={{ mb: 2, mt: 2 }}>
@@ -2151,11 +3103,18 @@ export default function RegistrationForm() {
                         onChange={(e) => setfeetype(e.target.value)}
                         value={feetype}
                       >
-                        <MenuItem value="select">---select---</MenuItem>
+                        {/* <MenuItem value="select">---select---</MenuItem> */}
                         <MenuItem value="Admission Fee">Admission Fee</MenuItem>
                         <MenuItem value="fee">Fee</MenuItem>
                       </Select>
                     </FormControl>
+
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.feetype && <div>{errorsState.feetype}</div>}
+                    </div>
+
+
+
                   </div>
                   <div className="col-12 col-md-6 col-lg-6 col-xl-6 ">
                     <TextField
@@ -2170,6 +3129,9 @@ export default function RegistrationForm() {
                       onChange={(e) => setAmount(e.target.value)}
                       value={amount}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.amount && <div>{errorsState.amount}</div>}
+                    </div>
                   </div>
                 </div>
                 <div className="row">
@@ -2183,6 +3145,9 @@ export default function RegistrationForm() {
                       onChange={(e) => setDiscount(e.target.value)}
                       value={discount}
                     />
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.discount && <div>{errorsState.discount}</div>}
+                    </div>
                   </div>
                 </div>
                 {/* <div className="row ">
@@ -2556,6 +3521,9 @@ export default function RegistrationForm() {
               </form>
             </StepContent>
           </Step>
+
+
+          {/* -------------------------------------others-------------------------------------------------------- */}
           <Step>
             <StepLabel>
               <Typography>
@@ -2575,7 +3543,13 @@ export default function RegistrationForm() {
                       onChange={(e) => setadmissionremarks(e.target.value)}
                       value={admissionremarks}
                     />
+
+                    <div style={{ color: 'red' }}>
+                      {errorsState && errorsState.admissionremarks && <div>{errorsState.admissionremarks}</div>}
+                    </div>
                   </div>
+
+
                 </div>
                 <br />
                 <label className="col-12 col-md-2 label">
@@ -2643,6 +3617,43 @@ export default function RegistrationForm() {
                     }
                     label="Course Material"
                   />
+                </div>
+                <label className="col-12 col-md-2 label">
+                  Follow us <span className="text-danger"> *</span>&nbsp;:
+                </label>
+                &nbsp;&nbsp;&nbsp;
+                <div className="col-9 col-md-5">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="Facebook"
+                        checked={follow.includes("Facebook")}
+                        onChange={handleFollowChange}
+                      />
+                    }
+                    label="Facebook"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="Instagram"
+                        checked={follow.includes("Instagram")}
+                        onChange={handleFollowChange}
+                      />
+                    }
+                    label="Instagram"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="Twitter"
+                        checked={follow.includes("Twitter")}
+                        onChange={handleFollowChange}
+                      />
+                    }
+                    label="Twitter"
+                  />
+
                 </div>
                 {/* <select
                     className="col-9 col-md-5"
@@ -2816,7 +3827,12 @@ export default function RegistrationForm() {
                       <div className="col-12 col-md-6 col-lg-6 col-xl-6">
                         Assets: {assets}
                       </div>
+                      <div className="col-12 col-md-6 col-lg-6 col-xl-6">
+                        Follow: {follow}
+                      </div>
+
                     </div>
+
 
                     <div className="col-12 text-end ">
                       <Button

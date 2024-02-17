@@ -11,6 +11,8 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 
 import TableHead from "@mui/material/TableHead";
+// import { FaRegIdCard } from "react-icons/fa";
+import BadgeIcon from '@mui/icons-material/Badge';
 
 import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
@@ -53,7 +55,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 // import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { CSVLink } from "react-csv";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { LastPage } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
@@ -94,6 +96,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const StudentData = () => {
+  const navigate = useNavigate();
   const { branches } = useBranchContext();
   const { students, dispatch } = useStudentsContext();
 
@@ -337,12 +340,15 @@ const StudentData = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-  ////////////
+  ////////////  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -447,6 +453,7 @@ const StudentData = () => {
     </div> */}
 
       <div className="studetdetails   mt-3">
+        <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
         <h5 className=" mt-3 text-center"> Student Data </h5>
 
         <div className="row mb-1 ps-1 ">
@@ -475,7 +482,14 @@ const StudentData = () => {
           <div className="col-12 col-md-6 col-lg-4 col-xl-4">
             <div className="d-flex justify-content-around">
               <p className="pt-3">
-                {recordCount}/{initialDataCount}{" "}
+
+                {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
+                  <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                ) : (
+                  <p>{recordCount}/{initialDataCount}{" "}</p>
+
+                )}
+                {/* {recordCount}/{initialDataCount}{" "} */}
               </p>
 
               <p>
@@ -491,6 +505,9 @@ const StudentData = () => {
                 </select>
               </p>
               <p>
+
+
+
                 <Button
                   id="demo-positioned-button"
                   aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -505,6 +522,12 @@ const StudentData = () => {
                     Filter
                   </button>
                 </Button>
+
+
+
+
+
+
                 <Menu
                   id="demo-positioned-menu"
                   aria-labelledby="demo-positioned-button"
@@ -758,7 +781,8 @@ const StudentData = () => {
                   </select>
                 </MenuItem>{" "}
               </div> */}
-                  <MenuItem className="d-flex justify-content-between">
+                  <div className="d-flex justify-content-between px-3
+                  ">
                     <button className="btn btn-color" onClick={filterreset}>
 
                       Clear
@@ -767,7 +791,7 @@ const StudentData = () => {
 
                       Save
                     </button>
-                  </MenuItem>
+                  </div>
                 </Menu>
               </p>
               <p>
@@ -844,6 +868,7 @@ const StudentData = () => {
                   </TableCell>
 
                   <TableCell className="table-cell-heading">Actions</TableCell>
+                  <TableCell className="table-cell-heading" style={{ width: "40px" }}>STUDENIDCARD</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -1040,6 +1065,7 @@ const StudentData = () => {
                           <div className="d-flex justify-content-evenly">
                             <NavLink to={`/studentdataview/${item.id}`}>
                               <VisibilityIcon
+                                titleAccess="view"
                                 style={{ width: "40px" }}
                                 className="icon-color"
                               />
@@ -1047,12 +1073,14 @@ const StudentData = () => {
 
                             <NavLink to={`/editstudent/${item.id}`}>
                               <EditIcon
+                                titleAccess="Edit"
                                 style={{ width: "40px" }}
                                 className="icon-color"
                               />
                             </NavLink>
                             <NavLink to={`/feeview/${item.id}`}>
                               <CurrencyRupeeIcon
+                                titleAccess="Fee"
                                 style={{ width: "40px" }}
                                 className="icon-color"
                               />
@@ -1070,6 +1098,7 @@ const StudentData = () => {
 
                             <NavLink to={`/studentApplicationprint/${item.id}`}>
                               <PrintIcon
+                                titleAccess="print"
                                 className="icon-color"
                                 style={{ width: "40px" }}
                               />
@@ -1112,6 +1141,14 @@ const StudentData = () => {
                               </DialogActions>
                             </Dialog>
                           </div>
+                        </TableCell>
+                        <TableCell>
+                          <NavLink to={`/getstudentidcard/${item.id}`}>
+                            <div style={{ fontSize: "25px", color: "#2a619d", cursor: "pointer", display: "flex", justifyContent: "center" }}>
+                              < BadgeIcon />
+                            </div>
+                          </NavLink>
+
                         </TableCell>
                       </TableRow>
                     );

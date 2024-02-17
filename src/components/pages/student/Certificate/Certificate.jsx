@@ -26,6 +26,10 @@ import axios from "axios";
 import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { GolfCourseSharp } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.blue,
@@ -46,8 +50,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+
+
 const Certificate = () => {
+
   const { students, dispatch } = useStudentsContext();
+  let totalcount;
+if(students.length>0){
+  totalcount = students.length;
+}
+
+
+
   const { getcourses } = useCourseContext();
   const { branches } = useBranchContext();
   const { users } = useUsersContext();
@@ -57,6 +71,30 @@ const Certificate = () => {
   const [courseEndDate, setcourseEndDate] = useState();
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   const [itemsPerPage, setrecordsPerPage] = useState(10);
+
+console.log("filteredData",filteredData);
+
+//{searching form total students}
+
+// const[totalstudentscount, settotalstudentscount] =useState(students)
+
+// // const totalstudents=students;
+
+// // const totalstudentscount = totalstudents.length;
+// // console.log("totalstudentscount",totalstudentscount);
+
+ 
+ 
+  // const handleStartDateChange = (event) => {
+  //   const selectedStartDate = event.target.value;
+  //   setcourseStartDate(selectedStartDate);
+  //   // Update the end date's min value to the selected start date
+  //   setcourseEndDate('');
+  // };
+  const fixedStartdate = courseStartDate;
+
+  const currentDate = new Date().toISOString().split('T')[0];
+
   useEffect(() => {
     if (users) {
       const filteruser = users.filter((user) => {
@@ -70,32 +108,26 @@ const Certificate = () => {
     setrecordsPerPage(e.target.value);
     setPage(1);
   };
+
   ////filters
   const [filterCriteria, setFilterCriteria] = useState({
+
     fromdate: "",
-
     todate: "",
-
     branch: "",
-
     course: "",
-
     enquirytakenby: "",
-
     search: "",
     certificate_Status: "",
   });
+
+
   const [dummyFilterCriteria, setDummyFilterCriteria] = useState({
     fromdate: "",
-
     todate: "",
-
     branch: "",
-
     course: "",
-
     enquirytakenby: "",
-
     search: "",
     certificate_Status: "",
   })
@@ -104,8 +136,10 @@ const Certificate = () => {
     const { name, value } = e.target;
 
     setDummyFilterCriteria({
-      ...dummyFilterCriteria, [name]: value
+      ...dummyFilterCriteria,
+      [name]: value
     });
+
     if (name == "search") {
       setFilterCriteria({
         ...filterCriteria, [name]: value
@@ -113,11 +147,12 @@ const Certificate = () => {
     }
   };
   const handleSave = (e) => {
-
-
     setFilterCriteria(dummyFilterCriteria);
 
   };
+
+
+
   useEffect(() => {
     if (students) {
       const filteredResults = students.filter((item) => {
@@ -172,6 +207,9 @@ const Certificate = () => {
       setFilteredData(filteredResults);
     }
   }, [students, filterCriteria]);
+
+
+  
   const filterreset = () => {
     setFilterCriteria({
       fromdate: "",
@@ -209,8 +247,12 @@ const Certificate = () => {
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   let records;
-  let initialDataCount;
+  
   let recordCount;
+
+  let initialDataCount;
+
+
   if (filteredData) {
     records = filteredData.slice(startIndex, endIndex);
     initialDataCount = filteredData.length;
@@ -220,7 +262,7 @@ const Certificate = () => {
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-  ////////////
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -229,46 +271,55 @@ const Certificate = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleRequest = (id) => {
     if (courseStartDate && courseEndDate) {
-      let certificate_status = [
-        {
-          courseStartDate: courseStartDate,
-          courseEndDate: courseEndDate,
-          certificateStatus: "request Submitted",
-        },
-      ];
-      const updatedData = {
-        certificate_status,
-      };
-      const uploadcontext = { certificate_status, id };
-      console.log("certificate_status", updatedData);
-      console.log("id", id);
-      axios
-        .put(
-          `${process.env.REACT_APP_API_URL}/certificatestatus/${id}`,
-          updatedData
-        )
-        .then((res) => {
-          if (res.data.updated) {
-            // alert("Certificate updated successfully");
-            dispatch({
-              type: "UPDATE_CERTIFICATE_STATUS",
-              payload: uploadcontext,
-            });
-          } else {
-            alert("Error please Try Again");
-          }
-        });
-      setcourseStartDate("");
-      setcourseEndDate("");
-    } else {
-      alert("enter course start and end dates");
+      if (courseStartDate < courseEndDate) {
+
+
+        let certificate_status = [
+          {
+            courseStartDate: courseStartDate,
+            courseEndDate: courseEndDate,
+            certificateStatus: "request Submitted",
+          },
+        ];
+        const updatedData = {
+          certificate_status,
+        };
+        const uploadcontext = { certificate_status, id };
+        console.log("certificate_status", updatedData);
+        console.log("id", id);
+        axios
+          .put(
+            `${process.env.REACT_APP_API_URL}/certificatestatus/${id}`,
+            updatedData
+          )
+          .then((res) => {
+            if (res.data.updated) {
+              // alert("Certificate updated successfully");
+              dispatch({
+                type: "UPDATE_CERTIFICATE_STATUS",
+                payload: uploadcontext,
+              });
+            } else {
+              alert("Error please Try Again");
+            }
+          });
+        setcourseStartDate("");
+        setcourseEndDate("");
+      } else {
+        alert("Enter vaild starting date and ending date")
+      }
     }
+
   };
+
+const navigate =useNavigate();
 
   return (
     <div className="container">
+          <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ml-2 ">Go Back</button>
       <div className=" main-certificate mt-3">
         <div className="certificate mt-2">
           <h5 className="mx-2 mt-3  text-center"> Certificate </h5>
@@ -298,7 +349,28 @@ const Certificate = () => {
             <div className="col-12 col-md-6 col-lg-4 col-xl-4 mt-1">
               <div className="d-flex justify-content-evenly">
                 <p className="mt-2">
-                  {recordCount}/{initialDataCount}
+
+                {/* {seraching count} */}
+
+
+                {totalcount && totalcount>0 && filterCriteria.search === "" && itemsPerPage <= totalcount ? (
+                    <p>{itemsPerPage}/{totalcount}{" "}</p>
+                  ) : (
+                    <p>{recordCount}/{totalcount}{" "}</p>
+                    
+                  )}
+
+
+
+
+
+
+                {/* {
+                  filterCriteria.search==""? <p>{itemsPerPage}/{totalstudentscount}</p>:<p>{recordCount}/{totalstudentscount}</p>
+                } */}
+
+
+                  {/* {recordCount}/{initialDataCount} */}
                 </p>
                 <p className="mt-2">
                   <select onChange={handlerecorddata}>
@@ -306,9 +378,12 @@ const Certificate = () => {
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="75">75</option>
+                    <option value="300">300</option>
+                    
                   </select>
                 </p>
                 <span>
+
                   <button
                     className="btn btn-color"
                     onClick={handleClick}
@@ -331,6 +406,7 @@ const Certificate = () => {
                       cursor: "pointer",
                     }}
                   >
+
                     <div className="d-flex justify-content-between m-2">
                       <div> Filter</div>
 
@@ -636,6 +712,9 @@ const Certificate = () => {
                   <TableCell className="table-cell-heading">
                     Certificate Status
                   </TableCell>
+                  <TableCell className="table-cell-heading">
+                    PDF
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -661,13 +740,14 @@ const Certificate = () => {
                           <span
                             title={student.name}
                             style={{
-                              width: "5rem",
 
+                              width: "5rem",
                               whiteSpace: "nowrap",
                               overflow: "hidden",
                               textOverflow: "ellipsis",
                               fontSize: "0.8rem",
                               display: "block",
+
                             }}
                           >
                             {student.name}
@@ -694,7 +774,6 @@ const Certificate = () => {
                             title={student.registrationnumber}
                             style={{
                               width: "8rem",
-
                               whiteSpace: "nowrap",
                               overflow: "hidden",
                               textOverflow: "ellipsis",
@@ -706,51 +785,48 @@ const Certificate = () => {
                           </span>
                         </TableCell>
 
+
+
                         <TableCell className="Table-cell">
                           <span
                             style={{
                               fontSize: "0.8rem",
                               background: "none",
-                            }}
-                          >
-                            <input
-                              type="date"
-                              name="startdate"
-                              style={{ background: "transparent" }}
-                              className="startdate"
-                              onChange={(e) =>
-                                setcourseStartDate(e.target.value)
-                              }
-                              value={
-                                courseStartDate !== ""
-                                  ? courseStartDate
-                                  : undefined
-                              }
-                            />
+                            }}>
+
+                            <input type="date" name="startdate" style={{ background: "transparent" }} className="startdate"
+
+                              onChange={(e) => setcourseStartDate(e.target.value)}
+
+                              value={courseStartDate !== "" ? courseStartDate : undefined}
+                              max={currentDate} />
+
                           </span>
                         </TableCell>
+
+                        
+
+
+
                         <TableCell className="Table-cell">
                           <span
                             style={{
                               fontSize: "0.8rem",
                             }}
                           >
-                            <input
-                              style={{ background: "transparent" }}
-                              type="date"
-                              name="enddate"
-                              className="enddate"
-                              onChange={(e) =>
-                                setcourseEndDate(e.target.value)
-                              }
-                              value={
-                                courseEndDate !== ""
-                                  ? courseEndDate
-                                  : undefined
-                              }
+                            <input style={{ background: "transparent" }} type="date" name="enddate" className="enddate"
+                              onChange={(e) => setcourseEndDate(e.target.value)}
+                              value={courseEndDate !== "" ? courseEndDate : undefined}
+                              min={fixedStartdate}
+
                             />
                           </span>
                         </TableCell>
+
+
+                       
+
+
                         <TableCell className="Table-cell">
                           {certificateStatus === "" && (
                             <button
@@ -774,6 +850,28 @@ const Certificate = () => {
                             </button>
                           )}
                         </TableCell>
+
+                        <TableCell className="d-flex justify-content-center">
+                          {certificateStatus === "issued" && (
+
+                            <div className="" style={{ cursor: "pointer" }} >
+                              <NavLink to={`/certificateprint/${student.id}`}>
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 " style={{ width: "20px" }}>
+                                  <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" />
+                                  <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                                </svg>
+
+                              </NavLink>
+
+                            </div>
+                          )}
+
+                        </TableCell>
+
+
+
                       </TableRow>
                     );
                   })}

@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(#7a86ac, rgb(229, 234, 238));
+  background: linear-gradient(#8992af, rgb(204, 207, 209));
 }
 
 .containers {
@@ -33,31 +33,53 @@
   top: 0;
   right: 0;
   width: calc(100% - 56%);
+  display: flex;
+  justify-content: center;
 }
 
 .form-box {
-  position: absolute;
-  padding-top: 40%;
-  padding-right: 20%;
-  display: flex;
+  position: relative;
+  right: 30px;
+  bottom: 30px;
+  display: flex; 
   justify-content: center;
   align-items: center;
-  width: 100%;
-  flex-direction: column;
+  width: 500px;
+  height: 500px;
+  flex-direction: column; 
 }
 
 .form-box h2 {
-  font-size: 35px;
+   font-size: 35px;
+ position: relative;
+  /* bottom: 70px; */
   text-align: center;
   font-weight: bold;
+  margin-bottom: 10px;
+  color: #29609c ; 
 }
+.form-box p{
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  /* top: -45px; */
+  color: #29609c ;
 
+}
 .input-box {
   /* height: 30px; */
-  width: 75%;
-  border-bottom: 2px solid #888;
-  position: relative;
-  margin: 10px 0px 10px 0px;
+  width: 55%;
+  /* border: 2px solid #888; */
+position: relative;
+top: 15px;
+ 
+  margin-top: 10px;
+ display: flex;
+ flex-direction: column;
+  border-radius:8px;
+
+
 }
 
 .btnbrder {
@@ -65,28 +87,41 @@
 }
 
 .input-box input {
-  width: 100%;
-  height: 100%;
-  background: transparent;
+  background: white;
   border: none;
   outline: none;
-  font-size: 16px;
-  padding-right: 20px;
+  height: 40px;
+  border-radius: 8px;
+  padding-left: 20px;
+
+
 }
 
 .input-box label {
-  position: absolute;
-  top: -85%;
-  left: 15px;
-  color: #888;
-  pointer-events: none;
-  transition: ease 0.5s;
+ font-size: 15px ;
+ color: #888;
+ font-weight: 200;
+position: relative;
+top: 5px;
+left: 5px;
+ 
 }
+/* span .password{
+ position: relative;
+ bottom: 55px;
+ left: 40px;
+} */
 
 /* .input-box input:focus ~ label,
 .input-box input:valid ~ label{ 
   top: -6px;
 } */
+button{
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+
+}
 .input-box .btn {
   background-color: #7a86ac;
   width: 100%;
@@ -96,11 +131,28 @@
   pointer-events: none;
   cursor: pointer;
   font-size: 16px;
-  border-radius: 4px;
+  margin-top: 30px;
   box-shadow: none;
-}
 
-@media (max-width: 576px) {
+}
+.passwrd{
+ position: relative;
+  top: -5px;
+  right: 40px;
+ font-size: 12px;
+}
+.mail{
+  position: relative;
+   top: 15px;
+   right: 55px;
+  font-size: 12px;
+}
+.input-box .eyeicon{
+  position: relative;
+ left: 250px;
+ bottom: 32px;
+}
+/* @media (max-width: 576px) {
   .img {
     display: none;
   }
@@ -108,11 +160,287 @@
   .form-box {
     display: block;
   }
+} */
+@media (max-width:1440px) 
+{
+  .passwrd{
+    position: relative;
+     top:-4px;
+     right: 38px;
+    font-size: 12px;
+   }
+   .mail{
+     position: relative;
+      top: 12px;
+      right: 50px;
+     font-size: 12px;
+   }
+   .input-box .eyeicon{
+     position: relative;
+    left: 230px;
+    bottom: 29px;
+   }
+}
+@media  (max-width:1309px){
+  .input-box .eyeicon{
+    position: relative;
+   left: 210px;
+   bottom: 29px;
+  }
+  .passwrd{
+    position: relative;
+     top:-3px;
+     right: 18px;
+    font-size: 12px;
+   }
+   .mail{
+     position: relative;
+      top: 12px;
+      right: 30px;
+     font-size: 12px;
+   }
+}
+@media  (max-width: 1190px){
+  .input-box{
+    width: 250px;
+  }
+  .passwrd{
+    position: relative;
+     top: -7px;
+     right: 20px;
+    font-size: 12px;
+   }
+   .mail{
+     position: relative;
+      top: 15px;
+      right: 40px;
+     font-size: 12px;
+   }
+   .input-box .eyeicon{
+    position: relative;
+   left: 220px;
+   bottom: 29px;
+  }
+}
+@media  (max-width: 1045px){
+  .input-box{
+    width: 250px;
+  }
+  .passwrd{
+    position: relative;
+     top: -7px;
+     right: 20px;
+    font-size: 12px;
+   }
+   .mail{
+     position: relative;
+      top: 15px;
+      right: 40px;
+     font-size: 12px;
+   }
+   .input-box .eyeicon{
+    position: relative;
+   left: 220px;
+   bottom: 29px;
+  }
+}
+@media (max-width: 574px) {
+  .img {
+    display: none;
+  }
+  .form-box{
+    position: relative;
+    right: 110px;
+  }
+  .input-box{
+    width: 270px;
+  }
+  .passwrd{
+    position: relative;
+     top: -7px;
+     right: 20px;
+    font-size: 12px;
+   }
+   .mail{
+     position: relative;
+      top: 15px;
+      right: 40px;
+     font-size: 12px;
+   }
+   .input-box .eyeicon{
+    position: relative;
+   left: 220px;
+   bottom: 29px;
+  }
+}
+@media (max-width: 768px) {
+  
+  .form-box{
+    width: 400px;
+  }
+ 
+  .form-box h2{
+    font-size: 25px;
+  
+  }
+  .input-box{
+    width: 200px;
+  }
+  .input-box label{
+    font-size: 12px;
+  }
+  .input-box input {
+    height: 35px;
+
+  }
+ button{
+    
+   position: relative;
+  
+ 
+  
+    
+  }
+  .input-box .btn{
+    width: 60%;
+  }
+  .passwrd{
+    position: relative;
+     top: -5px;
+     right: 0px;
+    font-size: 12px;
+   }
+   .mail{
+     position: relative;
+      top: 10px;
+      right: 15px;
+     font-size: 12px;
+   }
+   .input-box .eyeicon{
+    position: relative;
+   left: 170px;
+   bottom: 27px;
+  }
+  }
+ 
+@media (max-width: 425px) {
+  .login-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 500px;
+  }
+  .form-box {
+    display: flex;
+    justify-content: center;
+    position: relative;
+     left: 10px;
+
+ 
+    padding: 10px;
+  }
+  .form-box h2{
+    font-size: 25px;
+  }
+
+  .input-box{
+    display: flex;
+    justify-content: center;
+    width: 190px;
+  }
+  .input-box input{
+    height: 30px;
+    padding: 3px;
+  }
+  
+.input-box label{
+  font-size: 12px;
+}
+.mail{
+  position: relative;
+   top: 12px;
+   right: 13px;
+  font-size: 12px;
+}
+.passwrd{
+  position: relative;
+   top: -7px;
+   right: 1px;
+  font-size: 12px;
+ }
+ .input-box .eyeicon{
+  position: relative;
+ left: 170px;
+ bottom: 27px;
 }
 
-@media (max-width: 768px) {
-  .password-label {
+}
 
-    margin-left: 10px;
+@media (max-width: 375px){
+  .login-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 282px;
+    height: 500px;
   }
+  .input-box{
+    width: 160px;
+  }
+  
+  .form-box {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+   left: 0;
+ 
+    padding: 10px;
+  }
+  .mail{
+    position: relative;
+     top: 12px;
+     right: 11px;
+    font-size: 9px;
+  }
+  .passwrd{
+    position: relative;
+     top: -5px;
+     right: 0px;
+    font-size: 9px;
+   }
+  .input-box .eyeicon{
+    position: relative;
+   left: 135px;
+   bottom: 27px;
+  }
+}
+@media (max-width: 320px){
+  .login-section{
+    width: 240px;
+  }
+  .input-box{
+    width: 160px;
+  }
+  .input-box label{
+    font-size: 11px;
+  }
+  .input-box .eyeicon{
+    position: relative;
+   left: 136px;
+   bottom: 27px;
+  }
+  .mail{
+    position: relative;
+     top: 12px;
+     right: 2px;
+    font-size: 9px;
+  }
+  .passwrd{
+    position: relative;
+     top: -5px;
+     right: 0px;
+    font-size: 9px;
+   }
 }

@@ -33,6 +33,7 @@ import html2canvas from "html2canvas";
 import { useStudentsContext } from "../../../../hooks/useStudentsContext";
 
 const PrintableComponent = React.forwardRef((props, ref) => {
+  
   const location = useLocation();
   const dataFromState = location.state;
   console.log("dataFromState", dataFromState);
@@ -210,6 +211,7 @@ const PrintableComponent = React.forwardRef((props, ref) => {
   return (
     <div>
       <div className="container">
+     
         <div className=" invoice" ref={ref}>
           <div className="invoice-border">
             <img

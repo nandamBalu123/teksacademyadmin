@@ -43,6 +43,7 @@ const LeadSource = () => {
   }));
   return (
     <div className="container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="leadsource">
         <div className="d-flex justify-content-between my-3">
           <h5 className="ms-2"> Lead Source</h5>

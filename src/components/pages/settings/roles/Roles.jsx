@@ -26,6 +26,7 @@ const Roles = () => {
 
   return (
     <div className="container mt-3">
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ">Go Back</button>
       <div className="roles">
 
         <div className="flex mt-3">
