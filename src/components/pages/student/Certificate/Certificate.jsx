@@ -27,7 +27,7 @@ import { useBranchContext } from "../../../../hooks/useBranchContext";
 import { useUsersContext } from "../../../../hooks/useUsersContext";
 import { GolfCourseSharp } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -56,9 +56,9 @@ const Certificate = () => {
 
   const { students, dispatch } = useStudentsContext();
   let totalcount;
-if(students.length>0){
-  totalcount = students.length;
-}
+  if (students && students.length > 0) {
+    totalcount = students.length;
+  }
 
 
 
@@ -72,19 +72,19 @@ if(students.length>0){
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   const [itemsPerPage, setrecordsPerPage] = useState(10);
 
-console.log("filteredData",filteredData);
+  console.log("filteredData", filteredData);
 
-//{searching form total students}
+  //{searching form total students}
 
-// const[totalstudentscount, settotalstudentscount] =useState(students)
+  // const[totalstudentscount, settotalstudentscount] =useState(students)
 
-// // const totalstudents=students;
+  // // const totalstudents=students;
 
-// // const totalstudentscount = totalstudents.length;
-// // console.log("totalstudentscount",totalstudentscount);
+  // // const totalstudentscount = totalstudents.length;
+  // // console.log("totalstudentscount",totalstudentscount);
 
- 
- 
+
+
   // const handleStartDateChange = (event) => {
   //   const selectedStartDate = event.target.value;
   //   setcourseStartDate(selectedStartDate);
@@ -209,7 +209,7 @@ console.log("filteredData",filteredData);
   }, [students, filterCriteria]);
 
 
-  
+
   const filterreset = () => {
     setFilterCriteria({
       fromdate: "",
@@ -247,7 +247,7 @@ console.log("filteredData",filteredData);
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   let records;
-  
+
   let recordCount;
 
   let initialDataCount;
@@ -315,11 +315,11 @@ console.log("filteredData",filteredData);
 
   };
 
-const navigate =useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="container">
-          <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ml-2 ">Go Back</button>
+      <button onClick={() => navigate(-1)} className="btn btn-color btn-sm ml-2 ">Go Back</button>
       <div className=" main-certificate mt-3">
         <div className="certificate mt-2">
           <h5 className="mx-2 mt-3  text-center"> Certificate </h5>
@@ -350,14 +350,14 @@ const navigate =useNavigate();
               <div className="d-flex justify-content-evenly">
                 <p className="mt-2">
 
-                {/* {seraching count} */}
+                  {/* {seraching count} */}
 
 
-                {totalcount && totalcount>0 && filterCriteria.search === "" && itemsPerPage <= totalcount ? (
+                  {totalcount && totalcount > 0 && filterCriteria.search === "" && itemsPerPage <= totalcount ? (
                     <p>{itemsPerPage}/{totalcount}{" "}</p>
                   ) : (
                     <p>{recordCount}/{totalcount}{" "}</p>
-                    
+
                   )}
 
 
@@ -365,7 +365,7 @@ const navigate =useNavigate();
 
 
 
-                {/* {
+                  {/* {
                   filterCriteria.search==""? <p>{itemsPerPage}/{totalstudentscount}</p>:<p>{recordCount}/{totalstudentscount}</p>
                 } */}
 
@@ -379,7 +379,7 @@ const navigate =useNavigate();
                     <option value="50">50</option>
                     <option value="75">75</option>
                     <option value="300">300</option>
-                    
+
                   </select>
                 </p>
                 <span>
@@ -804,7 +804,7 @@ const navigate =useNavigate();
                           </span>
                         </TableCell>
 
-                        
+
 
 
 
@@ -824,7 +824,7 @@ const navigate =useNavigate();
                         </TableCell>
 
 
-                       
+
 
 
                         <TableCell className="Table-cell">

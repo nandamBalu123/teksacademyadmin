@@ -254,7 +254,7 @@ function App() {
                   }
                 />  }
                 <Route
-                  path="/certificateprint"
+                  path="/certificateprint/:id"
                   element={
                     // user && user.profile == "admin" ? <CertificatePrint /> : <Dashboard />
                     <CertificatePrint />
