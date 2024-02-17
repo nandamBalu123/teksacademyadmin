@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(#7a86ac, rgb(229, 234, 238));
+  background: linear-gradient(#8992af, rgb(204, 207, 209));
 }
 
 .containers {
@@ -33,48 +33,51 @@
   top: 0;
   right: 0;
   width: calc(100% - 56%);
+  display: flex;
+  justify-content: center;
 }
 
 .form-box {
-  position: absolute;
-  padding-top: 40%;
-  padding-right: 20%;
-  display: flex;
+  position: relative;
+  right: 30px;
+  bottom: 30px;
+  display: flex; 
   justify-content: center;
   align-items: center;
-  width: 100%;
-  flex-direction: column;
+  width: 500px;
+  height: 500px;
+  flex-direction: column; 
 }
 
 .form-box h2 {
-  font-size: 35px;
+   font-size: 35px;
  position: relative;
-  top: -40px;
+  /* bottom: 70px; */
   text-align: center;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #29609c ;
+  color: #29609c ; 
 }
 .form-box p{
   font-size: 15px;
   font-weight: bold;
   text-align: center;
   position: relative;
-  top: -45px;
+  /* top: -45px; */
   color: #29609c ;
 
 }
 .input-box {
   /* height: 30px; */
-  width: 75%;
+  width: 55%;
   /* border: 2px solid #888; */
 position: relative;
-top: -60px;
-  margin: 10px 0px 10px 0px;
+top: 15px;
+ 
   margin-top: 10px;
  display: flex;
  flex-direction: column;
-  border-radius:0px 8px 0px 8px;
+  border-radius:8px;
 
 
 }
@@ -88,7 +91,7 @@ top: -60px;
   border: none;
   outline: none;
   height: 40px;
-  border-radius: 0px 8px 0px 8px;
+  border-radius: 8px;
   padding-left: 20px;
 
 
@@ -97,10 +100,17 @@ top: -60px;
 .input-box label {
  font-size: 15px ;
  color: #888;
- font-weight: bold;
-
+ font-weight: 200;
+position: relative;
+top: 5px;
+left: 5px;
  
 }
+/* span .password{
+ position: relative;
+ bottom: 55px;
+ left: 40px;
+} */
 
 /* .input-box input:focus ~ label,
 .input-box input:valid ~ label{ 
@@ -109,6 +119,7 @@ top: -60px;
 button{
   display: flex;
   align-items: center;
+  border-radius: 8px;
 
 }
 .input-box .btn {
@@ -120,11 +131,27 @@ button{
   pointer-events: none;
   cursor: pointer;
   font-size: 16px;
-  border-radius: 4px;
+  margin-top: 30px;
   box-shadow: none;
 
 }
-
+.passwrd{
+ position: relative;
+  top: -5px;
+  right: 40px;
+ font-size: 12px;
+}
+.mail{
+  position: relative;
+   top: 15px;
+   right: 55px;
+  font-size: 12px;
+}
+.input-box .eyeicon{
+  position: relative;
+ left: 250px;
+ bottom: 32px;
+}
 @media (max-width: 576px) {
   .img {
     display: none;
@@ -134,10 +161,163 @@ button{
     display: block;
   }
 }
-
+@media (max-width:1440px){
+  .passwrd{
+    position: relative;
+     top:0;
+     right: 38px;
+    font-size: 12px;
+   }
+   .mail{
+     position: relative;
+      top: 12px;
+      right: 50px;
+     font-size: 12px;
+   }
+   .input-box .eyeicon{
+     position: relative;
+    left: 230px;
+    bottom: 27px;
+   }
+}
+@media (max-width: 1024px){
+  .input-box{
+    width: 250px;
+  }
+  .passwrd{
+    position: relative;
+     top: -2px;
+     right: 20px;
+    font-size: 12px;
+   }
+   .mail{
+     position: relative;
+      top: 15px;
+      right: 40px;
+     font-size: 12px;
+   }
+   .input-box .eyeicon{
+    position: relative;
+   left: 220px;
+   bottom: 27px;
+  }
+}
 @media (max-width: 768px) {
-  .password-label {
+  
+  .form-box{
+    width: 400px;
+  }
+ 
+  .form-box h2{
+    font-size: 25px;
+  
+  }
+  .input-box{
+    width: 200px;
+  }
+  .input-box label{
+    font-size: 12px;
+  }
+  .input-box input {
+    height: 35px;
 
-    margin-left: 10px;
+  }
+ button{
+    
+   position: relative;
+  
+ 
+  
+    
+  }
+  .input-box .btn{
+    width: 60%;
+  }
+  .passwrd{
+    position: relative;
+     top: -5px;
+     right: 0px;
+    font-size: 12px;
+   }
+   .mail{
+     position: relative;
+      top: 15px;
+      right: 15px;
+     font-size: 12px;
+   }
+   .input-box .eyeicon{
+    position: relative;
+   left: 170px;
+   bottom: 27px;
+  }
+  }
+ 
+@media (max-width: 425px) {
+  .login-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 500px;
+  }
+  .form-box {
+    display: flex;
+    justify-content: center;
+    position: relative;
+     left: 10px;
+
+ 
+    padding: 10px;
+  }
+  .form-box h2{
+    font-size: 25px;
+  }
+  .input-box{
+    display: flex;
+    justify-content: center;
+  }
+  .input-box input{
+    height: 30px;
+    padding: 3px;
+  }
+  
+.input-box label{
+  font-size: 12px;
+}
+.mail{
+  position: relative;
+   top: 12px;
+   right: 15px;
+  font-size: 12px;
+}
+}
+
+@media (max-width: 375px){
+  .login-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 282px;
+    height: 500px;
+  }
+  .form-box {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+   left: 0;
+ 
+    padding: 10px;
+  }
+  .mail{
+    position: relative;
+     top: 12px;
+     right: 16px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 325px){
+  .login-section{
+    width: 240px;
   }
 }

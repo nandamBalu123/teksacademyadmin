@@ -8,12 +8,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import validation from "./Loginvalidation";
 import { useAuthContext } from "../../../hooks/useAuthContext";
+import { Visibility, VisibilityOff } from "@mui/icons-material"; 
 // import { useUsersContext } from "../../../hooks/useUsersContext";
 // import { useEffect } from "react";
 const LoginPage = () => {
   const navigate = useNavigate();
   // const { users } = useUsersContext();
   const { dispatch } = useAuthContext();
+  const [showPassword, setShowPassword] = useState(false); 
   const [values, setValues] = useState({
     email: "",
 
@@ -25,7 +27,9 @@ const LoginPage = () => {
   const handleInput = (event) => {
     setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -35,7 +39,7 @@ const LoginPage = () => {
 
     // Check if there are errors after setting them
 
-    if (!errors.email && !errors.password) {
+    if (!errors.email && !errors.password && values.email && values.password) {
       axios
 
         .post(`${process.env.REACT_APP_API_URL}/adminlogin`, values)
@@ -157,7 +161,7 @@ const LoginPage = () => {
             <h2> Welcome Back!</h2>
                {/* <p>Enter your Details</p>  */}
             <div className="input-box">
-            <label htmlFor=""> Enter Email</label>
+            <label htmlFor=""> Enter Email<span>*</span></label>
               <input
                 type="email"
                 name="email"
@@ -169,21 +173,25 @@ const LoginPage = () => {
 
             </div>
             {errors.email && (
-              <span className="text-danger text-start">{errors.email}</span>
+              <span className="text-danger text-start mail">{errors.email}</span>
             )}
 
             <div className="input-box col-12 col-md-6 col-md-6">
-            <label htmlFor=""> Enter Password</label>
+            <label htmlFor=""> Enter Password<span>*</span></label>
               <input
-                type="password"
+               type={showPassword ? "text" : "password"}
                 name="password"
                 required
                 onChange={handleInput}
               />
-             
+             {showPassword ? (
+                <Visibility className="eyeicon" onClick={togglePasswordVisibility} /> // Show hide icon based on state
+              ) : (
+                <VisibilityOff className="eyeicon" onClick={togglePasswordVisibility} />
+              )}
             </div>
             {errors.password && (
-              <span className="text-danger">{errors.password}</span>
+              <span className="text-danger passwrd" >{errors.password}</span>
             )}
             <button
               className="btn btn-color input-box btnbrder"
