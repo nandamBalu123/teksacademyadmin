@@ -54,8 +54,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const Certificate = () => {
 
-
   const { students, dispatch } = useStudentsContext();
+  let totalcount;
+if(students.length>0){
+  totalcount = students.length;
+}
+
+
+
   const { getcourses } = useCourseContext();
   const { branches } = useBranchContext();
   const { users } = useUsersContext();
@@ -66,7 +72,7 @@ const Certificate = () => {
   const [filteredcounsellor, setfilteredcounsellor] = useState([]);
   const [itemsPerPage, setrecordsPerPage] = useState(10);
 
-
+console.log("filteredData",filteredData);
 
 //{searching form total students}
 
@@ -347,10 +353,10 @@ const navigate =useNavigate();
                 {/* {seraching count} */}
 
 
-                {filterCriteria.search === "" && itemsPerPage <= initialDataCount ? (
-                    <p>{itemsPerPage}/{initialDataCount}{" "}</p>
+                {totalcount && totalcount>0 && filterCriteria.search === "" && itemsPerPage <= totalcount ? (
+                    <p>{itemsPerPage}/{totalcount}{" "}</p>
                   ) : (
-                    <p>{recordCount}/{initialDataCount}{" "}</p>
+                    <p>{recordCount}/{totalcount}{" "}</p>
                     
                   )}
 

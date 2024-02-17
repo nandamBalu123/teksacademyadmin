@@ -4,7 +4,7 @@ function validation(values){
     const password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if(values.email === ""){
-        error.email = "Name should not be empty";
+        error.email = "Email should not be empty";
     }
     else if(!email_pattern.test(values.email)){
         error.email = "Email didn't match";

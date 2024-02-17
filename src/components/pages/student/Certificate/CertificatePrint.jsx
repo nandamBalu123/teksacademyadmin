@@ -8,9 +8,7 @@ import img3 from "../../../../images/img_files/ISO.png"
 import img4 from "../../../../images/img_files/Skill_india.png"
 import img5 from "../../../../images/img_files/MSME_logo.png"
 import tekslogo from "../../../../images/img_files/Tesks_Logo.png"
-import bgimg from "../../../../images/img_files/Teks_Shape_01.png"  
-import bgimg2 from "../../../../images/img_files/Student-Certificate-New_teks_pattern.png"
-import bgimg3 from "../../../../images/img_files/Student-Certificate-New_teks_pattern2.png"
+
 
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -66,17 +64,7 @@ const CertificatePrint = React.forwardRef((props, ref) => {
                 {CertificatePrint && (
                     <div className='section'>
 
-                        <div className='background'>
-                            <img src={bgimg} alt="" />
-                        </div>
-                        <div className='background2'>
-                            <img src={bgimg2} alt="" />
-
-                        </div>
-                        <div className='background3'>
-                            <img src={bgimg3} alt="" />
-                            
-                        </div>
+                       
                         <div className='logo'>
                             <img src={tekslogo} alt="" />
                         </div>

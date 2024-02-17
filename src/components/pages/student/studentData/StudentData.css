@@ -184,6 +184,7 @@ input::-webkit-inner-spin-button {
   background-color: #4676a0 !important;
   color: white !important;
 }
-.MuiTooltip-tooltip {
-  border: none;
+.MuiPaper-root::-webkit-scrollbar{
+  width: 5px;
+
 }
